@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An addition operator.
+//
 // CNNAdd wraps [raw.MPSCNNAdd] with a fluent Go API.
 type CNNAdd struct {
 	inner *raw.MPSCNNAdd
@@ -220,7 +222,7 @@ func (x *CNNAdd) WithDestinationImageAllocator(destinationImageAllocator mpscore
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNAdd) WithOptions(options mpscore.MPSKernelOptions) *CNNAdd {
@@ -228,7 +230,7 @@ func (x *CNNAdd) WithOptions(options mpscore.MPSKernelOptions) *CNNAdd {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNAdd) WithLabel(label string) *CNNAdd {

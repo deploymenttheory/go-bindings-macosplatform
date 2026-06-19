@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A 1D array of data that stores the data’s values.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsvector
 type MPSVector struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A simple container for a single C or Objective-C data item.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsvalue
 type NSValue struct {
 	NSObject
@@ -53,10 +55,12 @@ func NSValueFromID(id objc.ID) *NSValue {
 	return o
 }
 
+// Copies the value into the specified buffer.
 func (o *NSValue) GetValueSize(value unsafe.Pointer, size uint) {
 	o.Ptr().Send(_nSValueSelGetValueSize, value, size)
 }
 
+// Initializes a value object to contain the specified value, interpreted with the specified Objective-C type.
 func (o *NSValue) InitWithBytesObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueSelInitWithBytesObjCType, value, type_)
 	if _ret != 0 {
@@ -78,6 +82,7 @@ func (o *NSValue) ObjCType() unsafe.Pointer {
 	return _ret
 }
 
+// Creates a value object containing the specified value, interpreted with the specified Objective-C type.
 func NSValueValueWithBytesObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithBytesObjCType, value, type_)
 	if _ret != 0 {
@@ -86,6 +91,7 @@ func NSValueValueWithBytesObjCType(value unsafe.Pointer, type_ string) *NSValue 
 	return NSValueFromID(_ret)
 }
 
+// Creates a value object containing the specified value, interpreted with the specified Objective-C type.
 func NSValueValueWithObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithObjCType, value, type_)
 	if _ret != 0 {
@@ -94,6 +100,7 @@ func NSValueValueWithObjCType(value unsafe.Pointer, type_ string) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// Creates a value object containing the specified object.
 func NSValueValueWithNonretainedObject(anObject objc.ID) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithNonretainedObject, anObject)
 	if _ret != 0 {
@@ -102,6 +109,7 @@ func NSValueValueWithNonretainedObject(anObject objc.ID) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// Creates a value object containing the specified pointer.
 func NSValueValueWithPointer(pointer unsafe.Pointer) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithPointer, pointer)
 	if _ret != 0 {
@@ -110,6 +118,7 @@ func NSValueValueWithPointer(pointer unsafe.Pointer) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the value object and another value object are equal.
 func (o *NSValue) IsEqualToValue(value *NSValue) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSValueSelIsEqualToValue, value.Ptr())
 	return _ret
@@ -125,11 +134,13 @@ func (o *NSValue) PointerValue() unsafe.Pointer {
 	return _ret
 }
 
+// Copies the value into the specified buffer.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSValue) GetValue(value unsafe.Pointer) {
 	o.Ptr().Send(_nSValueSelGetValue, value)
 }
 
+// Creates a new value object containing the specified Foundation range structure.
 func NSValueValueWithRange(range_ NSRange) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithRange, range_)
 	if _ret != 0 {
@@ -143,6 +154,7 @@ func (o *NSValue) RangeValue() NSRange {
 	return _ret
 }
 
+// Creates a new value object containing the specified Foundation point structure.
 func NSValueValueWithPoint(point corefoundation.CGPoint) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithPoint, point)
 	if _ret != 0 {
@@ -151,6 +163,7 @@ func NSValueValueWithPoint(point corefoundation.CGPoint) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// Creates a new value object containing the specified Foundation size structure.
 func NSValueValueWithSize(size corefoundation.CGSize) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithSize, size)
 	if _ret != 0 {
@@ -159,6 +172,7 @@ func NSValueValueWithSize(size corefoundation.CGSize) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// Creates a new value object containing the specified Foundation rectangle structure.
 func NSValueValueWithRect(rect corefoundation.CGRect) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithRect, rect)
 	if _ret != 0 {
@@ -167,6 +181,7 @@ func NSValueValueWithRect(rect corefoundation.CGRect) *NSValue {
 	return NSValueFromID(_ret)
 }
 
+// Creates a new value object containing the specified edge insets structure.
 func NSValueValueWithEdgeInsets(insets NSEdgeInsets) *NSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValue), _nSValueSelValueWithEdgeInsets, insets)
 	if _ret != 0 {

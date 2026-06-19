@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an audio file that the system can open for reading or writing.
+//
 // AudioFile wraps [raw.AVAudioFile] with a fluent Go API.
 type AudioFile struct {
 	inner *raw.AVAudioFile
@@ -38,7 +40,7 @@ func NewAudioFile() *AudioFile {
 	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}
 }
 
-// @method initForReading:error: @abstract Open a file for reading. @param fileURL the file to open @param outError on exit, if an error occurs, a description of the error @discussion This opens the file for reading using the standard format (deinterleaved floating point).
+// Opens a file for reading using the standard, deinterleaved floating point format.
 //
 // NewAudioFileForReadingError creates a new [AudioFile].
 func NewAudioFileForReadingError(fileURL string) (*AudioFile, error) {
@@ -51,7 +53,7 @@ func NewAudioFileForReadingError(fileURL string) (*AudioFile, error) {
 	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
 }
 
-// @method initForReading:commonFormat:interleaved:error: @abstract Open a file for reading, using a specified processing format. @param fileURL the file to open @param format the processing format to use when reading from the file @param interleaved whether to use an interleaved processing format @param outError on exit, if an error occurs, a description of the error
+// Opens a file for reading using the specified processing format.
 //
 // NewAudioFileForReadingCommonFormatInterleavedError creates a new [AudioFile].
 func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
@@ -64,7 +66,7 @@ func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format A
 	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
 }
 
-// @method initForWriting:settings:error: @abstract Open a file for writing. @param fileURL the path at which to create the file @param settings the format of the file to create (See `AVAudioRecorder`.)  For linear PCM, only interleaved formats are supported for the saved file, non interleaved setting will be ignored and a warning is shown. @param outError on exit, if an error occurs, a description of the error @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified URL if a file exists. This opens the file for writing using the standard format (deinterleaved floating point).
+// Opens a file for writing using the specified settings.
 //
 // NewAudioFileForWritingSettingsError creates a new [AudioFile].
 func NewAudioFileForWritingSettingsError(fileURL string, settings purego.IDer) (*AudioFile, error) {
@@ -77,7 +79,7 @@ func NewAudioFileForWritingSettingsError(fileURL string, settings purego.IDer) (
 	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
 }
 
-// @method initForWriting:settings:commonFormat:interleaved:error: @abstract Open a file for writing. @param fileURL the path at which to create the file @param settings the format of the file to create (See `AVAudioRecorder`.) For linear PCM, only interleaved formats are supported for the saved file, non interleaved setting will be ignored and a warning is shown. @param format the processing format to use when writing to the file. @param interleaved whether to use an interleaved processing format @param outError on exit, if an error occurs, a description of the error @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified URL if a file exists.
+// Opens a file for writing using a specified processing format and settings.
 //
 // NewAudioFileForWritingSettingsCommonFormatInterleavedError creates a new [AudioFile].
 func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings purego.IDer, format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
@@ -90,7 +92,7 @@ func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, 
 	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
 }
 
-// @property framePosition @abstract The position in the file at which the next read or write will occur. @discussion Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
+// The position in the file where the next read or write operation occurs.
 //
 // WithFramePosition sets the framePosition property and returns the receiver for chaining.
 func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
@@ -98,21 +100,21 @@ func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
 	return x
 }
 
-// @method close @abstract Close the audio file. @discussion The underlying file will be closed if open. - It is normally unnecessary to close a file opened for reading (it will be automatically closed when the object is released) - It is only necessary to close a file opened for writing in order to achieve specific control over when the file's header is updated. Note: Once closed, further file read or write operations will fail with kAudio_FileNotFoundError.
+// Closes the audio file.
 //
 // Close calls the underlying Close.
 func (x *AudioFile) Close() {
 	x.inner.Close()
 }
 
-// @method readIntoBuffer:error: @abstract Read an entire buffer. @param buffer The buffer into which to read from the file. Its format must match the file's processing format. @param outError on exit, if an error occurs, a description of the error @return YES for success. @discussion Reading sequentially from framePosition, attempts to fill the buffer to its capacity. On return, the buffer's length indicates the number of sample frames successfully read.
+// Reads an entire audio buffer.
 //
 // ReadIntoBufferError calls the underlying ReadIntoBufferError.
 func (x *AudioFile) ReadIntoBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error) {
 	return x.inner.ReadIntoBufferError(buffer)
 }
 
-// @method readIntoBuffer:frameCount:error: @abstract Read a portion of a buffer. @param frames The number of frames to read. @param buffer The buffer into which to read from the file. Its format must match the file's processing format. @param outError on exit, if an error occurs, a description of the error @return YES for success. @discussion Like `readIntoBuffer:error:`, but can be used to read fewer frames than buffer.frameCapacity.
+// Reads a portion of an audio buffer using the number of frames you specify.
 //
 // ReadIntoBufferFrameCountError calls the underlying ReadIntoBufferFrameCountError.
 func (x *AudioFile) ReadIntoBufferFrameCountError(buffer *raw.AVAudioPCMBuffer, frames uint32) (bool, error) {

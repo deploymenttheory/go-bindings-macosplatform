@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents a live streaming media segment resource request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetrichlsmediasegmentrequestevent
 type AVMetricHLSMediaSegmentRequestEvent struct {
 	AVMetricEvent

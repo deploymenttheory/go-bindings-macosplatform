@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The common base class for all Metal Performance Shaders Graph objects. Only the child classes should be used.
+// The common base class for all Metal Performance Shaders Graph objects.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphobject
 type MPSGraphObject struct {

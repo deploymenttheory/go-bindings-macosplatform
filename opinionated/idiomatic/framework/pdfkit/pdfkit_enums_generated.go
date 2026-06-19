@@ -48,18 +48,30 @@ func (e PDFAccessPermissions) String() string {
 type PDFActionNamedName int64
 
 const (
-	KPDFActionNamedNone         PDFActionNamedName = 0
-	KPDFActionNamedNextPage     PDFActionNamedName = 1
+	// The action has no name.
+	KPDFActionNamedNone PDFActionNamedName = 0
+	// The Next Page action.
+	KPDFActionNamedNextPage PDFActionNamedName = 1
+	// The Previous Page action.
 	KPDFActionNamedPreviousPage PDFActionNamedName = 2
-	KPDFActionNamedFirstPage    PDFActionNamedName = 3
-	KPDFActionNamedLastPage     PDFActionNamedName = 4
-	KPDFActionNamedGoBack       PDFActionNamedName = 5
-	KPDFActionNamedGoForward    PDFActionNamedName = 6
-	KPDFActionNamedGoToPage     PDFActionNamedName = 7
-	KPDFActionNamedFind         PDFActionNamedName = 8
-	KPDFActionNamedPrint        PDFActionNamedName = 9
-	KPDFActionNamedZoomIn       PDFActionNamedName = 10
-	KPDFActionNamedZoomOut      PDFActionNamedName = 11
+	// The First Page action.
+	KPDFActionNamedFirstPage PDFActionNamedName = 3
+	// The Last Page action.
+	KPDFActionNamedLastPage PDFActionNamedName = 4
+	// The Go Back action.
+	KPDFActionNamedGoBack PDFActionNamedName = 5
+	// The Go Forward action.
+	KPDFActionNamedGoForward PDFActionNamedName = 6
+	// The Go to Page action.
+	KPDFActionNamedGoToPage PDFActionNamedName = 7
+	// The Find action.
+	KPDFActionNamedFind PDFActionNamedName = 8
+	// The Print action.
+	KPDFActionNamedPrint PDFActionNamedName = 9
+	// The Zoom In action.
+	KPDFActionNamedZoomIn PDFActionNamedName = 10
+	// The Zoom Out action.
+	KPDFActionNamedZoomOut PDFActionNamedName = 11
 )
 
 func (e PDFActionNamedName) String() string {
@@ -93,21 +105,32 @@ func (e PDFActionNamedName) String() string {
 	}
 }
 
+// The mouse position over PDF view areas.
 // Bitmask — values may be combined with |.
 type PDFAreaOfInterest uint64
 
 const (
-	KPDFNoArea         PDFAreaOfInterest = 0
-	KPDFPageArea       PDFAreaOfInterest = 1
-	KPDFTextArea       PDFAreaOfInterest = 2
+	// The mouse is over an undefined area.
+	KPDFNoArea PDFAreaOfInterest = 0
+	// The mouse is over a page.
+	KPDFPageArea PDFAreaOfInterest = 1
+	// The mouse is over text.
+	KPDFTextArea PDFAreaOfInterest = 2
+	// The mouse is over an annotation.
 	KPDFAnnotationArea PDFAreaOfInterest = 4
-	KPDFLinkArea       PDFAreaOfInterest = 8
-	KPDFControlArea    PDFAreaOfInterest = 16
-	KPDFTextFieldArea  PDFAreaOfInterest = 32
-	KPDFIconArea       PDFAreaOfInterest = 64
-	KPDFPopupArea      PDFAreaOfInterest = 128
-	KPDFImageArea      PDFAreaOfInterest = 256
-	KPDFAnyArea        PDFAreaOfInterest = 9223372036854775807
+	// The mouse is over a link.
+	KPDFLinkArea PDFAreaOfInterest = 8
+	// The mouse is over a control.
+	KPDFControlArea PDFAreaOfInterest = 16
+	// The mouse is over a text field.
+	KPDFTextFieldArea PDFAreaOfInterest = 32
+	// The mouse is over an icon.
+	KPDFIconArea PDFAreaOfInterest = 64
+	// The mouse is over a popup menu.
+	KPDFPopupArea PDFAreaOfInterest = 128
+	// The mouse is over an image.
+	KPDFImageArea PDFAreaOfInterest = 256
+	KPDFAnyArea   PDFAreaOfInterest = 9223372036854775807
 )
 
 func (e PDFAreaOfInterest) String() string {
@@ -148,13 +171,19 @@ func (e PDFAreaOfInterest) String() string {
 	return strings.Join(parts, "|")
 }
 
+// PDF Kit annotation borders may have the following styles.
 type PDFBorderStyle int64
 
 const (
-	KPDFBorderStyleSolid     PDFBorderStyle = 0
-	KPDFBorderStyleDashed    PDFBorderStyle = 1
-	KPDFBorderStyleBeveled   PDFBorderStyle = 2
-	KPDFBorderStyleInset     PDFBorderStyle = 3
+	// Solid border.
+	KPDFBorderStyleSolid PDFBorderStyle = 0
+	// Dashed border.
+	KPDFBorderStyleDashed PDFBorderStyle = 1
+	// Beveled border.
+	KPDFBorderStyleBeveled PDFBorderStyle = 2
+	// Inset border.
+	KPDFBorderStyleInset PDFBorderStyle = 3
+	// Underline border.
 	KPDFBorderStyleUnderline PDFBorderStyle = 4
 )
 
@@ -175,14 +204,20 @@ func (e PDFBorderStyle) String() string {
 	}
 }
 
+// The following box types may be used with PDFPage drawing and bounds-setting methods. See the Adobe PDF Specification for more information on box types, units, and coordinate systems.
 type PDFDisplayBox int64
 
 const (
+	// A rectangle defining the boundaries of the physical medium for display or printing, expressed in default user-space units.
 	KPDFDisplayBoxMediaBox PDFDisplayBox = 0
-	KPDFDisplayBoxCropBox  PDFDisplayBox = 1
+	// A rectangle defining the boundaries of the visible region , expressed in default user-space units. Default value equal to kPDFDisplayBoxMediaBox.
+	KPDFDisplayBoxCropBox PDFDisplayBox = 1
+	// A rectangle defining the boundaries of the clip region for the page contents in a production environment. Default value equal to kPDFDisplayBoxCropBox.
 	KPDFDisplayBoxBleedBox PDFDisplayBox = 2
-	KPDFDisplayBoxTrimBox  PDFDisplayBox = 3
-	KPDFDisplayBoxArtBox   PDFDisplayBox = 4
+	// A rectangle defining the intended boundaries of the finished page. Default value equal to kPDFDisplayBoxCropBox.
+	KPDFDisplayBoxTrimBox PDFDisplayBox = 3
+	// A rectangle defining the boundaries of the page’s meaningful content including surrounding white space intended for display. Default value equal to kPDFDisplayBoxCropBox.
+	KPDFDisplayBoxArtBox PDFDisplayBox = 4
 )
 
 func (e PDFDisplayBox) String() string {
@@ -220,13 +255,18 @@ func (e PDFDisplayDirection) String() string {
 	}
 }
 
+// A wrapper for the chosen display mode constant.
 type PDFDisplayMode int64
 
 const (
-	KPDFDisplaySinglePage           PDFDisplayMode = 0
+	// A display mode where the document displays one page at a time horizontally and vertically.
+	KPDFDisplaySinglePage PDFDisplayMode = 0
+	// A display mode where the document displays in continuous mode vertically, with single-page width horizontally.
 	KPDFDisplaySinglePageContinuous PDFDisplayMode = 1
-	KPDFDisplayTwoUp                PDFDisplayMode = 2
-	KPDFDisplayTwoUpContinuous      PDFDisplayMode = 3
+	// A display mode where the document displays two pages side-by-side.
+	KPDFDisplayTwoUp PDFDisplayMode = 2
+	// A display mode where the document displays in continuous mode vertically and displays two pages side-by-side horizontally.
+	KPDFDisplayTwoUpContinuous PDFDisplayMode = 3
 )
 
 func (e PDFDisplayMode) String() string {
@@ -244,11 +284,15 @@ func (e PDFDisplayMode) String() string {
 	}
 }
 
+// An enumeration that specifies document permissions status.
 type PDFDocumentPermissions int64
 
 const (
-	KPDFDocumentPermissionsNone  PDFDocumentPermissions = 0
-	KPDFDocumentPermissionsUser  PDFDocumentPermissions = 1
+	// The status that indicates no document permissions.
+	KPDFDocumentPermissionsNone PDFDocumentPermissions = 0
+	// The status that indicates user document permissions.
+	KPDFDocumentPermissionsUser PDFDocumentPermissions = 1
+	// The status that indicates owner document permissions.
 	KPDFDocumentPermissionsOwner PDFDocumentPermissions = 2
 )
 
@@ -265,11 +309,15 @@ func (e PDFDocumentPermissions) String() string {
 	}
 }
 
+// A wrapper for the specified interpolation quality.
 type PDFInterpolationQuality int64
 
 const (
+	// The case where no interpolation quality is specified.
 	KPDFInterpolationQualityNone PDFInterpolationQuality = 0
-	KPDFInterpolationQualityLow  PDFInterpolationQuality = 1
+	// The case specifying low interpolation quality.
+	KPDFInterpolationQualityLow PDFInterpolationQuality = 1
+	// The case specifying high interpolation quality.
 	KPDFInterpolationQualityHigh PDFInterpolationQuality = 2
 )
 
@@ -286,14 +334,21 @@ func (e PDFInterpolationQuality) String() string {
 	}
 }
 
+// The following constants specify the available line ending styles.
 type PDFLineStyle int64
 
 const (
-	KPDFLineStyleNone        PDFLineStyle = 0
-	KPDFLineStyleSquare      PDFLineStyle = 1
-	KPDFLineStyleCircle      PDFLineStyle = 2
-	KPDFLineStyleDiamond     PDFLineStyle = 3
-	KPDFLineStyleOpenArrow   PDFLineStyle = 4
+	// No line ending.
+	KPDFLineStyleNone PDFLineStyle = 0
+	// A square line ending filled with the annotation’s interior color, if any.
+	KPDFLineStyleSquare PDFLineStyle = 1
+	// A circular line ending filled with the annotation’s interior color, if any.
+	KPDFLineStyleCircle PDFLineStyle = 2
+	// A diamond-shaped line ending filled with the annotation’s interior color, if any.
+	KPDFLineStyleDiamond PDFLineStyle = 3
+	// An open arrowhead line ending, composed from two short lines meeting in an acute angle at the line end.
+	KPDFLineStyleOpenArrow PDFLineStyle = 4
+	// A closed arrowhead line ending, consisting of a triangle with the acute vertex at the line end and filled with the annotation’s interior color, if any.
 	KPDFLineStyleClosedArrow PDFLineStyle = 5
 )
 
@@ -316,13 +371,18 @@ func (e PDFLineStyle) String() string {
 	}
 }
 
+// The styles available for markup annotations in PDFKit.
 type PDFMarkupType int64
 
 const (
+	// Highlight style for the markup.
 	KPDFMarkupTypeHighlight PDFMarkupType = 0
+	// Strikethrough style for the markup.
 	KPDFMarkupTypeStrikeOut PDFMarkupType = 1
+	// Underline style for the markup.
 	KPDFMarkupTypeUnderline PDFMarkupType = 2
-	KPDFMarkupTypeRedact    PDFMarkupType = 3
+	// The redaction style for markup.
+	KPDFMarkupTypeRedact PDFMarkupType = 3
 )
 
 func (e PDFMarkupType) String() string {
@@ -340,11 +400,15 @@ func (e PDFMarkupType) String() string {
 	}
 }
 
+// The type of scaling to be used when printing a page (see PDFDocument).
 type PDFPrintScalingMode int64
 
 const (
-	KPDFPrintPageScaleNone      PDFPrintScalingMode = 0
-	KPDFPrintPageScaleToFit     PDFPrintScalingMode = 1
+	// Do not apply scaling to the page when printing.
+	KPDFPrintPageScaleNone PDFPrintScalingMode = 0
+	// Scale each page up or down to best fit the paper size.
+	KPDFPrintPageScaleToFit PDFPrintScalingMode = 1
+	// Scale large pages down to fit the paper size (smaller pages do not get scaled up).
 	KPDFPrintPageScaleDownToFit PDFPrintScalingMode = 2
 )
 
@@ -382,16 +446,24 @@ func (e PDFSelectionGranularity) String() string {
 	}
 }
 
+// The types of icons that a text annotation can use.
 type PDFTextAnnotationIconType int64
 
 const (
-	KPDFTextAnnotationIconComment      PDFTextAnnotationIconType = 0
-	KPDFTextAnnotationIconKey          PDFTextAnnotationIconType = 1
-	KPDFTextAnnotationIconNote         PDFTextAnnotationIconType = 2
-	KPDFTextAnnotationIconHelp         PDFTextAnnotationIconType = 3
+	// Comment annotation icon.
+	KPDFTextAnnotationIconComment PDFTextAnnotationIconType = 0
+	// Key annotation icon.
+	KPDFTextAnnotationIconKey PDFTextAnnotationIconType = 1
+	// Note annotation icon.
+	KPDFTextAnnotationIconNote PDFTextAnnotationIconType = 2
+	// Help annotation icon.
+	KPDFTextAnnotationIconHelp PDFTextAnnotationIconType = 3
+	// New Paragraph annotation icon.
 	KPDFTextAnnotationIconNewParagraph PDFTextAnnotationIconType = 4
-	KPDFTextAnnotationIconParagraph    PDFTextAnnotationIconType = 5
-	KPDFTextAnnotationIconInsert       PDFTextAnnotationIconType = 6
+	// Paragraph annotation icon.
+	KPDFTextAnnotationIconParagraph PDFTextAnnotationIconType = 5
+	// Insert annotation icon.
+	KPDFTextAnnotationIconInsert PDFTextAnnotationIconType = 6
 )
 
 func (e PDFTextAnnotationIconType) String() string {
@@ -415,12 +487,16 @@ func (e PDFTextAnnotationIconType) String() string {
 	}
 }
 
+// The state of a button annotation, either on, off, or mixed.
 type PDFWidgetCellState int64
 
 const (
+	// The button widget is in a mixed state, neither on nor off.
 	KPDFWidgetMixedState PDFWidgetCellState = -1
-	KPDFWidgetOffState   PDFWidgetCellState = 0
-	KPDFWidgetOnState    PDFWidgetCellState = 1
+	// The button widget is in an unselected state.
+	KPDFWidgetOffState PDFWidgetCellState = 0
+	// The button widget is in a selected state.
+	KPDFWidgetOnState PDFWidgetCellState = 1
 )
 
 func (e PDFWidgetCellState) String() string {
@@ -436,13 +512,18 @@ func (e PDFWidgetCellState) String() string {
 	}
 }
 
+// The types of annotation buttons.
 type PDFWidgetControlType int64
 
 const (
-	KPDFWidgetUnknownControl     PDFWidgetControlType = -1
-	KPDFWidgetPushButtonControl  PDFWidgetControlType = 0
+	// Unknown control type.
+	KPDFWidgetUnknownControl PDFWidgetControlType = -1
+	// Push button control.
+	KPDFWidgetPushButtonControl PDFWidgetControlType = 0
+	// Radio button control.
 	KPDFWidgetRadioButtonControl PDFWidgetControlType = 1
-	KPDFWidgetCheckBoxControl    PDFWidgetControlType = 2
+	// Check box control.
+	KPDFWidgetCheckBoxControl PDFWidgetControlType = 2
 )
 
 func (e PDFWidgetControlType) String() string {

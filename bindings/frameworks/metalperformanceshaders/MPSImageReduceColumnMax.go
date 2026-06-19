@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that returns the maximum value for each column in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducecolumnmax
 type MPSImageReduceColumnMax struct {
 	mpsimage.MPSImageReduceUnary

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to inspect locally cached media data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetcache
 type AVAssetCache struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func AVAssetCacheFromID(id objc.ID) *AVAssetCache {
 	return o
 }
 
-// Returns an array of AVMediaSelectionOptions in an AVMediaSelectionGroup that are available for offline operations, e.g. playback.
+// Returns an array of locally cached media selection options that are available for offline use.
 func (o *AVAssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSArray[*AVMediaSelectionOption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetCacheSelMediaSelectionOptionsInMediaSelectionGroup, mediaSelectionGroup.Ptr())
 	if _ret != 0 {
@@ -50,12 +52,18 @@ func (o *AVAssetCache) IsPlayableOffline() bool {
 
 // For each AVMediaPresentationSelector defined by the AVCustomMediaSelectionScheme of an AVMediaSelectionGroup, returns the AVMediaPresentationSettings that can be satisfied for offline operations, e.g. playback.
 func (o *AVAssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID]](o.Ptr(), _aVAssetCacheSelMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetCacheSelMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
 }
 
-// Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup's AVCustomMediaSelectionScheme.
+// Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup’s AVCustomMediaSelectionScheme.
 func (o *AVAssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetCacheSelMediaPresentationLanguagesForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetCacheSelMediaPresentationLanguagesForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

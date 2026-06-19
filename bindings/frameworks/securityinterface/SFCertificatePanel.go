@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A panel or sheet that displays one or more certificates.
+//
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfcertificatepanel
 type SFCertificatePanel struct {
 	appkit.NSPanel
@@ -46,7 +48,7 @@ func SFCertificatePanelFromID(id objc.ID) *SFCertificatePanel {
 	return o
 }
 
-// @method sharedCertificatePanel @abstract Returns a shared instance of SFCertificatePanel. @discussion If your application can display multiple SFCertificatePanels at once, you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
+// Returns a fully initialized, singleton certificate panel object.
 func SFCertificatePanelSharedCertificatePanel() *SFCertificatePanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificatePanel), _sFCertificatePanelSelSharedCertificatePanel)
 	if _ret != 0 {
@@ -55,62 +57,69 @@ func SFCertificatePanelSharedCertificatePanel() *SFCertificatePanel {
 	return SFCertificatePanelFromID(_ret)
 }
 
-// @method runModalForTrust:showGroup: @abstract Displays a certificate chain in a modal panel, returning NSOKButton when dismissed. This method is preferred over runModalForCertificates, since the SecTrustRef parameter lets you specify policies that determine whether the certificate is valid within your application's context. @param trust A trust reference which contains the certificates to display. @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
+// Displays a certificate chain in a modal panel.
 func (o *SFCertificatePanel) RunModalForTrustShowGroup(trust unsafe.Pointer, showGroup bool) int {
 	_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForTrustShowGroup, trust, showGroup)
 	return _ret
 }
 
-// @method runModalForCertificates:showGroup: @abstract Displays one or more specified certificates in a modal panel, returning NSOKButton when dismissed. @param certificates The certificates to display. Pass a NSArray containing one or more SecCertificateRef instances in this parameter. The leaf certificate is assumed to be at index 0; the order of additional certificates in the array is not critical. @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed. To show only a single certificate, specify only one SecCertificateRef in the array and set showGroup to NO.
+// Displays one or more specified certificates in a modal panel.
 func (o *SFCertificatePanel) RunModalForCertificatesShowGroup(certificates *foundation.NSArray[objc.ID], showGroup bool) int {
-	_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForCertificatesShowGroup, certificates, showGroup)
+	_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForCertificatesShowGroup, certificates.Ptr(), showGroup)
 	return _ret
 }
 
-// @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:showGroup: @abstract Displays a certificate chain in a modal sheet. This is the preferred sheet method for SFCertificatePanel, since the SecTrustRef parameter lets you specify policies that determine whether the certificate is valid within your application's context. @param docWindow The parent window to which the sheet is attached. @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed. @param didEndSelector This method is called when the sheet is dismissed. @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method. @param trust A trust reference which contains the certificates to display. @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed. @discussion The didEndSelector method should have the following signature: - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+// Displays a certificate chain in a modal sheet.
 func (o *SFCertificatePanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, showGroup bool) {
 	o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, trust, showGroup)
 }
 
-// @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:certificates:showGroup: @abstract Displays one or more specified certificates in a modal sheet. @param docWindow The parent window to which the sheet is attached. @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed. @param didEndSelector This method is called when the sheet is dismissed. @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method. @param certificates The certificates to display. Pass a NSArray containing one or more SecCertificateRef instances in this parameter. @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed. @discussion The didEndSelector method should have the following signature: - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+// Displays one or more certificates in a modal sheet.
 func (o *SFCertificatePanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, certificates *foundation.NSArray[objc.ID], showGroup bool) {
-	o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, certificates, showGroup)
+	o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, certificates.Ptr(), showGroup)
 }
 
-// @method setPolicies: @abstract Specifies one or more policies that apply to the displayed certificates. @param policies The policies to use when evaluating the certificates' status. You can pass either a SecPolicyRef or a NSArray (containing one or more SecPolicyRef instances) in this parameter. If policies is set to nil, the Apple X.509 Basic Policy will be used. @discussion Applications will typically display a SFCertificatePanel in the context of a specific usage, such as SSL or S/MIME. You should set only the policy references which apply to your intended usage.
+// Specifies one or more policies that apply to the displayed certificates.
 func (o *SFCertificatePanel) SetPolicies(policies objc.ID) {
 	o.Ptr().Send(_sFCertificatePanelSelSetPolicies, policies)
 }
 
-// @method policies @abstract Returns an array of policies used to evaluate the status of the displayed certificates. @discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous setPolicies: call.
+// Returns an array of policies used to evaluate the status of the displayed certificates.
 func (o *SFCertificatePanel) Policies() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _sFCertificatePanelSelPolicies)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelPolicies)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// @method setDefaultButtonTitle: @abstract Customizes the title of the default button. @param title The new title for the default button.
+// Customizes the title of the default button.
 func (o *SFCertificatePanel) SetDefaultButtonTitle(title *foundation.NSString) {
 	o.Ptr().Send(_sFCertificatePanelSelSetDefaultButtonTitle, title.Ptr())
 }
 
-// @method setAlternateButtonTitle: @abstract Customizes the title of the alternate button. @param title The new title for the alternate button. If title is set to nil, the button will not be shown.
+// Customizes the title of the alternate button.
 func (o *SFCertificatePanel) SetAlternateButtonTitle(title *foundation.NSString) {
 	o.Ptr().Send(_sFCertificatePanelSelSetAlternateButtonTitle, title.Ptr())
 }
 
+// Displays a Help button in the sheet or panel.
 func (o *SFCertificatePanel) SetShowsHelp(showsHelp bool) {
 	o.Ptr().Send(_sFCertificatePanelSelSetShowsHelp, showsHelp)
 }
 
+// Indicates whether the help button is currently set to be displayed.
 func (o *SFCertificatePanel) ShowsHelp() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificatePanelSelShowsHelp)
 	return _ret
 }
 
+// Sets the help anchor string for the sheet or modal panel.
 func (o *SFCertificatePanel) SetHelpAnchor(anchor *foundation.NSString) {
 	o.Ptr().Send(_sFCertificatePanelSelSetHelpAnchor, anchor.Ptr())
 }
 
+// Returns the current help anchor string for the sheet or panel.
 func (o *SFCertificatePanel) HelpAnchor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelHelpAnchor)
 	if _ret != 0 {
@@ -119,6 +128,7 @@ func (o *SFCertificatePanel) HelpAnchor() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the certificate view for the modal panel.
 func (o *SFCertificatePanel) CertificateView() *SFCertificateView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelCertificateView)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An occurrence of textual content found during the analysis of a block of text, such as when matching a regular expression.
+//
 // TextCheckingResult wraps [raw.NSTextCheckingResult] with a fluent Go API.
 type TextCheckingResult struct {
 	inner *raw.NSTextCheckingResult
@@ -53,6 +55,8 @@ func (x *TextCheckingResult) Range() raw.NSRange {
 	return x.inner.Range()
 }
 
+// Returns the result type that the range represents.
+//
 // RangeAtIndex calls the underlying RangeAtIndex.
 func (x *TextCheckingResult) RangeAtIndex(idx uint) raw.NSRange {
 	return x.inner.RangeAtIndex(idx)
@@ -63,6 +67,8 @@ func (x *TextCheckingResult) RangeWithName(name string) raw.NSRange {
 	return x.inner.RangeWithName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Returns a new text checking result after adjusting the ranges as specified by the offset.
+//
 // ResultByAdjustingRangesWithOffset calls the underlying ResultByAdjustingRangesWithOffset.
 func (x *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult {
 	_r := x.inner.ResultByAdjustingRangesWithOffset(offset)

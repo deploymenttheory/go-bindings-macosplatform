@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A value transformer that converts data to and from classes that support secure coding.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nssecureunarchivefromdatatransformer
 type NSSecureUnarchiveFromDataTransformer struct {
 	NSValueTransformer
@@ -30,6 +32,9 @@ func NSSecureUnarchiveFromDataTransformerFromID(id objc.ID) *NSSecureUnarchiveFr
 }
 
 func NSSecureUnarchiveFromDataTransformerAllowedTopLevelClasses() *NSArray[objc.Class] {
-	_ret := objc.Send[*NSArray[objc.Class]](objc.ID(_clsNSSecureUnarchiveFromDataTransformer), _nSSecureUnarchiveFromDataTransformerSelAllowedTopLevelClasses)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSSecureUnarchiveFromDataTransformer), _nSSecureUnarchiveFromDataTransformerSelAllowedTopLevelClasses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.Class](_ret)
 }

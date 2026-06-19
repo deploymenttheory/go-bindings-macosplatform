@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages access to a memory buffer used for the data storage of a Model I/O mesh.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlmeshbuffermap
 type MDLMeshBufferMap struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func MDLMeshBufferMapFromID(id objc.ID) *MDLMeshBufferMap {
 	return o
 }
 
-// @method initWithBytes:deallocator: @abstract Called by implementor of MDLMeshBuffer protocol to create the map and arrange for unmapping on deallocation.
+// Initializes a buffer map object to manage access to the specified memory.
 func (o *MDLMeshBufferMap) InitWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator func()) *MDLMeshBufferMap {
 	var __block_deallocator objc.Block
 	if deallocator != nil {

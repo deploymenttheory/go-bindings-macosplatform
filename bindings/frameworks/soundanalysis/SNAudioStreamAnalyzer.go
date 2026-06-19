@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you create to analyze a stream of audio data and provide the results to your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer
 type SNAudioStreamAnalyzer struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func SNAudioStreamAnalyzerFromID(id objc.ID) *SNAudioStreamAnalyzer {
 	return o
 }
 
-// Creates a new analyzer - Parameter format: The format of the audio stream to be analyzed. Only PCM formats are supported.
+// Creates a new audio stream analyzer.
 func (o *SNAudioStreamAnalyzer) InitWithFormat(format *avfaudio.AVAudioFormat) *SNAudioStreamAnalyzer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNAudioStreamAnalyzerSelInitWithFormat, format.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *SNAudioStreamAnalyzer) InitWithFormat(format *avfaudio.AVAudioFormat) *
 	return SNAudioStreamAnalyzerFromID(_ret)
 }
 
-// Adds a new analysis request to the analyzer - Parameters: - request: An audio analysis request to be performed on the audio stream - observer: The object that will receive the analysis results for the supplied request. The observer is weakly retained by the analyzer. - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify nil for this parameter if you do not want the error information. - Returns: YES if the request was successfully added, and NO otherwise. Requests can be added while analysis is in progress. If the analyzer cannot perform the requested analysis, an error will be returned. For example, an error could be returned if the request requires a stream format that doesn't match the analyzer's stream format.
+// Adds a new analysis request to the audio stream analyzer.
 func (o *SNAudioStreamAnalyzer) AddRequestWithObserverError(request SNRequest, observer SNResultsObserving) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sNAudioStreamAnalyzerSelAddRequestWithObserverError, request, observer, unsafe.Pointer(&_nsErr))
@@ -57,22 +59,22 @@ func (o *SNAudioStreamAnalyzer) AddRequestWithObserverError(request SNRequest, o
 	return _ret, nil
 }
 
-// Removes an existing analysis request from the analyzer - Parameter request: An audio analysis request to be removed Requests can be removed while analysis is in progress. Once the removeRequest method returns, the previously registered observer will not receive any more callbacks.
+// Removes an existing request from the audio stream analyzer.
 func (o *SNAudioStreamAnalyzer) RemoveRequest(request SNRequest) {
 	o.Ptr().Send(_sNAudioStreamAnalyzerSelRemoveRequest, request)
 }
 
-// Removes all requests from the analyzer
+// Removes all the sound analysis requests from the audio stream analyzer.
 func (o *SNAudioStreamAnalyzer) RemoveAllRequests() {
 	o.Ptr().Send(_sNAudioStreamAnalyzerSelRemoveAllRequests)
 }
 
-// Provides the next buffer for analysis - Parameters: - audioBuffer: The buffer containing the audio to be processed - audioFramePosition: The frame position of the data in the buffer The framePosition should be a monotonically increasing sample timestamp. If the sample timeline is detected to be non-continuous, the analyzer's internal state may reset to account for the jump. Some types of audio analysis are performed at a fixed block size, which may differ from the buffer sizes provided for analysis. For this reason, an invocation of analyzeAudioBuffer may cause an analysis request observer to be called zero times, one time, or many times, depending on the relationship between the input buffer size, current analyzer state, and native analysis block size. Any errors produced during analysis will be provided through the request observers. This method may block as a means of indicating backpressure to the caller. These methods are not safe to call from a realtime audio context but may be called from lower priority threads (i.e. AVAudioEngine tap callback or AudioQueue callback).
+// Adds a new audio buffer to the analyzer’s larger stream buffer.
 func (o *SNAudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuffer *avfaudio.AVAudioBuffer, audioFramePosition int64) {
 	o.Ptr().Send(_sNAudioStreamAnalyzerSelAnalyzeAudioBufferAtAudioFramePosition, audioBuffer.Ptr(), audioFramePosition)
 }
 
-// Indicates that the audio stream has ended, and no more audio buffers will be analyzed After this method has been called, it is invalid to provide any more audio data for analysis, and any provided buffers will be ignored. This method is useful for types of analysis that may have final results to provide upon the completion of the stream.
+// Notifies the analyzer when it receives the final audio buffer.
 func (o *SNAudioStreamAnalyzer) CompleteAnalysis() {
 	o.Ptr().Send(_sNAudioStreamAnalyzerSelCompleteAnalysis)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The sound played upon delivery of a notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationsound
 type UNNotificationSound struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func UNNotificationSoundFromID(id objc.ID) *UNNotificationSound {
 	return o
 }
 
+// Creates a sound object that plays the default critical alert sound at the volume you specify.
 func UNNotificationSoundDefaultCriticalSoundWithAudioVolume(volume float32) *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelDefaultCriticalSoundWithAudioVolume, volume)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func UNNotificationSoundDefaultCriticalSoundWithAudioVolume(volume float32) *UNN
 	return UNNotificationSoundFromID(_ret)
 }
 
+// Creates a sound object that represents a custom sound file.
 func UNNotificationSoundSoundNamed(name *foundation.NSString) *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelSoundNamed, name.Ptr())
 	if _ret != 0 {
@@ -49,6 +53,7 @@ func UNNotificationSoundSoundNamed(name *foundation.NSString) *UNNotificationSou
 	return UNNotificationSoundFromID(_ret)
 }
 
+// Creates a custom sound object for critical alerts with the volume you specify.
 func UNNotificationSoundCriticalSoundNamedWithAudioVolume(name *foundation.NSString, volume float32) *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelCriticalSoundNamedWithAudioVolume, name.Ptr(), volume)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A track in a composition that presents media of a uniform type.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcompositiontrack
 type AVCompositionTrack struct {
 	AVAssetTrack

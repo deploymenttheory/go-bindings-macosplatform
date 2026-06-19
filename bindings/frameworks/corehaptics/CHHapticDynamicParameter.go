@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A value that you send to a haptic pattern player to alter a property value during playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter
 type CHHapticDynamicParameter struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func CHHapticDynamicParameterFromID(id objc.ID) *CHHapticDynamicParameter {
 	return o
 }
 
-// @method initWithParameterID:value:relativeTime @abstract Initialize a CHHapticDynamicParameter with a parameter ID, value, and relative time. @param parameterID The CHHapticDynamicParameterID for the desired parameter change. @param value The value for that parameter. @param time The time at which this parameter should be applied, relative to the start time of the pattern.
+// Creates a dynamic parameter from its ID, value, and start time.
 func (o *CHHapticDynamicParameter) InitWithParameterIDValueRelativeTime(parameterID *foundation.NSString, value float32, time_ float64) *CHHapticDynamicParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticDynamicParameterSelInitWithParameterIDValueRelativeTime, parameterID.Ptr(), value, time_)
 	if _ret != 0 {

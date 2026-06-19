@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type you use to programmatically search the indexed app content.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cssearchquery
 type CSSearchQuery struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func CSSearchQueryFromID(id objc.ID) *CSSearchQuery {
 	return o
 }
 
+// Initializes and returns a query object with the specified query string and query context.
 func (o *CSSearchQuery) InitWithQueryStringQueryContext(queryString *foundation.NSString, queryContext *CSSearchQueryContext) *CSSearchQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelInitWithQueryStringQueryContext, queryString.Ptr(), queryContext.Ptr())
 	if _ret != 0 {
@@ -51,19 +54,22 @@ func (o *CSSearchQuery) InitWithQueryStringQueryContext(queryString *foundation.
 	return CSSearchQueryFromID(_ret)
 }
 
+// Initializes and returns a query object with the specified query string and item attributes.
 // Deprecated: since macOS 13.0.
 func (o *CSSearchQuery) InitWithQueryStringAttributes(queryString *foundation.NSString, attributes *foundation.NSArray[*foundation.NSString]) *CSSearchQuery {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelInitWithQueryStringAttributes, queryString.Ptr(), attributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelInitWithQueryStringAttributes, queryString.Ptr(), attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CSSearchQueryFromID(_ret)
 }
 
+// Starts searching the index for items that match the current query string and parameters.
 func (o *CSSearchQuery) Start() {
 	o.Ptr().Send(_cSSearchQuerySelStart)
 }
 
+// Cancels the current query operation.
 func (o *CSSearchQuery) Cancel() {
 	o.Ptr().Send(_cSSearchQuerySelCancel)
 }
@@ -115,10 +121,13 @@ func (o *CSSearchQuery) SetCompletionHandler(completionHandler func(unsafe.Point
 }
 
 func (o *CSSearchQuery) ProtectionClasses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchQuerySelProtectionClasses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQuerySelProtectionClasses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchQuery) SetProtectionClasses(protectionClasses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchQuerySelSetProtectionClasses, protectionClasses)
+	o.Ptr().Send(_cSSearchQuerySelSetProtectionClasses, protectionClasses.Ptr())
 }

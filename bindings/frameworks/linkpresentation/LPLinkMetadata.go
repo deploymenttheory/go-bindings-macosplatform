@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains metadata about a URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/linkpresentation/lplinkmetadata
 type LPLinkMetadata struct {
 	foundation.NSObject

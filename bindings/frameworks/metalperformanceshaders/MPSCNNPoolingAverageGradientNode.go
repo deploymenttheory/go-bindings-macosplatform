@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a gradient average pooling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaveragegradientnode
 type MPSCNNPoolingAverageGradientNode struct {
 	mpsneuralnetwork.MPSCNNPoolingGradientNode

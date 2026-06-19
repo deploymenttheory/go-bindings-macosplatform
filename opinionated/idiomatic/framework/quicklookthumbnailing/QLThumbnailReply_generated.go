@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object that provides a thumbnail for a custom file type.
+//
 // ThumbnailReply wraps [raw.QLThumbnailReply] with a fluent Go API.
 type ThumbnailReply struct {
 	inner *raw.QLThumbnailReply
@@ -37,7 +39,7 @@ func NewThumbnailReply() *ThumbnailReply {
 	return &ThumbnailReply{inner: raw.QLThumbnailReplyFromID(_id)}
 }
 
-// The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
+// A short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.
 //
 // WithExtensionBadge sets the extensionBadge property and returns the receiver for chaining.
 func (x *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailReply {

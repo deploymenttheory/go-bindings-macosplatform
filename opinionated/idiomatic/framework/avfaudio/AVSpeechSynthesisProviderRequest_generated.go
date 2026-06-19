@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the text to synthesize and the voice to use.
+//
 // SpeechSynthesisProviderRequest wraps [raw.AVSpeechSynthesisProviderRequest] with a fluent Go API.
 type SpeechSynthesisProviderRequest struct {
 	inner *raw.AVSpeechSynthesisProviderRequest
@@ -33,6 +35,8 @@ func SpeechSynthesisProviderRequestFromID(id objc.ID) *SpeechSynthesisProviderRe
 	return &SpeechSynthesisProviderRequest{inner: raw.AVSpeechSynthesisProviderRequestFromID(id)}
 }
 
+// Creates a request with a voice and a description.
+//
 // NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a new [SpeechSynthesisProviderRequest].
 func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, voice *raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisProviderRequest")), objc.RegisterName("alloc"))

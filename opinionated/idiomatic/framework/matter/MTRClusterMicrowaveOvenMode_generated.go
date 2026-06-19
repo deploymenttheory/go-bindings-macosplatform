@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Cluster Microwave Oven Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterMicrowaveOvenMode wraps [raw.MTRClusterMicrowaveOvenMode] with a fluent Go API.
 type MTRClusterMicrowaveOvenMode struct {
 	inner *raw.MTRClusterMicrowaveOvenMode

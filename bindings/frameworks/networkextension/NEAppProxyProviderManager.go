@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to create and manage the app proxy provider’s VPN configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neappproxyprovidermanager
 type NEAppProxyProviderManager struct {
 	NETunnelProviderManager
@@ -32,7 +34,7 @@ func NEAppProxyProviderManagerFromID(id objc.ID) *NEAppProxyProviderManager {
 	return o
 }
 
-// @method loadAllFromPreferencesWithCompletionHandler: @discussion This function asynchronously reads all of the NEAppProxy configurations associated with the calling app that have previously been saved to disk and returns them as NEAppProxyProviderManager objects. @param completionHandler A block that takes an array NEAppProxyProviderManager objects. The array passed to the block may be empty if no NETunnelProvider configurations were successfully read from the disk.  The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load all of the App Proxy configurations associated with the calling app that have previously been saved to the Network Extension preferences.
 func NEAppProxyProviderManagerLoadAllFromPreferencesWithCompletionHandler(completionHandler func(*foundation.NSArray[*NEAppProxyProviderManager], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

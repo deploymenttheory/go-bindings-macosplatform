@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a promise for the pasteboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsfilepromiseprovider
 type NSFilePromiseProvider struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSFilePromiseProviderFromID(id objc.ID) *NSFilePromiseProvider {
 	return o
 }
 
+// Initializes a file promise provider for a certain file type.
 func (o *NSFilePromiseProvider) InitWithFileTypeDelegate(fileType *foundation.NSString, delegate NSFilePromiseProviderDelegate) *NSFilePromiseProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseProviderSelInitWithFileTypeDelegate, fileType.Ptr(), delegate)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func (o *NSFilePromiseProvider) InitWithFileTypeDelegate(fileType *foundation.NS
 	return NSFilePromiseProviderFromID(_ret)
 }
 
+// Initializes a file promise provider.
 func (o *NSFilePromiseProvider) Init() *NSFilePromiseProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseProviderSelInit)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// One portion of an overall route.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkroutestep
 type MKRouteStep struct {
 	foundation.NSObject

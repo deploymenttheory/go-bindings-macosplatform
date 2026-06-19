@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A summary item that represents a disbursement.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkdisbursementsummaryitem
 type PKDisbursementSummaryItem struct {
 	PKPaymentSummaryItem

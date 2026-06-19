@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The horizon angle information that an image-analysis request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnhorizonobservation
 type VNHorizonObservation struct {
 	VNObservation
@@ -32,7 +34,7 @@ func VNHorizonObservationFromID(id objc.ID) *VNHorizonObservation {
 	return o
 }
 
-// @brief Creates a transform for the specified width and height.
+// Creates an affine transform for the specified image width and height.
 func (o *VNHorizonObservation) TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform {
 	_ret := objc.Send[corefoundation.CGAffineTransform](o.Ptr(), _vNHorizonObservationSelTransformForImageWidthHeight, width, height)
 	return _ret

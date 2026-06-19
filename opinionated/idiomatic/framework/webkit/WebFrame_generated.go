@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A WebFrame object encapsulates the data displayed in a WebFrameView object. There is one WebFrame object per frame displayed in a WebView. An entire webpage is represented by a hierarchy of WebFrame objects in which the root object is called the main frame.
+//
 // WebFrame wraps [raw.WebFrame] with a fluent Go API.
 type WebFrame struct {
 	inner *raw.WebFrame
@@ -33,7 +35,7 @@ func WebFrameFromID(id objc.ID) *WebFrame {
 	return &WebFrame{inner: raw.WebFrameFromID(id)}
 }
 
-// @method initWithName:webFrameView:webView: @abstract The designated initializer of WebFrame. @discussion WebFrames are normally created for you by the WebView.  You should not need to invoke this method directly. @param name The name of the frame. @param view The WebFrameView for the frame. @param webView The WebView that manages the frame. @result Returns an initialized WebFrame.
+// Initializes the receiver with a frame name, web frame view, and controlling web view.
 //
 // NewWebFrameWithNameWebFrameViewWebView creates a new [WebFrame].
 func NewWebFrameWithNameWebFrameViewWebView(name string, view *raw.WebFrameView, webView *raw.WebView) *WebFrame {
@@ -42,63 +44,63 @@ func NewWebFrameWithNameWebFrameViewWebView(name string, view *raw.WebFrameView,
 	return &WebFrame{inner: raw.WebFrameFromID(_id)}
 }
 
-// @method loadRequest: @param request The web request to load.
+// Connects to a given URL by initiating an asynchronous client request.
 //
 // LoadRequest calls the underlying LoadRequest.
 func (x *WebFrame) LoadRequest(request *foundation.NSURLRequest) {
 	x.inner.LoadRequest(request)
 }
 
-// @method loadData:MIMEType:textEncodingName:baseURL: @param data The data to use for the main page of the document. @param MIMEType The MIME type of the data. @param encodingName The encoding of the data. @param URL The base URL to apply to relative URLs within the document.
+// Sets the main page contents, MIME type, content encoding, and base URL.
 //
 // LoadDataMIMETypeTextEncodingNameBaseURL calls the underlying LoadDataMIMETypeTextEncodingNameBaseURL.
 func (x *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data *foundation.NSData, mIMEType string, encodingName string, uRL string) {
 	x.inner.LoadDataMIMETypeTextEncodingNameBaseURL(data, foundation.NSStringStringWithUTF8String(mIMEType), foundation.NSStringStringWithUTF8String(encodingName), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
-// @method loadHTMLString:baseURL: @param string The string to use for the main page of the document. @param URL The base URL to apply to relative URLs within the document.
+// Sets the main page contents and base URL.
 //
 // LoadHTMLStringBaseURL calls the underlying LoadHTMLStringBaseURL.
 func (x *WebFrame) LoadHTMLStringBaseURL(string_ string, uRL string) {
 	x.inner.LoadHTMLStringBaseURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
-// @method loadAlternateHTMLString:baseURL:forUnreachableURL: @abstract Loads a page to display as a substitute for a URL that could not be reached. @discussion This allows clients to display page-loading errors in the webview itself. This is typically called while processing the WebFrameLoadDelegate method -webView:didFailProvisionalLoadWithError:forFrame: or one of the WebPolicyDelegate methods -webView:decidePolicyForMIMEType:request:frame:decisionListener: or -webView:unableToImplementPolicyWithError:frame:. If it is called from within one of those three delegate methods then the back/forward list will be maintained appropriately. @param string The string to use for the main page of the document. @param baseURL The baseURL to apply to relative URLs within the document. @param unreachableURL The URL for which this page will serve as alternate content.
+// Loads alternate content for a frame whose URL is unreachable.
 //
 // LoadAlternateHTMLStringBaseURLForUnreachableURL calls the underlying LoadAlternateHTMLStringBaseURLForUnreachableURL.
 func (x *WebFrame) LoadAlternateHTMLStringBaseURLForUnreachableURL(string_ string, baseURL string, unreachableURL string) {
 	x.inner.LoadAlternateHTMLStringBaseURLForUnreachableURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(unreachableURL)))
 }
 
-// @method loadArchive: @abstract Causes WebFrame to load a WebArchive. @param archive The archive to be loaded.
+// Loads an archive into the web frame.
 //
 // LoadArchive calls the underlying LoadArchive.
 func (x *WebFrame) LoadArchive(archive *raw.WebArchive) {
 	x.inner.LoadArchive(archive)
 }
 
-// @method stopLoading @discussion Stop any pending loads on the frame's data source, and its children.
+// Stops any pending loads on the receiver’s data source, and those of its children.
 //
 // StopLoading calls the underlying StopLoading.
 func (x *WebFrame) StopLoading() {
 	x.inner.StopLoading()
 }
 
-// @method reload @discussion Performs HTTP/1.1 end-to-end revalidation using cache-validating conditionals if possible.
+// Reloads the initial request passed as an argument to loadRequest:.
 //
 // Reload calls the underlying Reload.
 func (x *WebFrame) Reload() {
 	x.inner.Reload()
 }
 
-// @method reloadFromOrigin @discussion Performs HTTP/1.1 end-to-end reload.
+// Performs an end-to-end revalidation using cache-validating conditionals if possible.
 //
 // ReloadFromOrigin calls the underlying ReloadFromOrigin.
 func (x *WebFrame) ReloadFromOrigin() {
 	x.inner.ReloadFromOrigin()
 }
 
-// @method findFrameNamed: @discussion This method returns a frame with the given name. findFrameNamed returns self for _self and _current, the parent frame for _parent and the main frame for _top. findFrameNamed returns self for _parent and _top if the receiver is the mainFrame. findFrameNamed first searches from the current frame to all descending frames then the rest of the frames in the WebView. If still not found, findFrameNamed searches the frames of the other WebViews. @param name The name of the frame to find. @result The frame matching the provided name. nil if the frame is not found.
+// Returns a web frame that matches the given name.
 //
 // FindFrameNamed calls the underlying FindFrameNamed.
 func (x *WebFrame) FindFrameNamed(name string) *WebFrame {

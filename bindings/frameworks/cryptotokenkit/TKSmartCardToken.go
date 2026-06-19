@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a smart card based cryptographic token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtoken
 type TKSmartCardToken struct {
 	TKToken
@@ -31,7 +33,7 @@ func TKSmartCardTokenFromID(id objc.ID) *TKSmartCardToken {
 	return o
 }
 
-// @discussion Initializes token instance with specified attributes. @param smartCard TKSmartCard instance representing connection to SmartCard on which the intance should operate. @param AID ISO7816-4 application ID which is preselected on the card. @param instanceID Unique, persistent identifier of this token.  This is typically implemented by some kind of SmartCard serial number. @param tokenDriver associated driver which initiated creation of this token.
+// Initializes a smart card token with the specified smart card, application identifier, and token driver.
 func (o *TKSmartCardToken) InitWithSmartCardAIDInstanceIDTokenDriver(smartCard *TKSmartCard, aID *foundation.NSData, instanceID *foundation.NSString, tokenDriver *TKSmartCardTokenDriver) *TKSmartCardToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSelInitWithSmartCardAIDInstanceIDTokenDriver, smartCard.Ptr(), aID.Ptr(), instanceID.Ptr(), tokenDriver.Ptr())
 	if _ret != 0 {

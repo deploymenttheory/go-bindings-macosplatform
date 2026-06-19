@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An element that represents text within project section content.
+//
 // ProjectTextElement wraps [raw.PHProjectTextElement] with a fluent Go API.
 type ProjectTextElement struct {
 	inner *raw.PHProjectTextElement

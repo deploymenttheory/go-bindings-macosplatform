@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for the node hierarchy and global properties that together form a displayable 3D scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnscene
 type SCNScene struct {
 	foundation.NSObject
@@ -65,6 +67,7 @@ func SCNSceneFromID(id objc.ID) *SCNScene {
 	return o
 }
 
+// Creates and returns an empty scene.
 func SCNSceneScene() *SCNScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelScene)
 	if _ret != 0 {
@@ -73,18 +76,18 @@ func SCNSceneScene() *SCNScene {
 	return SCNSceneFromID(_ret)
 }
 
-// @method attributeForKey: @abstract Retrieves a scene attribute. @discussion The available keys are listed in the "Scene attributes" group. @param key An NSString object that specifies the attribute to be read
+// Returns the scene attribute for the specified key.
 func (o *SCNScene) AttributeForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSelAttributeForKey, key.Ptr())
 	return _ret
 }
 
-// @method setAttribute:forKey: @abstract Sets a scene attribute @discussion The available keys are listed in the "Scene attributes" group. @param attribute An object that specifies the value of the attribute to be written. @param key An NSString object that specifies the attribute to be written
+// Sets a scene attribute for the specified key.
 func (o *SCNScene) SetAttributeForKey(attribute objc.ID, key *foundation.NSString) {
 	o.Ptr().Send(_sCNSceneSelSetAttributeForKey, attribute, key.Ptr())
 }
 
-// @method sceneNamed: @abstract Creates and returns a scene associated with the specified filename. @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle. @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
+// Loads a scene from a file with the specified name in the app’s main bundle.
 func SCNSceneSceneNamed(name *foundation.NSString) *SCNScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneNamed, name.Ptr())
 	if _ret != 0 {
@@ -93,19 +96,19 @@ func SCNSceneSceneNamed(name *foundation.NSString) *SCNScene {
 	return SCNSceneFromID(_ret)
 }
 
-// @method sceneNamed:options: @abstract Creates and returns a scene associated with the specified filename. @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle. @param directory The name of the bundle sub-directory to search into. @param options An options dictionary. The relevant keys are documented in the SCNSceneSource class. @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
+// Loads a scene from a file with the specified name in a specific subdirectory of the app’s main bundle.
 func SCNSceneSceneNamedInDirectoryOptions(name *foundation.NSString, directory *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNScene {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneNamedInDirectoryOptions, name.Ptr(), directory.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneNamedInDirectoryOptions, name.Ptr(), directory.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNSceneFromID(_ret)
 }
 
-// @method sceneWithURL:options:error: @abstract Creates and returns a scene from the specified URL. @param url The URL to the 3D file. @param options An options dictionary. The relevant keys are documented in the SCNSceneSource class. @param error A NSError object passed by reference to get more information about the error when a nil is returned. @discussion This method is here for convenience. It is equivalent to initializing a SCNSceneSource with the specified url and options, and asking it for its scene with the same options.
+// Loads a scene from the specified URL.
 func SCNSceneSceneWithURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*SCNScene, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneWithURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneWithURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -115,7 +118,7 @@ func SCNSceneSceneWithURLOptionsError(url *foundation.NSURL, options *foundation
 	return SCNSceneFromID(_ret), nil
 }
 
-// @method writeToURL:options:delegate:progressHandler: @abstract write the scene to the specified url. @param url the destination url to write the scene to. @param options A dictionary of options. The valid keys are described in the "Scene writing options" section. @param delegate an optional delegate to manage external references such as images. @param progressHandler an optional block to handle the progress of the operation. @return Returns YES if the operation succeeded, NO otherwise. Errors checking can be done via the "error" parameter of the 'progressHandler'. @discussion macOS 10.10 and lower only supports exporting to .dae files. Starting macOS 10.11 exporting supports .dae, .scn as well as file all formats supported by Model I/O. Starting iOS 10 exporting supports .scn as well as all file formats supported by Model I/O.
+// Exports the scene and its contents to a file at the specified URL.
 func (o *SCNScene) WriteToURLOptionsDelegateProgressHandler(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool {
 	var __block_progressHandler objc.Block
 	if progressHandler != nil {
@@ -124,7 +127,7 @@ func (o *SCNScene) WriteToURLOptionsDelegateProgressHandler(url *foundation.NSUR
 		})
 		defer __block_progressHandler.Release()
 	}
-	_ret := objc.Send[bool](o.Ptr(), _sCNSceneSelWriteToURLOptionsDelegateProgressHandler, url.Ptr(), options, delegate, __block_progressHandler)
+	_ret := objc.Send[bool](o.Ptr(), _sCNSceneSelWriteToURLOptionsDelegateProgressHandler, url.Ptr(), options.Ptr(), delegate, __block_progressHandler)
 	return _ret
 }
 
@@ -254,14 +257,17 @@ func (o *SCNScene) SetPaused(paused bool) {
 	o.Ptr().Send(_sCNSceneSelSetPaused, paused)
 }
 
+// Attaches a particle system to the scene, using the specified transform.
 func (o *SCNScene) AddParticleSystemWithTransform(system *SCNParticleSystem, transform quartzcore.CATransform3D) {
 	o.Ptr().Send(_sCNSceneSelAddParticleSystemWithTransform, system.Ptr(), transform)
 }
 
+// Removes any particle systems directly attached to the scene.
 func (o *SCNScene) RemoveAllParticleSystems() {
 	o.Ptr().Send(_sCNSceneSelRemoveAllParticleSystems)
 }
 
+// Removes a particle system attached to the scene.
 func (o *SCNScene) RemoveParticleSystem(system *SCNParticleSystem) {
 	o.Ptr().Send(_sCNSceneSelRemoveParticleSystem, system.Ptr())
 }

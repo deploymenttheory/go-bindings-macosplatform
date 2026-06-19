@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that dissipates sound frequencies over distance.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasegeometricspreadingdistancemodelparameters
 type PHASEGeometricSpreadingDistanceModelParameters struct {
 	PHASEDistanceModelParameters
@@ -31,6 +33,7 @@ func PHASEGeometricSpreadingDistanceModelParametersFromID(id objc.ID) *PHASEGeom
 	return o
 }
 
+// Creates the geometric spreading distance model parameters.
 func (o *PHASEGeometricSpreadingDistanceModelParameters) Init() *PHASEGeometricSpreadingDistanceModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGeometricSpreadingDistanceModelParametersSelInit)
 	if _ret != 0 {

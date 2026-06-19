@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A task, like downloading a specific resource, performed in a URL session.
+//
 // URLSessionTask wraps [raw.NSURLSessionTask] with a fluent Go API.
 type URLSessionTask struct {
 	inner *raw.NSURLSessionTask

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/memessagesecurityinformation
 type MEMessageSecurityInformation struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func MEMessageSecurityInformationFromID(id objc.ID) *MEMessageSecurityInformatio
 	return o
 }
 
+// Creates a message security information object that indicates if a message is encrypted, who signed it, or if an error occurred when decoding the message.
 func (o *MEMessageSecurityInformation) InitWithSignersIsEncryptedSigningErrorEncryptionError(signers *foundation.NSArray[*MEMessageSigner], isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MEMessageSecurityInformation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSecurityInformationSelInitWithSignersIsEncryptedSigningErrorEncryptionError, signers.Ptr(), isEncrypted, signingError, encryptionError)
 	if _ret != 0 {

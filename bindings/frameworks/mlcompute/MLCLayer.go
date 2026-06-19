@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for all framework layers.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlclayer
 type MLCLayer struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func MLCLayerFromID(id objc.ID) *MLCLayer {
 	return o
 }
 
-// @abstract   Determine whether instances of this layer accept source tensors of the given data type on the given device. @param      dataType   A data type of a possible input tensor to the layer @param      device     A device @return     A boolean indicating whether the data type is supported
+// Returns a Boolean that indicates whether instances of this layer accept source tensors for the data type and device that you specify.
 func MLCLayerSupportsDataTypeOnDevice(dataType MLCDataType, device *MLCDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMLCLayer), _mLCLayerSelSupportsDataTypeOnDevice, dataType, device.Ptr())
 	return _ret

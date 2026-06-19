@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/untimeintervalnotificationtrigger
 type UNTimeIntervalNotificationTrigger struct {
 	UNNotificationTrigger
@@ -32,6 +34,7 @@ func UNTimeIntervalNotificationTriggerFromID(id objc.ID) *UNTimeIntervalNotifica
 	return o
 }
 
+// Creates a time interval trigger using the time value parameter.
 func UNTimeIntervalNotificationTriggerTriggerWithTimeIntervalRepeats(timeInterval float64, repeats bool) *UNTimeIntervalNotificationTrigger {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNTimeIntervalNotificationTrigger), _uNTimeIntervalNotificationTriggerSelTriggerWithTimeIntervalRepeats, timeInterval, repeats)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func UNTimeIntervalNotificationTriggerTriggerWithTimeIntervalRepeats(timeInterva
 	return UNTimeIntervalNotificationTriggerFromID(_ret)
 }
 
+// The next date at which the trigger conditions are met.
 func (o *UNTimeIntervalNotificationTrigger) NextTriggerDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNTimeIntervalNotificationTriggerSelNextTriggerDate)
 	if _ret != 0 {

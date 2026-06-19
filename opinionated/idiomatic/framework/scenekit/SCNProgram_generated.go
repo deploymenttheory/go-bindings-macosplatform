@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A complete Metal or OpenGL shader program that replaces SceneKit’s rendering of a geometry or material.
+//
 // Program wraps [raw.SCNProgram] with a fluent Go API.
 type Program struct {
 	inner *raw.SCNProgram
@@ -38,7 +40,7 @@ func NewProgram() *Program {
 	return &Program{inner: raw.SCNProgramFromID(_id)}
 }
 
-// @property vertexShader @abstract Determines the receiver's vertex shader.
+// GLSL source code for the program’s vertex shader.
 //
 // WithVertexShader sets the vertexShader property and returns the receiver for chaining.
 func (x *Program) WithVertexShader(vertexShader string) *Program {
@@ -46,7 +48,7 @@ func (x *Program) WithVertexShader(vertexShader string) *Program {
 	return x
 }
 
-// @property fragmentShader @abstract Determines the receiver's fragment shader.
+// GLSL source code for the program’s fragment shader.
 //
 // WithFragmentShader sets the fragmentShader property and returns the receiver for chaining.
 func (x *Program) WithFragmentShader(fragmentShader string) *Program {
@@ -54,7 +56,7 @@ func (x *Program) WithFragmentShader(fragmentShader string) *Program {
 	return x
 }
 
-// @property tessellationControlShader @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
+// GLSL source code for the program’s optional tessellation control shader.
 //
 // WithTessellationControlShader sets the tessellationControlShader property and returns the receiver for chaining.
 func (x *Program) WithTessellationControlShader(tessellationControlShader string) *Program {
@@ -62,7 +64,7 @@ func (x *Program) WithTessellationControlShader(tessellationControlShader string
 	return x
 }
 
-// @property tessellationEvaluationShader @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
+// GLSL source code for the program’s optional tessellation evaluation shader.
 //
 // WithTessellationEvaluationShader sets the tessellationEvaluationShader property and returns the receiver for chaining.
 func (x *Program) WithTessellationEvaluationShader(tessellationEvaluationShader string) *Program {
@@ -70,7 +72,7 @@ func (x *Program) WithTessellationEvaluationShader(tessellationEvaluationShader 
 	return x
 }
 
-// @property geometryShader @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
+// GLSL source code for the program’s optional geometry shader.
 //
 // WithGeometryShader sets the geometryShader property and returns the receiver for chaining.
 func (x *Program) WithGeometryShader(geometryShader string) *Program {
@@ -78,7 +80,7 @@ func (x *Program) WithGeometryShader(geometryShader string) *Program {
 	return x
 }
 
-// @property vertexFunctionName @abstract Determines the receiver's vertex function name. @discussion The name of the vertex function (for Metal programs).
+// The name of the vertex shader function to load from a Metal shader library.
 //
 // WithVertexFunctionName sets the vertexFunctionName property and returns the receiver for chaining.
 func (x *Program) WithVertexFunctionName(vertexFunctionName string) *Program {
@@ -86,7 +88,7 @@ func (x *Program) WithVertexFunctionName(vertexFunctionName string) *Program {
 	return x
 }
 
-// @property fragmentFunctionName @abstract Determines the receiver's fragment function name. @discussion The name of the fragment function (for Metal programs).
+// The name of the fragment shader function to load from a Metal shader library.
 //
 // WithFragmentFunctionName sets the fragmentFunctionName property and returns the receiver for chaining.
 func (x *Program) WithFragmentFunctionName(fragmentFunctionName string) *Program {
@@ -94,7 +96,7 @@ func (x *Program) WithFragmentFunctionName(fragmentFunctionName string) *Program
 	return x
 }
 
-// @property opaque @abstract Determines the receiver's fragment are opaque or not. Defaults to YES.
+// A Boolean value that indicates whether fragments rendered by the program are fully opaque.
 //
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *Program) WithOpaque(opaque bool) *Program {
@@ -102,7 +104,7 @@ func (x *Program) WithOpaque(opaque bool) *Program {
 	return x
 }
 
-// @property delegate @abstract Determines the receiver's delegate
+// The delegate of the program object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Program) WithDelegate(delegate raw.SCNProgramDelegate) *Program {
@@ -110,7 +112,7 @@ func (x *Program) WithDelegate(delegate raw.SCNProgramDelegate) *Program {
 	return x
 }
 
-// @property library @abstract Specifies the Metal library to use to locate the function names specified above. @discussion If set to nil the default library is used. Defaults to nil.
+// The Metal shader library containing shader functions to be used by this program.
 //
 // WithLibrary sets the library property and returns the receiver for chaining.
 func (x *Program) WithLibrary(library metal.MTLLibrary) *Program {
@@ -118,21 +120,21 @@ func (x *Program) WithLibrary(library metal.MTLLibrary) *Program {
 	return x
 }
 
-// @method handleBindingOfBufferNamed:frequency:usingBlock: @abstract Sets the block to call at render time to bind the buffer of the specified symbol of the receiver's program. @param name The name of the buffer to bind. @param frequency The frequency at which the block has to be invoked. Can be per frame, per node or per geometry or material. See SCNBufferBindingBlock above. @param block The block that binds the buffer. @discussion This method can only be used with Metal based programs.
+// Registers a block for SceneKit to call at render time for binding a Metal buffer to the shader program.
 //
 // HandleBindingOfBufferNamedFrequencyUsing calls the underlying HandleBindingOfBufferNamedFrequencyUsing.
 func (x *Program) HandleBindingOfBufferNamedFrequencyUsing(name string, frequency SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer)) {
 	x.inner.HandleBindingOfBufferNamedFrequencyUsing(foundation.NSStringStringWithUTF8String(name), raw.SCNBufferFrequency(frequency), block)
 }
 
-// @method setSemantic:forSymbol:options: @abstract Associates a SceneKit semantic to a symbol. @param semantic The SceneKit semantic to associate to the specified symbol. @param symbol A symbol from the program source code. @param options An optional dictionary. See the 'Semantic options' above. @discussion Associates semantics handled by the SceneKit runtime to a symbol from the program. Supported semantics are listed in SCNGeometry.h and SCNNode.h.
+// Associates a SceneKit semantic identifier with the specified GLSL vertex attribute or uniform variable.
 //
 // SetSemanticForSymbolOptions calls the underlying SetSemanticForSymbolOptions.
 func (x *Program) SetSemanticForSymbolOptions(semantic string, symbol string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.SetSemanticForSymbolOptions(foundation.NSStringStringWithUTF8String(semantic), foundation.NSStringStringWithUTF8String(symbol), options)
 }
 
-// @method semanticForSymbol: @abstract Retrieves the SceneKit semantic associated to a symbol from the program source code. @param symbol A symbol from the program source code.
+// Returns the SceneKit semantic identifiers associated with the specified GLSL vertex attribute or uniform variable.
 //
 // SemanticForSymbol calls the underlying SemanticForSymbol.
 func (x *Program) SemanticForSymbol(symbol string) string {

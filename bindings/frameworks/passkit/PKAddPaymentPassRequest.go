@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Contains the card data needed to add a card to Apple Pay.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequest
 type PKAddPaymentPassRequest struct {
 	foundation.NSObject

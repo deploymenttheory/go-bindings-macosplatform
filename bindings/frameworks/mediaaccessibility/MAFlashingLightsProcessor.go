@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that processes a framebuffer object to detect and dim sequences of flashing lights.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor
 type MAFlashingLightsProcessor struct {
 	foundation.NSObject
@@ -33,15 +35,15 @@ func MAFlashingLightsProcessorFromID(id objc.ID) *MAFlashingLightsProcessor {
 	return o
 }
 
-// @abstract Determines whether the flashing lights processor is able to process the content in the surface for flashing lights. This might be false on unsupported hardware or unsupported color spaces. @result A boolean result.
+// Returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.
 func (o *MAFlashingLightsProcessor) CanProcessSurface(surface unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mAFlashingLightsProcessorSelCanProcessSurface, surface)
 	return _ret
 }
 
-// @abstract Processes an inSurface by analyzing pixels for sequences of flashing lights and then darkens content to reduce the risk of discomfort from some users. The outSurface will contain the mitigated content. The timestamp indicates the time at which the surface will be shown in the video playback. FPS will be determined based on the values of the timestamps. Options dictionary for additional parameters. @result An object which indicates whether the surface was able to be processed, the amount of mitigation that was applied, and the intensitry level that was detected.
+// Processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.
 func (o *MAFlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MAFlashingLightsProcessorResult {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mAFlashingLightsProcessorSelProcessSurfaceOutSurfaceTimestampOptions, inSurface, outSurface, timestamp, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mAFlashingLightsProcessorSelProcessSurfaceOutSurfaceTimestampOptions, inSurface, outSurface, timestamp, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

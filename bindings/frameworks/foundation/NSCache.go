@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable collection you use to temporarily store transient key-value pairs that are subject to eviction when resources are low.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscache
 type NSCache[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	NSObject
@@ -43,23 +45,28 @@ func NSCacheFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id obj
 	return o
 }
 
+// Returns the value associated with a given key.
 func (o *NSCache[KeyType, ObjectType]) ObjectForKey(key KeyType) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSCacheSelObjectForKey, key)
 	return _ret
 }
 
+// Sets the value of the specified key in the cache.
 func (o *NSCache[KeyType, ObjectType]) SetObjectForKey(obj ObjectType, key KeyType) {
 	o.Ptr().Send(_nSCacheSelSetObjectForKey, obj, key)
 }
 
+// Sets the value of the specified key in the cache, and associates the key-value pair with the specified cost.
 func (o *NSCache[KeyType, ObjectType]) SetObjectForKeyCost(obj ObjectType, key KeyType, g uint) {
 	o.Ptr().Send(_nSCacheSelSetObjectForKeyCost, obj, key, g)
 }
 
+// Removes the value of the specified key in the cache.
 func (o *NSCache[KeyType, ObjectType]) RemoveObjectForKey(key KeyType) {
 	o.Ptr().Send(_nSCacheSelRemoveObjectForKey, key)
 }
 
+// Empties the cache.
 func (o *NSCache[KeyType, ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSCacheSelRemoveAllObjects)
 }

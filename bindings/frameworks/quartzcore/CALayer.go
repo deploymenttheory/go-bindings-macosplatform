@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages image-based content and allows you to perform animations on that content.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/calayer
 type CALayer struct {
 	foundation.NSObject
@@ -199,6 +201,7 @@ func CALayerFromID(id objc.ID) *CALayer {
 	return o
 }
 
+// Creates and returns an instance of the layer object.
 func CALayerLayer() *CALayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelLayer)
 	if _ret != 0 {
@@ -207,6 +210,7 @@ func CALayerLayer() *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Returns an initialized CALayer object.
 func (o *CALayer) Init() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelInit)
 	if _ret != 0 {
@@ -215,6 +219,7 @@ func (o *CALayer) Init() *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Override to copy or initialize custom fields of the specified layer.
 func (o *CALayer) InitWithLayer(layer objc.ID) *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelInitWithLayer, layer)
 	if _ret != 0 {
@@ -223,6 +228,7 @@ func (o *CALayer) InitWithLayer(layer objc.ID) *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Returns a copy of the presentation layer object that represents the state of the layer as it currently appears onscreen.
 func (o *CALayer) PresentationLayer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelPresentationLayer)
 	if _ret != 0 {
@@ -231,6 +237,7 @@ func (o *CALayer) PresentationLayer() *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Returns the model layer object associated with the receiver, if any.
 func (o *CALayer) ModelLayer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelModelLayer)
 	if _ret != 0 {
@@ -239,89 +246,108 @@ func (o *CALayer) ModelLayer() *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Specifies the default value associated with the specified key.
 func CALayerDefaultValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelDefaultValueForKey, key.Ptr())
 	return _ret
 }
 
+// Returns a Boolean indicating whether changes to the specified key require the layer to be redisplayed.
 func CALayerNeedsDisplayForKey(key *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsCALayer), _cALayerSelNeedsDisplayForKey, key.Ptr())
 	return _ret
 }
 
+// Returns a Boolean indicating whether the value of the specified key should be archived.
 func (o *CALayer) ShouldArchiveValueForKey(key *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cALayerSelShouldArchiveValueForKey, key.Ptr())
 	return _ret
 }
 
+// Returns an affine version of the layer’s transform.
 func (o *CALayer) AffineTransform() corefoundation.CGAffineTransform {
 	_ret := objc.Send[corefoundation.CGAffineTransform](o.Ptr(), _cALayerSelAffineTransform)
 	return _ret
 }
 
+// Sets the layer’s transform to the specified affine transform.
 func (o *CALayer) SetAffineTransform(m corefoundation.CGAffineTransform) {
 	o.Ptr().Send(_cALayerSelSetAffineTransform, m)
 }
 
+// Returns a Boolean indicating whether the layer content is implicitly flipped when rendered.
 func (o *CALayer) ContentsAreFlipped() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cALayerSelContentsAreFlipped)
 	return _ret
 }
 
+// Detaches the layer from its parent layer.
 func (o *CALayer) RemoveFromSuperlayer() {
 	o.Ptr().Send(_cALayerSelRemoveFromSuperlayer)
 }
 
+// Appends the layer to the layer’s list of sublayers.
 func (o *CALayer) AddSublayer(layer *CALayer) {
 	o.Ptr().Send(_cALayerSelAddSublayer, layer.Ptr())
 }
 
+// Inserts the specified layer into the receiver’s list of sublayers at the specified index.
 func (o *CALayer) InsertSublayerAtIndex(layer *CALayer, idx uint) {
 	o.Ptr().Send(_cALayerSelInsertSublayerAtIndex, layer.Ptr(), idx)
 }
 
+// Inserts the specified sublayer below a different sublayer that already belongs to the receiver.
 func (o *CALayer) InsertSublayerBelow(layer *CALayer, sibling *CALayer) {
 	o.Ptr().Send(_cALayerSelInsertSublayerBelow, layer.Ptr(), sibling.Ptr())
 }
 
+// Inserts the specified sublayer above a different sublayer that already belongs to the receiver.
 func (o *CALayer) InsertSublayerAbove(layer *CALayer, sibling *CALayer) {
 	o.Ptr().Send(_cALayerSelInsertSublayerAbove, layer.Ptr(), sibling.Ptr())
 }
 
+// Replaces the specified sublayer with a different layer object.
 func (o *CALayer) ReplaceSublayerWith(oldLayer *CALayer, newLayer *CALayer) {
 	o.Ptr().Send(_cALayerSelReplaceSublayerWith, oldLayer.Ptr(), newLayer.Ptr())
 }
 
+// Converts the point from the specified layer’s coordinate system to the receiver’s coordinate system.
 func (o *CALayer) ConvertPointFromLayer(p corefoundation.CGPoint, l *CALayer) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _cALayerSelConvertPointFromLayer, p, l.Ptr())
 	return _ret
 }
 
+// Converts the point from the receiver’s coordinate system to the specified layer’s coordinate system.
 func (o *CALayer) ConvertPointToLayer(p corefoundation.CGPoint, l *CALayer) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _cALayerSelConvertPointToLayer, p, l.Ptr())
 	return _ret
 }
 
+// Converts the rectangle from the specified layer’s coordinate system to the receiver’s coordinate system.
 func (o *CALayer) ConvertRectFromLayer(r corefoundation.CGRect, l *CALayer) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cALayerSelConvertRectFromLayer, r, l.Ptr())
 	return _ret
 }
 
+// Converts the rectangle from the receiver’s coordinate system to the specified layer’s coordinate system.
 func (o *CALayer) ConvertRectToLayer(r corefoundation.CGRect, l *CALayer) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cALayerSelConvertRectToLayer, r, l.Ptr())
 	return _ret
 }
 
+// Converts the time interval from the specified layer’s time space to the receiver’s time space.
 func (o *CALayer) ConvertTimeFromLayer(t float64, l *CALayer) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cALayerSelConvertTimeFromLayer, t, l.Ptr())
 	return _ret
 }
 
+// Converts the time interval from the receiver’s time space to the specified layer’s time space
 func (o *CALayer) ConvertTimeToLayer(t float64, l *CALayer) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cALayerSelConvertTimeToLayer, t, l.Ptr())
 	return _ret
 }
 
+// Returns the farthest descendant of the receiver in the layer hierarchy (including itself) that contains the specified point.
 func (o *CALayer) HitTest(p corefoundation.CGPoint) *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelHitTest, p)
 	if _ret != 0 {
@@ -330,36 +356,44 @@ func (o *CALayer) HitTest(p corefoundation.CGPoint) *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Returns whether the receiver contains a specified point.
 func (o *CALayer) ContainsPoint(p corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cALayerSelContainsPoint, p)
 	return _ret
 }
 
+// Reloads the content of this layer.
 func (o *CALayer) Display() {
 	o.Ptr().Send(_cALayerSelDisplay)
 }
 
+// Marks the layer’s contents as needing to be updated.
 func (o *CALayer) SetNeedsDisplay() {
 	o.Ptr().Send(_cALayerSelSetNeedsDisplay)
 }
 
+// Marks the region within the specified rectangle as needing to be updated.
 func (o *CALayer) SetNeedsDisplayInRect(r corefoundation.CGRect) {
 	o.Ptr().Send(_cALayerSelSetNeedsDisplayInRect, r)
 }
 
+// Returns a Boolean indicating whether the layer has been marked as needing an update.
 func (o *CALayer) NeedsDisplay() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cALayerSelNeedsDisplay)
 	return _ret
 }
 
+// Initiates the update process for a layer if it is currently marked as needing an update.
 func (o *CALayer) DisplayIfNeeded() {
 	o.Ptr().Send(_cALayerSelDisplayIfNeeded)
 }
 
+// Draws the layer’s content using the specified graphics context.
 func (o *CALayer) DrawInContext(ctx unsafe.Pointer) {
 	o.Ptr().Send(_cALayerSelDrawInContext, ctx)
 }
 
+// Renders the layer and its sublayers into the specified context.
 func (o *CALayer) RenderInContext(ctx unsafe.Pointer) {
 	o.Ptr().Send(_cALayerSelRenderInContext, ctx)
 }
@@ -369,63 +403,80 @@ func CALayerCornerCurveExpansionFactor(curve *foundation.NSString) float64 {
 	return _ret
 }
 
+// Returns the preferred size of the layer in the coordinate space of its superlayer.
 func (o *CALayer) PreferredFrameSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _cALayerSelPreferredFrameSize)
 	return _ret
 }
 
+// Invalidates the layer’s layout and marks it as needing an update.
 func (o *CALayer) SetNeedsLayout() {
 	o.Ptr().Send(_cALayerSelSetNeedsLayout)
 }
 
+// Returns a Boolean indicating whether the layer has been marked as needing a layout update.
 func (o *CALayer) NeedsLayout() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cALayerSelNeedsLayout)
 	return _ret
 }
 
+// Recalculate the receiver’s layout, if required.
 func (o *CALayer) LayoutIfNeeded() {
 	o.Ptr().Send(_cALayerSelLayoutIfNeeded)
 }
 
+// Tells the layer to update its layout.
 func (o *CALayer) LayoutSublayers() {
 	o.Ptr().Send(_cALayerSelLayoutSublayers)
 }
 
+// Informs the receiver’s sublayers that the receiver’s size has changed.
 func (o *CALayer) ResizeSublayersWithOldSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_cALayerSelResizeSublayersWithOldSize, size)
 }
 
+// Informs the receiver that the size of its superlayer changed.
 func (o *CALayer) ResizeWithOldSuperlayerSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_cALayerSelResizeWithOldSuperlayerSize, size)
 }
 
+// Returns the default action for the current class.
 func CALayerDefaultActionForKey(event *foundation.NSString) CAAction {
 	_ret := objc.Send[CAAction](objc.ID(_clsCALayer), _cALayerSelDefaultActionForKey, event.Ptr())
 	return _ret
 }
 
+// Returns the action object assigned to the specified key.
 func (o *CALayer) ActionForKey(event *foundation.NSString) CAAction {
 	_ret := objc.Send[CAAction](o.Ptr(), _cALayerSelActionForKey, event.Ptr())
 	return _ret
 }
 
+// Add the specified animation object to the layer’s render tree.
 func (o *CALayer) AddAnimationForKey(anim *CAAnimation, key *foundation.NSString) {
 	o.Ptr().Send(_cALayerSelAddAnimationForKey, anim.Ptr(), key.Ptr())
 }
 
+// Remove all animations attached to the layer.
 func (o *CALayer) RemoveAllAnimations() {
 	o.Ptr().Send(_cALayerSelRemoveAllAnimations)
 }
 
+// Remove the animation object with the specified key.
 func (o *CALayer) RemoveAnimationForKey(key *foundation.NSString) {
 	o.Ptr().Send(_cALayerSelRemoveAnimationForKey, key.Ptr())
 }
 
+// Returns an array of strings that identify the animations currently attached to the layer.
 func (o *CALayer) AnimationKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cALayerSelAnimationKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelAnimationKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the animation object with the specified identifier.
 func (o *CALayer) AnimationForKey(key *foundation.NSString) *CAAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelAnimationForKey, key.Ptr())
 	if _ret != 0 {
@@ -841,21 +892,27 @@ func (o *CALayer) SetCompositingFilter(compositingFilter objc.ID) {
 }
 
 func (o *CALayer) Filters() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cALayerSelFilters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelFilters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CALayer) SetFilters(filters *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cALayerSelSetFilters, filters)
+	o.Ptr().Send(_cALayerSelSetFilters, filters.Ptr())
 }
 
 func (o *CALayer) BackgroundFilters() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cALayerSelBackgroundFilters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelBackgroundFilters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CALayer) SetBackgroundFilters(backgroundFilters *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cALayerSelSetBackgroundFilters, backgroundFilters)
+	o.Ptr().Send(_cALayerSelSetBackgroundFilters, backgroundFilters.Ptr())
 }
 
 func (o *CALayer) ShouldRasterize() bool {
@@ -940,12 +997,15 @@ func (o *CALayer) SetLayoutManager(layoutManager CALayoutManager) {
 }
 
 func (o *CALayer) Actions() *foundation.NSDictionary[*foundation.NSString, CAAction] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, CAAction]](o.Ptr(), _cALayerSelActions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelActions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, CAAction](_ret)
 }
 
 func (o *CALayer) SetActions(actions *foundation.NSDictionary[*foundation.NSString, CAAction]) {
-	o.Ptr().Send(_cALayerSelSetActions, actions)
+	o.Ptr().Send(_cALayerSelSetActions, actions.Ptr())
 }
 
 func (o *CALayer) Name() *foundation.NSString {
@@ -970,14 +1030,18 @@ func (o *CALayer) SetDelegate(delegate CALayerDelegate) {
 }
 
 func (o *CALayer) Style() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cALayerSelStyle)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cALayerSelStyle)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *CALayer) SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_cALayerSelSetStyle, style)
+	o.Ptr().Send(_cALayerSelSetStyle, style.Ptr())
 }
 
+// Adds the specified constraint to the layer.
 func (o *CALayer) AddConstraint(c *CAConstraint) {
 	o.Ptr().Send(_cALayerSelAddConstraint, c.Ptr())
 }
@@ -994,6 +1058,7 @@ func (o *CALayer) SetConstraints(constraints *foundation.NSArray[*CAConstraint])
 	o.Ptr().Send(_cALayerSelSetConstraints, constraints.Ptr())
 }
 
+// Initializes a layer with a remote client ID.
 func CALayerLayerWithRemoteClientId(client_id uint32) *CALayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelLayerWithRemoteClientId, client_id)
 	if _ret != 0 {
@@ -1002,10 +1067,12 @@ func CALayerLayerWithRemoteClientId(client_id uint32) *CALayer {
 	return CALayerFromID(_ret)
 }
 
+// Initiates a scroll in the layer’s closest ancestor scroll layer so that the specified point lies at the origin of the scroll layer.
 func (o *CALayer) ScrollPoint(p corefoundation.CGPoint) {
 	o.Ptr().Send(_cALayerSelScrollPoint, p)
 }
 
+// Initiates a scroll in the layer’s closest ancestor scroll layer so that the specified rectangle becomes visible.
 func (o *CALayer) ScrollRectToVisible(r corefoundation.CGRect) {
 	o.Ptr().Send(_cALayerSelScrollRectToVisible, r)
 }

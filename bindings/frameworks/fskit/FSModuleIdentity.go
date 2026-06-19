@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An installed file system module.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsmoduleidentity
 type FSModuleIdentity struct {
 	foundation.NSObject

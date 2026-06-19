@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Cluster Content App Observer This cluster provides an interface for sending targeted commands to an Observer of a Content App on a Video Player device such as a Streaming Media Player, Smart TV or Smart Screen. The cluster server for Content App Observer is implemented by an endpoint that communicates with a Content App, such as a Casting Video Client. The cluster client for Content App Observer is implemented by a Content App endpoint. A Content App is informed of the NodeId of an Observer when a binding is set on the Content App. The Content App can then send the ContentAppMessage to the Observer (server cluster), and the Observer responds with a ContentAppMessageResponse.
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrclustercontentappobserver
 type MTRClusterContentAppObserver struct {
 	MTRGenericCluster
@@ -49,32 +51,47 @@ func (o *MTRClusterContentAppObserver) ContentAppMessageWithParamsExpectedValues
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterContentAppObserverSelContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterContentAppObserverSelContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterContentAppObserver) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterContentAppObserver) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterContentAppObserver) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterContentAppObserver) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterContentAppObserver) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterContentAppObserverSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.

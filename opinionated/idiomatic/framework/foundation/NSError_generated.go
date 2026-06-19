@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about an error condition including a domain, a domain-specific error code, and application-specific information.
+//
 // Error wraps [raw.NSError] with a fluent Go API.
 type Error struct {
 	inner *raw.NSError
@@ -30,6 +32,8 @@ func ErrorFromID(id objc.ID) *Error {
 	return &Error{inner: raw.NSErrorFromID(id)}
 }
 
+// Returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
+//
 // NewErrorWithDomainCodeUserInfo creates a new [Error].
 func NewErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict purego.IDer) *Error {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSError")), objc.RegisterName("alloc"))

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The physics simulation attributes attached to a scene graph node.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsbody
 type SCNPhysicsBody struct {
 	foundation.NSObject
@@ -88,6 +90,7 @@ func SCNPhysicsBodyFromID(id objc.ID) *SCNPhysicsBody {
 	return o
 }
 
+// Creates a physics body that is unaffected by forces or collisions and that cannot move.
 func SCNPhysicsBodyStaticBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelStaticBody)
 	if _ret != 0 {
@@ -96,6 +99,7 @@ func SCNPhysicsBodyStaticBody() *SCNPhysicsBody {
 	return SCNPhysicsBodyFromID(_ret)
 }
 
+// Creates a physics body that can be affected by forces and collisions.
 func SCNPhysicsBodyDynamicBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelDynamicBody)
 	if _ret != 0 {
@@ -104,6 +108,7 @@ func SCNPhysicsBodyDynamicBody() *SCNPhysicsBody {
 	return SCNPhysicsBodyFromID(_ret)
 }
 
+// Creates a physics body that is unaffected by forces or collisions but that can cause collisions affecting other bodies when moved.
 func SCNPhysicsBodyKinematicBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelKinematicBody)
 	if _ret != 0 {
@@ -112,6 +117,7 @@ func SCNPhysicsBodyKinematicBody() *SCNPhysicsBody {
 	return SCNPhysicsBodyFromID(_ret)
 }
 
+// Creates a physics body with the specified type and shape.
 func SCNPhysicsBodyBodyWithTypeShape(type_ SCNPhysicsBodyType, shape *SCNPhysicsShape) *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelBodyWithTypeShape, type_, shape.Ptr())
 	if _ret != 0 {
@@ -120,26 +126,32 @@ func SCNPhysicsBodyBodyWithTypeShape(type_ SCNPhysicsBodyType, shape *SCNPhysics
 	return SCNPhysicsBodyFromID(_ret)
 }
 
+// Applies a force or impulse to the body at its center of mass.
 func (o *SCNPhysicsBody) ApplyForceImpulse(direction SCNVector3, impulse bool) {
 	o.Ptr().Send(_sCNPhysicsBodySelApplyForceImpulse, direction, impulse)
 }
 
+// Applies a force or impulse to the body at a specific point.
 func (o *SCNPhysicsBody) ApplyForceAtPositionImpulse(direction SCNVector3, position SCNVector3, impulse bool) {
 	o.Ptr().Send(_sCNPhysicsBodySelApplyForceAtPositionImpulse, direction, position, impulse)
 }
 
+// Applies a net torque or a change in angular momentum to the body.
 func (o *SCNPhysicsBody) ApplyTorqueImpulse(torque SCNVector4, impulse bool) {
 	o.Ptr().Send(_sCNPhysicsBodySelApplyTorqueImpulse, torque, impulse)
 }
 
+// Cancels all continuous forces and torques acting on the physics body during the current simulation step.
 func (o *SCNPhysicsBody) ClearAllForces() {
 	o.Ptr().Send(_sCNPhysicsBodySelClearAllForces)
 }
 
+// Updates the position and orientation of a body in the physics simulation to match that of the node to which the body is attached.
 func (o *SCNPhysicsBody) ResetTransform() {
 	o.Ptr().Send(_sCNPhysicsBodySelResetTransform)
 }
 
+// Tells SceneKit whether to treat the body as currently being in motion.
 func (o *SCNPhysicsBody) SetResting(resting bool) {
 	o.Ptr().Send(_sCNPhysicsBodySelSetResting, resting)
 }

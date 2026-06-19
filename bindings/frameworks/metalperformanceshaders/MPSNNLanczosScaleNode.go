@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a Lanczos resampling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlanczosscalenode
 type MPSNNLanczosScaleNode struct {
 	mpsneuralnetwork.MPSNNScaleNode

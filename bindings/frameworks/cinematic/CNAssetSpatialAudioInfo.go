@@ -116,12 +116,18 @@ func (o *CNAssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effe
 
 // @method		assetReaderOutputSettingsForContentType @abstract		Returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied @discussion    Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
 func (o *CNAssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cNAssetSpatialAudioInfoSelAssetReaderOutputSettingsForContentType, contentType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetSpatialAudioInfoSelAssetReaderOutputSettingsForContentType, contentType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @method		assetWriterInputSettingsForContentType @abstract		Returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
 func (o *CNAssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cNAssetSpatialAudioInfoSelAssetWriterInputSettingsForContentType, contentType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetSpatialAudioInfoSelAssetWriterInputSettingsForContentType, contentType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

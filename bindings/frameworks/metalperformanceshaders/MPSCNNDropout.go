@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dropout filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropout
 type MPSCNNDropout struct {
 	mpsneuralnetwork.MPSCNNKernel
@@ -62,7 +64,7 @@ func (o *MPSCNNDropout) InitWithDeviceKeepProbabilitySeedMaskStrideInPixels(devi
 }
 
 func (o *MPSCNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -70,7 +72,7 @@ func (o *MPSCNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(so
 }
 
 func (o *MPSCNNDropout) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) *mpsneuralnetwork.MPSCNNDropoutGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutSelResultStateBatchForSourceImageSourceStatesDestinationImage, sourceImage, sourceStates, destinationImage)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutSelResultStateBatchForSourceImageSourceStatesDestinationImage, sourceImage, sourceStates.Ptr(), destinationImage)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -78,7 +80,7 @@ func (o *MPSCNNDropout) ResultStateBatchForSourceImageSourceStatesDestinationIma
 }
 
 func (o *MPSCNNDropout) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -86,7 +88,7 @@ func (o *MPSCNNDropout) TemporaryResultStateForCommandBufferSourceImageSourceSta
 }
 
 func (o *MPSCNNDropout) TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNDropoutSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage, sourceStates, destinationImage)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNDropoutSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage, sourceStates.Ptr(), destinationImage)
 	return _ret
 }
 

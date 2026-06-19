@@ -400,13 +400,16 @@ func isObjCClass(goType string, ownerIndex map[string]string) bool {
 		return false
 	}
 	inner := goType[1:]
+	// Strip generic params first: "NSDictionary[*NSString, objc.ID]" → "NSDictionary".
+	// This must precede the package-qualifier strip below, because concrete
+	// generic arguments can themselves be qualified (e.g. "objc.ID"), whose dot
+	// would otherwise be mistaken for the base type's package separator.
+	if brIdx := strings.Index(inner, "["); brIdx >= 0 {
+		inner = inner[:brIdx]
+	}
 	// Strip package qualifier: "foundation.NSString" → "NSString"
 	if dotIdx := strings.LastIndex(inner, "."); dotIdx >= 0 {
 		inner = inner[dotIdx+1:]
-	}
-	// Strip generic params: "NSArray[T]" → "NSArray"
-	if brIdx := strings.Index(inner, "["); brIdx >= 0 {
-		inner = inner[:brIdx]
 	}
 	_, ok := ownerIndex[inner]
 	return ok

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI program or patch change message.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidiprogramchangeevent
 type AVMIDIProgramChangeEvent struct {
 	AVMIDIChannelEvent
@@ -31,7 +33,7 @@ func AVMIDIProgramChangeEventFromID(id objc.ID) *AVMIDIProgramChangeEvent {
 	return o
 }
 
-// @method initWithChannel:programNumber: @abstract Initialize the event with a channel and a program number. @param channel The MIDI channel for the message.  Range: 0-15. @param programNumber The program number to be sent.  Range: 0-127. @discussion Per the General MIDI specification, the actual instrument that is chosen will depend on optional AVMIDIControlChangeMessageTypeBankSelect events sent prior to this program change.
+// Creates a program change event with a channel and program number.
 func (o *AVMIDIProgramChangeEvent) InitWithChannelProgramNumber(channel uint, programNumber uint) *AVMIDIProgramChangeEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIProgramChangeEventSelInitWithChannelProgramNumber, channel, programNumber)
 	if _ret != 0 {

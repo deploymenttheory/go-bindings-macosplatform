@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A port name server that takes and returns Mach port objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmachbootstrapserver
 // Deprecated: Use NSXPCConnection instead
 type NSMachBootstrapServer struct {
@@ -31,11 +33,13 @@ func NSMachBootstrapServerFromID(id objc.ID) *NSMachBootstrapServer {
 	return o
 }
 
+// Returns the shared instance of the bootstrap server.
 func NSMachBootstrapServerSharedInstance() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMachBootstrapServer), _nSMachBootstrapServerSelSharedInstance)
 	return _ret
 }
 
+// Looks up and returns the port for the vended service that is registered under the specified name.
 func (o *NSMachBootstrapServer) ServicePortWithName(name *NSString) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMachBootstrapServerSelServicePortWithName, name.Ptr())
 	if _ret != 0 {

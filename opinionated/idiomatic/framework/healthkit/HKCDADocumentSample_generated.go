@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Clinical Document Architecture (CDA) sample that stores a single document.
+//
 // CDADocumentSample wraps [raw.HKCDADocumentSample] with a fluent Go API.
 type CDADocumentSample struct {
 	inner *raw.HKCDADocumentSample

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to fetch setup, import, or export events in a persistent CloudKit container.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest
 type NSPersistentCloudKitContainerEventRequest struct {
 	NSPersistentStoreRequest
@@ -35,6 +37,7 @@ func NSPersistentCloudKitContainerEventRequestFromID(id objc.ID) *NSPersistentCl
 	return o
 }
 
+// Creates a fetch request for events after a specified date from a persistent CloudKit container.
 func NSPersistentCloudKitContainerEventRequestFetchEventsAfterDate(date *foundation.NSDate) *NSPersistentCloudKitContainerEventRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterDate, date.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func NSPersistentCloudKitContainerEventRequestFetchEventsAfterDate(date *foundat
 	return NSPersistentCloudKitContainerEventRequestFromID(_ret)
 }
 
+// Creates a fetch request for events that occur after a specified event from a persistent CloudKit container.
 func NSPersistentCloudKitContainerEventRequestFetchEventsAfterEvent(event *NSPersistentCloudKitContainerEvent) *NSPersistentCloudKitContainerEventRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterEvent, event.Ptr())
 	if _ret != 0 {
@@ -51,17 +55,22 @@ func NSPersistentCloudKitContainerEventRequestFetchEventsAfterEvent(event *NSPer
 	return NSPersistentCloudKitContainerEventRequestFromID(_ret)
 }
 
+// Creates a fetch request for events that match a specified fetch request from a persistent CloudKit container.
 func NSPersistentCloudKitContainerEventRequestFetchEventsMatchingFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) *NSPersistentCloudKitContainerEventRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsMatchingFetchRequest, fetchRequest)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsMatchingFetchRequest, fetchRequest.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPersistentCloudKitContainerEventRequestFromID(_ret)
 }
 
+// Creates a fetch request for all events in a persistent CloudKit container.
 func NSPersistentCloudKitContainerEventRequestFetchRequestForEvents() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchRequestForEvents)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchRequestForEvents)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSPersistentCloudKitContainerEventRequest) ResultType() NSPersistentCloudKitContainerEventResultType {

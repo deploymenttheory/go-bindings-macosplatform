@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that applies an activation function to the source tensor and produces an output.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcactivationlayer
 type MLCActivationLayer struct {
 	MLCLayer
@@ -58,7 +60,7 @@ func MLCActivationLayerFromID(id objc.ID) *MLCActivationLayer {
 	return o
 }
 
-// @abstract   Create an activation layer @param      descriptor     The activation descriptor @return     A new activation layer
+// Creates an activation layer with the descriptor you specify.
 func MLCActivationLayerLayerWithDescriptor(descriptor *MLCActivationDescriptor) *MLCActivationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationLayer), _mLCActivationLayerSelLayerWithDescriptor, descriptor.Ptr())
 	if _ret != 0 {

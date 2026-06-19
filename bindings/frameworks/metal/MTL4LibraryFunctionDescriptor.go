@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes a shader function from a Metal library.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4libraryfunctiondescriptor
 type MTL4LibraryFunctionDescriptor struct {
 	MTL4FunctionDescriptor

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The programmatic interface for text fields that are used for text-based searches.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssearchfieldcell
 type NSSearchFieldCell struct {
 	NSTextFieldCell
@@ -69,24 +71,29 @@ func (o *NSSearchFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSSearchFi
 	return NSSearchFieldCellFromID(_ret)
 }
 
+// Resets the search button cell to its default attributes.
 func (o *NSSearchFieldCell) ResetSearchButtonCell() {
 	o.Ptr().Send(_nSSearchFieldCellSelResetSearchButtonCell)
 }
 
+// Resets the cancel button cell to its default attributes.
 func (o *NSSearchFieldCell) ResetCancelButtonCell() {
 	o.Ptr().Send(_nSSearchFieldCellSelResetCancelButtonCell)
 }
 
+// Modifies the bounding rectangle for the search-text field cell.
 func (o *NSSearchFieldCell) SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelSearchTextRectForBounds, rect)
 	return _ret
 }
 
+// Modifies the bounding rectangle for the search button cell.
 func (o *NSSearchFieldCell) SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelSearchButtonRectForBounds, rect)
 	return _ret
 }
 
+// Modifies the bounding rectangle for the cancel button cell.
 func (o *NSSearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelCancelButtonRectForBounds, rect)
 	return _ret
@@ -147,12 +154,15 @@ func (o *NSSearchFieldCell) SetMaximumRecents(maximumRecents int) {
 }
 
 func (o *NSSearchFieldCell) RecentSearches() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSearchFieldCellSelRecentSearches)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelRecentSearches)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSearchFieldCell) SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetRecentSearches, recentSearches)
+	o.Ptr().Send(_nSSearchFieldCellSelSetRecentSearches, recentSearches.Ptr())
 }
 
 func (o *NSSearchFieldCell) RecentsAutosaveName() *foundation.NSString {

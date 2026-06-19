@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A standard implementation of the MDLMeshBufferZone protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlmeshbufferzonedefault
 type MDLMeshBufferZoneDefault struct {
 	foundation.NSObject

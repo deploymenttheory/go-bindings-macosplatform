@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information associated with one of the user’s accounts.
+//
 // Account wraps [raw.ACAccount] with a fluent Go API.
 type Account struct {
 	inner *raw.ACAccount
@@ -31,6 +33,8 @@ func AccountFromID(id objc.ID) *Account {
 	return &Account{inner: raw.ACAccountFromID(id)}
 }
 
+// Initializes a new account of the specified type.
+//
 // NewAccountWithAccountType creates a new [Account].
 func NewAccountWithAccountType(type_ *raw.ACAccountType) *Account {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccount")), objc.RegisterName("alloc"))
@@ -38,24 +42,32 @@ func NewAccountWithAccountType(type_ *raw.ACAccountType) *Account {
 	return &Account{inner: raw.ACAccountFromID(_id)}
 }
 
+// The type of service account.
+//
 // WithAccountType sets the accountType property and returns the receiver for chaining.
 func (x *Account) WithAccountType(accountType *AccountType) *Account {
 	x.inner.SetAccountType(accountType.Unwrap())
 	return x
 }
 
+// A human-readable description of the account.
+//
 // WithAccountDescription sets the accountDescription property and returns the receiver for chaining.
 func (x *Account) WithAccountDescription(accountDescription string) *Account {
 	x.inner.SetAccountDescription(foundation.NSStringStringWithUTF8String(accountDescription))
 	return x
 }
 
+// The username for this account.
+//
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *Account) WithUsername(username string) *Account {
 	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
 	return x
 }
 
+// The credential used to authenticate the user of this account.
+//
 // WithCredential sets the credential property and returns the receiver for chaining.
 func (x *Account) WithCredential(credential *AccountCredential) *Account {
 	x.inner.SetCredential(credential.Unwrap())

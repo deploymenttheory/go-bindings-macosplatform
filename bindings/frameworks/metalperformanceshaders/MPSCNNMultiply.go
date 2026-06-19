@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A multiply operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnmultiply
 type MPSCNNMultiply struct {
 	mpsneuralnetwork.MPSCNNArithmetic

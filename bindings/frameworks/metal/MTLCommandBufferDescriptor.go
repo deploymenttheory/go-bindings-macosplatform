@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration that customizes the behavior for a new command buffer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcommandbufferdescriptor
 type MTLCommandBufferDescriptor struct {
 	foundation.NSObject

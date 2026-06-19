@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a single attribute belonging to an entity.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsattributedescription
 type NSAttributeDescription struct {
 	NSPropertyDescription

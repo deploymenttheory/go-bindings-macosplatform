@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable track that conforms to the QuickTime or ISO base media file format.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablemovietrack
 type AVMutableMovieTrack struct {
 	AVMovieTrack
@@ -213,7 +215,7 @@ func (o *AVMutableMovieTrack) SetPreferredMediaChunkAlignment(preferredMediaChun
 	o.Ptr().Send(_aVMutableMovieTrackSelSetPreferredMediaChunkAlignment, preferredMediaChunkAlignment)
 }
 
-// @method			insertTimeRange:ofTrack:atTime:copySampleData:error: @abstract		Inserts a portion of an AVAssetTrack object into the target movie. @param			timeRange The time range from the track from which media is to be inserted. @param			track An AVAssetTrack object indicating the source of the inserted media. Only AVAssetTracks of AVURLAssets and AVCompositions are supported. Must not be nil. @param			startTime The time in the target track at which the media is to be inserted. @param			copySampleData A BOOL value that indicates whether sample data is to be copied from the source to the destination during edits. If YES, the sample data is written to the file specified by the track property mediaDataStorage if non-nil, or else by the movie property defaultMediaDataStorage if non-nil; if both are nil, the method will fail and return NO. If NO, sample data will not be written and sample references to the samples in their original container will be added as necessary. Note that in this case, this method will fail if the original samples are fragmented. @param			outError If the insertion fails, describes the nature of the failure. @result			A BOOL value that indicates the success of the insertion.
+// Inserts a portion of an asset track into the target movie.
 func (o *AVMutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, track *AVAssetTrack, startTime coremedia.CMTime, copySampleData bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableMovieTrackSelInsertTimeRangeOfTrackAtTimeCopySampleDataError, timeRange, track.Ptr(), startTime, copySampleData, unsafe.Pointer(&_nsErr))
@@ -223,17 +225,17 @@ func (o *AVMutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleDataError(ti
 	return _ret, nil
 }
 
-// @method			insertEmptyTimeRange: @abstract		Adds an empty time range to the target track. @param			timeRange The time range to be made empty. Note that you cannot add empty time ranges to the end of a track.
+// Adds an empty time range to a track.
 func (o *AVMutableMovieTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableMovieTrackSelInsertEmptyTimeRange, timeRange)
 }
 
-// @method			removeTimeRange: @abstract		Removes a specified time range from a track. @param			timeRange The time range to be removed.
+// Removes the specified time range from a track.
 func (o *AVMutableMovieTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableMovieTrackSelRemoveTimeRange, timeRange)
 }
 
-// @method			scaleTimeRange:toDuration: @abstract		Changes the duration of a time range of a track. @param			timeRange The time range to be scaled. @param			duration The new duration of the time range.
+// Changes the duration of a time range in a track.
 func (o *AVMutableMovieTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
 	o.Ptr().Send(_aVMutableMovieTrackSelScaleTimeRangeToDuration, timeRange, duration)
 }
@@ -242,22 +244,22 @@ func (o *AVMutableMovieTrack) SetMetadata(metadata *foundation.NSArray[*AVMetada
 	o.Ptr().Send(_aVMutableMovieTrackSelSetMetadata, metadata.Ptr())
 }
 
-// @method			addTrackAssociationToTrack:type: @abstract		Establishes a track association of a specific type between two tracks. @param			movieTrack An AVMovieTrack object that is to be associated with the receiver. @param			trackAssociationType The type of track association to add between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList). @discussion		This method throws an exception if the movie track belongs to a different movie.
+// Creates a specific type of track association between two tracks.
 func (o *AVMutableMovieTrack) AddTrackAssociationToTrackType(movieTrack *AVMovieTrack, trackAssociationType *foundation.NSString) {
 	o.Ptr().Send(_aVMutableMovieTrackSelAddTrackAssociationToTrackType, movieTrack.Ptr(), trackAssociationType.Ptr())
 }
 
-// @method			removeTrackAssociationToTrack:type: @abstract		Removes a track association of a specific type between two tracks. @param			movieTrack An AVMovieTrack object that is associated with the receiver. @param			trackAssociationType The type of track association to remove between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList). @discussion		This method throws an exception if the movie track belongs to a different movie.
+// Removes a specific type of track association between two tracks.
 func (o *AVMutableMovieTrack) RemoveTrackAssociationToTrackType(movieTrack *AVMovieTrack, trackAssociationType *foundation.NSString) {
 	o.Ptr().Send(_aVMutableMovieTrackSelRemoveTrackAssociationToTrackType, movieTrack.Ptr(), trackAssociationType.Ptr())
 }
 
-// @method			replaceFormatDescription:withFormatDescription: @abstract		Replaces one of the receiver's format descriptions with another format description @param			formatDescription A CMFormatDescription occurring in the array returned by the -formatDescriptions method. @param			newFormatDescription A CMFormatDescription to replace the specified format description. @discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored. This method throws an exception if the media type of the new format description does not match the media type of the receiver.
+// Replaces the track’s format description with a new format description.
 func (o *AVMutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(formatDescription unsafe.Pointer, newFormatDescription unsafe.Pointer) {
 	o.Ptr().Send(_aVMutableMovieTrackSelReplaceFormatDescriptionWithFormatDescription, formatDescription, newFormatDescription)
 }
 
-// @method			appendSampleBuffer:decodeTime:presentationTime:error: @abstract		Appends sample data to a media file and adds sample references for the added data to a track's media sample tables. @param			sampleBuffer The CMSampleBuffer to be appended; this may be obtained from an instance of AVAssetReader. @param			outDecodeTime A pointer to a CMTime structure to receive the decode time in the media of the first sample appended from the sample buffer. Pass NULL if you do not need this information. @param			outPresentationTime A pointer to a CMTime structure to receive the presentation time in the media of the first sample appended from the sample buffer. Pass NULL if you do not need this information. @param			outError If the appending fails, describes the nature of the failure. For example, if the device containing the track's media data storage is full, AVErrorDiskFull is returned. @result			A BOOL value indicating the success of the operation. @discussion If the sample buffer carries sample data, the sample data is written to the container specified by the track property mediaDataStorage if non-nil, or else by the movie property defaultMediaDataStorage if non-nil, and sample references will be appended to the track's media. If both media data storage properties are nil, the method will fail and return NO. If the sample buffer carries sample references only, sample data will not be written and sample references to the samples in their original container will be appended to the track's media as necessary. Note regarding sample timing: in a track's media, the first sample's decode timestamp must always be zero. For an audio track, each sample buffer's duration is used as the sample decode duration. For other track types, difference between a sample's decode timestamp and the following sample's decode timestamp is used as the first sample's decode duration, so as to preserve the relative timing. Note that this method does not modify the track's sourceTimeMappings but only appends sample references and sample data to the track's media. To make the new samples appear in the track's timeline, invoke -insertMediaTimeRange:intoTimeRange:. You can retrieve the mediaPresentationTimeRange property before and after appending a sequence of samples, using CMTimeRangeGetEnd on each to calculate the media TimeRange for -insertMediaTimeRange:intoTimeRange:. It's safe for multiple threads to call this method on different tracks at once. This method throws an exception for any of the following reasons: - the sample buffer's media type does not match the track's media type - the sample buffer contains image buffers (must contain encoded video) - the sample buffer contains caption groups (must contain encoded media data)
+// Appends sample data to a media file and adds sample references for the added data to a track’s media sample tables.
 func (o *AVMutableMovieTrack) AppendSampleBufferDecodeTimePresentationTimeError(sampleBuffer unsafe.Pointer, outDecodeTime *coremedia.CMTime, outPresentationTime *coremedia.CMTime) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableMovieTrackSelAppendSampleBufferDecodeTimePresentationTimeError, sampleBuffer, outDecodeTime, outPresentationTime, unsafe.Pointer(&_nsErr))
@@ -267,7 +269,7 @@ func (o *AVMutableMovieTrack) AppendSampleBufferDecodeTimePresentationTimeError(
 	return _ret, nil
 }
 
-// @method			insertMediaTimeRange:intoTimeRange: @abstract		Inserts a reference to a media time range into a track. @param			mediaTimeRange The presentation time range of the media to be inserted. @param			trackTimeRange The time range of the track into which the media is to be inserted. @result			A BOOL value indicating the success of the operation. @discussion Use this method after you have appended samples or sample references to a track's media. To specify that the media time range be played at its natural rate, pass mediaTimeRange.duration == trackTimeRange.duration; otherwise, the ratio between these is used to determine the playback rate. Pass kCMTimeInvalid for trackTimeRange.start to indicate that the segment should be appended to the end of the track.
+// Inserts a reference to a media time range into a track.
 func (o *AVMutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableMovieTrackSelInsertMediaTimeRangeIntoTimeRange, mediaTimeRange, trackTimeRange)
 	return _ret

@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object you use to observe changes to the current configuration. Use this class to start and stop observing the current configuration. For example, you can opt to disable private browsing in your web browser’s view controller when “STScreenTimeConfiguration/enforcesChildRestrictions“ is `true`.
+// The object you use to observe changes to the current configuration.
 //
 // ScreenTimeConfigurationObserver wraps [raw.STScreenTimeConfigurationObserver] with a fluent Go API.
 type ScreenTimeConfigurationObserver struct {
@@ -34,7 +34,7 @@ func ScreenTimeConfigurationObserverFromID(id objc.ID) *ScreenTimeConfigurationO
 	return &ScreenTimeConfigurationObserver{inner: raw.STScreenTimeConfigurationObserverFromID(id)}
 }
 
-// Creates a configuration observer that reports updates on the queue you specify. - Parameters: - updateQueue: The queue on which to report updates.
+// Creates a configuration observer that reports updates on the queue you specify.
 //
 // NewScreenTimeConfigurationObserverWithUpdateQueue creates a new [ScreenTimeConfigurationObserver].
 func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue *foundation.NSObject) *ScreenTimeConfigurationObserver {

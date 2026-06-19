@@ -50,7 +50,7 @@ func (o *MTRClusterBasic) MfgSpecificPingWithParamsExpectedValuesExpectedValueIn
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterBasicSelMfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterBasicSelMfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -61,5 +61,5 @@ func (o *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueInterval
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterBasicSelMfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterBasicSelMfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

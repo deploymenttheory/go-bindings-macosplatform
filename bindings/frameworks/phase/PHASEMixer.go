@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that combines multiple audio signals into a single signal.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasemixer
 type PHASEMixer struct {
 	foundation.NSObject

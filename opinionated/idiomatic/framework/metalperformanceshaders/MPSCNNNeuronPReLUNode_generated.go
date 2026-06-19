@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A ReLU node with parameter a provided independently for each feature channel @discussion For each pixel, applies the following function: @code f(x) = x                if x >= 0 = aData[i] * x     if x < 0,  i is the index of the feature channel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      aData                   An array of single precision floating-point alpha values to use @endcode
+// A representation a PReLU neuron filter.
 //
 // CNNNeuronPReLUNode wraps [raw.MPSCNNNeuronPReLUNode] with a fluent Go API.
 type CNNNeuronPReLUNode struct {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optimizer that represents the stochastic gradient decent algorithm.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcsgdoptimizer
 type MLCSGDOptimizer struct {
 	MLCOptimizer
@@ -32,7 +34,7 @@ func MLCSGDOptimizerFromID(id objc.ID) *MLCSGDOptimizer {
 	return o
 }
 
-// @abstract   Create an MLCSGDOptimizer object with defaults @return     A new MLCSGDOptimizer object.
+// Creates an SGD optimizer with the descriptor you specify.
 func MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCSGDOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSGDOptimizer), _mLCSGDOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDes
 	return MLCSGDOptimizerFromID(_ret)
 }
 
-// @abstract   Create an MLCSGDOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      momentumScale                 The momentum scale @param      usesNesterovMomentum      A boolean to enable / disable nesterov momentum @return     A new MLCSGDOptimizer object.
+// Create an SGD optimizer with the descriptor, momentum scale, and option to enable Nesterov momentum that you specify.
 func MLCSGDOptimizerOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescriptor *MLCOptimizerDescriptor, momentumScale float32, usesNesterovMomentum bool) *MLCSGDOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSGDOptimizer), _mLCSGDOptimizerSelOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum, optimizerDescriptor.Ptr(), momentumScale, usesNesterovMomentum)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to send a message to the designated recipients.
+//
 // SendMessageIntent wraps [raw.INSendMessageIntent] with a fluent Go API.
 type SendMessageIntent struct {
 	inner *raw.INSendMessageIntent
@@ -31,6 +33,8 @@ func SendMessageIntentFromID(id objc.ID) *SendMessageIntent {
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(id)}
 }
 
+// Creates a send message intent object with the specified content and recipients.
+//
 // NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments creates a new [SendMessageIntent].
 func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments(recipients *foundation.NSArray[*raw.INPerson], outgoingMessageType INOutgoingMessageType, content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson, attachments *foundation.NSArray[*raw.INSendMessageAttachment]) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntent")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupN
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
+// Initializes a send message intent object with the specified content and recipients.
+//
 // NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender creates a new [SendMessageIntent].
 func NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender(recipients *foundation.NSArray[*raw.INPerson], content string, groupName string, serviceName string, sender *raw.INPerson) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntent")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender(recipie
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
+// Initializes a send message intent object with the specified content and recipients.
+//
 // NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender creates a new [SendMessageIntent].
 func NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients *foundation.NSArray[*raw.INPerson], content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntent")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIden
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
+// Initializes a send message intent object with the specified content and recipients.
+//
 // NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender creates a new [SendMessageIntent].
 func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients *foundation.NSArray[*raw.INPerson], outgoingMessageType INOutgoingMessageType, content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntent")), objc.RegisterName("alloc"))
@@ -59,6 +69,8 @@ func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupN
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

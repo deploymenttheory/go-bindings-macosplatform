@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).
+//
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser
 type MCNearbyServiceBrowser struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func MCNearbyServiceBrowserFromID(id objc.ID) *MCNearbyServiceBrowser {
 	return o
 }
 
+// Initializes the nearby service browser object.
 func (o *MCNearbyServiceBrowser) InitWithPeerServiceType(myPeerID *MCPeerID, serviceType *foundation.NSString) *MCNearbyServiceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceBrowserSelInitWithPeerServiceType, myPeerID.Ptr(), serviceType.Ptr())
 	if _ret != 0 {
@@ -45,14 +48,17 @@ func (o *MCNearbyServiceBrowser) InitWithPeerServiceType(myPeerID *MCPeerID, ser
 	return MCNearbyServiceBrowserFromID(_ret)
 }
 
+// Starts browsing for peers.
 func (o *MCNearbyServiceBrowser) StartBrowsingForPeers() {
 	o.Ptr().Send(_mCNearbyServiceBrowserSelStartBrowsingForPeers)
 }
 
+// Stops browsing for peers.
 func (o *MCNearbyServiceBrowser) StopBrowsingForPeers() {
 	o.Ptr().Send(_mCNearbyServiceBrowserSelStopBrowsingForPeers)
 }
 
+// Invites a discovered peer to join a Multipeer Connectivity session.
 func (o *MCNearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *MCPeerID, session *MCSession, context_ *foundation.NSData, timeout float64) {
 	o.Ptr().Send(_mCNearbyServiceBrowserSelInvitePeerToSessionWithContextTimeout, peerID.Ptr(), session.Ptr(), context_.Ptr(), timeout)
 }

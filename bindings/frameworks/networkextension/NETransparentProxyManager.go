@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures and controls transparent proxies.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netransparentproxymanager
 type NETransparentProxyManager struct {
 	NEVPNManager
@@ -32,7 +34,7 @@ func NETransparentProxyManagerFromID(id objc.ID) *NETransparentProxyManager {
 	return o
 }
 
-// @method loadAllFromPreferencesWithCompletionHandler: @discussion This function asynchronously reads all of the transparent proxy configurations associated with the calling app that have previously been saved to disk and returns them as NETransparentProxyManager objects. @param completionHandler A block that takes an array NETransparentProxyManager objects. The array passed to the block may be empty if no transparent proxy configurations were successfully read from the disk.  The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Loads all previously-saved transparent proxy configurations.
 func NETransparentProxyManagerLoadAllFromPreferencesWithCompletionHandler(completionHandler func(*foundation.NSArray[*NETransparentProxyManager], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a supported display mode.
+//
 // Apple documentation: https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaymode
 type PGDisplayMode struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
 	return o
 }
 
-// @method initWithSizeInPixels:refreshRateInHz @abstract Used to conjure up display mode objects (to be arranged into NSArrays for modeList). @param sizeInPixels Width/height of supported display mode. @param refreshRateInHz Refresh rate of supported display mode.
+// Creates a new display mode.
 func (o *PGDisplayMode) InitWithSizeInPixelsRefreshRateInHz(sizeInPixels PGDisplayCoord_t, refreshRateInHz float64) *PGDisplayMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pGDisplayModeSelInitWithSizeInPixelsRefreshRateInHz, sizeInPixels, refreshRateInHz)
 	if _ret != 0 {

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages an app’s menus.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmenu
 type NSMenu struct {
 	foundation.NSObject
@@ -114,6 +116,7 @@ func NSMenuFromID(id objc.ID) *NSMenu {
 	return o
 }
 
+// Initializes and returns a menu having the specified title and with autoenabling of menu items turned on.
 func (o *NSMenu) InitWithTitle(title *foundation.NSString) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelInitWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -130,36 +133,44 @@ func (o *NSMenu) InitWithCoder(coder *foundation.NSCoder) *NSMenu {
 	return NSMenuFromID(_ret)
 }
 
+// Displays a contextual menu over a view for an event.
 func NSMenuPopUpContextMenuWithEventForView(menu *NSMenu, event *NSEvent, view *NSView) {
 	objc.ID(_clsNSMenu).Send(_nSMenuSelPopUpContextMenuWithEventForView, menu.Ptr(), event.Ptr(), view.Ptr())
 }
 
+// Displays a contextual menu over a view for an event using a specified font.
 func NSMenuPopUpContextMenuWithEventForViewWithFont(menu *NSMenu, event *NSEvent, view *NSView, font *NSFont) {
 	objc.ID(_clsNSMenu).Send(_nSMenuSelPopUpContextMenuWithEventForViewWithFont, menu.Ptr(), event.Ptr(), view.Ptr(), font.Ptr())
 }
 
+// Pops up the menu at the specified location.
 func (o *NSMenu) PopUpMenuPositioningItemAtLocationInView(item *NSMenuItem, location corefoundation.CGPoint, view *NSView) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMenuSelPopUpMenuPositioningItemAtLocationInView, item.Ptr(), location, view.Ptr())
 	return _ret
 }
 
+// Sets whether the menu bar is visible and selectable by the user.
 func NSMenuSetMenuBarVisible(visible bool) {
 	objc.ID(_clsNSMenu).Send(_nSMenuSelSetMenuBarVisible, visible)
 }
 
+// Returns a Boolean value that indicates whether the menu bar is visible.
 func NSMenuMenuBarVisible() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSMenu), _nSMenuSelMenuBarVisible)
 	return _ret
 }
 
+// Inserts a menu item into the menu at a specific location.
 func (o *NSMenu) InsertItemAtIndex(newItem *NSMenuItem, index int) {
 	o.Ptr().Send(_nSMenuSelInsertItemAtIndex, newItem.Ptr(), index)
 }
 
+// Adds a menu item to the end of the menu.
 func (o *NSMenu) AddItem(newItem *NSMenuItem) {
 	o.Ptr().Send(_nSMenuSelAddItem, newItem.Ptr())
 }
 
+// Creates and adds a menu item at a specified location in the menu.
 func (o *NSMenu) InsertItemWithTitleActionKeyEquivalentAtIndex(string_ *foundation.NSString, selector objc.SEL, charCode *foundation.NSString, index int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelInsertItemWithTitleActionKeyEquivalentAtIndex, string_.Ptr(), selector, charCode.Ptr(), index)
 	if _ret != 0 {
@@ -168,6 +179,7 @@ func (o *NSMenu) InsertItemWithTitleActionKeyEquivalentAtIndex(string_ *foundati
 	return NSMenuItemFromID(_ret)
 }
 
+// Creates a new menu item and adds it to the end of the menu.
 func (o *NSMenu) AddItemWithTitleActionKeyEquivalent(string_ *foundation.NSString, selector objc.SEL, charCode *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelAddItemWithTitleActionKeyEquivalent, string_.Ptr(), selector, charCode.Ptr())
 	if _ret != 0 {
@@ -176,22 +188,27 @@ func (o *NSMenu) AddItemWithTitleActionKeyEquivalent(string_ *foundation.NSStrin
 	return NSMenuItemFromID(_ret)
 }
 
+// Removes the menu item at a specified location in the menu.
 func (o *NSMenu) RemoveItemAtIndex(index int) {
 	o.Ptr().Send(_nSMenuSelRemoveItemAtIndex, index)
 }
 
+// Removes a menu item from the menu.
 func (o *NSMenu) RemoveItem(item *NSMenuItem) {
 	o.Ptr().Send(_nSMenuSelRemoveItem, item.Ptr())
 }
 
+// Assigns a menu to be a submenu of the menu controlled by a given menu item.
 func (o *NSMenu) SetSubmenuForItem(menu *NSMenu, item *NSMenuItem) {
 	o.Ptr().Send(_nSMenuSelSetSubmenuForItem, menu.Ptr(), item.Ptr())
 }
 
+// Removes all the menu items in the menu.
 func (o *NSMenu) RemoveAllItems() {
 	o.Ptr().Send(_nSMenuSelRemoveAllItems)
 }
 
+// Returns the menu item at a specific location of the menu.
 func (o *NSMenu) ItemAtIndex(index int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemAtIndex, index)
 	if _ret != 0 {
@@ -200,36 +217,43 @@ func (o *NSMenu) ItemAtIndex(index int) *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
+// Returns the index identifying the location of a specified menu item in the menu.
 func (o *NSMenu) IndexOfItem(item *NSMenuItem) int {
 	_ret := objc.Send[int](o.Ptr(), _nSMenuSelIndexOfItem, item.Ptr())
 	return _ret
 }
 
+// Returns the index of the first menu item in the menu that has a specified title.
 func (o *NSMenu) IndexOfItemWithTitle(title *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSMenuSelIndexOfItemWithTitle, title.Ptr())
 	return _ret
 }
 
+// Returns the index of the first menu item in the menu identified by a tag.
 func (o *NSMenu) IndexOfItemWithTag(tag int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSMenuSelIndexOfItemWithTag, tag)
 	return _ret
 }
 
+// Returns the index of the first menu item in the menu that has a given represented object.
 func (o *NSMenu) IndexOfItemWithRepresentedObject(object objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSMenuSelIndexOfItemWithRepresentedObject, object)
 	return _ret
 }
 
+// Returns the index of the menu item in the menu with the given submenu.
 func (o *NSMenu) IndexOfItemWithSubmenu(submenu *NSMenu) int {
 	_ret := objc.Send[int](o.Ptr(), _nSMenuSelIndexOfItemWithSubmenu, submenu.Ptr())
 	return _ret
 }
 
+// Returns the index of the first menu item in the menu that has a specified action and target.
 func (o *NSMenu) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
 	_ret := objc.Send[int](o.Ptr(), _nSMenuSelIndexOfItemWithTargetAndAction, target, actionSelector)
 	return _ret
 }
 
+// Returns the first menu item in the menu with a specified title.
 func (o *NSMenu) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -238,6 +262,7 @@ func (o *NSMenu) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
+// Returns the first menu item in the menu with the specified tag.
 func (o *NSMenu) ItemWithTag(tag int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemWithTag, tag)
 	if _ret != 0 {
@@ -246,27 +271,33 @@ func (o *NSMenu) ItemWithTag(tag int) *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
+// Enables or disables the menu items of the menu based on the NSMenuValidation informal protocol and sizes the menu to fit its current menu items if necessary.
 func (o *NSMenu) Update() {
 	o.Ptr().Send(_nSMenuSelUpdate)
 }
 
+// Performs the action for the menu item that corresponds to the given key equivalent.
 func (o *NSMenu) PerformKeyEquivalent(event *NSEvent) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMenuSelPerformKeyEquivalent, event.Ptr())
 	return _ret
 }
 
+// Invoked when a menu item is modified visually (for example, its title changes).
 func (o *NSMenu) ItemChanged(item *NSMenuItem) {
 	o.Ptr().Send(_nSMenuSelItemChanged, item.Ptr())
 }
 
+// Causes the application to send the action message of a specified menu item to its target.
 func (o *NSMenu) PerformActionForItemAtIndex(index int) {
 	o.Ptr().Send(_nSMenuSelPerformActionForItemAtIndex, index)
 }
 
+// Dismisses the menu and ends all menu tracking.
 func (o *NSMenu) CancelTracking() {
 	o.Ptr().Send(_nSMenuSelCancelTracking)
 }
 
+// Dismisses the menu and ends all menu tracking without displaying the associated animation.
 func (o *NSMenu) CancelTrackingWithoutAnimation() {
 	o.Ptr().Send(_nSMenuSelCancelTrackingWithoutAnimation)
 }
@@ -405,7 +436,7 @@ func (o *NSMenu) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NS
 	o.Ptr().Send(_nSMenuSelSetUserInterfaceLayoutDirection, userInterfaceLayoutDirection)
 }
 
-// Creates a palette menu displaying user-selectable color tags using the provided array of colors and optional titles. Note that the palette menu is configured for display as an inline menu; you must set it as the submenu of another menu item, contained in a standard menu. The palette menu cannot be used to invoke the `popUpMenuPositioningItem` method, or attached directly to a popup button or toolbar item. @return An autoconfigured palette menu.
+// Creates a palette style menu displaying user-selectable color tags.
 func NSMenuPaletteMenuWithColorsTitlesSelectionHandler(colors *foundation.NSArray[*NSColor], itemTitles *foundation.NSArray[*foundation.NSString], onSelectionChange func(*NSMenu)) *NSMenu {
 	var __block_onSelectionChange objc.Block
 	if onSelectionChange != nil {
@@ -417,14 +448,14 @@ func NSMenuPaletteMenuWithColorsTitlesSelectionHandler(colors *foundation.NSArra
 		})
 		defer __block_onSelectionChange.Release()
 	}
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenu), _nSMenuSelPaletteMenuWithColorsTitlesSelectionHandler, colors.Ptr(), itemTitles, __block_onSelectionChange)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenu), _nSMenuSelPaletteMenuWithColorsTitlesSelectionHandler, colors.Ptr(), itemTitles.Ptr(), __block_onSelectionChange)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSMenuFromID(_ret)
 }
 
-// Creates a palette menu displaying user-selectable color tags using the provided template image, tinted using the specified array of colors. Optionally allows observing changes to the selection state in the compact menu. The block is invoked after the selection has been updated. Currently selected items can be retrieved from the `selectedItems` property. Note that the palette menu is configured for display as an inline menu; you must set it as the submenu of another menu item, contained in a standard menu. The palette menu cannot be used to invoke the `popUpMenuPositioningItem` method, or attached directly to a popup button or toolbar item. @return An autoconfigured palette menu.
+// Creates a palette style menu displaying user-selectable color tags that tint using the specified array of colors.
 func NSMenuPaletteMenuWithColorsTitlesTemplateImageSelectionHandler(colors *foundation.NSArray[*NSColor], itemTitles *foundation.NSArray[*foundation.NSString], image *NSImage, onSelectionChange func(*NSMenu)) *NSMenu {
 	var __block_onSelectionChange objc.Block
 	if onSelectionChange != nil {
@@ -436,7 +467,7 @@ func NSMenuPaletteMenuWithColorsTitlesTemplateImageSelectionHandler(colors *foun
 		})
 		defer __block_onSelectionChange.Release()
 	}
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenu), _nSMenuSelPaletteMenuWithColorsTitlesTemplateImageSelectionHandler, colors.Ptr(), itemTitles, image.Ptr(), __block_onSelectionChange)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenu), _nSMenuSelPaletteMenuWithColorsTitlesTemplateImageSelectionHandler, colors.Ptr(), itemTitles.Ptr(), image.Ptr(), __block_onSelectionChange)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -479,6 +510,7 @@ func (o *NSMenu) SetSelectedItems(selectedItems *foundation.NSArray[*NSMenuItem]
 	o.Ptr().Send(_nSMenuSelSetSelectedItems, selectedItems.Ptr())
 }
 
+// The action method assigned to menu items that open submenus.
 func (o *NSMenu) SubmenuAction(sender objc.ID) {
 	o.Ptr().Send(_nSMenuSelSubmenuAction, sender)
 }
@@ -488,50 +520,59 @@ func (o *NSMenu) PropertiesToUpdate() NSMenuProperties {
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) SetMenuRepresentation(menuRep objc.ID) {
 	o.Ptr().Send(_nSMenuSelSetMenuRepresentation, menuRep)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) MenuRepresentation() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelMenuRepresentation)
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) SetContextMenuRepresentation(menuRep objc.ID) {
 	o.Ptr().Send(_nSMenuSelSetContextMenuRepresentation, menuRep)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) ContextMenuRepresentation() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelContextMenuRepresentation)
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) SetTearOffMenuRepresentation(menuRep objc.ID) {
 	o.Ptr().Send(_nSMenuSelSetTearOffMenuRepresentation, menuRep)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) TearOffMenuRepresentation() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelTearOffMenuRepresentation)
 	return _ret
 }
 
+// Returns the zone from which NSMenu objects should be allocated.
 // Deprecated: since macOS 10.11.
 func NSMenuMenuZone() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNSMenu), _nSMenuSelMenuZone)
 	return _ret
 }
 
+// Sets the zone from which NSMenu objects should be allocated
 // Deprecated: since macOS 10.2.
 func NSMenuSetMenuZone(zone unsafe.Pointer) {
 	objc.ID(_clsNSMenu).Send(_nSMenuSelSetMenuZone, zone)
 }
 
+// Returns the menu currently attached to the menu.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) AttachedMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelAttachedMenu)
@@ -541,23 +582,27 @@ func (o *NSMenu) AttachedMenu() *NSMenu {
 	return NSMenuFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the menu is currently attached to another menu.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) IsAttached() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMenuSelIsAttached)
 	return _ret
 }
 
+// Resizes the menu to exactly fit its items.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) SizeToFit() {
 	o.Ptr().Send(_nSMenuSelSizeToFit)
 }
 
+// Returns the location in screen coordinates where the given submenu is displayed when opened as a submenu of the menu.
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) LocationForSubmenu(submenu *NSMenu) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSMenuSelLocationForSubmenu, submenu.Ptr())
 	return _ret
 }
 
+// Overridden by subclasses to implement specialized context-sensitive help behavior.
 // Deprecated: since macOS 10.11.
 func (o *NSMenu) HelpRequested(eventPtr *NSEvent) {
 	o.Ptr().Send(_nSMenuSelHelpRequested, eventPtr.Ptr())

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for sound event nodes that connect to form a node hierarchy.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasesoundeventnodedefinition
 type PHASESoundEventNodeDefinition struct {
 	PHASEDefinition

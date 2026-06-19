@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides playback information for an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetplaybackassistant
 type AVAssetPlaybackAssistant struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func AVAssetPlaybackAssistantFromID(id objc.ID) *AVAssetPlaybackAssistant {
 	return o
 }
 
-// Returns an instance of AVAssetPlaybackAssistant for inspection of an AVAsset object. - Parameter asset: An instance of AVAsset. - Returns: An instance of AVAssetPlaybackAssistant.
+// Creates a playback assistant to inspect the specified asset.
 func AVAssetPlaybackAssistantAssetPlaybackAssistantWithAsset(asset *AVAsset) *AVAssetPlaybackAssistant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetPlaybackAssistant), _aVAssetPlaybackAssistantSelAssetPlaybackAssistantWithAsset, asset.Ptr())
 	if _ret != 0 {
@@ -40,7 +42,17 @@ func AVAssetPlaybackAssistantAssetPlaybackAssistantWithAsset(asset *AVAsset) *AV
 	return AVAssetPlaybackAssistantFromID(_ret)
 }
 
-// Calls the completionHandler with information about the asset. completionHandler is called when all of the AVAssetPlaybackConfigurationOption values have been loaded. If AVAssetPlaybackAssistant encounters failures when inspecting the contents of the asset, it will return no AVAssetPlaybackConfigurationOptions associated with those contents. - Parameter completionHandler: Called with an array of AVAssetPlaybackConfigurationOption values describing capabilities of the asset.
-func (o *AVAssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_aVAssetPlaybackAssistantSelLoadPlaybackConfigurationOptionsWithCompletionHandler, completionHandler)
+// Loads playback configuration options for an asset.
+func (o *AVAssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_aVAssetPlaybackAssistantSelLoadPlaybackConfigurationOptionsWithCompletionHandler, __block_completionHandler)
 }

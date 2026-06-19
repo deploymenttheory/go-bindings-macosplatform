@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an in-progress or concluded asset download.
+//
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/badownload
 type BADownload struct {
 	foundation.NSObject

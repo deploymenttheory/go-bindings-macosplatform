@@ -102,10 +102,13 @@ func (o *MTRDoorLockClusterLockOperationEvent) SetSourceNode(sourceNode *foundat
 }
 
 func (o *MTRDoorLockClusterLockOperationEvent) Credentials() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDoorLockClusterLockOperationEventSelCredentials)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationEventSelCredentials)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDoorLockClusterLockOperationEvent) SetCredentials(credentials *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDoorLockClusterLockOperationEventSelSetCredentials, credentials)
+	o.Ptr().Send(_mTRDoorLockClusterLockOperationEventSelSetCredentials, credentials.Ptr())
 }

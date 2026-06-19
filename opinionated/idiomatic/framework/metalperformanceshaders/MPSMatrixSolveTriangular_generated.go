@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel for computing the solution of a linear system of equations using a triangular coefficient matrix.
+//
 // MatrixSolveTriangular wraps [raw.MPSMatrixSolveTriangular] with a fluent Go API.
 type MatrixSolveTriangular struct {
 	inner *raw.MPSMatrixSolveTriangular
@@ -82,7 +84,7 @@ func (x *MatrixSolveTriangular) WithBatchSize(batchSize uint) *MatrixSolveTriang
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveTriangular {
@@ -90,7 +92,7 @@ func (x *MatrixSolveTriangular) WithOptions(options mpscore.MPSKernelOptions) *M
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithLabel(label string) *MatrixSolveTriangular {

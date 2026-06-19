@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that converts between a property list and one of several serialized representations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspropertylistserialization
 type NSPropertyListSerialization struct {
 	NSObject

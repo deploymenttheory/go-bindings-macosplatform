@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request that detects an animal body pose.
+//
 // DetectAnimalBodyPoseRequest wraps [raw.VNDetectAnimalBodyPoseRequest] with a fluent Go API.
 type DetectAnimalBodyPoseRequest struct {
 	inner *raw.VNDetectAnimalBodyPoseRequest
@@ -38,7 +40,7 @@ func NewDetectAnimalBodyPoseRequest() *DetectAnimalBodyPoseRequest {
 	return &DetectAnimalBodyPoseRequest{inner: raw.VNDetectAnimalBodyPoseRequestFromID(_id)}
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectAnimalBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest {
@@ -46,7 +48,7 @@ func (x *DetectAnimalBodyPoseRequest) WithRegionOfInterest(regionOfInterest core
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectAnimalBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest {
@@ -54,7 +56,7 @@ func (x *DetectAnimalBodyPoseRequest) WithPreferBackgroundProcessing(preferBackg
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectAnimalBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest {
@@ -62,7 +64,7 @@ func (x *DetectAnimalBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectA
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectAnimalBodyPoseRequest) WithRevision(revision uint) *DetectAnimalBodyPoseRequest {
@@ -70,7 +72,7 @@ func (x *DetectAnimalBodyPoseRequest) WithRevision(revision uint) *DetectAnimalB
 	return x
 }
 
-// @brief Obtain the collection of animal body joint names that are supported by a request object configured with a request revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNAnimalBodyPoseObservationJointName symbols that are supported by the request, or nil if a failure occurs.
+// Retrieves the joint names the request supports.
 //
 // SupportedJointNames returns the collection as a Go slice.
 func (x *DetectAnimalBodyPoseRequest) SupportedJointNames() ([]*foundation.NSString, error) {
@@ -86,7 +88,7 @@ func (x *DetectAnimalBodyPoseRequest) SupportedJointNames() ([]*foundation.NSStr
 	}), nil
 }
 
-// @brief Obtain the collection of animal body joints group names that are supported by a request object configured with a request revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNAnimalBodyPoseObservationJointsGroupName symbols that are supported by the request, or nil if a failure occurs.
+// Retrieves the joint group names the request supports.
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
 func (x *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() ([]*foundation.NSString, error) {

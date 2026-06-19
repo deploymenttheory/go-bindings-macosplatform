@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A machine learning collection type that stores a series of strings or integers.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlsequence
 type MLSequence struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func MLSequenceFromID(id objc.ID) *MLSequence {
 	return o
 }
 
-// Empty sequence of a sepcific type
+// Creates an empty sequence of strings or integers.
 func MLSequenceEmptySequenceWithType(type_ MLFeatureType) *MLSequence {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelEmptySequenceWithType, type_)
 	if _ret != 0 {
@@ -44,18 +46,18 @@ func MLSequenceEmptySequenceWithType(type_ MLFeatureType) *MLSequence {
 	return MLSequenceFromID(_ret)
 }
 
-// String sequences, property will be empty array if type is MLFeatureTypeString
+// Creates a sequence of strings from a string array.
 func MLSequenceSequenceWithStringArray(stringValues *foundation.NSArray[*foundation.NSString]) *MLSequence {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelSequenceWithStringArray, stringValues)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelSequenceWithStringArray, stringValues.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLSequenceFromID(_ret)
 }
 
-// int64 sequence, propery will be empty array if type is MLFeatureTypeInt64
+// Creates a sequence of integers from an array of numbers.
 func MLSequenceSequenceWithInt64Array(int64Values *foundation.NSArray[*foundation.NSNumber]) *MLSequence {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelSequenceWithInt64Array, int64Values)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLSequence), _mLSequenceSelSequenceWithInt64Array, int64Values.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -69,11 +71,17 @@ func (o *MLSequence) Type() MLFeatureType {
 }
 
 func (o *MLSequence) StringValues() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mLSequenceSelStringValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLSequenceSelStringValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *MLSequence) Int64Values() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLSequenceSelInt64Values)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLSequenceSelInt64Values)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

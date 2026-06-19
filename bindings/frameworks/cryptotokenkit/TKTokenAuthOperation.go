@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An authentication operation for a cryptographic token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenauthoperation
 type TKTokenAuthOperation struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func TKTokenAuthOperationFromID(id objc.ID) *TKTokenAuthOperation {
 	return o
 }
 
-// @discussion Handler triggered by the system in order to let the token finalize the authentication operation. @param error Error details (see TKError.h). @return Finalization status.
+// Finishes the authentication operation.
 func (o *TKTokenAuthOperation) FinishWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _tKTokenAuthOperationSelFinishWithError, unsafe.Pointer(&_nsErr))

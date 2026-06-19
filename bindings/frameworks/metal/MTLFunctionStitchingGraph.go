@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a new stitched function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctionstitchinggraph
 type MTLFunctionStitchingGraph struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func MTLFunctionStitchingGraphFromID(id objc.ID) *MTLFunctionStitchingGraph {
 	return o
 }
 
+// Creates a description of a new function call graph.
 func (o *MTLFunctionStitchingGraph) InitWithFunctionNameNodesOutputNodeAttributes(functionName *foundation.NSString, nodes *foundation.NSArray[*MTLFunctionStitchingFunctionNode], outputNode *MTLFunctionStitchingFunctionNode, attributes *foundation.NSArray[MTLFunctionStitchingAttribute]) *MTLFunctionStitchingGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingGraphSelInitWithFunctionNameNodesOutputNodeAttributes, functionName.Ptr(), nodes.Ptr(), outputNode.Ptr(), attributes.Ptr())
 	if _ret != 0 {

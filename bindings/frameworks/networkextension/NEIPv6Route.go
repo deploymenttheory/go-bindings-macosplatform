@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The settings for an IPv6 route.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neipv6route
 type NEIPv6Route struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
 	return o
 }
 
-// @method initWithDestinationAddress:networkPrefixLength: @discussion Initialize a newly-allocated NEIPv6Route. @param address The IPv6 address of the destination network. @param networkPrefixLength A number containing the length in bits of the network prefix of the destination network. @return The initialized NEIPv6Route.
+// Initialize the NEIPv6Route
 func (o *NEIPv6Route) InitWithDestinationAddressNetworkPrefixLength(address *foundation.NSString, networkPrefixLength *foundation.NSNumber) *NEIPv6Route {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6RouteSelInitWithDestinationAddressNetworkPrefixLength, address.Ptr(), networkPrefixLength.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *NEIPv6Route) InitWithDestinationAddressNetworkPrefixLength(address *fou
 	return NEIPv6RouteFromID(_ret)
 }
 
-// @method defaultRoute @return A route object that represents the IPv6 default route.
+// A convenience method for creating the default IPv4 route.
 func NEIPv6RouteDefaultRoute() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNEIPv6Route), _nEIPv6RouteSelDefaultRoute)
 	return _ret

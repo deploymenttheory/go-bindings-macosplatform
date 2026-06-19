@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that represents a satellite image of the area with road and road name information layers on top.
+//
 // HybridMapConfiguration wraps [raw.MKHybridMapConfiguration] with a fluent Go API.
 type HybridMapConfiguration struct {
 	inner *raw.MKHybridMapConfiguration
@@ -35,6 +37,8 @@ func NewHybridMapConfiguration() *HybridMapConfiguration {
 	return &HybridMapConfiguration{inner: raw.MKHybridMapConfigurationFromID(_id)}
 }
 
+// Creates a new hybrid map configuration with the specified elevation style.
+//
 // NewHybridMapConfigurationWithElevationStyle creates a new [HybridMapConfiguration].
 func NewHybridMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKHybridMapConfiguration")), objc.RegisterName("alloc"))
@@ -42,18 +46,24 @@ func NewHybridMapConfigurationWithElevationStyle(elevationStyle MKMapElevationSt
 	return &HybridMapConfiguration{inner: raw.MKHybridMapConfigurationFromID(_id)}
 }
 
+// The filter the framework uses to determine the points of interest to show on the map.
+//
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
 func (x *HybridMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration {
 	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the maps shows traffic conditions.
+//
 // WithShowsTraffic sets the showsTraffic property and returns the receiver for chaining.
 func (x *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration {
 	x.inner.SetShowsTraffic(showsTraffic)
 	return x
 }
 
+// The value that indicates the map’s elevation style.
+//
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
 func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration {
 	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))

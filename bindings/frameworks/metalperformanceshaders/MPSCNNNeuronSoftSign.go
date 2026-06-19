@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A softsign neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftsign
 type MPSCNNNeuronSoftSign struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronSoftSignFromID(id objc.ID) *MPSCNNNeuronSoftSign {
 	return o
 }
 
-// @abstract   Initialize a softsign neuron filter @param      device          The device the filter will run on @return     A valid MPSCNNNeuronSoftSign object or nil, if failure.
+// Initializes a softsign neuron filter.
 func (o *MPSCNNNeuronSoftSign) InitWithDevice(device metal.MTLDevice) *MPSCNNNeuronSoftSign {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftSignSelInitWithDevice, device)
 	if _ret != 0 {

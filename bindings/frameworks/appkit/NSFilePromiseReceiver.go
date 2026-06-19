@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that receives a file promise from the pasteboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsfilepromisereceiver
 type NSFilePromiseReceiver struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func NSFilePromiseReceiverFromID(id objc.ID) *NSFilePromiseReceiver {
 	return o
 }
 
+// Fulfills the promises at the specified destination.
 func (o *NSFilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(destinationDir *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], operationQueue *foundation.NSOperationQueue, reader func(*foundation.NSURL, unsafe.Pointer)) {
 	var __block_reader objc.Block
 	if reader != nil {
@@ -46,20 +49,29 @@ func (o *NSFilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperatio
 		})
 		defer __block_reader.Release()
 	}
-	o.Ptr().Send(_nSFilePromiseReceiverSelReceivePromisedFilesAtDestinationOptionsOperationQueueReader, destinationDir.Ptr(), options, operationQueue.Ptr(), __block_reader)
+	o.Ptr().Send(_nSFilePromiseReceiverSelReceivePromisedFilesAtDestinationOptionsOperationQueueReader, destinationDir.Ptr(), options.Ptr(), operationQueue.Ptr(), __block_reader)
 }
 
 func NSFilePromiseReceiverReadableDraggedTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSFilePromiseReceiver), _nSFilePromiseReceiverSelReadableDraggedTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSFilePromiseReceiver), _nSFilePromiseReceiverSelReadableDraggedTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFilePromiseReceiver) FileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFilePromiseReceiverSelFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseReceiverSelFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFilePromiseReceiver) FileNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFilePromiseReceiverSelFileNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFilePromiseReceiverSelFileNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

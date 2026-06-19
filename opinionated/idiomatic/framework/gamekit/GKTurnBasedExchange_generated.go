@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Exchange request information that participants send in a turn-based match.
+//
 // TurnBasedExchange wraps [raw.GKTurnBasedExchange] with a fluent Go API.
 type TurnBasedExchange struct {
 	inner *raw.GKTurnBasedExchange
@@ -39,6 +41,8 @@ func NewTurnBasedExchange() *TurnBasedExchange {
 	return &TurnBasedExchange{inner: raw.GKTurnBasedExchangeFromID(_id)}
 }
 
+// Cancels an exchange request.
+//
 // CancelWithLocalizableMessageKeyArguments blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
@@ -57,6 +61,8 @@ func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context
 	}
 }
 
+// Replies to an exchange request on behalf of a recipient.
+//
 // ReplyWithLocalizableMessageKeyArgumentsData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData) error {
 	_ch := make(chan error, 1)

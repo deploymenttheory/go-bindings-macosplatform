@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
+//
 // SmartCardATRInterfaceGroup wraps [raw.TKSmartCardATRInterfaceGroup] with a fluent Go API.
 type SmartCardATRInterfaceGroup struct {
 	inner *raw.TKSmartCardATRInterfaceGroup

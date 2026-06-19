@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the detected contours in an image.
+//
 // ContoursObservation wraps [raw.VNContoursObservation] with a fluent Go API.
 type ContoursObservation struct {
 	inner *raw.VNContoursObservation
@@ -38,7 +40,7 @@ func NewContoursObservation() *ContoursObservation {
 	return &ContoursObservation{inner: raw.VNContoursObservationFromID(_id)}
 }
 
-// @brief Returns the VNContour object at the specified index, irrespective of hierarchy. @param contourIndex The index of the contour to request. Valid values are in the range [0..contourCount-1]. @param error The error returned if the index path is out of range. @return The detected VNContour at the specified index without regard to hierarchy.
+// Retrieves the contour object at the specified index, irrespective of hierarchy.
 //
 // ContourAtIndexError calls the underlying ContourAtIndexError.
 func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, error) {
@@ -52,7 +54,7 @@ func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, e
 	return &Contour{inner: _r}, nil
 }
 
-// @brief Returns the VNContour object at the specified index path. @details Use the indexPath property from a VNContour instance to pass to this method. @param indexPath The index path is the heirarchical path to the contour. @param error The error returned if the index path is out of range. @return The VNContour object at the specified index path.
+// Retrieves the contour object at the specified index path.
 //
 // ContourAtIndexPathError calls the underlying ContourAtIndexPathError.
 func (x *ContoursObservation) ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*Contour, error) {

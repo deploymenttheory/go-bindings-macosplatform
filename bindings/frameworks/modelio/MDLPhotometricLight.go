@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A light source whose shape, direction, and intensity of illumination are determined by a photometric profile.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlphotometriclight
 type MDLPhotometricLight struct {
 	MDLPhysicallyPlausibleLight
@@ -36,6 +38,7 @@ func MDLPhotometricLightFromID(id objc.ID) *MDLPhotometricLight {
 	return o
 }
 
+// Initializes a light from photometry data in the file at the specified URL.
 func (o *MDLPhotometricLight) InitWithIESProfile(uRL *foundation.NSURL) *MDLPhotometricLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelInitWithIESProfile, uRL.Ptr())
 	if _ret != 0 {
@@ -44,10 +47,12 @@ func (o *MDLPhotometricLight) InitWithIESProfile(uRL *foundation.NSURL) *MDLPhot
 	return MDLPhotometricLightFromID(_ret)
 }
 
+// Generates spherical harmonics information based on the light’s photometry data.
 func (o *MDLPhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint) {
 	o.Ptr().Send(_mDLPhotometricLightSelGenerateSphericalHarmonicsFromLight, sphericalHarmonicsLevel)
 }
 
+// Generates a cube map texture from the light’s photometry data.
 func (o *MDLPhotometricLight) GenerateCubemapFromLight(textureSize uint) {
 	o.Ptr().Send(_mDLPhotometricLightSelGenerateCubemapFromLight, textureSize)
 }

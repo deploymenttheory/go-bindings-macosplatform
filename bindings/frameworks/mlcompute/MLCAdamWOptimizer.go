@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optimizer that represents the Adam algorithm with weight decay.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer
 type MLCAdamWOptimizer struct {
 	MLCOptimizer
@@ -35,7 +37,7 @@ func MLCAdamWOptimizerFromID(id objc.ID) *MLCAdamWOptimizer {
 	return o
 }
 
-// @abstract   Create an MLCAdamWOptimizer object with defaults @return     A new MLCAdamWOptimizer object.
+// Creates a default optimizer with the descriptor you specify.
 func MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCAdamWOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamWOptimizer), _mLCAdamWOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerD
 	return MLCAdamWOptimizerFromID(_ret)
 }
 
-// @abstract   Create an MLCAdamWOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      beta1                  The beta1 value @param      beta2                  The beta2 value @param      epsilon              The epsilon value to use to improve numerical stability @param      usesAMSGrad     Whether to use the AMSGrad variant of this algorithm from the paper (https://arxiv.org/abs/1904.09237) @param      timeStep            The initial timestep to use for the update @return     A new MLCAdamWOptimizer object.
+// Creates an AdamW optimizer with the values you specify.
 func MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep uint) *MLCAdamWOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamWOptimizer), _mLCAdamWOptimizerSelOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep, optimizerDescriptor.Ptr(), beta1, beta2, epsilon, usesAMSGrad, timeStep)
 	if _ret != 0 {

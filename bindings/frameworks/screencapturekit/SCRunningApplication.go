@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that represents an app running on a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scrunningapplication
 type SCRunningApplication struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a relationship between two entities.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsrelationshipdescription
 type NSRelationshipDescription struct {
 	NSPropertyDescription

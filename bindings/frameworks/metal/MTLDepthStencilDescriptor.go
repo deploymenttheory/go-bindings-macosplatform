@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that configures new MTLDepthStencilState instances.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtldepthstencildescriptor
 type MTLDepthStencilDescriptor struct {
 	foundation.NSObject

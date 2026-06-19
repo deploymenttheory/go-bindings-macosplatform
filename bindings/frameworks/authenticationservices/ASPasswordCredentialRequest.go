@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a request to supply a password credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialrequest
 type ASPasswordCredentialRequest struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func ASPasswordCredentialRequestFromID(id objc.ID) *ASPasswordCredentialRequest 
 	return o
 }
 
-// @abstract Initializes an instance of ASPasswordCredentialRequest. @param credentialIdentity the credential identity to use for this request.
+// Initializes a password credential request object.
 func (o *ASPasswordCredentialRequest) InitWithCredentialIdentity(credentialIdentity *ASPasswordCredentialIdentity) *ASPasswordCredentialRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialRequestSelInitWithCredentialIdentity, credentialIdentity.Ptr())
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func (o *ASPasswordCredentialRequest) InitWithCredentialIdentity(credentialIdent
 	return ASPasswordCredentialRequestFromID(_ret)
 }
 
-// @abstract Creates and initializes an instance of ASPasswordCredentialRequest. @param credentialIdentity the credential identity to use for this request.
+// Creates and initializes a password credential request object.
 func ASPasswordCredentialRequestRequestWithCredentialIdentity(credentialIdentity *ASPasswordCredentialIdentity) *ASPasswordCredentialRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasswordCredentialRequest), _aSPasswordCredentialRequestSelRequestWithCredentialIdentity, credentialIdentity.Ptr())
 	if _ret != 0 {

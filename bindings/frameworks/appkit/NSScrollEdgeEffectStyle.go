@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Styles for a scroll view’s edge effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrolledgeeffectstyle
 type NSScrollEdgeEffectStyle struct {
 	foundation.NSObject

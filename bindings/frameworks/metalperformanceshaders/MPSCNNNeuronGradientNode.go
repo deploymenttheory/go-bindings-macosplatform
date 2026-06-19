@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a gradient exponential neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurongradientnode
 type MPSCNNNeuronGradientNode struct {
 	mpsneuralnetwork.MPSNNGradientFilterNode

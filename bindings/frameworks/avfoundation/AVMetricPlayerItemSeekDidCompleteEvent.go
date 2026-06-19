@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents when the playback seek completes.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeritemseekdidcompleteevent
 type AVMetricPlayerItemSeekDidCompleteEvent struct {
 	AVMetricPlayerItemRateChangeEvent

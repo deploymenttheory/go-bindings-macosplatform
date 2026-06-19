@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of all the details of your machine learning model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodel
 type MLModel struct {
 	foundation.NSObject
@@ -51,7 +53,7 @@ func MLModelFromID(id objc.ID) *MLModel {
 	return o
 }
 
-// Construct a model with a default MLModelConfiguration object
+// Creates a Core ML model instance from a compiled model file.
 func MLModelModelWithContentsOfURLError(url *foundation.NSURL) (*MLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelModelWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -64,7 +66,7 @@ func MLModelModelWithContentsOfURLError(url *foundation.NSURL) (*MLModel, error)
 	return MLModelFromID(_ret), nil
 }
 
-// Construct a model given the location of its on-disk representation. Returns nil on error.
+// Creates a Core ML model instance from a compiled model file and a custom configuration.
 func MLModelModelWithContentsOfURLConfigurationError(url *foundation.NSURL, configuration *MLModelConfiguration) (*MLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelModelWithContentsOfURLConfigurationError, url.Ptr(), configuration.Ptr(), unsafe.Pointer(&_nsErr))
@@ -77,7 +79,7 @@ func MLModelModelWithContentsOfURLConfigurationError(url *foundation.NSURL, conf
 	return MLModelFromID(_ret), nil
 }
 
-// Construct a model asynchronously given the location of its on-disk representation and configuration. Model loading may take time when the model content is not immediately available (e.g. encrypted model). Use this factory method especially when the caller is on the main thread. @param url the location of its on-disk representation (.mlmodelc directory). @param configuration The model configuration @param handler When the model load completes successfully or unsuccessfully, the completion handler is invoked with a valid MLModel instance or NSError object.
+// Creates a Core ML model instance asynchronously from a compiled model file, a custom configuration, and a completion handler.
 func MLModelLoadContentsOfURLConfigurationCompletionHandler(url *foundation.NSURL, configuration *MLModelConfiguration, handler func(*MLModel, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -92,7 +94,7 @@ func MLModelLoadContentsOfURLConfigurationCompletionHandler(url *foundation.NSUR
 	objc.ID(_clsMLModel).Send(_mLModelSelLoadContentsOfURLConfigurationCompletionHandler, url.Ptr(), configuration.Ptr(), __block_handler)
 }
 
-// Run a prediction on a model synchronously. This is a convenience overload method of `prediction(from:options:)` that uses the default prediction options. - Parameters - input: The input features to make a prediction from. - error: The output parameter to be filled with error information on failure. - Returns: The output features from the prediction.
+// Generates a prediction from the feature values within the input feature provider.
 func (o *MLModel) PredictionFromFeaturesError(input MLFeatureProvider) (MLFeatureProvider, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[MLFeatureProvider](o.Ptr(), _mLModelSelPredictionFromFeaturesError, input, unsafe.Pointer(&_nsErr))
@@ -102,7 +104,7 @@ func (o *MLModel) PredictionFromFeaturesError(input MLFeatureProvider) (MLFeatur
 	return _ret, nil
 }
 
-// Run a prediction on a model synchronously - Parameters - input: The input features to make a prediction from. - options: Prediction options to modify how the prediction is run. - error: The output parameter to be filled with error information on failure. - Returns: The output features from the prediction.
+// Generates a prediction from the feature values within the input feature provider using the prediction options.
 func (o *MLModel) PredictionFromFeaturesOptionsError(input MLFeatureProvider, options *MLPredictionOptions) (MLFeatureProvider, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[MLFeatureProvider](o.Ptr(), _mLModelSelPredictionFromFeaturesOptionsError, input, options.Ptr(), unsafe.Pointer(&_nsErr))
@@ -112,7 +114,7 @@ func (o *MLModel) PredictionFromFeaturesOptionsError(input MLFeatureProvider, op
 	return _ret, nil
 }
 
-// Run a prediction on a model asynchronously. This is a convenience overload method of `prediction(from:options:) async` that uses the default prediction options. - Parameters - input: The input features to make a prediction from. - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
+// Generates a prediction asynchronously from the feature values within the input feature provider.
 func (o *MLModel) PredictionFromFeaturesCompletionHandler(input MLFeatureProvider, completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -124,7 +126,7 @@ func (o *MLModel) PredictionFromFeaturesCompletionHandler(input MLFeatureProvide
 	o.Ptr().Send(_mLModelSelPredictionFromFeaturesCompletionHandler, input, __block_completionHandler)
 }
 
-// Run a prediction on a model asynchronously. - Parameters - input: The input features to make a prediction from. - options: Prediction options to modify how the prediction is run. - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
+// Generates a prediction asynchronously from the feature values within the input feature provider using the prediction options.
 func (o *MLModel) PredictionFromFeaturesOptionsCompletionHandler(input MLFeatureProvider, options *MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -136,7 +138,7 @@ func (o *MLModel) PredictionFromFeaturesOptionsCompletionHandler(input MLFeature
 	o.Ptr().Send(_mLModelSelPredictionFromFeaturesOptionsCompletionHandler, input, options.Ptr(), __block_completionHandler)
 }
 
-// Batch prediction without explicit options
+// Generates predictions for each input feature provider within the batch provider.
 func (o *MLModel) PredictionsFromBatchError(inputBatch MLBatchProvider) (MLBatchProvider, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[MLBatchProvider](o.Ptr(), _mLModelSelPredictionsFromBatchError, inputBatch, unsafe.Pointer(&_nsErr))
@@ -146,7 +148,7 @@ func (o *MLModel) PredictionsFromBatchError(inputBatch MLBatchProvider) (MLBatch
 	return _ret, nil
 }
 
-// Batch prediction with explicit options
+// Generates a prediction for each input feature provider within the batch provider using the prediction options.
 func (o *MLModel) PredictionsFromBatchOptionsError(inputBatch MLBatchProvider, options *MLPredictionOptions) (MLBatchProvider, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[MLBatchProvider](o.Ptr(), _mLModelSelPredictionsFromBatchOptionsError, inputBatch, options.Ptr(), unsafe.Pointer(&_nsErr))
@@ -156,7 +158,7 @@ func (o *MLModel) PredictionsFromBatchOptionsError(inputBatch MLBatchProvider, o
 	return _ret, nil
 }
 
-// Provides value for the given parameter. Returns nil on error.
+// Returns a model parameter value for a key.
 func (o *MLModel) ParameterValueForKeyError(key *MLParameterKey) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelSelParameterValueForKeyError, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -166,7 +168,7 @@ func (o *MLModel) ParameterValueForKeyError(key *MLParameterKey) (objc.ID, error
 	return _ret, nil
 }
 
-// Construct a model asynchronously from a compiled model asset. @param asset Compiled model asset derived from in-memory or on-disk Core ML model @param configuration Model configuration that hold options for loading a model @param handler When the model load completes successfully or unsuccessfully, the completion handler is invoked with a valid MLModel instance or NSError object.
+// Construct a model asynchronously from a compiled model asset.
 func MLModelLoadModelAssetConfigurationCompletionHandler(asset *MLModelAsset, configuration *MLModelConfiguration, handler func(*MLModel, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -234,7 +236,7 @@ func MLModelAvailableComputeDevices() *foundation.NSArray[MLComputeDeviceProtoco
 	return foundation.NSArrayFromID[MLComputeDeviceProtocol](_ret)
 }
 
-// Creates a new state object. Core ML framework will allocate the state buffers declared in the model. The allocated state buffers are initialized to zeros. To initialize with different values, use `.withMultiArray(for:)` to get the mutable `MLMultiArray`-view to the state buffer. It returns an empty state when the model is stateless. One can use the empty state with stateful prediction functions such as `prediction(from:using:)` and those predictions will be stateless. This simplifies the call site which may or may not use a stateful model. ```swift // Create state that contains two state buffers: s1 and s2. // Then, initialize s1 to 1.0 and s2 to 2.0. let state = model.newState() state.withMultiArray(for: "s1") { stateMultiArray in stateMultiArray[0] = 1.0 } state.withMultiArray(for: "s2") { stateMultiArray in stateMultiArray[0] = 2.0 } ```
+// Creates a new state object.
 func (o *MLModel) NewState() *MLState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelSelNewState)
 	return MLStateFromID(_ret)
@@ -260,7 +262,7 @@ func (o *MLModel) PredictionFromFeaturesUsingStateOptionsError(inputFeatures MLF
 	return _ret, nil
 }
 
-// Run a stateful prediction asynchronously. Use this method to run predictions on a stateful model. Do not request a prediction while another prediction that shares the same state is in-flight, otherwise the behavior is undefined. ```swift let state = model.newState() let prediction = try await model.prediction(from: inputFeatures, using: state) ``` - Parameters - input: The input features to make a prediction from. - state: The state object created by `newState()` method. - options: Prediction options to modify how the prediction is run. - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
+// Run a stateful prediction asynchronously.
 func (o *MLModel) PredictionFromFeaturesUsingStateOptionsCompletionHandler(inputFeatures MLFeatureProvider, state *MLState, options *MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A recurrent neural network layer for inference on Metal Performance Shaders matrices.
+//
 // RNNMatrixInferenceLayer wraps [raw.MPSRNNMatrixInferenceLayer] with a fluent Go API.
 type RNNMatrixInferenceLayer struct {
 	inner *raw.MPSRNNMatrixInferenceLayer
@@ -85,7 +87,7 @@ func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalComb
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *RNNMatrixInferenceLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixInferenceLayer {
@@ -93,7 +95,7 @@ func (x *RNNMatrixInferenceLayer) WithOptions(options mpscore.MPSKernelOptions) 
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInferenceLayer {

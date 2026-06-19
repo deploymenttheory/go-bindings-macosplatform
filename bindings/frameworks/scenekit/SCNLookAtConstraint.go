@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A constraint that orients a node to always point toward a specified other node.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnlookatconstraint
 type SCNLookAtConstraint struct {
 	SCNConstraint
@@ -39,7 +41,7 @@ func SCNLookAtConstraintFromID(id objc.ID) *SCNLookAtConstraint {
 	return o
 }
 
-// @method lookAtConstraintWithTarget: @abstract Creates and returns a SCNLookAtConstraint object with the specified target. @param target The target node to look at.
+// Creates a look-at constraint for a specified target node.
 func SCNLookAtConstraintLookAtConstraintWithTarget(target *SCNNode) *SCNLookAtConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLookAtConstraint), _sCNLookAtConstraintSelLookAtConstraintWithTarget, target.Ptr())
 	if _ret != 0 {

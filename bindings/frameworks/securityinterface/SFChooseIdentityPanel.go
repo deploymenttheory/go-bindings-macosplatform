@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A panel or sheet containing a list of identities that a user can choose from.
+//
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel
 type SFChooseIdentityPanel struct {
 	appkit.NSPanel
@@ -48,7 +50,7 @@ func SFChooseIdentityPanelFromID(id objc.ID) *SFChooseIdentityPanel {
 	return o
 }
 
-// @method sharedChooseIdentityPanel @abstract Returns a shared instance of SFChooseIdentityPanel. @discussion If your application can display multiple SFChooseIdentityPanels at once, you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
+// Returns a fully initialized, singleton choose identity panel object.
 func SFChooseIdentityPanelSharedChooseIdentityPanel() *SFChooseIdentityPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFChooseIdentityPanel), _sFChooseIdentityPanelSelSharedChooseIdentityPanel)
 	if _ret != 0 {
@@ -57,57 +59,64 @@ func SFChooseIdentityPanelSharedChooseIdentityPanel() *SFChooseIdentityPanel {
 	return SFChooseIdentityPanelFromID(_ret)
 }
 
-// @method runModalForIdentities:message: @abstract Displays a supplied list of identities in a modal panel, returning NSOKButton or NSCancelButton when dismissed. Use the -identity method to subsequently obtain the identity chosen by the user. @param identities An array of SecIdentityRef objects, usually obtained from an identity search (see <Security/SecIdentitySearch.h>). @param message Client-defined message string to display in the panel.
+// Displays a list of identities in a modal panel.
 func (o *SFChooseIdentityPanel) RunModalForIdentitiesMessage(identities *foundation.NSArray[objc.ID], message *foundation.NSString) int {
-	_ret := objc.Send[int](o.Ptr(), _sFChooseIdentityPanelSelRunModalForIdentitiesMessage, identities, message.Ptr())
+	_ret := objc.Send[int](o.Ptr(), _sFChooseIdentityPanelSelRunModalForIdentitiesMessage, identities.Ptr(), message.Ptr())
 	return _ret
 }
 
-// @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:identities:message: @abstract Displays a sheet version of the SFChooseIdentityPanel. The didEndSelector returnCode will contain either NSOKButton or NSCancelButton. @param docWindow The parent window to which the sheet is attached. @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed. @param didEndSelector This method is called when the sheet is dismissed. @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method. @param identities An array of SecIdentityRef objects, usually obtained from an identity search (see <Security/SecIdentitySearch.h>). @param message Client-defined message string to display in the panel. @discussion The didEndSelector method should have the following signature: - (void)chooseIdentitySheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+// Displays a list of identities in a modal sheet from which the user can select an identity.
 func (o *SFChooseIdentityPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, identities *foundation.NSArray[objc.ID], message *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, identities, message.Ptr())
+	o.Ptr().Send(_sFChooseIdentityPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, identities.Ptr(), message.Ptr())
 }
 
-// @method identity @abstract Returns the identity that the user chose in the panel.
+// Returns the identity that the user chose in the panel or sheet.
 func (o *SFChooseIdentityPanel) Identity() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFChooseIdentityPanelSelIdentity)
 	return _ret
 }
 
-// @method setPolicies: @abstract Specifies one or more policies that apply to the displayed certificates. @param policies The policies to use when evaluating the certificates' status. You can pass either a SecPolicyRef or a NSArray (containing one or more SecPolicyRef instances) in this parameter. If policies is set to nil, the Apple X.509 Basic Policy will be used. @discussion Applications will typically display a SFChooseIdentityPanel in the context of a specific usage, such as SSL or S/MIME. You should set only the policy references which apply to your intended usage.
+// Specifies one or more policies that apply to the displayed certificates.
 func (o *SFChooseIdentityPanel) SetPolicies(policies objc.ID) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetPolicies, policies)
 }
 
-// @method policies @abstract Returns an array of policies used to evaluate the status of the displayed certificates. @discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous setPolicies: call.
+// Returns an array of policies used to evaluate the status of the displayed certificates.
 func (o *SFChooseIdentityPanel) Policies() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _sFChooseIdentityPanelSelPolicies)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelPolicies)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// @method setDefaultButtonTitle: @abstract Customizes the title of the default button. @param title The new title for the default button.
+// Customizes the title of the default button.
 func (o *SFChooseIdentityPanel) SetDefaultButtonTitle(title *foundation.NSString) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetDefaultButtonTitle, title.Ptr())
 }
 
-// @method setAlternateButtonTitle: @abstract Customizes the title of the alternate button. @param title The new title for the alternate button. If title is set to nil, the button will not be shown.
+// Customizes the title of the alternate button.
 func (o *SFChooseIdentityPanel) SetAlternateButtonTitle(title *foundation.NSString) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetAlternateButtonTitle, title.Ptr())
 }
 
+// Displays a Help button in the sheet or panel.
 func (o *SFChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetShowsHelp, showsHelp)
 }
 
+// Indicates whether the help button is currently set to be displayed.
 func (o *SFChooseIdentityPanel) ShowsHelp() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFChooseIdentityPanelSelShowsHelp)
 	return _ret
 }
 
+// Sets the help anchor string for the sheet or modal panel.
 func (o *SFChooseIdentityPanel) SetHelpAnchor(anchor *foundation.NSString) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetHelpAnchor, anchor.Ptr())
 }
 
+// Returns the current help anchor string for the sheet or panel.
 func (o *SFChooseIdentityPanel) HelpAnchor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelHelpAnchor)
 	if _ret != 0 {
@@ -116,12 +125,12 @@ func (o *SFChooseIdentityPanel) HelpAnchor() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method setInformativeText: @abstract Sets the optional informative text displayed in the SFChooseIdentityPanel. @param informativeText The informative text to display in the panel. @discussion Call this method to set the informative text to be displayed.
+// Sets the optional informative text displayed in the panel.
 func (o *SFChooseIdentityPanel) SetInformativeText(informativeText *foundation.NSString) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetInformativeText, informativeText.Ptr())
 }
 
-// @method informativeText @abstract Returns the informative text currently displayed in the SFChooseIdentityPanel.
+// Returns the informative text currently displayed in the panel.
 func (o *SFChooseIdentityPanel) InformativeText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelInformativeText)
 	if _ret != 0 {
@@ -130,12 +139,12 @@ func (o *SFChooseIdentityPanel) InformativeText() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method setDomain: @abstract Sets an optional domain in which the identity is to be used. @param domainString A string containing a hostname, RFC822 name (email address), URL, or similar identifier. @discussion Call this method to associate a domain with the chosen identity. If the user chooses an identity and a domain has been set, an identity preference item will be created in the default keychain. Subsequently, calling SecIdentitySearchCreateWithPolicy and SecIdentitySearchCopyNext will return the preferred identity for this domain first.
+// Sets an optional domain in which the identity is to be used.
 func (o *SFChooseIdentityPanel) SetDomain(domainString *foundation.NSString) {
 	o.Ptr().Send(_sFChooseIdentityPanelSelSetDomain, domainString.Ptr())
 }
 
-// @method domain @abstract Returns the domain which will be associated with the chosen identity.
+// Returns the domain that will be associated with the chosen identity.
 func (o *SFChooseIdentityPanel) Domain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelDomain)
 	if _ret != 0 {

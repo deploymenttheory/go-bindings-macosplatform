@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "framework": "Hypervisor",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "OS_hv_gic_config": {
+      "doc": "Methods that provide information on the state of a generic interrupt controller.",
+      "url": "https://developer.apple.com/documentation/hypervisor/os_hv_gic_config"
+    },
+    "OS_hv_gic_state": {
+      "doc": "Methods that provide information on the hypervisor state.",
+      "url": "https://developer.apple.com/documentation/hypervisor/os_hv_gic_state"
+    },
+    "OS_hv_vcpu_config": {
+      "doc": "Configuration for a virtual CPU.",
+      "url": "https://developer.apple.com/documentation/hypervisor/os_hv_vcpu_config"
+    },
+    "OS_hv_vm_config": {
+      "doc": "Creates a virtual machine configuration object.",
+      "url": "https://developer.apple.com/documentation/hypervisor/os_hv_vm_config"
+    }
+  },
+  "enums": {
+    "hv_cache_type_t": {
+      "doc": "The structure that describes an instruction or data cache element.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_cache_type_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new 32-bit integer that describes a cache element.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_cache_type_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new cache element with the unsigned 32-bit integer you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_cache_type_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "An unsigned 32-bit integer that represents a cache element.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_cache_type_t/rawvalue"
+        }
+      }
+    },
+    "hv_exit_reason_t": {
+      "doc": "The type that describes the event that triggered a guest exit to the host.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_exit_reason_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new exit reason instance with the value you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_exit_reason_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new exit reason instance with the value you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_exit_reason_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The unsigned 32-bit integer that represents virual macine exit reasons.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_exit_reason_t/rawvalue"
+        }
+      }
+    },
+    "hv_feature_reg_t": {
+      "doc": "The type that defines feature registers.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_feature_reg_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance of the hardware feature registers.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_feature_reg_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance of the hardware feature registers.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_feature_reg_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "A 32-bit unsigned integer that represents the hardware feature registers.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_feature_reg_t/rawvalue"
+        }
+      }
+    },
+    "hv_gic_distributor_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_distributor_reg_t"
+    },
+    "hv_gic_icc_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_icc_reg_t"
+    },
+    "hv_gic_ich_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_ich_reg_t"
+    },
+    "hv_gic_icv_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_icv_reg_t"
+    },
+    "hv_gic_intid_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_intid_t"
+    },
+    "hv_gic_msi_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_msi_reg_t"
+    },
+    "hv_gic_redistributor_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_gic_redistributor_reg_t"
+    },
+    "hv_interrupt_type_t": {
+      "doc": "The type that defines the vCPU’s interrupts.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_interrupt_type_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new interrupt instance with the value you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_interrupt_type_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new interrupt instance with the integer value you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_interrupt_type_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "An unisgned 32-bit integer that describes the interrupts.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_interrupt_type_t/rawvalue"
+        }
+      }
+    },
+    "hv_ipa_granule_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_ipa_granule_t"
+    },
+    "hv_reg_t": {
+      "doc": "The type that defines general registers.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_reg_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new general register instance initialized with the value you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_reg_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new general register instance initialized with the value you provide.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_reg_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "A 32-bit unsigned integer that represents the general registers.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_reg_t/rawvalue"
+        }
+      }
+    },
+    "hv_simd_fp_reg_t": {
+      "doc": "The type that defines SIMD and floating-point registers.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_simd_fp_reg_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new SIMD and floating-point register instance.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_simd_fp_reg_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new SIMD and floating-point register instance.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_simd_fp_reg_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "An unsigned 32-bit integer that represents SIMD and floating-point registers.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_simd_fp_reg_t/rawvalue"
+        }
+      }
+    },
+    "hv_sme_p_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_sme_p_reg_t"
+    },
+    "hv_sme_z_reg_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_sme_z_reg_t"
+    },
+    "hv_sys_reg_t": {
+      "doc": "The type of system registers.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_sys_reg_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new system-register instance.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_sys_reg_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new system-register instance.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_sys_reg_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "An unsigned 16-bit integer that represents the system registers.",
+          "url": "https://developer.apple.com/documentation/hypervisor/hv_sys_reg_t/rawvalue"
+        }
+      }
+    }
+  },
+  "structs": {
+    "hv_vcpu_exit_exception_t": {
+      "doc": "The structure that describes information about an exit from the virtual CPU (vCPU) to the host.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_vcpu_exit_exception_t"
+    },
+    "hv_vcpu_exit_t": {
+      "doc": "Information about an exit from the vCPU to the host.",
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_vcpu_exit_t"
+    },
+    "hv_vcpu_sme_state_t": {
+      "url": "https://developer.apple.com/documentation/hypervisor/hv_vcpu_sme_state_t"
+    }
+  }
+}

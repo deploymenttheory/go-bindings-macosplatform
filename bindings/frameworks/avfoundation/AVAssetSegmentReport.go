@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about segment data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetsegmentreport
 type AVAssetSegmentReport struct {
 	foundation.NSObject

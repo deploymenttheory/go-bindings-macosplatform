@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A kernel that performs intersection tests between rays and geometry.
+//
 // RayIntersector wraps [raw.MPSRayIntersector] with a fluent Go API.
 type RayIntersector struct {
 	inner *raw.MPSRayIntersector
@@ -148,7 +150,7 @@ func (x *RayIntersector) WithRayMask(rayMask uint) *RayIntersector {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *RayIntersector) WithOptions(options mpscore.MPSKernelOptions) *RayIntersector {
@@ -156,7 +158,7 @@ func (x *RayIntersector) WithOptions(options mpscore.MPSKernelOptions) *RayInter
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RayIntersector) WithLabel(label string) *RayIntersector {

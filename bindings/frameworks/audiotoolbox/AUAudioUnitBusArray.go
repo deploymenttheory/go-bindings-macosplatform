@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines a container for an audio unit’s input or output busses.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray
 type AUAudioUnitBusArray struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func AUAudioUnitBusArrayFromID(id objc.ID) *AUAudioUnitBusArray {
 	return o
 }
 
-// @method		initWithAudioUnit:busType:busses: @brief		Initializes by making a copy of the supplied bus array.
+// Initializes a bus array by making a copy of the supplied busses.
 func (o *AUAudioUnitBusArray) InitWithAudioUnitBusTypeBusses(owner *AUAudioUnit, busType AUAudioUnitBusType, busArray *foundation.NSArray[*AUAudioUnitBus]) *AUAudioUnitBusArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelInitWithAudioUnitBusTypeBusses, owner.Ptr(), busType, busArray.Ptr())
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func (o *AUAudioUnitBusArray) InitWithAudioUnitBusTypeBusses(owner *AUAudioUnit,
 	return AUAudioUnitBusArrayFromID(_ret)
 }
 
-// @method		initWithAudioUnit:busType: @brief		Initializes an empty bus array.
+// Initializes an empty bus array.
 func (o *AUAudioUnitBusArray) InitWithAudioUnitBusType(owner *AUAudioUnit, busType AUAudioUnitBusType) *AUAudioUnitBusArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelInitWithAudioUnitBusType, owner.Ptr(), busType)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func (o *AUAudioUnitBusArray) InitWithAudioUnitBusType(owner *AUAudioUnit, busTy
 	return AUAudioUnitBusArrayFromID(_ret)
 }
 
-// @method		objectAtIndexedSubscript:
+// Returns the bus at the specified index.
 func (o *AUAudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AUAudioUnitBus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusArraySelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *AUAudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AUAudioUnitB
 	return AUAudioUnitBusFromID(_ret)
 }
 
-// @property	setBusCount:error: @brief		Change the number of busses in the array.
+// Changes the number of busses in the array.
 func (o *AUAudioUnitBusArray) SetBusCountError(count uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitBusArraySelSetBusCountError, count, unsafe.Pointer(&_nsErr))
@@ -79,12 +81,12 @@ func (o *AUAudioUnitBusArray) SetBusCountError(count uint) (bool, error) {
 	return _ret, nil
 }
 
-// @method		addObserverToAllBusses:forKeyPath:options:context: @brief		Add a KVO observer for a property on all busses in the array.
+// Adds a KVO observer for a given property on all busses in the array.
 func (o *AUAudioUnitBusArray) AddObserverToAllBussesForKeyPathOptionsContext(observer *foundation.NSObject, keyPath *foundation.NSString, options foundation.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	o.Ptr().Send(_aUAudioUnitBusArraySelAddObserverToAllBussesForKeyPathOptionsContext, observer.Ptr(), keyPath.Ptr(), options, context_)
 }
 
-// @method		removeObserverFromAllBusses:forKeyPath:context: @brief		Remove a KVO observer for a property on all busses in the array.
+// Removes a KVO observer for a given property on all busses in the array.
 func (o *AUAudioUnitBusArray) RemoveObserverFromAllBussesForKeyPathContext(observer *foundation.NSObject, keyPath *foundation.NSString, context_ unsafe.Pointer) {
 	o.Ptr().Send(_aUAudioUnitBusArraySelRemoveObserverFromAllBussesForKeyPathContext, observer.Ptr(), keyPath.Ptr(), context_)
 }
@@ -116,7 +118,7 @@ func (o *AUAudioUnitBusArray) BusType() AUAudioUnitBusType {
 	return _ret
 }
 
-// Sets the bus array to be a copy of the supplied array. The base class issues KVO notifications.
+// Replaces the current bus array with a copy of the supplied bus array.
 func (o *AUAudioUnitBusArray) ReplaceBusses(busArray *foundation.NSArray[*AUAudioUnitBus]) {
 	o.Ptr().Send(_aUAudioUnitBusArraySelReplaceBusses, busArray.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the region in which the system presents a caption.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionregion
 type AVCaptionRegion struct {
 	foundation.NSObject
@@ -42,11 +44,12 @@ func AVCaptionRegionFromID(id objc.ID) *AVCaptionRegion {
 	return o
 }
 
-// @method encodeWithCoder: @abstract NSCoding protocol method override @discussion This method throws an exception if the caption region's size has different units for width and height, or if the units are unrecognizeable.
+// Encodes the region using the specified encoder.
 func (o *AVCaptionRegion) EncodeWithCoder(encoder *foundation.NSCoder) {
 	o.Ptr().Send(_aVCaptionRegionSelEncodeWithCoder, encoder.Ptr())
 }
 
+// Returns a Boolean value that indicates whether an object equals another.
 func (o *AVCaptionRegion) IsEqual(object objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptionRegionSelIsEqual, object)
 	return _ret

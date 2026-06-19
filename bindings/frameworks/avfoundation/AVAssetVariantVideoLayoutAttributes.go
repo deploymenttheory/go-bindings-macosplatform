@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Attributes that describe the layout of video content.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantvideolayoutattributes
 type AVAssetVariantVideoLayoutAttributes struct {
 	foundation.NSObject

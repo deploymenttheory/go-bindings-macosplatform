@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a button.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbuttontouchbaritem
 type NSButtonTouchBarItem struct {
 	NSTouchBarItem

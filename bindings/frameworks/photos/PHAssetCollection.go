@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetcollection
 type PHAssetCollection struct {
 	PHCollection
@@ -44,14 +46,16 @@ func PHAssetCollectionFromID(id objc.ID) *PHAssetCollection {
 	return o
 }
 
+// Retrieves asset collections with the specified unique identifiers.
 func PHAssetCollectionFetchAssetCollectionsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithLocalIdentifiersOptions, identifiers, options.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithLocalIdentifiersOptions, identifiers.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
+// Retrieves asset collections of the specified type and subtype.
 func PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions(type_ PHAssetCollectionType, subtype unsafe.Pointer, options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithTypeSubtypeOptions, type_, subtype, options.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions(type_ PHAssetC
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
+// Retrieves asset collections of the specified type containing the specified asset.
 func PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions(asset *PHAsset, type_ PHAssetCollectionType, options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsContainingAssetWithTypeOptions, asset.Ptr(), type_, options.Ptr())
 	if _ret != 0 {
@@ -68,15 +73,17 @@ func PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions(asset 
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
+// Retrieves asset collections using URLs provided by the Assets Library framework.
 // Deprecated: Will be removed in a future release
 func PHAssetCollectionFetchAssetCollectionsWithALAssetGroupURLsOptions(assetGroupURLs *foundation.NSArray[*foundation.NSURL], options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithALAssetGroupURLsOptions, assetGroupURLs, options.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithALAssetGroupURLsOptions, assetGroupURLs.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
+// Creates a temporary asset collection containing the specified assets.
 func PHAssetCollectionTransientAssetCollectionWithAssetsTitle(assets *foundation.NSArray[*PHAsset], title *foundation.NSString) *PHAssetCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelTransientAssetCollectionWithAssetsTitle, assets.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -85,6 +92,7 @@ func PHAssetCollectionTransientAssetCollectionWithAssetsTitle(assets *foundation
 	return PHAssetCollectionFromID(_ret)
 }
 
+// Creates a temporary asset collection containing the assets from the specified fetch result.
 func PHAssetCollectionTransientAssetCollectionWithAssetFetchResultTitle(fetchResult *PHFetchResult[*PHAsset], title *foundation.NSString) *PHAssetCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelTransientAssetCollectionWithAssetFetchResultTitle, fetchResult.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -130,6 +138,9 @@ func (o *PHAssetCollection) ApproximateLocation() unsafe.Pointer {
 }
 
 func (o *PHAssetCollection) LocalizedLocationNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pHAssetCollectionSelLocalizedLocationNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetCollectionSelLocalizedLocationNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

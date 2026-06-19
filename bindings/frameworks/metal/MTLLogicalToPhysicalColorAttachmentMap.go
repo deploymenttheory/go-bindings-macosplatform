@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Allows you to easily specify color attachment remapping from logical to physical indices.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtllogicaltophysicalcolorattachmentmap
 type MTLLogicalToPhysicalColorAttachmentMap struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MTLLogicalToPhysicalColorAttachmentMapFromID(id objc.ID) *MTLLogicalToPhysi
 	return o
 }
 
-// Maps a physical color attachment index to a logical index. - Parameters: - physicalIndex: index of the color attachment's physical mapping. - logicalIndex: index of the color attachment's logical mapping.
+// Maps a physical color attachment index to a logical index.
 func (o *MTLLogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint) {
 	o.Ptr().Send(_mTLLogicalToPhysicalColorAttachmentMapSelSetPhysicalIndexForLogicalIndex, physicalIndex, logicalIndex)
 }

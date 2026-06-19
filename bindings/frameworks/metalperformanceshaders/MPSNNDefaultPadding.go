@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that provides predefined padding policies for common tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnndefaultpadding
 type MPSNNDefaultPadding struct {
 	foundation.NSObject

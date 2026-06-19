@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for registering handler routines for specific types of Apple events and dispatching events to those handlers.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsappleeventmanager
 type NSAppleEventManager struct {
 	NSObject
@@ -42,6 +44,7 @@ func NSAppleEventManagerFromID(id objc.ID) *NSAppleEventManager {
 	return o
 }
 
+// Returns the single instance of NSAppleEventManager, creating it first if it doesn’t exist.
 func NSAppleEventManagerSharedAppleEventManager() *NSAppleEventManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventManager), _nSAppleEventManagerSelSharedAppleEventManager)
 	if _ret != 0 {
@@ -50,24 +53,29 @@ func NSAppleEventManagerSharedAppleEventManager() *NSAppleEventManager {
 	return NSAppleEventManagerFromID(_ret)
 }
 
+// Registers the Apple event handler specified by handler for the event specified by eventClass and eventID.
 func (o *NSAppleEventManager) SetEventHandlerAndSelectorForEventClassAndEventID(handler objc.ID, handleEventSelector objc.SEL, eventClass uint, eventID uint) {
 	o.Ptr().Send(_nSAppleEventManagerSelSetEventHandlerAndSelectorForEventClassAndEventID, handler, handleEventSelector, eventClass, eventID)
 }
 
+// If an Apple event handler has been registered for the event specified by eventClass and eventID, removes it.
 func (o *NSAppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventClass uint, eventID uint) {
 	o.Ptr().Send(_nSAppleEventManagerSelRemoveEventHandlerForEventClassAndEventID, eventClass, eventID)
 }
 
+// Causes the Apple event specified by theAppleEvent to be dispatched to the appropriate Apple event handler, if one has been registered by calling setEventHandler:andSelector:forEventClass:andEventID:.
 func (o *NSAppleEventManager) DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent *ae.AEDesc, theReply *ae.AEDesc, handlerRefCon unsafe.Pointer) int16 {
 	_ret := objc.Send[int16](o.Ptr(), _nSAppleEventManagerSelDispatchRawAppleEventWithRawReplyHandlerRefCon, theAppleEvent, theReply, handlerRefCon)
 	return _ret
 }
 
+// Suspends the handling of the current event and returns an ID that must be used to resume the handling of the event if an Apple event is being handled on the current thread.
 func (o *NSAppleEventManager) SuspendCurrentAppleEvent() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSAppleEventManagerSelSuspendCurrentAppleEvent)
 	return _ret
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the descriptor for the event whose handling was suspended.
 func (o *NSAppleEventManager) AppleEventForSuspensionID(suspensionID unsafe.Pointer) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelAppleEventForSuspensionID, suspensionID)
 	if _ret != 0 {
@@ -76,6 +84,7 @@ func (o *NSAppleEventManager) AppleEventForSuspensionID(suspensionID unsafe.Poin
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the corresponding reply event descriptor.
 func (o *NSAppleEventManager) ReplyAppleEventForSuspensionID(suspensionID unsafe.Pointer) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventManagerSelReplyAppleEventForSuspensionID, suspensionID)
 	if _ret != 0 {
@@ -84,10 +93,12 @@ func (o *NSAppleEventManager) ReplyAppleEventForSuspensionID(suspensionID unsafe
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, sets the values that will be returned by subsequent invocations of currentAppleEvent and currentReplyAppleEvent to be the event whose handling was suspended and its corresponding reply event, respectively.
 func (o *NSAppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID unsafe.Pointer) {
 	o.Ptr().Send(_nSAppleEventManagerSelSetCurrentAppleEventAndReplyEventWithSuspensionID, suspensionID)
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.
 func (o *NSAppleEventManager) ResumeWithSuspensionID(suspensionID unsafe.Pointer) {
 	o.Ptr().Send(_nSAppleEventManagerSelResumeWithSuspensionID, suspensionID)
 }

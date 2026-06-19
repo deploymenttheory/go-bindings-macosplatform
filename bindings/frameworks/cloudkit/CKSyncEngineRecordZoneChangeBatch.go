@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the record changes for a single send operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginerecordzonechangebatch
 type CKSyncEngineRecordZoneChangeBatch struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func CKSyncEngineRecordZoneChangeBatchFromID(id objc.ID) *CKSyncEngineRecordZone
 	return o
 }
 
-// Creates a batch of records to modify using the provided record zone changes. - Parameters: - pendingChanges: The record zone changes to process. - recordProvider: A block that returns the record for the specified record identifier. - Returns: The batch of records to modify, or `nil` if there are no pending changes. This method iterates over `pendingChanges` and adds the necessary information to the new batch, until there are no more changes or the size of the batch reaches the maximum limit. If the type of change is a record save, the method asks the specified `recordProvider` block for that record. If the closure returns `nil`, the method skips that change.
+// Creates a batch of records to modify using the provided record zone changes.
 func (o *CKSyncEngineRecordZoneChangeBatch) InitWithPendingChangesRecordProvider(pendingChanges *foundation.NSArray[*CKSyncEnginePendingRecordZoneChange], recordProvider objc.Block) *CKSyncEngineRecordZoneChangeBatch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelInitWithPendingChangesRecordProvider, pendingChanges.Ptr(), recordProvider)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *CKSyncEngineRecordZoneChangeBatch) InitWithPendingChangesRecordProvider
 	return CKSyncEngineRecordZoneChangeBatchFromID(_ret)
 }
 
-// Creates a batch of records to modify. - Parameters: - recordsToSave: The records to save. - recordIDsToDelete: The identifiers of the records to delete. - atomicByZone: A Boolean value that determines whether CloudKit modifies the specified records atomically by record zone. - Returns: An initialized change batch. - Important: When using this initializer to create batches, consider the number of records you specify and their combined size. If you specify too many records, or their combined size is too large, the send operation may fail with an error of type “CKError/Code/limitExceeded“.
+// Creates a batch of records to modify.
 func (o *CKSyncEngineRecordZoneChangeBatch) InitWithRecordsToSaveRecordIDsToDeleteAtomicByZone(recordsToSave *foundation.NSArray[*CKRecord], recordIDsToDelete *foundation.NSArray[*CKRecordID], atomicByZone bool) *CKSyncEngineRecordZoneChangeBatch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineRecordZoneChangeBatchSelInitWithRecordsToSaveRecordIDsToDeleteAtomicByZone, recordsToSave.Ptr(), recordIDsToDelete.Ptr(), atomicByZone)
 	if _ret != 0 {

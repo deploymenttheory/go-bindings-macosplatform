@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that checks whether a fragmented movie appends additional movie fragments.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avfragmentedmovieminder
 type AVFragmentedMovieMinder struct {
 	AVFragmentedAssetMinder
@@ -34,7 +36,7 @@ func AVFragmentedMovieMinderFromID(id objc.ID) *AVFragmentedMovieMinder {
 	return o
 }
 
-// @method			fragmentedMovieMinderWithMovie:mindingInterval: @abstract       Creates an AVFragmentedMovieMinder, adds the specified movie to it, and sets the mindingInterval to the specified value. @param			movie An instance of AVFragmentedMovie to add to the AVFragmentedMovieMinder @param			mindingInterval The initial minding interval of the AVFragmentedMovieMinder. @result			A new instance of AVFragmentedMovieMinder.
+// Creates a movie minder and adds a movie with a minding interval.
 func AVFragmentedMovieMinderFragmentedMovieMinderWithMovieMindingInterval(movie *AVFragmentedMovie, mindingInterval float64) *AVFragmentedMovieMinder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedMovieMinder), _aVFragmentedMovieMinderSelFragmentedMovieMinderWithMovieMindingInterval, movie.Ptr(), mindingInterval)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func AVFragmentedMovieMinderFragmentedMovieMinderWithMovieMindingInterval(movie 
 	return AVFragmentedMovieMinderFromID(_ret)
 }
 
-// @method			initWithMovie:mindingInterval: @abstract       Creates an AVFragmentedMovieMinder, adds the specified movie to it, and sets the mindingInterval to the specified value. @param			movie An instance of AVFragmentedMovie to add to the AVFragmentedMovieMinder @param			mindingInterval The initial minding interval of the AVFragmentedMovieMinder. @result			A new instance of AVFragmentedMovieMinder.
+// Creates a movie minder and adds a movie with a minding interval.
 func (o *AVFragmentedMovieMinder) InitWithMovieMindingInterval(movie *AVFragmentedMovie, mindingInterval float64) *AVFragmentedMovieMinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedMovieMinderSelInitWithMovieMindingInterval, movie.Ptr(), mindingInterval)
 	if _ret != 0 {
@@ -52,12 +54,12 @@ func (o *AVFragmentedMovieMinder) InitWithMovieMindingInterval(movie *AVFragment
 	return AVFragmentedMovieMinderFromID(_ret)
 }
 
-// @method			addFragmentedMovie: @abstract		Adds a fragmented movie to the array of movies being minded. @param			movie The fragmented movie to add to the minder.
+// Adds a fragmented movie to the array of movies being minded.
 func (o *AVFragmentedMovieMinder) AddFragmentedMovie(movie *AVFragmentedMovie) {
 	o.Ptr().Send(_aVFragmentedMovieMinderSelAddFragmentedMovie, movie.Ptr())
 }
 
-// @method			removeFragmentedMovie: @abstract		Removes a fragmented movie from the array of movies being minded. @param			movie The fragmented movie to remove from the minder.
+// Removes a fragmented movie from the array of movies being minded.
 func (o *AVFragmentedMovieMinder) RemoveFragmentedMovie(movie *AVFragmentedMovie) {
 	o.Ptr().Send(_aVFragmentedMovieMinderSelRemoveFragmentedMovie, movie.Ptr())
 }

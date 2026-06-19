@@ -98,6 +98,7 @@ func (e ICReturnCodeOffset) String() string {
 	}
 }
 
+// The possible states for the browser cell. These values are used by the cellState method.
 type IKImageBrowserCellState int64
 
 const (
@@ -119,6 +120,7 @@ func (e IKImageBrowserCellState) String() string {
 	}
 }
 
+// These constants specify the locations for dropping items onto the browser view. Used by the method setDropIndex:dropOperation:.
 type IKImageBrowserDropOperation int64
 
 const (
@@ -232,6 +234,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Execution modes for custom patches.
 type QCPlugInExecutionMode int64
 
 const (
@@ -253,6 +256,7 @@ func (e QCPlugInExecutionMode) String() string {
 	}
 }
 
+// Time modes for custom patches.
 type QCPlugInTimeMode int64
 
 const (

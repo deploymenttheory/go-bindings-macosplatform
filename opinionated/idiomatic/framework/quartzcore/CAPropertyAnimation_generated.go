@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract subclass for creating animations that manipulate the value of layer properties.
+//
 // PropertyAnimation wraps [raw.CAPropertyAnimation] with a fluent Go API.
 type PropertyAnimation struct {
 	inner *raw.CAPropertyAnimation
@@ -37,42 +39,56 @@ func NewPropertyAnimation() *PropertyAnimation {
 	return &PropertyAnimation{inner: raw.CAPropertyAnimationFromID(_id)}
 }
 
+// Specifies the key path the receiver animates.
+//
 // WithKeyPath sets the keyPath property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithKeyPath(keyPath string) *PropertyAnimation {
 	x.inner.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
 	return x
 }
 
+// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+//
 // WithAdditive sets the additive property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithAdditive(additive bool) *PropertyAnimation {
 	x.inner.SetAdditive(additive)
 	return x
 }
 
+// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+//
 // WithCumulative sets the cumulative property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithCumulative(cumulative bool) *PropertyAnimation {
 	x.inner.SetCumulative(cumulative)
 	return x
 }
 
+// An optional value function that is applied to interpolated values.
+//
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation {
 	x.inner.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation {
 	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *PropertyAnimation {
 	x.inner.CAAnimation.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation {
 	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)

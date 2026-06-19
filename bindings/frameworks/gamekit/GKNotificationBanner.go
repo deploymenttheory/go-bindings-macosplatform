@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Game Center-style banner that displays a message to the local player.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gknotificationbanner
 // Deprecated: Use UNNotificationRequest or provide custom UI instead. This method will become a no-op in a future version of GameKit.
 type GKNotificationBanner struct {
@@ -32,6 +34,7 @@ func GKNotificationBannerFromID(id objc.ID) *GKNotificationBanner {
 	return o
 }
 
+// Displays a banner with a title and message to the player.
 // Deprecated: Use UNNotificationRequest or provide custom UI instead. This method will become a no-op in a future version of GameKit.
 func GKNotificationBannerShowBannerWithTitleMessageCompletionHandler(title *foundation.NSString, message *foundation.NSString, completionHandler func()) {
 	var __block_completionHandler objc.Block
@@ -44,6 +47,7 @@ func GKNotificationBannerShowBannerWithTitleMessageCompletionHandler(title *foun
 	objc.ID(_clsGKNotificationBanner).Send(_gKNotificationBannerSelShowBannerWithTitleMessageCompletionHandler, title.Ptr(), message.Ptr(), __block_completionHandler)
 }
 
+// Displays a banner to the player for a specified period of time.
 // Deprecated: Use UNNotificationRequest or provide custom UI instead. This method will become a no-op in a future version of GameKit.
 func GKNotificationBannerShowBannerWithTitleMessageDurationCompletionHandler(title *foundation.NSString, message *foundation.NSString, duration float64, completionHandler func()) {
 	var __block_completionHandler objc.Block

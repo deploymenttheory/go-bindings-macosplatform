@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of shading attributes that define the appearance of a geometry’s surface when rendered.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnmaterial
 type SCNMaterial struct {
 	foundation.NSObject
@@ -76,7 +78,7 @@ func SCNMaterialFromID(id objc.ID) *SCNMaterial {
 	return o
 }
 
-// @method material @abstract Creates and initialize a material instance.
+// Creates a new material object.
 func SCNMaterialMaterial() *SCNMaterial {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNMaterial), _sCNMaterialSelMaterial)
 	if _ret != 0 {

@@ -70,12 +70,15 @@ func (o *MTRChannelClusterGetProgramGuideParams) SetEndTime(endTime *foundation.
 }
 
 func (o *MTRChannelClusterGetProgramGuideParams) ChannelList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelChannelList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterGetProgramGuideParamsSelChannelList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRChannelClusterGetProgramGuideParamsSelSetChannelList, channelList)
+	o.Ptr().Send(_mTRChannelClusterGetProgramGuideParamsSelSetChannelList, channelList.Ptr())
 }
 
 func (o *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {

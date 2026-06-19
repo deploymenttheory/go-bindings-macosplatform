@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can retrieve localized information from the App Store about a specified list of products.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
 // Deprecated: Use Product.products(for:).
 type SKProductsRequest struct {
@@ -31,8 +33,9 @@ func SKProductsRequestFromID(id objc.ID) *SKProductsRequest {
 	return o
 }
 
+// Initializes the request with the set of product identifiers.
 func (o *SKProductsRequest) InitWithProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) *SKProductsRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductsRequestSelInitWithProductIdentifiers, productIdentifiers)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductsRequestSelInitWithProductIdentifiers, productIdentifiers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a Clinical Document Architecture (CDA) document in HealthKit.
+//
 // CDADocument wraps [raw.HKCDADocument] with a fluent Go API.
 type CDADocument struct {
 	inner *raw.HKCDADocument

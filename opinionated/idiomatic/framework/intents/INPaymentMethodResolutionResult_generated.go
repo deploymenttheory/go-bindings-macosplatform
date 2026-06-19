@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes the result of resolving a payment method.
+//
 // PaymentMethodResolutionResult wraps [raw.INPaymentMethodResolutionResult] with a fluent Go API.
 type PaymentMethodResolutionResult struct {
 	inner *raw.INPaymentMethodResolutionResult

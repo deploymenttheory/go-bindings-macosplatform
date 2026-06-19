@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Information about the distance traveled by a user on foot.
+//
 // PedometerData wraps [raw.CMPedometerData] with a fluent Go API.
 type PedometerData struct {
 	inner *raw.CMPedometerData

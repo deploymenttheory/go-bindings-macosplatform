@@ -39,7 +39,7 @@ func JRSAppKitAWTAwtAppDelegate() appkit.NSApplicationDelegate {
 }
 
 func JRSAppKitAWTRegisterAWTAppWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) {
-	objc.ID(_clsJRSAppKitAWT).Send(_jRSAppKitAWTSelRegisterAWTAppWithOptions, options)
+	objc.ID(_clsJRSAppKitAWT).Send(_jRSAppKitAWTSelRegisterAWTAppWithOptions, options.Ptr())
 }
 
 func JRSAppKitAWTMarkAppIsDaemon() bool {

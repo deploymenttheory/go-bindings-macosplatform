@@ -37,6 +37,8 @@ func NewUnsendMessagesIntentResponseWithCodeUserActivity(code INUnsendMessagesIn
 	return &UnsendMessagesIntentResponse{inner: raw.INUnsendMessagesIntentResponseFromID(_id)}
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *UnsendMessagesIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse {
 	x.inner.INIntentResponse.SetUserActivity(userActivity)

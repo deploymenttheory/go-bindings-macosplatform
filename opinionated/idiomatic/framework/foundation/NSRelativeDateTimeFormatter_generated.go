@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that creates locale-aware string representations of a relative date or time.
+//
 // RelativeDateTimeFormatter wraps [raw.NSRelativeDateTimeFormatter] with a fluent Go API.
 type RelativeDateTimeFormatter struct {
 	inner *raw.NSRelativeDateTimeFormatter

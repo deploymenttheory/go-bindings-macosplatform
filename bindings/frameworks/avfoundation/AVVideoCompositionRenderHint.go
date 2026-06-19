@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about upcoming composition requests, such as composition start time and end time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avvideocompositionrenderhint
 type AVVideoCompositionRenderHint struct {
 	foundation.NSObject

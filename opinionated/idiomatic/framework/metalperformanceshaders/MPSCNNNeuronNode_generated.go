@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The virtual base class for MPS CNN neuron nodes.
+//
 // CNNNeuronNode wraps [raw.MPSCNNNeuronNode] with a fluent Go API.
 type CNNNeuronNode struct {
 	inner *raw.MPSCNNNeuronNode

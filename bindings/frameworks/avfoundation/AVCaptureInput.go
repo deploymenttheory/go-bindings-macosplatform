@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for objects that provide input data to a capture session.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureinput
 type AVCaptureInput struct {
 	foundation.NSObject

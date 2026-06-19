@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the parameters to create a real-time or turn-based match.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkmatchrequest
 type GKMatchRequest struct {
 	foundation.NSObject
@@ -60,7 +62,7 @@ func GKMatchRequestFromID(id objc.ID) *GKMatchRequest {
 	return o
 }
 
-// To determine the maximum allowed players for each type of match supported.
+// Returns the maximum number of players allowed in the match request for a given match type.
 func GKMatchRequestMaxPlayersAllowedForMatchOfType(matchType GKMatchType) uint {
 	_ret := objc.Send[uint](objc.ID(_clsGKMatchRequest), _gKMatchRequestSelMaxPlayersAllowedForMatchOfType, matchType)
 	return _ret
@@ -197,13 +199,16 @@ func (o *GKMatchRequest) SetInviteeResponseHandler(inviteeResponseHandler func(*
 
 // Deprecated: since macOS 10.10.
 func (o *GKMatchRequest) PlayersToInvite() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _gKMatchRequestSelPlayersToInvite)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchRequestSelPlayersToInvite)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKMatchRequest) SetPlayersToInvite(playersToInvite *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_gKMatchRequestSelSetPlayersToInvite, playersToInvite)
+	o.Ptr().Send(_gKMatchRequestSelSetPlayersToInvite, playersToInvite.Ptr())
 }
 
 // The name of the queue, if rule-based matchmaking is used.
@@ -231,10 +236,13 @@ func (o *GKMatchRequest) SetProperties(properties unsafe.Pointer) {
 
 // The recipient specific match properties, if rule-based matchmaking is used when inviting players.
 func (o *GKMatchRequest) RecipientProperties() *foundation.NSDictionary[*GKPlayer, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*GKPlayer, objc.ID]](o.Ptr(), _gKMatchRequestSelRecipientProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchRequestSelRecipientProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*GKPlayer, objc.ID](_ret)
 }
 
 func (o *GKMatchRequest) SetRecipientProperties(recipientProperties *foundation.NSDictionary[*GKPlayer, objc.ID]) {
-	o.Ptr().Send(_gKMatchRequestSelSetRecipientProperties, recipientProperties)
+	o.Ptr().Send(_gKMatchRequestSelSetRecipientProperties, recipientProperties.Ptr())
 }

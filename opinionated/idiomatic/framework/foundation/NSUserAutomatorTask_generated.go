@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that executes Automator workflows.
+//
 // UserAutomatorTask wraps [raw.NSUserAutomatorTask] with a fluent Go API.
 type UserAutomatorTask struct {
 	inner *raw.NSUserAutomatorTask
@@ -36,6 +38,8 @@ func NewUserAutomatorTask() *UserAutomatorTask {
 	return &UserAutomatorTask{inner: raw.NSUserAutomatorTaskFromID(_id)}
 }
 
+// The variables required by the Automator workflow.
+//
 // WithVariables sets the variables property and returns the receiver for chaining.
 func (x *UserAutomatorTask) WithVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask {
 	x.inner.SetVariables(variables)
@@ -48,6 +52,8 @@ func (x *UserAutomatorTask) WithScriptingProperties(scriptingProperties *raw.NSD
 	return x
 }
 
+// Execute the Automator workflow by providing it as securely coded input.
+//
 // ExecuteWithInputCompletionHandler calls the underlying ExecuteWithInputCompletionHandler.
 func (x *UserAutomatorTask) ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer)) {
 	x.inner.ExecuteWithInputCompletionHandler(input, handler)

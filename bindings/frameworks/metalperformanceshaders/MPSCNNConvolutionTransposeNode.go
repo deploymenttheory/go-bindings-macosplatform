@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNConvolutionTranspose kernel
+// A representation of a transposed convolution.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontransposenode
 type MPSCNNConvolutionTransposeNode struct {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that contains a workout’s route data.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkworkoutroute
 type HKWorkoutRoute struct {
 	HKSeriesSample

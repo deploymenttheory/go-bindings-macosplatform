@@ -212,6 +212,7 @@ func (o *DOMHTMLDocument) SetVlinkColor(vlinkColor *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLDocumentSelSetVlinkColor, vlinkColor.Ptr())
 }
 
+// Creates a document fragment containing the given HTML markup.
 func (o *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupString *foundation.NSString, baseURL *foundation.NSURL) *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelCreateDocumentFragmentWithMarkupStringBaseURL, markupString.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -220,6 +221,7 @@ func (o *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupSt
 	return DOMDocumentFragmentFromID(_ret)
 }
 
+// Creates a document fragment containing the given text.
 func (o *DOMHTMLDocument) CreateDocumentFragmentWithText(text *foundation.NSString) *DOMDocumentFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDocumentSelCreateDocumentFragmentWithText, text.Ptr())
 	if _ret != 0 {

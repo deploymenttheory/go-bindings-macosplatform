@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier for a range of objects in a container.
+//
 // RangeSpecifier wraps [raw.NSRangeSpecifier] with a fluent Go API.
 type RangeSpecifier struct {
 	inner *raw.NSRangeSpecifier
@@ -37,6 +39,8 @@ func NewRangeSpecifierWithCoder(inCoder *raw.NSCoder) *RangeSpecifier {
 	return &RangeSpecifier{inner: raw.NSRangeSpecifierFromID(_id)}
 }
 
+// Returns a range specifier initialized with the given properties.
+//
 // NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier creates a new [RangeSpecifier].
 func NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, startSpec *raw.NSScriptObjectSpecifier, endSpec *raw.NSScriptObjectSpecifier) *RangeSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRangeSpecifier")), objc.RegisterName("alloc"))
@@ -44,54 +48,72 @@ func NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpe
 	return &RangeSpecifier{inner: raw.NSRangeSpecifierFromID(_id)}
 }
 
+// Returns the object specifier representing the first object of the range.
+//
 // WithStartSpecifier sets the startSpecifier property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithStartSpecifier(startSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	x.inner.SetStartSpecifier(startSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the object specifier representing the last object of the range to a given object.
+//
 // WithEndSpecifier sets the endSpecifier property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithEndSpecifier(endSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	x.inner.SetEndSpecifier(endSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithKey(key string) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *RangeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RangeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)

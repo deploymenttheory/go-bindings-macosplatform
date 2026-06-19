@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A wrapper for the Apple event descriptor data type.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsappleeventdescriptor
 type NSAppleEventDescriptor struct {
 	NSObject
@@ -86,6 +88,7 @@ func NSAppleEventDescriptorFromID(id objc.ID) *NSAppleEventDescriptor {
 	return o
 }
 
+// Creates and initializes a descriptor with no parameter or attribute values set.
 func NSAppleEventDescriptorNullDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelNullDescriptor)
 	if _ret != 0 {
@@ -94,6 +97,7 @@ func NSAppleEventDescriptorNullDescriptor() *NSAppleEventDescriptor {
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with the specified event type that stores the specified data (from a series of bytes).
 func NSAppleEventDescriptorDescriptorWithDescriptorTypeBytesLength(descriptorType uint, bytes_ unsafe.Pointer, byteCount uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDescriptorTypeBytesLength, descriptorType, bytes_, byteCount)
 	if _ret != 0 {
@@ -102,6 +106,7 @@ func NSAppleEventDescriptorDescriptorWithDescriptorTypeBytesLength(descriptorTyp
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with the specified event type that stores the specified data (from an instance of NSData).
 func NSAppleEventDescriptorDescriptorWithDescriptorTypeData(descriptorType uint, data *NSData) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDescriptorTypeData, descriptorType, data.Ptr())
 	if _ret != 0 {
@@ -110,6 +115,7 @@ func NSAppleEventDescriptorDescriptorWithDescriptorTypeData(descriptorType uint,
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with type typeBoolean that stores the specified Boolean value.
 func NSAppleEventDescriptorDescriptorWithBoolean(boolean uint8) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithBoolean, boolean)
 	if _ret != 0 {
@@ -118,6 +124,7 @@ func NSAppleEventDescriptorDescriptorWithBoolean(boolean uint8) *NSAppleEventDes
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with type typeEnumerated that stores the specified enumerator data type value.
 func NSAppleEventDescriptorDescriptorWithEnumCode(enumerator uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithEnumCode, enumerator)
 	if _ret != 0 {
@@ -126,6 +133,7 @@ func NSAppleEventDescriptorDescriptorWithEnumCode(enumerator uint) *NSAppleEvent
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with Apple event type typeSInt32 that stores the specified integer value.
 func NSAppleEventDescriptorDescriptorWithInt32(signedInt int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithInt32, signedInt)
 	if _ret != 0 {
@@ -134,6 +142,7 @@ func NSAppleEventDescriptorDescriptorWithInt32(signedInt int) *NSAppleEventDescr
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with Apple event type typeIEEE64BitFloatingPoint that stores the specified double value.
 func NSAppleEventDescriptorDescriptorWithDouble(doubleValue float64) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDouble, doubleValue)
 	if _ret != 0 {
@@ -142,6 +151,7 @@ func NSAppleEventDescriptorDescriptorWithDouble(doubleValue float64) *NSAppleEve
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with type typeType that stores the specified type value.
 func NSAppleEventDescriptorDescriptorWithTypeCode(typeCode uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithTypeCode, typeCode)
 	if _ret != 0 {
@@ -150,6 +160,7 @@ func NSAppleEventDescriptorDescriptorWithTypeCode(typeCode uint) *NSAppleEventDe
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor initialized with type typeUnicodeText that stores the text from the specified string.
 func NSAppleEventDescriptorDescriptorWithString(string_ *NSString) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithString, string_.Ptr())
 	if _ret != 0 {
@@ -158,6 +169,7 @@ func NSAppleEventDescriptorDescriptorWithString(string_ *NSString) *NSAppleEvent
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor that stores the specified date value.
 func NSAppleEventDescriptorDescriptorWithDate(date *NSDate) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithDate, date.Ptr())
 	if _ret != 0 {
@@ -166,6 +178,7 @@ func NSAppleEventDescriptorDescriptorWithDate(date *NSDate) *NSAppleEventDescrip
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor that stores the specified file URL.
 func NSAppleEventDescriptorDescriptorWithFileURL(fileURL *NSURL) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithFileURL, fileURL.Ptr())
 	if _ret != 0 {
@@ -174,6 +187,7 @@ func NSAppleEventDescriptorDescriptorWithFileURL(fileURL *NSURL) *NSAppleEventDe
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates a descriptor that represents an Apple event, initialized according to the specified information.
 func NSAppleEventDescriptorAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass uint, eventID uint, targetDescriptor *NSAppleEventDescriptor, returnID int16, transactionID int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID, eventClass, eventID, targetDescriptor.Ptr(), returnID, transactionID)
 	if _ret != 0 {
@@ -182,6 +196,7 @@ func NSAppleEventDescriptorAppleEventWithEventClassEventIDTargetDescriptorReturn
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates and initializes an empty list descriptor.
 func NSAppleEventDescriptorListDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelListDescriptor)
 	if _ret != 0 {
@@ -190,6 +205,7 @@ func NSAppleEventDescriptorListDescriptor() *NSAppleEventDescriptor {
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates and initializes a descriptor for an Apple event record whose data has yet to be set.
 func NSAppleEventDescriptorRecordDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelRecordDescriptor)
 	if _ret != 0 {
@@ -198,6 +214,7 @@ func NSAppleEventDescriptorRecordDescriptor() *NSAppleEventDescriptor {
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates and returns an application address descriptor using the current process.
 func NSAppleEventDescriptorCurrentProcessDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelCurrentProcessDescriptor)
 	if _ret != 0 {
@@ -206,6 +223,7 @@ func NSAppleEventDescriptorCurrentProcessDescriptor() *NSAppleEventDescriptor {
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates and returns an application address descriptor using the specified process identifier.
 func NSAppleEventDescriptorDescriptorWithProcessIdentifier(processIdentifier int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithProcessIdentifier, processIdentifier)
 	if _ret != 0 {
@@ -214,6 +232,7 @@ func NSAppleEventDescriptorDescriptorWithProcessIdentifier(processIdentifier int
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates and returns an application address descriptor using the specified bundle identifier.
 func NSAppleEventDescriptorDescriptorWithBundleIdentifier(bundleIdentifier *NSString) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithBundleIdentifier, bundleIdentifier.Ptr())
 	if _ret != 0 {
@@ -222,6 +241,7 @@ func NSAppleEventDescriptorDescriptorWithBundleIdentifier(bundleIdentifier *NSSt
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Creates and returns an application address descriptor using the specified application URL.
 func NSAppleEventDescriptorDescriptorWithApplicationURL(applicationURL *NSURL) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppleEventDescriptor), _nSAppleEventDescriptorSelDescriptorWithApplicationURL, applicationURL.Ptr())
 	if _ret != 0 {
@@ -230,6 +250,7 @@ func NSAppleEventDescriptorDescriptorWithApplicationURL(applicationURL *NSURL) *
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Initializes a newly allocated instance as a descriptor for the specified Carbon AEDesc structure.
 func (o *NSAppleEventDescriptor) InitWithAEDescNoCopy(aeDesc *ae.AEDesc) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithAEDescNoCopy, aeDesc)
 	if _ret != 0 {
@@ -238,6 +259,7 @@ func (o *NSAppleEventDescriptor) InitWithAEDescNoCopy(aeDesc *ae.AEDesc) *NSAppl
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Initializes a newly allocated instance as a descriptor with the specified descriptor type and data (from an arbitrary sequence of bytes and a length count).
 func (o *NSAppleEventDescriptor) InitWithDescriptorTypeBytesLength(descriptorType uint, bytes_ unsafe.Pointer, byteCount uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithDescriptorTypeBytesLength, descriptorType, bytes_, byteCount)
 	if _ret != 0 {
@@ -246,6 +268,7 @@ func (o *NSAppleEventDescriptor) InitWithDescriptorTypeBytesLength(descriptorTyp
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Initializes a newly allocated instance as a descriptor with the specified descriptor type and data (from an instance of NSData).
 func (o *NSAppleEventDescriptor) InitWithDescriptorTypeData(descriptorType uint, data *NSData) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithDescriptorTypeData, descriptorType, data.Ptr())
 	if _ret != 0 {
@@ -254,6 +277,7 @@ func (o *NSAppleEventDescriptor) InitWithDescriptorTypeData(descriptorType uint,
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Initializes a newly allocated instance as a descriptor for an Apple event, initialized with the specified values.
 func (o *NSAppleEventDescriptor) InitWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass uint, eventID uint, targetDescriptor *NSAppleEventDescriptor, returnID int16, transactionID int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitWithEventClassEventIDTargetDescriptorReturnIDTransactionID, eventClass, eventID, targetDescriptor.Ptr(), returnID, transactionID)
 	if _ret != 0 {
@@ -262,6 +286,7 @@ func (o *NSAppleEventDescriptor) InitWithEventClassEventIDTargetDescriptorReturn
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Initializes a newly allocated instance as an empty list descriptor.
 func (o *NSAppleEventDescriptor) InitListDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitListDescriptor)
 	if _ret != 0 {
@@ -270,6 +295,7 @@ func (o *NSAppleEventDescriptor) InitListDescriptor() *NSAppleEventDescriptor {
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Initializes a newly allocated instance as a descriptor that is an Apple event record.
 func (o *NSAppleEventDescriptor) InitRecordDescriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelInitRecordDescriptor)
 	if _ret != 0 {
@@ -278,10 +304,12 @@ func (o *NSAppleEventDescriptor) InitRecordDescriptor() *NSAppleEventDescriptor 
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Adds a descriptor to the receiver as an Apple event parameter identified by the specified keyword.
 func (o *NSAppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *NSAppleEventDescriptor, keyword uint) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelSetParamDescriptorForKeyword, descriptor.Ptr(), keyword)
 }
 
+// Returns a descriptor for the receiver’s Apple event parameter identified by the specified keyword.
 func (o *NSAppleEventDescriptor) ParamDescriptorForKeyword(keyword uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelParamDescriptorForKeyword, keyword)
 	if _ret != 0 {
@@ -290,14 +318,17 @@ func (o *NSAppleEventDescriptor) ParamDescriptorForKeyword(keyword uint) *NSAppl
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Removes the receiver’s parameter descriptor identified by the specified keyword.
 func (o *NSAppleEventDescriptor) RemoveParamDescriptorWithKeyword(keyword uint) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelRemoveParamDescriptorWithKeyword, keyword)
 }
 
+// Adds a descriptor to the receiver as an attribute identified by the specified keyword.
 func (o *NSAppleEventDescriptor) SetAttributeDescriptorForKeyword(descriptor *NSAppleEventDescriptor, keyword uint) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelSetAttributeDescriptorForKeyword, descriptor.Ptr(), keyword)
 }
 
+// Returns a descriptor for the receiver’s Apple event attribute identified by the specified keyword.
 func (o *NSAppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelAttributeDescriptorForKeyword, keyword)
 	if _ret != 0 {
@@ -306,6 +337,7 @@ func (o *NSAppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *NS
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Sends an Apple event.
 func (o *NSAppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NSAppleEventSendOptions, timeoutInSeconds float64) (*NSAppleEventDescriptor, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelSendEventWithOptionsTimeoutError, sendOptions, timeoutInSeconds, unsafe.Pointer(&_nsErr))
@@ -318,10 +350,12 @@ func (o *NSAppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NS
 	return NSAppleEventDescriptorFromID(_ret), nil
 }
 
+// Inserts a descriptor at the specified (one-based) position in the receiving descriptor list, replacing the existing descriptor, if any, at that position.
 func (o *NSAppleEventDescriptor) InsertDescriptorAtIndex(descriptor *NSAppleEventDescriptor, index int) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelInsertDescriptorAtIndex, descriptor.Ptr(), index)
 }
 
+// Returns the descriptor at the specified (one-based) position in the receiving descriptor list.
 func (o *NSAppleEventDescriptor) DescriptorAtIndex(index int) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelDescriptorAtIndex, index)
 	if _ret != 0 {
@@ -330,14 +364,17 @@ func (o *NSAppleEventDescriptor) DescriptorAtIndex(index int) *NSAppleEventDescr
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Removes the descriptor at the specified (one-based) position in the receiving descriptor list.
 func (o *NSAppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelRemoveDescriptorAtIndex, index)
 }
 
+// Adds a descriptor, identified by a keyword, to the receiver.
 func (o *NSAppleEventDescriptor) SetDescriptorForKeyword(descriptor *NSAppleEventDescriptor, keyword uint) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelSetDescriptorForKeyword, descriptor.Ptr(), keyword)
 }
 
+// Returns the receiver’s descriptor for the specified keyword.
 func (o *NSAppleEventDescriptor) DescriptorForKeyword(keyword uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelDescriptorForKeyword, keyword)
 	if _ret != 0 {
@@ -346,15 +383,18 @@ func (o *NSAppleEventDescriptor) DescriptorForKeyword(keyword uint) *NSAppleEven
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Removes the receiver’s descriptor identified by the specified keyword.
 func (o *NSAppleEventDescriptor) RemoveDescriptorWithKeyword(keyword uint) {
 	o.Ptr().Send(_nSAppleEventDescriptorSelRemoveDescriptorWithKeyword, keyword)
 }
 
+// Returns the keyword for the descriptor at the specified (one-based) position in the receiver.
 func (o *NSAppleEventDescriptor) KeywordForDescriptorAtIndex(index int) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSAppleEventDescriptorSelKeywordForDescriptorAtIndex, index)
 	return _ret
 }
 
+// Returns a descriptor obtained by coercing the receiver to the specified type.
 func (o *NSAppleEventDescriptor) CoerceToDescriptorType(descriptorType uint) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleEventDescriptorSelCoerceToDescriptorType, descriptorType)
 	if _ret != 0 {

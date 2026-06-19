@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for operations that act upon databases in CloudKit.
+//
 // DatabaseOperation wraps [raw.CKDatabaseOperation] with a fluent Go API.
 type DatabaseOperation struct {
 	inner *raw.CKDatabaseOperation
@@ -35,7 +37,7 @@ func NewDatabaseOperation() *DatabaseOperation {
 	return &DatabaseOperation{inner: raw.CKDatabaseOperationFromID(_id)}
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
@@ -43,7 +45,7 @@ func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation 
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
@@ -51,7 +53,7 @@ func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfigurat
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
@@ -59,7 +61,7 @@ func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation 
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
@@ -83,7 +85,7 @@ func (x *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) 
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {

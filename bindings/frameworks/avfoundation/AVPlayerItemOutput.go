@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the common interface to output media data from a player item.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemoutput
 type AVPlayerItemOutput struct {
 	foundation.NSObject
@@ -36,16 +38,19 @@ func AVPlayerItemOutputFromID(id objc.ID) *AVPlayerItemOutput {
 	return o
 }
 
+// Converts a host time, specified in seconds, to the item’s timebase.
 func (o *AVPlayerItemOutput) ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlayerItemOutputSelItemTimeForHostTime, hostTimeInSeconds)
 	return _ret
 }
 
+// Converts a Mach host time to the item’s timebase.
 func (o *AVPlayerItemOutput) ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlayerItemOutputSelItemTimeForMachAbsoluteTime, machAbsoluteTime)
 	return _ret
 }
 
+// Converts a Core Video timestamp to the item’s timebase.
 func (o *AVPlayerItemOutput) ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlayerItemOutputSelItemTimeForCVTimeStamp, timestamp)
 	return _ret

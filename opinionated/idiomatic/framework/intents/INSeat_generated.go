@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object containing seat information associated with a reservation.
+//
 // Seat wraps [raw.INSeat] with a fluent Go API.
 type Seat struct {
 	inner *raw.INSeat
@@ -31,6 +33,8 @@ func SeatFromID(id objc.ID) *Seat {
 	return &Seat{inner: raw.INSeatFromID(id)}
 }
 
+// Creates a new seat object containing the required seat information.
+//
 // NewSeatWithSeatSectionSeatRowSeatNumberSeatingType creates a new [Seat].
 func NewSeatWithSeatSectionSeatRowSeatNumberSeatingType(seatSection string, seatRow string, seatNumber string, seatingType string) *Seat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSeat")), objc.RegisterName("alloc"))

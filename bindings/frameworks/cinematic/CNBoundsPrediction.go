@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure representing the bounds of the predicted subject.
+//
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnboundsprediction
 type CNBoundsPrediction struct {
 	foundation.NSObject

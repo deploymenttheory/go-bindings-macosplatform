@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A physics behavior that connects two bodies and allows them to pivot around each other on a single axis.
+//
 // PhysicsHingeJoint wraps [raw.SCNPhysicsHingeJoint] with a fluent Go API.
 type PhysicsHingeJoint struct {
 	inner *raw.SCNPhysicsHingeJoint
@@ -35,24 +37,32 @@ func NewPhysicsHingeJoint() *PhysicsHingeJoint {
 	return &PhysicsHingeJoint{inner: raw.SCNPhysicsHingeJointFromID(_id)}
 }
 
+// The axis that the hinge pivots around, relative to the node containing the first body.
+//
 // WithAxisA sets the axisA property and returns the receiver for chaining.
 func (x *PhysicsHingeJoint) WithAxisA(axisA raw.SCNVector3) *PhysicsHingeJoint {
 	x.inner.SetAxisA(axisA)
 	return x
 }
 
+// The point at which the hinge connects, relative to the node containing the first body.
+//
 // WithAnchorA sets the anchorA property and returns the receiver for chaining.
 func (x *PhysicsHingeJoint) WithAnchorA(anchorA raw.SCNVector3) *PhysicsHingeJoint {
 	x.inner.SetAnchorA(anchorA)
 	return x
 }
 
+// The axis that the hinge pivots around, relative to the node containing the second body.
+//
 // WithAxisB sets the axisB property and returns the receiver for chaining.
 func (x *PhysicsHingeJoint) WithAxisB(axisB raw.SCNVector3) *PhysicsHingeJoint {
 	x.inner.SetAxisB(axisB)
 	return x
 }
 
+// The point at which the hinge connects, relative to the node containing the second body.
+//
 // WithAnchorB sets the anchorB property and returns the receiver for chaining.
 func (x *PhysicsHingeJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsHingeJoint {
 	x.inner.SetAnchorB(anchorB)

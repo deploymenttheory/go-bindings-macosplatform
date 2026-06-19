@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of render targets that hold the results of a render pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpassdescriptor
 type MTLRenderPassDescriptor struct {
 	foundation.NSObject
@@ -62,7 +64,7 @@ func MTLRenderPassDescriptorFromID(id objc.ID) *MTLRenderPassDescriptor {
 	return o
 }
 
-// @method renderPassDescriptor @abstract Create an autoreleased default frame buffer descriptor
+// Creates a default render pass descriptor.
 func MTLRenderPassDescriptorRenderPassDescriptor() *MTLRenderPassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRenderPassDescriptor), _mTLRenderPassDescriptorSelRenderPassDescriptor)
 	if _ret != 0 {
@@ -71,12 +73,12 @@ func MTLRenderPassDescriptorRenderPassDescriptor() *MTLRenderPassDescriptor {
 	return MTLRenderPassDescriptorFromID(_ret)
 }
 
-// @method setSamplePositions:count: @abstract Configure the custom sample positions, to be used in MSAA rendering (i.e. when sample count > 1). @param positions The source array for custom sample position data. @param count Specifies the length of the positions array, and must be a valid sample count or 0 (to disable custom sample positions).
+// Sets the programmable sample positions for a render pass.
 func (o *MTLRenderPassDescriptor) SetSamplePositionsCount(positions *MTLSamplePosition, count uint) {
 	o.Ptr().Send(_mTLRenderPassDescriptorSelSetSamplePositionsCount, positions, count)
 }
 
-// @method getSamplePositions:count: @abstract Retrieve the previously configured custom sample positions. The positions input array will only be modified when count specifies a length sufficient for the number of previously configured positions. @param positions The destination array for custom sample position data. @param count Specifies the length of the positions array, which must be large enough to hold all configured sample positions. @return The number of previously configured custom sample positions.
+// Retrieves the programmable sample positions set for a render pass.
 func (o *MTLRenderPassDescriptor) GetSamplePositionsCount(positions *MTLSamplePosition, count uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTLRenderPassDescriptorSelGetSamplePositionsCount, positions, count)
 	return _ret

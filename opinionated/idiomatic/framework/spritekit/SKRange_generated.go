@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A definition of a range of floating-point values.
+//
 // Range wraps [raw.SKRange] with a fluent Go API.
 type Range struct {
 	inner *raw.SKRange
@@ -29,6 +31,8 @@ func RangeFromID(id objc.ID) *Range {
 	return &Range{inner: raw.SKRangeFromID(id)}
 }
 
+// Initializes a new range object.
+//
 // NewRangeWithLowerLimitUpperLimit creates a new [Range].
 func NewRangeWithLowerLimitUpperLimit(lower float64, upper float64) *Range {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRange")), objc.RegisterName("alloc"))
@@ -36,12 +40,16 @@ func NewRangeWithLowerLimitUpperLimit(lower float64, upper float64) *Range {
 	return &Range{inner: raw.SKRangeFromID(_id)}
 }
 
+// The minimum possible value.
+//
 // WithLowerLimit sets the lowerLimit property and returns the receiver for chaining.
 func (x *Range) WithLowerLimit(lowerLimit float64) *Range {
 	x.inner.SetLowerLimit(lowerLimit)
 	return x
 }
 
+// The maximum possible value.
+//
 // WithUpperLimit sets the upperLimit property and returns the receiver for chaining.
 func (x *Range) WithUpperLimit(upperLimit float64) *Range {
 	x.inner.SetUpperLimit(upperLimit)

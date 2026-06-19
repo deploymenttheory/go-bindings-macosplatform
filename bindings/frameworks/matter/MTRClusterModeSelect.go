@@ -58,78 +58,111 @@ func (o *MTRClusterModeSelect) ChangeToModeWithParamsExpectedValuesExpectedValue
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeDescriptionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeDescriptionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeDescriptionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeStandardNamespaceWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeStandardNamespaceWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeStandardNamespaceWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeSupportedModesWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeSupportedModesWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeSupportedModesWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeCurrentModeWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeCurrentModeWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeCurrentModeWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeStartUpModeWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeStartUpModeWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeStartUpModeWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeStartUpModeWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeOnModeWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeOnModeWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeOnModeWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterModeSelectSelWriteAttributeOnModeWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterModeSelect) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterModeSelectSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterModeSelectSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
@@ -157,5 +190,5 @@ func (o *MTRClusterModeSelect) ChangeToModeWithParamsExpectedValuesExpectedValue
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterModeSelectSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

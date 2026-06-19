@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A JavaScript value with conditional retain behavior to provide automatic memory management.
+//
 // Apple documentation: https://developer.apple.com/documentation/javascriptcore/jsmanagedvalue
 type JSManagedValue struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func JSManagedValueFromID(id objc.ID) *JSManagedValue {
 	return o
 }
 
-// @method @abstract Create a JSManagedValue from a JSValue. @result The new JSManagedValue.
+// Creates a managed value with the specified JavaScript value.
 func JSManagedValueManagedValueWithValue(value *JSValue) *JSManagedValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSManagedValue), _jSManagedValueSelManagedValueWithValue, value.Ptr())
 	if _ret != 0 {
@@ -42,6 +44,7 @@ func JSManagedValueManagedValueWithValue(value *JSValue) *JSManagedValue {
 	return JSManagedValueFromID(_ret)
 }
 
+// Creates a managed value and associates it with an owner.
 func JSManagedValueManagedValueWithValueAndOwner(value *JSValue, owner objc.ID) *JSManagedValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSManagedValue), _jSManagedValueSelManagedValueWithValueAndOwner, value.Ptr(), owner)
 	if _ret != 0 {
@@ -50,7 +53,7 @@ func JSManagedValueManagedValueWithValueAndOwner(value *JSValue, owner objc.ID) 
 	return JSManagedValueFromID(_ret)
 }
 
-// @method @abstract Create a JSManagedValue. @result The new JSManagedValue.
+// Initializes a managed value with the specified JavaScript value.
 func (o *JSManagedValue) InitWithValue(value *JSValue) *JSManagedValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSManagedValueSelInitWithValue, value.Ptr())
 	if _ret != 0 {

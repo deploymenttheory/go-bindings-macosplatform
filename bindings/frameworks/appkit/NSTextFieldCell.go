@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enhances the text display capabilities of a cell.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextfieldcell
 type NSTextFieldCell struct {
 	NSActionCell
@@ -46,6 +48,7 @@ func NSTextFieldCellFromID(id objc.ID) *NSTextFieldCell {
 	return o
 }
 
+// Initializes a text field cell that displays the specified string.
 func (o *NSTextFieldCell) InitTextCell(string_ *foundation.NSString) *NSTextFieldCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitTextCell, string_.Ptr())
 	if _ret != 0 {
@@ -54,6 +57,7 @@ func (o *NSTextFieldCell) InitTextCell(string_ *foundation.NSString) *NSTextFiel
 	return NSTextFieldCellFromID(_ret)
 }
 
+// Initializes a text field cell from data in the provided unarchiver.
 func (o *NSTextFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSTextFieldCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -62,6 +66,7 @@ func (o *NSTextFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSTextFieldC
 	return NSTextFieldCellFromID(_ret)
 }
 
+// Directs the cell’s associated field editor to post text change notifications.
 func (o *NSTextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
 	o.Ptr().Send(_nSTextFieldCellSelSetWantsNotificationForMarkedText, flag)
 }
@@ -133,10 +138,13 @@ func (o *NSTextFieldCell) SetPlaceholderAttributedString(placeholderAttributedSt
 }
 
 func (o *NSTextFieldCell) AllowedInputSourceLocales() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextFieldCellSelAllowedInputSourceLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelAllowedInputSourceLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextFieldCellSelSetAllowedInputSourceLocales, allowedInputSourceLocales)
+	o.Ptr().Send(_nSTextFieldCellSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
 }

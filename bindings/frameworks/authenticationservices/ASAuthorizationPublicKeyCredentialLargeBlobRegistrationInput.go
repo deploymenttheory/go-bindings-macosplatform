@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that encapsulates input for large binary object extensions during registration.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobregistrationinput
 type ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
 	foundation.NSObject

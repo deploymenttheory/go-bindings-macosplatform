@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the separate parts of a person’s name to allow locale-aware formatting.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspersonnamecomponents
 type NSPersonNameComponents struct {
 	NSObject

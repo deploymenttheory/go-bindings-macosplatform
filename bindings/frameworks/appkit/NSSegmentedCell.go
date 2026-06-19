@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An NSSegmentedCell object implements the appearance and behavior of a horizontal button divided into multiple segments. This class is used in conjunction with the NSSegmentedControl class to implement a segmented control.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssegmentedcell
 type NSSegmentedCell struct {
 	NSActionCell
@@ -61,32 +63,39 @@ func NSSegmentedCellFromID(id objc.ID) *NSSegmentedCell {
 	return o
 }
 
+// Selects the segment with the specified tag.
 func (o *NSSegmentedCell) SelectSegmentWithTag(tag int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelSelectSegmentWithTag, tag)
 	return _ret
 }
 
+// Selects the next segment.
 func (o *NSSegmentedCell) MakeNextSegmentKey() {
 	o.Ptr().Send(_nSSegmentedCellSelMakeNextSegmentKey)
 }
 
+// Selects the previous segment.
 func (o *NSSegmentedCell) MakePreviousSegmentKey() {
 	o.Ptr().Send(_nSSegmentedCellSelMakePreviousSegmentKey)
 }
 
+// Sets the width of the specified segment.
 func (o *NSSegmentedCell) SetWidthForSegment(width float64, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetWidthForSegment, width, segment)
 }
 
+// Returns the width of the specified segment.
 func (o *NSSegmentedCell) WidthForSegment(segment int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSegmentedCellSelWidthForSegment, segment)
 	return _ret
 }
 
+// Sets the image for the specified segment.
 func (o *NSSegmentedCell) SetImageForSegment(image *NSImage, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetImageForSegment, image.Ptr(), segment)
 }
 
+// Returns the image associated with the specified segment.
 func (o *NSSegmentedCell) ImageForSegment(segment int) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelImageForSegment, segment)
 	if _ret != 0 {
@@ -95,19 +104,23 @@ func (o *NSSegmentedCell) ImageForSegment(segment int) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Sets the image scaling mode for the specified segment.
 func (o *NSSegmentedCell) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetImageScalingForSegment, scaling, segment)
 }
 
+// Returns the image scaling mode associated with the specified segment.
 func (o *NSSegmentedCell) ImageScalingForSegment(segment int) NSImageScaling {
 	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSSegmentedCellSelImageScalingForSegment, segment)
 	return _ret
 }
 
+// Sets the label for the specified segment.
 func (o *NSSegmentedCell) SetLabelForSegment(label *foundation.NSString, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetLabelForSegment, label.Ptr(), segment)
 }
 
+// Returns the label of the specified segment.
 func (o *NSSegmentedCell) LabelForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelLabelForSegment, segment)
 	if _ret != 0 {
@@ -116,28 +129,34 @@ func (o *NSSegmentedCell) LabelForSegment(segment int) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the selection state of the specified segment.
 func (o *NSSegmentedCell) SetSelectedForSegment(selected bool, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetSelectedForSegment, selected, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is selected,
 func (o *NSSegmentedCell) IsSelectedForSegment(segment int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelIsSelectedForSegment, segment)
 	return _ret
 }
 
+// Sets the enabled state of the specified segment
 func (o *NSSegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetEnabledForSegment, enabled, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is enabled.
 func (o *NSSegmentedCell) IsEnabledForSegment(segment int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelIsEnabledForSegment, segment)
 	return _ret
 }
 
+// Sets the menu for the specified segment.
 func (o *NSSegmentedCell) SetMenuForSegment(menu *NSMenu, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetMenuForSegment, menu.Ptr(), segment)
 }
 
+// Returns the menu for the specified segment.
 func (o *NSSegmentedCell) MenuForSegment(segment int) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelMenuForSegment, segment)
 	if _ret != 0 {
@@ -146,10 +165,12 @@ func (o *NSSegmentedCell) MenuForSegment(segment int) *NSMenu {
 	return NSMenuFromID(_ret)
 }
 
+// Sets the tooltip for the specified segment.
 func (o *NSSegmentedCell) SetToolTipForSegment(toolTip *foundation.NSString, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetToolTipForSegment, toolTip.Ptr(), segment)
 }
 
+// Returns the tooltip of the specified segment.
 func (o *NSSegmentedCell) ToolTipForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelToolTipForSegment, segment)
 	if _ret != 0 {
@@ -158,15 +179,18 @@ func (o *NSSegmentedCell) ToolTipForSegment(segment int) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the tag for the specified segment.
 func (o *NSSegmentedCell) SetTagForSegment(tag int, segment int) {
 	o.Ptr().Send(_nSSegmentedCellSelSetTagForSegment, tag, segment)
 }
 
+// Returns the tag of the specified segment.
 func (o *NSSegmentedCell) TagForSegment(segment int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelTagForSegment, segment)
 	return _ret
 }
 
+// Draws the image and label of the segment in the specified view.
 func (o *NSSegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSSegmentedCellSelDrawSegmentInFrameWithView, segment, frame, controlView.Ptr())
 }
@@ -207,6 +231,7 @@ func (o *NSSegmentedCell) SetSegmentStyle(segmentStyle NSSegmentStyle) {
 	o.Ptr().Send(_nSSegmentedCellSelSetSegmentStyle, segmentStyle)
 }
 
+// Returns the interior background style for the specified segment.
 func (o *NSSegmentedCell) InteriorBackgroundStyleForSegment(segment int) NSBackgroundStyle {
 	_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSSegmentedCellSelInteriorBackgroundStyleForSegment, segment)
 	return _ret

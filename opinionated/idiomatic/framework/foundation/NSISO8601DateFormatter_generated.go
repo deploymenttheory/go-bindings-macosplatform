@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that converts between dates and their ISO 8601 string representations.
+//
 // ISO8601DateFormatter wraps [raw.NSISO8601DateFormatter] with a fluent Go API.
 type ISO8601DateFormatter struct {
 	inner *raw.NSISO8601DateFormatter

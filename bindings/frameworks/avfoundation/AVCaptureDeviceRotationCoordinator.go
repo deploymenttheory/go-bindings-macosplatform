@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that monitors the physical orientation of a capture device and provides adjustment angles to keep images level, relative to gravity.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevicerotationcoordinator
 type AVCaptureDeviceRotationCoordinator struct {
 	foundation.NSObject

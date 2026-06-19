@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the HTTP cookies associated with a particular web view.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkhttpcookiestore
 type WKHTTPCookieStore struct {
 	foundation.NSObject
@@ -37,12 +39,22 @@ func WKHTTPCookieStoreFromID(id objc.ID) *WKHTTPCookieStore {
 	return o
 }
 
-// @abstract Fetches all stored cookies. @param completionHandler A block to invoke with the fetched cookies.
-func (o *WKHTTPCookieStore) GetAllCookies(completionHandler objc.Block) {
-	o.Ptr().Send(_wKHTTPCookieStoreSelGetAllCookies, completionHandler)
+// Fetches all stored cookies asynchronously and delivers them to the specified completion handler.
+func (o *WKHTTPCookieStore) GetAllCookies(completionHandler func(*foundation.NSArray[*foundation.NSHTTPCookie])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSHTTPCookie](blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_wKHTTPCookieStoreSelGetAllCookies, __block_completionHandler)
 }
 
-// @abstract Set a cookie. @param cookie The cookie to set. @param completionHandler A block to invoke once the cookie has been stored.
+// Adds a cookie to the cookie store.
 func (o *WKHTTPCookieStore) SetCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -63,10 +75,10 @@ func (o *WKHTTPCookieStore) SetCookiesCompletionHandler(cookies *foundation.NSAr
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiesCompletionHandler, cookies, __block_completionHandler)
+	o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiesCompletionHandler, cookies.Ptr(), __block_completionHandler)
 }
 
-// @abstract Delete the specified cookie. @param completionHandler A block to invoke once the cookie has been deleted.
+// Deletes the specified cookie.
 func (o *WKHTTPCookieStore) DeleteCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -78,17 +90,17 @@ func (o *WKHTTPCookieStore) DeleteCookieCompletionHandler(cookie *foundation.NSH
 	o.Ptr().Send(_wKHTTPCookieStoreSelDeleteCookieCompletionHandler, cookie.Ptr(), __block_completionHandler)
 }
 
-// @abstract Adds a WKHTTPCookieStoreObserver object with the cookie store. @param observer The observer object to add. @discussion The observer is not retained by the receiver. It is your responsibility to unregister the observer before it becomes invalid.
+// Adds an observer to the cookie store.
 func (o *WKHTTPCookieStore) AddObserver(observer WKHTTPCookieStoreObserver) {
 	o.Ptr().Send(_wKHTTPCookieStoreSelAddObserver, observer)
 }
 
-// @abstract Removes a WKHTTPCookieStoreObserver object from the cookie store. @param observer The observer to remove.
+// Removes an observer from the cookie store.
 func (o *WKHTTPCookieStore) RemoveObserver(observer WKHTTPCookieStoreObserver) {
 	o.Ptr().Send(_wKHTTPCookieStoreSelRemoveObserver, observer)
 }
 
-// @abstract Set whether cookies are allowed. @param policy A value indicating whether cookies are allowed. The default value is WKCookiePolicyAllow. @param completionHandler A block to invoke once the cookie policy has been set.
+// Sets a cookie policy that indicates whether the cookie store allows cookie storage.
 func (o *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePolicy, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -100,7 +112,7 @@ func (o *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePoli
 	o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiePolicyCompletionHandler, policy, __block_completionHandler)
 }
 
-// @abstract Get whether cookies are allowed. @param completionHandler A block to invoke with the value of whether cookies are allowed.
+// Returns a cookie policy that indicates whether the cookie store allows cookie storage.
 func (o *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolicy)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

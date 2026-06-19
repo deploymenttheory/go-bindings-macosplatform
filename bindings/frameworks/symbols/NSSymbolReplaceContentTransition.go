@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that replaces the layers of one symbol-based image with those of another.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition
 type NSSymbolReplaceContentTransition struct {
 	NSSymbolContentTransition
@@ -35,7 +37,7 @@ func NSSymbolReplaceContentTransitionFromID(id objc.ID) *NSSymbolReplaceContentT
 	return o
 }
 
-// The default replace transition, determined by the system.
+// An effect that replaces the layers of one symbol-based image with those of another.
 func NSSymbolReplaceContentTransitionTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelTransition)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func NSSymbolReplaceContentTransitionTransition() *NSSymbolReplaceContentTransit
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
-// Convenience initializer for a replace content transition where the initial symbol scales down as it is removed, and the new symbol scales up as it is added.
+// An effect that replaces a symbol by scaling it down, and scaling a different symbol up.
 func NSSymbolReplaceContentTransitionReplaceDownUpTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelReplaceDownUpTransition)
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func NSSymbolReplaceContentTransitionReplaceDownUpTransition() *NSSymbolReplaceC
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
-// Convenience initializer for a replace content transition where the initial symbol scales up as it is removed, and the new symbol scales up as it is added.
+// An effect that replaces a symbol by scaling it up, and scaling a different symbol up.
 func NSSymbolReplaceContentTransitionReplaceUpUpTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelReplaceUpUpTransition)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func NSSymbolReplaceContentTransitionReplaceUpUpTransition() *NSSymbolReplaceCon
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
-// Convenience initializer for a replace content transition where the initial symbol is removed with no animation, and the new symbol scales up as it is added.
+// An effect that replaces a symbol by removing it, and scaling a different symbol up.
 func NSSymbolReplaceContentTransitionReplaceOffUpTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelReplaceOffUpTransition)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func NSSymbolReplaceContentTransitionReplaceOffUpTransition() *NSSymbolReplaceCo
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
-// Returns a copy of the content transition that animates incrementally, by layer.
+// An effect that replaces each layer separately.
 func (o *NSSymbolReplaceContentTransition) TransitionWithByLayer() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolReplaceContentTransitionSelTransitionWithByLayer)
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func (o *NSSymbolReplaceContentTransition) TransitionWithByLayer() *NSSymbolRepl
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
-// Returns a copy of the content transition that animates all layers of the symbol simultaneously.
+// An effect that replaces all layers simultaneously.
 func (o *NSSymbolReplaceContentTransition) TransitionWithWholeSymbol() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolReplaceContentTransitionSelTransitionWithWholeSymbol)
 	if _ret != 0 {

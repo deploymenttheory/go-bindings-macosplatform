@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that contains the collaboration content and options.
+//
 // CollaborationView wraps [raw.SWCollaborationView] with a fluent Go API.
 type CollaborationView struct {
 	inner *raw.SWCollaborationView
@@ -33,6 +35,8 @@ func CollaborationViewFromID(id objc.ID) *CollaborationView {
 	return &CollaborationView{inner: raw.SWCollaborationViewFromID(id)}
 }
 
+// Creates and initializes a collaboration view.
+//
 // NewCollaborationViewWithItemProvider creates a new [CollaborationView].
 func NewCollaborationViewWithItemProvider(itemProvider *foundation.NSItemProvider) *CollaborationView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationView")), objc.RegisterName("alloc"))
@@ -40,43 +44,55 @@ func NewCollaborationViewWithItemProvider(itemProvider *foundation.NSItemProvide
 	return &CollaborationView{inner: raw.SWCollaborationViewFromID(_id)}
 }
 
+// The delegate object for the cloud-sharing controller.
+//
 // WithCloudSharingDelegate sets the cloudSharingDelegate property and returns the receiver for chaining.
 func (x *CollaborationView) WithCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView {
 	x.inner.SetCloudSharingDelegate(cloudSharingDelegate)
 	return x
 }
 
+// The number of participants in a collaboration.
+//
 // WithActiveParticipantCount sets the activeParticipantCount property and returns the receiver for chaining.
 func (x *CollaborationView) WithActiveParticipantCount(activeParticipantCount uint) *CollaborationView {
 	x.inner.SetActiveParticipantCount(activeParticipantCount)
 	return x
 }
 
+// The delegate object for the collaboration view.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CollaborationView) WithDelegate(delegate raw.SWCollaborationViewDelegate) *CollaborationView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The title that the system displays in the header.
+//
 // WithHeaderTitle sets the headerTitle property and returns the receiver for chaining.
 func (x *CollaborationView) WithHeaderTitle(headerTitle string) *CollaborationView {
 	x.inner.SetHeaderTitle(foundation.NSStringStringWithUTF8String(headerTitle))
 	return x
 }
 
+// The subtitle that the system displays in the header.
+//
 // WithHeaderSubtitle sets the headerSubtitle property and returns the receiver for chaining.
 func (x *CollaborationView) WithHeaderSubtitle(headerSubtitle string) *CollaborationView {
 	x.inner.SetHeaderSubtitle(foundation.NSStringStringWithUTF8String(headerSubtitle))
 	return x
 }
 
+// The image that the system displays in the header.
+//
 // WithHeaderImage sets the headerImage property and returns the receiver for chaining.
 func (x *CollaborationView) WithHeaderImage(headerImage *appkit.NSImage) *CollaborationView {
 	x.inner.SetHeaderImage(headerImage)
 	return x
 }
 
-// @abstract If you are using the built in manage share button, this delegate property will be forwarded along to the NSCloudSharingService that button presents. If you have your own and suppress the provided one via setShowManageButton, this does nothing.
+// A reference to an object that conforms to the cloud-sharing service delegate protocol.
 //
 // WithCloudSharingServiceDelegate sets the cloudSharingServiceDelegate property and returns the receiver for chaining.
 func (x *CollaborationView) WithCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView {
@@ -84,7 +100,7 @@ func (x *CollaborationView) WithCloudSharingServiceDelegate(cloudSharingServiceD
 	return x
 }
 
-// @abstract sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
+// The manage button title that the system displays in the header.
 //
 // WithManageButtonTitle sets the manageButtonTitle property and returns the receiver for chaining.
 func (x *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *CollaborationView {
@@ -92,12 +108,14 @@ func (x *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *Col
 	return x
 }
 
+// Sets the content view.
+//
 // SetContentView calls the underlying SetContentView.
 func (x *CollaborationView) SetContentView(detailViewListContentView *appkit.NSView) {
 	x.inner.SetContentView(detailViewListContentView)
 }
 
-// @abstract Dismisses the popover, if presented. @param completion Called when the popover dismissal finishes.
+// Dismisses the popover.
 //
 // DismissPopover blocks until the operation completes or ctx is cancelled.
 func (x *CollaborationView) DismissPopover(ctx context.Context) error {
@@ -113,7 +131,7 @@ func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	}
 }
 
-// @abstract whether the collaboration popover should show the default manage participants button in the popover, defaults to YES @param showManageButton whether the button should be hidden
+// A Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 //
 // SetShowManageButton calls the underlying SetShowManageButton.
 func (x *CollaborationView) SetShowManageButton(showManageButton bool) {

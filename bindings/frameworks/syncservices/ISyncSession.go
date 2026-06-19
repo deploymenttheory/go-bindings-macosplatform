@@ -62,7 +62,7 @@ func ISyncSessionFromID(id objc.ID) *ISyncSession {
 
 // Deprecated: since macOS 10.7.
 func ISyncSessionBeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate) *ISyncSession {
-	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSession), _iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDate, client.Ptr(), entityNames, date.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSession), _iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDate, client.Ptr(), entityNames.Ptr(), date.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -71,7 +71,7 @@ func ISyncSessionBeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient
 
 // Deprecated: since macOS 10.7.
 func ISyncSessionBeginSessionInBackgroundWithClientEntityNamesTargetSelector(client *ISyncClient, entityNames *foundation.NSArray[objc.ID], target objc.ID, selector objc.SEL) {
-	objc.ID(_clsISyncSession).Send(_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelector, client.Ptr(), entityNames, target, selector)
+	objc.ID(_clsISyncSession).Send(_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelector, client.Ptr(), entityNames.Ptr(), target, selector)
 }
 
 // Deprecated: since macOS 10.7.
@@ -81,7 +81,7 @@ func ISyncSessionCancelPreviousBeginSessionWithClient(client *ISyncClient) {
 
 // Deprecated: since macOS 10.7.
 func ISyncSessionBeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate, anchors *foundation.NSDictionary[objc.ID, objc.ID]) *ISyncSession {
-	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSession), _iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDateLastAnchors, client.Ptr(), entityNames, date.Ptr(), anchors)
+	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSession), _iSyncSessionSelBeginSessionWithClientEntityNamesBeforeDateLastAnchors, client.Ptr(), entityNames.Ptr(), date.Ptr(), anchors.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -90,17 +90,17 @@ func ISyncSessionBeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *
 
 // Deprecated: since macOS 10.7.
 func ISyncSessionBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors(client *ISyncClient, entityNames *foundation.NSArray[objc.ID], target objc.ID, selector objc.SEL, anchors *foundation.NSDictionary[objc.ID, objc.ID]) {
-	objc.ID(_clsISyncSession).Send(_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors, client.Ptr(), entityNames, target, selector, anchors)
+	objc.ID(_clsISyncSession).Send(_iSyncSessionSelBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors, client.Ptr(), entityNames.Ptr(), target, selector, anchors.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ClientDidResetEntityNames(entityNames *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iSyncSessionSelClientDidResetEntityNames, entityNames)
+	o.Ptr().Send(_iSyncSessionSelClientDidResetEntityNames, entityNames.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ClientWantsToPushAllRecordsForEntityNames(entityNames *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iSyncSessionSelClientWantsToPushAllRecordsForEntityNames, entityNames)
+	o.Ptr().Send(_iSyncSessionSelClientWantsToPushAllRecordsForEntityNames, entityNames.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
@@ -134,7 +134,7 @@ func (o *ISyncSession) PushChange(change *ISyncChange) {
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) PushChangesFromRecordWithIdentifier(record *foundation.NSDictionary[objc.ID, objc.ID], recordId *foundation.NSString) {
-	o.Ptr().Send(_iSyncSessionSelPushChangesFromRecordWithIdentifier, record, recordId.Ptr())
+	o.Ptr().Send(_iSyncSessionSelPushChangesFromRecordWithIdentifier, record.Ptr(), recordId.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
@@ -149,29 +149,32 @@ func (o *ISyncSession) ClientLostRecordWithIdentifierShouldReplaceOnNextSync(rec
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ClientFinishedPushingChangesWithNextAnchors(anchors *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iSyncSessionSelClientFinishedPushingChangesWithNextAnchors, anchors)
+	o.Ptr().Send(_iSyncSessionSelClientFinishedPushingChangesWithNextAnchors, anchors.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) PrepareToPullChangesForEntityNamesBeforeDate(entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate) bool {
-	_ret := objc.Send[bool](o.Ptr(), _iSyncSessionSelPrepareToPullChangesForEntityNamesBeforeDate, entityNames, date.Ptr())
+	_ret := objc.Send[bool](o.Ptr(), _iSyncSessionSelPrepareToPullChangesForEntityNamesBeforeDate, entityNames.Ptr(), date.Ptr())
 	return _ret
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) PrepareToPullChangesInBackgroundForEntityNamesTargetSelector(entityNames *foundation.NSArray[objc.ID], target objc.ID, selector objc.SEL) {
-	o.Ptr().Send(_iSyncSessionSelPrepareToPullChangesInBackgroundForEntityNamesTargetSelector, entityNames, target, selector)
+	o.Ptr().Send(_iSyncSessionSelPrepareToPullChangesInBackgroundForEntityNamesTargetSelector, entityNames.Ptr(), target, selector)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ChangeEnumeratorForEntityNames(entityNames *foundation.NSArray[objc.ID]) *foundation.NSEnumerator[objc.ID] {
-	_ret := objc.Send[*foundation.NSEnumerator[objc.ID]](o.Ptr(), _iSyncSessionSelChangeEnumeratorForEntityNames, entityNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncSessionSelChangeEnumeratorForEntityNames, entityNames.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSEnumeratorFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier(recordId *foundation.NSString, formattedRecord *foundation.NSDictionary[objc.ID, objc.ID], recordId2 *foundation.NSString) {
-	o.Ptr().Send(_iSyncSessionSelClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier, recordId.Ptr(), formattedRecord, recordId2.Ptr())
+	o.Ptr().Send(_iSyncSessionSelClientAcceptedChangesForRecordWithIdentifierFormattedRecordNewRecordIdentifier, recordId.Ptr(), formattedRecord.Ptr(), recordId2.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
@@ -186,12 +189,12 @@ func (o *ISyncSession) ClientCommittedAcceptedChanges() {
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ClientCommittedAcceptedChangesWithNextAnchors(anchors *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iSyncSessionSelClientCommittedAcceptedChangesWithNextAnchors, anchors)
+	o.Ptr().Send(_iSyncSessionSelClientCommittedAcceptedChangesWithNextAnchors, anchors.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSession) ClientChangedRecordIdentifiers(oldToNew *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iSyncSessionSelClientChangedRecordIdentifiers, oldToNew)
+	o.Ptr().Send(_iSyncSessionSelClientChangedRecordIdentifiers, oldToNew.Ptr())
 }
 
 // Deprecated: since macOS 10.7.

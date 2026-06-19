@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Lighting information for use in GLKit rendering effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkeffectpropertylight
 type GLKEffectPropertyLight struct {
 	GLKEffectProperty

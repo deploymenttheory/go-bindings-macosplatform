@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that controls the process of requesting App Store ratings and reviews from customers.
+//
 // StoreReviewController wraps [raw.SKStoreReviewController] with a fluent Go API.
 type StoreReviewController struct {
 	inner *raw.SKStoreReviewController

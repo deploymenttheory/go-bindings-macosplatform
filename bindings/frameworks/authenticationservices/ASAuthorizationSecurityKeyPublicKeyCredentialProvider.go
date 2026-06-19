@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for providing public key credential requests to an app or service with a physical security key.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialprovider
 type ASAuthorizationSecurityKeyPublicKeyCredentialProvider struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(id objc.ID) *AS
 	return o
 }
 
+// Creates the object with a relying party identifier.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) InitWithRelyingPartyIdentifier(relyingPartyIdentifier *foundation.NSString) *ASAuthorizationSecurityKeyPublicKeyCredentialProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier, relyingPartyIdentifier.Ptr())
 	if _ret != 0 {
@@ -41,7 +44,7 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) InitWithRelyingP
 	return ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(_ret)
 }
 
-// @abstract Create a request to register a new security key credential. @param challenge The challenge to sign. @param displayName The display name for the new credential. @param name The name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
+// Creates a registration request with a challenge, display name, and user ID.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge *foundation.NSData, displayName *foundation.NSString, name *foundation.NSString, userID *foundation.NSData) *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID, challenge.Ptr(), displayName.Ptr(), name.Ptr(), userID.Ptr())
 	if _ret != 0 {
@@ -50,7 +53,7 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredential
 	return ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(_ret)
 }
 
-// @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
+// Creates an assertion request with a challenge.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge, challenge.Ptr())
 	if _ret != 0 {

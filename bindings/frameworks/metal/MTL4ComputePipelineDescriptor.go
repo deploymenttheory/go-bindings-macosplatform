@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes a compute pipeline state.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4computepipelinedescriptor
 type MTL4ComputePipelineDescriptor struct {
 	MTL4PipelineDescriptor

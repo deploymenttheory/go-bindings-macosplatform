@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// The structure that describes an instruction or data cache element.
 type Hv_cache_type_t int64
 
 const (
@@ -28,6 +29,7 @@ func (e Hv_cache_type_t) String() string {
 	}
 }
 
+// The type that defines feature registers.
 type Hv_feature_reg_t int64
 
 const (
@@ -4981,6 +4983,7 @@ func (e Hv_gic_redistributor_reg_t) String() string {
 	}
 }
 
+// The type that defines the vCPU’s interrupts.
 type Hv_interrupt_type_t int64
 
 const (
@@ -5019,6 +5022,7 @@ func (e Hv_ipa_granule_t) String() string {
 	}
 }
 
+// The type that defines general registers.
 type Hv_reg_t int64
 
 const (
@@ -5138,6 +5142,7 @@ func (e Hv_reg_t) String() string {
 	}
 }
 
+// The type that defines SIMD and floating-point registers.
 type Hv_simd_fp_reg_t int64
 
 const (
@@ -5414,6 +5419,7 @@ func (e Hv_sme_z_reg_t) String() string {
 	}
 }
 
+// The type of system registers.
 type Hv_sys_reg_t int64
 
 const (

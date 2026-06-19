@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract virtual base class for CNN normalization nodes
+// Virtual base class for CNN normalization nodes.
 //
 // CNNNormalizationNode wraps [raw.MPSCNNNormalizationNode] with a fluent Go API.
 type CNNNormalizationNode struct {

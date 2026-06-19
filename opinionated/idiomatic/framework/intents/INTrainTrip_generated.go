@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a train trip.
+//
 // TrainTrip wraps [raw.INTrainTrip] with a fluent Go API.
 type TrainTrip struct {
 	inner *raw.INTrainTrip
@@ -32,6 +34,8 @@ func TrainTripFromID(id objc.ID) *TrainTrip {
 	return &TrainTrip{inner: raw.INTrainTripFromID(id)}
 }
 
+// Creates a new train trip with the specified contents and attributes.
+//
 // NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new [TrainTrip].
 func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider string, trainName string, trainNumber string, tripDuration *raw.INDateComponentsRange, departureStationLocation *corelocation.CLPlacemark, departurePlatform string, arrivalStationLocation *corelocation.CLPlacemark, arrivalPlatform string) *TrainTrip {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTrainTrip")), objc.RegisterName("alloc"))

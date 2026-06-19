@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that plays MIDI data through a system sound module.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidiplayer
 type AVMIDIPlayer struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func AVMIDIPlayerFromID(id objc.ID) *AVMIDIPlayer {
 	return o
 }
 
-// @method initWithContentsOfURL:soundBankURL:error: @abstract Create a player with the contents of the file specified by the URL. @discussion 'bankURL' should contain the path to a SoundFont2 or DLS bank to be used by the MIDI synthesizer.  For OSX it can be set to nil for the default, but for iOS it must always refer to a valid bank file.
+// Creates a player to play a MIDI file with the specified soundbank.
 func (o *AVMIDIPlayer) InitWithContentsOfURLSoundBankURLError(inURL *foundation.NSURL, bankURL *foundation.NSURL) (*AVMIDIPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPlayerSelInitWithContentsOfURLSoundBankURLError, inURL.Ptr(), bankURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -55,7 +57,7 @@ func (o *AVMIDIPlayer) InitWithContentsOfURLSoundBankURLError(inURL *foundation.
 	return AVMIDIPlayerFromID(_ret), nil
 }
 
-// @method initWithData:soundBankURL:error: @abstract Create a player with the contents of the data object @discussion 'bankURL' should contain the path to a SoundFont2 or DLS bank to be used by the MIDI synthesizer.  For OSX it can be set to nil for the default, but for iOS it must always refer to a valid bank file.
+// Creates a player to play MIDI data with the specified soundbank.
 func (o *AVMIDIPlayer) InitWithDataSoundBankURLError(data *foundation.NSData, bankURL *foundation.NSURL) (*AVMIDIPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPlayerSelInitWithDataSoundBankURLError, data.Ptr(), bankURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -68,12 +70,12 @@ func (o *AVMIDIPlayer) InitWithDataSoundBankURLError(data *foundation.NSData, ba
 	return AVMIDIPlayerFromID(_ret), nil
 }
 
-// @method prepareToPlay @abstract Get ready to play the sequence by prerolling all events @discussion Happens automatically on play if it has not already been called, but may produce a delay in startup.
+// Prepares the player to play the sequence by prerolling all events.
 func (o *AVMIDIPlayer) PrepareToPlay() {
 	o.Ptr().Send(_aVMIDIPlayerSelPrepareToPlay)
 }
 
-// @method play: @abstract Play the sequence.
+// Plays the MIDI sequence.
 func (o *AVMIDIPlayer) Play(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -85,7 +87,7 @@ func (o *AVMIDIPlayer) Play(completionHandler func()) {
 	o.Ptr().Send(_aVMIDIPlayerSelPlay, __block_completionHandler)
 }
 
-// @method stop @abstract Stop playing the sequence.
+// Stops playing the sequence.
 func (o *AVMIDIPlayer) Stop() {
 	o.Ptr().Send(_aVMIDIPlayerSelStop)
 }

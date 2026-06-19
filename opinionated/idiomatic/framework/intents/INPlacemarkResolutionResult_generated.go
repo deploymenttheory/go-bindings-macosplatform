@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for placemark information associated with an intent.
+//
 // PlacemarkResolutionResult wraps [raw.INPlacemarkResolutionResult] with a fluent Go API.
 type PlacemarkResolutionResult struct {
 	inner *raw.INPlacemarkResolutionResult

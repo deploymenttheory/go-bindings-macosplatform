@@ -35,7 +35,7 @@ func MDLPackedJointAnimationFromID(id objc.ID) *MDLPackedJointAnimation {
 }
 
 func (o *MDLPackedJointAnimation) InitWithNameJointPaths(name *foundation.NSString, jointPaths *foundation.NSArray[*foundation.NSString]) *MDLPackedJointAnimation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelInitWithNameJointPaths, name.Ptr(), jointPaths)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelInitWithNameJointPaths, name.Ptr(), jointPaths.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -43,8 +43,11 @@ func (o *MDLPackedJointAnimation) InitWithNameJointPaths(name *foundation.NSStri
 }
 
 func (o *MDLPackedJointAnimation) JointPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mDLPackedJointAnimationSelJointPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelJointPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *MDLPackedJointAnimation) Translations() *MDLAnimatedVector3Array {

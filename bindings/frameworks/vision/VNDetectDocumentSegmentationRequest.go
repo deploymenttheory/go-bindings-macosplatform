@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that detects rectangular regions that contain text in the input image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectdocumentsegmentationrequest
 type VNDetectDocumentSegmentationRequest struct {
 	VNImageBasedRequest

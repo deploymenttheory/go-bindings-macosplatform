@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller that lets the user edit or remove an existing shortcut.
+//
 // EditVoiceShortcutViewController wraps [raw.INUIEditVoiceShortcutViewController] with a fluent Go API.
 type EditVoiceShortcutViewController struct {
 	inner *raw.INUIEditVoiceShortcutViewController
@@ -32,7 +34,7 @@ func EditVoiceShortcutViewControllerFromID(id objc.ID) *EditVoiceShortcutViewCon
 	return &EditVoiceShortcutViewController{inner: raw.INUIEditVoiceShortcutViewControllerFromID(id)}
 }
 
-// @param voiceShortcut The voice shortcut to be edited.
+// Creates a view controller with the shortcut to edit or remove.
 //
 // NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a new [EditVoiceShortcutViewController].
 func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut *intents.INVoiceShortcut) *EditVoiceShortcutViewController {
@@ -41,6 +43,8 @@ func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut *intents.
 	return &EditVoiceShortcutViewController{inner: raw.INUIEditVoiceShortcutViewControllerFromID(_id)}
 }
 
+// The object that retrieves notifications from the view controller.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *EditVoiceShortcutViewController) WithDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate) *EditVoiceShortcutViewController {
 	x.inner.SetDelegate(delegate)

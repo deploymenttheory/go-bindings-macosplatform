@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient dropout filter.
+//
 // CNNDropoutGradient wraps [raw.MPSCNNDropoutGradient] with a fluent Go API.
 type CNNDropoutGradient struct {
 	inner *raw.MPSCNNDropoutGradient
@@ -195,7 +197,7 @@ func (x *CNNDropoutGradient) WithDestinationImageAllocator(destinationImageAlloc
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNDropoutGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNDropoutGradient {
@@ -203,7 +205,7 @@ func (x *CNNDropoutGradient) WithOptions(options mpscore.MPSKernelOptions) *CNND
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNDropoutGradient) WithLabel(label string) *CNNDropoutGradient {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that processes webpage content in an app extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess
 type BEWebContentProcess struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func BEWebContentProcessFromID(id objc.ID) *BEWebContentProcess {
 	return o
 }
 
-// Asynchronously launches a web content process This initializer launches a new web content extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BEWebContentProcess“ when the extension process has launched or with an error.
+// Launches a web content extension process asynchronously.
 func BEWebContentProcessWebContentProcessWithInterruptionHandlerCompletion(interruptionHandler func(), completion func(*BEWebContentProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -59,7 +61,7 @@ func BEWebContentProcessWebContentProcessWithInterruptionHandlerCompletion(inter
 	objc.ID(_clsBEWebContentProcess).Send(_bEWebContentProcessSelWebContentProcessWithInterruptionHandlerCompletion, __block_interruptionHandler, __block_completion)
 }
 
-// Asynchronously launches a web content process This initializer launches a new web content extension process. - Parameters: - `bundleID` : The bundle identifier of the WebContent process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BEWebContentProcess“ when the extension process has launched or with an error.
+// Launches a web content extension process asynchronously.
 func BEWebContentProcessWebContentProcessWithBundleIDInterruptionHandlerCompletion(bundleID *foundation.NSString, interruptionHandler func(), completion func(*BEWebContentProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -81,12 +83,12 @@ func BEWebContentProcessWebContentProcessWithBundleIDInterruptionHandlerCompleti
 	objc.ID(_clsBEWebContentProcess).Send(_bEWebContentProcessSelWebContentProcessWithBundleIDInterruptionHandlerCompletion, bundleID.Ptr(), __block_interruptionHandler, __block_completion)
 }
 
-// Stops the extension process. When you call this method, you tell the system your app no longer needs this extension process. If this is the last connection from the host process to the extension process, the system terminates the extension process.
+// Stops the web content process.
 func (o *BEWebContentProcess) Invalidate() {
 	o.Ptr().Send(_bEWebContentProcessSelInvalidate)
 }
 
-// Creates a new libXPC connection to the extension process. This method creates a connection to the extension process and returns it. If it is not possible to make an XPC connection, this method will return nil and populate the `error` out param. - Returns: The connection object representing the created libXPC connection or nil.
+// Creates a new XPC connection to the extension process.
 func (o *BEWebContentProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEWebContentProcessSelMakeLibXPCConnectionError, unsafe.Pointer(&_nsErr))
@@ -99,7 +101,7 @@ func (o *BEWebContentProcess) MakeLibXPCConnectionError() (*foundation.NSObject,
 	return foundation.NSObjectFromID(_ret), nil
 }
 
-// Grants the specified capability to the process. This method grants the specified capability to the process or returns nil and an error if it can not be granted. - Parameters: - capability: The capability to be granted - error: The error out param populated if the capability cannot be granted. - Returns: an invalidatable grant object that represents the granted capability.
+// Grants the specified capability to the process.
 func (o *BEWebContentProcess) GrantCapabilityError(capability *BEProcessCapability) (BEProcessCapabilityGrant, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[BEProcessCapabilityGrant](o.Ptr(), _bEWebContentProcessSelGrantCapabilityError, capability.Ptr(), unsafe.Pointer(&_nsErr))
@@ -109,7 +111,7 @@ func (o *BEWebContentProcess) GrantCapabilityError(capability *BEProcessCapabili
 	return _ret, nil
 }
 
-// Grants the specified capability to the process with invalidation handler. This method grants the specified capability to the process or returns nil and an error if it can not be granted. - Parameters: - capability: The capability to be granted - error: The error out param populated if the capability cannot be granted. - invalidationHandler: The invalidation handler - Returns: an invalidatable grant object that represents the granted capability.
+// Grants the specified capability to the process, invoking the handler when the capability becomes invalid.
 func (o *BEWebContentProcess) GrantCapabilityErrorInvalidationHandler(capability *BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) BEProcessCapabilityGrant {
 	var __block_invalidationHandler objc.Block
 	if invalidationHandler != nil {

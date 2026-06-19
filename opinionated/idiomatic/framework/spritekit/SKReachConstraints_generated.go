@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification of the degree of freedom when solving inverse kinematics.
+//
 // ReachConstraints wraps [raw.SKReachConstraints] with a fluent Go API.
 type ReachConstraints struct {
 	inner *raw.SKReachConstraints
@@ -29,6 +31,8 @@ func ReachConstraintsFromID(id objc.ID) *ReachConstraints {
 	return &ReachConstraints{inner: raw.SKReachConstraintsFromID(id)}
 }
 
+// Initializes a new reach constraint object.
+//
 // NewReachConstraintsWithLowerAngleLimitUpperAngleLimit creates a new [ReachConstraints].
 func NewReachConstraintsWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float64, upperAngleLimit float64) *ReachConstraints {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReachConstraints")), objc.RegisterName("alloc"))
@@ -36,7 +40,7 @@ func NewReachConstraintsWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float
 	return &ReachConstraints{inner: raw.SKReachConstraintsFromID(_id)}
 }
 
-// Lower angle limit in radians
+// The minimum angle that the node can have after it is rotated by a reach event.
 //
 // WithLowerAngleLimit sets the lowerAngleLimit property and returns the receiver for chaining.
 func (x *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints {
@@ -44,7 +48,7 @@ func (x *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachCo
 	return x
 }
 
-// Upper angle limit in radians
+// The maximum angle that the node can have after it is rotated by a reach event.
 //
 // WithUpperAngleLimit sets the upperAngleLimit property and returns the receiver for chaining.
 func (x *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints {

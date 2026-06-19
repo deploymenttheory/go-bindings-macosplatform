@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration for a tunnel provider’s virtual interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netunnelnetworksettings
 type NETunnelNetworkSettings struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
 	return o
 }
 
-// @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NETunnelNetworkSettings object with a given tunnel remote address. @param address The address of the remote endpoint that is providing the tunnel service.
+// Initialize a NETunnelNetworkSettings object.
 func (o *NETunnelNetworkSettings) InitWithTunnelRemoteAddress(address *foundation.NSString) *NETunnelNetworkSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelNetworkSettingsSelInitWithTunnelRemoteAddress, address.Ptr())
 	if _ret != 0 {

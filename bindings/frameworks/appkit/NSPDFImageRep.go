@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can render an image from a PDF format data stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspdfimagerep
 type NSPDFImageRep struct {
 	NSImageRep
@@ -37,6 +39,7 @@ func NSPDFImageRepFromID(id objc.ID) *NSPDFImageRep {
 	return o
 }
 
+// Creates and returns a representation of an image initialized with the specified PDF data.
 func NSPDFImageRepImageRepWithData(pdfData *foundation.NSData) *NSPDFImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPDFImageRep), _nSPDFImageRepSelImageRepWithData, pdfData.Ptr())
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func NSPDFImageRepImageRepWithData(pdfData *foundation.NSData) *NSPDFImageRep {
 	return NSPDFImageRepFromID(_ret)
 }
 
+// Returns a representation of an image initialized with the specified PDF data.
 func (o *NSPDFImageRep) InitWithData(pdfData *foundation.NSData) *NSPDFImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFImageRepSelInitWithData, pdfData.Ptr())
 	if _ret != 0 {

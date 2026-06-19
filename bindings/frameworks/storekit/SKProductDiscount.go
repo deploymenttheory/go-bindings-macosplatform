@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The details of an introductory offer or a promotional offer for an auto-renewable subscription.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skproductdiscount
 // Deprecated: Use Product.SubscriptionOffer.
 type SKProductDiscount struct {

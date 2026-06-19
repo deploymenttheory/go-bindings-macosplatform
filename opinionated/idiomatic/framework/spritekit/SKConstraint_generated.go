@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification for constraining a node’s position or rotation.
+//
 // Constraint wraps [raw.SKConstraint] with a fluent Go API.
 type Constraint struct {
 	inner *raw.SKConstraint
@@ -35,12 +37,16 @@ func NewConstraint() *Constraint {
 	return &Constraint{inner: raw.SKConstraintFromID(_id)}
 }
 
+// A Boolean value that specifies whether the constraint is applied.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Constraint) WithEnabled(enabled bool) *Constraint {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The node whose coordinate system should be used to apply the constraint.
+//
 // WithReferenceNode sets the referenceNode property and returns the receiver for chaining.
 func (x *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
 	x.inner.SetReferenceNode(referenceNode.asNode())

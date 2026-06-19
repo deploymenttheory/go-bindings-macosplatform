@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a gradient spatial normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalizationgradientnode
 type MPSCNNSpatialNormalizationGradientNode struct {
 	mpsneuralnetwork.MPSNNGradientFilterNode

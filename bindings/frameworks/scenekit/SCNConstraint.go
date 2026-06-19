@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for objects that automatically adjust the position, rotation, or scale of a node based on specified rules.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnconstraint
 type SCNConstraint struct {
 	foundation.NSObject

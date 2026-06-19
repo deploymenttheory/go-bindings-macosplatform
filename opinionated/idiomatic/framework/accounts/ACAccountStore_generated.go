@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The object you use to request, manage, and store the user’s account information.
+//
 // AccountStore wraps [raw.ACAccountStore] with a fluent Go API.
 type AccountStore struct {
 	inner *raw.ACAccountStore
@@ -37,6 +39,8 @@ func NewAccountStore() *AccountStore {
 	return &AccountStore{inner: raw.ACAccountStoreFromID(_id)}
 }
 
+// Returns the account with the specified identifier.
+//
 // AccountWithIdentifier calls the underlying AccountWithIdentifier.
 func (x *AccountStore) AccountWithIdentifier(identifier string) *Account {
 	_r := x.inner.AccountWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
@@ -46,6 +50,8 @@ func (x *AccountStore) AccountWithIdentifier(identifier string) *Account {
 	return &Account{inner: _r}
 }
 
+// Returns an account type that matches the specified identifier.
+//
 // AccountTypeWithAccountTypeIdentifier calls the underlying AccountTypeWithAccountTypeIdentifier.
 func (x *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
 	_r := x.inner.AccountTypeWithAccountTypeIdentifier(foundation.NSStringStringWithUTF8String(typeIdentifier))
@@ -55,21 +61,29 @@ func (x *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier strin
 	return &AccountType{inner: _r}
 }
 
+// Returns all accounts of the specified type.
+//
 // AccountsWithAccountType calls the underlying AccountsWithAccountType.
 func (x *AccountStore) AccountsWithAccountType(accountType *raw.ACAccountType) *foundation.NSArray[objc.ID] {
 	return x.inner.AccountsWithAccountType(accountType)
 }
 
+// Saves an account to the Accounts database.
+//
 // SaveAccountWithCompletionHandler calls the underlying SaveAccountWithCompletionHandler.
 func (x *AccountStore) SaveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer)) {
 	x.inner.SaveAccountWithCompletionHandler(account, completionHandler)
 }
 
+// Obtains permission to access protected user properties.
+//
 // RequestAccessToAccountsWithTypeOptionsCompletion calls the underlying RequestAccessToAccountsWithTypeOptionsCompletion.
 func (x *AccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accountType *raw.ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer)) {
 	x.inner.RequestAccessToAccountsWithTypeOptionsCompletion(accountType, options, completion)
 }
 
+// Renews account credentials when the credentials are no longer valid.
+//
 // RenewCredentialsForAccountCompletion calls the underlying RenewCredentialsForAccountCompletion.
 func (x *AccountStore) RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(ACAccountCredentialRenewResult, unsafe.Pointer)) {
 	x.inner.RenewCredentialsForAccountCompletion(account, func(_a0 raw.ACAccountCredentialRenewResult, _a1 unsafe.Pointer) {
@@ -77,6 +91,8 @@ func (x *AccountStore) RenewCredentialsForAccountCompletion(account *raw.ACAccou
 	})
 }
 
+// Removes an account from the account store.
+//
 // RemoveAccountWithCompletionHandler calls the underlying RemoveAccountWithCompletionHandler.
 func (x *AccountStore) RemoveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer)) {
 	x.inner.RemoveAccountWithCompletionHandler(account, completionHandler)

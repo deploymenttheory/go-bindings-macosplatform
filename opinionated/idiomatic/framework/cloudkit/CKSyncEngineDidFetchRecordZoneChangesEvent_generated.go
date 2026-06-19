@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides information about a finished record zone fetch.
+//
 // SyncEngineDidFetchRecordZoneChangesEvent wraps [raw.CKSyncEngineDidFetchRecordZoneChangesEvent] with a fluent Go API.
 type SyncEngineDidFetchRecordZoneChangesEvent struct {
 	inner *raw.CKSyncEngineDidFetchRecordZoneChangesEvent

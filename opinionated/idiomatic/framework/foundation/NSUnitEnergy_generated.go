@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for energy.
+//
 // UnitEnergy wraps [raw.NSUnitEnergy] with a fluent Go API.
 type UnitEnergy struct {
 	inner *raw.NSUnitEnergy

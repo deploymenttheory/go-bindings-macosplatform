@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A multihead, scaled dot-product attention layer that attends to one or more entries in the input key-value pairs.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer
 type MLCMultiheadAttentionLayer struct {
 	MLCLayer
@@ -36,7 +38,7 @@ func MLCMultiheadAttentionLayerFromID(id objc.ID) *MLCMultiheadAttentionLayer {
 	return o
 }
 
-// @abstract   Create a multi-head attention layer @param      weights  weights corresponding to query, key, value and output projections for all heads @param      biases  Optional, biases corresponding to query, key, value and output projections for all heads @param      attentionBiases  Optional, An array of biases added to the key and value respectively @return     A new MultiheadAttention layer
+// Creates a multi-head attention layer with the descriptor, weights, and biases you specify.
 func MLCMultiheadAttentionLayerLayerWithDescriptorWeightsBiasesAttentionBiases(descriptor *MLCMultiheadAttentionDescriptor, weights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor], attentionBiases *foundation.NSArray[*MLCTensor]) *MLCMultiheadAttentionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMultiheadAttentionLayer), _mLCMultiheadAttentionLayerSelLayerWithDescriptorWeightsBiasesAttentionBiases, descriptor.Ptr(), weights.Ptr(), biases.Ptr(), attentionBiases.Ptr())
 	if _ret != 0 {

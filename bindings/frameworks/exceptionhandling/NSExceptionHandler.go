@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
+//
 // Apple documentation: https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler
 type NSExceptionHandler struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func NSExceptionHandlerFromID(id objc.ID) *NSExceptionHandler {
 	return o
 }
 
+// Returns the singleton NSExceptionHandler instance.
 func NSExceptionHandlerDefaultExceptionHandler() *NSExceptionHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExceptionHandler), _nSExceptionHandlerSelDefaultExceptionHandler)
 	if _ret != 0 {
@@ -44,28 +47,34 @@ func NSExceptionHandlerDefaultExceptionHandler() *NSExceptionHandler {
 	return NSExceptionHandlerFromID(_ret)
 }
 
+// Sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
 func (o *NSExceptionHandler) SetExceptionHandlingMask(aMask uint) {
 	o.Ptr().Send(_nSExceptionHandlerSelSetExceptionHandlingMask, aMask)
 }
 
+// Returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
 func (o *NSExceptionHandler) ExceptionHandlingMask() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSExceptionHandlerSelExceptionHandlingMask)
 	return _ret
 }
 
+// Sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
 func (o *NSExceptionHandler) SetExceptionHangingMask(aMask uint) {
 	o.Ptr().Send(_nSExceptionHandlerSelSetExceptionHangingMask, aMask)
 }
 
+// Returns a bit mask representing the types of exceptions that will halt execution for debugging.
 func (o *NSExceptionHandler) ExceptionHangingMask() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSExceptionHandlerSelExceptionHangingMask)
 	return _ret
 }
 
+// Sets the delegate of the NSExceptionHandler object.
 func (o *NSExceptionHandler) SetDelegate(anObject objc.ID) {
 	o.Ptr().Send(_nSExceptionHandlerSelSetDelegate, anObject)
 }
 
+// Returns the delegate of the NSExceptionHandler object.
 func (o *NSExceptionHandler) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionHandlerSelDelegate)
 	return _ret

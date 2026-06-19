@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A cropping and bilinear resizing filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnncropandresizebilinear
 type MPSNNCropAndResizeBilinear struct {
 	mpsneuralnetwork.MPSCNNKernel

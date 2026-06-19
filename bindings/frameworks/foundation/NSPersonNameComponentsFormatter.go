@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that provides localized representations of the components of a person’s name.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspersonnamecomponentsformatter
 type NSPersonNameComponentsFormatter struct {
 	NSFormatter

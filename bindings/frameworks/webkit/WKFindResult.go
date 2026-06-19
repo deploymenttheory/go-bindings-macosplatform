@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the results of searching the web view’s contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkfindresult
 type WKFindResult struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents barcode information that an image analysis request detects.
+//
 // BarcodeObservation wraps [raw.VNBarcodeObservation] with a fluent Go API.
 type BarcodeObservation struct {
 	inner *raw.VNBarcodeObservation

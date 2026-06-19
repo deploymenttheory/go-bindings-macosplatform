@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The appearance and behavior of an NSSlider object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsslidercell
 type NSSliderCell struct {
 	NSActionCell
@@ -64,24 +66,29 @@ func NSSliderCellFromID(id objc.ID) *NSSliderCell {
 	return o
 }
 
+// Returns the rectangle in which the slider knob is drawn.
 func (o *NSSliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelKnobRectFlipped, flipped)
 	return _ret
 }
 
+// Returns the rectangle in which the bar is drawn.
 func (o *NSSliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelBarRectFlipped, flipped)
 	return _ret
 }
 
+// Draws the slider knob in the given rectangle.
 func (o *NSSliderCell) DrawKnob(knobRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSSliderCellSelDrawKnob, knobRect)
 }
 
+// Calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
 func (o *NSSliderCell) DrawKnob2() {
 	o.Ptr().Send(_nSSliderCellSelDrawKnob)
 }
 
+// Draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
 func (o *NSSliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
 	o.Ptr().Send(_nSSliderCellSelDrawBarInsideFlipped, rect, flipped)
 }
@@ -146,26 +153,31 @@ func (o *NSSliderCell) KnobThickness() float64 {
 	return _ret
 }
 
+// Returns the receiver’s value represented by the tick mark at the specified index.
 func (o *NSSliderCell) TickMarkValueAtIndex(index int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelTickMarkValueAtIndex, index)
 	return _ret
 }
 
+// Returns the bounding rectangle of the tick mark at the specified index.
 func (o *NSSliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelRectOfTickMarkAtIndex, index)
 	return _ret
 }
 
+// Returns the index of the tick mark closest to the location of the slider represented by the specified point.
 func (o *NSSliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSSliderCellSelIndexOfTickMarkAtPoint, point)
 	return _ret
 }
 
+// Returns the value of the tick mark closest to the specified value.
 func (o *NSSliderCell) ClosestTickMarkValueToValue(value float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelClosestTickMarkValueToValue, value)
 	return _ret
 }
 
+// Draws the slider’s tick marks.
 func (o *NSSliderCell) DrawTickMarks() {
 	o.Ptr().Send(_nSSliderCellSelDrawTickMarks)
 }
@@ -197,22 +209,26 @@ func (o *NSSliderCell) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool
 	o.Ptr().Send(_nSSliderCellSelSetAllowsTickMarkValuesOnly, allowsTickMarkValuesOnly)
 }
 
+// Sets the cell used to draw the slider’s title.
 // Deprecated: -setTitleCell: had no effect since 10.0
 func (o *NSSliderCell) SetTitleCell(cell *NSCell) {
 	o.Ptr().Send(_nSSliderCellSelSetTitleCell, cell.Ptr())
 }
 
+// Returns nil.
 // Deprecated: -titleCell has returned nil since 10.0
 func (o *NSSliderCell) TitleCell() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleCell)
 	return _ret
 }
 
+// Sets the color used to draw the slider’s title.
 // Deprecated: -setTitleColor: had no effect since 10.0
 func (o *NSSliderCell) SetTitleColor(newColor *NSColor) {
 	o.Ptr().Send(_nSSliderCellSelSetTitleColor, newColor.Ptr())
 }
 
+// Returns nil.
 // Deprecated: -titleColor has returned nil since 10.0
 func (o *NSSliderCell) TitleColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleColor)
@@ -222,11 +238,13 @@ func (o *NSSliderCell) TitleColor() *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Sets the font used to draw the slider’s title.
 // Deprecated: -setTitleFont: had no effect since 10.0
 func (o *NSSliderCell) SetTitleFont(fontObj *NSFont) {
 	o.Ptr().Send(_nSSliderCellSelSetTitleFont, fontObj.Ptr())
 }
 
+// Returns nil.
 // Deprecated: -titleFont has returned nil since 10.0
 func (o *NSSliderCell) TitleFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleFont)
@@ -236,6 +254,7 @@ func (o *NSSliderCell) TitleFont() *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// The thickness of the slider knob, in pixels.
 // Deprecated: -knobThickness has returned 0 since 10.0
 func (o *NSSliderCell) SetKnobThickness(thickness float64) {
 	o.Ptr().Send(_nSSliderCellSelSetKnobThickness, thickness)

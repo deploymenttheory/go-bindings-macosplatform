@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An item provider for conveying data or a file between processes during drag-and-drop or copy-and-paste activities, or from a host app to an app extension.
+//
 // ItemProvider wraps [raw.NSItemProvider] with a fluent Go API.
 type ItemProvider struct {
 	inner *raw.NSItemProvider
@@ -38,6 +40,8 @@ func NewItemProvider() *ItemProvider {
 	return &ItemProvider{inner: raw.NSItemProviderFromID(_id)}
 }
 
+// Creates a new item provider, employing a specified object’s type identifiers to specify the data representations eligible for the provider to load.
+//
 // NewItemProviderWithObject creates a new [ItemProvider].
 func NewItemProviderWithObject(object raw.NSItemProviderWriting) *ItemProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSItemProvider")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewItemProviderWithObject(object raw.NSItemProviderWriting) *ItemProvider {
 	return &ItemProvider{inner: raw.NSItemProviderFromID(_id)}
 }
 
+// Creates an item provider with an object, according to the item provider type coercion policy.
+//
 // NewItemProviderWithItemTypeIdentifier creates a new [ItemProvider].
 func NewItemProviderWithItemTypeIdentifier(item raw.NSSecureCoding, typeIdentifier string) *ItemProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSItemProvider")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewItemProviderWithItemTypeIdentifier(item raw.NSSecureCoding, typeIdentifi
 	return &ItemProvider{inner: raw.NSItemProviderFromID(_id)}
 }
 
+// Provides data-backed content from an existing file.
+//
 // NewItemProviderWithContentsOfURL creates a new [ItemProvider].
 func NewItemProviderWithContentsOfURL(fileURL string) *ItemProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSItemProvider")), objc.RegisterName("alloc"))
@@ -59,14 +67,18 @@ func NewItemProviderWithContentsOfURL(fileURL string) *ItemProvider {
 	return &ItemProvider{inner: raw.NSItemProviderFromID(_id)}
 }
 
+// The filename to use when writing the provided data to a file on disk.
+//
 // WithSuggestedName sets the suggestedName property and returns the receiver for chaining.
 func (x *ItemProvider) WithSuggestedName(suggestedName string) *ItemProvider {
 	x.inner.SetSuggestedName(foundation.NSStringStringWithUTF8String(suggestedName))
 	return x
 }
 
+// The custom preview image handler block for the item provider.
+//
 // WithPreviewImageHandler sets the previewImageHandler property and returns the receiver for chaining.
-func (x *ItemProvider) WithPreviewImageHandler(previewImageHandler objc.Block) *ItemProvider {
+func (x *ItemProvider) WithPreviewImageHandler(previewImageHandler func(objc.Block, objc.Class, *raw.NSDictionary[objc.ID, objc.ID])) *ItemProvider {
 	x.inner.SetPreviewImageHandler(previewImageHandler)
 	return x
 }
@@ -77,31 +89,43 @@ func (x *ItemProvider) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Registers a data-backed representation for an item, specifiying item visibility and a load handler.
+//
 // RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler calls the underlying RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler.
 func (x *ItemProvider) RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	x.inner.RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), raw.NSItemProviderRepresentationVisibility(visibility), loadHandler)
 }
 
+// Registers a file-backed representation for an item, specifying file options, item visibility, and a load handler.
+//
 // RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler calls the underlying RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler.
 func (x *ItemProvider) RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions NSItemProviderFileOptions, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	x.inner.RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), raw.NSItemProviderFileOptions(fileOptions), raw.NSItemProviderRepresentationVisibility(visibility), loadHandler)
 }
 
+// Returns an array with a subset of type identifiers for the item provider, according to the specified file options, in the same order they were registered.
+//
 // RegisteredTypeIdentifiersWithFileOptions calls the underlying RegisteredTypeIdentifiersWithFileOptions.
 func (x *ItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions NSItemProviderFileOptions) *raw.NSArray[*raw.NSString] {
 	return x.inner.RegisteredTypeIdentifiersWithFileOptions(raw.NSItemProviderFileOptions(fileOptions))
 }
 
+// Returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier file options parameter with a value of zero.
+//
 // HasItemConformingToTypeIdentifier calls the underlying HasItemConformingToTypeIdentifier.
 func (x *ItemProvider) HasItemConformingToTypeIdentifier(typeIdentifier string) bool {
 	return x.inner.HasItemConformingToTypeIdentifier(foundation.NSStringStringWithUTF8String(typeIdentifier))
 }
 
+// Returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
+//
 // HasRepresentationConformingToTypeIdentifierFileOptions calls the underlying HasRepresentationConformingToTypeIdentifierFileOptions.
 func (x *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions NSItemProviderFileOptions) bool {
 	return x.inner.HasRepresentationConformingToTypeIdentifierFileOptions(foundation.NSStringStringWithUTF8String(typeIdentifier), raw.NSItemProviderFileOptions(fileOptions))
 }
 
+// Asynchronously copies the provided, typed data into a generic data object, returning a progress object.
+//
 // LoadDataRepresentationForTypeIdentifierCompletionHandler calls the underlying LoadDataRepresentationForTypeIdentifierCompletionHandler.
 func (x *ItemProvider) LoadDataRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(*raw.NSData, unsafe.Pointer)) *Progress {
 	_r := x.inner.LoadDataRepresentationForTypeIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), completionHandler)
@@ -111,6 +135,8 @@ func (x *ItemProvider) LoadDataRepresentationForTypeIdentifierCompletionHandler(
 	return &Progress{inner: _r}
 }
 
+// Asynchronously writes a copy of the provided, typed data to a temporary file, returning a progress object.
+//
 // LoadFileRepresentationForTypeIdentifierCompletionHandler calls the underlying LoadFileRepresentationForTypeIdentifierCompletionHandler.
 func (x *ItemProvider) LoadFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(*raw.NSURL, unsafe.Pointer)) *Progress {
 	_r := x.inner.LoadFileRepresentationForTypeIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), completionHandler)
@@ -120,6 +146,8 @@ func (x *ItemProvider) LoadFileRepresentationForTypeIdentifierCompletionHandler(
 	return &Progress{inner: _r}
 }
 
+// Asynchronously opens a file in place, if possible, returning a progress object.
+//
 // LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler calls the underlying LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler.
 func (x *ItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(*raw.NSURL, bool, unsafe.Pointer)) *Progress {
 	_r := x.inner.LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), completionHandler)
@@ -129,21 +157,29 @@ func (x *ItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletionH
 	return &Progress{inner: _r}
 }
 
+// Adds representations of a specified object to an item provider, based on the object’s implementation of the item provider writing protocol, and adhering to a visibility specification.
+//
 // RegisterObjectVisibility calls the underlying RegisterObjectVisibility.
 func (x *ItemProvider) RegisterObjectVisibility(object raw.NSItemProviderWriting, visibility NSItemProviderRepresentationVisibility) {
 	x.inner.RegisterObjectVisibility(object, raw.NSItemProviderRepresentationVisibility(visibility))
 }
 
+// Lazily adds representations of a specified object class to an item provider, based on the object’s implementation of the item provider writing protocol, and adhering to a visibility specification.
+//
 // RegisterObjectOfClassVisibilityLoadHandler calls the underlying RegisterObjectOfClassVisibilityLoadHandler.
 func (x *ItemProvider) RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	x.inner.RegisterObjectOfClassVisibilityLoadHandler(aClass, raw.NSItemProviderRepresentationVisibility(visibility), loadHandler)
 }
 
+// Returns a Boolean value indicating whether an item provider can load objects of a specified class.
+//
 // CanLoadObjectOfClass calls the underlying CanLoadObjectOfClass.
 func (x *ItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
 	return x.inner.CanLoadObjectOfClass(aClass)
 }
 
+// Asynchronously loads an object of a specified class to an item provider, returning a progress object.
+//
 // LoadObjectOfClassCompletionHandler calls the underlying LoadObjectOfClassCompletionHandler.
 func (x *ItemProvider) LoadObjectOfClassCompletionHandler(aClass unsafe.Pointer, completionHandler func(objc.ID, unsafe.Pointer)) *Progress {
 	_r := x.inner.LoadObjectOfClassCompletionHandler(aClass, completionHandler)
@@ -153,11 +189,15 @@ func (x *ItemProvider) LoadObjectOfClassCompletionHandler(aClass unsafe.Pointer,
 	return &Progress{inner: _r}
 }
 
+// Lazily registers an item, according to the item provider type coercion policy.
+//
 // RegisterItemForTypeIdentifierLoadHandler calls the underlying RegisterItemForTypeIdentifierLoadHandler.
-func (x *ItemProvider) RegisterItemForTypeIdentifierLoadHandler(typeIdentifier string, loadHandler objc.Block) {
+func (x *ItemProvider) RegisterItemForTypeIdentifierLoadHandler(typeIdentifier string, loadHandler func(objc.Block, objc.Class, *raw.NSDictionary[objc.ID, objc.ID])) {
 	x.inner.RegisterItemForTypeIdentifierLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), loadHandler)
 }
 
+// Loads the item’s data and coerces it to the specified type.
+//
 // LoadItemForTypeIdentifierOptionsCompletionHandler calls the underlying LoadItemForTypeIdentifierOptionsCompletionHandler.
 func (x *ItemProvider) LoadItemForTypeIdentifierOptionsCompletionHandler(typeIdentifier string, options *raw.NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	x.inner.LoadItemForTypeIdentifierOptionsCompletionHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), options, completionHandler)
@@ -188,6 +228,8 @@ func (x *ItemProvider) SetSuggestedName(suggestedName string) {
 	x.inner.SetSuggestedName(foundation.NSStringStringWithUTF8String(suggestedName))
 }
 
+// Loads the preview image for the item that the item provider represents.
+//
 // LoadPreviewImageWithOptionsCompletionHandler calls the underlying LoadPreviewImageWithOptionsCompletionHandler.
 func (x *ItemProvider) LoadPreviewImageWithOptionsCompletionHandler(options *raw.NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	x.inner.LoadPreviewImageWithOptionsCompletionHandler(options, completionHandler)
@@ -199,7 +241,7 @@ func (x *ItemProvider) PreviewImageHandler() objc.Block {
 }
 
 // SetPreviewImageHandler calls the underlying SetPreviewImageHandler.
-func (x *ItemProvider) SetPreviewImageHandler(previewImageHandler objc.Block) {
+func (x *ItemProvider) SetPreviewImageHandler(previewImageHandler func(objc.Block, objc.Class, *raw.NSDictionary[objc.ID, objc.ID])) {
 	x.inner.SetPreviewImageHandler(previewImageHandler)
 }
 
@@ -209,7 +251,7 @@ func (x *ItemProvider) asObject() *raw.NSObject { return &x.inner.NSObject }
 type ItemProviderable interface {
 	Unwrap() *raw.NSItemProvider
 	WithSuggestedName(suggestedName string) *ItemProvider
-	WithPreviewImageHandler(previewImageHandler objc.Block) *ItemProvider
+	WithPreviewImageHandler(previewImageHandler func(objc.Block, objc.Class, *raw.NSDictionary[objc.ID, objc.ID])) *ItemProvider
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ItemProvider
 	RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block)
 	RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions NSItemProviderFileOptions, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block)
@@ -223,14 +265,14 @@ type ItemProviderable interface {
 	RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block)
 	CanLoadObjectOfClass(aClass unsafe.Pointer) bool
 	LoadObjectOfClassCompletionHandler(aClass unsafe.Pointer, completionHandler func(objc.ID, unsafe.Pointer)) *Progress
-	RegisterItemForTypeIdentifierLoadHandler(typeIdentifier string, loadHandler objc.Block)
+	RegisterItemForTypeIdentifierLoadHandler(typeIdentifier string, loadHandler func(objc.Block, objc.Class, *raw.NSDictionary[objc.ID, objc.ID]))
 	LoadItemForTypeIdentifierOptionsCompletionHandler(typeIdentifier string, options *raw.NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
 	RegisteredTypeIdentifiers() []string
 	SuggestedName() *String
 	SetSuggestedName(suggestedName string)
 	LoadPreviewImageWithOptionsCompletionHandler(options *raw.NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
 	PreviewImageHandler() objc.Block
-	SetPreviewImageHandler(previewImageHandler objc.Block)
+	SetPreviewImageHandler(previewImageHandler func(objc.Block, objc.Class, *raw.NSDictionary[objc.ID, objc.ID]))
 }
 
 var _ ItemProviderable = (*ItemProvider)(nil)

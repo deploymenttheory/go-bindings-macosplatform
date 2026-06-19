@@ -77,7 +77,7 @@ func (o *MTRClusterTestCluster) TestWithParamsExpectedValuesExpectedValueInterva
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -88,7 +88,7 @@ func (o *MTRClusterTestCluster) TestWithExpectedValuesExpectedValueIntervalCompl
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestNotHandledParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -99,7 +99,7 @@ func (o *MTRClusterTestCluster) TestNotHandledWithParamsExpectedValuesExpectedVa
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -110,7 +110,7 @@ func (o *MTRClusterTestCluster) TestNotHandledWithExpectedValuesExpectedValueInt
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestSpecificResponseParams, unsafe.Pointer)) {
@@ -124,7 +124,7 @@ func (o *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValu
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestSpecificResponseParams, unsafe.Pointer)) {
@@ -138,7 +138,7 @@ func (o *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInter
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestSpecificWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestSpecificWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestUnknownCommandParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -149,7 +149,7 @@ func (o *MTRClusterTestCluster) TestUnknownCommandWithParamsExpectedValuesExpect
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -160,7 +160,7 @@ func (o *MTRClusterTestCluster) TestUnknownCommandWithExpectedValuesExpectedValu
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestAddArgumentsResponseParams, unsafe.Pointer)) {
@@ -174,7 +174,7 @@ func (o *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpected
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestSimpleArgumentResponseParams, unsafe.Pointer)) {
@@ -188,7 +188,7 @@ func (o *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValue
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestStructArrayArgumentResponseParams, unsafe.Pointer)) {
@@ -202,7 +202,7 @@ func (o *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpected
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterBooleanResponseParams, unsafe.Pointer)) {
@@ -216,7 +216,7 @@ func (o *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValue
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterBooleanResponseParams, unsafe.Pointer)) {
@@ -230,7 +230,7 @@ func (o *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpecte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterBooleanResponseParams, unsafe.Pointer)) {
@@ -244,7 +244,7 @@ func (o *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedV
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterBooleanResponseParams, unsafe.Pointer)) {
@@ -258,7 +258,7 @@ func (o *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedVa
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterBooleanResponseParams, unsafe.Pointer)) {
@@ -272,7 +272,7 @@ func (o *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExp
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterBooleanResponseParams, unsafe.Pointer)) {
@@ -286,7 +286,7 @@ func (o *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParam
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestListInt8UReverseResponseParams, unsafe.Pointer)) {
@@ -300,7 +300,7 @@ func (o *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedVal
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestEnumsResponseParams, unsafe.Pointer)) {
@@ -314,7 +314,7 @@ func (o *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpected
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestNullableOptionalResponseParams, unsafe.Pointer)) {
@@ -328,7 +328,7 @@ func (o *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedVal
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestNullableOptionalResponseParams, unsafe.Pointer)) {
@@ -342,7 +342,7 @@ func (o *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExp
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestComplexNullableOptionalResponseParams, unsafe.Pointer)) {
@@ -356,7 +356,7 @@ func (o *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpe
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterSimpleStructResponseParams, unsafe.Pointer)) {
@@ -370,7 +370,7 @@ func (o *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesE
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelSimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelSimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTimedInvokeRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -381,7 +381,7 @@ func (o *MTRClusterTestCluster) TimedInvokeRequestWithParamsExpectedValuesExpect
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -392,7 +392,7 @@ func (o *MTRClusterTestCluster) TimedInvokeRequestWithExpectedValuesExpectedValu
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -403,7 +403,7 @@ func (o *MTRClusterTestCluster) TestSimpleOptionalArgumentRequestWithParamsExpec
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -414,7 +414,7 @@ func (o *MTRClusterTestCluster) TestSimpleOptionalArgumentRequestWithExpectedVal
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestEmitTestEventResponseParams, unsafe.Pointer)) {
@@ -428,7 +428,7 @@ func (o *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValues
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, unsafe.Pointer)) {
@@ -442,5 +442,5 @@ func (o *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsEx
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterTestClusterSelTestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterTestClusterSelTestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

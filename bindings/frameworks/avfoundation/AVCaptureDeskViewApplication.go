@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that programmatically presents Desk View.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeskviewapplication
 type AVCaptureDeskViewApplication struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func AVCaptureDeskViewApplicationFromID(id objc.ID) *AVCaptureDeskViewApplicatio
 	return o
 }
 
-// @method presentWithCompletionHandler: @abstract Presents the Desk View application to the user with no launch configuration. @param completionHandler A block to be called once the Desk View application has been completely launched (or brought to the foreground). @discussion This method allows you to programmatically launch the Desk View application from your own application UI. If the Desk View application is already running, this method brings it to the front. If the Desk View application is minimized in the Dock, this method un-minimizes it and brings it to the front.
+// Launches Desk View with no additional configuration and then performs a completion handler if you specify it.
 func (o *AVCaptureDeskViewApplication) PresentWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -45,7 +47,7 @@ func (o *AVCaptureDeskViewApplication) PresentWithCompletionHandler(completionHa
 	o.Ptr().Send(_aVCaptureDeskViewApplicationSelPresentWithCompletionHandler, __block_completionHandler)
 }
 
-// @method presentWithLaunchConfiguration:completionHandler: @abstract Presents the Desk View application to the user. @param launchConfiguration Launch configuration governing how the Desk View application will be presented. @param completionHandler A block to be called once the Desk View application has been completely launched (or brought to the foreground). Optionally, this completionHandler may fire later, once the user has completed set up mode (see AVCaptureDeskViewApplicationLaunchConfiguration.requiresSetUpModeCompletion). @discussion This method allows you to programmatically launch the Desk View application from your own application UI. If the Desk View application is already running, this method brings it to the front. If the Desk View application is minimized in the Dock, this method un-minimizes it and brings it to the front.
+// Launches Desk View with the configuration and completion handler that you specify.
 func (o *AVCaptureDeskViewApplication) PresentWithLaunchConfigurationCompletionHandler(launchConfiguration *AVCaptureDeskViewApplicationLaunchConfiguration, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

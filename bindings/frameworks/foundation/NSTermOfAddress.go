@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The type for representing grammatical gender in localized text.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nstermofaddress
 type NSTermOfAddress struct {
 	NSObject
@@ -62,7 +64,7 @@ func NSTermOfAddressMasculine() *NSTermOfAddress {
 	return NSTermOfAddressFromID(_ret)
 }
 
-// The term of address that should be used for addressing the user This term of address will only compare equal to another `+[NSTermOfAddress currentUser]`
+// The term of address that should be used for addressing the user
 func NSTermOfAddressCurrentUser() *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelCurrentUser)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func NSTermOfAddressCurrentUser() *NSTermOfAddress {
 	return NSTermOfAddressFromID(_ret)
 }
 
-// A term of address restricted to a given language @param language ISO language code identifier for the language @param pronouns A list of pronouns in the target language that can be used to refer to the person.
+// A term of address restricted to a given language
 func NSTermOfAddressLocalizedForLanguageIdentifierWithPronouns(language *NSString, pronouns *NSArray[*NSMorphologyPronoun]) *NSTermOfAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTermOfAddress), _nSTermOfAddressSelLocalizedForLanguageIdentifierWithPronouns, language.Ptr(), pronouns.Ptr())
 	if _ret != 0 {

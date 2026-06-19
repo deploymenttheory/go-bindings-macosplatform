@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Display-related attributes that a webpage requests for its window.
+//
 // WKWindowFeatures wraps [raw.WKWindowFeatures] with a fluent Go API.
 type WKWindowFeatures struct {
 	inner *raw.WKWindowFeatures

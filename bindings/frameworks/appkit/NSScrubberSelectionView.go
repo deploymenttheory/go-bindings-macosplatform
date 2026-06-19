@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for specifying the appearance of a highlighted or selected item in a scrubber.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberselectionview
 type NSScrubberSelectionView struct {
 	NSScrubberArrangedView

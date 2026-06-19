@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of related tracks in an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassettrackgroup
 type AVAssetTrackGroup struct {
 	foundation.NSObject
@@ -31,6 +33,9 @@ func AVAssetTrackGroupFromID(id objc.ID) *AVAssetTrackGroup {
 }
 
 func (o *AVAssetTrackGroup) TrackIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAssetTrackGroupSelTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackGroupSelTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

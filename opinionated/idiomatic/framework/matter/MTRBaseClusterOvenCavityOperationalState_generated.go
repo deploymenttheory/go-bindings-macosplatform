@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Oven Cavity Operational State
+//
 // MTRBaseClusterOvenCavityOperationalState wraps [raw.MTRBaseClusterOvenCavityOperationalState] with a fluent Go API.
 type MTRBaseClusterOvenCavityOperationalState struct {
 	inner *raw.MTRBaseClusterOvenCavityOperationalState
@@ -44,7 +46,7 @@ func NewMTRBaseClusterOvenCavityOperationalStateWithDeviceEndpointIDQueue(device
 	return &MTRBaseClusterOvenCavityOperationalState{inner: raw.MTRBaseClusterOvenCavityOperationalStateFromID(_id)}
 }
 
-// Command Stop Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
+// Command Stop
 //
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOvenCavityOperationalState) StopWithParamsCompletion(ctx context.Context, params *raw.MTROvenCavityOperationalStateClusterStopParams) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error) {
@@ -98,7 +100,7 @@ func (x *MTRBaseClusterOvenCavityOperationalState) StopWithCompletion(ctx contex
 	}
 }
 
-// Command Start Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it can be started.
+// Command Start
 //
 // StartWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOvenCavityOperationalState) StartWithParamsCompletion(ctx context.Context, params *raw.MTROvenCavityOperationalStateClusterStartParams) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error) {
@@ -152,14 +154,52 @@ func (x *MTRBaseClusterOvenCavityOperationalState) StartWithCompletion(ctx conte
 	}
 }
 
-// ReadAttributePhaseListWithCompletion calls the underlying ReadAttributePhaseListWithCompletion.
-func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributePhaseListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributePhaseListWithCompletion(completion)
+// ReadAttributePhaseListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributePhaseListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeCurrentPhaseWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -258,14 +298,52 @@ func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeCountdownTi
 	}
 }
 
-// ReadAttributeOperationalStateListWithCompletion calls the underlying ReadAttributeOperationalStateListWithCompletion.
-func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeOperationalStateListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeOperationalStateListWithCompletion(completion)
+// ReadAttributeOperationalStateListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeOperationalStateListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeOperationalStateWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -368,34 +446,148 @@ func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeOperational
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
-func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+// ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
-func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+// ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
-func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+// ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAttributeListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOvenCavityOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -509,24 +701,24 @@ type MTRBaseClusterOvenCavityOperationalStateable interface {
 	StopWithCompletion(ctx context.Context) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
 	StartWithParamsCompletion(ctx context.Context, params *raw.MTROvenCavityOperationalStateClusterStartParams) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
 	StartWithCompletion(ctx context.Context) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
-	ReadAttributePhaseListWithCompletion(completion objc.Block)
-	SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributePhaseListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
 	SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
 	ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
 	SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeOperationalStateListWithCompletion(completion objc.Block)
-	SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeOperationalStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
 	SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
 	ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (*MTROvenCavityOperationalStateClusterErrorStateStruct, error)
 	SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTROvenCavityOperationalStateClusterErrorStateStruct, error)
-	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
-	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
-	ReadAttributeAttributeListWithCompletion(completion objc.Block)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
 	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
 	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)

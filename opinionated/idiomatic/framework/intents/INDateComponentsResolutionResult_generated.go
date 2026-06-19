@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the date information associated with an intent.
+//
 // DateComponentsResolutionResult wraps [raw.INDateComponentsResolutionResult] with a fluent Go API.
 type DateComponentsResolutionResult struct {
 	inner *raw.INDateComponentsResolutionResult

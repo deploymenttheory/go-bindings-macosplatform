@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A symbolic representation of a compute operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphoperation
 type MPSGraphOperation struct {
 	MPSGraphObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reads composited video frames from one or more tracks of an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreadervideocompositionoutput
 type AVAssetReaderVideoCompositionOutput struct {
 	AVAssetReaderOutput
@@ -36,18 +38,18 @@ func AVAssetReaderVideoCompositionOutputFromID(id objc.ID) *AVAssetReaderVideoCo
 	return o
 }
 
-// @method assetReaderVideoCompositionOutputWithVideoTracks:videoSettings: @abstract Creates an instance of AVAssetReaderVideoCompositionOutput for reading composited video from the specified video tracks and supplying media data according to the specified video settings. @param tracks An NSArray of AVAssetTrack objects from which the resulting AVAssetReaderVideoCompositionOutput should read video frames for compositing. @param videoSettings An NSDictionary of video settings to be used for video output.  See AVVideoSettings.h for more information about how to construct a video settings dictionary. @result An instance of AVAssetReaderVideoCompositionOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeVideo. A value of nil for videoSettings configures the output to return samples in a convenient uncompressed format, with properties determined according to the properties of the specified video tracks.  Initialization will fail if the video settings cannot be used with the specified tracks. AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  In addition, the following keys are not supported: AVVideoCleanApertureKey AVVideoPixelAspectRatioKey AVVideoScalingModeKey
+// Returns a new object that reads composited video from the specified video tracks.
 func AVAssetReaderVideoCompositionOutputAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks *foundation.NSArray[*AVAssetTrack], videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetReaderVideoCompositionOutput {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderVideoCompositionOutput), _aVAssetReaderVideoCompositionOutputSelAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings, videoTracks.Ptr(), videoSettings)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderVideoCompositionOutput), _aVAssetReaderVideoCompositionOutputSelAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings, videoTracks.Ptr(), videoSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVAssetReaderVideoCompositionOutputFromID(_ret)
 }
 
-// @method initWithVideoTracks:videoSettings: @abstract Creates an instance of AVAssetReaderVideoCompositionOutput for reading composited video from the specified video tracks and supplying media data according to the specified video settings. @param tracks An NSArray of AVAssetTrack objects from which the resulting AVAssetReaderVideoCompositionOutput should read video frames for compositing. @param videoSettings An NSDictionary of video settings to be used for video output.  See AVVideoSettings.h for more information about how to construct a video settings dictionary. @result An instance of AVAssetReaderVideoCompositionOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeVideo. A value of nil for videoSettings configures the output to return samples in a convenient uncompressed format, with properties determined according to the properties of the specified video tracks.  Initialization will fail if the video settings cannot be used with the specified tracks. AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h. This method throws an exception for any of the following reasons: - any video track is not of media type AVMediaTypeVideo - any video track is not part of this asset reader output's AVAsset - track output settings would cause the output to yield compressed samples - video settings does not follow the rules for uncompressed video output (AVVideoSettings.h) - video settings contains any of the following keys: - AVVideoCleanApertureKey - AVVideoPixelAspectRatioKey - AVVideoScalingModeKey - AVVideoDecompressionPropertiesKey
+// Creates an object that reads composited video frames from the specified video tracks.
 func (o *AVAssetReaderVideoCompositionOutput) InitWithVideoTracksVideoSettings(videoTracks *foundation.NSArray[*AVAssetTrack], videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetReaderVideoCompositionOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderVideoCompositionOutputSelInitWithVideoTracksVideoSettings, videoTracks.Ptr(), videoSettings)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderVideoCompositionOutputSelInitWithVideoTracksVideoSettings, videoTracks.Ptr(), videoSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -65,8 +67,11 @@ func (o *AVAssetReaderVideoCompositionOutput) VideoTracks() *foundation.NSArray[
 
 // @property videoSettings @abstract The video settings used by the receiver. @discussion The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
 func (o *AVAssetReaderVideoCompositionOutput) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAssetReaderVideoCompositionOutputSelVideoSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderVideoCompositionOutputSelVideoSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property videoComposition @abstract The composition of video used by the receiver. @discussion The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for playback commands.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorplaybackcontrolcommand
 type AVDelegatingPlaybackCoordinatorPlaybackControlCommand struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Optional metadata with payment order details for the placed order.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentorderdetails
 type PKPaymentOrderDetails struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func PKPaymentOrderDetailsFromID(id objc.ID) *PKPaymentOrderDetails {
 	return o
 }
 
+// Initializes a payment order details object with the identifier, web service URL, and authentication token you provide.
 func (o *PKPaymentOrderDetails) InitWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken(orderTypeIdentifier *foundation.NSString, orderIdentifier *foundation.NSString, webServiceURL *foundation.NSURL, authenticationToken *foundation.NSString) *PKPaymentOrderDetails {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentOrderDetailsSelInitWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken, orderTypeIdentifier.Ptr(), orderIdentifier.Ptr(), webServiceURL.Ptr(), authenticationToken.Ptr())
 	if _ret != 0 {

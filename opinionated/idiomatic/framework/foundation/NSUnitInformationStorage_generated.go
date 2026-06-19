@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for quantities of information.
+//
 // UnitInformationStorage wraps [raw.NSUnitInformationStorage] with a fluent Go API.
 type UnitInformationStorage struct {
 	inner *raw.NSUnitInformationStorage

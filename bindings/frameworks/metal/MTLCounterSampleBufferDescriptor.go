@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of properties that configures the counter sample buffers you create with it.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcountersamplebufferdescriptor
 type MTLCounterSampleBufferDescriptor struct {
 	foundation.NSObject

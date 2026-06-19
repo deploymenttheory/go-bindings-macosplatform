@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object that coordinates your app’s authentication requests with a TV provider’s authentication service.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanager
 type VSAccountManager struct {
 	foundation.NSObject

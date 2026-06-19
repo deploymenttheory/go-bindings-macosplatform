@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a change in the Photos library, and allows for requesting local identifiers that identify the changes for a library object.
+//
 // PersistentChange wraps [raw.PHPersistentChange] with a fluent Go API.
 type PersistentChange struct {
 	inner *raw.PHPersistentChange
@@ -35,6 +37,8 @@ func NewPersistentChange() *PersistentChange {
 	return &PersistentChange{inner: raw.PHPersistentChangeFromID(_id)}
 }
 
+// Returns the change history that contains the local identifiers for object inserts, updates, and deletes.
+//
 // ChangeDetailsForObjectTypeError calls the underlying ChangeDetailsForObjectTypeError.
 func (x *PersistentChange) ChangeDetailsForObjectTypeError(objectType PHObjectType) (*PersistentObjectChangeDetails, error) {
 	_r, _err := x.inner.ChangeDetailsForObjectTypeError(raw.PHObjectType(objectType))

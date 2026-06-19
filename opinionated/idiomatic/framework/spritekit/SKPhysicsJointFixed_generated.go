@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A joint that fuses two physics bodies together at a reference point.
+//
 // PhysicsJointFixed wraps [raw.SKPhysicsJointFixed] with a fluent Go API.
 type PhysicsJointFixed struct {
 	inner *raw.SKPhysicsJointFixed
@@ -35,12 +37,16 @@ func NewPhysicsJointFixed() *PhysicsJointFixed {
 	return &PhysicsJointFixed{inner: raw.SKPhysicsJointFixedFromID(_id)}
 }
 
+// The first body connected by the joint.
+//
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
 func (x *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
 	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
+// The second body connected by the joint.
+//
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
 func (x *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
 	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for objects that direct sound.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasedirectivitymodelparameters
 type PHASEDirectivityModelParameters struct {
 	foundation.NSObject

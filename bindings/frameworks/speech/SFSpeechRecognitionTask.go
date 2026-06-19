@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A task object for monitoring the speech recognition progress.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitiontask
 type SFSpeechRecognitionTask struct {
 	foundation.NSObject
@@ -37,11 +39,12 @@ func SFSpeechRecognitionTaskFromID(id objc.ID) *SFSpeechRecognitionTask {
 	return o
 }
 
+// Stops accepting new audio and finishes processing on the audio input that has already been accepted.
 func (o *SFSpeechRecognitionTask) Finish() {
 	o.Ptr().Send(_sFSpeechRecognitionTaskSelFinish)
 }
 
-// Cancels the current speech recognition task. You can cancel recognition tasks for both prerecorded and live audio input. For example, you might cancel a task in response to a user action or because the recording was interrupted. When canceling a task, be sure to release any resources associated with the task, such as the audio input resources you are using to capture audio samples.
+// Cancels the current speech recognition task.
 func (o *SFSpeechRecognitionTask) Cancel() {
 	o.Ptr().Send(_sFSpeechRecognitionTaskSelCancel)
 }

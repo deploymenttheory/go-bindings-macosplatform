@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationMarkup object appears as highlighting, underlining, or a strikethrough style applied to the text of a document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationmarkup
 type PDFAnnotationMarkup struct {
 	PDFAnnotation

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a person that the request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnhumanobservation
 type VNHumanObservation struct {
 	VNDetectedObjectObservation

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of properties that configure a spatial scaling effect, and a factory method that creates the effect.
+//
 // SpatialScalerDescriptor wraps [raw.MTLFXSpatialScalerDescriptor] with a fluent Go API.
 type SpatialScalerDescriptor struct {
 	inner *raw.MTLFXSpatialScalerDescriptor
@@ -44,7 +46,7 @@ func (x *SpatialScalerDescriptor) WithColorTextureFormat(colorTextureFormat meta
 	return x
 }
 
-// The pixel format of the output texture for the spatial scaler you create with this descriptor.
+// The pixel format of the output color texture for the spatial scaler you create with this descriptor.
 //
 // WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor {
@@ -84,7 +86,7 @@ func (x *SpatialScalerDescriptor) WithOutputHeight(outputHeight uint) *SpatialSc
 	return x
 }
 
-// The color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
+// The color space of the input color texture for the spatial scaler you create with this descriptor.
 //
 // WithColorProcessingMode sets the colorProcessingMode property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor {
@@ -92,14 +94,14 @@ func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode MT
 	return x
 }
 
-// Creates a spatial scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the spatial scaler. - Returns: A new spatial scaler instance upon success, or `nil` otherwise.
+// Creates a spatial scaler instance from this descriptor’s current property values.
 //
 // NewSpatialScalerWithDevice calls the underlying NewSpatialScalerWithDevice.
 func (x *SpatialScalerDescriptor) NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler {
 	return x.inner.NewSpatialScalerWithDevice(device)
 }
 
-// Creates a spatial scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the spatial scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new spatial scaler instance upon success, or `nil` otherwise.
+// Creates a spatial scaler instance for a Metal device.
 //
 // NewSpatialScalerWithDeviceCompiler calls the underlying NewSpatialScalerWithDeviceCompiler.
 func (x *SpatialScalerDescriptor) NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler {

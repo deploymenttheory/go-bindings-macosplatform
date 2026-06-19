@@ -93,7 +93,7 @@ func MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID(id obj
 // Initialize an MTRUnitTestingClusterTestComplexNullableOptionalResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -368,12 +368,15 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableListValue() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListValue)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableListValue(nullableListValue *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableListValue, nullableListValue)
+	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableListValue, nullableListValue.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListWasPresent() *foundation.NSNumber {
@@ -389,12 +392,15 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListValue() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListValue)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalListValue(optionalListValue *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalListValue, optionalListValue)
+	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalListValue, optionalListValue.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasPresent() *foundation.NSNumber {
@@ -422,12 +428,15 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListValue() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListValue)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalListValue(nullableOptionalListValue *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListValue, nullableOptionalListValue)
+	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListValue, nullableOptionalListValue.Ptr())
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.

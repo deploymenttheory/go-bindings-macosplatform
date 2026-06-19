@@ -49,7 +49,7 @@ func (x *NDArrayIdentity) WithDestinationArrayAllocator(destinationArrayAllocato
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayIdentity) WithOptions(options mpscore.MPSKernelOptions) *NDArrayIdentity {
@@ -57,7 +57,7 @@ func (x *NDArrayIdentity) WithOptions(options mpscore.MPSKernelOptions) *NDArray
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {

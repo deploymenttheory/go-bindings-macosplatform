@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for an item in the tool picker.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pktoolpickeritem
 type PKToolPickerItem struct {
 	foundation.NSObject

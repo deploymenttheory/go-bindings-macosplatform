@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to generate a thumbnail for a custom file type.
+//
 // FileThumbnailRequest wraps [raw.QLFileThumbnailRequest] with a fluent Go API.
 type FileThumbnailRequest struct {
 	inner *raw.QLFileThumbnailRequest

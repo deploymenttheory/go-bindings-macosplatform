@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification of what traffic to route through a transparent proxy.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netransparentproxynetworksettings
 type NETransparentProxyNetworkSettings struct {
 	NETunnelNetworkSettings

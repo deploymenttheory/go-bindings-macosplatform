@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that store numerical values.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquantitytype
 type HKQuantityType struct {
 	HKSampleType
@@ -30,7 +32,7 @@ func HKQuantityTypeFromID(id objc.ID) *HKQuantityType {
 	return o
 }
 
-// @method        isCompatibleWithUnit: @abstract      Returns YES if the type of HKQuantitySample represented by the receiver can be created with quantities of the given unit.
+// Returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
 func (o *HKQuantityType) IsCompatibleWithUnit(unit *HKUnit) bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKQuantityTypeSelIsCompatibleWithUnit, unit.Ptr())
 	return _ret

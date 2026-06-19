@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A factory class for creating vertical layout constraint objects using a fluent API.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutyaxisanchor
 type NSLayoutYAxisAnchor struct {
 	NSLayoutAnchor[objc.ID]
@@ -32,6 +34,7 @@ func NSLayoutYAxisAnchorFromID(id objc.ID) *NSLayoutYAxisAnchor {
 	return o
 }
 
+// Creates a layout dimension object from two anchors.
 func (o *NSLayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *NSLayoutYAxisAnchor) *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutYAxisAnchorSelAnchorWithOffsetToAnchor, otherAnchor.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func (o *NSLayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *NSLayoutYAxi
 	return NSLayoutDimensionFromID(_ret)
 }
 
+// Returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
 func (o *NSLayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *NSLayoutYAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutYAxisAnchorSelConstraintEqualToSystemSpacingBelowAnchorMultiplier, anchor.Ptr(), multiplier)
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func (o *NSLayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplie
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
 func (o *NSLayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *NSLayoutYAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutYAxisAnchorSelConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier, anchor.Ptr(), multiplier)
 	if _ret != 0 {
@@ -56,6 +61,7 @@ func (o *NSLayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAn
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
 func (o *NSLayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *NSLayoutYAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutYAxisAnchorSelConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier, anchor.Ptr(), multiplier)
 	if _ret != 0 {

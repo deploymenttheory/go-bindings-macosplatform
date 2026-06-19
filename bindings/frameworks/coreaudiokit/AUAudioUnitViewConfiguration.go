@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that describes how to present the audio unit’s user interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/auaudiounitviewconfiguration
 type AUAudioUnitViewConfiguration struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguratio
 	return o
 }
 
-// @method		initWithWidth @brief		Designated initializer. @param		width The width associated with this view configuration. @param		height The height associated with this view configuration. @param		hostHasController This property controls whether the host shows its own control surface in this view configuration. @return		Returns the newly created view configuration object.
+// Creates a new configuration object.
 func (o *AUAudioUnitViewConfiguration) InitWithWidthHeightHostHasController(width float64, height float64, hostHasController bool) *AUAudioUnitViewConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitViewConfigurationSelInitWithWidthHeightHostHasController, width, height, hostHasController)
 	if _ret != 0 {

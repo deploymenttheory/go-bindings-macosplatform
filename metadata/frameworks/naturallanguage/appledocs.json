@@ -1,0 +1,641 @@
+{
+  "schema_version": 1,
+  "framework": "NaturalLanguage",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NLContextualEmbedding": {
+      "doc": "A model that computes sequences of embedding vectors for natural language utterances.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding"
+    },
+    "NLContextualEmbeddingResult": {
+      "doc": "An object that represents the embedding vector result from applying a contextual embedding to a string.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult"
+    },
+    "NLEmbedding": {
+      "doc": "A map of strings to vectors, which locates neighboring, similar strings.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding"
+    },
+    "NLGazetteer": {
+      "doc": "A collection of terms and their labels, which take precedence over a word tagger.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer"
+    },
+    "NLLanguageRecognizer": {
+      "doc": "The language of a body of text.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer"
+    },
+    "NLModel": {
+      "doc": "A custom model trained to classify or tag natural language text.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel"
+    },
+    "NLModelConfiguration": {
+      "doc": "The configuration parameters of a natural language model.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration"
+    },
+    "NLTagger": {
+      "doc": "A tagger that analyzes natural language text.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nltagger"
+    },
+    "NLTokenizer": {
+      "doc": "A tokenizer that segments natural language text into semantic units.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer"
+    }
+  },
+  "enums": {
+    "NLContextualEmbeddingAssetsResult": {
+      "doc": "The availability of the contextual embedding model assets.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingassetsresult"
+    },
+    "NLDistanceType": {
+      "doc": "The means of calculating a distance between two locations in a text embedding.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nldistancetype",
+      "members": {
+        "NLDistanceTypeCosine": {
+          "doc": "A method of calculating distance by using cosine similarity.",
+          "url": "https://developer.apple.com/documentation/naturallanguage/nldistancetype/cosine"
+        }
+      }
+    },
+    "NLModelType": {
+      "doc": "The different types of a natural language model.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlmodeltype"
+    },
+    "NLTaggerAssetsResult": {
+      "doc": "The response to an asset request.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nltaggerassetsresult"
+    },
+    "NLTaggerOptions": {
+      "doc": "Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nltaggeroptions"
+    },
+    "NLTokenUnit": {
+      "doc": "Constants representing linguistic units.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nltokenunit",
+      "members": {
+        "NLTokenUnitDocument": {
+          "doc": "The document in its entirety.",
+          "url": "https://developer.apple.com/documentation/naturallanguage/nltokenunit/document"
+        },
+        "NLTokenUnitParagraph": {
+          "doc": "An individual paragraph.",
+          "url": "https://developer.apple.com/documentation/naturallanguage/nltokenunit/paragraph"
+        },
+        "NLTokenUnitSentence": {
+          "doc": "An individual sentence.",
+          "url": "https://developer.apple.com/documentation/naturallanguage/nltokenunit/sentence"
+        },
+        "NLTokenUnitWord": {
+          "doc": "An individual word.",
+          "url": "https://developer.apple.com/documentation/naturallanguage/nltokenunit/word"
+        }
+      }
+    },
+    "NLTokenizerAttributes": {
+      "doc": "Hints about the contents of the string for the tokenizer.",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizerattributes"
+    }
+  },
+  "methods": {
+    "NLContextualEmbedding": {
+      "+contextualEmbeddingWithLanguage:": {
+        "doc": "Creates a contextual embedding from a language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/init(language:)"
+      },
+      "+contextualEmbeddingWithModelIdentifier:": {
+        "doc": "Creates a contextual embedding from a model identifier.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/init(modelidentifier:)"
+      },
+      "+contextualEmbeddingWithScript:": {
+        "doc": "Creates a contextual embedding from a script.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/init(script:)"
+      },
+      "+contextualEmbeddingsForValues:": {
+        "doc": "Returns contextual embedding models that match the specified language, script, or revision criteria.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/contextualembeddings(forvalues:)"
+      },
+      "-embeddingResultForString:language:error:": {
+        "doc": "Applies an embedding to a string and obtains the resulting embedding vectors.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/embeddingresult(for:language:)"
+      },
+      "-loadWithError:": {
+        "doc": "The instance method that loads the embedding model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/load()"
+      },
+      "-requestEmbeddingAssetsWithCompletionHandler:": {
+        "doc": "Requests embedding model assets and downloads them if available.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/requestassets(completionhandler:)"
+      },
+      "-unload": {
+        "doc": "The instance method that unloads the embedding model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/unload()"
+      }
+    },
+    "NLContextualEmbeddingResult": {
+      "-enumerateTokenVectorsInRange:usingBlock:": {
+        "doc": "Iterates over the embedding vectors corresponding to the subword tokens within the specified range of the input string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/enumeratetokenvectorsinrange:usingblock:"
+      },
+      "-tokenVectorAtIndex:tokenRange:": {
+        "doc": "Returns a token vector at the specified character index.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/tokenvectoratindex:tokenrange:"
+      }
+    },
+    "NLEmbedding": {
+      "+currentRevisionForLanguage:": {
+        "doc": "Retrieves the current version of a word embedding for the given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/currentrevision(for:)"
+      },
+      "+currentSentenceEmbeddingRevisionForLanguage:": {
+        "doc": "Retrieves the current version of a sentence embedding for the given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/currentsentenceembeddingrevision(for:)"
+      },
+      "+embeddingWithContentsOfURL:error:": {
+        "doc": "Creates a word embedding from a model file.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/init(contentsof:)"
+      },
+      "+sentenceEmbeddingForLanguage:": {
+        "doc": "Retrieves a sentence embedding for a given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/sentenceembedding(for:)"
+      },
+      "+sentenceEmbeddingForLanguage:revision:": {
+        "doc": "Retrieves a sentence embedding for a given language and revision.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/sentenceembedding(for:revision:)"
+      },
+      "+supportedRevisionsForLanguage:": {
+        "doc": "Retrieves all version numbers of a word embedding for the given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/supportedrevisions(for:)"
+      },
+      "+supportedSentenceEmbeddingRevisionsForLanguage:": {
+        "doc": "Retrieves all version numbers of a sentence embedding for the given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/supportedsentenceembeddingrevisions(for:)"
+      },
+      "+wordEmbeddingForLanguage:": {
+        "doc": "Retrieves a word embedding for a given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/wordembedding(for:)"
+      },
+      "+wordEmbeddingForLanguage:revision:": {
+        "doc": "Retrieves a word embedding for a given language and revision.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/wordembedding(for:revision:)"
+      },
+      "+writeEmbeddingForDictionary:language:revision:toURL:error:": {
+        "doc": "Exports the word embedding contained within a Core ML model file at the given URL.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/writeembeddingfordictionary:language:revision:tourl:error:"
+      },
+      "-containsString:": {
+        "doc": "Requests a Boolean value that indicates whether the term is in the vocabulary.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/contains(_:)"
+      },
+      "-distanceBetweenString:andString:distanceType:": {
+        "doc": "Calculates the distance between two strings in the vocabulary space.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/distancebetweenstring:andstring:distancetype:"
+      },
+      "-enumerateNeighborsForString:maximumCount:distanceType:usingBlock:": {
+        "doc": "Passes the nearest strings of a string in the vocabulary to a block.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighborsforstring:maximumcount:distancetype:usingblock:"
+      },
+      "-enumerateNeighborsForString:maximumCount:maximumDistance:distanceType:usingBlock:": {
+        "doc": "Passes the nearest strings, within a radius of a string in the vocabulary, to a block.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighborsforstring:maximumcount:maximumdistance:distancetype:usingblock:"
+      },
+      "-enumerateNeighborsForVector:maximumCount:distanceType:usingBlock:": {
+        "doc": "Passes the nearest strings of a location in the vocabulary space to a closure.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighborsforvector:maximumcount:distancetype:usingblock:"
+      },
+      "-enumerateNeighborsForVector:maximumCount:maximumDistance:distanceType:usingBlock:": {
+        "doc": "Passes the nearest strings, within a radius of a location in the vocabulary space, to a block.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighborsforvector:maximumcount:maximumdistance:distancetype:usingblock:"
+      },
+      "-getVector:forString:": {
+        "doc": "Copies a vector into the given a pointer to a float array.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/getvector:forstring:"
+      },
+      "-neighborsForString:maximumCount:distanceType:": {
+        "doc": "Retrieves a limited number of strings near a string in the vocabulary.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighborsforstring:maximumcount:distancetype:"
+      },
+      "-neighborsForString:maximumCount:maximumDistance:distanceType:": {
+        "doc": "Retrieves a limited number of strings, within a radius of a string, in the vocabulary.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighborsforstring:maximumcount:maximumdistance:distancetype:"
+      },
+      "-neighborsForVector:maximumCount:distanceType:": {
+        "doc": "Retrieves a limited number of strings near a location in the vocabulary space.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighborsforvector:maximumcount:distancetype:"
+      },
+      "-neighborsForVector:maximumCount:maximumDistance:distanceType:": {
+        "doc": "Retrieves a limited number of strings within a radius of a location in the vocabulary space.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighborsforvector:maximumcount:maximumdistance:distancetype:"
+      },
+      "-vectorForString:": {
+        "doc": "Requests the vector for the given term.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/vectorforstring:"
+      }
+    },
+    "NLGazetteer": {
+      "+gazetteerWithContentsOfURL:error:": {
+        "doc": "Creates a Natural Language gazetteer from a model created with the Create ML framework.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/gazetteerwithcontentsofurl:error:"
+      },
+      "+writeGazetteerForDictionary:language:toURL:error:": {
+        "doc": "Creates a gazetteer from a set of labels for terms represented by a dictionary and saves the gazetteer to a file.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/write(_:language:to:)"
+      },
+      "-initWithContentsOfURL:error:": {
+        "doc": "Creates a Natural Language gazetteer from a model created with the Create ML framework.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/init(contentsof:)"
+      },
+      "-initWithData:error:": {
+        "doc": "Creates a gazetteer from a data instance.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/init(data:)"
+      },
+      "-initWithDictionary:language:error:": {
+        "doc": "Creates a gazetteer from a set of labels for terms represented by a dictionary.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/init(dictionary:language:)"
+      },
+      "-labelForString:": {
+        "doc": "Retrieves the label for the given term.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/label(for:)"
+      }
+    },
+    "NLLanguageRecognizer": {
+      "+dominantLanguageForString:": {
+        "doc": "Finds the most likely language of a piece of text.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/dominantlanguage(for:)"
+      },
+      "-init": {
+        "doc": "Creates a recognizer that you can customize.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/init()"
+      },
+      "-languageHypothesesWithMaximum:": {
+        "doc": "Generates the probabilities of possible languages for the processed text.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehypotheseswithmaximum:"
+      },
+      "-processString:": {
+        "doc": "Analyzes the piece of text to determine its dominant language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/processstring(_:)"
+      },
+      "-reset": {
+        "doc": "Resets the recognizer to its initial state.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/reset()"
+      }
+    },
+    "NLModel": {
+      "+modelWithContentsOfURL:error:": {
+        "doc": "Creates a new natural language model based on a compiled Core ML model at the given URL.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/init(contentsof:)"
+      },
+      "+modelWithMLModel:error:": {
+        "doc": "Creates a new natural language model based on the given Core ML model instance.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/init(mlmodel:)-9tpjr"
+      },
+      "-predictedLabelForString:": {
+        "doc": "Predicts a label for the given input string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/predictedlabel(for:)"
+      },
+      "-predictedLabelHypothesesForString:maximumCount:": {
+        "doc": "Predicts multiple possible labels for the given input string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/predictedlabelhypothesesforstring:maximumcount:"
+      },
+      "-predictedLabelHypothesesForTokens:maximumCount:": {
+        "doc": "Predicts multiple possible labels for each string in the given array.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/predictedlabelhypothesesfortokens:maximumcount:"
+      },
+      "-predictedLabelsForTokens:": {
+        "doc": "Predicts a label for each string in the given array.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/predictedlabels(fortokens:)"
+      }
+    },
+    "NLModelConfiguration": {
+      "+currentRevisionForType:": {
+        "doc": "Returns the current Natural Language framework version in the OS.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration/currentrevision(for:)"
+      },
+      "+supportedRevisionsForType:": {
+        "doc": "Returns the versions of the Natural Language framework the OS supports.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration/supportedrevisions(for:)"
+      }
+    },
+    "NLTagger": {
+      "+availableTagSchemesForUnit:language:": {
+        "doc": "Retrieves the tag schemes available for a particular unit (like word or sentence) and language on the current device.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/availabletagschemes(for:language:)"
+      },
+      "+requestAssetsForLanguage:tagScheme:completionHandler:": {
+        "doc": "Asks the Natural Language framework to load any missing assets for a tag scheme onto the device for the given language.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/requestassets(for:tagscheme:completionhandler:)"
+      },
+      "-enumerateTagsInRange:unit:scheme:options:usingBlock:": {
+        "doc": "Enumerates a block over the tagger’s string, given a range, token unit, and tag scheme.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/enumeratetagsinrange:unit:scheme:options:usingblock:"
+      },
+      "-gazetteersForTagScheme:": {
+        "doc": "Retrieves the gazetteers attached to a tag scheme.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/gazetteers(for:)"
+      },
+      "-initWithTagSchemes:": {
+        "doc": "Creates a linguistic tagger instance using the specified tag schemes and options.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/init(tagschemes:)"
+      },
+      "-modelsForTagScheme:": {
+        "doc": "Returns the models that apply to the given tag scheme.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/models(fortagscheme:)"
+      },
+      "-setGazetteers:forTagScheme:": {
+        "doc": "Attaches gazetteers to a tag scheme, typically one gazetteer per language or one language-independent gazetteer.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/setgazetteers(_:for:)"
+      },
+      "-setLanguage:range:": {
+        "doc": "Sets the language for a range of text within the tagger’s string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/setlanguage:range:"
+      },
+      "-setModels:forTagScheme:": {
+        "doc": "Assigns models for a tag scheme.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/setmodels(_:fortagscheme:)"
+      },
+      "-setOrthography:range:": {
+        "doc": "Sets the orthography for the specified range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/setorthography:range:"
+      },
+      "-tagAtIndex:unit:scheme:tokenRange:": {
+        "doc": "Finds a tag for a given linguistic unit, for a single scheme, at the specified character position.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tagatindex:unit:scheme:tokenrange:"
+      },
+      "-tagHypothesesAtIndex:unit:scheme:maximumCount:tokenRange:": {
+        "doc": "Finds multiple possible tags for a given linguistic unit, for a single scheme, at the specified character position.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/taghypothesesatindex:unit:scheme:maximumcount:tokenrange:"
+      },
+      "-tagsInRange:unit:scheme:options:tokenRanges:": {
+        "doc": "Finds an array of linguistic tags and token ranges for a given string range and linguistic unit.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tagsinrange:unit:scheme:options:tokenranges:"
+      },
+      "-tokenRangeAtIndex:unit:": {
+        "doc": "Returns the range of the linguistic unit containing the specified character index.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tokenrangeatindex:unit:"
+      },
+      "-tokenRangeForRange:unit:": {
+        "doc": "Finds the entire range of all tokens of the specified linguistic unit contained completely or partially within the specified range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tokenrangeforrange:unit:"
+      }
+    },
+    "NLTokenizer": {
+      "-enumerateTokensInRange:usingBlock:": {
+        "doc": "Enumerates over a given range of the string and calls the specified block for each token.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/enumeratetokensinrange:usingblock:"
+      },
+      "-initWithUnit:": {
+        "doc": "Creates a tokenizer with the specified unit.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/init(unit:)"
+      },
+      "-setLanguage:": {
+        "doc": "Sets the language of the text to be tokenized.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/setlanguage(_:)"
+      },
+      "-tokenRangeAtIndex:": {
+        "doc": "Finds the range of the token at the given index.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/tokenrangeatindex:"
+      },
+      "-tokenRangeForRange:": {
+        "doc": "Finds the entire range of all tokens contained completely or partially within the specified range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/tokenrangeforrange:"
+      },
+      "-tokensForRange:": {
+        "doc": "Tokenizes the string within the provided range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/tokensforrange:"
+      }
+    }
+  },
+  "properties": {
+    "NLContextualEmbedding": {
+      "NLContextualEmbeddingAssetsResult": {
+        "doc": "The availability of the contextual embedding model assets.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/assetsresult"
+      },
+      "dimension": {
+        "doc": "The dimensionality of the embedding vectors generated by the model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/dimension"
+      },
+      "hasAvailableAssets": {
+        "doc": "A Boolean value that indicates whether assets are available on-device.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/hasavailableassets"
+      },
+      "languages": {
+        "doc": "The languages that the contextual embedding supports.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/languages"
+      },
+      "maximumSequenceLength": {
+        "doc": "The maximum number of tokens in sequence for which the embedding generates vectors.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/maximumsequencelength"
+      },
+      "modelIdentifier": {
+        "doc": "A string that uniquely identifies the embedding model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/modelidentifier"
+      },
+      "revision": {
+        "doc": "The version number the contextual embedding uses.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/revision"
+      },
+      "scripts": {
+        "doc": "The writing systems that the language uses.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding/scripts"
+      }
+    },
+    "NLContextualEmbeddingResult": {
+      "enumerateTokenVectors(in:using:)": {
+        "doc": "Iterates over the embedding vectors corresponding to the subword tokens within the specified range of the input string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/enumeratetokenvectors(in:using:)"
+      },
+      "language": {
+        "doc": "The language that the framework identified or used when processing the input string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/language"
+      },
+      "sequenceLength": {
+        "doc": "The number of embedding vectors the request generates.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/sequencelength"
+      },
+      "string": {
+        "doc": "A copy of the input string used to generate the embedding vectors.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/string"
+      },
+      "tokenVector(at:)": {
+        "doc": "Gets a token vector at the index you specify.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult/tokenvector(at:)"
+      }
+    },
+    "NLEmbedding": {
+      "dimension": {
+        "doc": "The number of dimensions in the vocabulary’s vector space.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/dimension"
+      },
+      "distance(between:and:distanceType:)": {
+        "doc": "Calculates the distance between two strings in the vocabulary space.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/distance(between:and:distancetype:)"
+      },
+      "enumerateNeighbors(for:maximumCount:distanceType:using:)": {
+        "doc": "Passes the nearest strings of a string in the vocabulary to a closure.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/enumerateneighbors(for:maximumcount:distancetype:using:)-72jda"
+      },
+      "language": {
+        "doc": "The language of the text in the word embedding.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/language"
+      },
+      "neighbors(for:maximumCount:distanceType:)": {
+        "doc": "Retrieves a limited number of strings near a string in the vocabulary.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/neighbors(for:maximumcount:distancetype:)-8f1jc"
+      },
+      "revision": {
+        "doc": "The revision of the word embedding.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/revision"
+      },
+      "vector(for:)": {
+        "doc": "Requests the vector for the given term.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/vector(for:)"
+      },
+      "vocabularySize": {
+        "doc": "The number of words in the vocabulary.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/vocabularysize"
+      },
+      "write(_:language:revision:to:)": {
+        "doc": "Exports the word embedding contained within a Core ML model file at the given URL.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding/write(_:language:revision:to:)"
+      }
+    },
+    "NLGazetteer": {
+      "data": {
+        "doc": "The gazetteer represented as a data instance.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/data"
+      },
+      "language": {
+        "doc": "The language of the gazetteer.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlgazetteer/language"
+      }
+    },
+    "NLLanguageRecognizer": {
+      "dominantLanguage": {
+        "doc": "The most likely language for the processed text.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/dominantlanguage"
+      },
+      "languageConstraints": {
+        "doc": "Limits the set of possible languages that the recognizer will return.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languageconstraints"
+      },
+      "languageHints": {
+        "doc": "A dictionary that maps languages to their probabilities in the language identification process.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehints-3gy00"
+      },
+      "languageHypotheses(withMaximum:)": {
+        "doc": "Generates the probabilities of possible languages for the processed text.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehypotheses(withmaximum:)"
+      }
+    },
+    "NLModel": {
+      "configuration": {
+        "doc": "A configuration describing the natural language model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/configuration"
+      },
+      "predictedLabelHypotheses(for:maximumCount:)": {
+        "doc": "Predicts multiple possible labels for the given input string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/predictedlabelhypotheses(for:maximumcount:)"
+      },
+      "predictedLabelHypotheses(forTokens:maximumCount:)": {
+        "doc": "Predicts multiple possible labels for each string in the given array.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodel/predictedlabelhypotheses(fortokens:maximumcount:)"
+      }
+    },
+    "NLModelConfiguration": {
+      "language": {
+        "doc": "The language the model supports.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration/language"
+      },
+      "revision": {
+        "doc": "The version of the Natural Language framework that trained the model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration/revision"
+      },
+      "type": {
+        "doc": "The natural language model type of the model.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration/type"
+      }
+    },
+    "NLTagger": {
+      "NLTaggerAssetsResult": {
+        "doc": "The response to an asset request.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/assetsresult"
+      },
+      "NLTaggerOptions": {
+        "doc": "Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/options"
+      },
+      "dominantLanguage": {
+        "doc": "The dominant language of the string set for the linguistic tagger.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/dominantlanguage"
+      },
+      "enumerateTags(in:unit:scheme:options:using:)": {
+        "doc": "Enumerates a block over the tagger’s string, given a range, token unit, and tag scheme.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/enumeratetags(in:unit:scheme:options:using:)"
+      },
+      "setLanguage(_:range:)": {
+        "doc": "Sets the language for a range of text within the tagger’s string.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/setlanguage(_:range:)"
+      },
+      "setOrthography(_:range:)": {
+        "doc": "Sets the orthography for the specified range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/setorthography(_:range:)"
+      },
+      "string": {
+        "doc": "The string being analyzed by the linguistic tagger.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/string"
+      },
+      "tag(at:unit:scheme:)": {
+        "doc": "Finds a tag for a given linguistic unit, for a single scheme, at the specified character position.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tag(at:unit:scheme:)"
+      },
+      "tagHypotheses(at:unit:scheme:maximumCount:)": {
+        "doc": "Finds multiple possible tags for a given linguistic unit, for a single scheme, at the specified character position.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/taghypotheses(at:unit:scheme:maximumcount:)"
+      },
+      "tagSchemes": {
+        "doc": "The tag schemes configured for this linguistic tagger.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tagschemes"
+      },
+      "tags(in:unit:scheme:options:)": {
+        "doc": "Finds an array of linguistic tags and token ranges for a given string range and linguistic unit.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tags(in:unit:scheme:options:)"
+      },
+      "tokenRange(at:unit:)": {
+        "doc": "Returns the range of the linguistic unit containing the specified character index.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tokenrange(at:unit:)"
+      },
+      "tokenRange(for:unit:)": {
+        "doc": "Finds the entire range of all tokens of the specified linguistic unit contained completely or partially within the specified range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltagger/tokenrange(for:unit:)"
+      }
+    },
+    "NLTokenizer": {
+      "NLTokenizerAttributes": {
+        "doc": "Hints about the contents of the string for the tokenizer.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/attributes"
+      },
+      "enumerateTokens(in:using:)": {
+        "doc": "Enumerates over a given range of the string and calls the specified block for each token.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/enumeratetokens(in:using:)"
+      },
+      "string": {
+        "doc": "The text to be tokenized.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/string"
+      },
+      "tokenRange(at:)": {
+        "doc": "Finds the range of the token at the given index.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/tokenrange(at:)"
+      },
+      "tokenRange(for:)": {
+        "doc": "Finds the entire range of all tokens contained completely or partially within the specified range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/tokenrange(for:)"
+      },
+      "tokens(for:)": {
+        "doc": "Tokenizes the string within the provided range.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/tokens(for:)"
+      },
+      "unit": {
+        "doc": "The linguistic unit that this tokenizer uses.",
+        "url": "https://developer.apple.com/documentation/naturallanguage/nltokenizer/unit"
+      }
+    }
+  }
+}

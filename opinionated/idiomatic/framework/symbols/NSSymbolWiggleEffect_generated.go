@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol effect that applies the Wiggle animation to symbol images.
+//
 // SymbolWiggleEffect wraps [raw.NSSymbolWiggleEffect] with a fluent Go API.
 type SymbolWiggleEffect struct {
 	inner *raw.NSSymbolWiggleEffect

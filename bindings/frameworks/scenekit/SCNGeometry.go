@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A three-dimensional shape (also called a model or mesh) that can be displayed in a scene, with attached materials that define its appearance.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scngeometry
 type SCNGeometry struct {
 	foundation.NSObject
@@ -60,7 +62,7 @@ func SCNGeometryFromID(id objc.ID) *SCNGeometry {
 	return o
 }
 
-// @method geometry @abstract Creates and returns an empty geometry object. @discussion An empty geometry may be used as the lowest level of detail of a geometry.
+// Creates a new geometry object with no content (or default content).
 func SCNGeometryGeometry() *SCNGeometry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometry), _sCNGeometrySelGeometry)
 	if _ret != 0 {
@@ -69,22 +71,22 @@ func SCNGeometryGeometry() *SCNGeometry {
 	return SCNGeometryFromID(_ret)
 }
 
-// @method insertMaterial:atIndex: @abstract Insert a material in the materials array at the specified index. @param material The material to insert. @param index Index in the materials array to insert the new material.
+// Attaches a material to the geometry at the specified index.
 func (o *SCNGeometry) InsertMaterialAtIndex(material *SCNMaterial, index uint) {
 	o.Ptr().Send(_sCNGeometrySelInsertMaterialAtIndex, material.Ptr(), index)
 }
 
-// @method removeMaterialAtIndex: @abstract Remove the material at the specified index from the materials array. @param index The index of the material to remove from the 'materials' array.
+// Removes a material attached to the geometry.
 func (o *SCNGeometry) RemoveMaterialAtIndex(index uint) {
 	o.Ptr().Send(_sCNGeometrySelRemoveMaterialAtIndex, index)
 }
 
-// @method replaceMaterialAtIndex:withMaterial: @abstract Remove the material at the index 'index' from the materials array of the receiver and insert 'material' in its position. @param index The index of the material to replace in the materials array. @param material The new material that will replace the previous one.
+// Replaces a material attached to the geometry with another.
 func (o *SCNGeometry) ReplaceMaterialAtIndexWithMaterial(index uint, material *SCNMaterial) {
 	o.Ptr().Send(_sCNGeometrySelReplaceMaterialAtIndexWithMaterial, index, material.Ptr())
 }
 
-// @method materialWithName: @abstract Return the first material from the materials array of the receiver with the specified name. @param name The name of the material to retrieve.
+// Returns the first material attached to the geometry with the specified name.
 func (o *SCNGeometry) MaterialWithName(name *foundation.NSString) *SCNMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometrySelMaterialWithName, name.Ptr())
 	if _ret != 0 {
@@ -93,7 +95,7 @@ func (o *SCNGeometry) MaterialWithName(name *foundation.NSString) *SCNMaterial {
 	return SCNMaterialFromID(_ret)
 }
 
-// @method geometryWithSources:elements: @abstract Creates and returns a new geometry built from geometry sources and geometry elements. @param sources An array of geometry sources. If several geometry sources have the same semantic, only the first one is taken into account. @param elements An array of geometry elements. The sort order in the array determines the mapping between materials and geometry elements. @discussion A geometry is made of geometry sources (at least `SCNGeometrySourceSemanticVertex`) and at least one geometry element. Multiple sources for texture coordinates are accepted. In that case the `mappingChannel` is implicitly set based on the order of the texture sources, starting at index 0.
+// Creates a new geometry built from the specified geometry sources and elements.
 func SCNGeometryGeometryWithSourcesElements(sources *foundation.NSArray[*SCNGeometrySource], elements *foundation.NSArray[*SCNGeometryElement]) *SCNGeometry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometry), _sCNGeometrySelGeometryWithSourcesElements, sources.Ptr(), elements.Ptr())
 	if _ret != 0 {
@@ -104,14 +106,14 @@ func SCNGeometryGeometryWithSourcesElements(sources *foundation.NSArray[*SCNGeom
 
 // @method geometryWithSources:elements:sourceChannels: @abstract Creates and returns a new geometry built from geometry sources and geometry elements, with per-source indexed geometry data. @param sources An array of geometry sources. If several geometry sources have the same semantic, only the first one is taken into account. @param elements An array of geometry elements. The sort order in the array determines the mapping between materials and geometry elements. @param sourceChannels An array of indices that describes, for each geometry source, which channel of the geometry elements to use. @discussion ``` Example: geometry made of 3 primitives (2 quads, 1 pentagon) using different indices to reference position and UV data (2 channels) Positions         ┆   POS0           POS3           POS4    ┆             quad   quad   pentagon    quad   quad   pentagon    ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:… 0 │ (0.0, 0.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌─────┐ ┌─────┐ ┌───────┐ ┌─────┐ ┌─────┐ ┌───────┐   ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon 1 │ (0.0, 1.0, 0.0)   ┆        │UV0     UV3│UV0     UV3│        ┆     4 4 5 0 1 2 3 5 4 3 2 7 6 5 2 1 0 1 2 3 2 3 0 1 1 2 3 4 0   ┆                                                              primitiveCount:3 2 │ (1.0, 0.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────┘ └───────────────────────┘   ┆                                                         indicesChannelCount:2 3 │ (1.0, 1.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons        channel 0                 channel 1           ┆                                                  interleavedIndicesChannels:… 4 │ (2.0, 0.0, 0.0)   ┆        │           │           │        ┆                  (positions)                  (UVs)             ┆                                                               bytesPerIndex:…]; 5 │ (2.0, 1.0, 0.0)   ┆        │UV1     UV2│UV1     UV2│        ┆                                                                 ┆ 6 │ (2.0, 2.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[positionSource, texcoordsSource] 7 │ (0.0, 2.0, 0.0)   ┆        │UVO       UV4       UV3│        ┆                                                                 ┆                                                   elements:@[element] ┆        │         POS2          │        ┆                quad A          quad B          pentagon C       ┆                                             sourceChannels:@[0, 1]]; UVs               ┆        │                       │        ┆           ┌─────────────┐ ┌─────────────┐ ┌─────────────────┐   ┆ 0 │ (0.0, 0.0)        ┆        │           C           │        ┆     4 4 5 0 0 1 1 2 2 3 3 5 2 4 3 3 0 2 1 7 1 6 2 5 3 2 4 1 0   ┆ 1 │ (0.0, 1.0)        ┆        │                       │        ┆     └───┘└──────────────────────────────────────────────────┘   ┆ 2 │ (1.0, 1.0)        ┆        │UV1                 UV2│        ┆   polygons               interleaved  channels                  ┆ 3 │ (1.0, 0.0)        ┆        └───────────────────────┘        ┆                           (positions and UVs)                   ┆ 4 │ (0.5, 0.0)        ┆   POS7                          POS6    ┆                                                                 ┆ Example: geometry made of 3 primitives (2 quads, 1 pentagon) using the same indices to reference position and UV data (1 channel) Positions         ┆   POS0           POS3           POS4    ┆             quad A      quad B      pentagon C                  ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:… 0 │ (0.0, 4.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌────────┐  ┌────────┐  ┌───────────┐                 ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon 1 │ (0.0, 2.0, 0.0)   ┆        │UV0     UV3│UV3     UV4│        ┆     4 4 5 0  1  2  3  5  4  3  2  7  6  5  2  1                 ┆                                                              primitiveCount:3 2 │ (2.0, 2.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────────────────┘                 ┆                                                               bytesPerIndex:…]; 3 │ (2.0, 4.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons              channel 0                               ┆ 4 │ (4.0, 4.0, 0.0)   ┆        │           │           │        ┆                    (positions and UVs)                          ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[positionSource, texcoordsSource] 5 │ (4.0, 2.0, 0.0)   ┆        │UV1     UV2│UV2     UV5│        ┆                                                                 ┆                                                   elements:@[element]]; 6 │ (4.0, 0.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆ 7 │ (0.0, 0.0, 0.0)   ┆        │UV1       UV2       UV5│        ┆                                                                 ┆                                            === or equivalently === ┆        │         POS2          │        ┆                                                                 ┆ UVs               ┆        │                       │        ┆                                                                 ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:… 0 │ (0.0, 0.0)        ┆        │           C           │        ┆                                                                 ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon 1 │ (0.0, 0.5)        ┆        │                       │        ┆                                                                 ┆                                                              primitiveCount:3 2 │ (0.5, 0.5)        ┆        │UV7                 UV6│        ┆                                                                 ┆                                                         indicesChannelCount:1 3 │ (0.5, 0.0)        ┆        └───────────────────────┘        ┆                                                                 ┆                                                  interleavedIndicesChannels:… 4 │ (1.0, 0.0)        ┆   POS7                          POS6    ┆                                                                 ┆                                                               bytesPerIndex:…]; 5 │ (1.0, 0.5)        ┆                                         ┆                                                                 ┆ 6 │ (1.0, 1.0)        ┆                                         ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[positionSource, texcoordsSource] 7 │ (0.0, 1.0)        ┆                                         ┆                                                                 ┆                                                   elements:@[element] ┆                                         ┆                                                                 ┆                                             sourceChannels:@[0, 0]];                                                                                                                                               ┆ ```
 func SCNGeometryGeometryWithSourcesElementsSourceChannels(sources *foundation.NSArray[*SCNGeometrySource], elements *foundation.NSArray[*SCNGeometryElement], sourceChannels *foundation.NSArray[*foundation.NSNumber]) *SCNGeometry {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometry), _sCNGeometrySelGeometryWithSourcesElementsSourceChannels, sources.Ptr(), elements.Ptr(), sourceChannels)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometry), _sCNGeometrySelGeometryWithSourcesElementsSourceChannels, sources.Ptr(), elements.Ptr(), sourceChannels.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNGeometryFromID(_ret)
 }
 
-// @method geometrySourcesForSemantic: @abstract Returns the geometry sources for a given semantic. @param semantic The semantic of the geometry sources that should be retrieved. @discussion Returns nil if no geometry source is found for the given semantic. May return more than one source, typically for multiple texture coordinate sources.
+// Returns the geometry sources for a specified semantic.
 func (o *SCNGeometry) GeometrySourcesForSemantic(semantic *foundation.NSString) *foundation.NSArray[*SCNGeometrySource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometrySelGeometrySourcesForSemantic, semantic.Ptr())
 	if _ret != 0 {
@@ -120,7 +122,7 @@ func (o *SCNGeometry) GeometrySourcesForSemantic(semantic *foundation.NSString) 
 	return foundation.NSArrayFromID[*SCNGeometrySource](_ret)
 }
 
-// @method geometryElementAtIndex: @abstract Returns the geometry element at a given index. @param elementIndex The index of the geometry element.
+// Returns the geometry element at a specified index.
 func (o *SCNGeometry) GeometryElementAtIndex(elementIndex int) *SCNGeometryElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometrySelGeometryElementAtIndex, elementIndex)
 	if _ret != 0 {
@@ -194,8 +196,11 @@ func (o *SCNGeometry) GeometryElementCount() int {
 
 // @property geometrySourceChannels @abstract An array of indices that describes, for each geometry source, which channel of the geometry elements to use.
 func (o *SCNGeometry) GeometrySourceChannels() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _sCNGeometrySelGeometrySourceChannels)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometrySelGeometrySourceChannels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.

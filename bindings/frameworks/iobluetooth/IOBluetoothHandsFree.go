@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Hands free profile class.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree
 type IOBluetoothHandsFree struct {
 	foundation.NSObject
@@ -56,18 +58,18 @@ func IOBluetoothHandsFreeFromID(id objc.ID) *IOBluetoothHandsFree {
 	return o
 }
 
-// @method		indicator:indicatorName @abstract		Return an indicator's value @discussion	Returns an indicator's value. @param			indicatorName  See  “Hands free indicator constants," for standard indicator names.
+// Return an indicator’s value
 func (o *IOBluetoothHandsFree) Indicator(indicatorName *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothHandsFreeSelIndicator, indicatorName.Ptr())
 	return _ret
 }
 
-// @method		setIndicator:indicatorName:indicatorValue @abstract		Set an indicator's value @discussion	Sets an indicator's value. @param			indicatorName  See  “Hands free indicator constants," for standard indicator names. @param			indicatorValue Will set the indicator value as long as it is within the min and max values allowed.
+// Set an indicator’s value
 func (o *IOBluetoothHandsFree) SetIndicatorValue(indicatorName *foundation.NSString, indicatorValue int) {
 	o.Ptr().Send(_iOBluetoothHandsFreeSelSetIndicatorValue, indicatorName.Ptr(), indicatorValue)
 }
 
-// @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFree object @discussion	This method should be called on a subclass (IOBluetoothHandsFreeDevice or IOBluetoothHandsFreeAudioGateway) to get full functionality. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate that implements the IOBluetoothHandsFreeDelegate protocol. @result		A newly created IOBluetoothHandsFreeAudioGateway object on success, nil on failure
+// Create a new IOBluetoothHandsFree object
 func (o *IOBluetoothHandsFree) InitWithDeviceDelegate(device *IOBluetoothDevice, inDelegate IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHandsFreeSelInitWithDeviceDelegate, device.Ptr(), inDelegate)
 	if _ret != 0 {
@@ -76,27 +78,27 @@ func (o *IOBluetoothHandsFree) InitWithDeviceDelegate(device *IOBluetoothDevice,
 	return IOBluetoothHandsFreeFromID(_ret)
 }
 
-// @method		connect @abstract		Connect to the device @discussion	Connects to the device and sets up a service level connection (RFCOMM channel). Delegate methods will be called once the connection is complete or a failure occurs.
+// Connect to the device
 func (o *IOBluetoothHandsFree) Connect() {
 	o.Ptr().Send(_iOBluetoothHandsFreeSelConnect)
 }
 
-// @method		disconnect @abstract		Disconnect from the device @discussion	Disconnects from the device, closes the SCO and service level connection if they are connected. Delegate methods will be called once the disconnection is complete.
+// Disconnect from the device
 func (o *IOBluetoothHandsFree) Disconnect() {
 	o.Ptr().Send(_iOBluetoothHandsFreeSelDisconnect)
 }
 
-// @method		connectSCO @abstract		Open a SCO connection with the device @discussion	Opens a SCO connection with the device. The device must already have a service level connection or this will return immediately. Delegate methods will be called once the connection is complete of a failure occurs.
+// Open a SCO connection with the device
 func (o *IOBluetoothHandsFree) ConnectSCO() {
 	o.Ptr().Send(_iOBluetoothHandsFreeSelConnectSCO)
 }
 
-// @method		disconnectSCO @abstract		Disconnect the SCO connection with the device @discussion	Disconnects the SCO connection with the device (if one exists). Delegate methods will be called once the disconnection is complete.
+// Disconnect the SCO connection with the device
 func (o *IOBluetoothHandsFree) DisconnectSCO() {
 	o.Ptr().Send(_iOBluetoothHandsFreeSelDisconnectSCO)
 }
 
-// @method		isSCOConnected @abstract		Determine if there is a SCO connection to the device @discussion	Determines if there is a SCO connection to the device. @result		YES if there is a SCO connection to the device; otherwise, NO.
+// Determine if there is a SCO connection to the device
 func (o *IOBluetoothHandsFree) IsSCOConnected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothHandsFreeSelIsSCOConnected)
 	return _ret

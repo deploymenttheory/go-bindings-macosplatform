@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains both input and output parameters that the low-latency frame interpolation processor needs.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters
 type VTLowLatencyFrameInterpolationParameters struct {
 	foundation.NSObject
@@ -34,9 +36,9 @@ func VTLowLatencyFrameInterpolationParametersFromID(id objc.ID) *VTLowLatencyFra
 	return o
 }
 
-// Creates a new low-latency frame interpolation parameters object. - Parameters: - sourceFrame: Current frame to use for interpolation; must be non `nil`. - previousFrame: Previous frame used for interpolation; must be non `nil`. - interpolationPhase: Array of float numbers that indicate interpolation phase locations at which the processor interpolates the frames. Must be greater than 0 and less than 1.0; for example 0.5 is midway between the previous frame and the source frame. If you enable spatial scaling, the only supported interpolation phase is 0.5. - destinationFrames: Caller-allocated array of `VTFrameProcessorFrame` to receive the interpolated frames. This must have the same number of elements as the the `interpolationPhase`. If you enable spatial scaling, it must also contain an element to hold the scaled version of sourceFrame.
+// Creates a new low-latency frame interpolation parameters object.
 func (o *VTLowLatencyFrameInterpolationParameters) InitWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *VTFrameProcessorFrame, previousFrame *VTFrameProcessorFrame, interpolationPhase *foundation.NSArray[*foundation.NSNumber], destinationFrames *foundation.NSArray[*VTFrameProcessorFrame]) *VTLowLatencyFrameInterpolationParameters {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationParametersSelInitWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames, sourceFrame.Ptr(), previousFrame.Ptr(), interpolationPhase, destinationFrames.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationParametersSelInitWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames, sourceFrame.Ptr(), previousFrame.Ptr(), interpolationPhase.Ptr(), destinationFrames.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -63,8 +65,11 @@ func (o *VTLowLatencyFrameInterpolationParameters) PreviousFrame() *VTFrameProce
 
 // Array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
 func (o *VTLowLatencyFrameInterpolationParameters) InterpolationPhase() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTLowLatencyFrameInterpolationParametersSelInterpolationPhase)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationParametersSelInterpolationPhase)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Array of destination frames that you provided when creating the low-latency frame interpolation parameters object.

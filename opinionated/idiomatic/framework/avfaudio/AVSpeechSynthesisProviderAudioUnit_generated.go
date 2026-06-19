@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that generates speech from text.
+//
 // SpeechSynthesisProviderAudioUnit wraps [raw.AVSpeechSynthesisProviderAudioUnit] with a fluent Go API.
 type SpeechSynthesisProviderAudioUnit struct {
 	inner *raw.AVSpeechSynthesisProviderAudioUnit
@@ -40,7 +42,7 @@ func NewSpeechSynthesisProviderAudioUnit() *SpeechSynthesisProviderAudioUnit {
 	return &SpeechSynthesisProviderAudioUnit{inner: raw.AVSpeechSynthesisProviderAudioUnitFromID(_id)}
 }
 
-// @brief  Returns the voices this audio unit has available and ready for synthesis. @discussion This method should fetch and return the voices ready to synthesize that a user can select from (usually through Settings). Required for speech synthesizer audio unit extensions. An audio unit with a dynamic list of voices can override this property's getter to perform a more complex fetch.
+// A list of voices the audio unit provides to the system.
 //
 // WithSpeechVoices sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit {
@@ -63,7 +65,7 @@ func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*raw.AVSpee
 	return x
 }
 
-// @brief A property set by the host that is called by the audio unit to supply metadata for a speech request. @discussion A synthesizer should call this method when it has produced relevant data to the audio buffers it is sending back to the host. In some cases speech output may be delayed until these markers are delivered. For example, word highlighting depends on marker data from synthesizers in order to properly time which words are highlighted. Many speech synthesizers generate this information on the fly, while synthesizing the audio. The array of markers can reference future audio buffers that have yet to be delivered. There may be cases in which marker data is not fully known until further audio processing is done. In these cases, and other casers where marker data has changed, calling this block with marker data that contains perviously delivered audio buffer ranges will replace that audio buffer range's marker data, as it will be considered stale.
+// A block that subclasses use to send marker information to the host.
 //
 // WithSpeechSynthesisOutputMetadataBlock sets the speechSynthesisOutputMetadataBlock property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderAudioUnit) WithSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) *SpeechSynthesisProviderAudioUnit {
@@ -71,14 +73,14 @@ func (x *SpeechSynthesisProviderAudioUnit) WithSpeechSynthesisOutputMetadataBloc
 	return x
 }
 
-// @brief  Sends a new speech request to be synthesized @discussion Sends a new speech request to the synthesizer to render. When the synthesizer audio unit is finished generating audio buffers for the speech request, it should indicate this within its internal render block, @c AUInternalRenderBlock, specifically through the @c AudioUnitRenderActionFlags flag @c kAudioOfflineUnitRenderAction_Complete.
+// Sets the text to synthesize and the voice to use.
 //
 // SynthesizeSpeechRequest calls the underlying SynthesizeSpeechRequest.
 func (x *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *raw.AVSpeechSynthesisProviderRequest) {
 	x.inner.SynthesizeSpeechRequest(speechRequest)
 }
 
-// @brief  Informs the audio unit that the speech request job should be discarded.
+// Informs the audio unit to discard the speech request.
 //
 // CancelSpeechRequest calls the underlying CancelSpeechRequest.
 func (x *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {

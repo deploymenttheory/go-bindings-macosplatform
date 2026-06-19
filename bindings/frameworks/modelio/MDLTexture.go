@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A source of texel data to be used in rendering material surface appearances.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdltexture
 type MDLTexture struct {
 	foundation.NSObject
@@ -67,7 +69,7 @@ func (o *MDLTexture) Init() *MDLTexture {
 	return MDLTextureFromID(_ret)
 }
 
-// Creates a texture from a source in the main bundle named in a manner matching name.
+// Loads the texture with the specified filename from the app’s main bundle.
 func MDLTextureTextureNamed(name *foundation.NSString) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureNamed, name.Ptr())
 	if _ret != 0 {
@@ -76,6 +78,7 @@ func MDLTextureTextureNamed(name *foundation.NSString) *MDLTexture {
 	return MDLTextureFromID(_ret)
 }
 
+// Loads the texture with the specified filename from the specified bundle.
 func MDLTextureTextureNamedBundle(name *foundation.NSString, bundleOrNil *foundation.NSBundle) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureNamedBundle, name.Ptr(), bundleOrNil.Ptr())
 	if _ret != 0 {
@@ -92,23 +95,25 @@ func MDLTextureTextureNamedAssetResolver(name *foundation.NSString, resolver MDL
 	return MDLTextureFromID(_ret)
 }
 
-// Creates a cube texture map image using 6 faces of the same dimensions, ordered +X,-X,+Y,-Y,+Z,-Z If the data is read back the image will be compacted into a single vertical stack where dimensions.y = 6 * dimensions.x isCube will return YES @param names a collection of mosaiced images in a cross formation or column or row. - If 6 individual images are given they are assumed to be in order and will be loaded as is. - if 3 images of double height or width are given they will be treated as pairs of + and - in each axis, the order is must be x, then y, then z. - if 2 images of triple height or width are given they will be treates as a positive set and a negative set in the order +x, +y, +z, then -x, -y, -z. - if a single image is given it will be used without conversion if in column orientation and demosaiced in all other instances.
+// Loads a cube texture from the specified image files in the app’s main bundle.
 func MDLTextureTextureCubeWithImagesNamed(names *foundation.NSArray[*foundation.NSString]) *MDLTexture {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureCubeWithImagesNamed, names)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureCubeWithImagesNamed, names.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MDLTextureFromID(_ret)
 }
 
+// Loads a cube texture from the specified image files in the specified bundle.
 func MDLTextureTextureCubeWithImagesNamedBundle(names *foundation.NSArray[*foundation.NSString], bundleOrNil *foundation.NSBundle) *MDLTexture {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureCubeWithImagesNamedBundle, names, bundleOrNil.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelTextureCubeWithImagesNamedBundle, names.Ptr(), bundleOrNil.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MDLTextureFromID(_ret)
 }
 
+// Generates an irradiance texture from the specified reflectance cube texture.
 func MDLTextureIrradianceTextureCubeWithTextureNameDimensions(texture *MDLTexture, name *foundation.NSString, dimensions unsafe.Pointer) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelIrradianceTextureCubeWithTextureNameDimensions, texture.Ptr(), name.Ptr(), dimensions)
 	if _ret != 0 {
@@ -117,6 +122,7 @@ func MDLTextureIrradianceTextureCubeWithTextureNameDimensions(texture *MDLTextur
 	return MDLTextureFromID(_ret)
 }
 
+// Generates an irradiance texture from the specified reflectance cube texture, assuming a surface of the specified roughness.
 func MDLTextureIrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *MDLTexture, name *foundation.NSString, dimensions unsafe.Pointer, roughness float32) *MDLTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLTexture), _mDLTextureSelIrradianceTextureCubeWithTextureNameDimensionsRoughness, texture.Ptr(), name.Ptr(), dimensions, roughness)
 	if _ret != 0 {
@@ -125,6 +131,7 @@ func MDLTextureIrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *
 	return MDLTextureFromID(_ret)
 }
 
+// Initializes a texture object with the specified image data and properties.
 func (o *MDLTexture) InitWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData *foundation.NSData, topLeftOrigin bool, name *foundation.NSString, dimensions unsafe.Pointer, rowStride int, channelCount uint, channelEncoding MDLTextureChannelEncoding, isCube bool) *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelInitWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube, pixelData.Ptr(), topLeftOrigin, name.Ptr(), dimensions, rowStride, channelCount, channelEncoding, isCube)
 	if _ret != 0 {
@@ -133,7 +140,7 @@ func (o *MDLTexture) InitWithDataTopLeftOriginNameDimensionsRowStrideChannelCoun
 	return MDLTextureFromID(_ret)
 }
 
-// write a texture to URL, deducing type from path extension
+// Exports the texture data to an image file at the specified URL.
 func (o *MDLTexture) WriteToURL(uRL *foundation.NSURL) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mDLTextureSelWriteToURL, uRL.Ptr())
 	return _ret
@@ -145,7 +152,7 @@ func (o *MDLTexture) WriteToURLLevel(uRL *foundation.NSURL, level uint) bool {
 	return _ret
 }
 
-// write a texture to URL, using a specific UT type
+// Exports the texture data to an image file at the specified URL, of the specified type.
 func (o *MDLTexture) WriteToURLType(nsurl *foundation.NSURL, type_ unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mDLTextureSelWriteToURLType, nsurl.Ptr(), type_)
 	return _ret
@@ -157,6 +164,7 @@ func (o *MDLTexture) WriteToURLTypeLevel(nsurl *foundation.NSURL, type_ unsafe.P
 	return _ret
 }
 
+// Exports the texture data as a CoreGraphics image.
 func (o *MDLTexture) ImageFromTexture() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLTextureSelImageFromTexture)
 	return _ret
@@ -167,6 +175,7 @@ func (o *MDLTexture) ImageFromTextureAtLevel(level uint) unsafe.Pointer {
 	return _ret
 }
 
+// Returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.
 func (o *MDLTexture) TexelDataWithTopLeftOrigin() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithTopLeftOrigin)
 	if _ret != 0 {
@@ -175,6 +184,7 @@ func (o *MDLTexture) TexelDataWithTopLeftOrigin() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns the texture’s image data, organized such that its first pixel represents the bottom-left corner of the image.
 func (o *MDLTexture) TexelDataWithBottomLeftOrigin() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithBottomLeftOrigin)
 	if _ret != 0 {
@@ -183,6 +193,7 @@ func (o *MDLTexture) TexelDataWithBottomLeftOrigin() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the top-left corner of the image.
 func (o *MDLTexture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithTopLeftOriginAtMipLevelCreate, level, create)
 	if _ret != 0 {
@@ -191,6 +202,7 @@ func (o *MDLTexture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, creat
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the bottom-left corner of the image.
 func (o *MDLTexture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTextureSelTexelDataWithBottomLeftOriginAtMipLevelCreate, level, create)
 	if _ret != 0 {

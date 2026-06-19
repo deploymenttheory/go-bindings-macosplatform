@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A scope in which the sync engine will send changes to the server.
+//
 // SyncEngineSendChangesScope wraps [raw.CKSyncEngineSendChangesScope] with a fluent Go API.
 type SyncEngineSendChangesScope struct {
 	inner *raw.CKSyncEngineSendChangesScope
@@ -30,7 +32,7 @@ func SyncEngineSendChangesScopeFromID(id objc.ID) *SyncEngineSendChangesScope {
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(id)}
 }
 
-// Creates a scope that contains only the given zone IDs. If `zoneIDs` is `nil`, then this scope contains all zones.
+// Creates a scope that contains only the given zone IDs. If zoneIDs is nil, then this scope contains all zones.
 //
 // NewSyncEngineSendChangesScopeWithZoneIDs creates a new [SyncEngineSendChangesScope].
 func NewSyncEngineSendChangesScopeWithZoneIDs(zoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineSendChangesScope {
@@ -48,7 +50,7 @@ func NewSyncEngineSendChangesScopeWithExcludedZoneIDs(excludedZoneIDs *foundatio
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(_id)}
 }
 
-// Creates a scope that includes only the given record IDs. If `recordIDs` is nil, this scope contains all records.
+// Creates a scope that includes only the given record IDs. If recordIDs is nil, this scope contains all records.
 //
 // NewSyncEngineSendChangesScopeWithRecordIDs creates a new [SyncEngineSendChangesScope].
 func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs *foundation.NSSet[*raw.CKRecordID]) *SyncEngineSendChangesScope {

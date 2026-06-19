@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A fully connected convolution layer, also known as an inner product layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnected
 type MPSCNNFullyConnected struct {
 	mpsneuralnetwork.MPSCNNConvolution
@@ -33,7 +35,7 @@ func MPSCNNFullyConnectedFromID(id objc.ID) *MPSCNNFullyConnected {
 	return o
 }
 
-// @abstract   Initializes a fully connected kernel @param      device                          The MTLDevice on which this MPSCNNFullyConnected filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNFullyConnected uses to obtain the weights and bias terms for the CNN fully connected filter. @return     A valid MPSCNNFullyConnected object or nil, if failure.
+// Initializes a fully connected convolution layer.
 func (o *MPSCNNFullyConnected) InitWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNFullyConnected {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNFullyConnectedSelInitWithDeviceWeights, device, weights)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *MPSCNNFullyConnected) InitWithDeviceWeights(device metal.MTLDevice, wei
 	return MPSCNNFullyConnectedFromID(_ret)
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+// Initializes a fully connected convolution layer.
 func (o *MPSCNNFullyConnected) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNFullyConnected {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNFullyConnectedSelInitWithCoderDevice, aDecoder.Ptr(), device)
 	if _ret != 0 {

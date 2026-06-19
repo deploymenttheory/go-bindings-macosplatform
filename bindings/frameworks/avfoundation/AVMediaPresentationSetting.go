@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSetting represents a selectable setting for controlling the presentation of the media.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmediapresentationsetting
 type AVMediaPresentationSetting struct {
 	foundation.NSObject

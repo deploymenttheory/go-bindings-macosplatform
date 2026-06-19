@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description object used to define which properties are fetched from Core Data.
+//
 // FetchedPropertyDescription wraps [raw.NSFetchedPropertyDescription] with a fluent Go API.
 type FetchedPropertyDescription struct {
 	inner *raw.NSFetchedPropertyDescription
@@ -36,60 +38,80 @@ func NewFetchedPropertyDescription() *FetchedPropertyDescription {
 	return &FetchedPropertyDescription{inner: raw.NSFetchedPropertyDescriptionFromID(_id)}
 }
 
+// The fetch request of the receiver.
+//
 // WithFetchRequest sets the fetchRequest property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *FetchedPropertyDescription {
 	x.inner.SetFetchRequest(fetchRequest)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithName(name string) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is optional.
+//
 // WithOptional sets the optional property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithOptional(optional bool) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetOptional(optional)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transient.
+//
 // WithTransient sets the transient property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithTransient(transient bool) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetTransient(transient)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver should be indexed for searching.
+//
 // WithIndexed sets the indexed property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithIndexed(indexed bool) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetIndexed(indexed)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+//
 // WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
 	return x
 }
 
+// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+//
 // WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription {
 	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))

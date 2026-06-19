@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the types media destinations.
+//
 // URLResolutionResult wraps [raw.INURLResolutionResult] with a fluent Go API.
 type URLResolutionResult struct {
 	inner *raw.INURLResolutionResult

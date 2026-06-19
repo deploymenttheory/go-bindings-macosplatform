@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that facilitates activation and deactivation of system extensions.
+//
 // Apple documentation: https://developer.apple.com/documentation/systemextensions/ossystemextensionmanager
 type OSSystemExtensionManager struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func OSSystemExtensionManagerFromID(id objc.ID) *OSSystemExtensionManager {
 	return o
 }
 
-// @abstract Submits a System Extension request to the manager. @param request The request to process.
+// Submits a system extension request to the manager.
 func (o *OSSystemExtensionManager) SubmitRequest(request *OSSystemExtensionRequest) {
 	o.Ptr().Send(_oSSystemExtensionManagerSelSubmitRequest, request.Ptr())
 }

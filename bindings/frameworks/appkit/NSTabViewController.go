@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container view controller that manages a tab view interface, which organizes multiple pages of content but displays only one page at a time.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstabviewcontroller
 type NSTabViewController struct {
 	NSViewController
@@ -52,22 +54,22 @@ func NSTabViewControllerFromID(id objc.ID) *NSTabViewController {
 	return o
 }
 
-// Adds a TabViewItem to the end of the TabViewController. The tabViewItem’s viewController’s view will only be loaded once its tab is selected. \param tabViewItem The TabViewItem to add. It must have a \c viewController set by the time it is added or an exception will be thrown. An exception will also be thrown if tabViewItem is nil.
+// Adds the specified tab to the end of the tab view controller’s list of tabs.
 func (o *NSTabViewController) AddTabViewItem(tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewControllerSelAddTabViewItem, tabViewItem.Ptr())
 }
 
-// Adds a TabViewItem to a given index in the TabViewController. The tabViewItem’s viewController’s view will only be loaded once its tab is selected. \c -selectedTabViewItemIndex will be adjusted if the insertion index is before it. Subclasses must call through \c -insertTabViewItem:atIndex: to add a TabViewItem. \param tabViewItem The TabViewItem to add. It must have a \c viewController set by the time it is added or an exception will be thrown. An exception will also be thrown if tabViewItem is nil. \param index The index to add the TabViewItem at. Will throw an exception if \c index < 0 or \c index > \c tabViewItems.count
+// Inserts a tab view into the tab view controller’s list of tabs.
 func (o *NSTabViewController) InsertTabViewItemAtIndex(tabViewItem *NSTabViewItem, index int) {
 	o.Ptr().Send(_nSTabViewControllerSelInsertTabViewItemAtIndex, tabViewItem.Ptr(), index)
 }
 
-// Removes a TabViewItem from the receiver. If the removed tabViewItem currently selected, the next (or previous, if there is no next) tabViewItem will become selected. If this is the only tabViewItem in the TabViewController, the selectedTabViewItemIndex will become \c -1. Subclasses must call through \c -removeTabViewItem: to remove a TabViewItem. \param tabViewItem The TabViewItem to remove. An exception will be thrown if \c tabViewItem is not in the NSTabViewController or if it is nil.
+// Removes the specified tab view item from the tab view controller.
 func (o *NSTabViewController) RemoveTabViewItem(tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewControllerSelRemoveTabViewItem, tabViewItem.Ptr())
 }
 
-// Convenience method for getting the associated tab view item for a particular childViewController. \param viewController The ViewController to look up. \return The corresponding TabViewItem. Returns nil if \c viewController is not a child of the TabViewController.
+// Returns the tab view item for the specified child view controller.
 func (o *NSTabViewController) TabViewItemForViewController(viewController *NSViewController) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItemForViewController, viewController.Ptr())
 	if _ret != 0 {
@@ -76,19 +78,23 @@ func (o *NSTabViewController) TabViewItemForViewController(viewController *NSVie
 	return NSTabViewItemFromID(_ret)
 }
 
+// Informs the tab view controller that the specified tab is about to be selected.
 func (o *NSTabViewController) TabViewWillSelectTabViewItem(tabView *NSTabView, tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewControllerSelTabViewWillSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
 }
 
+// Informs the tab view controller that the specified tab was selected.
 func (o *NSTabViewController) TabViewDidSelectTabViewItem(tabView *NSTabView, tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewControllerSelTabViewDidSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
 }
 
+// Asks the tab view controller if the specified tab should be selected.
 func (o *NSTabViewController) TabViewShouldSelectTabViewItem(tabView *NSTabView, tabViewItem *NSTabViewItem) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTabViewControllerSelTabViewShouldSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
 	return _ret
 }
 
+// Returns the toolbar item for the specified identifier.
 func (o *NSTabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *NSToolbar, itemIdentifier *foundation.NSString, flag bool) *NSToolbarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarItemForItemIdentifierWillBeInsertedIntoToolbar, toolbar.Ptr(), itemIdentifier.Ptr(), flag)
 	if _ret != 0 {
@@ -97,19 +103,31 @@ func (o *NSTabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoTool
 	return NSToolbarItemFromID(_ret)
 }
 
+// Returns the array of identifier strings for the default toolbar items.
 func (o *NSTabViewController) ToolbarDefaultItemIdentifiers(toolbar *NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTabViewControllerSelToolbarDefaultItemIdentifiers, toolbar.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarDefaultItemIdentifiers, toolbar.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the array of identifier strings for the allowed toolbar items.
 func (o *NSTabViewController) ToolbarAllowedItemIdentifiers(toolbar *NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTabViewControllerSelToolbarAllowedItemIdentifiers, toolbar.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarAllowedItemIdentifiers, toolbar.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the array of identifier strings for the selectable toolbar items
 func (o *NSTabViewController) ToolbarSelectableItemIdentifiers(toolbar *NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTabViewControllerSelToolbarSelectableItemIdentifiers, toolbar.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarSelectableItemIdentifiers, toolbar.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.

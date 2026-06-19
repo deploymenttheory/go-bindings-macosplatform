@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static collection of objects associated with unique keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdictionary
 type NSDictionary[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	NSObject
@@ -90,11 +92,13 @@ func NSDictionaryFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](i
 	return o
 }
 
+// Returns the value associated with a given key.
 func (o *NSDictionary[KeyType, ObjectType]) ObjectForKey(aKey KeyType) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSDictionarySelObjectForKey, aKey)
 	return _ret
 }
 
+// Provides an enumerator to access the keys in the dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) KeyEnumerator() *NSEnumerator[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelKeyEnumerator)
 	if _ret != 0 {
@@ -103,6 +107,7 @@ func (o *NSDictionary[KeyType, ObjectType]) KeyEnumerator() *NSEnumerator[KeyTyp
 	return NSEnumeratorFromID[KeyType](_ret)
 }
 
+// Initializes a newly allocated dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) Init() *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInit)
 	if _ret != 0 {
@@ -111,6 +116,7 @@ func (o *NSDictionary[KeyType, ObjectType]) Init() *NSDictionary[KeyType, Object
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Initializes a newly allocated dictionary with the specified number of key-value pairs constructed from the provided C arrays of keys and objects.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithObjectsForKeysCount(objects unsafe.Pointer, keys NSCopying, cnt uint) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithObjectsForKeysCount, objects, keys, cnt)
 	if _ret != 0 {
@@ -119,6 +125,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithObjectsForKeysCount(objects 
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Creates a dictionary initialized from data in the provided unarchiver.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithCoder(coder *NSCoder) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -132,6 +139,7 @@ func (o *NSDictionary[KeyType, ObjectType]) Count() uint {
 	return _ret
 }
 
+// Returns a new array containing the keys corresponding to all occurrences of a given object in the dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) AllKeysForObject(anObject ObjectType) *NSArray[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelAllKeysForObject, anObject)
 	if _ret != 0 {
@@ -140,6 +148,7 @@ func (o *NSDictionary[KeyType, ObjectType]) AllKeysForObject(anObject ObjectType
 	return NSArrayFromID[KeyType](_ret)
 }
 
+// Returns a string object that represents the contents of the dictionary, formatted as a property list.
 func (o *NSDictionary[KeyType, ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelDescriptionWithLocale, locale)
 	if _ret != 0 {
@@ -148,6 +157,7 @@ func (o *NSDictionary[KeyType, ObjectType]) DescriptionWithLocale(locale objc.ID
 	return NSStringFromID(_ret)
 }
 
+// Returns a string object that represents the contents of the dictionary, formatted as a property list.
 func (o *NSDictionary[KeyType, ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, level uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelDescriptionWithLocaleIndent, locale, level)
 	if _ret != 0 {
@@ -156,11 +166,13 @@ func (o *NSDictionary[KeyType, ObjectType]) DescriptionWithLocaleIndent(locale o
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the contents of the receiving dictionary are equal to the contents of another given dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) IsEqualToDictionary(otherDictionary *NSDictionary[KeyType, ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelIsEqualToDictionary, otherDictionary.Ptr())
 	return _ret
 }
 
+// Returns an enumerator object that lets you access each value in the dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelObjectEnumerator)
 	if _ret != 0 {
@@ -169,6 +181,7 @@ func (o *NSDictionary[KeyType, ObjectType]) ObjectEnumerator() *NSEnumerator[Obj
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Returns as a static array the set of objects from the dictionary that corresponds to the specified keys.
 func (o *NSDictionary[KeyType, ObjectType]) ObjectsForKeysNotFoundMarker(keys *NSArray[KeyType], marker ObjectType) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelObjectsForKeysNotFoundMarker, keys.Ptr(), marker)
 	if _ret != 0 {
@@ -177,6 +190,7 @@ func (o *NSDictionary[KeyType, ObjectType]) ObjectsForKeysNotFoundMarker(keys *N
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Writes a property list representation of the contents of the dictionary to a given URL.
 func (o *NSDictionary[KeyType, ObjectType]) WriteToURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelWriteToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -186,6 +200,7 @@ func (o *NSDictionary[KeyType, ObjectType]) WriteToURLError(url *NSURL) (bool, e
 	return _ret, nil
 }
 
+// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values.
 func (o *NSDictionary[KeyType, ObjectType]) KeysSortedByValueUsingSelector(comparator objc.SEL) *NSArray[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelKeysSortedByValueUsingSelector, comparator)
 	if _ret != 0 {
@@ -194,23 +209,28 @@ func (o *NSDictionary[KeyType, ObjectType]) KeysSortedByValueUsingSelector(compa
 	return NSArrayFromID[KeyType](_ret)
 }
 
+// Returns by reference C arrays of the keys and values in the dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) GetObjectsAndKeysCount(objects unsafe.Pointer, keys unsafe.Pointer, count uint) {
 	o.Ptr().Send(_nSDictionarySelGetObjectsAndKeysCount, objects, keys, count)
 }
 
+// Returns the value associated with a given key.
 func (o *NSDictionary[KeyType, ObjectType]) ObjectForKeyedSubscript(key KeyType) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSDictionarySelObjectForKeyedSubscript, key)
 	return _ret
 }
 
+// Applies a given block object to the entries of the dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) EnumerateKeysAndObjectsUsing(block objc.Block) {
 	o.Ptr().Send(_nSDictionarySelEnumerateKeysAndObjectsUsing, block)
 }
 
+// Applies a given block object to the entries of the dictionary, with options specifying how the enumeration is performed.
 func (o *NSDictionary[KeyType, ObjectType]) EnumerateKeysAndObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSDictionarySelEnumerateKeysAndObjectsWithOptionsUsing, opts, block)
 }
 
+// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block.
 func (o *NSDictionary[KeyType, ObjectType]) KeysSortedByValueUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSArray[KeyType] {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -226,6 +246,7 @@ func (o *NSDictionary[KeyType, ObjectType]) KeysSortedByValueUsingComparator(cmp
 	return NSArrayFromID[KeyType](_ret)
 }
 
+// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block and a specified set of options.
 func (o *NSDictionary[KeyType, ObjectType]) KeysSortedByValueWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSArray[KeyType] {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -241,6 +262,7 @@ func (o *NSDictionary[KeyType, ObjectType]) KeysSortedByValueWithOptionsUsingCom
 	return NSArrayFromID[KeyType](_ret)
 }
 
+// Returns the set of keys whose corresponding value satisfies a constraint described by a block object.
 func (o *NSDictionary[KeyType, ObjectType]) KeysOfEntriesPassingTest(predicate objc.Block) *NSSet[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelKeysOfEntriesPassingTest, predicate)
 	if _ret != 0 {
@@ -249,6 +271,7 @@ func (o *NSDictionary[KeyType, ObjectType]) KeysOfEntriesPassingTest(predicate o
 	return NSSetFromID[KeyType](_ret)
 }
 
+// Returns the set of keys whose corresponding value satisfies a constraint described by a block object.
 func (o *NSDictionary[KeyType, ObjectType]) KeysOfEntriesWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSSet[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelKeysOfEntriesWithOptionsPassingTest, opts, predicate)
 	if _ret != 0 {
@@ -281,12 +304,13 @@ func (o *NSDictionary[KeyType, ObjectType]) DescriptionInStringsFileFormat() *NS
 	return NSStringFromID(_ret)
 }
 
-// This method is unsafe because it could potentially cause buffer overruns. You should use -getObjects:andKeys:count:
+// Returns by reference C arrays of the keys and values in the dictionary.
 // Deprecated: Use -getObjects:andKeys:count: instead
 func (o *NSDictionary[KeyType, ObjectType]) GetObjectsAndKeys(objects unsafe.Pointer, keys unsafe.Pointer) {
 	o.Ptr().Send(_nSDictionarySelGetObjectsAndKeys, objects, keys)
 }
 
+// Creates a dictionary using the keys and values found in a file specified by a given path.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSDictionaryDictionaryWithContentsOfFile(path *NSString) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithContentsOfFile, path.Ptr())
@@ -296,6 +320,7 @@ func NSDictionaryDictionaryWithContentsOfFile(path *NSString) *NSDictionary[objc
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Creates a dictionary using the keys and values found in a resource specified by a given URL.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSDictionaryDictionaryWithContentsOfURL(url *NSURL) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithContentsOfURL, url.Ptr())
@@ -305,6 +330,7 @@ func NSDictionaryDictionaryWithContentsOfURL(url *NSURL) *NSDictionary[objc.ID, 
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Initializes a newly allocated dictionary using the keys and values found in a file at a given path.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfFile(path *NSString) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithContentsOfFile, path.Ptr())
@@ -314,6 +340,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfFile(path *NSStrin
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Initializes a newly allocated dictionary using the keys and values found at a given URL.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfURL(url *NSURL) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithContentsOfURL, url.Ptr())
@@ -323,18 +350,21 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfURL(url *NSURL) *N
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Writes a property list representation of the contents of the dictionary to a given path.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSDictionary[KeyType, ObjectType]) WriteToFileAtomically(path *NSString, useAuxiliaryFile bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelWriteToFileAtomically, path.Ptr(), useAuxiliaryFile)
 	return _ret
 }
 
+// Writes a property list representation of the contents of the dictionary to a given URL.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSDictionary[KeyType, ObjectType]) WriteToURLAtomically(url *NSURL, atomically bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelWriteToURLAtomically, url.Ptr(), atomically)
 	return _ret
 }
 
+// Creates an empty dictionary.
 func NSDictionaryDictionary() *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionary)
 	if _ret != 0 {
@@ -343,6 +373,7 @@ func NSDictionaryDictionary() *NSDictionary[objc.ID, objc.ID] {
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Creates a dictionary containing a given key and value.
 func NSDictionaryDictionaryWithObjectForKey(object objc.ID, key NSCopying) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithObjectForKey, object, key)
 	if _ret != 0 {
@@ -351,6 +382,7 @@ func NSDictionaryDictionaryWithObjectForKey(object objc.ID, key NSCopying) *NSDi
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Creates a dictionary containing a specified number of objects from a C array.
 func NSDictionaryDictionaryWithObjectsForKeysCount(objects unsafe.Pointer, keys NSCopying, cnt uint) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithObjectsForKeysCount, objects, keys, cnt)
 	if _ret != 0 {
@@ -359,6 +391,7 @@ func NSDictionaryDictionaryWithObjectsForKeysCount(objects unsafe.Pointer, keys 
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Creates a dictionary containing the keys and values from another given dictionary.
 func NSDictionaryDictionaryWithDictionary(dict *NSDictionary[objc.ID, objc.ID]) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithDictionary, dict.Ptr())
 	if _ret != 0 {
@@ -367,6 +400,7 @@ func NSDictionaryDictionaryWithDictionary(dict *NSDictionary[objc.ID, objc.ID]) 
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Creates a dictionary containing entries constructed from the contents of an array of keys and an array of values.
 func NSDictionaryDictionaryWithObjectsForKeys(objects *NSArray[objc.ID], keys *NSArray[NSCopying]) *NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithObjectsForKeys, objects.Ptr(), keys.Ptr())
 	if _ret != 0 {
@@ -375,6 +409,7 @@ func NSDictionaryDictionaryWithObjectsForKeys(objects *NSArray[objc.ID], keys *N
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Initializes a newly allocated dictionary by placing in it the keys and values contained in another given dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithDictionary(otherDictionary *NSDictionary[KeyType, ObjectType]) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithDictionary, otherDictionary.Ptr())
 	if _ret != 0 {
@@ -383,6 +418,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithDictionary(otherDictionary *
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Initializes a newly allocated dictionary using the objects contained in another given dictionary.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithDictionaryCopyItems(otherDictionary *NSDictionary[KeyType, ObjectType], flag bool) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithDictionaryCopyItems, otherDictionary.Ptr(), flag)
 	if _ret != 0 {
@@ -391,6 +427,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithDictionaryCopyItems(otherDic
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Initializes a newly allocated dictionary with key-value pairs constructed from the provided arrays of keys and objects.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithObjectsForKeys(objects *NSArray[ObjectType], keys *NSArray[NSCopying]) *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithObjectsForKeys, objects.Ptr(), keys.Ptr())
 	if _ret != 0 {
@@ -399,6 +436,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithObjectsForKeys(objects *NSAr
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Initializes a newly allocated dictionary using the keys and values found at a given URL.
 func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfURLError(url *NSURL) (*NSDictionary[*NSString, ObjectType], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -411,6 +449,7 @@ func (o *NSDictionary[KeyType, ObjectType]) InitWithContentsOfURLError(url *NSUR
 	return NSDictionaryFromID[*NSString, ObjectType](_ret), nil
 }
 
+// Creates a dictionary using the keys and values found in a resource specified by a given URL.
 func NSDictionaryDictionaryWithContentsOfURLError(url *NSURL) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelDictionaryWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -423,21 +462,25 @@ func NSDictionaryDictionaryWithContentsOfURLError(url *NSURL) (*NSDictionary[*NS
 	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
+// Creates a shared key set object for the specified keys.
 func NSDictionarySharedKeySetForKeys(keys *NSArray[NSCopying]) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDictionary), _nSDictionarySelSharedKeySetForKeys, keys.Ptr())
 	return _ret
 }
 
+// Returns by reference a C array of objects over which the sender should iterate.
 func (o *NSDictionary[KeyType, ObjectType]) CountByEnumeratingWithStateObjectsCount(state *NSFastEnumerationState, buffer unsafe.Pointer, len_ uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDictionarySelCountByEnumeratingWithStateObjectsCount, state, buffer, len_)
 	return _ret
 }
 
+// Returns the file’s size, in bytes.
 func (o *NSDictionary[KeyType, ObjectType]) FileSize() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _nSDictionarySelFileSize)
 	return _ret
 }
 
+// Returns file’s modification date.
 func (o *NSDictionary[KeyType, ObjectType]) FileModificationDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileModificationDate)
 	if _ret != 0 {
@@ -446,6 +489,7 @@ func (o *NSDictionary[KeyType, ObjectType]) FileModificationDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns the file type.
 func (o *NSDictionary[KeyType, ObjectType]) FileType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileType)
 	if _ret != 0 {
@@ -454,11 +498,13 @@ func (o *NSDictionary[KeyType, ObjectType]) FileType() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the file’s POSIX permissions.
 func (o *NSDictionary[KeyType, ObjectType]) FilePosixPermissions() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDictionarySelFilePosixPermissions)
 	return _ret
 }
 
+// Returns the file’s owner account name.
 func (o *NSDictionary[KeyType, ObjectType]) FileOwnerAccountName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileOwnerAccountName)
 	if _ret != 0 {
@@ -467,6 +513,7 @@ func (o *NSDictionary[KeyType, ObjectType]) FileOwnerAccountName() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the file’s group owner account name.
 func (o *NSDictionary[KeyType, ObjectType]) FileGroupOwnerAccountName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileGroupOwnerAccountName)
 	if _ret != 0 {
@@ -475,41 +522,49 @@ func (o *NSDictionary[KeyType, ObjectType]) FileGroupOwnerAccountName() *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns the filesystem number.
 func (o *NSDictionary[KeyType, ObjectType]) FileSystemNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDictionarySelFileSystemNumber)
 	return _ret
 }
 
+// Returns the filesystem file number.
 func (o *NSDictionary[KeyType, ObjectType]) FileSystemFileNumber() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDictionarySelFileSystemFileNumber)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the file hides its extension.
 func (o *NSDictionary[KeyType, ObjectType]) FileExtensionHidden() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelFileExtensionHidden)
 	return _ret
 }
 
+// Returns the file’s HFS creator code.
 func (o *NSDictionary[KeyType, ObjectType]) FileHFSCreatorCode() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDictionarySelFileHFSCreatorCode)
 	return _ret
 }
 
+// Returns file’s HFS type code.
 func (o *NSDictionary[KeyType, ObjectType]) FileHFSTypeCode() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSDictionarySelFileHFSTypeCode)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the file is immutable.
 func (o *NSDictionary[KeyType, ObjectType]) FileIsImmutable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelFileIsImmutable)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the file is append only.
 func (o *NSDictionary[KeyType, ObjectType]) FileIsAppendOnly() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDictionarySelFileIsAppendOnly)
 	return _ret
 }
 
+// Returns the file’s creation date.
 func (o *NSDictionary[KeyType, ObjectType]) FileCreationDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileCreationDate)
 	if _ret != 0 {
@@ -518,6 +573,7 @@ func (o *NSDictionary[KeyType, ObjectType]) FileCreationDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns the file’s owner account ID.
 func (o *NSDictionary[KeyType, ObjectType]) FileOwnerAccountID() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileOwnerAccountID)
 	if _ret != 0 {
@@ -526,6 +582,7 @@ func (o *NSDictionary[KeyType, ObjectType]) FileOwnerAccountID() *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns file’s group owner account ID.
 func (o *NSDictionary[KeyType, ObjectType]) FileGroupOwnerAccountID() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionarySelFileGroupOwnerAccountID)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass that implements the default color picking protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorpicker
 type NSColorPicker struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func NSColorPickerFromID(id objc.ID) *NSColorPicker {
 	return o
 }
 
+// Initializes the color picker with the specified color panel and color picker mode mask.
 func (o *NSColorPicker) InitWithPickerMaskColorPanel(mask uint, owningColorPanel *NSColorPanel) *NSColorPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerSelInitWithPickerMaskColorPanel, mask, owningColorPanel.Ptr())
 	if _ret != 0 {
@@ -48,22 +51,27 @@ func (o *NSColorPicker) InitWithPickerMaskColorPanel(mask uint, owningColorPanel
 	return NSColorPickerFromID(_ret)
 }
 
+// Sets the image used for the specified button cell.
 func (o *NSColorPicker) InsertNewButtonImageIn(newButtonImage *NSImage, buttonCell *NSButtonCell) {
 	o.Ptr().Send(_nSColorPickerSelInsertNewButtonImageIn, newButtonImage.Ptr(), buttonCell.Ptr())
 }
 
+// Overriden to respond to a size change.
 func (o *NSColorPicker) ViewSizeChanged(sender objc.ID) {
 	o.Ptr().Send(_nSColorPickerSelViewSizeChanged, sender)
 }
 
+// Overriden to attach a color list to a color picker.
 func (o *NSColorPicker) AttachColorList(colorList *NSColorList) {
 	o.Ptr().Send(_nSColorPickerSelAttachColorList, colorList.Ptr())
 }
 
+// Overriden to detach a color list from a color picker.
 func (o *NSColorPicker) DetachColorList(colorList *NSColorList) {
 	o.Ptr().Send(_nSColorPickerSelDetachColorList, colorList.Ptr())
 }
 
+// Overriden to set the color picker’s mode.
 func (o *NSColorPicker) SetMode(mode NSColorPanelMode) {
 	o.Ptr().Send(_nSColorPickerSelSetMode, mode)
 }

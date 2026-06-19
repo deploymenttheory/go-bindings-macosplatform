@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tool for erasing previously drawn content in a canvas view.
+//
 // EraserTool wraps [raw.PKEraserTool] with a fluent Go API.
 type EraserTool struct {
 	inner *raw.PKEraserTool

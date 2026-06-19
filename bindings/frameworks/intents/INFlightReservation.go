@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a flight reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inflightreservation
 type INFlightReservation struct {
 	INReservation
@@ -33,6 +35,7 @@ func INFlightReservationFromID(id objc.ID) *INFlightReservation {
 	return o
 }
 
+// Creates a flight reservation with the specified contents and attributes.
 func (o *INFlightReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, flight *INFlight) *INFlightReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), flight.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *INFlightReservation) InitWithItemReferenceReservationNumberBookingTimeR
 	return INFlightReservationFromID(_ret)
 }
 
+// Creates a new flight reservation with the specified contents and attributes.
 func (o *INFlightReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], reservedSeat *INSeat, flight *INFlight) *INFlightReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), reservedSeat.Ptr(), flight.Ptr())
 	if _ret != 0 {

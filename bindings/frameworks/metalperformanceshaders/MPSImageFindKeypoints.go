@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that is used to find a list of keypoints.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagefindkeypoints
 type MPSImageFindKeypoints struct {
 	mpscore.MPSKernel

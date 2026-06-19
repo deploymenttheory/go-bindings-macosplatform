@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/memessage
 type MEMessage struct {
 	foundation.NSObject
@@ -137,8 +139,11 @@ func (o *MEMessage) DateReceived() *foundation.NSDate {
 
 // @brief The headers for the message. Might only be a subset if the full body has not been downloaded.
 func (o *MEMessage) Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mEMessageSelHeaders)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelHeaders)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @brief The full raw RFC822 message data if it has been downloaded and the extension has permissions to access.

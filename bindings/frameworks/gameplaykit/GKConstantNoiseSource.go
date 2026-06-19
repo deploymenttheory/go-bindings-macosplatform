@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Produces a single, constant value at all positions in the space.
+// A procedural noise generator that outputs a field of a single constant value.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkconstantnoisesource
 type GKConstantNoiseSource struct {
@@ -34,6 +34,7 @@ func GKConstantNoiseSourceFromID(id objc.ID) *GKConstantNoiseSource {
 	return o
 }
 
+// Creates a noise source with the specified constant value.
 func GKConstantNoiseSourceConstantNoiseWithValue(value float64) *GKConstantNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKConstantNoiseSource), _gKConstantNoiseSourceSelConstantNoiseWithValue, value)
 	if _ret != 0 {
@@ -42,6 +43,7 @@ func GKConstantNoiseSourceConstantNoiseWithValue(value float64) *GKConstantNoise
 	return GKConstantNoiseSourceFromID(_ret)
 }
 
+// Initializes a noise source with the specified constant value.
 func (o *GKConstantNoiseSource) InitWithValue(value float64) *GKConstantNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKConstantNoiseSourceSelInitWithValue, value)
 	if _ret != 0 {

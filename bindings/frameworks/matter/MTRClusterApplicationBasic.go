@@ -45,68 +45,107 @@ func MTRClusterApplicationBasicFromID(id objc.ID) *MTRClusterApplicationBasic {
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeVendorNameWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeVendorNameWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeVendorNameWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeVendorIDWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeVendorIDWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeVendorIDWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeApplicationNameWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeApplicationNameWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeApplicationNameWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeProductIDWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeProductIDWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeProductIDWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeApplicationWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeApplicationWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeApplicationWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeStatusWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeStatusWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeStatusWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeApplicationVersionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeApplicationVersionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeApplicationVersionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeAllowedVendorListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeAllowedVendorListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeAllowedVendorListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterApplicationBasic) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationBasicSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.

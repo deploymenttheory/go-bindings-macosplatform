@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to generate a thumbnail for a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerationrequest
 type QLThumbnailGenerationRequest struct {
 	foundation.NSObject

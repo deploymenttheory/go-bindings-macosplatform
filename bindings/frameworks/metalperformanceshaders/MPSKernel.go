@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A standard interface for Metal Performance Shaders kernels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpskernel
 type MPSKernel struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func MPSKernelFromID(id objc.ID) *MPSKernel {
 	return o
 }
 
-// @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+// Initializes a new kernel object.
 func (o *MPSKernel) InitWithDevice(device metal.MTLDevice) *MPSKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKernelSelInitWithDevice, device)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func (o *MPSKernel) InitWithDevice(device metal.MTLDevice) *MPSKernel {
 	return MPSKernelFromID(_ret)
 }
 
-// @abstract   Make a copy of this MPSKernel for a new device @discussion -copyWithZone: will call this API to make a copy of the MPSKernel on the same device.  This interface may also be called directly to make a copy of the MPSKernel on a new device. Typically, the same MPSKernels should not be used to encode kernels on multiple command buffers from multiple threads. Many MPSKernels have mutable properties that might be changed by the other thread while this one is trying to encode. If you need to use a MPSKernel from multiple threads make a copy of it for each additional thread using -copyWithZone: or -copyWithZone:device: @param      zone        The NSZone in which to allocate the object @param      device      The device for the new MPSKernel. If nil, then use self.device. @result     a pointer to a copy of this MPSKernel. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+// Makes a copy of this kernel object for a new device.
 func (o *MPSKernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MPSKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSKernelSelCopyWithZoneDevice, zone, device)
 	return MPSKernelFromID(_ret)

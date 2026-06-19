@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static byte buffer in memory.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdata
 type NSData struct {
 	NSObject
@@ -81,19 +83,23 @@ func (o *NSData) Bytes() unsafe.Pointer {
 	return _ret
 }
 
+// Copies a number of bytes from the start of the data object into a given buffer.
 func (o *NSData) GetBytesLength(buffer unsafe.Pointer, length uint) {
 	o.Ptr().Send(_nSDataSelGetBytesLength, buffer, length)
 }
 
+// Copies a range of bytes from the data object into a given buffer.
 func (o *NSData) GetBytesRange(buffer unsafe.Pointer, range_ NSRange) {
 	o.Ptr().Send(_nSDataSelGetBytesRange, buffer, range_)
 }
 
+// Returns a Boolean value indicating whether this data object is the same as another.
 func (o *NSData) IsEqualToData(other *NSData) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelIsEqualToData, other.Ptr())
 	return _ret
 }
 
+// Returns a new data object containing the data object’s bytes that fall within the limits specified by a given range.
 func (o *NSData) SubdataWithRange(range_ NSRange) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelSubdataWithRange, range_)
 	if _ret != 0 {
@@ -102,16 +108,19 @@ func (o *NSData) SubdataWithRange(range_ NSRange) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Writes the data object’s bytes to the file specified by a given path.
 func (o *NSData) WriteToFileAtomically(path *NSString, useAuxiliaryFile bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelWriteToFileAtomically, path.Ptr(), useAuxiliaryFile)
 	return _ret
 }
 
+// Writes the data object’s bytes to the location specified by a given URL.
 func (o *NSData) WriteToURLAtomically(url *NSURL, atomically bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelWriteToURLAtomically, url.Ptr(), atomically)
 	return _ret
 }
 
+// Writes the data object’s bytes to the file specified by a given path.
 func (o *NSData) WriteToFileOptionsError(path *NSString, writeOptionsMask NSDataWritingOptions) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelWriteToFileOptionsError, path.Ptr(), writeOptionsMask, unsafe.Pointer(&_nsErr))
@@ -121,6 +130,7 @@ func (o *NSData) WriteToFileOptionsError(path *NSString, writeOptionsMask NSData
 	return _ret, nil
 }
 
+// Writes the data object’s bytes to the location specified by a given URL.
 func (o *NSData) WriteToURLOptionsError(url *NSURL, writeOptionsMask NSDataWritingOptions) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDataSelWriteToURLOptionsError, url.Ptr(), writeOptionsMask, unsafe.Pointer(&_nsErr))
@@ -130,15 +140,18 @@ func (o *NSData) WriteToURLOptionsError(url *NSURL, writeOptionsMask NSDataWriti
 	return _ret, nil
 }
 
+// Finds and returns the range of the first occurrence of the given data, within the given range, subject to given options.
 func (o *NSData) RangeOfDataOptionsRange(dataToFind *NSData, mask NSDataSearchOptions, searchRange NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSDataSelRangeOfDataOptionsRange, dataToFind.Ptr(), mask, searchRange)
 	return _ret
 }
 
+// Enumerates each range of bytes in the data object using a block.
 func (o *NSData) EnumerateByteRangesUsing(block objc.Block) {
 	o.Ptr().Send(_nSDataSelEnumerateByteRangesUsing, block)
 }
 
+// Creates an empty data object.
 func NSDataData() *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelData)
 	if _ret != 0 {
@@ -147,6 +160,7 @@ func NSDataData() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object containing a given number of bytes copied from a given buffer.
 func NSDataDataWithBytesLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithBytesLength, bytes_, length)
 	if _ret != 0 {
@@ -155,6 +169,7 @@ func NSDataDataWithBytesLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object that holds a given number of bytes from a given buffer.
 func NSDataDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithBytesNoCopyLength, bytes_, length)
 	if _ret != 0 {
@@ -163,6 +178,7 @@ func NSDataDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *NSData
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object that holds a given number of bytes from a given buffer.
 func NSDataDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b bool) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithBytesNoCopyLengthFreeWhenDone, bytes_, length, b)
 	if _ret != 0 {
@@ -171,6 +187,7 @@ func NSDataDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length u
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object by reading every byte from the file at a given path.
 func NSDataDataWithContentsOfFileOptionsError(path *NSString, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfFileOptionsError, path.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -183,6 +200,7 @@ func NSDataDataWithContentsOfFileOptionsError(path *NSString, readOptionsMask NS
 	return NSDataFromID(_ret), nil
 }
 
+// Creates a data object from the data at the provided file URL using specific reading options.
 func NSDataDataWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfURLOptionsError, url.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -195,6 +213,7 @@ func NSDataDataWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataR
 	return NSDataFromID(_ret), nil
 }
 
+// Creates a data object by reading every byte from the file at a given path.
 func NSDataDataWithContentsOfFile(path *NSString) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfFile, path.Ptr())
 	if _ret != 0 {
@@ -203,6 +222,7 @@ func NSDataDataWithContentsOfFile(path *NSString) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object from the data at the specified file URL.
 func NSDataDataWithContentsOfURL(url *NSURL) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -211,6 +231,7 @@ func NSDataDataWithContentsOfURL(url *NSURL) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Initializes a data object filled with a given number of bytes copied from a given buffer.
 func (o *NSData) InitWithBytesLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesLength, bytes_, length)
 	if _ret != 0 {
@@ -219,6 +240,7 @@ func (o *NSData) InitWithBytesLength(bytes_ unsafe.Pointer, length uint) *NSData
 	return NSDataFromID(_ret)
 }
 
+// Initializes a data object filled with a given number of bytes of data from a given buffer.
 func (o *NSData) InitWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesNoCopyLength, bytes_, length)
 	if _ret != 0 {
@@ -227,6 +249,7 @@ func (o *NSData) InitWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *
 	return NSDataFromID(_ret)
 }
 
+// Initializes a newly allocated data object by adding the given number of bytes from the given buffer.
 func (o *NSData) InitWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b bool) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesNoCopyLengthFreeWhenDone, bytes_, length, b)
 	if _ret != 0 {
@@ -235,6 +258,7 @@ func (o *NSData) InitWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, le
 	return NSDataFromID(_ret)
 }
 
+// Initializes a data object filled with a given number of bytes of data from a given buffer, with a custom deallocator block.
 func (o *NSData) InitWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint, deallocator func(unsafe.Pointer, uint)) *NSData {
 	var __block_deallocator objc.Block
 	if deallocator != nil {
@@ -250,6 +274,7 @@ func (o *NSData) InitWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, len
 	return NSDataFromID(_ret)
 }
 
+// Initializes a data object with the content of the file at a given path.
 func (o *NSData) InitWithContentsOfFileOptionsError(path *NSString, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfFileOptionsError, path.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -262,6 +287,7 @@ func (o *NSData) InitWithContentsOfFileOptionsError(path *NSString, readOptionsM
 	return NSDataFromID(_ret), nil
 }
 
+// Creates a data object from the data at the provided file URL using specific reading options.
 func (o *NSData) InitWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfURLOptionsError, url.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -274,6 +300,7 @@ func (o *NSData) InitWithContentsOfURLOptionsError(url *NSURL, readOptionsMask N
 	return NSDataFromID(_ret), nil
 }
 
+// Initializes a data object with the content of the file at a given path.
 func (o *NSData) InitWithContentsOfFile(path *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfFile, path.Ptr())
 	if _ret != 0 {
@@ -282,6 +309,7 @@ func (o *NSData) InitWithContentsOfFile(path *NSString) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object from the data at the specified file URL, or returns nil if the system can’t create one.
 func (o *NSData) InitWithContentsOfURL(url *NSURL) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -290,6 +318,7 @@ func (o *NSData) InitWithContentsOfURL(url *NSURL) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Initializes a data object with the contents of another data object.
 func (o *NSData) InitWithData(data *NSData) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -298,6 +327,7 @@ func (o *NSData) InitWithData(data *NSData) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a data object containing the contents of another data object.
 func NSDataDataWithData(data *NSData) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithData, data.Ptr())
 	if _ret != 0 {
@@ -306,6 +336,7 @@ func NSDataDataWithData(data *NSData) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Initializes a data object with the given Base64 encoded string.
 func (o *NSData) InitWithBase64EncodedStringOptions(base64String *NSString, options NSDataBase64DecodingOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBase64EncodedStringOptions, base64String.Ptr(), options)
 	if _ret != 0 {
@@ -314,6 +345,7 @@ func (o *NSData) InitWithBase64EncodedStringOptions(base64String *NSString, opti
 	return NSDataFromID(_ret)
 }
 
+// Creates a Base64 encoded string from the string using the given options.
 func (o *NSData) Base64EncodedStringWithOptions(options NSDataBase64EncodingOptions) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelBase64EncodedStringWithOptions, options)
 	if _ret != 0 {
@@ -322,6 +354,7 @@ func (o *NSData) Base64EncodedStringWithOptions(options NSDataBase64EncodingOpti
 	return NSStringFromID(_ret)
 }
 
+// Initializes a data object with the given Base64 encoded data.
 func (o *NSData) InitWithBase64EncodedDataOptions(base64Data *NSData, options NSDataBase64DecodingOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBase64EncodedDataOptions, base64Data.Ptr(), options)
 	if _ret != 0 {
@@ -330,6 +363,7 @@ func (o *NSData) InitWithBase64EncodedDataOptions(base64Data *NSData, options NS
 	return NSDataFromID(_ret)
 }
 
+// Creates a Base64, UTF-8 encoded data object from the string using the given options.
 func (o *NSData) Base64EncodedDataWithOptions(options NSDataBase64EncodingOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelBase64EncodedDataWithOptions, options)
 	if _ret != 0 {
@@ -338,6 +372,7 @@ func (o *NSData) Base64EncodedDataWithOptions(options NSDataBase64EncodingOption
 	return NSDataFromID(_ret)
 }
 
+// Returns a new data object by decompressing data object’s bytes.
 func (o *NSData) DecompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelDecompressedDataUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
@@ -350,6 +385,7 @@ func (o *NSData) DecompressedDataUsingAlgorithmError(algorithm NSDataCompression
 	return NSDataFromID(_ret), nil
 }
 
+// Returns a new data object by compressing the data object’s bytes.
 func (o *NSData) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelCompressedDataUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
@@ -362,29 +398,34 @@ func (o *NSData) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAl
 	return NSDataFromID(_ret), nil
 }
 
+// Copies a data object’s contents into a given buffer.
 // Deprecated: This method is unsafe because it could potentially cause buffer overruns. Use -getBytes:length: instead.
 func (o *NSData) GetBytes(buffer unsafe.Pointer) {
 	o.Ptr().Send(_nSDataSelGetBytes, buffer)
 }
 
+// Creates a data object from the mapped file at a given path.
 // Deprecated: Use +dataWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.
 func NSDataDataWithContentsOfMappedFile(path *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfMappedFile, path.Ptr())
 	return _ret
 }
 
+// Initializes a data object with the contents of the mapped file specified by a given path.
 // Deprecated: Use -initWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.
 func (o *NSData) InitWithContentsOfMappedFile(path *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfMappedFile, path.Ptr())
 	return _ret
 }
 
+// Initializes a data object initialized with the given Base64 encoded string.
 // Deprecated: Use initWithBase64EncodedString:options: instead
 func (o *NSData) InitWithBase64Encoding(base64String *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBase64Encoding, base64String.Ptr())
 	return _ret
 }
 
+// Initializes a Base64 encoded string from the string.
 // Deprecated: Use base64EncodedStringWithOptions: instead
 func (o *NSData) Base64Encoding() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelBase64Encoding)

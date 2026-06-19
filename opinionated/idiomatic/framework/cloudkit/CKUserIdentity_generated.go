@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The identity of a user.
+//
 // UserIdentity wraps [raw.CKUserIdentity] with a fluent Go API.
 type UserIdentity struct {
 	inner *raw.CKUserIdentity

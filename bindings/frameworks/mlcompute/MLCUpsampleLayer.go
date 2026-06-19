@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that applies upsampling with the shape you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer
 type MLCUpsampleLayer struct {
 	MLCLayer
@@ -34,18 +36,18 @@ func MLCUpsampleLayerFromID(id objc.ID) *MLCUpsampleLayer {
 	return o
 }
 
-// @abstract   Create an upsample layer @param      shape                   A NSArray<NSNumber *> representing the dimensions of the result tensor @return     A new upsample layer.
+// Creates an upsample layer with the shape you specify.
 func MLCUpsampleLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *MLCUpsampleLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCUpsampleLayer), _mLCUpsampleLayerSelLayerWithShape, shape)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCUpsampleLayer), _mLCUpsampleLayerSelLayerWithShape, shape.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCUpsampleLayerFromID(_ret)
 }
 
-// @abstract   Create an upsample layer @param      shape                   A NSArray<NSNumber *> representing the dimensions of the result tensor @param      sampleMode        The upsampling algorithm to use.  Default is nearest. @param      alignsCorners    Whether the corner pixels of the input and output tensors are aligned or not. @return     A new upsample layer.
+// Creates an upsample layer with the shape, upsampling algorithm, and corner alignement option you specify.
 func MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners(shape *foundation.NSArray[*foundation.NSNumber], sampleMode MLCSampleMode, alignsCorners bool) *MLCUpsampleLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCUpsampleLayer), _mLCUpsampleLayerSelLayerWithShapeSampleModeAlignsCorners, shape, sampleMode, alignsCorners)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCUpsampleLayer), _mLCUpsampleLayerSelLayerWithShapeSampleModeAlignsCorners, shape.Ptr(), sampleMode, alignsCorners)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -54,8 +56,11 @@ func MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners(shape *foundation.NSA
 
 // @property   shape @abstract   A NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
 func (o *MLCUpsampleLayer) Shape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCUpsampleLayerSelShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCUpsampleLayerSelShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   sampleMode @abstract   The sampling mode to use when performing the upsample.

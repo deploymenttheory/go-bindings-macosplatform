@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A passkey assertion credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential
 type ASPasskeyAssertionCredential struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func ASPasskeyAssertionCredentialFromID(id objc.ID) *ASPasskeyAssertionCredentia
 	return o
 }
 
-// @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty the relying party. @param signature the signature for the assertion challenge.
+// Initializes a passkey assertion credential object.
 func (o *ASPasskeyAssertionCredential) InitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty *foundation.NSString, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *ASPasskeyAssertionCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID, userHandle.Ptr(), relyingParty.Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *ASPasskeyAssertionCredential) InitWithUserHandleRelyingPartySignatureCl
 	return ASPasskeyAssertionCredentialFromID(_ret)
 }
 
-// @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty The relying party. @param signature The signature for the assertion challenge. @param extensionOutput The outputs of WebAuthn extensions processed by the credential provider.
+// Initializes a passkey assertion credential object, optionally specifying an extension output.
 func (o *ASPasskeyAssertionCredential) InitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput(userHandle *foundation.NSData, relyingParty *foundation.NSString, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData, extensionOutput *ASPasskeyAssertionCredentialExtensionOutput) *ASPasskeyAssertionCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput, userHandle.Ptr(), relyingParty.Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr(), extensionOutput.Ptr())
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *ASPasskeyAssertionCredential) InitWithUserHandleRelyingPartySignatureCl
 	return ASPasskeyAssertionCredentialFromID(_ret)
 }
 
-// @abstract Creates and initializes a new ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty the relying party. @param signature the signature for the assertion challenge.
+// Creates and initializes a new passkey assertion credential.
 func ASPasskeyAssertionCredentialCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty *foundation.NSString, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *ASPasskeyAssertionCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyAssertionCredential), _aSPasskeyAssertionCredentialSelCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID, userHandle.Ptr(), relyingParty.Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr())
 	if _ret != 0 {

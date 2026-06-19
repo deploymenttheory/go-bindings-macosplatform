@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Core Animation layer that renders a SceneKit scene as its content.
+//
 // Layer wraps [raw.SCNLayer] with a fluent Go API.
 type Layer struct {
 	inner *raw.SCNLayer
@@ -35,7 +37,7 @@ func NewLayer() *Layer {
 	return &Layer{inner: raw.SCNLayerFromID(_id)}
 }
 
-// @property scene @abstract Specifies the scene of the receiver
+// The scene to be displayed in the layer.
 //
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *Layer) WithScene(scene *Scene) *Layer {

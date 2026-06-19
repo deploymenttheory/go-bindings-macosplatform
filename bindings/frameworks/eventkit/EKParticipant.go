@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents person, group, or room invited to a calendar event.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekparticipant
 type EKParticipant struct {
 	EKObject
@@ -38,7 +40,7 @@ func EKParticipantFromID(id objc.ID) *EKParticipant {
 	return o
 }
 
-// @method     ABPersonInAddressBook @abstract   Returns the ABPerson that represents this participant. @discussion This method returns the ABPerson that represents this participant, if a match can be found based on email address in the address book passed. If we cannot find the participant, nil is returned.
+// Returns the address book record that represents the participant.
 // Deprecated: since macOS 10.11.
 func (o *EKParticipant) ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKParticipantSelABPersonInAddressBook, addressBook.Ptr())

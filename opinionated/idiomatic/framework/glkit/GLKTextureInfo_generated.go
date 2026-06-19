@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about OpenGL textures created by the GLKTextureLoader class.
+//
 // TextureInfo wraps [raw.GLKTextureInfo] with a fluent Go API.
 type TextureInfo struct {
 	inner *raw.GLKTextureInfo

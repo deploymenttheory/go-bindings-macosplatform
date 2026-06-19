@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a single property belonging to an entity.
+//
 // PropertyDescription wraps [raw.NSPropertyDescription] with a fluent Go API.
 type PropertyDescription struct {
 	inner *raw.NSPropertyDescription
@@ -37,60 +39,80 @@ func NewPropertyDescription() *PropertyDescription {
 	return &PropertyDescription{inner: raw.NSPropertyDescriptionFromID(_id)}
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *PropertyDescription) WithName(name string) *PropertyDescription {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is optional.
+//
 // WithOptional sets the optional property and returns the receiver for chaining.
 func (x *PropertyDescription) WithOptional(optional bool) *PropertyDescription {
 	x.inner.SetOptional(optional)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transient.
+//
 // WithTransient sets the transient property and returns the receiver for chaining.
 func (x *PropertyDescription) WithTransient(transient bool) *PropertyDescription {
 	x.inner.SetTransient(transient)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *PropertyDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *PropertyDescription {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver should be indexed for searching.
+//
 // WithIndexed sets the indexed property and returns the receiver for chaining.
 func (x *PropertyDescription) WithIndexed(indexed bool) *PropertyDescription {
 	x.inner.SetIndexed(indexed)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *PropertyDescription) WithVersionHashModifier(versionHashModifier string) *PropertyDescription {
 	x.inner.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+//
 // WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
 func (x *PropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *PropertyDescription {
 	x.inner.SetIndexedBySpotlight(indexedBySpotlight)
 	return x
 }
 
+// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+//
 // WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
 func (x *PropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *PropertyDescription {
 	x.inner.SetStoredInExternalRecord(storedInExternalRecord)
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *PropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *PropertyDescription {
 	x.inner.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
 	return x
 }
 
+// Sets the validation predicates and warnings of the receiver.
+//
 // SetValidationPredicatesWithValidationWarnings calls the underlying SetValidationPredicatesWithValidationWarnings.
 func (x *PropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates *foundation.NSArray[*foundation.NSPredicate], validationWarnings *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetValidationPredicatesWithValidationWarnings(validationPredicates, validationWarnings)

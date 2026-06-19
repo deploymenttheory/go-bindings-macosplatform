@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class representing a dimensional unit of measure.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdimension
 type NSDimension struct {
 	NSUnit

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to create and manage a content filter’s configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefiltermanager
 type NEFilterManager struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func NEFilterManagerFromID(id objc.ID) *NEFilterManager {
 	return o
 }
 
-// @method sharedManager @return The singleton NEFilterManager object for the calling process.
+// Access the single instance of NEFilterManager.
 func NEFilterManagerSharedManager() *NEFilterManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterManager), _nEFilterManagerSelSharedManager)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func NEFilterManagerSharedManager() *NEFilterManager {
 	return NEFilterManagerFromID(_ret)
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current filter configuration from the caller's filter preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load the filter configuration from the Network Extension preferences.
 func (o *NEFilterManager) LoadFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -66,7 +68,7 @@ func (o *NEFilterManager) LoadFromPreferencesWithCompletionHandler(completionHan
 	o.Ptr().Send(_nEFilterManagerSelLoadFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the filter configuration from the caller's filter preferences. If the filter is enabled, the filter becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove the filter configuration from the Network Extension preferences.
 func (o *NEFilterManager) RemoveFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -78,7 +80,7 @@ func (o *NEFilterManager) RemoveFromPreferencesWithCompletionHandler(completionH
 	o.Ptr().Send(_nEFilterManagerSelRemoveFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the filter configuration in the caller's filter preferences. If the filter is enabled, it will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save the filter configuration in the Network Extension preferences.
 func (o *NEFilterManager) SaveToPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

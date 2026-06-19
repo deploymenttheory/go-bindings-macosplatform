@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for all motion-related data objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmlogitem
 type CMLogItem struct {
 	foundation.NSObject

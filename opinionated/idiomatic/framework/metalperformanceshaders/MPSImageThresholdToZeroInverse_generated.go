@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that returns 0 for each pixel with a value greater than a specified threshold or the original value otherwise.
+//
 // ImageThresholdToZeroInverse wraps [raw.MPSImageThresholdToZeroInverse] with a fluent Go API.
 type ImageThresholdToZeroInverse struct {
 	inner *raw.MPSImageThresholdToZeroInverse
@@ -33,7 +35,7 @@ func ImageThresholdToZeroInverseFromID(id objc.ID) *ImageThresholdToZeroInverse 
 	return &ImageThresholdToZeroInverse{inner: raw.MPSImageThresholdToZeroInverseFromID(id)}
 }
 
-// @abstract  initialize a MPSImageThresholdToZeroInverse filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
+// Initializes the kernel.
 //
 // NewImageThresholdToZeroInverseWithDeviceThresholdValueLinearGrayColorTransform creates a new [ImageThresholdToZeroInverse].
 func NewImageThresholdToZeroInverseWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *ImageThresholdToZeroInverse {
@@ -51,7 +53,7 @@ func NewImageThresholdToZeroInverseWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageThresholdToZeroInverse{inner: raw.MPSImageThresholdToZeroInverseFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse {
@@ -59,7 +61,7 @@ func (x *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *Imag
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse {
@@ -67,7 +69,7 @@ func (x *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *Im
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageThresholdToZeroInverse) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZeroInverse {
@@ -75,7 +77,7 @@ func (x *ImageThresholdToZeroInverse) WithEdgeMode(edgeMode mpscore.MPSImageEdge
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageThresholdToZeroInverse) WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdToZeroInverse {
@@ -83,7 +85,7 @@ func (x *ImageThresholdToZeroInverse) WithOptions(options mpscore.MPSKernelOptio
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageThresholdToZeroInverse) WithLabel(label string) *ImageThresholdToZeroInverse {

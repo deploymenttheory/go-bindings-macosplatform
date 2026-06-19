@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for encapsulating user interaction with a Smart Card reader.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction
 type TKSmartCardUserInteraction struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func TKSmartCardUserInteractionFromID(id objc.ID) *TKSmartCardUserInteraction {
 	return o
 }
 
-// Runs the interaction.
+// Runs the user interaction and asynchronously receives a reply.
 func (o *TKSmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointer)) {
 	var __block_reply objc.Block
 	if reply != nil {
@@ -51,7 +53,7 @@ func (o *TKSmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointe
 	o.Ptr().Send(_tKSmartCardUserInteractionSelRunWithReply, __block_reply)
 }
 
-// Attempts to cancel a running interaction. Note that for some interactions, this functionality might not be available. @return Returns NO if the operation is not running, or cancelling is not supported.
+// Attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
 func (o *TKSmartCardUserInteraction) Cancel() bool {
 	_ret := objc.Send[bool](o.Ptr(), _tKSmartCardUserInteractionSelCancel)
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that represents a discrete quantity.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkdiscretequantitysample
 type HKDiscreteQuantitySample struct {
 	HKQuantitySample

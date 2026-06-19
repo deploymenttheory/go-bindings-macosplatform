@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-based request to generate feature prints from an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vngenerateimagefeatureprintrequest
 type VNGenerateImageFeaturePrintRequest struct {
 	VNImageBasedRequest

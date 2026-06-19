@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for transitions you can apply to symbol-based images.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolcontenttransition
 type NSSymbolContentTransition struct {
 	foundation.NSObject

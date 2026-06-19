@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A server takes and returns message ports.
+//
 // MessagePortNameServer wraps [raw.NSMessagePortNameServer] with a fluent Go API.
 type MessagePortNameServer struct {
 	inner *raw.NSMessagePortNameServer

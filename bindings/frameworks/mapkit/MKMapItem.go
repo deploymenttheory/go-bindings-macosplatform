@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A point of interest on the map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapitem
 type MKMapItem struct {
 	foundation.NSObject
@@ -55,6 +57,7 @@ func MKMapItemFromID(id objc.ID) *MKMapItem {
 	return o
 }
 
+// Creates and returns a singleton map item object representing the user’s location.
 func MKMapItemMapItemForCurrentLocation() *MKMapItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapItem), _mKMapItemSelMapItemForCurrentLocation)
 	if _ret != 0 {
@@ -63,6 +66,7 @@ func MKMapItemMapItemForCurrentLocation() *MKMapItem {
 	return MKMapItemFromID(_ret)
 }
 
+// Creates and returns a map item object using the specified placemark object.
 // Deprecated: Use init(location:address:)
 func (o *MKMapItem) InitWithPlacemark(placemark *MKPlacemark) *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelInitWithPlacemark, placemark.Ptr())
@@ -72,6 +76,7 @@ func (o *MKMapItem) InitWithPlacemark(placemark *MKPlacemark) *MKMapItem {
 	return MKMapItemFromID(_ret)
 }
 
+// Creates and returns a map item object using the specified location and address objects.
 func (o *MKMapItem) InitWithLocationAddress(location unsafe.Pointer, address *MKAddress) *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemSelInitWithLocationAddress, location, address.Ptr())
 	if _ret != 0 {
@@ -80,16 +85,19 @@ func (o *MKMapItem) InitWithLocationAddress(location unsafe.Pointer, address *MK
 	return MKMapItemFromID(_ret)
 }
 
+// Opens the Maps app and displays the map item.
 func (o *MKMapItem) OpenInMapsWithLaunchOptions(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapItemSelOpenInMapsWithLaunchOptions, launchOptions)
+	_ret := objc.Send[bool](o.Ptr(), _mKMapItemSelOpenInMapsWithLaunchOptions, launchOptions.Ptr())
 	return _ret
 }
 
+// Opens the Maps app and displays the specified map items.
 func MKMapItemOpenMapsWithItemsLaunchOptions(mapItems *foundation.NSArray[*MKMapItem], launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](objc.ID(_clsMKMapItem), _mKMapItemSelOpenMapsWithItemsLaunchOptions, mapItems.Ptr(), launchOptions)
+	_ret := objc.Send[bool](objc.ID(_clsMKMapItem), _mKMapItemSelOpenMapsWithItemsLaunchOptions, mapItems.Ptr(), launchOptions.Ptr())
 	return _ret
 }
 
+// Opens the Maps app and displays the map item.
 func (o *MKMapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -98,9 +106,10 @@ func (o *MKMapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mKMapItemSelOpenInMapsWithLaunchOptionsCompletionHandler, launchOptions, __block_completion)
+	o.Ptr().Send(_mKMapItemSelOpenInMapsWithLaunchOptionsCompletionHandler, launchOptions.Ptr(), __block_completion)
 }
 
+// Opens the Maps app using the specified map items and options.
 func MKMapItemOpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems *foundation.NSArray[*MKMapItem], launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -109,7 +118,7 @@ func MKMapItemOpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems *foundati
 		})
 		defer __block_completion.Release()
 	}
-	objc.ID(_clsMKMapItem).Send(_mKMapItemSelOpenMapsWithItemsLaunchOptionsCompletionHandler, mapItems.Ptr(), launchOptions, __block_completion)
+	objc.ID(_clsMKMapItem).Send(_mKMapItemSelOpenMapsWithItemsLaunchOptionsCompletionHandler, mapItems.Ptr(), launchOptions.Ptr(), __block_completion)
 }
 
 func (o *MKMapItem) Identifier() *MKMapItemIdentifier {

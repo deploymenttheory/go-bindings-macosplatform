@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A renderer for displaying a SceneKit scene in an existing Metal workflow or OpenGL context.
+//
 // Renderer wraps [raw.SCNRenderer] with a fluent Go API.
 type Renderer struct {
 	inner *raw.SCNRenderer
@@ -39,7 +41,7 @@ func NewRenderer() *Renderer {
 	return &Renderer{inner: raw.SCNRendererFromID(_id)}
 }
 
-// @property scene @abstract Specifies the scene of the receiver
+// The scene to be rendered.
 //
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *Renderer) WithScene(scene *Scene) *Renderer {
@@ -47,14 +49,14 @@ func (x *Renderer) WithScene(scene *Scene) *Renderer {
 	return x
 }
 
-// @method renderAtTime:viewport:commandBuffer:passDescriptor: @abstract updates and renders the receiver's scene at the specified time (system time) viewport, Metal command buffer and pass descriptor. @discussion Use this method to render using Metal.
+// Renders the scene’s contents at the specified system time in the specified Metal command buffer.
 //
 // RenderAtTimeViewportCommandBufferPassDescriptor calls the underlying RenderAtTimeViewportCommandBufferPassDescriptor.
 func (x *Renderer) RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
 	x.inner.RenderAtTimeViewportCommandBufferPassDescriptor(time_, viewport, commandBuffer, renderPassDescriptor)
 }
 
-// @method renderAtTime: @abstract updates and renders the receiver's scene at the specified time (system time). @discussion This method only work if the receiver was allocated with an OpenGL context. Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+// Renders the scene’s contents at the specified system time in the renderer’s OpenGL context.
 //
 // RenderAtTime calls the underlying RenderAtTime.
 func (x *Renderer) RenderAtTime(time_ float64) {
@@ -75,7 +77,7 @@ func (x *Renderer) RenderWithViewportCommandBufferPassDescriptor(viewport corefo
 	x.inner.RenderWithViewportCommandBufferPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
 }
 
-// @method snapshotAtTime:withSize:antialiasingMode: @abstract renders the receiver's scene at the specified time (system time) into an image.
+// Creates an image by drawing the renderer’s content at the specified system time.
 //
 // SnapshotAtTimeWithSizeAntialiasingMode calls the underlying SnapshotAtTimeWithSizeAntialiasingMode.
 func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage {
@@ -112,7 +114,7 @@ func (x *Renderer) NextFrameTime() float64 {
 	return x.inner.NextFrameTime()
 }
 
-// @method render @abstract renders the receiver's scene at the current system time. @discussion This method only work if the receiver was allocated with an OpenGL context and it is deprecated (use renderAtTime: instead). Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+// Renders the scene’s contents in the renderer’s OpenGL context.
 //
 // Render calls the underlying Render.
 func (x *Renderer) Render() {

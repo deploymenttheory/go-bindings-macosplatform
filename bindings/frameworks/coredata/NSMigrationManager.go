@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A migration manager instance that performs a migration of data from one persistent store to another using a given mapping model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmigrationmanager
 type NSMigrationManager struct {
 	foundation.NSObject
@@ -51,6 +53,7 @@ func NSMigrationManagerFromID(id objc.ID) *NSMigrationManager {
 	return o
 }
 
+// Initializes a migration manager instance with given source and destination models.
 func (o *NSMigrationManager) InitWithSourceModelDestinationModel(sourceModel *NSManagedObjectModel, destinationModel *NSManagedObjectModel) *NSMigrationManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelInitWithSourceModelDestinationModel, sourceModel.Ptr(), destinationModel.Ptr())
 	if _ret != 0 {
@@ -59,19 +62,22 @@ func (o *NSMigrationManager) InitWithSourceModelDestinationModel(sourceModel *NS
 	return NSMigrationManagerFromID(_ret)
 }
 
+// Migrates the store at a given source URL to the store at a given destination URL, performing all of the mappings specified in a given mapping model.
 func (o *NSMigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError(sourceURL *foundation.NSURL, sStoreType *foundation.NSString, sOptions *foundation.NSDictionary[objc.ID, objc.ID], mappings *NSMappingModel, dURL *foundation.NSURL, dStoreType *foundation.NSString, dOptions *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSMigrationManagerSelMigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError, sourceURL.Ptr(), sStoreType.Ptr(), sOptions, mappings.Ptr(), dURL.Ptr(), dStoreType.Ptr(), dOptions, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSMigrationManagerSelMigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError, sourceURL.Ptr(), sStoreType.Ptr(), sOptions.Ptr(), mappings.Ptr(), dURL.Ptr(), dStoreType.Ptr(), dOptions.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Resets the association tables for the migration.
 func (o *NSMigrationManager) Reset() {
 	o.Ptr().Send(_nSMigrationManagerSelReset)
 }
 
+// Returns the entity description for the source entity of a given entity mapping.
 func (o *NSMigrationManager) SourceEntityForEntityMapping(mEntity *NSEntityMapping) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelSourceEntityForEntityMapping, mEntity.Ptr())
 	if _ret != 0 {
@@ -80,6 +86,7 @@ func (o *NSMigrationManager) SourceEntityForEntityMapping(mEntity *NSEntityMappi
 	return NSEntityDescriptionFromID(_ret)
 }
 
+// Returns the entity description for the destination entity of a given entity mapping.
 func (o *NSMigrationManager) DestinationEntityForEntityMapping(mEntity *NSEntityMapping) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelDestinationEntityForEntityMapping, mEntity.Ptr())
 	if _ret != 0 {
@@ -88,10 +95,12 @@ func (o *NSMigrationManager) DestinationEntityForEntityMapping(mEntity *NSEntity
 	return NSEntityDescriptionFromID(_ret)
 }
 
+// Associates a given source managed object instance with an array of destination instances for a given property mapping.
 func (o *NSMigrationManager) AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance *NSManagedObject, destinationInstance *NSManagedObject, entityMapping *NSEntityMapping) {
 	o.Ptr().Send(_nSMigrationManagerSelAssociateSourceInstanceWithDestinationInstanceForEntityMapping, sourceInstance.Ptr(), destinationInstance.Ptr(), entityMapping.Ptr())
 }
 
+// Returns the managed object instances created in the destination store for the named entity mapping for the given array of source instances.
 func (o *NSMigrationManager) DestinationInstancesForEntityMappingNamedSourceInstances(mappingName *foundation.NSString, sourceInstances *foundation.NSArray[*NSManagedObject]) *foundation.NSArray[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelDestinationInstancesForEntityMappingNamedSourceInstances, mappingName.Ptr(), sourceInstances.Ptr())
 	if _ret != 0 {
@@ -100,6 +109,7 @@ func (o *NSMigrationManager) DestinationInstancesForEntityMappingNamedSourceInst
 	return foundation.NSArrayFromID[*NSManagedObject](_ret)
 }
 
+// Returns the managed object instances in the source store used to create the given destination instances for the passed in property mapping.
 func (o *NSMigrationManager) SourceInstancesForEntityMappingNamedDestinationInstances(mappingName *foundation.NSString, destinationInstances *foundation.NSArray[*NSManagedObject]) *foundation.NSArray[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelSourceInstancesForEntityMappingNamedDestinationInstances, mappingName.Ptr(), destinationInstances.Ptr())
 	if _ret != 0 {
@@ -108,6 +118,7 @@ func (o *NSMigrationManager) SourceInstancesForEntityMappingNamedDestinationInst
 	return foundation.NSArrayFromID[*NSManagedObject](_ret)
 }
 
+// Cancels the migration with a given error.
 func (o *NSMigrationManager) CancelMigrationWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nSMigrationManagerSelCancelMigrationWithError, error_)
 }
@@ -175,10 +186,13 @@ func (o *NSMigrationManager) MigrationProgress() float32 {
 }
 
 func (o *NSMigrationManager) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSMigrationManagerSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSMigrationManager) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSMigrationManagerSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSMigrationManagerSelSetUserInfo, userInfo.Ptr())
 }

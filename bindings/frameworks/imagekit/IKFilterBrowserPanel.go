@@ -58,23 +58,23 @@ func (o *IKFilterBrowserPanel) FilterName() *foundation.NSString {
 
 // @method     beginWithOptions:modelessDelegate:didEndSelector:contextInfo: @abstract   Displays the FilterBrowser in a new window unless it is already open. @discussion Use this method to open the IKFilterBrowser in a seperate window, much like a panel. When the panel operation is ended, didEndSelector is invoked on the modelessDelegate, passing contextInfo as an argument. didEndSelector should have the following signature: - (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo The value passed as returnCode will be either NSCancelButton or NSOKButton. @param		inOptions	A dictionary describing the desired UI configuration for the IKFilterBrowser @param		modelessDelegate	See discussion below @param		didEndSelector	See discussion below @param		contextInfo	See discussion below
 func (o *IKFilterBrowserPanel) BeginWithOptionsModelessDelegateDidEndSelectorContextInfo(inOptions *foundation.NSDictionary[objc.ID, objc.ID], modelessDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKFilterBrowserPanelSelBeginWithOptionsModelessDelegateDidEndSelectorContextInfo, inOptions, modelessDelegate, didEndSelector, contextInfo)
+	o.Ptr().Send(_iKFilterBrowserPanelSelBeginWithOptionsModelessDelegateDidEndSelectorContextInfo, inOptions.Ptr(), modelessDelegate, didEndSelector, contextInfo)
 }
 
 // @method     beginSheetWithOptions:modalForWindow:modalDelegate:didEndSelector:contextInfo: @abstract   Displays the FilterBrowser in a sheet attached to the passed in window. @discussion Use this method to open the IKFilterBrowser in a sheet attached to a window. When the sheet operation is ended, didEndSelector is invoked on the modalDelegate, passing contextInfo as an argument. didEndSelector should have the following signature: - (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo The value passed as returnCode will be either NSCancelButton or NSOKButton. @param		inOptions	A dictionary describing the desired UI configuration for the IKFilterBrowser @param		modalForWindow	The window to which the sheet should be attached to. @param		modalDelegate	See discussion below @param		didEndSelector	See discussion below @param		contextInfo	See discussion below
 func (o *IKFilterBrowserPanel) BeginSheetWithOptionsModalForWindowModalDelegateDidEndSelectorContextInfo(inOptions *foundation.NSDictionary[objc.ID, objc.ID], docWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKFilterBrowserPanelSelBeginSheetWithOptionsModalForWindowModalDelegateDidEndSelectorContextInfo, inOptions, docWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
+	o.Ptr().Send(_iKFilterBrowserPanelSelBeginSheetWithOptionsModalForWindowModalDelegateDidEndSelectorContextInfo, inOptions.Ptr(), docWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
 }
 
 // @method     runModalWithOptions @abstract   Displays the FilterBrowser in a modal dialog. @discussion Use this method to run the IKFilterBrowser in a modal dialog. The value passed as returnCode will be either NSCancelButton or NSOKButton. @param		inOptions	A dictionary describing the desired UI configuration for the IKFilterBrowser
 func (o *IKFilterBrowserPanel) RunModalWithOptions(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) int {
-	_ret := objc.Send[int](o.Ptr(), _iKFilterBrowserPanelSelRunModalWithOptions, inOptions)
+	_ret := objc.Send[int](o.Ptr(), _iKFilterBrowserPanelSelRunModalWithOptions, inOptions.Ptr())
 	return _ret
 }
 
 // @method     filterBrowserViewWithOptions @abstract   Returns a view containing the FilterBrowser. @discussion Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below. @param		inOptions	A dictionary describing the desired UI configuration for the IKFilterBrowser
 func (o *IKFilterBrowserPanel) FilterBrowserViewWithOptions(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) *IKFilterBrowserView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterBrowserViewWithOptions, inOptions)
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterBrowserViewWithOptions, inOptions.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

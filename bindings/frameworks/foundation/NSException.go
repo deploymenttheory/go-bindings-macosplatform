@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a special condition that interrupts the normal flow of program execution.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsexception
 type NSException struct {
 	NSObject
@@ -38,22 +40,25 @@ func NSExceptionFromID(id objc.ID) *NSException {
 	return o
 }
 
+// Creates and returns an exception object .
 func NSExceptionExceptionWithNameReasonUserInfo(name *NSString, reason *NSString, userInfo *NSDictionary[objc.ID, objc.ID]) *NSException {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSException), _nSExceptionSelExceptionWithNameReasonUserInfo, name.Ptr(), reason.Ptr(), userInfo)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSException), _nSExceptionSelExceptionWithNameReasonUserInfo, name.Ptr(), reason.Ptr(), userInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSExceptionFromID(_ret)
 }
 
+// Initializes and returns a newly allocated exception object.
 func (o *NSException) InitWithNameReasonUserInfo(aName *NSString, aReason *NSString, aUserInfo *NSDictionary[objc.ID, objc.ID]) *NSException {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelInitWithNameReasonUserInfo, aName.Ptr(), aReason.Ptr(), aUserInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelInitWithNameReasonUserInfo, aName.Ptr(), aReason.Ptr(), aUserInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSExceptionFromID(_ret)
 }
 
+// Raises the receiver, causing program flow to jump to the local exception handler.
 func (o *NSException) Raise() {
 	o.Ptr().Send(_nSExceptionSelRaise)
 }
@@ -75,8 +80,11 @@ func (o *NSException) Reason() *NSString {
 }
 
 func (o *NSException) UserInfo() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSExceptionSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSException) CallStackReturnAddresses() *NSArray[*NSNumber] {
@@ -95,10 +103,12 @@ func (o *NSException) CallStackSymbols() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// A convenience method that creates and raises an exception.
 func NSExceptionRaiseFormat(name *NSString, format *NSString) {
 	objc.ID(_clsNSException).Send(_nSExceptionSelRaiseFormat, name.Ptr(), format.Ptr())
 }
 
+// Creates and raises an exception with the specified name, reason, and arguments.
 func NSExceptionRaiseFormatArguments(name *NSString, format *NSString, argList string) {
 	objc.ID(_clsNSException).Send(_nSExceptionSelRaiseFormatArguments, name.Ptr(), format.Ptr(), argList)
 }

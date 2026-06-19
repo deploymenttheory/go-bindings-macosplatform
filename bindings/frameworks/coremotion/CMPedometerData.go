@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the distance traveled by a user on foot.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmpedometerdata
 type CMPedometerData struct {
 	foundation.NSObject

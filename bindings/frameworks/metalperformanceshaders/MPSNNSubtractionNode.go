@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract returns elementwise difference of left - right
+// A representation of an subtraction operator.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnsubtractionnode
 type MPSNNSubtractionNode struct {

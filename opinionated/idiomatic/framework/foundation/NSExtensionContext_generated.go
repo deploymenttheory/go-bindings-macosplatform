@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The host app context from which an app extension is invoked.
+//
 // ExtensionContext wraps [raw.NSExtensionContext] with a fluent Go API.
 type ExtensionContext struct {
 	inner *raw.NSExtensionContext
@@ -43,16 +45,22 @@ func (x *ExtensionContext) WithScriptingProperties(scriptingProperties *raw.NSDi
 	return x
 }
 
+// Tells the host app to complete the app extension request with an array of result items.
+//
 // CompleteRequestReturningItemsCompletionHandler calls the underlying CompleteRequestReturningItemsCompletionHandler.
 func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool)) {
 	x.inner.CompleteRequestReturningItemsCompletionHandler(items, completionHandler)
 }
 
+// Tells the host app to cancel the app extension request, with a supplied error.
+//
 // CancelRequestWithError calls the underlying CancelRequestWithError.
 func (x *ExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
 	x.inner.CancelRequestWithError(error_)
 }
 
+// Asks the system to open a URL on behalf of the currently running app extension.
+//
 // OpenURLCompletionHandler calls the underlying OpenURLCompletionHandler.
 func (x *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
 	x.inner.OpenURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), completionHandler)

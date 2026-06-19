@@ -116,13 +116,16 @@ func (o *PHPickerConfiguration) SetFilter(filter *PHPickerFilter) {
 
 // Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
 func (o *PHPickerConfiguration) PreselectedAssetIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pHPickerConfigurationSelPreselectedAssetIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerConfigurationSelPreselectedAssetIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
 func (o *PHPickerConfiguration) SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pHPickerConfigurationSelSetPreselectedAssetIdentifiers, preselectedAssetIdentifiers)
+	o.Ptr().Send(_pHPickerConfigurationSelSetPreselectedAssetIdentifiers, preselectedAssetIdentifiers.Ptr())
 }
 
 // The mode of the picker. Default is \c PHPickerModeDefault.

@@ -344,14 +344,19 @@ func (o *DOMNode) IsSupported(feature *foundation.NSString, version *foundation.
 	return _ret
 }
 
+// Returns a rectangle that bounds the onscreen rendering of the node.
 func (o *DOMNode) BoundingBox() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _dOMNodeSelBoundingBox)
 	return _ret
 }
 
+// Returns the rectangles that bound each line of text in the node.
 func (o *DOMNode) LineBoxRects() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _dOMNodeSelLineBoxRects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelLineBoxRects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *DOMNode) WebArchive() *WebArchive {

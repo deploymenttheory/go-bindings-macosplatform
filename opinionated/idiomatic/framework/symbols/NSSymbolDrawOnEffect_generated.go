@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol effect that applies the DrawOn animation to symbol images.
+//
 // SymbolDrawOnEffect wraps [raw.NSSymbolDrawOnEffect] with a fluent Go API.
 type SymbolDrawOnEffect struct {
 	inner *raw.NSSymbolDrawOnEffect

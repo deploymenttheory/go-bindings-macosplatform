@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A collection of GKGraphNodes that are governed by a mesh formed by the space between a set of GKPolygonObstacles
+// A navigation graph for 2D game worlds that creates a space-filling network for smooth pathfinding around obstacles.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkmeshgraph
 type GKMeshGraph[NodeType purego.AnyObject] struct {
@@ -48,7 +48,7 @@ func GKMeshGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKMeshGraph[NodeT
 	return o
 }
 
-// Creates a graph with a given buffer radius Obstacles can then be added to this graph prior to a call to [GKMeshGraph trianglulate] @param bufferRadius the circular radius of a potential agent that will navigate this graph.  Obstacles are extruded by this amount to create the graph.  Must be positive.  Negative values are clipped to 0.0f @param min the minimum coordinate (lower left corner) of the bounding box that will encapsulate this graph.  No obstacles should fall outside this bounding box. @param max the maximum coordinate (upper right corner) of the bounding box that will encapsulate this graph.  No obstacles should fall outside this bounding box. @param nodeClass the class of the nodes that this graph should create.  Must descend from GKGraphNode2D
+// Creates a graph to cover the specified area, using the specified node class.
 func GKMeshGraphGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer, nodeClass objc.Class) *GKMeshGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKMeshGraph), _gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass, bufferRadius, min, max, nodeClass)
 	if _ret != 0 {
@@ -57,6 +57,7 @@ func GKMeshGraphGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferR
 	return GKMeshGraphFromID[objc.ID](_ret)
 }
 
+// Initializes a graph to cover the specified area, using the specified node class.
 func (o *GKMeshGraph[NodeType]) InitWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer, nodeClass objc.Class) *GKMeshGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinateNodeClass, bufferRadius, min, max, nodeClass)
 	if _ret != 0 {
@@ -65,7 +66,7 @@ func (o *GKMeshGraph[NodeType]) InitWithBufferRadiusMinCoordinateMaxCoordinateNo
 	return GKMeshGraphFromID[NodeType](_ret)
 }
 
-// Same as [GKMeshGraph graphWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:] where custom node class defaults to GKGraphNode2D
+// Creates a graph to cover the specified area.
 func GKMeshGraphGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *GKMeshGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKMeshGraph), _gKMeshGraphSelGraphWithBufferRadiusMinCoordinateMaxCoordinate, bufferRadius, min, max)
 	if _ret != 0 {
@@ -74,6 +75,7 @@ func GKMeshGraphGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius flo
 	return GKMeshGraphFromID[objc.ID](_ret)
 }
 
+// Initializes a graph to cover the specified area.
 func (o *GKMeshGraph[NodeType]) InitWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *GKMeshGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMeshGraphSelInitWithBufferRadiusMinCoordinateMaxCoordinate, bufferRadius, min, max)
 	if _ret != 0 {
@@ -82,27 +84,27 @@ func (o *GKMeshGraph[NodeType]) InitWithBufferRadiusMinCoordinateMaxCoordinate(b
 	return GKMeshGraphFromID[NodeType](_ret)
 }
 
-// Adds obstacles to this mesh graph.  Only reflected after the next triangulate call.
+// Adds new obstacles to the graph.
 func (o *GKMeshGraph[NodeType]) AddObstacles(obstacles *foundation.NSArray[*GKPolygonObstacle]) {
 	o.Ptr().Send(_gKMeshGraphSelAddObstacles, obstacles.Ptr())
 }
 
-// Removes obstacles from this graph.  Only reflected after the next triangulate call.
+// Removes the specified obstacle from the graph.
 func (o *GKMeshGraph[NodeType]) RemoveObstacles(obstacles *foundation.NSArray[*GKPolygonObstacle]) {
 	o.Ptr().Send(_gKMeshGraphSelRemoveObstacles, obstacles.Ptr())
 }
 
-// Connects the node to this graph by inserting it into an existing triangle and making the appropriate connections Node must be in the space defined by the min and max coordinates of this graph. @param node the node to connect
+// Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
 func (o *GKMeshGraph[NodeType]) ConnectNodeUsingObstacles(node NodeType) {
 	o.Ptr().Send(_gKMeshGraphSelConnectNodeUsingObstacles, node)
 }
 
-// Generates a new triangle mesh for the given obstacles. This should be called after some number of calls to addObstacle The negative space between all input obstacles are triangulated to create a mesh This mesh is turned into a set of connected graph nodes based on
+// Creates or updates the graph with a network of nodes that describes the open space around its obstacles.
 func (o *GKMeshGraph[NodeType]) Triangulate() {
 	o.Ptr().Send(_gKMeshGraphSelTriangulate)
 }
 
-// Returns the triangle at the given index @see numTriangles @param index the index of the triangle to be returned @return the triangle at the given index
+// The triangle definition at the specified index.
 func (o *GKMeshGraph[NodeType]) TriangleAtIndex(index uint) GKTriangle {
 	_ret := objc.Send[GKTriangle](o.Ptr(), _gKMeshGraphSelTriangleAtIndex, index)
 	return _ret

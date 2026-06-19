@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages access and changes to the user’s photo library.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phphotolibrary
 type PHPhotoLibrary struct {
 	foundation.NSObject
@@ -49,6 +51,7 @@ func PHPhotoLibraryFromID(id objc.ID) *PHPhotoLibrary {
 	return o
 }
 
+// Retrieves the shared photo library object.
 func PHPhotoLibrarySharedPhotoLibrary() *PHPhotoLibrary {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHPhotoLibrary), _pHPhotoLibrarySelSharedPhotoLibrary)
 	if _ret != 0 {
@@ -57,12 +60,13 @@ func PHPhotoLibrarySharedPhotoLibrary() *PHPhotoLibrary {
 	return PHPhotoLibraryFromID(_ret)
 }
 
-// Replaces \c +authorizationStatus to support add-only/read-write access level status
+// Returns the app’s authorization to access the user’s photo library for the specified access level.
 func PHPhotoLibraryAuthorizationStatusForAccessLevel(accessLevel PHAccessLevel) PHAuthorizationStatus {
 	_ret := objc.Send[PHAuthorizationStatus](objc.ID(_clsPHPhotoLibrary), _pHPhotoLibrarySelAuthorizationStatusForAccessLevel, accessLevel)
 	return _ret
 }
 
+// Prompts the user to grant the app permission to access the photo library.
 func PHPhotoLibraryRequestAuthorizationForAccessLevelHandler(accessLevel PHAccessLevel, handler func(PHAuthorizationStatus)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -74,13 +78,14 @@ func PHPhotoLibraryRequestAuthorizationForAccessLevelHandler(accessLevel PHAcces
 	objc.ID(_clsPHPhotoLibrary).Send(_pHPhotoLibrarySelRequestAuthorizationForAccessLevelHandler, accessLevel, __block_handler)
 }
 
-// Deprecated and replaced by authorizationStatusForAccessLevel:, will return \c PHAuthorizationStatusAuthorized if the user has chosen limited photo library access
+// Returns information about your app’s authorization to access the user’s photo library.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func PHPhotoLibraryAuthorizationStatus() PHAuthorizationStatus {
 	_ret := objc.Send[PHAuthorizationStatus](objc.ID(_clsPHPhotoLibrary), _pHPhotoLibrarySelAuthorizationStatus)
 	return _ret
 }
 
+// Requests the user’s permission, if needed, to access the photo library.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func PHPhotoLibraryRequestAuthorization(handler func(PHAuthorizationStatus)) {
 	var __block_handler objc.Block
@@ -93,14 +98,17 @@ func PHPhotoLibraryRequestAuthorization(handler func(PHAuthorizationStatus)) {
 	objc.ID(_clsPHPhotoLibrary).Send(_pHPhotoLibrarySelRequestAuthorization, __block_handler)
 }
 
+// Registers an object to observe changes to the photo library’s availability.
 func (o *PHPhotoLibrary) RegisterAvailabilityObserver(observer PHPhotoLibraryAvailabilityObserver) {
 	o.Ptr().Send(_pHPhotoLibrarySelRegisterAvailabilityObserver, observer)
 }
 
+// Unregisters an object from observing changes to the photo library’s availability.
 func (o *PHPhotoLibrary) UnregisterAvailabilityObserver(observer PHPhotoLibraryAvailabilityObserver) {
 	o.Ptr().Send(_pHPhotoLibrarySelUnregisterAvailabilityObserver, observer)
 }
 
+// Asynchronously runs a block that requests changes to the photo library.
 func (o *PHPhotoLibrary) PerformChangesCompletionHandler(changeBlock func(), completionHandler func(bool, unsafe.Pointer)) {
 	var __block_changeBlock objc.Block
 	if changeBlock != nil {
@@ -119,6 +127,7 @@ func (o *PHPhotoLibrary) PerformChangesCompletionHandler(changeBlock func(), com
 	o.Ptr().Send(_pHPhotoLibrarySelPerformChangesCompletionHandler, __block_changeBlock, __block_completionHandler)
 }
 
+// Synchronously runs a block that requests changes to be performed in the photo library.
 func (o *PHPhotoLibrary) PerformChangesAndWaitError(changeBlock func()) (bool, error) {
 	var __block_changeBlock objc.Block
 	if changeBlock != nil {
@@ -135,14 +144,17 @@ func (o *PHPhotoLibrary) PerformChangesAndWaitError(changeBlock func()) (bool, e
 	return _ret, nil
 }
 
+// Registers an object to receive messages when objects in the photo library change.
 func (o *PHPhotoLibrary) RegisterChangeObserver(observer PHPhotoLibraryChangeObserver) {
 	o.Ptr().Send(_pHPhotoLibrarySelRegisterChangeObserver, observer)
 }
 
+// Unregisters an object so that it no longer receives change messages.
 func (o *PHPhotoLibrary) UnregisterChangeObserver(observer PHPhotoLibraryChangeObserver) {
 	o.Ptr().Send(_pHPhotoLibrarySelUnregisterChangeObserver, observer)
 }
 
+// Retrieves the Photos library changes since the token you specify.
 func (o *PHPhotoLibrary) FetchPersistentChangesSinceTokenError(token *PHPersistentChangeToken) (*PHPersistentChangeFetchResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelFetchPersistentChangesSinceTokenError, token.Ptr(), unsafe.Pointer(&_nsErr))
@@ -168,7 +180,7 @@ func (o *PHPhotoLibrary) CurrentChangeToken() *PHPersistentChangeToken {
 	return PHPersistentChangeTokenFromID(_ret)
 }
 
-// @abstract Returns a dictionary that maps each cloud identifier from the provided array to a PLLocalIdentifierMapping result containing the local identifier found for that cloud identifier. @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a local identifier for a given cloud identifier fails, the error parameter will indicate the reason. @param cloudIdentifiers The array of \c PHCloudIdentifier instances whose local identifiers are to being requested.
+// Retrieves the local identifier mappings for the list of cloud identifiers.
 func (o *PHPhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*PHCloudIdentifier]) *foundation.NSDictionary[*PHCloudIdentifier, *PHLocalIdentifierMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelLocalIdentifierMappingsForCloudIdentifiers, cloudIdentifiers.Ptr())
 	if _ret != 0 {
@@ -177,22 +189,29 @@ func (o *PHPhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentif
 	return foundation.NSDictionaryFromID[*PHCloudIdentifier, *PHLocalIdentifierMapping](_ret)
 }
 
-// @abstract Returns a dictionary that maps each local identifier from the provided array to a PLCloudIdentifierMapping result containing the cloud identifier found for that local identifier @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a cloud identifier for a given local identifier fails, the error parameter will indicate the reason. @param localIdentifiers The array of \c NSString instances whose cloud identifiers are to being requested.
+// Retrieves the cloud identifier mappings for the list of local identifiers.
 func (o *PHPhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *PHCloudIdentifierMapping] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHCloudIdentifierMapping]](o.Ptr(), _pHPhotoLibrarySelCloudIdentifierMappingsForLocalIdentifiers, localIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCloudIdentifierMappingsForLocalIdentifiers, localIdentifiers.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHCloudIdentifierMapping](_ret)
 }
 
-// DEPRECATED: These two methods can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.
+// Retrieves the equivalent local identifiers for the list of iCloud identifiers.
 // Deprecated: since macOS 12.
 func (o *PHPhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*PHCloudIdentifier]) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers, cloudIdentifiers.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers, cloudIdentifiers.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Retrieves the equivalent iCloud identifiers for the list of local identifiers.
 // Deprecated: since macOS 12.
 func (o *PHPhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*PHCloudIdentifier] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers, localIdentifiers)
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers, localIdentifiers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

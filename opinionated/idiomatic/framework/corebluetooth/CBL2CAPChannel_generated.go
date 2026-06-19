@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A live L2CAP connection to a remote device.
+//
 // L2CAPChannel wraps [raw.CBL2CAPChannel] with a fluent Go API.
 type L2CAPChannel struct {
 	inner *raw.CBL2CAPChannel

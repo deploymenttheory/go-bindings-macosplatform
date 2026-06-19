@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes pixel buffer requirements and creates new pixel buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager
 type MERAWProcessorPixelBufferManager struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MERAWProcessorPixelBufferManagerFromID(id objc.ID) *MERAWProcessorPixelBuff
 	return o
 }
 
-// @method			createPixelBufferAndReturnError: @abstract		Generates a pixel buffer using the session's pixel buffer pool. @discussion		If implemented in Objective-C, the caller is responsible for releasing the returned CVPixelBuffer. @param			error If provided, returns error information in the event that the method fails. @result A pixel buffer compatible with the extension's most recently set pixelBufferAttributes
+// Generates a pixel buffer using the session’s pixel buffer pool.
 func (o *MERAWProcessorPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mERAWProcessorPixelBufferManagerSelCreatePixelBufferAndReturnError, unsafe.Pointer(&_nsErr))
@@ -46,10 +48,13 @@ func (o *MERAWProcessorPixelBufferManager) CreatePixelBufferAndReturnError() (un
 
 // @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. @discussion		This can be updated by the processor before requesting a new pixelBuffer.
 func (o *MERAWProcessorPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mERAWProcessorPixelBufferManagerSelPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessorPixelBufferManagerSelPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MERAWProcessorPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_mERAWProcessorPixelBufferManagerSelSetPixelBufferAttributes, pixelBufferAttributes)
+	o.Ptr().Send(_mERAWProcessorPixelBufferManagerSelSetPixelBufferAttributes, pixelBufferAttributes.Ptr())
 }

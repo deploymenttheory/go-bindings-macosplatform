@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structural element of a scene graph, representing a position and transform in a 3D coordinate space, to which you can attach geometry, lights, cameras, or other displayable content.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnnode
 type SCNNode struct {
 	foundation.NSObject
@@ -169,7 +171,7 @@ func SCNNodeFromID(id objc.ID) *SCNNode {
 	return o
 }
 
-// @method node @abstract Creates and initializes a node instance.
+// Creates and returns a node object.
 func SCNNodeNode() *SCNNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNNode), _sCNNodeSelNode)
 	if _ret != 0 {
@@ -178,7 +180,7 @@ func SCNNodeNode() *SCNNode {
 	return SCNNodeFromID(_ret)
 }
 
-// @method nodeWithGeometry: @abstract Creates and initializes a node instance with the specified geometry attached. @param geometry The geometry to attach.
+// Creates and returns a node object with the specified geometry attached.
 func SCNNodeNodeWithGeometry(geometry *SCNGeometry) *SCNNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNNode), _sCNNodeSelNodeWithGeometry, geometry.Ptr())
 	if _ret != 0 {
@@ -187,7 +189,7 @@ func SCNNodeNodeWithGeometry(geometry *SCNGeometry) *SCNNode {
 	return SCNNodeFromID(_ret)
 }
 
-// @method clone @abstract Returns a copy of the receiver. The returned instance is autoreleased. @discussion The copy is recursive: every child node will be cloned, too. For a non-recursive copy, use copy instead. The copied nodes will share their attached objects (light, geometry, camera, ...) with the original instances; if you want, for example, to change the materials of the copy independently of the original object, you'll have to copy the geometry of the node separately.
+// Creates a copy of the node and its children.
 func (o *SCNNode) Clone() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelClone)
 	if _ret != 0 {
@@ -196,6 +198,7 @@ func (o *SCNNode) Clone() *SCNNode {
 	return SCNNodeFromID(_ret)
 }
 
+// Creates an optimized copy of the node and its children.
 func (o *SCNNode) FlattenedClone() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelFlattenedClone)
 	if _ret != 0 {
@@ -204,31 +207,32 @@ func (o *SCNNode) FlattenedClone() *SCNNode {
 	return SCNNodeFromID(_ret)
 }
 
+// Sets the world transform applied to the node.
 func (o *SCNNode) SetWorldTransform(worldTransform quartzcore.CATransform3D) {
 	o.Ptr().Send(_sCNNodeSelSetWorldTransform, worldTransform)
 }
 
-// @method addChildNode: @abstract Appends the node to the receiver’s childNodes array. @param child The node to be added to the receiver’s childNodes array.
+// Adds a node to the node’s array of children.
 func (o *SCNNode) AddChildNode(child *SCNNode) {
 	o.Ptr().Send(_sCNNodeSelAddChildNode, child.Ptr())
 }
 
-// @method insertChildNode:atIndex: @abstract Insert a node in the childNodes array at the specified index. @param child The node to insert. @param index Index in the childNodes array to insert the node.
+// Adds a node to the node’s array of children at a specified index.
 func (o *SCNNode) InsertChildNodeAtIndex(child *SCNNode, index uint) {
 	o.Ptr().Send(_sCNNodeSelInsertChildNodeAtIndex, child.Ptr(), index)
 }
 
-// @method removeFromParentNode @abstract Removes the node from the childNodes array of the receiver’s parentNode.
+// Removes the node from its parent’s array of child nodes.
 func (o *SCNNode) RemoveFromParentNode() {
 	o.Ptr().Send(_sCNNodeSelRemoveFromParentNode)
 }
 
-// @method replaceChildNode:with: @abstract Remove `child' from the childNode array of the receiver and insert 'child2' if non-nil in its position. @discussion If the parentNode of `child' is not the receiver, the behavior is undefined. @param oldChild The node to replace in the childNodes array. @param newChild The new node that will replace the previous one.
+// Removes a child from the node’s array of children and inserts another node in its place.
 func (o *SCNNode) ReplaceChildNodeWith(oldChild *SCNNode, newChild *SCNNode) {
 	o.Ptr().Send(_sCNNodeSelReplaceChildNodeWith, oldChild.Ptr(), newChild.Ptr())
 }
 
-// @method childNodeWithName:recursively: @abstract Returns the first node found in the node tree with the specified name. @discussion The search uses a pre-order tree traversal. @param name The name of the node you are searching for. @param recursively Set to YES if you want the search to look through the sub-nodes recursively.
+// Returns the first node in the node’s child node subtree with the specified name.
 func (o *SCNNode) ChildNodeWithNameRecursively(name *foundation.NSString, recursively bool) *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelChildNodeWithNameRecursively, name.Ptr(), recursively)
 	if _ret != 0 {
@@ -237,7 +241,7 @@ func (o *SCNNode) ChildNodeWithNameRecursively(name *foundation.NSString, recurs
 	return SCNNodeFromID(_ret)
 }
 
-// @method childNodesPassingTest: @abstract Returns the child nodes of the receiver that passes a test in a given Block. @discussion The search is recursive and uses a pre-order tree traversal. @param predicate The block to apply to child nodes of the receiver. The block takes two arguments: "child" is a child node and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "child" passed the test.
+// Returns all nodes in the node’s child node subtree that satisfy the test applied by a block.
 func (o *SCNNode) ChildNodesPassingTest(predicate func(*SCNNode, *bool) bool) *foundation.NSArray[*SCNNode] {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -256,7 +260,7 @@ func (o *SCNNode) ChildNodesPassingTest(predicate func(*SCNNode, *bool) bool) *f
 	return foundation.NSArrayFromID[*SCNNode](_ret)
 }
 
-// @method enumerateChildNodesUsingBlock: @abstract Executes a given block on each child node under the receiver. @discussion The search is recursive and uses a pre-order tree traversal. @param block The block to apply to child nodes of the receiver. The block takes two arguments: "child" is a child node and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.
+// Executes the specified block for each of the node’s child and descendant nodes.
 func (o *SCNNode) EnumerateChildNodesUsing(block func(*SCNNode, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -271,7 +275,7 @@ func (o *SCNNode) EnumerateChildNodesUsing(block func(*SCNNode, *bool)) {
 	o.Ptr().Send(_sCNNodeSelEnumerateChildNodesUsing, __block_block)
 }
 
-// @method enumerateHierarchyUsingBlock: @abstract Executes a given block on the receiver and its child nodes. @discussion The search is recursive and uses a pre-order tree traversal. @param block The block to apply to the receiver and its child nodes. The block takes two arguments: "node" is a node in the hierarchy of the receiver (including the receiver) and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the node hierarchy. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.
+// Executes the specified block for each of the node’s child and descendant nodes, as well as for the node itself.
 func (o *SCNNode) EnumerateHierarchyUsing(block func(*SCNNode, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -286,45 +290,45 @@ func (o *SCNNode) EnumerateHierarchyUsing(block func(*SCNNode, *bool)) {
 	o.Ptr().Send(_sCNNodeSelEnumerateHierarchyUsing, __block_block)
 }
 
-// @method convertPosition:toNode: @abstract Converts a position from the receiver’s coordinate system to that of the specified node. @param position A position specified in the local coordinate system of the receiver. @param node The node into whose coordinate system "position" is to be converted. If "node" is nil, this method instead converts to world coordinates.
+// Converts a position from the node’s local coordinate space to that of another node.
 func (o *SCNNode) ConvertPositionToNode(position SCNVector3, node *SCNNode) SCNVector3 {
 	_ret := objc.Send[SCNVector3](o.Ptr(), _sCNNodeSelConvertPositionToNode, position, node.Ptr())
 	return _ret
 }
 
-// @method convertPosition:fromNode: @abstract Converts a position from the coordinate system of a given node to that of the receiver. @param position A position specified in the local coordinate system of "node". @param node The node from whose coordinate system "position" is to be converted. If "node" is nil, this method instead converts from world coordinates.
+// Converts a position to the node’s local coordinate space from that of another node.
 func (o *SCNNode) ConvertPositionFromNode(position SCNVector3, node *SCNNode) SCNVector3 {
 	_ret := objc.Send[SCNVector3](o.Ptr(), _sCNNodeSelConvertPositionFromNode, position, node.Ptr())
 	return _ret
 }
 
-// @abstract Converts a vector from the coordinate system of a given node to that of the receiver. @param vector A vector specified in the local coordinate system the receiver. @param node The node defining the space from which the vector should be transformed. If "node" is nil, this method instead converts from world coordinates. @return vector transformed from receiver local space to node local space.
+// Converts a direction vector from the node’s local coordinate space to that of another node.
 func (o *SCNNode) ConvertVectorToNode(vector SCNVector3, node *SCNNode) SCNVector3 {
 	_ret := objc.Send[SCNVector3](o.Ptr(), _sCNNodeSelConvertVectorToNode, vector, node.Ptr())
 	return _ret
 }
 
-// @abstract Converts a vector from the coordinate system of a given node to that of the receiver. @param vector A vector specified in the local coordinate system of "node". @param node The node defining the space to which the vector should be transformed to. If "node" is nil, this method instead converts from world coordinates. @return vector transformed from node space to reveiver local space.
+// Converts a direction vector to the node’s local coordinate space from that of another node.
 func (o *SCNNode) ConvertVectorFromNode(vector SCNVector3, node *SCNNode) SCNVector3 {
 	_ret := objc.Send[SCNVector3](o.Ptr(), _sCNNodeSelConvertVectorFromNode, vector, node.Ptr())
 	return _ret
 }
 
-// @method convertTransform:toNode: @abstract Converts a transform from the receiver’s coordinate system to that of the specified node. @param transform A transform specified in the local coordinate system of the receiver. @param node The node into whose coordinate system "transform" is to be converted. If "node" is nil, this method instead converts to world coordinates.
+// Converts a transform from the node’s local coordinate space to that of another node.
 func (o *SCNNode) ConvertTransformToNode(transform quartzcore.CATransform3D, node *SCNNode) quartzcore.CATransform3D {
 	_ret := objc.Send[quartzcore.CATransform3D](o.Ptr(), _sCNNodeSelConvertTransformToNode, transform, node.Ptr())
 	return _ret
 }
 
-// @method convertTransform:fromNode: @abstract Converts a transform from the coordinate system of a given node to that of the receiver. @param transform A transform specified in the local coordinate system of "node". @param node The node from whose coordinate system "transform" is to be converted. If "node" is nil, this method instead converts from world coordinates.
+// Converts a transform to the node’s local coordinate space from that of another node.
 func (o *SCNNode) ConvertTransformFromNode(transform quartzcore.CATransform3D, node *SCNNode) quartzcore.CATransform3D {
 	_ret := objc.Send[quartzcore.CATransform3D](o.Ptr(), _sCNNodeSelConvertTransformFromNode, transform, node.Ptr())
 	return _ret
 }
 
-// @method hitTestWithSegmentFromPoint:toPoint:options: @abstract Returns an array of SCNHitTestResult for each node in the receiver's sub tree that intersects the specified segment. @param pointA The first point of the segment relative to the receiver. @param pointB The second point of the segment relative to the receiver. @param options Optional parameters (see the "Hit test options" section in SCNSceneRenderer.h for the available options). @discussion See SCNSceneRenderer.h for a screen-space hit testing method.
+// Searches the node’s child node subtree for objects intersecting a line segment between two specified points.
 func (o *SCNNode) HitTestWithSegmentFromPointToPointOptions(pointA SCNVector3, pointB SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNHitTestResult] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelHitTestWithSegmentFromPointToPointOptions, pointA, pointB, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelHitTestWithSegmentFromPointToPointOptions, pointA, pointB, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -613,12 +617,15 @@ func (o *SCNNode) SetConstraints(constraints *foundation.NSArray[*SCNConstraint]
 
 // @property filters @abstract An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable. @discussion Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
 func (o *SCNNode) Filters() *foundation.NSArray[*coreimage.CIFilter] {
-	_ret := objc.Send[*foundation.NSArray[*coreimage.CIFilter]](o.Ptr(), _sCNNodeSelFilters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNNodeSelFilters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
 }
 
 func (o *SCNNode) SetFilters(filters *foundation.NSArray[*coreimage.CIFilter]) {
-	o.Ptr().Send(_sCNNodeSelSetFilters, filters)
+	o.Ptr().Send(_sCNNodeSelSetFilters, filters.Ptr())
 }
 
 // @property presentationNode @abstract Returns the presentation node. @discussion Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
@@ -660,27 +667,27 @@ func (o *SCNNode) SetCategoryBitMask(categoryBitMask uint) {
 	o.Ptr().Send(_sCNNodeSelSetCategoryBitMask, categoryBitMask)
 }
 
-// Convenience for calling lookAt:up:localFront: with worldUp set to `self.worldUp` and localFront [SCNNode localFront]. @param worldTarget target position in world space.
+// Changes the node’s orientation so that its local forward vector points toward the specified location.
 func (o *SCNNode) LookAt(worldTarget SCNVector3) {
 	o.Ptr().Send(_sCNNodeSelLookAt, worldTarget)
 }
 
-// Set the orientation of the node so its front vector is pointing toward a given target. Using a reference up vector in world space and a front vector in local space. @param worldTarget position in world space. @param worldUp the up vector in world space. @param localFront the front vector in local space.
+// Changes the node’s orientation so that the specified forward vector points toward the specified location.
 func (o *SCNNode) LookAtUpLocalFront(worldTarget SCNVector3, worldUp SCNVector3, localFront SCNVector3) {
 	o.Ptr().Send(_sCNNodeSelLookAtUpLocalFront, worldTarget, worldUp, localFront)
 }
 
-// Translate the current node position along the given vector in local space. @param translation the translation in local space.
+// Changes the node’s position relative to its current position.
 func (o *SCNNode) LocalTranslateBy(translation SCNVector3) {
 	o.Ptr().Send(_sCNNodeSelLocalTranslateBy, translation)
 }
 
-// Apply a the given rotation to the current one. @param rotation rotation in local space.
+// Changes the node’s orientation relative to its current orientation.
 func (o *SCNNode) LocalRotateBy(rotation SCNVector4) {
 	o.Ptr().Send(_sCNNodeSelLocalRotateBy, rotation)
 }
 
-// Apply a rotation relative to a target point in parent space. @param worldRotation rotation to apply in world space. @param worldTarget position of the target in world space.
+// Changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
 func (o *SCNNode) RotateByAroundTarget(worldRotation SCNVector4, worldTarget SCNVector3) {
 	o.Ptr().Send(_sCNNodeSelRotateByAroundTarget, worldRotation, worldTarget)
 }
@@ -721,52 +728,63 @@ func (o *SCNNode) WorldFront() SCNVector3 {
 	return _ret
 }
 
+// Converts a position from the node’s local coordinate space to that of another node.
 func (o *SCNNode) SimdConvertPositionToNode(position unsafe.Pointer, node *SCNNode) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNNodeSelSimdConvertPositionToNode, position, node.Ptr())
 	return _ret
 }
 
+// Converts a position to the node’s local coordinate space from that of another node.
 func (o *SCNNode) SimdConvertPositionFromNode(position unsafe.Pointer, node *SCNNode) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNNodeSelSimdConvertPositionFromNode, position, node.Ptr())
 	return _ret
 }
 
+// Converts a direction vector from the node’s local coordinate space to that of another node.
 func (o *SCNNode) SimdConvertVectorToNode(vector unsafe.Pointer, node *SCNNode) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNNodeSelSimdConvertVectorToNode, vector, node.Ptr())
 	return _ret
 }
 
+// Converts a direction vector to the node’s local coordinate space from that of another node.
 func (o *SCNNode) SimdConvertVectorFromNode(vector unsafe.Pointer, node *SCNNode) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNNodeSelSimdConvertVectorFromNode, vector, node.Ptr())
 	return _ret
 }
 
+// Converts a transform from the node’s local coordinate space to that of another node.
 func (o *SCNNode) SimdConvertTransformToNode(transform unsafe.Pointer, node *SCNNode) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNNodeSelSimdConvertTransformToNode, transform, node.Ptr())
 	return _ret
 }
 
+// Converts a transform to the node’s local coordinate space from that of another node.
 func (o *SCNNode) SimdConvertTransformFromNode(transform unsafe.Pointer, node *SCNNode) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNNodeSelSimdConvertTransformFromNode, transform, node.Ptr())
 	return _ret
 }
 
+// Changes the node’s orientation so that its local forward vector points toward the specified location.
 func (o *SCNNode) SimdLookAt(worldTarget unsafe.Pointer) {
 	o.Ptr().Send(_sCNNodeSelSimdLookAt, worldTarget)
 }
 
+// Changes the node’s orientation so that the specified forward vector points toward the specified location.
 func (o *SCNNode) SimdLookAtUpLocalFront(worldTarget unsafe.Pointer, worldUp unsafe.Pointer, localFront unsafe.Pointer) {
 	o.Ptr().Send(_sCNNodeSelSimdLookAtUpLocalFront, worldTarget, worldUp, localFront)
 }
 
+// Changes the node’s position relative to its current position.
 func (o *SCNNode) SimdLocalTranslateBy(translation unsafe.Pointer) {
 	o.Ptr().Send(_sCNNodeSelSimdLocalTranslateBy, translation)
 }
 
+// Changes the node’s orientation relative to its current orientation.
 func (o *SCNNode) SimdLocalRotateBy(rotation unsafe.Pointer) {
 	o.Ptr().Send(_sCNNodeSelSimdLocalRotateBy, rotation)
 }
 
+// Changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
 func (o *SCNNode) SimdRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer) {
 	o.Ptr().Send(_sCNNodeSelSimdRotateByAroundTarget, worldRotation, worldTarget)
 }
@@ -910,14 +928,17 @@ func (o *SCNNode) SetFocusBehavior(focusBehavior SCNNodeFocusBehavior) {
 	o.Ptr().Send(_sCNNodeSelSetFocusBehavior, focusBehavior)
 }
 
+// Attaches a particle system to the node.
 func (o *SCNNode) AddParticleSystem(system *SCNParticleSystem) {
 	o.Ptr().Send(_sCNNodeSelAddParticleSystem, system.Ptr())
 }
 
+// Removes any particle systems directly attached to the node.
 func (o *SCNNode) RemoveAllParticleSystems() {
 	o.Ptr().Send(_sCNNodeSelRemoveAllParticleSystems)
 }
 
+// Removes a particle system attached to the node.
 func (o *SCNNode) RemoveParticleSystem(system *SCNParticleSystem) {
 	o.Ptr().Send(_sCNNodeSelRemoveParticleSystem, system.Ptr())
 }
@@ -930,17 +951,17 @@ func (o *SCNNode) ParticleSystems() *foundation.NSArray[*SCNParticleSystem] {
 	return foundation.NSArrayFromID[*SCNParticleSystem](_ret)
 }
 
-// @method addAudioPlayer: @abstract Add an audio player to the node and starts playing it right away.
+// Adds the specified auto player to the node and begins playback.
 func (o *SCNNode) AddAudioPlayer(player *SCNAudioPlayer) {
 	o.Ptr().Send(_sCNNodeSelAddAudioPlayer, player.Ptr())
 }
 
-// @method removeAllAudioPlayers @abstract Remove all audio players from this node and stop playing them.
+// Removes all audio players attached to the node, stopping playback.
 func (o *SCNNode) RemoveAllAudioPlayers() {
 	o.Ptr().Send(_sCNNodeSelRemoveAllAudioPlayers)
 }
 
-// @method removeAudioPlayer: @abstract Remove the given audio player from this node and stop playing it.
+// Removes the specified audio player from the node, stopping playback.
 func (o *SCNNode) RemoveAudioPlayer(player *SCNAudioPlayer) {
 	o.Ptr().Send(_sCNNodeSelRemoveAudioPlayer, player.Ptr())
 }

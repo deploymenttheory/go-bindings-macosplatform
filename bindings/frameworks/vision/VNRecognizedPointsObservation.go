@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that provides the points the analysis recognized.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation
 type VNRecognizedPointsObservation struct {
 	VNObservation
@@ -37,7 +39,7 @@ func VNRecognizedPointsObservationFromID(id objc.ID) *VNRecognizedPointsObservat
 	return o
 }
 
-// @brief Obtains a specific normalized recognized point. @param pointKey The key specifying the desired recognized point. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the specific point is not defined.
+// Retrieves a recognized point for a key.
 func (o *VNRecognizedPointsObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*VNRecognizedPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelRecognizedPointForKeyError, pointKey.Ptr(), unsafe.Pointer(&_nsErr))
@@ -50,17 +52,20 @@ func (o *VNRecognizedPointsObservation) RecognizedPointForKeyError(pointKey *fou
 	return VNRecognizedPointFromID(_ret), nil
 }
 
-// @brief Obtains the collection of points associated with an identified grouping. @discussion The obtained collection is a dictionary that provides the mapping of a recognized point's key to the recognized point. @param groupKey The key representing a specific grouping of points. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the dictionary of recognized points in the group, or nil if an error was encountered.
+// Retrieves the recognized points for a key.
 func (o *VNRecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint]](o.Ptr(), _vNRecognizedPointsObservationSelRecognizedPointsForGroupKeyError, groupKey.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelRecognizedPointsForGroupKeyError, groupKey.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, *VNRecognizedPoint](_ret), nil
 }
 
-// @brief    Returns the recognized points packaged into an MLMultiArray. @discussion The MLMultiArray will contain the raw data output of (x coordinate, y coordinate, confidence) for specific points in the format expected by CreateML action recognition models. The datatype of the elements in the array is double and the dimensions are [1, 3, # of possible points].  If an expected point key is not available in the obeservation, that entry in the MLMultiArray will be populated with 0s. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the MLMultiArray representation of the points, or nil if an error was encountered.
+// Retrieves the grouping of normalized point coordinates and confidence scores in a format compatible with Core ML.
 func (o *VNRecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (*coreml.MLMultiArray, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelKeypointsMultiArrayAndReturnError, unsafe.Pointer(&_nsErr))
@@ -75,12 +80,18 @@ func (o *VNRecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (*co
 
 // @brief Returns all of the point group keys available in the observation.
 func (o *VNRecognizedPointsObservation) AvailableKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizedPointsObservationSelAvailableKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelAvailableKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief The availableGroupKeys property returns all of the point group labels usable with the observation.
 func (o *VNRecognizedPointsObservation) AvailableGroupKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizedPointsObservationSelAvailableGroupKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelAvailableGroupKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

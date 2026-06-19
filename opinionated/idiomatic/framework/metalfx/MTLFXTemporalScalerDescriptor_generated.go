@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of properties that configure a temporal scaling effect, and a factory method that creates the effect.
+//
 // TemporalScalerDescriptor wraps [raw.MTLFXTemporalScalerDescriptor] with a fluent Go API.
 type TemporalScalerDescriptor struct {
 	inner *raw.MTLFXTemporalScalerDescriptor
@@ -60,7 +62,7 @@ func (x *TemporalScalerDescriptor) WithMotionTextureFormat(motionTextureFormat m
 	return x
 }
 
-// The pixel format of the output texture for the temporal scaler you create with this descriptor.
+// The pixel format of the output color texture for the temporal scaler you create with this descriptor.
 //
 // WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
 func (x *TemporalScalerDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor {
@@ -100,7 +102,7 @@ func (x *TemporalScalerDescriptor) WithOutputHeight(outputHeight uint) *Temporal
 	return x
 }
 
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Temporal scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that indicates whether MetalFX calculates the exposure for each frame.
 //
 // WithAutoExposureEnabled sets the autoExposureEnabled property and returns the receiver for chaining.
 func (x *TemporalScalerDescriptor) WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalScalerDescriptor {
@@ -108,7 +110,7 @@ func (x *TemporalScalerDescriptor) WithAutoExposureEnabled(autoExposureEnabled b
 	return x
 }
 
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal scaler that can upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
+// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.
 //
 // WithRequiresSynchronousInitialization sets the requiresSynchronousInitialization property and returns the receiver for chaining.
 func (x *TemporalScalerDescriptor) WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalScalerDescriptor {
@@ -116,7 +118,7 @@ func (x *TemporalScalerDescriptor) WithRequiresSynchronousInitialization(require
 	return x
 }
 
-// A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution. When you set this property to <doc://com.apple.documentation/documentation/swift/true> to enable dynamic resolution, scale properties “inputContentMinScale“ and “inputContentMaxScale“ represent the input and output resolution both the width and height. * Note: The scaler assumes that aspect ratio of the input and output textures doesn't change.
+// A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution.
 //
 // WithInputContentPropertiesEnabled sets the inputContentPropertiesEnabled property and returns the receiver for chaining.
 func (x *TemporalScalerDescriptor) WithInputContentPropertiesEnabled(inputContentPropertiesEnabled bool) *TemporalScalerDescriptor {
@@ -156,14 +158,14 @@ func (x *TemporalScalerDescriptor) WithReactiveMaskTextureFormat(reactiveMaskTex
 	return x
 }
 
-// Creates a temporal scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the temporal scaler. - Returns: A new temporal scaler instance upon success, or `nil` otherwise.
+// Creates a temporal scaler instance from this descriptor’s current property values.
 //
 // NewTemporalScalerWithDevice calls the underlying NewTemporalScalerWithDevice.
 func (x *TemporalScalerDescriptor) NewTemporalScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalScaler {
 	return x.inner.NewTemporalScalerWithDevice(device)
 }
 
-// Creates a temporal scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the temporal scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new temporal scaler instance upon success, or `nil` otherwise.
+// Creates a temporal scaler instance for a Metal device.
 //
 // NewTemporalScalerWithDeviceCompiler calls the underlying NewTemporalScalerWithDeviceCompiler.
 func (x *TemporalScalerDescriptor) NewTemporalScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalScaler {

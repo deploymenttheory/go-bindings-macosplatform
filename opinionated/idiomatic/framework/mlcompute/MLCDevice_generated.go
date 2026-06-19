@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.
+//
 // Device wraps [raw.MLCDevice] with a fluent Go API.
 type Device struct {
 	inner *raw.MLCDevice

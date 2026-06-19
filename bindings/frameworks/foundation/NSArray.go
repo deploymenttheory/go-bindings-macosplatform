@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static ordered collection of objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsarray
 type NSArray[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -99,11 +101,13 @@ func NSArrayFromID[ObjectType purego.AnyObject](id objc.ID) *NSArray[ObjectType]
 	return o
 }
 
+// Returns the object located at the specified index.
 func (o *NSArray[ObjectType]) ObjectAtIndex(index uint) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSArraySelObjectAtIndex, index)
 	return _ret
 }
 
+// Initializes a newly allocated array.
 func (o *NSArray[ObjectType]) Init() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInit)
 	if _ret != 0 {
@@ -112,6 +116,7 @@ func (o *NSArray[ObjectType]) Init() *NSArray[ObjectType] {
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated array to include a given number of objects from a given C array.
 func (o *NSArray[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithObjectsCount, objects, cnt)
 	if _ret != 0 {
@@ -133,6 +138,7 @@ func (o *NSArray[ObjectType]) Count() uint {
 	return _ret
 }
 
+// Returns a new array that is a copy of the receiving array with a given object added to the end.
 func (o *NSArray[ObjectType]) ArrayByAddingObject(anObject ObjectType) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelArrayByAddingObject, anObject)
 	if _ret != 0 {
@@ -141,6 +147,7 @@ func (o *NSArray[ObjectType]) ArrayByAddingObject(anObject ObjectType) *NSArray[
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns a new array that is a copy of the receiving array with the objects contained in another array added to the end.
 func (o *NSArray[ObjectType]) ArrayByAddingObjectsFromArray(otherArray *NSArray[ObjectType]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelArrayByAddingObjectsFromArray, otherArray.Ptr())
 	if _ret != 0 {
@@ -149,6 +156,7 @@ func (o *NSArray[ObjectType]) ArrayByAddingObjectsFromArray(otherArray *NSArray[
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Constructs and returns an NSString object that is the result of interposing a given separator between the elements of the array.
 func (o *NSArray[ObjectType]) ComponentsJoinedByString(separator *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelComponentsJoinedByString, separator.Ptr())
 	if _ret != 0 {
@@ -157,11 +165,13 @@ func (o *NSArray[ObjectType]) ComponentsJoinedByString(separator *NSString) *NSS
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether a given object is present in the array.
 func (o *NSArray[ObjectType]) ContainsObject(anObject ObjectType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArraySelContainsObject, anObject)
 	return _ret
 }
 
+// Returns a string that represents the contents of the array, formatted as a property list.
 func (o *NSArray[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDescriptionWithLocale, locale)
 	if _ret != 0 {
@@ -170,6 +180,7 @@ func (o *NSArray[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string that represents the contents of the array, formatted as a property list.
 func (o *NSArray[ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, level uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDescriptionWithLocaleIndent, locale, level)
 	if _ret != 0 {
@@ -178,40 +189,48 @@ func (o *NSArray[ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, level 
 	return NSStringFromID(_ret)
 }
 
+// Returns the first object contained in the receiving array that’s equal to an object in another given array.
 func (o *NSArray[ObjectType]) FirstObjectCommonWithArray(otherArray *NSArray[ObjectType]) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSArraySelFirstObjectCommonWithArray, otherArray.Ptr())
 	return _ret
 }
 
+// Copies references to objects contained in the array that fall within the specified range to aBuffer.
 func (o *NSArray[ObjectType]) GetObjectsRange(objects unsafe.Pointer, range_ NSRange) {
 	o.Ptr().Send(_nSArraySelGetObjectsRange, objects, range_)
 }
 
+// Returns the lowest index whose corresponding array value is equal to a given object.
 func (o *NSArray[ObjectType]) IndexOfObject(anObject ObjectType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObject, anObject)
 	return _ret
 }
 
+// Returns the lowest index within a specified range whose corresponding array value is equal to a given object .
 func (o *NSArray[ObjectType]) IndexOfObjectInRange(anObject ObjectType, range_ NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObjectInRange, anObject, range_)
 	return _ret
 }
 
+// Returns the lowest index whose corresponding array value is identical to a given object.
 func (o *NSArray[ObjectType]) IndexOfObjectIdenticalTo(anObject ObjectType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObjectIdenticalTo, anObject)
 	return _ret
 }
 
+// Returns the lowest index within a specified range whose corresponding array value is equal to a given object .
 func (o *NSArray[ObjectType]) IndexOfObjectIdenticalToInRange(anObject ObjectType, range_ NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObjectIdenticalToInRange, anObject, range_)
 	return _ret
 }
 
+// Compares the receiving array to another array.
 func (o *NSArray[ObjectType]) IsEqualToArray(otherArray *NSArray[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArraySelIsEqualToArray, otherArray.Ptr())
 	return _ret
 }
 
+// Returns an enumerator object that lets you access each object in the array.
 func (o *NSArray[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelObjectEnumerator)
 	if _ret != 0 {
@@ -220,6 +239,7 @@ func (o *NSArray[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Returns an enumerator object that lets you access each object in the array, in reverse order.
 func (o *NSArray[ObjectType]) ReverseObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelReverseObjectEnumerator)
 	if _ret != 0 {
@@ -228,6 +248,7 @@ func (o *NSArray[ObjectType]) ReverseObjectEnumerator() *NSEnumerator[ObjectType
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Returns a new array that lists the receiving array’s elements in ascending order as defined by the comparison function comparator.
 func (o *NSArray[ObjectType]) SortedArrayUsingFunctionContext(comparator unsafe.Pointer, context_ unsafe.Pointer) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingFunctionContext, comparator, context_)
 	if _ret != 0 {
@@ -236,6 +257,7 @@ func (o *NSArray[ObjectType]) SortedArrayUsingFunctionContext(comparator unsafe.
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns a new array that lists the receiving array’s elements in ascending order as defined by the comparison function comparator.
 func (o *NSArray[ObjectType]) SortedArrayUsingFunctionContextHint(comparator unsafe.Pointer, context_ unsafe.Pointer, hint *NSData) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingFunctionContextHint, comparator, context_, hint.Ptr())
 	if _ret != 0 {
@@ -244,6 +266,7 @@ func (o *NSArray[ObjectType]) SortedArrayUsingFunctionContextHint(comparator uns
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns an array that lists the receiving array’s elements in ascending order, as determined by the comparison method specified by a given selector.
 func (o *NSArray[ObjectType]) SortedArrayUsingSelector(comparator objc.SEL) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingSelector, comparator)
 	if _ret != 0 {
@@ -252,6 +275,7 @@ func (o *NSArray[ObjectType]) SortedArrayUsingSelector(comparator objc.SEL) *NSA
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns a new array containing the receiving array’s elements that fall within the limits specified by a given range.
 func (o *NSArray[ObjectType]) SubarrayWithRange(range_ NSRange) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSubarrayWithRange, range_)
 	if _ret != 0 {
@@ -269,14 +293,17 @@ func (o *NSArray[ObjectType]) WriteToURLError(url *NSURL) (bool, error) {
 	return _ret, nil
 }
 
+// Sends to each object in the array the message identified by a given selector, starting with the first object and continuing through the array to the last object.
 func (o *NSArray[ObjectType]) MakeObjectsPerformSelector(aSelector objc.SEL) {
 	o.Ptr().Send(_nSArraySelMakeObjectsPerformSelector, aSelector)
 }
 
+// Sends the aSelector message to each object in the array, starting with the first object and continuing through the array to the last object.
 func (o *NSArray[ObjectType]) MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID) {
 	o.Ptr().Send(_nSArraySelMakeObjectsPerformSelectorWithObject, aSelector, argument)
 }
 
+// Returns an array containing the objects in the array at the indexes specified by a given index set.
 func (o *NSArray[ObjectType]) ObjectsAtIndexes(indexes *NSIndexSet) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelObjectsAtIndexes, indexes.Ptr())
 	if _ret != 0 {
@@ -285,38 +312,46 @@ func (o *NSArray[ObjectType]) ObjectsAtIndexes(indexes *NSIndexSet) *NSArray[Obj
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns the object at the specified index.
 func (o *NSArray[ObjectType]) ObjectAtIndexedSubscript(idx uint) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSArraySelObjectAtIndexedSubscript, idx)
 	return _ret
 }
 
+// Executes a given closure or block using each object in the array, starting with the first object and continuing through the array to the last object.
 func (o *NSArray[ObjectType]) EnumerateObjectsUsing(block objc.Block) {
 	o.Ptr().Send(_nSArraySelEnumerateObjectsUsing, block)
 }
 
+// Executes a given closure or block using each object in the array with the specified options.
 func (o *NSArray[ObjectType]) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSArraySelEnumerateObjectsWithOptionsUsing, opts, block)
 }
 
+// Executes a given block using the objects in the array at the specified indexes.
 func (o *NSArray[ObjectType]) EnumerateObjectsAtIndexesOptionsUsing(s *NSIndexSet, opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSArraySelEnumerateObjectsAtIndexesOptionsUsing, s.Ptr(), opts, block)
 }
 
+// Returns the index of the first object in the array that passes a test in a given block.
 func (o *NSArray[ObjectType]) IndexOfObjectPassingTest(predicate objc.Block) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObjectPassingTest, predicate)
 	return _ret
 }
 
+// Returns the index of an object in the array that passes a test in a given block for a given set of enumeration options.
 func (o *NSArray[ObjectType]) IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObjectWithOptionsPassingTest, opts, predicate)
 	return _ret
 }
 
+// Returns the index, from a given set of indexes, of the first object in the array that passes a test in a given block for a given set of enumeration options.
 func (o *NSArray[ObjectType]) IndexOfObjectAtIndexesOptionsPassingTest(s *NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSArraySelIndexOfObjectAtIndexesOptionsPassingTest, s.Ptr(), opts, predicate)
 	return _ret
 }
 
+// Returns the indexes of objects in the array that pass a test in a given block.
 func (o *NSArray[ObjectType]) IndexesOfObjectsPassingTest(predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelIndexesOfObjectsPassingTest, predicate)
 	if _ret != 0 {
@@ -325,6 +360,7 @@ func (o *NSArray[ObjectType]) IndexesOfObjectsPassingTest(predicate objc.Block) 
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns the indexes of objects in the array that pass a test in a given block for a given set of enumeration options.
 func (o *NSArray[ObjectType]) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelIndexesOfObjectsWithOptionsPassingTest, opts, predicate)
 	if _ret != 0 {
@@ -333,6 +369,7 @@ func (o *NSArray[ObjectType]) IndexesOfObjectsWithOptionsPassingTest(opts NSEnum
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns the indexes, from a given set of indexes, of objects in the array that pass a test in a given block for a given set of enumeration options.
 func (o *NSArray[ObjectType]) IndexesOfObjectsAtIndexesOptionsPassingTest(s *NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelIndexesOfObjectsAtIndexesOptionsPassingTest, s.Ptr(), opts, predicate)
 	if _ret != 0 {
@@ -341,6 +378,7 @@ func (o *NSArray[ObjectType]) IndexesOfObjectsAtIndexesOptionsPassingTest(s *NSI
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns an array that lists the receiving array’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
 func (o *NSArray[ObjectType]) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSArray[ObjectType] {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -356,6 +394,7 @@ func (o *NSArray[ObjectType]) SortedArrayUsingComparator(cmptr func(objc.ID, obj
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns an array that lists the receiving array’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
 func (o *NSArray[ObjectType]) SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSArray[ObjectType] {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -371,6 +410,7 @@ func (o *NSArray[ObjectType]) SortedArrayWithOptionsUsingComparator(opts NSSortO
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns the index, within a specified range, of an object compared with elements in the array using a given NSComparator block.
 func (o *NSArray[ObjectType]) IndexOfObjectInSortedRangeOptionsUsingComparator(obj ObjectType, r NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint {
 	var __block_cmp objc.Block
 	if cmp != nil {
@@ -401,6 +441,7 @@ func (o *NSArray[ObjectType]) SortedArrayHint() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates and returns an empty array.
 func NSArrayArray() *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArray)
 	if _ret != 0 {
@@ -409,6 +450,7 @@ func NSArrayArray() *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Creates and returns an array containing a given object.
 func NSArrayArrayWithObject(anObject objc.ID) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithObject, anObject)
 	if _ret != 0 {
@@ -417,6 +459,7 @@ func NSArrayArrayWithObject(anObject objc.ID) *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Creates and returns an array that includes a given number of objects from a given C array.
 func NSArrayArrayWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithObjectsCount, objects, cnt)
 	if _ret != 0 {
@@ -425,6 +468,7 @@ func NSArrayArrayWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSArray[obj
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Creates and returns an array containing the objects in another given array.
 func NSArrayArrayWithArray(array *NSArray[objc.ID]) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithArray, array.Ptr())
 	if _ret != 0 {
@@ -433,6 +477,7 @@ func NSArrayArrayWithArray(array *NSArray[objc.ID]) *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Initializes a newly allocated array by placing in it the objects contained in a given array.
 func (o *NSArray[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithArray, array.Ptr())
 	if _ret != 0 {
@@ -441,6 +486,7 @@ func (o *NSArray[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSArray
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated array using anArray as the source of data objects for the array.
 func (o *NSArray[ObjectType]) InitWithArrayCopyItems(array *NSArray[ObjectType], flag bool) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithArrayCopyItems, array.Ptr(), flag)
 	if _ret != 0 {
@@ -473,6 +519,7 @@ func NSArrayArrayWithContentsOfURLError(url *NSURL) (*NSArray[objc.ID], error) {
 	return NSArrayFromID[objc.ID](_ret), nil
 }
 
+// Compares two arrays, using the provided block and with options, to create a difference object that represents the changes between them.
 func (o *NSArray[ObjectType]) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *NSArray[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDifferenceFromArrayWithOptionsUsingEquivalenceTest, other.Ptr(), options, block)
 	if _ret != 0 {
@@ -481,6 +528,7 @@ func (o *NSArray[ObjectType]) DifferenceFromArrayWithOptionsUsingEquivalenceTest
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Compares two arrays, with options, to create a difference object that represents the changes between them.
 func (o *NSArray[ObjectType]) DifferenceFromArrayWithOptions(other *NSArray[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDifferenceFromArrayWithOptions, other.Ptr(), options)
 	if _ret != 0 {
@@ -489,6 +537,7 @@ func (o *NSArray[ObjectType]) DifferenceFromArrayWithOptions(other *NSArray[Obje
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Compares two arrays to create a difference object that represents the changes between them.
 func (o *NSArray[ObjectType]) DifferenceFromArray(other *NSArray[ObjectType]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelDifferenceFromArray, other.Ptr())
 	if _ret != 0 {
@@ -497,6 +546,7 @@ func (o *NSArray[ObjectType]) DifferenceFromArray(other *NSArray[ObjectType]) *N
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Creates a new array by applying a difference object to an existing array.
 func (o *NSArray[ObjectType]) ArrayByApplyingDifference(difference *NSOrderedCollectionDifference[ObjectType]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelArrayByApplyingDifference, difference.Ptr())
 	if _ret != 0 {
@@ -505,11 +555,13 @@ func (o *NSArray[ObjectType]) ArrayByApplyingDifference(difference *NSOrderedCol
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Copies all the objects contained in the array to aBuffer.
 // Deprecated: Use -getObjects:range: instead
 func (o *NSArray[ObjectType]) GetObjects(objects unsafe.Pointer) {
 	o.Ptr().Send(_nSArraySelGetObjects, objects)
 }
 
+// Creates and returns an array containing the contents of the file specified by a given path.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSArrayArrayWithContentsOfFile(path *NSString) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithContentsOfFile, path.Ptr())
@@ -519,6 +571,7 @@ func NSArrayArrayWithContentsOfFile(path *NSString) *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Creates and returns an array containing the contents specified by a given URL.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSArrayArrayWithContentsOfURL(url *NSURL) *NSArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArray), _nSArraySelArrayWithContentsOfURL, url.Ptr())
@@ -528,6 +581,7 @@ func NSArrayArrayWithContentsOfURL(url *NSURL) *NSArray[objc.ID] {
 	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Initializes a newly allocated array with the contents of the file specified by a given path.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSArray[ObjectType]) InitWithContentsOfFile(path *NSString) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithContentsOfFile, path.Ptr())
@@ -537,6 +591,7 @@ func (o *NSArray[ObjectType]) InitWithContentsOfFile(path *NSString) *NSArray[Ob
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated array with the contents of the location specified by a given URL.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSArray[ObjectType]) InitWithContentsOfURL(url *NSURL) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelInitWithContentsOfURL, url.Ptr())
@@ -546,18 +601,21 @@ func (o *NSArray[ObjectType]) InitWithContentsOfURL(url *NSURL) *NSArray[ObjectT
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Writes the contents of the array to a file at a given path.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSArray[ObjectType]) WriteToFileAtomically(path *NSString, useAuxiliaryFile bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArraySelWriteToFileAtomically, path.Ptr(), useAuxiliaryFile)
 	return _ret
 }
 
+// Writes the contents of the array to the location specified by a given URL.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSArray[ObjectType]) WriteToURLAtomically(url *NSURL, atomically bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArraySelWriteToURLAtomically, url.Ptr(), atomically)
 	return _ret
 }
 
+// Returns an array containing all the pathname elements in the receiving array that have filename extensions from a given array.
 func (o *NSArray[ObjectType]) PathsMatchingExtensions(filterTypes *NSArray[*NSString]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelPathsMatchingExtensions, filterTypes.Ptr())
 	if _ret != 0 {
@@ -566,18 +624,22 @@ func (o *NSArray[ObjectType]) PathsMatchingExtensions(filterTypes *NSArray[*NSSt
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Registers an observer to receive key value observer notifications for the specified key-path relative to the objects at the indexes.
 func (o *NSArray[ObjectType]) AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *NSObject, indexes *NSIndexSet, keyPath *NSString, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSArraySelAddObserverToObjectsAtIndexesForKeyPathOptionsContext, observer.Ptr(), indexes.Ptr(), keyPath.Ptr(), options, context_)
 }
 
+// Raises an exception.
 func (o *NSArray[ObjectType]) RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer *NSObject, indexes *NSIndexSet, keyPath *NSString, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSArraySelRemoveObserverFromObjectsAtIndexesForKeyPathContext, observer.Ptr(), indexes.Ptr(), keyPath.Ptr(), context_)
 }
 
+// Removes anObserver from all key value observer notifications associated with the specified keyPath relative to the array’s objects at indexes.
 func (o *NSArray[ObjectType]) RemoveObserverFromObjectsAtIndexesForKeyPath(observer *NSObject, indexes *NSIndexSet, keyPath *NSString) {
 	o.Ptr().Send(_nSArraySelRemoveObserverFromObjectsAtIndexesForKeyPath, observer.Ptr(), indexes.Ptr(), keyPath.Ptr())
 }
 
+// Returns a copy of the receiving array sorted as specified by a given array of sort descriptors.
 func (o *NSArray[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelSortedArrayUsingDescriptors, sortDescriptors.Ptr())
 	if _ret != 0 {
@@ -586,6 +648,7 @@ func (o *NSArray[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArr
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Evaluates a given predicate against each object in the receiving array and returns a new array containing the objects for which the predicate returns true.
 func (o *NSArray[ObjectType]) FilteredArrayUsingPredicate(predicate *NSPredicate) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArraySelFilteredArrayUsingPredicate, predicate.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Settings for group presets.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasegrouppresetsetting
 type PHASEGroupPresetSetting struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func PHASEGroupPresetSettingFromID(id objc.ID) *PHASEGroupPresetSetting {
 	return o
 }
 
-// @method initWithGain:rate:gainCurveType:rateCurveType @abstract Initialize the PHASEGroupPresetSetting object with an existing PHASEGroup object. @param gain The main gain setting to apply to the group. Values are clamped to the range [0, 1]. Default value is 1. @param rate The playback rate setting to apply to the group. Values are clamped to the range [0.25, 4]. Default value is 1. @param gainCurveType The type of curve to apply to the gain as the preset changes to this new setting. @param rateCurveType The type of curve to apply to the rate as the preset changes to this new setting.
+// Creates a group preset setting.
 func (o *PHASEGroupPresetSetting) InitWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType PHASECurveType, rateCurveType PHASECurveType) *PHASEGroupPresetSetting {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupPresetSettingSelInitWithGainRateGainCurveTypeRateCurveType, gain, rate, gainCurveType, rateCurveType)
 	if _ret != 0 {

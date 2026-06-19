@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration for one class of token.
+//
 // TokenDriverConfiguration wraps [raw.TKTokenDriverConfiguration] with a fluent Go API.
 type TokenDriverConfiguration struct {
 	inner *raw.TKTokenDriverConfiguration

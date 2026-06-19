@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the standard behaviors to apply to websites.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkpreferences
 type WKPreferences struct {
 	foundation.NSObject

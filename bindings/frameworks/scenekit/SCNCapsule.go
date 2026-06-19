@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A right circular cylinder geometry whose ends are capped with hemispheres.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scncapsule
 type SCNCapsule struct {
 	SCNGeometry
@@ -39,7 +41,7 @@ func SCNCapsuleFromID(id objc.ID) *SCNCapsule {
 	return o
 }
 
-// @method capsuleWithCapRadius:height: @abstract Creates and returns a capsule with given radius and height. @param capRadius The radius of the capsule. @param height The height of the capsule.
+// Creates a capsule geometry with the specified radius and height.
 func SCNCapsuleCapsuleWithCapRadiusHeight(capRadius float64, height float64) *SCNCapsule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCapsule), _sCNCapsuleSelCapsuleWithCapRadiusHeight, capRadius, height)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object that contains the advertising identifier.
+//
 // Apple documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
 type ASIdentifierManager struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func ASIdentifierManagerFromID(id objc.ID) *ASIdentifierManager {
 	return o
 }
 
-// The shared instance of the identifier manager class. - Returns: Returns the shared instance of the AdSupport identifier manager class.
+// The shared instance of the identifier manager class.
 func ASIdentifierManagerSharedManager() *ASIdentifierManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASIdentifierManager), _aSIdentifierManagerSelSharedManager)
 	if _ret != 0 {

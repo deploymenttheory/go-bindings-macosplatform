@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a collection of key-value information that a Core ML image-analysis request produces.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncoremlfeaturevalueobservation
 type VNCoreMLFeatureValueObservation struct {
 	VNObservation

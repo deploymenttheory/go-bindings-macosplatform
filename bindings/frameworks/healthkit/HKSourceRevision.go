@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object indicating the source of a HealthKit sample.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hksourcerevision
 type HKSourceRevision struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func HKSourceRevisionFromID(id objc.ID) *HKSourceRevision {
 	return o
 }
 
-// @method        initWithSource:version:productType:operatingSystemVersion: @abstract      Initializes a new HKSourceRevision with the given source, version, product type, and operating system version.
+// Initializes a new source revision object with the provided source, version, product type, and operating system.
 func (o *HKSourceRevision) InitWithSourceVersionProductTypeOperatingSystemVersion(source *HKSource, version *foundation.NSString, productType *foundation.NSString, operatingSystemVersion foundation.NSOperatingSystemVersion) *HKSourceRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceRevisionSelInitWithSourceVersionProductTypeOperatingSystemVersion, source.Ptr(), version.Ptr(), productType.Ptr(), operatingSystemVersion)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *HKSourceRevision) InitWithSourceVersionProductTypeOperatingSystemVersio
 	return HKSourceRevisionFromID(_ret)
 }
 
-// @method        initWithSource:version: @abstract      Initializes a new HKSourceRevision with the given source and version.
+// Initializes a new source revision object with the provided source and version information.
 func (o *HKSourceRevision) InitWithSourceVersion(source *HKSource, version *foundation.NSString) *HKSourceRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceRevisionSelInitWithSourceVersion, source.Ptr(), version.Ptr())
 	if _ret != 0 {

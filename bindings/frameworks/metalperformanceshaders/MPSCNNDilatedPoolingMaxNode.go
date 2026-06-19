@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract  A node for a MPSCNNDilatedPooling kernel @discussion This class corresponds to the MPSCNNDilatedPooling class.
+// A representation of a dilated max pooling filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmaxnode
 type MPSCNNDilatedPoolingMaxNode struct {

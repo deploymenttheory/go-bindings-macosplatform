@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents activity in a persistent CloudKit container.
+//
 // PersistentCloudKitContainerEvent wraps [raw.NSPersistentCloudKitContainerEvent] with a fluent Go API.
 type PersistentCloudKitContainerEvent struct {
 	inner *raw.NSPersistentCloudKitContainerEvent

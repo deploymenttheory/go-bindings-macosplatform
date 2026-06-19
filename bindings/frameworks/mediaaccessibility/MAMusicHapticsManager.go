@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that reports information about the Music Haptics feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager
 type MAMusicHapticsManager struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MAMusicHapticsManagerFromID(id objc.ID) *MAMusicHapticsManager {
 	return o
 }
 
-// @abstract In an asynchronous completion handler, returns whether a specific media track with the supplied ISRC has an available haptic track.
+// Checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
 func (o *MAMusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode *foundation.NSString, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -46,7 +48,7 @@ func (o *MAMusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCode
 	o.Ptr().Send(_mAMusicHapticsManagerSelCheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler, internationalStandardRecordingCode.Ptr(), __block_completionHandler)
 }
 
-// @abstract Determine the status of haptic playback for the now playing track asynchronously. This will only be delivered for the app that is the active Now Playing app.
+// Adds an observer to monitor the status of haptic playback for the Now Playing song.
 func (o *MAMusicHapticsManager) AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying {
 	var __block_statusHandler objc.Block
 	if statusHandler != nil {
@@ -62,6 +64,7 @@ func (o *MAMusicHapticsManager) AddStatusObserver(statusHandler func(*foundation
 	return _ret
 }
 
+// Removes the observer monitoring the status of haptic playback for the Now Playing song.
 func (o *MAMusicHapticsManager) RemoveStatusObserver(registrationToken foundation.NSCopying) {
 	o.Ptr().Send(_mAMusicHapticsManagerSelRemoveStatusObserver, registrationToken)
 }

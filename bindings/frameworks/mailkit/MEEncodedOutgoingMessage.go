@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the signed or encrypted representation of a message’s RFC 2822 data.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/meencodedoutgoingmessage
 type MEEncodedOutgoingMessage struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func MEEncodedOutgoingMessageFromID(id objc.ID) *MEEncodedOutgoingMessage {
 	return o
 }
 
+// Creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
 func (o *MEEncodedOutgoingMessage) InitWithRawDataIsSignedIsEncrypted(rawData *foundation.NSData, isSigned bool, isEncrypted bool) *MEEncodedOutgoingMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEncodedOutgoingMessageSelInitWithRawDataIsSignedIsEncrypted, rawData.Ptr(), isSigned, isEncrypted)
 	if _ret != 0 {

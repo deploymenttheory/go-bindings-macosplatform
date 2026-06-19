@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents attributes specific to a particular rendition.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantaudiorenditionspecificattributes
 type AVAssetVariantAudioRenditionSpecificAttributes struct {
 	foundation.NSObject

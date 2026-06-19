@@ -65,15 +65,15 @@ func (o *MPSRNNMatrixInferenceLayer) InitWithDeviceRnnDescriptors(device metal.M
 }
 
 func (o *MPSRNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*MPSRNNRecurrentMatrixState]) {
-	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
+	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceMatrices.Ptr(), sourceOffsets, destinationMatrices.Ptr(), destinationOffsets, recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
 }
 
 func (o *MPSRNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*MPSRNNRecurrentMatrixState]) {
-	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceMatrices, destinationMatrices, recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
+	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceMatrices.Ptr(), destinationMatrices.Ptr(), recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
 }
 
 func (o *MPSRNNMatrixInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix]) {
-	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices, commandBuffer, sourceSequence, destinationForwardMatrices, destinationBackwardMatrices)
+	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices, commandBuffer, sourceSequence.Ptr(), destinationForwardMatrices.Ptr(), destinationBackwardMatrices.Ptr())
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNMatrixInferenceLayer @return     A new MPSRNNMatrixInferenceLayer object, or nil if failure.

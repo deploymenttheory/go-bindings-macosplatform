@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Details about a room where virtual conferences take place.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekvirtualconferenceroomtypedescriptor
 type EKVirtualConferenceRoomTypeDescriptor struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func EKVirtualConferenceRoomTypeDescriptorFromID(id objc.ID) *EKVirtualConferenc
 	return o
 }
 
-// @method     initWithTitle:identifier: @abstract   Initializes an instance of EKVirtualConferenceRoomTypeDescriptor. @param      title       A user-readable title describing this room type. This string will be displayed in UI. @param      identifier  An EKVirtualConferenceRoomTypeIdentifier that your extension can use to distinguish this room type from the other room types that your extension provides. This is chosen by your extension and is passed back to your extension if the user chooses to create a virtual conference of the associated room type.
+// Creates an object that describes a location where a virtual conference takes place.
 func (o *EKVirtualConferenceRoomTypeDescriptor) InitWithTitleIdentifier(title *foundation.NSString, identifier *foundation.NSString) *EKVirtualConferenceRoomTypeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceRoomTypeDescriptorSelInitWithTitleIdentifier, title.Ptr(), identifier.Ptr())
 	if _ret != 0 {

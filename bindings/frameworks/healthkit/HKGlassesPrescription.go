@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that stores a prescription for glasses.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkglassesprescription
 type HKGlassesPrescription struct {
 	HKVisionPrescription
@@ -32,9 +34,9 @@ func HKGlassesPrescriptionFromID(id objc.ID) *HKGlassesPrescription {
 	return o
 }
 
-// @method        prescriptionWithRightEyeSpecification:leftEyeSpecification:type:dateIssued:expirationDate:device:metadata @param         rightEyeSpecification    The right eye specification @param         leftEyeSpecification     The left eye specification @param         dateIssued               The date the prescription was issued @param         expirationDate           The date the prescription expires @param         device                   The device that generated the sample @param         metadata                 The metadata for the sample
+// Creates a new glasses prescription sample.
 func HKGlassesPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *HKGlassesLensSpecification, leftEyeSpecification *HKGlassesLensSpecification, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKGlassesPrescription {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKGlassesPrescription), _hKGlassesPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata, rightEyeSpecification.Ptr(), leftEyeSpecification.Ptr(), dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKGlassesPrescription), _hKGlassesPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata, rightEyeSpecification.Ptr(), leftEyeSpecification.Ptr(), dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

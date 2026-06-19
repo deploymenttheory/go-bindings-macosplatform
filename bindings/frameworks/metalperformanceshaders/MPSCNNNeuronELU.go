@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A parametric ELU neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronelu
 type MPSCNNNeuronELU struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronELUFromID(id objc.ID) *MPSCNNNeuronELU {
 	return o
 }
 
-// @abstract   Initialize a parametric ELU neuron filter @param      device          The device the filter will run on @param      a               Filter property "a". See class discussion. @return     A valid MPSCNNNeuronELU object or nil, if failure.
+// Initializes a parametric ELU neuron filter.
 func (o *MPSCNNNeuronELU) InitWithDeviceA(device metal.MTLDevice, a float32) *MPSCNNNeuronELU {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronELUSelInitWithDeviceA, device, a)
 	if _ret != 0 {

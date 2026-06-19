@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A proxy for objects in other applications or threads.
+//
 // DistantObject wraps [raw.NSDistantObject] with a fluent Go API.
 type DistantObject struct {
 	inner *raw.NSDistantObject
@@ -30,6 +32,8 @@ func DistantObjectFromID(id objc.ID) *DistantObject {
 	return &DistantObject{inner: raw.NSDistantObjectFromID(id)}
 }
 
+// Initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
+//
 // NewDistantObjectWithTargetConnection creates a new [DistantObject].
 func NewDistantObjectWithTargetConnection(target objc.ID, connection *raw.NSConnection) *DistantObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistantObject")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewDistantObjectWithTargetConnection(target objc.ID, connection *raw.NSConn
 	return &DistantObject{inner: raw.NSDistantObjectFromID(_id)}
 }
 
+// Initializes an NSDistantObject object as a local proxy for a given object.
+//
 // NewDistantObjectWithLocalConnection creates a new [DistantObject].
 func NewDistantObjectWithLocalConnection(target objc.ID, connection *raw.NSConnection) *DistantObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistantObject")), objc.RegisterName("alloc"))
@@ -51,6 +57,8 @@ func NewDistantObjectWithCoder(inCoder *raw.NSCoder) *DistantObject {
 	return &DistantObject{inner: raw.NSDistantObjectFromID(_id)}
 }
 
+// Sets the methods known to be handled by the receiver to those in a given protocol.
+//
 // SetProtocolForProxy calls the underlying SetProtocolForProxy.
 func (x *DistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
 	x.inner.SetProtocolForProxy(proto)

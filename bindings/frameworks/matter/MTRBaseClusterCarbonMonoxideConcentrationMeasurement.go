@@ -619,11 +619,21 @@ func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeLevelValue
 	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeLevelValueWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeGeneratedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeGeneratedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -631,18 +641,48 @@ func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttribut
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAcceptedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAcceptedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -650,18 +690,48 @@ func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttribut
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAttributeListWithCompletion, completion)
+func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAttributeListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -669,11 +739,31 @@ func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAttribut
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterCarbonMonoxideConcentrationMeasurementReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterCarbonMonoxideConcentrationMeasurement).Send(_mTRBaseClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
 func (o *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(completion func(*foundation.NSNumber, unsafe.Pointer)) {

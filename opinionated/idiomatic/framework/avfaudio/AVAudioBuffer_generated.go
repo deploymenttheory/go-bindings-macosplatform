@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a buffer of audio data with a format.
+//
 // AudioBuffer wraps [raw.AVAudioBuffer] with a fluent Go API.
 type AudioBuffer struct {
 	inner *raw.AVAudioBuffer

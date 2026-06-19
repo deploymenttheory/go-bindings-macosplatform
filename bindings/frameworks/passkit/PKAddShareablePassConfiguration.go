@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the data and action for a shared copy of pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddshareablepassconfiguration
 type PKAddShareablePassConfiguration struct {
 	PKAddSecureElementPassConfiguration
@@ -36,6 +38,7 @@ func PKAddShareablePassConfigurationFromID(id objc.ID) *PKAddShareablePassConfig
 	return o
 }
 
+// Creates and error checks a new shareable pass-configuration object.
 func PKAddShareablePassConfigurationConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(passMetadata *foundation.NSArray[*PKShareablePassMetadata], provisioningPolicyIdentifier *foundation.NSString, action PKAddShareablePassConfigurationPrimaryAction, completion func(*PKAddShareablePassConfiguration, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

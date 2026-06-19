@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that creates and tracks decryption keys for media data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcontentkeysession
 type AVContentKeySession struct {
 	foundation.NSObject
@@ -50,7 +52,7 @@ func AVContentKeySessionFromID(id objc.ID) *AVContentKeySession {
 	return o
 }
 
-// Creates a new instance of AVContentKeySession to manage a collection of media content keys. This method returns an AVContentKeySession instance that is capable of managing collection of media content keys corresponding to the input keySystem. An NSInvalidArgumentException will be raised if the value of keySystem is unsupported. - Parameter keySystem: A valid key system for retrieving keys. - Returns: A new AVContentKeySession.
+// Creates a content key session to manage a collection of content decryption keys.
 func AVContentKeySessionContentKeySessionWithKeySystem(keySystem *foundation.NSString) *AVContentKeySession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeySession), _aVContentKeySessionSelContentKeySessionWithKeySystem, keySystem.Ptr())
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func AVContentKeySessionContentKeySessionWithKeySystem(keySystem *foundation.NSS
 	return AVContentKeySessionFromID(_ret)
 }
 
-// Creates a new instance of AVContentKeySession to manage a collection of media content keys. This method returns an AVContentKeySession instance that is capable of managing collection of media content keys corresponding to the input keySystem. An NSInvalidArgumentException will be raised if the value of keySystem is unsupported. - Parameter keySystem: A valid key system for retrieving keys. - Parameter storageURL: URL to a writable directory that the session will use to facilitate expired session reports after abnormal session termination. - Returns: A new AVContentKeySession.
+// Creates a content key session to manage a collection of content decryption keys; points to a directory that stores abnormal session termination reports.
 func AVContentKeySessionContentKeySessionWithKeySystemStorageDirectoryAtURL(keySystem *foundation.NSString, storageURL *foundation.NSURL) *AVContentKeySession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeySession), _aVContentKeySessionSelContentKeySessionWithKeySystemStorageDirectoryAtURL, keySystem.Ptr(), storageURL.Ptr())
 	if _ret != 0 {
@@ -68,27 +70,27 @@ func AVContentKeySessionContentKeySessionWithKeySystemStorageDirectoryAtURL(keyS
 	return AVContentKeySessionFromID(_ret)
 }
 
-// Sets the receiver's delegate. A delegate is required to handle content key initialization. - Parameter delegate: An object conforming to the AVContentKeySessionDelegate protocol. - Parameter delegateQueue: A dispatch queue on which delegate methods will be invoked whenever processes requiring content keys are executed asynchronously. Passing a value of nil for the delegateQueue parameter along with a non-nil value for the delegate parameter will result in an invalid argument exception.
+// Sets the session’s delegate object and the dispatch queue on which to call the delegate’s methods.
 func (o *AVContentKeySession) SetDelegateQueue(delegate AVContentKeySessionDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVContentKeySessionSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }
 
-// Tells the receiver to treat the session as having been intentionally and normally expired. When an instance of AVContentKeySession receives an expire message, all of its associated objects conforming to the AVContentKeyRecipient protocol will become inoperable. Send this message only after you have finished operating on the media data.
+// Tells the delegate that the session expired as the result of normal, intentional processes.
 func (o *AVContentKeySession) Expire() {
 	o.Ptr().Send(_aVContentKeySessionSelExpire)
 }
 
-// Informs the receiver that it should attempt to instantiate a content decryption key using the specified initialization data. May be used to generate an AVContentKeyRequest from request initialization data already in hand, without awaiting such data during the processing of media data of an associated recipient. - Parameter identifier: Container- and protocol-specific identifier to be used to obtain a key response. Either identifier or initializationData must be non-nil. Both can be non-nil, if the content protection protocol requires both. - Parameter initializationData: Container- and protocol-specific data to be used to obtain a key response. Either identifier or initializationData must be non-nil. Both can be non-nil, if the content protection protocol requires both. - Parameter options: Additional information necessary to obtain the key, or nil if none. See AVContentKeyRequest*Key below.
+// Tells the delegate to start loading the content decryption key with the specified identifier and initialization data.
 func (o *AVContentKeySession) ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier objc.ID, initializationData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aVContentKeySessionSelProcessContentKeyRequestWithIdentifierInitializationDataOptions, identifier, initializationData.Ptr(), options)
+	o.Ptr().Send(_aVContentKeySessionSelProcessContentKeyRequestWithIdentifierInitializationDataOptions, identifier, initializationData.Ptr(), options.Ptr())
 }
 
-// Informs the receiver that the already provided response data for an earlier AVContentKeyRequest will imminently expire. In response the receiver will invoke your delegate with a new content key request entreating it to renew the expiring response data, via -contentKeySession:didProvideRenewingContentKeyRequest:.
+// Tells the delegate that previously provided response data for a content key request is about to expire.
 func (o *AVContentKeySession) RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *AVContentKeyRequest) {
 	o.Ptr().Send(_aVContentKeySessionSelRenewExpiringResponseDataForContentKeyRequest, contentKeyRequest.Ptr())
 }
 
-// Creates a secure server playback context (SPC) that the client could send to the key server to obtain an expiration date for the provided persistable content key data. - Parameter persistableContentKeyData: Persistable content key data that was previously created using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] or obtained via AVContentKeySessionDelegate callback -contentKeySession:didUpdatePersistableContentKey:forContentKeyIdentifier:. - Parameter handler: Once the secure token is ready, this block will be called with the token or an error describing the failure.
+// Creates a secure server playback context that the client sends to the key server to get an expiration date for the given persistable content key data.
 func (o *AVContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContentKeyCompletionHandler(persistableContentKeyData *foundation.NSData, handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -103,7 +105,7 @@ func (o *AVContentKeySession) MakeSecureTokenForExpirationDateOfPersistableConte
 	o.Ptr().Send(_aVContentKeySessionSelMakeSecureTokenForExpirationDateOfPersistableContentKeyCompletionHandler, persistableContentKeyData.Ptr(), __block_handler)
 }
 
-// Invalidates the persistable content key and creates a secure server playback context (SPC) that the client could send to the key server to verify the outcome of invalidation request. Once invalidated, a persistable content key cannot be used to answer key requests during later playback sessions. - Parameter persistableContentKeyData: Persistable content key data that was previously created using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] or obtained via AVContentKeySessionDelegate callback -contentKeySession:didUpdatePersistableContentKey:forContentKeyIdentifier:. - Parameter options: Additional information necessary to generate the server playback context, or nil if none. See AVContentKeySessionServerPlaybackContextOption for supported options. - Parameter handler: Once the server playback context is ready, this block will be called with the data or an error describing the failure.
+// Invalidates the persistable content key and creates a secure server playback context (SPC) to verify the outcome of an invalidation request.
 func (o *AVContentKeySession) InvalidatePersistableContentKeyOptionsCompletionHandler(persistableContentKeyData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -115,10 +117,10 @@ func (o *AVContentKeySession) InvalidatePersistableContentKeyOptionsCompletionHa
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_aVContentKeySessionSelInvalidatePersistableContentKeyOptionsCompletionHandler, persistableContentKeyData.Ptr(), options, __block_handler)
+	o.Ptr().Send(_aVContentKeySessionSelInvalidatePersistableContentKeyOptionsCompletionHandler, persistableContentKeyData.Ptr(), options.Ptr(), __block_handler)
 }
 
-// Invalidates all persistable content keys associated with the application and creates a secure server playback context (SPC) that the client could send to the key server to verify the outcome of invalidation request. Once invalidated, persistable content keys cannot be used to answer key requests during later playback sessions. - Parameter appIdentifier: An opaque identifier for the application. The contents of this identifier depend on the particular protocol in use by the entity that controls the use of the media data. - Parameter options: Additional information necessary to generate the server playback context, or nil if none. See AVContentKeySessionServerPlaybackContextOption for supported options. - Parameter handler: Once the server playback context is ready, this block will be called with the data or an error describing the failure.
+// Invalidates all of an app’s persistable content keys and creates a secure server playback context (SPC) to verify the outcome of an invalidation request.
 func (o *AVContentKeySession) InvalidateAllPersistableContentKeysForAppOptionsCompletionHandler(appIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -130,7 +132,7 @@ func (o *AVContentKeySession) InvalidateAllPersistableContentKeysForAppOptionsCo
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_aVContentKeySessionSelInvalidateAllPersistableContentKeysForAppOptionsCompletionHandler, appIdentifier.Ptr(), options, __block_handler)
+	o.Ptr().Send(_aVContentKeySessionSelInvalidateAllPersistableContentKeysForAppOptionsCompletionHandler, appIdentifier.Ptr(), options.Ptr(), __block_handler)
 }
 
 // The receiver's delegate. The value of this property is an object conforming to the AVContentKeySessionDelegate protocol. The delegate is set using the setDelegate:queue: method.
@@ -175,12 +177,12 @@ func (o *AVContentKeySession) ContentProtectionSessionIdentifier() *foundation.N
 	return foundation.NSDataFromID(_ret)
 }
 
-// Informs the receiver that the specified recipient will be used for the session. It is an error to add recipient to sessions that have received an expire message. It is also an error to add recipients after they have already begun to process media data (e.g. after an AVURLAsset has loaded the values of any of its keys). Such errors will result in NSInternalInconsistencyExceptions. Sending this message to an AVContentKeySession is atomic.
+// Tells the delegate that the specified recipient should have access to the decryption keys loaded with the session.
 func (o *AVContentKeySession) AddContentKeyRecipient(recipient AVContentKeyRecipient) {
 	o.Ptr().Send(_aVContentKeySessionSelAddContentKeyRecipient, recipient)
 }
 
-// Informs the receiver that the specified recipient will no longer be used. After the specified recipient is removed from the receiver it will become inoperable. Remove the recipient only after you have finished operating on the media data associated with it. Sending this message to an AVContentKeySession is atomic.
+// Tells the delegate to remove the specified recipient.
 func (o *AVContentKeySession) RemoveContentKeyRecipient(recipient AVContentKeyRecipient) {
 	o.Ptr().Send(_aVContentKeySessionSelRemoveContentKeyRecipient, recipient)
 }
@@ -193,13 +195,16 @@ func (o *AVContentKeySession) ContentKeyRecipients() *foundation.NSArray[AVConte
 	return foundation.NSArrayFromID[AVContentKeyRecipient](_ret)
 }
 
-// Provides "expired session reports" for prior AVContentKeySessions created with the specified app identifier that have expired either normally or abnormally. Note that no reports for sessions still in progress will be included. - Parameter appIdentifier: An opaque identifier for the application. The contents of this identifier depend on the particular protocol in use by the entity that controls the use of the media data. - Parameter storageURL: URL to a directory previously used with one or more instances of AVContentKeySession for the storage of expired session reports. - Returns: An NSArray containing instances of NSData, each containing a pending expired session report as a property-list serialization of an NSDictionary object. The contents of expired session reports depend on the particular protocol in use by the entity that controls the use of the media data.
+// Returns the expired session reports for content key sessions created with the specified app identifier.
 func AVContentKeySessionPendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL(appIdentifier *foundation.NSData, storageURL *foundation.NSURL) *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](objc.ID(_clsAVContentKeySession), _aVContentKeySessionSelPendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL, appIdentifier.Ptr(), storageURL.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeySession), _aVContentKeySessionSelPendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL, appIdentifier.Ptr(), storageURL.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
-// Removes expired session reports for prior AVContentKeySessions from storage. Once they have been removed, they will no longer be available via subsequent invocations of +pendingExpiredSessionReportsWithAppIdentifier:. This method is most suitable for use only after the specified expired session reports have been sent to the entity that controls the use of the media data and the entity has acknowledged their receipt. - Parameter expiredSessionReports: An array of expired session reports to be discarded. - Parameter appIdentifier: An opaque identifier for the application. The contents of this identifier depend on the particular protocol in use by the entity that controls the use of the media data. - Parameter storageURL: URL to a writable folder.
+// Removes expired session reports from storage.
 func AVContentKeySessionRemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL(expiredSessionReports *foundation.NSArray[*foundation.NSData], appIdentifier *foundation.NSData, storageURL *foundation.NSURL) {
-	objc.ID(_clsAVContentKeySession).Send(_aVContentKeySessionSelRemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL, expiredSessionReports, appIdentifier.Ptr(), storageURL.Ptr())
+	objc.ID(_clsAVContentKeySession).Send(_aVContentKeySessionSelRemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL, expiredSessionReports.Ptr(), appIdentifier.Ptr(), storageURL.Ptr())
 }

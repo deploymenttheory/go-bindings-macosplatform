@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a CPU compute device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlcpucomputedevice
 type MLCPUComputeDevice struct {
 	foundation.NSObject

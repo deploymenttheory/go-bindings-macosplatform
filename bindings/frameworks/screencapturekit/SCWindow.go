@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that represents an onscreen window.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scwindow
 type SCWindow struct {
 	foundation.NSObject

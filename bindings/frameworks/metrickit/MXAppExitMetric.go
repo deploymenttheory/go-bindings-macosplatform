@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the types of foreground and background app exits.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxappexitmetric
 type MXAppExitMetric struct {
 	MXMetric

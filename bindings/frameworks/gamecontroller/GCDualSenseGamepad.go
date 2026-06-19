@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supported the DualSense controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcdualsensegamepad
 type GCDualSenseGamepad struct {
 	GCExtendedGamepad

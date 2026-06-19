@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encoder that stores an object’s data to an archive referenced by keys.
+//
 // KeyedArchiver wraps [raw.NSKeyedArchiver] with a fluent Go API.
 type KeyedArchiver struct {
 	inner *raw.NSKeyedArchiver
@@ -36,7 +38,7 @@ func NewKeyedArchiver() *KeyedArchiver {
 	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
 }
 
-// Initializes the receiver for encoding an archive, optionally disabling secure coding. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off here; for improved security, however, \c requiresSecureCoding should be left enabled whenever possible. \c requiresSecureCoding ensures that all encoded objects conform to \c NSSecureCoding, preventing the possibility of encoding objects which cannot be decoded later. To produce archives whose structure matches those previously encoded using \c +archivedDataWithRootObject, encode the top-level object in your archive for the \c NSKeyedArchiveRootObjectKey.
+// Creates an archiver to encode data, and optionally disables secure coding.
 //
 // NewKeyedArchiverRequiringSecureCoding creates a new [KeyedArchiver].
 func NewKeyedArchiverRequiringSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
@@ -45,6 +47,8 @@ func NewKeyedArchiverRequiringSecureCoding(requiresSecureCoding bool) *KeyedArch
 	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
 }
 
+// Initializes an archiver to encode data into a given a mutable-data object.
+//
 // NewKeyedArchiverForWritingWithMutableData creates a new [KeyedArchiver].
 func NewKeyedArchiverForWritingWithMutableData(data *raw.NSMutableData) *KeyedArchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedArchiver")), objc.RegisterName("alloc"))
@@ -52,18 +56,24 @@ func NewKeyedArchiverForWritingWithMutableData(data *raw.NSMutableData) *KeyedAr
 	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
 }
 
+// The archiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *KeyedArchiver) WithDelegate(delegate raw.NSKeyedArchiverDelegate) *KeyedArchiver {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The format in which the receiver encodes its data.
+//
 // WithOutputFormat sets the outputFormat property and returns the receiver for chaining.
 func (x *KeyedArchiver) WithOutputFormat(outputFormat NSPropertyListFormat) *KeyedArchiver {
 	x.inner.SetOutputFormat(raw.NSPropertyListFormat(outputFormat))
 	return x
 }
 
+// Indicates whether the archiver requires all archived classes to resist object substitution attacks.
+//
 // WithRequiresSecureCoding sets the requiresSecureCoding property and returns the receiver for chaining.
 func (x *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
 	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
@@ -76,16 +86,22 @@ func (x *KeyedArchiver) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Instructs the receiver to construct the final data stream.
+//
 // FinishEncoding calls the underlying FinishEncoding.
 func (x *KeyedArchiver) FinishEncoding() {
 	x.inner.FinishEncoding()
 }
 
+// Sets a mapping for this archiver to encode instances of a given class with the provided name, rather than their real name.
+//
 // SetClassNameForClass calls the underlying SetClassNameForClass.
 func (x *KeyedArchiver) SetClassNameForClass(codedName string, cls objc.Class) {
 	x.inner.SetClassNameForClass(foundation.NSStringStringWithUTF8String(codedName), cls)
 }
 
+// Returns the class name with which this archiver encodes instances of a given class.
+//
 // ClassNameForClass calls the underlying ClassNameForClass.
 func (x *KeyedArchiver) ClassNameForClass(cls objc.Class) *String {
 	_r := x.inner.ClassNameForClass(cls)

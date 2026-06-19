@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to check for the availability of the speech recognition service, and to initiate the speech recognition process.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer
 type SFSpeechRecognizer struct {
 	foundation.NSObject
@@ -48,19 +50,22 @@ func SFSpeechRecognizerFromID(id objc.ID) *SFSpeechRecognizer {
 	return o
 }
 
-// Returns the set of locales that are supported by the speech recognizer. This method returns the locales for which speech recognition is supported. Support for a locale does not guarantee that speech recognition is currently possible for that locale. For some locales, the speech recognizer requires an active Internet connection to communicate with Apple's servers. If the speech recognizer is currently unable to process requests,   “isAvailable“ returns `false`. Speech recognition supports the same locales that are supported by the keyboard's dictation feature. For a list of these locales, see [QuickType Keyboard: Dictation](https://www.apple.com/ios/feature-availability/#quicktype-keyboard-dictation). - Returns: A set of locales that support speech recognition.
+// Returns the set of locales that are supported by the speech recognizer.
 func SFSpeechRecognizerSupportedLocales() *foundation.NSSet[*foundation.NSLocale] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSLocale]](objc.ID(_clsSFSpeechRecognizer), _sFSpeechRecognizerSelSupportedLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsSFSpeechRecognizer), _sFSpeechRecognizerSelSupportedLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSLocale](_ret)
 }
 
-// Returns your app's current authorization to perform speech recognition. The user can reject your app's request to perform speech recognition, but your request can also be denied if speech recognition is not supported on the device. The app can also change your app's authorization status at any time from the Settings app. - Returns: The app's current authorization status value. For a list of values, see “SFSpeechRecognizerAuthorizationStatus“.
+// Returns your app’s current authorization to perform speech recognition.
 func SFSpeechRecognizerAuthorizationStatusClass() SFSpeechRecognizerAuthorizationStatus {
 	_ret := objc.Send[SFSpeechRecognizerAuthorizationStatus](objc.ID(_clsSFSpeechRecognizer), _sFSpeechRecognizerSelAuthorizationStatus)
 	return _ret
 }
 
-// Asks the user to allow your app to perform speech recognition. Call this method before performing any other tasks associated with speech recognition. This method executes asynchronously, returning shortly after you call it. At some point later, the system calls the provided `handler` block with the results. When your app's authorization status is “SFSpeechRecognizerAuthorizationStatus/notDetermined“, this method causes the system to prompt the user to grant or deny permission for your app to use speech recognition. The prompt includes the custom message you specify in the `NSSpeechRecognitionUsageDescription` key of your app's `Info.plist` file. The user's response is saved so that future calls to this method do not prompt the user again. > Important: > Your app's `Info.plist` file must contain the `NSSpeechRecognitionUsageDescription` key with a valid usage description. If this key is not present, your app will crash when you call this method. For more information about requesting authorization, see <doc:asking-permission-to-use-speech-recognition>. - Parameters: - handler: The block to execute when your app's authorization status is known. The status parameter of the block contains your app's authorization status. The system does not guarantee the execution of this block on your app's main dispatch queue.
+// Asks the user to allow your app to perform speech recognition.
 func SFSpeechRecognizerRequestAuthorization(handler func(SFSpeechRecognizerAuthorizationStatus)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -72,7 +77,7 @@ func SFSpeechRecognizerRequestAuthorization(handler func(SFSpeechRecognizerAutho
 	objc.ID(_clsSFSpeechRecognizer).Send(_sFSpeechRecognizerSelRequestAuthorization, __block_handler)
 }
 
-// Creates a speech recognizer associated with the user's default language settings. If the user's default language is not supported for speech recognition, this method attempts to fall back to the language used by the keyboard for dictation. If that fails, this method returns `nil`. Even if this method returns a valid speech recognizer object, the speech recognition services may be temporarily unavailable. To determine whether speech recognition services are available, check the “isAvailable“ property. - Returns: An initialized speech recognizer object, or `nil` if there was a problem creating the object.
+// Creates a speech recognizer associated with the user’s default language settings.
 func (o *SFSpeechRecognizer) Init() *SFSpeechRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognizerSelInit)
 	if _ret != 0 {
@@ -81,7 +86,7 @@ func (o *SFSpeechRecognizer) Init() *SFSpeechRecognizer {
 	return SFSpeechRecognizerFromID(_ret)
 }
 
-// Creates a speech recognizer associated with the specified locale. If you specify a language that is not supported by the speech recognizer, this method attempts to fall back to the language used by the keyboard for dictation. If that fails, this method returns `nil`. Even if this method returns a valid speech recognizer object, the speech recognition services may be temporarily unavailable. To determine whether speech recognition services are available, check the “isAvailable“ property. - Parameters: - locale: The locale object representing the language you want to use for speech recognition. For a list of languages supported by the speech recognizer, see “supportedLocales()“. - Returns: An initialized speech recognizer object, or `nil` if the specified language was not supported.
+// Creates a speech recognizer associated with the specified locale.
 func (o *SFSpeechRecognizer) InitWithLocale(locale *foundation.NSLocale) *SFSpeechRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognizerSelInitWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -90,7 +95,7 @@ func (o *SFSpeechRecognizer) InitWithLocale(locale *foundation.NSLocale) *SFSpee
 	return SFSpeechRecognizerFromID(_ret)
 }
 
-// Executes the speech recognition request and delivers the results to the specified handler block. Use this method to initiate the speech recognition process on the audio contained in the request object. This method executes asynchronously and returns a “SFSpeechRecognitionTask“ object that you can use to cancel or finalize the recognition process later. As results become available, the method calls the block in the `resultHandler` parameter. - Parameters: - request: A request (in an “SFSpeechRecognitionRequest“ object) to recognize speech from an audio source. - resultHandler: The block to call when partial or final results are available, or when an error occurs. If the “SFSpeechRecognitionRequest/shouldReportPartialResults“ property is `true`, this block may be called multiple times to deliver the partial and final results. The block has no return value and takes the following parameters: - term result: A “SFSpeechRecognitionResult“ containing the partial or final transcriptions of the audio content. - term error: An error object if a problem occurred. This parameter is `nil` if speech recognition was successful. - Returns: The task object you can use to manage an in-progress recognition request.
+// Executes the speech recognition request and delivers the results to the specified handler block.
 func (o *SFSpeechRecognizer) RecognitionTaskWithRequestResultHandler(request *SFSpeechRecognitionRequest, resultHandler func(*SFSpeechRecognitionResult, unsafe.Pointer)) *SFSpeechRecognitionTask {
 	var __block_resultHandler objc.Block
 	if resultHandler != nil {
@@ -109,7 +114,7 @@ func (o *SFSpeechRecognizer) RecognitionTaskWithRequestResultHandler(request *SF
 	return SFSpeechRecognitionTaskFromID(_ret)
 }
 
-// Recognizes speech from the audio source associated with the specified request, using the specified delegate to manage the results. Use this method to initiate the speech recognition process on the audio contained in the request object. This method executes asynchronously and returns a “SFSpeechRecognitionTask“ object that you can use to cancel or finalize the recognition process later. As results become available, the method calls the methods of the provided `delegate` object. Note that the “SFSpeechRecognitionTask“ object returned by this method does not retain your delegate object. You must maintain a strong reference to your delegate while speech recognition is in progress. - Parameters: - request: A request (encapsulated in an “SFSpeechRecognitionRequest“ object) to recognize speech from an audio source. - delegate: An object that can handle results from the speech recognition task. This object must conform to the “SFSpeechRecognitionTaskDelegate“ protocol. - Returns: The task object you can use to manage an in-progress recognition request.
+// Recognizes speech from the audio source associated with the specified request, using the specified delegate to manage the results.
 func (o *SFSpeechRecognizer) RecognitionTaskWithRequestDelegate(request *SFSpeechRecognitionRequest, delegate SFSpeechRecognitionTaskDelegate) *SFSpeechRecognitionTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognizerSelRecognitionTaskWithRequestDelegate, request.Ptr(), delegate)
 	if _ret != 0 {

@@ -90,12 +90,15 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetSoftwareVersion
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProtocolsSupported() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProtocolsSupported)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProtocolsSupported)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProtocolsSupported(protocolsSupported *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProtocolsSupported, protocolsSupported)
+	o.Ptr().Send(_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProtocolsSupported, protocolsSupported.Ptr())
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) HardwareVersion() *foundation.NSNumber {

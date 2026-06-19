@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for reading and writing data to and from a TCP connection being proxied by the provider.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neappproxytcpflow
 type NEAppProxyTCPFlow struct {
 	NEAppProxyFlow
@@ -35,7 +37,7 @@ func NEAppProxyTCPFlowFromID(id objc.ID) *NEAppProxyTCPFlow {
 	return o
 }
 
-// @method readDataWithCompletionHandler: @discussion Read data from the flow. @param completionHandler A block that will be executed when some data is read from the flow. The block is passed either the data that was read or a non-nil error if an error occurred. If data has a length of 0 then no data can be subsequently read from the flow. The completion handler is only called for the single read operation that was initiated by calling this method. If the caller wants to read more data then it should call this method again to schedule another read operation and another execution of the completion handler block.
+// Read data from the flow.
 func (o *NEAppProxyTCPFlow) ReadDataWithCompletionHandler(completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -50,7 +52,7 @@ func (o *NEAppProxyTCPFlow) ReadDataWithCompletionHandler(completionHandler func
 	o.Ptr().Send(_nEAppProxyTCPFlowSelReadDataWithCompletionHandler, __block_completionHandler)
 }
 
-// @method writeData:completionHandler @discussion Write data to the flow. @param data The data to write. @param completionHandler A block that will be executed when the data is written into the associated socket's receive buffer. The caller should use this callback as an indication that it is possible to write more data to the flow without using up excessive buffer memory. If an error occurs while writing the data then a non-nil NSError object is passed to the block.
+// Write data to the flow.
 func (o *NEAppProxyTCPFlow) WriteDataWithCompletionHandler(data *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

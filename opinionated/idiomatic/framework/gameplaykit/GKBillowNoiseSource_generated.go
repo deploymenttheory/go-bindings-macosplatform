@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Billow noise is similar to Perlin noise, with more rounded shapes and clearly-defined transitions beween values.
+// A procedural noise generator whose output is a type of fractal coherent noise with smooth features.
 //
 // BillowNoiseSource wraps [raw.GKBillowNoiseSource] with a fluent Go API.
 type BillowNoiseSource struct {
@@ -31,6 +31,8 @@ func BillowNoiseSourceFromID(id objc.ID) *BillowNoiseSource {
 	return &BillowNoiseSource{inner: raw.GKBillowNoiseSourceFromID(id)}
 }
 
+// Creates a billow noise source with the specified parameters.
+//
 // NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed creates a new [BillowNoiseSource].
 func NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *BillowNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKBillowNoiseSource")), objc.RegisterName("alloc"))
@@ -38,30 +40,40 @@ func NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequ
 	return &BillowNoiseSource{inner: raw.GKBillowNoiseSourceFromID(_id)}
 }
 
+// The rate at which successive octaves of the noise function decrease in amplitude.
+//
 // WithPersistence sets the persistence property and returns the receiver for chaining.
 func (x *BillowNoiseSource) WithPersistence(persistence float64) *BillowNoiseSource {
 	x.inner.SetPersistence(persistence)
 	return x
 }
 
+// A value that determines the size and spacing of features in generated noise.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *BillowNoiseSource) WithFrequency(frequency float64) *BillowNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
 	return x
 }
 
+// The number of octaves of the underlying noise function to use for generating noise.
+//
 // WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
 func (x *BillowNoiseSource) WithOctaveCount(octaveCount int) *BillowNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
 	return x
 }
 
+// The rate at which successive octaves of the noise function increase in frequency.
+//
 // WithLacunarity sets the lacunarity property and returns the receiver for chaining.
 func (x *BillowNoiseSource) WithLacunarity(lacunarity float64) *BillowNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
 	return x
 }
 
+// The value that determines the specific configuration of noise produced by the noise source.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetSeed(seed)

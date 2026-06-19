@@ -1,0 +1,3127 @@
+{
+  "schema_version": 1,
+  "framework": "SpriteKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SK3DNode": {
+      "doc": "3D SceneKit content drawn as a flattened sprite.",
+      "url": "https://developer.apple.com/documentation/spritekit/sk3dnode"
+    },
+    "SKAction": {
+      "doc": "An object that is run by a node to change its structure or content.",
+      "url": "https://developer.apple.com/documentation/spritekit/skaction"
+    },
+    "SKAttribute": {
+      "doc": "A specification for dynamic per-node data used with a custom shader.",
+      "url": "https://developer.apple.com/documentation/spritekit/skattribute"
+    },
+    "SKAttributeValue": {
+      "doc": "A container for dynamic shader data associated with a node.",
+      "url": "https://developer.apple.com/documentation/spritekit/skattributevalue"
+    },
+    "SKAudioNode": {
+      "doc": "A node that plays audio.",
+      "url": "https://developer.apple.com/documentation/spritekit/skaudionode"
+    },
+    "SKCameraNode": {
+      "doc": "A node that determines which parts of the scene are visible within a view.",
+      "url": "https://developer.apple.com/documentation/spritekit/skcameranode"
+    },
+    "SKConstraint": {
+      "doc": "A specification for constraining a node’s position or rotation.",
+      "url": "https://developer.apple.com/documentation/spritekit/skconstraint"
+    },
+    "SKCropNode": {
+      "doc": "A node that masks pixels drawn by its children so that only some pixels are seen.",
+      "url": "https://developer.apple.com/documentation/spritekit/skcropnode"
+    },
+    "SKEffectNode": {
+      "doc": "A node that renders its children into a separate buffer, optionally applying an effect, before drawing the final result.",
+      "url": "https://developer.apple.com/documentation/spritekit/skeffectnode"
+    },
+    "SKEmitterNode": {
+      "doc": "A source of various particle effects.",
+      "url": "https://developer.apple.com/documentation/spritekit/skemitternode"
+    },
+    "SKFieldNode": {
+      "doc": "A node that applies physics effects to nearby nodes.",
+      "url": "https://developer.apple.com/documentation/spritekit/skfieldnode"
+    },
+    "SKKeyframeSequence": {
+      "doc": "An object that performs interpolation between values specified at different times (keyframes).",
+      "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence"
+    },
+    "SKLabelNode": {
+      "doc": "A graphical element that draws text.",
+      "url": "https://developer.apple.com/documentation/spritekit/sklabelnode"
+    },
+    "SKLightNode": {
+      "doc": "A node that lights surrounding nodes.",
+      "url": "https://developer.apple.com/documentation/spritekit/sklightnode"
+    },
+    "SKMutableTexture": {
+      "doc": "A texture whose contents can be dynamically updated.",
+      "url": "https://developer.apple.com/documentation/spritekit/skmutabletexture"
+    },
+    "SKNode": {
+      "doc": "The base class of all SpriteKit nodes.",
+      "url": "https://developer.apple.com/documentation/spritekit/sknode"
+    },
+    "SKPhysicsBody": {
+      "doc": "An object that adds physics simulation to a node.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody"
+    },
+    "SKPhysicsContact": {
+      "doc": "A description of the contact between two physics bodies.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicscontact"
+    },
+    "SKPhysicsJoint": {
+      "doc": "The abstract superclass for objects that connect physics bodies.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsjoint"
+    },
+    "SKPhysicsJointFixed": {
+      "doc": "A joint that fuses two physics bodies together at a reference point.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointfixed"
+    },
+    "SKPhysicsJointLimit": {
+      "doc": "A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointlimit"
+    },
+    "SKPhysicsJointPin": {
+      "doc": "A joint that pins together two physics bodies, allowing independent rotation.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin"
+    },
+    "SKPhysicsJointSliding": {
+      "doc": "A joint that allows two physics bodies to slide along an axis.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointsliding"
+    },
+    "SKPhysicsJointSpring": {
+      "doc": "A joint that simulates a spring connecting two physics bodies.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointspring"
+    },
+    "SKPhysicsWorld": {
+      "doc": "The driver of the physics engine in a scene; it exposes the ability for you to configure and query the physics system.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld"
+    },
+    "SKRange": {
+      "doc": "A definition of a range of floating-point values.",
+      "url": "https://developer.apple.com/documentation/spritekit/skrange"
+    },
+    "SKReachConstraints": {
+      "doc": "A specification of the degree of freedom when solving inverse kinematics.",
+      "url": "https://developer.apple.com/documentation/spritekit/skreachconstraints"
+    },
+    "SKReferenceNode": {
+      "doc": "A node that’s defined in an archived .sks file.",
+      "url": "https://developer.apple.com/documentation/spritekit/skreferencenode"
+    },
+    "SKRegion": {
+      "doc": "The definition of an arbitrary area.",
+      "url": "https://developer.apple.com/documentation/spritekit/skregion"
+    },
+    "SKRenderer": {
+      "doc": "An object that renders a scene into a custom Metal rendering pipeline and drives the scene update cycle.",
+      "url": "https://developer.apple.com/documentation/spritekit/skrenderer"
+    },
+    "SKScene": {
+      "doc": "An object that organizes all of the active SpriteKit content.",
+      "url": "https://developer.apple.com/documentation/spritekit/skscene"
+    },
+    "SKShader": {
+      "doc": "An object that allows you to apply a custom fragment shader.",
+      "url": "https://developer.apple.com/documentation/spritekit/skshader"
+    },
+    "SKShapeNode": {
+      "doc": "A mathematical shape that can be stroked or filled.",
+      "url": "https://developer.apple.com/documentation/spritekit/skshapenode"
+    },
+    "SKSpriteNode": {
+      "doc": "An image or solid color.",
+      "url": "https://developer.apple.com/documentation/spritekit/skspritenode"
+    },
+    "SKTexture": {
+      "doc": "An image, decoded on the GPU, that can be used to render various SpriteKit objects.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktexture"
+    },
+    "SKTextureAtlas": {
+      "doc": "A collection of textures optimized for storage and drawing performance.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas"
+    },
+    "SKTileDefinition": {
+      "doc": "A single tile that can be repeated in a tile map.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition"
+    },
+    "SKTileGroup": {
+      "doc": "A set of tiles that collectively define one type of terrain.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktilegroup"
+    },
+    "SKTileGroupRule": {
+      "doc": "Rules that describe how various tiles should be placed in a map.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktilegrouprule"
+    },
+    "SKTileMapNode": {
+      "doc": "A two-dimensional array of images.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode"
+    },
+    "SKTileSet": {
+      "doc": "A container for related tile groups.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktileset"
+    },
+    "SKTransformNode": {
+      "doc": "A node that allows its children to rotate in 3D.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktransformnode"
+    },
+    "SKTransition": {
+      "doc": "An object used to perform an animated transition to a new scene.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktransition"
+    },
+    "SKUniform": {
+      "doc": "A container for uniform shader data.",
+      "url": "https://developer.apple.com/documentation/spritekit/skuniform"
+    },
+    "SKVideoNode": {
+      "doc": "A graphical element that plays video content.",
+      "url": "https://developer.apple.com/documentation/spritekit/skvideonode"
+    },
+    "SKView": {
+      "doc": "A view subclass that renders a SpriteKit scene.",
+      "url": "https://developer.apple.com/documentation/spritekit/skview"
+    },
+    "SKWarpGeometry": {
+      "doc": "A definition for a deformation of nodes that conform to SKWarpable.",
+      "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometry"
+    },
+    "SKWarpGeometryGrid": {
+      "doc": "A definition for a grid-based deformation of nodes that conform to SKWarpable.",
+      "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid"
+    }
+  },
+  "protocols": {
+    "SKPhysicsContactDelegate": {
+      "doc": "Methods your app can implement to respond when physics bodies come into contact.",
+      "url": "https://developer.apple.com/documentation/spritekit/skphysicscontactdelegate"
+    },
+    "SKSceneDelegate": {
+      "doc": "Methods that, when implemented, allow any class to participate in the SpriteKit render loop callbacks.",
+      "url": "https://developer.apple.com/documentation/spritekit/skscenedelegate"
+    },
+    "SKViewDelegate": {
+      "doc": "Methods to take custom control over the view’s render rate.",
+      "url": "https://developer.apple.com/documentation/spritekit/skviewdelegate"
+    },
+    "SKWarpable": {
+      "doc": "A protocol for objects that can be warped and animated by an SKWarpGeometry.",
+      "url": "https://developer.apple.com/documentation/spritekit/skwarpable"
+    }
+  },
+  "enums": {
+    "SKActionTimingMode": {
+      "doc": "The modes that an action can use to adjust the apparent timing of the action.",
+      "url": "https://developer.apple.com/documentation/spritekit/skactiontimingmode",
+      "members": {
+        "SKActionTimingEaseIn": {
+          "doc": "Specifies ease-in pacing. Ease-in pacing causes the animation to begin slowly and then speed up as it progresses.",
+          "url": "https://developer.apple.com/documentation/spritekit/skactiontimingmode/easein"
+        },
+        "SKActionTimingEaseInEaseOut": {
+          "doc": "Specifies ease-in ease-out pacing. An ease-in ease-out animation begins slowly, accelerates through the middle of its duration, and then slows again before completing.",
+          "url": "https://developer.apple.com/documentation/spritekit/skactiontimingmode/easeineaseout"
+        },
+        "SKActionTimingEaseOut": {
+          "doc": "Specifies ease-out pacing. Ease-out pacing causes the animation to begin quickly and then slow as it completes.",
+          "url": "https://developer.apple.com/documentation/spritekit/skactiontimingmode/easeout"
+        },
+        "SKActionTimingLinear": {
+          "doc": "Specifies linear pacing. Linear pacing causes an animation to occur evenly over its duration.",
+          "url": "https://developer.apple.com/documentation/spritekit/skactiontimingmode/linear"
+        }
+      }
+    },
+    "SKAttributeType": {
+      "doc": "Options that specify an attribute’s data type.",
+      "url": "https://developer.apple.com/documentation/spritekit/skattributetype"
+    },
+    "SKBlendMode": {
+      "doc": "The modes that describe how the source and destination pixel colors are used to calculate the new destination color.",
+      "url": "https://developer.apple.com/documentation/spritekit/skblendmode",
+      "members": {
+        "SKBlendModeAdd": {
+          "doc": "The source and destination colors are added together.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/add"
+        },
+        "SKBlendModeAlpha": {
+          "doc": "The source and destination colors are blended by multiplying the source alpha value.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/alpha"
+        },
+        "SKBlendModeMultiply": {
+          "doc": "The source color is multiplied by the destination color.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/multiply"
+        },
+        "SKBlendModeMultiplyX2": {
+          "doc": "The source color is multiplied by the destination color and then doubled.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/multiplyx2"
+        },
+        "SKBlendModeReplace": {
+          "doc": "The source color replaces the destination color.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/replace"
+        },
+        "SKBlendModeScreen": {
+          "doc": "The source color is added to the destination color times the inverted source color.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/screen"
+        },
+        "SKBlendModeSubtract": {
+          "doc": "The source color is subtracted from the destination color.",
+          "url": "https://developer.apple.com/documentation/spritekit/skblendmode/subtract"
+        }
+      }
+    },
+    "SKInterpolationMode": {
+      "doc": "The modes used to interpolate between keyframes in the sequence.",
+      "url": "https://developer.apple.com/documentation/spritekit/skinterpolationmode",
+      "members": {
+        "SKInterpolationModeLinear": {
+          "doc": "Values between two keyframes are interpolated linearly.",
+          "url": "https://developer.apple.com/documentation/spritekit/skinterpolationmode/linear"
+        },
+        "SKInterpolationModeSpline": {
+          "doc": "Values between two keyframes using a spline curve.",
+          "url": "https://developer.apple.com/documentation/spritekit/skinterpolationmode/spline"
+        },
+        "SKInterpolationModeStep": {
+          "doc": "Values between two keyframes are not interpolated. Instead, the value is that of the most recent keyframe.",
+          "url": "https://developer.apple.com/documentation/spritekit/skinterpolationmode/step"
+        }
+      }
+    },
+    "SKLabelHorizontalAlignmentMode": {
+      "doc": "Options for aligning text horizontally.",
+      "url": "https://developer.apple.com/documentation/spritekit/sklabelhorizontalalignmentmode",
+      "members": {
+        "SKLabelHorizontalAlignmentModeCenter": {
+          "doc": "Centers the text horizontally on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelhorizontalalignmentmode/center"
+        },
+        "SKLabelHorizontalAlignmentModeLeft": {
+          "doc": "Positions the text so that the left side of the text is on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelhorizontalalignmentmode/left"
+        },
+        "SKLabelHorizontalAlignmentModeRight": {
+          "doc": "Positions the text so that the right side of the text is on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelhorizontalalignmentmode/right"
+        }
+      }
+    },
+    "SKLabelVerticalAlignmentMode": {
+      "doc": "Options for aligning text vertically.",
+      "url": "https://developer.apple.com/documentation/spritekit/sklabelverticalalignmentmode",
+      "members": {
+        "SKLabelVerticalAlignmentModeBaseline": {
+          "doc": "Positions the text so that the font’s baseline lies on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelverticalalignmentmode/baseline"
+        },
+        "SKLabelVerticalAlignmentModeBottom": {
+          "doc": "Positions the text so that the bottom of the text is on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelverticalalignmentmode/bottom"
+        },
+        "SKLabelVerticalAlignmentModeCenter": {
+          "doc": "Centers the text vertically on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelverticalalignmentmode/center"
+        },
+        "SKLabelVerticalAlignmentModeTop": {
+          "doc": "Positions the text so that the top of the text is on the node’s origin.",
+          "url": "https://developer.apple.com/documentation/spritekit/sklabelverticalalignmentmode/top"
+        }
+      }
+    },
+    "SKNodeFocusBehavior": {
+      "doc": "Options for the focusable states of a SpriteKit node.",
+      "url": "https://developer.apple.com/documentation/spritekit/sknodefocusbehavior",
+      "members": {
+        "SKNodeFocusBehaviorFocusable": {
+          "doc": "Node is focusable and prevents nodes that it visually obscures from becoming focusable.",
+          "url": "https://developer.apple.com/documentation/spritekit/sknodefocusbehavior/focusable"
+        },
+        "SKNodeFocusBehaviorNone": {
+          "doc": "Node is not focusable.",
+          "url": "https://developer.apple.com/documentation/spritekit/sknodefocusbehavior/none"
+        },
+        "SKNodeFocusBehaviorOccluding": {
+          "doc": "Node is not focusable and prevents nodes that it visually obscures from becoming focusable.",
+          "url": "https://developer.apple.com/documentation/spritekit/sknodefocusbehavior/occluding"
+        }
+      }
+    },
+    "SKParticleRenderOrder": {
+      "doc": "The order to use when the emitter’s particles are rendered.",
+      "url": "https://developer.apple.com/documentation/spritekit/skparticlerenderorder",
+      "members": {
+        "SKParticleRenderOrderDontCare": {
+          "doc": "The particles can be rendered in any order. SpriteKit may choose to reorder the particles to improve rendering performance.",
+          "url": "https://developer.apple.com/documentation/spritekit/skparticlerenderorder/dontcare"
+        },
+        "SKParticleRenderOrderOldestFirst": {
+          "doc": "The particles are rendered from oldest to newest.",
+          "url": "https://developer.apple.com/documentation/spritekit/skparticlerenderorder/oldestfirst"
+        },
+        "SKParticleRenderOrderOldestLast": {
+          "doc": "The particles are rendered from newest to oldest. This is the default value.",
+          "url": "https://developer.apple.com/documentation/spritekit/skparticlerenderorder/oldestlast"
+        }
+      }
+    },
+    "SKRepeatMode": {
+      "doc": "The modes used to determine how the sequence repeats.",
+      "url": "https://developer.apple.com/documentation/spritekit/skrepeatmode",
+      "members": {
+        "SKRepeatModeClamp": {
+          "doc": "When a sample is calculated, the time value is clamped to the range of time values found in the sequence. For example, if the last keyframe’s time value is 0.5, a sample at any time value from 0.5 to 1.0 returns the last keyframe’s value.",
+          "url": "https://developer.apple.com/documentation/spritekit/skrepeatmode/clamp"
+        },
+        "SKRepeatModeLoop": {
+          "doc": "When a sample is calculated, the sequence loops back to the beginning of the sequence. For example, if the last keyframe’s time value is 0.5, then a sample at any time value from 0.5 to 1.0 returns the same value as the sequence did from 0.0 to 0.5.",
+          "url": "https://developer.apple.com/documentation/spritekit/skrepeatmode/loop"
+        }
+      }
+    },
+    "SKSceneScaleMode": {
+      "doc": "The modes that determine how the scene’s area is mapped to the view that presents it.",
+      "url": "https://developer.apple.com/documentation/spritekit/skscenescalemode",
+      "members": {
+        "SKSceneScaleModeAspectFill": {
+          "doc": "The scaling factor of each dimension is calculated and the larger of the two is chosen. Each axis of the scene is scaled by the same scaling factor. This guarantees that the entire area of the view is filled but may cause parts of the scene to be cropped.",
+          "url": "https://developer.apple.com/documentation/spritekit/skscenescalemode/aspectfill"
+        },
+        "SKSceneScaleModeAspectFit": {
+          "doc": "The scaling factor of each dimension is calculated and the smaller of the two is chosen. Each axis of the scene is scaled by the same scaling factor. This guarantees that the entire scene is visible but may require letterboxing in the view.",
+          "url": "https://developer.apple.com/documentation/spritekit/skscenescalemode/aspectfit"
+        },
+        "SKSceneScaleModeFill": {
+          "doc": "Each axis of the scene is scaled independently so that each axis in the scene exactly maps to the length of that axis in the view.",
+          "url": "https://developer.apple.com/documentation/spritekit/skscenescalemode/fill"
+        },
+        "SKSceneScaleModeResizeFill": {
+          "doc": "The scene is not scaled to match the view. Instead, the scene is automatically resized so that its dimensions always match those of the view.",
+          "url": "https://developer.apple.com/documentation/spritekit/skscenescalemode/resizefill"
+        }
+      }
+    },
+    "SKTextureFilteringMode": {
+      "doc": "Texture filtering modes to use when the texture is drawn in a size other than its native size.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktexturefilteringmode",
+      "members": {
+        "SKTextureFilteringLinear": {
+          "doc": "Each pixel is drawn by using a linear filter of multiple texels in the texture. This mode produces higher quality results but may be slower.",
+          "url": "https://developer.apple.com/documentation/spritekit/sktexturefilteringmode/linear"
+        },
+        "SKTextureFilteringNearest": {
+          "doc": "Each pixel is drawn using the nearest point in the texture. This mode is faster, but the results are often pixelated.",
+          "url": "https://developer.apple.com/documentation/spritekit/sktexturefilteringmode/nearest"
+        }
+      }
+    },
+    "SKTileAdjacencyMask": {
+      "doc": "An enumeration defining how neighboring tiles are automatically placed next to each other.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktileadjacencymask"
+    },
+    "SKTileDefinitionRotation": {
+      "doc": "The allowed rotations for a given tile.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktiledefinitionrotation"
+    },
+    "SKTileSetType": {
+      "doc": "An enumeration defining how tiles are arranged.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktilesettype"
+    },
+    "SKTransitionDirection": {
+      "doc": "For some transitions, the direction in which the transition is performed.",
+      "url": "https://developer.apple.com/documentation/spritekit/sktransitiondirection",
+      "members": {
+        "SKTransitionDirectionDown": {
+          "doc": "The transition goes down.",
+          "url": "https://developer.apple.com/documentation/spritekit/sktransitiondirection/down"
+        },
+        "SKTransitionDirectionLeft": {
+          "doc": "The transition goes left.",
+          "url": "https://developer.apple.com/documentation/spritekit/sktransitiondirection/left"
+        },
+        "SKTransitionDirectionRight": {
+          "doc": "The transition goes right.",
+          "url": "https://developer.apple.com/documentation/spritekit/sktransitiondirection/right"
+        },
+        "SKTransitionDirectionUp": {
+          "doc": "The transition goes up.",
+          "url": "https://developer.apple.com/documentation/spritekit/sktransitiondirection/up"
+        }
+      }
+    },
+    "SKUniformType": {
+      "doc": "An enumerated type to identify the type of a uniform object.",
+      "url": "https://developer.apple.com/documentation/spritekit/skuniformtype",
+      "members": {
+        "SKUniformTypeFloat": {
+          "doc": "Indicates that the uniform variable holds a 32-bit floating-point value.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/float"
+        },
+        "SKUniformTypeFloatMatrix2": {
+          "doc": "Indicates that the uniform variable holds a 2 x 2 matrix of four 32-bit floating-point values.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/floatmatrix2"
+        },
+        "SKUniformTypeFloatMatrix3": {
+          "doc": "Indicates that the uniform variable holds a 3 x 3 matrix of four 32-bit floating-point values.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/floatmatrix3"
+        },
+        "SKUniformTypeFloatMatrix4": {
+          "doc": "Indicates that the uniform variable holds a 3 x 3 matrix of four 32-bit floating-point values.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/floatmatrix4"
+        },
+        "SKUniformTypeFloatVector2": {
+          "doc": "Indicates that the uniform variable holds a vector of two 32-bit floating-point values.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/floatvector2"
+        },
+        "SKUniformTypeFloatVector3": {
+          "doc": "Indicates that the uniform variable holds a vector of three 32-bit floating-point values.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/floatvector3"
+        },
+        "SKUniformTypeFloatVector4": {
+          "doc": "Indicates that the uniform variable holds a vector of four 32-bit floating-point values.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/floatvector4"
+        },
+        "SKUniformTypeNone": {
+          "doc": "Indicates that the uniform variable does not currently hold any data. A uniform object has this type until the first time its value is set.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/none"
+        },
+        "SKUniformTypeTexture": {
+          "doc": "Indicates that the uniform variable holds a reference to a SpriteKit texture.",
+          "url": "https://developer.apple.com/documentation/spritekit/skuniformtype/texture"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SK3DNode": {
+      "+nodeWithViewportSize:": {
+        "doc": "Creates and initializes a new 3D node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/nodewithviewportsize:"
+      },
+      "-hitTest:options:": {
+        "doc": "Searches the Scene Kit scene for objects corresponding to a point in the rendered image.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/hittest(_:options:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Tells you when to initialize a 3D node that has been unarchived.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/init(coder:)"
+      },
+      "-initWithViewportSize:": {
+        "doc": "Initializes a new 3D node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/init(viewportsize:)"
+      },
+      "-projectPoint:": {
+        "doc": "Projects a point from the 3D world coordinate system of the SceneKit scene to the 2D viewport coordinate system of the SpriteKit node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/projectpoint(_:)"
+      },
+      "-unprojectPoint:": {
+        "doc": "Unprojects a point from the SpriteKit node’s 2D viewport coordinate system to the 3D world coordinate system of the SceneKit scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/unprojectpoint(_:)"
+      }
+    },
+    "SKAction": {
+      "+actionNamed:fromURL:": {
+        "doc": "Creates an action of the given name from an action file.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaction/init(named:from:)"
+      },
+      "+actionNamed:fromURL:duration:": {
+        "doc": "Creates an action of the given name from an action file with a new duration.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaction/init(named:from:duration:)"
+      }
+    },
+    "SKAttribute": {
+      "-initWithName:type:": {
+        "doc": "Creates and initializes a new attribute object of a specified type with a name that can be referenced within the shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattribute/init(name:type:)"
+      }
+    },
+    "SKAttributeValue": {
+      "+valueWithFloat:": {
+        "doc": "Creates and initializes a new attribute value object that holds a floating point number.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/init(float:)"
+      },
+      "+valueWithVectorFloat2:": {
+        "doc": "Creates and initializes a new attribute value object that holds a vector of two floating point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/init(vectorfloat2:)"
+      },
+      "+valueWithVectorFloat3:": {
+        "doc": "Creates and initializes a new attribute value object that holds a vector of three floating point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/init(vectorfloat3:)"
+      },
+      "+valueWithVectorFloat4:": {
+        "doc": "Creates and initializes a new attribute value object that holds a vector of four floating point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/init(vectorfloat4:)"
+      },
+      "-init": {
+        "doc": "Creates and initializes a new attribute value object",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/init()"
+      }
+    },
+    "SKAudioNode": {
+      "-initWithAVAudioNode:": {
+        "doc": "Initializes an audio node from an AVFoundation audio node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/init(avaudionode:)-969st"
+      },
+      "-initWithCoder:": {
+        "doc": "Tells you when to initialize an audio node that has been unarchived.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/init(coder:)"
+      },
+      "-initWithFileNamed:": {
+        "doc": "Initializes an audio node from an audio asset with the specified filename.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/init(filenamed:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes an audio node from an audio asset with the specified URL.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/init(url:)-8v3q0"
+      }
+    },
+    "SKCameraNode": {
+      "-containedNodeSet": {
+        "doc": "Finds nodes that are visible in the camera’s viewport.",
+        "url": "https://developer.apple.com/documentation/spritekit/skcameranode/containednodeset()"
+      },
+      "-containsNode:": {
+        "doc": "Checks to see if a node is visible in the camera’s viewport.",
+        "url": "https://developer.apple.com/documentation/spritekit/skcameranode/contains(_:)"
+      }
+    },
+    "SKConstraint": {
+      "+distance:toNode:": {
+        "doc": "Creates a constraint that keeps a node within a certain distance of another node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/distance(_:to:)-6507j"
+      },
+      "+distance:toPoint:": {
+        "doc": "Creates a constraint that keeps a node within a certain distance of a point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/distance(_:to:)-7yk7n"
+      },
+      "+distance:toPoint:inNode:": {
+        "doc": "Creates a constraint that keeps a node within a certain distance of a point in another node’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/distance(_:to:in:)"
+      },
+      "+orientToNode:offset:": {
+        "doc": "Creates a constraint that forces a node to rotate to face another node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/orient(to:offset:)-1h1tw"
+      },
+      "+orientToPoint:inNode:offset:": {
+        "doc": "Creates a constraint that forces a node to rotate to face a point in another node’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/orient(to:in:offset:)"
+      },
+      "+orientToPoint:offset:": {
+        "doc": "Creates a constraint that forces a node to rotate to face a fixed point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/orient(to:offset:)-9lq3h"
+      },
+      "+positionX:": {
+        "doc": "Creates a constraint that restricts the x-coordinate of a node’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/positionx(_:)"
+      },
+      "+positionX:Y:": {
+        "doc": "Creates a constraint that restricts both coordinates of a node’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/positionx(_:y:)"
+      },
+      "+positionY:": {
+        "doc": "Creates a constraint that restricts the y-coordinate of a node’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/positiony(_:)"
+      },
+      "+zRotation:": {
+        "doc": "Creates a constraint that limits the orientation of a node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/zrotation(_:)"
+      }
+    },
+    "SKEffectNode": {
+      "-setValue:forAttributeNamed:": {
+        "doc": "Sets an attribute value for an attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/setvalue(_:forattribute:)"
+      },
+      "-valueForAttributeNamed:": {
+        "doc": "Gets the value of a shader attribute.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/value(forattributenamed:)"
+      }
+    },
+    "SKEmitterNode": {
+      "-advanceSimulationTime:": {
+        "doc": "Advances the emitter particle simulation.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/advancesimulationtime(_:)"
+      },
+      "-resetSimulation": {
+        "doc": "Removes all existing particles and restarts the simulation.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/resetsimulation()"
+      },
+      "-setValue:forAttributeNamed:": {
+        "doc": "Sets an attribute value for an attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/setvalue(_:forattribute:)"
+      },
+      "-valueForAttributeNamed:": {
+        "doc": "Gets the value of a shader attribute.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/value(forattributenamed:)"
+      }
+    },
+    "SKFieldNode": {
+      "+customFieldWithEvaluationBlock:": {
+        "doc": "Creates a field node that calculates and applies a custom force to the physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/customfield(evaluationblock:)"
+      },
+      "+dragField": {
+        "doc": "Creates a field node that applies a force that resists the motion of physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/dragfield()"
+      },
+      "+electricField": {
+        "doc": "Creates a field node that applies an electrical force proportional to the electrical charge of physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/electricfield()"
+      },
+      "+linearGravityFieldWithVector:": {
+        "doc": "Creates a field node that accelerates physics bodies in a specific direction.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/lineargravityfield(withvector:)"
+      },
+      "+magneticField": {
+        "doc": "Creates a field node that applies a magnetic force based on the velocity and electrical charge of the physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/magneticfield()"
+      },
+      "+noiseFieldWithSmoothness:animationSpeed:": {
+        "doc": "Creates a field node that applies a randomized acceleration to physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/noisefield(withsmoothness:animationspeed:)"
+      },
+      "+radialGravityField": {
+        "doc": "Creates a field node that accelerates physics bodies toward the field node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/radialgravityfield()"
+      },
+      "+springField": {
+        "doc": "Creates a field node that applies a spring-like force that pulls physics bodies toward the field node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/springfield()"
+      },
+      "+turbulenceFieldWithSmoothness:animationSpeed:": {
+        "doc": "Creates a field node that applies a randomized acceleration to physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/turbulencefield(withsmoothness:animationspeed:)"
+      },
+      "+velocityFieldWithTexture:": {
+        "doc": "Creates a field node that sets the velocity of physics bodies that enter the node’s area based on the pixel values of a texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/velocityfield(with:)"
+      },
+      "+velocityFieldWithVector:": {
+        "doc": "Creates a field node that gives physics bodies a constant velocity.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/velocityfield(withvector:)"
+      },
+      "+vortexField": {
+        "doc": "Creates a field node that applies a perpendicular force to physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/vortexfield()"
+      }
+    },
+    "SKKeyframeSequence": {
+      "-addKeyframeValue:time:": {
+        "doc": "Adds a keyframe to the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/addkeyframevalue(_:time:)"
+      },
+      "-count": {
+        "doc": "The number of keyframes in the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/count()"
+      },
+      "-getKeyframeTimeForIndex:": {
+        "doc": "Gets the time for a keyframe in the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/getkeyframetime(for:)"
+      },
+      "-getKeyframeValueForIndex:": {
+        "doc": "Gets the value for a keyframe in the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/getkeyframevalue(for:)"
+      },
+      "-initWithCapacity:": {
+        "doc": "Initializes a new keyframe sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/init(capacity:)"
+      },
+      "-initWithKeyframeValues:times:": {
+        "doc": "Initializes a keyframe sequence with an initial set of values and times.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/init(keyframevalues:times:)"
+      },
+      "-removeKeyframeAtIndex:": {
+        "doc": "Removes a keyframe from the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/removekeyframe(at:)"
+      },
+      "-removeLastKeyframe": {
+        "doc": "Removes the last value in the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/removelastkeyframe()"
+      },
+      "-sampleAtTime:": {
+        "doc": "Calculates the sample at a particular time.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/sample(attime:)"
+      },
+      "-setKeyframeTime:forIndex:": {
+        "doc": "Changes the time for a specific keyframe.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/setkeyframetime(_:for:)"
+      },
+      "-setKeyframeValue:forIndex:": {
+        "doc": "Changes the value for a specific keyframe.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/setkeyframevalue(_:for:)"
+      },
+      "-setKeyframeValue:time:forIndex:": {
+        "doc": "Replaces a keyframe in the sequence with a new keyframe.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/setkeyframevalue(_:time:for:)"
+      }
+    },
+    "SKLabelNode": {
+      "+labelNodeWithAttributedText:": {
+        "doc": "Initializes a new label object with an attributed text string.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/init(attributedtext:)"
+      },
+      "+labelNodeWithFontNamed:": {
+        "doc": "Initializes a new label object.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/labelnodewithfontnamed:"
+      },
+      "+labelNodeWithText:": {
+        "doc": "Initializes a new label object with a text string.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/init(text:)"
+      },
+      "-initWithFontNamed:": {
+        "doc": "Initializes a new label object with a specified font.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/init(fontnamed:)"
+      }
+    },
+    "SKMutableTexture": {
+      "+mutableTextureWithSize:": {
+        "doc": "Creates an empty texture with a specific size.",
+        "url": "https://developer.apple.com/documentation/spritekit/skmutabletexture/mutabletexturewithsize:"
+      },
+      "-initWithSize:": {
+        "doc": "Initializes an empty texture with a specific size.",
+        "url": "https://developer.apple.com/documentation/spritekit/skmutabletexture/init(size:)"
+      },
+      "-initWithSize:pixelFormat:": {
+        "doc": "Initializes an empty texture with a specific size and format.",
+        "url": "https://developer.apple.com/documentation/spritekit/skmutabletexture/init(size:pixelformat:)"
+      },
+      "-modifyPixelDataWithBlock:": {
+        "doc": "Modifies the contents of a mutable texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skmutabletexture/modifypixeldata(_:)"
+      }
+    },
+    "SKNode": {
+      "+node": {
+        "doc": "Creates a new node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/node"
+      },
+      "+nodeWithFileNamed:": {
+        "doc": "Creates a new node by loading an archive file from the game’s main bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/init(filenamed:)"
+      },
+      "+obstaclesFromNodeBounds:": {
+        "doc": "Converts each node into an obstacle by transforming its bounds into the scene’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/obstacles(fromnodebounds:)"
+      },
+      "+obstaclesFromNodePhysicsBodies:": {
+        "doc": "Converts each node into an obstacle by transforming the node’s physics body shape into the scene’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/obstacles(fromnodephysicsbodies:)"
+      },
+      "+obstaclesFromSpriteTextures:accuracy:": {
+        "doc": "Turns each node into an obstacle by changing the node’s texture into a physics shape and converting it into the scene’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/obstacles(fromspritetextures:accuracy:)"
+      },
+      "-accessibilityHitTest:": {
+        "doc": "Returns the frontmost user interface element in the element hierarchy.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilityhittest(_:)"
+      },
+      "-actionForKey:": {
+        "doc": "Returns an action associated with a specific key.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/action(forkey:)"
+      },
+      "-addChild:": {
+        "doc": "Adds a node to the end of the receiver’s list of child nodes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/addchild(_:)"
+      },
+      "-calculateAccumulatedFrame": {
+        "doc": "Returns a rectangle in the parent’s coordinate system that contains the position and size of itself and all child nodes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/calculateaccumulatedframe()"
+      },
+      "-childNodeWithName:": {
+        "doc": "Searches the children of the receiving node for a node with a specific name.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/childnode(withname:)"
+      },
+      "-containsPoint:": {
+        "doc": "Returns a Boolean value that indicates whether a point lies inside the parent’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/contains(_:)"
+      },
+      "-convertPoint:fromNode:": {
+        "doc": "Converts a point from the coordinate system of another node in the node tree to the coordinate system of this node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/convert(_:from:)"
+      },
+      "-convertPoint:toNode:": {
+        "doc": "Converts a point in this node’s coordinate system to the coordinate system of another node in the node tree.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/convert(_:to:)"
+      },
+      "-enumerateChildNodesWithName:usingBlock:": {
+        "doc": "Searches the children of the receiving node to perform processing for nodes that share a name.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/enumeratechildnodes(withname:using:)"
+      },
+      "-hasActions": {
+        "doc": "Returns a Boolean value that indicates whether the node is executing actions.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/hasactions()"
+      },
+      "-inParentHierarchy:": {
+        "doc": "Returns a Boolean value that indicates whether the node is a descendant of the target node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/inparenthierarchy(_:)"
+      },
+      "-init": {
+        "doc": "Initializes a blank node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/init()"
+      },
+      "-initWithCoder:": {
+        "doc": "Called when a node is initialized from an .sks file.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/init(coder:)"
+      },
+      "-insertChild:atIndex:": {
+        "doc": "Inserts a node into a specific position in the receiver’s list of child nodes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/insertchild(_:at:)"
+      },
+      "-intersectsNode:": {
+        "doc": "Returns a Boolean value that indicates whether this node intersects the specified node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/intersects(_:)"
+      },
+      "-isEqualToNode:": {
+        "doc": "Compares the parameter node to the receiving node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/isequal(to:)"
+      },
+      "-moveToParent:": {
+        "doc": "Moves the node to a new parent node in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/move(toparent:)"
+      },
+      "-nodeAtPoint:": {
+        "doc": "Returns the deepest visible descendant that intersects a point.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/atpoint(_:)"
+      },
+      "-nodesAtPoint:": {
+        "doc": "Returns an array of all visible descendants that intersect a point.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/nodes(at:)"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Returns an array of nodes that match the name parameter.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/subscript(_:)"
+      },
+      "-removeActionForKey:": {
+        "doc": "Removes an action associated with a specific key.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/removeaction(forkey:)"
+      },
+      "-removeAllActions": {
+        "doc": "Ends and removes all actions from the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/removeallactions()"
+      },
+      "-removeAllChildren": {
+        "doc": "Removes all of the node’s children.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/removeallchildren()"
+      },
+      "-removeChildrenInArray:": {
+        "doc": "Removes a list of children from the receiving node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/removechildren(in:)"
+      },
+      "-removeFromParent": {
+        "doc": "Removes the receiving node from its parent.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/removefromparent()"
+      },
+      "-runAction:": {
+        "doc": "Adds an action to the list of actions executed by the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/run(_:)"
+      },
+      "-runAction:completion:": {
+        "doc": "Adds an action to the list of actions executed by the node and schedules the argument block to be run upon completion of the action.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/run(_:completion:)"
+      },
+      "-runAction:withKey:": {
+        "doc": "Adds an identifiable action to the list of actions executed by the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/run(_:withkey:)"
+      },
+      "-setScale:": {
+        "doc": "Sets the xScale and yScale properties of the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/setscale(_:)"
+      },
+      "-setValue:forAttributeNamed:": {
+        "doc": "Sets an attribute value for an attached shader",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/setvalue(_:forattribute:)"
+      },
+      "-valueForAttributeNamed:": {
+        "doc": "The value of a shader attribute.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/value(forattributenamed:)"
+      }
+    },
+    "SKPhysicsBody": {
+      "+bodyWithBodies:": {
+        "doc": "Creates a physics body that’s shaped like a union of the argument physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(bodies:)"
+      },
+      "+bodyWithCircleOfRadius:": {
+        "doc": "Creates a circular physics body centered on the owning node’s origin.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(circleofradius:)"
+      },
+      "+bodyWithCircleOfRadius:center:": {
+        "doc": "Creates a circular physics body centered on an arbitrary point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(circleofradius:center:)"
+      },
+      "+bodyWithEdgeChainFromPath:": {
+        "doc": "Creates an edge chain from a path.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(edgechainfrom:)"
+      },
+      "+bodyWithEdgeFromPoint:toPoint:": {
+        "doc": "Creates an edge between two points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(edgefrom:to:)"
+      },
+      "+bodyWithEdgeLoopFromPath:": {
+        "doc": "Creates an edge loop from a path.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(edgeloopfrom:)-5grxu"
+      },
+      "+bodyWithEdgeLoopFromRect:": {
+        "doc": "Creates an edge loop from a rectangle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(edgeloopfrom:)-8sqfy"
+      },
+      "+bodyWithPolygonFromPath:": {
+        "doc": "Creates a polygonal physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(polygonfrom:)"
+      },
+      "+bodyWithRectangleOfSize:": {
+        "doc": "Creates a rectangular physics body centered on the owning node’s origin.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(rectangleof:)"
+      },
+      "+bodyWithRectangleOfSize:center:": {
+        "doc": "Creates a rectangular physics body centered on an arbitrary point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(rectangleof:center:)"
+      },
+      "+bodyWithTexture:alphaThreshold:size:": {
+        "doc": "Creates a physics body from the contents of a texture, capturing only the texels that exceed a specified transparency value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(texture:alphathreshold:size:)"
+      },
+      "+bodyWithTexture:size:": {
+        "doc": "Creates a physics body from the contents of a texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/init(texture:size:)"
+      },
+      "-allContactedBodies": {
+        "doc": "The physics bodies that this physics body is in contact with.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/allcontactedbodies()"
+      },
+      "-applyAngularImpulse:": {
+        "doc": "Applies an impulse that imparts angular momentum to an object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/applyangularimpulse(_:)"
+      },
+      "-applyForce:": {
+        "doc": "Applies a force to the center of gravity of a physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/applyforce(_:)"
+      },
+      "-applyForce:atPoint:": {
+        "doc": "Applies a force to a specific point of a physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/applyforce(_:at:)"
+      },
+      "-applyImpulse:": {
+        "doc": "Applies an impulse to the center of gravity of a physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/applyimpulse(_:)"
+      },
+      "-applyImpulse:atPoint:": {
+        "doc": "Applies an impulse to a specific point of a physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/applyimpulse(_:at:)"
+      },
+      "-applyTorque:": {
+        "doc": "Applies torque to an object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/applytorque(_:)"
+      }
+    },
+    "SKPhysicsJointFixed": {
+      "+jointWithBodyA:bodyB:anchor:": {
+        "doc": "Creates a new fixed joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointfixed/joint(withbodya:bodyb:anchor:)"
+      }
+    },
+    "SKPhysicsJointLimit": {
+      "+jointWithBodyA:bodyB:anchorA:anchorB:": {
+        "doc": "Creates a new limit joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointlimit/joint(withbodya:bodyb:anchora:anchorb:)"
+      }
+    },
+    "SKPhysicsJointPin": {
+      "+jointWithBodyA:bodyB:anchor:": {
+        "doc": "Creates a new pin joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin/joint(withbodya:bodyb:anchor:)"
+      }
+    },
+    "SKPhysicsJointSliding": {
+      "+jointWithBodyA:bodyB:anchor:axis:": {
+        "doc": "Creates a new sliding joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointsliding/joint(withbodya:bodyb:anchor:axis:)"
+      }
+    },
+    "SKPhysicsJointSpring": {
+      "+jointWithBodyA:bodyB:anchorA:anchorB:": {
+        "doc": "Creates a new spring joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointspring/joint(withbodya:bodyb:anchora:anchorb:)"
+      }
+    },
+    "SKPhysicsWorld": {
+      "-addJoint:": {
+        "doc": "Adds a joint to the physics world.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/add(_:)"
+      },
+      "-bodyAlongRayStart:end:": {
+        "doc": "Searches for the first physics body that intersects a ray.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/body(alongraystart:end:)"
+      },
+      "-bodyAtPoint:": {
+        "doc": "Searches for the first physics body that contains a point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/body(at:)"
+      },
+      "-bodyInRect:": {
+        "doc": "Searches for the first physics body that intersects the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/body(in:)"
+      },
+      "-enumerateBodiesAlongRayStart:end:usingBlock:": {
+        "doc": "Enumerates all the physics bodies in the scene that intersect a ray.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/enumeratebodies(alongraystart:end:using:)"
+      },
+      "-enumerateBodiesAtPoint:usingBlock:": {
+        "doc": "Enumerates all the physics bodies in the scene that contain a point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/enumeratebodies(at:using:)"
+      },
+      "-enumerateBodiesInRect:usingBlock:": {
+        "doc": "Enumerates all the physics bodies in the scene that intersect the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/enumeratebodies(in:using:)"
+      },
+      "-removeAllJoints": {
+        "doc": "Removes all joints from the physics world.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/removealljoints()"
+      },
+      "-removeJoint:": {
+        "doc": "Removes a specific joint from the physics world.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/remove(_:)"
+      },
+      "-sampleFieldsAt:": {
+        "doc": "Samples all of the field nodes in the scene and returns the summation of their forces at that point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/samplefields(at:)"
+      }
+    },
+    "SKRange": {
+      "+rangeWithConstantValue:": {
+        "doc": "Creates and initializes a new range object that specifies a constant value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/init(constantvalue:)"
+      },
+      "+rangeWithLowerLimit:": {
+        "doc": "Creates and initializes a new range object that specifies only a minimum value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/init(lowerlimit:)"
+      },
+      "+rangeWithLowerLimit:upperLimit:": {
+        "doc": "Creates and initializes a new range object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/rangewithlowerlimit:upperlimit:"
+      },
+      "+rangeWithNoLimits": {
+        "doc": "Creates and initializes a new range object that encompasses all possible values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/withnolimits()"
+      },
+      "+rangeWithUpperLimit:": {
+        "doc": "Creates and initializes a new range object that specifies only a maximum value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/init(upperlimit:)"
+      },
+      "+rangeWithValue:variance:": {
+        "doc": "Creates and initializes a new range object using a value and a maximum distance from that value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/init(value:variance:)"
+      },
+      "-initWithLowerLimit:upperLimit:": {
+        "doc": "Initializes a new range object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/init(lowerlimit:upperlimit:)"
+      }
+    },
+    "SKReachConstraints": {
+      "-initWithLowerAngleLimit:upperAngleLimit:": {
+        "doc": "Initializes a new reach constraint object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreachconstraints/init(loweranglelimit:upperanglelimit:)"
+      }
+    },
+    "SKReferenceNode": {
+      "+referenceNodeWithFileNamed:": {
+        "doc": "Creates a reference node from a file in the app’s main bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/init(filenamed:)-77gs0"
+      },
+      "+referenceNodeWithURL:": {
+        "doc": "Creates a reference node from a URL.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/init(url:)-3jryz"
+      },
+      "-didLoadReferenceNode:": {
+        "doc": "A method called by SpriteKit after the reference node’s contents are loaded.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/didload(_:)"
+      },
+      "-initWithCoder:": {
+        "doc": "A method that initializes a reference node from an archive.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/init(coder:)"
+      },
+      "-initWithFileNamed:": {
+        "doc": "Initializes a reference node from a file in the app’s main bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/init(filenamed:)-2yeh2"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes a reference node from a URL.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/init(url:)-429mo"
+      },
+      "-resolveReferenceNode": {
+        "doc": "Loads the reference node’s content and adds it as a new child node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreferencenode/resolve()"
+      }
+    },
+    "SKRegion": {
+      "+infiniteRegion": {
+        "doc": "Returns a region that defines a region that includes all points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/infinite()"
+      },
+      "-containsPoint:": {
+        "doc": "Returns a Boolean value that indicates whether a particular point is contained in the region.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/contains(_:)"
+      },
+      "-initWithPath:": {
+        "doc": "Initializes a new region using a Core Graphics path.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/init(path:)"
+      },
+      "-initWithRadius:": {
+        "doc": "Initializes a new region with a circular area.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/init(radius:)"
+      },
+      "-initWithSize:": {
+        "doc": "Initializes a new region with a rectangular area.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/init(size:)"
+      },
+      "-inverseRegion": {
+        "doc": "Returns a new region that is the mathematical inverse of an existing region.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/inverse()"
+      },
+      "-regionByDifferenceFromRegion:": {
+        "doc": "Returns a new region created by subtracting the contents of another region from this region.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/bydifference(from:)"
+      },
+      "-regionByIntersectionWithRegion:": {
+        "doc": "Returns a new region created by intersecting the contents of this region with another region.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/byintersection(with:)"
+      },
+      "-regionByUnionWithRegion:": {
+        "doc": "Returns a new region created by combining the contents of this region with another region.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/byunion(with:)"
+      }
+    },
+    "SKRenderer": {
+      "+rendererWithDevice:": {
+        "doc": "Initializes with a specific GPU to render into.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/init(device:)"
+      }
+    },
+    "SKScene": {
+      "+sceneWithSize:": {
+        "doc": "Creates and returns a new scene object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/scenewithsize:"
+      },
+      "-convertPointFromView:": {
+        "doc": "Converts a point from view coordinates to scene coordinates.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/convertpoint(fromview:)"
+      },
+      "-convertPointToView:": {
+        "doc": "Converts a point from scene coordinates to view coordinates.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/convertpoint(toview:)"
+      },
+      "-didApplyConstraints": {
+        "doc": "Tells your app to peform any necessary logic after constraints are applied.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/didapplyconstraints()"
+      },
+      "-didChangeSize:": {
+        "doc": "Tells you when the scene’s size has changed.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/didchangesize(_:)"
+      },
+      "-didEvaluateActions": {
+        "doc": "Tells your app to peform any necessary logic after scene actions are evaluated.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/didevaluateactions()"
+      },
+      "-didFinishUpdate": {
+        "doc": "Tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/didfinishupdate()"
+      },
+      "-didMoveToView:": {
+        "doc": "Tells you when the scene is presented by a view.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/didmove(to:)"
+      },
+      "-didSimulatePhysics": {
+        "doc": "Tells your app to peform any necessary logic after physics simulations are performed.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/didsimulatephysics()"
+      },
+      "-initWithSize:": {
+        "doc": "Initializes a new scene object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/init(size:)"
+      },
+      "-sceneDidLoad": {
+        "doc": "Tells you when the scene is presented.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/scenedidload()"
+      },
+      "-update:": {
+        "doc": "Tells your app to perform any app-specific logic to update your scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/update(_:)"
+      },
+      "-willMoveFromView:": {
+        "doc": "Tells you when the scene is about to be removed from a view.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/willmove(from:)"
+      }
+    },
+    "SKShader": {
+      "+shader": {
+        "doc": "Creates a new empty shader object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/shader"
+      },
+      "+shaderWithFileNamed:": {
+        "doc": "Creates a new shader object by loading the source for a fragment shader from a file stored in the app’s bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/init(filenamed:)"
+      },
+      "+shaderWithSource:": {
+        "doc": "Creates a new shader object using the specified source code.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/shaderwithsource:"
+      },
+      "+shaderWithSource:uniforms:": {
+        "doc": "Creates a new shader object using the specified source and uniform data.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/shaderwithsource:uniforms:"
+      },
+      "-addUniform:": {
+        "doc": "Adds a uniform to the shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/adduniform(_:)"
+      },
+      "-initWithSource:": {
+        "doc": "Initializes a new shader object using the specified source code.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/init(source:)"
+      },
+      "-initWithSource:uniforms:": {
+        "doc": "Initializes a new shader object using the specified source and uniform data.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/init(source:uniforms:)"
+      },
+      "-removeUniformNamed:": {
+        "doc": "Removes a uniform from the shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/removeuniformnamed(_:)"
+      },
+      "-uniformNamed:": {
+        "doc": "Returns the uniform object corresponding to a particular uniform variable.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/uniformnamed(_:)"
+      }
+    },
+    "SKShapeNode": {
+      "+shapeNodeWithCircleOfRadius:": {
+        "doc": "Creates a shape node with a circular path centered on the node’s origin.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(circleofradius:)"
+      },
+      "+shapeNodeWithEllipseInRect:": {
+        "doc": "Creates a shape node with an elliptical path that fills the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(ellipsein:)"
+      },
+      "+shapeNodeWithEllipseOfSize:": {
+        "doc": "Creates a shape node with an elliptical path centered on the node’s origin.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(ellipseof:)"
+      },
+      "+shapeNodeWithPath:": {
+        "doc": "Creates a shape node from a Core Graphics path.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(path:)"
+      },
+      "+shapeNodeWithPath:centered:": {
+        "doc": "Creates a shape node from a Core Graphics path, centered around its position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(path:centered:)"
+      },
+      "+shapeNodeWithPoints:count:": {
+        "doc": "Creates a shape node from a series of points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(points:count:)"
+      },
+      "+shapeNodeWithRect:": {
+        "doc": "Creates a shape node with a rectangular path.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(rect:)"
+      },
+      "+shapeNodeWithRect:cornerRadius:": {
+        "doc": "Creates a shape with a rectangular path that has rounded corners.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(rect:cornerradius:)"
+      },
+      "+shapeNodeWithRectOfSize:": {
+        "doc": "Creates a shape node with a rectangular path centered on the node’s origin.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(rectof:)"
+      },
+      "+shapeNodeWithRectOfSize:cornerRadius:": {
+        "doc": "Creates a shape with a rectangular path that has rounded corners centered on the node’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(rectof:cornerradius:)"
+      },
+      "+shapeNodeWithSplinePoints:count:": {
+        "doc": "Creates a shape node from a series of spline points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/init(splinepoints:count:)"
+      },
+      "-setValue:forAttributeNamed:": {
+        "doc": "Sets an attribute value for an attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/setvalue(_:forattribute:)"
+      },
+      "-valueForAttributeNamed:": {
+        "doc": "The value of a shader attribute.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/value(forattributenamed:)"
+      }
+    },
+    "SKSpriteNode": {
+      "+spriteNodeWithColor:size:": {
+        "doc": "Initializes a single-color sprite.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/spritenodewithcolor:size:"
+      },
+      "+spriteNodeWithImageNamed:": {
+        "doc": "Initializes a textured sprite using an image file.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/spritenodewithimagenamed:"
+      },
+      "+spriteNodeWithImageNamed:normalMapped:": {
+        "doc": "Initializes a textured sprite using an image file, optionally adding a normal map to simulate 3D lighting.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(imagenamed:normalmapped:)"
+      },
+      "+spriteNodeWithTexture:": {
+        "doc": "Initializes a textured sprite using an existing texture object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/spritenodewithtexture:"
+      },
+      "+spriteNodeWithTexture:normalMap:": {
+        "doc": "Initializes a textured sprite with a normal map to simulate 3D lighting.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(texture:normalmap:)"
+      },
+      "+spriteNodeWithTexture:size:": {
+        "doc": "Initializes a textured sprite using an existing texture object but with a specified size.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(texture:size:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Tells you when to initialize a sprite from an archive.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(coder:)"
+      },
+      "-initWithColor:size:": {
+        "doc": "Initializes a single-color sprite node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(color:size:)"
+      },
+      "-initWithImageNamed:": {
+        "doc": "Initializes a textured sprite using an image file.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(imagenamed:)"
+      },
+      "-initWithTexture:": {
+        "doc": "Initializes a textured sprite using an existing texture object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(texture:)"
+      },
+      "-initWithTexture:color:size:": {
+        "doc": "Initializes a textured sprite in color using an existing texture object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/init(texture:color:size:)"
+      },
+      "-scaleToSize:": {
+        "doc": "Scales the sprite node to a specified size.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/scale(to:)"
+      },
+      "-setValue:forAttributeNamed:": {
+        "doc": "Sets an attribute value for an attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/setvalue(_:forattribute:)"
+      },
+      "-valueForAttributeNamed:": {
+        "doc": "Sets the value of a shader attribute.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/value(forattributenamed:)"
+      }
+    },
+    "SKTexture": {
+      "+preloadTextures:withCompletionHandler:": {
+        "doc": "Load the data of multiple textures into memory.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/preload(_:withcompletionhandler:)"
+      },
+      "-CGImage": {
+        "doc": "Returns the texture’s image data as a Quartz 2D image.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/cgimage()"
+      },
+      "-preloadWithCompletionHandler:": {
+        "doc": "Load texture data into memory, calling a completion handler after the task completes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/preload(completionhandler:)"
+      },
+      "-size": {
+        "doc": "Gets the size of the texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/size()"
+      },
+      "-textureRect": {
+        "doc": "Gets a rectangle that defines the portion of the texture used to render its image.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/texturerect()"
+      }
+    },
+    "SKTextureAtlas": {
+      "+atlasNamed:": {
+        "doc": "Creates a texture atlas from data stored in the app bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/init(named:)"
+      },
+      "+atlasWithDictionary:": {
+        "doc": "Creates a texture atlas from a set of image files.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/init(dictionary:)"
+      },
+      "+preloadTextureAtlases:withCompletionHandler:": {
+        "doc": "Loads the textures of multiple atlas objects into memory, calling a completion handler after the task completes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/preloadtextureatlases(_:withcompletionhandler:)"
+      },
+      "+preloadTextureAtlasesNamed:withCompletionHandler:": {
+        "doc": "Loads the textures of multiple atlases into memory, calling a completion handler after the task completes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/preloadtextureatlasesnamed(_:withcompletionhandler:)"
+      },
+      "-preloadWithCompletionHandler:": {
+        "doc": "Loads an atlas object’s textures into memory, calling a completion handler after the task completes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/preload(completionhandler:)"
+      },
+      "-textureNamed:": {
+        "doc": "Creates a texture from data stored in the texture atlas.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/texturenamed(_:)"
+      }
+    },
+    "SKTileDefinition": {
+      "-initWithTexture:": {
+        "doc": "Initializes a new tile definition with a single texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/init(texture:)"
+      },
+      "-initWithTexture:normalTexture:size:": {
+        "doc": "Initializes a new tile definition with a single texture and separate normal texture for simulating 3D lighting.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/init(texture:normaltexture:size:)"
+      },
+      "-initWithTexture:size:": {
+        "doc": "Initializes a new tile definition of a specified size with a single texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/init(texture:size:)"
+      },
+      "-initWithTextures:normalTextures:size:timePerFrame:": {
+        "doc": "Initializes a new tile definition with arrays of textures and normal textures for animation.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/init(textures:normaltextures:size:timeperframe:)"
+      },
+      "-initWithTextures:size:timePerFrame:": {
+        "doc": "Initializes a new tile definition with an array of textures for animation.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/init(textures:size:timeperframe:)"
+      }
+    },
+    "SKTileGroup": {
+      "+emptyTileGroup": {
+        "doc": "Creates an empty tile that erases the existing tile at that location on a tile map.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegroup/empty()"
+      },
+      "-initWithRules:": {
+        "doc": "Creates and initializes a tile group with the specified tile group rules.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegroup/init(rules:)"
+      },
+      "-initWithTileDefinition:": {
+        "doc": "Creates and initializes a simple tile group with a single tile definition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegroup/init(tiledefinition:)"
+      }
+    },
+    "SKTileGroupRule": {
+      "-initWithAdjacency:tileDefinitions:": {
+        "doc": "Initializes a new tile group rule with adjacency rules and tile definitions.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegrouprule/init(adjacency:tiledefinitions:)"
+      }
+    },
+    "SKTileMapNode": {
+      "-fillWithTileGroup:": {
+        "doc": "When creating a tile map node programmatically, this function performs a fill operation with the specified tile group.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/fill(with:)"
+      },
+      "-setTileGroup:andTileDefinition:forColumn:row:": {
+        "doc": "Set the tile group and tile definition at the specified tile index.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/settilegroup(_:andtiledefinition:forcolumn:row:)"
+      },
+      "-setValue:forAttributeNamed:": {
+        "doc": "Sets an attribute value for an attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/setvalue(_:forattribute:)"
+      },
+      "-tileRowIndexFromPosition:": {
+        "doc": "Returns the tile map node object’s tile row index for the specified position in points.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/tilerowindex(fromposition:)"
+      },
+      "-valueForAttributeNamed:": {
+        "doc": "The value of a shader attribute.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/value(forattributenamed:)"
+      }
+    },
+    "SKTileSet": {
+      "+tileSetFromURL:": {
+        "doc": "Initializes a tile set from a URL to an archived .sks file.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/init(from:)"
+      },
+      "+tileSetNamed:": {
+        "doc": "Initializes a tile set by searching the app bundle for an archived .sks file by name.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/init(named:)"
+      },
+      "-initWithTileGroups:": {
+        "doc": "Initializes a new tile set with an array of tile groups and rectangular grid layout.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/init(tilegroups:)"
+      },
+      "-initWithTileGroups:tileSetType:": {
+        "doc": "Initializes a new tile set with an array of tile groups and specified layout.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/init(tilegroups:tilesettype:)"
+      }
+    },
+    "SKTransition": {
+      "+crossFadeWithDuration:": {
+        "doc": "Creates a cross fade transition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/crossfade(withduration:)"
+      },
+      "+doorsCloseHorizontalWithDuration:": {
+        "doc": "Creates a transition where the new scene appears as a pair of closing horizontal doors.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/doorsclosehorizontal(withduration:)"
+      },
+      "+doorsCloseVerticalWithDuration:": {
+        "doc": "Creates a transition where the new scene appears as a pair of closing vertical doors.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/doorsclosevertical(withduration:)"
+      },
+      "+doorsOpenHorizontalWithDuration:": {
+        "doc": "Creates a transition where the new scene appears as a pair of opening horizontal doors.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/doorsopenhorizontal(withduration:)"
+      },
+      "+doorsOpenVerticalWithDuration:": {
+        "doc": "Creates a transition where the new scene appears as a pair of opening vertical doors.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/doorsopenvertical(withduration:)"
+      },
+      "+doorwayWithDuration:": {
+        "doc": "Creates a transition where the previous scene disappears as a pair of opening doors.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/doorway(withduration:)"
+      },
+      "+fadeWithColor:duration:": {
+        "doc": "Creates a transition that first fades to a constant color and then fades to the new scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/fade(with:duration:)"
+      },
+      "+fadeWithDuration:": {
+        "doc": "Creates a transition that first fades to black and then fades to the new scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/fade(withduration:)"
+      },
+      "+flipHorizontalWithDuration:": {
+        "doc": "Creates a transition where the two scenes are flipped across a horizontal line running through the center of the view.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/fliphorizontal(withduration:)"
+      },
+      "+flipVerticalWithDuration:": {
+        "doc": "Creates a transition where the two scenes are flipped across a vertical line running through the center of the view.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/flipvertical(withduration:)"
+      },
+      "+moveInWithDirection:duration:": {
+        "doc": "Creates a transition where the new scene moves in on top of the old scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/movein(with:duration:)"
+      },
+      "+pushWithDirection:duration:": {
+        "doc": "Creates a transition where the new scene moves in, pushing the old scene out of the view.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/push(with:duration:)"
+      },
+      "+revealWithDirection:duration:": {
+        "doc": "Creates a transition where the old scene moves out of the view, revealing the new scene underneath it.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/reveal(with:duration:)"
+      },
+      "+transitionWithCIFilter:duration:": {
+        "doc": "Creates a transition that uses a Core Image filter to perform the transition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/init(cifilter:duration:)-451za"
+      }
+    },
+    "SKUniform": {
+      "+uniformWithName:": {
+        "doc": "Creates and initializes a new uniform object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:"
+      },
+      "+uniformWithName:float:": {
+        "doc": "Creates and initializes a new uniform object that holds a floating-point number.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:float:"
+      },
+      "+uniformWithName:floatMatrix2:": {
+        "doc": "Creates and initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:floatmatrix2:"
+      },
+      "+uniformWithName:floatMatrix3:": {
+        "doc": "Creates and initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:floatmatrix3:"
+      },
+      "+uniformWithName:floatMatrix4:": {
+        "doc": "Creates and initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:floatmatrix4:"
+      },
+      "+uniformWithName:floatVector2:": {
+        "doc": "Creates and initializes a new uniform object that holds a vector of two floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:floatvector2:"
+      },
+      "+uniformWithName:floatVector3:": {
+        "doc": "Creates and initializes a new uniform object that holds a vector of three floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:floatvector3:"
+      },
+      "+uniformWithName:floatVector4:": {
+        "doc": "Creates and initializes a new uniform object that holds a vector of four floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:floatvector4:"
+      },
+      "+uniformWithName:texture:": {
+        "doc": "Creates and initializes a new uniform object that holds a reference to a texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformwithname:texture:"
+      },
+      "-initWithName:": {
+        "doc": "Initializes a new uniform object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:)"
+      },
+      "-initWithName:float:": {
+        "doc": "Initializes a new uniform object that holds a floating-point number.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-48rln"
+      },
+      "-initWithName:floatMatrix2:": {
+        "doc": "Initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-6110m"
+      },
+      "-initWithName:floatMatrix3:": {
+        "doc": "Initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-611hs"
+      },
+      "-initWithName:floatMatrix4:": {
+        "doc": "Initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-60zbm"
+      },
+      "-initWithName:floatVector2:": {
+        "doc": "Initializes a new uniform object that holds a vector of two floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-9g5vj"
+      },
+      "-initWithName:floatVector3:": {
+        "doc": "Creates and initializes a new uniform object that holds a vector of three floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-9g6a7"
+      },
+      "-initWithName:floatVector4:": {
+        "doc": "Initializes a new uniform object that holds a vector of four floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:float:)-9g7j7"
+      },
+      "-initWithName:texture:": {
+        "doc": "Initializes a new uniform object that holds a reference to a texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/init(name:texture:)"
+      }
+    },
+    "SKVideoNode": {
+      "+videoNodeWithAVPlayer:": {
+        "doc": "Creates and initializes a video node using an existing video player object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/videonodewithavplayer:"
+      },
+      "+videoNodeWithFileNamed:": {
+        "doc": "Creates and initializes a new video node using a video file stored in the app bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/videonodewithfilenamed:"
+      },
+      "+videoNodeWithURL:": {
+        "doc": "Creates and initializes a video node using a URL that points to a video file.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/videonodewithurl:"
+      },
+      "+videoNodeWithVideoFileNamed:": {
+        "doc": "Creates and initializes a new video node using a video file stored in the app bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/videonodewithvideofilenamed:"
+      },
+      "+videoNodeWithVideoURL:": {
+        "doc": "Creates and initializes a video node using a URL that points to a video file.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/videonodewithvideourl:"
+      },
+      "-initWithAVPlayer:": {
+        "doc": "Initializes a video node using an existing AVPlayer object.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/init(avplayer:)-9ydbu"
+      },
+      "-initWithCoder:": {
+        "doc": "Tells you when to initialize a video node that was created from an archive.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/init(coder:)"
+      },
+      "-initWithFileNamed:": {
+        "doc": "Initializes a video node using a video file stored in the app bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/init(filenamed:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes a video node using a URL.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/init(url:)-2im38"
+      },
+      "-initWithVideoFileNamed:": {
+        "doc": "Initializes a video node using a video file stored in the app bundle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/init(videofilenamed:)"
+      },
+      "-initWithVideoURL:": {
+        "doc": "Initializes a video node using a URL that points to a video file.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/init(videourl:)"
+      },
+      "-pause": {
+        "doc": "Pauses video playback.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/pause()"
+      },
+      "-play": {
+        "doc": "Starts video playback.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/play()"
+      }
+    },
+    "SKView": {
+      "-convertPoint:fromScene:": {
+        "doc": "Converts a point from scene coordinates to view coordinates.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/convert(_:from:)"
+      },
+      "-convertPoint:toScene:": {
+        "doc": "Converts a point from view coordinates to scene coordinates.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/convert(_:to:)"
+      },
+      "-presentScene:": {
+        "doc": "Presents a scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/presentscene(_:)"
+      },
+      "-presentScene:transition:": {
+        "doc": "Transitions from the current scene to a new scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/presentscene(_:transition:)"
+      },
+      "-textureFromNode:": {
+        "doc": "Renders the contents of a node tree and returns the rendered image as a texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/texture(from:)"
+      },
+      "-textureFromNode:crop:": {
+        "doc": "Renders a portion of a node’s contents and returns the rendered image as a texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/texture(from:crop:)"
+      }
+    },
+    "SKWarpGeometryGrid": {
+      "+grid": {
+        "doc": "Initializes a new empty grid.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/grid"
+      },
+      "+gridWithColumns:rows:": {
+        "doc": "Creates a warp geometry grid of a specified size.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/init(columns:rows:)"
+      },
+      "-destPositionAtIndex:": {
+        "doc": "Returns the destination position of a vertex.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/destposition(at:)"
+      },
+      "-gridByReplacingDestPositions:": {
+        "doc": "Returns a copy of the receiver with the destination positions replaced by a specified array.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/gridbyreplacingdestpositions:"
+      },
+      "-gridByReplacingSourcePositions:": {
+        "doc": "Returns a copy of the receiver with the source positions replaced by a specified array.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/gridbyreplacingsourcepositions:"
+      },
+      "-initWithCoder:": {
+        "doc": "Tells you when to intialize a grid that was loaded from an archive.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/init(coder:)"
+      },
+      "-initWithColumns:rows:sourcePositions:destPositions:": {
+        "doc": "Creates a warp geometry grid of a specific size and warp translation, in pointers to point arrays.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/initwithcolumns:rows:sourcepositions:destpositions:"
+      },
+      "-sourcePositionAtIndex:": {
+        "doc": "Returns the source position of a vertex.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/sourceposition(at:)"
+      }
+    }
+  },
+  "properties": {
+    "SK3DNode": {
+      "autoenablesDefaultLighting": {
+        "doc": "A Boolean value that determines whether Scene Kit automatically adds lights to a scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/autoenablesdefaultlighting"
+      },
+      "loops": {
+        "doc": "A Boolean value that determines whether Scene Kit restarts the scene time after all animations in the scene have played.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/loops"
+      },
+      "playing": {
+        "doc": "A Boolean value that determines whether the scene is playing.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/isplaying"
+      },
+      "pointOfView": {
+        "doc": "The Scene Kit node from which the scene’s contents are viewed when rendered.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/pointofview"
+      },
+      "sceneTime": {
+        "doc": "The current scene time.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/scenetime"
+      },
+      "scnScene": {
+        "doc": "The SceneKit scene to render.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/scnscene"
+      },
+      "viewportSize": {
+        "doc": "The size of the image rendered by the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sk3dnode/viewportsize"
+      }
+    },
+    "SKAction": {
+      "duration": {
+        "doc": "The duration required to complete an action.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaction/duration"
+      },
+      "speed": {
+        "doc": "A speed factor that modifies how fast an action runs.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaction/speed"
+      },
+      "timingFunction": {
+        "doc": "A block used to customize the timing function.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaction/timingfunction"
+      },
+      "timingMode": {
+        "doc": "A setting that controls the speed curve of an animation.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaction/timingmode"
+      }
+    },
+    "SKAttribute": {
+      "name": {
+        "doc": "The receiver’s name",
+        "url": "https://developer.apple.com/documentation/spritekit/skattribute/name"
+      },
+      "type": {
+        "doc": "The data type of the attribute’s value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattribute/type"
+      }
+    },
+    "SKAttributeValue": {
+      "floatValue": {
+        "doc": "The receiver’s floating point value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/floatvalue"
+      },
+      "vectorFloat2Value": {
+        "doc": "The receiver’s value as a vector of two floating-point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/vectorfloat2value"
+      },
+      "vectorFloat3Value": {
+        "doc": "The receiver’s value as a vector of three floating point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/vectorfloat3value"
+      },
+      "vectorFloat4Value": {
+        "doc": "The receiver’s value as a vector of four floating point numbers.",
+        "url": "https://developer.apple.com/documentation/spritekit/skattributevalue/vectorfloat4value"
+      }
+    },
+    "SKAudioNode": {
+      "autoplayLooped": {
+        "doc": "A Boolean value that indicates whether the audio should play in a loop when the node is added to the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/autoplaylooped"
+      },
+      "avAudioNode": {
+        "doc": "The audio node’s current audio asset.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/avaudionode"
+      },
+      "positional": {
+        "doc": "A Boolean property that indicates whether the node’s audio is altered based on the position of the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skaudionode/ispositional"
+      }
+    },
+    "SKConstraint": {
+      "enabled": {
+        "doc": "A Boolean value that specifies whether the constraint is applied.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/enabled"
+      },
+      "referenceNode": {
+        "doc": "The node whose coordinate system should be used to apply the constraint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skconstraint/referencenode"
+      }
+    },
+    "SKCropNode": {
+      "maskNode": {
+        "doc": "The node used to determine the crop node’s mask.",
+        "url": "https://developer.apple.com/documentation/spritekit/skcropnode/masknode"
+      }
+    },
+    "SKEffectNode": {
+      "attributeValues": {
+        "doc": "The values of each attribute associated with the node’s attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/attributevalues"
+      },
+      "blendMode": {
+        "doc": "The blend mode used to draw the node’s contents into its parent’s framebuffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/blendmode"
+      },
+      "filter": {
+        "doc": "The Core Image filter to apply.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/filter"
+      },
+      "shader": {
+        "doc": "A custom shader that is called when the effect node is blended into the parent’s framebuffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/shader"
+      },
+      "shouldCenterFilter": {
+        "doc": "A Boolean value that determines whether the effect node automatically sets the filter’s image center.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/shouldcenterfilter"
+      },
+      "shouldEnableEffects": {
+        "doc": "A Boolean value that determines whether the effect node applies the filter to its children as they are drawn.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/shouldenableeffects"
+      },
+      "shouldRasterize": {
+        "doc": "A Boolean value that indicates whether the results of rendering the child nodes should be cached.",
+        "url": "https://developer.apple.com/documentation/spritekit/skeffectnode/shouldrasterize"
+      }
+    },
+    "SKEmitterNode": {
+      "attributeValues": {
+        "doc": "The values of each attribute associated with the node’s attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/attributevalues"
+      },
+      "emissionAngle": {
+        "doc": "The average initial direction of a particle, expressed as an angle in radians.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/emissionangle"
+      },
+      "emissionAngleRange": {
+        "doc": "The range of allowed random values for a particle’s initial direction, expressed as an angle in radians.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/emissionanglerange"
+      },
+      "fieldBitMask": {
+        "doc": "A mask that defines which categories of physics fields can exert forces on the particles.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/fieldbitmask"
+      },
+      "numParticlesToEmit": {
+        "doc": "The number of particles the emitter should emit before stopping.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/numparticlestoemit"
+      },
+      "particleAction": {
+        "doc": "An action executed by new particles.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particleaction"
+      },
+      "particleAlpha": {
+        "doc": "The average starting alpha value for a particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlealpha"
+      },
+      "particleAlphaRange": {
+        "doc": "The range of allowed random values for a particle’s starting alpha value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlealpharange"
+      },
+      "particleAlphaSequence": {
+        "doc": "The sequence used to specify the alpha value of a particle over its lifetime.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlealphasequence"
+      },
+      "particleAlphaSpeed": {
+        "doc": "The rate at which the alpha value of a particle changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlealphaspeed"
+      },
+      "particleBirthRate": {
+        "doc": "The rate at which new particles are created.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlebirthrate"
+      },
+      "particleBlendMode": {
+        "doc": "The blending mode used to blend particles into the framebuffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particleblendmode"
+      },
+      "particleColor": {
+        "doc": "The average initial color for a particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolor"
+      },
+      "particleColorAlphaRange": {
+        "doc": "The range of allowed random values for the alpha component of a particle’s initial color.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecoloralpharange"
+      },
+      "particleColorAlphaSpeed": {
+        "doc": "The rate at which the alpha component of a particle’s color changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecoloralphaspeed"
+      },
+      "particleColorBlendFactor": {
+        "doc": "The average starting value for the color blend factor.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorblendfactor"
+      },
+      "particleColorBlendFactorRange": {
+        "doc": "The range of allowed random values for a particle’s starting color blend factor.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorblendfactorrange"
+      },
+      "particleColorBlendFactorSequence": {
+        "doc": "The sequence used to specify the color blend factor of a particle over its lifetime.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorblendfactorsequence"
+      },
+      "particleColorBlendFactorSpeed": {
+        "doc": "The rate at which the color blend factor changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorblendfactorspeed"
+      },
+      "particleColorBlueRange": {
+        "doc": "The range of allowed random values for the blue component of a particle’s initial color.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorbluerange"
+      },
+      "particleColorBlueSpeed": {
+        "doc": "The rate at which the blue component of a particle’s color changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorbluespeed"
+      },
+      "particleColorGreenRange": {
+        "doc": "The range of allowed random values for the green component of a particle’s initial color.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorgreenrange"
+      },
+      "particleColorGreenSpeed": {
+        "doc": "The rate at which the green component of a particle’s color changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorgreenspeed"
+      },
+      "particleColorRedRange": {
+        "doc": "The range of allowed random values for the red component of a particle’s initial color.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorredrange"
+      },
+      "particleColorRedSpeed": {
+        "doc": "The rate at which the red component of a particle’s color changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorredspeed"
+      },
+      "particleColorSequence": {
+        "doc": "The sequence used to specify the color components of a particle over its lifetime.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlecolorsequence"
+      },
+      "particleLifetime": {
+        "doc": "The average lifetime of a particle, in seconds.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlelifetime"
+      },
+      "particleLifetimeRange": {
+        "doc": "The range of allowed random values for a particle’s lifetime.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlelifetimerange"
+      },
+      "particlePosition": {
+        "doc": "The average starting position for a particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particleposition"
+      },
+      "particlePositionRange": {
+        "doc": "The range of allowed random values for a particle’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlepositionrange"
+      },
+      "particleRenderOrder": {
+        "doc": "The order in which the emitter’s particles are rendered.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlerenderorder"
+      },
+      "particleRotation": {
+        "doc": "The average initial rotation of a particle, expressed as an angle in radians.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlerotation"
+      },
+      "particleRotationRange": {
+        "doc": "The range of allowed random values for a particle’s initial rotation, expressed as an angle in radians.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlerotationrange"
+      },
+      "particleRotationSpeed": {
+        "doc": "The speed at which a particle rotates, expressed in radians per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlerotationspeed"
+      },
+      "particleScale": {
+        "doc": "The average initial scale factor of a particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlescale"
+      },
+      "particleScaleRange": {
+        "doc": "The range of allowed random values for a particle’s initial scale.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlescalerange"
+      },
+      "particleScaleSequence": {
+        "doc": "The sequence used to specify the scale factor of a particle over its lifetime.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlescalesequence"
+      },
+      "particleScaleSpeed": {
+        "doc": "The rate at which a particle’s scale factor changes per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlescalespeed"
+      },
+      "particleSize": {
+        "doc": "The starting size of each particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlesize"
+      },
+      "particleSpeed": {
+        "doc": "The average initial speed of a new particle, in points per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlespeed"
+      },
+      "particleSpeedRange": {
+        "doc": "The range of allowed random values for a particle’s initial speed.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlespeedrange"
+      },
+      "particleTexture": {
+        "doc": "The texture to use to render a particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particletexture"
+      },
+      "particleZPosition": {
+        "doc": "The average starting depth of a particle.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlezposition"
+      },
+      "particleZPositionRange": {
+        "doc": "The range of allowed random values for a particle’s depth.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlezpositionrange"
+      },
+      "particleZPositionSpeed": {
+        "doc": "The speed at which the particle’s depth changes.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/particlezpositionspeed"
+      },
+      "shader": {
+        "doc": "A custom shader used to determine how particles are rendered.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/shader"
+      },
+      "targetNode": {
+        "doc": "The target node that renders the emitter’s particles.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/targetnode"
+      },
+      "xAcceleration": {
+        "doc": "The acceleration to apply to a particle’s horizontal velocity.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/xacceleration"
+      },
+      "yAcceleration": {
+        "doc": "The acceleration to apply to a particle’s vertical velocity.",
+        "url": "https://developer.apple.com/documentation/spritekit/skemitternode/yacceleration"
+      }
+    },
+    "SKFieldNode": {
+      "animationSpeed": {
+        "doc": "The rate at which a noise or turbulence field node changes.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/animationspeed"
+      },
+      "categoryBitMask": {
+        "doc": "A mask that defines which categories this field belongs to.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/categorybitmask"
+      },
+      "direction": {
+        "doc": "The direction of a velocity field node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/direction"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the field is active.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/isenabled"
+      },
+      "exclusive": {
+        "doc": "A Boolean value that indicates whether the field node should override all other field nodes that might otherwise affect physics bodies.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/isexclusive"
+      },
+      "falloff": {
+        "doc": "The exponent that defines the rate of decay for the strength of the field as the distance increases between the node and the physics body being affected.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/falloff"
+      },
+      "minimumRadius": {
+        "doc": "The minimum value for distance-based effects.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/minimumradius"
+      },
+      "region": {
+        "doc": "The area (relative to the node’s origin) that the field affects.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/region"
+      },
+      "smoothness": {
+        "doc": "The smoothness of the noise used to generate the forces.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/smoothness"
+      },
+      "strength": {
+        "doc": "The strength of the field.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/strength"
+      },
+      "texture": {
+        "doc": "A normal texture that specifies the velocities at different points in a velocity field node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skfieldnode/texture"
+      }
+    },
+    "SKKeyframeSequence": {
+      "interpolationMode": {
+        "doc": "The mode used to determine how values for times between the keyframes are calculated.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/interpolationmode"
+      },
+      "repeatMode": {
+        "doc": "The mode used to determine how the keyframe sequence repeats.",
+        "url": "https://developer.apple.com/documentation/spritekit/skkeyframesequence/repeatmode"
+      }
+    },
+    "SKLabelNode": {
+      "attributedText": {
+        "doc": "The attributed string displayed by the label.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/attributedtext"
+      },
+      "blendMode": {
+        "doc": "The blend mode used to draw the label into the parent’s framebuffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/blendmode"
+      },
+      "color": {
+        "doc": "An alternative to the font color that can be used for animations.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/color"
+      },
+      "colorBlendFactor": {
+        "doc": "A floating-point value that describes how the color is blended with the font color.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/colorblendfactor"
+      },
+      "fontColor": {
+        "doc": "The color of the label.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/fontcolor"
+      },
+      "fontName": {
+        "doc": "The font used for the text in the label.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/fontname"
+      },
+      "fontSize": {
+        "doc": "The size of the font used in the label.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/fontsize"
+      },
+      "horizontalAlignmentMode": {
+        "doc": "The horizontal position of the text within the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/horizontalalignmentmode"
+      },
+      "lineBreakMode": {
+        "doc": "Determines the line-break mode for multiple lines.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/linebreakmode"
+      },
+      "numberOfLines": {
+        "doc": "Determines the number of lines to draw.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/numberoflines"
+      },
+      "preferredMaxLayoutWidth": {
+        "doc": "The width, in screen points, after which line-break mode should be applied.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/preferredmaxlayoutwidth"
+      },
+      "text": {
+        "doc": "The string that the label node displays.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/text"
+      },
+      "verticalAlignmentMode": {
+        "doc": "The vertical position of the text within the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklabelnode/verticalalignmentmode"
+      }
+    },
+    "SKLightNode": {
+      "ambientColor": {
+        "doc": "The ambient color of the light.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklightnode/ambientcolor"
+      },
+      "categoryBitMask": {
+        "doc": "A mask that defines which categories this light belongs to.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklightnode/categorybitmask"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the node is casting light.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklightnode/isenabled"
+      },
+      "falloff": {
+        "doc": "The exponent for the rate of decay of the light source.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklightnode/falloff"
+      },
+      "lightColor": {
+        "doc": "The diffuse and specular color of the light source.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklightnode/lightcolor"
+      },
+      "shadowColor": {
+        "doc": "The color of any shadow cast by a sprite.",
+        "url": "https://developer.apple.com/documentation/spritekit/sklightnode/shadowcolor"
+      }
+    },
+    "SKNode": {
+      "accessibilityChildren": {
+        "doc": "An array of user interface elements that represent children of this element.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilitychildren"
+      },
+      "accessibilityElement": {
+        "doc": "A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/isaccessibilityelement"
+      },
+      "accessibilityEnabled": {
+        "doc": "A toggle you implement to indicate to the system whether this user interface element should respond to user input.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/isaccessibilityenabled"
+      },
+      "accessibilityFrame": {
+        "doc": "The size of this user interface element, in screen points.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilityframe"
+      },
+      "accessibilityHelp": {
+        "doc": "The help description of this user interface element; for example, the text shown in a tooltip.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilityhelp"
+      },
+      "accessibilityLabel": {
+        "doc": "A short description of this user interface element.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilitylabel"
+      },
+      "accessibilityParent": {
+        "doc": "The user interface element that contains this element.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilityparent"
+      },
+      "accessibilityRole": {
+        "doc": "A string value describing the user interface element type; for example, a button.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilityrole"
+      },
+      "accessibilityRoleDescription": {
+        "doc": "A string value describing the user interface element name and type; for example, the Buy button.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilityroledescription"
+      },
+      "accessibilitySubrole": {
+        "doc": "A string that defines this user interface element’s subrole; for example, a full-screen button.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/accessibilitysubrole"
+      },
+      "alpha": {
+        "doc": "The transparency value applied to the node’s contents.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/alpha"
+      },
+      "attributeValues": {
+        "doc": "The values of each attribute associated with the node’s attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/attributevalues"
+      },
+      "children": {
+        "doc": "The node’s children.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/children"
+      },
+      "constraints": {
+        "doc": "A list of constraints to apply to the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/constraints"
+      },
+      "entity": {
+        "doc": "The GameplayKit entity this node represents.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/entity"
+      },
+      "focusBehavior": {
+        "doc": "The focus behavior for a node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/focusbehavior"
+      },
+      "frame": {
+        "doc": "A rectangle in the parent’s coordinate system that contains the node’s content, ignoring the node’s children.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/frame"
+      },
+      "hidden": {
+        "doc": "A Boolean value that determines whether a node and its descendants are rendered.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/ishidden"
+      },
+      "name": {
+        "doc": "The node’s assignable name.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/name"
+      },
+      "parent": {
+        "doc": "The node’s parent node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/parent"
+      },
+      "paused": {
+        "doc": "A Boolean value that determines whether actions on the node and its descendants are processed.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/ispaused"
+      },
+      "physicsBody": {
+        "doc": "The physics body associated with the node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/physicsbody"
+      },
+      "position": {
+        "doc": "The position of the node in its parent’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/position"
+      },
+      "reachConstraints": {
+        "doc": "The reach constraints to apply to the node when executing a reach action.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/reachconstraints"
+      },
+      "scene": {
+        "doc": "The scene node that contains this node.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/scene"
+      },
+      "speed": {
+        "doc": "A speed modifier applied to all actions executed by a node and its descendants.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/speed"
+      },
+      "userData": {
+        "doc": "A dictionary containing arbitrary data.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/userdata"
+      },
+      "userInteractionEnabled": {
+        "doc": "A Boolean value that indicates whether the node receives touch events.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/isuserinteractionenabled"
+      },
+      "xScale": {
+        "doc": "A scaling factor that multiplies the width of a node and its children.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/xscale"
+      },
+      "yScale": {
+        "doc": "A scaling factor that multiplies the height of a node and its children.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/yscale"
+      },
+      "zPosition": {
+        "doc": "The height of the node relative to its parent.",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/zposition"
+      },
+      "zRotation": {
+        "doc": "The Euler rotation about the z axis (in radians).",
+        "url": "https://developer.apple.com/documentation/spritekit/sknode/zrotation"
+      }
+    },
+    "SKPhysicsBody": {
+      "affectedByGravity": {
+        "doc": "A Boolean value that indicates whether this physics body is affected by the physics world’s gravity.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/affectedbygravity"
+      },
+      "allowsRotation": {
+        "doc": "A Boolean value that indicates whether the physics body is affected by angular forces and impulses applied to it.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/allowsrotation"
+      },
+      "angularDamping": {
+        "doc": "A property that reduces the body’s rotational velocity.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/angulardamping"
+      },
+      "angularVelocity": {
+        "doc": "The physics body’s angular speed.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/angularvelocity"
+      },
+      "area": {
+        "doc": "The area covered by the body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/area"
+      },
+      "categoryBitMask": {
+        "doc": "A mask that defines which categories this physics body belongs to.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/categorybitmask"
+      },
+      "charge": {
+        "doc": "The electrical charge of the physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/charge"
+      },
+      "collisionBitMask": {
+        "doc": "A mask that defines which categories of physics bodies can collide with this physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/collisionbitmask"
+      },
+      "contactTestBitMask": {
+        "doc": "A mask that defines which categories of physics bodies cause intersection notifications with this physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/contacttestbitmask"
+      },
+      "density": {
+        "doc": "The density of the object, in kilograms per square meter.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/density"
+      },
+      "dynamic": {
+        "doc": "A Boolean value that indicates whether the physics body is moved by the physics simulation.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/isdynamic"
+      },
+      "fieldBitMask": {
+        "doc": "A mask that defines which categories of physics fields can exert forces on this physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/fieldbitmask"
+      },
+      "friction": {
+        "doc": "The roughness of the surface of the physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/friction"
+      },
+      "joints": {
+        "doc": "The joints connected to this physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/joints"
+      },
+      "linearDamping": {
+        "doc": "A property that reduces the body’s linear velocity.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/lineardamping"
+      },
+      "mass": {
+        "doc": "The mass of the body, in kilograms.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/mass"
+      },
+      "node": {
+        "doc": "The node that this body is connected to.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/node"
+      },
+      "pinned": {
+        "doc": "A Boolean value that indicates whether the physics body’s node is pinned to its parent node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/pinned"
+      },
+      "resting": {
+        "doc": "A Boolean property that indicates whether the object is at rest within the physics simulation.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/isresting"
+      },
+      "restitution": {
+        "doc": "The bounciness of the physics body.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/restitution"
+      },
+      "usesPreciseCollisionDetection": {
+        "doc": "A Boolean value that determines whether the physics world uses an iterative collision detection algorithm.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/usesprecisecollisiondetection"
+      },
+      "velocity": {
+        "doc": "The physics body’s velocity vector, measured in meters per second.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsbody/velocity"
+      }
+    },
+    "SKPhysicsContact": {
+      "bodyA": {
+        "doc": "The first body in the contact.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicscontact/bodya"
+      },
+      "bodyB": {
+        "doc": "The second body in the contact.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicscontact/bodyb"
+      },
+      "collisionImpulse": {
+        "doc": "The impulse that specifies how hard these two bodies struck each other in Newton-seconds.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicscontact/collisionimpulse"
+      },
+      "contactNormal": {
+        "doc": "The normal vector specifying the direction of the collision.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicscontact/contactnormal"
+      },
+      "contactPoint": {
+        "doc": "The contact point between the two physics bodies, in scene coordinates.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicscontact/contactpoint"
+      }
+    },
+    "SKPhysicsJoint": {
+      "bodyA": {
+        "doc": "The first body connected by the joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjoint/bodya"
+      },
+      "bodyB": {
+        "doc": "The second body connected by the joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjoint/bodyb"
+      },
+      "reactionForce": {
+        "doc": "The instantaneous reaction force, in newtons, currently being directed at the anchor point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjoint/reactionforce"
+      },
+      "reactionTorque": {
+        "doc": "Instantaneous reaction torque, in newton-meters, currently being directed at the anchor point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjoint/reactiontorque"
+      }
+    },
+    "SKPhysicsJointLimit": {
+      "maxLength": {
+        "doc": "The maximum distance allowed between the two physics bodies connected by the limit joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointlimit/maxlength"
+      }
+    },
+    "SKPhysicsJointPin": {
+      "frictionTorque": {
+        "doc": "The resistance applied by the pin joint to spinning around the anchor point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin/frictiontorque"
+      },
+      "lowerAngleLimit": {
+        "doc": "The smallest angle allowed for the pin joint, in radians.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin/loweranglelimit"
+      },
+      "rotationSpeed": {
+        "doc": "The speed, in radians per second, at which the physics bodies are driven around the pin joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin/rotationspeed"
+      },
+      "shouldEnableLimits": {
+        "doc": "A Boolean value that indicates whether the pin joint’s rotation is limited to a specific range of values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin/shouldenablelimits"
+      },
+      "upperAngleLimit": {
+        "doc": "The largest angle allowed for the pin joint, in radians.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointpin/upperanglelimit"
+      }
+    },
+    "SKPhysicsJointSliding": {
+      "lowerDistanceLimit": {
+        "doc": "The smallest distance allowed for the sliding joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointsliding/lowerdistancelimit"
+      },
+      "shouldEnableLimits": {
+        "doc": "A Boolean value that indicates whether the sliding joint is restricted so that the objects may only slide a finite distance from the initial anchor point.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointsliding/shouldenablelimits"
+      },
+      "upperDistanceLimit": {
+        "doc": "The largest distance allowed for the sliding joint.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointsliding/upperdistancelimit"
+      }
+    },
+    "SKPhysicsJointSpring": {
+      "damping": {
+        "doc": "Defines how the spring’s motion should be damped due to the forces of friction.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointspring/damping"
+      },
+      "frequency": {
+        "doc": "Defines the frequency or stiffness characteristics of the spring.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsjointspring/frequency"
+      }
+    },
+    "SKPhysicsWorld": {
+      "contactDelegate": {
+        "doc": "A delegate that is called when two physics bodies come in contact with each other.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/contactdelegate"
+      },
+      "gravity": {
+        "doc": "A vector that specifies the gravitational acceleration applied to physics bodies in the physics world.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/gravity"
+      },
+      "speed": {
+        "doc": "The rate at which the simulation executes.",
+        "url": "https://developer.apple.com/documentation/spritekit/skphysicsworld/speed"
+      }
+    },
+    "SKRange": {
+      "lowerLimit": {
+        "doc": "The minimum possible value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/lowerlimit"
+      },
+      "upperLimit": {
+        "doc": "The maximum possible value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrange/upperlimit"
+      }
+    },
+    "SKReachConstraints": {
+      "lowerAngleLimit": {
+        "doc": "The minimum angle that the node can have after it is rotated by a reach event.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreachconstraints/loweranglelimit"
+      },
+      "upperAngleLimit": {
+        "doc": "The maximum angle that the node can have after it is rotated by a reach event.",
+        "url": "https://developer.apple.com/documentation/spritekit/skreachconstraints/upperanglelimit"
+      }
+    },
+    "SKRegion": {
+      "path": {
+        "doc": "Returns a Core Graphics path that defines the region.",
+        "url": "https://developer.apple.com/documentation/spritekit/skregion/path"
+      }
+    },
+    "SKRenderer": {
+      "scene": {
+        "doc": "The scene this renderer will draw into the Metal command buffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/scene"
+      },
+      "showsDrawCount": {
+        "doc": "A Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/showsdrawcount"
+      },
+      "showsFields": {
+        "doc": "A Boolean value that indicates whether the view displays information about physics fields in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/showsfields"
+      },
+      "showsNodeCount": {
+        "doc": "A Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/showsnodecount"
+      },
+      "showsPhysics": {
+        "doc": "A Boolean value that indicates whether the view displays physics-related debugging information.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/showsphysics"
+      },
+      "showsQuadCount": {
+        "doc": "A Boolean value that indicates whether the view displays the number of rectangles used to render the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skrenderer/showsquadcount"
+      }
+    },
+    "SKScene": {
+      "anchorPoint": {
+        "doc": "The point in the view’s frame that corresponds to the scene’s origin.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/anchorpoint"
+      },
+      "audioEngine": {
+        "doc": "The AVFoundation audio engine used to play audio from audio nodes contained in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/audioengine"
+      },
+      "backgroundColor": {
+        "doc": "The background color of the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/backgroundcolor"
+      },
+      "camera": {
+        "doc": "The camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/camera"
+      },
+      "delegate": {
+        "doc": "A delegate to be called during the animation loop.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/delegate"
+      },
+      "listener": {
+        "doc": "A node used to determine the position of the listener for positional audio in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/listener"
+      },
+      "physicsWorld": {
+        "doc": "The physics simulation associated with the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/physicsworld"
+      },
+      "scaleMode": {
+        "doc": "A setting that defines how the scene is mapped to the view that presents it.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/scalemode"
+      },
+      "size": {
+        "doc": "The dimensions of the scene, in points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/size"
+      },
+      "view": {
+        "doc": "The view that is currently presenting the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skscene/view"
+      }
+    },
+    "SKShader": {
+      "attributes": {
+        "doc": "The list of attributes associated with the shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/attributes"
+      },
+      "source": {
+        "doc": "The source code for the shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/source"
+      },
+      "uniforms": {
+        "doc": "The list of uniforms associated with the shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshader/uniforms"
+      }
+    },
+    "SKShapeNode": {
+      "antialiased": {
+        "doc": "A Boolean value that determines whether the stroked path is smoothed when drawn.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/isantialiased"
+      },
+      "attributeValues": {
+        "doc": "The values of each attribute associated with the node’s attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/attributevalues"
+      },
+      "blendMode": {
+        "doc": "The blend mode used to blend the shape into the parent’s framebuffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/blendmode"
+      },
+      "customPlaygroundQuickLook": {
+        "doc": "A custom playground quick look for this instance.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/customplaygroundquicklook"
+      },
+      "fillColor": {
+        "doc": "The color used to fill the shape.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/fillcolor"
+      },
+      "fillShader": {
+        "doc": "A custom shader used to determine the color of the filled portion of the shape node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/fillshader"
+      },
+      "fillTexture": {
+        "doc": "The texture used to fill the shape.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/filltexture"
+      },
+      "glowWidth": {
+        "doc": "A glow that extends outward from the stroked line.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/glowwidth"
+      },
+      "lineCap": {
+        "doc": "The style used to render the endpoints of the stroked portion of the shape node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/linecap"
+      },
+      "lineJoin": {
+        "doc": "The junction type used when the stroked portion of the shape node is rendered.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/linejoin"
+      },
+      "lineLength": {
+        "doc": "The length of the line defined by the shape node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/linelength"
+      },
+      "lineWidth": {
+        "doc": "The width used to stroke the path.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/linewidth"
+      },
+      "miterLimit": {
+        "doc": "The miter limit to use when the line is stroked using a miter join style.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/miterlimit"
+      },
+      "path": {
+        "doc": "The path that defines the shape.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/path"
+      },
+      "strokeColor": {
+        "doc": "The color used to stroke the shape.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/strokecolor"
+      },
+      "strokeShader": {
+        "doc": "A custom shader used to determine the color of the stroked portion of the shape node.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/strokeshader"
+      },
+      "strokeTexture": {
+        "doc": "The texture used to stroke the shape.",
+        "url": "https://developer.apple.com/documentation/spritekit/skshapenode/stroketexture"
+      }
+    },
+    "SKSpriteNode": {
+      "anchorPoint": {
+        "doc": "Defines the point in the sprite that corresponds to the node’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/anchorpoint"
+      },
+      "attributeValues": {
+        "doc": "The values of each attribute associated with the node’s attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/attributevalues"
+      },
+      "blendMode": {
+        "doc": "The blend mode used to draw the sprite into the parent’s framebuffer.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/blendmode"
+      },
+      "centerRect": {
+        "doc": "Enable nine-part stretching of the sprite’s texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/centerrect"
+      },
+      "color": {
+        "doc": "The sprite’s color.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/color"
+      },
+      "colorBlendFactor": {
+        "doc": "A floating-point value that describes how the color is blended with the sprite’s texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/colorblendfactor"
+      },
+      "customPlaygroundQuickLook": {
+        "doc": "A custom playground quick look for this instance.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/customplaygroundquicklook"
+      },
+      "lightingBitMask": {
+        "doc": "A mask that defines how this sprite is lit by light nodes in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/lightingbitmask"
+      },
+      "normalTexture": {
+        "doc": "A texture that specifies the normal map for the sprite.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/normaltexture"
+      },
+      "shader": {
+        "doc": "A text file that defines code that does custom per-pixel drawing or colorization.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/shader"
+      },
+      "shadowCastBitMask": {
+        "doc": "A mask that defines which lights are occluded by this sprite.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/shadowcastbitmask"
+      },
+      "shadowedBitMask": {
+        "doc": "A mask that defines which lights add shadows to the sprite.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/shadowedbitmask"
+      },
+      "size": {
+        "doc": "The dimensions of the sprite, in points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/size"
+      },
+      "texture": {
+        "doc": "The texture used to draw the sprite.",
+        "url": "https://developer.apple.com/documentation/spritekit/skspritenode/texture"
+      }
+    },
+    "SKTexture": {
+      "filteringMode": {
+        "doc": "The filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/filteringmode"
+      },
+      "usesMipmaps": {
+        "doc": "A Boolean value that indicates whether the texture attempts to generate mipmaps.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktexture/usesmipmaps"
+      }
+    },
+    "SKTextureAtlas": {
+      "customPlaygroundQuickLook": {
+        "doc": "A custom playground quick look for this instance.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/customplaygroundquicklook"
+      },
+      "textureNames": {
+        "doc": "The names of the texture images stored in the atlas.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktextureatlas/texturenames"
+      }
+    },
+    "SKTileDefinition": {
+      "flipHorizontally": {
+        "doc": "A Boolean that flips the definition’s image vertically.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/fliphorizontally"
+      },
+      "flipVertically": {
+        "doc": "A Boolean that flips the definition’s image horizontally.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/flipvertically"
+      },
+      "name": {
+        "doc": "A name associated with the tile definition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/name"
+      },
+      "normalTextures": {
+        "doc": "An array of SKTexture objects used to generate the normals for the tile to simulate 3D lighting.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/normaltextures"
+      },
+      "placementWeight": {
+        "doc": "The placement weight of the tile definition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/placementweight"
+      },
+      "rotation": {
+        "doc": "The rotation of the tile definition in 90˚ increments.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/rotation"
+      },
+      "size": {
+        "doc": "The size of the tile definition in points.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/size"
+      },
+      "textures": {
+        "doc": "An array of SKTexture objects that defines the tile definition object’s content.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/textures"
+      },
+      "timePerFrame": {
+        "doc": "The duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/timeperframe"
+      },
+      "userData": {
+        "doc": "A dictionary containing arbitrary data.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktiledefinition/userdata"
+      }
+    },
+    "SKTileGroup": {
+      "name": {
+        "doc": "The receiver’s name.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegroup/name"
+      },
+      "rules": {
+        "doc": "An array of SKTileGroupRule objects that the tile group uses to determine tile placement.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegroup/rules"
+      }
+    },
+    "SKTileGroupRule": {
+      "adjacency": {
+        "doc": "The adjacency requirement for this rule.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegrouprule/adjacency"
+      },
+      "name": {
+        "doc": "A name associated with the tile group rule.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegrouprule/name"
+      },
+      "tileDefinitions": {
+        "doc": "The tile definitions used for this rule.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilegrouprule/tiledefinitions"
+      }
+    },
+    "SKTileMapNode": {
+      "anchorPoint": {
+        "doc": "Defines the point in the tile map that corresponds to its position.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/anchorpoint"
+      },
+      "attributeValues": {
+        "doc": "The values of each attribute associated with the node’s attached shader.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/attributevalues"
+      },
+      "blendMode": {
+        "doc": "Defines the blend mode to use when compositing the tile map over other nodes.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/blendmode"
+      },
+      "color": {
+        "doc": "The base color for the tile map. The influence of the color over the tile map node’s textures is controlled by colorBlendFactor.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/color"
+      },
+      "colorBlendFactor": {
+        "doc": "Controls the blending between the texture and the tile map object’s color. Values are clamped between zero and one where zero has no color blending and one has the maximum color blending.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/colorblendfactor"
+      },
+      "lightingBitMask": {
+        "doc": "A mask that defines how the tile map is lit by light nodes in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/lightingbitmask"
+      },
+      "mapSize": {
+        "doc": "The overall size of the tile map.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/mapsize"
+      },
+      "numberOfColumns": {
+        "doc": "The number of columns in the tile map",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/numberofcolumns"
+      },
+      "numberOfRows": {
+        "doc": "The number of rows in the tile map.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/numberofrows"
+      },
+      "shader": {
+        "doc": "Defines a shader which is applied to each tile of the tile map.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/shader"
+      },
+      "tileSet": {
+        "doc": "The tile set being used by this tile map. The tile map object can only display tiles that exist in this set.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/tileset"
+      },
+      "tileSize": {
+        "doc": "The size of each tile in points.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktilemapnode/tilesize"
+      }
+    },
+    "SKTileSet": {
+      "defaultTileGroup": {
+        "doc": "The tile set’s default tile group.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/defaulttilegroup"
+      },
+      "defaultTileSize": {
+        "doc": "The tile set’s default tile size.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/defaulttilesize"
+      },
+      "name": {
+        "doc": "A name associated with the tile set.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/name"
+      },
+      "tileGroups": {
+        "doc": "The tile set’s array of tile group objects.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/tilegroups"
+      },
+      "type": {
+        "doc": "The tile set’s type.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktileset/type"
+      }
+    },
+    "SKTransition": {
+      "pausesIncomingScene": {
+        "doc": "A Boolean value that determines whether the incoming scene is paused during the transition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/pausesincomingscene"
+      },
+      "pausesOutgoingScene": {
+        "doc": "A Boolean value that determines whether the outgoing scene is paused during the transition.",
+        "url": "https://developer.apple.com/documentation/spritekit/sktransition/pausesoutgoingscene"
+      }
+    },
+    "SKUniform": {
+      "floatMatrix2Value": {
+        "doc": "The receiver’s value as a 2 x 2 matrix of floating-point values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatmatrix2value"
+      },
+      "floatMatrix3Value": {
+        "doc": "The receiver’s value as a 3 x 3 matrix of floating-point values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatmatrix3value"
+      },
+      "floatMatrix4Value": {
+        "doc": "The receiver’s value as a 4 x 4 matrix of floating-point values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatmatrix4value"
+      },
+      "floatValue": {
+        "doc": "The receiver’s value as a floating-point value.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatvalue"
+      },
+      "floatVector2Value": {
+        "doc": "The receiver’s value as a vector of two floating-point values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatvector2value"
+      },
+      "floatVector3Value": {
+        "doc": "The receiver’s value as a vector of three floating-point values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatvector3value"
+      },
+      "floatVector4Value": {
+        "doc": "The receiver’s value as a vector of four floating-point values.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/floatvector4value"
+      },
+      "name": {
+        "doc": "The uniform’s name.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/name"
+      },
+      "textureValue": {
+        "doc": "The receiver’s value as a SpriteKit texture.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/texturevalue"
+      },
+      "uniformType": {
+        "doc": "The uniform object’s data type.",
+        "url": "https://developer.apple.com/documentation/spritekit/skuniform/uniformtype"
+      }
+    },
+    "SKVideoNode": {
+      "anchorPoint": {
+        "doc": "The point in the sprite that corresponds to the node’s position.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/anchorpoint"
+      },
+      "size": {
+        "doc": "The dimensions of the video node, in points.",
+        "url": "https://developer.apple.com/documentation/spritekit/skvideonode/size"
+      }
+    },
+    "SKView": {
+      "allowsTransparency": {
+        "doc": "A Boolean property that indicates whether the view is rendered using transparency.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/allowstransparency"
+      },
+      "asynchronous": {
+        "doc": "A Boolean value that indicates whether the content is rendered asynchronously.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/isasynchronous"
+      },
+      "delegate": {
+        "doc": "A delegate that allows dynamic control of the view’s render rate.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/delegate"
+      },
+      "frameInterval": {
+        "doc": "The number of frames that must pass before the scene is called to update its contents.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/frameinterval"
+      },
+      "ignoresSiblingOrder": {
+        "doc": "A Boolean value that indicates whether parent-child and sibling relationships affect the rendering order of nodes in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/ignoressiblingorder"
+      },
+      "paused": {
+        "doc": "A Boolean value that indicates whether the view’s scene animations are paused.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/ispaused"
+      },
+      "preferredFramesPerSecond": {
+        "doc": "The animation frame rate that the view uses to render its scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/preferredframespersecond"
+      },
+      "scene": {
+        "doc": "The scene currently presented by this view.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/scene"
+      },
+      "shouldCullNonVisibleNodes": {
+        "doc": "A Boolean value that indicates whether the view automatically culls non-visible nodes from the rendering tree.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/shouldcullnonvisiblenodes"
+      },
+      "showsDrawCount": {
+        "doc": "A Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/showsdrawcount"
+      },
+      "showsFPS": {
+        "doc": "A Boolean value that indicates whether the view displays a frame rate indicator.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/showsfps"
+      },
+      "showsFields": {
+        "doc": "A Boolean value that indicates whether the view displays information about physics fields in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/showsfields"
+      },
+      "showsNodeCount": {
+        "doc": "A Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/showsnodecount"
+      },
+      "showsPhysics": {
+        "doc": "A Boolean value that indicates whether the view displays physics-related debugging information.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/showsphysics"
+      },
+      "showsQuadCount": {
+        "doc": "A Boolean value that indicates whether the view displays the number of rectangles used to render the scene.",
+        "url": "https://developer.apple.com/documentation/spritekit/skview/showsquadcount"
+      }
+    },
+    "SKWarpGeometryGrid": {
+      "init(columns:rows:sourcePositions:destinationPositions:)": {
+        "doc": "Creates a warp geometry grid of a specific size and warp translation, in point arrays.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/init(columns:rows:sourcepositions:destinationpositions:)"
+      },
+      "numberOfColumns": {
+        "doc": "The object’s number of columns.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/numberofcolumns"
+      },
+      "numberOfRows": {
+        "doc": "The object’s number of rows.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/numberofrows"
+      },
+      "replacingByDestinationPositions(positions:)": {
+        "doc": "Returns a copy of this grid, updated with the argument destination positions.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/replacingbydestinationpositions(positions:)"
+      },
+      "replacingBySourcePositions(positions:)": {
+        "doc": "Returns a copy of this grid, updated with the argument source positions.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/replacingbysourcepositions(positions:)"
+      },
+      "vertexCount": {
+        "doc": "The object’s total number of vertices.",
+        "url": "https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid/vertexcount"
+      }
+    }
+  }
+}

@@ -71,7 +71,7 @@ func (o *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedV
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTROperationalCredentialsClusterCertificateChainResponseParams, unsafe.Pointer)) {
@@ -85,7 +85,7 @@ func (o *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpe
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTROperationalCredentialsClusterCSRResponseParams, unsafe.Pointer)) {
@@ -99,7 +99,7 @@ func (o *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExp
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -113,7 +113,7 @@ func (o *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpecte
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -127,7 +127,7 @@ func (o *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpe
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -141,7 +141,7 @@ func (o *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedVa
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -155,7 +155,7 @@ func (o *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesE
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -166,62 +166,95 @@ func (o *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsEx
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeNOCsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeNOCsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeFabricsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeFabricsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeSupportedFabricsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeSupportedFabricsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeCommissionedFabricsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeCommissionedFabricsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeTrustedRootCertificatesWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeTrustedRootCertificatesWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeCurrentFabricIndexWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeCurrentFabricIndexWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalCredentialsSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
@@ -252,7 +285,7 @@ func (o *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedV
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROperationalCredentialsClusterCertificateChainResponseParams, unsafe.Pointer)) {
@@ -266,7 +299,7 @@ func (o *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpe
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROperationalCredentialsClusterCSRResponseParams, unsafe.Pointer)) {
@@ -280,7 +313,7 @@ func (o *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExp
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelCSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -294,7 +327,7 @@ func (o *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpecte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -308,7 +341,7 @@ func (o *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpe
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -322,7 +355,7 @@ func (o *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedVa
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelUpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROperationalCredentialsClusterNOCResponseParams, unsafe.Pointer)) {
@@ -336,7 +369,7 @@ func (o *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesE
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelRemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -347,5 +380,5 @@ func (o *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsEx
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOperationalCredentialsSelAddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The path made by a network connection, including information about its viability.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nwpath
 // Deprecated: Use `nw_path_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWPath.h>
 type NWPath struct {
@@ -34,7 +36,7 @@ func NWPathFromID(id objc.ID) *NWPath {
 	return o
 }
 
-// @method isEqualToPath: @param path An NWPath object to compare. @return YES if the two path objects have the same content, NO otherwise.
+// Comparison method for NWPath objects.
 // Deprecated: Use `nw_path_is_equal` in Network framework instead, see deprecation notice in <NetworkExtension/NWPath.h>
 func (o *NWPath) IsEqualToPath(path *NWPath) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nWPathSelIsEqualToPath, path.Ptr())

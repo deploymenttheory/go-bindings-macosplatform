@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Settings for an IPsec VPN configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnprotocolipsec
 type NEVPNProtocolIPSec struct {
 	NEVPNProtocol

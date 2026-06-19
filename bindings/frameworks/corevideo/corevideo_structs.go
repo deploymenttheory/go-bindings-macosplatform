@@ -7,33 +7,38 @@ import (
 	"unsafe"
 )
 
+// A structure for holding information that describes a custom extended pixel fill algorithm.
 type CVFillExtendedPixelsCallBackData struct {
 	Version      int
 	FillCallBack unsafe.Pointer
 	RefCon       unsafe.Pointer
 }
 
+// A structure for describing planar components.
 type CVPlanarComponentInfo struct {
 	Offset   int32
 	RowBytes uint32
 }
 
+// A structure for describing planar buffers.
 type CVPlanarPixelBufferInfo struct {
 	ComponentInfo [1]CVPlanarComponentInfo
 }
 
+// A structure for describing YCbCr biplanar buffers.
 type CVPlanarPixelBufferInfo_YCbCrBiPlanar struct {
 	ComponentInfoY    CVPlanarComponentInfo
 	ComponentInfoCbCr CVPlanarComponentInfo
 }
 
+// A structure for describing YCbCr planar buffers.
 type CVPlanarPixelBufferInfo_YCbCrPlanar struct {
 	ComponentInfoY  CVPlanarComponentInfo
 	ComponentInfoCb CVPlanarComponentInfo
 	ComponentInfoCr CVPlanarComponentInfo
 }
 
-// @struct         CVSMPTETime @abstract       A structure for holding a SMPTE time. @field          subframes The number of subframes in the full message. @field          subframeDivisor The number of subframes per frame (typically 80). @field          counter The total number of messages received. @field          type The kind of SMPTE time using the SMPTE time type constants. @field          flags A set of flags that indicate the SMPTE state. @field          hours The number of hours in the full message. @field          minutes The number of minutes in the full message. @field          seconds The number of seconds in the full message. @field          frames The number of frames in the full message.
+// A structure for holding an SMPTE time.
 type CVSMPTETime struct {
 	Subframes       int16
 	SubframeDivisor int16
@@ -46,13 +51,14 @@ type CVSMPTETime struct {
 	Frames          int16
 }
 
+// A structure for reporting Core Video time values.
 type CVTime struct {
 	TimeValue int64
 	TimeScale int32
 	Flags     int32
 }
 
-// @struct CVTimeStamp @abstract CoreVideo uses a CVTimeStamp structure to store video display time stamps. @discussion This structure is purposely very similar to AudioTimeStamp defined in the CoreAudio framework. Most of the CVTimeStamp struct should be fairly self-explanatory. However, it is probably worth pointing out that unlike the audio time stamps, floats are not used to represent the video equivalent of sample times. This was done partly to avoid precision issues, and partly because QuickTime still uses integers for time values and time scales. In the actual implementation it has turned out to be very convenient to use integers, and we can represent framerates like NTSC (30000/1001 fps) exactly. The mHostTime structure field uses the same Mach absolute time base that is used in CoreAudio, so that clients of the CoreVideo API can synchronize between the two subsystems. @field version The current CVTimeStamp is version 0. @field videoTimeScale The scale (in units per second) of the videoTime and videoPeriod values @field videoTime This represents the start of a frame (or field for interlaced) @field hostTime Host root timebase time @field rateScalar This is the current rate of the device as measured by the timestamps, divided by the nominal rate @field videoRefreshPeriod This is the nominal update period of the current output device @field smpteTime SMPTE time representation of the time stamp. @field flags Possible values are: kCVTimeStampVideoTimeValid kCVTimeStampHostTimeValid kCVTimeStampSMPTETimeValid kCVTimeStampVideoPeriodValid kCVTimeStampRateScalarValid There are flags for each field to make it easier to detect interlaced vs progressive output kCVTimeStampTopField kCVTimeStampBottomField Some commonly used combinations of timestamp flags kCVTimeStampVideoHostTimeValid kCVTimeStampIsInterlaced @field reserved Reserved. Do not use.
+// A structure for defining a display timestamp.
 type CVTimeStamp struct {
 	Version            uint32
 	VideoTimeScale     int32

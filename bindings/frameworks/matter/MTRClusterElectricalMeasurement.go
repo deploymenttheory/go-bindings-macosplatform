@@ -196,7 +196,7 @@ func (o *MTRClusterElectricalMeasurement) GetProfileInfoCommandWithParamsExpecte
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterElectricalMeasurement) GetProfileInfoCommandWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -207,7 +207,7 @@ func (o *MTRClusterElectricalMeasurement) GetProfileInfoCommandWithExpectedValue
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterElectricalMeasurement) GetMeasurementProfileCommandWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -218,736 +218,1135 @@ func (o *MTRClusterElectricalMeasurement) GetMeasurementProfileCommandWithParams
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetMeasurementProfileCommandWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetMeasurementProfileCommandWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasurementTypeWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasurementTypeWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcPowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcVoltageDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcCurrentDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeDcPowerDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeNeutralCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeNeutralCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeTotalActivePowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeTotalActivePowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeTotalReactivePowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeTotalReactivePowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeTotalApparentPowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeTotalApparentPowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured1stHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured1stHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured3rdHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured3rdHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured5thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured5thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured7thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured7thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured9thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured9thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured11thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasured11thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase1stHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase1stHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase5thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase5thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase7thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase7thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase9thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase9thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase11thHarmonicCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeMeasuredPhase11thHarmonicCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcFrequencyDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributePowerMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributePowerDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeHarmonicCurrentMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeHarmonicCurrentMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePhaseHarmonicCurrentMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePhaseHarmonicCurrentMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousLineCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousLineCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousActiveCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousActiveCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousReactiveCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousReactiveCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousPowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeInstantaneousPowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMinWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMinWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMaxWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMaxWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactivePowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactivePowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeApparentPowerWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeApparentPowerWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributePowerFactorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerFactorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerFactorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsVoltageMeasurementPeriodWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsVoltageMeasurementPeriodWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageCounterWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageCounterWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltagePeriodWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltagePeriodWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltagePeriodWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltagePeriodWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagPeriodWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagPeriodWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellPeriodWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellPeriodWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcVoltageMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcVoltageMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcVoltageDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcVoltageDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcCurrentMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcCurrentMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcCurrentDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcCurrentDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcPowerMultiplierWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcPowerMultiplierWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcPowerDivisorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcPowerDivisorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeOverloadAlarmsMaskWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeOverloadAlarmsMaskWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeVoltageOverloadWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeVoltageOverloadWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeCurrentOverloadWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeCurrentOverloadWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcOverloadAlarmsMaskWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcOverloadAlarmsMaskWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelWriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcVoltageOverloadWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcVoltageOverloadWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcCurrentOverloadWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcCurrentOverloadWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcActivePowerOverloadWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcActivePowerOverloadWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcReactivePowerOverloadWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcReactivePowerOverloadWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsOverVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsOverVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltageWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltageWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeLineCurrentPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeLineCurrentPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActiveCurrentPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActiveCurrentPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactiveCurrentPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactiveCurrentPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltagePhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltagePhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMinPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMinPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMaxPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMaxPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMinPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMinPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMaxPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMaxPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMinPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMinPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMaxPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMaxPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactivePowerPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactivePowerPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeApparentPowerPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeApparentPowerPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerFactorPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerFactorPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagPeriodPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagPeriodPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellPeriodPhaseBWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellPeriodPhaseBWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeLineCurrentPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeLineCurrentPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActiveCurrentPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActiveCurrentPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactiveCurrentPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactiveCurrentPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltagePhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltagePhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMinPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMinPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMaxPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageMaxPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMinPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMinPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMaxPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsCurrentMaxPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMinPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMinPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMaxPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeActivePowerMaxPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactivePowerPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeReactivePowerPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeApparentPowerPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeApparentPowerPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerFactorPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributePowerFactorPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagPeriodPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSagPeriodPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellPeriodPhaseCWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeRmsVoltageSwellPeriodPhaseCWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterElectricalMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalMeasurementSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
@@ -975,7 +1374,7 @@ func (o *MTRClusterElectricalMeasurement) GetProfileInfoCommandWithParamsExpecte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterElectricalMeasurement) GetProfileInfoCommandWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -986,7 +1385,7 @@ func (o *MTRClusterElectricalMeasurement) GetProfileInfoCommandWithExpectedValue
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetProfileInfoCommandWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterElectricalMeasurement) GetMeasurementProfileCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -997,5 +1396,5 @@ func (o *MTRClusterElectricalMeasurement) GetMeasurementProfileCommandWithParams
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetMeasurementProfileCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterElectricalMeasurementSelGetMeasurementProfileCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

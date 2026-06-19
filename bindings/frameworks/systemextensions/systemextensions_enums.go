@@ -64,6 +64,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Error codes for system extensions.
 type OSSystemExtensionErrorCode int64
 
 const (
@@ -115,6 +116,7 @@ func (e OSSystemExtensionErrorCode) String() string {
 	}
 }
 
+// Actions for describing how the extension manager should resolve a version conflict.
 type OSSystemExtensionReplacementAction int64
 
 const (
@@ -135,7 +137,7 @@ func (e OSSystemExtensionReplacementAction) String() string {
 	}
 }
 
-// Describes additional result feedback after completion of a system extension request
+// The result of a completed request, possibly including additional information about the extension’s state.
 type OSSystemExtensionRequestResult int64
 
 const (

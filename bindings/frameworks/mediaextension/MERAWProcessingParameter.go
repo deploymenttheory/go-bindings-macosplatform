@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for the RAW processor to describe each processing parameter the processor exposes.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/merawprocessingparameter
 type MERAWProcessingParameter struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that implements an index-maintenance app extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/csindexextensionrequesthandler
 type CSIndexExtensionRequestHandler struct {
 	foundation.NSObject

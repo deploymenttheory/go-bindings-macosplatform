@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A camera zoom range that limits the distances to which the user can zoom.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapcamerazoomrange
 type MKMapCameraZoomRange struct {
 	foundation.NSObject

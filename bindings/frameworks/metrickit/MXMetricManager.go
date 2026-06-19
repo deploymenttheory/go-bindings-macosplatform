@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetricmanager
 type MXMetricManager struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func MXMetricManagerFromID(id objc.ID) *MXMetricManager {
 	return o
 }
 
-// @method        makeLogHandleWithCategory:category @abstract      Retrieve a log handle for flagging critical sections with os_signpost(). @param         category A string used to define a log category @discussion    The log handle configures persistence for any signposts emit while using the log handle. @result        A log handle that can be used with the logging framework.
+// Returns a log handle used for writing custom metric events.
 func MXMetricManagerMakeLogHandleWithCategory(category *foundation.NSString) *foundation.NSObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMXMetricManager), _mXMetricManagerSelMakeLogHandleWithCategory, category.Ptr())
 	if _ret != 0 {
@@ -48,16 +50,17 @@ func MXMetricManagerMakeLogHandleWithCategory(category *foundation.NSString) *fo
 	return foundation.NSObjectFromID(_ret)
 }
 
-// @method        addSubscriber:subscriber @abstract      Adds a subscriber to the metric manager. @param         subscriber An object that conforms to the MXMetricManagerSubscriber protocol. @discussion    Subscribers can receive metric payloads by conforming to the MXMetricManagerSubscriber protocol.
+// Registers to receive a daily report of app metrics from the metrics manager.
 func (o *MXMetricManager) AddSubscriber(subscriber MXMetricManagerSubscriber) {
 	o.Ptr().Send(_mXMetricManagerSelAddSubscriber, subscriber)
 }
 
-// @method        removeSubscriber:subscriber @abstract      Removes a subscriber from the metric manager. @param         subscriber An object that conforms to the MXMetricManagerSubscriber protocol. @discussion    The subscriber indicated, if previously registered, will no longer receive metric payloads.
+// Unsubscribes from daily reports of app metrics.
 func (o *MXMetricManager) RemoveSubscriber(subscriber MXMetricManagerSubscriber) {
 	o.Ptr().Send(_mXMetricManagerSelRemoveSubscriber, subscriber)
 }
 
+// Starts to measure an extended launch task with the given task identifier.
 func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID unsafe.Pointer) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelExtendLaunchMeasurementForTaskIDError, taskID, unsafe.Pointer(&_nsErr))
@@ -67,6 +70,7 @@ func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID unsafe.Pointer)
 	return _ret, nil
 }
 
+// Signals the end of an extended launch task.
 func MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError(taskID unsafe.Pointer) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelFinishExtendedLaunchMeasurementForTaskIDError, taskID, unsafe.Pointer(&_nsErr))

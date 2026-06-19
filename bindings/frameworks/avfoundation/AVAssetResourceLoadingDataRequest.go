@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for requesting data from a resource that an asset resource-loading request references.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetresourceloadingdatarequest
 type AVAssetResourceLoadingDataRequest struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func AVAssetResourceLoadingDataRequestFromID(id objc.ID) *AVAssetResourceLoading
 	return o
 }
 
-// @method 		respondWithData: @abstract		Provides data to the receiver. @param			data An instance of NSData containing some or all of the requested bytes. @discussion	May be invoked multiple times on the same instance of AVAssetResourceLoadingDataRequest to provide the full range of requested data incrementally. Upon each invocation, the value of currentOffset will be updated to accord with the amount of data provided. The instance of NSData that you provide may be retained for use in parsing or other processing for an indefinite period of time after this method returns. For this reason, if you are providing an instance of NSMutableData, you should avoid mutating it further after sharing its contents. If you are managing your own memory pool for I/O and resource loading, consider using -[NSData initWithBytesNoCopy:length:deallocator:] in order to receive notification of the earliest opportunity for safe recycling of the underlying memory.
+// Provides data to the loading request.
 func (o *AVAssetResourceLoadingDataRequest) RespondWithData(data *foundation.NSData) {
 	o.Ptr().Send(_aVAssetResourceLoadingDataRequestSelRespondWithData, data.Ptr())
 }

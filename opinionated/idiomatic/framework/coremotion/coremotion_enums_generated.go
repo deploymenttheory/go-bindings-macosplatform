@@ -8,13 +8,18 @@ import (
 	"fmt"
 )
 
+// The authorization status for motion-related features.
 type CMAuthorizationStatus int64
 
 const (
+	// The status has not yet been determined.
 	CMAuthorizationStatusNotDetermined CMAuthorizationStatus = 0
-	CMAuthorizationStatusRestricted    CMAuthorizationStatus = 1
-	CMAuthorizationStatusDenied        CMAuthorizationStatus = 2
-	CMAuthorizationStatusAuthorized    CMAuthorizationStatus = 3
+	// Access is denied due to system-wide restrictions.
+	CMAuthorizationStatusRestricted CMAuthorizationStatus = 1
+	// Access was denied by the user.
+	CMAuthorizationStatusDenied CMAuthorizationStatus = 2
+	// Access was granted by the user.
+	CMAuthorizationStatusAuthorized CMAuthorizationStatus = 3
 )
 
 func (e CMAuthorizationStatus) String() string {
@@ -32,6 +37,7 @@ func (e CMAuthorizationStatus) String() string {
 	}
 }
 
+// Defines the device’s sensor locations.
 type CMDeviceMotionSensorLocation int64
 
 const (
@@ -53,6 +59,7 @@ func (e CMDeviceMotionSensorLocation) String() string {
 	}
 }
 
+// Headphone connection status updates.
 type CMHeadphoneActivityStatus int64
 
 const (
@@ -71,12 +78,16 @@ func (e CMHeadphoneActivityStatus) String() string {
 	}
 }
 
+// The confidence that the motion data is accurate.
 type CMMotionActivityConfidence int64
 
 const (
-	CMMotionActivityConfidenceLow    CMMotionActivityConfidence = 0
+	// Confidence is low.
+	CMMotionActivityConfidenceLow CMMotionActivityConfidence = 0
+	// Confidence is good.
 	CMMotionActivityConfidenceMedium CMMotionActivityConfidence = 1
-	CMMotionActivityConfidenceHigh   CMMotionActivityConfidence = 2
+	// Confidence is high.
+	CMMotionActivityConfidenceHigh CMMotionActivityConfidence = 2
 )
 
 func (e CMMotionActivityConfidence) String() string {
@@ -92,12 +103,16 @@ func (e CMMotionActivityConfidence) String() string {
 	}
 }
 
+// The device that the odometer sample originates from.
 type CMOdometerOriginDevice int64
 
 const (
+	// The origin of the odometer sample is unknown.
 	CMOdometerOriginDeviceUnknown CMOdometerOriginDevice = 0
-	CMOdometerOriginDeviceLocal   CMOdometerOriginDevice = 1
-	CMOdometerOriginDeviceRemote  CMOdometerOriginDevice = 2
+	// The origin of the odometer sample comes from the same device that requests the sample.
+	CMOdometerOriginDeviceLocal CMOdometerOriginDevice = 1
+	// The origin of the odometer sample comes from a device that’s paired with the local device.
+	CMOdometerOriginDeviceRemote CMOdometerOriginDevice = 2
 )
 
 func (e CMOdometerOriginDevice) String() string {
@@ -113,10 +128,13 @@ func (e CMOdometerOriginDevice) String() string {
 	}
 }
 
+// Constants indicating the change that occurred to the user’s pedestrian activity.
 type CMPedometerEventType int64
 
 const (
-	CMPedometerEventTypePause  CMPedometerEventType = 0
+	// The user’s pedestrian activity stopped.
+	CMPedometerEventTypePause CMPedometerEventType = 0
+	// The user’s pedestrian activity resumed.
 	CMPedometerEventTypeResume CMPedometerEventType = 1
 )
 

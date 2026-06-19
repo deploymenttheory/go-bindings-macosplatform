@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that creates a specified number of sublayer copies with varying geometric, temporal, and color transformations.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/careplicatorlayer
 type CAReplicatorLayer struct {
 	CALayer

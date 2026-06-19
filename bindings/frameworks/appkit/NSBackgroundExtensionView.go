@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that extends content to fill its own bounds.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbackgroundextensionview
 type NSBackgroundExtensionView struct {
 	NSView

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that determines the direction change of vectors for each pixel from a previous to current image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrackopticalflowrequest
 type VNTrackOpticalFlowRequest struct {
 	VNStatefulRequest
@@ -38,7 +40,7 @@ func VNTrackOpticalFlowRequestFromID(id objc.ID) *VNTrackOpticalFlowRequest {
 	return o
 }
 
-// @brief Create a new request that can statefully track the optical from from one image to another. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero and a nil completion handler.
+// Creates a new request that tracks the optical from one image to another.
 func (o *VNTrackOpticalFlowRequest) Init() *VNTrackOpticalFlowRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackOpticalFlowRequestSelInit)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *VNTrackOpticalFlowRequest) Init() *VNTrackOpticalFlowRequest {
 	return VNTrackOpticalFlowRequestFromID(_ret)
 }
 
-// @brief Create a new request that can statefully track the optical from from one image to another. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero.
+// Creates a new request that tracks the optical from one image to another, with a system callback on completion.
 func (o *VNTrackOpticalFlowRequest) InitWithCompletionHandler(completionHandler func(*VNRequest, unsafe.Pointer)) *VNTrackOpticalFlowRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

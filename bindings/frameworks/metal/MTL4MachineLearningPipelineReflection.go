@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents reflection information for a machine learning pipeline state.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4machinelearningpipelinereflection
 type MTL4MachineLearningPipelineReflection struct {
 	foundation.NSObject

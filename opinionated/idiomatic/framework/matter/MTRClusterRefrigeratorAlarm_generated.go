@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Cluster Refrigerator Alarm Attributes and commands for configuring the Refrigerator alarm.
+//
 // MTRClusterRefrigeratorAlarm wraps [raw.MTRClusterRefrigeratorAlarm] with a fluent Go API.
 type MTRClusterRefrigeratorAlarm struct {
 	inner *raw.MTRClusterRefrigeratorAlarm

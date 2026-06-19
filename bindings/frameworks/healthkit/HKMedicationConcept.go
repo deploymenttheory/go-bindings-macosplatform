@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a specific medication concept.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkmedicationconcept
 type HKMedicationConcept struct {
 	foundation.NSObject

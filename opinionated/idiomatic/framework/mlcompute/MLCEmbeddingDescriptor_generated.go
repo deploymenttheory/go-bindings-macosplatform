@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create an embedding layer.
+//
 // EmbeddingDescriptor wraps [raw.MLCEmbeddingDescriptor] with a fluent Go API.
 type EmbeddingDescriptor struct {
 	inner *raw.MLCEmbeddingDescriptor

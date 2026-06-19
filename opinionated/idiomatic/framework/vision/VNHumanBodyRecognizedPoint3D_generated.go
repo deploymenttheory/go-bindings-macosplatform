@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// @brief
+// A recognized 3D point that includes a parent joint.
 //
 // HumanBodyRecognizedPoint3D wraps [raw.VNHumanBodyRecognizedPoint3D] with a fluent Go API.
 type HumanBodyRecognizedPoint3D struct {

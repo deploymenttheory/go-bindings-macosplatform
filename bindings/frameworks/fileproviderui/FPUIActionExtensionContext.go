@@ -33,7 +33,7 @@ func FPUIActionExtensionContextFromID(id objc.ID) *FPUIActionExtensionContext {
 	return o
 }
 
-// Marks the action as complete. Call this method when the action completes successfully.
+// Marks the action as complete.
 func (o *FPUIActionExtensionContext) CompleteRequest() {
 	o.Ptr().Send(_fPUIActionExtensionContextSelCompleteRequest)
 }

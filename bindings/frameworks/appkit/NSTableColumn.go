@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The display characteristics and identifier for a column in a table view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstablecolumn
 type NSTableColumn struct {
 	foundation.NSObject
@@ -61,6 +63,7 @@ func NSTableColumnFromID(id objc.ID) *NSTableColumn {
 	return o
 }
 
+// Initializes a newly created table column with a string identifier.
 func (o *NSTableColumn) InitWithIdentifier(identifier *foundation.NSString) *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -77,6 +80,7 @@ func (o *NSTableColumn) InitWithCoder(coder *foundation.NSCoder) *NSTableColumn 
 	return NSTableColumnFromID(_ret)
 }
 
+// Resizes the table column to fit the width of its header cell.
 func (o *NSTableColumn) SizeToFit() {
 	o.Ptr().Send(_nSTableColumnSelSizeToFit)
 }
@@ -207,17 +211,20 @@ func (o *NSTableColumn) SetHidden(hidden bool) {
 	o.Ptr().Send(_nSTableColumnSelSetHidden, hidden)
 }
 
+// Sets whether the user can resize the receiver in its NSTableView.
 // Deprecated: since macOS 10.4.
 func (o *NSTableColumn) SetResizable(flag bool) {
 	o.Ptr().Send(_nSTableColumnSelSetResizable, flag)
 }
 
+// Returns whether the column is resizable.
 // Deprecated: since macOS 10.4.
 func (o *NSTableColumn) IsResizable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsResizable)
 	return _ret
 }
 
+// Returns the cell object used to display values in the specified row of the table column.
 func (o *NSTableColumn) DataCellForRow(row int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelDataCellForRow, row)
 	return _ret

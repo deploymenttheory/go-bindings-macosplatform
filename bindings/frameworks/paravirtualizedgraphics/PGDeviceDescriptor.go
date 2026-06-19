@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the paravirtualized graphics device to create.
+//
 // Apple documentation: https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor
 type PGDeviceDescriptor struct {
 	foundation.NSObject

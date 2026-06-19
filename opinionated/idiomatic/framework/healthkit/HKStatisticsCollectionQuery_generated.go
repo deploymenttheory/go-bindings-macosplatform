@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A query that performs multiple statistics queries over a series of fixed-length time intervals.
+//
 // StatisticsCollectionQuery wraps [raw.HKStatisticsCollectionQuery] with a fluent Go API.
 type StatisticsCollectionQuery struct {
 	inner *raw.HKStatisticsCollectionQuery
@@ -37,6 +39,8 @@ func NewStatisticsCollectionQuery() *StatisticsCollectionQuery {
 	return &StatisticsCollectionQuery{inner: raw.HKStatisticsCollectionQueryFromID(_id)}
 }
 
+// Initializes a statistics collection query to perform the specified calculations over a set of time intervals.
+//
 // NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents creates a new [StatisticsCollectionQuery].
 func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, anchorDate *foundation.NSDate, intervalComponents *foundation.NSDateComponents) *StatisticsCollectionQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
@@ -44,12 +48,16 @@ func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsA
 	return &StatisticsCollectionQuery{inner: raw.HKStatisticsCollectionQueryFromID(_id)}
 }
 
+// The results handler for the query’s initial results.
+//
 // WithInitialResultsHandler sets the initialResultsHandler property and returns the receiver for chaining.
 func (x *StatisticsCollectionQuery) WithInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery {
 	x.inner.SetInitialResultsHandler(initialResultsHandler)
 	return x
 }
 
+// The results handler for monitoring updates to the HealthKit store.
+//
 // WithStatisticsUpdateHandler sets the statisticsUpdateHandler property and returns the receiver for chaining.
 func (x *StatisticsCollectionQuery) WithStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery {
 	x.inner.SetStatisticsUpdateHandler(statisticsUpdateHandler)

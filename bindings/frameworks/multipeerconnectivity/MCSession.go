@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An MCSession object enables and manages communication among all peers in a Multipeer Connectivity session.
+//
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcsession
 type MCSession struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func MCSessionFromID(id objc.ID) *MCSession {
 	return o
 }
 
+// Creates a Multipeer Connectivity session.
 func (o *MCSession) InitWithPeer(myPeerID *MCPeerID) *MCSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelInitWithPeer, myPeerID.Ptr())
 	if _ret != 0 {
@@ -54,14 +57,16 @@ func (o *MCSession) InitWithPeer(myPeerID *MCPeerID) *MCSession {
 	return MCSessionFromID(_ret)
 }
 
+// Creates a Multipeer Connectivity session, providing security information.
 func (o *MCSession) InitWithPeerSecurityIdentityEncryptionPreference(myPeerID *MCPeerID, identity *foundation.NSArray[objc.ID], encryptionPreference MCEncryptionPreference) *MCSession {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelInitWithPeerSecurityIdentityEncryptionPreference, myPeerID.Ptr(), identity, encryptionPreference)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelInitWithPeerSecurityIdentityEncryptionPreference, myPeerID.Ptr(), identity.Ptr(), encryptionPreference)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MCSessionFromID(_ret)
 }
 
+// Sends a message to nearby peers.
 func (o *MCSession) SendDataToPeersWithModeError(data *foundation.NSData, peerIDs *foundation.NSArray[*MCPeerID], mode MCSessionSendDataMode) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mCSessionSelSendDataToPeersWithModeError, data.Ptr(), peerIDs.Ptr(), mode, unsafe.Pointer(&_nsErr))
@@ -71,10 +76,12 @@ func (o *MCSession) SendDataToPeersWithModeError(data *foundation.NSData, peerID
 	return _ret, nil
 }
 
+// Disconnects the local peer from the session.
 func (o *MCSession) Disconnect() {
 	o.Ptr().Send(_mCSessionSelDisconnect)
 }
 
+// Sends the contents of a URL to a peer.
 func (o *MCSession) SendResourceAtURLWithNameToPeerWithCompletionHandler(resourceURL *foundation.NSURL, resourceName *foundation.NSString, peerID *MCPeerID, completionHandler func(unsafe.Pointer)) *foundation.NSProgress {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -90,6 +97,7 @@ func (o *MCSession) SendResourceAtURLWithNameToPeerWithCompletionHandler(resourc
 	return foundation.NSProgressFromID(_ret)
 }
 
+// Opens a byte stream to a nearby peer.
 func (o *MCSession) StartStreamWithNameToPeerError(streamName *foundation.NSString, peerID *MCPeerID) (*foundation.NSOutputStream, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelStartStreamWithNameToPeerError, streamName.Ptr(), peerID.Ptr(), unsafe.Pointer(&_nsErr))
@@ -120,8 +128,11 @@ func (o *MCSession) MyPeerID() *MCPeerID {
 }
 
 func (o *MCSession) SecurityIdentity() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mCSessionSelSecurityIdentity)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mCSessionSelSecurityIdentity)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MCSession) EncryptionPreference() MCEncryptionPreference {
@@ -137,6 +148,7 @@ func (o *MCSession) ConnectedPeers() *foundation.NSArray[*MCPeerID] {
 	return foundation.NSArrayFromID[*MCPeerID](_ret)
 }
 
+// Obtains connection data for the specified peer.
 func (o *MCSession) NearbyConnectionDataForPeerWithCompletionHandler(peerID *MCPeerID, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -151,10 +163,12 @@ func (o *MCSession) NearbyConnectionDataForPeerWithCompletionHandler(peerID *MCP
 	o.Ptr().Send(_mCSessionSelNearbyConnectionDataForPeerWithCompletionHandler, peerID.Ptr(), __block_completionHandler)
 }
 
+// Call this method to connect a peer to the session when using your own service discovery code instead of an MCNearbyServiceBrowser or MCBrowserViewController object.
 func (o *MCSession) ConnectPeerWithNearbyConnectionData(peerID *MCPeerID, data *foundation.NSData) {
 	o.Ptr().Send(_mCSessionSelConnectPeerWithNearbyConnectionData, peerID.Ptr(), data.Ptr())
 }
 
+// Cancels an attempt to connect to a peer.
 func (o *MCSession) CancelConnectPeer(peerID *MCPeerID) {
 	o.Ptr().Send(_mCSessionSelCancelConnectPeer, peerID.Ptr())
 }

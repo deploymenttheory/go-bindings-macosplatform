@@ -3,23 +3,27 @@
 
 package coremotion
 
+// The type of a structure containing 3-axis acceleration values.
 type CMAcceleration struct {
 	X float64
 	Y float64
 	Z float64
 }
 
+// Calibrated magnetic field data and an estimate of the accuracy of the calibration.
 type CMCalibratedMagneticField struct {
 	Field    CMMagneticField
 	Accuracy CMMagneticFieldCalibrationAccuracy
 }
 
+// A structure containing 3-axis magnetometer data
 type CMMagneticField struct {
 	X float64
 	Y float64
 	Z float64
 }
 
+// The type for a quaternion representing a measurement of attitude.
 type CMQuaternion struct {
 	X float64
 	Y float64
@@ -27,6 +31,7 @@ type CMQuaternion struct {
 	W float64
 }
 
+// The type of a structure representing a rotation matrix.
 type CMRotationMatrix struct {
 	M11 float64
 	M12 float64
@@ -39,6 +44,7 @@ type CMRotationMatrix struct {
 	M33 float64
 }
 
+// The type of structures representing a measurement of rotation rate.
 type CMRotationRate struct {
 	X float64
 	Y float64

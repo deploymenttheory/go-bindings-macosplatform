@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of properties that you use to initialize a web view.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebviewconfiguration
 type WKWebViewConfiguration struct {
 	foundation.NSObject
@@ -66,10 +68,12 @@ func WKWebViewConfigurationFromID(id objc.ID) *WKWebViewConfiguration {
 	return o
 }
 
+// Registers an object to load resources associated with the specified URL scheme.
 func (o *WKWebViewConfiguration) SetURLSchemeHandlerForURLScheme(urlSchemeHandler WKURLSchemeHandler, urlScheme *foundation.NSString) {
 	o.Ptr().Send(_wKWebViewConfigurationSelSetURLSchemeHandlerForURLScheme, urlSchemeHandler, urlScheme.Ptr())
 }
 
+// Returns the currently registered handler object for the specified URL scheme.
 func (o *WKWebViewConfiguration) UrlSchemeHandlerForURLScheme(urlScheme *foundation.NSString) WKURLSchemeHandler {
 	_ret := objc.Send[WKURLSchemeHandler](o.Ptr(), _wKWebViewConfigurationSelUrlSchemeHandlerForURLScheme, urlScheme.Ptr())
 	return _ret

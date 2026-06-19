@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the result of a change-history fetch request.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnfetchresult
 type CNFetchResult[ValueType purego.AnyObject] struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A dynamic, ordered collection of unique objects.
+//
 // MutableOrderedSet wraps [raw.NSMutableOrderedSet] with a fluent Go API.
 type MutableOrderedSet struct {
 	inner *raw.NSMutableOrderedSet[objc.ID]
@@ -43,6 +45,8 @@ func NewMutableOrderedSetWithCoder(coder *raw.NSCoder) *MutableOrderedSet {
 	return &MutableOrderedSet{inner: raw.NSMutableOrderedSetFromID[objc.ID](_id)}
 }
 
+// Returns an initialized mutable ordered set with a given initial capacity.
+//
 // NewMutableOrderedSetWithCapacity creates a new [MutableOrderedSet].
 func NewMutableOrderedSetWithCapacity(numItems uint) *MutableOrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableOrderedSet")), objc.RegisterName("alloc"))
@@ -56,136 +60,190 @@ func (x *MutableOrderedSet) WithScriptingProperties(scriptingProperties *raw.NSD
 	return x
 }
 
+// Inserts the given object at the specified index of the mutable ordered set, if it is not already a member.
+//
 // InsertObjectAtIndex calls the underlying InsertObjectAtIndex.
 func (x *MutableOrderedSet) InsertObjectAtIndex(object objc.ID, idx uint) {
 	x.inner.InsertObjectAtIndex(object, idx)
 }
 
+// Removes a the object at the specified index from the mutable ordered set.
+//
 // RemoveObjectAtIndex calls the underlying RemoveObjectAtIndex.
 func (x *MutableOrderedSet) RemoveObjectAtIndex(idx uint) {
 	x.inner.RemoveObjectAtIndex(idx)
 }
 
+// Replaces the object at the specified index with the new object.
+//
 // ReplaceObjectAtIndexWithObject calls the underlying ReplaceObjectAtIndexWithObject.
 func (x *MutableOrderedSet) ReplaceObjectAtIndexWithObject(idx uint, object objc.ID) {
 	x.inner.ReplaceObjectAtIndexWithObject(idx, object)
 }
 
+// Appends a given object to the end of the mutable ordered set, if it is not already a member.
+//
 // AddObject calls the underlying AddObject.
 func (x *MutableOrderedSet) AddObject(object objc.ID) {
 	x.inner.AddObject(object)
 }
 
+// Appends the given number of objects from a given C array to the end of the mutable ordered set.
+//
 // AddObjectsCount calls the underlying AddObjectsCount.
 func (x *MutableOrderedSet) AddObjectsCount(objects unsafe.Pointer, count uint) {
 	x.inner.AddObjectsCount(objects, count)
 }
 
+// Appends to the end of the mutable ordered set each object contained in a given array that is not already a member.
+//
 // AddObjectsFromArray calls the underlying AddObjectsFromArray.
 func (x *MutableOrderedSet) AddObjectsFromArray(array *raw.NSArray[objc.ID]) {
 	x.inner.AddObjectsFromArray(array)
 }
 
+// Exchanges the object at the specified index with the object at the other index.
+//
 // ExchangeObjectAtIndexWithObjectAtIndex calls the underlying ExchangeObjectAtIndexWithObjectAtIndex.
 func (x *MutableOrderedSet) ExchangeObjectAtIndexWithObjectAtIndex(idx1 uint, idx2 uint) {
 	x.inner.ExchangeObjectAtIndexWithObjectAtIndex(idx1, idx2)
 }
 
+// Moves the objects at the specified indexes to the new location.
+//
 // MoveObjectsAtIndexesToIndex calls the underlying MoveObjectsAtIndexesToIndex.
 func (x *MutableOrderedSet) MoveObjectsAtIndexesToIndex(indexes *raw.NSIndexSet, idx uint) {
 	x.inner.MoveObjectsAtIndexesToIndex(indexes, idx)
 }
 
+// Inserts the objects in the array at the specified indexes.
+//
 // InsertObjectsAtIndexes calls the underlying InsertObjectsAtIndexes.
 func (x *MutableOrderedSet) InsertObjectsAtIndexes(objects *raw.NSArray[objc.ID], indexes *raw.NSIndexSet) {
 	x.inner.InsertObjectsAtIndexes(objects, indexes)
 }
 
+// Appends or replaces the object at the specified index.
+//
 // SetObjectAtIndex calls the underlying SetObjectAtIndex.
 func (x *MutableOrderedSet) SetObjectAtIndex(obj objc.ID, idx uint) {
 	x.inner.SetObjectAtIndex(obj, idx)
 }
 
+// Replaces the given object at the specified index of the mutable ordered set.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *MutableOrderedSet) SetObjectAtIndexedSubscript(obj objc.ID, idx uint) {
 	x.inner.SetObjectAtIndexedSubscript(obj, idx)
 }
 
+// Replaces the objects in the receiving mutable ordered set at the range with the specified number of objects from a given C array.
+//
 // ReplaceObjectsInRangeWithObjectsCount calls the underlying ReplaceObjectsInRangeWithObjectsCount.
 func (x *MutableOrderedSet) ReplaceObjectsInRangeWithObjectsCount(range_ raw.NSRange, objects unsafe.Pointer, count uint) {
 	x.inner.ReplaceObjectsInRangeWithObjectsCount(range_, objects, count)
 }
 
+// Replaces the objects at the specified indexes with the new objects.
+//
 // ReplaceObjectsAtIndexesWithObjects calls the underlying ReplaceObjectsAtIndexesWithObjects.
 func (x *MutableOrderedSet) ReplaceObjectsAtIndexesWithObjects(indexes *raw.NSIndexSet, objects *raw.NSArray[objc.ID]) {
 	x.inner.ReplaceObjectsAtIndexesWithObjects(indexes, objects)
 }
 
+// Removes from the mutable ordered set each of the objects within a given range.
+//
 // RemoveObjectsInRange calls the underlying RemoveObjectsInRange.
 func (x *MutableOrderedSet) RemoveObjectsInRange(range_ raw.NSRange) {
 	x.inner.RemoveObjectsInRange(range_)
 }
 
+// Removes the objects at the specified indexes from the mutable ordered set.
+//
 // RemoveObjectsAtIndexes calls the underlying RemoveObjectsAtIndexes.
 func (x *MutableOrderedSet) RemoveObjectsAtIndexes(indexes *raw.NSIndexSet) {
 	x.inner.RemoveObjectsAtIndexes(indexes)
 }
 
+// Removes all the objects from the mutable ordered set.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MutableOrderedSet) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()
 }
 
+// Removes a given object from the mutable ordered set.
+//
 // RemoveObject calls the underlying RemoveObject.
 func (x *MutableOrderedSet) RemoveObject(object objc.ID) {
 	x.inner.RemoveObject(object)
 }
 
+// Removes the objects in the array from the mutable ordered set.
+//
 // RemoveObjectsInArray calls the underlying RemoveObjectsInArray.
 func (x *MutableOrderedSet) RemoveObjectsInArray(array *raw.NSArray[objc.ID]) {
 	x.inner.RemoveObjectsInArray(array)
 }
 
+// Removes from the receiving ordered set each object that isn’t a member of another ordered set.
+//
 // IntersectOrderedSet calls the underlying IntersectOrderedSet.
 func (x *MutableOrderedSet) IntersectOrderedSet(other *raw.NSOrderedSet[objc.ID]) {
 	x.inner.IntersectOrderedSet(other)
 }
 
+// Removes each object in another given ordered set from the receiving mutable ordered set, if present.
+//
 // MinusOrderedSet calls the underlying MinusOrderedSet.
 func (x *MutableOrderedSet) MinusOrderedSet(other *raw.NSOrderedSet[objc.ID]) {
 	x.inner.MinusOrderedSet(other)
 }
 
+// Adds each object in another given ordered set to the receiving mutable ordered set, if not present.
+//
 // UnionOrderedSet calls the underlying UnionOrderedSet.
 func (x *MutableOrderedSet) UnionOrderedSet(other *raw.NSOrderedSet[objc.ID]) {
 	x.inner.UnionOrderedSet(other)
 }
 
+// Removes from the receiving ordered set each object that isn’t a member of another set.
+//
 // IntersectSet calls the underlying IntersectSet.
 func (x *MutableOrderedSet) IntersectSet(other *raw.NSSet[objc.ID]) {
 	x.inner.IntersectSet(other)
 }
 
+// Removes each object in another given set from the receiving mutable ordered set, if present.
+//
 // MinusSet calls the underlying MinusSet.
 func (x *MutableOrderedSet) MinusSet(other *raw.NSSet[objc.ID]) {
 	x.inner.MinusSet(other)
 }
 
+// Adds each object in another given set to the receiving mutable ordered set, if not present.
+//
 // UnionSet calls the underlying UnionSet.
 func (x *MutableOrderedSet) UnionSet(other *raw.NSSet[objc.ID]) {
 	x.inner.UnionSet(other)
 }
 
+// Sorts the mutable ordered set using the comparison method specified by the comparator block.
+//
 // SortUsingComparator calls the underlying SortUsingComparator.
 func (x *MutableOrderedSet) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	x.inner.SortUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Sorts the mutable ordered set using the specified options and the comparison method specified by a given comparator block.
+//
 // SortWithOptionsUsingComparator calls the underlying SortWithOptionsUsingComparator.
 func (x *MutableOrderedSet) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	x.inner.SortWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Sorts the specified range of the mutable ordered set using the specified options and the comparison method specified by a given comparator block.
+//
 // SortRangeOptionsUsingComparator calls the underlying SortRangeOptionsUsingComparator.
 func (x *MutableOrderedSet) SortRangeOptionsUsingComparator(range_ raw.NSRange, opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	x.inner.SortRangeOptionsUsingComparator(range_, raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
@@ -196,11 +254,15 @@ func (x *MutableOrderedSet) ApplyDifference(difference *raw.NSOrderedCollectionD
 	x.inner.ApplyDifference(difference)
 }
 
+// Sorts the receiving ordered set using a given array of sort descriptors.
+//
 // SortUsingDescriptors calls the underlying SortUsingDescriptors.
 func (x *MutableOrderedSet) SortUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) {
 	x.inner.SortUsingDescriptors(sortDescriptors)
 }
 
+// Evaluates a given predicate against the mutable ordered set’s content and leaves only objects that match.
+//
 // FilterUsingPredicate calls the underlying FilterUsingPredicate.
 func (x *MutableOrderedSet) FilterUsingPredicate(p *raw.NSPredicate) {
 	x.inner.FilterUsingPredicate(p)

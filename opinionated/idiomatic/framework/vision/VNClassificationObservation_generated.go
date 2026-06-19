@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents classification information that an image-analysis request produces.
+//
 // ClassificationObservation wraps [raw.VNClassificationObservation] with a fluent Go API.
 type ClassificationObservation struct {
 	inner *raw.VNClassificationObservation
@@ -45,14 +47,14 @@ func (x *ClassificationObservation) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @brief	Determine whether or not the observation's operation point for a specific precision has a minimum recall value. @param minimumRecall	The minimum recall desired for an operation point. @param precision		The precision value used to select the operation point. @return YES if the recall value for the operation point specified by a precision value has the minimum value; otherwise, NO.
+// Determines whether the observation for a specific precision has a minimum recall value.
 //
 // HasMinimumRecallForPrecision calls the underlying HasMinimumRecallForPrecision.
 func (x *ClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
 	return x.inner.HasMinimumRecallForPrecision(minimumRecall, precision)
 }
 
-// @brief	Determine whether or not the observation's operation point for a specific recall has a minimum precision value. @param minimumPrecision	The minimum precision desired for an operation point. @param recall		The recall value used to select the operation point. @return YES if the precision value for the operation point specified by a recall value has the minimum value; otherwise, NO.
+// Determines whether the observation for a specific recall has a minimum precision value.
 //
 // HasMinimumPrecisionForRecall calls the underlying HasMinimumPrecisionForRecall.
 func (x *ClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {

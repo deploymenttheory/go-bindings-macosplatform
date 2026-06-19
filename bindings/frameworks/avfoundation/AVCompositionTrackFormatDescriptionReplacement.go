@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a format description and its replacement.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcompositiontrackformatdescriptionreplacement
 type AVCompositionTrackFormatDescriptionReplacement struct {
 	foundation.NSObject

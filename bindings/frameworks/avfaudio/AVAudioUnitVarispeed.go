@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that allows control of the playback rate.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitvarispeed
 type AVAudioUnitVarispeed struct {
 	AVAudioUnitTimeEffect

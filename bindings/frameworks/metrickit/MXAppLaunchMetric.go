@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about app launch time.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxapplaunchmetric
 type MXAppLaunchMetric struct {
 	MXMetric
@@ -35,24 +37,36 @@ func MXAppLaunchMetricFromID(id objc.ID) *MXAppLaunchMetric {
 
 // @property      histogrammedTimeToFirstDraw @abstract      Histogrammed application time-to-first-draw data. @discussion    Dimensioned as NSUnitDuration. @discussion    This represents the time when the first CA commit is finished.
 func (o *MXAppLaunchMetric) HistogrammedTimeToFirstDraw() *MXHistogram[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppLaunchMetricSelHistogrammedTimeToFirstDraw)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppLaunchMetricSelHistogrammedTimeToFirstDraw)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXHistogramFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      histogrammedApplicationResumeTime @abstract      Histogrammed application resume time data. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXAppLaunchMetric) HistogrammedApplicationResumeTime() *MXHistogram[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppLaunchMetricSelHistogrammedApplicationResumeTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppLaunchMetricSelHistogrammedApplicationResumeTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXHistogramFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      histogrammedOptimizedTimeToFirstDraw @abstract      Histogrammed optimized application time-to-first-draw data. @discussion    Dimensioned as NSUnitDuration. @discussion    This represents the time when the first CA commit is finished where the application launch has been optimized by the system. @discussion    In iOS 15, the system will opportunistically start applications that are not running in the background to reduce the amount of time a user may have to wait before an application is usable. These launches can occur after a system reboot and periodically as system conditions allow.
 func (o *MXAppLaunchMetric) HistogrammedOptimizedTimeToFirstDraw() *MXHistogram[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppLaunchMetricSelHistogrammedOptimizedTimeToFirstDraw)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppLaunchMetricSelHistogrammedOptimizedTimeToFirstDraw)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXHistogramFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      histogrammedExtendedLaunch @abstract      Histogrammed extended launch data. @discussion    Dimensioned as NSUnitDuration. @discussion    This represents the time when the app has drawn the first frame and finishes all extended launch tasks that assigned by the developer.
 func (o *MXAppLaunchMetric) HistogrammedExtendedLaunch() *MXHistogram[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppLaunchMetricSelHistogrammedExtendedLaunch)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppLaunchMetricSelHistogrammedExtendedLaunch)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXHistogramFromID[*foundation.NSUnitDuration](_ret)
 }

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that modifies one or more records.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckmodifyrecordsoperation
 type CKModifyRecordsOperation struct {
 	CKDatabaseOperation
@@ -53,7 +55,7 @@ func CKModifyRecordsOperationFromID(id objc.ID) *CKModifyRecordsOperation {
 	return o
 }
 
-// Creates an empty modify records operation. You must set at least one of the “CKModifyRecordsOperation/recordsToSave“ or “CKModifyRecordsOperation/recordIDsToDelete“ properties before you execute the operation.
+// Creates an empty modify records operation.
 func (o *CKModifyRecordsOperation) Init() *CKModifyRecordsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordsOperationSelInit)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *CKModifyRecordsOperation) Init() *CKModifyRecordsOperation {
 	return CKModifyRecordsOperationFromID(_ret)
 }
 
-// Creates an operation for modifying the specified records. - Parameters: - records: The records to save. You can specify `nil` for this parameter. - recordIDs: The IDs of the records to delete. You can specify `nil` for this parameter. The records that you intend to save or delete must all reside in the same database, which you specify when you configure the operation. If your app saves a record in a database that doesn't exist, the server creates the database.
+// Creates an operation for modifying the specified records.
 func (o *CKModifyRecordsOperation) InitWithRecordsToSaveRecordIDsToDelete(records *foundation.NSArray[*CKRecord], recordIDs *foundation.NSArray[*CKRecordID]) *CKModifyRecordsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordsOperationSelInitWithRecordsToSaveRecordIDsToDelete, records.Ptr(), recordIDs.Ptr())
 	if _ret != 0 {

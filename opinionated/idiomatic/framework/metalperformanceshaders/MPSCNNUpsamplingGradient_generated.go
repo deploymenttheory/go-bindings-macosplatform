@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient filter that upsamples an existing Metal Performance Shaders image.
+//
 // CNNUpsamplingGradient wraps [raw.MPSCNNUpsamplingGradient] with a fluent Go API.
 type CNNUpsamplingGradient struct {
 	inner *raw.MPSCNNUpsamplingGradient
@@ -183,7 +185,7 @@ func (x *CNNUpsamplingGradient) WithDestinationImageAllocator(destinationImageAl
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNUpsamplingGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingGradient {
@@ -191,7 +193,7 @@ func (x *CNNUpsamplingGradient) WithOptions(options mpscore.MPSKernelOptions) *C
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNUpsamplingGradient) WithLabel(label string) *CNNUpsamplingGradient {

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Perlin noise is useful for creating natural-looking textures and realistic-looking terrain.
+// A procedural noise generator whose output is a type of fractal coherent noise resembling natural phenomena such as clouds and terrain.
 //
 // PerlinNoiseSource wraps [raw.GKPerlinNoiseSource] with a fluent Go API.
 type PerlinNoiseSource struct {
@@ -31,6 +31,8 @@ func PerlinNoiseSourceFromID(id objc.ID) *PerlinNoiseSource {
 	return &PerlinNoiseSource{inner: raw.GKPerlinNoiseSourceFromID(id)}
 }
 
+// Initializes a Perlin noise source with the specified parameters.
+//
 // NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed creates a new [PerlinNoiseSource].
 func NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *PerlinNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPerlinNoiseSource")), objc.RegisterName("alloc"))
@@ -38,30 +40,40 @@ func NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequ
 	return &PerlinNoiseSource{inner: raw.GKPerlinNoiseSourceFromID(_id)}
 }
 
+// The rate at which successive octaves of the noise function decrease in amplitude.
+//
 // WithPersistence sets the persistence property and returns the receiver for chaining.
 func (x *PerlinNoiseSource) WithPersistence(persistence float64) *PerlinNoiseSource {
 	x.inner.SetPersistence(persistence)
 	return x
 }
 
+// A value that determines the size and spacing of features in generated noise.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *PerlinNoiseSource) WithFrequency(frequency float64) *PerlinNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
 	return x
 }
 
+// The number of octaves of the underlying noise function to use for generating noise.
+//
 // WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
 func (x *PerlinNoiseSource) WithOctaveCount(octaveCount int) *PerlinNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
 	return x
 }
 
+// The rate at which successive octaves of the noise function increase in frequency.
+//
 // WithLacunarity sets the lacunarity property and returns the receiver for chaining.
 func (x *PerlinNoiseSource) WithLacunarity(lacunarity float64) *PerlinNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
 	return x
 }
 
+// The value that determines the specific configuration of noise produced by the noise source.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetSeed(seed)

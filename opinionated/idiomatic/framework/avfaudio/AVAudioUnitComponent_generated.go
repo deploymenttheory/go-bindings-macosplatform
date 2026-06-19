@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides details about an audio unit.
+//
 // AudioUnitComponent wraps [raw.AVAudioUnitComponent] with a fluent Go API.
 type AudioUnitComponent struct {
 	inner *raw.AVAudioUnitComponent
@@ -39,7 +41,7 @@ func NewAudioUnitComponent() *AudioUnitComponent {
 	return &AudioUnitComponent{inner: raw.AVAudioUnitComponentFromID(_id)}
 }
 
-// @property userTagNames @abstract User tags represent the tags from the current user.
+// An array of tags the user creates.
 //
 // WithUserTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitComponent) WithUserTagNames(items ...*foundation.NSString) *AudioUnitComponent {
@@ -62,7 +64,7 @@ func (x *AudioUnitComponent) WithUserTagNames(items ...*foundation.NSString) *Au
 	return x
 }
 
-// @method supportsNumberInputChannels:outputChannels: @abstract returns YES if the AudioComponent supports the input/output channel configuration
+// Gets a Boolean value that indicates whether the audio unit component supports the specified number of input and output channels.
 //
 // SupportsNumberInputChannelsOutputChannels calls the underlying SupportsNumberInputChannelsOutputChannels.
 func (x *AudioUnitComponent) SupportsNumberInputChannelsOutputChannels(numInputChannels int, numOutputChannels int) bool {

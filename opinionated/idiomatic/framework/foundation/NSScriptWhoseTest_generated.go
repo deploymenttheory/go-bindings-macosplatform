@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that provides the basis for testing specifiers one at a time or in groups.
+//
 // ScriptWhoseTest wraps [raw.NSScriptWhoseTest] with a fluent Go API.
 type ScriptWhoseTest struct {
 	inner *raw.NSScriptWhoseTest
@@ -48,6 +50,8 @@ func (x *ScriptWhoseTest) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
+//
 // IsTrue calls the underlying IsTrue.
 func (x *ScriptWhoseTest) IsTrue() bool {
 	return x.inner.IsTrue()

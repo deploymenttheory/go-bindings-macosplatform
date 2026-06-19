@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Provides options controlling how to compile a pipeline state.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4pipelineoptions
 type MTL4PipelineOptions struct {
 	foundation.NSObject

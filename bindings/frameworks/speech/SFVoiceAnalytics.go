@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of vocal analysis metrics.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfvoiceanalytics
 type SFVoiceAnalytics struct {
 	foundation.NSObject

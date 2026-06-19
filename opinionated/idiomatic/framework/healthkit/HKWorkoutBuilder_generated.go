@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A builder object that incrementally constructs a workout.
+//
 // WorkoutBuilder wraps [raw.HKWorkoutBuilder] with a fluent Go API.
 type WorkoutBuilder struct {
 	inner *raw.HKWorkoutBuilder
@@ -32,7 +34,7 @@ func WorkoutBuilderFromID(id objc.ID) *WorkoutBuilder {
 	return &WorkoutBuilder{inner: raw.HKWorkoutBuilderFromID(id)}
 }
 
-// @method        initWithHealthStore:configuration:device: @abstract      The designated initializer to create an HKWorkoutBuilder. @discussion    Creates a new HKWorkoutBuilder unconnected to any HKWorkoutSession or any sources of data. @param         healthStore     Specifies the HKHealthStore object to use for building the workout. The store is retained until the builder is finished and a workout has been saved or discarded. @param         configuration   The workout configuration to be used. @param         device          The HKDevice to attach to the resulting HKWorkout.
+// Returns a new workout builder object that is not connected to a workout session or other data source.
 //
 // NewWorkoutBuilderWithHealthStoreConfigurationDevice creates a new [WorkoutBuilder].
 func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *raw.HKHealthStore, configuration *raw.HKWorkoutConfiguration, device *raw.HKDevice) *WorkoutBuilder {
@@ -41,84 +43,84 @@ func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *raw.HKHeal
 	return &WorkoutBuilder{inner: raw.HKWorkoutBuilderFromID(_id)}
 }
 
-// @method        beginCollectionWithStartDate:error: @abstract      Sets the workout start date and activates the workout builder. @discussion    Calling this method is required before any samples, events or metadata can be added to the builder. @param         startDate   The start date of the workout. @param         completion  Called once data collection has started or has failed to start.
+// Sets the workout’s start date and begins building the workout.
 //
 // BeginCollectionWithStartDateCompletion calls the underlying BeginCollectionWithStartDateCompletion.
 func (x *WorkoutBuilder) BeginCollectionWithStartDateCompletion(startDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
 	x.inner.BeginCollectionWithStartDateCompletion(startDate, completion)
 }
 
-// @method        addSamples:completion: @discussion    Adds new samples to the builder instance. This method can be called multiple times to add samples incrementally to the builder. The samples will be saved to the database if they have not already been saved. The constraints of -[HKHealthStore saveObject:withCompletion:] apply to this method as well. The start date of the samples must be later than the start date of the receiver. It is an error to call this method after finishWorkoutWithCompletion: has been called. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param         samples     The samples to add to the workout. @param         completion  Block to be called when the insertion is complete. If success is YES, the samples were added to the builder successfully. If success is NO, error will be non-nil and contain the error encountered while adding the new samples.
+// Adds a sample to be associated with the workout.
 //
 // AddSamplesCompletion calls the underlying AddSamplesCompletion.
 func (x *WorkoutBuilder) AddSamplesCompletion(samples *foundation.NSArray[*raw.HKSample], completion func(bool, unsafe.Pointer)) {
 	x.inner.AddSamplesCompletion(samples, completion)
 }
 
-// @method        addWorkoutEvents:completion: @discussion    Adds new workout events to the builder instance. This method can be called many times to add workout events incrementally to the builder. It is an error to call this method after finishWorkoutWithCompletion: has been called. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param         workoutEvents   The events to add to the builder. @param         completion      Block to be called when the addition of events to the builder is complete. If success is YES, the events were added to the builder successfully. If success is NO, error will be non-null and will contain the error encountered during the insertion operation.
+// Adds a workout event to the builder.
 //
 // AddWorkoutEventsCompletion calls the underlying AddWorkoutEventsCompletion.
 func (x *WorkoutBuilder) AddWorkoutEventsCompletion(workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], completion func(bool, unsafe.Pointer)) {
 	x.inner.AddWorkoutEventsCompletion(workoutEvents, completion)
 }
 
-// @method        addMetadata:completion: @discussion    Adds new metadata to the builder instance. This method can be called more than once; each time the newly provided metadata will be merged with previously added metadata in the same manner as -[NSMutableDictionary addEntriesFromDictionary:]. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param         metadata    The metadata to add to the workout. @param         completion  Block to be called when the addition of metadata to the builder is complete. If success is YES, the metadata has been added to the builder successfully. If success is NO, error will be non-null and will contain the error encountered during the insertion operation. When an error occurs, the builder's metadata property will remain unchanged.
+// Adds metadata to be saved with the workout.
 //
 // AddMetadataCompletion calls the underlying AddMetadataCompletion.
 func (x *WorkoutBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
 	x.inner.AddMetadataCompletion(metadata, completion)
 }
 
-// @method        addWorkoutActivity:completion: @discussion    Adds a new workout activity to the builder instance. This method can be called many times to add workout activities incrementally to the builder. It is an error to call this method after finishWorkoutWithCompletion: has been called. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param         workoutActivity     The activity to add to the builder. @param         completion          Block to be called when the addition of the activity to the builder is complete. If success is YES, the activity was added to the builder successfully. If success is NO, error will be non-null and will contain the error encountered during the insertion operation.
+// Adds a workout activity to the workout builder.
 //
 // AddWorkoutActivityCompletion calls the underlying AddWorkoutActivityCompletion.
 func (x *WorkoutBuilder) AddWorkoutActivityCompletion(workoutActivity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
 	x.inner.AddWorkoutActivityCompletion(workoutActivity, completion)
 }
 
-// @method        updateActivityWithUUID:endDate:completion: @discussion    Sets the end date on an already added activity. It is an error to call this method after finishWorkoutWithCompletion: has been called. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param         UUID        The UUID of the workout activity to update. @param         endDate     The end date to set on the activity @param         completion  Block to be called when the update of the end date on the activity is complete. If success is YES, the end date was set to the actvity successfully. If success is NO, error will be non-null and will contain the error encountered during the update operation.
+// Sets the end date for a workout activity that you’ve already added to the workout builder.
 //
 // UpdateActivityWithUUIDEndDateCompletion calls the underlying UpdateActivityWithUUIDEndDateCompletion.
 func (x *WorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uUID *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
 	x.inner.UpdateActivityWithUUIDEndDateCompletion(uUID, endDate, completion)
 }
 
-// @method        updateActivityWithUUID:addMetadata:completion: @discussion    Adds new metadata to an already added activity. This method can be called more than once; each time the newly provided metadata will be merged with previously added metadata in the same manner as -[NSMutableDictionary addEntriesFromDictionary:]. It is an error to call this method after finishWorkoutWithCompletion: has been called. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param         UUID        The UUID of the workout activity to update. @param         metadata    The metadata to add to the workout activity. @param         completion  Block to be called when the addition of metadata to the activity is complete. If success is YES, the metadata has been added to the activity successfully. If success is NO, error will be non-null and will contain the error encountered during the insertion operation. When an error occurs, the activity's metadata property will remain unchanged.
+// Adds metadata to a workout activity that you’ve already added to the workout builder.
 //
 // UpdateActivityWithUUIDAddMedatataCompletion calls the underlying UpdateActivityWithUUIDAddMedatataCompletion.
 func (x *WorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uUID *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
 	x.inner.UpdateActivityWithUUIDAddMedatataCompletion(uUID, metadata, completion)
 }
 
-// @method        endCollectionWithEndDate:error: @abstract      Sets the workout end date and deactivates the workout builer. @discussion    Calling this method is required before you finish a workout builder. @param         endDate     The end date of the workout. @param         completion  Called once data collection has stopped or has failed to stop.
+// Stops the collection of data, sets the workout’s end date, and deactivates the workout builder.
 //
 // EndCollectionWithEndDateCompletion calls the underlying EndCollectionWithEndDateCompletion.
 func (x *WorkoutBuilder) EndCollectionWithEndDateCompletion(endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
 	x.inner.EndCollectionWithEndDateCompletion(endDate, completion)
 }
 
-// @method        finishWorkoutWithCompletion: @discussion    Creates and saves an HKWorkout using samples and events that have been added to workout previously. @param         completion  Block to be called after the HKWorkout object has been created and saved. If the returned workout is nil, an error may have occurred in which case error will be non-nil. If both workout and error are nil then finishing the workout succeeded but the workout sample is not available because the device is locked.
+// Creates the workout, using the samples and events added to the builder, and saves it to the HealthKit store.
 //
 // FinishWorkoutWithCompletion calls the underlying FinishWorkoutWithCompletion.
 func (x *WorkoutBuilder) FinishWorkoutWithCompletion(completion func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.FinishWorkoutWithCompletion(completion)
 }
 
-// @method        discardWorkout @discussion    Finishes building the workout and discards the result instead of saving it. Samples that were added to the workout will not be deleted. Adding samples, events, and metadata to the receiver after discardWorkout has been called is an error.
+// Stops the collection of data and discards the current results without saving the workout.
 //
 // DiscardWorkout calls the underlying DiscardWorkout.
 func (x *WorkoutBuilder) DiscardWorkout() {
 	x.inner.DiscardWorkout()
 }
 
-// @method        elapsedTimeAtDate: @abstract      The elapsed duration of the workout evaluated at the specified date. The duration does not include periods when the workout was paused, which are the intervals between pause and resume events.
+// Calculates the duration of the workout at the specified time.
 //
 // ElapsedTimeAtDate calls the underlying ElapsedTimeAtDate.
 func (x *WorkoutBuilder) ElapsedTimeAtDate(date *foundation.NSDate) float64 {
 	return x.inner.ElapsedTimeAtDate(date)
 }
 
-// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the receiver. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+// Returns the statistics calculated for matching samples added to the workout.
 //
 // StatisticsForType calls the underlying StatisticsForType.
 func (x *WorkoutBuilder) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
@@ -129,7 +131,7 @@ func (x *WorkoutBuilder) StatisticsForType(quantityType *raw.HKQuantityType) *St
 	return &Statistics{inner: _r}
 }
 
-// @method        seriesBuilderForType: @abstract      Retrieves the associated series builder for the specified type. @discussion    Retrieves, and creates if it does not already exist, the series builder for the specified type. The series constructed with the returned builder will be associated with the workout when it is finished. @param         seriesType  The series type for which the builder should be retrieved.
+// Returns the series builder for the specified type, creating a new builder, if necessary.
 //
 // SeriesBuilderForType calls the underlying SeriesBuilderForType.
 func (x *WorkoutBuilder) SeriesBuilderForType(seriesType *raw.HKSeriesType) *SeriesBuilder {

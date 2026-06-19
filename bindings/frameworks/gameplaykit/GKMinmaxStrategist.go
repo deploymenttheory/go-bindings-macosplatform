@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The Minmax Strategist is a generic AI that selects a game model update for a given player that maximises potential gain, while minimising potential loss. It does this by examining all of the updates available to the player in question, extrapolating the potential moves opposing players may take, projecting out maxLookAheadDepth number of turns. The selected update will result in the greatest potential gain, balanced against the potential gain of other players.
+// An AI that chooses moves in turn-based games using a deterministic strategy.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkminmaxstrategist
 type GKMinmaxStrategist struct {
@@ -35,13 +35,13 @@ func GKMinmaxStrategistFromID(id objc.ID) *GKMinmaxStrategist {
 	return o
 }
 
-// Selects the best move for the specified player. If randomSource is not nil, it will randomly select which move to use if there are one or more ties for the best. Returns nil if the player is invalid, the player is not a part of the game model, or the player has no valid moves available.
+// Computes and returns the best possible move for the specified player.
 func (o *GKMinmaxStrategist) BestMoveForPlayer(player GKGameModelPlayer) GKGameModelUpdate {
 	_ret := objc.Send[GKGameModelUpdate](o.Ptr(), _gKMinmaxStrategistSelBestMoveForPlayer, player)
 	return _ret
 }
 
-// Selects one move from the set of N best moves for the specified player, where N is equal to numMovesToConsider. If randomSource is nil, it will not randomly select, but will behave like bestMoveForPlayer and return the first best move. Returns nil if the player is invalid, the player is not a part of the game model, or the player has no valid moves available.
+// Computes several of the best possible moves for the specified player, and returns a move randomly selected from among them.
 func (o *GKMinmaxStrategist) RandomMoveForPlayerFromNumberOfBestMoves(player GKGameModelPlayer, numMovesToConsider int) GKGameModelUpdate {
 	_ret := objc.Send[GKGameModelUpdate](o.Ptr(), _gKMinmaxStrategistSelRandomMoveForPlayerFromNumberOfBestMoves, player, numMovesToConsider)
 	return _ret

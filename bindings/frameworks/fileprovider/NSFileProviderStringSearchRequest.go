@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that contains details of a string-based search request.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileproviderstringsearchrequest
 type NSFileProviderStringSearchRequest struct {
 	foundation.NSObject

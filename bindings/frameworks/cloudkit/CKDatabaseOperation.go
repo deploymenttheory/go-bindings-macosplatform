@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for operations that act upon databases in CloudKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckdatabaseoperation
 type CKDatabaseOperation struct {
 	CKOperation

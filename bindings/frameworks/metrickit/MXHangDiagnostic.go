@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a diagnostic report for an app that is too busy to handle user input responsively.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 type MXHangDiagnostic struct {
 	MXDiagnostic
@@ -42,6 +44,9 @@ func (o *MXHangDiagnostic) CallStackTree() *MXCallStackTree {
 
 // @property      hangDuration @abstract      Total hang duration for this diagnostic. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXHangDiagnostic) HangDuration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXHangDiagnosticSelHangDuration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXHangDiagnosticSelHangDuration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }

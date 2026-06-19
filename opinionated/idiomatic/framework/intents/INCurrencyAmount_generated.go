@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An amount of money to transfer during a financial transaction.
+//
 // CurrencyAmount wraps [raw.INCurrencyAmount] with a fluent Go API.
 type CurrencyAmount struct {
 	inner *raw.INCurrencyAmount
@@ -31,6 +33,8 @@ func CurrencyAmountFromID(id objc.ID) *CurrencyAmount {
 	return &CurrencyAmount{inner: raw.INCurrencyAmountFromID(id)}
 }
 
+// Initializes a currency amount object with the specified values.
+//
 // NewCurrencyAmountWithAmountCurrencyCode creates a new [CurrencyAmount].
 func NewCurrencyAmountWithAmountCurrencyCode(amount *foundation.NSDecimalNumber, currencyCode string) *CurrencyAmount {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCurrencyAmount")), objc.RegisterName("alloc"))

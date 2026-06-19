@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the default options to use when displaying contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactsuserdefaults
 type CNContactsUserDefaults struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func CNContactsUserDefaultsFromID(id objc.ID) *CNContactsUserDefaults {
 	return o
 }
 
+// The singleton contacts user defaults object.
 func CNContactsUserDefaultsSharedDefaults() *CNContactsUserDefaults {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactsUserDefaults), _cNContactsUserDefaultsSelSharedDefaults)
 	if _ret != 0 {

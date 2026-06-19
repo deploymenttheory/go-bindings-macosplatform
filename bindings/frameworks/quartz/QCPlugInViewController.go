@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qcpluginviewcontroller
 type QCPlugInViewController struct {
 	appkit.NSViewController
@@ -32,11 +34,13 @@ func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
 	return o
 }
 
+// Creates and initializes a controller for the specified QCPlugIn object and nib file.
 func (o *QCPlugInViewController) InitWithPlugInViewNibName(plugIn *QCPlugIn, name *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelInitWithPlugInViewNibName, plugIn.Ptr(), name.Ptr())
 	return _ret
 }
 
+// Returns the QCPlugIn object associated with the view controller for the custom patch.
 func (o *QCPlugInViewController) PlugIn() *QCPlugIn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelPlugIn)
 	if _ret != 0 {

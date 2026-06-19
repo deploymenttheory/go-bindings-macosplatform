@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that manages a window, usually a window stored in a nib file.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nswindowcontroller
 type NSWindowController struct {
 	NSResponder
@@ -62,6 +64,7 @@ func NSWindowControllerFromID(id objc.ID) *NSWindowController {
 	return o
 }
 
+// Returns a window controller initialized with a given window.
 func (o *NSWindowController) InitWithWindow(window *NSWindow) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindow, window.Ptr())
 	if _ret != 0 {
@@ -78,6 +81,7 @@ func (o *NSWindowController) InitWithCoder(coder *foundation.NSCoder) *NSWindowC
 	return NSWindowControllerFromID(_ret)
 }
 
+// Returns a window controller initialized with a nib file.
 func (o *NSWindowController) InitWithWindowNibName(windowNibName *foundation.NSString) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibName, windowNibName.Ptr())
 	if _ret != 0 {
@@ -86,6 +90,7 @@ func (o *NSWindowController) InitWithWindowNibName(windowNibName *foundation.NSS
 	return NSWindowControllerFromID(_ret)
 }
 
+// Returns a window controller initialized with a nib file and a specified owner for that nib file.
 func (o *NSWindowController) InitWithWindowNibNameOwner(windowNibName *foundation.NSString, owner objc.ID) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibNameOwner, windowNibName.Ptr(), owner)
 	if _ret != 0 {
@@ -94,6 +99,7 @@ func (o *NSWindowController) InitWithWindowNibNameOwner(windowNibName *foundatio
 	return NSWindowControllerFromID(_ret)
 }
 
+// Returns a window controller initialized with a nib file at an absolute path and a specified owner.
 func (o *NSWindowController) InitWithWindowNibPathOwner(windowNibPath *foundation.NSString, owner objc.ID) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibPathOwner, windowNibPath.Ptr(), owner)
 	if _ret != 0 {
@@ -102,14 +108,17 @@ func (o *NSWindowController) InitWithWindowNibPathOwner(windowNibPath *foundatio
 	return NSWindowControllerFromID(_ret)
 }
 
+// Sets the document edited flag for the window controller.
 func (o *NSWindowController) SetDocumentEdited(dirtyFlag bool) {
 	o.Ptr().Send(_nSWindowControllerSelSetDocumentEdited, dirtyFlag)
 }
 
+// Synchronizes the displayed window title and the represented filename with the information in the associated document.
 func (o *NSWindowController) SynchronizeWindowTitleWithDocumentName() {
 	o.Ptr().Send(_nSWindowControllerSelSynchronizeWindowTitleWithDocumentName)
 }
 
+// Returns the window title to be used for a given document display name.
 func (o *NSWindowController) WindowTitleForDocumentDisplayName(displayName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowTitleForDocumentDisplayName, displayName.Ptr())
 	if _ret != 0 {
@@ -118,22 +127,27 @@ func (o *NSWindowController) WindowTitleForDocumentDisplayName(displayName *foun
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sent before the window owned by the receiver is loaded.
 func (o *NSWindowController) WindowWillLoad() {
 	o.Ptr().Send(_nSWindowControllerSelWindowWillLoad)
 }
 
+// Sent after the window owned by the receiver has been loaded.
 func (o *NSWindowController) WindowDidLoad() {
 	o.Ptr().Send(_nSWindowControllerSelWindowDidLoad)
 }
 
+// Loads the receiver’s window from the nib file.
 func (o *NSWindowController) LoadWindow() {
 	o.Ptr().Send(_nSWindowControllerSelLoadWindow)
 }
 
+// Closes the window if it was loaded.
 func (o *NSWindowController) Close() {
 	o.Ptr().Send(_nSWindowControllerSelClose)
 }
 
+// Displays the window associated with the receiver.
 func (o *NSWindowController) ShowWindow(sender objc.ID) {
 	o.Ptr().Send(_nSWindowControllerSelShowWindow, sender)
 }
@@ -247,6 +261,7 @@ func (o *NSWindowController) Storyboard() *NSStoryboard {
 	return NSStoryboardFromID(_ret)
 }
 
+// Dismisses the window controller.
 func (o *NSWindowController) DismissController(sender objc.ID) {
 	o.Ptr().Send(_nSWindowControllerSelDismissController, sender)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// WebHistory objects are used to maintain the pages visited by users. Visited pages are represented by WebHistoryItem objects. You add and remove history items using the addItems: and removeItems: methods. These methods post appropriate notifications when items are added or removed so you can update the display. WebHistory organizes the WebHistoryItem objects by the day they were visited, ordered from most recent to oldest. You can request all the days that contain history items using the orderedLastVisitedDays method or request the items visited on a particular day using the orderedItemsLastVisitedOnDay: method. WebHistory objects can be loaded and saved by specifying a file URL (see loadFromURL:error:).
+//
 // WebHistory wraps [raw.WebHistory] with a fluent Go API.
 type WebHistory struct {
 	inner *raw.WebHistory
@@ -36,7 +38,7 @@ func NewWebHistory() *WebHistory {
 	return &WebHistory{inner: raw.WebHistoryFromID(_id)}
 }
 
-// @property historyItemLimit @abstract The maximum number of items that will be stored by the WebHistory.
+// The maximum number of web history items that can be stored.
 //
 // WithHistoryItemLimit sets the historyItemLimit property and returns the receiver for chaining.
 func (x *WebHistory) WithHistoryItemLimit(historyItemLimit int) *WebHistory {
@@ -44,7 +46,7 @@ func (x *WebHistory) WithHistoryItemLimit(historyItemLimit int) *WebHistory {
 	return x
 }
 
-// @property historyAgeInDaysLimit @abstract The maximum number of days to be read from stored history.
+// The maximum age of web history items that can be retrieved.
 //
 // WithHistoryAgeInDaysLimit sets the historyAgeInDaysLimit property and returns the receiver for chaining.
 func (x *WebHistory) WithHistoryAgeInDaysLimit(historyAgeInDaysLimit int) *WebHistory {
@@ -52,47 +54,49 @@ func (x *WebHistory) WithHistoryAgeInDaysLimit(historyAgeInDaysLimit int) *WebHi
 	return x
 }
 
-// @method loadFromURL:error: @param URL The URL to use to initialize the WebHistory. @param error Set to nil or an NSError instance if an error occurred. @abstract The designated initializer for WebHistory. @result Returns YES if successful, NO otherwise.
+// Loads the contents of the specified web history file.
 //
 // LoadFromURLError calls the underlying LoadFromURLError.
 func (x *WebHistory) LoadFromURLError(uRL string) (bool, error) {
 	return x.inner.LoadFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
-// @method saveToURL:error: @discussion Save history to URL. It is the client's responsibility to call this at appropriate times. @param URL The URL to use to save the WebHistory. @param error Set to nil or an NSError instance if an error occurred. @result Returns YES if successful, NO otherwise.
+// Saves the web history to the specified file.
 //
 // SaveToURLError calls the underlying SaveToURLError.
 func (x *WebHistory) SaveToURLError(uRL string) (bool, error) {
 	return x.inner.SaveToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
-// @method addItems: @param newItems An array of WebHistoryItems to add to the WebHistory.
+// Inserts or updates the specified items in the web history.
 //
 // AddItems calls the underlying AddItems.
 func (x *WebHistory) AddItems(newItems *foundation.NSArray[objc.ID]) {
 	x.inner.AddItems(newItems)
 }
 
-// @method removeItems: @param items An array of WebHistoryItems to remove from the WebHistory.
+// Removes the specified items from the web history.
 //
 // RemoveItems calls the underlying RemoveItems.
 func (x *WebHistory) RemoveItems(items *foundation.NSArray[objc.ID]) {
 	x.inner.RemoveItems(items)
 }
 
-// @method removeAllItems
+// Removes all items from the web history.
 //
 // RemoveAllItems calls the underlying RemoveAllItems.
 func (x *WebHistory) RemoveAllItems() {
 	x.inner.RemoveAllItems()
 }
 
+// Returns web history items that were last visited on the specified date.
+//
 // OrderedItemsLastVisitedOnDay calls the underlying OrderedItemsLastVisitedOnDay.
 func (x *WebHistory) OrderedItemsLastVisitedOnDay(calendarDate *foundation.NSCalendarDate) *foundation.NSArray[objc.ID] {
 	return x.inner.OrderedItemsLastVisitedOnDay(calendarDate)
 }
 
-// @method itemForURL: @abstract Get an item for a specific URL @param URL The URL of the history item to search for @result Returns an item matching the URL
+// Returns the web history item that corresponds to the specified web location.
 //
 // ItemForURL calls the underlying ItemForURL.
 func (x *WebHistory) ItemForURL(uRL string) *WebHistoryItem {

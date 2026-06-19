@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Messages
+//
 // MTRBaseClusterMessages wraps [raw.MTRBaseClusterMessages] with a fluent Go API.
 type MTRBaseClusterMessages struct {
 	inner *raw.MTRBaseClusterMessages
@@ -42,68 +44,258 @@ func NewMTRBaseClusterMessagesWithDeviceEndpointIDQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterMessages{inner: raw.MTRBaseClusterMessagesFromID(_id)}
 }
 
-// Command PresentMessagesRequest Command for requesting messages be presented
+// Command PresentMessagesRequest
 //
 // PresentMessagesRequestWithParamsCompletion calls the underlying PresentMessagesRequestWithParamsCompletion.
 func (x *MTRBaseClusterMessages) PresentMessagesRequestWithParamsCompletion(params *raw.MTRMessagesClusterPresentMessagesRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.PresentMessagesRequestWithParamsCompletion(params, completion)
 }
 
-// Command CancelMessagesRequest Command for cancelling message present requests
+// Command CancelMessagesRequest
 //
 // CancelMessagesRequestWithParamsCompletion calls the underlying CancelMessagesRequestWithParamsCompletion.
 func (x *MTRBaseClusterMessages) CancelMessagesRequestWithParamsCompletion(params *raw.MTRMessagesClusterCancelMessagesRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.CancelMessagesRequestWithParamsCompletion(params, completion)
 }
 
-// ReadAttributeMessagesWithCompletion calls the underlying ReadAttributeMessagesWithCompletion.
-func (x *MTRBaseClusterMessages) ReadAttributeMessagesWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeMessagesWithCompletion(completion)
+// ReadAttributeMessagesWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) ReadAttributeMessagesWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeMessagesWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterMessages) SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeActiveMessageIDsWithCompletion calls the underlying ReadAttributeActiveMessageIDsWithCompletion.
-func (x *MTRBaseClusterMessages) ReadAttributeActiveMessageIDsWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeActiveMessageIDsWithCompletion(completion)
+// ReadAttributeActiveMessageIDsWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) ReadAttributeActiveMessageIDsWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeActiveMessageIDsWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterMessages) SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
-func (x *MTRBaseClusterMessages) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+// ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterMessages) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
-func (x *MTRBaseClusterMessages) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+// ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterMessages) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
-func (x *MTRBaseClusterMessages) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
-	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+// ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAttributeListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterMessages) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMessages) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -215,16 +407,16 @@ type MTRBaseClusterMessagesable interface {
 	Unwrap() *raw.MTRBaseClusterMessages
 	PresentMessagesRequestWithParamsCompletion(params *raw.MTRMessagesClusterPresentMessagesRequestParams, completion func(unsafe.Pointer))
 	CancelMessagesRequestWithParamsCompletion(params *raw.MTRMessagesClusterCancelMessagesRequestParams, completion func(unsafe.Pointer))
-	ReadAttributeMessagesWithCompletion(completion objc.Block)
-	SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
-	ReadAttributeActiveMessageIDsWithCompletion(completion objc.Block)
-	SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
-	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
-	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
-	ReadAttributeAttributeListWithCompletion(completion objc.Block)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeMessagesWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeMessagesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeActiveMessageIDsWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeActiveMessageIDsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
 	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
 	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)

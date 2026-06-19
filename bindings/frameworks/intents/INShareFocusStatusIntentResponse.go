@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Your app’s response to an intent that shares the user’s focus status.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/insharefocusstatusintentresponse
 type INShareFocusStatusIntentResponse struct {
 	INIntentResponse
@@ -31,6 +33,7 @@ func INShareFocusStatusIntentResponseFromID(id objc.ID) *INShareFocusStatusInten
 	return o
 }
 
+// Creates a response with the specified response code and user activity.
 func (o *INShareFocusStatusIntentResponse) InitWithCodeUserActivity(code INShareFocusStatusIntentResponseCode, userActivity *foundation.NSUserActivity) *INShareFocusStatusIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShareFocusStatusIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
 	if _ret != 0 {

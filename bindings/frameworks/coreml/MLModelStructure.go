@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An enum representing the structure of a model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructure
 type MLModelStructure struct {
 	foundation.NSObject

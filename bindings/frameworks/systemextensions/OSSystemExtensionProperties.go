@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Properties that identify a specific version of a system extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/systemextensions/ossystemextensionproperties
 type OSSystemExtensionProperties struct {
 	foundation.NSObject

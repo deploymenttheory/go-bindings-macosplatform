@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Perlin noise is useful for creating natural-looking textures and realistic-looking terrain.
+// A procedural noise generator whose output is a type of fractal coherent noise resembling natural phenomena such as clouds and terrain.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkperlinnoisesource
 type GKPerlinNoiseSource struct {
@@ -34,6 +34,7 @@ func GKPerlinNoiseSourceFromID(id objc.ID) *GKPerlinNoiseSource {
 	return o
 }
 
+// Creates a Perlin noise source with the specified parameters.
 func GKPerlinNoiseSourcePerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKPerlinNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPerlinNoiseSource), _gKPerlinNoiseSourceSelPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
 	if _ret != 0 {
@@ -42,6 +43,7 @@ func GKPerlinNoiseSourcePerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacu
 	return GKPerlinNoiseSourceFromID(_ret)
 }
 
+// Initializes a Perlin noise source with the specified parameters.
 func (o *GKPerlinNoiseSource) InitWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKPerlinNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPerlinNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
 	if _ret != 0 {

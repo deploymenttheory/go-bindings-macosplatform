@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a MIDI control change message.
+//
 // MIDIControlChangeEvent wraps [raw.AVMIDIControlChangeEvent] with a fluent Go API.
 type MIDIControlChangeEvent struct {
 	inner *raw.AVMIDIControlChangeEvent
@@ -29,7 +31,7 @@ func MIDIControlChangeEventFromID(id objc.ID) *MIDIControlChangeEvent {
 	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(id)}
 }
 
-// @method initWithChannel:messageType:value @abstract Initialize the event with a channel, a control change type, and a control value. @param channel The MIDI channel for the control change.  Range: 0-15. @param messageType The AVMIDIControlChangeMessageType indicating which MIDI control change message to send. @param value The value for this control change.  Range: Depends on the type (see the General MIDI specification).
+// Creates an event with a channel, control change type, and a value.
 //
 // NewMIDIControlChangeEventWithChannelMessageTypeValue creates a new [MIDIControlChangeEvent].
 func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageType AVMIDIControlChangeMessageType, value uint) *MIDIControlChangeEvent {
@@ -38,7 +40,7 @@ func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageT
 	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(_id)}
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIControlChangeEvent) WithChannel(channel uint) *MIDIControlChangeEvent {

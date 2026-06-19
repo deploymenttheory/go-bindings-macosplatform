@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A graph of points and curves that shapes the volume of a sound over distance.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseenvelopedistancemodelparameters
 type PHASEEnvelopeDistanceModelParameters struct {
 	PHASEDistanceModelParameters
@@ -30,7 +32,7 @@ func PHASEEnvelopeDistanceModelParametersFromID(id objc.ID) *PHASEEnvelopeDistan
 	return o
 }
 
-// @method initWithEnvelope @abstract Initialize a PHASEEnvelopeDistanceModelParameters with a PHASEEnvelope @param envelope An envelope object where x values are interpreted as distance and the y values interpreted as gain. @return An instance, or nil if initialization failed.
+// Creates the distance model parameters with an envelope.
 func (o *PHASEEnvelopeDistanceModelParameters) InitWithEnvelope(envelope *PHASEEnvelope) *PHASEEnvelopeDistanceModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeDistanceModelParametersSelInitWithEnvelope, envelope.Ptr())
 	if _ret != 0 {

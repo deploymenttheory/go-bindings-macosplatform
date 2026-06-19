@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object to create and manage the tunnel provider’s VPN configuration.
+//
 // NETunnelProviderManager wraps [raw.NETunnelProviderManager] with a fluent Go API.
 type NETunnelProviderManager struct {
 	inner *raw.NETunnelProviderManager
@@ -38,7 +40,7 @@ func NewNETunnelProviderManager() *NETunnelProviderManager {
 	return &NETunnelProviderManager{inner: raw.NETunnelProviderManagerFromID(_id)}
 }
 
-// @property safariDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled and the user navigates in Safari to a web site within one of these domains, the web site network traffic is routed through the per-app VPN.
+// The website domains that the system routes connections from the Safari app through a per-app VPN.
 //
 // WithSafariDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithSafariDomains(items ...*foundation.NSString) *NETunnelProviderManager {
@@ -61,7 +63,7 @@ func (x *NETunnelProviderManager) WithSafariDomains(items ...*foundation.NSStrin
 	return x
 }
 
-// @property mailDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Mail app to mail servers within one of these domains are routed through the per-app VPN.
+// The mail servers that the system routes connections from the Mail app through for a per-app VPN.
 //
 // WithMailDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithMailDomains(items ...*foundation.NSString) *NETunnelProviderManager {
@@ -84,7 +86,7 @@ func (x *NETunnelProviderManager) WithMailDomains(items ...*foundation.NSString)
 	return x
 }
 
-// @property calendarDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Calendar app to calendar servers within one of these domains are routed through the per-app VPN.
+// The calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
 //
 // WithCalendarDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithCalendarDomains(items ...*foundation.NSString) *NETunnelProviderManager {
@@ -107,7 +109,7 @@ func (x *NETunnelProviderManager) WithCalendarDomains(items ...*foundation.NSStr
 	return x
 }
 
-// @property contactsDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Contacts app to contacts servers within one of these domains are routed through the per-app VPN.
+// The contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
 //
 // WithContactsDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithContactsDomains(items ...*foundation.NSString) *NETunnelProviderManager {
@@ -130,7 +132,7 @@ func (x *NETunnelProviderManager) WithContactsDomains(items ...*foundation.NSStr
 	return x
 }
 
-// @property appRules @property An array of NEAppRule objects. Only applies to per-app VPN configurations. Network traffic originating from apps matching one of these rules is routed through the per-app VPN.
+// The rules for specific apps in a per-app VPN.
 //
 // WithAppRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithAppRules(items ...*raw.NEAppRule) *NETunnelProviderManager {
@@ -153,7 +155,7 @@ func (x *NETunnelProviderManager) WithAppRules(items ...*raw.NEAppRule) *NETunne
 	return x
 }
 
-// @property excludedDomains @property An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections to servers within one of these domains are excluded from the per-app VPN.
+// The domains that the system excludes from a per-app VPN.
 //
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithExcludedDomains(items ...*foundation.NSString) *NETunnelProviderManager {
@@ -176,7 +178,7 @@ func (x *NETunnelProviderManager) WithExcludedDomains(items ...*foundation.NSStr
 	return x
 }
 
-// @property associatedDomains @property An array of domain strings. Only applies to per-app VPN configurations. HTTP requests to download the Apple App Site Association files for domains in this list are routed through the per-app VPN.
+// The domains that the system routes network traffic through for a per-app VPN.
 //
 // WithAssociatedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithAssociatedDomains(items ...*foundation.NSString) *NETunnelProviderManager {
@@ -199,7 +201,7 @@ func (x *NETunnelProviderManager) WithAssociatedDomains(items ...*foundation.NSS
 	return x
 }
 
-// @property onDemandRules @discussion An array of NEOnDemandRule objects.
+// An ordered list of Connect On Demand rules.
 //
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETunnelProviderManager {
@@ -222,7 +224,7 @@ func (x *NETunnelProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvi
 	return x
 }
 
-// @property onDemandEnabled @discussion Toggles VPN On Demand.
+// A Boolean used to toggle the Connect On Demand capability.
 //
 // WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
 func (x *NETunnelProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NETunnelProviderManager {
@@ -230,7 +232,7 @@ func (x *NETunnelProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NET
 	return x
 }
 
-// @property localizedDescription @discussion A string containing a description of the VPN.
+// A string containing the display name of the VPN configuration.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NETunnelProviderManager) WithLocalizedDescription(localizedDescription string) *NETunnelProviderManager {
@@ -238,7 +240,7 @@ func (x *NETunnelProviderManager) WithLocalizedDescription(localizedDescription 
 	return x
 }
 
-// @property protocol @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 //
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *NETunnelProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NETunnelProviderManager {
@@ -246,7 +248,7 @@ func (x *NETunnelProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *
 	return x
 }
 
-// @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 //
 // WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
 func (x *NETunnelProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager {
@@ -254,7 +256,7 @@ func (x *NETunnelProviderManager) WithProtocolConfiguration(protocolConfiguratio
 	return x
 }
 
-// @property enabled @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+// A Boolean used to toggle the enabled state of the VPN configuration.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NETunnelProviderManager) WithEnabled(enabled bool) *NETunnelProviderManager {
@@ -262,7 +264,7 @@ func (x *NETunnelProviderManager) WithEnabled(enabled bool) *NETunnelProviderMan
 	return x
 }
 
-// @method copyAppRules @discussion This function returns an array of NEAppRule objects.
+// Returns a copy of the app rules currently set in the configuration.
 //
 // CopyAppRules returns the collection as a Go slice.
 func (x *NETunnelProviderManager) CopyAppRules() []*NEAppRule {

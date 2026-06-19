@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that applies the default animation to a symbol-based image in a context-sensitive manner.
+//
 // SymbolAutomaticContentTransition wraps [raw.NSSymbolAutomaticContentTransition] with a fluent Go API.
 type SymbolAutomaticContentTransition struct {
 	inner *raw.NSSymbolAutomaticContentTransition

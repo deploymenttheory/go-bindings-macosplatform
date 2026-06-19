@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents MIDI note on or off messages.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidinoteevent
 type AVMIDINoteEvent struct {
 	AVMusicEvent
@@ -37,7 +39,7 @@ func AVMIDINoteEventFromID(id objc.ID) *AVMIDINoteEvent {
 	return o
 }
 
-// @method initWithChannel:key:velocity:duration @abstract Initialize the event with a MIDI channel, key number, velocity and duration. @param channel The MIDI channel.  Range: 0-15. @param key The MIDI key number.  Range: 0-127. @param velocity The MIDI velocity.  Range: 0-127 with zero indicating a note-off event. @param duration The duration in beats for this note.  Range: Any non-negative number.
+// Creates an event with a MIDI channel, key number, velocity, and duration.
 func (o *AVMIDINoteEvent) InitWithChannelKeyVelocityDuration(channel uint, keyNum uint, velocity uint, duration float64) *AVMIDINoteEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDINoteEventSelInitWithChannelKeyVelocityDuration, channel, keyNum, velocity, duration)
 	if _ret != 0 {

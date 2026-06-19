@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that provides a specialized user interface for a Cocoa-based panner audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/aupannerview
 type AUPannerView struct {
 	appkit.NSView
@@ -32,7 +34,7 @@ func AUPannerViewFromID(id objc.ID) *AUPannerView {
 	return o
 }
 
-// @method +AUPannerViewWithAudioUnit: @abstract Static constructor used to create the view @param au  The Panner Audio Unit associated with the view @result  Returns the newly created view object autoreleased or nil on error
+// Creates a panner view for an audio unit.
 func AUPannerViewAUPannerViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUPannerView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAUPannerView), _aUPannerViewSelAUPannerViewWithAudioUnit, au)
 	if _ret != 0 {

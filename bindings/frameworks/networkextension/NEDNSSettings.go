@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The DNS resolver settings of a network tunnel or a system-wide configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nednssettings
 type NEDNSSettings struct {
 	foundation.NSObject
@@ -42,9 +44,9 @@ func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
 	return o
 }
 
-// @method initWithServers: @discussion Initialize a newly-allocated NEDNSSettings object. @param servers An array of DNS server IP address strings.
+// Initialize the NEDNSSetting object.
 func (o *NEDNSSettings) InitWithServers(servers *foundation.NSArray[*foundation.NSString]) *NEDNSSettings {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelInitWithServers, servers)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelInitWithServers, servers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -59,18 +61,24 @@ func (o *NEDNSSettings) DnsProtocol() NEDNSProtocol {
 
 // @property servers @discussion An array of DNS server address strings.
 func (o *NEDNSSettings) Servers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEDNSSettingsSelServers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelServers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property searchDomains @discussion An array of DNS server search domain strings.
 func (o *NEDNSSettings) SearchDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEDNSSettingsSelSearchDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelSearchDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEDNSSettings) SetSearchDomains(searchDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEDNSSettingsSelSetSearchDomains, searchDomains)
+	o.Ptr().Send(_nEDNSSettingsSelSetSearchDomains, searchDomains.Ptr())
 }
 
 // @property domainName @discussion A string containing the DNS domain.
@@ -88,12 +96,15 @@ func (o *NEDNSSettings) SetDomainName(domainName *foundation.NSString) {
 
 // @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
 func (o *NEDNSSettings) MatchDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEDNSSettingsSelMatchDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSSettingsSelMatchDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEDNSSettings) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEDNSSettingsSelSetMatchDomains, matchDomains)
+	o.Ptr().Send(_nEDNSSettingsSelSetMatchDomains, matchDomains.Ptr())
 }
 
 // @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).

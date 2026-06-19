@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that applies forces, such as gravitation, electromagnetism, and turbulence, to physics bodies within a certain area of effect.
+//
 // PhysicsField wraps [raw.SCNPhysicsField] with a fluent Go API.
 type PhysicsField struct {
 	inner *raw.SCNPhysicsField
@@ -35,67 +37,87 @@ func NewPhysicsField() *PhysicsField {
 	return &PhysicsField{inner: raw.SCNPhysicsFieldFromID(_id)}
 }
 
+// A multiplier for the force that the field applies to objects in its area of effect.
+//
 // WithStrength sets the strength property and returns the receiver for chaining.
 func (x *PhysicsField) WithStrength(strength float64) *PhysicsField {
 	x.inner.SetStrength(strength)
 	return x
 }
 
+// An exponent that determines how the field’s strength diminishes with distance.
+//
 // WithFalloffExponent sets the falloffExponent property and returns the receiver for chaining.
 func (x *PhysicsField) WithFalloffExponent(falloffExponent float64) *PhysicsField {
 	x.inner.SetFalloffExponent(falloffExponent)
 	return x
 }
 
+// The minimum value for distance-based effects.
+//
 // WithMinimumDistance sets the minimumDistance property and returns the receiver for chaining.
 func (x *PhysicsField) WithMinimumDistance(minimumDistance float64) *PhysicsField {
 	x.inner.SetMinimumDistance(minimumDistance)
 	return x
 }
 
+// A Boolean value that determines whether the field’s effect is enabled.
+//
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *PhysicsField) WithActive(active bool) *PhysicsField {
 	x.inner.SetActive(active)
 	return x
 }
 
+// A Boolean value that determines whether the field overrides other fields whose areas of effect it overlaps.
+//
 // WithExclusive sets the exclusive property and returns the receiver for chaining.
 func (x *PhysicsField) WithExclusive(exclusive bool) *PhysicsField {
 	x.inner.SetExclusive(exclusive)
 	return x
 }
 
+// A location marking the end of the field’s area of effect.
+//
 // WithHalfExtent sets the halfExtent property and returns the receiver for chaining.
 func (x *PhysicsField) WithHalfExtent(halfExtent raw.SCNVector3) *PhysicsField {
 	x.inner.SetHalfExtent(halfExtent)
 	return x
 }
 
+// A Boolean value that determines whether the field’s area of effect is shaped like a box or ellipsoid.
+//
 // WithUsesEllipsoidalExtent sets the usesEllipsoidalExtent property and returns the receiver for chaining.
 func (x *PhysicsField) WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *PhysicsField {
 	x.inner.SetUsesEllipsoidalExtent(usesEllipsoidalExtent)
 	return x
 }
 
+// The area affected by the field, either inside or outside its region.
+//
 // WithScope sets the scope property and returns the receiver for chaining.
 func (x *PhysicsField) WithScope(scope SCNPhysicsFieldScope) *PhysicsField {
 	x.inner.SetScope(raw.SCNPhysicsFieldScope(scope))
 	return x
 }
 
+// The offset of the field’s center within its area of effect.
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *PhysicsField) WithOffset(offset raw.SCNVector3) *PhysicsField {
 	x.inner.SetOffset(offset)
 	return x
 }
 
+// The field’s directional axis.
+//
 // WithDirection sets the direction property and returns the receiver for chaining.
 func (x *PhysicsField) WithDirection(direction raw.SCNVector3) *PhysicsField {
 	x.inner.SetDirection(direction)
 	return x
 }
 
-// @property categoryBitMask @abstract Determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
+// A mask that defines which categories this physics field belongs to.
 //
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *PhysicsField) WithCategoryBitMask(categoryBitMask uint) *PhysicsField {

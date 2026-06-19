@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about a frame on a webpage.
+//
 // WKFrameInfo wraps [raw.WKFrameInfo] with a fluent Go API.
 type WKFrameInfo struct {
 	inner *raw.WKFrameInfo

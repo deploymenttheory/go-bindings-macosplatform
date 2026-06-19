@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Utility methods to determine the geometries of various Vision types.
+//
 // GeometryUtils wraps [raw.VNGeometryUtils] with a fluent Go API.
 type GeometryUtils struct {
 	inner *raw.VNGeometryUtils

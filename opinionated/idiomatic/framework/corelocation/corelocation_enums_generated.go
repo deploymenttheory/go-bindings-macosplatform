@@ -8,10 +8,13 @@ import (
 	"fmt"
 )
 
+// Constants that indicate the level of location accuracy the app has authorization to use.
 type CLAccuracyAuthorization int64
 
 const (
-	CLAccuracyAuthorizationFullAccuracy    CLAccuracyAuthorization = 0
+	// The user authorized the app to access location data with full accuracy.
+	CLAccuracyAuthorizationFullAccuracy CLAccuracyAuthorization = 0
+	// The user authorized the app to access location data with reduced accuracy.
 	CLAccuracyAuthorizationReducedAccuracy CLAccuracyAuthorization = 1
 )
 
@@ -26,14 +29,20 @@ func (e CLAccuracyAuthorization) String() string {
 	}
 }
 
+// Constants that indicate the type of activity associated with location updates.
 type CLActivityType int64
 
 const (
-	CLActivityTypeOther                CLActivityType = 1
+	// The value that indicates the app is using location manager for an unspecified activity.
+	CLActivityTypeOther CLActivityType = 1
+	// The value that indicates positioning in an automobile following a road network.
 	CLActivityTypeAutomotiveNavigation CLActivityType = 2
-	CLActivityTypeFitness              CLActivityType = 3
-	CLActivityTypeOtherNavigation      CLActivityType = 4
-	CLActivityTypeAirborne             CLActivityType = 5
+	// The value that indicates positioning during dedicated fitness sessions, such as walking workouts, running workouts, cycling workouts, and so on.
+	CLActivityTypeFitness CLActivityType = 3
+	// The value that indicates positioning for activities that don’t or may not adhere to roads such as cycling, scooters, trains, boats and off-road vehicles.
+	CLActivityTypeOtherNavigation CLActivityType = 4
+	// The value that indicates activities in the air.
+	CLActivityTypeAirborne CLActivityType = 5
 )
 
 func (e CLActivityType) String() string {
@@ -53,14 +62,20 @@ func (e CLActivityType) String() string {
 	}
 }
 
+// Constants that indicate the app’s authorization to use location services.
 type CLAuthorizationStatus int32
 
 const (
-	KCLAuthorizationStatusNotDetermined    CLAuthorizationStatus = 0
-	KCLAuthorizationStatusRestricted       CLAuthorizationStatus = 1
-	KCLAuthorizationStatusDenied           CLAuthorizationStatus = 2
+	// The user has not chosen whether the app can use location services.
+	KCLAuthorizationStatusNotDetermined CLAuthorizationStatus = 0
+	// The app is not authorized to use location services.
+	KCLAuthorizationStatusRestricted CLAuthorizationStatus = 1
+	// The user denied the use of location services for the app or they are disabled globally in Settings.
+	KCLAuthorizationStatusDenied CLAuthorizationStatus = 2
+	// The user authorized the app to start location services at any time.
 	KCLAuthorizationStatusAuthorizedAlways CLAuthorizationStatus = 3
-	KCLAuthorizationStatusAuthorized       CLAuthorizationStatus = 3
+	// The user authorized the app to use location services.
+	KCLAuthorizationStatusAuthorized CLAuthorizationStatus = 3
 )
 
 func (e CLAuthorizationStatus) String() string {
@@ -78,16 +93,24 @@ func (e CLAuthorizationStatus) String() string {
 	}
 }
 
+// Constants indicating the physical orientation of the device.
 type CLDeviceOrientation int32
 
 const (
-	CLDeviceOrientationUnknown            CLDeviceOrientation = 0
-	CLDeviceOrientationPortrait           CLDeviceOrientation = 1
+	// The orientation is currently not known.
+	CLDeviceOrientationUnknown CLDeviceOrientation = 0
+	// The device is in portrait mode, with the device held upright and the home button at the bottom.
+	CLDeviceOrientationPortrait CLDeviceOrientation = 1
+	// The device is in portrait mode but upside down, with the device held upright and the home button at the top.
 	CLDeviceOrientationPortraitUpsideDown CLDeviceOrientation = 2
-	CLDeviceOrientationLandscapeLeft      CLDeviceOrientation = 3
-	CLDeviceOrientationLandscapeRight     CLDeviceOrientation = 4
-	CLDeviceOrientationFaceUp             CLDeviceOrientation = 5
-	CLDeviceOrientationFaceDown           CLDeviceOrientation = 6
+	// The device is in landscape mode, with the device held upright and the home button on the right side.
+	CLDeviceOrientationLandscapeLeft CLDeviceOrientation = 3
+	// The device is in landscape mode, with the device held upright and the home button on the left side.
+	CLDeviceOrientationLandscapeRight CLDeviceOrientation = 4
+	// The device is held parallel to the ground with the screen facing upwards.
+	CLDeviceOrientationFaceUp CLDeviceOrientation = 5
+	// The device is held parallel to the ground with the screen facing downwards.
+	CLDeviceOrientationFaceDown CLDeviceOrientation = 6
 )
 
 func (e CLDeviceOrientation) String() string {
@@ -111,14 +134,20 @@ func (e CLDeviceOrientation) String() string {
 	}
 }
 
+// Specifies the types of locations that a location updater generates.
 type CLLiveUpdateConfiguration int64
 
 const (
-	CLLiveUpdateConfigurationDefault              CLLiveUpdateConfiguration = 0
+	// The default configuration.
+	CLLiveUpdateConfigurationDefault CLLiveUpdateConfiguration = 0
+	// A configuration for automotive navigation use cases.
 	CLLiveUpdateConfigurationAutomotiveNavigation CLLiveUpdateConfiguration = 1
-	CLLiveUpdateConfigurationOtherNavigation      CLLiveUpdateConfiguration = 2
-	CLLiveUpdateConfigurationFitness              CLLiveUpdateConfiguration = 3
-	CLLiveUpdateConfigurationAirborne             CLLiveUpdateConfiguration = 4
+	// A configuration for other navigation use cases.
+	CLLiveUpdateConfigurationOtherNavigation CLLiveUpdateConfiguration = 2
+	// A configuration for fitness use cases.
+	CLLiveUpdateConfigurationFitness CLLiveUpdateConfiguration = 3
+	// A configuration for airborne use cases.
+	CLLiveUpdateConfigurationAirborne CLLiveUpdateConfiguration = 4
 )
 
 func (e CLLiveUpdateConfiguration) String() string {
@@ -138,12 +167,17 @@ func (e CLLiveUpdateConfiguration) String() string {
 	}
 }
 
+// Values that represent the current state of a monitoring condition.
 type CLMonitoringState uint64
 
 const (
-	CLMonitoringStateUnknown     CLMonitoringState = 0
-	CLMonitoringStateSatisfied   CLMonitoringState = 1
+	// The condition is in an unknown state.
+	CLMonitoringStateUnknown CLMonitoringState = 0
+	// The condition is in a satisfied state.
+	CLMonitoringStateSatisfied CLMonitoringState = 1
+	// The condition is in an unsatisfied state.
 	CLMonitoringStateUnsatisfied CLMonitoringState = 2
+	// The condition is in an unmonitored state.
 	CLMonitoringStateUnmonitored CLMonitoringState = 3
 )
 
@@ -162,13 +196,18 @@ func (e CLMonitoringState) String() string {
 	}
 }
 
+// Constants that reflect the relative distance to a beacon.
 type CLProximity int64
 
 const (
-	CLProximityUnknown   CLProximity = 0
+	// The proximity of the beacon could not be determined.
+	CLProximityUnknown CLProximity = 0
+	// The beacon is in the user’s immediate vicinity.
 	CLProximityImmediate CLProximity = 1
-	CLProximityNear      CLProximity = 2
-	CLProximityFar       CLProximity = 3
+	// The beacon is relatively close to the user.
+	CLProximityNear CLProximity = 2
+	// The beacon is far away.
+	CLProximityFar CLProximity = 3
 )
 
 func (e CLProximity) String() string {

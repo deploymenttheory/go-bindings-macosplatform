@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier representing an object in a collection (or container) with an index number.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsindexspecifier
 type NSIndexSpecifier struct {
 	NSScriptObjectSpecifier
@@ -31,6 +33,7 @@ func NSIndexSpecifierFromID(id objc.ID) *NSIndexSpecifier {
 	return o
 }
 
+// Initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
 func (o *NSIndexSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, index int) *NSIndexSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyIndex, classDesc.Ptr(), container.Ptr(), property.Ptr(), index)
 	if _ret != 0 {

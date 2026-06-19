@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The context an update task provides to your app’s completion and update progress handlers.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlupdatecontext
 type MLUpdateContext struct {
 	foundation.NSObject
@@ -56,11 +58,17 @@ func (o *MLUpdateContext) Event() MLUpdateProgressEvent {
 }
 
 func (o *MLUpdateContext) Metrics() *foundation.NSDictionary[*MLMetricKey, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*MLMetricKey, objc.ID]](o.Ptr(), _mLUpdateContextSelMetrics)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLUpdateContextSelMetrics)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*MLMetricKey, objc.ID](_ret)
 }
 
 func (o *MLUpdateContext) Parameters() *foundation.NSDictionary[*MLParameterKey, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*MLParameterKey, objc.ID]](o.Ptr(), _mLUpdateContextSelParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLUpdateContextSelParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*MLParameterKey, objc.ID](_ret)
 }

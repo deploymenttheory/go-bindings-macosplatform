@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class describes a media entity, which can be a media item, such as an audio track.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibmediaentity
 type ITLibMediaEntity struct {
 	foundation.NSObject
@@ -33,13 +35,13 @@ func ITLibMediaEntityFromID(id objc.ID) *ITLibMediaEntity {
 	return o
 }
 
-// @abstract Gets the value for a specified media property key. @discusion The media property keys you can use with this property are listed in this document and in Media Item Property Keys and Playlist Property Keys. @param property The media property key that you want the corresponding value of. @return The value for the media property key.
+// Gets the value for a specified media property key.
 func (o *ITLibMediaEntity) ValueForProperty(property *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaEntitySelValueForProperty, property.Ptr())
 	return _ret
 }
 
-// @abstract Executes a provided block with the fetched values for the given item properties. @discussion Use this method to get property values in a batch fashion. In some cases, enumerating over a set of property keys can be more efficient than fetching each individual property with valueForProperty:. The media property keys you can use with this property are listed in this document and in Media Item Property Keys and Playlist Property Keys. @param properties A set of keys for the properties that will be enumerated, or nil to enumerate all properties. @param block A block object that executes for each property in the properties set.
+// Executes a provided block with the fetched values for the item properties.
 func (o *ITLibMediaEntity) EnumerateValuesForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -51,10 +53,10 @@ func (o *ITLibMediaEntity) EnumerateValuesForPropertiesUsing(properties *foundat
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_iTLibMediaEntitySelEnumerateValuesForPropertiesUsing, properties, __block_block)
+	o.Ptr().Send(_iTLibMediaEntitySelEnumerateValuesForPropertiesUsing, properties.Ptr(), __block_block)
 }
 
-// @abstract Executes a provided block with the fetched values for all properties in the entity except for the provided set. @discussion Use this method to get property values in a batch fashion. In some cases, enumerating over a set of property keys can be more efficient than fetching each individual property with valueForProperty:. The media property keys you can use with this property are listed in this document and in Media Item Property Keys and Playlist Property Keys. @param properties A set of property keys that should NOT be enumerated, or nil to enumerate all properties. @param block A block object that executes for each property except for the ones in the properties set.
+// Executes a provided block with the fetched values for all properties in the entity except for the provided set.
 func (o *ITLibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -66,7 +68,7 @@ func (o *ITLibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties *f
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_iTLibMediaEntitySelEnumerateValuesExceptForPropertiesUsing, properties, __block_block)
+	o.Ptr().Send(_iTLibMediaEntitySelEnumerateValuesExceptForPropertiesUsing, properties.Ptr(), __block_block)
 }
 
 // @abstract The unique identifier of this media entity.

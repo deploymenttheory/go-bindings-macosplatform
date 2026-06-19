@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface with up and down arrow buttons for incrementing or decrementing a value.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstepper
 type NSStepper struct {
 	NSControl

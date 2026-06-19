@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents the estimated cost of executing a layer or operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlcomputeplancost
 type MLComputePlanCost struct {
 	foundation.NSObject

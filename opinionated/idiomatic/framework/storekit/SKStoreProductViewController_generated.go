@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A view controller that provides a page where customers can purchase media from the App Store.
+//
 // StoreProductViewController wraps [raw.SKStoreProductViewController] with a fluent Go API.
 type StoreProductViewController struct {
 	inner *raw.SKStoreProductViewController
@@ -37,12 +39,16 @@ func NewStoreProductViewController() *StoreProductViewController {
 	return &StoreProductViewController{inner: raw.SKStoreProductViewControllerFromID(_id)}
 }
 
+// The store view controller’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *StoreProductViewController) WithDelegate(delegate raw.SKStoreProductViewControllerDelegate) *StoreProductViewController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Loads a new product screen to display.
+//
 // LoadProductWithParametersCompletionBlock calls the underlying LoadProductWithParametersCompletionBlock.
 func (x *StoreProductViewController) LoadProductWithParametersCompletionBlock(parameters *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(bool, unsafe.Pointer)) {
 	x.inner.LoadProductWithParametersCompletionBlock(parameters, block)

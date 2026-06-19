@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that performs audio input or output in the engine.
+//
 // AudioIONode wraps [raw.AVAudioIONode] with a fluent Go API.
 type AudioIONode struct {
 	inner *raw.AVAudioIONode
@@ -36,7 +38,7 @@ func NewAudioIONode() *AudioIONode {
 	return &AudioIONode{inner: raw.AVAudioIONodeFromID(_id)}
 }
 
-// @method setVoiceProcessingEnabled:error: @abstract Enable or disable voice processing on the IO node. @param enabled Whether voice processing is to be enabled. @param outError On exit, if the IO node cannot enable or diable voice processing, a description of the error @return YES for success @discussion If enabled, the input node does signal processing on the incoming audio (taking out any of the audio that is played from the device at a given time from the incoming audio). Disabling this mode on either of the IO nodes automatically disabled it on the other IO node. Voice processing requires both input and output nodes to be in the voice processing mode. Enabling this mode on either of the IO nodes automatically enables it on the other IO node. Voice processing is only supported when the engine is rendering to the audio device and not in the manual rendering mode. Voice processing can only be be enabled or disabled when the engine is in a stopped state. The output format of the input node and the input format of the output node have to be the same and they can only be changed when the engine is in a stopped state.
+// Enables or disables voice processing on the I/O node.
 //
 // SetVoiceProcessingEnabledError calls the underlying SetVoiceProcessingEnabledError.
 func (x *AudioIONode) SetVoiceProcessingEnabledError(enabled bool) (bool, error) {

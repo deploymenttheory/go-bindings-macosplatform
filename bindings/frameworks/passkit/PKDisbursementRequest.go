@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a request to disburse funds from a merchant to an individual.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkdisbursementrequest
 type PKDisbursementRequest struct {
 	foundation.NSObject
@@ -56,19 +58,22 @@ func PKDisbursementRequestFromID(id objc.ID) *PKDisbursementRequest {
 	return o
 }
 
+// Creates a new instance of a disbursement request with the merchant identifier, currency and region codes, and other parameters you specify.
 func (o *PKDisbursementRequest) InitWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier *foundation.NSString, currencyCode *foundation.NSString, regionCode *foundation.NSString, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities PKMerchantCapability, summaryItems *foundation.NSArray[*PKPaymentSummaryItem]) *PKDisbursementRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelInitWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems, merchantIdentifier.Ptr(), currencyCode.Ptr(), regionCode.Ptr(), supportedNetworks, merchantCapabilities, summaryItems.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelInitWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems, merchantIdentifier.Ptr(), currencyCode.Ptr(), regionCode.Ptr(), supportedNetworks.Ptr(), merchantCapabilities, summaryItems.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PKDisbursementRequestFromID(_ret)
 }
 
+// Creates a recipient contact error with the supplied field.
 func PKDisbursementRequestDisbursementContactInvalidErrorWithContactFieldLocalizedDescription(field *foundation.NSString, localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKDisbursementRequest), _pKDisbursementRequestSelDisbursementContactInvalidErrorWithContactFieldLocalizedDescription, field.Ptr(), localizedDescription.Ptr())
 	return _ret
 }
 
+// Creates an error that indicates that the selected payment pass doesn’t support receiving funds through disbursements.
 func PKDisbursementRequestDisbursementCardUnsupportedError() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKDisbursementRequest), _pKDisbursementRequestSelDisbursementCardUnsupportedError)
 	return _ret
@@ -99,12 +104,15 @@ func (o *PKDisbursementRequest) SetRegionCode(regionCode *foundation.NSString) {
 }
 
 func (o *PKDisbursementRequest) SupportedNetworks() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pKDisbursementRequestSelSupportedNetworks)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelSupportedNetworks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKDisbursementRequest) SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pKDisbursementRequestSelSetSupportedNetworks, supportedNetworks)
+	o.Ptr().Send(_pKDisbursementRequestSelSetSupportedNetworks, supportedNetworks.Ptr())
 }
 
 func (o *PKDisbursementRequest) MerchantCapabilities() PKMerchantCapability {
@@ -141,12 +149,15 @@ func (o *PKDisbursementRequest) SetCurrencyCode(currencyCode *foundation.NSStrin
 }
 
 func (o *PKDisbursementRequest) RequiredRecipientContactFields() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pKDisbursementRequestSelRequiredRecipientContactFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelRequiredRecipientContactFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKDisbursementRequest) SetRequiredRecipientContactFields(requiredRecipientContactFields *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pKDisbursementRequestSelSetRequiredRecipientContactFields, requiredRecipientContactFields)
+	o.Ptr().Send(_pKDisbursementRequestSelSetRequiredRecipientContactFields, requiredRecipientContactFields.Ptr())
 }
 
 func (o *PKDisbursementRequest) RecipientContact() *PKContact {
@@ -162,12 +173,15 @@ func (o *PKDisbursementRequest) SetRecipientContact(recipientContact *PKContact)
 }
 
 func (o *PKDisbursementRequest) SupportedRegions() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pKDisbursementRequestSelSupportedRegions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelSupportedRegions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKDisbursementRequest) SetSupportedRegions(supportedRegions *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pKDisbursementRequestSelSetSupportedRegions, supportedRegions)
+	o.Ptr().Send(_pKDisbursementRequestSelSetSupportedRegions, supportedRegions.Ptr())
 }
 
 func (o *PKDisbursementRequest) ApplicationData() *foundation.NSData {

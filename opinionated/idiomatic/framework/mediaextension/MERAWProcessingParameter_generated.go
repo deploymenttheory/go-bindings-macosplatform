@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for the RAW processor to describe each processing parameter the processor exposes.
+//
 // RAWProcessingParameter wraps [raw.MERAWProcessingParameter] with a fluent Go API.
 type RAWProcessingParameter struct {
 	inner *raw.MERAWProcessingParameter
@@ -36,7 +38,7 @@ func NewRAWProcessingParameter() *RAWProcessingParameter {
 	return &RAWProcessingParameter{inner: raw.MERAWProcessingParameterFromID(_id)}
 }
 
-// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+// A Boolean value that indicates whether the extension enables the parameter.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {

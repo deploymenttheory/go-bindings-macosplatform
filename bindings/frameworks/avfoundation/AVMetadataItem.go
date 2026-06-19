@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A metadata item for an audiovisual asset or one of its tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadataitem
 type AVMetadataItem struct {
 	foundation.NSObject
@@ -107,8 +109,11 @@ func (o *AVMetadataItem) Value() objc.ID {
 }
 
 func (o *AVMetadataItem) ExtraAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVMetadataItemSelExtraAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelExtraAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AVMetadataItem) StartDate() *foundation.NSDate {
@@ -151,6 +156,7 @@ func (o *AVMetadataItem) DataValue() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Reports whether the value for a given key is immediately available without blocking.
 func (o *AVMetadataItem) StatusOfValueForKeyError(key *foundation.NSString) (AVKeyValueStatus, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[AVKeyValueStatus](o.Ptr(), _aVMetadataItemSelStatusOfValueForKeyError, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -160,6 +166,7 @@ func (o *AVMetadataItem) StatusOfValueForKeyError(key *foundation.NSString) (AVK
 	return _ret, nil
 }
 
+// Tells the object to load the values of any of the specified keys that aren’t already loaded.
 func (o *AVMetadataItem) LoadValuesAsynchronouslyForKeysCompletionHandler(keys *foundation.NSArray[*foundation.NSString], handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -168,19 +175,19 @@ func (o *AVMetadataItem) LoadValuesAsynchronouslyForKeysCompletionHandler(keys *
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_aVMetadataItemSelLoadValuesAsynchronouslyForKeysCompletionHandler, keys, __block_handler)
+	o.Ptr().Send(_aVMetadataItemSelLoadValuesAsynchronouslyForKeysCompletionHandler, keys.Ptr(), __block_handler)
 }
 
-// @method		metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages: @abstract		Filters an array of AVMetadataItems according to whether their locales match any language identifier in the specified array of preferred languages. The returned array is sorted according to the order of preference of the language each matches. @param			metadataItems An array of AVMetadataItems to be filtered and sorted. @param			preferredLanguages An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. If your goal is to provide the best match for the end user's preferred languages without consideration of your app's available localizations, pass [NSLocale preferredLanguages] as the value of preferredLanguages. However, if you want to filter the available choices in order to obtain the best match among the localizations that are available for your app, pass [NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations] forPreferences:[NSLocale preferredLanguages]] instead. The latter choice is normally more appropriate for strings intended for display as part of the app's UI. @result		An instance of NSArray containing metadata items of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
+// Returns metadata items whose locales match one of the specified language identifiers.
 func AVMetadataItemMetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages(metadataItems *foundation.NSArray[*AVMetadataItem], preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVMetadataItem] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages, metadataItems.Ptr(), preferredLanguages)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages, metadataItems.Ptr(), preferredLanguages.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
-// @method			metadataItemsFromArray:filteredByIdentifier: @abstract			Filters an array of AVMetadataItems according to identifier. @param			metadataItems An array of AVMetadataItems to be filtered by identifier. @param			identifier The identifier that must be matched for a metadata item to be copied to the output array. Items are considered a match not only when their identifiers are equal to the specified identifier, and also when their identifiers conform to the specified identifier. @result			An instance of NSArray containing the metadata items of the target NSArray that match the specified identifier.
+// Returns metadata items for the specified identifier.
 func AVMetadataItemMetadataItemsFromArrayFilteredByIdentifier(metadataItems *foundation.NSArray[*AVMetadataItem], identifier *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredByIdentifier, metadataItems.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -189,7 +196,7 @@ func AVMetadataItemMetadataItemsFromArrayFilteredByIdentifier(metadataItems *fou
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
-// @method			metadataItemsFromArray:filteredByMetadataItemFilter: @abstract		Filters an array of AVMetadataItems using the supplied AVMetadataItemFilter. @param			metadataItems An array of AVMetadataItems to be filtered. @param			metadataItemFilter The AVMetadataItemFilter object for filtering the metadataItems. @result			An instance of NSArray containing the metadata items of the target NSArray that have not been removed by metadataItemFilter.
+// Returns filtered metadata items.
 func AVMetadataItemMetadataItemsFromArrayFilteredByMetadataItemFilter(metadataItems *foundation.NSArray[*AVMetadataItem], metadataItemFilter *AVMetadataItemFilter) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredByMetadataItemFilter, metadataItems.Ptr(), metadataItemFilter.Ptr())
 	if _ret != 0 {
@@ -198,7 +205,7 @@ func AVMetadataItemMetadataItemsFromArrayFilteredByMetadataItemFilter(metadataIt
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
-// @method			identifierForKey:keySpace: @abstract		Provides the metadata identifier that's equivalent to a key and keySpace. @param			key The metadata key. @param			keySpace The metadata keySpace. @result			A metadata identifier equivalent to the given key and keySpace, or nil if no identifier can be constructed from the given key and keySpace. @discussion Metadata keys that are not instances of NSString, NSNumber, or NSData cannot be converted to metadata identifiers; they also cannot be written to media resources via AVAssetExportSession or AVAssetWriter.  Metadata item keySpaces must be a string of one to four printable ASCII characters. For custom identifiers, the keySpace AVMetadataKeySpaceQuickTimeMetadata is recommended.  This keySpace defines its key values to be expressed as reverse-DNS strings, which allows third parties to define their own keys in a well established way that avoids collisions.
+// Returns a metadata identifier for the specified key and key space.
 func AVMetadataItemIdentifierForKeyKeySpace(key objc.ID, keySpace *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelIdentifierForKeyKeySpace, key, keySpace.Ptr())
 	if _ret != 0 {
@@ -207,6 +214,7 @@ func AVMetadataItemIdentifierForKeyKeySpace(key objc.ID, keySpace *foundation.NS
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns a metadata key space for the specified identifier.
 func AVMetadataItemKeySpaceForIdentifier(identifier *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelKeySpaceForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -215,6 +223,7 @@ func AVMetadataItemKeySpaceForIdentifier(identifier *foundation.NSString) *found
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns a metadata key for the specified identifier.
 func AVMetadataItemKeyForIdentifier(identifier *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelKeyForIdentifier, identifier.Ptr())
 	return _ret
@@ -260,7 +269,7 @@ func AVMetadataItemMetadataItemWithPropertiesOfMetadataItemValueLoadingHandler(m
 	return AVMetadataItemFromID(_ret)
 }
 
-// @method			metadataItemsFromArray:withLocale: @discussion		Instead, use metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:.
+// Returns metadata items that match a specified locale.
 func AVMetadataItemMetadataItemsFromArrayWithLocale(metadataItems *foundation.NSArray[*AVMetadataItem], locale *foundation.NSLocale) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayWithLocale, metadataItems.Ptr(), locale.Ptr())
 	if _ret != 0 {
@@ -269,7 +278,7 @@ func AVMetadataItemMetadataItemsFromArrayWithLocale(metadataItems *foundation.NS
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
-// @method			metadataItemsFromArray:withKey:keySpace: @discussion		Instead, use metadataItemsFromArray:filteredByIdentifier:.
+// Returns metadata items that match a specified key or key space.
 func AVMetadataItemMetadataItemsFromArrayWithKeyKeySpace(metadataItems *foundation.NSArray[*AVMetadataItem], key objc.ID, keySpace *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayWithKeyKeySpace, metadataItems.Ptr(), key, keySpace.Ptr())
 	if _ret != 0 {

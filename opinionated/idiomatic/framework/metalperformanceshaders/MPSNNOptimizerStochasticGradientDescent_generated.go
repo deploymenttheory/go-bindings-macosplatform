@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimization layer that performs a gradient descent with an optional momentum update.
+//
 // NNOptimizerStochasticGradientDescent wraps [raw.MPSNNOptimizerStochasticGradientDescent] with a fluent Go API.
 type NNOptimizerStochasticGradientDescent struct {
 	inner *raw.MPSNNOptimizerStochasticGradientDescent
@@ -76,7 +78,7 @@ func (x *NNOptimizerStochasticGradientDescent) WithApplyGradientClipping(applyGr
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNOptimizerStochasticGradientDescent) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerStochasticGradientDescent {
@@ -84,7 +86,7 @@ func (x *NNOptimizerStochasticGradientDescent) WithOptions(options mpscore.MPSKe
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOptimizerStochasticGradientDescent {

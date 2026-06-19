@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that confirms a user’s participation in a share.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckacceptsharesoperation
 type CKAcceptSharesOperation struct {
 	CKOperation
@@ -39,7 +41,7 @@ func CKAcceptSharesOperationFromID(id objc.ID) *CKAcceptSharesOperation {
 	return o
 }
 
-// Creates an operation for accepting shares. You can use this operation only once.
+// Creates an operation for accepting shares.
 func (o *CKAcceptSharesOperation) Init() *CKAcceptSharesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAcceptSharesOperationSelInit)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func (o *CKAcceptSharesOperation) Init() *CKAcceptSharesOperation {
 	return CKAcceptSharesOperationFromID(_ret)
 }
 
-// Creates an operation for accepting the specified shares. - Parameters: - shareMetadatas: The share metadatas to accept. If you specify `nil`, you must assign a value to the “CKAcceptSharesOperation/shareMetadatas“ property before you execute the operation. After initializing the operation, assign a handler to the “CKAcceptSharesOperation/acceptSharesCompletionBlock“ property to process the results.
+// Creates an operation for accepting the specified shares.
 func (o *CKAcceptSharesOperation) InitWithShareMetadatas(shareMetadatas *foundation.NSArray[*CKShareMetadata]) *CKAcceptSharesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAcceptSharesOperationSelInitWithShareMetadatas, shareMetadatas.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores image data in a form that can be readily transferred to the screen.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscachedimagerep
 // Deprecated: since macOS 10.6.
 type NSCachedImageRep struct {
@@ -34,18 +36,21 @@ func NSCachedImageRepFromID(id objc.ID) *NSCachedImageRep {
 	return o
 }
 
+// Returns a cached image representation initialized for drawing in the specified window.
 // Deprecated: since macOS 10.6.
 func (o *NSCachedImageRep) InitWithWindowRect(win *NSWindow, rect corefoundation.CGRect) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedImageRepSelInitWithWindowRect, win.Ptr(), rect)
 	return _ret
 }
 
+// Returns a cached image representation initialized with the specified image characteristics.
 // Deprecated: since macOS 10.6.
 func (o *NSCachedImageRep) InitWithSizeDepthSeparateAlpha(size corefoundation.CGSize, depth NSWindowDepth, flag bool, alpha bool) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedImageRepSelInitWithSizeDepthSeparateAlpha, size, depth, flag, alpha)
 	return _ret
 }
 
+// Returns the window where the representation is cached.
 // Deprecated: since macOS 10.6.
 func (o *NSCachedImageRep) Window() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedImageRepSelWindow)
@@ -55,6 +60,7 @@ func (o *NSCachedImageRep) Window() *NSWindow {
 	return NSWindowFromID(_ret)
 }
 
+// Returns the rectangle where the representation is cached.
 // Deprecated: since macOS 10.6.
 func (o *NSCachedImageRep) Rect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCachedImageRepSelRect)

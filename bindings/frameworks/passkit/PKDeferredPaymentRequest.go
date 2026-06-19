@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a request to set up a deferred payment, such as a hotel booking or a pre-order.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest
 type PKDeferredPaymentRequest struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func PKDeferredPaymentRequestFromID(id objc.ID) *PKDeferredPaymentRequest {
 	return o
 }
 
+// Creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.
 func (o *PKDeferredPaymentRequest) InitWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription *foundation.NSString, deferredBilling *PKDeferredPaymentSummaryItem, managementURL *foundation.NSURL) *PKDeferredPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDeferredPaymentRequestSelInitWithPaymentDescriptionDeferredBillingManagementURL, paymentDescription.Ptr(), deferredBilling.Ptr(), managementURL.Ptr())
 	if _ret != 0 {

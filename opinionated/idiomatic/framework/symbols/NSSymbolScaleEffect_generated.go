@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that scales the layers in a symbol-based image separately or as a whole.
+//
 // SymbolScaleEffect wraps [raw.NSSymbolScaleEffect] with a fluent Go API.
 type SymbolScaleEffect struct {
 	inner *raw.NSSymbolScaleEffect
@@ -35,7 +37,7 @@ func NewSymbolScaleEffect() *SymbolScaleEffect {
 	return &SymbolScaleEffect{inner: raw.NSSymbolScaleEffectFromID(_id)}
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that scales each layer separately.
 //
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
@@ -46,7 +48,7 @@ func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
 	return &SymbolScaleEffect{inner: _r}
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that scales all layers simultaneously.
 //
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {

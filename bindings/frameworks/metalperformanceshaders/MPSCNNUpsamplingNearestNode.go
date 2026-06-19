@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Node representing a MPSCNNUpsamplingNearest kernel
+// A representation of a nearest spatial upsampling filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearestnode
 type MPSCNNUpsamplingNearestNode struct {

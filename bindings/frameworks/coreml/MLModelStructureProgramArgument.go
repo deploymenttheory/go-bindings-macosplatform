@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing an argument in the Program.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureprogramargument
 type MLModelStructureProgramArgument struct {
 	foundation.NSObject

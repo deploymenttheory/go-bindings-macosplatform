@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class used to voluntarily validate URLs for apps that don’t use WebKit or the URL session API.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neurlfilter
 type NEURLFilter struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func NEURLFilterFromID(id objc.ID) *NEURLFilter {
 	return o
 }
 
-// This method determines if the specified URL should be allowed or denied.  The returned Allow or Deny verdict should be honored to prevent communication with restricted or malicious Internet sites. - Parameters: - url: url to be validated - completionHandler: A block that will be called when validation is completed. A NEURLFilterVerdict verdict will be returned to indicate whether the specified URL should be allowed or denied.  If verdict is Deny, caller should fail the URL request.
+// Determines if accessing the specified URL is allowed or denied.
 func NEURLFilterVerdictForURLCompletionHandler(url *foundation.NSURL, completionHandler func(NEURLFilterVerdict)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

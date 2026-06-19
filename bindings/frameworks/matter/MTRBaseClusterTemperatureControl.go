@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Cluster Temperature Control
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrbaseclustertemperaturecontrol
 type MTRBaseClusterTemperatureControl struct {
 	MTRGenericBaseCluster
@@ -67,7 +69,7 @@ func MTRBaseClusterTemperatureControlFromID(id objc.ID) *MTRBaseClusterTemperatu
 	return o
 }
 
-// Command SetTemperature The SetTemperature command SHALL have the following data fields:
+// Command SetTemperature
 func (o *MTRBaseClusterTemperatureControl) SetTemperatureWithParamsCompletion(params *MTRTemperatureControlClusterSetTemperatureParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -335,11 +337,21 @@ func MTRBaseClusterTemperatureControlReadAttributeSelectedTemperatureLevelWithCl
 	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeSelectedTemperatureLevelWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeSupportedTemperatureLevelsWithCompletion, completion)
+func (o *MTRBaseClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeSupportedTemperatureLevelsWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -347,18 +359,48 @@ func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemperatur
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterTemperatureControlReadAttributeSupportedTemperatureLevelsWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeSupportedTemperatureLevelsWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterTemperatureControlReadAttributeSupportedTemperatureLevelsWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeSupportedTemperatureLevelsWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeGeneratedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterTemperatureControl) ReadAttributeGeneratedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeGeneratedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -366,18 +408,48 @@ func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedCommandLis
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterTemperatureControlReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterTemperatureControlReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeAcceptedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterTemperatureControl) ReadAttributeAcceptedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeAcceptedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -385,18 +457,48 @@ func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommandList
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterTemperatureControlReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterTemperatureControlReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeAttributeListWithCompletion, completion)
+func (o *MTRBaseClusterTemperatureControl) ReadAttributeAttributeListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelReadAttributeAttributeListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -404,11 +506,31 @@ func (o *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWithPa
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterTemperatureControlSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterTemperatureControlReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterTemperatureControlReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterTemperatureControl).Send(_mTRBaseClusterTemperatureControlSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
 func (o *MTRBaseClusterTemperatureControl) ReadAttributeFeatureMapWithCompletion(completion func(*foundation.NSNumber, unsafe.Pointer)) {

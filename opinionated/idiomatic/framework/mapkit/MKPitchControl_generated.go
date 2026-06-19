@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specialized view that displays and controls the pitch angle of the map view.
+//
 // PitchControl wraps [raw.MKPitchControl] with a fluent Go API.
 type PitchControl struct {
 	inner *raw.MKPitchControl
@@ -35,6 +37,8 @@ func NewPitchControl() *PitchControl {
 	return &PitchControl{inner: raw.MKPitchControlFromID(_id)}
 }
 
+// The map view associated with this control.
+//
 // WithMapView sets the mapView property and returns the receiver for chaining.
 func (x *PitchControl) WithMapView(mapView *MapView) *PitchControl {
 	x.inner.SetMapView(mapView.Unwrap())

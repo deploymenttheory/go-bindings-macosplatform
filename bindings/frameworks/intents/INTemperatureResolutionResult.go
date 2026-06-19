@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the units to use with a temperature value.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/intemperatureresolutionresult
 type INTemperatureResolutionResult struct {
 	INIntentResolutionResult
@@ -32,24 +34,27 @@ func INTemperatureResolutionResultFromID(id objc.ID) *INTemperatureResolutionRes
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INTemperatureResolutionResultSuccessWithResolvedTemperature(resolvedTemperature *foundation.NSMeasurement[*foundation.NSUnitTemperature]) *INTemperatureResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINTemperatureResolutionResult), _iNTemperatureResolutionResultSelSuccessWithResolvedTemperature, resolvedTemperature)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINTemperatureResolutionResult), _iNTemperatureResolutionResultSelSuccessWithResolvedTemperature, resolvedTemperature.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INTemperatureResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INTemperatureResolutionResultDisambiguationWithTemperaturesToDisambiguate(temperaturesToDisambiguate *foundation.NSArray[objc.ID]) *INTemperatureResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINTemperatureResolutionResult), _iNTemperatureResolutionResultSelDisambiguationWithTemperaturesToDisambiguate, temperaturesToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINTemperatureResolutionResult), _iNTemperatureResolutionResultSelDisambiguationWithTemperaturesToDisambiguate, temperaturesToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INTemperatureResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INTemperatureResolutionResultConfirmationRequiredWithTemperatureToConfirm(temperatureToConfirm *foundation.NSMeasurement[*foundation.NSUnitTemperature]) *INTemperatureResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINTemperatureResolutionResult), _iNTemperatureResolutionResultSelConfirmationRequiredWithTemperatureToConfirm, temperatureToConfirm)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINTemperatureResolutionResult), _iNTemperatureResolutionResultSelConfirmationRequiredWithTemperatureToConfirm, temperatureToConfirm.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

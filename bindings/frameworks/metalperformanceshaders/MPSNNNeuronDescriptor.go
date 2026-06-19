@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies properties used by a neuron kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnneurondescriptor
 type MPSNNNeuronDescriptor struct {
 	foundation.NSObject

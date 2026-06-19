@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration for a resource state pass, used to create a resource state command encoder.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlresourcestatepassdescriptor
 type MTLResourceStatePassDescriptor struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func MTLResourceStatePassDescriptorFromID(id objc.ID) *MTLResourceStatePassDescr
 	return o
 }
 
-// @method resourceStatePassDescriptor @abstract Create an autoreleased default frame buffer descriptor
+// Creates a new resource state pass descriptor.
 func MTLResourceStatePassDescriptorResourceStatePassDescriptor() *MTLResourceStatePassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLResourceStatePassDescriptor), _mTLResourceStatePassDescriptorSelResourceStatePassDescriptor)
 	if _ret != 0 {

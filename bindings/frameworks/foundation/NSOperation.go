@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents the code and data associated with a single task.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsoperation
 type NSOperation struct {
 	NSObject

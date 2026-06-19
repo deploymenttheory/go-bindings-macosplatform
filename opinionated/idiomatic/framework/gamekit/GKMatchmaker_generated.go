@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that creates matches with other players without presenting an interface to the players.
+//
 // Matchmaker wraps [raw.GKMatchmaker] with a fluent Go API.
 type Matchmaker struct {
 	inner *raw.GKMatchmaker
@@ -40,12 +42,12 @@ func NewMatchmaker() *Matchmaker {
 }
 
 // WithInviteHandler sets the inviteHandler property and returns the receiver for chaining.
-func (x *Matchmaker) WithInviteHandler(inviteHandler objc.Block) *Matchmaker {
+func (x *Matchmaker) WithInviteHandler(inviteHandler func(*raw.GKInvite, *foundation.NSArray[objc.ID])) *Matchmaker {
 	x.inner.SetInviteHandler(inviteHandler)
 	return x
 }
 
-// Get a match for an accepted invite Possible reasons for error: 1. Communications failure 2. Invite cancelled
+// Creates a match from an invitation that the local player accepts.
 //
 // MatchForInvite blocks until the operation completes or ctx is cancelled.
 func (x *Matchmaker) MatchForInvite(ctx context.Context, invite *raw.GKInvite) (*Match, error) {
@@ -73,7 +75,7 @@ func (x *Matchmaker) MatchForInvite(ctx context.Context, invite *raw.GKInvite) (
 	}
 }
 
-// Automatching or invites to find a peer-to-peer match for the specified request. Error will be nil on success: Possible reasons for error: 1. Communications failure 2. Unauthenticated player 3. Timeout Note that the players property on the returned GKMatch instance will only contain connected players. It will initially be empty as players are connecting. Implement the GKMatchDelegate method match:player:didChangeConnectionState: to listen for updates to the GKMatch instance's players property.
+// Initiates a request to find players for a peer-to-peer match.
 //
 // FindMatchForRequest blocks until the operation completes or ctx is cancelled.
 func (x *Matchmaker) FindMatchForRequest(ctx context.Context, request *raw.GKMatchRequest) (*Match, error) {
@@ -101,7 +103,7 @@ func (x *Matchmaker) FindMatchForRequest(ctx context.Context, request *raw.GKMat
 	}
 }
 
-// Automatching or invites for host-client match request. This returns a list of player identifiers to be included in the match. Determination and communication with the host is not part of this API. When inviting, no player identifiers will be returned. Player responses will be reported via the inviteeResponseHandler. Possible reasons for error: 1. Communications failure 2. Unauthenticated player 3. Timeout
+// Initiates a request to find players for a hosted match.
 //
 // FindPlayersForHostedRequest blocks until the operation completes or ctx is cancelled.
 func (x *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *raw.GKMatchRequest) (*foundation.NSArray[*raw.GKPlayer], error) {
@@ -127,7 +129,7 @@ func (x *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *r
 	}
 }
 
-// Automatching or invites for host-client rule-based match request.
+// Initiates a request to find players for a hosted match that uses matchmaking rules.
 //
 // FindMatchedPlayers blocks until the operation completes or ctx is cancelled.
 func (x *Matchmaker) FindMatchedPlayers(ctx context.Context, request *raw.GKMatchRequest) (*MatchedPlayers, error) {
@@ -155,7 +157,7 @@ func (x *Matchmaker) FindMatchedPlayers(ctx context.Context, request *raw.GKMatc
 	}
 }
 
-// Automatching or invites to add additional players to a peer-to-peer match for the specified request. Error will be nil on success: Possible reasons for error: 1. Communications failure 2. Timeout
+// Invites additional players to an existing match.
 //
 // AddPlayersToMatchMatchRequest blocks until the operation completes or ctx is cancelled.
 func (x *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *raw.GKMatch, matchRequest *raw.GKMatchRequest) error {
@@ -175,63 +177,63 @@ func (x *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *r
 	}
 }
 
-// Cancel matchmaking and any pending invites
+// Cancels a matchmaking request.
 //
 // Cancel calls the underlying Cancel.
 func (x *Matchmaker) Cancel() {
 	x.inner.Cancel()
 }
 
-// Cancel a pending invitation to a player
+// Cancels a pending invitation to another player.
 //
 // CancelPendingInviteToPlayer calls the underlying CancelPendingInviteToPlayer.
 func (x *Matchmaker) CancelPendingInviteToPlayer(player *raw.GKPlayer) {
 	x.inner.CancelPendingInviteToPlayer(player)
 }
 
-// Call this when finished with all programmatic P2P invites/matchmaking, for compatability with connected players using GKMatchmakerViewController.
+// Informs the server when programmatic matchmaking finishes.
 //
 // FinishMatchmakingForMatch calls the underlying FinishMatchmakingForMatch.
 func (x *Matchmaker) FinishMatchmakingForMatch(match *raw.GKMatch) {
 	x.inner.FinishMatchmakingForMatch(match)
 }
 
-// Query the server for recent activity in the specified player group. A larger value indicates that a given group has seen more recent activity. Error will be nil on success. Possible reasons for error: 1. Communications failure
+// Finds the number of players in a player group who recently requested a match.
 //
 // QueryPlayerGroupActivityWithCompletionHandler calls the underlying QueryPlayerGroupActivityWithCompletionHandler.
 func (x *Matchmaker) QueryPlayerGroupActivityWithCompletionHandler(playerGroup uint, completionHandler func(int, unsafe.Pointer)) {
 	x.inner.QueryPlayerGroupActivityWithCompletionHandler(playerGroup, completionHandler)
 }
 
-// Query the server for recent activity for all the player groups of that game. Error will be nil on success. Possible reasons for error: 1. Communications failure
+// Finds the number of players, across player groups, who recently requested a match.
 //
 // QueryActivityWithCompletionHandler calls the underlying QueryActivityWithCompletionHandler.
 func (x *Matchmaker) QueryActivityWithCompletionHandler(completionHandler func(int, unsafe.Pointer)) {
 	x.inner.QueryActivityWithCompletionHandler(completionHandler)
 }
 
-// Query the server for recent activity for the specified queue.
+// Finds the number of players in a specific queue who recently requested a match.
 //
 // QueryQueueActivityWithCompletionHandler calls the underlying QueryQueueActivityWithCompletionHandler.
 func (x *Matchmaker) QueryQueueActivityWithCompletionHandler(queueName string, completionHandler func(int, unsafe.Pointer)) {
 	x.inner.QueryQueueActivityWithCompletionHandler(foundation.NSStringStringWithUTF8String(queueName), completionHandler)
 }
 
-// Start browsing for nearby players that can be invited to a match. The reachableHandler will be called for each player found with a compatible game. It may be called more than once for the same player if that player ever becomes unreachable (e.g. moves out of range). You should call stopBrowsingForNearbyPlayers when finished browsing.
+// Finds nearby players through Bluetooth or WiFi on the same subnet.
 //
 // StartBrowsingForNearbyPlayersWithHandler calls the underlying StartBrowsingForNearbyPlayersWithHandler.
 func (x *Matchmaker) StartBrowsingForNearbyPlayersWithHandler(reachableHandler func(*raw.GKPlayer, bool)) {
 	x.inner.StartBrowsingForNearbyPlayersWithHandler(reachableHandler)
 }
 
-// Stop browsing for nearby players.
+// Stops finding nearby players.
 //
 // StopBrowsingForNearbyPlayers calls the underlying StopBrowsingForNearbyPlayers.
 func (x *Matchmaker) StopBrowsingForNearbyPlayers() {
 	x.inner.StopBrowsingForNearbyPlayers()
 }
 
-// Activate  a  group activity by Game Center for your game, which allows people in the FaceTime call to join the local player's game. The handler will be called for each player who joined from the activity.
+// Begins a SharePlay activity for your game when a FaceTime call is active.
 //
 // StartGroupActivityWithPlayerHandler blocks until the operation completes or ctx is cancelled.
 func (x *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (*Player, error) {
@@ -256,7 +258,7 @@ func (x *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (*
 	}
 }
 
-// End the group activity created by Game Center for your game, which was activated by the local player.
+// Ends a SharePlay activity for the entire group, which the local player activates.
 //
 // StopGroupActivity calls the underlying StopGroupActivity.
 func (x *Matchmaker) StopGroupActivity() {
@@ -269,7 +271,7 @@ func (x *Matchmaker) InviteHandler() objc.Block {
 }
 
 // SetInviteHandler calls the underlying SetInviteHandler.
-func (x *Matchmaker) SetInviteHandler(inviteHandler objc.Block) {
+func (x *Matchmaker) SetInviteHandler(inviteHandler func(*raw.GKInvite, *foundation.NSArray[objc.ID])) {
 	x.inner.SetInviteHandler(inviteHandler)
 }
 
@@ -287,17 +289,36 @@ func (x *Matchmaker) CancelInviteToPlayer(playerID string) {
 	x.inner.CancelInviteToPlayer(foundation.NSStringStringWithUTF8String(playerID))
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Initiates a request to find players for a hosted match.
 //
-// FindPlayersForHostedMatchRequestWithCompletionHandler calls the underlying FindPlayersForHostedMatchRequestWithCompletionHandler.
-func (x *Matchmaker) FindPlayersForHostedMatchRequestWithCompletionHandler(request *raw.GKMatchRequest, completionHandler objc.Block) {
-	x.inner.FindPlayersForHostedMatchRequestWithCompletionHandler(request, completionHandler)
+// FindPlayersForHostedMatchRequest blocks until the operation completes or ctx is cancelled.
+func (x *Matchmaker) FindPlayersForHostedMatchRequest(ctx context.Context, request *raw.GKMatchRequest) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FindPlayersForHostedMatchRequestWithCompletionHandler(request, func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // Matchmakerable is the interface implemented by [Matchmaker], for mocking and DI.
 type Matchmakerable interface {
 	Unwrap() *raw.GKMatchmaker
-	WithInviteHandler(inviteHandler objc.Block) *Matchmaker
+	WithInviteHandler(inviteHandler func(*raw.GKInvite, *foundation.NSArray[objc.ID])) *Matchmaker
 	MatchForInvite(ctx context.Context, invite *raw.GKInvite) (*Match, error)
 	FindMatchForRequest(ctx context.Context, request *raw.GKMatchRequest) (*Match, error)
 	FindPlayersForHostedRequest(ctx context.Context, request *raw.GKMatchRequest) (*foundation.NSArray[*raw.GKPlayer], error)
@@ -314,10 +335,10 @@ type Matchmakerable interface {
 	StartGroupActivityWithPlayerHandler(ctx context.Context) (*Player, error)
 	StopGroupActivity()
 	InviteHandler() objc.Block
-	SetInviteHandler(inviteHandler objc.Block)
+	SetInviteHandler(inviteHandler func(*raw.GKInvite, *foundation.NSArray[objc.ID]))
 	StartBrowsingForNearbyPlayersWithReachableHandler(reachableHandler func(*foundation.NSString, bool))
 	CancelInviteToPlayer(playerID string)
-	FindPlayersForHostedMatchRequestWithCompletionHandler(request *raw.GKMatchRequest, completionHandler objc.Block)
+	FindPlayersForHostedMatchRequest(ctx context.Context, request *raw.GKMatchRequest) (*foundation.NSArray[*foundation.NSString], error)
 }
 
 var _ Matchmakerable = (*Matchmaker)(nil)

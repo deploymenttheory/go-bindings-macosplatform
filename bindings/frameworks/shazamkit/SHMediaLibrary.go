@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the user’s Shazam library.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shmedialibrary
 // Deprecated: Use SHLibrary instead
 type SHMediaLibrary struct {
@@ -34,7 +36,7 @@ func SHMediaLibraryFromID(id objc.ID) *SHMediaLibrary {
 	return o
 }
 
-// Adds an array of songs to the user's Shazam library. > Important: > You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: > > ```swift > func add(_ mediaItems: [SHMediaItem]) async throws > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. Saving a song to the user's Shazam library also saves the following media item properties and their associated values: - “SHMediaItemProperty/shazamID“ - “SHMediaItemProperty/title“ - “SHMediaItemProperty/subtitle“, or “SHMediaItemProperty/artist“ if the subtitle is unavailable > Note: > Saving to the user's Shazam library works only for songs with a valid “SHMediaItemProperty/shazamID“. - Parameters: - mediaItems: An array of media items that represents the songs to add to the library. - completionHandler: The system calls this completion block after adding the media items to the library. This block takes the following parameters: - term `error`: An error object if a problem occurs when adding any item; otherwise, `nil`.
+// Adds an array of songs to the user’s Shazam library.
 func (o *SHMediaLibrary) AddMediaItemsCompletionHandler(mediaItems *foundation.NSArray[*SHMediaItem], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

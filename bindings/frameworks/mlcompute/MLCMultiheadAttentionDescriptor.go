@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create a multi-head attention layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor
 type MLCMultiheadAttentionDescriptor struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func MLCMultiheadAttentionDescriptorFromID(id objc.ID) *MLCMultiheadAttentionDes
 	return o
 }
 
-// @abstract   A multi-head attention layer descriptor @param      modelDimension  total dimension of model space @param      keyDimension  total dimension of key space. Default = modelDimension @param      valueDimension  total dimension of value space. Default = modelDimension @param      headCount  number of parallel attention heads @param      dropout optional, a dropout layer applied to the output projection weights. Default = 0.0f @param      hasBiases  if true, bias will be added to query/key/value/output projections. Default = YES @param      hasAttentionBiases  if true, an array of biases is added to key and value respectively. Default = NO @param      addsZeroAttention  if true, a row of zeroes is added to projected key and value. Default = NO @return     A new MultiheadAttention layer descriptor
+// Creates a multi-head attention descriptor with the dimensions, number of attention heads, dropout rate, and bias and padding options you specify.
 func MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention(modelDimension uint, keyDimension uint, valueDimension uint, headCount uint, dropout float32, hasBiases bool, hasAttentionBiases bool, addsZeroAttention bool) *MLCMultiheadAttentionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMultiheadAttentionDescriptor), _mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention, modelDimension, keyDimension, valueDimension, headCount, dropout, hasBiases, hasAttentionBiases, addsZeroAttention)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionKeyDimensionValu
 	return MLCMultiheadAttentionDescriptorFromID(_ret)
 }
 
-// @abstract   A multi-head attention layer descriptor @param      modelDimension  total dimension of model space @param      headCount  number of parallel attention heads @return     A valid MultiheadAttention layer descriptor
+// Creates a multi-head attention descriptor with the model dimension and number of parallel attention heads you specify.
 func MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionHeadCount(modelDimension uint, headCount uint) *MLCMultiheadAttentionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMultiheadAttentionDescriptor), _mLCMultiheadAttentionDescriptorSelDescriptorWithModelDimensionHeadCount, modelDimension, headCount)
 	if _ret != 0 {

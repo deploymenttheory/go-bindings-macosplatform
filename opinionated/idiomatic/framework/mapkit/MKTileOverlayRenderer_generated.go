@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The renderer for a tile overlay that handles the drawing of bitmap images on the map surface.
+//
 // TileOverlayRenderer wraps [raw.MKTileOverlayRenderer] with a fluent Go API.
 type TileOverlayRenderer struct {
 	inner *raw.MKTileOverlayRenderer
@@ -29,6 +31,8 @@ func TileOverlayRendererFromID(id objc.ID) *TileOverlayRenderer {
 	return &TileOverlayRenderer{inner: raw.MKTileOverlayRendererFromID(id)}
 }
 
+// Initializes and returns a tile renderer with the specified overlay object.
+//
 // NewTileOverlayRendererWithTileOverlay creates a new [TileOverlayRenderer].
 func NewTileOverlayRendererWithTileOverlay(overlay *raw.MKTileOverlay) *TileOverlayRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKTileOverlayRenderer")), objc.RegisterName("alloc"))
@@ -36,12 +40,16 @@ func NewTileOverlayRendererWithTileOverlay(overlay *raw.MKTileOverlay) *TileOver
 	return &TileOverlayRenderer{inner: raw.MKTileOverlayRendererFromID(_id)}
 }
 
+// The amount of transparency to apply to the overlay.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *TileOverlayRenderer) WithAlpha(alpha float64) *TileOverlayRenderer {
 	x.inner.MKOverlayRenderer.SetAlpha(alpha)
 	return x
 }
 
+// Forces the tile overlay renderer to reload and redisplay the tiles.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *TileOverlayRenderer) ReloadData() {
 	x.inner.ReloadData()

@@ -152,6 +152,7 @@ func (e MPSDeviceCapsValues) String() string {
 	}
 }
 
+// The options available to a graph.
 type MPSGraphDeploymentPlatform int64
 
 const (
@@ -180,6 +181,7 @@ func (e MPSGraphDeploymentPlatform) String() string {
 	}
 }
 
+// The device type.
 type MPSGraphDeviceType int64
 
 const (
@@ -196,6 +198,7 @@ func (e MPSGraphDeviceType) String() string {
 	}
 }
 
+// Execution events that can be used with shared events.
 type MPSGraphExecutionStage int64
 
 const (
@@ -212,6 +215,7 @@ func (e MPSGraphExecutionStage) String() string {
 	}
 }
 
+// The scaling modes for Fourier transform operations.
 type MPSGraphFFTScalingMode uint64
 
 const (
@@ -236,6 +240,7 @@ func (e MPSGraphFFTScalingMode) String() string {
 	}
 }
 
+// The type of the reduction the graph applies in the loss operations.
 type MPSGraphLossReductionType int64
 
 const (
@@ -262,6 +267,7 @@ func (e MPSGraphLossReductionType) String() string {
 	}
 }
 
+// The non-maximum suppression coordinate mode.
 type MPSGraphNonMaximumSuppressionCoordinateMode uint64
 
 const (
@@ -286,6 +292,7 @@ func (e MPSGraphNonMaximumSuppressionCoordinateMode) String() string {
 	}
 }
 
+// The optimization levels to trade compilation time for even more runtime performance by running more passes.
 type MPSGraphOptimization int64
 
 const (
@@ -306,6 +313,7 @@ func (e MPSGraphOptimization) String() string {
 	}
 }
 
+// The optimization profile used as a heuristic as the graph compiler optimizes the network.
 type MPSGraphOptimizationProfile int64
 
 const (
@@ -326,6 +334,7 @@ func (e MPSGraphOptimizationProfile) String() string {
 	}
 }
 
+// The options available to a graph.
 type MPSGraphOptions int64
 
 const (
@@ -352,6 +361,7 @@ func (e MPSGraphOptions) String() string {
 	}
 }
 
+// The tensor padding mode.
 type MPSGraphPaddingMode int64
 
 const (
@@ -365,9 +375,9 @@ const (
 	MPSGraphPaddingModeClampToEdge MPSGraphPaddingMode = 3
 	// Zero
 	MPSGraphPaddingModeZero MPSGraphPaddingMode = 4
-	// Periodic `x[-2] -> x[L-3], where L is size of x.`
+	// Periodic x[-2] -> x[L-3], where L is size of x.
 	MPSGraphPaddingModePeriodic MPSGraphPaddingMode = 5
-	// Anti Periodic `x[-2] -> -x[L-3]`
+	// Anti Periodic x[-2] -> -x[L-3]
 	MPSGraphPaddingModeAntiPeriodic MPSGraphPaddingMode = 6
 )
 
@@ -392,6 +402,7 @@ func (e MPSGraphPaddingMode) String() string {
 	}
 }
 
+// The tensor padding style.
 type MPSGraphPaddingStyle uint64
 
 const (
@@ -424,6 +435,7 @@ func (e MPSGraphPaddingStyle) String() string {
 	}
 }
 
+// The flattening mode for returned indices with max-pooling.
 type MPSGraphPoolingReturnIndicesMode uint64
 
 const (
@@ -472,6 +484,7 @@ func (e MPSGraphPoolingReturnIndicesMode) String() string {
 	}
 }
 
+// The activation modes for RNN operations.
 type MPSGraphRNNActivation uint64
 
 const (
@@ -504,6 +517,7 @@ func (e MPSGraphRNNActivation) String() string {
 	}
 }
 
+// The distributions supported by random operations.
 type MPSGraphRandomDistribution int64
 
 const (
@@ -528,6 +542,7 @@ func (e MPSGraphRandomDistribution) String() string {
 	}
 }
 
+// The sampling method to use when generating values in the normal distribution.
 type MPSGraphRandomNormalSamplingMethod int64
 
 const (
@@ -548,6 +563,7 @@ func (e MPSGraphRandomNormalSamplingMethod) String() string {
 	}
 }
 
+// MPSGraph could use these reduced precision paths to deliver faster math, but it is not guaranteed.
 type MPSGraphReducedPrecisionFastMath uint64
 
 const (
@@ -580,6 +596,7 @@ func (e MPSGraphReducedPrecisionFastMath) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The reduction mode.
 type MPSGraphReductionMode uint64
 
 const (
@@ -616,6 +633,7 @@ func (e MPSGraphReductionMode) String() string {
 	}
 }
 
+// The resize mode to use for resizing.
 type MPSGraphResizeMode uint64
 
 const (
@@ -636,6 +654,7 @@ func (e MPSGraphResizeMode) String() string {
 	}
 }
 
+// The rounding mode to use when using nearest resize mode.
 type MPSGraphResizeNearestRoundingMode uint64
 
 const (
@@ -672,6 +691,7 @@ func (e MPSGraphResizeNearestRoundingMode) String() string {
 	}
 }
 
+// The scatter mode.
 type MPSGraphScatterMode int64
 
 const (
@@ -712,6 +732,7 @@ func (e MPSGraphScatterMode) String() string {
 	}
 }
 
+// The sparse storage options in the Metal Performance Shaders Graph framework.
 type MPSGraphSparseStorageType int64
 
 const (
@@ -736,6 +757,7 @@ func (e MPSGraphSparseStorageType) String() string {
 	}
 }
 
+// The tensor layout.
 type MPSGraphTensorNamedDataLayout uint64
 
 const (

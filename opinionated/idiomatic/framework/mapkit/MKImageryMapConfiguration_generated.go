@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that represents an imagery-based map presentation, such as one using satellite imagery.
+//
 // ImageryMapConfiguration wraps [raw.MKImageryMapConfiguration] with a fluent Go API.
 type ImageryMapConfiguration struct {
 	inner *raw.MKImageryMapConfiguration
@@ -35,6 +37,8 @@ func NewImageryMapConfiguration() *ImageryMapConfiguration {
 	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(_id)}
 }
 
+// Creates a new imagery based map configuration with the specified elevation style.
+//
 // NewImageryMapConfigurationWithElevationStyle creates a new [ImageryMapConfiguration].
 func NewImageryMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKImageryMapConfiguration")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewImageryMapConfigurationWithElevationStyle(elevationStyle MKMapElevationS
 	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(_id)}
 }
 
+// The value that indicates the map’s elevation style.
+//
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
 func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration {
 	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))

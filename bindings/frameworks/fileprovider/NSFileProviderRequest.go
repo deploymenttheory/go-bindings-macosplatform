@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about the application requesting data from the File Provider extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileproviderrequest
 type NSFileProviderRequest struct {
 	foundation.NSObject

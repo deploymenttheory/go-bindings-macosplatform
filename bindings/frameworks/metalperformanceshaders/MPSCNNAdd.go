@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An addition operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnadd
 type MPSCNNAdd struct {
 	mpsneuralnetwork.MPSCNNArithmetic

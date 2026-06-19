@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that starts and manages headphone activity services.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager
 type CMHeadphoneActivityManager struct {
 	foundation.NSObject
@@ -40,11 +42,13 @@ func CMHeadphoneActivityManagerFromID(id objc.ID) *CMHeadphoneActivityManager {
 	return o
 }
 
+// Returns the authorization status for monitoring headphone activity.
 func CMHeadphoneActivityManagerAuthorizationStatus() CMAuthorizationStatus {
 	_ret := objc.Send[CMAuthorizationStatus](objc.ID(_clsCMHeadphoneActivityManager), _cMHeadphoneActivityManagerSelAuthorizationStatus)
 	return _ret
 }
 
+// Starts headphone activity updates, providing data to the given handler through the given queue.
 func (o *CMHeadphoneActivityManager) StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*CMMotionActivity, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -59,10 +63,12 @@ func (o *CMHeadphoneActivityManager) StartActivityUpdatesToQueueWithHandler(queu
 	o.Ptr().Send(_cMHeadphoneActivityManagerSelStartActivityUpdatesToQueueWithHandler, queue.Ptr(), __block_handler)
 }
 
+// Stops headphone activity updates.
 func (o *CMHeadphoneActivityManager) StopActivityUpdates() {
 	o.Ptr().Send(_cMHeadphoneActivityManagerSelStopActivityUpdates)
 }
 
+// Starts headphone status updates, providing data to the given handler through the given queue.
 func (o *CMHeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(CMHeadphoneActivityStatus, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -74,6 +80,7 @@ func (o *CMHeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue 
 	o.Ptr().Send(_cMHeadphoneActivityManagerSelStartStatusUpdatesToQueueWithHandler, queue.Ptr(), __block_handler)
 }
 
+// Stops headphone status updates.
 func (o *CMHeadphoneActivityManager) StopStatusUpdates() {
 	o.Ptr().Send(_cMHeadphoneActivityManagerSelStopStatusUpdates)
 }

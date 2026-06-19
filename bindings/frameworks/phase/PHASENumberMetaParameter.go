@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A metaparameter defined by a number that can change over time.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasenumbermetaparameter
 type PHASENumberMetaParameter struct {
 	PHASEMetaParameter
@@ -31,7 +33,7 @@ func PHASENumberMetaParameterFromID(id objc.ID) *PHASENumberMetaParameter {
 	return o
 }
 
-// @method fadeToValue @abstract Fades to a new value over an interval of time @param value The new destination value to fade to @param duration The length of time it takes to arrive at the destination value
+// Sets the value gradually over the given amount of time.
 func (o *PHASENumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
 	o.Ptr().Send(_pHASENumberMetaParameterSelFadeToValueDuration, value, duration)
 }

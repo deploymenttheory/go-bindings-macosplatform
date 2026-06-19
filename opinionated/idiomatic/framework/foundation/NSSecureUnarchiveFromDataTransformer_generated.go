@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A value transformer that converts data to and from classes that support secure coding.
+//
 // SecureUnarchiveFromDataTransformer wraps [raw.NSSecureUnarchiveFromDataTransformer] with a fluent Go API.
 type SecureUnarchiveFromDataTransformer struct {
 	inner *raw.NSSecureUnarchiveFromDataTransformer

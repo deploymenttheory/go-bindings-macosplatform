@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Base class for basic arithmetic nodes
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagearithmetic
 type MPSImageArithmetic struct {
 	mpsimage.MPSBinaryImageKernel

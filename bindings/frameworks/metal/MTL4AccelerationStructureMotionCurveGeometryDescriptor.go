@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes motion curve geometry, suitable for motion ray tracing.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4accelerationstructuremotioncurvegeometrydescriptor
 type MTL4AccelerationStructureMotionCurveGeometryDescriptor struct {
 	MTL4AccelerationStructureGeometryDescriptor

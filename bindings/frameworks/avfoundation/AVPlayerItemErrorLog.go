@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The error log associated with a player item.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemerrorlog
 type AVPlayerItemErrorLog struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func AVPlayerItemErrorLogFromID(id objc.ID) *AVPlayerItemErrorLog {
 	return o
 }
 
-// Serializes an AVPlayerItemErrorLog in the Extended Log File Format. This method converts the webserver error log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
+// Returns a serialized representation of the error log in the Extended Log File Format.
 func (o *AVPlayerItemErrorLog) ExtendedLogData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemErrorLogSelExtendedLogData)
 	if _ret != 0 {

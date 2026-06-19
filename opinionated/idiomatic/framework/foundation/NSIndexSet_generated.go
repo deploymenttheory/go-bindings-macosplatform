@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable collection of unique integer values that represent indexes in another collection.
+//
 // IndexSet wraps [raw.NSIndexSet] with a fluent Go API.
 type IndexSet struct {
 	inner *raw.NSIndexSet
@@ -29,6 +31,8 @@ func IndexSetFromID(id objc.ID) *IndexSet {
 	return &IndexSet{inner: raw.NSIndexSetFromID(id)}
 }
 
+// Initializes an allocated NSIndexSet object with an index range.
+//
 // NewIndexSetWithIndexesInRange creates a new [IndexSet].
 func NewIndexSetWithIndexesInRange(range_ raw.NSRange) *IndexSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexSet")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewIndexSetWithIndexesInRange(range_ raw.NSRange) *IndexSet {
 	return &IndexSet{inner: raw.NSIndexSetFromID(_id)}
 }
 
+// Initializes an allocated NSIndexSet object with an index set.
+//
 // NewIndexSetWithIndexSet creates a new [IndexSet].
 func NewIndexSetWithIndexSet(indexSet *raw.NSIndexSet) *IndexSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexSet")), objc.RegisterName("alloc"))
@@ -43,6 +49,8 @@ func NewIndexSetWithIndexSet(indexSet *raw.NSIndexSet) *IndexSet {
 	return &IndexSet{inner: raw.NSIndexSetFromID(_id)}
 }
 
+// Initializes an allocated NSIndexSet object with an index.
+//
 // NewIndexSetWithIndex creates a new [IndexSet].
 func NewIndexSetWithIndex(value uint) *IndexSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexSet")), objc.RegisterName("alloc"))
@@ -56,91 +64,127 @@ func (x *IndexSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// Indicates whether the indexes in the receiving index set are the same indexes contained in another index set.
+//
 // IsEqualToIndexSet calls the underlying IsEqualToIndexSet.
 func (x *IndexSet) IsEqualToIndexSet(indexSet *raw.NSIndexSet) bool {
 	return x.inner.IsEqualToIndexSet(indexSet)
 }
 
+// Returns either the closest index in the index set that is greater than a specific index or the not-found indicator.
+//
 // IndexGreaterThanIndex calls the underlying IndexGreaterThanIndex.
 func (x *IndexSet) IndexGreaterThanIndex(value uint) uint {
 	return x.inner.IndexGreaterThanIndex(value)
 }
 
+// Returns either the closest index in the index set that is less than a specific index or the not-found indicator.
+//
 // IndexLessThanIndex calls the underlying IndexLessThanIndex.
 func (x *IndexSet) IndexLessThanIndex(value uint) uint {
 	return x.inner.IndexLessThanIndex(value)
 }
 
+// Returns either the closest index in the index set that is greater than or equal to a specific index or the not-found indicator.
+//
 // IndexGreaterThanOrEqualToIndex calls the underlying IndexGreaterThanOrEqualToIndex.
 func (x *IndexSet) IndexGreaterThanOrEqualToIndex(value uint) uint {
 	return x.inner.IndexGreaterThanOrEqualToIndex(value)
 }
 
+// Returns either the closest index in the index set that is less than or equal to a specific index or the not-found indicator.
+//
 // IndexLessThanOrEqualToIndex calls the underlying IndexLessThanOrEqualToIndex.
 func (x *IndexSet) IndexLessThanOrEqualToIndex(value uint) uint {
 	return x.inner.IndexLessThanOrEqualToIndex(value)
 }
 
+// The index set fills an index buffer with the indexes contained both in the index set and in an index range, returning the number of indexes copied.
+//
 // GetIndexesMaxCountInIndexRange calls the underlying GetIndexesMaxCountInIndexRange.
 func (x *IndexSet) GetIndexesMaxCountInIndexRange(indexBuffer *uint, bufferSize uint, range_ *raw.NSRange) uint {
 	return x.inner.GetIndexesMaxCountInIndexRange(indexBuffer, bufferSize, range_)
 }
 
+// Returns the number of indexes in the index set that are members of a given range.
+//
 // CountOfIndexesInRange calls the underlying CountOfIndexesInRange.
 func (x *IndexSet) CountOfIndexesInRange(range_ raw.NSRange) uint {
 	return x.inner.CountOfIndexesInRange(range_)
 }
 
+// Indicates whether the index set contains a specific index.
+//
 // ContainsIndex calls the underlying ContainsIndex.
 func (x *IndexSet) ContainsIndex(value uint) bool {
 	return x.inner.ContainsIndex(value)
 }
 
+// Indicates whether the index set contains the indexes represented by an index range.
+//
 // ContainsIndexesInRange calls the underlying ContainsIndexesInRange.
 func (x *IndexSet) ContainsIndexesInRange(range_ raw.NSRange) bool {
 	return x.inner.ContainsIndexesInRange(range_)
 }
 
+// Indicates whether the receiving index set contains a superset of the indexes in another index set.
+//
 // ContainsIndexes calls the underlying ContainsIndexes.
 func (x *IndexSet) ContainsIndexes(indexSet *raw.NSIndexSet) bool {
 	return x.inner.ContainsIndexes(indexSet)
 }
 
+// Indicates whether the index set contains any of the indexes in a range.
+//
 // IntersectsIndexesInRange calls the underlying IntersectsIndexesInRange.
 func (x *IndexSet) IntersectsIndexesInRange(range_ raw.NSRange) bool {
 	return x.inner.IntersectsIndexesInRange(range_)
 }
 
+// Executes a given Block using each object in the index set.
+//
 // EnumerateIndexesUsing calls the underlying EnumerateIndexesUsing.
 func (x *IndexSet) EnumerateIndexesUsing(block func(uint, *bool)) {
 	x.inner.EnumerateIndexesUsing(block)
 }
 
+// Executes a given Block over the index set’s indexes, using the specified enumeration options.
+//
 // EnumerateIndexesWithOptionsUsing calls the underlying EnumerateIndexesWithOptionsUsing.
 func (x *IndexSet) EnumerateIndexesWithOptionsUsing(opts NSEnumerationOptions, block func(uint, *bool)) {
 	x.inner.EnumerateIndexesWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
+// Executes a given Block using the indexes in the specified range, using the specified enumeration options.
+//
 // EnumerateIndexesInRangeOptionsUsing calls the underlying EnumerateIndexesInRangeOptionsUsing.
 func (x *IndexSet) EnumerateIndexesInRangeOptionsUsing(range_ raw.NSRange, opts NSEnumerationOptions, block func(uint, *bool)) {
 	x.inner.EnumerateIndexesInRangeOptionsUsing(range_, raw.NSEnumerationOptions(opts), block)
 }
 
+// Returns the index of the first object that passes the predicate Block test.
+//
 // IndexPassingTest calls the underlying IndexPassingTest.
 func (x *IndexSet) IndexPassingTest(predicate func(uint, *bool) bool) uint {
 	return x.inner.IndexPassingTest(predicate)
 }
 
+// Returns the index of the first object that passes the predicate Block test using the specified enumeration options.
+//
 // IndexWithOptionsPassingTest calls the underlying IndexWithOptionsPassingTest.
 func (x *IndexSet) IndexWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
 	return x.inner.IndexWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 }
 
+// Returns the index of the first object in the specified range that passes the predicate Block test.
+//
 // IndexInRangeOptionsPassingTest calls the underlying IndexInRangeOptionsPassingTest.
 func (x *IndexSet) IndexInRangeOptionsPassingTest(range_ raw.NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
 	return x.inner.IndexInRangeOptionsPassingTest(range_, raw.NSEnumerationOptions(opts), predicate)
 }
 
+// Returns an NSIndexSet containing the receiving index set’s objects that pass the Block test.
+//
 // IndexesPassingTest calls the underlying IndexesPassingTest.
 func (x *IndexSet) IndexesPassingTest(predicate func(uint, *bool) bool) *IndexSet {
 	_r := x.inner.IndexesPassingTest(predicate)
@@ -150,6 +194,8 @@ func (x *IndexSet) IndexesPassingTest(predicate func(uint, *bool) bool) *IndexSe
 	return &IndexSet{inner: _r}
 }
 
+// Returns an NSIndexSet containing the receiving index set’s objects that pass the Block test using the specified enumeration options.
+//
 // IndexesWithOptionsPassingTest calls the underlying IndexesWithOptionsPassingTest.
 func (x *IndexSet) IndexesWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet {
 	_r := x.inner.IndexesWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
@@ -159,6 +205,8 @@ func (x *IndexSet) IndexesWithOptionsPassingTest(opts NSEnumerationOptions, pred
 	return &IndexSet{inner: _r}
 }
 
+// Returns an NSIndexSet containing the receiving index set’s objects in the specified range that pass the Block test.
+//
 // IndexesInRangeOptionsPassingTest calls the underlying IndexesInRangeOptionsPassingTest.
 func (x *IndexSet) IndexesInRangeOptionsPassingTest(range_ raw.NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet {
 	_r := x.inner.IndexesInRangeOptionsPassingTest(range_, raw.NSEnumerationOptions(opts), predicate)
@@ -168,16 +216,22 @@ func (x *IndexSet) IndexesInRangeOptionsPassingTest(range_ raw.NSRange, opts NSE
 	return &IndexSet{inner: _r}
 }
 
+// Executes a given block using each object in the index set, in the specified ranges.
+//
 // EnumerateRangesUsing calls the underlying EnumerateRangesUsing.
 func (x *IndexSet) EnumerateRangesUsing(block objc.Block) {
 	x.inner.EnumerateRangesUsing(block)
 }
 
+// Executes a given block using each object in the index set, in the specified ranges.
+//
 // EnumerateRangesWithOptionsUsing calls the underlying EnumerateRangesWithOptionsUsing.
 func (x *IndexSet) EnumerateRangesWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateRangesWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
+// Enumerates over the ranges in the range of objects using the block
+//
 // EnumerateRangesInRangeOptionsUsing calls the underlying EnumerateRangesInRangeOptionsUsing.
 func (x *IndexSet) EnumerateRangesInRangeOptionsUsing(range_ raw.NSRange, opts NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateRangesInRangeOptionsUsing(range_, raw.NSEnumerationOptions(opts), block)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a voice that an audio unit provides to its host.
+//
 // SpeechSynthesisProviderVoice wraps [raw.AVSpeechSynthesisProviderVoice] with a fluent Go API.
 type SpeechSynthesisProviderVoice struct {
 	inner *raw.AVSpeechSynthesisProviderVoice
@@ -31,6 +33,8 @@ func SpeechSynthesisProviderVoiceFromID(id objc.ID) *SpeechSynthesisProviderVoic
 	return &SpeechSynthesisProviderVoice{inner: raw.AVSpeechSynthesisProviderVoiceFromID(id)}
 }
 
+// Creates a voice with a name, an identifier, and language information.
+//
 // NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedLanguages creates a new [SpeechSynthesisProviderVoice].
 func NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedLanguages(name string, identifier string, primaryLanguages *foundation.NSArray[*foundation.NSString], supportedLanguages *foundation.NSArray[*foundation.NSString]) *SpeechSynthesisProviderVoice {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisProviderVoice")), objc.RegisterName("alloc"))
@@ -38,7 +42,7 @@ func NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedL
 	return &SpeechSynthesisProviderVoice{inner: raw.AVSpeechSynthesisProviderVoiceFromID(_id)}
 }
 
-// @brief  The size of the voice (optional) @discussion This reported size of the voice package on disk, in bytes. Defaults to 0.
+// The size of the voice package on disk, in bytes.
 //
 // WithVoiceSize sets the voiceSize property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderVoice) WithVoiceSize(voiceSize int64) *SpeechSynthesisProviderVoice {
@@ -46,7 +50,7 @@ func (x *SpeechSynthesisProviderVoice) WithVoiceSize(voiceSize int64) *SpeechSyn
 	return x
 }
 
-// @brief  The gender of the voice (optional)
+// The gender of the voice.
 //
 // WithGender sets the gender property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderVoice) WithGender(gender AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice {
@@ -54,7 +58,7 @@ func (x *SpeechSynthesisProviderVoice) WithGender(gender AVSpeechSynthesisVoiceG
 	return x
 }
 
-// @brief  The age of the voice in years (optional) @discussion This is an optional property that indicates the age of this voice, to be treated as a personality trait. Defaults to 0.
+// The age of the voice, in years.
 //
 // WithAge sets the age property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderVoice) WithAge(age int) *SpeechSynthesisProviderVoice {

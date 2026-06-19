@@ -91,7 +91,7 @@ func (o *OSAScript) InitWithSourceFromURLLanguageInstanceUsingStorageOptions(sou
 }
 
 func (o *OSAScript) InitWithContentsOfURLError(url *foundation.NSURL, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *OSAScript {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLError, url.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLError, url.Ptr(), errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -99,7 +99,7 @@ func (o *OSAScript) InitWithContentsOfURLError(url *foundation.NSURL, errorInfo 
 }
 
 func (o *OSAScript) InitWithContentsOfURLLanguageError(url *foundation.NSURL, language *OSALanguage, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLLanguageError, url.Ptr(), language.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLLanguageError, url.Ptr(), language.Ptr(), errorInfo.Ptr())
 	return _ret
 }
 
@@ -116,7 +116,7 @@ func (o *OSAScript) InitWithContentsOfURLLanguageInstanceUsingStorageOptionsErro
 }
 
 func (o *OSAScript) InitWithCompiledDataError(data *foundation.NSData, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithCompiledDataError, data.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithCompiledDataError, data.Ptr(), errorInfo.Ptr())
 	return _ret
 }
 
@@ -145,12 +145,12 @@ func (o *OSAScript) InitWithScriptDataDescriptorFromURLLanguageInstanceUsingStor
 }
 
 func (o *OSAScript) CompileAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptSelCompileAndReturnError, errorInfo)
+	_ret := objc.Send[bool](o.Ptr(), _oSAScriptSelCompileAndReturnError, errorInfo.Ptr())
 	return _ret
 }
 
 func (o *OSAScript) ExecuteAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAndReturnError, errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAndReturnError, errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -158,7 +158,7 @@ func (o *OSAScript) ExecuteAndReturnError(errorInfo *foundation.NSDictionary[*fo
 }
 
 func (o *OSAScript) ExecuteAppleEventError(event *foundation.NSAppleEventDescriptor, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAppleEventError, event.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAppleEventError, event.Ptr(), errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -166,7 +166,7 @@ func (o *OSAScript) ExecuteAppleEventError(event *foundation.NSAppleEventDescrip
 }
 
 func (o *OSAScript) ExecuteAndReturnDisplayValueError(displayValue *foundation.NSAttributedString, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAndReturnDisplayValueError, displayValue.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAndReturnDisplayValueError, displayValue.Ptr(), errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -174,7 +174,7 @@ func (o *OSAScript) ExecuteAndReturnDisplayValueError(displayValue *foundation.N
 }
 
 func (o *OSAScript) ExecuteHandlerWithNameArgumentsError(name *foundation.NSString, arguments *foundation.NSArray[objc.ID], errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteHandlerWithNameArgumentsError, name.Ptr(), arguments, errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteHandlerWithNameArgumentsError, name.Ptr(), arguments.Ptr(), errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -190,17 +190,17 @@ func (o *OSAScript) RichTextFromDescriptor(descriptor *foundation.NSAppleEventDe
 }
 
 func (o *OSAScript) WriteToURLOfTypeError(url *foundation.NSURL, type_ *foundation.NSString, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptSelWriteToURLOfTypeError, url.Ptr(), type_.Ptr(), errorInfo)
+	_ret := objc.Send[bool](o.Ptr(), _oSAScriptSelWriteToURLOfTypeError, url.Ptr(), type_.Ptr(), errorInfo.Ptr())
 	return _ret
 }
 
 func (o *OSAScript) WriteToURLOfTypeUsingStorageOptionsError(url *foundation.NSURL, type_ *foundation.NSString, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptSelWriteToURLOfTypeUsingStorageOptionsError, url.Ptr(), type_.Ptr(), storageOptions, errorInfo)
+	_ret := objc.Send[bool](o.Ptr(), _oSAScriptSelWriteToURLOfTypeUsingStorageOptionsError, url.Ptr(), type_.Ptr(), storageOptions, errorInfo.Ptr())
 	return _ret
 }
 
 func (o *OSAScript) CompiledDataForTypeUsingStorageOptionsError(type_ *foundation.NSString, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelCompiledDataForTypeUsingStorageOptionsError, type_.Ptr(), storageOptions, errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelCompiledDataForTypeUsingStorageOptionsError, type_.Ptr(), storageOptions, errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

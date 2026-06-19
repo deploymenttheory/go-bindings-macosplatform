@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that enables a file system module to pass log messages and completion notifications to clients.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fstask
 type FSTask struct {
 	foundation.NSObject
@@ -35,12 +37,12 @@ func FSTaskFromID(id objc.ID) *FSTask {
 	return o
 }
 
-// Logs the given string to the initiating client. - Parameter str: The string to log.
+// Logs the given string to the initiating client.
 func (o *FSTask) LogMessage(str *foundation.NSString) {
 	o.Ptr().Send(_fSTaskSelLogMessage, str.Ptr())
 }
 
-// Informs the client that the task completed. - Parameter error: `nil` if the task completed successfully; otherwise, an error that caused the task to fail.
+// Informs the client that the task completed.
 func (o *FSTask) DidCompleteWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_fSTaskSelDidCompleteWithError, error_)
 }

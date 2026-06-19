@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that convolves an image with the Sobel operator.
+//
 // ImageSobel wraps [raw.MPSImageSobel] with a fluent Go API.
 type ImageSobel struct {
 	inner *raw.MPSImageSobel
@@ -33,7 +35,7 @@ func ImageSobelFromID(id objc.ID) *ImageSobel {
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(id)}
 }
 
-// @abstract   Initialize a Sobel filter on a given device using the default color transform. Default: BT.601/JPEG {0.299f, 0.587f, 0.114f} For non-default conversion matrices, use -initWithDevice:linearGrayColorTransform: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
+// Initializes a Sobel filter on a given device using the default color transform.
 //
 // NewImageSobelWithDevice creates a new [ImageSobel].
 func NewImageSobelWithDevice(device metal.MTLDevice) *ImageSobel {
@@ -42,7 +44,7 @@ func NewImageSobelWithDevice(device metal.MTLDevice) *ImageSobel {
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
-// @abstract   Initialize a Sobel filter on a given device with a non-default color transform @param      device          The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @return     A valid object or nil, if failure.
+// Initializes a Sobel filter on a given device using a specific color transform.
 //
 // NewImageSobelWithDeviceLinearGrayColorTransform creates a new [ImageSobel].
 func NewImageSobelWithDeviceLinearGrayColorTransform(device metal.MTLDevice, transform *float32) *ImageSobel {
@@ -60,7 +62,7 @@ func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
@@ -68,7 +70,7 @@ func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
@@ -76,7 +78,7 @@ func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageSobel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel {
@@ -84,7 +86,7 @@ func (x *ImageSobel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageSobel) WithOptions(options mpscore.MPSKernelOptions) *ImageSobel {
@@ -92,7 +94,7 @@ func (x *ImageSobel) WithOptions(options mpscore.MPSKernelOptions) *ImageSobel {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageSobel) WithLabel(label string) *ImageSobel {

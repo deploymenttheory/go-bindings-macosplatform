@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A default implementation for handling object hierarchy relationships in a 3D asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlobjectcontainer
 type MDLObjectContainer struct {
 	foundation.NSObject

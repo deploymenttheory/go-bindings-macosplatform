@@ -3,13 +3,13 @@
 
 package paravirtualizedgraphics
 
-// @typedef PGDisplayCoord_t @abstract A struct for describing size of or offsets into a 2D array of pixels (used for size of display mode, size of cursor, and cursor hotSpot). @field x Represents horizontal pixel offset/size @field y Represents vertical pixel offset/size
+// Coordinates that describe sizes or offsets within a 2D array of pixels.
 type PGDisplayCoord_t struct {
 	X uint16
 	Y uint16
 }
 
-// @typedef PGPhysicalMemoryRange_t @abstract A struct for a guest physical memory range @field physicalAddress The starting physical address of the range @field physicalLength The length of the range
+// A range in the guest virtual machine’s physical memory address space.
 type PGPhysicalMemoryRange_s struct {
 	PhysicalAddress uint64
 	PhysicalLength  uint64

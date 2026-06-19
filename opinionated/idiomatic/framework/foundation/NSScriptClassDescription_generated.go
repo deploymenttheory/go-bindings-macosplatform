@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A scriptable class that a macOS app supports.
+//
 // ScriptClassDescription wraps [raw.NSScriptClassDescription] with a fluent Go API.
 type ScriptClassDescription struct {
 	inner *raw.NSScriptClassDescription
@@ -31,6 +33,8 @@ func ScriptClassDescriptionFromID(id objc.ID) *ScriptClassDescription {
 	return &ScriptClassDescription{inner: raw.NSScriptClassDescriptionFromID(id)}
 }
 
+// Initializes and returns a newly allocated instance of NSScriptClassDescription.
+//
 // NewScriptClassDescriptionWithSuiteNameClassNameDictionary creates a new [ScriptClassDescription].
 func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string, className string, classDeclaration purego.IDer) *ScriptClassDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptClassDescription")), objc.RegisterName("alloc"))
@@ -44,21 +48,29 @@ func (x *ScriptClassDescription) WithScriptingProperties(scriptingProperties *ra
 	return x
 }
 
+// Returns a Boolean value indicating whether a primary or secondary Apple event code in the receiver matches the passed code.
+//
 // MatchesAppleEventCode calls the underlying MatchesAppleEventCode.
 func (x *ScriptClassDescription) MatchesAppleEventCode(appleEventCode uint) bool {
 	return x.inner.MatchesAppleEventCode(appleEventCode)
 }
 
+// Returns a Boolean value indicating whether the receiver or any superclass supports the specified command.
+//
 // SupportsCommand calls the underlying SupportsCommand.
 func (x *ScriptClassDescription) SupportsCommand(commandDescription *raw.NSScriptCommandDescription) bool {
 	return x.inner.SupportsCommand(commandDescription)
 }
 
+// Returns the selector associated with the receiver for the specified command description.
+//
 // SelectorForCommand calls the underlying SelectorForCommand.
 func (x *ScriptClassDescription) SelectorForCommand(commandDescription *raw.NSScriptCommandDescription) objc.SEL {
 	return x.inner.SelectorForCommand(commandDescription)
 }
 
+// Returns the name of the declared type of the attribute or relationship identified by the passed key.
+//
 // TypeForKey calls the underlying TypeForKey.
 func (x *ScriptClassDescription) TypeForKey(key string) *String {
 	_r := x.inner.TypeForKey(foundation.NSStringStringWithUTF8String(key))
@@ -68,6 +80,8 @@ func (x *ScriptClassDescription) TypeForKey(key string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the class description instance for the class type of the specified attribute or relationship.
+//
 // ClassDescriptionForKey calls the underlying ClassDescriptionForKey.
 func (x *ScriptClassDescription) ClassDescriptionForKey(key string) *ScriptClassDescription {
 	_r := x.inner.ClassDescriptionForKey(foundation.NSStringStringWithUTF8String(key))
@@ -77,11 +91,15 @@ func (x *ScriptClassDescription) ClassDescriptionForKey(key string) *ScriptClass
 	return &ScriptClassDescription{inner: _r}
 }
 
+// Returns the Apple event code for the specified attribute or relationship in the receiver.
+//
 // AppleEventCodeForKey calls the underlying AppleEventCodeForKey.
 func (x *ScriptClassDescription) AppleEventCodeForKey(key string) uint {
 	return x.inner.AppleEventCodeForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Given an Apple event code that identifies a property or element class, returns the key for the corresponding attribute, one-to-one relationship, or one-to-many relationship.
+//
 // KeyWithAppleEventCode calls the underlying KeyWithAppleEventCode.
 func (x *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode uint) *String {
 	_r := x.inner.KeyWithAppleEventCode(appleEventCode)
@@ -91,26 +109,36 @@ func (x *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode uint) *Str
 	return &String{inner: _r}
 }
 
+// Returns a Boolean value indicating whether an insertion location must be specified when creating a new object in the specified to-many relationship of the receiver.
+//
 // IsLocationRequiredToCreateForKey calls the underlying IsLocationRequiredToCreateForKey.
 func (x *ScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool {
 	return x.inner.IsLocationRequiredToCreateForKey(foundation.NSStringStringWithUTF8String(toManyRelationshipKey))
 }
 
+// Returns a Boolean value indicating whether the described class has a property identified by the specified key.
+//
 // HasPropertyForKey calls the underlying HasPropertyForKey.
 func (x *ScriptClassDescription) HasPropertyForKey(key string) bool {
 	return x.inner.HasPropertyForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a Boolean value indicating whether the described class has an ordered to-many relationship identified by the specified key.
+//
 // HasOrderedToManyRelationshipForKey calls the underlying HasOrderedToManyRelationshipForKey.
 func (x *ScriptClassDescription) HasOrderedToManyRelationshipForKey(key string) bool {
 	return x.inner.HasOrderedToManyRelationshipForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a Boolean value indicating whether the described class has a readable property identified by the specified key.
+//
 // HasReadablePropertyForKey calls the underlying HasReadablePropertyForKey.
 func (x *ScriptClassDescription) HasReadablePropertyForKey(key string) bool {
 	return x.inner.HasReadablePropertyForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a Boolean value indicating whether the described class has a writable property identified by the specified key.
+//
 // HasWritablePropertyForKey calls the underlying HasWritablePropertyForKey.
 func (x *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
 	return x.inner.HasWritablePropertyForKey(foundation.NSStringStringWithUTF8String(key))
@@ -157,6 +185,8 @@ func (x *ScriptClassDescription) DefaultSubcontainerAttributeKey() *String {
 	return &String{inner: _r}
 }
 
+// Returns a Boolean value indicating whether a specified property in the receiver is read-only.
+//
 // IsReadOnlyKey calls the underlying IsReadOnlyKey.
 func (x *ScriptClassDescription) IsReadOnlyKey(key string) bool {
 	return x.inner.IsReadOnlyKey(foundation.NSStringStringWithUTF8String(key))

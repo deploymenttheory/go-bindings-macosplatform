@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that stores the mask used by dropout and gradient dropout filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutgradientstate
 type MPSCNNDropoutGradientState struct {
 	mpsneuralnetwork.MPSNNGradientState

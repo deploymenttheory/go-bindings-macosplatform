@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that determines how to store attribute data in memory and map it to the arguments of a vertex function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvertexattributedescriptor
 type MTLVertexAttributeDescriptor struct {
 	foundation.NSObject

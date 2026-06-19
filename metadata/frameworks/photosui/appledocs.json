@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "framework": "PhotosUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PHLivePhotoView": {
+      "doc": "A view that displays a Live Photo—a picture that also includes motion and sound from the moments just before and after its capture.",
+      "url": "https://developer.apple.com/documentation/photosui/phlivephotoview"
+    },
+    "PHPickerUpdateConfiguration": {
+      "doc": "An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.",
+      "url": "https://developer.apple.com/documentation/photosui/phpickerupdateconfiguration"
+    },
+    "PHPickerViewController": {
+      "doc": "A view controller that provides the user interface for choosing assets from the photo library.",
+      "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller"
+    },
+    "PHProjectAssetElement": {
+      "doc": "An element that represents a media asset within project section content.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement"
+    },
+    "PHProjectElement": {
+      "doc": "The superclass for all element objects.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectelement"
+    },
+    "PHProjectExtensionContext": {
+      "doc": "An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectextensioncontext"
+    },
+    "PHProjectInfo": {
+      "doc": "Information about the project extension.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectinfo"
+    },
+    "PHProjectJournalEntryElement": {
+      "doc": "An element that represents a journal entry within project section content.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectjournalentryelement"
+    },
+    "PHProjectMapElement": {
+      "doc": "An element that represents a map within project section content.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement"
+    },
+    "PHProjectRegionOfInterest": {
+      "doc": "A representation of a region of interest in a photo asset.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectregionofinterest"
+    },
+    "PHProjectSection": {
+      "doc": "A collection of content representing curated asset and text elements.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectsection"
+    },
+    "PHProjectSectionContent": {
+      "doc": "An object containing section elements and layout information for a single level of curation.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectsectioncontent"
+    },
+    "PHProjectTextElement": {
+      "doc": "An element that represents text within project section content.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojecttextelement"
+    },
+    "PHProjectTypeDescription": {
+      "doc": "An extensible enumerator for PHProjectType that’s presented to users in the project picker.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription"
+    }
+  },
+  "protocols": {
+    "PHContentEditingController": {
+      "doc": "A protocol your custom view controller class implements to provide a user interface for your Photos extension.",
+      "url": "https://developer.apple.com/documentation/photosui/phcontenteditingcontroller"
+    },
+    "PHLivePhotoViewDelegate": {
+      "doc": "The PHLivePhotoViewDelegate protocol describes messages sent by a PHLivePhotoView instance in response to playback events when playing the motion and sound content associated with a Live Photo. To receive these messages, implement the methods in this protocol in one of your controller objects and assign that object to the delegate property of a Live Photo view.",
+      "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewdelegate"
+    },
+    "PHProjectExtensionController": {
+      "doc": "A protocol defining the life cycle and supported types of project extensions.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectextensioncontroller"
+    },
+    "PHProjectTypeDescriptionDataSource": {
+      "doc": "A protocol that you use to provide the project with type description data.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescriptiondatasource"
+    },
+    "PHProjectTypeDescriptionInvalidator": {
+      "doc": "A protocol that you use to tell the project when and how to invalidate type and footer text.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescriptioninvalidator"
+    }
+  },
+  "enums": {
+    "PHLivePhotoViewContentMode": {
+      "doc": "The enumerated Live Photo content modes.",
+      "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewcontentmode",
+      "members": {
+        "PHLivePhotoViewContentModeAspectFill": {
+          "doc": "A mode that resizes the content to fill its horizontal or vertical dimension.",
+          "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewcontentmode/aspectfill"
+        },
+        "PHLivePhotoViewContentModeAspectFit": {
+          "doc": "A mode that resizes the content to fit the view’s bounds, while preserving the content’s aspect ratio.",
+          "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewcontentmode/aspectfit"
+        }
+      }
+    },
+    "PHLivePhotoViewPlaybackStyle": {
+      "doc": "Options for how much of the motion and sound content of a Live Photo to play, used in the startPlaybackWithStyle: method and in messages to the view’s delegate object.",
+      "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewplaybackstyle",
+      "members": {
+        "PHLivePhotoViewPlaybackStyleFull": {
+          "doc": "Plays back the entire motion and sound content of the Live Photo, including transition effects at the start and end.",
+          "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewplaybackstyle/full"
+        },
+        "PHLivePhotoViewPlaybackStyleHint": {
+          "doc": "Plays back only a brief section of the motion content of the Live Photo, without sound.",
+          "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewplaybackstyle/hint"
+        },
+        "PHLivePhotoViewPlaybackStyleUndefined": {
+          "doc": "This value is invalid for use.",
+          "url": "https://developer.apple.com/documentation/photosui/phlivephotoviewplaybackstyle/undefined"
+        }
+      }
+    },
+    "PHPickerCapabilities": {
+      "doc": "Options that customize the look and behavior of the photos picker.",
+      "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities",
+      "members": {
+        "PHPickerCapabilitiesCollectionNavigation": {
+          "doc": "A capability that corresponds to a sidebar or the Albums tab.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/collectionnavigation"
+        },
+        "PHPickerCapabilitiesNone": {
+          "doc": "An option that represents no capabilities.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/phpickercapabilitiesnone"
+        },
+        "PHPickerCapabilitiesSearch": {
+          "doc": "A capability that corresponds to the search bar.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/search"
+        },
+        "PHPickerCapabilitiesSelectionActions": {
+          "doc": "A cabability that represents the Cancel and Add buttons.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/selectionactions"
+        },
+        "PHPickerCapabilitiesSensitivityAnalysisIntervention": {
+          "doc": "A capability that prompts for confirmation if a person selects a photo that contains nudity.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/sensitivityanalysisintervention"
+        },
+        "PHPickerCapabilitiesStagingArea": {
+          "doc": "A capability that corresponds to an area in which the selected photos display.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/stagingarea"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a photo picker capability.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickercapabilities/init(rawvalue:)"
+        }
+      }
+    },
+    "PHPickerConfigurationAssetRepresentationMode": {
+      "doc": "Constants identifying the mode the system uses when many representations exist for an asset.",
+      "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationassetrepresentationmode",
+      "members": {
+        "PHPickerConfigurationAssetRepresentationModeAutomatic": {
+          "doc": "A mode that indicates that the system chooses the appropriate asset representation.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationassetrepresentationmode/automatic"
+        },
+        "PHPickerConfigurationAssetRepresentationModeCompatible": {
+          "doc": "A mode that uses the most compatible asset representation.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationassetrepresentationmode/compatible"
+        },
+        "PHPickerConfigurationAssetRepresentationModeCurrent": {
+          "doc": "A mode that uses the current representation to avoid transcoding, if possible.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationassetrepresentationmode/current"
+        }
+      }
+    },
+    "PHPickerConfigurationSelection": {
+      "doc": "Options that represent differing selection behavior.",
+      "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationselection",
+      "members": {
+        "PHPickerConfigurationSelectionContinuous": {
+          "doc": "An option that provides the app a person’s selection immediately.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationselection/continuous"
+        },
+        "PHPickerConfigurationSelectionContinuousAndOrdered": {
+          "doc": "An option that provides the app a person’s selection immediately and displays selected photos with a numbered badge.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationselection/continuousandordered"
+        },
+        "PHPickerConfigurationSelectionDefault": {
+          "doc": "An option that provides selected photos to the app in the default order after the user confirms the selection.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationselection/default"
+        },
+        "PHPickerConfigurationSelectionOrdered": {
+          "doc": "An option that provides selected photos to the app in the chosen order after the user confirms the selection.",
+          "url": "https://developer.apple.com/documentation/photosui/phpickerconfigurationselection/ordered"
+        }
+      }
+    },
+    "PHProjectCreationSource": {
+      "doc": "Defines the source of a project extension.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectcreationsource"
+    },
+    "PHProjectSectionType": {
+      "doc": "The intended usage of the section: cover, content, or auxiliary.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojectsectiontype"
+    },
+    "PHProjectTextElementType": {
+      "doc": "An enumeration of the type of text element.",
+      "url": "https://developer.apple.com/documentation/photosui/phprojecttextelementtype"
+    }
+  },
+  "methods": {
+    "PHLivePhotoView": {
+      "+livePhotoBadgeImageWithOptions:": {
+        "doc": "Returns an icon image for the specified Live Photo semantic options.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/livephotobadgeimage(options:)"
+      },
+      "-startPlaybackWithStyle:": {
+        "doc": "Begins playback of Live Photo content in the view.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/startplayback(with:)"
+      },
+      "-stopPlayback": {
+        "doc": "Stops playback of a Live Photo.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/stopplayback()"
+      },
+      "-stopPlaybackAnimated:": {
+        "doc": "Stops playback of a Live Photo in an animated manner.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/stopplayback(animated:)"
+      }
+    },
+    "PHPickerViewController": {
+      "-deselectAssetsWithIdentifiers:": {
+        "doc": "Deselects assets that are in a selected state.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/deselectassets(withidentifiers:)"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Creates a new picker view controller with the configuration you specify.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/initwithconfiguration:"
+      },
+      "-moveAssetWithIdentifier:afterAssetWithIdentifier:": {
+        "doc": "Reorders assets that are in a selected state.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/moveasset(withidentifier:afterassetwithidentifier:)"
+      },
+      "-scrollToInitialPosition": {
+        "doc": "Resets the visible photo thumbnails by scrolling the view to the picker’s initial position.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/scrolltoinitialposition()"
+      },
+      "-updatePickerUsingConfiguration:": {
+        "doc": "Customizes your app’s photo picker according to the given configuration.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/updatepickerusingconfiguration:"
+      },
+      "-zoomIn": {
+        "doc": "Changes the picker’s content scale by making the photo thumbnails larger in the view.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/zoomin()"
+      },
+      "-zoomOut": {
+        "doc": "Changes the picker’s content scale by making the photo thumbnails smaller in the view.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/zoomout()"
+      }
+    },
+    "PHProjectExtensionContext": {
+      "-showEditorForAsset:": {
+        "doc": "Invokes the built-in photo editor for the given asset.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectextensioncontext/showeditor(for:)"
+      },
+      "-updatedProjectInfoFromProjectInfo:completion:": {
+        "doc": "Creates an updated PHProjectInfo instance from existing project information and current assets.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectextensioncontext/updatedprojectinfo(from:completion:)"
+      }
+    },
+    "PHProjectTypeDescription": {
+      "-initWithProjectType:title:attributedDescription:image:canProvideSubtypes:": {
+        "doc": "A designated initializer for project type descriptions with lazily fetched subtypes and an attributed description string.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/init(projecttype:title:attributeddescription:image:canprovidesubtypes:)"
+      },
+      "-initWithProjectType:title:attributedDescription:image:subtypeDescriptions:": {
+        "doc": "A designated initializer for project type descriptions with the full subtype hierarchy specified up front and an attributed string for description text.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/init(projecttype:title:attributeddescription:image:subtypedescriptions:)"
+      },
+      "-initWithProjectType:title:description:image:": {
+        "doc": "A convenience initializer without subtype descriptions.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/init(projecttype:title:description:image:)"
+      },
+      "-initWithProjectType:title:description:image:canProvideSubtypes:": {
+        "doc": "A designated initializer for project type descriptions with lazily fetched subtypes and a standard description string.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/init(projecttype:title:description:image:canprovidesubtypes:)"
+      },
+      "-initWithProjectType:title:description:image:subtypeDescriptions:": {
+        "doc": "A designated initializer for project type descriptions with the full subtype hierarchy specified up front and a standard string for description text.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/init(projecttype:title:description:image:subtypedescriptions:)"
+      }
+    }
+  },
+  "properties": {
+    "PHLivePhotoView": {
+      "audioVolume": {
+        "doc": "The audio gain to apply to the Live Photo’s movie content during playback.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/audiovolume"
+      },
+      "contentMode": {
+        "doc": "The mode in which the view displays its content.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/contentmode"
+      },
+      "delegate": {
+        "doc": "An object to be notified when Live Photo playback begins or ends.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/delegate"
+      },
+      "livePhoto": {
+        "doc": "The Live Photo displayed in the view.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/livephoto"
+      },
+      "livePhotoBadgeView": {
+        "doc": "A view for displaying Live Photo status.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/livephotobadgeview"
+      },
+      "muted": {
+        "doc": "A Boolean value that determines whether the view plays the audio content of its Live Photo.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/ismuted"
+      },
+      "playbackGestureRecognizer": {
+        "doc": "A gesture recognizer that controls playback of the Live Photo in the view.",
+        "url": "https://developer.apple.com/documentation/photosui/phlivephotoview/playbackgesturerecognizer"
+      }
+    },
+    "PHPickerUpdateConfiguration": {
+      "edgesWithoutContentMargins": {
+        "doc": "The portions of a photo picker’s permiter that are borderless.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerupdateconfiguration/edgeswithoutcontentmargins"
+      },
+      "searchText": {
+        "doc": "The search text for the picker.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerupdateconfiguration/searchtext"
+      },
+      "selectionLimit": {
+        "doc": "The maximum number of selections the user can make.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerupdateconfiguration/selectionlimit"
+      }
+    },
+    "PHPickerViewController": {
+      "configuration": {
+        "doc": "The configuration you specify when creating the picker.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/configuration-17a8p"
+      },
+      "delegate": {
+        "doc": "The picker’s delegate object.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/delegate-3zqmt"
+      },
+      "init(configuration:)": {
+        "doc": "Creates a new picker view controller with the configuration you specify.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/init(configuration:)"
+      },
+      "updatePicker(using:)": {
+        "doc": "Customizes your app’s photo picker according to the given configuration.",
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/updatepicker(using:)"
+      }
+    },
+    "PHProjectAssetElement": {
+      "annotation": {
+        "doc": "A string annotation attached to the asset.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement/annotation"
+      },
+      "cloudAssetIdentifier": {
+        "doc": "The asset’s identifier in the cloud.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement/cloudassetidentifier"
+      },
+      "cropRect": {
+        "doc": "A rectangle defining the cropped portion of the asset.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement/croprect"
+      },
+      "horizontallyFlipped": {
+        "doc": "A Boolean indicating whether the asset is vertically flipped.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement/horizontallyflipped"
+      },
+      "regionsOfInterest": {
+        "doc": "An array of regions of interest in the photo asset.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement/regionsofinterest"
+      },
+      "verticallyFlipped": {
+        "doc": "A Boolean indicating whether the asset is vertically flipped.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectassetelement/verticallyflipped"
+      }
+    },
+    "PHProjectElement": {
+      "placement": {
+        "doc": "A rectangle defining where an element is placed in grid space coordinates.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectelement/placement"
+      },
+      "weight": {
+        "doc": "A value between 0 and 1 representing relative significance of the element in its section.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectelement/weight"
+      }
+    },
+    "PHProjectExtensionContext": {
+      "photoLibrary": {
+        "doc": "A read-only version of the photo library being modified.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectextensioncontext/photolibrary"
+      },
+      "project": {
+        "doc": "A read-only version of the project being edited.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectextensioncontext/project"
+      }
+    },
+    "PHProjectInfo": {
+      "PHProjectCreationSource": {
+        "doc": "Defines the source of a project extension.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/creationsource-swift.enum"
+      },
+      "brandingEnabled": {
+        "doc": "A Boolean value indicating whether branding was enabled in the source project.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/brandingenabled"
+      },
+      "creationSource": {
+        "doc": "The source from which the project was created.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/creationsource-swift.property"
+      },
+      "pageNumbersEnabled": {
+        "doc": "A Boolean value indicating whether page numbering was enabled in the source project.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/pagenumbersenabled"
+      },
+      "productIdentifier": {
+        "doc": "The product identifier of the originating Apple Print Product.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/productidentifier"
+      },
+      "projectType": {
+        "doc": "The project type that the user selected from the project extension options.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/projecttype"
+      },
+      "sections": {
+        "doc": "An array of project sections, each containing one or more section content objects.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/sections"
+      },
+      "themeIdentifier": {
+        "doc": "The product theme identifier of the originating Apple Print Product.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectinfo/themeidentifier"
+      }
+    },
+    "PHProjectJournalEntryElement": {
+      "assetElement": {
+        "doc": "An optional asset to represent the date in the journal entry.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectjournalentryelement/assetelement"
+      },
+      "date": {
+        "doc": "The date of the journal entry.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectjournalentryelement/date"
+      },
+      "textElement": {
+        "doc": "Descriptive text for the date of the entry.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectjournalentryelement/textelement"
+      }
+    },
+    "PHProjectMapElement": {
+      "altitude": {
+        "doc": "The altitude of the map.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement/altitude"
+      },
+      "annotations": {
+        "doc": "An array of optional annotations attached to the map.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement/annotations"
+      },
+      "centerCoordinate": {
+        "doc": "The coordinates of the center of the map.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement/centercoordinate"
+      },
+      "heading": {
+        "doc": "The heading of the map.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement/heading"
+      },
+      "mapType": {
+        "doc": "The type of map in the project.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement/maptype"
+      },
+      "pitch": {
+        "doc": "The pitch of the map.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectmapelement/pitch"
+      }
+    },
+    "PHProjectRegionOfInterest": {
+      "PHProjectRegionOfInterestIdentifier": {
+        "doc": "A descriptor identifying a region of interest.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectregionofinterest/identifier-swift.struct"
+      },
+      "identifier": {
+        "doc": "The region’s unique identifier.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectregionofinterest/identifier-swift.property"
+      },
+      "quality": {
+        "doc": "The region’s quality.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectregionofinterest/quality"
+      },
+      "rect": {
+        "doc": "The rectangle representing the region’s location.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectregionofinterest/rect"
+      },
+      "weight": {
+        "doc": "The face region’s weight.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectregionofinterest/weight"
+      }
+    },
+    "PHProjectSection": {
+      "PHProjectSectionType": {
+        "doc": "The intended usage of the section: cover, content, or auxiliary.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsection/sectiontype-swift.enum"
+      },
+      "sectionContents": {
+        "doc": "An array containing PHProjectionSessionContent objects.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsection/sectioncontents"
+      },
+      "sectionType": {
+        "doc": "The intended usage of the section: cover, content, or auxiliary.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsection/sectiontype-swift.property"
+      },
+      "title": {
+        "doc": "The optional section title.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsection/title"
+      }
+    },
+    "PHProjectSectionContent": {
+      "aspectRatio": {
+        "doc": "The aspect ratio of the full content layout, defined as width over height.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsectioncontent/aspectratio"
+      },
+      "backgroundColor": {
+        "doc": "The background color of the section content when created from an Apple Print Product.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsectioncontent/backgroundcolor"
+      },
+      "cloudAssetIdentifiers": {
+        "doc": "An array containing all cloud asset identifiers referenced in the content.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsectioncontent/cloudassetidentifiers"
+      },
+      "elements": {
+        "doc": "An array of asset, text, or journal entry elements contained in the content.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsectioncontent/elements"
+      },
+      "numberOfColumns": {
+        "doc": "The number of columns if section content is displayed in a grid layout.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojectsectioncontent/numberofcolumns"
+      }
+    },
+    "PHProjectTextElement": {
+      "PHProjectTextElementType": {
+        "doc": "An enumeration of the type of text element.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttextelement/elementtype"
+      },
+      "attributedText": {
+        "doc": "The stylized attributed string for the text element as presented to the user in Photos.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttextelement/attributedtext"
+      },
+      "text": {
+        "doc": "The raw unformatted string for the text element.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttextelement/text"
+      },
+      "textElementType": {
+        "doc": "The enumerated type of the text element.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttextelement/textelementtype"
+      }
+    },
+    "PHProjectTypeDescription": {
+      "canProvideSubtypes": {
+        "doc": "A Boolean variable indicating whether subtypes can be fetched from the data source.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/canprovidesubtypes"
+      },
+      "image": {
+        "doc": "An optional image associated with the project type in the picker.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/image"
+      },
+      "localizedAttributedDescription": {
+        "doc": "The localized attributed description of the project type as shown to the user.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/localizedattributeddescription"
+      },
+      "localizedDescription": {
+        "doc": "The localized description of the project type as shown to the user.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/localizeddescription"
+      },
+      "localizedTitle": {
+        "doc": "The localized title of the project type as shown to the user.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/localizedtitle"
+      },
+      "projectType": {
+        "doc": "An identifier for the project type.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/projecttype"
+      },
+      "subtypeDescriptions": {
+        "doc": "An array of type descriptions used for subtype descriptions.",
+        "url": "https://developer.apple.com/documentation/photosui/phprojecttypedescription/subtypedescriptions"
+      }
+    }
+  }
+}

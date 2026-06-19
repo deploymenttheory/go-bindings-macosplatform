@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result returned when executing a batch update request.
+//
 // BatchUpdateResult wraps [raw.NSBatchUpdateResult] with a fluent Go API.
 type BatchUpdateResult struct {
 	inner *raw.NSBatchUpdateResult

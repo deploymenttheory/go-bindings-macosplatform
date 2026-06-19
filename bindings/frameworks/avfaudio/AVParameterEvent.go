@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a parameter event on a music track’s destination.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avparameterevent
 type AVParameterEvent struct {
 	AVMusicEvent
@@ -37,7 +39,7 @@ func AVParameterEventFromID(id objc.ID) *AVParameterEvent {
 	return o
 }
 
-// @method initWithParameterID:scope:element:value @abstract Initialize the event with the parameter ID, scope, element, and value for the parameter to be set. @param parameterID The ID of the parameter (see AudioUnitParameterID). @param scope The audio unit scope for the parameter (see AudioUnitScope). @param element The element index within the scope (see AudioUnitElement). @param value The value of the parameter to be set.  Range:  Dependent on parameter.
+// Creates an event with a parameter identifier, scope, element, and value for the parameter to set.
 func (o *AVParameterEvent) InitWithParameterIDScopeElementValue(parameterID uint, scope uint, element uint, value float32) *AVParameterEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVParameterEventSelInitWithParameterIDScopeElementValue, parameterID, scope, element, value)
 	if _ret != 0 {

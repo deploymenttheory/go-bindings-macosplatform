@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the RFC 2822 data for a message, without encryption or digital signatures.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/medecodedmessage
 type MEDecodedMessage struct {
 	foundation.NSObject

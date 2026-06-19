@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A thread of execution.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsthread
 type NSThread struct {
 	NSObject
@@ -151,8 +153,11 @@ func NSThreadCurrentThread() *NSThread {
 }
 
 func (o *NSThread) ThreadDictionary() *NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _nSThreadSelThreadDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSThreadSelThreadDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSThread) ThreadPriority() float64 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A physics behavior that connects two physics bodies and allows them to pivot around each other in any direction.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsballsocketjoint
 type SCNPhysicsBallSocketJoint struct {
 	SCNPhysicsBehavior
@@ -36,6 +38,7 @@ func SCNPhysicsBallSocketJointFromID(id objc.ID) *SCNPhysicsBallSocketJoint {
 	return o
 }
 
+// Creates a ball and socket joint connecting two physics bodies.
 func SCNPhysicsBallSocketJointJointWithBodyAAnchorABodyBAnchorB(bodyA *SCNPhysicsBody, anchorA SCNVector3, bodyB *SCNPhysicsBody, anchorB SCNVector3) *SCNPhysicsBallSocketJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBallSocketJoint), _sCNPhysicsBallSocketJointSelJointWithBodyAAnchorABodyBAnchorB, bodyA.Ptr(), anchorA, bodyB.Ptr(), anchorB)
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func SCNPhysicsBallSocketJointJointWithBodyAAnchorABodyBAnchorB(bodyA *SCNPhysic
 	return SCNPhysicsBallSocketJointFromID(_ret)
 }
 
+// Creates a ball and socket joint that anchors a single physics body in space and allows it to rotate freely around an anchor point.
 func SCNPhysicsBallSocketJointJointWithBodyAnchor(body *SCNPhysicsBody, anchor SCNVector3) *SCNPhysicsBallSocketJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBallSocketJoint), _sCNPhysicsBallSocketJointSelJointWithBodyAnchor, body.Ptr(), anchor)
 	if _ret != 0 {

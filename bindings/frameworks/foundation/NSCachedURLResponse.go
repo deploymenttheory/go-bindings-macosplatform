@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A cached response to a URL request.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscachedurlresponse
 type NSCachedURLResponse struct {
 	NSObject
@@ -45,7 +47,7 @@ func (o *NSCachedURLResponse) InitWithResponseData(response *NSURLResponse, data
 
 // @method initWithResponse:data:userInfo:storagePolicy: @abstract Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @param userInfo a dictionary user-specified information to be stored with the NSCachedURLResponse. @param storagePolicy an NSURLCacheStoragePolicy constant. @result an initialized NSCachedURLResponse.
 func (o *NSCachedURLResponse) InitWithResponseDataUserInfoStoragePolicy(response *NSURLResponse, data *NSData, userInfo *NSDictionary[objc.ID, objc.ID], storagePolicy NSURLCacheStoragePolicy) *NSCachedURLResponse {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelInitWithResponseDataUserInfoStoragePolicy, response.Ptr(), data.Ptr(), userInfo, storagePolicy)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelInitWithResponseDataUserInfoStoragePolicy, response.Ptr(), data.Ptr(), userInfo.Ptr(), storagePolicy)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -72,8 +74,11 @@ func (o *NSCachedURLResponse) Data() *NSData {
 
 // @abstract Returns the userInfo dictionary of the receiver. @result The userInfo dictionary of the receiver.
 func (o *NSCachedURLResponse) UserInfo() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSCachedURLResponseSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @abstract Returns the NSURLCacheStoragePolicy constant of the receiver. @result The NSURLCacheStoragePolicy constant of the receiver.

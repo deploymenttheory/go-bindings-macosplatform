@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object representing a phone number for a contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnphonenumber
 type CNPhoneNumber struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func CNPhoneNumberFromID(id objc.ID) *CNPhoneNumber {
 	return o
 }
 
-// These will return nil if the stringValue is nil.
+// Returns a new phone number object initialized with the specified phone number string.
 func CNPhoneNumberPhoneNumberWithStringValue(stringValue *foundation.NSString) *CNPhoneNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNPhoneNumber), _cNPhoneNumberSelPhoneNumberWithStringValue, stringValue.Ptr())
 	if _ret != 0 {
@@ -43,6 +45,7 @@ func CNPhoneNumberPhoneNumberWithStringValue(stringValue *foundation.NSString) *
 	return CNPhoneNumberFromID(_ret)
 }
 
+// Returns a new phone number object initialized with the specified phone number string.
 func (o *CNPhoneNumber) InitWithStringValue(string_ *foundation.NSString) *CNPhoneNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNPhoneNumberSelInitWithStringValue, string_.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control element associated with a directional pad or a thumbstick.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollerdirectionpad
 type GCControllerDirectionPad struct {
 	GCControllerElement
@@ -37,7 +39,7 @@ func GCControllerDirectionPadFromID(id objc.ID) *GCControllerDirectionPad {
 	return o
 }
 
-// Sets the normalized value for the direction pad's axis inputs. Will update the states of the direction pad's button inputs as well. @param xAxis the value to set the xAxis of the touchpad to. @param yAxis the value to set the yAxis of the touchpad to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value @see pressed
+// Sets the input values of a snapshot of a directional pad.
 func (o *GCControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {
 	o.Ptr().Send(_gCControllerDirectionPadSelSetValueForXAxisYAxis, xAxis, yAxis)
 }

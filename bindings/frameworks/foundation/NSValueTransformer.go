@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class used to transform values from one representation to another.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsvaluetransformer
 type NSValueTransformer struct {
 	NSObject

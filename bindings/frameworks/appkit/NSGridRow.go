@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A row within a grid view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgridrow
 type NSGridRow struct {
 	foundation.NSObject

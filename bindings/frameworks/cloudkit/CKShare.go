@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized record type that manages a collection of shared records.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckshare
 type CKShare struct {
 	CKRecord
@@ -49,7 +51,7 @@ func CKShareFromID(id objc.ID) *CKShare {
 	return o
 }
 
-// Creates a new share for the specified record. - Parameters: - rootRecord: The record to share. When saving a newly created “CKShare“, you save both the share and its “CKShare/Metadata/rootRecord“ in the same “CKModifyRecordsOperation“ batch.
+// Creates a new share for the specified record.
 func (o *CKShare) InitWithRootRecord(rootRecord *CKRecord) *CKShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareSelInitWithRootRecord, rootRecord.Ptr())
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *CKShare) InitWithRootRecord(rootRecord *CKRecord) *CKShare {
 	return CKShareFromID(_ret)
 }
 
-// Creates a new share for the specified record and record ID. - Parameters: - rootRecord: The record to share. - shareID: The “CKRecord/ID“ for the share. When saving a newly created “CKShare“, you save both the share and its “CKShare/Metadata/rootRecord“ in the same “CKModifyRecordsOperation“ batch.
+// Creates a new share for the specified record and record ID.
 func (o *CKShare) InitWithRootRecordShareID(rootRecord *CKRecord, shareID *CKRecordID) *CKShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareSelInitWithRootRecordShareID, rootRecord.Ptr(), shareID.Ptr())
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func (o *CKShare) InitWithRootRecordShareID(rootRecord *CKRecord, shareID *CKRec
 	return CKShareFromID(_ret)
 }
 
-// Creates a new share for the specified record zone. - Parameters: - recordZoneID: The ID of the record zone to share. A shared record zone must have the “CKRecordZone/Capabilities/zoneWideSharing“ capability. Custom record zones that you create in the user's private database have this capability by default. A record zone, and the records it contains, can take part in only a single share. After accepting a share invite, CloudKit adds the records of the shared record zone to a new zone in the participant's shared database. Use “CKFetchDatabaseChangesOperation“ to fetch the ID of the new record zone. Then configure “CKFetchRecordZoneChangesOperation“ with that record zone ID and execute the operation to fetch the records. If you use “CKFetchShareMetadataOperation“ to fetch the metadata for a shared record zone, the operation ignores the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ and “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ properties because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
+// Creates a new share for the specified record zone.
 func (o *CKShare) InitWithRecordZoneID(recordZoneID *CKRecordZoneID) *CKShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareSelInitWithRecordZoneID, recordZoneID.Ptr())
 	if _ret != 0 {
@@ -76,7 +78,7 @@ func (o *CKShare) InitWithRecordZoneID(recordZoneID *CKRecordZoneID) *CKShare {
 	return CKShareFromID(_ret)
 }
 
-// Creates a share from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the share. When saving a newly created “CKShare“, you must save the share and its “CKShare/Metadata/rootRecord“ in the same “CKModifyRecordsOperation“ batch.
+// Creates a share from a serialized instance.
 func (o *CKShare) InitWithCoder(aDecoder *foundation.NSCoder) *CKShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -85,17 +87,17 @@ func (o *CKShare) InitWithCoder(aDecoder *foundation.NSCoder) *CKShare {
 	return CKShareFromID(_ret)
 }
 
-// Adds a participant to the share. - Parameters: - participant: The participant to add to the share. If a participant with a matching “CKShare/Participant/userIdentity“ already exists in the share, the system updates the existing participant's properties and doesn't add a new participant. To modify the list of participants, a share's “CKShare/publicPermission“ must be “CKShare/ParticipantPermission/none“. You can't mix and match public and private users in the same share. You can only add certain participant types with this API. See “CKShare/Participant“ for more information.
+// Adds a participant to the share.
 func (o *CKShare) AddParticipant(participant *CKShareParticipant) {
 	o.Ptr().Send(_cKShareSelAddParticipant, participant.Ptr())
 }
 
-// Removes a participant from the share. - Parameters: - participant: The participant to remove from the share. To modify the list of participants, a share's “CKShare/publicPermission“ must be “CKShare/ParticipantPermission/none“. You can't mix and match public and private users in the same share. You can only add certain participant types with this API. See “CKShare/Participant“ for more information.
+// Removes a participant from the share.
 func (o *CKShare) RemoveParticipant(participant *CKShareParticipant) {
 	o.Ptr().Send(_cKShareSelRemoveParticipant, participant.Ptr())
 }
 
-// Invitation URLs that any receiver can use to claim the associated participantID and join the share. Only available after a share record has been saved to the server for participants created via “CKShareParticipant/oneTimeURLParticipant“. One-time URLs are stable, and tied to the associated participantIDs as long as the participant is part of the share. Typically, a share owner provides a “URL“ directly to a user invited via their handle. However, any user can also use a one-time URL in the same manner to fetch share metadata and accept the share. After share acceptance, the one-time URL becomes functionally equivalent to the regular “URL“. - Parameters: - participantID: The “CKShareParticipant/participantID“ corresponding to the “CKShareParticipant/oneTimeURLParticipant“ added to the share.
+// Invitation URLs that any receiver can use to claim the associated participantID and join the share.
 func (o *CKShare) OneTimeURLForParticipantID(participantID *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareSelOneTimeURLForParticipantID, participantID.Ptr())
 	if _ret != 0 {
@@ -104,17 +106,17 @@ func (o *CKShare) OneTimeURLForParticipantID(participantID *foundation.NSString)
 	return foundation.NSURLFromID(_ret)
 }
 
-// Denies access requests from specified users. Use this method to deny pending access requests from uninvited users. CloudKit removes denied requesters from the “CloudKit/CKShare/requesters“ array. To persist the changes, save the share to the server after calling this method. After denial, requesters can still submit new access requests unless explicitly blocked using “CloudKit/CKShare/blockRequesters(_:)“. Only the share owner or an administrator can invoke this method. Attempts by other participants result in an exception. - Parameter requesters: An array of “CKShareAccessRequester“ objects to deny.
+// Denies access requests from specified users.
 func (o *CKShare) DenyRequesters(requesters *foundation.NSArray[*CKShareAccessRequester]) {
 	o.Ptr().Send(_cKShareSelDenyRequesters, requesters.Ptr())
 }
 
-// Blocks specified users from requesting access to this share. Blocking prevents users from submitting future access requests and removes existing participants from the share. Blocked requesters appear in the “CloudKit/CKShare/blockedIdentities“ array. To persist this change, save the share to the server after calling this method. Only the share owner or an administrator can invoke this method. Attempts by other participants result in an exception. - Parameter requesters: An array of “CKShareAccessRequester“ objects to block.
+// Blocks specified users from requesting access to this share.
 func (o *CKShare) BlockRequesters(requesters *foundation.NSArray[*CKShareAccessRequester]) {
 	o.Ptr().Send(_cKShareSelBlockRequesters, requesters.Ptr())
 }
 
-// Unblocks previously blocked users, allowing them to request access again. Use this method to remove specified identities from the “CKShare/blockedIdentities“ array. Unblocked identities can request access again if the “CKShare/allowsAccessRequests“ is enabled. To persist this change, save the share to the server after calling this method. Only the share owner or an administrator can invoke this method. Attempts by other participants result in an exception. - Parameter blockedIdentities: An array of “CKShareBlockedIdentity“ objects to unblock.
+// Unblocks previously blocked users, allowing them to request access again.
 func (o *CKShare) UnblockIdentities(blockedIdentities *foundation.NSArray[*CKShareBlockedIdentity]) {
 	o.Ptr().Send(_cKShareSelUnblockIdentities, blockedIdentities.Ptr())
 }

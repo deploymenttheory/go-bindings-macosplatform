@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing the record for a signpost interval or event.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxsignpostrecord
 type MXSignpostRecord struct {
 	foundation.NSObject
@@ -49,8 +51,11 @@ func (o *MXSignpostRecord) JSONRepresentation() *foundation.NSData {
 
 // @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this SignpostRecord. @result        An NSDictionary object containing the dictionary representation
 func (o *MXSignpostRecord) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXSignpostRecordSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property      subsystem @abstract      An NSString representation of the subsystem of the signpost instance.
@@ -95,8 +100,11 @@ func (o *MXSignpostRecord) EndTimeStamp() *foundation.NSDate {
 }
 
 func (o *MXSignpostRecord) Duration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXSignpostRecordSelDuration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostRecordSelDuration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 func (o *MXSignpostRecord) IsInterval() bool {

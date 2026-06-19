@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that lets you view and edit Automator workflows in your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/amworkflowview
 type AMWorkflowView struct {
 	appkit.NSView

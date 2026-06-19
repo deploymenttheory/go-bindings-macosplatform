@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that logs an assertion to the console.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsassertionhandler
 type NSAssertionHandler struct {
 	NSObject

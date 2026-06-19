@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that captures the components of a stroke and provides methods to find and interpolate points along the stroke’s path.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkstrokepath
 type PKStrokePath struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A stub class that encapsulates security information about a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilesecurity
 type NSFileSecurity struct {
 	NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class serves as the entry point to the iTunesLibrary framework.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibrary
 type ITLibrary struct {
 	foundation.NSObject
@@ -47,7 +49,7 @@ func ITLibraryFromID(id objc.ID) *ITLibrary {
 	return o
 }
 
-// @abstract Creates and initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Upon initialization of the ITLibrary class, the default iTunes database for the current user will be read and parsed. At this point all media entities will be cached in memory until the time the object is deallocated. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+// Creates and initializes an instance of ITLibrary that can retrieve media entities.
 func ITLibraryLibraryWithAPIVersionError(requestedAPIVersion *foundation.NSString) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsITLibrary), _iTLibrarySelLibraryWithAPIVersionError, requestedAPIVersion.Ptr(), unsafe.Pointer(&_nsErr))
@@ -60,7 +62,7 @@ func ITLibraryLibraryWithAPIVersionError(requestedAPIVersion *foundation.NSStrin
 	return ITLibraryFromID(_ret), nil
 }
 
-// @abstract Creates and initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Unless the ITLibInitOptionLazyLoadData option is specified, the default iTunes database for the current user will be read and parsed upon initialization of the ITLibrary class, and all media entities will be cached in memory. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param options Options that change the initialization behavior. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+// Creates and initializes an instance of ITLibrary that can retrieve media entities.
 func ITLibraryLibraryWithAPIVersionOptionsError(requestedAPIVersion *foundation.NSString, options ITLibInitOptions) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsITLibrary), _iTLibrarySelLibraryWithAPIVersionOptionsError, requestedAPIVersion.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -73,7 +75,7 @@ func ITLibraryLibraryWithAPIVersionOptionsError(requestedAPIVersion *foundation.
 	return ITLibraryFromID(_ret), nil
 }
 
-// @abstract Initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Upon initialization of the ITLibrary class, the default iTunes database for the current user will be read and parsed. At this point all media entities will be cached in memory until the time the object is deallocated. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+// Initializes an instance of ITLibrary that can retrieve media entities.
 func (o *ITLibrary) InitWithAPIVersionError(requestedAPIVersion *foundation.NSString) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelInitWithAPIVersionError, requestedAPIVersion.Ptr(), unsafe.Pointer(&_nsErr))
@@ -86,7 +88,7 @@ func (o *ITLibrary) InitWithAPIVersionError(requestedAPIVersion *foundation.NSSt
 	return ITLibraryFromID(_ret), nil
 }
 
-// @abstract Initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Unless the ITLibInitOptionLazyLoadData option is specified, the default iTunes database for the current user will be read and parsed upon initialization of the ITLibrary class, and all media entities will be cached in memory. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param options Options that change the initialization behavior. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+// Initializes an instance of ITLibrary that can retrieve media entities.
 func (o *ITLibrary) InitWithAPIVersionOptionsError(requestedAPIVersion *foundation.NSString, options ITLibInitOptions) (*ITLibrary, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelInitWithAPIVersionOptionsError, requestedAPIVersion.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -99,7 +101,7 @@ func (o *ITLibrary) InitWithAPIVersionOptionsError(requestedAPIVersion *foundati
 	return ITLibraryFromID(_ret), nil
 }
 
-// @abstract Retrieves the artwork from a media file. @param mediaFileURL The URL of the media file whose artwork should be extracted. @return A ITLibArtwork instance represeting the media file artwork, or nil if the artwork was not found or could not be extracted.
+// Retrieves the artwork from a media file that may or may not be in the iTunes library.
 func (o *ITLibrary) ArtworkForMediaFile(mediaFileURL *foundation.NSURL) *ITLibArtwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibrarySelArtworkForMediaFile, mediaFileURL.Ptr())
 	if _ret != 0 {
@@ -108,13 +110,13 @@ func (o *ITLibrary) ArtworkForMediaFile(mediaFileURL *foundation.NSURL) *ITLibAr
 	return ITLibArtworkFromID(_ret)
 }
 
-// @abstract Refreshes the data used by the framework. @return YES if the data was reloaded, false if an error occurred.
+// Refreshes the data that the framework uses.
 func (o *ITLibrary) ReloadData() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iTLibrarySelReloadData)
 	return _ret
 }
 
-// @abstract Unloads the data used by the framework.
+// Unloads the data that the framework uses.
 func (o *ITLibrary) UnloadData() {
 	o.Ptr().Send(_iTLibrarySelUnloadData)
 }

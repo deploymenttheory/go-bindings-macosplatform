@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An ordered pair that defines a bounding box for an envelope.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasenumericpair
 type PHASENumericPair struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func PHASENumericPairFromID(id objc.ID) *PHASENumericPair {
 	return o
 }
 
-// @method initWithFirstValue:secondValue @abstract Initialize a numeric pair with a first and second value. @param first The first value in the pair. @param second The second value in the pair. @return A new pair.
+// Creates a pair of numbers with the given values.
 func (o *PHASENumericPair) InitWithFirstValueSecondValue(first float64, second float64) *PHASENumericPair {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumericPairSelInitWithFirstValueSecondValue, first, second)
 	if _ret != 0 {

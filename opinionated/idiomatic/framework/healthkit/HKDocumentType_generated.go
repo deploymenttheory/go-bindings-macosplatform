@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample type used to create queries for documents.
+//
 // DocumentType wraps [raw.HKDocumentType] with a fluent Go API.
 type DocumentType struct {
 	inner *raw.HKDocumentType

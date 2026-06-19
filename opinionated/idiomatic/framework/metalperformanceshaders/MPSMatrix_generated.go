@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A 2D array of data that stores the data’s values.
+//
 // Matrix wraps [raw.MPSMatrix] with a fluent Go API.
 type Matrix struct {
 	inner *raw.MPSMatrix
@@ -31,7 +33,7 @@ func MatrixFromID(id objc.ID) *Matrix {
 	return &Matrix{inner: raw.MPSMatrixFromID(id)}
 }
 
-// @abstract   Initialize a MPSMatrix object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSMatrix. May not be NULL. @param      descriptor      The MPSMatrixDescriptor. May not be NULL. @return     A valid MPSMatrix object or nil, if failure. @discussion This function returns a MPSMatrix object which uses the supplied MTLBuffer.  The dimensions and stride of the matrix are specified by the MPSMatrixDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.matrices-1) * descriptor.matrixBytes + (descriptor.rows-1) * descriptor.rowBytes + descriptor.columns * (element size) bytes.
+// Initializes a matrix with a buffer.
 //
 // NewMatrixWithBufferDescriptor creates a new [Matrix].
 func NewMatrixWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *mpscore.MPSMatrixDescriptor) *Matrix {

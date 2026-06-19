@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An audio stream you manage to provide a sound buffer data.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasepushstreamnode
 type PHASEPushStreamNode struct {
 	PHASEStreamNode
@@ -33,12 +35,12 @@ func PHASEPushStreamNodeFromID(id objc.ID) *PHASEPushStreamNode {
 	return o
 }
 
-// @method scheduleBuffer @abstract Schedule a buffer for playback. @param buffer The buffer with PCM audio data. @discussion Schedules the buffer to be played following any previously scheduled buffer(s). The buffer format must be same as format specified during player instantiation
+// Schedules audio data for playback.
 func (o *PHASEPushStreamNode) ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer) {
 	o.Ptr().Send(_pHASEPushStreamNodeSelScheduleBuffer, buffer.Ptr())
 }
 
-// @method scheduleBuffer:completionCallbackType:completionHandler: @abstract Schedule a buffer for playback. @discussion Schedules the buffer to be played following any previously scheduled buffer(s). The buffer format must be same as format specified during player instantiation @param buffer The buffer with PCM audio data. @param completionCallbackType Option to specify when the completion handler must be called. @param completionHandler The completionHandler to be called as per the specified completion callback type or when the player is stopped, at which point the buffer can be recycled.
+// Schedules audio data playback with a completion handler.
 func (o *PHASEPushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -50,12 +52,12 @@ func (o *PHASEPushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHand
 	o.Ptr().Send(_pHASEPushStreamNodeSelScheduleBufferCompletionCallbackTypeCompletionHandler, buffer.Ptr(), completionCallbackType, __block_completionHandler)
 }
 
-// @method scheduleBuffer:atTime:options: @abstract Schedule a buffer for playback at a given time. @discussion The buffer format must be same as format specified during player instantiation @param buffer The buffer with PCM audio data. @param when The time at which to play the buffer. @param options Options for looping, interrupting other buffers, etc.
+// Schedules audio data playback at a specific time.
 func (o *PHASEPushStreamNode) ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions) {
 	o.Ptr().Send(_pHASEPushStreamNodeSelScheduleBufferAtTimeOptions, buffer.Ptr(), when.Ptr(), options)
 }
 
-// @method scheduleBuffer:atTime:options:completionCallbackType:completionHandler: @abstract Schedule a buffer for playback at a given time. @discussion The buffer format must be same as format specified during player instantiation @param buffer The buffer with PCM audio data. @param when The time at which to play the buffer. @param options Options for looping, interrupting other buffers, etc. @param completionCallbackType Option to specify when the completion handler must be called. @param completionHandler The completionHandler to be called as per the callback type specified or when the player is stopped, at which point the buffer can be recycled.
+// Schedules audio data playback at a specific time with a completion handler.
 func (o *PHASEPushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -88,10 +88,13 @@ func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetMaxM
 }
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) AccuracyRanges() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructSelAccuracyRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructSelAccuracyRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetAccuracyRanges(accuracyRanges *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructSelSetAccuracyRanges, accuracyRanges)
+	o.Ptr().Send(_mTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructSelSetAccuracyRanges, accuracyRanges.Ptr())
 }

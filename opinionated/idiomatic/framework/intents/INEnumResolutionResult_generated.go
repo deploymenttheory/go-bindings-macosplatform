@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for an enumeration associated with an intent.
+//
 // EnumResolutionResult wraps [raw.INEnumResolutionResult] with a fluent Go API.
 type EnumResolutionResult struct {
 	inner *raw.INEnumResolutionResult

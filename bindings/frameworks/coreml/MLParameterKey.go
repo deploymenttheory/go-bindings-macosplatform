@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The keys for the parameter dictionary in a model configuration or a model update context.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlparameterkey
 type MLParameterKey struct {
 	MLKey
@@ -156,6 +158,7 @@ func MLParameterKeyBiases() *MLParameterKey {
 	return MLParameterKeyFromID(_ret)
 }
 
+// Creates a copy of a parameter key and adds the scope to it.
 func (o *MLParameterKey) ScopedTo(scope *foundation.NSString) *MLParameterKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLParameterKeySelScopedTo, scope.Ptr())
 	if _ret != 0 {

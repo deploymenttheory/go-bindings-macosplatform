@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the deletion of a record zone.
+//
 // SyncEngineFetchedZoneDeletion wraps [raw.CKSyncEngineFetchedZoneDeletion] with a fluent Go API.
 type SyncEngineFetchedZoneDeletion struct {
 	inner *raw.CKSyncEngineFetchedZoneDeletion

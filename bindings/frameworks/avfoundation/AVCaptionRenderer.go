@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that renders captions for display at a particular time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionrenderer
 type AVCaptionRenderer struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func (o *AVCaptionRenderer) Init() *AVCaptionRenderer {
 	return AVCaptionRendererFromID(_ret)
 }
 
-// @method		captionSceneChangesInRange: @abstract		Determine render time ranges within an enclosing time range to account for visual changes among captions. @result		An NSArray of AVCaptionRendererScenes; perhaps empty if there are no captions intersecting with the consideredTimeRange @discussion This is an optional service useful for optimizing drawing. A client can perform drawing without it. As captions may become active and inactive throughout the timeline, this method will return a NSArray holding scene objects with time ranges on whose edges there's a visual change. The client can use the ranges of time between these edges with -renderInContext:atTime: to ensure all visual changes are rendered. The returned time ranges consider activation/deactivation of captions, temporal overlapping, and intra-caption timing requirements (e.g., character reveal animations). Time ranges may be returned where no captions are active as this is also a change in the caption "scene". The returned NSArray contains AVCaptionRendererScenes, each holding the CMTimeRange of that scene but potentially other information that may be useful to the client during renderering. The consideredTimeRange parameter is a CMTimeRange expressing the limits for consideration. The extent of this range does not need to correspond to the timing of captions. It might be the range from 0 to some duration. For efficiency, the range can be limited to a window of time. It is also possible to use the range anchored at a time and extending in the direction of playback.
+// Determine render time ranges within an enclosing time range to account for visual changes among captions.
 func (o *AVCaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*AVCaptionRendererScene] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRendererSelCaptionSceneChangesInRange, consideredTimeRange)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *AVCaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange corem
 	return foundation.NSArrayFromID[*AVCaptionRendererScene](_ret)
 }
 
-// @method		renderInContext:forTime: @abstract		Draw the captions corresponding to a time established by the AVCaptions to a CGContext. @discussion	Captions are drawn into the CGContextRef based upon their activation at the specified time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
+// Draw the captions for the time you specify.
 func (o *AVCaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime) {
 	o.Ptr().Send(_aVCaptionRendererSelRenderInContextForTime, ctx, time_)
 }

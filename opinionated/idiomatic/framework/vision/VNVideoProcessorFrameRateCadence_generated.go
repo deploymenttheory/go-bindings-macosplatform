@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a frame-based cadence for processing a video stream.
+//
 // VideoProcessorFrameRateCadence wraps [raw.VNVideoProcessorFrameRateCadence] with a fluent Go API.
 type VideoProcessorFrameRateCadence struct {
 	inner *raw.VNVideoProcessorFrameRateCadence

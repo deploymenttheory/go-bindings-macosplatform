@@ -48,8 +48,11 @@ func QuartzFilterManagerFilterManager() *QuartzFilterManager {
 }
 
 func QuartzFilterManagerFiltersInDomains(domains *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsQuartzFilterManager), _quartzFilterManagerSelFiltersInDomains, domains)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilterManager), _quartzFilterManagerSelFiltersInDomains, domains.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QuartzFilterManager) FilterPanel() *appkit.NSPanel {
@@ -91,7 +94,7 @@ func (o *QuartzFilterManager) Delegate() objc.ID {
 }
 
 func (o *QuartzFilterManager) ImportFilter(filterProperties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterManagerSelImportFilter, filterProperties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterManagerSelImportFilter, filterProperties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

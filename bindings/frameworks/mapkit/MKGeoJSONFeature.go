@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The decoded representation of a GeoJSON feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkgeojsonfeature
 type MKGeoJSONFeature struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that facilitates retrieving or generating preview thumbnails, optimized for batch preloading large numbers of assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcachingimagemanager
 type PHCachingImageManager struct {
 	PHImageManager
@@ -35,14 +37,17 @@ func PHCachingImageManagerFromID(id objc.ID) *PHCachingImageManager {
 	return o
 }
 
+// Prepares image representations of the specified assets for later use.
 func (o *PHCachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *PHImageRequestOptions) {
 	o.Ptr().Send(_pHCachingImageManagerSelStartCachingImagesForAssetsTargetSizeContentModeOptions, assets.Ptr(), targetSize, contentMode, options.Ptr())
 }
 
+// Cancels image preparation for the specified assets and options.
 func (o *PHCachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *PHImageRequestOptions) {
 	o.Ptr().Send(_pHCachingImageManagerSelStopCachingImagesForAssetsTargetSizeContentModeOptions, assets.Ptr(), targetSize, contentMode, options.Ptr())
 }
 
+// Cancels all image preparation that is currently in progress.
 func (o *PHCachingImageManager) StopCachingImagesForAllAssets() {
 	o.Ptr().Send(_pHCachingImageManagerSelStopCachingImagesForAllAssets)
 }

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A resource manager for the data storage underlying a Photos asset.
+//
 // AssetResourceManager wraps [raw.PHAssetResourceManager] with a fluent Go API.
 type AssetResourceManager struct {
 	inner *raw.PHAssetResourceManager
@@ -39,11 +41,15 @@ func NewAssetResourceManager() *AssetResourceManager {
 	return &AssetResourceManager{inner: raw.PHAssetResourceManagerFromID(_id)}
 }
 
+// Requests the underlying data for the specified asset resource, to be delivered asynchronously.
+//
 // RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler calls the underlying RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler.
 func (x *AssetResourceManager) RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *raw.PHAssetResource, options *raw.PHAssetResourceRequestOptions, handler func(*foundation.NSData), completionHandler func(unsafe.Pointer)) int32 {
 	return x.inner.RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource, options, handler, completionHandler)
 }
 
+// Requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
+//
 // WriteDataForAssetResourceToFileOptions blocks until the operation completes or ctx is cancelled.
 func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *raw.PHAssetResource, fileURL string, options *raw.PHAssetResourceRequestOptions) error {
 	_ch := make(chan error, 1)
@@ -62,6 +68,8 @@ func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx contex
 	}
 }
 
+// Cancels an asynchronous request.
+//
 // CancelDataRequest calls the underlying CancelDataRequest.
 func (x *AssetResourceManager) CancelDataRequest(requestID int32) {
 	x.inner.CancelDataRequest(requestID)

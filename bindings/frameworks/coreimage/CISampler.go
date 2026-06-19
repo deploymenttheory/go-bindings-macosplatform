@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that retrieves pixel samples for processing by a filter kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cisampler
 type CISampler struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func CISamplerFromID(id objc.ID) *CISampler {
 	return o
 }
 
+// Creates and returns a sampler that references an image.
 func CISamplerSamplerWithImage(im *CIImage) *CISampler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCISampler), _cISamplerSelSamplerWithImage, im.Ptr())
 	if _ret != 0 {
@@ -44,14 +47,16 @@ func CISamplerSamplerWithImage(im *CIImage) *CISampler {
 	return CISamplerFromID(_ret)
 }
 
+// Creates and returns a sampler that references an image using options specified in a dictionary.
 func CISamplerSamplerWithImageOptions(im *CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CISampler {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCISampler), _cISamplerSelSamplerWithImageOptions, im.Ptr(), dict)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCISampler), _cISamplerSelSamplerWithImageOptions, im.Ptr(), dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CISamplerFromID(_ret)
 }
 
+// Initializes a sampler with an image object.
 func (o *CISampler) InitWithImage(im *CIImage) *CISampler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cISamplerSelInitWithImage, im.Ptr())
 	if _ret != 0 {
@@ -60,8 +65,9 @@ func (o *CISampler) InitWithImage(im *CIImage) *CISampler {
 	return CISamplerFromID(_ret)
 }
 
+// Initializes the sampler with an image object using options specified in a dictionary.
 func (o *CISampler) InitWithImageOptions(im *CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CISampler {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cISamplerSelInitWithImageOptions, im.Ptr(), dict)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cISamplerSelInitWithImageOptions, im.Ptr(), dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

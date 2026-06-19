@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that provides localized descriptions of energy values.
+//
 // EnergyFormatter wraps [raw.NSEnergyFormatter] with a fluent Go API.
 type EnergyFormatter struct {
 	inner *raw.NSEnergyFormatter

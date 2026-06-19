@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A region where text layout occurs.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextcontainer
 type NSTextContainer struct {
 	foundation.NSObject
@@ -59,6 +61,7 @@ func NSTextContainerFromID(id objc.ID) *NSTextContainer {
 	return o
 }
 
+// Initializes a text container with a specified bounding rectangle.
 func (o *NSTextContainer) InitWithSize(size corefoundation.CGSize) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithSize, size)
 	if _ret != 0 {
@@ -67,6 +70,7 @@ func (o *NSTextContainer) InitWithSize(size corefoundation.CGSize) *NSTextContai
 	return NSTextContainerFromID(_ret)
 }
 
+// Creates a text container from data in an unarchiver.
 func (o *NSTextContainer) InitWithCoder(coder *foundation.NSCoder) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -75,6 +79,7 @@ func (o *NSTextContainer) InitWithCoder(coder *foundation.NSCoder) *NSTextContai
 	return NSTextContainerFromID(_ret)
 }
 
+// Returns the bounds of a line fragment rectangle inside the text container for the proposed rectangle.
 func (o *NSTextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextContainerSelLineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect, proposedRect, characterIndex, baseWritingDirection, remainingRect)
 	return _ret
@@ -159,6 +164,7 @@ func (o *NSTextContainer) SetLayoutManager(layoutManager *NSLayoutManager) {
 	o.Ptr().Send(_nSTextContainerSelSetLayoutManager, layoutManager.Ptr())
 }
 
+// Replaces the layout manager for the group of text system objects that contains the text container.
 func (o *NSTextContainer) ReplaceLayoutManager(newLayoutManager *NSLayoutManager) {
 	o.Ptr().Send(_nSTextContainerSelReplaceLayoutManager, newLayoutManager.Ptr())
 }
@@ -187,6 +193,7 @@ func (o *NSTextContainer) SetTextView(textView *NSTextView) {
 	o.Ptr().Send(_nSTextContainerSelSetTextView, textView.Ptr())
 }
 
+// Initializes a text container with a specified bounding rectangle.
 func (o *NSTextContainer) InitWithContainerSize(aContainerSize corefoundation.CGSize) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContainerSelInitWithContainerSize, aContainerSize)
 	if _ret != 0 {
@@ -195,11 +202,13 @@ func (o *NSTextContainer) InitWithContainerSize(aContainerSize corefoundation.CG
 	return NSTextContainerFromID(_ret)
 }
 
+// Calculates and returns the longest rectangle available in the proposed rectangle for displaying text.
 func (o *NSTextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextContainerSelLineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect, proposedRect, sweepDirection, movementDirection, remainingRect)
 	return _ret
 }
 
+// Queries whether a point lies within the text container’s region or on the region’s edge—not simply within its bounding rectangle.
 // Deprecated: since macOS 10.11.
 func (o *NSTextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextContainerSelContainsPoint, point)

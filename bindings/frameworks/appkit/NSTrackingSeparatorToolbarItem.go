@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A toolbar separator that aligns with the vertical split view in the same window.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstrackingseparatortoolbaritem
 type NSTrackingSeparatorToolbarItem struct {
 	NSToolbarItem
@@ -34,7 +36,7 @@ func NSTrackingSeparatorToolbarItemFromID(id objc.ID) *NSTrackingSeparatorToolba
 	return o
 }
 
-// Creates a new `NSTrackingSeparatorToolbarItem` and configures it to attempt to visually align with the specified divider of the `splitView`. The `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
+// Creates a new tracking separator toolbar item and configures it to align with the divider of the split view.
 func NSTrackingSeparatorToolbarItemTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex(identifier *foundation.NSString, splitView *NSSplitView, dividerIndex int) *NSTrackingSeparatorToolbarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTrackingSeparatorToolbarItem), _nSTrackingSeparatorToolbarItemSelTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex, identifier.Ptr(), splitView.Ptr(), dividerIndex)
 	if _ret != 0 {

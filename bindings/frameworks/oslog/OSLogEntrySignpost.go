@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An entry containing a signpost.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogentrysignpost
 type OSLogEntrySignpost struct {
 	OSLogEntry

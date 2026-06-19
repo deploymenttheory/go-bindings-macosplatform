@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that represents long short-term memory (LSTM) networks.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlclstmlayer
 type MLCLSTMLayer struct {
 	MLCLayer
@@ -43,7 +45,7 @@ func MLCLSTMLayerFromID(id objc.ID) *MLCLSTMLayer {
 	return o
 }
 
-// @abstract   Create a LSTM layer @param      descriptor               The LSTM descriptor @param      inputWeights           An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      hiddenWeights         An array of (layerCount * 4) tensors describing the hidden weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @return     A new LSTM layer.
+// Creates an LSTM layer with the descriptor, input and hidden weights, and biases you specify.
 func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor *MLCLSTMDescriptor, inputWeights *foundation.NSArray[*MLCTensor], hiddenWeights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor]) *MLCLSTMLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMLayer), _mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsBiases, descriptor.Ptr(), inputWeights.Ptr(), hiddenWeights.Ptr(), biases.Ptr())
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor *
 	return MLCLSTMLayerFromID(_ret)
 }
 
-// @abstract   Create a LSTM layer @param      descriptor               The LSTM descriptor @param      inputWeights           An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      hiddenWeights         An array of (layerCount * 4) tensors describing the hidden weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      peepholeWeights     An array of (layerCount * 4) tensors describing the peephole weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @return     A new LSTM layer.
+// Creates an LSTM layer with the descriptor, weights, and biases you specify.
 func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases(descriptor *MLCLSTMDescriptor, inputWeights *foundation.NSArray[*MLCTensor], hiddenWeights *foundation.NSArray[*MLCTensor], peepholeWeights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor]) *MLCLSTMLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMLayer), _mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases, descriptor.Ptr(), inputWeights.Ptr(), hiddenWeights.Ptr(), peepholeWeights.Ptr(), biases.Ptr())
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBias
 	return MLCLSTMLayerFromID(_ret)
 }
 
-// @abstract   Create a LSTM layer @param      descriptor                            The LSTM descriptor @param      inputWeights                        An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. For bidirectional LSTM, the forward time weights for all stacked layers will come first followed by backward time weights @param      hiddenWeights                      An array of (layerCount * 4) tensors describing the hidden weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. For bidirectional LSTM, the forward time weights for all stacked layers will come first followed by backward time weights @param      peepholeWeights                 An array of (layerCount * 4) tensors describing the peephole weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      biases                               An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. For bidirectional LSTM, the forward time bias terms for all stacked layers will come first followed by backward time bias terms @param      gateActivations                  An array of 4 neuron descriptors for the input, hidden, cell and output gate activations. @param      outputResultActivation  The neuron descriptor used for the activation function applied to output result.  Default is tanh. @return     A new  LSTM layer.
+// Creates an LSTM layer using the descriptor, weights, biases, gate activations, and output result activation that you specify.
 func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation(descriptor *MLCLSTMDescriptor, inputWeights *foundation.NSArray[*MLCTensor], hiddenWeights *foundation.NSArray[*MLCTensor], peepholeWeights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor], gateActivations *foundation.NSArray[*MLCActivationDescriptor], outputResultActivation *MLCActivationDescriptor) *MLCLSTMLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMLayer), _mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation, descriptor.Ptr(), inputWeights.Ptr(), hiddenWeights.Ptr(), peepholeWeights.Ptr(), biases.Ptr(), gateActivations.Ptr(), outputResultActivation.Ptr())
 	if _ret != 0 {

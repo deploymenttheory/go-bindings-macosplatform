@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// A tile set contains all of the tile definitions that are available for use in a tile map. In addition, it also contains tile groups, which define collections of related tile definitions and the rules that govern their placement.
+// A container for related tile groups.
 //
 // TileSet wraps [raw.SKTileSet] with a fluent Go API.
 type TileSet struct {
@@ -35,7 +35,7 @@ func TileSetFromID(id objc.ID) *TileSet {
 	return &TileSet{inner: raw.SKTileSetFromID(id)}
 }
 
-// Initilize a tile set with the specified tile groups. @param tileGroups the tile groups that will be available for use with this set
+// Initializes a new tile set with an array of tile groups and rectangular grid layout.
 //
 // NewTileSetWithTileGroups creates a new [TileSet].
 func NewTileSetWithTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup]) *TileSet {
@@ -44,7 +44,7 @@ func NewTileSetWithTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup]) 
 	return &TileSet{inner: raw.SKTileSetFromID(_id)}
 }
 
-// Initilize a tile set with the specified tile groups and tile set type. @param tileGroups the tile groups that will be available for use with this set @param tileSetType the type of tile set this will be
+// Initializes a new tile set with an array of tile groups and specified layout.
 //
 // NewTileSetWithTileGroupsTileSetType creates a new [TileSet].
 func NewTileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKTileGroup], tileSetType SKTileSetType) *TileSet {
@@ -53,7 +53,7 @@ func NewTileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKT
 	return &TileSet{inner: raw.SKTileSetFromID(_id)}
 }
 
-// The tile groups that this set provides for use.
+// The tile set’s array of tile group objects.
 //
 // WithTileGroups sets the collection, converting the Go slice to an NSArray.
 func (x *TileSet) WithTileGroups(items ...*raw.SKTileGroup) *TileSet {
@@ -76,7 +76,7 @@ func (x *TileSet) WithTileGroups(items ...*raw.SKTileGroup) *TileSet {
 	return x
 }
 
-// Client-assignable name for the tile set. Defaults to nil.
+// A name associated with the tile set.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TileSet) WithName(name string) *TileSet {
@@ -84,7 +84,7 @@ func (x *TileSet) WithName(name string) *TileSet {
 	return x
 }
 
-// The tile set type specifies how the tiles in the set will be arranged when placed in a tile map. Defaults to SKTileSetTypeGrid.
+// The tile set’s type.
 //
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *TileSet) WithType(type_ SKTileSetType) *TileSet {
@@ -92,13 +92,15 @@ func (x *TileSet) WithType(type_ SKTileSetType) *TileSet {
 	return x
 }
 
+// The tile set’s default tile group.
+//
 // WithDefaultTileGroup sets the defaultTileGroup property and returns the receiver for chaining.
 func (x *TileSet) WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet {
 	x.inner.SetDefaultTileGroup(defaultTileGroup.Unwrap())
 	return x
 }
 
-// The default tile size is the value an SKTileMapNode will use for it's tiles when the tile set is assigned to it.
+// The tile set’s default tile size.
 //
 // WithDefaultTileSize sets the defaultTileSize property and returns the receiver for chaining.
 func (x *TileSet) WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet {

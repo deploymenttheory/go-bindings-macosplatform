@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for the Safari extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariextension
 type SFSafariExtension struct {
 	foundation.NSObject

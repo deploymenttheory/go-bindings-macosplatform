@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines media formats and capture settings that capture devices support.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceformat
 type AVCaptureDeviceFormat struct {
 	foundation.NSObject
@@ -125,8 +127,11 @@ func (o *AVCaptureDeviceFormat) AutoFocusSystem() AVCaptureAutoFocusSystem {
 
 // @property supportedColorSpaces @abstract A property indicating the receiver's supported color spaces. @discussion This read-only property indicates the receiver's supported color spaces as an array of AVCaptureColorSpace constants sorted from narrow to wide color.
 func (o *AVCaptureDeviceFormat) SupportedColorSpaces() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCaptureDeviceFormatSelSupportedColorSpaces)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSupportedColorSpaces)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property supportedVideoZoomRangesForDepthDataDelivery @abstract This property returns the zoom ranges within which depth data can be delivered. @discussion Virtual devices support limited zoom ranges when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns an empty array. The presence of one or more ranges where the min and max zoom factors are not equal means that "continuous zoom" with depth is supported. For example: a) ranges: @[ [2..2], [4..4] ] only zoom factors 2 and 4 are allowed to be set when depthDataDelivery is enabled. Any other zoom factor results in an exception. b) ranges: @[ [2..5] ] depthDataDelivery is supported with zoom factors [2..5]. Zoom factors outside of this range may be set, but will result in loss of depthDataDeliery. Whenever zoom is set back to a value within the range of [2..5], depthDataDelivery will resume. When depth data delivery is enabled, the effective videoZoomFactorUpscaleThreshold will be 1.0, meaning that all zoom factors that are not native zoom factors (see AVCaptureDevice.virtualDeviceSwitchOverVideoZoomFactors and AVCaptureDevice.secondaryNativeResolutionZoomFactors) result in digital upscaling.
@@ -146,14 +151,20 @@ func (o *AVCaptureDeviceFormat) ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliv
 
 // @property supportedMaxPhotoDimensions @abstract This property lists all of the supported maximum photo dimensions for this format. The array contains CMVideoDimensions structs encoded as NSValues. @discussion Enumerate all supported resolution settings for which this format may be configured to capture photos. Use these values to set AVCapturePhotoOutput.maxPhotoDimensions and AVCapturePhotoSettings.maxPhotoDimensions.
 func (o *AVCaptureDeviceFormat) SupportedMaxPhotoDimensions() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVCaptureDeviceFormatSelSupportedMaxPhotoDimensions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSupportedMaxPhotoDimensions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // @property secondaryNativeResolutionZoomFactors @abstract Indicates zoom factors at which this device transitions to secondary native resolution modes. @discussion Devices with this property have the means to switch their pixel sampling mode on the fly to produce a high-fidelity, non-upsampled images at a fixed zoom factor beyond 1.0x.
 func (o *AVCaptureDeviceFormat) SecondaryNativeResolutionZoomFactors() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCaptureDeviceFormatSelSecondaryNativeResolutionZoomFactors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSecondaryNativeResolutionZoomFactors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property autoVideoFrameRateSupported @abstract Indicates whether the device format supports auto video frame rate. @discussion See -[AVCaptureDevice autoVideoFrameRateEnabled] (above) for a detailed description of the feature.
@@ -312,8 +323,11 @@ func (o *AVCaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortio
 
 // Indicates the supported aspect ratios for the device format. An array that describes the aspect ratios that are supported for this format. If this device format does not support dynamic aspect ratio, this property returns an empty array.
 func (o *AVCaptureDeviceFormat) SupportedDynamicAspectRatios() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCaptureDeviceFormatSelSupportedDynamicAspectRatios)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSupportedDynamicAspectRatios)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVCaptureDeviceFormat) IsSmartFramingSupported() bool {

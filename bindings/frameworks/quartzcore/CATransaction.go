@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for grouping multiple layer-tree operations into atomic updates to the render tree.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/catransaction
 type CATransaction struct {
 	foundation.NSObject
@@ -44,35 +46,43 @@ func CATransactionFromID(id objc.ID) *CATransaction {
 	return o
 }
 
+// Begin a new transaction for the current thread.
 func CATransactionBegin() {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelBegin)
 }
 
+// Commit all changes made during the current transaction.
 func CATransactionCommit() {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelCommit)
 }
 
+// Flushes any extant implicit transaction.
 func CATransactionFlush() {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelFlush)
 }
 
+// Attempts to acquire a recursive spin-lock lock, ensuring that returned layer values are valid until unlocked.
 func CATransactionLock() {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelLock)
 }
 
+// Relinquishes a previously acquired transaction lock.
 func CATransactionUnlock() {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelUnlock)
 }
 
+// Returns the animation duration used by all animations within this transaction group.
 func CATransactionAnimationDuration() float64 {
 	_ret := objc.Send[float64](objc.ID(_clsCATransaction), _cATransactionSelAnimationDuration)
 	return _ret
 }
 
+// Sets the animation duration used by all animations within this transaction group.
 func CATransactionSetAnimationDuration(dur float64) {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelSetAnimationDuration, dur)
 }
 
+// Returns the timing function used for all animations within this transaction group.
 func CATransactionAnimationTimingFunction() *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCATransaction), _cATransactionSelAnimationTimingFunction)
 	if _ret != 0 {
@@ -81,24 +91,29 @@ func CATransactionAnimationTimingFunction() *CAMediaTimingFunction {
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
+// Sets the timing function used for all animations within this transaction group.
 func CATransactionSetAnimationTimingFunction(function *CAMediaTimingFunction) {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelSetAnimationTimingFunction, function.Ptr())
 }
 
+// Returns whether actions triggered as a result of property changes made within this transaction group are suppressed.
 func CATransactionDisableActions() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCATransaction), _cATransactionSelDisableActions)
 	return _ret
 }
 
+// Sets whether actions triggered as a result of property changes made within this transaction group are suppressed.
 func CATransactionSetDisableActions(flag bool) {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelSetDisableActions, flag)
 }
 
+// Returns the completion block object.
 func CATransactionCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](objc.ID(_clsCATransaction), _cATransactionSelCompletionBlock)
 	return _ret
 }
 
+// Sets the completion block object.
 func CATransactionSetCompletionBlock(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -110,11 +125,13 @@ func CATransactionSetCompletionBlock(block func()) {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelSetCompletionBlock, __block_block)
 }
 
+// Returns the arbitrary keyed-data specified by the given key.
 func CATransactionValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCATransaction), _cATransactionSelValueForKey, key.Ptr())
 	return _ret
 }
 
+// Sets the arbitrary keyed-data for the specified key.
 func CATransactionSetValueForKey(anObject objc.ID, key *foundation.NSString) {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelSetValueForKey, anObject, key.Ptr())
 }

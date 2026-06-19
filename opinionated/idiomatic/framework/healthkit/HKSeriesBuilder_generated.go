@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for building series samples.
+//
 // SeriesBuilder wraps [raw.HKSeriesBuilder] with a fluent Go API.
 type SeriesBuilder struct {
 	inner *raw.HKSeriesBuilder
@@ -35,7 +37,7 @@ func NewSeriesBuilder() *SeriesBuilder {
 	return &SeriesBuilder{inner: raw.HKSeriesBuilderFromID(_id)}
 }
 
-// @method        discard @abstract      Stop series generation and discard all collected data. @discussion    This method informs the receiver that no more data should be collected and all previously collected data should be deleted and the receiver will be considered invalid. Any further calls to the receiver will result in an exception.
+// Invalidates the builder and discards the collected data.
 //
 // Discard calls the underlying Discard.
 func (x *SeriesBuilder) Discard() {

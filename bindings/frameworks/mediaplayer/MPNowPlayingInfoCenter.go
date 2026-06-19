@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for setting the Now Playing information for media that your app plays.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter
 type MPNowPlayingInfoCenter struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func MPNowPlayingInfoCenterFromID(id objc.ID) *MPNowPlayingInfoCenter {
 	return o
 }
 
-// Returns the default now playing info center. The default center holds now playing info about the current application.
+// Returns the singleton Now Playing info center.
 func MPNowPlayingInfoCenterDefaultCenter() *MPNowPlayingInfoCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPNowPlayingInfoCenter), _mPNowPlayingInfoCenterSelDefaultCenter)
 	if _ret != 0 {
@@ -46,12 +48,15 @@ func MPNowPlayingInfoCenterDefaultCenter() *MPNowPlayingInfoCenter {
 
 // The current now playing info for the center. Setting the info to nil will clear it.
 func (o *MPNowPlayingInfoCenter) NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mPNowPlayingInfoCenterSelNowPlayingInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoCenterSelNowPlayingInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MPNowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_mPNowPlayingInfoCenterSelSetNowPlayingInfo, nowPlayingInfo)
+	o.Ptr().Send(_mPNowPlayingInfoCenterSelSetNowPlayingInfo, nowPlayingInfo.Ptr())
 }
 
 // The current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
@@ -66,6 +71,9 @@ func (o *MPNowPlayingInfoCenter) SetPlaybackState(playbackState MPNowPlayingPlay
 
 // Keys related to animated artwork that are supported by the current platform. If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to `nowPlayingInfo` using any key not in this collection it will be ignored.
 func MPNowPlayingInfoCenterSupportedAnimatedArtworkKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsMPNowPlayingInfoCenter), _mPNowPlayingInfoCenterSelSupportedAnimatedArtworkKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPNowPlayingInfoCenter), _mPNowPlayingInfoCenterSelSupportedAnimatedArtworkKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

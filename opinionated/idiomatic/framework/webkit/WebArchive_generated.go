@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.
+//
 // WebArchive wraps [raw.WebArchive] with a fluent Go API.
 type WebArchive struct {
 	inner *raw.WebArchive
@@ -30,7 +32,7 @@ func WebArchiveFromID(id objc.ID) *WebArchive {
 	return &WebArchive{inner: raw.WebArchiveFromID(id)}
 }
 
-// @method initWithMainResource:subresources:subframeArchives: @abstract The initializer for WebArchive. @param mainResource The main resource of the archive. @param subresources The subresources of the archive (can be nil). @param subframeArchives The archives representing the subframes of the archive (can be nil). @result An initialized WebArchive.
+// Initializes the receiver with a resource and optional subresources and subframe archives..
 //
 // NewWebArchiveWithMainResourceSubresourcesSubframeArchives creates a new [WebArchive].
 func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *raw.WebResource, subresources *foundation.NSArray[objc.ID], subframeArchives *foundation.NSArray[objc.ID]) *WebArchive {
@@ -39,7 +41,7 @@ func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *raw
 	return &WebArchive{inner: raw.WebArchiveFromID(_id)}
 }
 
-// @method initWithData: @abstract The initializer for creating a WebArchive from data. @param data The data representing the archive. This can be obtained using WebArchive's data method. @result An initialized WebArchive.
+// Initializes and returns the receiver, specifying the initial content data.
 //
 // NewWebArchiveWithData creates a new [WebArchive].
 func NewWebArchiveWithData(data *foundation.NSData) *WebArchive {

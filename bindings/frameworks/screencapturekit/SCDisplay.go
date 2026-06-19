@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that represents a display device.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scdisplay
 type SCDisplay struct {
 	foundation.NSObject

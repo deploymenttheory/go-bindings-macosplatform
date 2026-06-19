@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A policy object that you use to resolve conflicts between the persistent store and in-memory versions of managed objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmergepolicy
 type NSMergePolicy struct {
 	foundation.NSObject
@@ -41,20 +43,23 @@ func NSMergePolicyFromID(id objc.ID) *NSMergePolicy {
 	return o
 }
 
+// Returns a merge policy initialized with a given policy type.
 func (o *NSMergePolicy) InitWithMergeType(ty NSMergePolicyType) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergePolicySelInitWithMergeType, ty)
 	return _ret
 }
 
+// Resolves the conflicts in a given list.
 func (o *NSMergePolicy) ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSMergePolicySelResolveConflictsError, list, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSMergePolicySelResolveConflictsError, list.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Resolves the conflicts in a given list.
 func (o *NSMergePolicy) ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*NSMergeConflict]) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSMergePolicySelResolveOptimisticLockingVersionConflictsError, list.Ptr(), unsafe.Pointer(&_nsErr))
@@ -64,6 +69,7 @@ func (o *NSMergePolicy) ResolveOptimisticLockingVersionConflictsError(list *foun
 	return _ret, nil
 }
 
+// Resolves the conflicts in a given list.
 func (o *NSMergePolicy) ResolveConstraintConflictsError(list *foundation.NSArray[*NSConstraintConflict]) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSMergePolicySelResolveConstraintConflictsError, list.Ptr(), unsafe.Pointer(&_nsErr))

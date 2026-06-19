@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that represents the paths, boundaries, and other properties of a stroke drawn on a canvas.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkstroke
 type PKStroke struct {
 	foundation.NSObject

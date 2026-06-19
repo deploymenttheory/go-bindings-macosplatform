@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Retrieve the user’s shortcuts and make shortcut suggestions.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/invoiceshortcutcenter
 type INVoiceShortcutCenter struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func INVoiceShortcutCenterFromID(id objc.ID) *INVoiceShortcutCenter {
 	return o
 }
 
-// @abstract Get all of the shortcuts associated with this app that have been added to Siri. These could have either been added with `INUIAddVoiceShortcutViewController`, or separately by the user in the Shortcuts app.
+// Retrieves all shortcuts added to Siri for your app.
 func (o *INVoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(completionHandler func(*foundation.NSArray[*INVoiceShortcut], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -50,7 +52,7 @@ func (o *INVoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(completionHan
 	o.Ptr().Send(_iNVoiceShortcutCenterSelGetAllVoiceShortcutsWithCompletion, __block_completionHandler)
 }
 
-// @abstract Get a single shortcut (associated with this app) that has been added to Siri, by its identifier.
+// Retrieves a shortcut the user added to Siri.
 func (o *INVoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(identifier *foundation.NSUUID, completionHandler func(*INVoiceShortcut, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -65,7 +67,7 @@ func (o *INVoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(identif
 	o.Ptr().Send(_iNVoiceShortcutCenterSelGetVoiceShortcutWithIdentifierCompletion, identifier.Ptr(), __block_completionHandler)
 }
 
-// @abstract Set some shortcuts that should be suggested to the user to add to Siri. @discussion These suggestions are shown to the user in the Shortcuts app.
+// Suggests shortcuts the user may want to add to Siri.
 func (o *INVoiceShortcutCenter) SetShortcutSuggestions(suggestions *foundation.NSArray[*INShortcut]) {
 	o.Ptr().Send(_iNVoiceShortcutCenterSelSetShortcutSuggestions, suggestions.Ptr())
 }

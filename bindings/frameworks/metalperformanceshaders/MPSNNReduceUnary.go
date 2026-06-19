@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for unary reduction filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreduceunary
 type MPSNNReduceUnary struct {
 	mpsneuralnetwork.MPSCNNKernel

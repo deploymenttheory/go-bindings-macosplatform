@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Translates print text to Braille and Braille to print text according to the given Braille table.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axbrailletranslator
 type AXBrailleTranslator struct {
 	foundation.NSObject

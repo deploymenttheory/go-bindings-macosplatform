@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies properties used by a loss data descriptor.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlossdatadescriptor
 type MPSCNNLossDataDescriptor struct {
 	foundation.NSObject

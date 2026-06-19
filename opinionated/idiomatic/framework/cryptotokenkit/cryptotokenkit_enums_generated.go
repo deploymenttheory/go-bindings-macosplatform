@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Error codes from CryptoTokenKit.
 type TKErrorCode int64
 
 const (
@@ -54,6 +55,7 @@ func (e TKErrorCode) String() string {
 	}
 }
 
+// Possible PIN character sets.
 type TKSmartCardPINCharset int64
 
 const (
@@ -133,6 +135,7 @@ func (e TKSmartCardPINConfirmation) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Possible PIN encoding types.
 type TKSmartCardPINEncoding int64
 
 const (
@@ -157,6 +160,7 @@ func (e TKSmartCardPINEncoding) String() string {
 	}
 }
 
+// Possible PIN justification types
 type TKSmartCardPINJustification int64
 
 const (
@@ -177,6 +181,7 @@ func (e TKSmartCardPINJustification) String() string {
 	}
 }
 
+// Smart Card transmission protocols.
 // Bitmask — values may be combined with |.
 type TKSmartCardProtocol uint64
 
@@ -208,6 +213,7 @@ func (e TKSmartCardProtocol) String() string {
 	return strings.Join(parts, "|")
 }
 
+// All smart card slot states.
 type TKSmartCardSlotState int64
 
 const (

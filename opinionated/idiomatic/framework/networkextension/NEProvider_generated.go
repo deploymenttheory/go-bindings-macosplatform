@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract base class for all NetworkExtension providers.
+//
 // NEProvider wraps [raw.NEProvider] with a fluent Go API.
 type NEProvider struct {
 	inner *raw.NEProvider
@@ -38,7 +40,7 @@ func NewNEProvider() *NEProvider {
 	return &NEProvider{inner: raw.NEProviderFromID(_id)}
 }
 
-// @method sleepWithCompletionHandler: @discussion This function is called by the framework when the system is about to go to sleep. Subclass developers can override this method to implement custom behavior such as closing connections or pausing some network activity. @param completionHandler When the method is finished handling the sleep event it must execute this completion handler.
+// Handle a sleep event.
 //
 // Sleep blocks until the operation completes or ctx is cancelled.
 func (x *NEProvider) Sleep(ctx context.Context) error {
@@ -54,14 +56,14 @@ func (x *NEProvider) Sleep(ctx context.Context) error {
 	}
 }
 
-// @method wake @discussion This function is called by the framework immediately after the system wakes up from sleep. Subclass developers can override this method to implement custom behavior such as re-establishing connections or resuming some network activity.
+// Handle a wake event.
 //
 // Wake calls the underlying Wake.
 func (x *NEProvider) Wake() {
 	x.inner.Wake()
 }
 
-// @method createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate: @discussion This function can be called by subclass implementations to create a TCP connection to a given network endpoint. This function should not be overridden by subclasses. @param remoteEndpoint An NWEndpoint object that specifies the remote network endpoint to connect to. @param enableTLS A flag indicating if a TLS session should be negotiated on the connection. @param TLSParameters A set of optional TLS parameters. Only valid if enableTLS is YES. If TLSParameters is nil, the default system parameters will be used for TLS negotiation. @param delegate An object to use as the connections delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol. @return An NWTCPConnection object.
+// Create a TCP connection.
 //
 // CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate calls the underlying CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate.
 func (x *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection {
@@ -72,7 +74,7 @@ func (x *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate
 	return &NWTCPConnection{inner: _r}
 }
 
-// @method createUDPSessionToEndpoint:fromEndpoint: @discussion This function can be called by subclass implementations to create a UDP session between a local network endpoint and a remote network endpoint. This function should not be overridden by subclasses. @param remoteEndpoint An NWEndpoint object that specifies the remote endpoint to which UDP datagrams will be sent by the UDP session. @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session. @return An NWUDPSession object.
+// Creates a UDP session.
 //
 // CreateUDPSessionToEndpointFromEndpoint calls the underlying CreateUDPSessionToEndpointFromEndpoint.
 func (x *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession {
@@ -83,7 +85,7 @@ func (x *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsaf
 	return &NWUDPSession{inner: _r}
 }
 
-// @method displayMessage:completionHandler: @discussion This method can be called by subclass implementations to display a message to the user. @param message The message to be displayed. @param completionHandler A block that is executed when the user acknowledges the message. If this method is called on a NEFilterDataProvider instance or the message cannot be displayed, then the completion handler block will be executed immediately with success parameter set to NO. If the message was successfully displayed to the user, then the completion handler block is executed with the success parameter set to YES when the user dismisses the message.
+// Call this method from your NEProvider subclass if you want to display a message to the person using the app.
 //
 // DisplayMessageCompletionHandler calls the underlying DisplayMessageCompletionHandler.
 func (x *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {

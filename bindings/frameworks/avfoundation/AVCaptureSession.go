@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures capture behavior and coordinates the flow of data from input devices to capture outputs.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturesession
 type AVCaptureSession struct {
 	foundation.NSObject
@@ -71,117 +73,117 @@ func AVCaptureSessionFromID(id objc.ID) *AVCaptureSession {
 	return o
 }
 
-// @method canSetSessionPreset: @abstract Returns whether the receiver can be configured with the given preset. @param preset An AVCaptureSession preset. @result YES if the receiver can be set to the given preset, NO otherwise. @discussion An AVCaptureSession instance can be associated with a preset that configures its inputs and outputs to fulfill common use cases. This method can be used to determine if the receiver supports the desired preset given its current input and output configuration. The receiver's sessionPreset property may only be set to a certain preset if this method returns YES for that preset.
+// Determines whether you can configure a capture session with the specified preset.
 func (o *AVCaptureSession) CanSetSessionPreset(preset *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelCanSetSessionPreset, preset.Ptr())
 	return _ret
 }
 
-// @method canAddInput: @abstract Returns whether the proposed input can be added to the receiver. @param input An AVCaptureInput instance. @result YES if the proposed input can be added to the receiver, NO otherwise. @discussion An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown.
+// Determines whether you can add an input to a session.
 func (o *AVCaptureSession) CanAddInput(input *AVCaptureInput) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelCanAddInput, input.Ptr())
 	return _ret
 }
 
-// @method addInput: @abstract Adds an AVCaptureInput to the session. @param input An AVCaptureInput instance. @discussion An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInput: may be called while the session is running.
+// Adds a capture input to the session.
 func (o *AVCaptureSession) AddInput(input *AVCaptureInput) {
 	o.Ptr().Send(_aVCaptureSessionSelAddInput, input.Ptr())
 }
 
-// @method removeInput: @abstract Removes an AVCaptureInput from the session. @param input An AVCaptureInput instance. @discussion -removeInput: may be called while the session is running.
+// Removes an input from the session.
 func (o *AVCaptureSession) RemoveInput(input *AVCaptureInput) {
 	o.Ptr().Send(_aVCaptureSessionSelRemoveInput, input.Ptr())
 }
 
-// @method canAddOutput: @abstract Returns whether the proposed output can be added to the receiver. @param output An AVCaptureOutput instance. @result YES if the proposed output can be added to the receiver, NO otherwise. @discussion An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. On iOS and Mac Catalyst, some limitations to adding combinations of different types of outputs apply: - A maximum of one output of each type may be added. For applications linked on or after iOS 16.0, this restriction no longer applies to AVCaptureVideoDataOutputs. When adding more than one AVCaptureVideoDataOutput, AVCaptureSession.hardwareCost must be taken into account. - A session cannot contain both an AVCaptureStillImageOutput and an AVCapturePhotoOutput at the same time. - Prior to iOS 16.0, an AVCaptureVideoDataOutput and an AVCaptureMovieFileOutput may be added to the same session, but only one may have its connection active. When both have their connections enabled, the AVCaptureMovieFileOutput "wins" and the AVCaptureVideoDataOutput's connection becomes inactive. For applications linked on or after iOS 16.0, this restriction has been lifted. When adding multiple AVCaptureVideoDataOutputs or a combination of AVCaptureVideoDataOutputs and an AVCaptureMovieFileOutput, AVCaptureSession.hardwareCost must be taken into account. - Similarly, prior to iOS 16.0, an AVCaptureAudioDataOutput and an AVCaptureMovieFileOutput may be added to the same session, but only one may have its connection active. When both have their connections enabled, the AVCaptureMovieFileOutput "wins" and the AVCaptureAudioDataOutput's connection becomes inactive. For applications linked on or after iOS 16.0, this restriction has been lifted.
+// Determines whether you can add an output to a session.
 func (o *AVCaptureSession) CanAddOutput(output *AVCaptureOutput) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelCanAddOutput, output.Ptr())
 	return _ret
 }
 
-// @method addOutput: @abstract Adds an AVCaptureOutput to the session. @param output An AVCaptureOutput instance. @discussion An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutput: may be called while the session is running.
+// Adds an output to the capture session.
 func (o *AVCaptureSession) AddOutput(output *AVCaptureOutput) {
 	o.Ptr().Send(_aVCaptureSessionSelAddOutput, output.Ptr())
 }
 
-// @method removeOutput: @abstract Removes an AVCaptureOutput from the session. @param output An AVCaptureOutput instance. @discussion -removeOutput: may be called while the session is running.
+// Removes an output from a capture session.
 func (o *AVCaptureSession) RemoveOutput(output *AVCaptureOutput) {
 	o.Ptr().Send(_aVCaptureSessionSelRemoveOutput, output.Ptr())
 }
 
-// @method addInputWithNoConnections: @abstract Adds an AVCaptureInput to the session without forming any connections. @param input An AVCaptureInput instance. @discussion An AVCaptureInput instance can only be added to a session using -addInputWithNoConnections: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInputWithNoConnections: may be called while the session is running. The -addInput: method is the preferred method for adding an input to an AVCaptureSession. -addInputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
+// Adds a capture input to a session without forming any connections.
 func (o *AVCaptureSession) AddInputWithNoConnections(input *AVCaptureInput) {
 	o.Ptr().Send(_aVCaptureSessionSelAddInputWithNoConnections, input.Ptr())
 }
 
-// @method addOutputWithNoConnections: @abstract Adds an AVCaptureOutput to the session without forming any connections. @param output An AVCaptureOutput instance. @discussion An AVCaptureOutput instance can only be added to a session using -addOutputWithNoConnections: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutputWithNoConnections: may be called while the session is running. The -addOutput: method is the preferred method for adding an output to an AVCaptureSession. -addOutputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
+// Adds a capture output to the session without forming any connections.
 func (o *AVCaptureSession) AddOutputWithNoConnections(output *AVCaptureOutput) {
 	o.Ptr().Send(_aVCaptureSessionSelAddOutputWithNoConnections, output.Ptr())
 }
 
-// @method canAddConnection: @abstract Returns whether the proposed connection can be added to the receiver. @param connection An AVCaptureConnection instance. @discussion An AVCaptureConnection instance can only be added to a session using -addConnection: if -canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections.
+// Determines whether a you can add a connection to a capture session.
 func (o *AVCaptureSession) CanAddConnection(connection *AVCaptureConnection) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelCanAddConnection, connection.Ptr())
 	return _ret
 }
 
-// @method addConnection: @abstract Adds an AVCaptureConnection to the session. @param connection An AVCaptureConnection instance. @discussion An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections. -addConnection: may be called while the session is running.
+// Adds a connection to the capture session.
 func (o *AVCaptureSession) AddConnection(connection *AVCaptureConnection) {
 	o.Ptr().Send(_aVCaptureSessionSelAddConnection, connection.Ptr())
 }
 
-// @method removeConnection: @abstract Removes an AVCaptureConnection from the session. @param connection An AVCaptureConnection instance. @discussion -removeConnection: may be called while the session is running.
+// Removes a capture connection from the session.
 func (o *AVCaptureSession) RemoveConnection(connection *AVCaptureConnection) {
 	o.Ptr().Send(_aVCaptureSessionSelRemoveConnection, connection.Ptr())
 }
 
-// @method setControlsDelegate:queue: @abstract Sets the receiver's controls delegate that receives events about the session's controls and the dispatch queue on which the delegate is called. @param controlsDelegate An object conforming to the `AVCaptureSessionControlsDelegate` protocol that receives events about the session's controls. @param controlsDelegateCallbackQueue A dispatch queue on which all delegate methods are called. @discussion Users can interact with an `AVCaptureSession`'s controls by performing specific gestures to enable their visibility. A delegate may be specified to be informed when the controls can be interacted with and are dismissed. All delegate methods will be called on the specified dispatch queue. A serial dispatch queue must be used to guarantee that delegate callbacks will be delivered in order. The `controlsDelegateCallbackQueue` parameter may not be `NULL`, except when setting the `controlsDelegate` to `nil` otherwise `-setControlsDelegate:queue:` throws an `NSInvalidArgumentException`.
+// Sets a delegate object for the system to call when it activates and presents controls.
 func (o *AVCaptureSession) SetControlsDelegateQueue(controlsDelegate AVCaptureSessionControlsDelegate, controlsDelegateCallbackQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVCaptureSessionSelSetControlsDelegateQueue, controlsDelegate, controlsDelegateCallbackQueue.Ptr())
 }
 
-// @method canAddControl: @abstract Returns whether the proposed control can be added to the session. @param control An `AVCaptureControl` instance. @result `YES` if the proposed control can be added to the session, `NO` otherwise. @discussion An `AVCaptureControl` instance can only be added to a session using `-addControl:` if `-canAddControl:` returns `YES`. For example, some platforms do not support controls. Instances of `AVCaptureSlider`, `AVCaptureToggle` and `AVCaptureIndexPicker` must have an action and an action queue set before being added to a session.
+// Returns a Boolean value that indicates whether a capture session add the specified control.
 func (o *AVCaptureSession) CanAddControl(control *AVCaptureControl) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureSessionSelCanAddControl, control.Ptr())
 	return _ret
 }
 
-// @method addControl: @abstract Adds an `AVCaptureControl` instance to the session. @param control An `AVCaptureControl` instance. @discussion An `AVCaptureControl` instance can only be added to a session using `-addControl:` if `-canAddControl:` returns `YES`, otherwise an `NSInvalidArgumentException` is thrown. `-addControl:` may be called while the session is running. For an `AVCaptureControl` instance to become active, an `AVCaptureSessionControlsDelegate` must be set on the session.
+// Adds a control to a capture session.
 func (o *AVCaptureSession) AddControl(control *AVCaptureControl) {
 	o.Ptr().Send(_aVCaptureSessionSelAddControl, control.Ptr())
 }
 
-// @method removeControl: @abstract Removes an `AVCaptureControl` instance from the session. @param control An `AVCaptureControl` instance. @discussion `-removeControl:` may be called while the session is running.
+// Removes a control from a capture session.
 func (o *AVCaptureSession) RemoveControl(control *AVCaptureControl) {
 	o.Ptr().Send(_aVCaptureSessionSelRemoveControl, control.Ptr())
 }
 
-// @method beginConfiguration @abstract When paired with commitConfiguration, allows a client to batch multiple configuration operations on a running session into atomic updates. @discussion -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning or -stopRunning, otherwise an NSGenericException is thrown.
+// Marks the beginning of changes to a running capture session’s configuration to perform in a single atomic update.
 func (o *AVCaptureSession) BeginConfiguration() {
 	o.Ptr().Send(_aVCaptureSessionSelBeginConfiguration)
 }
 
-// @method commitConfiguration @abstract When preceded by beginConfiguration, allows a client to batch multiple configuration operations on a running session into atomic updates. @discussion -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning or -stopRunning, otherwise an NSGenericException is thrown.
+// Commits one or more changes to a running capture session’s configuration in a single atomic update.
 func (o *AVCaptureSession) CommitConfiguration() {
 	o.Ptr().Send(_aVCaptureSessionSelCommitConfiguration)
 }
 
-// @method startRunning @abstract Starts an AVCaptureSession instance running. @discussion Clients invoke -startRunning to start the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely started up or failed. A failure to start running is reported through the AVCaptureSessionRuntimeErrorNotification mechanism. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning, otherwise an NSGenericException is thrown.
+// Starts the flow of data through the capture pipeline.
 func (o *AVCaptureSession) StartRunning() {
 	o.Ptr().Send(_aVCaptureSessionSelStartRunning)
 }
 
-// @method stopRunning @abstract Stops an AVCaptureSession instance that is currently running. @discussion Clients invoke -stopRunning to stop the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely stopped. -stopRunning may not be called while the session is being configured. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -stopRunning, otherwise an NSGenericException is thrown.
+// Stops the flow of data through the capture pipeline.
 func (o *AVCaptureSession) StopRunning() {
 	o.Ptr().Send(_aVCaptureSessionSelStopRunning)
 }
 
-// Tells the session to run deferred start when appropriate. For best perceived startup performance, call this after displaying the first frame, so that deferred start processing doesn't interfere with other initialization operations. For example, if using a <doc://com.apple.documentation/documentation/quartzcore/cametallayer> to draw camera frames, add a `presentHandler` (using <doc://com.apple.documentation/metal/mtldrawable/addpresentedhandler>) to the first drawable and call “runDeferredStartWhenNeeded“ from there. If one or more outputs need to start to perform a capture operation, and “runDeferredStartWhenNeeded“ has not run yet, the session runs the deferred start on your app's behalf. Only call this method once for each configuration commit - after the first call, subsequent calls to “runDeferredStartWhenNeeded“ have no effect. The deferred start runs asynchronously, so this method returns immediately. - Note: You can only call this when “automaticallyRunsDeferredStart“ is `false`. Otherwise, the session throws an `NSInvalidArgumentException`. - Important: To avoid blocking your app's UI, don't call this method from the application's main actor or queue.
+// Tells the session to run deferred start when appropriate.
 func (o *AVCaptureSession) RunDeferredStartWhenNeeded() {
 	o.Ptr().Send(_aVCaptureSessionSelRunDeferredStartWhenNeeded)
 }
 
-// Sets a delegate object for the session to call when performing deferred start. This delegate receives a call to the “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ method when deferred start is about to run. It is non-blocking, so by the time this method is called, the deferred start may already be underway. If you want your app to perform initialization (potentially) concurrently with deferred start (e.g. user-facing camera features that are not needed to display the first preview frame, but are available to the user as soon as possible) it may be done in the delegate's “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ method. To wait until deferred start is finished to perform some remaining initialization work, use the “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ method instead. The delegate receives a call to the “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ method when the deferred start finishes running. This allows you to run less-critical application initialization code. For example, if you've deferred an “AVCapturePhotoOutput“ by setting its “AVCaptureOutput/deferredStartEnabled“ property to `true`, and you'd like to do some app-specific initialization related to still capture, here might be a good place to put it. If the delegate is non-nil, the session still calls the “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ and “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ methods regardless of the value of the session's “automaticallyRunsDeferredStart“ property. To minimize the capture session's startup latency, defer all unnecessary work until after the session starts. This delegate provides callbacks for you to schedule deferred work without impacting session startup performance. To perform initialization prior to deferred start but after the user interface displays, set “automaticallyRunsDeferredStart“ to `false`, and then run the custom initialization prior to calling “runDeferredStartWhenNeeded“. If “deferredStartDelegate“ is not `NULL`, the session throws an exception if “deferredStartDelegateCallbackQueue“ is `nil`. - Parameter deferredStartDelegate: An object conforming to the “AVCaptureSessionDeferredStartDelegate“ protocol that receives events about deferred start. - Parameter deferredStartDelegateCallbackQueue: A dispatch queue on which deferredStart delegate methods are called.
+// Sets a delegate object for the session to call when performing deferred start.
 func (o *AVCaptureSession) SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate AVCaptureSessionDeferredStartDelegate, deferredStartDelegateCallbackQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVCaptureSessionSelSetDeferredStartDelegateDeferredStartDelegateCallbackQueue, deferredStartDelegate, deferredStartDelegateCallbackQueue.Ptr())
 }

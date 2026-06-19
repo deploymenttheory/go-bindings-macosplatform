@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// A SpriteKit node used to render a 2D array of textured sprites. Uses SKTileSet to determine what textures it can use to render. Separate tile map nodes can be layered on top of one another to achieve various effects, such as parallax scrolling.
+// A two-dimensional array of images.
 //
 // TileMapNode wraps [raw.SKTileMapNode] with a fluent Go API.
 type TileMapNode struct {
@@ -62,7 +62,7 @@ func NewTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *raw.SK
 	return &TileMapNode{inner: raw.SKTileMapNodeFromID(_id)}
 }
 
-// The number of columns in the tile map.
+// The number of columns in the tile map
 //
 // WithNumberOfColumns sets the numberOfColumns property and returns the receiver for chaining.
 func (x *TileMapNode) WithNumberOfColumns(numberOfColumns uint) *TileMapNode {
@@ -78,7 +78,7 @@ func (x *TileMapNode) WithNumberOfRows(numberOfRows uint) *TileMapNode {
 	return x
 }
 
-// The size of each tile in the map.
+// The size of each tile in points.
 //
 // WithTileSize sets the tileSize property and returns the receiver for chaining.
 func (x *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNode {
@@ -86,7 +86,7 @@ func (x *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNode 
 	return x
 }
 
-// The tile set being used by this tile map.
+// The tile set being used by this tile map. The tile map object can only display tiles that exist in this set.
 //
 // WithTileSet sets the tileSet property and returns the receiver for chaining.
 func (x *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
@@ -94,7 +94,7 @@ func (x *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
 	return x
 }
 
-// Controls the blending between the texture and the tile map color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+// Controls the blending between the texture and the tile map object’s color. Values are clamped between zero and one where zero has no color blending and one has the maximum color blending.
 //
 // WithColorBlendFactor sets the colorBlendFactor property and returns the receiver for chaining.
 func (x *TileMapNode) WithColorBlendFactor(colorBlendFactor float64) *TileMapNode {
@@ -102,7 +102,7 @@ func (x *TileMapNode) WithColorBlendFactor(colorBlendFactor float64) *TileMapNod
 	return x
 }
 
-// Base color for the tile map (If no texture is present, the color still is drawn).
+// The base color for the tile map. The influence of the color over the tile map node’s textures is controlled by colorBlendFactor.
 //
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *TileMapNode) WithColor(color *appkit.NSColor) *TileMapNode {
@@ -110,7 +110,7 @@ func (x *TileMapNode) WithColor(color *appkit.NSColor) *TileMapNode {
 	return x
 }
 
-// Sets the blend mode to use when composing the tile map with the final framebuffer. @see SKNode.SKBlendMode
+// Defines the blend mode to use when compositing the tile map over other nodes.
 //
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *TileMapNode) WithBlendMode(blendMode SKBlendMode) *TileMapNode {
@@ -118,7 +118,7 @@ func (x *TileMapNode) WithBlendMode(blendMode SKBlendMode) *TileMapNode {
 	return x
 }
 
-// Used to choose the location in the tile map that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
+// Defines the point in the tile map that corresponds to its position.
 //
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode {
@@ -126,7 +126,7 @@ func (x *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileM
 	return x
 }
 
-// A property that determines whether the tile map is rendered using a custom shader.
+// Defines a shader which is applied to each tile of the tile map.
 //
 // WithShader sets the shader property and returns the receiver for chaining.
 func (x *TileMapNode) WithShader(shader *Shader) *TileMapNode {
@@ -134,7 +134,7 @@ func (x *TileMapNode) WithShader(shader *Shader) *TileMapNode {
 	return x
 }
 
-// Bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
+// A mask that defines how the tile map is lit by light nodes in the scene.
 //
 // WithLightingBitMask sets the lightingBitMask property and returns the receiver for chaining.
 func (x *TileMapNode) WithLightingBitMask(lightingBitMask uint32) *TileMapNode {
@@ -148,7 +148,7 @@ func (x *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *TileMapNode) WithPosition(position corefoundation.CGPoint) *TileMapNode {
@@ -156,7 +156,7 @@ func (x *TileMapNode) WithPosition(position corefoundation.CGPoint) *TileMapNode
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *TileMapNode) WithZPosition(zPosition float64) *TileMapNode {
@@ -164,7 +164,7 @@ func (x *TileMapNode) WithZPosition(zPosition float64) *TileMapNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *TileMapNode) WithZRotation(zRotation float64) *TileMapNode {
@@ -172,7 +172,7 @@ func (x *TileMapNode) WithZRotation(zRotation float64) *TileMapNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *TileMapNode) WithXScale(xScale float64) *TileMapNode {
@@ -180,7 +180,7 @@ func (x *TileMapNode) WithXScale(xScale float64) *TileMapNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *TileMapNode) WithYScale(yScale float64) *TileMapNode {
@@ -188,7 +188,7 @@ func (x *TileMapNode) WithYScale(yScale float64) *TileMapNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *TileMapNode) WithSpeed(speed float64) *TileMapNode {
@@ -196,7 +196,7 @@ func (x *TileMapNode) WithSpeed(speed float64) *TileMapNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *TileMapNode) WithAlpha(alpha float64) *TileMapNode {
@@ -204,7 +204,7 @@ func (x *TileMapNode) WithAlpha(alpha float64) *TileMapNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *TileMapNode) WithPaused(paused bool) *TileMapNode {
@@ -212,7 +212,7 @@ func (x *TileMapNode) WithPaused(paused bool) *TileMapNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *TileMapNode) WithHidden(hidden bool) *TileMapNode {
@@ -220,7 +220,7 @@ func (x *TileMapNode) WithHidden(hidden bool) *TileMapNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *TileMapNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode {
@@ -228,7 +228,7 @@ func (x *TileMapNode) WithUserInteractionEnabled(userInteractionEnabled bool) *T
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TileMapNode) WithName(name string) *TileMapNode {
@@ -236,7 +236,7 @@ func (x *TileMapNode) WithName(name string) *TileMapNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
@@ -244,7 +244,7 @@ func (x *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *TileMapNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TileMapNode {
@@ -252,7 +252,7 @@ func (x *TileMapNode) WithUserData(userData *foundation.NSMutableDictionary[objc
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode {
@@ -260,7 +260,7 @@ func (x *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *TileMapNode) WithConstraints(items ...*raw.SKConstraint) *TileMapNode {
@@ -283,7 +283,7 @@ func (x *TileMapNode) WithConstraints(items ...*raw.SKConstraint) *TileMapNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *TileMapNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TileMapNode {
@@ -291,61 +291,79 @@ func (x *TileMapNode) WithAttributeValues(attributeValues *foundation.NSDictiona
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityElement(accessibilityElement bool) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityRole(accessibilityRole string) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityParent(accessibilityParent objc.ID) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityHelp(accessibilityHelp string) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityLabel(accessibilityLabel string) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *TileMapNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
-// Fill the entire tile map with the provided tile group. @param tileGroup the tile group that will be used to fill the map
+// When creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
 //
 // FillWithTileGroup calls the underlying FillWithTileGroup.
 func (x *TileMapNode) FillWithTileGroup(tileGroup *raw.SKTileGroup) {
@@ -381,7 +399,7 @@ func (x *TileMapNode) SetTileGroupForColumnRow(tileGroup *raw.SKTileGroup, colum
 	x.inner.SetTileGroupForColumnRow(tileGroup, column, row)
 }
 
-// Set the tile group and tile defintion at the specified tile index. When automapping is enabled, it will attempt to resolve the surrounding tiles to allow the specified tile definition to be placed. When automapping is disabled, it will simply place the tile definition and not modify any of the neighboring tiles. @param tileGroup the tile group we want to place in the map @param tileDefinition the tile definition we want to place in the map @param column the column index of the tile @param row the row index of the tile
+// Set the tile group and tile definition at the specified tile index.
 //
 // SetTileGroupAndTileDefinitionForColumnRow calls the underlying SetTileGroupAndTileDefinitionForColumnRow.
 func (x *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *raw.SKTileGroup, tileDefinition *raw.SKTileDefinition, column uint, row uint) {
@@ -395,7 +413,7 @@ func (x *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoin
 	return x.inner.TileColumnIndexFromPosition(position)
 }
 
-// Returns the row index of the tile that lies under the specified position. Returns NSUIntegerMax if the position does not fall within the tile map. @param position the position we want to check against the tile map
+// Returns the tile map node object’s tile row index for the specified position in points.
 //
 // TileRowIndexFromPosition calls the underlying TileRowIndexFromPosition.
 func (x *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) uint {

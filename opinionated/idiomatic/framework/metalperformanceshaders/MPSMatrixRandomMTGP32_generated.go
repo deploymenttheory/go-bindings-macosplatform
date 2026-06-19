@@ -83,7 +83,7 @@ func (x *MatrixRandomMTGP32) WithBatchSize(batchSize uint) *MatrixRandomMTGP32 {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixRandomMTGP32) WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomMTGP32 {
@@ -91,7 +91,7 @@ func (x *MatrixRandomMTGP32) WithOptions(options mpscore.MPSKernelOptions) *Matr
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixRandomMTGP32) WithLabel(label string) *MatrixRandomMTGP32 {

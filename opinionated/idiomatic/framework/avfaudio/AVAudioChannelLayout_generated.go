@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the roles of a set of audio channels.
+//
 // AudioChannelLayout wraps [raw.AVAudioChannelLayout] with a fluent Go API.
 type AudioChannelLayout struct {
 	inner *raw.AVAudioChannelLayout
@@ -30,7 +32,7 @@ func AudioChannelLayoutFromID(id objc.ID) *AudioChannelLayout {
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(id)}
 }
 
-// @method initWithLayoutTag: @abstract Initialize from a layout tag. @param layoutTag The tag. @discussion Returns nil if the tag is either kAudioChannelLayoutTag_UseChannelDescriptions or kAudioChannelLayoutTag_UseChannelBitmap.
+// Creates an audio channel layout object from a layout tag.
 //
 // NewAudioChannelLayoutWithLayoutTag creates a new [AudioChannelLayout].
 func NewAudioChannelLayoutWithLayoutTag(layoutTag uint) *AudioChannelLayout {
@@ -39,7 +41,7 @@ func NewAudioChannelLayoutWithLayoutTag(layoutTag uint) *AudioChannelLayout {
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
 }
 
-// @method initWithLayout: @abstract Initialize from an AudioChannelLayout. @param layout The AudioChannelLayout. @discussion If the provided layout's tag is kAudioChannelLayoutTag_UseChannelDescriptions, this initializer attempts to convert it to a more specific tag.
+// Creates an audio channel layout object from an existing one.
 //
 // NewAudioChannelLayoutWithLayout creates a new [AudioChannelLayout].
 func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
@@ -48,7 +50,7 @@ func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) 
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
 }
 
-// @method isEqual: @abstract Determine whether another AVAudioChannelLayout is exactly equal to this layout. @param object The AVAudioChannelLayout to compare against. @discussion The underlying AudioChannelLayoutTag and AudioChannelLayout are compared for equality.
+// Indicates whether another audio channel layout is exactly equal to the current layout.
 //
 // IsEqual calls the underlying IsEqual.
 func (x *AudioChannelLayout) IsEqual(object objc.ID) bool {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single data value.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axdatapointvalue
 type AXDataPointValue struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func AXDataPointValueFromID(id objc.ID) *AXDataPointValue {
 	return o
 }
 
+// Creates a numeric data value with the specified number.
 func AXDataPointValueValueWithNumber(number float64) *AXDataPointValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXDataPointValue), _aXDataPointValueSelValueWithNumber, number)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func AXDataPointValueValueWithNumber(number float64) *AXDataPointValue {
 	return AXDataPointValueFromID(_ret)
 }
 
+// Creates a categorical data value with the specified category string.
 func AXDataPointValueValueWithCategory(category *foundation.NSString) *AXDataPointValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXDataPointValue), _aXDataPointValueSelValueWithCategory, category.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a lodging reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inlodgingreservation
 type INLodgingReservation struct {
 	INReservation
@@ -36,6 +38,7 @@ func INLodgingReservationFromID(id objc.ID) *INLodgingReservation {
 	return o
 }
 
+// Creates a lodging reservation with the specified contents and attributes.
 func (o *INLodgingReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *INLodgingReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), lodgingBusinessLocation.Ptr(), reservationDuration.Ptr(), numberOfAdults.Ptr(), numberOfChildren.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *INLodgingReservation) InitWithItemReferenceReservationNumberBookingTime
 	return INLodgingReservationFromID(_ret)
 }
 
+// Creates a new lodging reservation with the provided information.
 func (o *INLodgingReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *INLodgingReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), lodgingBusinessLocation.Ptr(), reservationDuration.Ptr(), numberOfAdults.Ptr(), numberOfChildren.Ptr())
 	if _ret != 0 {

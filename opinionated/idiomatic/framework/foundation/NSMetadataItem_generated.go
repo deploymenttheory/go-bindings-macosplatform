@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The metadata associated with a file.
+//
 // MetadataItem wraps [raw.NSMetadataItem] with a fluent Go API.
 type MetadataItem struct {
 	inner *raw.NSMetadataItem
@@ -32,6 +34,8 @@ func MetadataItemFromID(id objc.ID) *MetadataItem {
 	return &MetadataItem{inner: raw.NSMetadataItemFromID(id)}
 }
 
+// Initializes a metadata item with a given URL.
+//
 // NewMetadataItemWithURL creates a new [MetadataItem].
 func NewMetadataItemWithURL(url string) *MetadataItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMetadataItem")), objc.RegisterName("alloc"))
@@ -45,11 +49,15 @@ func (x *MetadataItem) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Returns the receiver’s metadata attribute name specified by a given key.
+//
 // ValueForAttribute calls the underlying ValueForAttribute.
 func (x *MetadataItem) ValueForAttribute(key string) objc.ID {
 	return x.inner.ValueForAttribute(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
+//
 // ValuesForAttributes calls the underlying ValuesForAttributes.
 func (x *MetadataItem) ValuesForAttributes(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	_ptrs := make([]objc.ID, len(keys))

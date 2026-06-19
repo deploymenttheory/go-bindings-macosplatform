@@ -144,11 +144,21 @@ func MTRBaseClusterUnitLocalizationReadAttributeTemperatureUnitWithClusterStateC
 	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeTemperatureUnitWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterUnitLocalization) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterUnitLocalization) ReadAttributeGeneratedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -156,18 +166,48 @@ func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandListW
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterUnitLocalizationReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterUnitLocalizationReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterUnitLocalization) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterUnitLocalization) ReadAttributeAcceptedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -175,18 +215,48 @@ func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandListWi
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterUnitLocalizationReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterUnitLocalizationReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterUnitLocalization) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithCompletion, completion)
+func (o *MTRBaseClusterUnitLocalization) ReadAttributeAttributeListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -194,11 +264,31 @@ func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWithPara
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterUnitLocalizationReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterUnitLocalizationReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
 func (o *MTRBaseClusterUnitLocalization) ReadAttributeFeatureMapWithCompletion(completion func(*foundation.NSNumber, unsafe.Pointer)) {
@@ -387,11 +477,21 @@ func MTRBaseClusterUnitLocalizationReadAttributeTemperatureUnitWithAttributeCach
 	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeTemperatureUnitWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
 
-func (o *MTRBaseClusterUnitLocalization) ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithCompletionHandler, completionHandler)
+func (o *MTRBaseClusterUnitLocalization) ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithCompletionHandler, __block_completionHandler)
 }
 
-func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablishedHandler objc.Block
 	if subscriptionEstablishedHandler != nil {
 		__block_subscriptionEstablishedHandler = objc.NewBlock(func(_ objc.Block) {
@@ -399,18 +499,48 @@ func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandListW
 		})
 		defer __block_subscriptionEstablishedHandler.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler, minInterval.Ptr(), maxInterval.Ptr(), params.Ptr(), __block_subscriptionEstablishedHandler, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler, minInterval.Ptr(), maxInterval.Ptr(), params.Ptr(), __block_subscriptionEstablishedHandler, __block_reportHandler)
 }
 
-func MTRBaseClusterUnitLocalizationReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler(attributeCacheContainer *MTRAttributeCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completionHandler objc.Block) {
-	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completionHandler)
+func MTRBaseClusterUnitLocalizationReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler(attributeCacheContainer *MTRAttributeCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completionHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
 
-func (o *MTRBaseClusterUnitLocalization) ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithCompletionHandler, completionHandler)
+func (o *MTRBaseClusterUnitLocalization) ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithCompletionHandler, __block_completionHandler)
 }
 
-func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablishedHandler objc.Block
 	if subscriptionEstablishedHandler != nil {
 		__block_subscriptionEstablishedHandler = objc.NewBlock(func(_ objc.Block) {
@@ -418,18 +548,48 @@ func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandListWi
 		})
 		defer __block_subscriptionEstablishedHandler.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler, minInterval.Ptr(), maxInterval.Ptr(), params.Ptr(), __block_subscriptionEstablishedHandler, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler, minInterval.Ptr(), maxInterval.Ptr(), params.Ptr(), __block_subscriptionEstablishedHandler, __block_reportHandler)
 }
 
-func MTRBaseClusterUnitLocalizationReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler(attributeCacheContainer *MTRAttributeCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completionHandler objc.Block) {
-	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completionHandler)
+func MTRBaseClusterUnitLocalizationReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler(attributeCacheContainer *MTRAttributeCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completionHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
 
-func (o *MTRBaseClusterUnitLocalization) ReadAttributeAttributeListWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithCompletionHandler, completionHandler)
+func (o *MTRBaseClusterUnitLocalization) ReadAttributeAttributeListWithCompletionHandler(completionHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithCompletionHandler, __block_completionHandler)
 }
 
-func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablishedHandler objc.Block
 	if subscriptionEstablishedHandler != nil {
 		__block_subscriptionEstablishedHandler = objc.NewBlock(func(_ objc.Block) {
@@ -437,11 +597,31 @@ func (o *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWithMinI
 		})
 		defer __block_subscriptionEstablishedHandler.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler, minInterval.Ptr(), maxInterval.Ptr(), params.Ptr(), __block_subscriptionEstablishedHandler, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterUnitLocalizationSelSubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler, minInterval.Ptr(), maxInterval.Ptr(), params.Ptr(), __block_subscriptionEstablishedHandler, __block_reportHandler)
 }
 
-func MTRBaseClusterUnitLocalizationReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler(attributeCacheContainer *MTRAttributeCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completionHandler objc.Block) {
-	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completionHandler)
+func MTRBaseClusterUnitLocalizationReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler(attributeCacheContainer *MTRAttributeCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completionHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	objc.ID(_clsMTRBaseClusterUnitLocalization).Send(_mTRBaseClusterUnitLocalizationSelReadAttributeAttributeListWithAttributeCacheEndpointQueueCompletionHandler, attributeCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRBaseClusterUnitLocalization) ReadAttributeFeatureMapWithCompletionHandler(completionHandler func(*foundation.NSNumber, unsafe.Pointer)) {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that retrieves metadata for a URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider
 type LPMetadataProvider struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func LPMetadataProviderFromID(id objc.ID) *LPMetadataProvider {
 	return o
 }
 
-// Fetches metadata for the given URL. Call this method once per “LPMetadataProvider“ instance. If you attempt to fetch metadata multiple times on a single “LPMetadataProvider“ instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting “LPLinkMetadata“. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for url: URL) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+// Fetches metadata for the given URL.
 func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*LPLinkMetadata, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +55,7 @@ func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(uRL *f
 	o.Ptr().Send(_lPMetadataProviderSelStartFetchingMetadataForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
 }
 
-// Fetches metadata for the given “NSURLRequest“. Call this method once per “LPMetadataProvider“ instance. If you attempt to fetch metadata multiple times on a single “LPMetadataProvider“ instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting “LPLinkMetadata“. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for request: URLRequest) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+// Fetches metadata for the given NSURLRequest.
 func (o *LPMetadataProvider) StartFetchingMetadataForRequestCompletionHandler(request *foundation.NSURLRequest, completionHandler func(*LPLinkMetadata, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -68,7 +70,7 @@ func (o *LPMetadataProvider) StartFetchingMetadataForRequestCompletionHandler(re
 	o.Ptr().Send(_lPMetadataProviderSelStartFetchingMetadataForRequestCompletionHandler, request.Ptr(), __block_completionHandler)
 }
 
-// Cancels a metadata request. This method invokes the completion handler with the error code “LPErrorCode/LPErrorMetadataFetchCancelled“ if the request hasn’t already completed.
+// Cancels a metadata request.
 func (o *LPMetadataProvider) Cancel() {
 	o.Ptr().Send(_lPMetadataProviderSelCancel)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A notification that triggers when a record that matches the subscription’s predicate changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckquerynotification
 type CKQueryNotification struct {
 	CKNotification
@@ -41,8 +43,11 @@ func (o *CKQueryNotification) QueryNotificationReason() CKQueryNotificationReaso
 
 // A dictionary of fields that have changes. For record updates and creations, this property contains the subscription's desired keys. When you configure the notification info of a subscription, you specify the names of one or more fields in the “CKSubscription/NotificationInfo/desiredKeys“ property. When a push notification triggers, CloudKit retrieves the values for each of those keys from the record and includes them in the notification's payload. For query notifications that you fetch from a container, all keys and values are present. For query notifications that you create from push notifications, one or more keys and values may be missing. Push notification payloads have a size limit, and CloudKit can exclude record fields when a payload exceeds that limit. For information about the order, see the overview of this class.
 func (o *CKQueryNotification) RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cKQueryNotificationSelRecordFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryNotificationSelRecordFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // The ID of the record that CloudKit creates, updates, or deletes. Use this value to fetch the record.

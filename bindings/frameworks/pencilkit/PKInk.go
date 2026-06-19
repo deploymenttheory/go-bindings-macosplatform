@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that represents an ink that specifies its type, color, and width.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkink
 type PKInk struct {
 	foundation.NSObject

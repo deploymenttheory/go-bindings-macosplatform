@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resource that represents an abstract URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsgenericurlresource
 type FSGenericURLResource struct {
 	FSResource
@@ -31,7 +33,7 @@ func FSGenericURLResourceFromID(id objc.ID) *FSGenericURLResource {
 	return o
 }
 
-// Creates a generic URL resource with the given URL. - Parameter url: A URL that provides the content of the file system. The format of this URL is completely arbitrary. It's up to your extension to access the contents represented by the URL and make them available as an “FSVolume“ that FSKit can load.
+// Creates a generic URL resource with the given URL.
 func (o *FSGenericURLResource) InitWithURL(url *foundation.NSURL) *FSGenericURLResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSGenericURLResourceSelInitWithURL, url.Ptr())
 	if _ret != 0 {

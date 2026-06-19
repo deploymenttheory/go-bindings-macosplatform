@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an attribute defined in the stage-in argument for a shader.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlattribute
 type MTLAttribute struct {
 	foundation.NSObject

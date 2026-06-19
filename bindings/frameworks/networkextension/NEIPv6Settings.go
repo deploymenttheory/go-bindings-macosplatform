@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IPv6 settings of an IP layer network tunnel.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neipv6settings
 type NEIPv6Settings struct {
 	foundation.NSObject
@@ -36,9 +38,9 @@ func NEIPv6SettingsFromID(id objc.ID) *NEIPv6Settings {
 	return o
 }
 
-// @method initWithAddresses:networkPrefixLengths: @discussion Initialize a newly-allocated NEIPv6Settings object. @param addresses An array of IPv6 addresses represented as dotted decimal strings. @param networkPrefixLengths An array of NSNumber objects each containing the length in bits of the network prefix of the corresponding address in the addresses parameter. @return The initialized object.
+// Initializes the IPv6 settings object.
 func (o *NEIPv6Settings) InitWithAddressesNetworkPrefixLengths(addresses *foundation.NSArray[*foundation.NSString], networkPrefixLengths *foundation.NSArray[*foundation.NSNumber]) *NEIPv6Settings {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelInitWithAddressesNetworkPrefixLengths, addresses, networkPrefixLengths)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelInitWithAddressesNetworkPrefixLengths, addresses.Ptr(), networkPrefixLengths.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -47,14 +49,20 @@ func (o *NEIPv6Settings) InitWithAddressesNetworkPrefixLengths(addresses *founda
 
 // @property addresses @discussion An array of IPv6 addresses represented strings. These addresses will be set on the virtual interface used by the VPN tunnel.
 func (o *NEIPv6Settings) Addresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEIPv6SettingsSelAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property networkPrefixLengths @discussion An array of NSNumber objects each representing the length in bits of the network prefix of the corresponding address in the addresses property.
 func (o *NEIPv6Settings) NetworkPrefixLengths() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nEIPv6SettingsSelNetworkPrefixLengths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelNetworkPrefixLengths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property includedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.

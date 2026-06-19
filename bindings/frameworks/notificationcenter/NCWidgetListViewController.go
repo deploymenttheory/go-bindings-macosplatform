@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a list view for displaying content in a macOS Today widget.
+//
 // Apple documentation: https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 type NCWidgetListViewController struct {
@@ -45,6 +47,7 @@ func NCWidgetListViewControllerFromID(id objc.ID) *NCWidgetListViewController {
 	return o
 }
 
+// Returns the content view controller associated with the specified row, or a new content view controller if desired.
 func (o *NCWidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelViewControllerAtRowMakeIfNecessary, row, makeIfNecesary)
 	if _ret != 0 {
@@ -53,6 +56,7 @@ func (o *NCWidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint
 	return appkit.NSViewControllerFromID(_ret)
 }
 
+// Returns the row represented by the specified content view controller.
 func (o *NCWidgetListViewController) RowForViewController(viewController *appkit.NSViewController) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nCWidgetListViewControllerSelRowForViewController, viewController.Ptr())
 	return _ret
@@ -70,12 +74,15 @@ func (o *NCWidgetListViewController) SetDelegate(delegate NCWidgetListViewDelega
 }
 
 func (o *NCWidgetListViewController) Contents() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nCWidgetListViewControllerSelContents)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelContents)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NCWidgetListViewController) SetContents(contents *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetContents, contents)
+	o.Ptr().Send(_nCWidgetListViewControllerSelSetContents, contents.Ptr())
 }
 
 func (o *NCWidgetListViewController) MinimumVisibleRowCount() uint {

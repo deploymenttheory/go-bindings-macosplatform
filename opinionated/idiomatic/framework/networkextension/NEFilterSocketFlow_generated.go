@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A flow of network data that the filter examines.
+//
 // NEFilterSocketFlow wraps [raw.NEFilterSocketFlow] with a fluent Go API.
 type NEFilterSocketFlow struct {
 	inner *raw.NEFilterSocketFlow

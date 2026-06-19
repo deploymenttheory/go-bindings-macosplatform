@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The superclass for all element objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectelement
 type PHProjectElement struct {
 	foundation.NSObject

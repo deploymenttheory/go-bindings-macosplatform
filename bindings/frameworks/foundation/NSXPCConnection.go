@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bidirectional communication channel between two processes.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxpcconnection
 type NSXPCConnection struct {
 	NSObject
@@ -59,6 +61,7 @@ func NSXPCConnectionFromID(id objc.ID) *NSXPCConnection {
 	return o
 }
 
+// Initializes an NSXPCConnection object to connect to an NSXPCListener object in an XPC service, identified by a service name.
 func (o *NSXPCConnection) InitWithServiceName(serviceName *NSString) *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelInitWithServiceName, serviceName.Ptr())
 	if _ret != 0 {
@@ -67,6 +70,7 @@ func (o *NSXPCConnection) InitWithServiceName(serviceName *NSString) *NSXPCConne
 	return NSXPCConnectionFromID(_ret)
 }
 
+// Initializes an NSXPCConnection object to connect to a LaunchAgent or LaunchDaemon with a name advertised in a launchd.plist.
 func (o *NSXPCConnection) InitWithMachServiceNameOptions(name *NSString, options NSXPCConnectionOptions) *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelInitWithMachServiceNameOptions, name.Ptr(), options)
 	if _ret != 0 {
@@ -75,6 +79,7 @@ func (o *NSXPCConnection) InitWithMachServiceNameOptions(name *NSString, options
 	return NSXPCConnectionFromID(_ret)
 }
 
+// Initializes an NSXPCConnection object to connect to an NSXPCListener object in another process, identified by an NSXPCListenerEndpoint object.
 func (o *NSXPCConnection) InitWithListenerEndpoint(endpoint *NSXPCListenerEndpoint) *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelInitWithListenerEndpoint, endpoint.Ptr())
 	if _ret != 0 {
@@ -83,6 +88,7 @@ func (o *NSXPCConnection) InitWithListenerEndpoint(endpoint *NSXPCListenerEndpoi
 	return NSXPCConnectionFromID(_ret)
 }
 
+// Returns a proxy for the remote object (that is, the object exported from the other side of this connection) with the specified error handler.
 func (o *NSXPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -95,6 +101,7 @@ func (o *NSXPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.
 	return _ret
 }
 
+// Returns a proxy that makes a synchronous IPC call instead of the default async behavior.
 func (o *NSXPCConnection) SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -107,22 +114,27 @@ func (o *NSXPCConnection) SynchronousRemoteObjectProxyWithErrorHandler(handler f
 	return _ret
 }
 
+// Starts or resumes handling of messages on a connection.
 func (o *NSXPCConnection) Resume() {
 	o.Ptr().Send(_nSXPCConnectionSelResume)
 }
 
+// Suspends the connection.
 func (o *NSXPCConnection) Suspend() {
 	o.Ptr().Send(_nSXPCConnectionSelSuspend)
 }
 
+// Activates the connection.
 func (o *NSXPCConnection) Activate() {
 	o.Ptr().Send(_nSXPCConnectionSelActivate)
 }
 
+// Invalidates the connection.
 func (o *NSXPCConnection) Invalidate() {
 	o.Ptr().Send(_nSXPCConnectionSelInvalidate)
 }
 
+// Returns the current connection, in the context of a call to a method on your exported object.
 func NSXPCConnectionCurrentConnection() *NSXPCConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCConnection), _nSXPCConnectionSelCurrentConnection)
 	if _ret != 0 {
@@ -131,6 +143,7 @@ func NSXPCConnectionCurrentConnection() *NSXPCConnection {
 	return NSXPCConnectionFromID(_ret)
 }
 
+// Add a barrier block to execute on the connection.
 func (o *NSXPCConnection) ScheduleSendBarrierBlock(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -142,7 +155,7 @@ func (o *NSXPCConnection) ScheduleSendBarrierBlock(block func()) {
 	o.Ptr().Send(_nSXPCConnectionSelScheduleSendBarrierBlock, __block_block)
 }
 
-// Sets the code signing requirement for this connection. If the requirement is malformed, an exception is thrown. If new messages do not match the requirement, the connection is invalidated. It is recommended to set this before calling `resume`, as it is an XPC error to call it more than once. See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+// Sets the code signing requirement for this connection.
 func (o *NSXPCConnection) SetCodeSigningRequirement(requirement *NSString) {
 	o.Ptr().Send(_nSXPCConnectionSelSetCodeSigningRequirement, requirement.Ptr())
 }

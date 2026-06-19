@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a physical racing wheel controller connected to a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcracingwheel
 type GCRacingWheel struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func GCRacingWheelFromID(id objc.ID) *GCRacingWheel {
 	return o
 }
 
-// A GCRacingWheel must be acquired before your application can begin receiving events from it.  Prior to acquisition, your application may only query the properties of the racing wheel.  Acquisition is exclusive and may fail.
+// Starts receiving events from the racing wheel.
 func (o *GCRacingWheel) AcquireDeviceWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gCRacingWheelSelAcquireDeviceWithError, unsafe.Pointer(&_nsErr))
@@ -48,12 +50,12 @@ func (o *GCRacingWheel) AcquireDeviceWithError() (bool, error) {
 	return _ret, nil
 }
 
-// Releases a previous acquisition of the racing wheel.
+// Stops receiving events from the racing wheel.
 func (o *GCRacingWheel) RelinquishDevice() {
 	o.Ptr().Send(_gCRacingWheelSelRelinquishDevice)
 }
 
-// Polls the state vector of the racing wheel and saves it to a new instance of GCRacingWheel. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new racing wheel with the duplicated state vector of the receiver.
+// Returns a snapshot of the racing wheel with its current element values.
 func (o *GCRacingWheel) Capture() *GCRacingWheel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelSelCapture)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the parameters that the equalizer uses.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiouniteqfilterparameters
 type AVAudioUnitEQFilterParameters struct {
 	foundation.NSObject

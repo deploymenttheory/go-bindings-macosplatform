@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the redial capabilities of a missed call.
+//
 // StartCallCallRecordToCallBackResolutionResult wraps [raw.INStartCallCallRecordToCallBackResolutionResult] with a fluent Go API.
 type StartCallCallRecordToCallBackResolutionResult struct {
 	inner *raw.INStartCallCallRecordToCallBackResolutionResult
@@ -31,6 +33,8 @@ func StartCallCallRecordToCallBackResolutionResultFromID(id objc.ID) *StartCallC
 	return &StartCallCallRecordToCallBackResolutionResult{inner: raw.INStartCallCallRecordToCallBackResolutionResultFromID(id)}
 }
 
+// Creates an object whose resolution involves successfully redialing a call.
+//
 // NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult creates a new [StartCallCallRecordToCallBackResolutionResult].
 func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult(callRecordResolutionResult *raw.INCallRecordResolutionResult) *StartCallCallRecordToCallBackResolutionResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INStartCallCallRecordToCallBackResolutionResult")), objc.RegisterName("alloc"))

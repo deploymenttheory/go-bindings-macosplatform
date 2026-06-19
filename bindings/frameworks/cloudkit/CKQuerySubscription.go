@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A subscription that generates push notifications when CloudKit modifies records that match a predicate.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckquerysubscription
 type CKQuerySubscription struct {
 	CKSubscription
@@ -37,7 +39,7 @@ func CKQuerySubscriptionFromID(id objc.ID) *CKQuerySubscription {
 	return o
 }
 
-// Creates a query-based subscription that queries records of a specific type. - Parameters: - recordType: The record's type. You're responsible for defining your app's record types. This parameter must not be `nil` or an empty string. - predicate: The predicate that identifies the records for inclusion in the subscription. This parameter must not be `nil`. For information about the operators that predicates support, see the discussion in “CKQuery“. - querySubscriptionOptions: A bitmask of configuration options. See “CKQuerySubscription/Options“ for more information. The subscription that this method returns is a query-based subscription with a scope that includes all of the user's record zones. When CloudKit modifies a record that matches the specified type and predicate, it uses `querySubscriptionOptions` to determine whether to send a push notification.
+// Creates a query-based subscription that queries records of a specific type.
 // Deprecated: since macOS 10.12.
 func (o *CKQuerySubscription) InitWithRecordTypePredicateOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, querySubscriptionOptions CKQuerySubscriptionOptions) *CKQuerySubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySubscriptionSelInitWithRecordTypePredicateOptions, recordType.Ptr(), predicate.Ptr(), querySubscriptionOptions)
@@ -47,7 +49,7 @@ func (o *CKQuerySubscription) InitWithRecordTypePredicateOptions(recordType *fou
 	return CKQuerySubscriptionFromID(_ret)
 }
 
-// Creates a named query-based subscription that queries records of a specific type. - Parameters: - recordType: The record's type. You're responsible for defining your app's record types. This parameter must not be `nil` or an empty string. - predicate: The predicate that identifies the records for inclusion in the subscription. This parameter must not be `nil`. For information about the operators that predicates support, see the discussion in “CKQuery“. - subscriptionID: The subscription's name. You should provide a value that is unique in the target database, and you may not provide `nil` or an empty string. - querySubscriptionOptions: A bitmask of configuration options. See “CKQuerySubscription/Options“ for more information. The subscription that this method returns is a query-based subscription with a scope that includes all of the user's record zones. When CloudKit modifies a record that matches the specified type and predicate, it uses `querySubscriptionOptions` to determine whether to send a push notification.
+// Creates a named query-based subscription that queries records of a specific type.
 func (o *CKQuerySubscription) InitWithRecordTypePredicateSubscriptionIDOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, subscriptionID *foundation.NSString, querySubscriptionOptions CKQuerySubscriptionOptions) *CKQuerySubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySubscriptionSelInitWithRecordTypePredicateSubscriptionIDOptions, recordType.Ptr(), predicate.Ptr(), subscriptionID.Ptr(), querySubscriptionOptions)
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *CKQuerySubscription) InitWithRecordTypePredicateSubscriptionIDOptions(r
 	return CKQuerySubscriptionFromID(_ret)
 }
 
-// Creates a query-based subscription from a serialized instance. - Parameters: - aDecoder: The coder for decoding the serialized query subscription.
+// Creates a query-based subscription from a serialized instance.
 func (o *CKQuerySubscription) InitWithCoder(aDecoder *foundation.NSCoder) *CKQuerySubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySubscriptionSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {

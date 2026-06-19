@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A constraint that runs a specified closure, block in Objective-C, to compute a new transform (position, rotation, and scale) for each node that the constraint affects.
+//
 // TransformConstraint wraps [raw.SCNTransformConstraint] with a fluent Go API.
 type TransformConstraint struct {
 	inner *raw.SCNTransformConstraint
@@ -43,7 +45,7 @@ func (x *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {

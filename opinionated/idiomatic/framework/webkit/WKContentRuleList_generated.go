@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A compiled list of rules to apply to web content.
+//
 // WKContentRuleList wraps [raw.WKContentRuleList] with a fluent Go API.
 type WKContentRuleList struct {
 	inner *raw.WKContentRuleList

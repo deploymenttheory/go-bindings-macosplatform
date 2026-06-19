@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete view subclass for displaying text for an item in a scrubber.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubbertextitemview
 type NSScrubberTextItemView struct {
 	NSScrubberItemView

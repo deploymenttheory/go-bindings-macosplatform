@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A simple, reusable animation that changes attributes of any node you attach it to.
+//
 // Action wraps [raw.SCNAction] with a fluent Go API.
 type Action struct {
 	inner *raw.SCNAction
@@ -35,7 +37,7 @@ func NewAction() *Action {
 	return &Action{inner: raw.SCNActionFromID(_id)}
 }
 
-// @property duration @abstract This is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
+// The duration required to complete an action.
 //
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *Action) WithDuration(duration float64) *Action {
@@ -43,7 +45,7 @@ func (x *Action) WithDuration(duration float64) *Action {
 	return x
 }
 
-// @property timingMode @abstract The timing mode used to execute an action.
+// The timing mode used to execute an action.
 //
 // WithTimingMode sets the timingMode property and returns the receiver for chaining.
 func (x *Action) WithTimingMode(timingMode SCNActionTimingMode) *Action {
@@ -51,7 +53,7 @@ func (x *Action) WithTimingMode(timingMode SCNActionTimingMode) *Action {
 	return x
 }
 
-// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SCNActionTimingFunction
+// A block SceneKit calls to determine the action’s animation timing.
 //
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
@@ -59,7 +61,7 @@ func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
 	return x
 }
 
-// @property speed @abstract A speed factor that modifies how fast an action runs. Defaults to 1.
+// A speed factor that modifies how fast an action runs.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Action) WithSpeed(speed float64) *Action {
@@ -67,7 +69,7 @@ func (x *Action) WithSpeed(speed float64) *Action {
 	return x
 }
 
-// @method reversedAction @abstract Creates an action that reverses the behavior of another action.
+// Creates an action that reverses the behavior of another action.
 //
 // ReversedAction calls the underlying ReversedAction.
 func (x *Action) ReversedAction() *Action {

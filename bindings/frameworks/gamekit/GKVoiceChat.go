@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A voice channel that allows players to speak with each other in a multiplayer game.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkvoicechat
 // Deprecated: No longer supported
 type GKVoiceChat struct {
@@ -46,21 +48,25 @@ func GKVoiceChatFromID(id objc.ID) *GKVoiceChat {
 	return o
 }
 
+// Starts communication with other players in a channel.
 // Deprecated: No longer supported
 func (o *GKVoiceChat) Start() {
 	o.Ptr().Send(_gKVoiceChatSelStart)
 }
 
+// Ends communication with other players in a channel.
 // Deprecated: No longer supported
 func (o *GKVoiceChat) Stop() {
 	o.Ptr().Send(_gKVoiceChatSelStop)
 }
 
+// Mutes a player in the chat, including the local player.
 // Deprecated: No longer supported
 func (o *GKVoiceChat) SetPlayerMuted(player *GKPlayer, isMuted bool) {
 	o.Ptr().Send(_gKVoiceChatSelSetPlayerMuted, player.Ptr(), isMuted)
 }
 
+// Returns whether voice chat is available on the device.
 // Deprecated: No longer supported
 func GKVoiceChatIsVoIPAllowed() bool {
 	_ret := objc.Send[bool](objc.ID(_clsGKVoiceChat), _gKVoiceChatSelIsVoIPAllowed)
@@ -147,7 +153,7 @@ func (o *GKVoiceChat) SetPlayerStateUpdateHandler(playerStateUpdateHandler func(
 	o.Ptr().Send(_gKVoiceChatSelSetPlayerStateUpdateHandler, __block_playerStateUpdateHandler)
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Mutes a player in a voice chat.
 // Deprecated: since macOS 10.10.
 func (o *GKVoiceChat) SetMuteForPlayer(isMuted bool, playerID *foundation.NSString) {
 	o.Ptr().Send(_gKVoiceChatSelSetMuteForPlayer, isMuted, playerID.Ptr())
@@ -156,6 +162,9 @@ func (o *GKVoiceChat) SetMuteForPlayer(isMuted bool, playerID *foundation.NSStri
 // * This property is obsolete. **
 // Deprecated: since macOS 10.10.
 func (o *GKVoiceChat) PlayerIDs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _gKVoiceChatSelPlayerIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKVoiceChatSelPlayerIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A representation of a smart card.
+//
 // SmartCard wraps [raw.TKSmartCard] with a fluent Go API.
 type SmartCard struct {
 	inner *raw.TKSmartCard
@@ -39,7 +41,7 @@ func NewSmartCard() *SmartCard {
 	return &SmartCard{inner: raw.TKSmartCardFromID(_id)}
 }
 
-// Bitmask containing allowed protocols to be used when communicating with the card.  This property is consulted only during connection to the card, changes are not propagated to already connected session.  By default, any protocol can be used.
+// The protocols allowed for communication with the Smart Card. TKSmartCardProtocolAny by default.
 //
 // WithAllowedProtocols sets the allowedProtocols property and returns the receiver for chaining.
 func (x *SmartCard) WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *SmartCard {
@@ -47,7 +49,7 @@ func (x *SmartCard) WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *
 	return x
 }
 
-// Flag indicating whether card session should be considered as sensitive.  Sensitive session always gets card after reset before communicating with it and never leaves card without reset to be used by another SmartCard object.  This might be important in case that card session contain some important state which should not leak to another SmartCard object (possibly running in another, foreign application).  Default is NO.
+// Whether sessions established for the Smart Card should be considered sensitive. false by default.
 //
 // WithSensitive sets the sensitive property and returns the receiver for chaining.
 func (x *SmartCard) WithSensitive(sensitive bool) *SmartCard {
@@ -55,7 +57,7 @@ func (x *SmartCard) WithSensitive(sensitive bool) *SmartCard {
 	return x
 }
 
-// User-specified context kept as long as the card is powered.  Once the card is removed or another TKSmartCard object opens session, this property is automatically set to nil.
+// User-specified information. This property is automatically set to nil if the Smart Card is removed or another TKSmartCard object begins a session.
 //
 // WithContext sets the context_ property and returns the receiver for chaining.
 func (x *SmartCard) WithContext(context_ objc.ID) *SmartCard {
@@ -63,7 +65,7 @@ func (x *SmartCard) WithContext(context_ objc.ID) *SmartCard {
 	return x
 }
 
-// CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
+// The CLA byte used for APDU transmission. 0x00 by default.
 //
 // WithCla sets the cla property and returns the receiver for chaining.
 func (x *SmartCard) WithCla(cla uint8) *SmartCard {
@@ -71,7 +73,7 @@ func (x *SmartCard) WithCla(cla uint8) *SmartCard {
 	return x
 }
 
-// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
+// Whether to use extended length APDU.
 //
 // WithUseExtendedLength sets the useExtendedLength property and returns the receiver for chaining.
 func (x *SmartCard) WithUseExtendedLength(useExtendedLength bool) *SmartCard {
@@ -79,7 +81,7 @@ func (x *SmartCard) WithUseExtendedLength(useExtendedLength bool) *SmartCard {
 	return x
 }
 
-// Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
+// Whether to use command chaining of APDU with a data field longer than 255 bytes.
 //
 // WithUseCommandChaining sets the useCommandChaining property and returns the receiver for chaining.
 func (x *SmartCard) WithUseCommandChaining(useCommandChaining bool) *SmartCard {
@@ -87,14 +89,14 @@ func (x *SmartCard) WithUseCommandChaining(useCommandChaining bool) *SmartCard {
 	return x
 }
 
-// Begins session with the card. @discussion When session exists, other requests for sessions from other card objects to the same card are blocked. Session is reference-counted, the same amount of 'end' calls must be done to really terminate the session. Note that finishing session does not automatically mean that the card is disconnected; it only happens when another session from different card object is requested. @param success Signals whether session was successfully started. @param error More information about error preventing the transaction to start
+// Begins a session with the Smart Card.
 //
 // BeginSessionWithReply calls the underlying BeginSessionWithReply.
 func (x *SmartCard) BeginSessionWithReply(reply func(bool, unsafe.Pointer)) {
 	x.inner.BeginSessionWithReply(reply)
 }
 
-// Transmits raw command to the card.  This call is allowed only inside session. @param request Request part of APDU @param reponse Response part of APDU, or nil if communication with the card failed @param error Error details when communication with the card failed
+// Transmits data in Application Protocol Data Unit (APDU) format to the Smart Card.
 //
 // TransmitRequestReply blocks until the operation completes or ctx is cancelled.
 func (x *SmartCard) TransmitRequestReply(ctx context.Context, request *foundation.NSData) (*foundation.NSData, error) {
@@ -120,14 +122,14 @@ func (x *SmartCard) TransmitRequestReply(ctx context.Context, request *foundatio
 	}
 }
 
-// Terminates the transaction. If no transaction is pending any more, the connection will be closed if there is another session in the system waiting for the transaction.
+// Completes any pending transmissions and ends the session to the Smart Card.
 //
 // EndSession calls the underlying EndSession.
 func (x *SmartCard) EndSession() {
 	x.inner.EndSession()
 }
 
-// Creates a new user interaction object for secure PIN verification using the SmartCard reader facilities (typically a HW keypad). @note This interaction is only allowed within a session. @param PINFormat PIN format descriptor. @param APDU Predefined APDU in which the SmartCard reader fills in the PIN. @param PINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the entered PIN (currently unused, must be 0). @return A new user interaction object, or nil if this feature is not supported by the SmartCard reader. After the interaction has been successfully completed the operation result is available in the result properites.
+// Creates and returns a new user interaction object for secure PIN verification using the Smart Card reader facilities.
 //
 // UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset calls the underlying UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset.
 func (x *SmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, pINByteOffset int) *SmartCardUserInteractionForSecurePINVerification {
@@ -138,7 +140,7 @@ func (x *SmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINB
 	return &SmartCardUserInteractionForSecurePINVerification{inner: _r}
 }
 
-// Creates a new user interaction object for secure PIN change using the SmartCard reader facilities (typically a HW keypad). @note This interaction is only allowed within a session. @param PINFormat PIN format descriptor. @param APDU Predefined APDU in which the SmartCard reader fills in the PIN(s). @param currentPINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the current PIN. @param newPINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the new PIN. @return A new user interaction object, or nil if this feature is not supported by the SmartCard reader. After the interaction has been successfully completed the operation result is available in the result properites.
+// Creates a new user interaction object for secure PIN change using the smart card reader facilities (typically a HW keypad).
 //
 // UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset calls the underlying UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset.
 func (x *SmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange {
@@ -210,21 +212,21 @@ func (x *SmartCard) SetContext(context_ objc.ID) {
 	x.inner.SetContext(context_)
 }
 
-// Transmits APDU to the card and returns response. @discussion Asynchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Consults useExtendedAPDU and useCommandChaining properties and uses these modes whenever appropriate and beneficial for sending requested APDU request. @param ins INS code of the APDU @param p1 P1 code of the APDU @param p2 P2 code of the APDU @param requestData Data field of the APDU, or nil if no input data field should be present (i.e case1 or case2 APDUs).  Length of the data serves as Lc field of the APDU. @param le Expected number of bytes to be returned, or nil if no output data are expected (i.e. case1 or case3 APDUs). To get as much bytes as card provides, pass @0. @param replyData Block of returned data without SW1SW2 bytes, or nil if an error occured. @param sw SW1SW2 result code, first two bytes of returned card's reply. @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000.
+// Asynchronously transmits an APDU command to the card, returning the response in a completion handler.
 //
 // SendInsP1P2DataLeReply calls the underlying SendInsP1P2DataLeReply.
 func (x *SmartCard) SendInsP1P2DataLeReply(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, reply func(*foundation.NSData, uint16, unsafe.Pointer)) {
 	x.inner.SendInsP1P2DataLeReply(ins, p1, p2, requestData, le, reply)
 }
 
-// Synchronous variant of session creation.  Begins the session, executes given block and ends session. @param error Error receiving more information when transaction failed to start or block failed for some reason. @param block Block to be executed when the session was successfully begun. @return Returns YES if the session was successfully begun and block returned YES, otherwise NO.
+// Synchronously begins a session, executes the given block, and ends the session.
 //
 // InSessionWithErrorExecuteBlock calls the underlying InSessionWithErrorExecuteBlock.
 func (x *SmartCard) InSessionWithErrorExecuteBlock(error_ unsafe.Pointer, block func(unsafe.Pointer) bool) bool {
 	return x.inner.InSessionWithErrorExecuteBlock(error_, block)
 }
 
-// Transmits APDU to the card and returns response. @discussion Synchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Should be used in block passed to -[TKSmartCard inSessionWithError:executeBlock:] method. @param ins INS code of the APDU @param p1 P1 code of the APDU @param p2 P2 code of the APDU @param data Data field of the APDU.  Length of the data serves as Lc field of the APDU @param le Expected number of bytes to be returned, or nil if no output data are expected (i.e. case1 or case3 APDUs). To get as much bytes as card provides, pass @0. @param sw On output, filled with SW1SW2 result code @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000. @return Returned data field, excluding SW status bytes.  If an error occured, returns nil.
+// Synchronously transmits an APDU command to the card and returns the response.
 //
 // SendInsP1P2DataLeSwError calls the underlying SendInsP1P2DataLeSwError.
 func (x *SmartCard) SendInsP1P2DataLeSwError(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, sw *uint16) (*foundation.NSData, error) {

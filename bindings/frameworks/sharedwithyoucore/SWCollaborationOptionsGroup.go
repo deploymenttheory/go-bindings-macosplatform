@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a group of collaboration options that the system displays together.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup
 type SWCollaborationOptionsGroup struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func SWCollaborationOptionsGroupFromID(id objc.ID) *SWCollaborationOptionsGroup 
 	return o
 }
 
-// @abstract Initializes a new option group @param identifier unique identifier for the group @param options SWCollaborationOptions to display in the section
+// Creates and initializes a collaboration options group object.
 func (o *SWCollaborationOptionsGroup) InitWithIdentifierOptions(identifier *foundation.NSString, options *foundation.NSArray[*SWCollaborationOption]) *SWCollaborationOptionsGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsGroupSelInitWithIdentifierOptions, identifier.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *SWCollaborationOptionsGroup) InitWithIdentifierOptions(identifier *foun
 	return SWCollaborationOptionsGroupFromID(_ret)
 }
 
-// @abstract Initializes a new option group @param identifier unique identifier for the group @param options SWCollaborationOptions to display in the group
+// Creates and initializes a collaboration options group object.
 func SWCollaborationOptionsGroupOptionsGroupWithIdentifierOptions(identifier *foundation.NSString, options *foundation.NSArray[*SWCollaborationOption]) *SWCollaborationOptionsGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationOptionsGroup), _sWCollaborationOptionsGroupSelOptionsGroupWithIdentifierOptions, identifier.Ptr(), options.Ptr())
 	if _ret != 0 {

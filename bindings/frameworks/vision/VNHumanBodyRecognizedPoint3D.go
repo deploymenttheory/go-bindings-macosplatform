@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @brief
+// A recognized 3D point that includes a parent joint.
 //
 // Apple documentation: https://developer.apple.com/documentation/vision/vnhumanbodyrecognizedpoint3d
 type VNHumanBodyRecognizedPoint3D struct {

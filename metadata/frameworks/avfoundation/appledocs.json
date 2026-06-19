@@ -6281,7 +6281,7 @@
       },
       "averageBitRate": {
         "doc": "The average bit rate for the variant.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avassetvariant/averagebitrate-5p1oh"
+        "url": "https://developer.apple.com/documentation/avfoundation/avassetvariant/averagebitrate-7bnsq"
       },
       "peakBitRate": {
         "doc": "The peak bit rate for the variant.",
@@ -7980,8 +7980,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/isshuttersoundsuppressionsupported"
       },
       "supportedFlashModes": {
-        "doc": "The flash settings this capture output currently supports.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/supportedflashmodes-4u69s"
+        "doc": "A Swift array of flash settings this capture output currently supports.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/supportedflashmodes-1n6nm"
       },
       "supportedPhotoPixelFormatTypes(for:)": {
         "doc": "Returns the list of uncompressed pixel formats supported for photo data in the specified file type.",
@@ -8048,8 +8048,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotosettings/availableembeddedthumbnailphotocodectypes"
       },
       "availablePreviewPhotoPixelFormatTypes": {
-        "doc": "An array of pixel format types compatible with the photo settings for delivery of preview-sized images.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotosettings/availablepreviewphotopixelformattypes-2vfwu"
+        "doc": "An array of available of pixel format types available to specify a preview photo format.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotosettings/availablepreviewphotopixelformattypes-30d9"
       },
       "availableRawEmbeddedThumbnailPhotoCodecTypes": {
         "doc": "An array of video codec types compatible with the photo settings for embedding raw thumbnail images in photo file output.",
@@ -9205,7 +9205,7 @@
       },
       "availableDepthDataTypes": {
         "doc": "The list of depth data formats to which you can convert this depth data.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avdepthdata/availabledepthdatatypes-3ifx1"
+        "url": "https://developer.apple.com/documentation/avfoundation/avdepthdata/availabledepthdatatypes-472g0"
       },
       "cameraCalibrationData": {
         "doc": "The imaging parameters with which this depth data was captured.",
@@ -10320,8 +10320,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/rendersize"
       },
       "sourceSampleDataTrackIDs": {
-        "doc": "The identifiers of source sample data tracks in the composition that the compositor requires to compose frames.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/sourcesampledatatrackids-21o6b"
+        "doc": "The identifiers of source sample data tracks in the composition that the object requires to compose frames.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/sourcesampledatatrackids-7i02t"
       },
       "sourceTrackIDForFrameTiming": {
         "doc": "An identifier of the source track from which the video composition derives frame timing.",
@@ -11417,7 +11417,7 @@
       },
       "loadedTimeRanges": {
         "doc": "The time ranges for the segment that have media data is readily available.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment/loadedtimeranges-2p0fl"
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment/loadedtimeranges-879hc"
       },
       "segmentType": {
         "doc": "The type content this segment represents.",
@@ -11676,8 +11676,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/delaysratechangeuntilhassufficientmediadata"
       },
       "intendedSpatialAudioExperience": {
-        "doc": "The intended spatial audio experience applied to all AVSampleBufferAudioRenderers within this synchronizer.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/intendedspatialaudioexperience-2wthu"
+        "doc": "The synchronizer’s intended Spatial Audio experience.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/intendedspatialaudioexperience-3z7d3"
       },
       "rate": {
         "doc": "The current playback rate.",
@@ -11697,7 +11697,7 @@
       },
       "sampleBufferReceiver(adding:)": {
         "doc": "Adds a renderer to the list of renderers under the synchronizer’s control and returns a sample buffer receiver to enqueue samples.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/samplebufferreceiver(adding:)-5dw84"
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebufferrendersynchronizer/samplebufferreceiver(adding:)-rxap"
       },
       "timebase": {
         "doc": "The synchronizer’s rendering timebase which determines how it interprets timestamps.",
@@ -11966,8 +11966,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/instructions"
       },
       "outputBufferDescription": {
-        "doc": "The output buffers of the video composition can be specified with the outputBufferDescription. The value is an array of an array of CMTag objects that describes the output buffers.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/outputbufferdescription-3ayt8"
+        "doc": "The output buffers of the video composition can be specified with the outputBufferDescription. The value is an array of CMTagCollectionRef objects that describes the output buffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/outputbufferdescription-3wsar"
       },
       "perFrameHDRDisplayMetadataPolicy": {
         "doc": "The policy for display of HDR display metadata on the rendered frame.",
@@ -11982,8 +11982,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/rendersize"
       },
       "sourceSampleDataTrackIDs": {
-        "doc": "The identifiers of source sample data tracks in the composition that the compositor requires to compose frames.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/sourcesampledatatrackids-3nrgi"
+        "doc": "The identifiers of source sample data tracks in the composition that the object requires to compose frames.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avvideocomposition/sourcesampledatatrackids-2hgue"
       },
       "sourceTrackIDForFrameTiming": {
         "doc": "An identifier of the source track from which the video composition derives frame timing.",

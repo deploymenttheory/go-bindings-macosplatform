@@ -130,11 +130,15 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Messages that describe a content blocker or Safari app extension error.
 type SFErrorCode int64
 
 const (
-	SFErrorNoExtensionFound   SFErrorCode = 1
-	SFErrorNoAttachmentFound  SFErrorCode = 2
+	// A Content Blocker or Safari app extension with the specified bundle identifier was not found, or the bundle identifier specified an extension that was not owned by you.
+	SFErrorNoExtensionFound SFErrorCode = 1
+	// The Content Blocker extension returned an NSExtensionItem that did not include an attachment.
+	SFErrorNoAttachmentFound SFErrorCode = 2
+	// There was an error loading the content blocker extension.
 	SFErrorLoadingInterrupted SFErrorCode = 3
 )
 

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient L2-norm pooling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2normgradient
 type MPSCNNPoolingL2NormGradient struct {
 	mpsneuralnetwork.MPSCNNPoolingGradient

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcollectionlist
 type PHCollectionList struct {
 	PHCollection
@@ -39,6 +41,7 @@ func PHCollectionListFromID(id objc.ID) *PHCollectionList {
 	return o
 }
 
+// Retrieves collection lists that contain the specified collection.
 func PHCollectionListFetchCollectionListsContainingCollectionOptions(collection *PHCollection, options *PHFetchOptions) *PHFetchResult[*PHCollectionList] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsContainingCollectionOptions, collection.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -47,14 +50,16 @@ func PHCollectionListFetchCollectionListsContainingCollectionOptions(collection 
 	return PHFetchResultFromID[*PHCollectionList](_ret)
 }
 
+// Retrieves collection lists with the specified local-device-specific unique identifiers.
 func PHCollectionListFetchCollectionListsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *PHFetchOptions) *PHFetchResult[*PHCollectionList] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsWithLocalIdentifiersOptions, identifiers, options.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsWithLocalIdentifiersOptions, identifiers.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PHFetchResultFromID[*PHCollectionList](_ret)
 }
 
+// Retrieves collection lists of the specified type.
 func PHCollectionListFetchCollectionListsWithTypeSubtypeOptions(collectionListType PHCollectionListType, subtype PHCollectionListSubtype, options *PHFetchOptions) *PHFetchResult[*PHCollectionList] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsWithTypeSubtypeOptions, collectionListType, subtype, options.Ptr())
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func PHCollectionListFetchCollectionListsWithTypeSubtypeOptions(collectionListTy
 	return PHFetchResultFromID[*PHCollectionList](_ret)
 }
 
+// Creates a temporary collection list that contains the specified asset collections.
 func PHCollectionListTransientCollectionListWithCollectionsTitle(collections *foundation.NSArray[*PHCollection], title *foundation.NSString) *PHCollectionList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelTransientCollectionListWithCollectionsTitle, collections.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func PHCollectionListTransientCollectionListWithCollectionsTitle(collections *fo
 	return PHCollectionListFromID(_ret)
 }
 
+// Creates a temporary collection list containing the asset collections in the specified fetch result.
 func PHCollectionListTransientCollectionListWithCollectionsFetchResultTitle(fetchResult *PHFetchResult[*PHCollection], title *foundation.NSString) *PHCollectionList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelTransientCollectionListWithCollectionsFetchResultTitle, fetchResult.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -106,6 +113,9 @@ func (o *PHCollectionList) EndDate() *foundation.NSDate {
 }
 
 func (o *PHCollectionList) LocalizedLocationNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pHCollectionListSelLocalizedLocationNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionListSelLocalizedLocationNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

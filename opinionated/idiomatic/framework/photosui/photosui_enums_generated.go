@@ -9,10 +9,13 @@ import (
 	"strings"
 )
 
+// The enumerated Live Photo content modes.
 type PHLivePhotoViewContentMode int64
 
 const (
-	PHLivePhotoViewContentModeAspectFit  PHLivePhotoViewContentMode = 0
+	// A mode that resizes the content to fit the view’s bounds, while preserving the content’s aspect ratio.
+	PHLivePhotoViewContentModeAspectFit PHLivePhotoViewContentMode = 0
+	// A mode that resizes the content to fill its horizontal or vertical dimension.
 	PHLivePhotoViewContentModeAspectFill PHLivePhotoViewContentMode = 1
 )
 
@@ -27,12 +30,16 @@ func (e PHLivePhotoViewContentMode) String() string {
 	}
 }
 
+// Options for how much of the motion and sound content of a Live Photo to play, used in the startPlaybackWithStyle: method and in messages to the view’s delegate object.
 type PHLivePhotoViewPlaybackStyle int64
 
 const (
+	// This value is invalid for use.
 	PHLivePhotoViewPlaybackStyleUndefined PHLivePhotoViewPlaybackStyle = 0
-	PHLivePhotoViewPlaybackStyleFull      PHLivePhotoViewPlaybackStyle = 1
-	PHLivePhotoViewPlaybackStyleHint      PHLivePhotoViewPlaybackStyle = 2
+	// Plays back the entire motion and sound content of the Live Photo, including transition effects at the start and end.
+	PHLivePhotoViewPlaybackStyleFull PHLivePhotoViewPlaybackStyle = 1
+	// Plays back only a brief section of the motion content of the Live Photo, without sound.
+	PHLivePhotoViewPlaybackStyleHint PHLivePhotoViewPlaybackStyle = 2
 )
 
 func (e PHLivePhotoViewPlaybackStyle) String() string {
@@ -48,21 +55,22 @@ func (e PHLivePhotoViewPlaybackStyle) String() string {
 	}
 }
 
+// Options that customize the look and behavior of the photos picker.
 // Bitmask — values may be combined with |.
 type PHPickerCapabilities uint64
 
 const (
-	// No specified capabilities.
+	// An option that represents no capabilities.
 	PHPickerCapabilitiesNone PHPickerCapabilities = 0
-	// The search bar.
+	// A capability that corresponds to the search bar.
 	PHPickerCapabilitiesSearch PHPickerCapabilities = 1
-	// The staging area.
+	// A capability that corresponds to an area in which the selected photos display.
 	PHPickerCapabilitiesStagingArea PHPickerCapabilities = 2
-	// The sidebar or the albums tab.
+	// A capability that corresponds to a sidebar or the Albums tab.
 	PHPickerCapabilitiesCollectionNavigation PHPickerCapabilities = 4
-	// The "Cancel" and the "Add" (if possible) button.
+	// A cabability that represents the Cancel and Add buttons.
 	PHPickerCapabilitiesSelectionActions PHPickerCapabilities = 8
-	// Show intervention UI explaining potential risks for kids or teens if a sensitive asset is selected. Analysis and intervention will only be performed if "Communication Safety" is enabled in ScreenTime.
+	// A capability that prompts for confirmation if a person selects a photo that contains nudity.
 	PHPickerCapabilitiesSensitivityAnalysisIntervention PHPickerCapabilities = 16
 )
 
@@ -89,14 +97,15 @@ func (e PHPickerCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants identifying the mode the system uses when many representations exist for an asset.
 type PHPickerConfigurationAssetRepresentationMode int64
 
 const (
-	// Uses the best representation determined by the system. This may change in future releases.
+	// A mode that indicates that the system chooses the appropriate asset representation.
 	PHPickerConfigurationAssetRepresentationModeAutomatic PHPickerConfigurationAssetRepresentationMode = 0
-	// Uses the current representation to avoid transcoding if possible.
+	// A mode that uses the current representation to avoid transcoding, if possible.
 	PHPickerConfigurationAssetRepresentationModeCurrent PHPickerConfigurationAssetRepresentationMode = 1
-	// Uses the most compatible representation if possible, even if transcoding is required.
+	// A mode that uses the most compatible asset representation.
 	PHPickerConfigurationAssetRepresentationModeCompatible PHPickerConfigurationAssetRepresentationMode = 2
 )
 
@@ -113,16 +122,17 @@ func (e PHPickerConfigurationAssetRepresentationMode) String() string {
 	}
 }
 
+// Options that represent differing selection behavior.
 type PHPickerConfigurationSelection int64
 
 const (
-	// Uses the default selection behavior.
+	// An option that provides selected photos to the app in the default order after the user confirms the selection.
 	PHPickerConfigurationSelectionDefault PHPickerConfigurationSelection = 0
-	// Uses the selection order made by the user. Selected assets are numbered.
+	// An option that provides selected photos to the app in the chosen order after the user confirms the selection.
 	PHPickerConfigurationSelectionOrdered PHPickerConfigurationSelection = 1
-	// Selection can be delivered continuously.
+	// An option that provides the app a person’s selection immediately.
 	PHPickerConfigurationSelectionContinuous PHPickerConfigurationSelection = 2
-	// Selection can be delivered continuously and uses the selection order made by the user. Selected assets are numbered.
+	// An option that provides the app a person’s selection immediately and displays selected photos with a numbered badge.
 	PHPickerConfigurationSelectionContinuousAndOrdered PHPickerConfigurationSelection = 3
 )
 
@@ -161,7 +171,7 @@ func (e PHPickerMode) String() string {
 	}
 }
 
-// PHProjectCreationSource is provided as a hint to project extensions of the user context at the time of project creation. For example, if a user is viewing a Memory in the Photos app and from that chooses the 'Create Project' option, the creationSource provided in PHProjectInfo will be PHProjectCreationSourceMemory.
+// Defines the source of a project extension.
 type PHProjectCreationSource int64
 
 const (
@@ -210,7 +220,7 @@ func (e PHProjectCreationSource) String() string {
 	}
 }
 
-// Options for the sectionType property in PHProjectSection which provides a hint to a section's intended usage. - PHProjectSectionTypeUndefined: used when there is only one section and no suggested pagination or project construction - PHProjectSectionTypeCover: represents the cover or title section of a project - PHProjectSectionTypeContent: any section representing general content in a project - PHProjectSectionTypeAuxiliary: auxiliary content (for example, cover flap in a book)
+// The intended usage of the section: cover, content, or auxiliary.
 type PHProjectSectionType int64
 
 const (
@@ -235,7 +245,7 @@ func (e PHProjectSectionType) String() string {
 	}
 }
 
-// Options for PHProjectTextElementType
+// An enumeration of the type of text element.
 type PHProjectTextElementType int64
 
 const (

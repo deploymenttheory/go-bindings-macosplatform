@@ -660,7 +660,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @typedef nw_browser_state_t @abstract Browser states sent by nw_browser_set_state_changed_handler.
+// States indicating whether a browser is able to discover services.
 type Nw_browser_state_t int64
 
 const (
@@ -693,7 +693,7 @@ func (e Nw_browser_state_t) String() string {
 	}
 }
 
-// @typedef nw_connection_group_state_t @abstract Connection Group states sent by nw_connection_group_set_state_changed_handler. States progress forward and do not move backwards.
+// States that indicate whether you can use a connection group to send and receive messages.
 type Nw_connection_group_state_t int64
 
 const (
@@ -726,7 +726,7 @@ func (e Nw_connection_group_state_t) String() string {
 	}
 }
 
-// @typedef nw_connection_state_t @abstract Connection states sent by nw_connection_set_state_changed_handler. States generally progress forward and do not move backwards, with the exception of preparing and waiting, which may alternate before the connection becomes ready or failed.
+// States indicating whether a connection can be used to send and receive data.
 type Nw_connection_state_t int64
 
 const (
@@ -763,7 +763,7 @@ func (e Nw_connection_state_t) String() string {
 	}
 }
 
-// @typedef nw_data_transfer_report_state_t @abstract The state of a Data Transfer Report indicates whether or not the contents have been collected, and are ready to be accessed.
+// States indicating whether a data transfer report is collected yet.
 type Nw_data_transfer_report_state_t int64
 
 const (
@@ -784,7 +784,7 @@ func (e Nw_data_transfer_report_state_t) String() string {
 	}
 }
 
-// @typedef nw_endpoint_type_t @abstract Endpoint types represent a well-known form of endpoint. Values may be added to this enumeration, and some custom endpoint types may use values not defined in this enumeration.
+// The type of a network endpoint, such as a host or a service.
 type Nw_endpoint_type_t int64
 
 const (
@@ -817,7 +817,7 @@ func (e Nw_endpoint_type_t) String() string {
 	}
 }
 
-// @typedef nw_error_domain_t @abstract The enumeration of network error domains.
+// The error domain for errors used by the Network framework.
 type Nw_error_domain_t int64
 
 const (
@@ -850,6 +850,7 @@ func (e Nw_error_domain_t) String() string {
 	}
 }
 
+// States indicating whether an Ethernet channel is able to send and receive frames.
 type Nw_ethernet_channel_state_t int64
 
 const (
@@ -886,6 +887,7 @@ func (e Nw_ethernet_channel_state_t) String() string {
 	}
 }
 
+// Results that you send to indicate the disposition of your protocol after the start handler is invoked.
 type Nw_framer_start_result_t int64
 
 const (
@@ -965,7 +967,7 @@ func (e Nw_interface_radio_type_t) String() string {
 	}
 }
 
-// @typedef nw_interface_type_t @abstract Interface types represent the underlying media for a network link, such as Wi-Fi or Cellular.
+// Types of network interfaces, based on their link layer media types.
 type Nw_interface_type_t int64
 
 const (
@@ -998,7 +1000,7 @@ func (e Nw_interface_type_t) String() string {
 	}
 }
 
-// @typedef nw_ip_ecn_flag_t @abstract ECN flags marked in IP headers to indicate congestion.
+// Flag values for Explicit Congestion Notifications in IP packets.
 type Nw_ip_ecn_flag_t int64
 
 const (
@@ -1027,7 +1029,7 @@ func (e Nw_ip_ecn_flag_t) String() string {
 	}
 }
 
-// @typedef nw_ip_local_address_preference_t @abstract Preference for local addresses selection.
+// Types of local addresses that can be selected, such as temporary or stable.
 type Nw_ip_local_address_preference_t int64
 
 const (
@@ -1052,7 +1054,7 @@ func (e Nw_ip_local_address_preference_t) String() string {
 	}
 }
 
-// @typedef nw_ip_version_t @abstract A specific version of the Internet Protocol.
+// IP versions to require on connections and listeners.
 type Nw_ip_version_t int64
 
 const (
@@ -1106,7 +1108,7 @@ func (e Nw_link_quality_t) String() string {
 	}
 }
 
-// @typedef nw_listener_state_t @abstract Listener states sent by nw_listener_set_state_changed_handler. States progress forward and do not move backwards.
+// States indicating whether a listener is able to accept incoming connections.
 type Nw_listener_state_t int64
 
 const (
@@ -1139,7 +1141,7 @@ func (e Nw_listener_state_t) String() string {
 	}
 }
 
-// @typedef nw_multipath_service_t @abstract Multipath services represent the modes of multipath usage that are allowed for connections.
+// Modes in which a connection can support multipath protocols.
 type Nw_multipath_service_t int64
 
 const (
@@ -1193,12 +1195,13 @@ func (e Nw_multipath_version_t) String() string {
 	}
 }
 
+// The entities that can make a network request.
 type Nw_parameters_attribution_t int64
 
 const (
-	// @const nw_parameters_attribution_developer Developer chosen content.
+	// A developer-initiated network request.
 	Nw_parameters_attribution_developer Nw_parameters_attribution_t = 1
-	// @const nw_parameters_attribution_user User chosen content.
+	// The user explicitly directs the app to make a network request.
 	Nw_parameters_attribution_user Nw_parameters_attribution_t = 2
 )
 
@@ -1213,7 +1216,7 @@ func (e Nw_parameters_attribution_t) String() string {
 	}
 }
 
-// @typedef nw_parameters_expired_dns_behavior_t @abstract Expired DNS behavior defines whether or not a connection will allow the use of expired DNS answers during connection establishment.
+// Options for configuring how expired DNS answers should be used.
 type Nw_parameters_expired_dns_behavior_t int64
 
 const (
@@ -1242,7 +1245,7 @@ func (e Nw_parameters_expired_dns_behavior_t) String() string {
 	}
 }
 
-// @typedef nw_path_status_t @abstract A network path status indicates if there is a usable route available upon which to send and receive data.
+// Status values indicating whether a path can be used by connections.
 type Nw_path_status_t int64
 
 const (
@@ -1333,7 +1336,7 @@ func (e Nw_quic_stream_type_t) String() string {
 	}
 }
 
-// @typedef nw_report_resolution_protocol_t @abstract The protocol used for endpoint resolution.
+// A set of transport protocols connections use for DNS resolution.
 type Nw_report_resolution_protocol_t int64
 
 const (
@@ -1366,7 +1369,7 @@ func (e Nw_report_resolution_protocol_t) String() string {
 	}
 }
 
-// @typedef nw_report_resolution_source_t @abstract The source of a resolution indicates if the set of endpoints was resolved locally using a cache, or sent a query over the network.
+// Sources that may provide DNS responses.
 type Nw_report_resolution_source_t int64
 
 const (
@@ -1391,7 +1394,7 @@ func (e Nw_report_resolution_source_t) String() string {
 	}
 }
 
-// @typedef nw_service_class_t @abstract The network service class represents the network queuing priority to use for traffic generated by a connection.
+// Levels of service quality that can be used with a connection.
 type Nw_service_class_t int64
 
 const (
@@ -1428,7 +1431,7 @@ func (e Nw_service_class_t) String() string {
 	}
 }
 
-// @typedef nw_txt_record_find_key_t @abstract An enumeration of possible find results when trying to find a key-value pair in the TXT record object.
+// Status values describing what kind of value is stored in a TXT record dictionary.
 type Nw_txt_record_find_key_t int64
 
 const (
@@ -1461,7 +1464,7 @@ func (e Nw_txt_record_find_key_t) String() string {
 	}
 }
 
-// @typedef nw_ws_close_code_t @abstract WebSocket close codes that describe the reason for closing a WebSocket connection. Endpoints MAY use the following pre-defined status codes when sending a Close frame.
+// Types of codes used upon closing a WebSocket connection.
 type Nw_ws_close_code_t int64
 
 const (
@@ -1522,7 +1525,7 @@ func (e Nw_ws_close_code_t) String() string {
 	}
 }
 
-// @typedef nw_ws_opcode_t @abstract WebSocket opcodes that denote the type of frame sent or received by a WebSocket endpoint. Opcodes define the interpretation of their associated payload data.
+// Types of messages that you send and receive on a WebSocket connection.
 type Nw_ws_opcode_t int64
 
 const (
@@ -1563,7 +1566,7 @@ func (e Nw_ws_opcode_t) String() string {
 	}
 }
 
-// @typedef nw_ws_response_status_t @abstract The status of a WebSocket server's response to a client's request to connect.
+// Status values that are sent with a WebSocket server response.
 type Nw_ws_response_status_t int64
 
 const (
@@ -1588,7 +1591,7 @@ func (e Nw_ws_response_status_t) String() string {
 	}
 }
 
-// @typedef nw_ws_version_t @abstract The WebSocket Protocol version.
+// Supported versions of the WebSocket protocol.
 type Nw_ws_version_t int64
 
 const (

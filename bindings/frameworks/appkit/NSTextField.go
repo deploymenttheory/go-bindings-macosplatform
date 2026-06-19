@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Text the user can select or edit to send an action message to a target when the user presses the Return key.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextfield
 type NSTextField struct {
 	NSControl
@@ -88,28 +90,34 @@ func NSTextFieldFromID(id objc.ID) *NSTextField {
 	return o
 }
 
+// Ends editing in the text field and, if it’s selectable, selects the entire text content.
 func (o *NSTextField) SelectText(sender objc.ID) {
 	o.Ptr().Send(_nSTextFieldSelSelectText, sender)
 }
 
+// Requests permission to begin editing a text object.
 func (o *NSTextField) TextShouldBeginEditing(textObject *NSText) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelTextShouldBeginEditing, textObject.Ptr())
 	return _ret
 }
 
+// Performs validation on the text field’s new value.
 func (o *NSTextField) TextShouldEndEditing(textObject *NSText) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelTextShouldEndEditing, textObject.Ptr())
 	return _ret
 }
 
+// Posts a notification to the default notification center that the text is about to go into edit mode.
 func (o *NSTextField) TextDidBeginEditing(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSTextFieldSelTextDidBeginEditing, notification.Ptr())
 }
 
+// Posts a notification when the text is no longer in edit mode.
 func (o *NSTextField) TextDidEndEditing(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSTextFieldSelTextDidEndEditing, notification.Ptr())
 }
 
+// Posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
 func (o *NSTextField) TextDidChange(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSTextFieldSelTextDidChange, notification.Ptr())
 }
@@ -280,21 +288,27 @@ func (o *NSTextField) SetAllowsWritingToolsAffordance(allowsWritingToolsAffordan
 }
 
 func (o *NSTextField) PlaceholderStrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextFieldSelPlaceholderStrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderStrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextField) SetPlaceholderStrings(placeholderStrings *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextFieldSelSetPlaceholderStrings, placeholderStrings)
+	o.Ptr().Send(_nSTextFieldSelSetPlaceholderStrings, placeholderStrings.Ptr())
 }
 
 func (o *NSTextField) PlaceholderAttributedStrings() *foundation.NSArray[*foundation.NSAttributedString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSAttributedString]](o.Ptr(), _nSTextFieldSelPlaceholderAttributedStrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderAttributedStrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSAttributedString](_ret)
 }
 
 func (o *NSTextField) SetPlaceholderAttributedStrings(placeholderAttributedStrings *foundation.NSArray[*foundation.NSAttributedString]) {
-	o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedStrings, placeholderAttributedStrings)
+	o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedStrings, placeholderAttributedStrings.Ptr())
 }
 
 // Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
@@ -326,7 +340,7 @@ func (o *NSTextField) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPicker
 	o.Ptr().Send(_nSTextFieldSelSetAllowsCharacterPickerTouchBarItem, allowsCharacterPickerTouchBarItem)
 }
 
-// Creates a non-wrapping, non-editable, non-selectable text field that displays text in the default system font. @param stringValue The title text to display in the field. @return An initialized text field object.
+// Initializes a text field for use as a static label that uses the system default font, doesn’t wrap, and doesn’t have selectable text.
 func NSTextFieldLabelWithString(stringValue *foundation.NSString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithString, stringValue.Ptr())
 	if _ret != 0 {
@@ -335,7 +349,7 @@ func NSTextFieldLabelWithString(stringValue *foundation.NSString) *NSTextField {
 	return NSTextFieldFromID(_ret)
 }
 
-// Creates a wrapping, non-editable, selectable text field that displays text in the default system font. @param stringValue The title text to display in the field. @return An initialized text field object.
+// Initializes a text field for use as a multiline static label with selectable text that uses the system default font.
 func NSTextFieldWrappingLabelWithString(stringValue *foundation.NSString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelWrappingLabelWithString, stringValue.Ptr())
 	if _ret != 0 {
@@ -344,7 +358,7 @@ func NSTextFieldWrappingLabelWithString(stringValue *foundation.NSString) *NSTex
 	return NSTextFieldFromID(_ret)
 }
 
-// Creates a non-editable, non-selectable text field that displays attributed text. The line break mode of this field is determined by the attributed string's NSParagraphStyle attribute. @param attributedStringValue The attributed string to display in the field. @return An initialized text field object.
+// Creates a text field for use as a static label that displays styled text, doesn’t wrap, and doesn’t have selectable text.
 func NSTextFieldLabelWithAttributedString(attributedStringValue *foundation.NSAttributedString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithAttributedString, attributedStringValue.Ptr())
 	if _ret != 0 {
@@ -353,7 +367,7 @@ func NSTextFieldLabelWithAttributedString(attributedStringValue *foundation.NSAt
 	return NSTextFieldFromID(_ret)
 }
 
-// Creates a non-wrapping editable text field. @param stringValue The initial contents of the text field, or empty string for an initially empty text field. @return An initialized text field object.
+// Initializes a single-line editable text field for user input using the system default font and standard visual appearance.
 func NSTextFieldTextFieldWithString(stringValue *foundation.NSString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelTextFieldWithString, stringValue.Ptr())
 	if _ret != 0 {
@@ -380,6 +394,7 @@ func (o *NSTextField) SetImportsGraphics(importsGraphics bool) {
 	o.Ptr().Send(_nSTextFieldSelSetImportsGraphics, importsGraphics)
 }
 
+// Sets the text field’s string value using the embedded character as the keyboard mnemonic.
 // Deprecated: Use `-setTitle:` instead
 func (o *NSTextField) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSTextFieldSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())

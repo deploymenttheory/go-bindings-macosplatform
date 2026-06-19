@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of conflicts that occur during an attempt to save a managed object.
+//
 // ConstraintConflict wraps [raw.NSConstraintConflict] with a fluent Go API.
 type ConstraintConflict struct {
 	inner *raw.NSConstraintConflict
@@ -31,6 +33,8 @@ func ConstraintConflictFromID(id objc.ID) *ConstraintConflict {
 	return &ConstraintConflict{inner: raw.NSConstraintConflictFromID(id)}
 }
 
+// Initializes a constraint conflict.
+//
 // NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots creates a new [ConstraintConflict].
 func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint *foundation.NSArray[*foundation.NSString], databaseObject *raw.NSManagedObject, databaseSnapshot purego.IDer, conflictingObjects *foundation.NSArray[*raw.NSManagedObject], conflictingSnapshots *foundation.NSArray[objc.ID]) *ConstraintConflict {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSConstraintConflict")), objc.RegisterName("alloc"))

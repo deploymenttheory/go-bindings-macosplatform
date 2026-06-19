@@ -112,13 +112,17 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// The result of updating a widget’s state.
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 type NCUpdateResult uint64
 
 const (
+	// The update resulted in new data to display.
 	NCUpdateResultNewData NCUpdateResult = 0
-	NCUpdateResultNoData  NCUpdateResult = 1
-	NCUpdateResultFailed  NCUpdateResult = 2
+	// The update did not result in any new data since the last update.
+	NCUpdateResultNoData NCUpdateResult = 1
+	// The update attempt failed.
+	NCUpdateResultFailed NCUpdateResult = 2
 )
 
 func (e NCUpdateResult) String() string {

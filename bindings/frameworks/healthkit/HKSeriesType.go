@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that indicates the data stored in a series sample.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkseriestype
 type HKSeriesType struct {
 	HKSampleType
@@ -30,6 +32,7 @@ func HKSeriesTypeFromID(id objc.ID) *HKSeriesType {
 	return o
 }
 
+// Returns a series type object for workout routes.
 func HKSeriesTypeWorkoutRouteType() *HKSeriesType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKSeriesType), _hKSeriesTypeSelWorkoutRouteType)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func HKSeriesTypeWorkoutRouteType() *HKSeriesType {
 	return HKSeriesTypeFromID(_ret)
 }
 
+// Returns a series type object for heartbeat data.
 func HKSeriesTypeHeartbeatSeriesType() *HKSeriesType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKSeriesType), _hKSeriesTypeSelHeartbeatSeriesType)
 	if _ret != 0 {

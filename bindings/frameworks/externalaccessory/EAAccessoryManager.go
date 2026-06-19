@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to identify connected accessories, and begin delivery of connection and disconnection notifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager
 type EAAccessoryManager struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func EAAccessoryManagerFromID(id objc.ID) *EAAccessoryManager {
 	return o
 }
 
+// Returns the shared accessory manager object for the iOS-based device.
 func EAAccessoryManagerSharedAccessoryManager() *EAAccessoryManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEAAccessoryManager), _eAAccessoryManagerSelSharedAccessoryManager)
 	if _ret != 0 {

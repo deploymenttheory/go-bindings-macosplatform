@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An opaque object that tracks the state of the Photos library between runs, and that you can copy and serialize for future use.
+//
 // PersistentChangeToken wraps [raw.PHPersistentChangeToken] with a fluent Go API.
 type PersistentChangeToken struct {
 	inner *raw.PHPersistentChangeToken

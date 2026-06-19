@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A container for all the ClassKit data in your app.
+//
 // DataStore wraps [raw.CLSDataStore] with a fluent Go API.
 type DataStore struct {
 	inner *raw.CLSDataStore
@@ -39,7 +41,7 @@ func NewDataStore() *DataStore {
 	return &DataStore{inner: raw.CLSDataStoreFromID(_id)}
 }
 
-// @abstract      The data store delegate allows for easy population of the app's context hierarchy.
+// The data store delegate instance.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DataStore) WithDelegate(delegate raw.CLSDataStoreDelegate) *DataStore {
@@ -47,7 +49,7 @@ func (x *DataStore) WithDelegate(delegate raw.CLSDataStoreDelegate) *DataStore {
 	return x
 }
 
-// @abstract      Save changes made in the data store. @discussion    Save new/modified/removed contexts, activities, etc. to the local store. In case of an error -[NSError userInfo] will contain the object that caused the error under the CLSErrorObjectKey..
+// Saves any changes you’ve made in the data store.
 //
 // SaveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
@@ -67,7 +69,7 @@ func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 	}
 }
 
-// @abstract      Complete all assigned actvities. @discussion    Marks all of the currently active assigned activities for this contextPath as complete.
+// Marks all of the assigned and active activities for the given context path as complete.
 //
 // CompleteAllAssignedActivitiesMatching calls the underlying CompleteAllAssignedActivitiesMatching.
 func (x *DataStore) CompleteAllAssignedActivitiesMatching(contextPath *foundation.NSArray[*foundation.NSString]) {
@@ -119,7 +121,7 @@ func (x *DataStore) SetDelegate(delegate raw.CLSDataStoreDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
-// @abstract      Fetch contexts matching a predicate. @discussion    For example: NSPredicate<topic == CLSContextTopicMath AND parent == someContext>.  Completion block may be called on a background thread.
+// Fetches all the contexts matching a predicate.
 //
 // ContextsMatchingPredicateCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CLSContext], error) {
@@ -145,7 +147,7 @@ func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, pre
 	}
 }
 
-// @abstract      Returns contexts matching a set of identifiers where each identifier is the parent of the following identifier. @discussion    For example: @c@["math-game", @c"level1"] returns two contexts where @em math-game is the parent of @em level1. If there are any missing contexts, they will be filled in by calling the following method on the data store's delegate: @code -[CLSDataStoreDelegate createContextForIdentifier:parentContext:parentIdentifierPath:] @endcode If the dataStore does not have a delegate and there are missing contexts then an incomplete list of contexts will be passed to the completion handler.  Completion block may be called on a background thread.
+// Fetches all the contexts along a given identifier path.
 //
 // ContextsMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.CLSContext], error) {
@@ -171,14 +173,14 @@ func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context
 	}
 }
 
-// @abstract      Mark a context for removal. @discussion    Save to commit removal. Removal cascades and deletes all descendants.
+// Marks a context for removal.
 //
 // RemoveContext calls the underlying RemoveContext.
 func (x *DataStore) RemoveContext(context_ *raw.CLSContext) {
 	x.inner.RemoveContext(context_)
 }
 
-// @abstract Implement to fetch the current CLSActivity instance for your document to add progress to. @discussion Gets the currently CLSActivity for the file. If no current activity exists, one will be created for you. @param  url File url for the document.
+// Fetches an activity for a given document so you can record progress on the associated task.
 //
 // FetchActivityForURLCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (*Activity, error) {

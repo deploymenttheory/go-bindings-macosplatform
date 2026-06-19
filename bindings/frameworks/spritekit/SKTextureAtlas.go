@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of textures optimized for storage and drawing performance.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktextureatlas
 type SKTextureAtlas struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func SKTextureAtlasFromID(id objc.ID) *SKTextureAtlas {
 	return o
 }
 
+// Creates a texture atlas from data stored in the app bundle.
 func SKTextureAtlasAtlasNamed(name *foundation.NSString) *SKTextureAtlas {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTextureAtlas), _sKTextureAtlasSelAtlasNamed, name.Ptr())
 	if _ret != 0 {
@@ -46,14 +49,16 @@ func SKTextureAtlasAtlasNamed(name *foundation.NSString) *SKTextureAtlas {
 	return SKTextureAtlasFromID(_ret)
 }
 
+// Creates a texture atlas from a set of image files.
 func SKTextureAtlasAtlasWithDictionary(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SKTextureAtlas {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKTextureAtlas), _sKTextureAtlasSelAtlasWithDictionary, properties)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSKTextureAtlas), _sKTextureAtlasSelAtlasWithDictionary, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SKTextureAtlasFromID(_ret)
 }
 
+// Creates a texture from data stored in the texture atlas.
 func (o *SKTextureAtlas) TextureNamed(name *foundation.NSString) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTextureAtlasSelTextureNamed, name.Ptr())
 	if _ret != 0 {
@@ -62,7 +67,7 @@ func (o *SKTextureAtlas) TextureNamed(name *foundation.NSString) *SKTexture {
 	return SKTextureFromID(_ret)
 }
 
-// Start a texture atlas preload operation on an array of texture atlas @param textureAtlases an array of SKTextureAtlas to be preloaded @param completionHandler will be called upon the preload completion
+// Loads the textures of multiple atlas objects into memory, calling a completion handler after the task completes.
 func SKTextureAtlasPreloadTextureAtlasesWithCompletionHandler(textureAtlases *foundation.NSArray[*SKTextureAtlas], completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -74,7 +79,7 @@ func SKTextureAtlasPreloadTextureAtlasesWithCompletionHandler(textureAtlases *fo
 	objc.ID(_clsSKTextureAtlas).Send(_sKTextureAtlasSelPreloadTextureAtlasesWithCompletionHandler, textureAtlases.Ptr(), __block_completionHandler)
 }
 
-// Start a texture atlas preload operation on an array of texture atlas identifiers, error == nil if all atlases were found, else an NSError is returned and the user info will contain a list of the atlases that couldn't be found the ones that could be found are looked up and prefetched. @param atlasNames is an array of the SKTextureAtlas, that were located and preloaded. @param completionHandler will be called upon the preload completion.
+// Loads the textures of multiple atlases into memory, calling a completion handler after the task completes.
 func SKTextureAtlasPreloadTextureAtlasesNamedWithCompletionHandler(atlasNames *foundation.NSArray[*foundation.NSString], completionHandler func(unsafe.Pointer, *foundation.NSArray[*SKTextureAtlas])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -86,10 +91,10 @@ func SKTextureAtlasPreloadTextureAtlasesNamedWithCompletionHandler(atlasNames *f
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsSKTextureAtlas).Send(_sKTextureAtlasSelPreloadTextureAtlasesNamedWithCompletionHandler, atlasNames, __block_completionHandler)
+	objc.ID(_clsSKTextureAtlas).Send(_sKTextureAtlasSelPreloadTextureAtlasesNamedWithCompletionHandler, atlasNames.Ptr(), __block_completionHandler)
 }
 
-// Request that this texture atlas be loaded into vram on the next render update, with a callback handler.
+// Loads an atlas object’s textures into memory, calling a completion handler after the task completes.
 func (o *SKTextureAtlas) PreloadWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -102,6 +107,9 @@ func (o *SKTextureAtlas) PreloadWithCompletionHandler(completionHandler func()) 
 }
 
 func (o *SKTextureAtlas) TextureNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sKTextureAtlasSelTextureNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKTextureAtlasSelTextureNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

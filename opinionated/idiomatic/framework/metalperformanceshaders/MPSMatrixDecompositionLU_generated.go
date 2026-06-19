@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel for computing the LU factorization of a matrix using partial pivoting with row interchanges.
+//
 // MatrixDecompositionLU wraps [raw.MPSMatrixDecompositionLU] with a fluent Go API.
 type MatrixDecompositionLU struct {
 	inner *raw.MPSMatrixDecompositionLU
@@ -74,7 +76,7 @@ func (x *MatrixDecompositionLU) WithBatchSize(batchSize uint) *MatrixDecompositi
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixDecompositionLU) WithOptions(options mpscore.MPSKernelOptions) *MatrixDecompositionLU {
@@ -82,7 +84,7 @@ func (x *MatrixDecompositionLU) WithOptions(options mpscore.MPSKernelOptions) *M
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixDecompositionLU) WithLabel(label string) *MatrixDecompositionLU {

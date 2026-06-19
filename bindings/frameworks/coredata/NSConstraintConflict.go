@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of conflicts that occur during an attempt to save a managed object.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsconstraintconflict
 type NSConstraintConflict struct {
 	foundation.NSObject
@@ -36,8 +38,9 @@ func NSConstraintConflictFromID(id objc.ID) *NSConstraintConflict {
 	return o
 }
 
+// Initializes a constraint conflict.
 func (o *NSConstraintConflict) InitWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint *foundation.NSArray[*foundation.NSString], databaseObject *NSManagedObject, databaseSnapshot *foundation.NSDictionary[objc.ID, objc.ID], conflictingObjects *foundation.NSArray[*NSManagedObject], conflictingSnapshots *foundation.NSArray[objc.ID]) *NSConstraintConflict {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelInitWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots, contraint, databaseObject.Ptr(), databaseSnapshot, conflictingObjects.Ptr(), conflictingSnapshots)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelInitWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots, contraint.Ptr(), databaseObject.Ptr(), databaseSnapshot.Ptr(), conflictingObjects.Ptr(), conflictingSnapshots.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -45,13 +48,19 @@ func (o *NSConstraintConflict) InitWithConstraintDatabaseObjectDatabaseSnapshotC
 }
 
 func (o *NSConstraintConflict) Constraint() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSConstraintConflictSelConstraint)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelConstraint)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSConstraintConflict) ConstraintValues() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSConstraintConflictSelConstraintValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelConstraintValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSConstraintConflict) DatabaseObject() *NSManagedObject {
@@ -63,8 +72,11 @@ func (o *NSConstraintConflict) DatabaseObject() *NSManagedObject {
 }
 
 func (o *NSConstraintConflict) DatabaseSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSConstraintConflictSelDatabaseSnapshot)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelDatabaseSnapshot)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSConstraintConflict) ConflictingObjects() *foundation.NSArray[*NSManagedObject] {
@@ -76,6 +88,9 @@ func (o *NSConstraintConflict) ConflictingObjects() *foundation.NSArray[*NSManag
 }
 
 func (o *NSConstraintConflict) ConflictingSnapshots() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSConstraintConflictSelConflictingSnapshots)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelConflictingSnapshots)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

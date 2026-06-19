@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A playback coordinator subclass that coordinates the playback of player objects in a connected group.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayerplaybackcoordinator
 type AVPlayerPlaybackCoordinator struct {
 	AVPlaybackCoordinator
@@ -54,7 +56,7 @@ func (o *AVPlayerPlaybackCoordinator) SetDelegate(delegate AVPlayerPlaybackCoord
 	o.Ptr().Send(_aVPlayerPlaybackCoordinatorSelSetDelegate, delegate)
 }
 
-// Connects the playback coordinator to the coordination medium This connects the playback coordinator to a coordination medium to enable sending and receiving messages from other connected playback coordinators. If the coordination medium is non-NULL, this will connect the playback coordinator to the specified coordination medium. If the coordination medium is set to NULL, this will disconnect the playback coordinator from the playback coordination medium. The player will no longer be coordinated with the other players connected to the coordination medium. The playback coordinator can either only coordinate with local players through an AVPlaybackCoordinationMedium or coordinate with a remote group session through the `coordinateWithSession` API. If the client attempts to connect to an AVPlaybackCoordinationMedium while already connected to a group session, this method will populate the outError parameter If the playback coordinator successfully connects to the coordination medium or disconnects from a coordination medium, the `outError` parameter will be nil. If the playback coordinator fails to connect to the specified coordination medium, the `outError` parameter will describe what went wrong. - Parameter coordinationMedium: The coordination medium the playback coordinator connects to. If NULL, the playback coordinator disconnects from any existing coordination medium. - Parameter outError: A pointer to an NSError object that will be populated with failure information if connecting to or disconnecting from the coordination medium fails.
+// Connects the playback coordinator to the coordination medium
 func (o *AVPlayerPlaybackCoordinator) CoordinateUsingCoordinationMediumError(coordinationMedium *AVPlaybackCoordinationMedium) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVPlayerPlaybackCoordinatorSelCoordinateUsingCoordinationMediumError, coordinationMedium.Ptr(), unsafe.Pointer(&_nsErr))

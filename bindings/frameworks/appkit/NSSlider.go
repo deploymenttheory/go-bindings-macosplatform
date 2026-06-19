@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A display of a bar representing a continuous range of numerical values and a knob representing the currently selected value.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsslider
 type NSSlider struct {
 	NSControl
@@ -154,21 +156,25 @@ func (o *NSSlider) SetTintProminence(tintProminence NSTintProminence) {
 	o.Ptr().Send(_nSSliderSelSetTintProminence, tintProminence)
 }
 
+// Returns the slider’s value represented by the tick mark at the specified index.
 func (o *NSSlider) TickMarkValueAtIndex(index int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelTickMarkValueAtIndex, index)
 	return _ret
 }
 
+// Returns the bounding rectangle of the tick mark at the given index.
 func (o *NSSlider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderSelRectOfTickMarkAtIndex, index)
 	return _ret
 }
 
+// Returns the index of the tick mark closest to the location of the slider represented by the given point.
 func (o *NSSlider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSSliderSelIndexOfTickMarkAtPoint, point)
 	return _ret
 }
 
+// Returns the value of the tick mark closest to the specified value.
 func (o *NSSlider) ClosestTickMarkValueToValue(value float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelClosestTickMarkValueToValue, value)
 	return _ret
@@ -201,7 +207,7 @@ func (o *NSSlider) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
 	o.Ptr().Send(_nSSliderSelSetAllowsTickMarkValuesOnly, allowsTickMarkValuesOnly)
 }
 
-// Creates a continuous horizontal slider over the range 0.0 to 1.0. The default value is 0.0. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized slider control.
+// Creates a continuous horizontal slider whose values range from 0.0 to 1.0.
 func NSSliderSliderWithTargetAction(target objc.ID, action objc.SEL) *NSSlider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithTargetAction, target, action)
 	if _ret != 0 {
@@ -210,7 +216,7 @@ func NSSliderSliderWithTargetAction(target objc.ID, action objc.SEL) *NSSlider {
 	return NSSliderFromID(_ret)
 }
 
-// Creates a continuous horizontal slider that represents values over a specified range. @param value The initial value displayed by the control. @param minValue The minimum value represented by the control. @param maxValue The maximum value represented by the control. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized slider control.
+// Creates a continuous horizontal slider that represents values over the specified range.
 func NSSliderSliderWithValueMinValueMaxValueTargetAction(value float64, minValue float64, maxValue float64, target objc.ID, action objc.SEL) *NSSlider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithValueMinValueMaxValueTargetAction, value, minValue, maxValue, target, action)
 	if _ret != 0 {
@@ -219,22 +225,26 @@ func NSSliderSliderWithValueMinValueMaxValueTargetAction(value float64, minValue
 	return NSSliderFromID(_ret)
 }
 
+// Sets the cell used to draw the slider’s title.
 // Deprecated: -setTitleCell: had no effect since 10.0
 func (o *NSSlider) SetTitleCell(cell *NSCell) {
 	o.Ptr().Send(_nSSliderSelSetTitleCell, cell.Ptr())
 }
 
+// This method has been deprecated. Returns nil.
 // Deprecated: -titleCell has returned nil since 10.0
 func (o *NSSlider) TitleCell() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleCell)
 	return _ret
 }
 
+// Sets the color used to draw the slider’s title.
 // Deprecated: -setTitleColor: had no effect since 10.0
 func (o *NSSlider) SetTitleColor(newColor *NSColor) {
 	o.Ptr().Send(_nSSliderSelSetTitleColor, newColor.Ptr())
 }
 
+// This method has been deprecated. Returns nil.
 // Deprecated: -titleColor has returned nil since 10.0
 func (o *NSSlider) TitleColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleColor)
@@ -244,11 +254,13 @@ func (o *NSSlider) TitleColor() *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Sets the font used to draw the slider’s title.
 // Deprecated: -setTitleFont: had no effect since 10.0
 func (o *NSSlider) SetTitleFont(fontObj *NSFont) {
 	o.Ptr().Send(_nSSliderSelSetTitleFont, fontObj.Ptr())
 }
 
+// This method has been deprecated. Returns nil.
 // Deprecated: -titleFont has returned nil since 10.0
 func (o *NSSlider) TitleFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleFont)
@@ -258,6 +270,7 @@ func (o *NSSlider) TitleFont() *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the slider’s title.
 // Deprecated: -title has returned nil since 10.0
 func (o *NSSlider) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitle)
@@ -267,6 +280,7 @@ func (o *NSSlider) Title() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the title the slider displays in the bar behind its knob.
 // Deprecated: -setTitle: had no effect since 10.0
 func (o *NSSlider) SetTitle(string_ *foundation.NSString) {
 	o.Ptr().Send(_nSSliderSelSetTitle, string_.Ptr())
@@ -277,11 +291,13 @@ func (o *NSSlider) SetKnobThickness(thickness float64) {
 	o.Ptr().Send(_nSSliderSelSetKnobThickness, thickness)
 }
 
+// Sets the image the slider displays in the bar behind its knob.
 // Deprecated: -setImage: had no effect since 10.0
 func (o *NSSlider) SetImage(backgroundImage *NSImage) {
 	o.Ptr().Send(_nSSliderSelSetImage, backgroundImage.Ptr())
 }
 
+// Returns nil.
 // Deprecated: -image has returned nil since 10.0
 func (o *NSSlider) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelImage)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A trigger condition that causes a notification the system delivers at a specific date and time.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/uncalendarnotificationtrigger
 type UNCalendarNotificationTrigger struct {
 	UNNotificationTrigger
@@ -32,6 +34,7 @@ func UNCalendarNotificationTriggerFromID(id objc.ID) *UNCalendarNotificationTrig
 	return o
 }
 
+// Creates a calendar trigger using the date components parameter.
 func UNCalendarNotificationTriggerTriggerWithDateMatchingComponentsRepeats(dateComponents *foundation.NSDateComponents, repeats bool) *UNCalendarNotificationTrigger {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNCalendarNotificationTrigger), _uNCalendarNotificationTriggerSelTriggerWithDateMatchingComponentsRepeats, dateComponents.Ptr(), repeats)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func UNCalendarNotificationTriggerTriggerWithDateMatchingComponentsRepeats(dateC
 	return UNCalendarNotificationTriggerFromID(_ret)
 }
 
+// The next date at which the trigger conditions are met.
 func (o *UNCalendarNotificationTrigger) NextTriggerDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNCalendarNotificationTriggerSelNextTriggerDate)
 	if _ret != 0 {

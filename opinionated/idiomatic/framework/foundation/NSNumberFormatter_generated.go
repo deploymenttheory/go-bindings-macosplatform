@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that converts between numeric values and their textual representations.
+//
 // NumberFormatter wraps [raw.NSNumberFormatter] with a fluent Go API.
 type NumberFormatter struct {
 	inner *raw.NSNumberFormatter

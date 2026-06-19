@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that represents a health document in the HealthKit store.
+//
 // DocumentSample wraps [raw.HKDocumentSample] with a fluent Go API.
 type DocumentSample struct {
 	inner *raw.HKDocumentSample

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a convolution object that does subpixel upsampling and reshaping.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsubpixelconvolutiondescriptor
 type MPSCNNSubPixelConvolutionDescriptor struct {
 	mpsneuralnetwork.MPSCNNConvolutionDescriptor

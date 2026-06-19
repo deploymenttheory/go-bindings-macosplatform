@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages one or more audio sessions that belong to an app.
+//
 // AudioApplication wraps [raw.AVAudioApplication] with a fluent Go API.
 type AudioApplication struct {
 	inner *raw.AVAudioApplication
@@ -35,14 +37,14 @@ func NewAudioApplication() *AudioApplication {
 	return &AudioApplication{inner: raw.AVAudioApplicationFromID(_id)}
 }
 
-// @brief Set the muted/unmuted state of the application's audio input. When set true, inputs (microphone etc.) of all audio clients relating to this application will have their samples zeroed out. @note - this is per-application input muting and doesn't affect the hardware mute state.
+// Sets a Boolean value that indicates whether the app’s audio input is in a muted state.
 //
 // SetInputMutedError calls the underlying SetInputMutedError.
 func (x *AudioApplication) SetInputMutedError(muted bool) (bool, error) {
 	return x.inner.SetInputMutedError(muted)
 }
 
-// @brief  Provide a block that implements your app's input (microphone) muting logic (macOS only). The block will be called whenever the input mute state changes, either due to changing the `AVAudioApplication.inputMute` property on this API, or due to a Bluetooth audio accessory gesture (certain AirPods / Beats headphones) changing the mute state. @param	inputMuteHandler block that will be called upon every input mute state change. If the boolean `inputShouldBeMuted` is true, your block should mute all input/microphone samples until the next time the handler is called. Your block should return a value of YES if successful, or in exceptional cases return a NO value if the mute action was unsuccesful. Since the input mute handling logic should happen a single place, subsequent calls to this method will overwrite any previously registered block with the one provided. A nil value may be provided to cancel the block being called, e.g. at end of call lifecycle. @note   This is available on macOS only - for all other platforms input muting will be handled internally. It is recommended only to perform your input muting logic within this block, and to perform your UI updates for input mute state changes within the handler for AVAudioApplicationInputMuteStateChangeNotification. This handler should be set by the process doing the call's audio I/O.
+// Sets a callback to handle changes to application-level audio muting states.
 //
 // SetInputMuteStateChangeHandlerError calls the underlying SetInputMuteStateChangeHandlerError.
 func (x *AudioApplication) SetInputMuteStateChangeHandlerError(inputMuteHandler func(bool) bool) (bool, error) {

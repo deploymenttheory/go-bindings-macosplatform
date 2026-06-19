@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The position of attributed string text in its original Markdown source string.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsattributedstringmarkdownsourceposition
 type NSAttributedStringMarkdownSourcePosition struct {
 	NSObject
@@ -34,6 +36,7 @@ func NSAttributedStringMarkdownSourcePositionFromID(id objc.ID) *NSAttributedStr
 	return o
 }
 
+// Creates a Markdown source position instance from its start and end line and column.
 func (o *NSAttributedStringMarkdownSourcePosition) InitWithStartLineStartColumnEndLineEndColumn(startLine int, startColumn int, endLine int, endColumn int) *NSAttributedStringMarkdownSourcePosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelInitWithStartLineStartColumnEndLineEndColumn, startLine, startColumn, endLine, endColumn)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *NSAttributedStringMarkdownSourcePosition) InitWithStartLineStartColumnE
 	return NSAttributedStringMarkdownSourcePositionFromID(_ret)
 }
 
+// Returns a range indicating the source portion within a Markdown string.
 func (o *NSAttributedStringMarkdownSourcePosition) RangeInString(string_ *NSString) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelRangeInString, string_.Ptr())
 	return _ret

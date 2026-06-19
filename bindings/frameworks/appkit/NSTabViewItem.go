@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item in a tab view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstabviewitem
 type NSTabViewItem struct {
 	foundation.NSObject
@@ -61,6 +63,7 @@ func NSTabViewItemTabViewItemWithViewController(viewController *NSViewController
 	return NSTabViewItemFromID(_ret)
 }
 
+// Performs default initialization for the receiver.
 func (o *NSTabViewItem) InitWithIdentifier(identifier objc.ID) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelInitWithIdentifier, identifier)
 	if _ret != 0 {
@@ -69,10 +72,12 @@ func (o *NSTabViewItem) InitWithIdentifier(identifier objc.ID) *NSTabViewItem {
 	return NSTabViewItemFromID(_ret)
 }
 
+// Draws the receiver’s label in tabRect, which is the area between the curved end caps.
 func (o *NSTabViewItem) DrawLabelInRect(shouldTruncateLabel bool, labelRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTabViewItemSelDrawLabelInRect, shouldTruncateLabel, labelRect)
 }
 
+// Calculates the size of the receiver’s label.
 func (o *NSTabViewItem) SizeOfLabel(computeMin bool) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTabViewItemSelSizeOfLabel, computeMin)
 	return _ret

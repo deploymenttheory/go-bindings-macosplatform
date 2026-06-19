@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that convolves an image with a given kernel of odd width and height.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconvolution
 type MPSImageConvolution struct {
 	mpsimage.MPSUnaryImageKernel
@@ -37,6 +39,7 @@ func MPSImageConvolutionFromID(id objc.ID) *MPSImageConvolution {
 	return o
 }
 
+// Initializes a convolution filter.
 func (o *MPSImageConvolution) InitWithDeviceKernelWidthKernelHeightWeights(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, kernelWeights *float32) *MPSImageConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageConvolutionSelInitWithDeviceKernelWidthKernelHeightWeights, device, kernelWidth, kernelHeight, kernelWeights)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of data and associated behaviors that accomplish a function or feature of a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbservice
 type CBService struct {
 	CBAttribute

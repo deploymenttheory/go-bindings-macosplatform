@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// NEProxyServer contains settings for a proxy server.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neproxyserver
 type NEProxyServer struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func NEProxyServerFromID(id objc.ID) *NEProxyServer {
 	return o
 }
 
-// @method initWithAddress:port: @discussion This function initializes a newly-allocated NEProxyServer object @param address The string representation of the proxy server IP address. @param port The TCP port of the proxy server.
+// Initialize a newly-allocated NEProxyServer object
 func (o *NEProxyServer) InitWithAddressPort(address *foundation.NSString, port int) *NEProxyServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxyServerSelInitWithAddressPort, address.Ptr(), port)
 	if _ret != 0 {

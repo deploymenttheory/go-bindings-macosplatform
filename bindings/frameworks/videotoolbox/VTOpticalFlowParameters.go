@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes frame-level optical flow parameters.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters
 type VTOpticalFlowParameters struct {
 	foundation.NSObject

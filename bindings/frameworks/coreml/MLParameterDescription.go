@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a model parameter that includes a default value and a constraint, if applicable.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlparameterdescription
 type MLParameterDescription struct {
 	foundation.NSObject

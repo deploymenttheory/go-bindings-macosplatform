@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Laundry Washer Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterLaundryWasherMode wraps [raw.MTRClusterLaundryWasherMode] with a fluent Go API.
 type MTRClusterLaundryWasherMode struct {
 	inner *raw.MTRClusterLaundryWasherMode

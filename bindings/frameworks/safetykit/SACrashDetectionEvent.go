@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes the information about a vehicular crash.
+//
 // Apple documentation: https://developer.apple.com/documentation/safetykit/sacrashdetectionevent
 type SACrashDetectionEvent struct {
 	foundation.NSObject

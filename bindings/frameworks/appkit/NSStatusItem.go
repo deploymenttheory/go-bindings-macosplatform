@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An individual element displayed in the system menu bar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstatusitem
 type NSStatusItem struct {
 	foundation.NSObject
@@ -134,17 +136,20 @@ func (o *NSStatusItem) SetAutosaveName(autosaveName *foundation.NSString) {
 	o.Ptr().Send(_nSStatusItemSelSetAutosaveName, autosaveName.Ptr())
 }
 
+// Sets the conditions on which the status item sends action messages to its target.
 // Deprecated: Use the receiver's button's -sendActionOn: instead
 func (o *NSStatusItem) SendActionOn(mask NSEventMask) int {
 	_ret := objc.Send[int](o.Ptr(), _nSStatusItemSelSendActionOn, mask)
 	return _ret
 }
 
+// Draws the menu background pattern for a custom status-bar item in regular or highlight pattern.
 // Deprecated: Use the standard button instead which handles highlight drawing, making this method obsolete
 func (o *NSStatusItem) DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool) {
 	o.Ptr().Send(_nSStatusItemSelDrawStatusBarBackgroundInRectWithHighlight, rect, highlight)
 }
 
+// Displays a menu under a custom status bar item.
 // Deprecated: Use the menu property instead
 func (o *NSStatusItem) PopUpStatusItemMenu(menu *NSMenu) {
 	o.Ptr().Send(_nSStatusItemSelPopUpStatusItemMenu, menu.Ptr())

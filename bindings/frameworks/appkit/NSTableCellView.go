@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reusable container view shown for a particular cell in a table view that uses rows for content.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstablecellview
 type NSTableCellView struct {
 	NSView

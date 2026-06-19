@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The visual representation of multiple polygon overlays.
+//
 // MultiPolygonRenderer wraps [raw.MKMultiPolygonRenderer] with a fluent Go API.
 type MultiPolygonRenderer struct {
 	inner *raw.MKMultiPolygonRenderer
@@ -33,6 +35,8 @@ func MultiPolygonRendererFromID(id objc.ID) *MultiPolygonRenderer {
 	return &MultiPolygonRenderer{inner: raw.MKMultiPolygonRendererFromID(id)}
 }
 
+// Creates and returns a renderer that handles drawing for the specified multipolygon overlay object.
+//
 // NewMultiPolygonRendererWithMultiPolygon creates a new [MultiPolygonRenderer].
 func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *raw.MKMultiPolygon) *MultiPolygonRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolygonRenderer")), objc.RegisterName("alloc"))
@@ -40,48 +44,64 @@ func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *raw.MKMultiPolygon) *
 	return &MultiPolygonRenderer{inner: raw.MKMultiPolygonRendererFromID(_id)}
 }
 
+// The fill color to use for the path.
+//
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithFillColor(fillColor *appkit.NSColor) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
 	return x
 }
 
+// The stroke color to use for the path.
+//
 // WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
 	return x
 }
 
+// The stroke width to use for the path.
+//
 // WithLineWidth sets the lineWidth property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithLineWidth(lineWidth float64) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
 	return x
 }
 
+// The line join style to apply to the corners of the path.
+//
 // WithLineJoin sets the lineJoin property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
 	return x
 }
 
+// The line cap style to apply to the open ends of the path.
+//
 // WithLineCap sets the lineCap property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
 	return x
 }
 
+// The limiting value that helps avoid spikes at junctions between connected line segments.
+//
 // WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithMiterLimit(miterLimit float64) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
 	return x
 }
 
+// The offset (in points) at which to start drawing the dash pattern.
+//
 // WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
 	return x
 }
 
+// An array of numbers specifying the dash pattern to use for the path.
+//
 // WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
 func (x *MultiPolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolygonRenderer {
 	if len(items) == 0 {
@@ -103,12 +123,16 @@ func (x *MultiPolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber
 	return x
 }
 
+// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The amount of transparency to apply to the overlay.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer {
 	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)

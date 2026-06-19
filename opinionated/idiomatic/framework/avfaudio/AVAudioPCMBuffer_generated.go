@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an audio buffer you use with PCM audio formats.
+//
 // AudioPCMBuffer wraps [raw.AVAudioPCMBuffer] with a fluent Go API.
 type AudioPCMBuffer struct {
 	inner *raw.AVAudioPCMBuffer
@@ -31,7 +33,7 @@ func AudioPCMBufferFromID(id objc.ID) *AudioPCMBuffer {
 	return &AudioPCMBuffer{inner: raw.AVAudioPCMBufferFromID(id)}
 }
 
-// @method initWithPCMFormat:frameCapacity: @abstract Initialize a buffer that is to contain PCM audio samples. @param format The format of the PCM audio to be contained in the buffer. @param frameCapacity The capacity of the buffer in PCM sample frames. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if the buffer byte capacity (frameCapacity * format.streamDescription->mBytesPerFrame) cannot be represented by an uint32_t
+// Creates a PCM audio buffer instance for PCM audio data.
 //
 // NewAudioPCMBufferWithPCMFormatFrameCapacity creates a new [AudioPCMBuffer].
 func NewAudioPCMBufferWithPCMFormatFrameCapacity(format *raw.AVAudioFormat, frameCapacity uint32) *AudioPCMBuffer {
@@ -40,7 +42,7 @@ func NewAudioPCMBufferWithPCMFormatFrameCapacity(format *raw.AVAudioFormat, fram
 	return &AudioPCMBuffer{inner: raw.AVAudioPCMBufferFromID(_id)}
 }
 
-// @method initWithPCMFormat:bufferListNoCopy:deallocator: @abstract Initialize a buffer that is to contain PCM audio samples with a given AudioBufferList without copying samples and a custom deallocator block. @param format The format of the PCM audio to be contained in the buffer. @param bufferList The buffer list with allocated memory to contain the PCM audio data. @param deallocator A block to invoke when the resulting AVAudioPCMBuffer object is deallocated. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if supplied buffer has zero number of buffers - if each buffer's data byte size are not equal or if any of the buffers' data byte size is zero - if there is a mismatch between the format's number of buffers and the AudioBufferList's size (1 if interleaved, mChannelsPerFrame if deinterleaved) - if the AudioBufferList's pointer to the buffer of audio data is null. Use the deallocator block to define your own deallocation behavior for the provided AudioBufferList's underlying memory. The AudioBufferList passed to the deallocator is identical to the one which was passed to the initializer, in terms of the buffer count, and each buffer's mData and mDataByteSize members.
+// Creates a PCM audio buffer instance without copying samples, for PCM audio data, with a specified buffer list and a deallocator closure.
 //
 // NewAudioPCMBufferWithPCMFormatBufferListNoCopyDeallocator creates a new [AudioPCMBuffer].
 func NewAudioPCMBufferWithPCMFormatBufferListNoCopyDeallocator(format *raw.AVAudioFormat, bufferList *coreaudiotypes.AudioBufferList, deallocator func(*coreaudiotypes.AudioBufferList)) *AudioPCMBuffer {
@@ -49,7 +51,7 @@ func NewAudioPCMBufferWithPCMFormatBufferListNoCopyDeallocator(format *raw.AVAud
 	return &AudioPCMBuffer{inner: raw.AVAudioPCMBufferFromID(_id)}
 }
 
-// @property frameLength @abstract The current number of valid sample frames in the buffer. @discussion You may modify the length of the buffer as part of an operation that modifies its contents. The length must be less than or equal to the frameCapacity. Modifying frameLength will update the mDataByteSize in each of the underlying AudioBufferList's AudioBuffer's correspondingly, and vice versa. Note that in the case of deinterleaved formats, mDataByteSize will refers the size of one channel's worth of audio samples.
+// The current number of valid sample frames in the buffer.
 //
 // WithFrameLength sets the frameLength property and returns the receiver for chaining.
 func (x *AudioPCMBuffer) WithFrameLength(frameLength uint32) *AudioPCMBuffer {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that generates sample buffers in a batch.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebuffergeneratorbatch
 type AVSampleBufferGeneratorBatch struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func AVSampleBufferGeneratorBatchFromID(id objc.ID) *AVSampleBufferGeneratorBatc
 	return o
 }
 
-// @method		makeDataReadyWithCompletionHandler: @abstract		Loads sample data asynchronously for all CMSampleBuffers within a batch. This can only be called once on a batch, an exception will be thrown otherwise. @param		completionHandler The completionHandler is called once, when all CMSampleBuffers in the batch are data-ready, or as soon as an error has occurred.
+// Loads sample data asynchronously for all sample buffers within a batch.
 func (o *AVSampleBufferGeneratorBatch) MakeDataReadyWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -45,7 +47,7 @@ func (o *AVSampleBufferGeneratorBatch) MakeDataReadyWithCompletionHandler(comple
 	o.Ptr().Send(_aVSampleBufferGeneratorBatchSelMakeDataReadyWithCompletionHandler, __block_completionHandler)
 }
 
-// @method		cancel @abstract		Attempt to cancel any I/O for this batch. The associated sample buffers will have their data ready handler invoked with an error.
+// Cancels any I/O for this batch.
 func (o *AVSampleBufferGeneratorBatch) Cancel() {
 	o.Ptr().Send(_aVSampleBufferGeneratorBatchSelCancel)
 }

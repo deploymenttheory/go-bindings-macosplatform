@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A string of text that manages data, layout, and stylistic information for ranges of characters to support rendering.
+//
 // AttributedString wraps [raw.NSAttributedString] with a fluent Go API.
 type AttributedString struct {
 	inner *raw.NSAttributedString
@@ -128,6 +130,8 @@ func (x *AttributedString) WithScriptingProperties(scriptingProperties *raw.NSDi
 	return x
 }
 
+// Returns the attributes for the character at the specified index.
+//
 // AttributesAtIndexEffectiveRange calls the underlying AttributesAtIndexEffectiveRange.
 func (x *AttributedString) AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.AttributesAtIndexEffectiveRange(location, range_)
@@ -142,11 +146,15 @@ func (x *AttributedString) String() *String {
 	return &String{inner: _r}
 }
 
+// Returns the value for an attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
+//
 // AttributeAtIndexEffectiveRange calls the underlying AttributeAtIndexEffectiveRange.
 func (x *AttributedString) AttributeAtIndexEffectiveRange(attrName *raw.NSString, location uint, range_ *raw.NSRange) objc.ID {
 	return x.inner.AttributeAtIndexEffectiveRange(attrName, location, range_)
 }
 
+// Returns an attributed string consisting of the characters and attributes within the specified range in the attributed string.
+//
 // AttributedSubstringFromRange calls the underlying AttributedSubstringFromRange.
 func (x *AttributedString) AttributedSubstringFromRange(range_ raw.NSRange) *AttributedString {
 	_r := x.inner.AttributedSubstringFromRange(range_)
@@ -156,26 +164,36 @@ func (x *AttributedString) AttributedSubstringFromRange(range_ raw.NSRange) *Att
 	return &AttributedString{inner: _r}
 }
 
+// Returns the attributes for the character at the specified index and, by reference, the range where the attributes apply.
+//
 // AttributesAtIndexLongestEffectiveRangeInRange calls the underlying AttributesAtIndexLongestEffectiveRangeInRange.
 func (x *AttributedString) AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.AttributesAtIndexLongestEffectiveRangeInRange(location, range_, rangeLimit)
 }
 
+// Returns the value for the attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
+//
 // AttributeAtIndexLongestEffectiveRangeInRange calls the underlying AttributeAtIndexLongestEffectiveRangeInRange.
 func (x *AttributedString) AttributeAtIndexLongestEffectiveRangeInRange(attrName *raw.NSString, location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) objc.ID {
 	return x.inner.AttributeAtIndexLongestEffectiveRangeInRange(attrName, location, range_, rangeLimit)
 }
 
+// Returns a Boolean value that indicates whether the attributed string is equal to the specified string.
+//
 // IsEqualToAttributedString calls the underlying IsEqualToAttributedString.
 func (x *AttributedString) IsEqualToAttributedString(other *raw.NSAttributedString) bool {
 	return x.inner.IsEqualToAttributedString(other)
 }
 
+// Executes the specified closure or block for each range of attributes in the attributed string.
+//
 // EnumerateAttributesInRangeOptionsUsing calls the underlying EnumerateAttributesInRangeOptionsUsing.
 func (x *AttributedString) EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateAttributesInRangeOptionsUsing(enumerationRange, raw.NSAttributedStringEnumerationOptions(opts), block)
 }
 
+// Executes the specified closure or block for each range of a particular attribute in the attributed string.
+//
 // EnumerateAttributeInRangeOptionsUsing calls the underlying EnumerateAttributeInRangeOptionsUsing.
 func (x *AttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateAttributeInRangeOptionsUsing(attrName, enumerationRange, raw.NSAttributedStringEnumerationOptions(opts), block)

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that confirms a user’s participation in a share.
+//
 // AcceptSharesOperation wraps [raw.CKAcceptSharesOperation] with a fluent Go API.
 type AcceptSharesOperation struct {
 	inner *raw.CKAcceptSharesOperation
@@ -39,7 +41,7 @@ func NewAcceptSharesOperation() *AcceptSharesOperation {
 	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(_id)}
 }
 
-// Creates an operation for accepting the specified shares. - Parameters: - shareMetadatas: The share metadatas to accept. If you specify `nil`, you must assign a value to the “CKAcceptSharesOperation/shareMetadatas“ property before you execute the operation. After initializing the operation, assign a handler to the “CKAcceptSharesOperation/acceptSharesCompletionBlock“ property to process the results.
+// Creates an operation for accepting the specified shares.
 //
 // NewAcceptSharesOperationWithShareMetadatas creates a new [AcceptSharesOperation].
 func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata]) *AcceptSharesOperation {
@@ -48,7 +50,7 @@ func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas *foundation.NSArr
 	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(_id)}
 }
 
-// The share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+// The share metadatas to process.
 //
 // WithShareMetadatas sets the collection, converting the Go slice to an NSArray.
 func (x *AcceptSharesOperation) WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation {
@@ -71,7 +73,7 @@ func (x *AcceptSharesOperation) WithShareMetadatas(items ...*raw.CKShareMetadata
 	return x
 }
 
-// The block to execute as CloudKit processes individual shares. The closure returns no value and takes the following parameters: - The share metadata to process. - The share, or `nil` if CloudKit can't process the share metadata. - If CloudKit can't process the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each element in the “CKAcceptSharesOperation/shareMetadatas“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The block to execute as CloudKit processes individual shares.
 //
 // WithPerShareCompletionBlock sets the perShareCompletionBlock property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) *AcceptSharesOperation {
@@ -79,7 +81,7 @@ func (x *AcceptSharesOperation) WithPerShareCompletionBlock(perShareCompletionBl
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully processes the shares. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't process some of the shares. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are share URLs that CloudKit can't process, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes.
 //
 // WithAcceptSharesCompletionBlock sets the acceptSharesCompletionBlock property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation {
@@ -87,7 +89,7 @@ func (x *AcceptSharesOperation) WithAcceptSharesCompletionBlock(acceptSharesComp
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation {
@@ -95,7 +97,7 @@ func (x *AcceptSharesOperation) WithConfiguration(configuration *OperationConfig
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOperation {
@@ -103,7 +105,7 @@ func (x *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOp
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *AcceptSharesOperation {
@@ -127,7 +129,7 @@ func (x *AcceptSharesOperation) WithAllowsCellularAccess(allowsCellularAccess bo
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithLongLived(longLived bool) *AcceptSharesOperation {

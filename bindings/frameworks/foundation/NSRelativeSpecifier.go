@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier that indicates an object in a collection by its position relative to another object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsrelativespecifier
 type NSRelativeSpecifier struct {
 	NSScriptObjectSpecifier
@@ -42,6 +44,7 @@ func (o *NSRelativeSpecifier) InitWithCoder(inCoder *NSCoder) *NSRelativeSpecifi
 	return NSRelativeSpecifierFromID(_ret)
 }
 
+// Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and initializes the relative position and base specifier to relPos and baseSpecifier.
 func (o *NSRelativeSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, relPos NSRelativePosition, baseSpecifier *NSScriptObjectSpecifier) *NSRelativeSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelativeSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier, classDesc.Ptr(), container.Ptr(), property.Ptr(), relPos, baseSpecifier.Ptr())
 	if _ret != 0 {

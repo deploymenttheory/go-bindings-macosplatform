@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A representation of a custom intent parameter or response property.
+//
 // Object wraps [raw.INObject] with a fluent Go API.
 type Object struct {
 	inner *raw.INObject
@@ -32,6 +34,8 @@ func ObjectFromID(id objc.ID) *Object {
 	return &Object{inner: raw.INObjectFromID(id)}
 }
 
+// Creates a custom intent object with the specified attributes.
+//
 // NewObjectWithIdentifierDisplayStringPronunciationHint creates a new [Object].
 func NewObjectWithIdentifierDisplayStringPronunciationHint(identifier string, displayString string, pronunciationHint string) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObject")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewObjectWithIdentifierDisplayStringPronunciationHint(identifier string, di
 	return &Object{inner: raw.INObjectFromID(_id)}
 }
 
+// Creates a custom intent object with the specified identifier and display string.
+//
 // NewObjectWithIdentifierDisplayString creates a new [Object].
 func NewObjectWithIdentifierDisplayString(identifier string, displayString string) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObject")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewObjectWithIdentifierDisplayString(identifier string, displayString strin
 	return &Object{inner: raw.INObjectFromID(_id)}
 }
 
+// Creates a custom intent object with full display information.
+//
 // NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage creates a new [Object].
 func NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier string, displayString string, subtitleString string, displayImage *raw.INImage) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObject")), objc.RegisterName("alloc"))
@@ -53,6 +61,8 @@ func NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier s
 	return &Object{inner: raw.INObjectFromID(_id)}
 }
 
+// Creates a custom intent object with the specified attributes.
+//
 // NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage creates a new [Object].
 func NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage(identifier string, displayString string, pronunciationHint string, subtitleString string, displayImage *raw.INImage) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObject")), objc.RegisterName("alloc"))
@@ -60,18 +70,24 @@ func NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayI
 	return &Object{inner: raw.INObjectFromID(_id)}
 }
 
+// Additional details about the custom intent object.
+//
 // WithSubtitleString sets the subtitleString property and returns the receiver for chaining.
 func (x *Object) WithSubtitleString(subtitleString string) *Object {
 	x.inner.SetSubtitleString(foundation.NSStringStringWithUTF8String(subtitleString))
 	return x
 }
 
+// An image to display alongside the custom intent object’s text.
+//
 // WithDisplayImage sets the displayImage property and returns the receiver for chaining.
 func (x *Object) WithDisplayImage(displayImage *Image) *Object {
 	x.inner.SetDisplayImage(displayImage.Unwrap())
 	return x
 }
 
+// An array of alternative speakable strings that identify the object.
+//
 // WithAlternativeSpeakableMatches sets the collection, converting the Go slice to an NSArray.
 func (x *Object) WithAlternativeSpeakableMatches(items ...*raw.INSpeakableString) *Object {
 	if len(items) == 0 {

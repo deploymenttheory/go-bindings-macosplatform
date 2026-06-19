@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "framework": "FinderSync",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "FIFinderSync": {
+      "doc": "A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.",
+      "url": "https://developer.apple.com/documentation/findersync/fifindersync"
+    },
+    "FIFinderSyncController": {
+      "doc": "A controller that acts as a bridge between your Finder Sync extension and the Finder itself.",
+      "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller"
+    }
+  },
+  "protocols": {
+    "FIFinderSync": {
+      "doc": "A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.",
+      "url": "https://developer.apple.com/documentation/findersync/fifindersync"
+    }
+  },
+  "enums": {
+    "FIMenuKind": {
+      "doc": "The different kinds of custom menus that the Finder Sync extension can provide.",
+      "url": "https://developer.apple.com/documentation/findersync/fimenukind",
+      "members": {
+        "FIMenuKindContextualMenuForContainer": {
+          "doc": "A shortcut menu created when the user control-clicks on the Finder window’s background.",
+          "url": "https://developer.apple.com/documentation/findersync/fimenukind/contextualmenuforcontainer"
+        },
+        "FIMenuKindContextualMenuForItems": {
+          "doc": "A shortcut menu created when the user control-clicks on an item or a group of selected items inside the Finder window.",
+          "url": "https://developer.apple.com/documentation/findersync/fimenukind/contextualmenuforitems"
+        },
+        "FIMenuKindContextualMenuForSidebar": {
+          "doc": "A shortcut menu created when the user control-clicks on an item in the sidebar.",
+          "url": "https://developer.apple.com/documentation/findersync/fimenukind/contextualmenuforsidebar"
+        },
+        "FIMenuKindToolbarItemMenu": {
+          "doc": "A menu created when the user clicks on the extension’s toolbar button.",
+          "url": "https://developer.apple.com/documentation/findersync/fimenukind/toolbaritemmenu"
+        }
+      }
+    }
+  },
+  "methods": {
+    "FIFinderSyncController": {
+      "+defaultController": {
+        "doc": "Returns the shared Finder Sync controller object.",
+        "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller/default()"
+      },
+      "-selectedItemURLs": {
+        "doc": "Returns an array of selected items.",
+        "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller/selecteditemurls()"
+      },
+      "-setBadgeIdentifier:forURL:": {
+        "doc": "Sets the badge for a file or directory.",
+        "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller/setbadgeidentifier(_:for:)"
+      },
+      "-setBadgeImage:label:forBadgeIdentifier:": {
+        "doc": "Sets the badge image and label for the given ID.",
+        "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller/setbadgeimage(_:label:forbadgeidentifier:)"
+      },
+      "-targetedURL": {
+        "doc": "Returns the URL of the Finder’s current target.",
+        "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller/targetedurl()"
+      }
+    }
+  },
+  "properties": {
+    "FIFinderSyncController": {
+      "directoryURLs": {
+        "doc": "The directories managed by this extension.",
+        "url": "https://developer.apple.com/documentation/findersync/fifindersynccontroller/directoryurls"
+      }
+    }
+  }
+}

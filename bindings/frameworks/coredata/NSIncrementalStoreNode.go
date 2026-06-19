@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete class used to represent basic nodes in a Core Data incremental store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsincrementalstorenode
 type NSIncrementalStoreNode struct {
 	foundation.NSObject
@@ -33,18 +35,21 @@ func NSIncrementalStoreNodeFromID(id objc.ID) *NSIncrementalStoreNode {
 	return o
 }
 
+// Returns an object initialized with the given values.
 func (o *NSIncrementalStoreNode) InitWithObjectIDWithValuesVersion(objectID *NSManagedObjectID, values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) *NSIncrementalStoreNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreNodeSelInitWithObjectIDWithValuesVersion, objectID.Ptr(), values, version)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreNodeSelInitWithObjectIDWithValuesVersion, objectID.Ptr(), values.Ptr(), version)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSIncrementalStoreNodeFromID(_ret)
 }
 
+// Update the values and version to reflect new data being saved to or loaded from the external store.
 func (o *NSIncrementalStoreNode) UpdateWithValuesVersion(values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) {
-	o.Ptr().Send(_nSIncrementalStoreNodeSelUpdateWithValuesVersion, values, version)
+	o.Ptr().Send(_nSIncrementalStoreNodeSelUpdateWithValuesVersion, values.Ptr(), version)
 }
 
+// Returns the value for the given property.
 func (o *NSIncrementalStoreNode) ValueForPropertyDescription(prop *NSPropertyDescription) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreNodeSelValueForPropertyDescription, prop.Ptr())
 	return _ret

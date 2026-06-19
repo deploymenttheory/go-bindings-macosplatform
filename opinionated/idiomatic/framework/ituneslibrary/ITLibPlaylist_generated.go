@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class describes a playlist in the iTunes library.
+//
 // LibPlaylist wraps [raw.ITLibPlaylist] with a fluent Go API.
 type LibPlaylist struct {
 	inner *raw.ITLibPlaylist

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies properties used by a YOLO loss kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnyololossdescriptor
 type MPSCNNYOLOLossDescriptor struct {
 	foundation.NSObject

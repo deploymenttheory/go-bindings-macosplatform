@@ -187,12 +187,15 @@ func (o *ODConfiguration) SetTemplateName(templateName *foundation.NSString) {
 }
 
 func (o *ODConfiguration) VirtualSubnodes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDConfigurationSelVirtualSubnodes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelVirtualSubnodes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODConfiguration) SetVirtualSubnodes(virtualSubnodes *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDConfigurationSelSetVirtualSubnodes, virtualSubnodes)
+	o.Ptr().Send(_oDConfigurationSelSetVirtualSubnodes, virtualSubnodes.Ptr())
 }
 
 func (o *ODConfiguration) HideRegistration() bool {
@@ -327,37 +330,49 @@ func (o *ODConfiguration) SetConnectionIdleTimeoutInSeconds(connectionIdleTimeou
 }
 
 func (o *ODConfiguration) DefaultModuleEntries() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDConfigurationSelDefaultModuleEntries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelDefaultModuleEntries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODConfiguration) SetDefaultModuleEntries(defaultModuleEntries *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDConfigurationSelSetDefaultModuleEntries, defaultModuleEntries)
+	o.Ptr().Send(_oDConfigurationSelSetDefaultModuleEntries, defaultModuleEntries.Ptr())
 }
 
 func (o *ODConfiguration) AuthenticationModuleEntries() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDConfigurationSelAuthenticationModuleEntries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelAuthenticationModuleEntries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODConfiguration) SetAuthenticationModuleEntries(authenticationModuleEntries *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDConfigurationSelSetAuthenticationModuleEntries, authenticationModuleEntries)
+	o.Ptr().Send(_oDConfigurationSelSetAuthenticationModuleEntries, authenticationModuleEntries.Ptr())
 }
 
 func (o *ODConfiguration) DiscoveryModuleEntries() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDConfigurationSelDiscoveryModuleEntries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelDiscoveryModuleEntries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODConfiguration) SetDiscoveryModuleEntries(discoveryModuleEntries *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDConfigurationSelSetDiscoveryModuleEntries, discoveryModuleEntries)
+	o.Ptr().Send(_oDConfigurationSelSetDiscoveryModuleEntries, discoveryModuleEntries.Ptr())
 }
 
 func (o *ODConfiguration) GeneralModuleEntries() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDConfigurationSelGeneralModuleEntries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelGeneralModuleEntries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODConfiguration) SetGeneralModuleEntries(generalModuleEntries *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDConfigurationSelSetGeneralModuleEntries, generalModuleEntries)
+	o.Ptr().Send(_oDConfigurationSelSetGeneralModuleEntries, generalModuleEntries.Ptr())
 }

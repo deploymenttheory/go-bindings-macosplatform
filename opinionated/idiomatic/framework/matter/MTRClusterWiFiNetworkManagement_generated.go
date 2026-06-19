@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Wi-Fi Network Management Functionality to retrieve operational information about a managed Wi-Fi network.
+//
 // MTRClusterWiFiNetworkManagement wraps [raw.MTRClusterWiFiNetworkManagement] with a fluent Go API.
 type MTRClusterWiFiNetworkManagement struct {
 	inner *raw.MTRClusterWiFiNetworkManagement

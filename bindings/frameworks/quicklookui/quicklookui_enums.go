@@ -177,9 +177,9 @@ func (e QLPreviewPDFStyle) String() string {
 type QLPreviewViewStyle uint64
 
 const (
-	// Provides the default preview style for larger, full-sized previews. The default style for a ``QuickLookUI/QLPreviewView`` object. Use this style should for larger, full-size previews.
+	// Provides the default preview style for larger, full-sized previews.
 	QLPreviewViewStyleNormal QLPreviewViewStyle = 0
-	// Provides a compact preview style suited for smaller previews or inspectors. A more compact style for a ``QuickLookUI/QLPreviewView`` object. Use this style for smaller previews or inspectors.
+	// Provides a compact preview style suited for smaller previews or inspectors.
 	QLPreviewViewStyleCompact QLPreviewViewStyle = 1
 )
 

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single entry from the unified logging system.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogentry
 type OSLogEntry struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A boundary of an area within which the map’s center needs to remain.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapcameraboundary
 type MKMapCameraBoundary struct {
 	foundation.NSObject

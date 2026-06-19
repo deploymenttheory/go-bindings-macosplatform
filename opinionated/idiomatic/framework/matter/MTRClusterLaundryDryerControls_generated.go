@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Cluster Laundry Dryer Controls This cluster provides a way to access options associated with the operation of a laundry dryer device type.
+//
 // MTRClusterLaundryDryerControls wraps [raw.MTRClusterLaundryDryerControls] with a fluent Go API.
 type MTRClusterLaundryDryerControls struct {
 	inner *raw.MTRClusterLaundryDryerControls

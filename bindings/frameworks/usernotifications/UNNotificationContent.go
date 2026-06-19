@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The uneditable content of a notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationcontent
 type UNNotificationContent struct {
 	foundation.NSObject
@@ -46,7 +48,7 @@ func UNNotificationContentFromID(id objc.ID) *UNNotificationContent {
 	return o
 }
 
-// Contextualizes your UNNotificationContent object with other Apple SDK objects conforming to UNNotificationContentProviding. This will specialize the notification and decorate its look and behavior accordingly. For example, the notification will be treated as a message with an avatar and be promoted to the top of notification center if the object passed in is a valid INSendMessageIntent<UNNotificationContentProviding>. This throws an error with a UNErrorCode found in UNError.h if the UNNotificationContentProviding object is invalid. A valid UNNotificationContent result should not be mutated and be passed directly to UNUserNotificationCenter. This should be called in the UNNotificationServiceExtension in didReceiveNotificationRequest:withContentHandler: and the returned UNNotificationContent should be passed to the contentHandler for incoming push notifications.
+// Returns a copy of the notification that includes content from the specified provider.
 func (o *UNNotificationContent) ContentByUpdatingWithProviderError(provider UNNotificationContentProviding) (*UNNotificationContent, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelContentByUpdatingWithProviderError, provider, unsafe.Pointer(&_nsErr))
@@ -116,8 +118,11 @@ func (o *UNNotificationContent) Title() *foundation.NSString {
 }
 
 func (o *UNNotificationContent) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _uNNotificationContentSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationContentSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // The argument to be inserted in the summary for this notification.

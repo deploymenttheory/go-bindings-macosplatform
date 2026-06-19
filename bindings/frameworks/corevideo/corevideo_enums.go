@@ -29,11 +29,14 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
+// The propagation modes of a Core Video buffer attachment.
 type CVAttachmentMode int64
 
 const (
+	// Indicates to not propagate the attachment.
 	KCVAttachmentMode_ShouldNotPropagate CVAttachmentMode = 0
-	KCVAttachmentMode_ShouldPropagate    CVAttachmentMode = 1
+	// Indicates to copy the attachment.
+	KCVAttachmentMode_ShouldPropagate CVAttachmentMode = 1
 )
 
 func (e CVAttachmentMode) String() string {
@@ -47,9 +50,11 @@ func (e CVAttachmentMode) String() string {
 	}
 }
 
+// The flags to pass to CVPixelBufferLockBaseAddress and CVPixelBufferUnlockBaseAddress.
 type CVPixelBufferLockFlags int64
 
 const (
+	// A read-only buffer.
 	KCVPixelBufferLock_ReadOnly CVPixelBufferLockFlags = 1
 )
 
@@ -64,9 +69,11 @@ func (e CVPixelBufferLockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The flags to pass to flush the pool.
 type CVPixelBufferPoolFlushFlags int64
 
 const (
+	// The value to pass to flush all unused buffers regardless of age.
 	KCVPixelBufferPoolFlushExcessBuffers CVPixelBufferPoolFlushFlags = 1
 )
 
@@ -84,7 +91,9 @@ func (e CVPixelBufferPoolFlushFlags) String() string {
 type CVSMPTETimeFlags int64
 
 const (
-	KCVSMPTETimeValid   CVSMPTETimeFlags = 1
+	// The full time is valid.
+	KCVSMPTETimeValid CVSMPTETimeFlags = 1
+	// Time is running.
 	KCVSMPTETimeRunning CVSMPTETimeFlags = 2
 )
 
@@ -105,14 +114,22 @@ func (e CVSMPTETimeFlags) String() string {
 type CVSMPTETimeType int64
 
 const (
-	KCVSMPTETimeType24       CVSMPTETimeType = 0
-	KCVSMPTETimeType25       CVSMPTETimeType = 1
-	KCVSMPTETimeType30Drop   CVSMPTETimeType = 2
-	KCVSMPTETimeType30       CVSMPTETimeType = 3
-	KCVSMPTETimeType2997     CVSMPTETimeType = 4
+	// 24 frames per second (standard film).
+	KCVSMPTETimeType24 CVSMPTETimeType = 0
+	// 25 frames per second (standard PAL).
+	KCVSMPTETimeType25 CVSMPTETimeType = 1
+	// 30 drop frame.
+	KCVSMPTETimeType30Drop CVSMPTETimeType = 2
+	// 30 frames per second.
+	KCVSMPTETimeType30 CVSMPTETimeType = 3
+	// 29.97 frames per second (standard NTSC).
+	KCVSMPTETimeType2997 CVSMPTETimeType = 4
+	// 29.97 drop frame.
 	KCVSMPTETimeType2997Drop CVSMPTETimeType = 5
-	KCVSMPTETimeType60       CVSMPTETimeType = 6
-	KCVSMPTETimeType5994     CVSMPTETimeType = 7
+	// 60 frames per second.
+	KCVSMPTETimeType60 CVSMPTETimeType = 6
+	// 59.94 frames per second.
+	KCVSMPTETimeType5994 CVSMPTETimeType = 7
 )
 
 func (e CVSMPTETimeType) String() string {
@@ -141,6 +158,7 @@ func (e CVSMPTETimeType) String() string {
 type CVTimeFlags int64
 
 const (
+	// The time value is unknown.
 	KCVTimeIsIndefinite CVTimeFlags = 1
 )
 
@@ -158,15 +176,24 @@ func (e CVTimeFlags) String() string {
 type CVTimeStampFlags int64
 
 const (
-	KCVTimeStampVideoTimeValid          CVTimeStampFlags = 1
-	KCVTimeStampHostTimeValid           CVTimeStampFlags = 2
-	KCVTimeStampSMPTETimeValid          CVTimeStampFlags = 4
+	// The value in the video time field is valid.
+	KCVTimeStampVideoTimeValid CVTimeStampFlags = 1
+	// The value in the host time field is valid.
+	KCVTimeStampHostTimeValid CVTimeStampFlags = 2
+	// The value in the SMPTE time field is valid.
+	KCVTimeStampSMPTETimeValid CVTimeStampFlags = 4
+	// The value in the video refresh period field is valid.
 	KCVTimeStampVideoRefreshPeriodValid CVTimeStampFlags = 8
-	KCVTimeStampRateScalarValid         CVTimeStampFlags = 16
-	KCVTimeStampTopField                CVTimeStampFlags = 65536
-	KCVTimeStampBottomField             CVTimeStampFlags = 131072
-	KCVTimeStampVideoHostTimeValid      CVTimeStampFlags = 3
-	KCVTimeStampIsInterlaced            CVTimeStampFlags = 196608
+	// The value in the rate scalar field is valid.
+	KCVTimeStampRateScalarValid CVTimeStampFlags = 16
+	// The timestamp represents the top lines of an interlaced image.
+	KCVTimeStampTopField CVTimeStampFlags = 65536
+	// The timestamp represents the bottom lines of an interlaced image.
+	KCVTimeStampBottomField CVTimeStampFlags = 131072
+	// A convenience constant indicating that both the video time and host time fields are valid.
+	KCVTimeStampVideoHostTimeValid CVTimeStampFlags = 3
+	// A convenience constant indicating that the timestamp is for an interlaced image.
+	KCVTimeStampIsInterlaced CVTimeStampFlags = 196608
 )
 
 func (e CVTimeStampFlags) String() string {

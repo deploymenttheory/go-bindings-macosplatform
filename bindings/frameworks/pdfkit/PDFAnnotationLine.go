@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationLine object displays a single line on a page.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationline
 type PDFAnnotationLine struct {
 	PDFAnnotation

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that draws text and handles user interactions with that text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextview
 type NSTextView struct {
 	NSText
@@ -234,6 +236,7 @@ func NSTextViewFromID(id objc.ID) *NSTextView {
 	return o
 }
 
+// Initializes a text view.
 func (o *NSTextView) InitWithFrameTextContainer(frameRect corefoundation.CGRect, container *NSTextContainer) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrameTextContainer, frameRect, container.Ptr())
 	if _ret != 0 {
@@ -242,6 +245,7 @@ func (o *NSTextView) InitWithFrameTextContainer(frameRect corefoundation.CGRect,
 	return NSTextViewFromID(_ret)
 }
 
+// Initializes a text view with data in an unarchiver.
 func (o *NSTextView) InitWithCoder(coder *foundation.NSCoder) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -250,6 +254,7 @@ func (o *NSTextView) InitWithCoder(coder *foundation.NSCoder) *NSTextView {
 	return NSTextViewFromID(_ret)
 }
 
+// Initializes a text view.
 func (o *NSTextView) InitWithFrame(frameRect corefoundation.CGRect) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrame, frameRect)
 	if _ret != 0 {
@@ -274,167 +279,207 @@ func NSTextViewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *NSTe
 	return NSTextViewFromID(_ret)
 }
 
+// Replaces the text container for the group of text system objects containing the receiver, keeping the association between the receiver and its layout manager intact.
 func (o *NSTextView) ReplaceTextContainer(newContainer *NSTextContainer) {
 	o.Ptr().Send(_nSTextViewSelReplaceTextContainer, newContainer.Ptr())
 }
 
+// Invalidates the calculated origin of the text container.
 func (o *NSTextView) InvalidateTextContainerOrigin() {
 	o.Ptr().Send(_nSTextViewSelInvalidateTextContainerOrigin)
 }
 
+// Inserts aString into the receiver’s text at the insertion point if there is one, otherwise replacing the selection.
 // Deprecated: Use -insertText:replacementRange: from NSTextInputClient instead. Since the method is designed to be used solely by the input system, the message should never be sent to a text view from applications. Any content modifications should be via either NSTextStorage or NSText methods.
 func (o *NSTextView) InsertText(insertString objc.ID) {
 	o.Ptr().Send(_nSTextViewSelInsertText, insertString)
 }
 
+// Attempts to set the frame size as if by user action.
 func (o *NSTextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
 	o.Ptr().Send(_nSTextViewSelSetConstrainedFrameSize, desiredSize)
 }
 
+// Sets the alignment of the paragraphs containing characters in the specified range.
 func (o *NSTextView) SetAlignmentRange(alignment NSTextAlignment, range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextViewSelSetAlignmentRange, alignment, range_)
 }
 
+// Sets the base writing direction of a range of text.
 func (o *NSTextView) SetBaseWritingDirectionRange(writingDirection NSWritingDirection, range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextViewSelSetBaseWritingDirectionRange, writingDirection, range_)
 }
 
+// Sets the receiver to use nominal glyph spacing for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (o *NSTextView) TurnOffKerning(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelTurnOffKerning, sender)
 }
 
+// Decreases the space between glyphs in the receiver’s selection, or for all glyphs if the receiver is a plain text view.
 func (o *NSTextView) TightenKerning(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelTightenKerning, sender)
 }
 
+// Increases the space between glyphs in the receiver’s selection, or in all text if the receiver is a plain text view.
 func (o *NSTextView) LoosenKerning(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelLoosenKerning, sender)
 }
 
+// Set the receiver to use pair kerning data for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (o *NSTextView) UseStandardKerning(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelUseStandardKerning, sender)
 }
 
+// Sets the receiver to use only required ligatures when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (o *NSTextView) TurnOffLigatures(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelTurnOffLigatures, sender)
 }
 
+// Sets the receiver to use the standard ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (o *NSTextView) UseStandardLigatures(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelUseStandardLigatures, sender)
 }
 
+// Sets the receiver to use all ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (o *NSTextView) UseAllLigatures(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelUseAllLigatures, sender)
 }
 
+// Raises the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (o *NSTextView) RaiseBaseline(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelRaiseBaseline, sender)
 }
 
+// Lowers the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (o *NSTextView) LowerBaseline(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelLowerBaseline, sender)
 }
 
+// Toggles the NSCharacterShapeAttributeName attribute at the current selection.
 // Deprecated: Use the traditional shaped characters encoded in the Unicode standard. Access the characters via the character palette.
 func (o *NSTextView) ToggleTraditionalCharacterShape(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleTraditionalCharacterShape, sender)
 }
 
+// Adds the outline attribute to the selected text attributes if absent; removes the attribute if present.
 // Deprecated: Use the traditional shaped characters encoded in the Unicode standard. Access the characters via the character palette.
 func (o *NSTextView) Outline(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOutline, sender)
 }
 
+// Performs a find panel action specified by the sender’s tag.
 func (o *NSTextView) PerformFindPanelAction(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelPerformFindPanelAction, sender)
 }
 
+// Applies full justification to selected paragraphs (or all text, if the receiver is a plain text object).
 func (o *NSTextView) AlignJustified(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelAlignJustified, sender)
 }
 
+// Sets the color of the selected text.
 func (o *NSTextView) ChangeColor(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelChangeColor, sender)
 }
 
+// Changes the attributes of the current selection.
 func (o *NSTextView) ChangeAttributes(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelChangeAttributes, sender)
 }
 
+// An action method used to set the background color.
 func (o *NSTextView) ChangeDocumentBackgroundColor(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelChangeDocumentBackgroundColor, sender)
 }
 
+// Brings forward a panel allowing the user to manipulate text line heights, interline spacing, and paragraph spacing, in the text view.
 func (o *NSTextView) OrderFrontSpacingPanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOrderFrontSpacingPanel, sender)
 }
 
+// Brings forward a panel allowing the user to manipulate links in the text view.
 func (o *NSTextView) OrderFrontLinkPanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOrderFrontLinkPanel, sender)
 }
 
+// Brings forward a panel allowing the user to manipulate text lists in the text view.
 func (o *NSTextView) OrderFrontListPanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOrderFrontListPanel, sender)
 }
 
+// Brings forward a panel allowing the user to manipulate text tables in the text view.
 func (o *NSTextView) OrderFrontTablePanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOrderFrontTablePanel, sender)
 }
 
+// Marks the receiver as requiring display.
 func (o *NSTextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool) {
 	o.Ptr().Send(_nSTextViewSelSetNeedsDisplayInRectAvoidAdditionalLayout, rect, flag)
 }
 
+// Draws or erases the insertion point.
 func (o *NSTextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *NSColor, flag bool) {
 	o.Ptr().Send(_nSTextViewSelDrawInsertionPointInRectColorTurnedOn, rect, color.Ptr(), flag)
 }
 
+// Draws the background of the text view.
 func (o *NSTextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTextViewSelDrawViewBackgroundInRect, rect)
 }
 
+// Updates the ruler view in the receiver’s enclosing scroll view to reflect the selection’s paragraph and marker attributes.
 func (o *NSTextView) UpdateRuler() {
 	o.Ptr().Send(_nSTextViewSelUpdateRuler)
 }
 
+// Updates the Font panel to contain the font attributes of the selection.
 func (o *NSTextView) UpdateFontPanel() {
 	o.Ptr().Send(_nSTextViewSelUpdateFontPanel)
 }
 
+// Updates the acceptable drag types of all text views associated with the receiver’s layout manager.
 func (o *NSTextView) UpdateDragTypeRegistration() {
 	o.Ptr().Send(_nSTextViewSelUpdateDragTypeRegistration)
 }
 
+// Returns an adjusted selected range based on the selection granularity.
 func (o *NSTextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity NSSelectionGranularity) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelSelectionRangeForProposedRangeGranularity, proposedCharRange, granularity)
 	return _ret
 }
 
+// Causes the text view to act as if the user clicked on some text with the given link as the value of a link attribute associated with the text.
 func (o *NSTextView) ClickedOnLinkAtIndex(link objc.ID, charIndex uint) {
 	o.Ptr().Send(_nSTextViewSelClickedOnLinkAtIndex, link, charIndex)
 }
 
+// Speaks the selected text, or all text if no selection.
 func (o *NSTextView) StartSpeaking(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelStartSpeaking, sender)
 }
 
+// Stops the speaking of text.
 func (o *NSTextView) StopSpeaking(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelStopSpeaking, sender)
 }
 
+// Changes the receiver’s layout orientation and invalidates the contents.
 func (o *NSTextView) SetLayoutOrientation(orientation NSTextLayoutOrientation) {
 	o.Ptr().Send(_nSTextViewSelSetLayoutOrientation, orientation)
 }
 
+// An action method that sets the layout orientation of the text.
 func (o *NSTextView) ChangeLayoutOrientation(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelChangeLayoutOrientation, sender)
 }
 
+// Returns a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.
 func (o *NSTextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSTextViewSelCharacterIndexForInsertionAtPoint, point)
 	return _ret
 }
 
+// Replaces text in the range you specify with the attributed string you provide.
 func (o *NSTextView) PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString *foundation.NSAttributedString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelPerformValidatedReplacementInRangeWithAttributedString, range_, attributedString.Ptr())
 	return _ret
@@ -517,15 +562,21 @@ func (o *NSTextView) SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveCo
 	o.Ptr().Send(_nSTextViewSelSetUsesAdaptiveColorMappingForDarkAppearance, usesAdaptiveColorMappingForDarkAppearance)
 }
 
+// Invokes completion in a text view.
 func (o *NSTextView) Complete(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelComplete, sender)
 }
 
+// Returns an array of potential completions, in the order to be presented, representing possible word completions available from a partial word.
 func (o *NSTextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange, index *int64) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextViewSelCompletionsForPartialWordRangeIndexOfSelectedItem, charRange, index)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelCompletionsForPartialWordRangeIndexOfSelectedItem, charRange, index)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Inserts the selected completion into the text at the appropriate location.
 func (o *NSTextView) InsertCompletionForPartialWordRangeMovementIsFinal(word *foundation.NSString, charRange foundation.NSRange, movement int, flag bool) {
 	o.Ptr().Send(_nSTextViewSelInsertCompletionForPartialWordRangeMovementIsFinal, word.Ptr(), charRange, movement, flag)
 }
@@ -535,61 +586,77 @@ func (o *NSTextView) RangeForUserCompletion() foundation.NSRange {
 	return _ret
 }
 
+// Writes the current selection to the specified pasteboard using the given type.
 func (o *NSTextView) WriteSelectionToPasteboardType(pboard *NSPasteboard, type_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardType, pboard.Ptr(), type_.Ptr())
 	return _ret
 }
 
+// Writes the current selection to the specified pasteboard under each given type.
 func (o *NSTextView) WriteSelectionToPasteboardTypes(pboard *NSPasteboard, types *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardTypes, pboard.Ptr(), types)
+	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardTypes, pboard.Ptr(), types.Ptr())
 	return _ret
 }
 
+// Returns whatever type on the pasteboard would be most preferred for copying data.
 func (o *NSTextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes *foundation.NSArray[*foundation.NSString], allowedTypes *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray, availableTypes, allowedTypes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray, availableTypes.Ptr(), allowedTypes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSStringFromID(_ret)
 }
 
+// Reads data of the given type from the specified pasteboard.
 func (o *NSTextView) ReadSelectionFromPasteboardType(pboard *NSPasteboard, type_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelReadSelectionFromPasteboardType, pboard.Ptr(), type_.Ptr())
 	return _ret
 }
 
+// Reads the text view’s preferred type of data from the specified pasteboard.
 func (o *NSTextView) ReadSelectionFromPasteboard(pboard *NSPasteboard) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelReadSelectionFromPasteboard, pboard.Ptr())
 	return _ret
 }
 
+// Registers send and return types for the Services facility.
 func NSTextViewRegisterForServices() {
 	objc.ID(_clsNSTextView).Send(_nSTextViewSelRegisterForServices)
 }
 
+// Inserts the contents of the pasteboard into the receiver’s text as plain text.
 func (o *NSTextView) PasteAsPlainText(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelPasteAsPlainText, sender)
 }
 
+// This action method inserts the contents of the pasteboard into the receiver’s text as rich text, maintaining its attributes.
 func (o *NSTextView) PasteAsRichText(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelPasteAsRichText, sender)
 }
 
 func (o *NSTextView) WritablePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextViewSelWritablePasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelWritablePasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextView) ReadablePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextViewSelReadablePasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelReadablePasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Begins dragging the current selected text range.
 func (o *NSTextView) DragSelectionWithEventOffsetSlideBack(event *NSEvent, mouseOffset corefoundation.CGSize, slideBack bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelDragSelectionWithEventOffsetSlideBack, event.Ptr(), mouseOffset, slideBack)
 	return _ret
 }
 
+// Returns an appropriate drag image for the drag initiated by the specified event.
 func (o *NSTextView) DragImageForSelectionWithEventOrigin(event *NSEvent, origin *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDragImageForSelectionWithEventOrigin, event.Ptr(), origin)
 	if _ret != 0 {
@@ -598,73 +665,92 @@ func (o *NSTextView) DragImageForSelectionWithEventOrigin(event *NSEvent, origin
 	return NSImageFromID(_ret)
 }
 
+// Returns the type of drag operation that should be performed if the image were released now.
 func (o *NSTextView) DragOperationForDraggingInfoType(dragInfo NSDraggingInfo, type_ *foundation.NSString) NSDragOperation {
 	_ret := objc.Send[NSDragOperation](o.Ptr(), _nSTextViewSelDragOperationForDraggingInfoType, dragInfo, type_.Ptr())
 	return _ret
 }
 
+// Releases the drag information still existing after the dragging session has completed.
 func (o *NSTextView) CleanUpAfterDragOperation() {
 	o.Ptr().Send(_nSTextViewSelCleanUpAfterDragOperation)
 }
 
 func (o *NSTextView) AcceptableDragTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextViewSelAcceptableDragTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelAcceptableDragTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Sets the selection to the characters in an array of ranges in response to user action.
 func (o *NSTextView) SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity NSSelectionAffinity, stillSelectingFlag bool) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedRangesAffinityStillSelecting, ranges, affinity, stillSelectingFlag)
+	o.Ptr().Send(_nSTextViewSelSetSelectedRangesAffinityStillSelecting, ranges.Ptr(), affinity, stillSelectingFlag)
 }
 
+// Sets the selection to a range of characters in response to user action.
 func (o *NSTextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity NSSelectionAffinity, stillSelectingFlag bool) {
 	o.Ptr().Send(_nSTextViewSelSetSelectedRangeAffinityStillSelecting, charRange, affinity, stillSelectingFlag)
 }
 
+// Updates the insertion point’s location and optionally restarts the blinking cursor timer.
 func (o *NSTextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
 	o.Ptr().Send(_nSTextViewSelUpdateInsertionPointStateAndRestartTimer, restartFlag)
 }
 
+// Toggles whether continuous spell checking is enabled for the receiver.
 func (o *NSTextView) ToggleContinuousSpellChecking(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleContinuousSpellChecking, sender)
 }
 
+// Changes the state of grammar checking from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleGrammarChecking(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleGrammarChecking, sender)
 }
 
+// Sets the spelling state, which controls the display of the spelling and grammar indicators on the given text range.
 func (o *NSTextView) SetSpellingStateRange(value int, charRange foundation.NSRange) {
 	o.Ptr().Send(_nSTextViewSelSetSpellingStateRange, value, charRange)
 }
 
+// Initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (o *NSTextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges *foundation.NSArray[*foundation.NSValue], replacementStrings *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangesReplacementStrings, affectedRanges, replacementStrings)
+	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangesReplacementStrings, affectedRanges.Ptr(), replacementStrings.Ptr())
 	return _ret
 }
 
+// Initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (o *NSTextView) ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangeReplacementString, affectedCharRange, replacementString.Ptr())
 	return _ret
 }
 
+// Sends out necessary notifications when a text change completes.
 func (o *NSTextView) DidChangeText() {
 	o.Ptr().Send(_nSTextViewSelDidChangeText)
 }
 
+// Informs the receiver that it should begin coalescing successive typing operations in a new undo grouping.
 func (o *NSTextView) BreakUndoCoalescing() {
 	o.Ptr().Send(_nSTextViewSelBreakUndoCoalescing)
 }
 
+// Causes a temporary highlighting effect to appear around the visible portion (or portions) of the specified range.
 func (o *NSTextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
 	o.Ptr().Send(_nSTextViewSelShowFindIndicatorForRange, charRange)
 }
 
 func (o *NSTextView) SelectedRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextViewSelSelectedRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSelectedRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *NSTextView) SetSelectedRanges(selectedRanges *foundation.NSArray[*foundation.NSValue]) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedRanges, selectedRanges)
+	o.Ptr().Send(_nSTextViewSelSetSelectedRanges, selectedRanges.Ptr())
 }
 
 func (o *NSTextView) SelectionAffinity() NSSelectionAffinity {
@@ -682,12 +768,15 @@ func (o *NSTextView) SetSelectionGranularity(selectionGranularity NSSelectionGra
 }
 
 func (o *NSTextView) SelectedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextViewSelSelectedTextAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSelectedTextAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTextView) SetSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedTextAttributes, selectedTextAttributes)
+	o.Ptr().Send(_nSTextViewSelSetSelectedTextAttributes, selectedTextAttributes.Ptr())
 }
 
 func (o *NSTextView) InsertionPointColor() *NSColor {
@@ -703,21 +792,27 @@ func (o *NSTextView) SetInsertionPointColor(insertionPointColor *NSColor) {
 }
 
 func (o *NSTextView) MarkedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextViewSelMarkedTextAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelMarkedTextAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTextView) SetMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetMarkedTextAttributes, markedTextAttributes)
+	o.Ptr().Send(_nSTextViewSelSetMarkedTextAttributes, markedTextAttributes.Ptr())
 }
 
 func (o *NSTextView) LinkTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextViewSelLinkTextAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelLinkTextAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTextView) SetLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetLinkTextAttributes, linkTextAttributes)
+	o.Ptr().Send(_nSTextViewSelSetLinkTextAttributes, linkTextAttributes.Ptr())
 }
 
 func (o *NSTextView) DisplaysLinkToolTips() bool {
@@ -780,27 +875,39 @@ func (o *NSTextView) SetGrammarCheckingEnabled(grammarCheckingEnabled bool) {
 }
 
 func (o *NSTextView) TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextViewSelTypingAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTypingAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTextView) SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetTypingAttributes, typingAttributes)
+	o.Ptr().Send(_nSTextViewSelSetTypingAttributes, typingAttributes.Ptr())
 }
 
 func (o *NSTextView) RangesForUserTextChange() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextViewSelRangesForUserTextChange)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserTextChange)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *NSTextView) RangesForUserCharacterAttributeChange() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextViewSelRangesForUserCharacterAttributeChange)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserCharacterAttributeChange)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *NSTextView) RangesForUserParagraphAttributeChange() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextViewSelRangesForUserParagraphAttributeChange)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserParagraphAttributeChange)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *NSTextView) RangeForUserTextChange() foundation.NSRange {
@@ -876,12 +983,15 @@ func (o *NSTextView) SetRulerVisible(rulerVisible bool) {
 }
 
 func (o *NSTextView) AllowedInputSourceLocales() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextViewSelAllowedInputSourceLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelAllowedInputSourceLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextView) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextViewSelSetAllowedInputSourceLocales, allowedInputSourceLocales)
+	o.Ptr().Send(_nSTextViewSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
 }
 
 func (o *NSTextView) IsWritingToolsActive() bool {
@@ -907,19 +1017,23 @@ func (o *NSTextView) SetAllowedWritingToolsResultOptions(allowedWritingToolsResu
 	o.Ptr().Send(_nSTextViewSelSetAllowedWritingToolsResultOptions, allowedWritingToolsResultOptions)
 }
 
+// Returns an extended range that includes adjacent whitespace that should be deleted along with the proposed range in order to preserve proper spacing and punctuation.
 func (o *NSTextView) SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelSmartDeleteRangeForProposedRange, proposedCharRange)
 	return _ret
 }
 
+// Changes the state of smart insert and delete from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleSmartInsertDelete(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleSmartInsertDelete, sender)
 }
 
+// Determines whether whitespace needs to be added around the string to preserve proper spacing and punctuation when it replaces the characters in the specified range.
 func (o *NSTextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange, beforeString *foundation.NSString, afterString *foundation.NSString) {
 	o.Ptr().Send(_nSTextViewSelSmartInsertForStringReplacingRangeBeforeStringAfterString, pasteString.Ptr(), charRangeToReplace, beforeString.Ptr(), afterString.Ptr())
 }
 
+// Returns any whitespace that needs to be added before the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (o *NSTextView) SmartInsertBeforeStringForStringReplacingRange(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertBeforeStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
 	if _ret != 0 {
@@ -928,6 +1042,7 @@ func (o *NSTextView) SmartInsertBeforeStringForStringReplacingRange(pasteString 
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns any whitespace that needs to be added after the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (o *NSTextView) SmartInsertAfterStringForStringReplacingRange(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertAfterStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
 	if _ret != 0 {
@@ -936,46 +1051,57 @@ func (o *NSTextView) SmartInsertAfterStringForStringReplacingRange(pasteString *
 	return foundation.NSStringFromID(_ret)
 }
 
+// Changes the state of automatic quotation mark substitution from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleAutomaticQuoteSubstitution(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleAutomaticQuoteSubstitution, sender)
 }
 
+// Changes the state of automatic link detection from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleAutomaticLinkDetection(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleAutomaticLinkDetection, sender)
 }
 
+// Toggles the state of the automatic data detection.
 func (o *NSTextView) ToggleAutomaticDataDetection(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleAutomaticDataDetection, sender)
 }
 
+// Toggles the state of the automatic dash substitution.
 func (o *NSTextView) ToggleAutomaticDashSubstitution(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleAutomaticDashSubstitution, sender)
 }
 
+// Toggles the state of the automatic text replacement.
 func (o *NSTextView) ToggleAutomaticTextReplacement(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleAutomaticTextReplacement, sender)
 }
 
+// Toggles the state of the automatic spelling correction.
 func (o *NSTextView) ToggleAutomaticSpellingCorrection(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleAutomaticSpellingCorrection, sender)
 }
 
+// Check and replace the text in the range using the specified checking types and options.
 func (o *NSTextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelCheckTextInRangeTypesOptions, range_, checkingTypes, options)
+	o.Ptr().Send(_nSTextViewSelCheckTextInRangeTypesOptions, range_, checkingTypes, options.Ptr())
 }
 
+// Handles the text checking results returned by the text view
 func (o *NSTextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results *foundation.NSArray[*foundation.NSTextCheckingResult], range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], orthography *foundation.NSOrthography, wordCount int) {
-	o.Ptr().Send(_nSTextViewSelHandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount, results, range_, checkingTypes, options, orthography.Ptr(), wordCount)
+	o.Ptr().Send(_nSTextViewSelHandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount, results.Ptr(), range_, checkingTypes, options.Ptr(), orthography.Ptr(), wordCount)
 }
 
+// Brings forward a panel allowing the user to specify string substitutions in the text view.
 func (o *NSTextView) OrderFrontSubstitutionsPanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOrderFrontSubstitutionsPanel, sender)
 }
 
+// Performs the default text checking on the current selection.
 func (o *NSTextView) CheckTextInSelection(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelCheckTextInSelection, sender)
 }
 
+// Performs the default text checking on the entire document.
 func (o *NSTextView) CheckTextInDocument(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelCheckTextInDocument, sender)
 }
@@ -1097,19 +1223,26 @@ func (o *NSTextView) SetMathExpressionCompletionType(mathExpressionCompletionTyp
 	o.Ptr().Send(_nSTextViewSelSetMathExpressionCompletionType, mathExpressionCompletionType)
 }
 
+// An action message that toggles the visibility state of the Quick Look preview panel.
 func (o *NSTextView) ToggleQuickLookPreviewPanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleQuickLookPreviewPanel, sender)
 }
 
+// Returns an array of URLs for items that can be displayed by QuickLook in the specified ranges.
 func (o *NSTextView) QuickLookPreviewableItemsInRanges(ranges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSTextViewSelQuickLookPreviewableItemsInRanges, ranges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelQuickLookPreviewableItemsInRanges, ranges.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Notifies the QuickLook panel that an update may be required.
 func (o *NSTextView) UpdateQuickLookPreviewPanel() {
 	o.Ptr().Send(_nSTextViewSelUpdateQuickLookPreviewPanel)
 }
 
+// Creates and displays a new instance of the sharing service picker.
 func (o *NSTextView) OrderFrontSharingServicePicker(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelOrderFrontSharingServicePicker, sender)
 }
@@ -1184,20 +1317,24 @@ func (o *NSTextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *NS
 	o.Ptr().Send(_nSTextViewSelDrawTextHighlightBackgroundForTextRangeOrigin, textRange.Ptr(), origin)
 }
 
-// An action for toggling `NSTextHighlightStyleAttributeName` in the receiver’s selected range. The sender should be a menu item with a `representedObject` of type (`NSTextHighlightColorScheme`).
+// An action for toggling NSTextHighlightStyleAttributeName in the receiver’s selected range. The sender should be a menu item with a representedObject of type (NSTextHighlightColorScheme).
 func (o *NSTextView) Highlight(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelHighlight, sender)
 }
 
 func (o *NSTextView) TextHighlightAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextViewSelTextHighlightAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextHighlightAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTextView) SetTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetTextHighlightAttributes, textHighlightAttributes)
+	o.Ptr().Send(_nSTextViewSelSetTextHighlightAttributes, textHighlightAttributes.Ptr())
 }
 
+// Changes the base writing direction of a paragraph between left-to-right and right-to-left.
 // Deprecated: Use NSResponder's makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft: instead
 func (o *NSTextView) ToggleBaseWritingDirection(sender objc.ID) {
 	o.Ptr().Send(_nSTextViewSelToggleBaseWritingDirection, sender)

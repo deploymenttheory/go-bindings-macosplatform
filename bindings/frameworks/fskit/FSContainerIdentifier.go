@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies a container.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fscontaineridentifier
 type FSContainerIdentifier struct {
 	FSEntityIdentifier

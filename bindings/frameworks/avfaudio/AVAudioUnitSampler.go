@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you configure with one or more instrument samples, based on Apple’s Sampler audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitsampler
 type AVAudioUnitSampler struct {
 	AVAudioUnitMIDIInstrument
@@ -42,7 +44,7 @@ func AVAudioUnitSamplerFromID(id objc.ID) *AVAudioUnitSampler {
 	return o
 }
 
-// @method loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error: @abstract loads a specific instrument from the specified sound bank @param bankURL URL for a Soundbank file. The file can be either a DLS bank (.dls) or a SoundFont bank (.sf2). @param program program number for the instrument to load @param bankMSB MSB for the bank number for the instrument to load.  This is usually 0x79 for melodic instruments and 0x78 for percussion instruments. @param bankLSB LSB for the bank number for the instrument to load.  This is often 0, and represents the "bank variation". @param outError the status of the operation @discussion This method reads from file and allocates memory, so it should not be called on a real time thread.
+// Loads a specific instrument from the specified soundbank.
 func (o *AVAudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError(bankURL *foundation.NSURL, program uint8, bankMSB uint8, bankLSB uint8) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioUnitSamplerSelLoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError, bankURL.Ptr(), program, bankMSB, bankLSB, unsafe.Pointer(&_nsErr))
@@ -52,7 +54,7 @@ func (o *AVAudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBEr
 	return _ret, nil
 }
 
-// @method loadInstrumentAtURL:error: @abstract configures the sampler by loading the specified preset file. @param instrumentURL URL to the preset file or audio file @param outError the status of the operation @discussion The file can be of one of the following types: Logic/GarageBand EXS24 instrument, the Sampler AU's native aupreset, or an audio file (eg. .caf, .aiff, .wav, .mp3). If an audio file URL is loaded, it will become the sole sample in a new default instrument. Any information contained in the file regarding its keyboard placement (e.g. root key, key range) will be used. This method reads from file and allocates memory, so it should not be called on a real time thread.
+// Configures the sampler with the specified instrument file.
 func (o *AVAudioUnitSampler) LoadInstrumentAtURLError(instrumentURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioUnitSamplerSelLoadInstrumentAtURLError, instrumentURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -62,10 +64,10 @@ func (o *AVAudioUnitSampler) LoadInstrumentAtURLError(instrumentURL *foundation.
 	return _ret, nil
 }
 
-// @method loadAudioFilesAtURLs:error: @abstract configures the sampler by loading a set of audio files. @param audioFiles array of URLs for audio files to be loaded @param outError the status of the operation @discussion The audio files are loaded into a new default instrument with each audio file placed into its own sampler zone. Any information contained in the audio file regarding their placement on the keyboard (e.g. root key, key range) will be used. This method reads from file and allocates memory, so it should not be called on a real time thread.
+// Configures the sampler by loading the specified audio files.
 func (o *AVAudioUnitSampler) LoadAudioFilesAtURLsError(audioFiles *foundation.NSArray[*foundation.NSURL]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aVAudioUnitSamplerSelLoadAudioFilesAtURLsError, audioFiles, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aVAudioUnitSamplerSelLoadAudioFilesAtURLsError, audioFiles.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

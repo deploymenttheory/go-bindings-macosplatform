@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The parameters you use when adding an audio track to a mix.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutableaudiomixinputparameters
 type AVMutableAudioMixInputParameters struct {
 	AVAudioMixInputParameters
@@ -39,6 +41,7 @@ func AVMutableAudioMixInputParametersFromID(id objc.ID) *AVMutableAudioMixInputP
 	return o
 }
 
+// Creates a mutable input parameters object for a given track.
 func AVMutableAudioMixInputParametersAudioMixInputParametersWithTrack(track *AVAssetTrack) *AVMutableAudioMixInputParameters {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableAudioMixInputParameters), _aVMutableAudioMixInputParametersSelAudioMixInputParametersWithTrack, track.Ptr())
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func AVMutableAudioMixInputParametersAudioMixInputParametersWithTrack(track *AVA
 	return AVMutableAudioMixInputParametersFromID(_ret)
 }
 
+// Creates a mutable input parameters object.
 func AVMutableAudioMixInputParametersAudioMixInputParameters() *AVMutableAudioMixInputParameters {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableAudioMixInputParameters), _aVMutableAudioMixInputParametersSelAudioMixInputParameters)
 	if _ret != 0 {
@@ -55,10 +59,12 @@ func AVMutableAudioMixInputParametersAudioMixInputParameters() *AVMutableAudioMi
 	return AVMutableAudioMixInputParametersFromID(_ret)
 }
 
+// Sets a volume ramp to apply during a specified time range.
 func (o *AVMutableAudioMixInputParameters) SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableAudioMixInputParametersSelSetVolumeRampFromStartVolumeToEndVolumeTimeRange, startVolume, endVolume, timeRange)
 }
 
+// Sets the value of the audio volume starting at the specified time.
 func (o *AVMutableAudioMixInputParameters) SetVolumeAtTime(volume float32, time_ coremedia.CMTime) {
 	o.Ptr().Send(_aVMutableAudioMixInputParametersSelSetVolumeAtTime, volume, time_)
 }

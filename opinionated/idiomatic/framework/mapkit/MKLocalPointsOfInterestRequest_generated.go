@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A structured request to use when searching for points of interest.
+//
 // LocalPointsOfInterestRequest wraps [raw.MKLocalPointsOfInterestRequest] with a fluent Go API.
 type LocalPointsOfInterestRequest struct {
 	inner *raw.MKLocalPointsOfInterestRequest
@@ -30,6 +32,8 @@ func LocalPointsOfInterestRequestFromID(id objc.ID) *LocalPointsOfInterestReques
 	return &LocalPointsOfInterestRequest{inner: raw.MKLocalPointsOfInterestRequestFromID(id)}
 }
 
+// Creates a points of interest search request centered on the provided coordinate with the provided radius.
+//
 // NewLocalPointsOfInterestRequestWithCenterCoordinateRadius creates a new [LocalPointsOfInterestRequest].
 func NewLocalPointsOfInterestRequestWithCenterCoordinateRadius(coordinate unsafe.Pointer, radius unsafe.Pointer) *LocalPointsOfInterestRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalPointsOfInterestRequest")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewLocalPointsOfInterestRequestWithCenterCoordinateRadius(coordinate unsafe
 	return &LocalPointsOfInterestRequest{inner: raw.MKLocalPointsOfInterestRequestFromID(_id)}
 }
 
+// Creates a points of interest search request based on existing region.
+//
 // NewLocalPointsOfInterestRequestWithCoordinateRegion creates a new [LocalPointsOfInterestRequest].
 func NewLocalPointsOfInterestRequestWithCoordinateRegion(region raw.MKCoordinateRegion) *LocalPointsOfInterestRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalPointsOfInterestRequest")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewLocalPointsOfInterestRequestWithCoordinateRegion(region raw.MKCoordinate
 	return &LocalPointsOfInterestRequest{inner: raw.MKLocalPointsOfInterestRequestFromID(_id)}
 }
 
+// A filter that lists points of interest categories to include or exclude.
+//
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
 func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
 	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())

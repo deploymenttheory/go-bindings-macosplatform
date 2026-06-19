@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A tile group rule defines how a certain type of tile should be placed on the map. These tiles are like puzzle pieces, and the rules define how they should be pieced together. This is accomplished by defining which neighboring spaces need to be filled with tiles that belong to the same group, and which tiles are required to be empty. The required pattern of neighboring tiles is defined using the SKTileAdjacencyMask.
+// Rules that describe how various tiles should be placed in a map.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktilegrouprule
 type SKTileGroupRule struct {
@@ -48,7 +48,7 @@ func SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAd
 	return SKTileGroupRuleFromID(_ret)
 }
 
-// Initilize a tile group rule with the specified adjacency and tile definitions. @param adjacency the adjacency requirements for this rule; use the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group; tiles not masked out must be empty @param tileDefinitions the tile definitions used for this rule
+// Initializes a new tile group rule with adjacency rules and tile definitions.
 func (o *SKTileGroupRule) InitWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*SKTileDefinition]) *SKTileGroupRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupRuleSelInitWithAdjacencyTileDefinitions, adjacency, tileDefinitions.Ptr())
 	if _ret != 0 {

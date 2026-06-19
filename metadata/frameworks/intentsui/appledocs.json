@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "framework": "IntentsUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "INUIAddVoiceShortcutButton": {
+      "doc": "A button that allows the user to add or edit a shortcut.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbutton"
+    },
+    "INUIAddVoiceShortcutViewController": {
+      "doc": "A view controller that guides the user through the steps for adding a shortcut to Siri.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutviewcontroller"
+    },
+    "INUIEditVoiceShortcutViewController": {
+      "doc": "A view controller that lets the user edit or remove an existing shortcut.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuieditvoiceshortcutviewcontroller"
+    }
+  },
+  "protocols": {
+    "INUIAddVoiceShortcutButtonDelegate": {
+      "doc": "The protocol an object implements to receive notifications from the Siri Shortcut button.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbuttondelegate"
+    },
+    "INUIAddVoiceShortcutViewControllerDelegate": {
+      "doc": "The protocol an object implements to receive notifications from the view controller adding a shortcut to Siri.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutviewcontrollerdelegate"
+    },
+    "INUIEditVoiceShortcutViewControllerDelegate": {
+      "doc": "The protocol an object implements to receive notifications from the view controller that edits or removes a shortcut in Siri.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuieditvoiceshortcutviewcontrollerdelegate"
+    }
+  },
+  "enums": {
+    "INUIAddVoiceShortcutButtonStyle": {
+      "doc": "The styles for the Add to Siri button.",
+      "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbuttonstyle",
+      "members": {
+        "INUIAddVoiceShortcutButtonStyleBlack": {
+          "doc": "A button with a black background.",
+          "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbuttonstyle/black"
+        },
+        "INUIAddVoiceShortcutButtonStyleBlackOutline": {
+          "doc": "A button with a black background, and a border outlining the button.",
+          "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbuttonstyle/blackoutline"
+        },
+        "INUIAddVoiceShortcutButtonStyleWhite": {
+          "doc": "A button with a white background.",
+          "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbuttonstyle/white"
+        },
+        "INUIAddVoiceShortcutButtonStyleWhiteOutline": {
+          "doc": "A button with a white background, and a border outlining the button.",
+          "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbuttonstyle/whiteoutline"
+        }
+      }
+    }
+  },
+  "methods": {
+    "INUIAddVoiceShortcutButton": {
+      "-initWithStyle:": {
+        "doc": "Creates an Add to Siri button with the specified style.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbutton/init(style:)"
+      }
+    },
+    "INUIAddVoiceShortcutViewController": {
+      "-initWithShortcut:": {
+        "doc": "Creates a view controller with a shortcut the user can add to Siri.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutviewcontroller/init(shortcut:)"
+      }
+    },
+    "INUIEditVoiceShortcutViewController": {
+      "-initWithVoiceShortcut:": {
+        "doc": "Creates a view controller with the shortcut to edit or remove.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuieditvoiceshortcutviewcontroller/init(voiceshortcut:)"
+      }
+    }
+  },
+  "properties": {
+    "INUIAddVoiceShortcutButton": {
+      "delegate": {
+        "doc": "The object that receives presentation requests from the button.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbutton/delegate"
+      },
+      "shortcut": {
+        "doc": "The shortcut Siri invokes when the user speaks the invocation phrase.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbutton/shortcut"
+      },
+      "style": {
+        "doc": "The button style.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbutton/style"
+      }
+    },
+    "INUIAddVoiceShortcutViewController": {
+      "delegate": {
+        "doc": "The object that retrieves notifications from the view controller.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutviewcontroller/delegate"
+      }
+    },
+    "INUIEditVoiceShortcutViewController": {
+      "delegate": {
+        "doc": "The object that retrieves notifications from the view controller.",
+        "url": "https://developer.apple.com/documentation/intentsui/inuieditvoiceshortcutviewcontroller/delegate"
+      }
+    }
+  }
+}

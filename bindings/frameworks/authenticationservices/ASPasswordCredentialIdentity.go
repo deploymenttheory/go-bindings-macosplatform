@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description that uniquely identifies a particular password credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity
 type ASPasswordCredentialIdentity struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func ASPasswordCredentialIdentityFromID(id objc.ID) *ASPasswordCredentialIdentit
 	return o
 }
 
-// @abstract Initializes an instance of ASPasswordCredentialIdentity. @param serviceIdentifier the service identifier for which this credential identity is valid. @param user the user that can authenticate into the service indicated by the serviceIdentifier. @param recordIdentifier an optional string to uniquely identify this record in your local database.
+// Initializes a password credential identity.
 func (o *ASPasswordCredentialIdentity) InitWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *ASCredentialServiceIdentifier, user *foundation.NSString, recordIdentifier *foundation.NSString) *ASPasswordCredentialIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialIdentitySelInitWithServiceIdentifierUserRecordIdentifier, serviceIdentifier.Ptr(), user.Ptr(), recordIdentifier.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *ASPasswordCredentialIdentity) InitWithServiceIdentifierUserRecordIdenti
 	return ASPasswordCredentialIdentityFromID(_ret)
 }
 
-// @abstract Creates and initializes an instance of ASPasswordCredentialIdentity. @param serviceIdentifier the service identifier for which this credential identity is valid. @param user the user that can authenticate into the service indicated by the serviceIdentifier. @param recordIdentifier an optional string to uniquely identify this record in your local database.
+// Creates and returns a password credential identity object with a service identifier.
 func ASPasswordCredentialIdentityIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *ASCredentialServiceIdentifier, user *foundation.NSString, recordIdentifier *foundation.NSString) *ASPasswordCredentialIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasswordCredentialIdentity), _aSPasswordCredentialIdentitySelIdentityWithServiceIdentifierUserRecordIdentifier, serviceIdentifier.Ptr(), user.Ptr(), recordIdentifier.Ptr())
 	if _ret != 0 {

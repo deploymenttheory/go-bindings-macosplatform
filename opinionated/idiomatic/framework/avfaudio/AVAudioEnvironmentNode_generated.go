@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that simulates a 3D audio environment.
+//
 // AudioEnvironmentNode wraps [raw.AVAudioEnvironmentNode] with a fluent Go API.
 type AudioEnvironmentNode struct {
 	inner *raw.AVAudioEnvironmentNode
@@ -37,7 +39,7 @@ func NewAudioEnvironmentNode() *AudioEnvironmentNode {
 	return &AudioEnvironmentNode{inner: raw.AVAudioEnvironmentNodeFromID(_id)}
 }
 
-// @property outputType @abstract Type of output hardware to be used with AVAudio3DMixingRenderingAlgorithmAuto @discussion Output hardware cannot be automatically determined in Manual Rendering modes or for wired output. This property can be used to override the output type if the correct type is known. Selecting an output type that does not match the actual hardware can produce unexpected results, especially with AVAudioEnvironmentOutputTypeBuiltInSpeakers. An app choosing a value other than AVAudio3DMixingOutputTypeAuto should listen to route change notifications and update the output type accordingly. Default:    AVAudio3DMixingOutputTypeAuto
+// The type of output hardware.
 //
 // WithOutputType sets the outputType property and returns the receiver for chaining.
 func (x *AudioEnvironmentNode) WithOutputType(outputType AVAudioEnvironmentOutputType) *AudioEnvironmentNode {
@@ -45,7 +47,7 @@ func (x *AudioEnvironmentNode) WithOutputType(outputType AVAudioEnvironmentOutpu
 	return x
 }
 
-// @property outputVolume @abstract The mixer's output volume. @discussion This accesses the mixer's output volume (0.0-1.0, inclusive).
+// The mixer’s output volume.
 //
 // WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
 func (x *AudioEnvironmentNode) WithOutputVolume(outputVolume float32) *AudioEnvironmentNode {
@@ -53,7 +55,7 @@ func (x *AudioEnvironmentNode) WithOutputVolume(outputVolume float32) *AudioEnvi
 	return x
 }
 
-// @property listenerPosition @abstract Sets the listener's position in the 3D environment @discussion The coordinates are specified in meters. Default: The default position of the listener is at the origin. x: 0.0 y: 0.0 z: 0.0
+// The listener’s position in the 3D environment.
 //
 // WithListenerPosition sets the listenerPosition property and returns the receiver for chaining.
 func (x *AudioEnvironmentNode) WithListenerPosition(listenerPosition raw.AVAudio3DPoint) *AudioEnvironmentNode {
@@ -61,7 +63,7 @@ func (x *AudioEnvironmentNode) WithListenerPosition(listenerPosition raw.AVAudio
 	return x
 }
 
-// @property listenerVectorOrientation @abstract The listener's orientation in the environment @discussion Changing listenerVectorOrientation will result in a corresponding change in listenerAngularOrientation. Default: The default orientation is with the listener looking directly along the negative Z axis. forward: (0, 0, -1) up:      (0, 1, 0)
+// The listener’s vector orientation in the environment.
 //
 // WithListenerVectorOrientation sets the listenerVectorOrientation property and returns the receiver for chaining.
 func (x *AudioEnvironmentNode) WithListenerVectorOrientation(listenerVectorOrientation raw.AVAudio3DVectorOrientation) *AudioEnvironmentNode {
@@ -69,7 +71,7 @@ func (x *AudioEnvironmentNode) WithListenerVectorOrientation(listenerVectorOrien
 	return x
 }
 
-// @property listenerAngularOrientation @abstract The listener's orientation in the environment @discussion Changing listenerAngularOrientation will result in a corresponding change in listenerVectorOrientation. All angles are specified in degrees. Default: The default orientation is with the listener looking directly along the negative Z axis. yaw: 0.0 pitch: 0.0 roll: 0.0
+// The listener’s angular orientation in the environment.
 //
 // WithListenerAngularOrientation sets the listenerAngularOrientation property and returns the receiver for chaining.
 func (x *AudioEnvironmentNode) WithListenerAngularOrientation(listenerAngularOrientation raw.AVAudio3DAngularOrientation) *AudioEnvironmentNode {
@@ -77,7 +79,7 @@ func (x *AudioEnvironmentNode) WithListenerAngularOrientation(listenerAngularOri
 	return x
 }
 
-// @property listenerHeadTrackingEnabled @abstract On capable devices, listener orientation will be automatically rotated based on user's head-orientation if enabled.
+// A Boolean value that indicates whether the listener orientation is automatically rotated based on head orientation.
 //
 // WithListenerHeadTrackingEnabled sets the listenerHeadTrackingEnabled property and returns the receiver for chaining.
 func (x *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode {

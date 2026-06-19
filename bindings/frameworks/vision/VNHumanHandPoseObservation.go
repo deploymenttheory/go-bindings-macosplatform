@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that provides the hand points the analysis recognized.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnhumanhandposeobservation
 type VNHumanHandPoseObservation struct {
 	VNRecognizedPointsObservation
@@ -36,7 +38,7 @@ func VNHumanHandPoseObservationFromID(id objc.ID) *VNHumanHandPoseObservation {
 	return o
 }
 
-// @brief Obtain a specific normalized point for a named human hand joint. @param jointName The name of the human hand joint. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the point could not be obtained.
+// Retrieves the recognized point for a joint name.
 func (o *VNHumanHandPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*VNRecognizedPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanHandPoseObservationSelRecognizedPointForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -49,26 +51,35 @@ func (o *VNHumanHandPoseObservation) RecognizedPointForJointNameError(jointName 
 	return VNRecognizedPointFromID(_ret), nil
 }
 
-// @brief Obtains the collection of points associated with a named human hand joints group. @discussion The obtained collection is a dictionary that provides the mapping of human hand join names to the recognized point. @param jointsGroupName The name of the human hand joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+// Retrieves the recognized points associated with the joint group name.
 func (o *VNHumanHandPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint]](o.Ptr(), _vNHumanHandPoseObservationSelRecognizedPointsForJointsGroupNameError, jointsGroupName.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanHandPoseObservationSelRecognizedPointsForJointsGroupNameError, jointsGroupName.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, *VNRecognizedPoint](_ret), nil
 }
 
 // @brief All of the joint names available in the observation.
 func (o *VNHumanHandPoseObservation) AvailableJointNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNHumanHandPoseObservationSelAvailableJointNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanHandPoseObservationSelAvailableJointNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief All of the joints group names available in the observation.
 func (o *VNHumanHandPoseObservation) AvailableJointsGroupNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNHumanHandPoseObservationSelAvailableJointsGroupNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanHandPoseObservationSelAvailableJointsGroupNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief The chirality of the hand.

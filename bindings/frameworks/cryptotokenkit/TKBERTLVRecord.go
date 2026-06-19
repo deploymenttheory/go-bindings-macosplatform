@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that parses BER-encoded data and produces DER-encoded data for TLV records.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tkbertlvrecord
 type TKBERTLVRecord struct {
 	TKTLVRecord
@@ -32,7 +34,7 @@ func TKBERTLVRecordFromID(id objc.ID) *TKBERTLVRecord {
 	return o
 }
 
-// Encodes tag using BER-TLV tag encoding rules. @param tag Tag value to encode @return Binary block containing encoded tag value.
+// Encodes a specified tag using BER-TLV tag encoding rules.
 func TKBERTLVRecordDataForTag(tag uint64) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsTKBERTLVRecord), _tKBERTLVRecordSelDataForTag, tag)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func TKBERTLVRecordDataForTag(tag uint64) *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+// Initializes a BER-TLV record with the specified tag and value.
 func (o *TKBERTLVRecord) InitWithTagValue(tag uint64, value *foundation.NSData) *TKBERTLVRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKBERTLVRecordSelInitWithTagValue, tag, value.Ptr())
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func (o *TKBERTLVRecord) InitWithTagValue(tag uint64, value *foundation.NSData) 
 	return TKBERTLVRecordFromID(_ret)
 }
 
-// Creates TKBERTLVRecord with specified tag and array of children TKTLVRecord instances as subrecords. @param tag Tag value for the new record. @param records Array of TKTLVRecord instances serving as subrecords of this record. @return Newly created TLV record.
+// Initializes a BER-TLV record with the specified tag and an array of TLV subrecords.
 func (o *TKBERTLVRecord) InitWithTagRecords(tag uint64, records *foundation.NSArray[*TKTLVRecord]) *TKBERTLVRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKBERTLVRecordSelInitWithTagRecords, tag, records.Ptr())
 	if _ret != 0 {

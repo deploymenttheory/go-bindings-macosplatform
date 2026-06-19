@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that processes buffer objects as received from ReplayKit.
+//
 // BroadcastSampleHandler wraps [raw.RPBroadcastSampleHandler] with a fluent Go API.
 type BroadcastSampleHandler struct {
 	inner *raw.RPBroadcastSampleHandler
@@ -37,49 +39,49 @@ func NewBroadcastSampleHandler() *BroadcastSampleHandler {
 	return &BroadcastSampleHandler{inner: raw.RPBroadcastSampleHandlerFromID(_id)}
 }
 
-// @abstract Method is called when the RPBroadcastController startBroadcast method is called from the broadcasting application. @param setupInfo Dictionary that can be supplied by the UI extension to the sample handler.
+// Perform any required actions after starting a live broadcast.
 //
 // BroadcastStartedWithSetupInfo calls the underlying BroadcastStartedWithSetupInfo.
 func (x *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
 	x.inner.BroadcastStartedWithSetupInfo(setupInfo)
 }
 
-// @abstract Method is called when the RPBroadcastController pauseBroadcast method is called from the broadcasting application.
+// Perform any required actions after a live broadcast is paused.
 //
 // BroadcastPaused calls the underlying BroadcastPaused.
 func (x *BroadcastSampleHandler) BroadcastPaused() {
 	x.inner.BroadcastPaused()
 }
 
-// @abstract Method is called when the RPBroadcastController resumeBroadcast method is called from the broadcasting application.
+// Perform any required actions after a live broadcast is resumed.
 //
 // BroadcastResumed calls the underlying BroadcastResumed.
 func (x *BroadcastSampleHandler) BroadcastResumed() {
 	x.inner.BroadcastResumed()
 }
 
-// @abstract Method is called when the RPBroadcastController finishBroadcast method is called from the broadcasting application.
+// Perform any required actions after a live broadcast is finished.
 //
 // BroadcastFinished calls the underlying BroadcastFinished.
 func (x *BroadcastSampleHandler) BroadcastFinished() {
 	x.inner.BroadcastFinished()
 }
 
-// @abstract Method is called when broadcast is started from Control Center and provides extension information about the first application opened or used during the broadcast. @param applicationInfo Dictionary that contains information about the first application opened or used buring the broadcast.
+// Perform any required actions after starting a live broadcast.
 //
 // BroadcastAnnotatedWithApplicationInfo calls the underlying BroadcastAnnotatedWithApplicationInfo.
 func (x *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.BroadcastAnnotatedWithApplicationInfo(applicationInfo)
 }
 
-// @abstract Method is called as video and audio data become available during a broadcast session and is delivered as CMSampleBuffer objects. @param sampleBuffer CMSampleBuffer object which contains either video or audio data. @param sampleBufferType Determine's the type of the sample buffer defined by the RPSampleBufferType enum.
+// Processes video and audio data as it becomes available during a live broadcast.
 //
 // ProcessSampleBufferWithType calls the underlying ProcessSampleBufferWithType.
 func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType RPSampleBufferType) {
 	x.inner.ProcessSampleBufferWithType(sampleBuffer, raw.RPSampleBufferType(sampleBufferType))
 }
 
-// @abstract Method that should be called when broadcasting can not proceed due to an error. Calling this method will stop the broadcast and deliver the error back to the broadcasting app through RPBroadcastController's delegate. @param error NSError object that will be passed back to the broadcasting app through RPBroadcastControllerDelegate's broadcastController:didFinishWithError: method.
+// Stops the broadcast and passes an error back to the broadcasting app.
 //
 // FinishBroadcastWithError calls the underlying FinishBroadcastWithError.
 func (x *BroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer) {

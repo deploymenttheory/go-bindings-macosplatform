@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration for a tunnel provider’s virtual interface.
+//
 // NETunnelNetworkSettings wraps [raw.NETunnelNetworkSettings] with a fluent Go API.
 type NETunnelNetworkSettings struct {
 	inner *raw.NETunnelNetworkSettings
@@ -31,7 +33,7 @@ func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
 	return &NETunnelNetworkSettings{inner: raw.NETunnelNetworkSettingsFromID(id)}
 }
 
-// @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NETunnelNetworkSettings object with a given tunnel remote address. @param address The address of the remote endpoint that is providing the tunnel service.
+// Initialize a NETunnelNetworkSettings object.
 //
 // NewNETunnelNetworkSettingsWithTunnelRemoteAddress creates a new [NETunnelNetworkSettings].
 func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnelNetworkSettings {
@@ -40,7 +42,7 @@ func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnel
 	return &NETunnelNetworkSettings{inner: raw.NETunnelNetworkSettingsFromID(_id)}
 }
 
-// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+// The tunnel DNS settings.
 //
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings {
@@ -48,7 +50,7 @@ func (x *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvi
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+// The tunnel HTTP proxy settings.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings {

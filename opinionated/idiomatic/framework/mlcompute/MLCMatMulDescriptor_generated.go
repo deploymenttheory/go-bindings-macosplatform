@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create a matrix multiplication layer.
+//
 // MatMulDescriptor wraps [raw.MLCMatMulDescriptor] with a fluent Go API.
 type MatMulDescriptor struct {
 	inner *raw.MLCMatMulDescriptor

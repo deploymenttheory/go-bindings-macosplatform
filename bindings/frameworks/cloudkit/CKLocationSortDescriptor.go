@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for sorting records that contain location data.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cklocationsortdescriptor
 type CKLocationSortDescriptor struct {
 	foundation.NSSortDescriptor
@@ -34,7 +36,7 @@ func CKLocationSortDescriptorFromID(id objc.ID) *CKLocationSortDescriptor {
 	return o
 }
 
-// Creates a location sort descriptor using the specified key and relative location. - Parameters: - key: The name of the key with a <doc://com.apple.documentation/documentation/corelocation/cllocation> object as its value. The key must belong to the records you're sorting. The sort descriptor uses this key to retrieve the corresponding value from the record. - relativeLocation: The reference location when sorting. CloudKit sorts records according to their distance from this location. During sorting, the sort descriptor computes the distance between the value in the `relativeLocation` parameter and the location value in the specified key of each record. It then sorts the records in ascending order using the distance between the two points. You can't change the sort order.
+// Creates a location sort descriptor using the specified key and relative location.
 func (o *CKLocationSortDescriptor) InitWithKeyRelativeLocation(key *foundation.NSString, relativeLocation unsafe.Pointer) *CKLocationSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKLocationSortDescriptorSelInitWithKeyRelativeLocation, key.Ptr(), relativeLocation)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *CKLocationSortDescriptor) InitWithKeyRelativeLocation(key *foundation.N
 	return CKLocationSortDescriptorFromID(_ret)
 }
 
-// Creates a location sort descriptor from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the location sort descriptor.
+// Creates a location sort descriptor from a serialized instance.
 func (o *CKLocationSortDescriptor) InitWithCoder(aDecoder *foundation.NSCoder) *CKLocationSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKLocationSortDescriptorSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {

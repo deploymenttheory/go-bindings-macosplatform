@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to create, delete, change metadata for, or edit the content of a Photos asset, for use in a photo library change block.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetchangerequest
 type PHAssetChangeRequest struct {
 	PHChangeRequest
@@ -49,6 +51,7 @@ func PHAssetChangeRequestFromID(id objc.ID) *PHAssetChangeRequest {
 	return o
 }
 
+// Creates a request for adding a new image asset to the Photos library.
 func PHAssetChangeRequestCreationRequestForAssetFromImage(image *appkit.NSImage) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelCreationRequestForAssetFromImage, image.Ptr())
 	if _ret != 0 {
@@ -57,6 +60,7 @@ func PHAssetChangeRequestCreationRequestForAssetFromImage(image *appkit.NSImage)
 	return PHAssetChangeRequestFromID(_ret)
 }
 
+// Creates a request for adding a new image asset to the Photos library, using the image file at the specified URL.
 func PHAssetChangeRequestCreationRequestForAssetFromImageAtFileURL(fileURL *foundation.NSURL) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelCreationRequestForAssetFromImageAtFileURL, fileURL.Ptr())
 	if _ret != 0 {
@@ -65,6 +69,7 @@ func PHAssetChangeRequestCreationRequestForAssetFromImageAtFileURL(fileURL *foun
 	return PHAssetChangeRequestFromID(_ret)
 }
 
+// Creates a request for adding a new video asset to the Photos library, using the video file at the specified URL.
 func PHAssetChangeRequestCreationRequestForAssetFromVideoAtFileURL(fileURL *foundation.NSURL) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelCreationRequestForAssetFromVideoAtFileURL, fileURL.Ptr())
 	if _ret != 0 {
@@ -73,10 +78,12 @@ func PHAssetChangeRequestCreationRequestForAssetFromVideoAtFileURL(fileURL *foun
 	return PHAssetChangeRequestFromID(_ret)
 }
 
+// Requests that the specified assets be deleted.
 func PHAssetChangeRequestDeleteAssets(assets foundation.NSFastEnumeration) {
 	objc.ID(_clsPHAssetChangeRequest).Send(_pHAssetChangeRequestSelDeleteAssets, assets)
 }
 
+// Creates a request for modifying the specified asset.
 func PHAssetChangeRequestChangeRequestForAsset(asset *PHAsset) *PHAssetChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetChangeRequest), _pHAssetChangeRequestSelChangeRequestForAsset, asset.Ptr())
 	if _ret != 0 {
@@ -85,6 +92,7 @@ func PHAssetChangeRequestChangeRequestForAsset(asset *PHAsset) *PHAssetChangeReq
 	return PHAssetChangeRequestFromID(_ret)
 }
 
+// Request to revert any edits made to the asset’s content.
 func (o *PHAssetChangeRequest) RevertAssetContentToOriginal() {
 	o.Ptr().Send(_pHAssetChangeRequestSelRevertAssetContentToOriginal)
 }

@@ -2925,6 +2925,7 @@ func (e IOBluetoothDeviceSearchOptionsBits) String() string {
 	}
 }
 
+// Bits to determine what Bluetooth devices to search for
 type IOBluetoothDeviceSearchTypesBits int64
 
 const (
@@ -3254,6 +3255,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Flags for Connect command.
 type OBEXConnectFlagValues int64
 
 const (
@@ -3384,6 +3386,7 @@ func (e OBEXErrorCodes) String() string {
 	}
 }
 
+// Identifiers for OBEX Headers.
 type OBEXHeaderIdentifiers int64
 
 const (
@@ -3474,6 +3477,7 @@ func (e OBEXHeaderIdentifiers) String() string {
 	}
 }
 
+// Flags for Nonce command during digest challenge.
 type OBEXNonceFlagValues int64
 
 const (
@@ -3513,6 +3517,7 @@ func (e OBEXNonceFlagValues) String() string {
 	}
 }
 
+// Operation OpCode values for commands.
 type OBEXOpCodeCommandValues int64
 
 const (
@@ -3567,6 +3572,7 @@ func (e OBEXOpCodeCommandValues) String() string {
 	}
 }
 
+// Response opCode values.
 type OBEXOpCodeResponseValues int64
 
 const (
@@ -3813,6 +3819,7 @@ func (e OBEXOpCodeResponseValues) String() string {
 	}
 }
 
+// Operation OpCode values for sessions. From the OBEX 1.3 specification.
 type OBEXOpCodeSessionValues int64
 
 const (
@@ -3879,6 +3886,7 @@ func (e OBEXPutFlagValues) String() string {
 	}
 }
 
+// Values for Realm during digest response.
 type OBEXRealmValues int64
 
 const (
@@ -3924,6 +3932,7 @@ func (e OBEXRealmValues) String() string {
 	}
 }
 
+// Type identifiers for OBEX sessions.
 type OBEXSessionEventTypes int64
 
 const (
@@ -3975,6 +3984,7 @@ func (e OBEXSessionEventTypes) String() string {
 	}
 }
 
+// Tags for SessionParameters.
 type OBEXSessionParameterTags int64
 
 const (
@@ -4023,6 +4033,7 @@ func (e OBEXTransportEventTypes) String() string {
 	}
 }
 
+// The available/supported OBEX versions.
 type OBEXVersions int64
 
 const (

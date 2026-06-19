@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that guides the user through the steps for adding a shortcut to Siri.
+//
 // Apple documentation: https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutviewcontroller
 type INUIAddVoiceShortcutViewController struct {
 	appkit.NSViewController
@@ -33,7 +35,7 @@ func INUIAddVoiceShortcutViewControllerFromID(id objc.ID) *INUIAddVoiceShortcutV
 	return o
 }
 
-// @param shortcut The shortcut is what will be run when the resulting voice shortcut is invoked. It also provides the suggested invocation phrase, via the @c suggestedInvocationPhrase property on the intent or user activity.
+// Creates a view controller with a shortcut the user can add to Siri.
 func (o *INUIAddVoiceShortcutViewController) InitWithShortcut(shortcut *intents.INShortcut) *INUIAddVoiceShortcutViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutViewControllerSelInitWithShortcut, shortcut.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized view that displays and controls the pitch angle of the map view.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpitchcontrol
 type MKPitchControl struct {
 	appkit.NSView
@@ -32,6 +34,7 @@ func MKPitchControlFromID(id objc.ID) *MKPitchControl {
 	return o
 }
 
+// Creates a pitch control and associates it with the specified map view.
 func MKPitchControlPitchControlWithMapView(mapView *MKMapView) *MKPitchControl {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPitchControl), _mKPitchControlSelPitchControlWithMapView, mapView.Ptr())
 	if _ret != 0 {

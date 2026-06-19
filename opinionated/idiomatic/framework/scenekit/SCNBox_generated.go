@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A six-sided polyhedron geometry whose faces are all rectangles, optionally with rounded edges and corners.
+//
 // Box wraps [raw.SCNBox] with a fluent Go API.
 type Box struct {
 	inner *raw.SCNBox
@@ -37,7 +39,7 @@ func NewBox() *Box {
 	return &Box{inner: raw.SCNBoxFromID(_id)}
 }
 
-// @property width @abstract The width of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the box along its x-axis. Animatable.
 //
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Box) WithWidth(width float64) *Box {
@@ -45,7 +47,7 @@ func (x *Box) WithWidth(width float64) *Box {
 	return x
 }
 
-// @property height @abstract The height of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the box along its y-axis. Animatable.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Box) WithHeight(height float64) *Box {
@@ -53,7 +55,7 @@ func (x *Box) WithHeight(height float64) *Box {
 	return x
 }
 
-// @property length @abstract The length of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the box along its z-axis. Animatable.
 //
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *Box) WithLength(length float64) *Box {
@@ -61,7 +63,7 @@ func (x *Box) WithLength(length float64) *Box {
 	return x
 }
 
-// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+// The radius of curvature for the edges and corners of the box. Animatable.
 //
 // WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
 func (x *Box) WithChamferRadius(chamferRadius float64) *Box {
@@ -69,7 +71,7 @@ func (x *Box) WithChamferRadius(chamferRadius float64) *Box {
 	return x
 }
 
-// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in each face of the box along its x-axis. Animatable.
 //
 // WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithWidthSegmentCount(widthSegmentCount int) *Box {
@@ -77,7 +79,7 @@ func (x *Box) WithWidthSegmentCount(widthSegmentCount int) *Box {
 	return x
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in each face of the box along its y-axis. Animatable.
 //
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithHeightSegmentCount(heightSegmentCount int) *Box {
@@ -85,7 +87,7 @@ func (x *Box) WithHeightSegmentCount(heightSegmentCount int) *Box {
 	return x
 }
 
-// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in each face of the box along its z-axis. Animatable.
 //
 // WithLengthSegmentCount sets the lengthSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithLengthSegmentCount(lengthSegmentCount int) *Box {
@@ -93,7 +95,7 @@ func (x *Box) WithLengthSegmentCount(lengthSegmentCount int) *Box {
 	return x
 }
 
-// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+// The number of line segments used to create each rounded edge of the box. Animatable.
 //
 // WithChamferSegmentCount sets the chamferSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithChamferSegmentCount(chamferSegmentCount int) *Box {
@@ -101,7 +103,7 @@ func (x *Box) WithChamferSegmentCount(chamferSegmentCount int) *Box {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Box) WithName(name string) *Box {
@@ -109,7 +111,7 @@ func (x *Box) WithName(name string) *Box {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
@@ -132,7 +134,7 @@ func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Box) WithFirstMaterial(firstMaterial *Material) *Box {
@@ -140,7 +142,7 @@ func (x *Box) WithFirstMaterial(firstMaterial *Material) *Box {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Box) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box {
@@ -169,7 +171,7 @@ func (x *Box) WithTessellator(tessellator *GeometryTessellator) *Box {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Box) WithSubdivisionLevel(subdivisionLevel uint) *Box {
@@ -185,7 +187,7 @@ func (x *Box) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box {
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box {
@@ -193,7 +195,7 @@ func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box {
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Box) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box {

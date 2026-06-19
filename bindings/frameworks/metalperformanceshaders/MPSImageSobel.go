@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that convolves an image with the Sobel operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagesobel
 type MPSImageSobel struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,7 +37,7 @@ func MPSImageSobelFromID(id objc.ID) *MPSImageSobel {
 	return o
 }
 
-// @abstract   Initialize a Sobel filter on a given device using the default color transform. Default: BT.601/JPEG {0.299f, 0.587f, 0.114f} For non-default conversion matrices, use -initWithDevice:linearGrayColorTransform: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
+// Initializes a Sobel filter on a given device using the default color transform.
 func (o *MPSImageSobel) InitWithDevice(device metal.MTLDevice) *MPSImageSobel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSobelSelInitWithDevice, device)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *MPSImageSobel) InitWithDevice(device metal.MTLDevice) *MPSImageSobel {
 	return MPSImageSobelFromID(_ret)
 }
 
-// @abstract   Initialize a Sobel filter on a given device with a non-default color transform @param      device          The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @return     A valid object or nil, if failure.
+// Initializes a Sobel filter on a given device using a specific color transform.
 func (o *MPSImageSobel) InitWithDeviceLinearGrayColorTransform(device metal.MTLDevice, transform *float32) *MPSImageSobel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSobelSelInitWithDeviceLinearGrayColorTransform, device, transform)
 	if _ret != 0 {

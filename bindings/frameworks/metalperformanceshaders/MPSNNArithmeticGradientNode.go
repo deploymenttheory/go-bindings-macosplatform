@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the base class for gradient arithmetic operators.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnarithmeticgradientnode
 type MPSNNArithmeticGradientNode struct {
 	mpsneuralnetwork.MPSNNGradientFilterNode
@@ -70,7 +72,7 @@ func (o *MPSNNArithmeticGradientNode) InitWithSourceGradientSourceImageGradientS
 
 // @abstract create a new arithmetic gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this. @param      gradientImages          The input gradient from the 'downstream' gradient filter and the source input image from the forward pass (primary or secondary). @param      filter                  The matching filter node from the forward pass. @param      isSecondarySourceFilter The isSecondarySourceFilter property is used to indicate whether the arithmetic gradient filter is operating on the primary or secondary source image from the forward pass.
 func (o *MPSNNArithmeticGradientNode) InitWithGradientImagesForwardFilterIsSecondarySourceFilter(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], filter *mpsneuralnetwork.MPSNNFilterNode, isSecondarySourceFilter bool) *MPSNNArithmeticGradientNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNArithmeticGradientNodeSelInitWithGradientImagesForwardFilterIsSecondarySourceFilter, gradientImages, filter.Ptr(), isSecondarySourceFilter)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNArithmeticGradientNodeSelInitWithGradientImagesForwardFilterIsSecondarySourceFilter, gradientImages.Ptr(), filter.Ptr(), isSecondarySourceFilter)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

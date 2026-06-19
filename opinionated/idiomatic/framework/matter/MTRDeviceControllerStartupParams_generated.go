@@ -72,7 +72,7 @@ func (x *MTRDeviceControllerStartupParams) WithVendorID(vendorID *foundation.NSN
 	return x
 }
 
-// Node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
+// Node id for this controller.
 //
 // WithNodeID sets the nodeID property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithNodeID(nodeID *foundation.NSNumber) *MTRDeviceControllerStartupParams {

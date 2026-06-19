@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that represents a quantity, including the value and the units.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquantitysample
 type HKQuantitySample struct {
 	HKSample
@@ -35,7 +37,7 @@ func HKQuantitySampleFromID(id objc.ID) *HKQuantitySample {
 	return o
 }
 
-// @method        quantitySampleWithType:quantity:startDate:endDate: @abstract      Creates a new HKQuantitySample with the given type, quantity, start date, and end date. @discussion    The quantity must have a unit that is compatible with the given quantity type. See -[HKQuantityType isCompatibleWithUnit:].
+// Returns a sample containing a numeric measurement.
 func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDate(quantityType *HKQuantityType, quantity *HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate) *HKQuantitySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDate, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr())
 	if _ret != 0 {
@@ -44,18 +46,18 @@ func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDate(quantityType
 	return HKQuantitySampleFromID(_ret)
 }
 
-// @method        quantitySampleWithType:quantity:startDate:endDate:metadata: @abstract      Creates a new HKQuantitySample with the given type, quantity, start date, end date, and metadata. @discussion    The quantity must have a unit that is compatible with the given quantity type. See -[HKQuantityType isCompatibleWithUnit:].
+// Returns a sample containing a numeric measurement with the provided metadata.
 func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *HKQuantityType, quantity *HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKQuantitySample {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateMetadata, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateMetadata, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKQuantitySampleFromID(_ret)
 }
 
-// @method        quantitySampleWithType:quantity:startDate:endDate:device:metadata: @abstract      Creates a new HKQuantitySample with the given type, quantity, start date, end date, and metadata. @param         quantityType    The type of the sample. @param         startDate       The start date of the sample. @param         endDate         The end date of the sample. @param         device          The HKDevice that generated the sample (optional). @param         metadata        Metadata for the sample (optional). @discussion    The quantity must have a unit that is compatible with the given quantity type. See -[HKQuantityType isCompatibleWithUnit:].
+// Returns a sample containing a numeric measurement with the provided device and metadata.
 func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *HKQuantityType, quantity *HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKQuantitySample {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Prescription data for eye alignment.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkvisionprism
 type HKVisionPrism struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func HKVisionPrismFromID(id objc.ID) *HKVisionPrism {
 	return o
 }
 
-// @method        initWithAmount:angle:eye @param         amount    The compensation for amount eye misalignment @param         angle     The angle of the lens required to correct diplopia @param         eye       The eye associated with the prism values
+// Creates a new vision prism object, using a single quantity and an alignment angle.
 func (o *HKVisionPrism) InitWithAmountAngleEye(amount *HKQuantity, angle *HKQuantity, eye HKVisionEye) *HKVisionPrism {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVisionPrismSelInitWithAmountAngleEye, amount.Ptr(), angle.Ptr(), eye)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *HKVisionPrism) InitWithAmountAngleEye(amount *HKQuantity, angle *HKQuan
 	return HKVisionPrismFromID(_ret)
 }
 
-// @method        initWithVerticalAmount:verticalBase:horizontalAmount:horizontalBase:eye @param         verticalAmount      The vertical component of compensation in prism diopters @param         verticalBase        The direction of the prism base relative to the vertical axis of the lens; base up or base down. @param         horizontalAmount    The horizontal component of compensation in prism diopters @param         horizontalBase      The direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). @param         eye                 The eye associated with the prism values
+// Creates a new vision prism object that separates the correction strength into horizontal and vertical components.
 func (o *HKVisionPrism) InitWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye(verticalAmount *HKQuantity, verticalBase HKPrismBase, horizontalAmount *HKQuantity, horizontalBase HKPrismBase, eye HKVisionEye) *HKVisionPrism {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVisionPrismSelInitWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye, verticalAmount.Ptr(), verticalBase, horizontalAmount.Ptr(), horizontalBase, eye)
 	if _ret != 0 {

@@ -8,11 +8,14 @@ import (
 	"fmt"
 )
 
+// A constant that describes how lighting is calculated by an effect.
 type GLKLightingType int64
 
 const (
+	// Indicates that the lighting calculations are performed at each vertex in a triangle and then interpolated across the triangle.
 	GLKLightingTypePerVertex GLKLightingType = 0
-	GLKLightingTypePerPixel  GLKLightingType = 1
+	// Indicates that the inputs to the lighting calculation are interpolated across a triangle and the lighting calculations are performed at each fragment.
+	GLKLightingTypePerPixel GLKLightingType = 1
 )
 
 func (e GLKLightingType) String() string {
@@ -26,12 +29,16 @@ func (e GLKLightingType) String() string {
 	}
 }
 
+// The mode used to combine the texture with other color components.
 type GLKTextureEnvMode int64
 
 const (
-	GLKTextureEnvModeReplace  GLKTextureEnvMode = 0
+	// The output color is set to the color fetched from the texture. The input color is ignored.
+	GLKTextureEnvModeReplace GLKTextureEnvMode = 0
+	// The output color is calculated by multiplying the texture’s color by the input color.
 	GLKTextureEnvModeModulate GLKTextureEnvMode = 1
-	GLKTextureEnvModeDecal    GLKTextureEnvMode = 2
+	// The output color is calculated by using the texture’s alpha component to blend the texture’s color with the input color.
+	GLKTextureEnvModeDecal GLKTextureEnvMode = 2
 )
 
 func (e GLKTextureEnvMode) String() string {
@@ -47,12 +54,16 @@ func (e GLKTextureEnvMode) String() string {
 	}
 }
 
+// Values that describe the alpha information stored in a source image’s pixel data.
 type GLKTextureInfoAlphaState int64
 
 const (
-	GLKTextureInfoAlphaStateNone             GLKTextureInfoAlphaState = 0
+	// Indicates that the texture has no alpha information.
+	GLKTextureInfoAlphaStateNone GLKTextureInfoAlphaState = 0
+	// Indicates that the color values in the texture were not premultiplied by the alpha value.
 	GLKTextureInfoAlphaStateNonPremultiplied GLKTextureInfoAlphaState = 1
-	GLKTextureInfoAlphaStatePremultiplied    GLKTextureInfoAlphaState = 2
+	// Indicates that the color values in the texture have already been premultiplied by the alpha value.
+	GLKTextureInfoAlphaStatePremultiplied GLKTextureInfoAlphaState = 2
 )
 
 func (e GLKTextureInfoAlphaState) String() string {
@@ -68,11 +79,15 @@ func (e GLKTextureInfoAlphaState) String() string {
 	}
 }
 
+// The location of the origin in the original source image.
 type GLKTextureInfoOrigin int64
 
 const (
-	GLKTextureInfoOriginUnknown    GLKTextureInfoOrigin = 0
-	GLKTextureInfoOriginTopLeft    GLKTextureInfoOrigin = 1
+	// The origin of the texture is not supported.
+	GLKTextureInfoOriginUnknown GLKTextureInfoOrigin = 0
+	// The origin of the texture is in the top-left corner.
+	GLKTextureInfoOriginTopLeft GLKTextureInfoOrigin = 1
+	// The origin of the texture is in the bottom-left corner.
 	GLKTextureInfoOriginBottomLeft GLKTextureInfoOrigin = 2
 )
 
@@ -89,12 +104,16 @@ func (e GLKTextureInfoOrigin) String() string {
 	}
 }
 
+// The kind of texture pointed to by the property.
 type GLKTextureTarget int64
 
 const (
-	GLKTextureTarget2D      GLKTextureTarget = 3553
+	// The texture is a 2D texture.
+	GLKTextureTarget2D GLKTextureTarget = 3553
+	// The texture is a set of six textures that make up a cube map.
 	GLKTextureTargetCubeMap GLKTextureTarget = 34067
-	GLKTextureTargetCt      GLKTextureTarget = 2
+	// The number of items in the enumeration.
+	GLKTextureTargetCt GLKTextureTarget = 2
 )
 
 func (e GLKTextureTarget) String() string {

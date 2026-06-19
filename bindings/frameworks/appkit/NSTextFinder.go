@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optional search-and-replace find interface inside a view, usually a scroll view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextfinder
 type NSTextFinder struct {
 	foundation.NSObject
@@ -48,6 +50,7 @@ func NSTextFinderFromID(id objc.ID) *NSTextFinder {
 	return o
 }
 
+// Initializes and returns a new NSTextFinder instance.
 func (o *NSTextFinder) Init() *NSTextFinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFinderSelInit)
 	if _ret != 0 {
@@ -64,23 +67,28 @@ func (o *NSTextFinder) InitWithCoder(coder *foundation.NSCoder) *NSTextFinder {
 	return NSTextFinderFromID(_ret)
 }
 
+// Performs the specified text finding action.
 func (o *NSTextFinder) PerformAction(op NSTextFinderAction) {
 	o.Ptr().Send(_nSTextFinderSelPerformAction, op)
 }
 
+// Allows validation of the find action before performing.
 func (o *NSTextFinder) ValidateAction(op NSTextFinderAction) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextFinderSelValidateAction, op)
 	return _ret
 }
 
+// Cancels the find indicator immediately.
 func (o *NSTextFinder) CancelFindIndicator() {
 	o.Ptr().Send(_nSTextFinderSelCancelFindIndicator)
 }
 
+// Override this method to draw custom highlighting.
 func NSTextFinderDrawIncrementalMatchHighlightInRect(rect corefoundation.CGRect) {
 	objc.ID(_clsNSTextFinder).Send(_nSTextFinderSelDrawIncrementalMatchHighlightInRect, rect)
 }
 
+// Invoke this method when the searched content will change.
 func (o *NSTextFinder) NoteClientStringWillChange() {
 	o.Ptr().Send(_nSTextFinderSelNoteClientStringWillChange)
 }
@@ -131,6 +139,9 @@ func (o *NSTextFinder) SetIncrementalSearchingShouldDimContentView(incrementalSe
 }
 
 func (o *NSTextFinder) IncrementalMatchRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextFinderSelIncrementalMatchRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFinderSelIncrementalMatchRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

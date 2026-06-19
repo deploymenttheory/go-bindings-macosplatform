@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to manage a UDP session to a network endpoint.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nwudpsession
 // Deprecated: Use `nw_connection_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 type NWUDPSession struct {
@@ -45,7 +47,7 @@ func NWUDPSessionFromID(id objc.ID) *NWUDPSession {
 	return o
 }
 
-// @method initWithUpgradeForSession: @discussion This convenience initializer can be used to create a new session based on the original session's endpoint and parameters. The application should create an NWUDPSession and watch the "hasBetterPath" property. When this property is YES, it should call initWithUpgradeForSession: to create a new session, with the goal to start transferring data on the new better path as soon as possible to reduce power and potentially monetary cost. When the new "upgrade" session becomes ready and when the application wraps up the previous application session on the original session, the application can start using the new "upgrade" session and tear down the original one. @param session The original session from which the application will upgrade @return An initialized NWUDPSession object.
+// This convenience initializer can be used to create a new session based on the original session’s endpoint and parameters.
 // Deprecated: Use `nw_connection_create` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) InitWithUpgradeForSession(session *NWUDPSession) *NWUDPSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWUDPSessionSelInitWithUpgradeForSession, session.Ptr())
@@ -55,19 +57,29 @@ func (o *NWUDPSession) InitWithUpgradeForSession(session *NWUDPSession) *NWUDPSe
 	return NWUDPSessionFromID(_ret)
 }
 
-// @method tryNextResolvedEndpoint @discussion Mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint. This should be used when the caller has attempted to communicate with the current resolvedEndpoint, and the caller has determined that it is unusable. If there are no other resolved endpoints, the session will move to the failed state.
+// Mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint.
 // Deprecated: Use `nw_connection_cancel_current_endpoint` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) TryNextResolvedEndpoint() {
 	o.Ptr().Send(_nWUDPSessionSelTryNextResolvedEndpoint)
 }
 
-// @method setReadHandler:maxDatagrams @discussion Set a read handler for datagrams. Reads will be scheduled by the system, so this method only needs to be called once for a session. @param handler A handler called when datagrams have been read, or when an error has occurred. @param maxDatagrams The maximum number of datagrams to send to the handler.
+// Set a read handler for datagrams.
 // Deprecated: Use `nw_connection_receive` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
-func (o *NWUDPSession) SetReadHandlerMaxDatagrams(handler objc.Block, maxDatagrams uint) {
-	o.Ptr().Send(_nWUDPSessionSelSetReadHandlerMaxDatagrams, handler, maxDatagrams)
+func (o *NWUDPSession) SetReadHandlerMaxDatagrams(handler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer), maxDatagrams uint) {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			handler(foundation.NSArrayFromID[*foundation.NSData](blockParam0), blockParam1)
+		})
+		defer __block_handler.Release()
+	}
+	o.Ptr().Send(_nWUDPSessionSelSetReadHandlerMaxDatagrams, __block_handler, maxDatagrams)
 }
 
-// @method writeMultipleDatagrams:completionHandler @discussion Write multiple datagrams. Callers should wait until the completionHandler is executed before issuing another write. @param datagramArray An NSArray of NSData objects, containing the ordered list datagrams to write. @param completionHandler A handler called when the write request has either succeeded or failed.
+// Write multiple datagrams.
 // Deprecated: Use `nw_connection_send` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) WriteMultipleDatagramsCompletionHandler(datagramArray *foundation.NSArray[*foundation.NSData], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -77,10 +89,10 @@ func (o *NWUDPSession) WriteMultipleDatagramsCompletionHandler(datagramArray *fo
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nWUDPSessionSelWriteMultipleDatagramsCompletionHandler, datagramArray, __block_completionHandler)
+	o.Ptr().Send(_nWUDPSessionSelWriteMultipleDatagramsCompletionHandler, datagramArray.Ptr(), __block_completionHandler)
 }
 
-// @method writeDatagram:completionHandler @discussion Write a single datagram. Callers should wait until the completionHandler is executed before issuing another write. @param datagram An NSData containing the datagram to write. @param completionHandler A handler called when the write request has either succeeded or failed.
+// Write a single datagram.
 // Deprecated: Use `nw_connection_send` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) WriteDatagramCompletionHandler(datagram *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -93,7 +105,7 @@ func (o *NWUDPSession) WriteDatagramCompletionHandler(datagram *foundation.NSDat
 	o.Ptr().Send(_nWUDPSessionSelWriteDatagramCompletionHandler, datagram.Ptr(), __block_completionHandler)
 }
 
-// @method cancel @discussion Move into the NWUDPSessionStateCancelled state. The connection will be terminated, and all handlers will be cancelled.
+// Cancel the session.
 // Deprecated: Use `nw_connection_cancel` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) Cancel() {
 	o.Ptr().Send(_nWUDPSessionSelCancel)

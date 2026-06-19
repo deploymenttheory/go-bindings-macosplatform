@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class RPBroadcastActivityController @abstract Controller object that allows clients to present the macOS broadcast picker and returns the RPBroadcastController object that controls broadcast functionality.
+// A controller object that presents the macOS broadcast picker.
 //
 // BroadcastActivityController wraps [raw.RPBroadcastActivityController] with a fluent Go API.
 type BroadcastActivityController struct {
@@ -37,7 +37,7 @@ func NewBroadcastActivityController() *BroadcastActivityController {
 	return &BroadcastActivityController{inner: raw.RPBroadcastActivityControllerFromID(_id)}
 }
 
-// @abstract Delegate that is notified when the activity view controller is complete.
+// The broadcast activity controller’s delegate object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *BroadcastActivityController) WithDelegate(delegate raw.RPBroadcastActivityControllerDelegate) *BroadcastActivityController {

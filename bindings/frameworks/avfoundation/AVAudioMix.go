@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the input parameters for mixing audio tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avaudiomix
 type AVAudioMix struct {
 	foundation.NSObject

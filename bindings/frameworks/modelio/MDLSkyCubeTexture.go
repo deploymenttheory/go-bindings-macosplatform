@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A generator of texel data that creates cube textures using a physically realistic simulation of the sunlit sky.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlskycubetexture
 type MDLSkyCubeTexture struct {
 	MDLTexture
@@ -60,6 +62,7 @@ func MDLSkyCubeTextureFromID(id objc.ID) *MDLSkyCubeTexture {
 	return o
 }
 
+// Initializes a sky cube texture object with the specified parameters.
 func (o *MDLSkyCubeTexture) InitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name *foundation.NSString, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *MDLSkyCubeTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSkyCubeTextureSelInitWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo, name.Ptr(), channelEncoding, textureDimensions, turbidity, sunElevation, upperAtmosphereScattering, groundAlbedo)
 	if _ret != 0 {
@@ -76,7 +79,7 @@ func (o *MDLSkyCubeTexture) InitWithNameChannelEncodingTextureDimensionsTurbidit
 	return MDLSkyCubeTextureFromID(_ret)
 }
 
-// Call updateTexture if parameters have been changed and a new sky is required.
+// Generates new texel data matching the current sky parameters.
 func (o *MDLSkyCubeTexture) UpdateTexture() {
 	o.Ptr().Send(_mDLSkyCubeTextureSelUpdateTexture)
 }

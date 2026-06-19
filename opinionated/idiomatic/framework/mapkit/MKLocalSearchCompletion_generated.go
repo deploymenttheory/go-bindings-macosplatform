@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A fully formed string that completes a partial string.
+//
 // LocalSearchCompletion wraps [raw.MKLocalSearchCompletion] with a fluent Go API.
 type LocalSearchCompletion struct {
 	inner *raw.MKLocalSearchCompletion

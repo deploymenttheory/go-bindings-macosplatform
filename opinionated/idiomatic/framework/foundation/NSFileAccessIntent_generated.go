@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The details of a coordinated-read or coordinated-write operation.
+//
 // FileAccessIntent wraps [raw.NSFileAccessIntent] with a fluent Go API.
 type FileAccessIntent struct {
 	inner *raw.NSFileAccessIntent

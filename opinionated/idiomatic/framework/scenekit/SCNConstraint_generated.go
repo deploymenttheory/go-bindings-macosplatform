@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for objects that automatically adjust the position, rotation, or scale of a node based on specified rules.
+//
 // Constraint wraps [raw.SCNConstraint] with a fluent Go API.
 type Constraint struct {
 	inner *raw.SCNConstraint
@@ -43,7 +45,7 @@ func (x *Constraint) WithEnabled(enabled bool) *Constraint {
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *Constraint) WithInfluenceFactor(influenceFactor float64) *Constraint {

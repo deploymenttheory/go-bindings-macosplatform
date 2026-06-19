@@ -9,14 +9,15 @@ import (
 	"strings"
 )
 
+// The possible states the framework sets for Automatic Sign-In.
 type VSAutoSignInAuthorization int64
 
 const (
-	// Consent to auto sign in hasn't been granted nor denied.
+	// A state that indicates the framework needs to reauthorize Automatic Sign-In.
 	VSAutoSignInAuthorizationNotDetermined VSAutoSignInAuthorization = 0
-	// Authorized to store and use auto sign in tokens.
+	// A state that indicates the person opts in to Automatic Sign-In.
 	VSAutoSignInAuthorizationGranted VSAutoSignInAuthorization = 1
-	// Consent to use auto sign in has been denied.
+	// A state that indicates the person denied authorization.
 	VSAutoSignInAuthorizationDenied VSAutoSignInAuthorization = 2
 )
 
@@ -33,6 +34,7 @@ func (e VSAutoSignInAuthorization) String() string {
 	}
 }
 
+// Error codes in the framework error domain.
 type VSErrorCode int64
 
 const (
@@ -69,11 +71,14 @@ func (e VSErrorCode) String() string {
 	}
 }
 
+// Constants that represent whether the device from which the user originally registered is mobile.
 type VSOriginatingDeviceCategory int64
 
 const (
+	// A constant that indicates the original registering device is mobile.
 	VSOriginatingDeviceCategoryMobile VSOriginatingDeviceCategory = 0
-	VSOriginatingDeviceCategoryOther  VSOriginatingDeviceCategory = 1
+	// A constant that indicates the original registering device is not mobile.
+	VSOriginatingDeviceCategoryOther VSOriginatingDeviceCategory = 1
 )
 
 func (e VSOriginatingDeviceCategory) String() string {
@@ -87,12 +92,16 @@ func (e VSOriginatingDeviceCategory) String() string {
 	}
 }
 
+// Constants representing a subscriber’s level of access to your content.
 type VSSubscriptionAccessLevel int64
 
 const (
-	VSSubscriptionAccessLevelUnknown         VSSubscriptionAccessLevel = 0
+	// The default access level.
+	VSSubscriptionAccessLevelUnknown VSSubscriptionAccessLevel = 0
+	// The user has access to free content with a valid account.
 	VSSubscriptionAccessLevelFreeWithAccount VSSubscriptionAccessLevel = 1
-	VSSubscriptionAccessLevelPaid            VSSubscriptionAccessLevel = 2
+	// The user has access to content that requires a paid subscription.
+	VSSubscriptionAccessLevelPaid VSSubscriptionAccessLevel = 2
 )
 
 func (e VSSubscriptionAccessLevel) String() string {
@@ -108,10 +117,12 @@ func (e VSSubscriptionAccessLevel) String() string {
 	}
 }
 
+// Constants that represent options you use to fetch a list of user accounts.
 // Bitmask — values may be combined with |.
 type VSUserAccountQueryOptions int64
 
 const (
+	// A constant that indicates fetching user accounts from the user’s current device only.
 	VSUserAccountQueryNone       VSUserAccountQueryOptions = 0
 	VSUserAccountQueryAllDevices VSUserAccountQueryOptions = 1
 )
@@ -127,10 +138,13 @@ func (e VSUserAccountQueryOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that represent whether a user has access to paid content.
 type VSUserAccountType int64
 
 const (
+	// A constant that indicates a user has access to free content.
 	VSUserAccountTypeFree VSUserAccountType = 0
+	// A constant that indicates a user has access to paid content.
 	VSUserAccountTypePaid VSUserAccountType = 1
 )
 

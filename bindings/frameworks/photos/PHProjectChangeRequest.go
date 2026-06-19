@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to change asset data in a Photos project extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phprojectchangerequest
 type PHProjectChangeRequest struct {
 	PHChangeRequest
@@ -38,6 +40,7 @@ func PHProjectChangeRequestFromID(id objc.ID) *PHProjectChangeRequest {
 	return o
 }
 
+// Creates a change request around the specified project.
 func (o *PHProjectChangeRequest) InitWithProject(project *PHProject) *PHProjectChangeRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectChangeRequestSelInitWithProject, project.Ptr())
 	if _ret != 0 {
@@ -46,17 +49,18 @@ func (o *PHProjectChangeRequest) InitWithProject(project *PHProject) *PHProjectC
 	return PHProjectChangeRequestFromID(_ret)
 }
 
-// Sets the key asset representing the project. Deprecated in macOS 10.14, please use -[PHProjectChangeRequest setProjectPreviewImage:] to provide a rendered preview instead.
+// Sets the key asset representing the project.
 // Deprecated: since macOS 10.14.
 func (o *PHProjectChangeRequest) SetKeyAsset(keyAsset *PHAsset) {
 	o.Ptr().Send(_pHProjectChangeRequestSelSetKeyAsset, keyAsset.Ptr())
 }
 
+// Updates the project preview in Photos.
 func (o *PHProjectChangeRequest) SetProjectPreviewImage(previewImage *appkit.NSImage) {
 	o.Ptr().Send(_pHProjectChangeRequestSelSetProjectPreviewImage, previewImage.Ptr())
 }
 
-// Removes the specified assets from the project. @param assets A collection of PHAsset objects to be removed from the project.
+// Removes the specified assets from the project.
 func (o *PHProjectChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHProjectChangeRequestSelRemoveAssets, assets)
 }

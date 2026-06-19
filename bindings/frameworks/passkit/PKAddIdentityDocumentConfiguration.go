@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration to define the identity document.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddidentitydocumentconfiguration
 type PKAddIdentityDocumentConfiguration struct {
 	PKAddSecureElementPassConfiguration
@@ -32,7 +34,7 @@ func PKAddIdentityDocumentConfigurationFromID(id objc.ID) *PKAddIdentityDocument
 	return o
 }
 
-// Initialize identity document configuration with corresponding identity document metadata. - Parameters: - metadata: Set of configured metadata defining the required information to add the corresponding pass to Wallet. - completion: Returns the identity document configuration if successful, otherwise returns an error.
+// Returns the identity document configuration.
 func PKAddIdentityDocumentConfigurationConfigurationForMetadataCompletion(metadata *PKIdentityDocumentMetadata, completion func(*PKAddIdentityDocumentConfiguration, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

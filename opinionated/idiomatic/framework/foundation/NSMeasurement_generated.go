@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A numeric quantity labeled with a unit of measure, with support for unit conversion and unit-aware calculations.
+//
 // Measurement wraps [raw.NSMeasurement] with a fluent Go API.
 type Measurement struct {
 	inner *raw.NSMeasurement[objc.ID]
@@ -29,6 +31,8 @@ func MeasurementFromID(id objc.ID) *Measurement {
 	return &Measurement{inner: raw.NSMeasurementFromID[objc.ID](id)}
 }
 
+// Initializes a new measurement with a specified double-precision floating-point value and unit.
+//
 // NewMeasurementWithDoubleValueUnit creates a new [Measurement].
 func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit objc.ID) *Measurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMeasurement")), objc.RegisterName("alloc"))
@@ -42,21 +46,29 @@ func (x *Measurement) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// Indicates whether the measurement can be converted to the given unit.
+//
 // CanBeConvertedToUnit calls the underlying CanBeConvertedToUnit.
 func (x *Measurement) CanBeConvertedToUnit(unit *raw.NSUnit) bool {
 	return x.inner.CanBeConvertedToUnit(unit)
 }
 
+// Returns a measurement created by converting the receiver to the specified unit.
+//
 // MeasurementByConvertingToUnit calls the underlying MeasurementByConvertingToUnit.
 func (x *Measurement) MeasurementByConvertingToUnit(unit *raw.NSUnit) *raw.NSMeasurement[objc.ID] {
 	return x.inner.MeasurementByConvertingToUnit(unit)
 }
 
+// Returns a new measurement by adding the receiver to the specified measurement.
+//
 // MeasurementByAddingMeasurement calls the underlying MeasurementByAddingMeasurement.
 func (x *Measurement) MeasurementByAddingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID] {
 	return x.inner.MeasurementByAddingMeasurement(measurement)
 }
 
+// Returns a new measurement by subtracting the specified measurement from the receiver.
+//
 // MeasurementBySubtractingMeasurement calls the underlying MeasurementBySubtractingMeasurement.
 func (x *Measurement) MeasurementBySubtractingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID] {
 	return x.inner.MeasurementBySubtractingMeasurement(measurement)

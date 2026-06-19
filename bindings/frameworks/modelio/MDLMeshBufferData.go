@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A memory buffer that stores vertex or index data for a Model I/O mesh.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlmeshbufferdata
 type MDLMeshBufferData struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MDLMeshBufferDataFromID(id objc.ID) *MDLMeshBufferData {
 	return o
 }
 
-// @method initWithType:length @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param length the size of buffer to allocate, in bytes
+// Initializes a buffer of the specified length.
 func (o *MDLMeshBufferData) InitWithTypeLength(type_ MDLMeshBufferType, length uint) *MDLMeshBufferData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshBufferDataSelInitWithTypeLength, type_, length)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *MDLMeshBufferData) InitWithTypeLength(type_ MDLMeshBufferType, length u
 	return MDLMeshBufferDataFromID(_ret)
 }
 
-// @method initWithType:data @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param data the data to be used as a mesh buffer. It will be copied.
+// Initializes a buffer containing the specified data.
 func (o *MDLMeshBufferData) InitWithTypeData(type_ MDLMeshBufferType, data *foundation.NSData) *MDLMeshBufferData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshBufferDataSelInitWithTypeData, type_, data.Ptr())
 	if _ret != 0 {

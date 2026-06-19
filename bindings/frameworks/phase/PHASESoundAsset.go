@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sound resource stored in the asset registry.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasesoundasset
 type PHASESoundAsset struct {
 	PHASEAsset

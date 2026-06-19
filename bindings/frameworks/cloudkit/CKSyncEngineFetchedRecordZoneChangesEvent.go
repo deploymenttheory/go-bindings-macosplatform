@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about fetched record zone changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetchedrecordzonechangesevent
 type CKSyncEngineFetchedRecordZoneChangesEvent struct {
 	CKSyncEngineEvent

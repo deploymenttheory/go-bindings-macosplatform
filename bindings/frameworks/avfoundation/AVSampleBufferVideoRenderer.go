@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enqueues video sample buffers for rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer
 type AVSampleBufferVideoRenderer struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func AVSampleBufferVideoRendererFromID(id objc.ID) *AVSampleBufferVideoRenderer 
 	return o
 }
 
+// Tells the video renderer to discard pending enqueued sample buffers.
 func (o *AVSampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImageCompletionHandler(removeDisplayedImage bool, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -93,8 +96,11 @@ func (o *AVSampleBufferVideoRenderer) ResetUpcomingSampleBufferPresentationTimeE
 }
 
 func (o *AVSampleBufferVideoRenderer) RecommendedPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVSampleBufferVideoRendererSelRecommendedPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferVideoRendererSelRecommendedPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @method			loadVideoPerformanceMetricsWithCompletionHandler: @abstract		Gathers a snapshot of the video performance metrics and calls the completion handler with the results. @param			completionHandler The handler to invoke with the video performance metrics. @discussion		If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics.

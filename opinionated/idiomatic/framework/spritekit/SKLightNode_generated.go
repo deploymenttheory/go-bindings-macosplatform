@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A node that lights surrounding nodes.
+//
 // LightNode wraps [raw.SKLightNode] with a fluent Go API.
 type LightNode struct {
 	inner *raw.SKLightNode
@@ -39,7 +41,7 @@ func NewLightNode() *LightNode {
 	return &LightNode{inner: raw.SKLightNodeFromID(_id)}
 }
 
-// Enables or disables lighting contribution from this light node. Set to YES; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to NO; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is YES. @see lightColor @see falloff @see categoryBitMask
+// A Boolean value that indicates whether the node is casting light.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *LightNode) WithEnabled(enabled bool) *LightNode {
@@ -47,7 +49,7 @@ func (x *LightNode) WithEnabled(enabled bool) *LightNode {
 	return x
 }
 
-// Diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting. @see SKUniform @see falloff
+// The diffuse and specular color of the light source.
 //
 // WithLightColor sets the lightColor property and returns the receiver for chaining.
 func (x *LightNode) WithLightColor(lightColor *appkit.NSColor) *LightNode {
@@ -55,7 +57,7 @@ func (x *LightNode) WithLightColor(lightColor *appkit.NSColor) *LightNode {
 	return x
 }
 
-// Ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals. @see lightColor
+// The ambient color of the light.
 //
 // WithAmbientColor sets the ambientColor property and returns the receiver for chaining.
 func (x *LightNode) WithAmbientColor(ambientColor *appkit.NSColor) *LightNode {
@@ -63,7 +65,7 @@ func (x *LightNode) WithAmbientColor(ambientColor *appkit.NSColor) *LightNode {
 	return x
 }
 
-// Color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow. @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
+// The color of any shadow cast by a sprite.
 //
 // WithShadowColor sets the shadowColor property and returns the receiver for chaining.
 func (x *LightNode) WithShadowColor(shadowColor *appkit.NSColor) *LightNode {
@@ -71,7 +73,7 @@ func (x *LightNode) WithShadowColor(shadowColor *appkit.NSColor) *LightNode {
 	return x
 }
 
-// Falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color. @see lightColor
+// The exponent for the rate of decay of the light source.
 //
 // WithFalloff sets the falloff property and returns the receiver for chaining.
 func (x *LightNode) WithFalloff(falloff float64) *LightNode {
@@ -79,7 +81,7 @@ func (x *LightNode) WithFalloff(falloff float64) *LightNode {
 	return x
 }
 
-// The category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light. @see SKSpriteNode.lightingBitMask @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
+// A mask that defines which categories this light belongs to.
 //
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
@@ -87,7 +89,7 @@ func (x *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *LightNode) WithPosition(position corefoundation.CGPoint) *LightNode {
@@ -95,7 +97,7 @@ func (x *LightNode) WithPosition(position corefoundation.CGPoint) *LightNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *LightNode) WithZPosition(zPosition float64) *LightNode {
@@ -103,7 +105,7 @@ func (x *LightNode) WithZPosition(zPosition float64) *LightNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *LightNode) WithZRotation(zRotation float64) *LightNode {
@@ -111,7 +113,7 @@ func (x *LightNode) WithZRotation(zRotation float64) *LightNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *LightNode) WithXScale(xScale float64) *LightNode {
@@ -119,7 +121,7 @@ func (x *LightNode) WithXScale(xScale float64) *LightNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *LightNode) WithYScale(yScale float64) *LightNode {
@@ -127,7 +129,7 @@ func (x *LightNode) WithYScale(yScale float64) *LightNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *LightNode) WithSpeed(speed float64) *LightNode {
@@ -135,7 +137,7 @@ func (x *LightNode) WithSpeed(speed float64) *LightNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *LightNode) WithAlpha(alpha float64) *LightNode {
@@ -143,7 +145,7 @@ func (x *LightNode) WithAlpha(alpha float64) *LightNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *LightNode) WithPaused(paused bool) *LightNode {
@@ -151,7 +153,7 @@ func (x *LightNode) WithPaused(paused bool) *LightNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *LightNode) WithHidden(hidden bool) *LightNode {
@@ -159,7 +161,7 @@ func (x *LightNode) WithHidden(hidden bool) *LightNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *LightNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode {
@@ -167,7 +169,7 @@ func (x *LightNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Lig
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *LightNode) WithName(name string) *LightNode {
@@ -175,7 +177,7 @@ func (x *LightNode) WithName(name string) *LightNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
@@ -183,7 +185,7 @@ func (x *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *LightNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode {
@@ -191,7 +193,7 @@ func (x *LightNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *LightNode {
@@ -199,7 +201,7 @@ func (x *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *Li
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *LightNode) WithConstraints(items ...*raw.SKConstraint) *LightNode {
@@ -222,7 +224,7 @@ func (x *LightNode) WithConstraints(items ...*raw.SKConstraint) *LightNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *LightNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode {
@@ -230,54 +232,72 @@ func (x *LightNode) WithAttributeValues(attributeValues *foundation.NSDictionary
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityElement(accessibilityElement bool) *LightNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityRole(accessibilityRole string) *LightNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LightNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilitySubrole(accessibilitySubrole string) *LightNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LightNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityParent(accessibilityParent objc.ID) *LightNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityHelp(accessibilityHelp string) *LightNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityLabel(accessibilityLabel string) *LightNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *LightNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LightNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides alternative text suggestions for a person’s text selection.
+//
 // Apple documentation: https://developer.apple.com/documentation/browserenginekit/betextalternatives
 type BETextAlternatives struct {
 	foundation.NSObject
@@ -42,6 +44,9 @@ func (o *BETextAlternatives) PrimaryString() *foundation.NSString {
 
 // Array of available aternative strings
 func (o *BETextAlternatives) AlternativeStrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _bETextAlternativesSelAlternativeStrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _bETextAlternativesSelAlternativeStrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

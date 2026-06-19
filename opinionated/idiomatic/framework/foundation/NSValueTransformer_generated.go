@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class used to transform values from one representation to another.
+//
 // ValueTransformer wraps [raw.NSValueTransformer] with a fluent Go API.
 type ValueTransformer struct {
 	inner *raw.NSValueTransformer

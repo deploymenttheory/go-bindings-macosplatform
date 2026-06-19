@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that fades the opacity of some or all layers in a symbol-based image.
+//
 // SymbolPulseEffect wraps [raw.NSSymbolPulseEffect] with a fluent Go API.
 type SymbolPulseEffect struct {
 	inner *raw.NSSymbolPulseEffect
@@ -35,7 +37,7 @@ func NewSymbolPulseEffect() *SymbolPulseEffect {
 	return &SymbolPulseEffect{inner: raw.NSSymbolPulseEffectFromID(_id)}
 }
 
-// Returns a copy of the effect that only animates annotated pulse layers.
+// A copy of the effect requesting an animation that pulses only the layers marked to always pulse.
 //
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
@@ -46,7 +48,7 @@ func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
 	return &SymbolPulseEffect{inner: _r}
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// A copy of the effect requesting an animation that pulses all layers simultaneously.
 //
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {

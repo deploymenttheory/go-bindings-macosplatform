@@ -212,14 +212,14 @@ func (x *Workspace) SetIconForFileOptions(image *raw.NSImage, fullPath string, o
 // Moves the specified URLs to the trash in the same manner as the Finder.
 //
 // RecycleURLsCompletionHandler calls the underlying RecycleURLsCompletionHandler.
-func (x *Workspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block) {
+func (x *Workspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
 	x.inner.RecycleURLsCompletionHandler(uRLs, handler)
 }
 
 // Duplicates the specified URLS asynchronously in the same manner as the Finder.
 //
 // DuplicateURLsCompletionHandler calls the underlying DuplicateURLsCompletionHandler.
-func (x *Workspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block) {
+func (x *Workspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
 	x.inner.DuplicateURLsCompletionHandler(uRLs, handler)
 }
 
@@ -768,8 +768,8 @@ type Workspaceable interface {
 	IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *Image
 	IconForContentType(contentType *uniformtypeidentifiers.UTType) *Image
 	SetIconForFileOptions(image *raw.NSImage, fullPath string, options NSWorkspaceIconCreationOptions) bool
-	RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block)
-	DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block)
+	RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer))
+	DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer))
 	GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, removableFlag *bool, writableFlag *bool, unmountableFlag *bool, description string, fileSystemType string) bool
 	UnmountAndEjectDeviceAtPath(path string) bool
 	UnmountAndEjectDeviceAtURLError(url string) (bool, error)

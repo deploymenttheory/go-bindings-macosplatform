@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient L2-norm pooling filter.
+//
 // CNNPoolingL2NormGradientNode wraps [raw.MPSCNNPoolingL2NormGradientNode] with a fluent Go API.
 type CNNPoolingL2NormGradientNode struct {
 	inner *raw.MPSCNNPoolingL2NormGradientNode

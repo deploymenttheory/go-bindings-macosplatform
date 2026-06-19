@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An emitter of particle sprites.
+// A source of various particle effects.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skemitternode
 type SKEmitterNode struct {
@@ -130,10 +130,12 @@ func SKEmitterNodeFromID(id objc.ID) *SKEmitterNode {
 	return o
 }
 
+// Advances the emitter particle simulation.
 func (o *SKEmitterNode) AdvanceSimulationTime(sec float64) {
 	o.Ptr().Send(_sKEmitterNodeSelAdvanceSimulationTime, sec)
 }
 
+// Removes all existing particles and restarts the simulation.
 func (o *SKEmitterNode) ResetSimulation() {
 	o.Ptr().Send(_sKEmitterNodeSelResetSimulation)
 }

@@ -34,7 +34,7 @@ func MTRServiceAreaClusterSkipAreaResponseParamsFromID(id objc.ID) *MTRServiceAr
 	return &MTRServiceAreaClusterSkipAreaResponseParams{inner: raw.MTRServiceAreaClusterSkipAreaResponseParamsFromID(id)}
 }
 
-// Initialize an MTRServiceAreaClusterSkipAreaResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTRServiceAreaClusterSkipAreaResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
 // NewMTRServiceAreaClusterSkipAreaResponseParamsWithResponseValueError creates a new [MTRServiceAreaClusterSkipAreaResponseParams].
 func NewMTRServiceAreaClusterSkipAreaResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRServiceAreaClusterSkipAreaResponseParams, error) {

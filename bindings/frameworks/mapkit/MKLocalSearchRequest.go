@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The parameters to use when searching for points of interest on the map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklocalsearchrequest
 type MKLocalSearchRequest struct {
 	foundation.NSObject

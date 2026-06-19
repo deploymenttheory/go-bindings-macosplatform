@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the app’s memory use.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmemorymetric
 type MXMemoryMetric struct {
 	MXMetric
@@ -33,12 +35,18 @@ func MXMemoryMetricFromID(id objc.ID) *MXMemoryMetric {
 
 // @property      peakMemoryUsage @abstract      A single value representing the peak memory consumption of the application. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXMemoryMetric) PeakMemoryUsage() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXMemoryMetricSelPeakMemoryUsage)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXMemoryMetricSelPeakMemoryUsage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      averageSuspendedMemory @abstract      Average memory of the application upon suspend. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXMemoryMetric) AverageSuspendedMemory() *MXAverage[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*MXAverage[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXMemoryMetricSelAverageSuspendedMemory)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXMemoryMetricSelAverageSuspendedMemory)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXAverageFromID[*foundation.NSUnitInformationStorage](_ret)
 }

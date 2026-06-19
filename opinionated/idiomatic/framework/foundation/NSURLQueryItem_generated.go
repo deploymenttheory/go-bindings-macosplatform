@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a single name/value pair for an item in the query portion of a URL.
+//
 // URLQueryItem wraps [raw.NSURLQueryItem] with a fluent Go API.
 type URLQueryItem struct {
 	inner *raw.NSURLQueryItem
@@ -30,6 +32,8 @@ func URLQueryItemFromID(id objc.ID) *URLQueryItem {
 	return &URLQueryItem{inner: raw.NSURLQueryItemFromID(id)}
 }
 
+// Initializes a newly allocated query item with the specified name and value.
+//
 // NewURLQueryItemWithNameValue creates a new [URLQueryItem].
 func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLQueryItem")), objc.RegisterName("alloc"))

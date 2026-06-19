@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about a finished send operation.
+//
 // SyncEngineDidSendChangesEvent wraps [raw.CKSyncEngineDidSendChangesEvent] with a fluent Go API.
 type SyncEngineDidSendChangesEvent struct {
 	inner *raw.CKSyncEngineDidSendChangesEvent

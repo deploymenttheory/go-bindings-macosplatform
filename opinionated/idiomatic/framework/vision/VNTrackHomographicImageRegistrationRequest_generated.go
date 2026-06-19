@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An image-analysis request, as a stateful request you track over time, that determines the perspective warp matrix necessary to align the content of two images.
+//
 // TrackHomographicImageRegistrationRequest wraps [raw.VNTrackHomographicImageRegistrationRequest] with a fluent Go API.
 type TrackHomographicImageRegistrationRequest struct {
 	inner *raw.VNTrackHomographicImageRegistrationRequest
@@ -39,7 +41,7 @@ func NewTrackHomographicImageRegistrationRequest() *TrackHomographicImageRegistr
 	return &TrackHomographicImageRegistrationRequest{inner: raw.VNTrackHomographicImageRegistrationRequestFromID(_id)}
 }
 
-// @brief Create a new request that can statefully track the homographic registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero.
+// Creates a new request that tracks the homographic transformation of two images, with a system callback on completion.
 //
 // NewTrackHomographicImageRegistrationRequestWithCompletionHandler creates a new [TrackHomographicImageRegistrationRequest].
 func NewTrackHomographicImageRegistrationRequestWithCompletionHandler(completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TrackHomographicImageRegistrationRequest {
@@ -48,7 +50,7 @@ func NewTrackHomographicImageRegistrationRequestWithCompletionHandler(completion
 	return &TrackHomographicImageRegistrationRequest{inner: raw.VNTrackHomographicImageRegistrationRequestFromID(_id)}
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *TrackHomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackHomographicImageRegistrationRequest {
@@ -56,7 +58,7 @@ func (x *TrackHomographicImageRegistrationRequest) WithRegionOfInterest(regionOf
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *TrackHomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackHomographicImageRegistrationRequest {
@@ -64,7 +66,7 @@ func (x *TrackHomographicImageRegistrationRequest) WithPreferBackgroundProcessin
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *TrackHomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackHomographicImageRegistrationRequest {
@@ -72,7 +74,7 @@ func (x *TrackHomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly b
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *TrackHomographicImageRegistrationRequest) WithRevision(revision uint) *TrackHomographicImageRegistrationRequest {

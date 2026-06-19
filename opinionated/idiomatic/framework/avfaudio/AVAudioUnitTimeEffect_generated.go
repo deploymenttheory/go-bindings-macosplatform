@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that processes audio in nonreal time.
+//
 // AudioUnitTimeEffect wraps [raw.AVAudioUnitTimeEffect] with a fluent Go API.
 type AudioUnitTimeEffect struct {
 	inner *raw.AVAudioUnitTimeEffect
@@ -29,7 +31,7 @@ func AudioUnitTimeEffectFromID(id objc.ID) *AudioUnitTimeEffect {
 	return &AudioUnitTimeEffect{inner: raw.AVAudioUnitTimeEffectFromID(id)}
 }
 
-// @method initWithAudioComponentDescription: @abstract create an AVAudioUnitTimeEffect object @param audioComponentDescription AudioComponentDescription of the audio unit to be initialized @discussion The componentType must be kAudioUnitType_FormatConverter
+// Creates a time effect audio unit with the specified description.
 //
 // NewAudioUnitTimeEffectWithAudioComponentDescription creates a new [AudioUnitTimeEffect].
 func NewAudioUnitTimeEffectWithAudioComponentDescription(audioComponentDescription objc.ID) *AudioUnitTimeEffect {
@@ -38,7 +40,7 @@ func NewAudioUnitTimeEffectWithAudioComponentDescription(audioComponentDescripti
 	return &AudioUnitTimeEffect{inner: raw.AVAudioUnitTimeEffectFromID(_id)}
 }
 
-// @property bypass @abstract bypass state of the audio unit
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitTimeEffect) WithBypass(bypass bool) *AudioUnitTimeEffect {

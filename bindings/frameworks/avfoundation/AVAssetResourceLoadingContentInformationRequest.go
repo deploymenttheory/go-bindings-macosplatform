@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query for retrieving essential information about a resource that an asset resource-loading request references.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetresourceloadingcontentinformationrequest
 type AVAssetResourceLoadingContentInformationRequest struct {
 	foundation.NSObject
@@ -55,8 +57,11 @@ func (o *AVAssetResourceLoadingContentInformationRequest) SetContentType(content
 
 // @property		allowedContentTypes @abstract		An array showing the types of data which will be accepted as a valid response for the requested resource. @discussion	If an AVAssetResourceLoadingRequest's contentInformationRequest is not nil, ensure that the value assigned to the contentType property is in this array. Otherwise, calling -finishLoading on the associated request will result in an exception.
 func (o *AVAssetResourceLoadingContentInformationRequest) AllowedContentTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetResourceLoadingContentInformationRequestSelAllowedContentTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingContentInformationRequestSelAllowedContentTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property 		contentLength @abstract		Indicates the length of the requested resource, in bytes. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to the number of bytes contained by the requested resource.

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that represents a set of displays, apps, and windows that your app can capture.
+//
 // ShareableContent wraps [raw.SCShareableContent] with a fluent Go API.
 type ShareableContent struct {
 	inner *raw.SCShareableContent

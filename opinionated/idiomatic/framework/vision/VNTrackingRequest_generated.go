@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for image-analysis requests that track unique features across multiple images or video frames.
+//
 // TrackingRequest wraps [raw.VNTrackingRequest] with a fluent Go API.
 type TrackingRequest struct {
 	inner *raw.VNTrackingRequest
@@ -36,7 +38,7 @@ func NewTrackingRequest() *TrackingRequest {
 	return &TrackingRequest{inner: raw.VNTrackingRequestFromID(_id)}
 }
 
-// @property property inputObservation @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
+// The observation object defining a region to track.
 //
 // WithInputObservation sets the inputObservation property and returns the receiver for chaining.
 func (x *TrackingRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest {
@@ -44,7 +46,7 @@ func (x *TrackingRequest) WithInputObservation(inputObservation DetectedObjectOb
 	return x
 }
 
-// @property property trackingLevel @abstract Tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
+// A value for specifying whether to prioritize speed or location accuracy.
 //
 // WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
 func (x *TrackingRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackingRequest {
@@ -52,7 +54,7 @@ func (x *TrackingRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel
 	return x
 }
 
-// @property property lastFrame @abstract This property allows marking the last frame for tracking using current tracker. If set to YES, the results for this frame will be processed and returned and the current tracker will be released to the pool of available trackers
+// A Boolean that indicates the last frame in a tracking sequence.
 //
 // WithLastFrame sets the lastFrame property and returns the receiver for chaining.
 func (x *TrackingRequest) WithLastFrame(lastFrame bool) *TrackingRequest {
@@ -60,7 +62,7 @@ func (x *TrackingRequest) WithLastFrame(lastFrame bool) *TrackingRequest {
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *TrackingRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackingRequest {
@@ -68,7 +70,7 @@ func (x *TrackingRequest) WithRegionOfInterest(regionOfInterest corefoundation.C
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *TrackingRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackingRequest {
@@ -76,7 +78,7 @@ func (x *TrackingRequest) WithPreferBackgroundProcessing(preferBackgroundProcess
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *TrackingRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest {
@@ -84,7 +86,7 @@ func (x *TrackingRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest {
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *TrackingRequest) WithRevision(revision uint) *TrackingRequest {
@@ -92,7 +94,7 @@ func (x *TrackingRequest) WithRevision(revision uint) *TrackingRequest {
 	return x
 }
 
-// @brief This class method returns a maximum number of allowed simultaneously executed trackers for [request revision x tracking level] combination @details The total number of simultaneously running trackes is limited due to performance concerns. There is a limit for each combination of [request revision x tracking level] and this method could be used to query that limit @param revision The revision of a specific tracking request (an object of a subclass of VNTrackingRequest). @param trackingLevel Tracking level of a specific tracking request (an object of a subclass of VNTrackingRequest). @param error The address of a variable that will be populated with an error upon failure. If the caller does not need this information, NULL can be passed. @result Maximum number of trackers for a given combination [request revision x tracking level], or 0 if such combination doesn't exist
+// Returns the maximum number of simultaneous trackers for the request.
 //
 // SupportedNumberOfTrackersAndReturnError calls the underlying SupportedNumberOfTrackersAndReturnError.
 func (x *TrackingRequest) SupportedNumberOfTrackersAndReturnError() (uint, error) {

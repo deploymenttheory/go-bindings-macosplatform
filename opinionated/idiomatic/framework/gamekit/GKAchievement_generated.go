@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An achievement you can award a player as they make progress toward and reach a goal in your game.
+//
 // Achievement wraps [raw.GKAchievement] with a fluent Go API.
 type Achievement struct {
 	inner *raw.GKAchievement
@@ -34,7 +36,7 @@ func AchievementFromID(id objc.ID) *Achievement {
 	return &Achievement{inner: raw.GKAchievementFromID(id)}
 }
 
-// Designated initializer
+// Initializes an achievement for the local player.
 //
 // NewAchievementWithIdentifier creates a new [Achievement].
 func NewAchievementWithIdentifier(identifier string) *Achievement {
@@ -43,7 +45,7 @@ func NewAchievementWithIdentifier(identifier string) *Achievement {
 	return &Achievement{inner: raw.GKAchievementFromID(_id)}
 }
 
-// Initialize the achievement for a specific player. Use to submit participant achievements when ending a turn-based match.
+// Initializes an achievement for a player.
 //
 // NewAchievementWithIdentifierPlayer creates a new [Achievement].
 func NewAchievementWithIdentifierPlayer(identifier string, player *raw.GKPlayer) *Achievement {
@@ -61,7 +63,7 @@ func NewAchievementWithIdentifierForPlayer(identifier string, playerID string) *
 	return &Achievement{inner: raw.GKAchievementFromID(_id)}
 }
 
-// Achievement identifier
+// The identifier for the achievement that you enter in App Store Connect.
 //
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *Achievement) WithIdentifier(identifier string) *Achievement {
@@ -69,7 +71,7 @@ func (x *Achievement) WithIdentifier(identifier string) *Achievement {
 	return x
 }
 
-// Required, Percentage of achievement complete.
+// A percentage value that states how far the player has progressed on the achievement.
 //
 // WithPercentComplete sets the percentComplete property and returns the receiver for chaining.
 func (x *Achievement) WithPercentComplete(percentComplete float64) *Achievement {
@@ -77,7 +79,7 @@ func (x *Achievement) WithPercentComplete(percentComplete float64) *Achievement 
 	return x
 }
 
-// A banner will be momentarily displayed after reporting a completed achievement
+// A Boolean value that indicates whether GameKit displays a banner when the player completes the achievement.
 //
 // WithShowsCompletionBanner sets the showsCompletionBanner property and returns the receiver for chaining.
 func (x *Achievement) WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement {
@@ -182,7 +184,7 @@ func (x *Achievement) PlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// Given a list of players, return a subset of that list containing only players that are eligible to receive a challenge for the achievement.
+// Finds the subset of players who can earn an achievement.
 //
 // SelectChallengeablePlayers blocks until the operation completes or ctx is cancelled.
 func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players *foundation.NSArray[*raw.GKPlayer]) (*foundation.NSArray[*raw.GKPlayer], error) {
@@ -217,16 +219,39 @@ func (x *Achievement) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArr
 
 // * This method is obsolete. It will never be invoked and its implementation does nothing**
 //
-// SelectChallengeablePlayerIDsWithCompletionHandler calls the underlying SelectChallengeablePlayerIDsWithCompletionHandler.
-func (x *Achievement) SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs *foundation.NSArray[*foundation.NSString], completionHandler objc.Block) {
-	x.inner.SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs, completionHandler)
+// SelectChallengeablePlayerIDs blocks until the operation completes or ctx is cancelled.
+func (x *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerIDs *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs, func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
+// Provides a view controller that you present to the player to issue an achievement challenge.
+//
 // ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
-func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
+func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
 	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
 }
 
+// Provides a view controller that you present to the player to issue an achievement challenge.
+//
 // ChallengeComposeControllerWithMessagePlayersCompletion calls the underlying ChallengeComposeControllerWithMessagePlayersCompletion.
 func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController {
 	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletion(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
@@ -252,8 +277,8 @@ type Achievementable interface {
 	PlayerID() string
 	SelectChallengeablePlayers(ctx context.Context, players *foundation.NSArray[*raw.GKPlayer]) (*foundation.NSArray[*raw.GKPlayer], error)
 	IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string)
-	SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs *foundation.NSArray[*foundation.NSString], completionHandler objc.Block)
-	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController
+	SelectChallengeablePlayerIDs(ctx context.Context, playerIDs *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSString], error)
+	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController
 	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
 }
 

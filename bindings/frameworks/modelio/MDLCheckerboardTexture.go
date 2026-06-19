@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A generator of texel data that creates a checkerboard pattern with two specified colors.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlcheckerboardtexture
 type MDLCheckerboardTexture struct {
 	MDLTexture
@@ -38,6 +40,7 @@ func MDLCheckerboardTextureFromID(id objc.ID) *MDLCheckerboardTexture {
 	return o
 }
 
+// Initializes a checkerboard texture with the specified colors and other properties.
 func (o *MDLCheckerboardTexture) InitWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name *foundation.NSString, dimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, color1 unsafe.Pointer, color2 unsafe.Pointer) *MDLCheckerboardTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLCheckerboardTextureSelInitWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2, divisions, name.Ptr(), dimensions, channelCount, channelEncoding, color1, color2)
 	if _ret != 0 {

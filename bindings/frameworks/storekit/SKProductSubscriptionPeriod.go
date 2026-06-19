@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing the subscription period duration information.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skproductsubscriptionperiod
 // Deprecated: Use Product.SubscriptionPeriod.
 type SKProductSubscriptionPeriod struct {

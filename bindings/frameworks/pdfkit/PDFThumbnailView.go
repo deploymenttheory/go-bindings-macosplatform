@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains a set of thumbnails, each of which represents a page in a PDF document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfthumbnailview
 type PDFThumbnailView struct {
 	appkit.NSView

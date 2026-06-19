@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A formatter that converts between dates and their textual representations.
+//
 // DateFormatter wraps [raw.NSDateFormatter] with a fluent Go API.
 type DateFormatter struct {
 	inner *raw.NSDateFormatter
@@ -32,6 +34,8 @@ func DateFormatterFromID(id objc.ID) *DateFormatter {
 	return &DateFormatter{inner: raw.NSDateFormatterFromID(id)}
 }
 
+// Initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.
+//
 // NewDateFormatterWithDateFormatAllowNaturalLanguage creates a new [DateFormatter].
 func NewDateFormatterWithDateFormatAllowNaturalLanguage(format string, flag bool) *DateFormatter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDateFormatter")), objc.RegisterName("alloc"))
@@ -1229,6 +1233,8 @@ func (x *DateFormatter) SetDoesRelativeDateFormatting(doesRelativeDateFormatting
 	x.inner.SetDoesRelativeDateFormatting(doesRelativeDateFormatting)
 }
 
+// Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
+//
 // AllowsNaturalLanguage calls the underlying AllowsNaturalLanguage.
 func (x *DateFormatter) AllowsNaturalLanguage() bool {
 	return x.inner.AllowsNaturalLanguage()

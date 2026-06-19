@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An action that is performed when, for example, a PDF annotation is activated or an outline item is clicked.
+//
 // Action wraps [raw.PDFAction] with a fluent Go API.
 type Action struct {
 	inner *raw.PDFAction

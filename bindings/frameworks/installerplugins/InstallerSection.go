@@ -51,8 +51,11 @@ func (o *InstallerSection) DidLoadMainNib() {
 
 // @method		sharedDictionary @discussion A global Mutable Dictionary which is global to the Install session. Use this dictionary to pass information between sections. This dictionary should not be used to store state for your section or its panes.
 func (o *InstallerSection) SharedDictionary() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _installerSectionSelSharedDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _installerSectionSelSharedDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method     gotoPane: @discussion This method causes the current pane to exit and "pane" to be made active.  This effectively replaces the current pane and does not place the current pane onto the pane stack. gotoPane does not invoke shouldExit method for the current pane. gotoPane is typically not overriden by a subclass.

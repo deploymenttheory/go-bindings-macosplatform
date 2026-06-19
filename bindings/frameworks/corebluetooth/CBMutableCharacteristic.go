@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A characteristic of a local peripheral’s service.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic
 type CBMutableCharacteristic struct {
 	CBCharacteristic
@@ -36,7 +38,7 @@ func CBMutableCharacteristicFromID(id objc.ID) *CBMutableCharacteristic {
 	return o
 }
 
-// @method initWithType:properties:value:permissions @param UUID			The Bluetooth UUID of the characteristic. @param properties	The properties of the characteristic. @param value		The characteristic value to be cached. If <i>nil</i>, the value will be dynamic and requested on-demand. @param permissions	The permissions of the characteristic value. @discussion			Returns an initialized characteristic.
+// Creates a mutable characteristic with specified permissions, properties, and value.
 func (o *CBMutableCharacteristic) InitWithTypePropertiesValuePermissions(uUID *CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *CBMutableCharacteristic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableCharacteristicSelInitWithTypePropertiesValuePermissions, uUID.Ptr(), properties, value.Ptr(), permissions)
 	if _ret != 0 {

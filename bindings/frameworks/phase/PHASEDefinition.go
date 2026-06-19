@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class that adds a name to framework definitions.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasedefinition
 type PHASEDefinition struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient normalization kernel applied across feature channels.
+//
 // CNNCrossChannelNormalizationGradient wraps [raw.MPSCNNCrossChannelNormalizationGradient] with a fluent Go API.
 type CNNCrossChannelNormalizationGradient struct {
 	inner *raw.MPSCNNCrossChannelNormalizationGradient
@@ -221,7 +223,7 @@ func (x *CNNCrossChannelNormalizationGradient) WithDestinationImageAllocator(des
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalizationGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNCrossChannelNormalizationGradient {
@@ -229,7 +231,7 @@ func (x *CNNCrossChannelNormalizationGradient) WithOptions(options mpscore.MPSKe
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalizationGradient) WithLabel(label string) *CNNCrossChannelNormalizationGradient {

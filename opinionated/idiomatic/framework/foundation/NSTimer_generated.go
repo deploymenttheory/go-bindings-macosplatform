@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A timer that fires after a certain time interval has elapsed, sending a specified message to a target object.
+//
 // Timer wraps [raw.NSTimer] with a fluent Go API.
 type Timer struct {
 	inner *raw.NSTimer

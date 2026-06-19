@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a sample that has been deleted from the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkdeletedobject
 type HKDeletedObject struct {
 	foundation.NSObject
@@ -42,6 +44,9 @@ func (o *HKDeletedObject) UUID() *foundation.NSUUID {
 
 // @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
 func (o *HKDeletedObject) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKDeletedObjectSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKDeletedObjectSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

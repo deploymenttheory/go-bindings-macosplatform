@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient instance normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationgradient
 type MPSCNNInstanceNormalizationGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

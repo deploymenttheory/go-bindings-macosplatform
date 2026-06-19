@@ -56,12 +56,17 @@ func (e EvCmd) String() string {
 	}
 }
 
+// The location of the image capture device.
 type ICDeviceLocationType uint64
 
 const (
-	ICDeviceLocationTypeLocal     ICDeviceLocationType = 256
-	ICDeviceLocationTypeShared    ICDeviceLocationType = 512
-	ICDeviceLocationTypeBonjour   ICDeviceLocationType = 1024
+	// A device that’s directly attached to the Mac through its USB or FireWire port.
+	ICDeviceLocationTypeLocal ICDeviceLocationType = 256
+	// A device that’s shared by other Mac hosts.
+	ICDeviceLocationTypeShared ICDeviceLocationType = 512
+	// A supported Bonjour services device.
+	ICDeviceLocationTypeBonjour ICDeviceLocationType = 1024
+	// A paired Bluetooth device.
 	ICDeviceLocationTypeBluetooth ICDeviceLocationType = 2048
 )
 
@@ -80,14 +85,20 @@ func (e ICDeviceLocationType) String() string {
 	}
 }
 
+// Masks for detecting different device locations.
 type ICDeviceLocationTypeMask uint64
 
 const (
-	ICDeviceLocationTypeMaskLocal     ICDeviceLocationTypeMask = 256
-	ICDeviceLocationTypeMaskShared    ICDeviceLocationTypeMask = 512
-	ICDeviceLocationTypeMaskBonjour   ICDeviceLocationTypeMask = 1024
+	// A mask for detecting a local device, such as USB or FireWire.
+	ICDeviceLocationTypeMaskLocal ICDeviceLocationTypeMask = 256
+	// A mask for detecting a device shared by another Mac host.
+	ICDeviceLocationTypeMaskShared ICDeviceLocationTypeMask = 512
+	// A mask for detecting a network device that publishes a Bonjour service.
+	ICDeviceLocationTypeMaskBonjour ICDeviceLocationTypeMask = 1024
+	// A mask for detecting a paired Bluetooth device.
 	ICDeviceLocationTypeMaskBluetooth ICDeviceLocationTypeMask = 2048
-	ICDeviceLocationTypeMaskRemote    ICDeviceLocationTypeMask = 65024
+	// A mask for detecting a remote device, such as a shared, Bonjour, or Bluetooth device.
+	ICDeviceLocationTypeMaskRemote ICDeviceLocationTypeMask = 65024
 )
 
 func (e ICDeviceLocationTypeMask) String() string {
@@ -107,10 +118,13 @@ func (e ICDeviceLocationTypeMask) String() string {
 	}
 }
 
+// The type of image capture device.
 type ICDeviceType uint64
 
 const (
-	ICDeviceTypeCamera  ICDeviceType = 1
+	// The device is a camera.
+	ICDeviceTypeCamera ICDeviceType = 1
+	// The device is a scanner.
 	ICDeviceTypeScanner ICDeviceType = 2
 )
 
@@ -125,10 +139,13 @@ func (e ICDeviceType) String() string {
 	}
 }
 
+// Masks for detecting different device types.
 type ICDeviceTypeMask uint64
 
 const (
-	ICDeviceTypeMaskCamera  ICDeviceTypeMask = 1
+	// A mask for detecting a camera.
+	ICDeviceTypeMaskCamera ICDeviceTypeMask = 1
+	// A mask for detecting a scanner.
 	ICDeviceTypeMaskScanner ICDeviceTypeMask = 2
 )
 
@@ -143,16 +160,25 @@ func (e ICDeviceTypeMask) String() string {
 	}
 }
 
+// The file’s orientation type.
 type ICEXIFOrientationType uint64
 
 const (
+	// Normal
 	ICEXIFOrientation1 ICEXIFOrientationType = 1
+	// Flipped horizontally
 	ICEXIFOrientation2 ICEXIFOrientationType = 2
+	// Rotated 180°
 	ICEXIFOrientation3 ICEXIFOrientationType = 3
+	// Flipped vertically
 	ICEXIFOrientation4 ICEXIFOrientationType = 4
+	// Rotated 90° CCW and flipped vertically
 	ICEXIFOrientation5 ICEXIFOrientationType = 5
+	// Rotated 90° CCW
 	ICEXIFOrientation6 ICEXIFOrientationType = 6
+	// Rotated 90° CW and flipped vertically
 	ICEXIFOrientation7 ICEXIFOrientationType = 7
+	// Rotated 90° CW
 	ICEXIFOrientation8 ICEXIFOrientationType = 8
 )
 
@@ -596,6 +622,7 @@ func (e ICReturnThumbnailErrorCode) String() string {
 	}
 }
 
+// The number of bits per channel in the scanned image.
 type ICScannerBitDepth uint64
 
 const (
@@ -617,6 +644,7 @@ func (e ICScannerBitDepth) String() string {
 	}
 }
 
+// The color data formats relevant to multichannel data.
 type ICScannerColorDataFormatType uint64
 
 const (
@@ -635,6 +663,7 @@ func (e ICScannerColorDataFormatType) String() string {
 	}
 }
 
+// The supported document size types.
 type ICScannerDocumentType uint64
 
 const (
@@ -863,13 +892,18 @@ func (e ICScannerDocumentType) String() string {
 	}
 }
 
+// The types of scanner features.
 type ICScannerFeatureType uint64
 
 const (
+	// A feature that can have one of several discrete values, strings, or numbers.
 	ICScannerFeatureTypeEnumeration ICScannerFeatureType = 0
-	ICScannerFeatureTypeRange       ICScannerFeatureType = 1
-	ICScannerFeatureTypeBoolean     ICScannerFeatureType = 2
-	ICScannerFeatureTypeTemplate    ICScannerFeatureType = 3
+	// A feature with a value that lies within a range.
+	ICScannerFeatureTypeRange ICScannerFeatureType = 1
+	// A feature with a value of YES or NO.
+	ICScannerFeatureTypeBoolean ICScannerFeatureType = 2
+	// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
+	ICScannerFeatureTypeTemplate ICScannerFeatureType = 3
 )
 
 func (e ICScannerFeatureType) String() string {
@@ -887,11 +921,15 @@ func (e ICScannerFeatureType) String() string {
 	}
 }
 
+// Flags to indicate the state of the scanner functional unit.
 type ICScannerFunctionalUnitState uint64
 
 const (
-	ICScannerFunctionalUnitStateReady                  ICScannerFunctionalUnitState = 1
-	ICScannerFunctionalUnitStateScanInProgress         ICScannerFunctionalUnitState = 2
+	// A flag indicating that the functional unit is ready for operation.
+	ICScannerFunctionalUnitStateReady ICScannerFunctionalUnitState = 1
+	// A flag indicating that the functional unit is performing a scan.
+	ICScannerFunctionalUnitStateScanInProgress ICScannerFunctionalUnitState = 2
+	// A flag indicating that the functional unit is performing an overview scan.
 	ICScannerFunctionalUnitStateOverviewScanInProgress ICScannerFunctionalUnitState = 4
 )
 
@@ -908,13 +946,18 @@ func (e ICScannerFunctionalUnitState) String() string {
 	}
 }
 
+// The types of scanner functional units.
 type ICScannerFunctionalUnitType uint64
 
 const (
-	ICScannerFunctionalUnitTypeFlatbed              ICScannerFunctionalUnitType = 0
+	// A flatbed functional unit.
+	ICScannerFunctionalUnitTypeFlatbed ICScannerFunctionalUnitType = 0
+	// A transparency functional unit for scanning positives.
 	ICScannerFunctionalUnitTypePositiveTransparency ICScannerFunctionalUnitType = 1
+	// A transparency functional unit for scanning negatives.
 	ICScannerFunctionalUnitTypeNegativeTransparency ICScannerFunctionalUnitType = 2
-	ICScannerFunctionalUnitTypeDocumentFeeder       ICScannerFunctionalUnitType = 3
+	// A document feeder functional unit.
+	ICScannerFunctionalUnitTypeDocumentFeeder ICScannerFunctionalUnitType = 3
 )
 
 func (e ICScannerFunctionalUnitType) String() string {
@@ -932,6 +975,7 @@ func (e ICScannerFunctionalUnitType) String() string {
 	}
 }
 
+// The unit of measurement used by the scanner.
 type ICScannerMeasurementUnit uint64
 
 const (
@@ -962,6 +1006,7 @@ func (e ICScannerMeasurementUnit) String() string {
 	}
 }
 
+// The pixel data types.
 type ICScannerPixelDataType uint64
 
 const (
@@ -1001,10 +1046,13 @@ func (e ICScannerPixelDataType) String() string {
 	}
 }
 
+// The modes for transferring scan data from the scanner functional unit.
 type ICScannerTransferMode uint64
 
 const (
-	ICScannerTransferModeFileBased   ICScannerTransferMode = 0
+	// The mode for transferring the scan as a file.
+	ICScannerTransferModeFileBased ICScannerTransferMode = 0
+	// The mode for transferring the scan as data.
 	ICScannerTransferModeMemoryBased ICScannerTransferMode = 1
 )
 

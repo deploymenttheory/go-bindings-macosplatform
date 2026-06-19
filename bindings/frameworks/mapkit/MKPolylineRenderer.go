@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A visual representation of any polyline overlay object.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpolylinerenderer
 type MKPolylineRenderer struct {
 	MKOverlayPathRenderer
@@ -34,6 +36,7 @@ func MKPolylineRendererFromID(id objc.ID) *MKPolylineRenderer {
 	return o
 }
 
+// Creates a new overlay view using the specified polyline overlay object.
 func (o *MKPolylineRenderer) InitWithPolyline(polyline *MKPolyline) *MKPolylineRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolylineRendererSelInitWithPolyline, polyline.Ptr())
 	if _ret != 0 {

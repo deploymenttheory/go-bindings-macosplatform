@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager
 type ASAuthorizationWebBrowserPublicKeyCredentialManager struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(id objc.ID) *ASAu
 	return o
 }
 
+// Initializes a credential manager.
 func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) Init() *ASAuthorizationWebBrowserPublicKeyCredentialManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPublicKeyCredentialManagerSelInit)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) Init() *ASAuthoriz
 	return ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(_ret)
 }
 
+// Requests a person’s permission to use their passkeys.
 func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,6 +57,7 @@ func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizati
 	o.Ptr().Send(_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelRequestAuthorizationForPublicKeyCredentials, __block_completionHandler)
 }
 
+// Gets a list of passkeys available for authenticating with the given relying party.
 func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingPartyCompletionHandler(relyingParty *foundation.NSString, completionHandler func(*foundation.NSArray[*ASAuthorizationWebBrowserPlatformPublicKeyCredential])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

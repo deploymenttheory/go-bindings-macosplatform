@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "framework": "LinkPresentation",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "LPLinkMetadata": {
+      "doc": "An object that contains metadata about a URL.",
+      "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata"
+    },
+    "LPLinkView": {
+      "doc": "A rich visual representation of a link.",
+      "url": "https://developer.apple.com/documentation/linkpresentation/lplinkview"
+    },
+    "LPMetadataProvider": {
+      "doc": "An object that retrieves metadata for a URL.",
+      "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider"
+    }
+  },
+  "enums": {
+    "LPErrorCode": {
+      "doc": "Possible error values that can be returned from LinkPresentation APIs.",
+      "url": "https://developer.apple.com/documentation/linkpresentation/lperrorcode"
+    }
+  },
+  "methods": {
+    "LPLinkView": {
+      "-initWithMetadata:": {
+        "doc": "Initializes a link view with specified metadata.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkview/init(metadata:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes a placeholder link view without metadata for a given URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkview/init(url:)-6f6kt"
+      }
+    },
+    "LPMetadataProvider": {
+      "-cancel": {
+        "doc": "Cancels a metadata request.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider/cancel()"
+      },
+      "-startFetchingMetadataForRequest:completionHandler:": {
+        "doc": "Fetches metadata for the given NSURLRequest.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider/startfetchingmetadata(for:completionhandler:)-9e6s8"
+      },
+      "-startFetchingMetadataForURL:completionHandler:": {
+        "doc": "Fetches metadata for the given URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider/startfetchingmetadata(for:completionhandler:)-54z5i"
+      }
+    }
+  },
+  "properties": {
+    "LPLinkMetadata": {
+      "URL": {
+        "doc": "The URL that returned the metadata, taking server-side redirects into account.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/url"
+      },
+      "iconProvider": {
+        "doc": "An object that retrieves data corresponding to a representative icon for the URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/iconprovider"
+      },
+      "imageProvider": {
+        "doc": "An object that retrieves data corresponding to a representative image for the URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/imageprovider"
+      },
+      "originalURL": {
+        "doc": "The original URL of the metadata request.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/originalurl"
+      },
+      "remoteVideoURL": {
+        "doc": "A remote URL corresponding to a representative video for the URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/remotevideourl"
+      },
+      "title": {
+        "doc": "A representative title for the URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/title"
+      },
+      "videoProvider": {
+        "doc": "An object that retrieves data corresponding to a representative video for the URL.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkmetadata/videoprovider"
+      }
+    },
+    "LPLinkView": {
+      "metadata": {
+        "doc": "The metadata from which to generate a rich presentation.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lplinkview/metadata"
+      }
+    },
+    "LPMetadataProvider": {
+      "shouldFetchSubresources": {
+        "doc": "A Boolean value indicating whether to download subresources specified by the metadata.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider/shouldfetchsubresources"
+      },
+      "timeout": {
+        "doc": "The time interval after which the request automatically fails if it hasn’t already completed.",
+        "url": "https://developer.apple.com/documentation/linkpresentation/lpmetadataprovider/timeout"
+      }
+    }
+  }
+}

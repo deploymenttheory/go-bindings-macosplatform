@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNConvolutionTranspose kernel
+// A representation of a transposed convolution.
 //
 // CNNConvolutionTransposeNode wraps [raw.MPSCNNConvolutionTransposeNode] with a fluent Go API.
 type CNNConvolutionTransposeNode struct {

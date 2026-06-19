@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance for configuring the system content-sharing picker.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerconfiguration
 type SCContentSharingPickerConfiguration[NSCopying purego.AnyObject] struct {
 	foundation.NSObject
@@ -49,22 +51,28 @@ func (o *SCContentSharingPickerConfiguration[NSCopying]) SetAllowedPickerModes(a
 
 // @abstract excludedWindowIDs Excludes CGWindowIDs for picking
 func (o *SCContentSharingPickerConfiguration[NSCopying]) ExcludedWindowIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _sCContentSharingPickerConfigurationSelExcludedWindowIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentSharingPickerConfigurationSelExcludedWindowIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *SCContentSharingPickerConfiguration[NSCopying]) SetExcludedWindowIDs(excludedWindowIDs *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_sCContentSharingPickerConfigurationSelSetExcludedWindowIDs, excludedWindowIDs)
+	o.Ptr().Send(_sCContentSharingPickerConfigurationSelSetExcludedWindowIDs, excludedWindowIDs.Ptr())
 }
 
 // @abstract excludedBundleIDs Excludes bundle IDs for picking
 func (o *SCContentSharingPickerConfiguration[NSCopying]) ExcludedBundleIDs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sCContentSharingPickerConfigurationSelExcludedBundleIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentSharingPickerConfigurationSelExcludedBundleIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *SCContentSharingPickerConfiguration[NSCopying]) SetExcludedBundleIDs(excludedBundleIDs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_sCContentSharingPickerConfigurationSelSetExcludedBundleIDs, excludedBundleIDs)
+	o.Ptr().Send(_sCContentSharingPickerConfigurationSelSetExcludedBundleIDs, excludedBundleIDs.Ptr())
 }
 
 // @abstract allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.

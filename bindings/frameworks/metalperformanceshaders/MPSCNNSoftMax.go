@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A neural transfer function that is useful for classification tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmax
 type MPSCNNSoftMax struct {
 	mpsneuralnetwork.MPSCNNKernel

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A token session that is based on a smart card token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokensession
 type TKSmartCardTokenSession struct {
 	TKTokenSession

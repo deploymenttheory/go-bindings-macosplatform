@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of common aspects of services offered by a peripheral.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbattribute
 type CBAttribute struct {
 	foundation.NSObject

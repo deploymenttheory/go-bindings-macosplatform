@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that contain a value from a small set of possible values.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcategorytype
 type HKCategoryType struct {
 	HKSampleType

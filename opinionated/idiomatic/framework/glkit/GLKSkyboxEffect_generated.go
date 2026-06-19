@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A simple skybox visual effect for use in shader-based OpenGL rendering.
+//
 // SkyboxEffect wraps [raw.GLKSkyboxEffect] with a fluent Go API.
 type SkyboxEffect struct {
 	inner *raw.GLKSkyboxEffect
@@ -38,35 +40,47 @@ func NewSkyboxEffect() *SkyboxEffect {
 	return &SkyboxEffect{inner: raw.GLKSkyboxEffectFromID(_id)}
 }
 
+// The width of the skybox.
+//
 // WithXSize sets the xSize property and returns the receiver for chaining.
 func (x *SkyboxEffect) WithXSize(xSize float32) *SkyboxEffect {
 	x.inner.SetXSize(xSize)
 	return x
 }
 
+// The height of the skybox.
+//
 // WithYSize sets the ySize property and returns the receiver for chaining.
 func (x *SkyboxEffect) WithYSize(ySize float32) *SkyboxEffect {
 	x.inner.SetYSize(ySize)
 	return x
 }
 
+// The depth of the skybox.
+//
 // WithZSize sets the zSize property and returns the receiver for chaining.
 func (x *SkyboxEffect) WithZSize(zSize float32) *SkyboxEffect {
 	x.inner.SetZSize(zSize)
 	return x
 }
 
+// A string used to name your effect.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SkyboxEffect) WithLabel(label string) *SkyboxEffect {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Prepares an effect for rendering.
+//
 // PrepareToDraw calls the underlying PrepareToDraw.
 func (x *SkyboxEffect) PrepareToDraw() {
 	x.inner.PrepareToDraw()
 }
 
+// Draws the skybox.
+//
 // Draw calls the underlying Draw.
 func (x *SkyboxEffect) Draw() {
 	x.inner.Draw()

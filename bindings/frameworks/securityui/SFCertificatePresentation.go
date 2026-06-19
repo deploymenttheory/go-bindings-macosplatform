@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays a certificate sheet for a provided certificate trust.
+//
 // Apple documentation: https://developer.apple.com/documentation/securityui/sfcertificatepresentation
 type SFCertificatePresentation struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for energy.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitenergy
 type NSUnitEnergy struct {
 	NSDimension

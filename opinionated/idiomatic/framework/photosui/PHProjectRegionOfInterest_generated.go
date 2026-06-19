@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a region of interest in a photo asset.
+//
 // ProjectRegionOfInterest wraps [raw.PHProjectRegionOfInterest] with a fluent Go API.
 type ProjectRegionOfInterest struct {
 	inner *raw.PHProjectRegionOfInterest

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An action a user can perform that’s relevant to a reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inreservationaction
 type INReservationAction struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func INReservationActionFromID(id objc.ID) *INReservationAction {
 	return o
 }
 
+// Creates a new reservation action.
 func (o *INReservationAction) InitWithTypeValidDurationUserActivity(type_ INReservationActionType, validDuration *INDateComponentsRange, userActivity *foundation.NSUserActivity) *INReservationAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationActionSelInitWithTypeValidDurationUserActivity, type_, validDuration.Ptr(), userActivity.Ptr())
 	if _ret != 0 {

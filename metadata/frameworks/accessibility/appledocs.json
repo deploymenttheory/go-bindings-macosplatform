@@ -354,7 +354,7 @@
       },
       "additionalAxes": {
         "doc": "The descriptors for additional categorical or numerical axes beyond the x-axis and y-axis.",
-        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/additionalaxes-9ldc0"
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/additionalaxes-2adwh"
       },
       "attributedTitle": {
         "doc": "An attributed version of the chart title.",
@@ -390,7 +390,7 @@
       },
       "xAxis": {
         "doc": "The axis descriptor for the chart’s x-axis.",
-        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/xaxis-6dnxd"
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/xaxis-7sb9a"
       },
       "yAxis": {
         "doc": "The axis descriptor for the chart’s y-axis.",
@@ -438,7 +438,7 @@
       },
       "init(x:y:additionalValues:label:)": {
         "doc": "Creates a data point with the specified x-value, y-value, additional values, and label.",
-        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/init(x:y:additionalvalues:label:)-4v3sb"
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/init(x:y:additionalvalues:label:)-83xvg"
       },
       "label": {
         "doc": "The label for the data point.",

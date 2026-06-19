@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image processor that identifies notable features, such as faces and barcodes, in a still image or video.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cidetector
 type CIDetector struct {
 	foundation.NSObject
@@ -32,16 +34,16 @@ func CIDetectorFromID(id objc.ID) *CIDetector {
 	return o
 }
 
-// Returns a new detector instance of the given type. The type is used to specify the detection intent. This will return value if the detector type is not supported. The context argument specifies the CIContext to be used to operate on the image. May be nil. If the input image to -featuresInImage: is the output of a CoreImage operation, it may improve performance to specify the same context that was used to operate on that image. The detector may do image processing in this context and if the image is on the GPU and the specified context is a GPU context this may avoid additional upload to / download from the GPU. If the input image is on the CPU (or the output from a CPU based context) specifying a GPU based context (or vice versa) may reduce performance. //  The options parameter lets you optionally specify a accuracy / performance tradeoff. Can be nil or an empty dictionary.
+// Creates and returns a configured detector.
 func CIDetectorDetectorOfTypeContextOptions(type_ *foundation.NSString, context_ *CIContext, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIDetector {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIDetector), _cIDetectorSelDetectorOfTypeContextOptions, type_.Ptr(), context_.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIDetector), _cIDetectorSelDetectorOfTypeContextOptions, type_.Ptr(), context_.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIDetectorFromID(_ret)
 }
 
-// Returns an array of CIFeature instances in the given image. The array is sorted by confidence, highest confidence first.
+// Searches for features in an image.
 func (o *CIDetector) FeaturesInImage(image *CIImage) *foundation.NSArray[*CIFeature] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIDetectorSelFeaturesInImage, image.Ptr())
 	if _ret != 0 {
@@ -50,9 +52,9 @@ func (o *CIDetector) FeaturesInImage(image *CIImage) *foundation.NSArray[*CIFeat
 	return foundation.NSArrayFromID[*CIFeature](_ret)
 }
 
-// Returns an array of CIFeature instances in the given image. The array is sorted by confidence, highest confidence first. The options dictionary can contain a CIDetectorImageOrientation key value.
+// Searches for features in an image based on the specified image orientation.
 func (o *CIDetector) FeaturesInImageOptions(image *CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*CIFeature] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIDetectorSelFeaturesInImageOptions, image.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIDetectorSelFeaturesInImageOptions, image.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

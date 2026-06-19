@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An expression that evaluates the result of a fetch request on a managed object context.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsfetchrequestexpression
 type NSFetchRequestExpression struct {
 	foundation.NSExpression
@@ -33,6 +35,7 @@ func NSFetchRequestExpressionFromID(id objc.ID) *NSFetchRequestExpression {
 	return o
 }
 
+// Returns an expression which will evaluate to the result of executing a fetch request on a context.
 func NSFetchRequestExpressionExpressionForFetchContextCountOnly(fetch *foundation.NSExpression, context_ *foundation.NSExpression, countFlag bool) *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFetchRequestExpression), _nSFetchRequestExpressionSelExpressionForFetchContextCountOnly, fetch.Ptr(), context_.Ptr(), countFlag)
 	if _ret != 0 {

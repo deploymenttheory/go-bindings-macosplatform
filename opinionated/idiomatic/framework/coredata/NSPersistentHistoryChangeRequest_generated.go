@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A request to fetch or purge persistent history.
+//
 // PersistentHistoryChangeRequest wraps [raw.NSPersistentHistoryChangeRequest] with a fluent Go API.
 type PersistentHistoryChangeRequest struct {
 	inner *raw.NSPersistentHistoryChangeRequest
@@ -39,18 +41,24 @@ func NewPersistentHistoryChangeRequest() *PersistentHistoryChangeRequest {
 	return &PersistentHistoryChangeRequest{inner: raw.NSPersistentHistoryChangeRequestFromID(_id)}
 }
 
+// The type of result that this request returns.
+//
 // WithResultType sets the resultType property and returns the receiver for chaining.
 func (x *PersistentHistoryChangeRequest) WithResultType(resultType NSPersistentHistoryResultType) *PersistentHistoryChangeRequest {
 	x.inner.SetResultType(raw.NSPersistentHistoryResultType(resultType))
 	return x
 }
 
+// The specified fetch request, when retrieving history.
+//
 // WithFetchRequest sets the fetchRequest property and returns the receiver for chaining.
 func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *PersistentHistoryChangeRequest {
 	x.inner.SetFetchRequest(fetchRequest)
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
 	if len(items) == 0 {

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Represents a snapshot of changes made to the cinematic script since recording. Can be used as a snapshot to quickly revert to previously saved edits via `-[CNScript reloadWithChanges:]`
+// An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnscriptchanges
 type CNScriptChanges struct {
@@ -36,7 +36,7 @@ func CNScriptChangesFromID(id objc.ID) *CNScriptChanges {
 	return o
 }
 
-// Create from previously saved data representation
+// Creates a previously saved data representation.
 func (o *CNScriptChanges) InitWithDataRepresentation(dataRepresentation *foundation.NSData) *CNScriptChanges {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptChangesSelInitWithDataRepresentation, dataRepresentation.Ptr())
 	if _ret != 0 {

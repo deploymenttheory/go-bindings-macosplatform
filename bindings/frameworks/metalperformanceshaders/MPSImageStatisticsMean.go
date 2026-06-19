@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that computes the mean for a given region of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagestatisticsmean
 type MPSImageStatisticsMean struct {
 	mpsimage.MPSUnaryImageKernel

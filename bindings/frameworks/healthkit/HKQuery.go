@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class for all the query classes in HealthKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquery
 type HKQuery struct {
 	foundation.NSObject
@@ -112,7 +114,7 @@ func (o *HKQuery) Predicate() *foundation.NSPredicate {
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsWithMetadataKey: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches objects with metadata that contains a given key. @param         key     The metadata key.
+// Returns a predicate that matches any object whose metadata contains the provided key.
 func HKQueryPredicateForObjectsWithMetadataKey(key *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithMetadataKey, key.Ptr())
 	if _ret != 0 {
@@ -121,16 +123,16 @@ func HKQueryPredicateForObjectsWithMetadataKey(key *foundation.NSString) *founda
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsWithMetadataKey:allowedValues: @abstract      Creates a predicate for use with HKQuery subclasses @discussion    Creates a query predicate that matches objects with metadata containing a value the matches one of the given values for the given key. @param         key             The metadata key. @param         allowedValues   The list of values that the metadata value can be equal to.
+// Returns a predicate that matches objects based on the provided metadata key and an array of target values.
 func HKQueryPredicateForObjectsWithMetadataKeyAllowedValues(key *foundation.NSString, allowedValues *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithMetadataKeyAllowedValues, key.Ptr(), allowedValues)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithMetadataKeyAllowedValues, key.Ptr(), allowedValues.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsWithMetadataKey:operatorType:value: @abstract      Creates a predicate for use with HKQuery subclasses @discussion    Creates a query predicate that matches objects with a value for a given metadata key matches the given operator type and value. @param         key            The metadata key. @param         operatorType   The comparison operator type for the expression. @param         value          The value to be compared against.
+// Returns a predicate that matches objects based on the provided metadata key, value, and operator.
 func HKQueryPredicateForObjectsWithMetadataKeyOperatorTypeValue(key *foundation.NSString, operatorType foundation.NSPredicateOperatorType, value objc.ID) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithMetadataKeyOperatorTypeValue, key.Ptr(), operatorType, value)
 	if _ret != 0 {
@@ -139,7 +141,7 @@ func HKQueryPredicateForObjectsWithMetadataKeyOperatorTypeValue(key *foundation.
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsFromSource: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches objects saved by a given source. @param         source  The source.
+// Returns a predicate that matches all the objects that were created by the provided source.
 func HKQueryPredicateForObjectsFromSource(source *HKSource) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsFromSource, source.Ptr())
 	if _ret != 0 {
@@ -148,7 +150,7 @@ func HKQueryPredicateForObjectsFromSource(source *HKSource) *foundation.NSPredic
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsFromSources: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches objects saved by any of the given sources. @param         sources The list of sources.
+// Returns a predicate that matches all the objects that were created by any of the provided sources.
 func HKQueryPredicateForObjectsFromSources(sources *foundation.NSSet[*HKSource]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsFromSources, sources.Ptr())
 	if _ret != 0 {
@@ -157,7 +159,7 @@ func HKQueryPredicateForObjectsFromSources(sources *foundation.NSSet[*HKSource])
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsFromSourceRevisions: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches objects saved by any of the specified HKSourceRevisions. @param         sourceRevisions The list of source revisions.
+// Returns a predicate that matches all the objects that were created by any of the provided source revisions.
 func HKQueryPredicateForObjectsFromSourceRevisions(sourceRevisions *foundation.NSSet[*HKSourceRevision]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsFromSourceRevisions, sourceRevisions.Ptr())
 	if _ret != 0 {
@@ -166,7 +168,7 @@ func HKQueryPredicateForObjectsFromSourceRevisions(sourceRevisions *foundation.N
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsFromDevices: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches objects associated with any of the given devices. All properties of each HKDevice are considered in the query and must match exactly, including nil values. To perform searches based on specific device properties, use predicateForObjectsWithDeviceProperty:allowedValues:. @param         devices     The set of devices that generated data.
+// Returns a predicate that matches all the objects that were created by any of the provided devices.
 func HKQueryPredicateForObjectsFromDevices(devices *foundation.NSSet[*HKDevice]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsFromDevices, devices.Ptr())
 	if _ret != 0 {
@@ -175,16 +177,16 @@ func HKQueryPredicateForObjectsFromDevices(devices *foundation.NSSet[*HKDevice])
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsWithDeviceProperty:allowedValues: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches objects associated with an HKDevice with the specified device property matching any value included in allowedValues. To query for samples with devices that match all the properties of an HKDevice, use predicateForObjectsFromDevices. @param         key             The device property key. (See HKDevice.h) @param         allowedValues   The set of values for which the device property can match. An empty set will match all devices whose property value is nil.
+// Returns a predicate that matches all objects created by devices with the specified properties.
 func HKQueryPredicateForObjectsWithDevicePropertyAllowedValues(key *foundation.NSString, allowedValues *foundation.NSSet[*foundation.NSString]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithDevicePropertyAllowedValues, key.Ptr(), allowedValues)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithDevicePropertyAllowedValues, key.Ptr(), allowedValues.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectWithUUID: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches the object saved with a particular UUID. @param         UUID The UUID of the object.
+// Returns a predicate that matches an object with the specified universally unique identifier (UUID).
 func HKQueryPredicateForObjectWithUUID(uUID *foundation.NSUUID) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectWithUUID, uUID.Ptr())
 	if _ret != 0 {
@@ -193,16 +195,16 @@ func HKQueryPredicateForObjectWithUUID(uUID *foundation.NSUUID) *foundation.NSPr
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsWithUUIDs: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches the objects saved with one of the given UUIDs. @param         UUIDs The set of NSUUIDs.
+// Returns a predicate that matches the objects with the specified universally unique identifiers (UUIDs).
 func HKQueryPredicateForObjectsWithUUIDs(uUIDs *foundation.NSSet[*foundation.NSUUID]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithUUIDs, uUIDs)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithUUIDs, uUIDs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsNoCorrelation @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches the objects that are not associated with an HKCorrelation.
+// Returns a predicate that matches all objects that are not associated with a HealthKit correlation.
 func HKQueryPredicateForObjectsWithNoCorrelation() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithNoCorrelation)
 	if _ret != 0 {
@@ -211,7 +213,7 @@ func HKQueryPredicateForObjectsWithNoCorrelation() *foundation.NSPredicate {
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsFromWorkout: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches the objects that have been added to the given workout. @param         workout     The HKWorkout that the object was added to.
+// Returns a predicate that matches any objects that have been associated with the provided workout.
 func HKQueryPredicateForObjectsFromWorkout(workout *HKWorkout) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsFromWorkout, workout.Ptr())
 	if _ret != 0 {
@@ -220,7 +222,7 @@ func HKQueryPredicateForObjectsFromWorkout(workout *HKWorkout) *foundation.NSPre
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForObjectsAssociatedWithElectrocardiogram: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches the objects that have been added to the given electrocardiogram @param         electrocardiogram     The HKElectrocardiogram that the object was added to.
+// Returns a predicate that matches symptom samples associated with the specified electrocardiogram.
 func HKQueryPredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram *HKElectrocardiogram) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsAssociatedWithElectrocardiogram, electrocardiogram.Ptr())
 	if _ret != 0 {
@@ -238,7 +240,7 @@ func HKQueryPredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *HK
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForSamplesWithStartDate:endDate:options: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches samples with a startDate and an endDate that lie inside of a given time interval. @param         startDate  The start date of the predicate's time interval. @param         endDate    The end date of the predicate's time interval. @param         options    The rules for how a sample's time interval overlaps with the predicate's time interval.
+// Returns a predicate for samples whose start and end dates fall within the specified time interval.
 func HKQueryPredicateForSamplesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options HKQueryOptions) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForSamplesWithStartDateEndDateOptions, startDate.Ptr(), endDate.Ptr(), options)
 	if _ret != 0 {
@@ -247,7 +249,7 @@ func HKQueryPredicateForSamplesWithStartDateEndDateOptions(startDate *foundation
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForQuantitySamplesWithOperatorType:quantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches quantity samples with values that match the expression formed by the given operator and quantity. @param         operatorType    The operator type for the expression. @param         quantity        The quantity that the sample's quantity is being compared to. It is the right hand side of the expression.
+// Returns a predicate that matches samples based on the target quantity.
 func HKQueryPredicateForQuantitySamplesWithOperatorTypeQuantity(operatorType foundation.NSPredicateOperatorType, quantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForQuantitySamplesWithOperatorTypeQuantity, operatorType, quantity.Ptr())
 	if _ret != 0 {
@@ -256,6 +258,7 @@ func HKQueryPredicateForQuantitySamplesWithOperatorTypeQuantity(operatorType fou
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns a predicate that checks a category sample’s value.
 func HKQueryPredicateForCategorySamplesWithOperatorTypeValue(operatorType foundation.NSPredicateOperatorType, value int) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForCategorySamplesWithOperatorTypeValue, operatorType, value)
 	if _ret != 0 {
@@ -264,16 +267,16 @@ func HKQueryPredicateForCategorySamplesWithOperatorTypeValue(operatorType founda
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method predicateForCategorySamplesEqualToValues: @abstract Creates a predicate for use with HKQuery subclasses. @discussion Creates a query predicate that matches all specified category values.
+// A predicate that returns category samples with a matching value.
 func HKQueryPredicateForCategorySamplesEqualToValues(values *foundation.NSSet[*foundation.NSNumber]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForCategorySamplesEqualToValues, values)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForCategorySamplesEqualToValues, values.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithWorkoutActivityType: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts with the given HKWorkoutActivityType. @param         workoutActivityType     The HKWorkoutActivity type of the workout
+// Returns a predicate for matching workouts based on the type of activity.
 func HKQueryPredicateForWorkoutsWithWorkoutActivityType(workoutActivityType HKWorkoutActivityType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithWorkoutActivityType, workoutActivityType)
 	if _ret != 0 {
@@ -282,7 +285,7 @@ func HKQueryPredicateForWorkoutsWithWorkoutActivityType(workoutActivityType HKWo
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:duration: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and duration @param         operatorType    The operator type for the expression. @param         duration        The value that the workout's duration is being compared to. It is the right hand side of the expression.
+// Returns a predicate for matching workouts based on their duration.
 func HKQueryPredicateForWorkoutsWithOperatorTypeDuration(operatorType foundation.NSPredicateOperatorType, duration float64) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeDuration, operatorType, duration)
 	if _ret != 0 {
@@ -291,7 +294,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeDuration(operatorType foundation
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:totalEnergyBurned: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and totalEnergyBurned @param         operatorType        The operator type for the expression. @param         totalEnergyBurned   The value that the workout's totalEnergyBurned is being compared to. It is the right hand side of the expression. The unit for this value should be of type Energy.
+// Returns a predicate for matching workouts based on the total energy burned.
 // Deprecated: Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned
 func HKQueryPredicateForWorkoutsWithOperatorTypeTotalEnergyBurned(operatorType foundation.NSPredicateOperatorType, totalEnergyBurned *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeTotalEnergyBurned, operatorType, totalEnergyBurned.Ptr())
@@ -301,7 +304,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeTotalEnergyBurned(operatorType f
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:totalDistance: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and totalEnergyBurned @param         operatorType    The operator type for the expression. @param         totalDistance   The value that the workout's totalEnergyBurned is being compared to. It is the right hand side of the expression. The unit for this value should be of type Distance.
+// Returns a predicate for matching workouts based on the total distance traveled.
 // Deprecated: Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for the desired distance type
 func HKQueryPredicateForWorkoutsWithOperatorTypeTotalDistance(operatorType foundation.NSPredicateOperatorType, totalDistance *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeTotalDistance, operatorType, totalDistance.Ptr())
@@ -311,7 +314,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeTotalDistance(operatorType found
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:totalSwimmingStrokeCount: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and totalSwimmingStrokeCount @param         operatorType                The operator type for the expression. @param         totalSwimmingStrokeCount    The value that the workout's totalSwimmingStrokeCount is being compared to. It is the right hand side of the expression. The unit for this value should be of type Count.
+// Returns a predicate that matches workout samples based on the number of strokes while swimming.
 // Deprecated: Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount
 func HKQueryPredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount(operatorType foundation.NSPredicateOperatorType, totalSwimmingStrokeCount *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount, operatorType, totalSwimmingStrokeCount.Ptr())
@@ -321,7 +324,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount(operato
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:totalFlightsClimbed: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and totalFlightsClimbed @param         operatorType                The operator type for the expression. @param         totalFlightsClimbed         The value that the workout's totalFlightsClimbed is being compared to. It is the right hand side of the expression. The unit for this value should be of type Count.
+// Returns a predicate that matches workout samples based on the number of flights climbed.
 // Deprecated: Use predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierFlightsClimbed
 func HKQueryPredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed(operatorType foundation.NSPredicateOperatorType, totalFlightsClimbed *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed, operatorType, totalFlightsClimbed.Ptr())
@@ -331,7 +334,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed(operatorType
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:quantityType:sumQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and sumQuantity in the statistics for the specified type. @param         operatorType    The operator type for the expression. @param         quantityType    The quantity type to compare statistics for. Should be a cumulative quantity type. @param         sumQuantity     The sum value that the workout statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the sum of an associated quantity type.
 func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, sumQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity, operatorType, quantityType.Ptr(), sumQuantity.Ptr())
 	if _ret != 0 {
@@ -340,7 +343,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity(operator
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:quantityType:minimumQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and minimumQuantity in the statistics for the specified type. @param         operatorType        The operator type for the expression. @param         quantityType        The quantity type to compare statistics for. Should be a discrete quantity type. @param         minimumQuantity     The minumum value that the workout statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the minimum value of an associated quantity type.
 func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, minimumQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity, operatorType, quantityType.Ptr(), minimumQuantity.Ptr())
 	if _ret != 0 {
@@ -349,7 +352,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity(oper
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:quantityType:maximumQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and maximumQuantity in the statistics for the specified type. @param         operatorType        The operator type for the expression. @param         quantityType        The quantity type to compare statistics for. Should be a discrete quantity type. @param         maximumQuantity     The maximum value that the workout statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the maximum value of an associated quantity type.
 func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, maximumQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity, operatorType, quantityType.Ptr(), maximumQuantity.Ptr())
 	if _ret != 0 {
@@ -358,7 +361,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity(oper
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithOperatorType:quantityType:averageQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkouts by the given operator type and averageQuantity in the statistics for the specified type. @param         operatorType        The operator type for the expression. @param         quantityType        The quantity type to compare statistics for. Should be a discrete quantity type. @param         averageQuantity     The average value that the workout statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workouts based the average value of an associated quantity type.
 func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, averageQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity, operatorType, quantityType.Ptr(), averageQuantity.Ptr())
 	if _ret != 0 {
@@ -367,7 +370,7 @@ func HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity(oper
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithWorkoutActivityType: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objects with the given HKWorkoutActivityType. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         workoutActivityType     The HKWorkoutActivity type of the workout
+// Returns a predicate for workout activities based on the type of activity performed.
 func HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType HKWorkoutActivityType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithWorkoutActivityType, workoutActivityType)
 	if _ret != 0 {
@@ -376,7 +379,7 @@ func HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivity
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithOperatorType:duration: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objects by the given operator type and duration. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         operatorType    The operator type for the expression. @param         duration        The value that the workout's duration is being compared to. It is the right hand side of the expression.
+// Returns a predicate for matching workout activities based on their duration.
 func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeDuration(operatorType foundation.NSPredicateOperatorType, duration float64) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithOperatorTypeDuration, operatorType, duration)
 	if _ret != 0 {
@@ -385,7 +388,7 @@ func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeDuration(operatorType f
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithStartDate:endDate:options: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objects with a startDate and an endDate that lie inside of a given time interval. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         startDate   The start date of the predicate's time interval. @param         endDate     The end date of the predicate's time interval. @param         options     The rules for how a activity's time interval overlaps with the predicate's time interval.
+// Returns a predicate for workout activities that occur between the start and end date.
 func HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options HKQueryOptions) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithStartDateEndDateOptions, startDate.Ptr(), endDate.Ptr(), options)
 	if _ret != 0 {
@@ -394,7 +397,7 @@ func HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate *
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objetcs by the given operator type and sumQuantity in the statistics for the specified type. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         operatorType    The operator type for the expression. @param         quantityType    The quantity type to compare statistics for. Should be a cumulative quantity type. @param         sumQuantity     The sum value that the activity statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the sum of an associated quantity type.
 func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, sumQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity, operatorType, quantityType.Ptr(), sumQuantity.Ptr())
 	if _ret != 0 {
@@ -403,7 +406,7 @@ func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithOperatorType:quantityType:minimumQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objetcs  by the given operator type and minimumQuantity in the statistics for the specified type. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         operatorType        The operator type for the expression. @param         quantityType        The quantity type to compare statistics for. Should be a discrete quantity type. @param         minimumQuantity     The minumum value that the activty statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the minimum value of an associated quantity type.
 func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, minimumQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuantity, operatorType, quantityType.Ptr(), minimumQuantity.Ptr())
 	if _ret != 0 {
@@ -412,7 +415,7 @@ func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuan
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithOperatorType:quantityType:maximumQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objetcs by the given operator type and maximumQuantity in the statistics for the specified type. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         operatorType        The operator type for the expression. @param         quantityType        The quantity type to compare statistics for. Should be a discrete quantity type. @param         maximumQuantity     The maximum value that the activity statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the maximum value of an associated quantity type.
 func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, maximumQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuantity, operatorType, quantityType.Ptr(), maximumQuantity.Ptr())
 	if _ret != 0 {
@@ -421,7 +424,7 @@ func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuan
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutActivitiesWithOperatorType:quantityType:averageQuantity: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKWorkoutActivity objetcs by the given operator type and averageQuantity in the statistics for the specified type. The resulting predicate should be wrapped using predicateForWorkoutsWithActivityPredicate: before being used in a query. @param         operatorType        The operator type for the expression. @param         quantityType        The quantity type to compare statistics for. Should be a discrete quantity type. @param         averageQuantity     The average value that the activity statistics are being compared to. The unit for this value should match the allowed values for the quantityType.
+// Returns a predicate for matching workout activities based the average value of an associated quantity type.
 func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *HKQuantityType, averageQuantity *HKQuantity) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuantity, operatorType, quantityType.Ptr(), averageQuantity.Ptr())
 	if _ret != 0 {
@@ -430,7 +433,7 @@ func HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuan
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForWorkoutsWithActivityPredicate: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches workouts containing an activity matching the passed predicate. @param         activityPredicate   The predicate on the activities of the workout
+// Returns a predicate for matching workouts based on the associated workout activities.
 func HKQueryPredicateForWorkoutsWithActivityPredicate(activityPredicate *foundation.NSPredicate) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForWorkoutsWithActivityPredicate, activityPredicate.Ptr())
 	if _ret != 0 {
@@ -439,7 +442,7 @@ func HKQueryPredicateForWorkoutsWithActivityPredicate(activityPredicate *foundat
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForActivitySummaryWithDateComponents: @abstract      Creates a predicate for use with HKActivitySummaryQuery @discussion    Creates a query predicate that matches HKActivitySummaries with the given date components. @param         dateComponents  The date components of the activity summary. These date components should contain era, year, month, and day components in the gregorian calendar.
+// Returns a predicate that matches the activity summary for the specified day.
 func HKQueryPredicateForActivitySummaryWithDateComponents(dateComponents *foundation.NSDateComponents) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForActivitySummaryWithDateComponents, dateComponents.Ptr())
 	if _ret != 0 {
@@ -448,7 +451,7 @@ func HKQueryPredicateForActivitySummaryWithDateComponents(dateComponents *founda
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForActivitySummariesBetweenStartDateComponents:endDateComponents: @abstract      Creates a predicate for use with HKActivitySummaryQuery @discussion    Creates a query predicate that matches HKActivitySummaries that fall between the given date components. @param         startDateComponents The date components that define the beginning of the range. These date components should contain era, year, month, and day components in the gregorian calendar. @param         endDateComponents   The date components that define the end of the range. These date components should contain era, year, month, and day components in the gregorian calendar.
+// Returns a predicate for matching all the activity summaries that fall between the days identified by the start and end date components.
 func HKQueryPredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents, startDateComponents.Ptr(), endDateComponents.Ptr())
 	if _ret != 0 {
@@ -457,7 +460,7 @@ func HKQueryPredicateForActivitySummariesBetweenStartDateComponentsEndDateCompon
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForClinicalRecordsWithFHIRResourceType: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKClinicalRecords with a specific FHIR resource type. @param         resourceType    The FHIR resource type.
+// Returns a predicate for a specific FHIR type.
 func HKQueryPredicateForClinicalRecordsWithFHIRResourceType(resourceType *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForClinicalRecordsWithFHIRResourceType, resourceType.Ptr())
 	if _ret != 0 {
@@ -466,7 +469,7 @@ func HKQueryPredicateForClinicalRecordsWithFHIRResourceType(resourceType *founda
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForClinicalRecordsFromSource:withFHIRResourceType:identifier: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKClinicalRecords for a given source, FHIR resource type, and FHIR identifier. @param         source          The source. @param         resourceType    The FHIR resource type. @param         identifier      The FHIR identifier.
+// Returns a predicate for a specific FHIR resource.
 func HKQueryPredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *HKSource, resourceType *foundation.NSString, identifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier, source.Ptr(), resourceType.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -475,7 +478,7 @@ func HKQueryPredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(sour
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForElectrocardiogramsWithClassification: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKElectrocardiograms with a specific classification. @param         classification    The classification for the electrocardiogram.
+// Returns a predicate that matches electrocardiogram samples with the specified classification.
 func HKQueryPredicateForElectrocardiogramsWithClassification(classification HKElectrocardiogramClassification) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForElectrocardiogramsWithClassification, classification)
 	if _ret != 0 {
@@ -484,7 +487,7 @@ func HKQueryPredicateForElectrocardiogramsWithClassification(classification HKEl
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForElectrocardiogramsWithSymptomsStatus: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKElectrocardiograms with a specificied symptoms status. @param         symptomsStatus    The symptoms status for the electrocardiogram.
+// Returns a predicate that matches electrocardiogram samples with the specified symptom status.
 func HKQueryPredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus HKElectrocardiogramSymptomsStatus) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForElectrocardiogramsWithSymptomsStatus, symptomsStatus)
 	if _ret != 0 {
@@ -493,7 +496,7 @@ func HKQueryPredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus HKEl
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method        predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a predicate that matches HKVerifiableClinicalRecords with a relevant date within a date interval. @param         dateInterval      The date interval that the record's relevant date is in.
+// Returns a predicate that finds verifiable health records with a relevant date within the specified range.
 func HKQueryPredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval *foundation.NSDateInterval) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval, dateInterval.Ptr())
 	if _ret != 0 {
@@ -549,7 +552,7 @@ func HKQueryPredicateForMedicationDoseEventWithStatus(status HKMedicationDoseEve
 
 // @method        predicateForMedicationDoseEventWithStatuses: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the statuses specified. @param         statuses    The logged statuses of the medication dose event to match.
 func HKQueryPredicateForMedicationDoseEventWithStatuses(statuses *foundation.NSSet[*foundation.NSNumber]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForMedicationDoseEventWithStatuses, statuses)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForMedicationDoseEventWithStatuses, statuses.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -567,7 +570,7 @@ func HKQueryPredicateForMedicationDoseEventWithScheduledDate(scheduledDate *foun
 
 // @method        predicateForMedicationDoseEventWithScheduledDates: @abstract      Creates a predicate for use with HKQuery subclasses. @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the exact scheduled dates specified. @param         scheduledDates    The exact scheduled dates of any medication dose event to match.
 func HKQueryPredicateForMedicationDoseEventWithScheduledDates(scheduledDates *foundation.NSSet[*foundation.NSDate]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForMedicationDoseEventWithScheduledDates, scheduledDates)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForMedicationDoseEventWithScheduledDates, scheduledDates.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

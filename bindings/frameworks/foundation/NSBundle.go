@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the code and resources stored in a bundle directory on disk.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsbundle
 type NSBundle struct {
 	NSObject
@@ -88,6 +90,7 @@ func NSBundleFromID(id objc.ID) *NSBundle {
 	return o
 }
 
+// Returns an NSBundle object that corresponds to the specified directory.
 func NSBundleBundleWithPath(path *NSString) *NSBundle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBundle), _nSBundleSelBundleWithPath, path.Ptr())
 	if _ret != 0 {
@@ -308,7 +311,7 @@ func (o *NSBundle) LocalizedAttributedStringForKeyValueTable(key *NSString, valu
 	return NSAttributedStringFromID(_ret)
 }
 
-// Look up a localized string given a list of available localizations. - Parameters: - key: The key for the localized string to retrieve. - value: A default value to return if a localized string for “key“ cannot be found. - tableName: The name of the strings file to search. If `nil`, the method uses tables in `Localizable.strings`. - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback. - Returns: A localized version of the string designated by “key“ in table “tableName“.
+// Look up a localized string given a list of available localizations.
 func (o *NSBundle) LocalizedStringForKeyValueTableLocalizations(key *NSString, value *NSString, tableName *NSString, localizations *NSArray[*NSString]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelLocalizedStringForKeyValueTableLocalizations, key.Ptr(), value.Ptr(), tableName.Ptr(), localizations.Ptr())
 	if _ret != 0 {
@@ -501,13 +504,19 @@ func (o *NSBundle) BundleIdentifier() *NSString {
 }
 
 func (o *NSBundle) InfoDictionary() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSBundleSelInfoDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelInfoDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSBundle) LocalizedInfoDictionary() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSBundleSelLocalizedInfoDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBundleSelLocalizedInfoDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSBundle) PrincipalClass() objc.Class {

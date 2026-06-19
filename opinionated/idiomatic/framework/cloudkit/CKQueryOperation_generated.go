@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation for executing queries in a database.
+//
 // QueryOperation wraps [raw.CKQueryOperation] with a fluent Go API.
 type QueryOperation struct {
 	inner *raw.CKQueryOperation
@@ -39,7 +41,7 @@ func NewQueryOperation() *QueryOperation {
 	return &QueryOperation{inner: raw.CKQueryOperationFromID(_id)}
 }
 
-// Creates an operation that searches for records in the specified record zone. - Parameters: - query: The query for the search. You can use the operation that this method returns only once to perform a search, but you can reuse the query that you provide. During execution, the operation performs a new search and returns the first batch of results. If there are more results available, you must create a separate query object using the provided cursor object.
+// Creates an operation that searches for records in the specified record zone.
 //
 // NewQueryOperationWithQuery creates a new [QueryOperation].
 func NewQueryOperationWithQuery(query *raw.CKQuery) *QueryOperation {
@@ -48,7 +50,7 @@ func NewQueryOperationWithQuery(query *raw.CKQuery) *QueryOperation {
 	return &QueryOperation{inner: raw.CKQueryOperationFromID(_id)}
 }
 
-// Creates an operation with additional results from a previous search. - Parameters: - cursor: The cursor that identifies the previous search. CloudKit passes this value to the completion handler of the previous search. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. Use this method to create an operation that retrieves the next batch of results from a previous search. When executing searches for a cursor, don't cache cursors for a long time before using them. A cursor isn't a snapshot of the previous search results; it stores a relative offset into the results list. An operation that you create from a cursor performs a new search, sorts the new set of results, and uses the previous offset value to determine where the next batch of results starts.
+// Creates an operation with additional results from a previous search.
 //
 // NewQueryOperationWithCursor creates a new [QueryOperation].
 func NewQueryOperationWithCursor(cursor *raw.CKQueryCursor) *QueryOperation {
@@ -57,7 +59,7 @@ func NewQueryOperationWithCursor(cursor *raw.CKQueryCursor) *QueryOperation {
 	return &QueryOperation{inner: raw.CKQueryOperationFromID(_id)}
 }
 
-// The query for the search. The initial value of this property is the query that you provide to the “CKQueryOperation/init(query:)“ method. When the value in the “CKQueryOperation/cursor“ property is `nil`, the operation uses this property's value to execute a new search and return its results to your completion handler. If “CKQueryOperation/cursor“ isn't `nil`, the operation uses the cursor instead. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+// The query for the search.
 //
 // WithQuery sets the query property and returns the receiver for chaining.
 func (x *QueryOperation) WithQuery(query *Query) *QueryOperation {
@@ -65,7 +67,7 @@ func (x *QueryOperation) WithQuery(query *Query) *QueryOperation {
 	return x
 }
 
-// The cursor for continuing the search. The initial value of this property is the cursor that you provide to the “CKQueryOperation/init(cursor:)“ method. When you use a cursor, the operation ignores the contents of the “CKQueryOperation/query“ property. This property's value is an opaque value that CloudKit provides. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. If you intend to specify or change the value in this property, do so before you execute the operation or submit it to a queue.
+// The cursor for continuing the search.
 //
 // WithCursor sets the cursor property and returns the receiver for chaining.
 func (x *QueryOperation) WithCursor(cursor *QueryCursor) *QueryOperation {
@@ -73,7 +75,7 @@ func (x *QueryOperation) WithCursor(cursor *QueryCursor) *QueryOperation {
 	return x
 }
 
-// The ID of the record zone that contains the records to search. The value of this property limits the scope of the search to only the records in the specified record zone. If you don't specify a record zone, the search includes all record zones. When you create an operation using the “CKQueryOperation/init(cursor:)“ method, this property's value is `nil` and CloudKit ignores any changes that you make to it. When the operation executes, the cursor provides the record zone information from the original search that provides the cursor.
+// The ID of the record zone that contains the records to search.
 //
 // WithZoneID sets the zoneID property and returns the receiver for chaining.
 func (x *QueryOperation) WithZoneID(zoneID *RecordZoneID) *QueryOperation {
@@ -81,7 +83,7 @@ func (x *QueryOperation) WithZoneID(zoneID *RecordZoneID) *QueryOperation {
 	return x
 }
 
-// The maximum number of records to return at one time. For most queries, leave the value of this property as the default value, which is the “CKQueryOperation/maximumResults“ constant. When using that value, CloudKit returns as many records as possible while minimizing delays in receiving those records. If you want to process a fixed number of results, change the value of this property accordingly.
+// The maximum number of records to return at one time.
 //
 // WithResultsLimit sets the resultsLimit property and returns the receiver for chaining.
 func (x *QueryOperation) WithResultsLimit(resultsLimit uint) *QueryOperation {
@@ -89,7 +91,7 @@ func (x *QueryOperation) WithResultsLimit(resultsLimit uint) *QueryOperation {
 	return x
 }
 
-// The fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
+// The fields of the records to fetch.
 //
 // WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *QueryOperation) WithDesiredKeys(items ...*foundation.NSString) *QueryOperation {
@@ -112,7 +114,7 @@ func (x *QueryOperation) WithDesiredKeys(items ...*foundation.NSString) *QueryOp
 	return x
 }
 
-// The closure to execute when a record becomes available. The closure returns no value and takes the following parameter: - A single record that matches the search criteria. After identifying and sorting the records, the query operation executes this closure once for each of the result's records. The closure executes serially with respect to all other closures of the operation, so you can expect only one closure at a time to execute for this operation. Set the property's value before you execute the operation or submit it to a queue. - Warning: Query indexes update asynchronously so they aren't always current. If you query for records that you recently changed and don't allow enough time for those changes to process, the query's results may be incorrect. The results may not contain the correct records, and the records may be out of order.
+// The closure to execute when a record becomes available.
 //
 // WithRecordFetchedBlock sets the recordFetchedBlock property and returns the receiver for chaining.
 func (x *QueryOperation) WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKRecord)) *QueryOperation {
@@ -120,7 +122,7 @@ func (x *QueryOperation) WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKR
 	return x
 }
 
-// The closure to execute when a record match is available. The closure returns no value and takes the following parameters: - The ID of the record. - The record, or `nil` if CloudKit can't retrieve the record. - If CloudKit can't retrieve the record, an error that provides information about the failure; otherwise, `nil`. After identifying and sorting the records, the query operation executes this closure once for each of the result's records. The closure executes serially with respect to all other closures of the operation, so you can expect only one closure at a time to execute for this operation. Set the property's value before you execute the operation or submit it to a queue. - Warning: Query indexes update asynchronously so they aren't always current. If you query for records that you recently changed and don't allow enough time for those changes to process, the query's results may be incorrect. The results may not contain the correct records, and the records may be out of order.
+// The closure to execute when a record match is available.
 //
 // WithRecordMatchedBlock sets the recordMatchedBlock property and returns the receiver for chaining.
 func (x *QueryOperation) WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *QueryOperation {
@@ -128,7 +130,7 @@ func (x *QueryOperation) WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKR
 	return x
 }
 
-// The closure to execute after CloudKit retrieves all of the records. The closure returns no value and takes the following parameters: - A cursor that indicates there are more results to fetch, or `nil` if there are no additional results. Use the cursor to create a new query operation when you're ready to retrieve the next batch of results. - An error that contains information about a problem, or `nil` if CloudKit retrieves the results successfully. This closure executes only once, and represents your final opportunity to process the results. It executes after all of the individual record fetch closures. The closure executes serially with respect to the other closures of the operation. If the number of records that the operation intends to return exceeds “CKQueryOperation/resultsLimit“, the operation provides a cursor that you can use to retrieve the next batch of results. You must create a separate operation using the cursor to fetch the next batch of results. Update the value of this property before you execute the operation or submit it to a queue.
+// The closure to execute after CloudKit retrieves all of the records.
 //
 // WithQueryCompletionBlock sets the queryCompletionBlock property and returns the receiver for chaining.
 func (x *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(*raw.CKQueryCursor, unsafe.Pointer)) *QueryOperation {
@@ -136,7 +138,7 @@ func (x *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(*raw
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *QueryOperation) WithDatabase(database *Database) *QueryOperation {
@@ -144,7 +146,7 @@ func (x *QueryOperation) WithDatabase(database *Database) *QueryOperation {
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *QueryOperation) WithConfiguration(configuration *OperationConfiguration) *QueryOperation {
@@ -152,7 +154,7 @@ func (x *QueryOperation) WithConfiguration(configuration *OperationConfiguration
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *QueryOperation) WithGroup(group *OperationGroup) *QueryOperation {
@@ -160,7 +162,7 @@ func (x *QueryOperation) WithGroup(group *OperationGroup) *QueryOperation {
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *QueryOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *QueryOperation {
@@ -184,7 +186,7 @@ func (x *QueryOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *Qu
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *QueryOperation) WithLongLived(longLived bool) *QueryOperation {

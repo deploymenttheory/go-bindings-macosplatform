@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An annotation that groups two or more distinct annotations into a single entity.
+//
 // ClusterAnnotation wraps [raw.MKClusterAnnotation] with a fluent Go API.
 type ClusterAnnotation struct {
 	inner *raw.MKClusterAnnotation
@@ -32,6 +34,8 @@ func ClusterAnnotationFromID(id objc.ID) *ClusterAnnotation {
 	return &ClusterAnnotation{inner: raw.MKClusterAnnotationFromID(id)}
 }
 
+// Creates a cluster annotation with the specified individual annotations.
+//
 // NewClusterAnnotationWithMemberAnnotations creates a new [ClusterAnnotation].
 func NewClusterAnnotationWithMemberAnnotations(memberAnnotations ...purego.IDer) *ClusterAnnotation {
 	_ptrs := make([]objc.ID, len(memberAnnotations))
@@ -50,12 +54,16 @@ func NewClusterAnnotationWithMemberAnnotations(memberAnnotations ...purego.IDer)
 	return &ClusterAnnotation{inner: raw.MKClusterAnnotationFromID(_id)}
 }
 
+// The title string to display for the group of annotations.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ClusterAnnotation) WithTitle(title string) *ClusterAnnotation {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle string to display for the group of annotations.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

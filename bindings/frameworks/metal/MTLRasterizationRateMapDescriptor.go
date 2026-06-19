@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to configure new rasterization rate maps.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrasterizationratemapdescriptor
 type MTLRasterizationRateMapDescriptor struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func MTLRasterizationRateMapDescriptorFromID(id objc.ID) *MTLRasterizationRateMa
 	return o
 }
 
-// @method rasterizationRateMapDescriptorWithScreenSize: @abstract Convenience descriptor creation function without layers @param screenSize The dimensions, in screen space pixels, of the region where variable rasterization is applied. The depth component of MTLSize is ignored. @return A descriptor containing no layers. Add or remove layers using setObject:atIndexedSubscript:.
+// Creates a rate map descriptor with a given size and identifier.
 func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSize(screenSize MTLSize) *MTLRasterizationRateMapDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSize, screenSize)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSi
 	return MTLRasterizationRateMapDescriptorFromID(_ret)
 }
 
-// @method rasterizationRateMapDescriptorWithScreenSize:layer: @abstract Convenience descriptor creation function for a single layer. @param screenSize The dimensions, in screen space pixels, of the region where variable rasterization is applied. The depth component of MTLSize is ignored. @param layer The single layer describing how the rasterization rate varies in screen space @return A descriptor containing a single layer. Add or remove layers using setObject:atIndexedSubscript:.
+// Creates a rate map descriptor with a single rate layer.
 func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSizeLayer(screenSize MTLSize, layer *MTLRasterizationRateLayerDescriptor) *MTLRasterizationRateMapDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayer, screenSize, layer.Ptr())
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSi
 	return MTLRasterizationRateMapDescriptorFromID(_ret)
 }
 
-// @method rasterizationRateMapDescriptorWithScreenSize:layerCount:layers: @abstract Convenience descriptor creation function for an arbitrary amount of layers stored in a C-array. @param screenSize The dimensions, in screen space pixels, of the region where variable rasterization is applied. The depth component of MTLSize is ignored. @param layerCount The number of layers in the descriptor. @param layers An array of pointers to layer descriptors. The array must contain layerCount non-null pointers to MTLRasterizationRateLayerDescriptor instances. @return A descriptor containing all the specified layers. Add or remove layers using setObject:atIndexedSubscript:. @discussion The function copies the array of pointers internally, the caller need not keep the array alive after creating the descriptor.
+// Creates a rate map descriptor with a set of layer descriptors.
 func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers(screenSize MTLSize, layerCount uint, layers unsafe.Pointer) *MTLRasterizationRateMapDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers, screenSize, layerCount, layers)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSi
 	return MTLRasterizationRateMapDescriptorFromID(_ret)
 }
 
-// @method layerAtIndex: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setLayer:atIndex: to add or set the layer. Identical to "layers[layerIndex]".
+// Returns the layer description for a layer in the rate map.
 func (o *MTLRasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateMapDescriptorSelLayerAtIndex, layerIndex)
 	if _ret != 0 {
@@ -78,7 +80,7 @@ func (o *MTLRasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *MTLRa
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
-// @method setLayer:atIndex: @abstract Sets the MTLRasterizationRateLayerDescriptor instance for the given layerIndex. @discussion The previous instance at the index, if any, will be overwritten. Set nil to an index to remove the layer at that index from the descriptor. Identical to "layers[layerIndex] = layer".
+// Sets a configuration for a layer rate map.
 func (o *MTLRasterizationRateMapDescriptor) SetLayerAtIndex(layer *MTLRasterizationRateLayerDescriptor, layerIndex uint) {
 	o.Ptr().Send(_mTLRasterizationRateMapDescriptorSelSetLayerAtIndex, layer.Ptr(), layerIndex)
 }

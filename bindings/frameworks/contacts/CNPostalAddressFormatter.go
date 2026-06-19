@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to format a contact’s postal addresses.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnpostaladdressformatter
 type CNPostalAddressFormatter struct {
 	foundation.NSFormatter
@@ -35,7 +37,7 @@ func CNPostalAddressFormatterFromID(id objc.ID) *CNPostalAddressFormatter {
 	return o
 }
 
-// @abstract Formats the postal address. @param postalAddress The postal address to be formatted. @param style The formatting style to be used for the postal address. @return The formatted postal address.
+// Returns a postal address as a string and formatted for the specified style.
 func CNPostalAddressFormatterStringFromPostalAddressStyle(postalAddress *CNPostalAddress, style CNPostalAddressFormatterStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNPostalAddressFormatter), _cNPostalAddressFormatterSelStringFromPostalAddressStyle, postalAddress.Ptr(), style)
 	if _ret != 0 {
@@ -44,16 +46,16 @@ func CNPostalAddressFormatterStringFromPostalAddressStyle(postalAddress *CNPosta
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract Formats the postal address returning an attributed string. @discussion This behaves like +stringFromPostalAddress: except it returns an attributed string. Includes attribute keys CNPostalAddressPropertyAttribute and CNPostalAddressLocalizedPropertyNameAttribute. @param postalAddress The postal address to be formatted. @param style The formatting style to be used for the postal address. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted postal address as an attributed string.
+// Returns a postal address as an attributed string and formatted for the specified style.
 func CNPostalAddressFormatterAttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress *CNPostalAddress, style CNPostalAddressFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCNPostalAddressFormatter), _cNPostalAddressFormatterSelAttributedStringFromPostalAddressStyleWithDefaultAttributes, postalAddress.Ptr(), style, attributes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNPostalAddressFormatter), _cNPostalAddressFormatterSelAttributedStringFromPostalAddressStyleWithDefaultAttributes, postalAddress.Ptr(), style, attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
-// @abstract Formats the postal address. @param postalAddress The postal address to be formatted. @return The formatted postal address.
+// Returns a formatted postal address.
 func (o *CNPostalAddressFormatter) StringFromPostalAddress(postalAddress *CNPostalAddress) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNPostalAddressFormatterSelStringFromPostalAddress, postalAddress.Ptr())
 	if _ret != 0 {
@@ -62,9 +64,9 @@ func (o *CNPostalAddressFormatter) StringFromPostalAddress(postalAddress *CNPost
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract Formats the postal address returning an attributed string. @discussion This behaves like +stringFromPostalAddress: except it returns an attributed string. Includes attribute keys CNPostalAddressPropertyAttribute and CNPostalAddressLocalizedPropertyNameAttribute. @param postalAddress The postal address to be formatted. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted postal address as an attributed string.
+// Returns a formatted postal address as an attributed string.
 func (o *CNPostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cNPostalAddressFormatterSelAttributedStringFromPostalAddressWithDefaultAttributes, postalAddress.Ptr(), attributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNPostalAddressFormatterSelAttributedStringFromPostalAddressWithDefaultAttributes, postalAddress.Ptr(), attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

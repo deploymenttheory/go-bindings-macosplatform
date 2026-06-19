@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The metadata associated with a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmetadataitem
 type NSMetadataItem struct {
 	NSObject
@@ -32,6 +34,7 @@ func NSMetadataItemFromID(id objc.ID) *NSMetadataItem {
 	return o
 }
 
+// Initializes a metadata item with a given URL.
 func (o *NSMetadataItem) InitWithURL(url *NSURL) *NSMetadataItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataItemSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -40,14 +43,19 @@ func (o *NSMetadataItem) InitWithURL(url *NSURL) *NSMetadataItem {
 	return NSMetadataItemFromID(_ret)
 }
 
+// Returns the receiver’s metadata attribute name specified by a given key.
 func (o *NSMetadataItem) ValueForAttribute(key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataItemSelValueForAttribute, key.Ptr())
 	return _ret
 }
 
+// Returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
 func (o *NSMetadataItem) ValuesForAttributes(keys *NSArray[*NSString]) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSMetadataItemSelValuesForAttributes, keys.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataItemSelValuesForAttributes, keys.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSMetadataItem) Attributes() *NSArray[*NSString] {

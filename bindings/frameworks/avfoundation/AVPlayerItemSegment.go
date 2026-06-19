@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that represents a segment of time on the integrated timeline.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemsegment
 type AVPlayerItemSegment struct {
 	foundation.NSObject
@@ -49,8 +51,11 @@ func (o *AVPlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
 
 // @property	loadedTimeRanges @abstract	This property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. @discussion Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
 func (o *AVPlayerItemSegment) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVPlayerItemSegmentSelLoadedTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSegmentSelLoadedTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // @property		startDate @abstract		The date this segment starts at. @discussion The date this segment starts at. This value will be nil if the primary item does not contain dates.

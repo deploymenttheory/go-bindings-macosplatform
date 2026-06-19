@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that creates an authentication token for use with CloudKit web services.
+//
 // FetchWebAuthTokenOperation wraps [raw.CKFetchWebAuthTokenOperation] with a fluent Go API.
 type FetchWebAuthTokenOperation struct {
 	inner *raw.CKFetchWebAuthTokenOperation
@@ -39,7 +41,7 @@ func NewFetchWebAuthTokenOperation() *FetchWebAuthTokenOperation {
 	return &FetchWebAuthTokenOperation{inner: raw.CKFetchWebAuthTokenOperationFromID(_id)}
 }
 
-// Creates a fetch operation for the specified API token. - Parameters: - APIToken: The API token that allows access to an app's container.
+// Creates a fetch operation for the specified API token.
 //
 // NewFetchWebAuthTokenOperationWithAPIToken creates a new [FetchWebAuthTokenOperation].
 func NewFetchWebAuthTokenOperationWithAPIToken(aPIToken string) *FetchWebAuthTokenOperation {
@@ -48,7 +50,7 @@ func NewFetchWebAuthTokenOperationWithAPIToken(aPIToken string) *FetchWebAuthTok
 	return &FetchWebAuthTokenOperation{inner: raw.CKFetchWebAuthTokenOperationFromID(_id)}
 }
 
-// The API token that allows access to an app's container.
+// The API token that allows access to an app’s container.
 //
 // WithAPIToken sets the aPIToken property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithAPIToken(aPIToken string) *FetchWebAuthTokenOperation {
@@ -56,7 +58,7 @@ func (x *FetchWebAuthTokenOperation) WithAPIToken(aPIToken string) *FetchWebAuth
 	return x
 }
 
-// The block to execute when the operation finishes. The closure returns no value and takes the following parameters: - If the operation is successful, the web authentication token; otherwise, `nil`. - An error that contains information about a problem, or `nil` if the system successfully fetches the token. The operation executes this closure only once. You must provide a closure capable of executing on a background thread, so any tasks that require access to the main thread must dispatch accordingly.
+// The block to execute when the operation finishes.
 //
 // WithFetchWebAuthTokenCompletionBlock sets the fetchWebAuthTokenCompletionBlock property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithFetchWebAuthTokenCompletionBlock(fetchWebAuthTokenCompletionBlock func(*foundation.NSString, unsafe.Pointer)) *FetchWebAuthTokenOperation {
@@ -64,7 +66,7 @@ func (x *FetchWebAuthTokenOperation) WithFetchWebAuthTokenCompletionBlock(fetchW
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithDatabase(database *Database) *FetchWebAuthTokenOperation {
@@ -72,7 +74,7 @@ func (x *FetchWebAuthTokenOperation) WithDatabase(database *Database) *FetchWebA
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithConfiguration(configuration *OperationConfiguration) *FetchWebAuthTokenOperation {
@@ -80,7 +82,7 @@ func (x *FetchWebAuthTokenOperation) WithConfiguration(configuration *OperationC
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithGroup(group *OperationGroup) *FetchWebAuthTokenOperation {
@@ -88,7 +90,7 @@ func (x *FetchWebAuthTokenOperation) WithGroup(group *OperationGroup) *FetchWebA
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchWebAuthTokenOperation {
@@ -112,7 +114,7 @@ func (x *FetchWebAuthTokenOperation) WithAllowsCellularAccess(allowsCellularAcce
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchWebAuthTokenOperation) WithLongLived(longLived bool) *FetchWebAuthTokenOperation {

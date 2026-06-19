@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Base type for descriptors you use for building pipeline state objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4pipelinedescriptor
 type MTL4PipelineDescriptor struct {
 	foundation.NSObject

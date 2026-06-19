@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the amount of time the app is active.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxappruntimemetric
 type MXAppRunTimeMetric struct {
 	MXMetric
@@ -35,24 +37,36 @@ func MXAppRunTimeMetricFromID(id objc.ID) *MXAppRunTimeMetric {
 
 // @property      cumulativeForegroundTime @abstract      Cumulative application foreground time. @discussion    Time spent on screen and visible to the user. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXAppRunTimeMetric) CumulativeForegroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXAppRunTimeMetricSelCumulativeForegroundTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppRunTimeMetricSelCumulativeForegroundTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeBackgroundTime @abstract      Cumulative application background time. @discussion    Time spent off screen and in the background, invisible to the user. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXAppRunTimeMetric) CumulativeBackgroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeBackgroundAudioTime @abstract      Cumulative time the application spent running in the background to play audio @discussion    Dimensioned as NSUnitDuration.
 func (o *MXAppRunTimeMetric) CumulativeBackgroundAudioTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundAudioTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundAudioTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeBackgroundLocationTime @abstract      Cumulative time the application spent running in the background to acquire or process location. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXAppRunTimeMetric) CumulativeBackgroundLocationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundLocationTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundLocationTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }

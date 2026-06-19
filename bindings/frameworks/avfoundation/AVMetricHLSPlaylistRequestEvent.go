@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents a live streaming playlist resource request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetrichlsplaylistrequestevent
 type AVMetricHLSPlaylistRequestEvent struct {
 	AVMetricEvent

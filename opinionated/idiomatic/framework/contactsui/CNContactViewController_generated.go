@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller that displays a new, unknown, or existing contact.
+//
 // ContactViewController wraps [raw.CNContactViewController] with a fluent Go API.
 type ContactViewController struct {
 	inner *raw.CNContactViewController
@@ -36,7 +38,7 @@ func NewContactViewController() *ContactViewController {
 	return &ContactViewController{inner: raw.CNContactViewControllerFromID(_id)}
 }
 
-// @abstract A @c contact to display. @discussion When @c contact is nil, displays an empty selection state.
+// The contact being displayed.
 //
 // WithContact sets the contact property and returns the receiver for chaining.
 func (x *ContactViewController) WithContact(contact *contacts.CNContact) *ContactViewController {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An icon associated with an action.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationactionicon
 type UNNotificationActionIcon struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func UNNotificationActionIconFromID(id objc.ID) *UNNotificationActionIcon {
 	return o
 }
 
+// Creates an action icon based on an image in your app’s bundle, preferably in an asset catalog.
 func UNNotificationActionIconIconWithTemplateImageName(templateImageName *foundation.NSString) *UNNotificationActionIcon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationActionIcon), _uNNotificationActionIconSelIconWithTemplateImageName, templateImageName.Ptr())
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func UNNotificationActionIconIconWithTemplateImageName(templateImageName *founda
 	return UNNotificationActionIconFromID(_ret)
 }
 
+// Creates an action icon by using a system symbol image.
 func UNNotificationActionIconIconWithSystemImageName(systemImageName *foundation.NSString) *UNNotificationActionIcon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationActionIcon), _uNNotificationActionIconSelIconWithSystemImageName, systemImageName.Ptr())
 	if _ret != 0 {

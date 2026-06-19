@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssharingservice
 type NSSharingService struct {
 	foundation.NSObject
@@ -49,17 +51,17 @@ func NSSharingServiceFromID(id objc.ID) *NSSharingService {
 	return o
 }
 
-// Returns a list of NSSharingServices which could share all the provided items together. sharingServicesForItems can be used to build a custom UI, or to populate a contextual NSMenu. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Returns a list of sharing services which could share all the provided items together.
 // Deprecated: Use -[NSSharingServicePicker standardShareMenuItem] instead.
 func NSSharingServiceSharingServicesForItems(items *foundation.NSArray[objc.ID]) *foundation.NSArray[*NSSharingService] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSharingService), _nSSharingServiceSelSharingServicesForItems, items)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSSharingService), _nSSharingServiceSelSharingServicesForItems, items.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*NSSharingService](_ret)
 }
 
-// Returns an NSSharingService representing one of the built-in services.
+// Returns a sharing service instance representing the specified service name.
 func NSSharingServiceSharingServiceNamed(serviceName *foundation.NSString) *NSSharingService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSharingService), _nSSharingServiceSelSharingServiceNamed, serviceName.Ptr())
 	if _ret != 0 {
@@ -68,7 +70,7 @@ func NSSharingServiceSharingServiceNamed(serviceName *foundation.NSString) *NSSh
 	return NSSharingServiceFromID(_ret)
 }
 
-// Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method.
+// Creates a custom sharing service object.
 func (o *NSSharingService) InitWithTitleImageAlternateImageHandler(title *foundation.NSString, image *NSImage, alternateImage *NSImage, block func()) *NSSharingService {
 	var __block_block objc.Block
 	if block != nil {
@@ -84,15 +86,15 @@ func (o *NSSharingService) InitWithTitleImageAlternateImageHandler(title *founda
 	return NSSharingServiceFromID(_ret)
 }
 
-// Returns whether a service can do something with all the provided items. This can be used to validate a custom UI such as a dedicated Twitter button. If items is nil, the method will return YES when the service is configured. Therefore you could call it once at launch time with nil items to check whether to display the button or not, and then with real items to enable and disable the button depending on the context or selection. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Returns whether the service can share all the specified items.
 func (o *NSSharingService) CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSharingServiceSelCanPerformWithItems, items)
+	_ret := objc.Send[bool](o.Ptr(), _nSSharingServiceSelCanPerformWithItems, items.Ptr())
 	return _ret
 }
 
-// Manually performs the service on the provided items. In most cases this will display a sharing window. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Manually performs the service on the provided items.
 func (o *NSSharingService) PerformWithItems(items *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSSharingServiceSelPerformWithItems, items)
+	o.Ptr().Send(_nSSharingServiceSelPerformWithItems, items.Ptr())
 }
 
 func (o *NSSharingService) Delegate() NSSharingServiceDelegate {
@@ -144,13 +146,16 @@ func (o *NSSharingService) SetMenuItemTitle(menuItemTitle *foundation.NSString) 
 
 // NSArray of NSString objects representing handles (example: email adresses)
 func (o *NSSharingService) Recipients() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSharingServiceSelRecipients)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelRecipients)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // NSArray of NSString objects representing handles (example: email adresses)
 func (o *NSSharingService) SetRecipients(recipients *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSharingServiceSelSetRecipients, recipients)
+	o.Ptr().Send(_nSSharingServiceSelSetRecipients, recipients.Ptr())
 }
 
 func (o *NSSharingService) Subject() *foundation.NSString {
@@ -194,6 +199,9 @@ func (o *NSSharingService) AccountName() *foundation.NSString {
 
 // NSArray of NSURL objects representing the files that were shared
 func (o *NSSharingService) AttachmentFileURLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _nSSharingServiceSelAttachmentFileURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelAttachmentFileURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }

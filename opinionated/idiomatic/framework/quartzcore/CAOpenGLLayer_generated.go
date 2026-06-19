@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A layer that provides a layer suitable for rendering OpenGL content.
+//
 // OpenGLLayer wraps [raw.CAOpenGLLayer] with a fluent Go API.
 type OpenGLLayer struct {
 	inner *raw.CAOpenGLLayer
@@ -39,72 +41,96 @@ func NewOpenGLLayer() *OpenGLLayer {
 	return &OpenGLLayer{inner: raw.CAOpenGLLayerFromID(_id)}
 }
 
+// Determines when the contents of the layer are updated.
+//
 // WithAsynchronous sets the asynchronous property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
 	x.inner.SetAsynchronous(asynchronous)
 	return x
 }
 
+// The layer’s bounds rectangle. Animatable.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithBounds(bounds corefoundation.CGRect) *OpenGLLayer {
 	x.inner.CALayer.SetBounds(bounds)
 	return x
 }
 
+// The layer’s position in its superlayer’s coordinate space. Animatable.
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithPosition(position corefoundation.CGPoint) *OpenGLLayer {
 	x.inner.CALayer.SetPosition(position)
 	return x
 }
 
+// The layer’s position on the z axis. Animatable.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithZPosition(zPosition float64) *OpenGLLayer {
 	x.inner.CALayer.SetZPosition(zPosition)
 	return x
 }
 
+// Defines the anchor point of the layer’s bounds rectangle. Animatable.
+//
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *OpenGLLayer {
 	x.inner.CALayer.SetAnchorPoint(anchorPoint)
 	return x
 }
 
+// The anchor point for the layer’s position along the z axis. Animatable.
+//
 // WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer {
 	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
 	return x
 }
 
+// The transform applied to the layer’s contents. Animatable.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithTransform(transform raw.CATransform3D) *OpenGLLayer {
 	x.inner.CALayer.SetTransform(transform)
 	return x
 }
 
+// The layer’s frame rectangle.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithFrame(frame corefoundation.CGRect) *OpenGLLayer {
 	x.inner.CALayer.SetFrame(frame)
 	return x
 }
 
+// A Boolean indicating whether the layer is displayed. Animatable.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithHidden(hidden bool) *OpenGLLayer {
 	x.inner.CALayer.SetHidden(hidden)
 	return x
 }
 
+// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+//
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithDoubleSided(doubleSided bool) *OpenGLLayer {
 	x.inner.CALayer.SetDoubleSided(doubleSided)
 	return x
 }
 
+// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+//
 // WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer {
 	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
 	return x
 }
 
+// An array containing the layer’s sublayers.
+//
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
 	if len(items) == 0 {
@@ -126,54 +152,72 @@ func (x *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
 	return x
 }
 
+// Specifies the transform to apply to sublayers when rendering. Animatable.
+//
 // WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *OpenGLLayer {
 	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
 	return x
 }
 
+// An optional layer whose alpha channel is used to mask the layer’s content.
+//
 // WithMask sets the mask property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithMask(mask LayerProvider) *OpenGLLayer {
 	x.inner.CALayer.SetMask(mask.asLayer())
 	return x
 }
 
+// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+//
 // WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithMasksToBounds(masksToBounds bool) *OpenGLLayer {
 	x.inner.CALayer.SetMasksToBounds(masksToBounds)
 	return x
 }
 
+// An object that provides the contents of the layer. Animatable.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithContents(contents objc.ID) *OpenGLLayer {
 	x.inner.CALayer.SetContents(contents)
 	return x
 }
 
+// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+//
 // WithContentsRect sets the contentsRect property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithContentsRect(contentsRect corefoundation.CGRect) *OpenGLLayer {
 	x.inner.CALayer.SetContentsRect(contentsRect)
 	return x
 }
 
+// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+//
 // WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithContentsGravity(contentsGravity *foundation.NSString) *OpenGLLayer {
 	x.inner.CALayer.SetContentsGravity(contentsGravity)
 	return x
 }
 
+// The scale factor applied to the layer.
+//
 // WithContentsScale sets the contentsScale property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithContentsScale(contentsScale float64) *OpenGLLayer {
 	x.inner.CALayer.SetContentsScale(contentsScale)
 	return x
 }
 
+// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+//
 // WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *OpenGLLayer {
 	x.inner.CALayer.SetContentsCenter(contentsCenter)
 	return x
 }
 
+// A hint for the desired storage format of the layer contents.
+//
 // WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithContentsFormat(contentsFormat *foundation.NSString) *OpenGLLayer {
 	x.inner.CALayer.SetContentsFormat(contentsFormat)
@@ -204,54 +248,72 @@ func (x *OpenGLLayer) WithContentsHeadroom(contentsHeadroom float64) *OpenGLLaye
 	return x
 }
 
+// The filter used when reducing the size of the content.
+//
 // WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *OpenGLLayer {
 	x.inner.CALayer.SetMinificationFilter(minificationFilter)
 	return x
 }
 
+// The filter used when increasing the size of the content.
+//
 // WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *OpenGLLayer {
 	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
 	return x
 }
 
+// The bias factor used by the minification filter to determine the levels of detail.
+//
 // WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithMinificationFilterBias(minificationFilterBias float32) *OpenGLLayer {
 	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
 	return x
 }
 
+// A Boolean value indicating whether the layer contains completely opaque content.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithOpaque(opaque bool) *OpenGLLayer {
 	x.inner.CALayer.SetOpaque(opaque)
 	return x
 }
 
+// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+//
 // WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer {
 	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
 	return x
 }
 
+// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+//
 // WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer {
 	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
 	return x
 }
 
+// A bitmask defining how the edges of the receiver are rasterized.
+//
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *OpenGLLayer {
 	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
+//
 // WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer {
 	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
 	return x
 }
 
+// The radius to use when drawing rounded corners for the layer’s background. Animatable.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithCornerRadius(cornerRadius float64) *OpenGLLayer {
 	x.inner.CALayer.SetCornerRadius(cornerRadius)
@@ -270,96 +332,128 @@ func (x *OpenGLLayer) WithCornerCurve(cornerCurve *foundation.NSString) *OpenGLL
 	return x
 }
 
+// The width of the layer’s border. Animatable.
+//
 // WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithBorderWidth(borderWidth float64) *OpenGLLayer {
 	x.inner.CALayer.SetBorderWidth(borderWidth)
 	return x
 }
 
+// The opacity of the receiver. Animatable.
+//
 // WithOpacity sets the opacity property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithOpacity(opacity float32) *OpenGLLayer {
 	x.inner.CALayer.SetOpacity(opacity)
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+//
 // WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLLayer {
 	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
 	return x
 }
 
+// A CoreImage filter used to composite the layer and the content behind it. Animatable.
+//
 // WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithCompositingFilter(compositingFilter objc.ID) *OpenGLLayer {
 	x.inner.CALayer.SetCompositingFilter(compositingFilter)
 	return x
 }
 
+// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithShouldRasterize(shouldRasterize bool) *OpenGLLayer {
 	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+//
 // WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithRasterizationScale(rasterizationScale float64) *OpenGLLayer {
 	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
 	return x
 }
 
+// The opacity of the layer’s shadow. Animatable.
+//
 // WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithShadowOpacity(shadowOpacity float32) *OpenGLLayer {
 	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
 	return x
 }
 
+// The offset (in points) of the layer’s shadow. Animatable.
+//
 // WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer {
 	x.inner.CALayer.SetShadowOffset(shadowOffset)
 	return x
 }
 
+// The blur radius (in points) used to render the layer’s shadow. Animatable.
+//
 // WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
 	x.inner.CALayer.SetShadowRadius(shadowRadius)
 	return x
 }
 
+// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
+//
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *OpenGLLayer {
 	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
+// The object responsible for laying out the layer’s sublayers.
+//
 // WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *OpenGLLayer {
 	x.inner.CALayer.SetLayoutManager(layoutManager)
 	return x
 }
 
+// A dictionary containing layer actions.
+//
 // WithActions sets the actions property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *OpenGLLayer {
 	x.inner.CALayer.SetActions(actions)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithName(name string) *OpenGLLayer {
 	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The layer’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithDelegate(delegate raw.CALayerDelegate) *OpenGLLayer {
 	x.inner.CALayer.SetDelegate(delegate)
 	return x
 }
 
+// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *OpenGLLayer {
 	x.inner.CALayer.SetStyle(style)
 	return x
 }
 
+// The constraints used to position current layer’s sublayers.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *OpenGLLayer) WithConstraints(items ...*raw.CAConstraint) *OpenGLLayer {
 	if len(items) == 0 {
@@ -381,31 +475,43 @@ func (x *OpenGLLayer) WithConstraints(items ...*raw.CAConstraint) *OpenGLLayer {
 	return x
 }
 
+// Returns whether the receiver should draw OpenGL content for the specified time.
+//
 // CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime calls the underlying CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime.
 func (x *OpenGLLayer) CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) bool {
 	return x.inner.CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx, pf, t, ts)
 }
 
+// Draws the OpenGL content for the specified time.
+//
 // DrawInCGLContextPixelFormatForLayerTimeDisplayTime calls the underlying DrawInCGLContextPixelFormatForLayerTimeDisplayTime.
 func (x *OpenGLLayer) DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) {
 	x.inner.DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx, pf, t, ts)
 }
 
+// Returns the OpenGL pixel format suitable for rendering to the set of displays specified by the display mask.
+//
 // CopyCGLPixelFormatForDisplayMask calls the underlying CopyCGLPixelFormatForDisplayMask.
 func (x *OpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) unsafe.Pointer {
 	return x.inner.CopyCGLPixelFormatForDisplayMask(mask)
 }
 
+// Releases the specified OpenGL pixel format object.
+//
 // ReleaseCGLPixelFormat calls the underlying ReleaseCGLPixelFormat.
 func (x *OpenGLLayer) ReleaseCGLPixelFormat(pf unsafe.Pointer) {
 	x.inner.ReleaseCGLPixelFormat(pf)
 }
 
+// Returns the rendering context the receiver requires for the specified pixel format.
+//
 // CopyCGLContextForPixelFormat calls the underlying CopyCGLContextForPixelFormat.
 func (x *OpenGLLayer) CopyCGLContextForPixelFormat(pf unsafe.Pointer) unsafe.Pointer {
 	return x.inner.CopyCGLContextForPixelFormat(pf)
 }
 
+// Releases the specified rendering context.
+//
 // ReleaseCGLContext calls the underlying ReleaseCGLContext.
 func (x *OpenGLLayer) ReleaseCGLContext(ctx unsafe.Pointer) {
 	x.inner.ReleaseCGLContext(ctx)

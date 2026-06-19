@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "framework": "Accounts",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ACAccount": {
+      "doc": "The information associated with one of the user’s accounts.",
+      "url": "https://developer.apple.com/documentation/accounts/acaccount"
+    },
+    "ACAccountCredential": {
+      "doc": "A credential object that encapsulates the information needed to authenticate a user.",
+      "url": "https://developer.apple.com/documentation/accounts/acaccountcredential"
+    },
+    "ACAccountStore": {
+      "doc": "The object you use to request, manage, and store the user’s account information.",
+      "url": "https://developer.apple.com/documentation/accounts/acaccountstore"
+    },
+    "ACAccountType": {
+      "doc": "An object that encapsulates information about all accounts of a particular type.",
+      "url": "https://developer.apple.com/documentation/accounts/acaccounttype"
+    }
+  },
+  "enums": {
+    "ACAccountCredentialRenewResult": {
+      "doc": "Status codes of credential renewal requests.",
+      "url": "https://developer.apple.com/documentation/accounts/acaccountcredentialrenewresult",
+      "members": {
+        "ACAccountCredentialRenewResultFailed": {
+          "doc": "A non-user-initiated cancel of the prompt.",
+          "url": "https://developer.apple.com/documentation/accounts/acaccountcredentialrenewresult/failed"
+        },
+        "ACAccountCredentialRenewResultRejected": {
+          "doc": "Renewal failed because the user revoked your access to their account.",
+          "url": "https://developer.apple.com/documentation/accounts/acaccountcredentialrenewresult/rejected"
+        },
+        "ACAccountCredentialRenewResultRenewed": {
+          "doc": "The account’s credentials have been renewed and are now associated with the account.",
+          "url": "https://developer.apple.com/documentation/accounts/acaccountcredentialrenewresult/renewed"
+        }
+      }
+    },
+    "ACErrorCode": {
+      "doc": "Codes for errors that may occur.",
+      "url": "https://developer.apple.com/documentation/accounts/acerrorcode",
+      "members": {
+        "init(_:)": {
+          "doc": "Initializes a new error code structure.",
+          "url": "https://developer.apple.com/documentation/accounts/acerrorcode/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a new error code structure.",
+          "url": "https://developer.apple.com/documentation/accounts/acerrorcode/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw integer value of the error code.",
+          "url": "https://developer.apple.com/documentation/accounts/acerrorcode/rawvalue"
+        }
+      }
+    }
+  },
+  "methods": {
+    "ACAccount": {
+      "-initWithAccountType:": {
+        "doc": "Initializes a new account of the specified type.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/init(accounttype:)"
+      }
+    },
+    "ACAccountCredential": {
+      "-initWithOAuth2Token:refreshToken:expiryDate:": {
+        "doc": "Initializes an account credential using OAuth 2.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountcredential/init(oauth2token:refreshtoken:expirydate:)-67hmd"
+      },
+      "-initWithOAuthToken:tokenSecret:": {
+        "doc": "Initializes an account credential using OAuth.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountcredential/init(oauthtoken:tokensecret:)-6bfyf"
+      }
+    },
+    "ACAccountStore": {
+      "-accountTypeWithAccountTypeIdentifier:": {
+        "doc": "Returns an account type that matches the specified identifier.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/accounttype(withaccounttypeidentifier:)"
+      },
+      "-accountWithIdentifier:": {
+        "doc": "Returns the account with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/account(withidentifier:)"
+      },
+      "-accountsWithAccountType:": {
+        "doc": "Returns all accounts of the specified type.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/accounts(with:)"
+      },
+      "-removeAccount:withCompletionHandler:": {
+        "doc": "Removes an account from the account store.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/removeaccount(_:withcompletionhandler:)"
+      },
+      "-renewCredentialsForAccount:completion:": {
+        "doc": "Renews account credentials when the credentials are no longer valid.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/renewcredentials(for:completion:)"
+      },
+      "-requestAccessToAccountsWithType:options:completion:": {
+        "doc": "Obtains permission to access protected user properties.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/requestaccesstoaccounts(with:options:completion:)"
+      },
+      "-requestAccessToAccountsWithType:withCompletionHandler:": {
+        "doc": "Requests access to accounts of the specified type.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/requestaccesstoaccountswithtype:withcompletionhandler:"
+      },
+      "-saveAccount:withCompletionHandler:": {
+        "doc": "Saves an account to the Accounts database.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/saveaccount(_:withcompletionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "ACAccount": {
+      "accountDescription": {
+        "doc": "A human-readable description of the account.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/accountdescription"
+      },
+      "accountType": {
+        "doc": "The type of service account.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/accounttype"
+      },
+      "credential": {
+        "doc": "The credential used to authenticate the user of this account.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/credential"
+      },
+      "identifier": {
+        "doc": "A unique identifier for this account.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/identifier"
+      },
+      "userFullName": {
+        "doc": "The full name associated with the user account.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/userfullname"
+      },
+      "username": {
+        "doc": "The username for this account.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccount/username"
+      }
+    },
+    "ACAccountCredential": {
+      "oauthToken": {
+        "doc": "The token used for the credential.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountcredential/oauthtoken"
+      }
+    },
+    "ACAccountStore": {
+      "accounts": {
+        "doc": "The accounts managed by this account store.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccountstore/accounts"
+      }
+    },
+    "ACAccountType": {
+      "accessGranted": {
+        "doc": "A Boolean value indicating whether the user granted the application access to accounts of this type.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccounttype/accessgranted"
+      },
+      "accountTypeDescription": {
+        "doc": "A human-readable description of the account type.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccounttype/accounttypedescription"
+      },
+      "identifier": {
+        "doc": "The unique identifier for the account type.",
+        "url": "https://developer.apple.com/documentation/accounts/acaccounttype/identifier"
+      }
+    }
+  }
+}

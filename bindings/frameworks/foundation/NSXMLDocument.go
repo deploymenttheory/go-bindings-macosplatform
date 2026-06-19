@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class NSXMLDocument @abstract An XML Document @discussion Note: if the application of a method would result in more than one element in the children array, an exception is thrown. Trying to add a document, namespace, attribute, or node with a parent also throws an exception. To add a node with a parent first detach or create a copy of it.
+// An XML document as internalized into a logical tree structure.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmldocument
 type NSXMLDocument struct {

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "framework": "GSS",
+  "source": "developer.apple.com DocC render API",
+  "structs": {
+    "gss_OID_desc_struct": {
+      "doc": "The structure for an OID descriptor that exchanges object identifiers with many GSS-API functions.",
+      "url": "https://developer.apple.com/documentation/gss/gss_oid_desc_struct"
+    },
+    "gss_OID_set_desc_struct": {
+      "doc": "The structure for an OID set descriptor that manages an array of OID descriptors.",
+      "url": "https://developer.apple.com/documentation/gss/gss_oid_set_desc_struct"
+    },
+    "gss_buffer_desc_struct": {
+      "doc": "The structure for a buffer descriptor that you use to exchange octet streams with many GSS-API functions.",
+      "url": "https://developer.apple.com/documentation/gss/gss_buffer_desc_struct"
+    },
+    "gss_buffer_set_desc_struct": {
+      "doc": "The structure for a buffer set descriptor that you use to manage an array of buffer descriptors.",
+      "url": "https://developer.apple.com/documentation/gss/gss_buffer_set_desc_struct"
+    },
+    "gss_channel_bindings_struct": {
+      "doc": "The structure defining a channel bindings descriptor that specifies the communications channel used to carry a context.",
+      "url": "https://developer.apple.com/documentation/gss/gss_channel_bindings_struct"
+    },
+    "gss_iov_buffer_desc_struct": {
+      "doc": "The structure for a vectored I/O buffer and its defined type.",
+      "url": "https://developer.apple.com/documentation/gss/gss_iov_buffer_desc_struct"
+    },
+    "gss_krb5_cfx_keydata": {
+      "url": "https://developer.apple.com/documentation/gss/gss_krb5_cfx_keydata"
+    },
+    "gss_krb5_lucid_context_v1": {
+      "url": "https://developer.apple.com/documentation/gss/gss_krb5_lucid_context_v1"
+    },
+    "gss_krb5_lucid_context_version": {
+      "url": "https://developer.apple.com/documentation/gss/gss_krb5_lucid_context_version"
+    },
+    "gss_krb5_lucid_key": {
+      "url": "https://developer.apple.com/documentation/gss/gss_krb5_lucid_key"
+    },
+    "gss_krb5_rfc1964_keydata": {
+      "url": "https://developer.apple.com/documentation/gss/gss_krb5_rfc1964_keydata"
+    }
+  }
+}

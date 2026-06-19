@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing counts for the different types of foreground app exits.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxforegroundexitdata
 type MXForegroundExitData struct {
 	foundation.NSObject

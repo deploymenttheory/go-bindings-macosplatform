@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Describes the information about a vehicular crash.
+//
 // CrashDetectionEvent wraps [raw.SACrashDetectionEvent] with a fluent Go API.
 type CrashDetectionEvent struct {
 	inner *raw.SACrashDetectionEvent

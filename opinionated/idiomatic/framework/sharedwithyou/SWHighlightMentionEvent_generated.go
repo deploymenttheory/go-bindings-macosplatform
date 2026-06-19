@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents mention activity for a highlight.
+//
 // HighlightMentionEvent wraps [raw.SWHighlightMentionEvent] with a fluent Go API.
 type HighlightMentionEvent struct {
 	inner *raw.SWHighlightMentionEvent
@@ -32,7 +34,7 @@ func HighlightMentionEventFromID(id objc.ID) *HighlightMentionEvent {
 	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(id)}
 }
 
-// Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param handle The CloudKit handle of the person being mentioned by the sender.
+// Creates and initializes a mention event.
 //
 // NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates a new [HighlightMentionEvent].
 func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(highlight *raw.SWHighlight, handle string) *HighlightMentionEvent {
@@ -41,7 +43,7 @@ func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(hig
 	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(_id)}
 }
 
-// Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param identity The identity of the person being mentioned by the sender.
+// Creates and initializes a mention event.
 //
 // NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates a new [HighlightMentionEvent].
 func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *raw.SWHighlight, identity *sharedwithyoucore.SWPersonIdentity) *HighlightMentionEvent {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the record changes for a single send operation.
+//
 // SyncEngineRecordZoneChangeBatch wraps [raw.CKSyncEngineRecordZoneChangeBatch] with a fluent Go API.
 type SyncEngineRecordZoneChangeBatch struct {
 	inner *raw.CKSyncEngineRecordZoneChangeBatch
@@ -33,7 +35,7 @@ func SyncEngineRecordZoneChangeBatchFromID(id objc.ID) *SyncEngineRecordZoneChan
 	return &SyncEngineRecordZoneChangeBatch{inner: raw.CKSyncEngineRecordZoneChangeBatchFromID(id)}
 }
 
-// Creates a batch of records to modify using the provided record zone changes. - Parameters: - pendingChanges: The record zone changes to process. - recordProvider: A block that returns the record for the specified record identifier. - Returns: The batch of records to modify, or `nil` if there are no pending changes. This method iterates over `pendingChanges` and adds the necessary information to the new batch, until there are no more changes or the size of the batch reaches the maximum limit. If the type of change is a record save, the method asks the specified `recordProvider` block for that record. If the closure returns `nil`, the method skips that change.
+// Creates a batch of records to modify using the provided record zone changes.
 //
 // NewSyncEngineRecordZoneChangeBatchWithPendingChangesRecordProvider creates a new [SyncEngineRecordZoneChangeBatch].
 func NewSyncEngineRecordZoneChangeBatchWithPendingChangesRecordProvider(pendingChanges *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange], recordProvider objc.Block) *SyncEngineRecordZoneChangeBatch {
@@ -42,7 +44,7 @@ func NewSyncEngineRecordZoneChangeBatchWithPendingChangesRecordProvider(pendingC
 	return &SyncEngineRecordZoneChangeBatch{inner: raw.CKSyncEngineRecordZoneChangeBatchFromID(_id)}
 }
 
-// Creates a batch of records to modify. - Parameters: - recordsToSave: The records to save. - recordIDsToDelete: The identifiers of the records to delete. - atomicByZone: A Boolean value that determines whether CloudKit modifies the specified records atomically by record zone. - Returns: An initialized change batch. - Important: When using this initializer to create batches, consider the number of records you specify and their combined size. If you specify too many records, or their combined size is too large, the send operation may fail with an error of type “CKError/Code/limitExceeded“.
+// Creates a batch of records to modify.
 //
 // NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone creates a new [SyncEngineRecordZoneChangeBatch].
 func NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone(recordsToSave *foundation.NSArray[*raw.CKRecord], recordIDsToDelete *foundation.NSArray[*raw.CKRecordID], atomicByZone bool) *SyncEngineRecordZoneChangeBatch {
@@ -51,7 +53,7 @@ func NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicB
 	return &SyncEngineRecordZoneChangeBatch{inner: raw.CKSyncEngineRecordZoneChangeBatchFromID(_id)}
 }
 
-// A Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type “CKError/Code/batchRequestFailed“. The default value is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that determines whether CloudKit modifies records atomically by record zone.
 //
 // WithAtomicByZone sets the atomicByZone property and returns the receiver for chaining.
 func (x *SyncEngineRecordZoneChangeBatch) WithAtomicByZone(atomicByZone bool) *SyncEngineRecordZoneChangeBatch {

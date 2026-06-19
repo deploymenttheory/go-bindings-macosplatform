@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that stores an array of sample buffer attachments for a blit pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlblitpasssamplebufferattachmentdescriptorarray
 type MTLBlitPassSampleBufferAttachmentDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *MTLBlit
 	return o
 }
 
+// Accesses one of the array’s blit pass sample buffer attachment descriptor instances.
 func (o *MTLBlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLBlitPassSampleBufferAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLBlitPassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLBlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscr
 	return MTLBlitPassSampleBufferAttachmentDescriptorFromID(_ret)
 }
 
+// Copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
 func (o *MTLBlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLBlitPassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }

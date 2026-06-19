@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An action a user can perform that’s relevant to a reservation.
+//
 // ReservationAction wraps [raw.INReservationAction] with a fluent Go API.
 type ReservationAction struct {
 	inner *raw.INReservationAction
@@ -30,6 +32,8 @@ func ReservationActionFromID(id objc.ID) *ReservationAction {
 	return &ReservationAction{inner: raw.INReservationActionFromID(id)}
 }
 
+// Creates a new reservation action.
+//
 // NewReservationActionWithTypeValidDurationUserActivity creates a new [ReservationAction].
 func NewReservationActionWithTypeValidDurationUserActivity(type_ INReservationActionType, validDuration *raw.INDateComponentsRange, userActivity *foundation.NSUserActivity) *ReservationAction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INReservationAction")), objc.RegisterName("alloc"))

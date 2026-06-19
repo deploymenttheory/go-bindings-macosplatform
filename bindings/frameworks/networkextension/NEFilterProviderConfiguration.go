@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration parameters for a content filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterproviderconfiguration
 type NEFilterProviderConfiguration struct {
 	foundation.NSObject
@@ -85,12 +87,15 @@ func (o *NEFilterProviderConfiguration) SetFilterPackets(filterPackets bool) {
 
 // @property vendorConfiguration @discussion An optional dictionary of plugin-specific keys to be passed to the plugin.
 func (o *NEFilterProviderConfiguration) VendorConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nEFilterProviderConfigurationSelVendorConfiguration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelVendorConfiguration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NEFilterProviderConfiguration) SetVendorConfiguration(vendorConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nEFilterProviderConfigurationSelSetVendorConfiguration, vendorConfiguration)
+	o.Ptr().Send(_nEFilterProviderConfigurationSelSetVendorConfiguration, vendorConfiguration.Ptr())
 }
 
 // @property serverAddress @discussion The optional address of the server used to support the filter.

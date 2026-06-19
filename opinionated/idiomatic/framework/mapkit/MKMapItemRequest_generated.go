@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A utility class you use to request additional information about a map feature.
+//
 // MapItemRequest wraps [raw.MKMapItemRequest] with a fluent Go API.
 type MapItemRequest struct {
 	inner *raw.MKMapItemRequest
@@ -29,6 +31,8 @@ func MapItemRequestFromID(id objc.ID) *MapItemRequest {
 	return &MapItemRequest{inner: raw.MKMapItemRequestFromID(id)}
 }
 
+// Create a request with a map item identifier.
+//
 // NewMapItemRequestWithMapItemIdentifier creates a new [MapItemRequest].
 func NewMapItemRequestWithMapItemIdentifier(identifier *raw.MKMapItemIdentifier) *MapItemRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemRequest")), objc.RegisterName("alloc"))

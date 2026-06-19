@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MLMediaLibrary class provides an interface for accessing a collection of media objects from various sources. It serves as the initial access point of the Media Library framework.
+//
 // Apple documentation: https://developer.apple.com/documentation/medialibrary/mlmedialibrary
 type MLMediaLibrary struct {
 	foundation.NSObject
@@ -31,8 +33,9 @@ func MLMediaLibraryFromID(id objc.ID) *MLMediaLibrary {
 	return o
 }
 
+// Initializes the media library based on the specified load options.
 func (o *MLMediaLibrary) InitWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MLMediaLibrary {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaLibrarySelInitWithOptions, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaLibrarySelInitWithOptions, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -40,6 +43,9 @@ func (o *MLMediaLibrary) InitWithOptions(options *foundation.NSDictionary[*found
 }
 
 func (o *MLMediaLibrary) MediaSources() *foundation.NSDictionary[*foundation.NSString, *MLMediaSource] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLMediaSource]](o.Ptr(), _mLMediaLibrarySelMediaSources)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaLibrarySelMediaSources)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLMediaSource](_ret)
 }

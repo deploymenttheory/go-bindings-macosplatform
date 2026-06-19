@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a ticketed event reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inticketedeventreservation
 type INTicketedEventReservation struct {
 	INReservation
@@ -33,6 +35,7 @@ func INTicketedEventReservationFromID(id objc.ID) *INTicketedEventReservation {
 	return o
 }
 
+// Creates a ticketed event reservation with the specified contents and attributes.
 func (o *INTicketedEventReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, event *INTicketedEvent) *INTicketedEventReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), event.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *INTicketedEventReservation) InitWithItemReferenceReservationNumberBooki
 	return INTicketedEventReservationFromID(_ret)
 }
 
+// Creates a new ticketed event reservation with the specified contents and attributes.
 func (o *INTicketedEventReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], reservedSeat *INSeat, event *INTicketedEvent) *INTicketedEventReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), reservedSeat.Ptr(), event.Ptr())
 	if _ret != 0 {

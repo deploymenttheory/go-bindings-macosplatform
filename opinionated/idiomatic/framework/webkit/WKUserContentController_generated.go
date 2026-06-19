@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for managing interactions between JavaScript code and your web view, and for filtering content in your web view.
+//
 // WKUserContentController wraps [raw.WKUserContentController] with a fluent Go API.
 type WKUserContentController struct {
 	inner *raw.WKUserContentController
@@ -37,84 +39,84 @@ func NewWKUserContentController() *WKUserContentController {
 	return &WKUserContentController{inner: raw.WKUserContentControllerFromID(_id)}
 }
 
-// @abstract Adds a user script. @param userScript The user script to add.
+// Injects the specified script into the webpage’s content.
 //
 // AddUserScript calls the underlying AddUserScript.
 func (x *WKUserContentController) AddUserScript(userScript *raw.WKUserScript) {
 	x.inner.AddUserScript(userScript)
 }
 
-// @abstract Removes all associated user scripts.
+// Removes all user scripts from the web view.
 //
 // RemoveAllUserScripts calls the underlying RemoveAllUserScripts.
 func (x *WKUserContentController) RemoveAllUserScripts() {
 	x.inner.RemoveAllUserScripts()
 }
 
-// @abstract Adds a script message handler. @param scriptMessageHandler The script message handler to add. @param contentWorld The WKContentWorld in which to add the script message handler. @param name The name of the message handler. @discussion Adding a script message handler adds a function window.webkit.messageHandlers.<name>.postMessage(<messageBody>) to all frames, available in the given WKContentWorld. The name argument must be a non-empty string. Each WKContentWorld can have any number of script message handlers, but only one per unique name. Once any script message handler has been added to a WKContentWorld for a given name, it is an error to add another script message handler to that WKContentWorld for that same name without first removing the previous script message handler. The above restriction applies to any type of script message handler - WKScriptMessageHandler and WKScriptMessageHandlerWithReply objects will conflict with each other if you try to add them to the same WKContentWorld with the same name.
+// Installs a message handler that you can call from the specified content world in your JavaScript code.
 //
 // AddScriptMessageHandlerContentWorldName calls the underlying AddScriptMessageHandlerContentWorldName.
 func (x *WKUserContentController) AddScriptMessageHandlerContentWorldName(scriptMessageHandler raw.WKScriptMessageHandler, world *raw.WKContentWorld, name string) {
 	x.inner.AddScriptMessageHandlerContentWorldName(scriptMessageHandler, world, foundation.NSStringStringWithUTF8String(name))
 }
 
-// @abstract Adds a script message handler. @param scriptMessageHandlerWithReply The script message handler to add. @param contentWorld The WKContentWorld in which to add the script message handler. @param name The name of the message handler. @discussion Adding a script message handler adds a function window.webkit.messageHandlers.<name>.postMessage(<messageBody>) to all frames, available in the given WKContentWorld. The name argument must be a non-empty string. Each WKContentWorld can have any number of script message handlers, but only one per unique name. Once any script message handler has been added to a WKContentWorld for a given name, it is an error to add another script message handler to that WKContentWorld for that same name without first removing the previous script message handler. The above restriction applies to any type of script message handler - WKScriptMessageHandlerWithReply and WKScriptMessageHandler objects will conflict with each other if you try to add them to the same WKContentWorld with the same name. Refer to the WKScriptMessageHandlerWithReply documentation for examples of how it is more flexible than WKScriptMessageHandler.
+// Installs a message handler that returns a reply to your JavaScript code.
 //
 // AddScriptMessageHandlerWithReplyContentWorldName calls the underlying AddScriptMessageHandlerWithReplyContentWorldName.
 func (x *WKUserContentController) AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply raw.WKScriptMessageHandlerWithReply, contentWorld *raw.WKContentWorld, name string) {
 	x.inner.AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply, contentWorld, foundation.NSStringStringWithUTF8String(name))
 }
 
-// @abstract Adds a script message handler to the main world used by page content itself. @param scriptMessageHandler The script message handler to add. @param name The name of the message handler. @discussion Calling this method is equivalent to calling addScriptMessageHandler:contentWorld:name: with [WKContentWorld pageWorld] as the contentWorld argument.
+// Installs a message handler that you can call from your JavaScript code.
 //
 // AddScriptMessageHandlerName calls the underlying AddScriptMessageHandlerName.
 func (x *WKUserContentController) AddScriptMessageHandlerName(scriptMessageHandler raw.WKScriptMessageHandler, name string) {
 	x.inner.AddScriptMessageHandlerName(scriptMessageHandler, foundation.NSStringStringWithUTF8String(name))
 }
 
-// @abstract Removes a script message handler. @param name The name of the message handler to remove. @param contentWorld The WKContentWorld from which to remove the script message handler.
+// Uninstalls a custom message handler from the specified content world in your JavaScript code.
 //
 // RemoveScriptMessageHandlerForNameContentWorld calls the underlying RemoveScriptMessageHandlerForNameContentWorld.
 func (x *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *raw.WKContentWorld) {
 	x.inner.RemoveScriptMessageHandlerForNameContentWorld(foundation.NSStringStringWithUTF8String(name), contentWorld)
 }
 
-// @abstract Removes a script message handler. @param name The name of the message handler to remove. @discussion Calling this method is equivalent to calling removeScriptMessageHandlerForName:contentWorld: with [WKContentWorld pageWorld] as the contentWorld argument.
+// Uninstalls the custom message handler with the specified name from your JavaScript code.
 //
 // RemoveScriptMessageHandlerForName calls the underlying RemoveScriptMessageHandlerForName.
 func (x *WKUserContentController) RemoveScriptMessageHandlerForName(name string) {
 	x.inner.RemoveScriptMessageHandlerForName(foundation.NSStringStringWithUTF8String(name))
 }
 
-// @abstract Removes all script message handlers from a given WKContentWorld. @param contentWorld The WKContentWorld from which to remove all script message handlers.
+// Uninstalls all custom message handlers from the specified content world in your JavaScript code.
 //
 // RemoveAllScriptMessageHandlersFromContentWorld calls the underlying RemoveAllScriptMessageHandlersFromContentWorld.
 func (x *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *raw.WKContentWorld) {
 	x.inner.RemoveAllScriptMessageHandlersFromContentWorld(contentWorld)
 }
 
-// @abstract Removes all associated script message handlers.
+// Uninstalls all custom message handlers associated with the user content controller.
 //
 // RemoveAllScriptMessageHandlers calls the underlying RemoveAllScriptMessageHandlers.
 func (x *WKUserContentController) RemoveAllScriptMessageHandlers() {
 	x.inner.RemoveAllScriptMessageHandlers()
 }
 
-// @abstract Adds a content rule list. @param contentRuleList The content rule list to add.
+// Adds the specified content rule list to the content controller object.
 //
 // AddContentRuleList calls the underlying AddContentRuleList.
 func (x *WKUserContentController) AddContentRuleList(contentRuleList *raw.WKContentRuleList) {
 	x.inner.AddContentRuleList(contentRuleList)
 }
 
-// @abstract Removes a content rule list. @param contentRuleList The content rule list to remove.
+// Removes the specified rule list from the content controller object.
 //
 // RemoveContentRuleList calls the underlying RemoveContentRuleList.
 func (x *WKUserContentController) RemoveContentRuleList(contentRuleList *raw.WKContentRuleList) {
 	x.inner.RemoveContentRuleList(contentRuleList)
 }
 
-// @abstract Removes all associated content rule lists.
+// Removes all rules lists from the content controller.
 //
 // RemoveAllContentRuleLists calls the underlying RemoveAllContentRuleLists.
 func (x *WKUserContentController) RemoveAllContentRuleLists() {

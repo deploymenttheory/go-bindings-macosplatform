@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the static metadata you define for the activity.
+//
 // GameActivityDefinition wraps [raw.GKGameActivityDefinition] with a fluent Go API.
 type GameActivityDefinition struct {
 	inner *raw.GKGameActivityDefinition

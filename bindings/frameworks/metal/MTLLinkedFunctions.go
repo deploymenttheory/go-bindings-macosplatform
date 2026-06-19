@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of related functions that Metal links to when necessary to create the function instance.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtllinkedfunctions
 type MTLLinkedFunctions struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func MTLLinkedFunctionsFromID(id objc.ID) *MTLLinkedFunctions {
 	return o
 }
 
-// @method linkedFunctions @abstract Create an autoreleased MTLLinkedFunctions object.
+// Creates an empty linked functions object.
 func MTLLinkedFunctionsLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLLinkedFunctions), _mTLLinkedFunctionsSelLinkedFunctions)
 	if _ret != 0 {
@@ -75,12 +77,15 @@ func (o *MTLLinkedFunctions) SetBinaryFunctions(binaryFunctions *foundation.NSAr
 
 // @property groups @abstract Groups of functions, grouped to match callsites in the shader code.
 func (o *MTLLinkedFunctions) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTLLinkedFunctionsSelGroups)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTLLinkedFunctionsSelGroups)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTLLinkedFunctions) SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_mTLLinkedFunctionsSelSetGroups, groups)
+	o.Ptr().Send(_mTLLinkedFunctionsSelSetGroups, groups.Ptr())
 }
 
 // @property privateFunctions @abstract The array of functions to be AIR linked. @discussion These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.

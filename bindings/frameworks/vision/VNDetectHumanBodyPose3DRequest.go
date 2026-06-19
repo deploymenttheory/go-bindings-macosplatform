@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects points on human bodies in 3D space, relative to the camera.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest
 type VNDetectHumanBodyPose3DRequest struct {
 	VNStatefulRequest
@@ -35,7 +37,7 @@ func VNDetectHumanBodyPose3DRequestFromID(id objc.ID) *VNDetectHumanBodyPose3DRe
 	return o
 }
 
-// @brief Creates a new VNDetectHumanBodyPose3DRequest with no completion handler.
+// Creates a new request with no completion handler.
 func (o *VNDetectHumanBodyPose3DRequest) Init() *VNDetectHumanBodyPose3DRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelInit)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *VNDetectHumanBodyPose3DRequest) Init() *VNDetectHumanBodyPose3DRequest 
 	return VNDetectHumanBodyPose3DRequestFromID(_ret)
 }
 
-// @brief Creates a new VNDetectHumanBodyPose3DRequest with completion handler.
+// Creates a new 3D body pose request with a completion handler.
 func (o *VNDetectHumanBodyPose3DRequest) InitWithCompletionHandler(completionHandler func(*VNRequest, unsafe.Pointer)) *VNDetectHumanBodyPose3DRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -63,22 +65,28 @@ func (o *VNDetectHumanBodyPose3DRequest) InitWithCompletionHandler(completionHan
 	return VNDetectHumanBodyPose3DRequestFromID(_ret)
 }
 
-// @brief Obtain the collection of human body joint names that are supported by a given request revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanBodyPose3DObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+// Returns the joint names the request supports.
 func (o *VNDetectHumanBodyPose3DRequest) SupportedJointNamesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of human body joints group names that are supported by a request object configured with a request revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanBody3DPoseObservationJointsGroupName symbols that are supported by the request, or nil if a failure occurs.
+// Returns the joint group names the request supports.
 func (o *VNDetectHumanBodyPose3DRequest) SupportedJointsGroupNamesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanBodyPose3DRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }

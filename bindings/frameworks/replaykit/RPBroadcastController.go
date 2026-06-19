@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing methods for starting and controlling a broadcast.
+//
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller
 type RPBroadcastController struct {
 	foundation.NSObject
@@ -40,14 +42,17 @@ func RPBroadcastControllerFromID(id objc.ID) *RPBroadcastController {
 	return o
 }
 
+// Pauses the current broadcast.
 func (o *RPBroadcastController) PauseBroadcast() {
 	o.Ptr().Send(_rPBroadcastControllerSelPauseBroadcast)
 }
 
+// Resumes a paused broadcast.
 func (o *RPBroadcastController) ResumeBroadcast() {
 	o.Ptr().Send(_rPBroadcastControllerSelResumeBroadcast)
 }
 
+// Stops the current broadcast.
 func (o *RPBroadcastController) FinishBroadcastWithHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -78,8 +83,11 @@ func (o *RPBroadcastController) BroadcastURL() *foundation.NSURL {
 }
 
 func (o *RPBroadcastController) ServiceInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]](o.Ptr(), _rPBroadcastControllerSelServiceInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _rPBroadcastControllerSelServiceInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSObject](_ret)
 }
 
 func (o *RPBroadcastController) Delegate() RPBroadcastControllerDelegate {

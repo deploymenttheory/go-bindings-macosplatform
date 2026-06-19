@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that implements the client side of a custom link-layer packet tunneling protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neethernettunnelprovider
 type NEEthernetTunnelProvider struct {
 	NEPacketTunnelProvider

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A wrapper around the entire Wi-Fi subsystem that you use to access interfaces and set up event notifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwwificlient
 type CWWiFiClient struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func CWWiFiClientFromID(id objc.ID) *CWWiFiClient {
 	return o
 }
 
-// @method @abstract Returns the shared CWWiFiClient instance. There is a single shared instance per process.
+// The shared Wi-Fi client object.
 func CWWiFiClientSharedWiFiClient() *CWWiFiClient {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWWiFiClient), _cWWiFiClientSelSharedWiFiClient)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func CWWiFiClientSharedWiFiClient() *CWWiFiClient {
 	return CWWiFiClientFromID(_ret)
 }
 
-// @method @abstract Initializes a CWWiFiClient object.
+// Initializes a Wi-Fi client object.
 func (o *CWWiFiClient) Init() *CWWiFiClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInit)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func (o *CWWiFiClient) Init() *CWWiFiClient {
 	return CWWiFiClientFromID(_ret)
 }
 
-// @method @abstract Returns the CWInterface object for the default Wi-Fi interface.
+// Returns the default Wi-Fi interface.
 func (o *CWWiFiClient) Interface() *CWInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterface)
 	if _ret != 0 {
@@ -71,17 +73,24 @@ func (o *CWWiFiClient) Interface() *CWInterface {
 
 // @method @result An NSArray of NSString objects corresponding to Wi-Fi interface names. @abstract Returns the list of available Wi-Fi interface names (e.g. "en0"). @discussion If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
 func (o *CWWiFiClient) InterfaceNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cWWiFiClientSelInterfaceNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterfaceNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the list of the names of available Wi-Fi interfaces.
 // Deprecated: since macOS 13.0.
 func CWWiFiClientInterfaceNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCWWiFiClient), _cWWiFiClientSelInterfaceNames)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCWWiFiClient), _cWWiFiClientSelInterfaceNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @method @param interfaceName The name of an available Wi-Fi interface. @abstract Get the CWInterface object bound to the Wi-Fi interface with a specific interface name. @discussion Use +[CWWiFiClient interfaceNames] to get a list of available Wi-Fi interface names. Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
+// Returns the Wi-Fi interface with the given name.
 func (o *CWWiFiClient) InterfaceWithName(interfaceName *foundation.NSString) *CWInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterfaceWithName, interfaceName.Ptr())
 	if _ret != 0 {
@@ -90,7 +99,7 @@ func (o *CWWiFiClient) InterfaceWithName(interfaceName *foundation.NSString) *CW
 	return CWInterfaceFromID(_ret)
 }
 
-// @method @result An NSArray of CWInterface objects. @abstract Returns all available Wi-Fi interfaces. @discussion If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
+// Returns all available Wi-Fi interfaces.
 func (o *CWWiFiClient) Interfaces() *foundation.NSArray[*CWInterface] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterfaces)
 	if _ret != 0 {
@@ -99,7 +108,7 @@ func (o *CWWiFiClient) Interfaces() *foundation.NSArray[*CWInterface] {
 	return foundation.NSArrayFromID[*CWInterface](_ret)
 }
 
-// @method @param type A CWEventType value. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Register for specific Wi-Fi event notifications.
+// Register for specific Wi-Fi event notifications.
 func (o *CWWiFiClient) StartMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWWiFiClientSelStartMonitoringEventWithTypeError, type_, unsafe.Pointer(&_nsErr))
@@ -109,7 +118,7 @@ func (o *CWWiFiClient) StartMonitoringEventWithTypeError(type_ CWEventType) (boo
 	return _ret, nil
 }
 
-// @method @param type A CWEventType value. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Unregister for specific Wi-Fi event notifications.
+// Unregister for specific Wi-Fi event notifications.
 func (o *CWWiFiClient) StopMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWWiFiClientSelStopMonitoringEventWithTypeError, type_, unsafe.Pointer(&_nsErr))
@@ -119,7 +128,7 @@ func (o *CWWiFiClient) StopMonitoringEventWithTypeError(type_ CWEventType) (bool
 	return _ret, nil
 }
 
-// @method @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Unregister for all Wi-Fi event notifications.
+// Unregister for all Wi-Fi event notifications.
 func (o *CWWiFiClient) StopMonitoringAllEventsAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cWWiFiClientSelStopMonitoringAllEventsAndReturnError, unsafe.Pointer(&_nsErr))

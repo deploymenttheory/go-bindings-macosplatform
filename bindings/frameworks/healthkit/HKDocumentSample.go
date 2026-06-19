@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a health document in the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkdocumentsample
 type HKDocumentSample struct {
 	HKSample

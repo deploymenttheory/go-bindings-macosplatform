@@ -122,8 +122,11 @@ func (o *WKWebExtensionAction) IsEnabled() bool {
 }
 
 func (o *WKWebExtensionAction) MenuItems() *foundation.NSArray[*appkit.NSMenuItem] {
-	_ret := objc.Send[*foundation.NSArray[*appkit.NSMenuItem]](o.Ptr(), _wKWebExtensionActionSelMenuItems)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelMenuItems)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*appkit.NSMenuItem](_ret)
 }
 
 // @abstract A Boolean value indicating whether the action has a popup. @discussion Use this property to check if the action has a popup before attempting to show any popup views.

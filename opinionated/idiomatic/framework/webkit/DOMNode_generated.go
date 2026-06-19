@@ -356,11 +356,15 @@ func (x *DOMNode) IsSupported(feature string, version string) bool {
 	return x.inner.IsSupported(foundation.NSStringStringWithUTF8String(feature), foundation.NSStringStringWithUTF8String(version))
 }
 
+// Returns a rectangle that bounds the onscreen rendering of the node.
+//
 // BoundingBox calls the underlying BoundingBox.
 func (x *DOMNode) BoundingBox() corefoundation.CGRect {
 	return x.inner.BoundingBox()
 }
 
+// Returns the rectangles that bound each line of text in the node.
+//
 // LineBoxRects calls the underlying LineBoxRects.
 func (x *DOMNode) LineBoxRects() *foundation.NSArray[objc.ID] {
 	return x.inner.LineBoxRects()

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A constraint that runs a specified closure, block in Objective-C, to compute a new transform (position, rotation, and scale) for each node that the constraint affects.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scntransformconstraint
 type SCNTransformConstraint struct {
 	SCNConstraint
@@ -31,7 +33,7 @@ func SCNTransformConstraintFromID(id objc.ID) *SCNTransformConstraint {
 	return o
 }
 
-// @method transformConstraintInWorldSpace:withBlock: @abstract Creates and returns a SCNTransformConstraint object with the specified parameters. @param world Determines whether the constraint is evaluated in world or local space. @param block The custom block to call to evaluate the constraint. @discussion The node and its transform are passed to the block. The transform returned by the block will be used to render the node.
+// Creates a new transform constraint.
 func SCNTransformConstraintTransformConstraintInWorldSpaceWith(world bool, block objc.Block) *SCNTransformConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTransformConstraint), _sCNTransformConstraintSelTransformConstraintInWorldSpaceWith, world, block)
 	if _ret != 0 {

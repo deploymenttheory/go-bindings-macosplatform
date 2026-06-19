@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The entry point for an Intents extension.
+//
 // Extension wraps [raw.INExtension] with a fluent Go API.
 type Extension struct {
 	inner *raw.INExtension

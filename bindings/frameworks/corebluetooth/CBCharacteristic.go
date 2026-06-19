@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A characteristic of a remote peripheral’s service.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbcharacteristic
 type CBCharacteristic struct {
 	CBAttribute

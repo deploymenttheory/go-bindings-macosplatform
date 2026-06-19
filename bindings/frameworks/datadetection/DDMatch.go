@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A base class for common types of data that the data detection system matches. The DataDetection framework returns results in objects that are subclasses of `DDMatch`, which are specific to the type of matching data. Each object contains the matched string.
+// A base class for common types of data that the data detection system matches.
 //
 // Apple documentation: https://developer.apple.com/documentation/datadetection/ddmatch
 type DDMatch struct {

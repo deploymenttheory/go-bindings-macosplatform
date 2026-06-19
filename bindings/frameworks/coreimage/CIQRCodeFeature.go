@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a Quick Response code detected in a still or video image.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciqrcodefeature
 type CIQRCodeFeature struct {
 	CIFeature

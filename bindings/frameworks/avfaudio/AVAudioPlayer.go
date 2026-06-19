@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that plays audio data from a file or buffer.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioplayer
 type AVAudioPlayer struct {
 	foundation.NSObject
@@ -70,6 +72,7 @@ func AVAudioPlayerFromID(id objc.ID) *AVAudioPlayer {
 	return o
 }
 
+// Creates a player to play audio from a file.
 func (o *AVAudioPlayer) InitWithContentsOfURLError(url *foundation.NSURL) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -82,6 +85,7 @@ func (o *AVAudioPlayer) InitWithContentsOfURLError(url *foundation.NSURL) (*AVAu
 	return AVAudioPlayerFromID(_ret), nil
 }
 
+// Creates a player to play in-memory audio data.
 func (o *AVAudioPlayer) InitWithDataError(data *foundation.NSData) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -94,6 +98,7 @@ func (o *AVAudioPlayer) InitWithDataError(data *foundation.NSData) (*AVAudioPlay
 	return AVAudioPlayerFromID(_ret), nil
 }
 
+// Creates a player to play audio from a file of a particular type.
 func (o *AVAudioPlayer) InitWithContentsOfURLFileTypeHintError(url *foundation.NSURL, utiString *foundation.NSString) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithContentsOfURLFileTypeHintError, url.Ptr(), utiString.Ptr(), unsafe.Pointer(&_nsErr))
@@ -106,6 +111,7 @@ func (o *AVAudioPlayer) InitWithContentsOfURLFileTypeHintError(url *foundation.N
 	return AVAudioPlayerFromID(_ret), nil
 }
 
+// Creates a player to play in-memory audio data of a particular type.
 func (o *AVAudioPlayer) InitWithDataFileTypeHintError(data *foundation.NSData, utiString *foundation.NSString) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithDataFileTypeHintError, data.Ptr(), utiString.Ptr(), unsafe.Pointer(&_nsErr))
@@ -118,42 +124,51 @@ func (o *AVAudioPlayer) InitWithDataFileTypeHintError(data *foundation.NSData, u
 	return AVAudioPlayerFromID(_ret), nil
 }
 
+// Prepares the player for audio playback.
 func (o *AVAudioPlayer) PrepareToPlay() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioPlayerSelPrepareToPlay)
 	return _ret
 }
 
+// Plays audio asynchronously.
 func (o *AVAudioPlayer) Play() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioPlayerSelPlay)
 	return _ret
 }
 
+// Plays audio asynchronously, starting at a specified point in the audio output device’s timeline.
 func (o *AVAudioPlayer) PlayAtTime(time_ float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioPlayerSelPlayAtTime, time_)
 	return _ret
 }
 
+// Pauses audio playback.
 func (o *AVAudioPlayer) Pause() {
 	o.Ptr().Send(_aVAudioPlayerSelPause)
 }
 
+// Stops playback and undoes the setup the system requires for playback.
 func (o *AVAudioPlayer) Stop() {
 	o.Ptr().Send(_aVAudioPlayerSelStop)
 }
 
+// Changes the audio player’s volume over a duration of time.
 func (o *AVAudioPlayer) SetVolumeFadeDuration(volume float32, duration float64) {
 	o.Ptr().Send(_aVAudioPlayerSelSetVolumeFadeDuration, volume, duration)
 }
 
+// Refreshes the average and peak power values for all channels of an audio player.
 func (o *AVAudioPlayer) UpdateMeters() {
 	o.Ptr().Send(_aVAudioPlayerSelUpdateMeters)
 }
 
+// Returns the peak power, in decibels full-scale (dBFS), for an audio channel.
 func (o *AVAudioPlayer) PeakPowerForChannel(channelNumber uint) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVAudioPlayerSelPeakPowerForChannel, channelNumber)
 	return _ret
 }
 
+// Returns the average power, in decibels full-scale (dBFS), for an audio channel.
 func (o *AVAudioPlayer) AveragePowerForChannel(channelNumber uint) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVAudioPlayerSelAveragePowerForChannel, channelNumber)
 	return _ret
@@ -271,8 +286,11 @@ func (o *AVAudioPlayer) SetNumberOfLoops(numberOfLoops int) {
 }
 
 func (o *AVAudioPlayer) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAudioPlayerSelSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AVAudioPlayer) Format() *AVAudioFormat {

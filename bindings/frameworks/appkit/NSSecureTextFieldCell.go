@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text field whose value is hidden from the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssecuretextfieldcell
 type NSSecureTextFieldCell struct {
 	NSTextFieldCell

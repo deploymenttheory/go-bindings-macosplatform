@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A Sprite is a textured 2D node. It can be placed, rotated, scaled and animated like any other node except it draws a textured rectangle specified by the bounds and anchor point. Sprites are used to define quad primitives with color and/or textures applied to them. See <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)">wiki</a> for a definition of a Sprite.
+// An image or solid color.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skspritenode
 type SKSpriteNode struct {
@@ -69,7 +69,7 @@ func SKSpriteNodeFromID(id objc.ID) *SKSpriteNode {
 	return o
 }
 
-// Create a sprite with an SKTexture and the specified size. @param texture the texture to reference for size and content @param size the size of the sprite in points
+// Initializes a textured sprite using an existing texture object but with a specified size.
 func SKSpriteNodeSpriteNodeWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureSize, texture.Ptr(), size)
 	if _ret != 0 {
@@ -78,7 +78,7 @@ func SKSpriteNodeSpriteNodeWithTextureSize(texture *SKTexture, size corefoundati
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Create a sprite with an SKTexture and set its size to the SKTexture's pixel width/height. @param texture the texture to reference for size and content
+// Initializes a textured sprite using an existing texture object.
 func SKSpriteNodeSpriteNodeWithTexture(texture *SKTexture) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTexture, texture.Ptr())
 	if _ret != 0 {
@@ -87,6 +87,7 @@ func SKSpriteNodeSpriteNodeWithTexture(texture *SKTexture) *SKSpriteNode {
 	return SKSpriteNodeFromID(_ret)
 }
 
+// Initializes a textured sprite with a normal map to simulate 3D lighting.
 func SKSpriteNodeSpriteNodeWithTextureNormalMap(texture *SKTexture, normalMap *SKTexture) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureNormalMap, texture.Ptr(), normalMap.Ptr())
 	if _ret != 0 {
@@ -95,7 +96,7 @@ func SKSpriteNodeSpriteNodeWithTextureNormalMap(texture *SKTexture, normalMap *S
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Create a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height) The position of the sprite is (0, 0) and the texture anchored at (0.5, 0.5), so that it is offset by half the width and half the height. Thus the sprite has the texture centered about the position. If you wish to have the texture anchored at a different offset set the anchorPoint to another pair of values in the interval from 0.0 up to and including 1.0. @param name is the name of an image file stored in the app bundle.
+// Initializes a textured sprite using an image file.
 func SKSpriteNodeSpriteNodeWithImageNamed(name *foundation.NSString) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamed, name.Ptr())
 	if _ret != 0 {
@@ -104,6 +105,7 @@ func SKSpriteNodeSpriteNodeWithImageNamed(name *foundation.NSString) *SKSpriteNo
 	return SKSpriteNodeFromID(_ret)
 }
 
+// Initializes a textured sprite using an image file, optionally adding a normal map to simulate 3D lighting.
 func SKSpriteNodeSpriteNodeWithImageNamedNormalMapped(name *foundation.NSString, generateNormalMap bool) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamedNormalMapped, name.Ptr(), generateNormalMap)
 	if _ret != 0 {
@@ -112,7 +114,7 @@ func SKSpriteNodeSpriteNodeWithImageNamedNormalMapped(name *foundation.NSString,
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Create a sprite with a color and the specified bounds. @param color the color to use for tinting the sprite. @param size the size of the sprite in points
+// Initializes a single-color sprite.
 func SKSpriteNodeSpriteNodeWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithColorSize, color.Ptr(), size)
 	if _ret != 0 {
@@ -121,7 +123,7 @@ func SKSpriteNodeSpriteNodeWithColorSize(color *appkit.NSColor, size corefoundat
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Designated Initializer Initialize a sprite with a color and the specified bounds. @param texture the texture to use (can be nil for colored sprite) @param color the color to use for tinting the sprite. @param size the size of the sprite in points
+// Initializes a textured sprite in color using an existing texture object.
 func (o *SKSpriteNode) InitWithTextureColorSize(texture *SKTexture, color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTextureColorSize, texture.Ptr(), color.Ptr(), size)
 	if _ret != 0 {
@@ -130,7 +132,7 @@ func (o *SKSpriteNode) InitWithTextureColorSize(texture *SKTexture, color *appki
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Initialize a sprite with an SKTexture and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
+// Initializes a textured sprite using an existing texture object.
 func (o *SKSpriteNode) InitWithTexture(texture *SKTexture) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTexture, texture.Ptr())
 	if _ret != 0 {
@@ -139,7 +141,7 @@ func (o *SKSpriteNode) InitWithTexture(texture *SKTexture) *SKSpriteNode {
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Initialize a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height) The position of the sprite is (0, 0) and the texture anchored at (0.5, 0.5), so that it is offset by half the width and half the height. Thus the sprite has the texture centered about the position. If you wish to have the texture anchored at a different offset set the anchorPoint to another pair of values in the interval from 0.0 up to and including 1.0. @param name the name or path of the image to load.
+// Initializes a textured sprite using an image file.
 func (o *SKSpriteNode) InitWithImageNamed(name *foundation.NSString) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithImageNamed, name.Ptr())
 	if _ret != 0 {
@@ -148,7 +150,7 @@ func (o *SKSpriteNode) InitWithImageNamed(name *foundation.NSString) *SKSpriteNo
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Initialize a sprite with a color and the specified bounds. @param color the color to use for tinting the sprite. @param size the size of the sprite in points
+// Initializes a single-color sprite node.
 func (o *SKSpriteNode) InitWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithColorSize, color.Ptr(), size)
 	if _ret != 0 {
@@ -157,7 +159,7 @@ func (o *SKSpriteNode) InitWithColorSize(color *appkit.NSColor, size corefoundat
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Tells you when to initialize a sprite from an archive.
 func (o *SKSpriteNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKSpriteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -166,7 +168,7 @@ func (o *SKSpriteNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKSpriteNode
 	return SKSpriteNodeFromID(_ret)
 }
 
-// Adjust the sprite's xScale & yScale to achieve the desired size (in parent's coordinate space)
+// Scales the sprite node to a specified size.
 func (o *SKSpriteNode) ScaleToSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_sKSpriteNodeSelScaleToSize, size)
 }

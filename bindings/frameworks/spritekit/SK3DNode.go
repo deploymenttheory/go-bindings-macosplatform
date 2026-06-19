@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// 3D SceneKit content drawn as a flattened sprite.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sk3dnode
 type SK3DNode struct {
 	SKNode
@@ -53,7 +55,7 @@ func SK3DNodeFromID(id objc.ID) *SK3DNode {
 	return o
 }
 
-// Designated initializer. Initialize a 3D Node with the viewport size the 3D content will be rendered with.
+// Initializes a new 3D node.
 func (o *SK3DNode) InitWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithViewportSize, viewportSize)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *SK3DNode) InitWithViewportSize(viewportSize corefoundation.CGSize) *SK3
 	return SK3DNodeFromID(_ret)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Tells you when to initialize a 3D node that has been unarchived.
 func (o *SK3DNode) InitWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *SK3DNode) InitWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
 	return SK3DNodeFromID(_ret)
 }
 
-// Create a 3D Node with the viewport size the 3D content will be rendered with.
+// Creates and initializes a new 3D node.
 func SK3DNodeNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSK3DNode), _sK3DNodeSelNodeWithViewportSize, viewportSize)
 	if _ret != 0 {
@@ -80,19 +82,22 @@ func SK3DNodeNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode 
 	return SK3DNodeFromID(_ret)
 }
 
-// @method hitTest:options: @abstract Returns an array of SCNHitTestResult for each node that contains a specified point. @param point A point in the coordinate system of the receiver. @param options Optional parameters (see the "Hit test options" group for the available options).
+// Searches the Scene Kit scene for objects corresponding to a point in the rendered image.
 func (o *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult] {
-	_ret := objc.Send[*foundation.NSArray[*scenekit.SCNHitTestResult]](o.Ptr(), _sK3DNodeSelHitTestOptions, point, options)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelHitTestOptions, point, options.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*scenekit.SCNHitTestResult](_ret)
 }
 
-// @method projectPoint @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport. @param point The world position to be projected. @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
+// Projects a point from the 3D world coordinate system of the SceneKit scene to the 2D viewport coordinate system of the SpriteKit node.
 func (o *SK3DNode) ProjectPoint(point unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sK3DNodeSelProjectPoint, point)
 	return _ret
 }
 
-// @method unprojectPoint @abstract Unprojects a screenspace 2D point with depth info using the receiver's current point of view and viewport. @param point The screenspace position to be unprojected. @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
+// Unprojects a point from the SpriteKit node’s 2D viewport coordinate system to the 3D world coordinate system of the SceneKit scene.
 func (o *SK3DNode) UnprojectPoint(point unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sK3DNodeSelUnprojectPoint, point)
 	return _ret

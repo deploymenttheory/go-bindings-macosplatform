@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a single layout constraint between two layers.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caconstraint
 type CAConstraint struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func CAConstraintFromID(id objc.ID) *CAConstraint {
 	return o
 }
 
+// Creates and returns an CAConstraint object with the specified parameters.
 func CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute, m float64, c float64) *CAConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraint), _cAConstraintSelConstraintWithAttributeRelativeToAttributeScaleOffset, attr, srcId.Ptr(), srcAttr, m, c)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset(attr CACo
 	return CAConstraintFromID(_ret)
 }
 
+// Creates and returns an CAConstraint object with the specified parameters.
 func CAConstraintConstraintWithAttributeRelativeToAttributeOffset(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute, c float64) *CAConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraint), _cAConstraintSelConstraintWithAttributeRelativeToAttributeOffset, attr, srcId.Ptr(), srcAttr, c)
 	if _ret != 0 {
@@ -54,6 +58,7 @@ func CAConstraintConstraintWithAttributeRelativeToAttributeOffset(attr CAConstra
 	return CAConstraintFromID(_ret)
 }
 
+// Creates and returns an CAConstraint object with the specified parameters.
 func CAConstraintConstraintWithAttributeRelativeToAttribute(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute) *CAConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraint), _cAConstraintSelConstraintWithAttributeRelativeToAttribute, attr, srcId.Ptr(), srcAttr)
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func CAConstraintConstraintWithAttributeRelativeToAttribute(attr CAConstraintAtt
 	return CAConstraintFromID(_ret)
 }
 
+// Returns an CAConstraint object with the specified parameters. Designated initializer.
 func (o *CAConstraint) InitWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute, m float64, c float64) *CAConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAConstraintSelInitWithAttributeRelativeToAttributeScaleOffset, attr, srcId.Ptr(), srcAttr, m, c)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that encapsulates the parameters that you use to control the reverb of the environment node class.
+//
 // AudioEnvironmentReverbParameters wraps [raw.AVAudioEnvironmentReverbParameters] with a fluent Go API.
 type AudioEnvironmentReverbParameters struct {
 	inner *raw.AVAudioEnvironmentReverbParameters
@@ -37,7 +39,7 @@ func NewAudioEnvironmentReverbParameters() *AudioEnvironmentReverbParameters {
 	return &AudioEnvironmentReverbParameters{inner: raw.AVAudioEnvironmentReverbParametersFromID(_id)}
 }
 
-// @property enable @abstract Turns on/off the reverb @discussion Default:    NO
+// A Boolean value that indicates whether reverberation is in an enabled state.
 //
 // WithEnable sets the enable property and returns the receiver for chaining.
 func (x *AudioEnvironmentReverbParameters) WithEnable(enable bool) *AudioEnvironmentReverbParameters {
@@ -45,7 +47,7 @@ func (x *AudioEnvironmentReverbParameters) WithEnable(enable bool) *AudioEnviron
 	return x
 }
 
-// @property level @abstract Controls the master level of the reverb @discussion Range:      -40 to 40 dB Default:    0.0
+// Controls the amount of reverb, in decibels.
 //
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnvironmentReverbParameters {
@@ -53,7 +55,7 @@ func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnviro
 	return x
 }
 
-// @method loadFactoryReverbPreset: @abstract Load one of the reverb's factory presets @param preset Reverb preset to be set. @discussion Loading a factory reverb preset changes the sound of the reverb. This works independently of the filter which follows the reverb in the signal chain.
+// Loads one of the reverbs factory presets.
 //
 // LoadFactoryReverbPreset calls the underlying LoadFactoryReverbPreset.
 func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AVAudioUnitReverbPreset) {

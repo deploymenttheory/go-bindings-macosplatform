@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Information about the thumbnail that the thumbnail generator returns.
+//
 // ThumbnailRepresentation wraps [raw.QLThumbnailRepresentation] with a fluent Go API.
 type ThumbnailRepresentation struct {
 	inner *raw.QLThumbnailRepresentation

@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class SFAuthorization @abstract SFAuthorization APIs are used for implementing access control in applications and daemons. It has NSCoder support for proxied objects SFAuthorization is a wrapper for using the Authorization API.
+// A class that allows you to restrict a user’s access to particular features in your Mac app or daemon.
 //
 // Apple documentation: https://developer.apple.com/documentation/securityfoundation/sfauthorization
 type SFAuthorization struct {
@@ -44,42 +44,42 @@ func SFAuthorizationFromID(id objc.ID) *SFAuthorization {
 	return o
 }
 
-// @method authorization @abstract Returns an authorization object initialized with a default environment, flags and rights.
+// Returns an authorization object initialized with a default environment, flags, and rights.
 func SFAuthorizationAuthorization() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFAuthorization), _sFAuthorizationSelAuthorization)
 	return _ret
 }
 
-// @method authorizationRef @abstract Returns the AuthorizationRef for this SFAuthorization.
+// Returns the authorization reference for this object.
 func (o *SFAuthorization) AuthorizationRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFAuthorizationSelAuthorizationRef)
 	return _ret
 }
 
-// @method authorizationWithFlags:rights:environment: @abstract Returns an authorization object initialized with the specified flags, rights and environment. @param flags Authorization flags. @param rights (input/optional) An AuthorizationItemSet containing rights for which authorization is being requested.  If none are specified the resulting AuthorizationRef will authorize nothing at all. @param environment (input/optional) An AuthorizationItemSet containing enviroment state used when making the autorization decision.  See the AuthorizationEnvironment type for details.
+// Returns an authorization object initialized with the specified flags, rights and environment.
 func SFAuthorizationAuthorizationWithFlagsRightsEnvironment(flags security.AuthorizationFlags, rights *security.AuthorizationItemSet, environment *security.AuthorizationItemSet) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFAuthorization), _sFAuthorizationSelAuthorizationWithFlagsRightsEnvironment, flags, rights, environment)
 	return _ret
 }
 
-// @method initWithFlags:rights:environment: @abstract Initializes an authorization object specified flags, rights and environment. @param flags Authorization flags. @param rights (input/optional) An AuthorizationItemSet containing rights for which authorization is being requested.  If none are specified the resulting AuthorizationRef will authorize nothing at all. @param environment (input/optional) An AuthorizationItemSet containing enviroment state used when making the autorization decision.  See the AuthorizationEnvironment type for details.
+// Initializes an authorization object with the specified flags, rights, and environment.
 func (o *SFAuthorization) InitWithFlagsRightsEnvironment(flags security.AuthorizationFlags, rights *security.AuthorizationItemSet, environment *security.AuthorizationItemSet) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationSelInitWithFlagsRightsEnvironment, flags, rights, environment)
 	return _ret
 }
 
-// @method init @abstract Initializes an authorization object initialized with a default environment, flags and rights.
+// Initializes an authorization object with default environment, flags, and rights.
 func (o *SFAuthorization) Init() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationSelInit)
 	return _ret
 }
 
-// @method invalidateCredentials @abstract Calling this will prevent any rights that were obtained by this object to be preserved. It effectively locks down all potentially shared authorizations.
+// Prevents any rights that were obtained by this object from being preserved.
 func (o *SFAuthorization) InvalidateCredentials() {
 	o.Ptr().Send(_sFAuthorizationSelInvalidateCredentials)
 }
 
-// @method obtainWithRight:flags: @abstract Call obtainWithRight to gain a right to have access to a privilege operation. On success, YES is returned. @param rightName The name of an authorization right. @param flags Authorization flags. @param error Resulting error.
+// Authorizes and preauthorizes one specific right.
 func (o *SFAuthorization) ObtainWithRightFlagsError(rightName string, flags security.AuthorizationFlags) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationSelObtainWithRightFlagsError, rightName, flags, unsafe.Pointer(&_nsErr))
@@ -89,7 +89,7 @@ func (o *SFAuthorization) ObtainWithRightFlagsError(rightName string, flags secu
 	return _ret, nil
 }
 
-// @method obtainWithRights:flags:environment:authorizedRights:error: @abstract Call obtainWithRights to gain the rights to have access to privileged operations. On success, YES is returned. @param flags Authorization flags. @param rights (input) A rights set (see AuthorizationCreate). @param environment (input/optional) An AuthorizationItemSet containing enviroment state used when making the autorization decision.  See the AuthorizationEnvironment type for details. @param authorizedRights (output/optional) A pointer to a newly allocated AuthorizationInfoSet in which the authorized subset of rights are returned (authorizedRights should be deallocated by calling AuthorizationFreeInfoSet() when it is no longer needed).  If NULL the only information returned is the status.  Note that if the kAuthorizationFlagPreAuthorize flag was specified rights that could not be preauthorized are returned in authorizedRights, but their flags contains the kAuthorizationFlagCanNotPreAuthorize bit. @param error Resulting error.
+// Authorizes and preauthorizes rights to access a privileged operation and returns the granted rights.
 func (o *SFAuthorization) ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationSelObtainWithRightsFlagsEnvironmentAuthorizedRightsError, rights, flags, environment, authorizedRights, unsafe.Pointer(&_nsErr))
@@ -99,14 +99,14 @@ func (o *SFAuthorization) ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(
 	return _ret, nil
 }
 
-// DEPRECATED: Use obtainWithRights:flags:environment:authorizedRights:error: @method permitWithRights:flags:environment:authorizedRights: @abstract Call permitWithRights to gain the rights to have access to privileged operations and to obtain the result. @param flags Authorization flags. @param rights (input) A rights set (see AuthorizationCreate). @param environment (input/optional) An AuthorizationItemSet containing enviroment state used when making the autorization decision.  See the AuthorizationEnvironment type for details. @param authorizedRights (output/optional) A pointer to a newly allocated AuthorizationInfoSet in which the authorized subset of rights are returned (authorizedRights should be deallocated by calling AuthorizationFreeInfoSet() when it is no longer needed).  If NULL the only information returned is the status.  Note that if the kAuthorizationFlagPreAuthorize flag was specified rights that could not be preauthorized are returned in authorizedRights, but their flags contains the kAuthorizationFlagCanNotPreAuthorize bit.
+// Authorizes and preauthorizes rights to access a privileged operation and returns the granted rights.
 // Deprecated: since macOS 10.5.
 func (o *SFAuthorization) PermitWithRightsFlagsEnvironmentAuthorizedRights(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) int {
 	_ret := objc.Send[int](o.Ptr(), _sFAuthorizationSelPermitWithRightsFlagsEnvironmentAuthorizedRights, rights, flags, environment, authorizedRights)
 	return _ret
 }
 
-// DEPRECATED: Use obtainWithRight:flags:error: @method permitWithRight:flags: @abstract Call permitWithRight to gain a right to have access to a privilege operation. @param rightName The name of an authorization right. @param flags Authorization flags.
+// Authorizes and preauthorizes one specific right.
 // Deprecated: since macOS 10.5.
 func (o *SFAuthorization) PermitWithRightFlags(rightName string, flags security.AuthorizationFlags) int {
 	_ret := objc.Send[int](o.Ptr(), _sFAuthorizationSelPermitWithRightFlags, rightName, flags)

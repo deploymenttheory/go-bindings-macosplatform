@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single measurement of the device’s rotation rate.
+//
 // GyroData wraps [raw.CMGyroData] with a fluent Go API.
 type GyroData struct {
 	inner *raw.CMGyroData

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class of all SpriteKit nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sknode
 type SKNode struct {
 	appkit.NSResponder
@@ -123,6 +125,7 @@ func SKNodeFromID(id objc.ID) *SKNode {
 	return o
 }
 
+// Initializes a blank node.
 func (o *SKNode) Init() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelInit)
 	if _ret != 0 {
@@ -131,7 +134,7 @@ func (o *SKNode) Init() *SKNode {
 	return SKNodeFromID(_ret)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Called when a node is initialized from an .sks file.
 func (o *SKNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -140,6 +143,7 @@ func (o *SKNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKNode {
 	return SKNodeFromID(_ret)
 }
 
+// Creates a new node.
 func SKNodeNode() *SKNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNode)
 	if _ret != 0 {
@@ -148,6 +152,7 @@ func SKNodeNode() *SKNode {
 	return SKNodeFromID(_ret)
 }
 
+// Creates a new node by loading an archive file from the game’s main bundle.
 func SKNodeNodeWithFileNamed(filename *foundation.NSString) *SKNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNodeWithFileNamed, filename.Ptr())
 	if _ret != 0 {
@@ -158,7 +163,7 @@ func SKNodeNodeWithFileNamed(filename *foundation.NSString) *SKNode {
 
 func SKNodeNodeWithFileNamedSecurelyWithClassesAndError(filename *foundation.NSString, classes *foundation.NSSet[objc.Class]) (*SKNode, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNodeWithFileNamedSecurelyWithClassesAndError, filename.Ptr(), classes, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsSKNode), _sKNodeSelNodeWithFileNamedSecurelyWithClassesAndError, filename.Ptr(), classes.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -168,12 +173,13 @@ func SKNodeNodeWithFileNamedSecurelyWithClassesAndError(filename *foundation.NSS
 	return SKNodeFromID(_ret), nil
 }
 
-// Calculates the bounding box including all child nodes in parents coordinate system.
+// Returns a rectangle in the parent’s coordinate system that contains the position and size of itself and all child nodes.
 func (o *SKNode) CalculateAccumulatedFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _sKNodeSelCalculateAccumulatedFrame)
 	return _ret
 }
 
+// The value of a shader attribute.
 // Deprecated: since macOS 10.12.
 func (o *SKNode) ValueForAttributeNamed(key *foundation.NSString) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelValueForAttributeNamed, key.Ptr())
@@ -183,41 +189,48 @@ func (o *SKNode) ValueForAttributeNamed(key *foundation.NSString) *SKAttributeVa
 	return SKAttributeValueFromID(_ret)
 }
 
+// Sets an attribute value for an attached shader
 // Deprecated: since macOS 10.12.
 func (o *SKNode) SetValueForAttributeNamed(value *SKAttributeValue, key *foundation.NSString) {
 	o.Ptr().Send(_sKNodeSelSetValueForAttributeNamed, value.Ptr(), key.Ptr())
 }
 
-// Sets both the x & y scale @param scale the uniform scale to set.
+// Sets the xScale and yScale properties of the node.
 func (o *SKNode) SetScale(scale float64) {
 	o.Ptr().Send(_sKNodeSelSetScale, scale)
 }
 
-// Adds a node as a child node of this node The added node must not have a parent. @param node the child node to add.
+// Adds a node to the end of the receiver’s list of child nodes.
 func (o *SKNode) AddChild(node *SKNode) {
 	o.Ptr().Send(_sKNodeSelAddChild, node.Ptr())
 }
 
+// Inserts a node into a specific position in the receiver’s list of child nodes.
 func (o *SKNode) InsertChildAtIndex(node *SKNode, index int) {
 	o.Ptr().Send(_sKNodeSelInsertChildAtIndex, node.Ptr(), index)
 }
 
+// Removes a list of children from the receiving node.
 func (o *SKNode) RemoveChildrenInArray(nodes *foundation.NSArray[*SKNode]) {
 	o.Ptr().Send(_sKNodeSelRemoveChildrenInArray, nodes.Ptr())
 }
 
+// Removes all of the node’s children.
 func (o *SKNode) RemoveAllChildren() {
 	o.Ptr().Send(_sKNodeSelRemoveAllChildren)
 }
 
+// Removes the receiving node from its parent.
 func (o *SKNode) RemoveFromParent() {
 	o.Ptr().Send(_sKNodeSelRemoveFromParent)
 }
 
+// Moves the node to a new parent node in the scene.
 func (o *SKNode) MoveToParent(parent *SKNode) {
 	o.Ptr().Send(_sKNodeSelMoveToParent, parent.Ptr())
 }
 
+// Searches the children of the receiving node for a node with a specific name.
 func (o *SKNode) ChildNodeWithName(name *foundation.NSString) *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelChildNodeWithName, name.Ptr())
 	if _ret != 0 {
@@ -226,6 +239,7 @@ func (o *SKNode) ChildNodeWithName(name *foundation.NSString) *SKNode {
 	return SKNodeFromID(_ret)
 }
 
+// Searches the children of the receiving node to perform processing for nodes that share a name.
 func (o *SKNode) EnumerateChildNodesWithNameUsing(name *foundation.NSString, block func(*SKNode, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -240,7 +254,7 @@ func (o *SKNode) EnumerateChildNodesWithNameUsing(name *foundation.NSString, blo
 	o.Ptr().Send(_sKNodeSelEnumerateChildNodesWithNameUsing, name.Ptr(), __block_block)
 }
 
-// Simplified shorthand for enumerateChildNodesWithName that returns an array of the matching nodes. This allows subscripting of the form: NSArray *childrenMatchingName = node[@"name"] or even complex like: NSArray *siblingsBeginningWithA = node[@"../a*"] @param name An Xpath style path that can include simple regular expressions for matching node names. @see enumerateChildNodesWithName:usingBlock:
+// Returns an array of nodes that match the name parameter.
 func (o *SKNode) ObjectForKeyedSubscript(name *foundation.NSString) *foundation.NSArray[*SKNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelObjectForKeyedSubscript, name.Ptr())
 	if _ret != 0 {
@@ -249,15 +263,18 @@ func (o *SKNode) ObjectForKeyedSubscript(name *foundation.NSString) *foundation.
 	return foundation.NSArrayFromID[*SKNode](_ret)
 }
 
+// Returns a Boolean value that indicates whether the node is a descendant of the target node.
 func (o *SKNode) InParentHierarchy(parent *SKNode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sKNodeSelInParentHierarchy, parent.Ptr())
 	return _ret
 }
 
+// Adds an action to the list of actions executed by the node.
 func (o *SKNode) RunAction(action *SKAction) {
 	o.Ptr().Send(_sKNodeSelRunAction, action.Ptr())
 }
 
+// Adds an action to the list of actions executed by the node and schedules the argument block to be run upon completion of the action.
 func (o *SKNode) RunActionCompletion(action *SKAction, block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -269,15 +286,18 @@ func (o *SKNode) RunActionCompletion(action *SKAction, block func()) {
 	o.Ptr().Send(_sKNodeSelRunActionCompletion, action.Ptr(), __block_block)
 }
 
+// Adds an identifiable action to the list of actions executed by the node.
 func (o *SKNode) RunActionWithKey(action *SKAction, key *foundation.NSString) {
 	o.Ptr().Send(_sKNodeSelRunActionWithKey, action.Ptr(), key.Ptr())
 }
 
+// Returns a Boolean value that indicates whether the node is executing actions.
 func (o *SKNode) HasActions() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sKNodeSelHasActions)
 	return _ret
 }
 
+// Returns an action associated with a specific key.
 func (o *SKNode) ActionForKey(key *foundation.NSString) *SKAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelActionForKey, key.Ptr())
 	if _ret != 0 {
@@ -286,20 +306,23 @@ func (o *SKNode) ActionForKey(key *foundation.NSString) *SKAction {
 	return SKActionFromID(_ret)
 }
 
+// Removes an action associated with a specific key.
 func (o *SKNode) RemoveActionForKey(key *foundation.NSString) {
 	o.Ptr().Send(_sKNodeSelRemoveActionForKey, key.Ptr())
 }
 
+// Ends and removes all actions from the node.
 func (o *SKNode) RemoveAllActions() {
 	o.Ptr().Send(_sKNodeSelRemoveAllActions)
 }
 
+// Returns a Boolean value that indicates whether a point lies inside the parent’s coordinate system.
 func (o *SKNode) ContainsPoint(p corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sKNodeSelContainsPoint, p)
 	return _ret
 }
 
-// Returns the node itself or a child node at the point given. If the receiver is returned there is no child node at the given point. @return a child node or self at the given location.
+// Returns the deepest visible descendant that intersects a point.
 func (o *SKNode) NodeAtPoint(p corefoundation.CGPoint) *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelNodeAtPoint, p)
 	if _ret != 0 {
@@ -308,6 +331,7 @@ func (o *SKNode) NodeAtPoint(p corefoundation.CGPoint) *SKNode {
 	return SKNodeFromID(_ret)
 }
 
+// Returns an array of all visible descendants that intersect a point.
 func (o *SKNode) NodesAtPoint(p corefoundation.CGPoint) *foundation.NSArray[*SKNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelNodesAtPoint, p)
 	if _ret != 0 {
@@ -316,21 +340,25 @@ func (o *SKNode) NodesAtPoint(p corefoundation.CGPoint) *foundation.NSArray[*SKN
 	return foundation.NSArrayFromID[*SKNode](_ret)
 }
 
+// Converts a point from the coordinate system of another node in the node tree to the coordinate system of this node.
 func (o *SKNode) ConvertPointFromNode(point corefoundation.CGPoint, node *SKNode) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKNodeSelConvertPointFromNode, point, node.Ptr())
 	return _ret
 }
 
+// Converts a point in this node’s coordinate system to the coordinate system of another node in the node tree.
 func (o *SKNode) ConvertPointToNode(point corefoundation.CGPoint, node *SKNode) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKNodeSelConvertPointToNode, point, node.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether this node intersects the specified node.
 func (o *SKNode) IntersectsNode(node *SKNode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sKNodeSelIntersectsNode, node.Ptr())
 	return _ret
 }
 
+// Compares the parameter node to the receiving node.
 func (o *SKNode) IsEqualToNode(node *SKNode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sKNodeSelIsEqualToNode, node.Ptr())
 	return _ret
@@ -496,12 +524,15 @@ func (o *SKNode) SetPhysicsBody(physicsBody *SKPhysicsBody) {
 
 // An optional dictionary that can be used to store your own data in a node. Defaults to nil.
 func (o *SKNode) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _sKNodeSelUserData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelUserData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *SKNode) SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_sKNodeSelSetUserData, userData)
+	o.Ptr().Send(_sKNodeSelSetUserData, userData.Ptr())
 }
 
 // Kinematic constraints, used in IK solving
@@ -533,15 +564,19 @@ func (o *SKNode) SetConstraints(constraints *foundation.NSArray[*SKConstraint]) 
 // Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
 // Deprecated: since macOS 10.12.
 func (o *SKNode) AttributeValues() *foundation.NSDictionary[*foundation.NSString, *SKAttributeValue] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *SKAttributeValue]](o.Ptr(), _sKNodeSelAttributeValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAttributeValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *SKAttributeValue](_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKNode) SetAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *SKAttributeValue]) {
-	o.Ptr().Send(_sKNodeSelSetAttributeValues, attributeValues)
+	o.Ptr().Send(_sKNodeSelSetAttributeValues, attributeValues.Ptr())
 }
 
+// Returns the frontmost user interface element in the element hierarchy.
 func (o *SKNode) AccessibilityHitTest(point corefoundation.CGPoint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilityHitTest, point)
 	return _ret
@@ -611,12 +646,15 @@ func (o *SKNode) SetAccessibilityParent(accessibilityParent objc.ID) {
 }
 
 func (o *SKNode) AccessibilityChildren() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _sKNodeSelAccessibilityChildren)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKNodeSelAccessibilityChildren)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *SKNode) SetAccessibilityChildren(accessibilityChildren *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_sKNodeSelSetAccessibilityChildren, accessibilityChildren)
+	o.Ptr().Send(_sKNodeSelSetAccessibilityChildren, accessibilityChildren.Ptr())
 }
 
 func (o *SKNode) AccessibilityHelp() *foundation.NSString {

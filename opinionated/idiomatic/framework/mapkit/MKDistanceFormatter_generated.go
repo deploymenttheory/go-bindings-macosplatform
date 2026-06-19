@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A utility object that converts between a geographic distance and a string-based expression of that distance.
+//
 // DistanceFormatter wraps [raw.MKDistanceFormatter] with a fluent Go API.
 type DistanceFormatter struct {
 	inner *raw.MKDistanceFormatter
@@ -38,24 +40,32 @@ func NewDistanceFormatter() *DistanceFormatter {
 	return &DistanceFormatter{inner: raw.MKDistanceFormatterFromID(_id)}
 }
 
+// The locale to use when formatting strings.
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *DistanceFormatter) WithLocale(locale *foundation.NSLocale) *DistanceFormatter {
 	x.inner.SetLocale(locale)
 	return x
 }
 
+// The measuring system — imperial or metric — to use for units.
+//
 // WithUnits sets the units property and returns the receiver for chaining.
 func (x *DistanceFormatter) WithUnits(units MKDistanceFormatterUnits) *DistanceFormatter {
 	x.inner.SetUnits(raw.MKDistanceFormatterUnits(units))
 	return x
 }
 
+// The preferred style for units.
+//
 // WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
 func (x *DistanceFormatter) WithUnitStyle(unitStyle MKDistanceFormatterUnitStyle) *DistanceFormatter {
 	x.inner.SetUnitStyle(raw.MKDistanceFormatterUnitStyle(unitStyle))
 	return x
 }
 
+// Creates a string representation of the specified distance.
+//
 // StringFromDistance calls the underlying StringFromDistance.
 func (x *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string {
 	_r := x.inner.StringFromDistance(distance)
@@ -65,6 +75,8 @@ func (x *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the distance value parsed from the specified string.
+//
 // DistanceFromString calls the underlying DistanceFromString.
 func (x *DistanceFormatter) DistanceFromString(distance string) unsafe.Pointer {
 	return x.inner.DistanceFromString(foundation.NSStringStringWithUTF8String(distance))

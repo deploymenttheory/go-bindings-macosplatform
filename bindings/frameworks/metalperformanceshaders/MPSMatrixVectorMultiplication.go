@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A matrix-vector multiplication kernel
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixvectormultiplication
 type MPSMatrixVectorMultiplication struct {
 	mpsmatrix.MPSMatrixBinaryKernel

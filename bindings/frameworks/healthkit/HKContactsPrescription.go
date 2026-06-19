@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that store a prescription for contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcontactsprescription
 type HKContactsPrescription struct {
 	HKVisionPrescription
@@ -33,9 +35,9 @@ func HKContactsPrescriptionFromID(id objc.ID) *HKContactsPrescription {
 	return o
 }
 
-// @method        prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata @param         rightEyeSpecification  The right eye specification @param         leftEyeSpecification   The left eye specification @param         brand                  The prescribed brand after contact lens fitting @param         dateIssued             The date the prescription was issued @param         expirationDate         The date the prescription expires @param         device                 The device that generated the sample @param         metadata               The metadata for the sample
+// Creates a new glasses prescription sample.
 func HKContactsPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *HKContactsLensSpecification, leftEyeSpecification *HKContactsLensSpecification, brand *foundation.NSString, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKContactsPrescription {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKContactsPrescription), _hKContactsPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata, rightEyeSpecification.Ptr(), leftEyeSpecification.Ptr(), brand.Ptr(), dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKContactsPrescription), _hKContactsPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata, rightEyeSpecification.Ptr(), leftEyeSpecification.Ptr(), brand.Ptr(), dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

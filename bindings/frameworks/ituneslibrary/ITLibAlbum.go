@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class provides information about an album in the iTunes library.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibalbum
 type ITLibAlbum struct {
 	foundation.NSObject

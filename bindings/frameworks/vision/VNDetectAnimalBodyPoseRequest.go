@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects an animal body pose.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest
 type VNDetectAnimalBodyPoseRequest struct {
 	VNImageBasedRequest
@@ -33,22 +35,28 @@ func VNDetectAnimalBodyPoseRequestFromID(id objc.ID) *VNDetectAnimalBodyPoseRequ
 	return o
 }
 
-// @brief Obtain the collection of animal body joint names that are supported by a request object configured with a request revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNAnimalBodyPoseObservationJointName symbols that are supported by the request, or nil if a failure occurs.
+// Retrieves the joint names the request supports.
 func (o *VNDetectAnimalBodyPoseRequest) SupportedJointNamesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectAnimalBodyPoseRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectAnimalBodyPoseRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of animal body joints group names that are supported by a request object configured with a request revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNAnimalBodyPoseObservationJointsGroupName symbols that are supported by the request, or nil if a failure occurs.
+// Retrieves the joint group names the request supports.
 func (o *VNDetectAnimalBodyPoseRequest) SupportedJointsGroupNamesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectAnimalBodyPoseRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectAnimalBodyPoseRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }

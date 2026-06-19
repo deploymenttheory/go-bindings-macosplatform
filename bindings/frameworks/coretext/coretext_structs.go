@@ -69,13 +69,14 @@ type BslnTable struct {
 	Parts           unsafe.Pointer
 }
 
-// @struct     CTParagraphStyleSetting @abstract   This structure is used to alter the paragraph style. @field      spec The specifier of the setting. @field      valueSize The size of the value pointed to by the "value" field. This must match the size of the value required by the CTParagraphStyleSpecifier set in the "spec" field. @field      value A reference to the value of the setting specified by the "spec" field. The value must be in the proper range for the spec value. The value must also be at least valueSize.
+// This structure is used to alter the paragraph style.
 type CTParagraphStyleSetting struct {
 	Spec      CTParagraphStyleSpecifier
 	ValueSize uint
 	Value     unsafe.Pointer
 }
 
+// A structure holding pointers to callbacks implemented by the run delegate.
 type CTRunDelegateCallbacks struct {
 	Version    int
 	Dealloc    unsafe.Pointer

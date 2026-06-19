@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IKFilterBrowserView class is used as a container for the elements of an IKFilterBrowserPanel object.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikfilterbrowserview
 type IKFilterBrowserView struct {
 	appkit.NSView
@@ -32,12 +34,12 @@ func IKFilterBrowserViewFromID(id objc.ID) *IKFilterBrowserView {
 	return o
 }
 
-// @method     setPreviewState: @abstract   Use this method to show and hide the Preview @discussion Use this method to show and hide the Preview from the program. @param      inState Boolean for visibility of the preview.
+// Sets the preview state.
 func (o *IKFilterBrowserView) SetPreviewState(inState bool) {
 	o.Ptr().Send(_iKFilterBrowserViewSelSetPreviewState, inState)
 }
 
-// @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+// Returns the name of the filter that is currently selected in the filter browser.
 func (o *IKFilterBrowserView) FilterName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserViewSelFilterName)
 	if _ret != 0 {

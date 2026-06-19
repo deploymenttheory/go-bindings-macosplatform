@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that performs a Euclidean distance transform on an image.
+//
 // ImageEuclideanDistanceTransform wraps [raw.MPSImageEuclideanDistanceTransform] with a fluent Go API.
 type ImageEuclideanDistanceTransform struct {
 	inner *raw.MPSImageEuclideanDistanceTransform
@@ -35,6 +37,8 @@ func ImageEuclideanDistanceTransformFromID(id objc.ID) *ImageEuclideanDistanceTr
 	return &ImageEuclideanDistanceTransform{inner: raw.MPSImageEuclideanDistanceTransformFromID(id)}
 }
 
+// Creates a Euclidean distance transform that runs on a specified device.
+//
 // NewImageEuclideanDistanceTransformWithDevice creates a new [ImageEuclideanDistanceTransform].
 func NewImageEuclideanDistanceTransformWithDevice(device metal.MTLDevice) *ImageEuclideanDistanceTransform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageEuclideanDistanceTransform")), objc.RegisterName("alloc"))
@@ -42,7 +46,7 @@ func NewImageEuclideanDistanceTransformWithDevice(device metal.MTLDevice) *Image
 	return &ImageEuclideanDistanceTransform{inner: raw.MPSImageEuclideanDistanceTransformFromID(_id)}
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+// Creates a Euclidean distance transform that uses a specified decoder for your data and runs on a specified device.
 //
 // NewImageEuclideanDistanceTransformWithCoderDevice creates a new [ImageEuclideanDistanceTransform].
 func NewImageEuclideanDistanceTransformWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageEuclideanDistanceTransform {
@@ -51,7 +55,7 @@ func NewImageEuclideanDistanceTransformWithCoderDevice(aDecoder *foundation.NSCo
 	return &ImageEuclideanDistanceTransform{inner: raw.MPSImageEuclideanDistanceTransformFromID(_id)}
 }
 
-// @property   searchLimitRadius @abstract   Defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. @discussion When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
+// Limits the search in an image from a pixel to the closest nonzero pixel within a specified radius.
 //
 // WithSearchLimitRadius sets the searchLimitRadius property and returns the receiver for chaining.
 func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform {
@@ -59,7 +63,7 @@ func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadiu
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
@@ -67,7 +71,7 @@ func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
@@ -75,7 +79,7 @@ func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageEuclideanDistanceTransform) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform {
@@ -83,7 +87,7 @@ func (x *ImageEuclideanDistanceTransform) WithEdgeMode(edgeMode mpscore.MPSImage
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageEuclideanDistanceTransform) WithOptions(options mpscore.MPSKernelOptions) *ImageEuclideanDistanceTransform {
@@ -91,7 +95,7 @@ func (x *ImageEuclideanDistanceTransform) WithOptions(options mpscore.MPSKernelO
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageEuclideanDistanceTransform) WithLabel(label string) *ImageEuclideanDistanceTransform {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that displays detailed information about a map item.
+//
 // MapItemDetailViewController wraps [raw.MKMapItemDetailViewController] with a fluent Go API.
 type MapItemDetailViewController struct {
 	inner *raw.MKMapItemDetailViewController
@@ -29,6 +31,8 @@ func MapItemDetailViewControllerFromID(id objc.ID) *MapItemDetailViewController 
 	return &MapItemDetailViewController{inner: raw.MKMapItemDetailViewControllerFromID(id)}
 }
 
+// Create a map item detail view controller
+//
 // NewMapItemDetailViewControllerWithMapItemDisplaysMap creates a new [MapItemDetailViewController].
 func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *raw.MKMapItem, displaysMap bool) *MapItemDetailViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *raw.MKMapItem
 	return &MapItemDetailViewController{inner: raw.MKMapItemDetailViewControllerFromID(_id)}
 }
 
+// Create a map item detail view controller.
+//
 // NewMapItemDetailViewControllerWithMapItem creates a new [MapItemDetailViewController].
 func NewMapItemDetailViewControllerWithMapItem(mapItem *raw.MKMapItem) *MapItemDetailViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
@@ -43,12 +49,16 @@ func NewMapItemDetailViewControllerWithMapItem(mapItem *raw.MKMapItem) *MapItemD
 	return &MapItemDetailViewController{inner: raw.MKMapItemDetailViewControllerFromID(_id)}
 }
 
+// The map item to display.
+//
 // WithMapItem sets the mapItem property and returns the receiver for chaining.
 func (x *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
 	x.inner.SetMapItem(mapItem.Unwrap())
 	return x
 }
 
+// The map item detail view controller’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *MapItemDetailViewController) WithDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) *MapItemDetailViewController {
 	x.inner.SetDelegate(delegate)

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurongradient
 type MPSCNNNeuronGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

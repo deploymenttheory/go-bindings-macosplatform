@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a flight.
+//
 // Flight wraps [raw.INFlight] with a fluent Go API.
 type Flight struct {
 	inner *raw.INFlight
@@ -31,6 +33,8 @@ func FlightFromID(id objc.ID) *Flight {
 	return &Flight{inner: raw.INFlightFromID(id)}
 }
 
+// Creates a new object containing information about a flight.
+//
 // NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate creates a new [Flight].
 func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate(airline *raw.INAirline, flightNumber string, boardingTime *raw.INDateComponentsRange, flightDuration *raw.INDateComponentsRange, departureAirportGate *raw.INAirportGate, arrivalAirportGate *raw.INAirportGate) *Flight {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INFlight")), objc.RegisterName("alloc"))

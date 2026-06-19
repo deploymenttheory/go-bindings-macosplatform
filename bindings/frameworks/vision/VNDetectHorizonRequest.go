@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that determines the horizon angle in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecthorizonrequest
 type VNDetectHorizonRequest struct {
 	VNImageBasedRequest

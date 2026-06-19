@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a constraint-based layout manager.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caconstraintlayoutmanager
 type CAConstraintLayoutManager struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func CAConstraintLayoutManagerFromID(id objc.ID) *CAConstraintLayoutManager {
 	return o
 }
 
+// Returns the shared layout manager object.
 func CAConstraintLayoutManagerLayoutManager() *CAConstraintLayoutManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraintLayoutManager), _cAConstraintLayoutManagerSelLayoutManager)
 	if _ret != 0 {

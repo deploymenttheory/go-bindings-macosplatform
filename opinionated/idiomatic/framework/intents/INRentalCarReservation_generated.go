@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a rental car reservation.
+//
 // RentalCarReservation wraps [raw.INRentalCarReservation] with a fluent Go API.
 type RentalCarReservation struct {
 	inner *raw.INRentalCarReservation
@@ -31,6 +33,8 @@ func RentalCarReservationFromID(id objc.ID) *RentalCarReservation {
 	return &RentalCarReservation{inner: raw.INRentalCarReservationFromID(id)}
 }
 
+// Creates a rental car reservation with the specified contents and attributes.
+//
 // NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation creates a new [RentalCarReservation].
 func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, rentalCar *raw.INRentalCar, rentalDuration *raw.INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *RentalCarReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRentalCarReservation")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReserva
 	return &RentalCarReservation{inner: raw.INRentalCarReservationFromID(_id)}
 }
 
+// Creates a new rental car reservation with the specified contents and attributes.
+//
 // NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation creates a new [RentalCarReservation].
 func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], rentalCar *raw.INRentalCar, rentalDuration *raw.INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *RentalCarReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRentalCarReservation")), objc.RegisterName("alloc"))

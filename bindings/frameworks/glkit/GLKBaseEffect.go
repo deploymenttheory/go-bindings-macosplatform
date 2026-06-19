@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A simple lighting and shading system for use in shader-based OpenGL rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkbaseeffect
 type GLKBaseEffect struct {
 	foundation.NSObject
@@ -56,6 +58,7 @@ func GLKBaseEffectFromID(id objc.ID) *GLKBaseEffect {
 	return o
 }
 
+// Prepares an effect for rendering.
 func (o *GLKBaseEffect) PrepareToDraw() {
 	o.Ptr().Send(_gLKBaseEffectSelPrepareToDraw)
 }

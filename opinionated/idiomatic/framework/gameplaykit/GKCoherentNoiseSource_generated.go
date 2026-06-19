@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Coherent noise is smoothly-changing, semi-random noise.  A given input always produces the same output. A small change in input produces a small change in output.  A large change in input produces a random change in output. This class is not intended to be instantiated.
+// The abstract superclass for procedural noise generators that create coherent noise.
 //
 // CoherentNoiseSource wraps [raw.GKCoherentNoiseSource] with a fluent Go API.
 type CoherentNoiseSource struct {
@@ -37,24 +37,32 @@ func NewCoherentNoiseSource() *CoherentNoiseSource {
 	return &CoherentNoiseSource{inner: raw.GKCoherentNoiseSourceFromID(_id)}
 }
 
+// A value that determines the size and spacing of features in generated noise.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *CoherentNoiseSource) WithFrequency(frequency float64) *CoherentNoiseSource {
 	x.inner.SetFrequency(frequency)
 	return x
 }
 
+// The number of octaves of the underlying noise function to use for generating noise.
+//
 // WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
 func (x *CoherentNoiseSource) WithOctaveCount(octaveCount int) *CoherentNoiseSource {
 	x.inner.SetOctaveCount(octaveCount)
 	return x
 }
 
+// The rate at which successive octaves of the noise function increase in frequency.
+//
 // WithLacunarity sets the lacunarity property and returns the receiver for chaining.
 func (x *CoherentNoiseSource) WithLacunarity(lacunarity float64) *CoherentNoiseSource {
 	x.inner.SetLacunarity(lacunarity)
 	return x
 }
 
+// The value that determines the specific configuration of noise produced by the noise source.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
 	x.inner.SetSeed(seed)

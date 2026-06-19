@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a set of thumbnails, each of which represents a page in a PDF document.
+//
 // ThumbnailView wraps [raw.PDFThumbnailView] with a fluent Go API.
 type ThumbnailView struct {
 	inner *raw.PDFThumbnailView
@@ -38,42 +40,56 @@ func NewThumbnailView() *ThumbnailView {
 	return &ThumbnailView{inner: raw.PDFThumbnailViewFromID(_id)}
 }
 
+// Returns the PDFView object associated with the thumbnail view.
+//
 // WithPDFView sets the pDFView property and returns the receiver for chaining.
 func (x *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
 	x.inner.SetPDFView(pDFView.Unwrap())
 	return x
 }
 
+// Returns the color used in the background of the thumbnail view.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *ThumbnailView) WithBackgroundColor(backgroundColor *appkit.NSColor) *ThumbnailView {
 	x.inner.SetBackgroundColor(backgroundColor)
 	return x
 }
 
+// Returns the maximum width and height of the thumbnails in the thumbnail view.
+//
 // WithThumbnailSize sets the thumbnailSize property and returns the receiver for chaining.
 func (x *ThumbnailView) WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView {
 	x.inner.SetThumbnailSize(thumbnailSize)
 	return x
 }
 
+// Returns the maximum number of columns of thumbnails the thumbnail view can display.
+//
 // WithMaximumNumberOfColumns sets the maximumNumberOfColumns property and returns the receiver for chaining.
 func (x *ThumbnailView) WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *ThumbnailView {
 	x.inner.SetMaximumNumberOfColumns(maximumNumberOfColumns)
 	return x
 }
 
+// Returns the font used to label the thumbnails.
+//
 // WithLabelFont sets the labelFont property and returns the receiver for chaining.
 func (x *ThumbnailView) WithLabelFont(labelFont *appkit.NSFont) *ThumbnailView {
 	x.inner.SetLabelFont(labelFont)
 	return x
 }
 
+// Returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.
+//
 // WithAllowsDragging sets the allowsDragging property and returns the receiver for chaining.
 func (x *ThumbnailView) WithAllowsDragging(allowsDragging bool) *ThumbnailView {
 	x.inner.SetAllowsDragging(allowsDragging)
 	return x
 }
 
+// Returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.
+//
 // WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
 func (x *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView {
 	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)

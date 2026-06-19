@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that manages authorization requests that a provider creates.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller
 type ASAuthorizationController struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func ASAuthorizationControllerFromID(id objc.ID) *ASAuthorizationController {
 	return o
 }
 
-// @abstract Initialize the controller with authorization requests. @param authorizationRequests At least one request should be provided. Requests of same type maybe honored in first in first out order
+// Creates a controller from a collection of authorization requests.
 func (o *ASAuthorizationController) InitWithAuthorizationRequests(authorizationRequests *foundation.NSArray[*ASAuthorizationRequest]) *ASAuthorizationController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationControllerSelInitWithAuthorizationRequests, authorizationRequests.Ptr())
 	if _ret != 0 {
@@ -47,17 +49,17 @@ func (o *ASAuthorizationController) InitWithAuthorizationRequests(authorizationR
 	return ASAuthorizationControllerFromID(_ret)
 }
 
-// @abstract Initiate the authorization flows. Upon completion, the delegate will be called with either success or failure. Certain authorization flows may require a presentation context. The @c presentationContextProvider will be called to provide it. The instance will remain retained until the flow is either completed or canceled, and the delegate callback is made.
+// Starts the specified authorization flows during controller initialization.
 func (o *ASAuthorizationController) PerformRequests() {
 	o.Ptr().Send(_aSAuthorizationControllerSelPerformRequests)
 }
 
-// @abstract Initiate the authorization flows. Upon completion, the delegate will be called with either success or failure. Certain authorization flows may require a presentation context. The @c presentationContextProvider will be called to provide it. Calling this method with no options is the same as calling @c performRequests. The instance will remain retained until the flow is either completed or canceled, and the delegate callback is made.
+// Starts the specified authorization flows during controller initialization.
 func (o *ASAuthorizationController) PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions) {
 	o.Ptr().Send(_aSAuthorizationControllerSelPerformRequestsWithOptions, options)
 }
 
-// @abstract Cancel the running authorization flows, if there are any. If a flow is canceled, the delegate callback will be made indicating the cancel.
+// Cancels any active authorization requests.
 func (o *ASAuthorizationController) Cancel() {
 	o.Ptr().Send(_aSAuthorizationControllerSelCancel)
 }

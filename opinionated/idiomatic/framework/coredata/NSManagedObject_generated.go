@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class that all Core Data model objects inherit from.
+//
 // ManagedObject wraps [raw.NSManagedObject] with a fluent Go API.
 type ManagedObject struct {
 	inner *raw.NSManagedObject
@@ -30,6 +32,8 @@ func ManagedObjectFromID(id objc.ID) *ManagedObject {
 	return &ManagedObject{inner: raw.NSManagedObjectFromID(id)}
 }
 
+// Initializes a managed object from an entity description and inserts it into the specified managed object context.
+//
 // NewManagedObjectWithEntityInsertIntoManagedObjectContext creates a new [ManagedObject].
 func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *raw.NSEntityDescription, context_ *raw.NSManagedObjectContext) *ManagedObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObject")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *raw.NSEnti
 	return &ManagedObject{inner: raw.NSManagedObjectFromID(_id)}
 }
 
+// Initializes a managed object subclass and inserts it into the specified managed object context.
+//
 // NewManagedObjectWithContext creates a new [ManagedObject].
 func NewManagedObjectWithContext(moc *raw.NSManagedObjectContext) *ManagedObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObject")), objc.RegisterName("alloc"))
@@ -44,103 +50,143 @@ func NewManagedObjectWithContext(moc *raw.NSManagedObjectContext) *ManagedObject
 	return &ManagedObject{inner: raw.NSManagedObjectFromID(_id)}
 }
 
+// Returns a Boolean value that indicates whether the relationship for a given key is a fault.
+//
 // HasFaultForRelationshipNamed calls the underlying HasFaultForRelationshipNamed.
 func (x *ManagedObject) HasFaultForRelationshipNamed(key string) bool {
 	return x.inner.HasFaultForRelationshipNamed(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns the object IDs for all of the managed objects that are in the named relationship.
+//
 // ObjectIDsForRelationshipNamed calls the underlying ObjectIDsForRelationshipNamed.
 func (x *ManagedObject) ObjectIDsForRelationshipNamed(key string) *foundation.NSArray[*raw.NSManagedObjectID] {
 	return x.inner.ObjectIDsForRelationshipNamed(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Provides support for key-value observing access notification.
+//
 // WillAccessValueForKey calls the underlying WillAccessValueForKey.
 func (x *ManagedObject) WillAccessValueForKey(key string) {
 	x.inner.WillAccessValueForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Provides support for key-value observing access notification.
+//
 // DidAccessValueForKey calls the underlying DidAccessValueForKey.
 func (x *ManagedObject) DidAccessValueForKey(key string) {
 	x.inner.DidAccessValueForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.
+//
 // AwakeFromFetch calls the underlying AwakeFromFetch.
 func (x *ManagedObject) AwakeFromFetch() {
 	x.inner.AwakeFromFetch()
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object when initially creating it.
+//
 // AwakeFromInsert calls the underlying AwakeFromInsert.
 func (x *ManagedObject) AwakeFromInsert() {
 	x.inner.AwakeFromInsert()
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.
+//
 // AwakeFromSnapshotEvents calls the underlying AwakeFromSnapshotEvents.
 func (x *ManagedObject) AwakeFromSnapshotEvents(flags NSSnapshotEventType) {
 	x.inner.AwakeFromSnapshotEvents(raw.NSSnapshotEventType(flags))
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object before deleting it.
+//
 // PrepareForDeletion calls the underlying PrepareForDeletion.
 func (x *ManagedObject) PrepareForDeletion() {
 	x.inner.PrepareForDeletion()
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object before saving it.
+//
 // WillSave calls the underlying WillSave.
 func (x *ManagedObject) WillSave() {
 	x.inner.WillSave()
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.
+//
 // DidSave calls the underlying DidSave.
 func (x *ManagedObject) DidSave() {
 	x.inner.DidSave()
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.
+//
 // WillTurnIntoFault calls the underlying WillTurnIntoFault.
 func (x *ManagedObject) WillTurnIntoFault() {
 	x.inner.WillTurnIntoFault()
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.
+//
 // DidTurnIntoFault calls the underlying DidTurnIntoFault.
 func (x *ManagedObject) DidTurnIntoFault() {
 	x.inner.DidTurnIntoFault()
 }
 
+// Returns the value for the specified property from the managed object’s private internal storage .
+//
 // PrimitiveValueForKey calls the underlying PrimitiveValueForKey.
 func (x *ManagedObject) PrimitiveValueForKey(key string) objc.ID {
 	return x.inner.PrimitiveValueForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Sets the value of a given property in the managed object’s private internal storage.
+//
 // SetPrimitiveValueForKey calls the underlying SetPrimitiveValueForKey.
 func (x *ManagedObject) SetPrimitiveValueForKey(value objc.ID, key string) {
 	x.inner.SetPrimitiveValueForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.
+//
 // CommittedValuesForKeys calls the underlying CommittedValuesForKeys.
 func (x *ManagedObject) CommittedValuesForKeys(keys *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.CommittedValuesForKeys(keys)
 }
 
+// Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
+//
 // ChangedValues calls the underlying ChangedValues.
 func (x *ManagedObject) ChangedValues() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ChangedValues()
 }
 
+// Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
+//
 // ChangedValuesForCurrentEvent calls the underlying ChangedValuesForCurrentEvent.
 func (x *ManagedObject) ChangedValuesForCurrentEvent() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ChangedValuesForCurrentEvent()
 }
 
+// Determines whether the managed object can be deleted in its current state.
+//
 // ValidateForDelete returns any validation error.
 func (x *ManagedObject) ValidateForDelete() error {
 	_, err := x.inner.ValidateForDelete()
 	return err
 }
 
+// Determines whether the managed object can be inserted in its current state.
+//
 // ValidateForInsert returns any validation error.
 func (x *ManagedObject) ValidateForInsert() error {
 	_, err := x.inner.ValidateForInsert()
 	return err
 }
 
+// Determines whether the managed object’s current state is valid.
+//
 // ValidateForUpdate returns any validation error.
 func (x *ManagedObject) ValidateForUpdate() error {
 	_, err := x.inner.ValidateForUpdate()

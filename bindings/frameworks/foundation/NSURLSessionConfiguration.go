@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that defines behavior and policies for a URL session.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration
 type NSURLSessionConfiguration struct {
 	NSObject
@@ -264,12 +266,15 @@ func (o *NSURLSessionConfiguration) SetSessionSendsLaunchEvents(sessionSendsLaun
 }
 
 func (o *NSURLSessionConfiguration) ConnectionProxyDictionary() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSURLSessionConfigurationSelConnectionProxyDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelConnectionProxyDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSURLSessionConfiguration) SetConnectionProxyDictionary(connectionProxyDictionary *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetConnectionProxyDictionary, connectionProxyDictionary)
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetConnectionProxyDictionary, connectionProxyDictionary.Ptr())
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
@@ -343,12 +348,15 @@ func (o *NSURLSessionConfiguration) SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPo
 }
 
 func (o *NSURLSessionConfiguration) HTTPAdditionalHeaders() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSURLSessionConfigurationSelHTTPAdditionalHeaders)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelHTTPAdditionalHeaders)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSURLSessionConfiguration) SetHTTPAdditionalHeaders(hTTPAdditionalHeaders *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders, hTTPAdditionalHeaders)
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders, hTTPAdditionalHeaders.Ptr())
 }
 
 func (o *NSURLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
@@ -408,12 +416,15 @@ func (o *NSURLSessionConfiguration) SetShouldUseExtendedBackgroundIdleMode(shoul
 }
 
 func (o *NSURLSessionConfiguration) ProtocolClasses() *NSArray[objc.Class] {
-	_ret := objc.Send[*NSArray[objc.Class]](o.Ptr(), _nSURLSessionConfigurationSelProtocolClasses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionConfigurationSelProtocolClasses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.Class](_ret)
 }
 
 func (o *NSURLSessionConfiguration) SetProtocolClasses(protocolClasses *NSArray[objc.Class]) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetProtocolClasses, protocolClasses)
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetProtocolClasses, protocolClasses.Ptr())
 }
 
 func (o *NSURLSessionConfiguration) UsesClassicLoadingMode() bool {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier for an object in a collection (or container) by unique ID.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuniqueidspecifier
 type NSUniqueIDSpecifier struct {
 	NSScriptObjectSpecifier
@@ -40,6 +42,7 @@ func (o *NSUniqueIDSpecifier) InitWithCoder(inCoder *NSCoder) *NSUniqueIDSpecifi
 	return NSUniqueIDSpecifierFromID(_ret)
 }
 
+// Returns an NSUniqueIDSpecifier object, initialized with the given arguments.
 func (o *NSUniqueIDSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyUniqueID(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, uniqueID objc.ID) *NSUniqueIDSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUniqueIDSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyUniqueID, classDesc.Ptr(), container.Ptr(), property.Ptr(), uniqueID)
 	if _ret != 0 {

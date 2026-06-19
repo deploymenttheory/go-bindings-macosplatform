@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that loads, plays, and controls Quartz Composer compositions in a Core Animation layer hierarchy.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qccompositionlayer
 type QCCompositionLayer struct {
 	quartzcore.CAOpenGLLayer
@@ -35,6 +37,7 @@ func QCCompositionLayerFromID(id objc.ID) *QCCompositionLayer {
 	return o
 }
 
+// Creates and returns an instance of a composition layer using the Quartz Composer composition in the specified file.
 func QCCompositionLayerCompositionLayerWithFile(path *foundation.NSString) *QCCompositionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionLayer), _qCCompositionLayerSelCompositionLayerWithFile, path.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func QCCompositionLayerCompositionLayerWithFile(path *foundation.NSString) *QCCo
 	return QCCompositionLayerFromID(_ret)
 }
 
+// Creates and returns an instance of a composition layer using the provided Quartz Composer composition.
 func QCCompositionLayerCompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionLayer), _qCCompositionLayerSelCompositionLayerWithComposition, composition.Ptr())
 	if _ret != 0 {
@@ -51,16 +55,19 @@ func QCCompositionLayerCompositionLayerWithComposition(composition *QCCompositio
 	return QCCompositionLayerFromID(_ret)
 }
 
+// Initializes and returns a composition layer using the Quartz Composer composition in the specified file.
 func (o *QCCompositionLayer) InitWithFile(path *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionLayerSelInitWithFile, path.Ptr())
 	return _ret
 }
 
+// Initializes and returns a composition layer using the provided Quartz Composer composition.
 func (o *QCCompositionLayer) InitWithComposition(composition *QCComposition) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionLayerSelInitWithComposition, composition.Ptr())
 	return _ret
 }
 
+// Returns the composition associated with the layer.
 func (o *QCCompositionLayer) Composition() *QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionLayerSelComposition)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that generates audio output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitgenerator
 type AVAudioUnitGenerator struct {
 	AVAudioUnit
@@ -31,7 +33,7 @@ func AVAudioUnitGeneratorFromID(id objc.ID) *AVAudioUnitGenerator {
 	return o
 }
 
-// @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitGenerator object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be kAudioUnitType_Generator or kAudioUnitType_RemoteGenerator
+// Creates a generator audio unit with the specified description.
 func (o *AVAudioUnitGenerator) InitWithAudioComponentDescription(audioComponentDescription objc.ID) *AVAudioUnitGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitGeneratorSelInitWithAudioComponentDescription, audioComponentDescription)
 	if _ret != 0 {

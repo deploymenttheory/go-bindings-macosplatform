@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A SpriteKit node that masks child nodes using another node's alpha component
+// A node that masks pixels drawn by its children so that only some pixels are seen.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skcropnode
 type SKCropNode struct {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A general query that returns a snapshot of all the matching samples currently saved in the HealthKit store.
+//
 // SampleQuery wraps [raw.HKSampleQuery] with a fluent Go API.
 type SampleQuery struct {
 	inner *raw.HKSampleQuery
@@ -32,7 +34,7 @@ func SampleQueryFromID(id objc.ID) *SampleQuery {
 	return &SampleQuery{inner: raw.HKSampleQueryFromID(id)}
 }
 
-// @method        initWithSampleType:predicate:limit:sortDescriptors:resultsHandler: @abstract      Returns a query that will retrieve HKSamples matching the given predicate. @param         sampleType      The type of sample to retrieve. @param         predicate       The predicate which samples should match. @param         limit           The maximum number of samples to return.  Pass HKObjectQueryNoLimit for no limit. @param         sortDescriptors The sort descriptors to use to order the resulting samples. @param         resultsHandler  The block to invoke with results when the query has finished executing.
+// Instantiates and returns a sample query.
 //
 // NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler creates a new [SampleQuery].
 func NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate, limit uint, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], resultsHandler func(*raw.HKSampleQuery, *foundation.NSArray[*raw.HKSample], unsafe.Pointer)) *SampleQuery {
@@ -41,7 +43,7 @@ func NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler(sam
 	return &SampleQuery{inner: raw.HKSampleQueryFromID(_id)}
 }
 
-// @method        initWithQueryDescriptors:limit:resultsHandler: @abstract      Returns a query that will retrieve HKSamples matching any of the given queryDescriptors. @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates used for querying. @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit for no limit. @param         resultsHandler            The block to invoke with results when the query has finished executing. This block is invoked once with results, an array of HKSamples matching the queryDescriptors passed in, or nil if an error occurred.
+// Creates a query for samples that match any of the descriptors you provided.
 //
 // NewSampleQueryWithQueryDescriptorsLimitResultsHandler creates a new [SampleQuery].
 func NewSampleQueryWithQueryDescriptorsLimitResultsHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], limit int, resultsHandler func(*raw.HKSampleQuery, *foundation.NSArray[*raw.HKSample], unsafe.Pointer)) *SampleQuery {
@@ -50,7 +52,7 @@ func NewSampleQueryWithQueryDescriptorsLimitResultsHandler(queryDescriptors *fou
 	return &SampleQuery{inner: raw.HKSampleQueryFromID(_id)}
 }
 
-// @method        initWithQueryDescriptors:limit:sortDescriptors:resultsHandler: @abstract      Returns a query that will retrieve HKSamples matching any of the given queryDescriptors. @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates used for querying. @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit for no limit. @param         sortDescriptors           The sort descriptors to use to order the resulting samples. @param         resultsHandler            The block to invoke with results when the query has finished executing. This block is invoked once with results, an array of HKSamples matching the queryDescriptors passed in, or nil if an error occurred. The HKSamples in the array are sorted by the specified sortDescriptors.
+// Creates a query for samples that match any of the query descriptors you provided, sorted by the sort descriptors you provided.
 //
 // NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler creates a new [SampleQuery].
 func NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], limit int, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], resultsHandler func(*raw.HKSampleQuery, *foundation.NSArray[*raw.HKSample], unsafe.Pointer)) *SampleQuery {

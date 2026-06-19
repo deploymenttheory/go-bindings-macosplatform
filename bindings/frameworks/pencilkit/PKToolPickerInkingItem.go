@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item that represents an inking tool in the tool picker.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem
 type PKToolPickerInkingItem struct {
 	PKToolPickerItem
@@ -39,7 +41,7 @@ func PKToolPickerInkingItemFromID(id objc.ID) *PKToolPickerInkingItem {
 	return o
 }
 
-// Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool.
+// Create a new tool picker item with a PKInkType.
 func (o *PKToolPickerInkingItem) InitWithInkType(inkType *foundation.NSString) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkType, inkType.Ptr())
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *PKToolPickerInkingItem) InitWithInkTypeColor(inkType *foundation.NSStri
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
-// Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool. @param width The width for the tool.
+// Create a new tool picker item with a PKInkType.
 func (o *PKToolPickerInkingItem) InitWithInkTypeWidth(inkType *foundation.NSString, width float64) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeWidth, inkType.Ptr(), width)
 	if _ret != 0 {
@@ -65,6 +67,7 @@ func (o *PKToolPickerInkingItem) InitWithInkTypeWidth(inkType *foundation.NSStri
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
+// Creates a new inking item with the specified ink type, color, and width.
 func (o *PKToolPickerInkingItem) InitWithInkTypeColorWidth(inkType *foundation.NSString, color *appkit.NSColor, width float64) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeColorWidth, inkType.Ptr(), color.Ptr(), width)
 	if _ret != 0 {
@@ -73,6 +76,7 @@ func (o *PKToolPickerInkingItem) InitWithInkTypeColorWidth(inkType *foundation.N
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
+// Creates a new inking item with the specified ink type, color, width, and identifier.
 func (o *PKToolPickerInkingItem) InitWithInkTypeColorWidthIdentifier(inkType *foundation.NSString, color *appkit.NSColor, width float64, identifier *foundation.NSString) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeColorWidthIdentifier, inkType.Ptr(), color.Ptr(), width, identifier.Ptr())
 	if _ret != 0 {

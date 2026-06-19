@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that determines the current capabilities of a person’s Music library.
+//
 // CloudServiceController wraps [raw.SKCloudServiceController] with a fluent Go API.
 type CloudServiceController struct {
 	inner *raw.SKCloudServiceController
@@ -39,6 +41,8 @@ func NewCloudServiceController() *CloudServiceController {
 	return &CloudServiceController{inner: raw.SKCloudServiceControllerFromID(_id)}
 }
 
+// Gets the current capabilities associated with the Music library on the device.
+//
 // RequestCapabilitiesWithCompletionHandler calls the underlying RequestCapabilitiesWithCompletionHandler.
 func (x *CloudServiceController) RequestCapabilitiesWithCompletionHandler(completionHandler func(SKCloudServiceCapability, unsafe.Pointer)) {
 	x.inner.RequestCapabilitiesWithCompletionHandler(func(_a0 raw.SKCloudServiceCapability, _a1 unsafe.Pointer) {
@@ -46,6 +50,8 @@ func (x *CloudServiceController) RequestCapabilitiesWithCompletionHandler(comple
 	})
 }
 
+// Gets the country code for the storefront associated with a customer’s iTunes account.
+//
 // RequestStorefrontCountryCode blocks until the operation completes or ctx is cancelled.
 func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Context) (string, error) {
 	type _result struct {
@@ -72,6 +78,8 @@ func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Contex
 	}
 }
 
+// Gets the device’s storefront identifier.
+//
 // RequestStorefrontIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context) (string, error) {
 	type _result struct {
@@ -98,6 +106,8 @@ func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context
 	}
 }
 
+// Returns a user token that you use to access personalized Apple Music content.
+//
 // RequestUserTokenForDeveloperToken blocks until the operation completes or ctx is cancelled.
 func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (string, error) {
 	type _result struct {

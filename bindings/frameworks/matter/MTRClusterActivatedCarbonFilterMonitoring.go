@@ -55,7 +55,7 @@ func (o *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithParamsExpe
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -66,70 +66,103 @@ func (o *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithExpectedVa
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelResetConditionWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeConditionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeConditionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeDegradationDirectionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeDegradationDirectionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeChangeIndicationWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeChangeIndicationWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeInPlaceIndicatorWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeInPlaceIndicatorWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeLastChangedTimeWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeLastChangedTimeWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterActivatedCarbonFilterMonitoringSelWriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeReplacementProductListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeReplacementProductListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterActivatedCarbonFilterMonitoringSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.

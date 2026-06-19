@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for all framework optimizers.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcoptimizer
 type MLCOptimizer struct {
 	foundation.NSObject

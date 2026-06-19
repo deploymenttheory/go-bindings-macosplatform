@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for illuminance.
+//
 // UnitIlluminance wraps [raw.NSUnitIlluminance] with a fluent Go API.
 type UnitIlluminance struct {
 	inner *raw.NSUnitIlluminance

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a request made for subscriber account information.
+//
 // VSAccountManagerResult wraps [raw.VSAccountManagerResult] with a fluent Go API.
 type VSAccountManagerResult struct {
 	inner *raw.VSAccountManagerResult
@@ -35,7 +37,7 @@ func NewVSAccountManagerResult() *VSAccountManagerResult {
 	return &VSAccountManagerResult{inner: raw.VSAccountManagerResultFromID(_id)}
 }
 
-// Advise the account manager that the app no longer needs the requested work to be done.
+// Cancels an in-progress request for subscriber account information.
 //
 // Cancel calls the underlying Cancel.
 func (x *VSAccountManagerResult) Cancel() {

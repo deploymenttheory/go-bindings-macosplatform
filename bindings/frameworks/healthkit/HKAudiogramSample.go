@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that stores an audiogram.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkaudiogramsample
 type HKAudiogramSample struct {
 	HKSample
@@ -32,9 +34,9 @@ func HKAudiogramSampleFromID(id objc.ID) *HKAudiogramSample {
 	return o
 }
 
-// @method                   audiogramSampleWithSensitivityPoints:startDate:endDate:metadata: @abstract                 Creates a new audiogram sample with the specified attributes. @param sensitivityPoints  Sensitivity data associated with the sample, with a maximum limit of 30 points. Frequencies must be unique, and ordered ascending. @param startDate          The start date for the hearing test. @param endDate            The end date for the hearing test. @param metadata           Optional meta data associated with the sample. @return                   A new instance of an audiogram sample.
+// Creates a new audiogram sample.
 func HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints *foundation.NSArray[*HKAudiogramSensitivityPoint], startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKAudiogramSample {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSample), _hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata, sensitivityPoints.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSample), _hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata, sensitivityPoints.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -43,7 +45,7 @@ func HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateMetada
 
 // @method                   audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata: @abstract                 Creates a new audiogram sample with the specified attributes. @param sensitivityPoints  Sensitivity data associated with the sample, with a maximum limit of 30 points. Frequencies must be unique, and ordered ascending. @param startDate          The start date of the hearing test. @param endDate            The end date of the hearing test. @param device             The device that generated the sample data. @param metadata           Optional metadata associated with the sample. @return                   A new instance of an audiogram sample.
 func HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints *foundation.NSArray[*HKAudiogramSensitivityPoint], startDate *foundation.NSDate, endDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKAudiogramSample {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSample), _hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata, sensitivityPoints.Ptr(), startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSample), _hKAudiogramSampleSelAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata, sensitivityPoints.Ptr(), startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

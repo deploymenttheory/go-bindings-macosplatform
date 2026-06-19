@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatrinterfacegroup
 type TKSmartCardATRInterfaceGroup struct {
 	foundation.NSObject

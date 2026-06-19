@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An interface for converting between geographic coordinates and place names.
+//
 // Geocoder wraps [raw.CLGeocoder] with a fluent Go API.
 type Geocoder struct {
 	inner *raw.CLGeocoder
@@ -38,36 +40,50 @@ func NewGeocoder() *Geocoder {
 	return &Geocoder{inner: raw.CLGeocoderFromID(_id)}
 }
 
+// Submits a reverse-geocoding request for the specified location.
+//
 // ReverseGeocodeLocationCompletionHandler calls the underlying ReverseGeocodeLocationCompletionHandler.
 func (x *Geocoder) ReverseGeocodeLocationCompletionHandler(location unsafe.Pointer, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.ReverseGeocodeLocationCompletionHandler(location, completionHandler)
 }
 
+// Submits a reverse-geocoding request for the specified location and locale.
+//
 // ReverseGeocodeLocationPreferredLocaleCompletionHandler calls the underlying ReverseGeocodeLocationPreferredLocaleCompletionHandler.
 func (x *Geocoder) ReverseGeocodeLocationPreferredLocaleCompletionHandler(location unsafe.Pointer, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.ReverseGeocodeLocationPreferredLocaleCompletionHandler(location, locale, completionHandler)
 }
 
+// Submits a forward-geocoding request using the specified address dictionary.
+//
 // GeocodeAddressDictionaryCompletionHandler calls the underlying GeocodeAddressDictionaryCompletionHandler.
 func (x *Geocoder) GeocodeAddressDictionaryCompletionHandler(addressDictionary *foundation.NSDictionary[objc.ID, objc.ID], completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.GeocodeAddressDictionaryCompletionHandler(addressDictionary, completionHandler)
 }
 
+// Submits a forward-geocoding request using the specified string and region information.
+//
 // GeocodeAddressStringInRegionCompletionHandler calls the underlying GeocodeAddressStringInRegionCompletionHandler.
 func (x *Geocoder) GeocodeAddressStringInRegionCompletionHandler(addressString string, region *raw.CLRegion, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.GeocodeAddressStringInRegionCompletionHandler(foundation.NSStringStringWithUTF8String(addressString), region, completionHandler)
 }
 
+// Submits a forward-geocoding requesting using the specified address string and locale information.
+//
 // GeocodeAddressStringInRegionPreferredLocaleCompletionHandler calls the underlying GeocodeAddressStringInRegionPreferredLocaleCompletionHandler.
 func (x *Geocoder) GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(addressString string, region *raw.CLRegion, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(foundation.NSStringStringWithUTF8String(addressString), region, locale, completionHandler)
 }
 
+// Submits a forward-geocoding request using the specified string.
+//
 // GeocodeAddressStringCompletionHandler calls the underlying GeocodeAddressStringCompletionHandler.
 func (x *Geocoder) GeocodeAddressStringCompletionHandler(addressString string, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.GeocodeAddressStringCompletionHandler(foundation.NSStringStringWithUTF8String(addressString), completionHandler)
 }
 
+// Cancels a pending geocoding request.
+//
 // CancelGeocode calls the underlying CancelGeocode.
 func (x *Geocoder) CancelGeocode() {
 	x.inner.CancelGeocode()
@@ -78,11 +94,15 @@ func (x *Geocoder) IsGeocoding() bool {
 	return x.inner.IsGeocoding()
 }
 
+// Submits a forward-geocoding requesting using the specified Contacts framework information.
+//
 // GeocodePostalAddressCompletionHandler calls the underlying GeocodePostalAddressCompletionHandler.
 func (x *Geocoder) GeocodePostalAddressCompletionHandler(postalAddress *contacts.CNPostalAddress, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.GeocodePostalAddressCompletionHandler(postalAddress, completionHandler)
 }
 
+// Submits a forward-geocoding requesting using the specified locale and Contacts framework information.
+//
 // GeocodePostalAddressPreferredLocaleCompletionHandler calls the underlying GeocodePostalAddressPreferredLocaleCompletionHandler.
 func (x *Geocoder) GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress *contacts.CNPostalAddress, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
 	x.inner.GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress, locale, completionHandler)

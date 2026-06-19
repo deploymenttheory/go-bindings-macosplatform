@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of material properties that describes a physically realistic shading model for materials.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction
 type MDLPhysicallyPlausibleScatteringFunction struct {
 	MDLScatteringFunction

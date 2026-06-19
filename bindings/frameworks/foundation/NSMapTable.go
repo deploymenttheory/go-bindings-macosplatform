@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection similar to a dictionary, but with a broader range of available memory semantics.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmaptable
 type NSMapTable[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	NSObject
@@ -49,6 +51,7 @@ func NSMapTableFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id 
 	return o
 }
 
+// Returns a map table, initialized with the given options.
 func (o *NSMapTable[KeyType, ObjectType]) InitWithKeyOptionsValueOptionsCapacity(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions, initialCapacity uint) *NSMapTable[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelInitWithKeyOptionsValueOptionsCapacity, keyOptions, valueOptions, initialCapacity)
 	if _ret != 0 {
@@ -57,6 +60,7 @@ func (o *NSMapTable[KeyType, ObjectType]) InitWithKeyOptionsValueOptionsCapacity
 	return NSMapTableFromID[KeyType, ObjectType](_ret)
 }
 
+// Returns a map table, initialized with the given functions.
 func (o *NSMapTable[KeyType, ObjectType]) InitWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunctions *NSPointerFunctions, valueFunctions *NSPointerFunctions, initialCapacity uint) *NSMapTable[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelInitWithKeyPointerFunctionsValuePointerFunctionsCapacity, keyFunctions.Ptr(), valueFunctions.Ptr(), initialCapacity)
 	if _ret != 0 {
@@ -65,6 +69,7 @@ func (o *NSMapTable[KeyType, ObjectType]) InitWithKeyPointerFunctionsValuePointe
 	return NSMapTableFromID[KeyType, ObjectType](_ret)
 }
 
+// Returns a new map table, initialized with the given options
 func NSMapTableMapTableWithKeyOptionsValueOptions(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions) *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelMapTableWithKeyOptionsValueOptions, keyOptions, valueOptions)
 	if _ret != 0 {
@@ -73,30 +78,35 @@ func NSMapTableMapTableWithKeyOptionsValueOptions(keyOptions NSPointerFunctionsO
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a new map table object which has strong references to the keys and values.
 // Deprecated: GC no longer supported
 func NSMapTableMapTableWithStrongToStrongObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelMapTableWithStrongToStrongObjects)
 	return _ret
 }
 
+// Returns a new map table object which has weak references to the keys and strong references to the values.
 // Deprecated: GC no longer supported
 func NSMapTableMapTableWithWeakToStrongObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelMapTableWithWeakToStrongObjects)
 	return _ret
 }
 
+// Returns a new map table object which has strong references to the keys and weak references to the values.
 // Deprecated: GC no longer supported
 func NSMapTableMapTableWithStrongToWeakObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelMapTableWithStrongToWeakObjects)
 	return _ret
 }
 
+// Returns a new map table object which has weak references to the keys and values.
 // Deprecated: GC no longer supported
 func NSMapTableMapTableWithWeakToWeakObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelMapTableWithWeakToWeakObjects)
 	return _ret
 }
 
+// Returns a new map table object which has strong references to the keys and values.
 func NSMapTableStrongToStrongObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelStrongToStrongObjectsMapTable)
 	if _ret != 0 {
@@ -105,6 +115,7 @@ func NSMapTableStrongToStrongObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a new map table object which has weak references to the keys and strong references to the values.
 func NSMapTableWeakToStrongObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelWeakToStrongObjectsMapTable)
 	if _ret != 0 {
@@ -113,6 +124,7 @@ func NSMapTableWeakToStrongObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a new map table object which has strong references to the keys and weak references to the values.
 func NSMapTableStrongToWeakObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelStrongToWeakObjectsMapTable)
 	if _ret != 0 {
@@ -121,6 +133,7 @@ func NSMapTableStrongToWeakObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a new map table object which has weak references to the keys and values.
 func NSMapTableWeakToWeakObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelWeakToWeakObjectsMapTable)
 	if _ret != 0 {
@@ -129,19 +142,23 @@ func NSMapTableWeakToWeakObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a the value associated with a given key.
 func (o *NSMapTable[KeyType, ObjectType]) ObjectForKey(aKey KeyType) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSMapTableSelObjectForKey, aKey)
 	return _ret
 }
 
+// Removes a given key and its associated value from the map table.
 func (o *NSMapTable[KeyType, ObjectType]) RemoveObjectForKey(aKey KeyType) {
 	o.Ptr().Send(_nSMapTableSelRemoveObjectForKey, aKey)
 }
 
+// Adds a given key-value pair to the map table.
 func (o *NSMapTable[KeyType, ObjectType]) SetObjectForKey(anObject ObjectType, aKey KeyType) {
 	o.Ptr().Send(_nSMapTableSelSetObjectForKey, anObject, aKey)
 }
 
+// Returns an enumerator object that lets you access each key in the map table.
 func (o *NSMapTable[KeyType, ObjectType]) KeyEnumerator() *NSEnumerator[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelKeyEnumerator)
 	if _ret != 0 {
@@ -150,6 +167,7 @@ func (o *NSMapTable[KeyType, ObjectType]) KeyEnumerator() *NSEnumerator[KeyType]
 	return NSEnumeratorFromID[KeyType](_ret)
 }
 
+// Returns an enumerator object that lets you access each value in the map table.
 func (o *NSMapTable[KeyType, ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelObjectEnumerator)
 	if _ret != 0 {
@@ -158,10 +176,12 @@ func (o *NSMapTable[KeyType, ObjectType]) ObjectEnumerator() *NSEnumerator[Objec
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Empties the map table of its entries.
 func (o *NSMapTable[KeyType, ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSMapTableSelRemoveAllObjects)
 }
 
+// Returns a dictionary representation of the map table.
 func (o *NSMapTable[KeyType, ObjectType]) DictionaryRepresentation() *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelDictionaryRepresentation)
 	if _ret != 0 {

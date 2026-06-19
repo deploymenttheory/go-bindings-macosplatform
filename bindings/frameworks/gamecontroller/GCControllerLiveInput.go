@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The input profile for a controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollerliveinput
 type GCControllerLiveInput struct {
 	GCControllerInputState
@@ -31,6 +33,7 @@ func GCControllerLiveInputFromID(id objc.ID) *GCControllerLiveInput {
 	return o
 }
 
+// Returns a snapshot of the physical device inputs.
 func (o *GCControllerLiveInput) Capture() *GCControllerInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerLiveInputSelCapture)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *GCControllerLiveInput) Capture() *GCControllerInputState {
 	return GCControllerInputStateFromID(_ret)
 }
 
+// Returns the next device input state from the queue.
 func (o *GCControllerLiveInput) NextInputState() *GCControllerInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerLiveInputSelNextInputState)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control for selecting an item from a list.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspopupbutton
 type NSPopUpButton struct {
 	NSButton
@@ -71,7 +73,7 @@ func NSPopUpButtonFromID(id objc.ID) *NSPopUpButton {
 	return o
 }
 
-// Creates a standard pop-up button with a menu, target, and action. @param menu A menu presented by the pop-up button, containing items that the user can choose between. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @discussion If `menu` is non-empty, the pop-up button uses the first item for its initial selection. @return An initialized pop-up button object.
+// Creates a standard pop-up button with a menu, target, and action.
 func NSPopUpButtonPopUpButtonWithMenuTargetAction(menu *NSMenu, target objc.ID, action objc.SEL) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPopUpButtonWithMenuTargetAction, menu.Ptr(), target, action)
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func NSPopUpButtonPopUpButtonWithMenuTargetAction(menu *NSMenu, target objc.ID, 
 	return NSPopUpButtonFromID(_ret)
 }
 
-// Creates a standard pull-down button with a title and menu. @param title The localized title string that is displayed on the button. @param menu The pull-down menu to present when interacting with the button. @discussion Pull-down buttons created using this method have the `usesItemFromMenu` property set to `NO`. @return An initialized pull-down button object.
+// Creates a standard pull-down button with a title and menu.
 func NSPopUpButtonPullDownButtonWithTitleMenu(title *foundation.NSString, menu *NSMenu) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleMenu, title.Ptr(), menu.Ptr())
 	if _ret != 0 {
@@ -89,7 +91,7 @@ func NSPopUpButtonPullDownButtonWithTitleMenu(title *foundation.NSString, menu *
 	return NSPopUpButtonFromID(_ret)
 }
 
-// Creates a standard pull-down button with an image and menu. @param image The icon that is displayed on the button. @param menu The pull-down menu to present when interacting with the button. @discussion Pull-down buttons created using this method have the `usesItemFromMenu` property set to `NO`. @return An initialized pull-down button object.
+// Creates a standard pull-down button with an image and menu.
 func NSPopUpButtonPullDownButtonWithImageMenu(image *NSImage, menu *NSMenu) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithImageMenu, image.Ptr(), menu.Ptr())
 	if _ret != 0 {
@@ -98,7 +100,7 @@ func NSPopUpButtonPullDownButtonWithImageMenu(image *NSImage, menu *NSMenu) *NSP
 	return NSPopUpButtonFromID(_ret)
 }
 
-// Creates a standard pull-down button with a title, image, and menu. @param title The localized title string that is displayed on the button. @param image The icon that is displayed on the button. @param menu The pull-down menu to present when interacting with the button. @discussion Pull-down buttons created using this method have the `usesItemFromMenu` property set to `NO`. @return An initialized pull-down button object.
+// Creates a standard pull-down button with a title, image, and menu.
 func NSPopUpButtonPullDownButtonWithTitleImageMenu(title *foundation.NSString, image *NSImage, menu *NSMenu) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleImageMenu, title.Ptr(), image.Ptr(), menu.Ptr())
 	if _ret != 0 {
@@ -107,6 +109,7 @@ func NSPopUpButtonPullDownButtonWithTitleImageMenu(title *foundation.NSString, i
 	return NSPopUpButtonFromID(_ret)
 }
 
+// Returns an NSPopUpButton object initialized to the specified dimensions.
 func (o *NSPopUpButton) InitWithFramePullsDown(buttonFrame corefoundation.CGRect, flag bool) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelInitWithFramePullsDown, buttonFrame, flag)
 	if _ret != 0 {
@@ -115,55 +118,67 @@ func (o *NSPopUpButton) InitWithFramePullsDown(buttonFrame corefoundation.CGRect
 	return NSPopUpButtonFromID(_ret)
 }
 
+// Adds an item with the specified title to the end of the menu.
 func (o *NSPopUpButton) AddItemWithTitle(title *foundation.NSString) {
 	o.Ptr().Send(_nSPopUpButtonSelAddItemWithTitle, title.Ptr())
 }
 
+// Adds multiple items to the end of the menu.
 func (o *NSPopUpButton) AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPopUpButtonSelAddItemsWithTitles, itemTitles)
+	o.Ptr().Send(_nSPopUpButtonSelAddItemsWithTitles, itemTitles.Ptr())
 }
 
+// Inserts an item at the specified position in the menu.
 func (o *NSPopUpButton) InsertItemWithTitleAtIndex(title *foundation.NSString, index int) {
 	o.Ptr().Send(_nSPopUpButtonSelInsertItemWithTitleAtIndex, title.Ptr(), index)
 }
 
+// Removes the item with the specified title from the menu.
 func (o *NSPopUpButton) RemoveItemWithTitle(title *foundation.NSString) {
 	o.Ptr().Send(_nSPopUpButtonSelRemoveItemWithTitle, title.Ptr())
 }
 
+// Removes the item at the specified index.
 func (o *NSPopUpButton) RemoveItemAtIndex(index int) {
 	o.Ptr().Send(_nSPopUpButtonSelRemoveItemAtIndex, index)
 }
 
+// Removes all items in the receiver’s item menu.
 func (o *NSPopUpButton) RemoveAllItems() {
 	o.Ptr().Send(_nSPopUpButtonSelRemoveAllItems)
 }
 
+// Returns the index of the specified menu item.
 func (o *NSPopUpButton) IndexOfItem(item *NSMenuItem) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItem, item.Ptr())
 	return _ret
 }
 
+// Returns the index of the item with the specified title.
 func (o *NSPopUpButton) IndexOfItemWithTitle(title *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTitle, title.Ptr())
 	return _ret
 }
 
+// Returns the index of the menu item with the specified tag.
 func (o *NSPopUpButton) IndexOfItemWithTag(tag int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTag, tag)
 	return _ret
 }
 
+// Returns the index of the menu item that holds the specified represented object.
 func (o *NSPopUpButton) IndexOfItemWithRepresentedObject(obj objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithRepresentedObject, obj)
 	return _ret
 }
 
+// Returns the index of the menu item with the specified target and action.
 func (o *NSPopUpButton) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTargetAndAction, target, actionSelector)
 	return _ret
 }
 
+// Returns the menu item at the specified index.
 func (o *NSPopUpButton) ItemAtIndex(index int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemAtIndex, index)
 	if _ret != 0 {
@@ -172,6 +187,7 @@ func (o *NSPopUpButton) ItemAtIndex(index int) *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
+// Returns the menu item with the specified title.
 func (o *NSPopUpButton) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -180,27 +196,33 @@ func (o *NSPopUpButton) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
+// Selects the specified menu item.
 func (o *NSPopUpButton) SelectItem(item *NSMenuItem) {
 	o.Ptr().Send(_nSPopUpButtonSelSelectItem, item.Ptr())
 }
 
+// Selects the item in the menu at the specified index.
 func (o *NSPopUpButton) SelectItemAtIndex(index int) {
 	o.Ptr().Send(_nSPopUpButtonSelSelectItemAtIndex, index)
 }
 
+// Selects the item with the specified title.
 func (o *NSPopUpButton) SelectItemWithTitle(title *foundation.NSString) {
 	o.Ptr().Send(_nSPopUpButtonSelSelectItemWithTitle, title.Ptr())
 }
 
+// Selects the menu item with the specified tag.
 func (o *NSPopUpButton) SelectItemWithTag(tag int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelSelectItemWithTag, tag)
 	return _ret
 }
 
+// Ensures that the item being displayed by the receiver agrees with the selected item.
 func (o *NSPopUpButton) SynchronizeTitleAndSelectedItem() {
 	o.Ptr().Send(_nSPopUpButtonSelSynchronizeTitleAndSelectedItem)
 }
 
+// Returns the title of the item at the specified index.
 func (o *NSPopUpButton) ItemTitleAtIndex(index int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitleAtIndex, index)
 	if _ret != 0 {
@@ -299,8 +321,11 @@ func (o *NSPopUpButton) IndexOfSelectedItem() int {
 }
 
 func (o *NSPopUpButton) ItemTitles() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSPopUpButtonSelItemTitles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSPopUpButton) TitleOfSelectedItem() *foundation.NSString {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to specify whether a Today widget has content to display.
+//
 // Apple documentation: https://developer.apple.com/documentation/notificationcenter/ncwidgetcontroller
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 type NCWidgetController struct {
@@ -33,6 +35,7 @@ func NCWidgetControllerFromID(id objc.ID) *NCWidgetController {
 	return o
 }
 
+// Returns a widget controller used to specify whether a widget has content to display.
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 func NCWidgetControllerWidgetController() *NCWidgetController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNCWidgetController), _nCWidgetControllerSelWidgetController)
@@ -50,6 +53,7 @@ func NCWidgetControllerDefaultWidgetController() *NCWidgetController {
 	return NCWidgetControllerFromID(_ret)
 }
 
+// Sets whether the specified widget has content to display.
 func (o *NCWidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID *foundation.NSString) {
 	o.Ptr().Send(_nCWidgetControllerSelSetHasContentForWidgetWithBundleIdentifier, flag, bundleID.Ptr())
 }

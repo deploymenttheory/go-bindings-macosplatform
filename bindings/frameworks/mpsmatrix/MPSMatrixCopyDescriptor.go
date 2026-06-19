@@ -60,7 +60,7 @@ func (o *MPSMatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestination
 
 // @abstract       Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU @discussion     Use this method when the offsets needed are coming from GPU based computation. @param          sourceMatrices      A list of matrices from which the matrix data is read @param          destinationMatrices A list of matrices to which to write the data. The count must match the number of source matrices. @param          offsets         A MPSVector of type MPSDataTypeUInt32 containing the list of offsets, stored as a packed array of MPSMatrixCopyOffsets. @param          byteOffset      A byte offset into the offsets vector where the data starts in 'offsets'. This value must be a multiple of 16. @result         A valid MPSMatrixCopyDescriptor to represent the list of copy operations
 func (o *MPSMatrixCopyDescriptor) InitWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], offsets *mpscore.MPSVector, byteOffset uint) *MPSMatrixCopyDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixCopyDescriptorSelInitWithSourceMatricesDestinationMatricesOffsetVectorOffset, sourceMatrices, destinationMatrices, offsets.Ptr(), byteOffset)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixCopyDescriptorSelInitWithSourceMatricesDestinationMatricesOffsetVectorOffset, sourceMatrices.Ptr(), destinationMatrices.Ptr(), offsets.Ptr(), byteOffset)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

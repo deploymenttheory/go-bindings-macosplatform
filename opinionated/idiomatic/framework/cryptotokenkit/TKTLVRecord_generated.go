@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class encapsulating a Tag-Length-Value record.
+//
 // TLVRecord wraps [raw.TKTLVRecord] with a fluent Go API.
 type TLVRecord struct {
 	inner *raw.TKTLVRecord

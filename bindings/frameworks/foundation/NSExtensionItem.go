@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable collection of values representing different aspects of an item for an extension to act upon.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsextensionitem
 type NSExtensionItem struct {
 	NSObject
@@ -73,10 +75,13 @@ func (o *NSExtensionItem) SetAttachments(attachments *NSArray[*NSItemProvider]) 
 }
 
 func (o *NSExtensionItem) UserInfo() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSExtensionItemSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSExtensionItem) SetUserInfo(userInfo *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSExtensionItemSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSExtensionItemSelSetUserInfo, userInfo.Ptr())
 }

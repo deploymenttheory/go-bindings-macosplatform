@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a person in the context of search results.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/csperson
 type CSPerson struct {
 	foundation.NSObject
@@ -35,8 +37,9 @@ func CSPersonFromID(id objc.ID) *CSPerson {
 	return o
 }
 
+// Returns a new CSPerson object initialized with the specified display name and contact attributes.
 func (o *CSPerson) InitWithDisplayNameHandlesHandleIdentifier(displayName *foundation.NSString, handles *foundation.NSArray[*foundation.NSString], handleIdentifier *foundation.NSString) *CSPerson {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelInitWithDisplayNameHandlesHandleIdentifier, displayName.Ptr(), handles, handleIdentifier.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelInitWithDisplayNameHandlesHandleIdentifier, displayName.Ptr(), handles.Ptr(), handleIdentifier.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -52,8 +55,11 @@ func (o *CSPerson) DisplayName() *foundation.NSString {
 }
 
 func (o *CSPerson) Handles() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSPersonSelHandles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSPersonSelHandles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSPerson) HandleIdentifier() *foundation.NSString {

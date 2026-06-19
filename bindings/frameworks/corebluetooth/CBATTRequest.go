@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that uses the Attribute Protocol (ATT).
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbattrequest
 type CBATTRequest struct {
 	foundation.NSObject

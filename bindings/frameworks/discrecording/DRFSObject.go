@@ -98,8 +98,11 @@ func (o *DRFSObject) SpecificNameForFilesystem(filesystem *foundation.NSString) 
 
 // @method		specificNames @abstract	Returns all the filesystem-specific names for the receiver. @param		filesystem	The filesystem to return the name from. @result		An NSDictionary containing the name of the file on all the filesystems.
 func (o *DRFSObject) SpecificNames() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRFSObjectSelSpecificNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelSpecificNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method		setSpecificName:forFilesystem: @abstract	Sets the name used for the receiver in a particular filesystem. @discussion	Every effort will be made to use the name passed in.  However, if a name is illegal, it will be modified to fit the rules for the filesystem's names.  Because of this, you should always call @link //apple_ref/occ/instm/DRFSObject/specificNameForFilesystem: specificNameForFilesystem: @/link after to ensure that you are always displaying the most current names to the user. @param		name	The name to set. @param		filesystem	The filesystem to set the name for.
@@ -109,7 +112,7 @@ func (o *DRFSObject) SetSpecificNameForFilesystem(name *foundation.NSString, fil
 
 // @method		setSpecificNames: @abstract	Sets the names used for the receiver in the different filesystems all at once. @discussion	Takes an NSDictionary of filesystem keys with corresponding name strings as their values for each specific filesystem name that should be set. Every effort will be made to use the names passed in.  However, if a name is illegal, it will be modified to fit the rules for that filesystem's names.  Because of this, you should always call @link //apple_ref/occ/instm/DRFSObject/specificNames specificNames @/link after @link //apple_ref/occ/instm/DRFSObject/setSpecificNames: setSpecificNames: @/link to ensure that you are always displaying the most current names to the user. @param		specificNames	The names to set.
 func (o *DRFSObject) SetSpecificNames(specificNames *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_dRFSObjectSelSetSpecificNames, specificNames)
+	o.Ptr().Send(_dRFSObjectSelSetSpecificNames, specificNames.Ptr())
 }
 
 // @method		mangledNameForFilesystem: @abstract	Returns a single filesystem-specific name for the receiver, mangled for uniqueness. @discussion	The string will be mangled for uniqueness amongst its siblings; if the burn were to happen immediately after this call, this is the name which would be used on the resulting disc. @param		filesystem	The filesystem to set the name for. @result		The name of the file mangled for filesystem constraints.
@@ -123,8 +126,11 @@ func (o *DRFSObject) MangledNameForFilesystem(filesystem *foundation.NSString) *
 
 // @method		mangledNames @abstract	Returns a dictionary containing all of the filesystem-specific names for the receiver, each one mangled for uniqueness. @discussion	The dictionary will return only the names which are indicated by the receiver's effective mask.  If the receiver's effective mask is zero, an empty dictionary is returned. @result		An NSDictionary containing the filesystem-specific mangled file names.
 func (o *DRFSObject) MangledNames() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRFSObjectSelMangledNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelMangledNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method		propertyForKey:inFilesystem:mergeWithOtherFilesystems: @abstract	Returns a file/folder property specified by key for the specified filesystem. @discussion	Normally you would call this method with merge set to <i>YES</i> since you are interested in the property that will be used when writing the object to disc. But if you have a need to determine what property is set just for a specific filesystem, then pass in <i>NO</i> for merge. In this case only the specific filesystem is checked. So if @link DRHFSPlus DRHFSPlus @/link is passed in for filesystem and merge is <i>NO</i> then the property returned is the value set for the HFS+ filesytem only. If that property has not been directly set for HFS+ yet, then the returned value will be nil. @param		key	The property to return. @param		filesystem	The filesystem to look in. @param		merge		If <i>YES</i>, also look for the property in the umbrella @link DRAllFilesystems DRAllFilesystems @/link. @result		The value associated with the property.
@@ -135,8 +141,11 @@ func (o *DRFSObject) PropertyForKeyInFilesystemMergeWithOtherFilesystems(key *fo
 
 // @method		propertiesForFilesystem:mergeWithOtherFilesystems: @abstract	Returns all the filesystem properties set for the specified filesystem. @discussion	Normally you would call this method with merge set to <i>YES</i> since you are interested in the set of properties that will be used when writing the object to disc. But if you have a need to determine what properties are set just for a specific filesystem, then pass in <i>NO</i> for merge. In this case only the specific filesystem is checked. So if filesystem is set to @link DRHFSPlus DRHFSPlus @/link and merge is <i>NO</i> then the properties dictionary contains the values set for the HFS+ filesytem only. If no properties have been directly set for HFS+ yet, then this properties dictionary will be empty. @param		filesystem	The filesystem to look in. @param		merge		If <i>YES</i>, also look for properties in the umbrella @link DRAllFilesystems DRAllFilesystems @/link. @result		A dictionary of property values.
 func (o *DRFSObject) PropertiesForFilesystemMergeWithOtherFilesystems(filesystem *foundation.NSString, merge bool) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRFSObjectSelPropertiesForFilesystemMergeWithOtherFilesystems, filesystem.Ptr(), merge)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRFSObjectSelPropertiesForFilesystemMergeWithOtherFilesystems, filesystem.Ptr(), merge)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method		setProperty:forKey:inFilesystem: @abstract	Sets the value of the receiver's property specified by key for the specific filesystem. @discussion	The property is set only in the filesystem dictionary specified by filesystem. @link DRAllFilesystems DRAllFilesystems @/link may be specified as the filesystem in which case the umbrella property affecting all filesystems at once will be set. Setting a property for @link DRAllFilesystems DRAllFilesystems @/link does not preclude setting a filesystem specific property. @param		property	The value of the property. @param		key			The property key. @param		filesystem	The filesystem to set the property in.
@@ -146,7 +155,7 @@ func (o *DRFSObject) SetPropertyForKeyInFilesystem(property objc.ID, key *founda
 
 // @method		setProperties:inFilesystem: @abstract	Sets the value of all the receiver's properties specified by the keys in properties for the specific filesystem. @discussion	The properties are set only in the filesystem dictionary specified by filesystem. @link DRAllFilesystems DRAllFilesystems @/link may be specified as the filesystem in which case he umbrella property affecting all filesystems at once will be set. Setting properties for @link DRAllFilesystems DRAllFilesystems @/link does not preclude setting a filesystem specific property. @param		properties	The value of the property. @param		filesystem	The filesystem to set the property in.
 func (o *DRFSObject) SetPropertiesInFilesystem(properties *foundation.NSDictionary[objc.ID, objc.ID], filesystem *foundation.NSString) {
-	o.Ptr().Send(_dRFSObjectSelSetPropertiesInFilesystem, properties, filesystem.Ptr())
+	o.Ptr().Send(_dRFSObjectSelSetPropertiesInFilesystem, properties.Ptr(), filesystem.Ptr())
 }
 
 // @method		explicitFilesystemMask @abstract	Returns the explicit filesystem mask set for the reciever. @discussion	The explicit mask is one that has been explicitly set by a client through the @link //apple_ref/occ/instm/DRFSObject/setExplicitFilesystemMask: setExplicitFilesystemMask: @/link method. @result		A filesystem mask

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The criteria to use when searching for discoverable iCloud users.
+//
 // UserIdentityLookupInfo wraps [raw.CKUserIdentityLookupInfo] with a fluent Go API.
 type UserIdentityLookupInfo struct {
 	inner *raw.CKUserIdentityLookupInfo

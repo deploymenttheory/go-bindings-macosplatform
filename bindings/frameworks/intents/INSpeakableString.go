@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A custom phrase to be resolved by an Intents extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inspeakablestring
 type INSpeakableString struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func INSpeakableStringFromID(id objc.ID) *INSpeakableString {
 	return o
 }
 
+// Initializes the string with a phrase from your app’s vocabulary.
 func (o *INSpeakableString) InitWithVocabularyIdentifierSpokenPhrasePronunciationHint(vocabularyIdentifier *foundation.NSString, spokenPhrase *foundation.NSString, pronunciationHint *foundation.NSString) *INSpeakableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSpeakableStringSelInitWithVocabularyIdentifierSpokenPhrasePronunciationHint, vocabularyIdentifier.Ptr(), spokenPhrase.Ptr(), pronunciationHint.Ptr())
 	if _ret != 0 {

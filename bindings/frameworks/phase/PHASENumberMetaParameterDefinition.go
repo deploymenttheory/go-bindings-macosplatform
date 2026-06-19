@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for a metaparameter defined by a number.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition
 type PHASENumberMetaParameterDefinition struct {
 	PHASEMetaParameterDefinition
@@ -35,7 +37,7 @@ func PHASENumberMetaParameterDefinitionFromID(id objc.ID) *PHASENumberMetaParame
 	return o
 }
 
-// @method initWithValue:identifier @abstract Create a new numeric metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASENumberMetaParameterDefinition object
+// Creates a specification for a named metaparameter with the given numeric value.
 func (o *PHASENumberMetaParameterDefinition) InitWithValueIdentifier(value float64, identifier *foundation.NSString) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValueIdentifier, value, identifier.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *PHASENumberMetaParameterDefinition) InitWithValueIdentifier(value float
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
-// @method initWithValue @abstract Create a new numeric metaparameter definition @param value The initial value of the metaparameter @return The new PHASENumberMetaParameterDefinition object
+// Creates a specification for a metaparameter with the given numeric value.
 func (o *PHASENumberMetaParameterDefinition) InitWithValue(value float64) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValue, value)
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *PHASENumberMetaParameterDefinition) InitWithValue(value float64) *PHASE
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
-// @method initWithValue:minimum:maximum:identifier @abstract Create a new numeric metaparameter definition and a predefined min and maximum range @param value The initial value of the metaparameter @param minimum The minimum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param maximum The maximum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param identifier An optional custom identifier to give to this object @return The new PHASENumberMetaParameterDefinition object
+// Creates a specification for a named metaparameter with the given numeric value and range.
 func (o *PHASENumberMetaParameterDefinition) InitWithValueMinimumMaximumIdentifier(value float64, minimum float64, maximum float64, identifier *foundation.NSString) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximumIdentifier, value, minimum, maximum, identifier.Ptr())
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *PHASENumberMetaParameterDefinition) InitWithValueMinimumMaximumIdentifi
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
-// @method initWithValue:minimum:maximum @abstract Create a new numeric metaparameter definition and a predefined min and maximum range @param value The initial value of the metaparameter @param minimum The minimum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param maximum The maximum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @return The new PHASENumberMetaParameterDefinition object
+// Creates a specification for a metaparameter with the given numeric value and range.
 func (o *PHASENumberMetaParameterDefinition) InitWithValueMinimumMaximum(value float64, minimum float64, maximum float64) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximum, value, minimum, maximum)
 	if _ret != 0 {

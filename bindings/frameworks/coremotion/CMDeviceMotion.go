@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmdevicemotion
 type CMDeviceMotion struct {
 	CMLogItem

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A representation of an image, video, or Live Photo in the Photos library.
+//
 // Asset wraps [raw.PHAsset] with a fluent Go API.
 type Asset struct {
 	inner *raw.PHAsset
@@ -39,6 +41,8 @@ func NewAsset() *Asset {
 	return &Asset{inner: raw.PHAssetFromID(_id)}
 }
 
+// Returns whether the asset supports the specified editing operation.
+//
 // CanPerformEditOperation calls the underlying CanPerformEditOperation.
 func (x *Asset) CanPerformEditOperation(editOperation PHAssetEditOperation) bool {
 	return x.inner.CanPerformEditOperation(raw.PHAssetEditOperation(editOperation))
@@ -160,11 +164,15 @@ func (x *Asset) AdjustmentFormatIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Requests asset information for beginning a content editing session.
+//
 // RequestContentEditingInputWithOptionsCompletionHandler calls the underlying RequestContentEditingInputWithOptionsCompletionHandler.
-func (x *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler objc.Block) uint {
+func (x *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler func(*raw.PHContentEditingInput, *foundation.NSDictionary[objc.ID, objc.ID])) uint {
 	return x.inner.RequestContentEditingInputWithOptionsCompletionHandler(options, completionHandler)
 }
 
+// Cancels a request for editing the asset’s content.
+//
 // CancelContentEditingInputRequest calls the underlying CancelContentEditingInputRequest.
 func (x *Asset) CancelContentEditingInputRequest(requestID uint) {
 	x.inner.CancelContentEditingInputRequest(requestID)
@@ -196,7 +204,7 @@ type Assetable interface {
 	SourceType() PHAssetSourceType
 	HasAdjustments() bool
 	AdjustmentFormatIdentifier() string
-	RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler objc.Block) uint
+	RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler func(*raw.PHContentEditingInput, *foundation.NSDictionary[objc.ID, objc.ID])) uint
 	CancelContentEditingInputRequest(requestID uint)
 }
 

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the arguments of a compute function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcomputepipelinereflection
 type MTLComputePipelineReflection struct {
 	foundation.NSObject

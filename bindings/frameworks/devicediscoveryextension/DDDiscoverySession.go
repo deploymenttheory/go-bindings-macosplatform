@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that relays device discovery events from the extension to the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/devicediscoveryextension/dddiscoverysession
 type DDDiscoverySession struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func DDDiscoverySessionFromID(id objc.ID) *DDDiscoverySession {
 	return o
 }
 
-// Reports an event to the host.
+// Reports an event to the system.
 func (o *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
 	o.Ptr().Send(_dDDiscoverySessionSelReportEvent, inEvent.Ptr())
 }

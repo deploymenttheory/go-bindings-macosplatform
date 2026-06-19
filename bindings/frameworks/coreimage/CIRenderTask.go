@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single render task.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cirendertask
 type CIRenderTask struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func CIRenderTaskFromID(id objc.ID) *CIRenderTask {
 	return o
 }
 
+// Waits until the CIRenderTask finishes and returns.
 func (o *CIRenderTask) WaitUntilCompletedAndReturnError() (*CIRenderInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderTaskSelWaitUntilCompletedAndReturnError, unsafe.Pointer(&_nsErr))

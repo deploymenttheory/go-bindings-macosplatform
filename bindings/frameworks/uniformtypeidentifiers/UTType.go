@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// \brief A class representing a type in a type hierarchy. Types may represent files on disk, abstract data types with no on-disk representation, or even entirely unrelated hierarchical classification systems such as hardware. Older API that does not use \c UTType typically uses an untyped \c NSString or \c CFStringRef to refer to a type by its identifier. To get the identifier of a type for use with these APIs, use the \c identifier property of this class. \sa https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/
+// A structure that represents a type of data to load, send, or receive.
 //
 // Apple documentation: https://developer.apple.com/documentation/uniformtypeidentifiers/uttype
 type UTType struct {
@@ -210,8 +210,11 @@ func UTTypeTypesWithTagTagClassConformingToType(tag *foundation.NSString, tagCla
 
 // \brief The tag specification dictionary of the type. The system does not store tag information for non-standard tag classes. It normalizes string values into arrays containing those strings. For instance, a value of: \code { "public.mime-type": "x/y", "nonstandard-tag-class": "abc", } \endcode Is normalized to: \code { "public.mime-type": [ "x/y" ] } \endcode If you are simply looking for the preferred filename extension or MIME type of a type, it is more efficient for you to use the \c preferredFilenameExtension and \c preferredMIMEType properties respectively.
 func (o *UTType) Tags() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _uTTypeSelTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _uTTypeSelTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // \brief Gets an active \c UTType corresponding to a type that is declared as "exported" by the current process. \param identifier The type identifier for which a type is desired. \result A type. Use this method to get types that are exported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. Conformance to either \c UTTypeData or \c UTTypePackage is assumed. You would generally use this method with \c dispatch_once(): \code UTType *GetMyFileFormat(void) { static UTType *result = nil; static dispatch_once_t once; dispatch_once(&once, ^ { result = [UTType exportedTypeWithIdentifier:@"com.example.myfileformat"]; }); return result; } \endcode

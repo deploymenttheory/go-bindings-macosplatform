@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstraction of a physics body’s solid volume for tuning collision detection.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsshape
 type SCNPhysicsShape struct {
 	foundation.NSObject
@@ -35,24 +37,27 @@ func SCNPhysicsShapeFromID(id objc.ID) *SCNPhysicsShape {
 	return o
 }
 
+// Creates a physics shape based on a geometry object.
 func SCNPhysicsShapeShapeWithGeometryOptions(geometry *SCNGeometry, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNPhysicsShape {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithGeometryOptions, geometry.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithGeometryOptions, geometry.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNPhysicsShapeFromID(_ret)
 }
 
+// Creates a physics shape from a node or hierarchy of nodes.
 func SCNPhysicsShapeShapeWithNodeOptions(node *SCNNode, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNPhysicsShape {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithNodeOptions, node.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithNodeOptions, node.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNPhysicsShapeFromID(_ret)
 }
 
+// Creates a new physics shape by combining others.
 func SCNPhysicsShapeShapeWithShapesTransforms(shapes *foundation.NSArray[*SCNPhysicsShape], transforms *foundation.NSArray[*foundation.NSValue]) *SCNPhysicsShape {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithShapesTransforms, shapes.Ptr(), transforms)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsShape), _sCNPhysicsShapeSelShapeWithShapesTransforms, shapes.Ptr(), transforms.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -60,8 +65,11 @@ func SCNPhysicsShapeShapeWithShapesTransforms(shapes *foundation.NSArray[*SCNPhy
 }
 
 func (o *SCNPhysicsShape) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _sCNPhysicsShapeSelOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsShapeSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *SCNPhysicsShape) SourceObject() objc.ID {
@@ -70,6 +78,9 @@ func (o *SCNPhysicsShape) SourceObject() objc.ID {
 }
 
 func (o *SCNPhysicsShape) Transforms() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _sCNPhysicsShapeSelTransforms)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsShapeSelTransforms)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

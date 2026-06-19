@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An operation that uses the device’s contacts to search for discoverable iCloud users.
+//
 // DiscoverAllUserIdentitiesOperation wraps [raw.CKDiscoverAllUserIdentitiesOperation] with a fluent Go API.
 type DiscoverAllUserIdentitiesOperation struct {
 	inner *raw.CKDiscoverAllUserIdentitiesOperation
@@ -40,7 +42,7 @@ func NewDiscoverAllUserIdentitiesOperation() *DiscoverAllUserIdentitiesOperation
 	return &DiscoverAllUserIdentitiesOperation{inner: raw.CKDiscoverAllUserIdentitiesOperationFromID(_id)}
 }
 
-// The closure to execute for each user identity. The closure doesn't return a value and takes the following parameter: - The user identity that matches an entry in the device's Contacts. The operation executes this closure one or more times for each user identity it discovers. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+// The closure to execute for each user identity.
 //
 // WithUserIdentityDiscoveredBlock sets the userIdentityDiscoveredBlock property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation {
@@ -48,7 +50,7 @@ func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(use
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure doesn't return a value and takes the following parameter: - An error if a problem occurs, or `nil` if CloudKit successfully fetches the user identities. This closure executes only once, after all of the individual discovery closures finish. The closure executes serially with respect to the operation's other closures. If you intend to use this closure to process results, update the property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes.
 //
 // WithDiscoverAllUserIdentitiesCompletionBlock sets the discoverAllUserIdentitiesCompletionBlock property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation {
@@ -56,7 +58,7 @@ func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesComple
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
@@ -64,7 +66,7 @@ func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *Op
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
@@ -72,7 +74,7 @@ func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *D
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
@@ -96,7 +98,7 @@ func (x *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCell
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {

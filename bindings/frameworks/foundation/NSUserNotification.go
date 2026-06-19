@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A notification that can be scheduled for display in the notification center.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsusernotification
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 type NSUserNotification struct {
@@ -125,12 +127,15 @@ func (o *NSUserNotification) SetActionButtonTitle(actionButtonTitle *NSString) {
 }
 
 func (o *NSUserNotification) UserInfo() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUserNotificationSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSUserNotification) SetUserInfo(userInfo *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSUserNotificationSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSUserNotificationSelSetUserInfo, userInfo.Ptr())
 }
 
 func (o *NSUserNotification) DeliveryDate() *NSDate {

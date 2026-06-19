@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration for a Metal capture session.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcapturedescriptor
 type MTLCaptureDescriptor struct {
 	foundation.NSObject

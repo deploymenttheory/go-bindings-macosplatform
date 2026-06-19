@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can create paths using PostScript-style commands.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbezierpath
 // Deprecated: since macOS 14.0.
 type NSBezierPath struct {
@@ -112,6 +114,7 @@ func NSBezierPathFromID(id objc.ID) *NSBezierPath {
 	return o
 }
 
+// Creates and returns a new Bézier path object.
 func NSBezierPathBezierPath() *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPath)
 	if _ret != 0 {
@@ -120,6 +123,7 @@ func NSBezierPathBezierPath() *NSBezierPath {
 	return NSBezierPathFromID(_ret)
 }
 
+// Creates and returns a new Bézier path object initialized with a rectangular path.
 func NSBezierPathBezierPathWithRect(rect corefoundation.CGRect) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithRect, rect)
 	if _ret != 0 {
@@ -128,6 +132,7 @@ func NSBezierPathBezierPathWithRect(rect corefoundation.CGRect) *NSBezierPath {
 	return NSBezierPathFromID(_ret)
 }
 
+// Creates and returns a new Bézier path object initialized with an oval path inscribed in the specified rectangle.
 func NSBezierPathBezierPathWithOvalInRect(rect corefoundation.CGRect) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithOvalInRect, rect)
 	if _ret != 0 {
@@ -136,6 +141,7 @@ func NSBezierPathBezierPathWithOvalInRect(rect corefoundation.CGRect) *NSBezierP
 	return NSBezierPathFromID(_ret)
 }
 
+// Creates and returns a new Bézier path object initialized with a rounded rectangular path.
 func NSBezierPathBezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius float64, yRadius float64) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithRoundedRectXRadiusYRadius, rect, xRadius, yRadius)
 	if _ret != 0 {
@@ -152,34 +158,42 @@ func NSBezierPathBezierPathWithCGPath(cgPath unsafe.Pointer) *NSBezierPath {
 	return NSBezierPathFromID(_ret)
 }
 
+// Fills the specified rectangular path with the current fill color.
 func NSBezierPathFillRect(rect corefoundation.CGRect) {
 	objc.ID(_clsNSBezierPath).Send(_nSBezierPathSelFillRect, rect)
 }
 
+// Strokes the path of the specified rectangle using the current stroke color and the default drawing attributes.
 func NSBezierPathStrokeRect(rect corefoundation.CGRect) {
 	objc.ID(_clsNSBezierPath).Send(_nSBezierPathSelStrokeRect, rect)
 }
 
+// Intersects the specified rectangle with the clipping path of the current graphics context and makes the resulting shape the current clipping path.
 func NSBezierPathClipRect(rect corefoundation.CGRect) {
 	objc.ID(_clsNSBezierPath).Send(_nSBezierPathSelClipRect, rect)
 }
 
+// Strokes a line between two points using the current stroke color and the default drawing attributes.
 func NSBezierPathStrokeLineFromPointToPoint(point1 corefoundation.CGPoint, point2 corefoundation.CGPoint) {
 	objc.ID(_clsNSBezierPath).Send(_nSBezierPathSelStrokeLineFromPointToPoint, point1, point2)
 }
 
+// Draws a set of packed glyphs at the specified point in the current coordinate system.
 func NSBezierPathDrawPackedGlyphsAtPoint(packedGlyphs string, point corefoundation.CGPoint) {
 	objc.ID(_clsNSBezierPath).Send(_nSBezierPathSelDrawPackedGlyphsAtPoint, packedGlyphs, point)
 }
 
+// Moves the path’s current point to the specified location.
 func (o *NSBezierPath) MoveToPoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSBezierPathSelMoveToPoint, point)
 }
 
+// Appends a straight line to the path.
 func (o *NSBezierPath) LineToPoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSBezierPathSelLineToPoint, point)
 }
 
+// Adds a Bezier cubic curve to the path.
 func (o *NSBezierPath) CurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint) {
 	o.Ptr().Send(_nSBezierPathSelCurveToPointControlPoint1ControlPoint2, endPoint, controlPoint1, controlPoint2)
 }
@@ -188,22 +202,27 @@ func (o *NSBezierPath) CurveToPointControlPoint(endPoint corefoundation.CGPoint,
 	o.Ptr().Send(_nSBezierPathSelCurveToPointControlPoint, endPoint, controlPoint)
 }
 
+// Closes the most recently added subpath.
 func (o *NSBezierPath) ClosePath() {
 	o.Ptr().Send(_nSBezierPathSelClosePath)
 }
 
+// Removes all path elements from the path, effectively clearing the path.
 func (o *NSBezierPath) RemoveAllPoints() {
 	o.Ptr().Send(_nSBezierPathSelRemoveAllPoints)
 }
 
+// Moves the path’s current point to a new point whose location is the specified distance from the current point.
 func (o *NSBezierPath) RelativeMoveToPoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSBezierPathSelRelativeMoveToPoint, point)
 }
 
+// Appends a straight line segment to the path starting at the current point and moving towards the specified point, relative to the current location.
 func (o *NSBezierPath) RelativeLineToPoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSBezierPathSelRelativeLineToPoint, point)
 }
 
+// Adds a Bezier cubic curve to the path from the current point to a new location, which is specified as a relative distance from the current point.
 func (o *NSBezierPath) RelativeCurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint) {
 	o.Ptr().Send(_nSBezierPathSelRelativeCurveToPointControlPoint1ControlPoint2, endPoint, controlPoint1, controlPoint2)
 }
@@ -212,88 +231,109 @@ func (o *NSBezierPath) RelativeCurveToPointControlPoint(endPoint corefoundation.
 	o.Ptr().Send(_nSBezierPathSelRelativeCurveToPointControlPoint, endPoint, controlPoint)
 }
 
+// Returns the line-stroking pattern for the receiver.
 func (o *NSBezierPath) GetLineDashCountPhase(pattern *float64, count *int64, phase *float64) {
 	o.Ptr().Send(_nSBezierPathSelGetLineDashCountPhase, pattern, count, phase)
 }
 
+// Sets the line-stroking pattern for the path.
 func (o *NSBezierPath) SetLineDashCountPhase(pattern *float64, count int, phase float64) {
 	o.Ptr().Send(_nSBezierPathSelSetLineDashCountPhase, pattern, count, phase)
 }
 
+// Draws a line along the path using the current stroke color and drawing attributes.
 func (o *NSBezierPath) Stroke() {
 	o.Ptr().Send(_nSBezierPathSelStroke)
 }
 
+// Paints the region enclosed by the path.
 func (o *NSBezierPath) Fill() {
 	o.Ptr().Send(_nSBezierPathSelFill)
 }
 
+// Intersects the area enclosed by the path with the clipping path of the current graphics context and makes the resulting shape the current clipping path.
 func (o *NSBezierPath) AddClip() {
 	o.Ptr().Send(_nSBezierPathSelAddClip)
 }
 
+// Replaces the clipping path of the current graphics context with the area inside the path.
 func (o *NSBezierPath) SetClip() {
 	o.Ptr().Send(_nSBezierPathSelSetClip)
 }
 
+// Transforms all points in the path using the specified transform.
 func (o *NSBezierPath) TransformUsingAffineTransform(transform *foundation.NSAffineTransform) {
 	o.Ptr().Send(_nSBezierPathSelTransformUsingAffineTransform, transform.Ptr())
 }
 
+// Gets the element type and (and optionally) the associated points for the path element at the specified index.
 func (o *NSBezierPath) ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) NSBezierPathElement {
 	_ret := objc.Send[NSBezierPathElement](o.Ptr(), _nSBezierPathSelElementAtIndexAssociatedPoints, index, points)
 	return _ret
 }
 
+// Returns the type of path element at the specified index.
 func (o *NSBezierPath) ElementAtIndex(index int) NSBezierPathElement {
 	_ret := objc.Send[NSBezierPathElement](o.Ptr(), _nSBezierPathSelElementAtIndex, index)
 	return _ret
 }
 
+// Changes the points associated with the specified path element.
 func (o *NSBezierPath) SetAssociatedPointsAtIndex(points *corefoundation.CGPoint, index int) {
 	o.Ptr().Send(_nSBezierPathSelSetAssociatedPointsAtIndex, points, index)
 }
 
+// Appends the contents of the specified path object to the path.
 func (o *NSBezierPath) AppendBezierPath(path *NSBezierPath) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPath, path.Ptr())
 }
 
+// Appends a rectangular path to the path.
 func (o *NSBezierPath) AppendBezierPathWithRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithRect, rect)
 }
 
+// Appends a series of line segments to the path.
 func (o *NSBezierPath) AppendBezierPathWithPointsCount(points *corefoundation.CGPoint, count int) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithPointsCount, points, count)
 }
 
+// Appends an oval path to the path, inscribing the oval in the specified rectangle.
 func (o *NSBezierPath) AppendBezierPathWithOvalInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithOvalInRect, rect)
 }
 
+// Appends an arc of a circle to the path.
 func (o *NSBezierPath) AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64, clockwise bool) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise, center, radius, startAngle, endAngle, clockwise)
 }
 
+// Appends an arc of a circle to the path.
 func (o *NSBezierPath) AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle, center, radius, startAngle, endAngle)
 }
 
+// Appends an arc to the path.
 func (o *NSBezierPath) AppendBezierPathWithArcFromPointToPointRadius(point1 corefoundation.CGPoint, point2 corefoundation.CGPoint, radius float64) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithArcFromPointToPointRadius, point1, point2, radius)
 }
 
+// Appends an outline of the specified glyph to the path.
 func (o *NSBezierPath) AppendBezierPathWithCGGlyphInFont(glyph uint16, font *NSFont) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithCGGlyphInFont, glyph, font.Ptr())
 }
 
+// Appends the outlines of the specified glyphs to the path.
 func (o *NSBezierPath) AppendBezierPathWithCGGlyphsCountInFont(glyphs *uint16, count int, font *NSFont) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithCGGlyphsCountInFont, glyphs, count, font.Ptr())
 }
 
+// Appends a rounded rectangular path to the path.
 func (o *NSBezierPath) AppendBezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius float64, yRadius float64) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithRoundedRectXRadiusYRadius, rect, xRadius, yRadius)
 }
 
+// Returns a Boolean value that indicates whether the path contains the specified point.
 func (o *NSBezierPath) ContainsPoint(point corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBezierPathSelContainsPoint, point)
 	return _ret
@@ -457,27 +497,32 @@ func (o *NSBezierPath) ElementCount() int {
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether this object maintains a cached image of its path.
 // Deprecated: since macOS 10.0.
 func (o *NSBezierPath) CachesBezierPath() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBezierPathSelCachesBezierPath)
 	return _ret
 }
 
+// Sets whether the path should cache its path information.
 // Deprecated: since macOS 10.0.
 func (o *NSBezierPath) SetCachesBezierPath(flag bool) {
 	o.Ptr().Send(_nSBezierPathSelSetCachesBezierPath, flag)
 }
 
+// Appends an outline of the specified glyph to the path.
 // Deprecated: Use -appendBezierPathWithCGGlyph:inFont: instead
 func (o *NSBezierPath) AppendBezierPathWithGlyphInFont(glyph uint, font *NSFont) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithGlyphInFont, glyph, font.Ptr())
 }
 
+// Appends the outlines of the specified glyphs to the path.
 // Deprecated: Use -appendBezierPathWithCGGlyphs:count:inFont: instead
 func (o *NSBezierPath) AppendBezierPathWithGlyphsCountInFont(glyphs *uint, count int, font *NSFont) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithGlyphsCountInFont, glyphs, count, font.Ptr())
 }
 
+// Appends an array of packed glyphs to the path.
 // Deprecated: Use -appendBezierPathWithCGGlyphs:count:inFont: instead
 func (o *NSBezierPath) AppendBezierPathWithPackedGlyphs(packedGlyphs string) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithPackedGlyphs, packedGlyphs)

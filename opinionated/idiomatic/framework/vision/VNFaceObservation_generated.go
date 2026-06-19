@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Face or facial-feature information that an image analysis request detects.
+//
 // FaceObservation wraps [raw.VNFaceObservation] with a fluent Go API.
 type FaceObservation struct {
 	inner *raw.VNFaceObservation

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The controller you use to report web usage and block restricted webpages.
+//
 // Apple documentation: https://developer.apple.com/documentation/screentime/stwebpagecontroller
 type STWebpageController struct {
 	appkit.NSViewController
@@ -44,7 +46,7 @@ func STWebpageControllerFromID(id objc.ID) *STWebpageController {
 	return o
 }
 
-// Changes the bundle identifier used to report web usage. This is only supported for web browsers that have been properly registered with Screen Time. - Parameters: - bundleIdentifier: The bundle identifier that can be changed to facilitate web usage reporting for a parent web browser from one of its helper processes or extensions. - error: Any error that occurred while changing the bundle identifier.
+// Changes the bundle identifier used to report web usage.
 func (o *STWebpageController) SetBundleIdentifierError(bundleIdentifier *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelSetBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))

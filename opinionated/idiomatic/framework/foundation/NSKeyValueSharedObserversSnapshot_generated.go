@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of key-value observations which may be registered with multiple observable objects. Create using -[NSKeyValueSharedObservers snapshot]
+//
 // KeyValueSharedObserversSnapshot wraps [raw.NSKeyValueSharedObserversSnapshot] with a fluent Go API.
 type KeyValueSharedObserversSnapshot struct {
 	inner *raw.NSKeyValueSharedObserversSnapshot

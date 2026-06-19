@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that detects available media playback routes.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avroutedetector
 type AVRouteDetector struct {
 	foundation.NSObject

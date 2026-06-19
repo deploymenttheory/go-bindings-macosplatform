@@ -64,7 +64,7 @@ func (o *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRGroupsClusterViewGroupResponseParams, unsafe.Pointer)) {
@@ -78,7 +78,7 @@ func (o *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterva
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRGroupsClusterGetGroupMembershipResponseParams, unsafe.Pointer)) {
@@ -92,7 +92,7 @@ func (o *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedVal
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRGroupsClusterRemoveGroupResponseParams, unsafe.Pointer)) {
@@ -106,7 +106,7 @@ func (o *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -117,7 +117,7 @@ func (o *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueI
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -128,7 +128,7 @@ func (o *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueInterva
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -139,37 +139,55 @@ func (o *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpected
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGroupsSelReadAttributeNameSupportWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelReadAttributeNameSupportWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterGroups) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGroupsSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterGroups) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGroupsSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterGroups) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGroupsSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterGroups) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGroupsSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterGroupsSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
@@ -200,7 +218,7 @@ func (o *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRGroupsClusterViewGroupResponseParams, unsafe.Pointer)) {
@@ -214,7 +232,7 @@ func (o *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterva
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRGroupsClusterGetGroupMembershipResponseParams, unsafe.Pointer)) {
@@ -228,7 +246,7 @@ func (o *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedVal
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRGroupsClusterRemoveGroupResponseParams, unsafe.Pointer)) {
@@ -242,7 +260,7 @@ func (o *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -253,7 +271,7 @@ func (o *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueI
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -264,7 +282,7 @@ func (o *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueInterva
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -275,5 +293,5 @@ func (o *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpected
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

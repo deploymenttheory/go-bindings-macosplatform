@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A database partition that contains related records.
+//
 // RecordZone wraps [raw.CKRecordZone] with a fluent Go API.
 type RecordZone struct {
 	inner *raw.CKRecordZone
@@ -30,7 +32,7 @@ func RecordZoneFromID(id objc.ID) *RecordZone {
 	return &RecordZone{inner: raw.CKRecordZoneFromID(id)}
 }
 
-// Creates a record zone object with the specified zone name. - Parameters: - zoneName: The name of the new zone. Zone names inside a user's private database are unique, consist of up to 255 ASCII characters, and don't start with an underscore. One way to satisfy the uniqueness of zone names is to create a string from a Universally Unique Identifier (UUID), but you can also use other techniques. If this parameter is `nil` or is an empty string, the method throws an exception. - Returns: The new custom zone. Use this method to create a new record zone. The new zone has the name you provide and the zone's owner is the current user. After creating the zone, save it to the server using a “CKModifyRecordZonesOperation“ object or the “CKDatabase/save(_:completionHandler:)-32ffr“ method of “CKDatabase“. You must save the zone to the server before you attempt to save any records to that zone. Don't use this method to create a `CKRecordZone` object that corresponds to a zone that already exists in the database. If the zone exists, fetch it using a “CKFetchRecordZonesOperation“ object or the “CKDatabase/fetch(withRecordZoneID:completionHandler:)“ method of “CKDatabase“.
+// Creates a record zone object with the specified zone name.
 //
 // NewRecordZoneWithZoneName creates a new [RecordZone].
 func NewRecordZoneWithZoneName(zoneName string) *RecordZone {
@@ -39,7 +41,7 @@ func NewRecordZoneWithZoneName(zoneName string) *RecordZone {
 	return &RecordZone{inner: raw.CKRecordZoneFromID(_id)}
 }
 
-// Creates a record zone object with the specified zone ID. - Parameters: - zoneID: The ID for the new zone. This parameter must not be `nil`. - Returns: The custom record zone. Use this method when you want to create a new record zone from the information in a zone ID. After creating the zone, save it to the server using a “CKModifyRecordZonesOperation“ object or the “CKDatabase/save(_:completionHandler:)-32ffr“ method of “CKDatabase“. Don't use this method to create a “CKRecordZone“ object that corresponds to a zone that already exists in the database. If the zone exists, fetch it using a “CKFetchRecordZonesOperation“ object or the “CKDatabase/fetch(withRecordZoneID:completionHandler:)“ method of “CKDatabase“.
+// Creates a record zone object with the specified zone ID.
 //
 // NewRecordZoneWithZoneID creates a new [RecordZone].
 func NewRecordZoneWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone {
@@ -48,7 +50,7 @@ func NewRecordZoneWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone {
 	return &RecordZone{inner: raw.CKRecordZoneFromID(_id)}
 }
 
-// The encryption scope determines the granularity at which CloudKit stores encryption keys within the zone. Zone encryption scope defaults to `CKRecordZoneEncryptionScopePerRecord` and can only be modified before zone creation. Attempting to change the encryption scope of an existing zone is invalid and results in an error. Zones using `CKRecordZoneEncryptionScopePerZone` can only use zone-wide sharing and are not compatible with older device OS versions. Refer to `CKRecordZoneEncryptionScope` for more info.
+// The encryption scope determines the granularity at which CloudKit stores encryption keys within the zone.
 //
 // WithEncryptionScope sets the encryptionScope property and returns the receiver for chaining.
 func (x *RecordZone) WithEncryptionScope(encryptionScope CKRecordZoneEncryptionScope) *RecordZone {

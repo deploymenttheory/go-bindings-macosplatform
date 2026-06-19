@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that adopts the decimal number behaviors protocol.
+//
 // DecimalNumberHandler wraps [raw.NSDecimalNumberHandler] with a fluent Go API.
 type DecimalNumberHandler struct {
 	inner *raw.NSDecimalNumberHandler
@@ -29,6 +31,8 @@ func DecimalNumberHandlerFromID(id objc.ID) *DecimalNumberHandler {
 	return &DecimalNumberHandler{inner: raw.NSDecimalNumberHandlerFromID(id)}
 }
 
+// Returns an NSDecimalNumberHandler object initialized so it behaves as specified by the method’s arguments.
+//
 // NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero creates a new [DecimalNumberHandler].
 func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumberHandler")), objc.RegisterName("alloc"))

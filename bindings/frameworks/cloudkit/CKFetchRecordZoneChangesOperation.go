@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that fetches record zone changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesoperation
 type CKFetchRecordZoneChangesOperation struct {
 	CKDatabaseOperation
@@ -63,7 +65,7 @@ func (o *CKFetchRecordZoneChangesOperation) Init() *CKFetchRecordZoneChangesOper
 	return CKFetchRecordZoneChangesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching record zone changes. - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. You can specify `nil` for this parameter. - configurationsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding configurations. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone configurations for each record zone.
+// Creates an operation for fetching record zone changes.
 func (o *CKFetchRecordZoneChangesOperation) InitWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs *foundation.NSArray[*CKRecordZoneID], configurationsByRecordZoneID *foundation.NSDictionary[*CKRecordZoneID, *CKFetchRecordZoneChangesConfiguration]) *CKFetchRecordZoneChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOperationSelInitWithRecordZoneIDsConfigurationsByRecordZoneID, recordZoneIDs.Ptr(), configurationsByRecordZoneID.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that allows a player to invite other players to a real-time game and automatch to fill any empty slots.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller
 type GKMatchmakerViewController struct {
 	appkit.NSViewController
@@ -46,23 +48,24 @@ func GKMatchmakerViewControllerFromID(id objc.ID) *GKMatchmakerViewController {
 	return o
 }
 
-// Initialize with a matchmaking request, allowing the user to send invites and/or start matchmaking
+// Creates a matchmaker view controller for the local player to start inviting other players.
 func (o *GKMatchmakerViewController) InitWithMatchRequest(request *GKMatchRequest) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
 	return _ret
 }
 
-// Initialize with an accepted invite, allowing the user to see the status of other invited players and get notified when the game starts
+// Creates a matchmaker view controller to present to a player who accepts an invitation.
 func (o *GKMatchmakerViewController) InitWithInvite(invite *GKInvite) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelInitWithInvite, invite.Ptr())
 	return _ret
 }
 
-// Add additional players (not currently connected) to an existing peer-to-peer match. Apps should elect a single device to do this, otherwise conflicts could arise resulting in unexpected connection errors.
+// Invites additional players to join an existing match.
 func (o *GKMatchmakerViewController) AddPlayersToMatch(match *GKMatch) {
 	o.Ptr().Send(_gKMatchmakerViewControllerSelAddPlayersToMatch, match.Ptr())
 }
 
+// Updates the connection status of a player in a hosted game.
 func (o *GKMatchmakerViewController) SetHostedPlayerDidConnect(player *GKPlayer, connected bool) {
 	o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerDidConnect, player.Ptr(), connected)
 }
@@ -129,7 +132,7 @@ func (o *GKMatchmakerViewController) SetDefaultInvitationMessage(defaultInvitati
 	o.Ptr().Send(_gKMatchmakerViewControllerSelSetDefaultInvitationMessage, defaultInvitationMessage.Ptr())
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Updates a player’s status on the view to show that the player has connected or disconnected from your server.
 // Deprecated: since macOS 10.10.
 func (o *GKMatchmakerViewController) SetHostedPlayerConnected(playerID *foundation.NSString, connected bool) {
 	o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerConnected, playerID.Ptr(), connected)

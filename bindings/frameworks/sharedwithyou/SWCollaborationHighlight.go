@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A highlight object that represents an active collaboration.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swcollaborationhighlight
 type SWCollaborationHighlight struct {
 	SWHighlight

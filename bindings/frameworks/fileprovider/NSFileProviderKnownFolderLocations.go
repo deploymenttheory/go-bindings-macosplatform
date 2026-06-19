@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class for working with known-folder locations.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileproviderknownfolderlocations
 type NSFileProviderKnownFolderLocations struct {
 	foundation.NSObject

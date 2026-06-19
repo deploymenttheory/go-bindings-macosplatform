@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an audio buffer that you use for compressed audio formats.
+//
 // AudioCompressedBuffer wraps [raw.AVAudioCompressedBuffer] with a fluent Go API.
 type AudioCompressedBuffer struct {
 	inner *raw.AVAudioCompressedBuffer
@@ -31,7 +33,7 @@ func AudioCompressedBufferFromID(id objc.ID) *AudioCompressedBuffer {
 	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(id)}
 }
 
-// @method initWithFormat:packetCapacity:maximumPacketSize: @abstract Initialize a buffer that is to contain compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @param maximumPacketSize The maximum size in bytes of a compressed packet. The maximum packet size can be obtained from the maximumOutputPacketSize property of an AVAudioConverter configured for encoding this format. @discussion An exception is raised if the format is PCM.
+// Creates a buffer that contains audio data in a compressed state.
 //
 // NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a new [AudioCompressedBuffer].
 func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *raw.AVAudioFormat, packetCapacity uint32, maximumPacketSize int) *AudioCompressedBuffer {
@@ -40,7 +42,7 @@ func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *r
 	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(_id)}
 }
 
-// @method initWithFormat:packetCapacity: @abstract Initialize a buffer that is to contain constant bytes per packet compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @discussion This fails if the format is PCM or if the format has variable bytes per packet (format.streamDescription->mBytesPerPacket == 0).
+// Creates a buffer that contains constant bytes per packet of audio data in a compressed state.
 //
 // NewAudioCompressedBufferWithFormatPacketCapacity creates a new [AudioCompressedBuffer].
 func NewAudioCompressedBufferWithFormatPacketCapacity(format *raw.AVAudioFormat, packetCapacity uint32) *AudioCompressedBuffer {
@@ -49,7 +51,7 @@ func NewAudioCompressedBufferWithFormatPacketCapacity(format *raw.AVAudioFormat,
 	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(_id)}
 }
 
-// @property packetCount @abstract The current number of compressed packets in the buffer. @discussion You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
+// The number of packets currently in the buffer.
 //
 // WithPacketCount sets the packetCount property and returns the receiver for chaining.
 func (x *AudioCompressedBuffer) WithPacketCount(packetCount uint32) *AudioCompressedBuffer {
@@ -57,7 +59,7 @@ func (x *AudioCompressedBuffer) WithPacketCount(packetCount uint32) *AudioCompre
 	return x
 }
 
-// @property byteLength @abstract The current number of valid bytes in the buffer. @discussion Can be changed as part of an operation that modifies the contents.
+// The number of valid bytes in the buffer.
 //
 // WithByteLength sets the byteLength property and returns the receiver for chaining.
 func (x *AudioCompressedBuffer) WithByteLength(byteLength uint32) *AudioCompressedBuffer {

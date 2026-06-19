@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request, as a stateful request you track over time, that determines the perspective warp matrix necessary to align the content of two images.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrackhomographicimageregistrationrequest
 type VNTrackHomographicImageRegistrationRequest struct {
 	VNStatefulRequest
@@ -32,7 +34,7 @@ func VNTrackHomographicImageRegistrationRequestFromID(id objc.ID) *VNTrackHomogr
 	return o
 }
 
-// @brief Create a new request that can statefully track the homographic registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero and a nil completion handler.
+// Creates a new request that tracks the homographic transformation of two images.
 func (o *VNTrackHomographicImageRegistrationRequest) Init() *VNTrackHomographicImageRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackHomographicImageRegistrationRequestSelInit)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *VNTrackHomographicImageRegistrationRequest) Init() *VNTrackHomographicI
 	return VNTrackHomographicImageRegistrationRequestFromID(_ret)
 }
 
-// @brief Create a new request that can statefully track the homographic registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero.
+// Creates a new request that tracks the homographic transformation of two images, with a system callback on completion.
 func (o *VNTrackHomographicImageRegistrationRequest) InitWithCompletionHandler(completionHandler func(*VNRequest, unsafe.Pointer)) *VNTrackHomographicImageRegistrationRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An open polygon overlay consisting of line segments that follow the contours of the Earth to create the shortest path between the specified points.
+//
 // GeodesicPolyline wraps [raw.MKGeodesicPolyline] with a fluent Go API.
 type GeodesicPolyline struct {
 	inner *raw.MKGeodesicPolyline
@@ -36,12 +38,16 @@ func NewGeodesicPolyline() *GeodesicPolyline {
 	return &GeodesicPolyline{inner: raw.MKGeodesicPolylineFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *GeodesicPolyline) WithTitle(title string) *GeodesicPolyline {
 	x.inner.MKPolyline.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *GeodesicPolyline) WithSubtitle(subtitle string) *GeodesicPolyline {
 	x.inner.MKPolyline.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

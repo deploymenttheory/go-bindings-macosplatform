@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that processes audio in real time.
+//
 // AudioUnitEffect wraps [raw.AVAudioUnitEffect] with a fluent Go API.
 type AudioUnitEffect struct {
 	inner *raw.AVAudioUnitEffect
@@ -29,7 +31,7 @@ func AudioUnitEffectFromID(id objc.ID) *AudioUnitEffect {
 	return &AudioUnitEffect{inner: raw.AVAudioUnitEffectFromID(id)}
 }
 
-// @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitEffect object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be one of these types kAudioUnitType_Effect kAudioUnitType_MusicEffect kAudioUnitType_Panner kAudioUnitType_RemoteEffect kAudioUnitType_RemoteMusicEffect
+// Creates an audio unit effect object with the specified description.
 //
 // NewAudioUnitEffectWithAudioComponentDescription creates a new [AudioUnitEffect].
 func NewAudioUnitEffectWithAudioComponentDescription(audioComponentDescription objc.ID) *AudioUnitEffect {
@@ -38,7 +40,7 @@ func NewAudioUnitEffectWithAudioComponentDescription(audioComponentDescription o
 	return &AudioUnitEffect{inner: raw.AVAudioUnitEffectFromID(_id)}
 }
 
-// @property bypass @abstract Bypass state of the audio unit.
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitEffect) WithBypass(bypass bool) *AudioUnitEffect {

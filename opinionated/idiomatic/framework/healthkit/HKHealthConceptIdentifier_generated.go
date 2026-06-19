@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unique identifier for a specific health concept within a domain.
+//
 // HealthConceptIdentifier wraps [raw.HKHealthConceptIdentifier] with a fluent Go API.
 type HealthConceptIdentifier struct {
 	inner *raw.HKHealthConceptIdentifier

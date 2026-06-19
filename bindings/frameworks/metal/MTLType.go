@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a data type.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltype
 type MTLType struct {
 	foundation.NSObject

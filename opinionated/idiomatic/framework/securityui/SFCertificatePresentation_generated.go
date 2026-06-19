@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that displays a certificate sheet for a provided certificate trust.
+//
 // CertificatePresentation wraps [raw.SFCertificatePresentation] with a fluent Go API.
 type CertificatePresentation struct {
 	inner *raw.SFCertificatePresentation
@@ -59,7 +61,7 @@ func (x *CertificatePresentation) WithMessage(message string) *CertificatePresen
 	return x
 }
 
-// The URL that will be opened by clicking the "Learn More" button.
+// The URL that will be opened by clicking the “Learn More” button.
 //
 // WithHelpURL sets the helpURL property and returns the receiver for chaining.
 func (x *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePresentation {

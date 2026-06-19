@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a detected human full body in a picture.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadatahumanfullbodyobject
 type AVMetadataHumanFullBodyObject struct {
 	AVMetadataBodyObject

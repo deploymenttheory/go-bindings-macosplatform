@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that encapsulates the Core Data stack in your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentcontainer
 type NSPersistentContainer struct {
 	foundation.NSObject
@@ -45,6 +47,7 @@ func NSPersistentContainerFromID(id objc.ID) *NSPersistentContainer {
 	return o
 }
 
+// Initializes a new persistent container using the provided name for the container.
 func NSPersistentContainerPersistentContainerWithName(name *foundation.NSString) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentContainer), _nSPersistentContainerSelPersistentContainerWithName, name.Ptr())
 	if _ret != 0 {
@@ -53,6 +56,7 @@ func NSPersistentContainerPersistentContainerWithName(name *foundation.NSString)
 	return NSPersistentContainerFromID(_ret)
 }
 
+// Initializes a new persistent container using the provided name and managed object model.
 func NSPersistentContainerPersistentContainerWithNameManagedObjectModel(name *foundation.NSString, model *NSManagedObjectModel) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentContainer), _nSPersistentContainerSelPersistentContainerWithNameManagedObjectModel, name.Ptr(), model.Ptr())
 	if _ret != 0 {
@@ -61,6 +65,7 @@ func NSPersistentContainerPersistentContainerWithNameManagedObjectModel(name *fo
 	return NSPersistentContainerFromID(_ret)
 }
 
+// Returns the location of the directory that contains the persistent stores.
 func NSPersistentContainerDefaultDirectoryURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentContainer), _nSPersistentContainerSelDefaultDirectoryURL)
 	if _ret != 0 {
@@ -69,6 +74,7 @@ func NSPersistentContainerDefaultDirectoryURL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
+// Creates a container with the specified name.
 func (o *NSPersistentContainer) InitWithName(name *foundation.NSString) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelInitWithName, name.Ptr())
 	if _ret != 0 {
@@ -77,6 +83,7 @@ func (o *NSPersistentContainer) InitWithName(name *foundation.NSString) *NSPersi
 	return NSPersistentContainerFromID(_ret)
 }
 
+// Create a container with the specified name and managed object model.
 func (o *NSPersistentContainer) InitWithNameManagedObjectModel(name *foundation.NSString, model *NSManagedObjectModel) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelInitWithNameManagedObjectModel, name.Ptr(), model.Ptr())
 	if _ret != 0 {
@@ -85,6 +92,7 @@ func (o *NSPersistentContainer) InitWithNameManagedObjectModel(name *foundation.
 	return NSPersistentContainerFromID(_ret)
 }
 
+// Loads the persistent stores.
 func (o *NSPersistentContainer) LoadPersistentStoresWithCompletionHandler(block func(*NSPersistentStoreDescription, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -99,11 +107,13 @@ func (o *NSPersistentContainer) LoadPersistentStoresWithCompletionHandler(block 
 	o.Ptr().Send(_nSPersistentContainerSelLoadPersistentStoresWithCompletionHandler, __block_block)
 }
 
+// Returns a new managed object context that executes on a private queue.
 func (o *NSPersistentContainer) NewBackgroundContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelNewBackgroundContext)
 	return NSManagedObjectContextFromID(_ret)
 }
 
+// Executes a closure on a private queue using an ephemeral managed object context.
 func (o *NSPersistentContainer) PerformBackgroundTask(block func(*NSManagedObjectContext)) {
 	var __block_block objc.Block
 	if block != nil {

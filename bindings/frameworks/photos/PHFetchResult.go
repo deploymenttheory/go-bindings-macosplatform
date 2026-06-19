@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An ordered list of assets or collections returned from a Photos fetch method.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phfetchresult
 type PHFetchResult[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
@@ -42,31 +44,37 @@ func PHFetchResultFromID[ObjectType purego.AnyObject](id objc.ID) *PHFetchResult
 	return o
 }
 
+// Returns the object located at the specified index.
 func (o *PHFetchResult[ObjectType]) ObjectAtIndex(index uint) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _pHFetchResultSelObjectAtIndex, index)
 	return _ret
 }
 
+// Returns the object located at the specified index.
 func (o *PHFetchResult[ObjectType]) ObjectAtIndexedSubscript(idx uint) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _pHFetchResultSelObjectAtIndexedSubscript, idx)
 	return _ret
 }
 
+// Returns whether the specified object is present in the fetch result.
 func (o *PHFetchResult[ObjectType]) ContainsObject(anObject ObjectType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHFetchResultSelContainsObject, anObject)
 	return _ret
 }
 
+// Returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
 func (o *PHFetchResult[ObjectType]) IndexOfObject(anObject ObjectType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _pHFetchResultSelIndexOfObject, anObject)
 	return _ret
 }
 
+// Returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.
 func (o *PHFetchResult[ObjectType]) IndexOfObjectInRange(anObject ObjectType, range_ foundation.NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _pHFetchResultSelIndexOfObjectInRange, anObject, range_)
 	return _ret
 }
 
+// Returns an array containing the objects in the fetch result at the indexes in the specified index set.
 func (o *PHFetchResult[ObjectType]) ObjectsAtIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchResultSelObjectsAtIndexes, indexes.Ptr())
 	if _ret != 0 {
@@ -75,18 +83,22 @@ func (o *PHFetchResult[ObjectType]) ObjectsAtIndexes(indexes *foundation.NSIndex
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
+// Executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
 func (o *PHFetchResult[ObjectType]) EnumerateObjectsUsing(block objc.Block) {
 	o.Ptr().Send(_pHFetchResultSelEnumerateObjectsUsing, block)
 }
 
+// Executes the specified block using each object in the fetch result.
 func (o *PHFetchResult[ObjectType]) EnumerateObjectsWithOptionsUsing(opts foundation.NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_pHFetchResultSelEnumerateObjectsWithOptionsUsing, opts, block)
 }
 
+// Executes the specified block using the objects in the fetch result at the specified indexes.
 func (o *PHFetchResult[ObjectType]) EnumerateObjectsAtIndexesOptionsUsing(s *foundation.NSIndexSet, opts foundation.NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_pHFetchResultSelEnumerateObjectsAtIndexesOptionsUsing, s.Ptr(), opts, block)
 }
 
+// Returns the number of assets in the fetch result of a specified type.
 func (o *PHFetchResult[ObjectType]) CountOfAssetsWithMediaType(mediaType PHAssetMediaType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _pHFetchResultSelCountOfAssetsWithMediaType, mediaType)
 	return _ret

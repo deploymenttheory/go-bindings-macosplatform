@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups parameters for the creation of a Metal argument table.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4argumenttabledescriptor
 type MTL4ArgumentTableDescriptor struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A representation of the code and resources stored in a bundle directory on disk.
+//
 // Bundle wraps [raw.NSBundle] with a fluent Go API.
 type Bundle struct {
 	inner *raw.NSBundle
@@ -184,7 +186,7 @@ func (x *Bundle) LocalizedAttributedStringForKeyValueTable(key string, value str
 	return &AttributedString{inner: _r}
 }
 
-// Look up a localized string given a list of available localizations. - Parameters: - key: The key for the localized string to retrieve. - value: A default value to return if a localized string for “key“ cannot be found. - tableName: The name of the strings file to search. If `nil`, the method uses tables in `Localizable.strings`. - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback. - Returns: A localized version of the string designated by “key“ in table “tableName“.
+// Look up a localized string given a list of available localizations.
 //
 // LocalizedStringForKeyValueTableLocalizations calls the underlying LocalizedStringForKeyValueTableLocalizations.
 func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations ...StringProvider) *String {

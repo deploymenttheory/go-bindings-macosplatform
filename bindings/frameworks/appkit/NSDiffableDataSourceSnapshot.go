@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the state of the data in a view at a specific point in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdiffabledatasourcesnapshot
 type NSDiffableDataSourceSnapshot[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject] struct {
 	foundation.NSObject

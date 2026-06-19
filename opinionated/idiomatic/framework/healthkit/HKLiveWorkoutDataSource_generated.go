@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data source that automatically provides live data from an active workout session.
+//
 // LiveWorkoutDataSource wraps [raw.HKLiveWorkoutDataSource] with a fluent Go API.
 type LiveWorkoutDataSource struct {
 	inner *raw.HKLiveWorkoutDataSource
@@ -30,7 +32,7 @@ func LiveWorkoutDataSourceFromID(id objc.ID) *LiveWorkoutDataSource {
 	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(id)}
 }
 
-// @method        initWithHealthStore:workoutConfiguration: @abstract      The designated initializer of HKLiveWorkoutDataSource. @param         healthStore     The HKHealthStore. This should match the one used to create the corresponding HKWorkoutBuilder. @param         configuration   An optional workout configuration. typesToCollect will be populated with default types for the workout configuration
+// Creates a new data source based on the provided workout configuration.
 //
 // NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new [LiveWorkoutDataSource].
 func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *raw.HKHealthStore, configuration *raw.HKWorkoutConfiguration) *LiveWorkoutDataSource {
@@ -39,14 +41,14 @@ func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *ra
 	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(_id)}
 }
 
-// @method        enableCollectionForType:predicate @abstract      Adds a new type of quantity sample to collect. @discussion    Calling this method for a type that is already being collected will override the predicate for that type. @param         quantityType    The type of sample to collect. @param         predicate       If non-nil, collected samples must match this predicate.
+// Begins automatically calculating statistics for samples that match the quantity type and predicate.
 //
 // EnableCollectionForTypePredicate calls the underlying EnableCollectionForTypePredicate.
 func (x *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate) {
 	x.inner.EnableCollectionForTypePredicate(quantityType, predicate)
 }
 
-// @method        disableCollectionForType: @abstract      Removes the specified quantity type from the types to collect. @param         quantityType    The type of sample to no longer collect.
+// Stops automatically calculating statistics for the quantity type.
 //
 // DisableCollectionForType calls the underlying DisableCollectionForType.
 func (x *LiveWorkoutDataSource) DisableCollectionForType(quantityType *raw.HKQuantityType) {

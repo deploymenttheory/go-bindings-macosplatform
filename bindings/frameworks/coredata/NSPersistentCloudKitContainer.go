@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that encapsulates the Core Data stack in your app, and mirrors select persistent stores to a CloudKit private database.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer
 type NSPersistentCloudKitContainer struct {
 	NSPersistentContainer
@@ -39,6 +41,7 @@ func NSPersistentCloudKitContainerFromID(id objc.ID) *NSPersistentCloudKitContai
 	return o
 }
 
+// Creates the CloudKit schema for all stores in the container that manage a CloudKit database.
 func (o *NSPersistentCloudKitContainer) InitializeCloudKitSchemaWithOptionsError(options NSPersistentCloudKitContainerSchemaInitializationOptions) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentCloudKitContainerSelInitializeCloudKitSchemaWithOptionsError, options, unsafe.Pointer(&_nsErr))
@@ -48,36 +51,49 @@ func (o *NSPersistentCloudKitContainer) InitializeCloudKitSchemaWithOptionsError
 	return _ret, nil
 }
 
+// Returns the CloudKit record for the specified managed object ID.
 func (o *NSPersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *NSManagedObjectID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerSelRecordForManagedObjectID, managedObjectID.Ptr())
 	return _ret
 }
 
+// Returns a dictionary that contains the CloudKit records for the specified managed object IDs.
 func (o *NSPersistentCloudKitContainer) RecordsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*NSManagedObjectID]) *foundation.NSDictionary[*NSManagedObjectID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*NSManagedObjectID, objc.ID]](o.Ptr(), _nSPersistentCloudKitContainerSelRecordsForManagedObjectIDs, managedObjectIDs.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerSelRecordsForManagedObjectIDs, managedObjectIDs.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*NSManagedObjectID, objc.ID](_ret)
 }
 
+// Returns the CloudKit record ID for the specified managed object ID.
 func (o *NSPersistentCloudKitContainer) RecordIDForManagedObjectID(managedObjectID *NSManagedObjectID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerSelRecordIDForManagedObjectID, managedObjectID.Ptr())
 	return _ret
 }
 
+// Returns a dictionary that contains the CloudKit record IDs for the specified managed object IDs.
 func (o *NSPersistentCloudKitContainer) RecordIDsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*NSManagedObjectID]) *foundation.NSDictionary[*NSManagedObjectID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*NSManagedObjectID, objc.ID]](o.Ptr(), _nSPersistentCloudKitContainerSelRecordIDsForManagedObjectIDs, managedObjectIDs.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerSelRecordIDsForManagedObjectIDs, managedObjectIDs.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*NSManagedObjectID, objc.ID](_ret)
 }
 
+// Returns a Boolean value that indicates whether the user can modify the managed object’s underlying CloudKit record.
 func (o *NSPersistentCloudKitContainer) CanUpdateRecordForManagedObjectWithID(objectID *NSManagedObjectID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentCloudKitContainerSelCanUpdateRecordForManagedObjectWithID, objectID.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the user can delete the managed object’s underlying CloudKit record.
 func (o *NSPersistentCloudKitContainer) CanDeleteRecordForManagedObjectWithID(objectID *NSManagedObjectID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentCloudKitContainerSelCanDeleteRecordForManagedObjectWithID, objectID.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the user can modify the specified persistent store.
 func (o *NSPersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *NSPersistentStore) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentCloudKitContainerSelCanModifyManagedObjectsInStore, store.Ptr())
 	return _ret

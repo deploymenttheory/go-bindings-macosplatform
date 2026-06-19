@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for concentration of mass.
+//
 // UnitConcentrationMass wraps [raw.NSUnitConcentrationMass] with a fluent Go API.
 type UnitConcentrationMass struct {
 	inner *raw.NSUnitConcentrationMass

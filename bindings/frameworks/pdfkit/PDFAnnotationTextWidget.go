@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationTextWidget object allows you to manage the appearance and content of text fields.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget
 type PDFAnnotationTextWidget struct {
 	PDFAnnotation
@@ -36,6 +38,7 @@ func PDFAnnotationTextWidgetFromID(id objc.ID) *PDFAnnotationTextWidget {
 	return o
 }
 
+// Returns the string assigned to the annotation.
 func (o *PDFAnnotationTextWidget) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationTextWidgetSelStringValue)
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *PDFAnnotationTextWidget) StringValue() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the string for the annotation.
 func (o *PDFAnnotationTextWidget) SetStringValue(value *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationTextWidgetSelSetStringValue, value.Ptr())
 }
@@ -60,11 +64,13 @@ func (o *PDFAnnotationTextWidget) SetAttributedStringValue(value *foundation.NSA
 	o.Ptr().Send(_pDFAnnotationTextWidgetSelSetAttributedStringValue, value.Ptr())
 }
 
+// Returns the rotation angle of the annotation text field in degrees.
 func (o *PDFAnnotationTextWidget) Rotation() int {
 	_ret := objc.Send[int](o.Ptr(), _pDFAnnotationTextWidgetSelRotation)
 	return _ret
 }
 
+// Sets the rotation angle of the annotation text field in degrees.
 func (o *PDFAnnotationTextWidget) SetRotation(rotation int) {
 	o.Ptr().Send(_pDFAnnotationTextWidgetSelSetRotation, rotation)
 }

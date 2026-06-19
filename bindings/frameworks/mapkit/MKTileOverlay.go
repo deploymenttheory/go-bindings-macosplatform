@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An overlay that covers an area of the map with tiles of bitmap images.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mktileoverlay
 type MKTileOverlay struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func MKTileOverlayFromID(id objc.ID) *MKTileOverlay {
 	return o
 }
 
+// Creates and returns a tile overlay object using the specified tile-access template.
 func (o *MKTileOverlay) InitWithURLTemplate(uRLTemplate *foundation.NSString) *MKTileOverlay {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelInitWithURLTemplate, uRLTemplate.Ptr())
 	if _ret != 0 {
@@ -107,6 +110,7 @@ func (o *MKTileOverlay) SetCanReplaceMapContent(canReplaceMapContent bool) {
 	o.Ptr().Send(_mKTileOverlaySelSetCanReplaceMapContent, canReplaceMapContent)
 }
 
+// Returns the URL to use to access the specified tile.
 func (o *MKTileOverlay) URLForTilePath(path MKTileOverlayPath) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelURLForTilePath, path)
 	if _ret != 0 {
@@ -115,6 +119,7 @@ func (o *MKTileOverlay) URLForTilePath(path MKTileOverlayPath) *foundation.NSURL
 	return foundation.NSURLFromID(_ret)
 }
 
+// Loads the specified tile asynchronously.
 func (o *MKTileOverlay) LoadTileAtPathResult(path MKTileOverlayPath, result func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_result objc.Block
 	if result != nil {

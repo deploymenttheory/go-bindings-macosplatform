@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A string parser that scans for substrings or characters in a character set, and for numeric values from decimal, hexadecimal, and floating-point representations.
+//
 // Scanner wraps [raw.NSScanner] with a fluent Go API.
 type Scanner struct {
 	inner *raw.NSScanner

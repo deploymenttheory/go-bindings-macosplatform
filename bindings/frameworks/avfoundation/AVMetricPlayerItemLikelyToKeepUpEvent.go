@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents when playback is likely to continue without stalling.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeritemlikelytokeepupevent
 type AVMetricPlayerItemLikelyToKeepUpEvent struct {
 	AVMetricEvent
@@ -49,6 +51,9 @@ func (o *AVMetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
 
 // This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 func (o *AVMetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVMetricPlayerItemLikelyToKeepUpEventSelLoadedTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemLikelyToKeepUpEventSelLoadedTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

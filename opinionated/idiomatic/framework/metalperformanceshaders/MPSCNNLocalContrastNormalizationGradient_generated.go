@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient local-contrast normalization kernel.
+//
 // CNNLocalContrastNormalizationGradient wraps [raw.MPSCNNLocalContrastNormalizationGradient] with a fluent Go API.
 type CNNLocalContrastNormalizationGradient struct {
 	inner *raw.MPSCNNLocalContrastNormalizationGradient
@@ -245,7 +247,7 @@ func (x *CNNLocalContrastNormalizationGradient) WithDestinationImageAllocator(de
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNLocalContrastNormalizationGradient {
@@ -253,7 +255,7 @@ func (x *CNNLocalContrastNormalizationGradient) WithOptions(options mpscore.MPSK
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradient) WithLabel(label string) *CNNLocalContrastNormalizationGradient {

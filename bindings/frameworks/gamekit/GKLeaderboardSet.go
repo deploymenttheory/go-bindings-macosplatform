@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Organizes leaderboards into logical and coherent groups.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkleaderboardset
 type GKLeaderboardSet struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func GKLeaderboardSetFromID(id objc.ID) *GKLeaderboardSet {
 	return o
 }
 
-// Loads array with all sets for game Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Set not present
+// Loads all of the leaderboard sets you configure for your game.
 func GKLeaderboardSetLoadLeaderboardSetsWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKLeaderboardSet], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -55,7 +57,7 @@ func GKLeaderboardSetLoadLeaderboardSetsWithCompletionHandler(completionHandler 
 	objc.ID(_clsGKLeaderboardSet).Send(_gKLeaderboardSetSelLoadLeaderboardSetsWithCompletionHandler, __block_completionHandler)
 }
 
-// Loads array with all classic leaderboards and current instances of recurring leaderboards for this leaderboardSet Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads the leaderboards in the leaderboard set.
 func (o *GKLeaderboardSet) LoadLeaderboardsWithHandler(handler func(*foundation.NSArray[*GKLeaderboard], unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -101,7 +103,7 @@ func (o *GKLeaderboardSet) SetIdentifier(identifier *foundation.NSString) {
 	o.Ptr().Send(_gKLeaderboardSetSelSetIdentifier, identifier.Ptr())
 }
 
-// Loads array with all leaderboards for the leaderboardSet Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads all of the leaderboards for the current leaderboard set.
 // Deprecated: since macOS 11.0.
 func (o *GKLeaderboardSet) LoadLeaderboardsWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKLeaderboard], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -117,7 +119,7 @@ func (o *GKLeaderboardSet) LoadLeaderboardsWithCompletionHandler(completionHandl
 	o.Ptr().Send(_gKLeaderboardSetSelLoadLeaderboardsWithCompletionHandler, __block_completionHandler)
 }
 
-// Asynchronously load the image. Error will be nil on success.
+// Loads the localized image that you associate with the leaderboard set.
 func (o *GKLeaderboardSet) LoadImageWithCompletionHandler(completionHandler func(*appkit.NSImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

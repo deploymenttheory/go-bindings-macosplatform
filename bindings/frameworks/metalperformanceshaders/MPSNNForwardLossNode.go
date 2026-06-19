@@ -70,7 +70,7 @@ func MPSNNForwardLossNodeNodeWithSourceLabelsLossDescriptor(source *mpsneuralnet
 
 // @abstract   Init a forward loss node from multiple images @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter Node0: logits, Node1: labels, Node2: weights @return     A new MPSNNFilter node.
 func MPSNNForwardLossNodeNodeWithSourcesLossDescriptor(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSNNForwardLossNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNForwardLossNode), _mPSNNForwardLossNodeSelNodeWithSourcesLossDescriptor, sourceNodes, descriptor.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNForwardLossNode), _mPSNNForwardLossNodeSelNodeWithSourcesLossDescriptor, sourceNodes.Ptr(), descriptor.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -94,7 +94,7 @@ func (o *MPSNNForwardLossNode) InitWithSourceLabelsLossDescriptor(source *mpsneu
 }
 
 func (o *MPSNNForwardLossNode) InitWithSourcesLossDescriptor(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSNNForwardLossNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossNodeSelInitWithSourcesLossDescriptor, sourceNodes, descriptor.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossNodeSelInitWithSourcesLossDescriptor, sourceNodes.Ptr(), descriptor.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -102,7 +102,7 @@ func (o *MPSNNForwardLossNode) InitWithSourcesLossDescriptor(sourceNodes *founda
 }
 
 func (o *MPSNNForwardLossNode) GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossNodeSelGradientFilterWithSources, sourceGradient)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossNodeSelGradientFilterWithSources, sourceGradient.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -110,8 +110,11 @@ func (o *MPSNNForwardLossNode) GradientFilterWithSources(sourceGradient *foundat
 }
 
 func (o *MPSNNForwardLossNode) GradientFiltersWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode] {
-	_ret := objc.Send[*foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]](o.Ptr(), _mPSNNForwardLossNodeSelGradientFiltersWithSources, sourceGradient)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossNodeSelGradientFiltersWithSources, sourceGradient.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*mpsneuralnetwork.MPSNNLossGradientNode](_ret)
 }
 
 func (o *MPSNNForwardLossNode) GradientFilterWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNLossGradientNode {
@@ -123,8 +126,11 @@ func (o *MPSNNForwardLossNode) GradientFilterWithSource(sourceGradient *mpsneura
 }
 
 func (o *MPSNNForwardLossNode) GradientFiltersWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode] {
-	_ret := objc.Send[*foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]](o.Ptr(), _mPSNNForwardLossNodeSelGradientFiltersWithSource, sourceGradient.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossNodeSelGradientFiltersWithSource, sourceGradient.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*mpsneuralnetwork.MPSNNLossGradientNode](_ret)
 }
 
 func (o *MPSNNForwardLossNode) LossType() mpsneuralnetwork.MPSCNNLossType {

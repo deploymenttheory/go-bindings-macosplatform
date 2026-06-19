@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A texture whose contents can be dynamically updated.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skmutabletexture
 type SKMutableTexture struct {
 	SKTexture
@@ -35,7 +37,7 @@ func SKMutableTextureFromID(id objc.ID) *SKMutableTexture {
 	return o
 }
 
-// Create a mutable texture with a specfic size. @param size the dimension to use when creating the given texture.
+// Initializes an empty texture with a specific size.
 func (o *SKMutableTexture) InitWithSize(size corefoundation.CGSize) *SKMutableTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKMutableTextureSelInitWithSize, size)
 	if _ret != 0 {
@@ -44,6 +46,7 @@ func (o *SKMutableTexture) InitWithSize(size corefoundation.CGSize) *SKMutableTe
 	return SKMutableTextureFromID(_ret)
 }
 
+// Creates an empty texture with a specific size.
 func SKMutableTextureMutableTextureWithSize(size corefoundation.CGSize) *SKMutableTexture {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKMutableTexture), _sKMutableTextureSelMutableTextureWithSize, size)
 	if _ret != 0 {
@@ -52,7 +55,7 @@ func SKMutableTextureMutableTextureWithSize(size corefoundation.CGSize) *SKMutab
 	return SKMutableTextureFromID(_ret)
 }
 
-// Create a mutable texture with a specfic size and type. @param size the dimension to use when creating the given texture. @param format the CoreVideo format type.  supported types include 'RGBA', 'RGhA', and 'RGfA' for byte, half-float, and float components.
+// Initializes an empty texture with a specific size and format.
 func (o *SKMutableTexture) InitWithSizePixelFormat(size corefoundation.CGSize, format int) *SKMutableTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKMutableTextureSelInitWithSizePixelFormat, size, format)
 	if _ret != 0 {
@@ -61,7 +64,7 @@ func (o *SKMutableTexture) InitWithSizePixelFormat(size corefoundation.CGSize, f
 	return SKMutableTextureFromID(_ret)
 }
 
-// Modify the created mutable texture.
+// Modifies the contents of a mutable texture.
 func (o *SKMutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, uint)) {
 	var __block_block objc.Block
 	if block != nil {

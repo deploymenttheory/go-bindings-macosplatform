@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A task that downloads multiple media selections for an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avaggregateassetdownloadtask
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
 type AVAggregateAssetDownloadTask struct {

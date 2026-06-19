@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized date object with embedded calendar information.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscalendardate
 // Deprecated: Use NSCalendar and NSDateComponents and NSDateFormatter instead
 type NSCalendarDate struct {

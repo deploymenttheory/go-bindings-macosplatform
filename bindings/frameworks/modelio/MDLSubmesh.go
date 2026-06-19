@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for index buffer data and material information to be used in rendering all or part of a 3D object.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlsubmesh
 type MDLSubmesh struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func MDLSubmeshFromID(id objc.ID) *MDLSubmesh {
 	return o
 }
 
-// @method initWithName:indexBuffer:indexCount:indexType:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid
+// Initializes a named submesh with an index buffer and the specified properties.
 func (o *MDLSubmesh) InitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial(name *foundation.NSString, indexBuffer MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *MDLMaterial) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial, name.Ptr(), indexBuffer, indexCount, indexType, geometryType, material.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *MDLSubmesh) InitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMater
 	return MDLSubmeshFromID(_ret)
 }
 
-// @method initWithIndexBuffer:indexCount:indexType:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid
+// Initializes a submesh with an index buffer and the specified properties.
 func (o *MDLSubmesh) InitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(indexBuffer MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *MDLMaterial) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial, indexBuffer, indexCount, indexType, geometryType, material.Ptr())
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *MDLSubmesh) InitWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(
 	return MDLSubmeshFromID(_ret)
 }
 
-// @method initWithIndexBuffer:indexCount:indexType:faceTopologyBuffer:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid @discussion The geometry type will typically be MDLGeometryTypeVariableTopology, if other types are used the faceTopologyBuffer contents should reflect that.
+// Initializes a named submesh with a specific topology.
 func (o *MDLSubmesh) InitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology(name *foundation.NSString, indexBuffer MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *MDLMaterial, topology *MDLSubmeshTopology) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology, name.Ptr(), indexBuffer, indexCount, indexType, geometryType, material.Ptr(), topology.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *MDLSubmesh) InitWithNameIndexBufferIndexCountIndexTypeGeometryTypeMater
 	return MDLSubmeshFromID(_ret)
 }
 
-// @method initWithMDLSubmesh:indexType:geometryType: @abstract Initialize submesh using another submesh as input. @discussion the resulting submesh will have a new index type if necessary. If a conversion from the source submesh's geometry type to the requested geometry type is possible, conversion will be performed. Otherwise nil will be returned.
+// Initializes a submesh by copying or converting another submesh.
 func (o *MDLSubmesh) InitWithMDLSubmeshIndexTypeGeometryType(submesh *MDLSubmesh, indexType MDLIndexBitDepth, geometryType MDLGeometryType) *MDLSubmesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSubmeshSelInitWithMDLSubmeshIndexTypeGeometryType, submesh.Ptr(), indexType, geometryType)
 	if _ret != 0 {

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to assemble an HTTP request for communicating with a social media service.
+//
 // Apple documentation: https://developer.apple.com/documentation/social/slrequest
 type SLRequest struct {
 	foundation.NSObject
@@ -42,22 +44,26 @@ func SLRequestFromID(id objc.ID) *SLRequest {
 	return o
 }
 
+// Initializes a newly created request object with the specified properties.
 func SLRequestRequestForServiceTypeRequestMethodURLParameters(serviceType *foundation.NSString, requestMethod SLRequestMethod, url *foundation.NSURL, parameters *foundation.NSDictionary[objc.ID, objc.ID]) *SLRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSLRequest), _sLRequestSelRequestForServiceTypeRequestMethodURLParameters, serviceType.Ptr(), requestMethod, url.Ptr(), parameters)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSLRequest), _sLRequestSelRequestForServiceTypeRequestMethodURLParameters, serviceType.Ptr(), requestMethod, url.Ptr(), parameters.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SLRequestFromID(_ret)
 }
 
+// Specifies a named multipart POST body for this request.
 func (o *SLRequest) AddMultipartDataWithNameTypeFilename(data *foundation.NSData, name *foundation.NSString, type_ *foundation.NSString, filename *foundation.NSString) {
 	o.Ptr().Send(_sLRequestSelAddMultipartDataWithNameTypeFilename, data.Ptr(), name.Ptr(), type_.Ptr(), filename.Ptr())
 }
 
+// Specifies a named multipart POST body for this request.
 func (o *SLRequest) AddMultipartDataWithNameType(data *foundation.NSData, name *foundation.NSString, type_ *foundation.NSString) {
 	o.Ptr().Send(_sLRequestSelAddMultipartDataWithNameType, data.Ptr(), name.Ptr(), type_.Ptr())
 }
 
+// Returns an authorized URL request that can be sent using an NSURLConnection object.
 func (o *SLRequest) PreparedURLRequest() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLRequestSelPreparedURLRequest)
 	if _ret != 0 {
@@ -66,6 +72,7 @@ func (o *SLRequest) PreparedURLRequest() *foundation.NSURLRequest {
 	return foundation.NSURLRequestFromID(_ret)
 }
 
+// Performs an asynchronous request and calls the specified handler when done.
 func (o *SLRequest) PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -109,6 +116,9 @@ func (o *SLRequest) URL() *foundation.NSURL {
 }
 
 func (o *SLRequest) Parameters() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _sLRequestSelParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sLRequestSelParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

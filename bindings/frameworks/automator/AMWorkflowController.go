@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that lets you manage an Automator workflow in your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/amworkflowcontroller
 type AMWorkflowController struct {
 	appkit.NSController
@@ -43,22 +45,27 @@ func AMWorkflowControllerFromID(id objc.ID) *AMWorkflowController {
 	return o
 }
 
+// Runs the associated workflow, after first clearing any results stored by its actions during any previous run.
 func (o *AMWorkflowController) Run(sender objc.ID) {
 	o.Ptr().Send(_aMWorkflowControllerSelRun, sender)
 }
 
+// Stops the associated workflow.
 func (o *AMWorkflowController) Stop(sender objc.ID) {
 	o.Ptr().Send(_aMWorkflowControllerSelStop, sender)
 }
 
+// Pauses a workflow that’s running.
 func (o *AMWorkflowController) Pause(sender objc.ID) {
 	o.Ptr().Send(_aMWorkflowControllerSelPause, sender)
 }
 
+// In a paused workflow, runs the next action in the workflow and then pauses again.
 func (o *AMWorkflowController) Step(sender objc.ID) {
 	o.Ptr().Send(_aMWorkflowControllerSelStep, sender)
 }
 
+// Stops a workflow, clears any action results, and resets the workflow back to an un-run state.
 func (o *AMWorkflowController) Reset(sender objc.ID) {
 	o.Ptr().Send(_aMWorkflowControllerSelReset, sender)
 }

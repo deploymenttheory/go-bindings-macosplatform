@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a single mail compose window.
+//
 // ComposeSession wraps [raw.MEComposeSession] with a fluent Go API.
 type ComposeSession struct {
 	inner *raw.MEComposeSession
@@ -36,7 +38,7 @@ func NewComposeSession() *ComposeSession {
 	return &ComposeSession{inner: raw.MEComposeSessionFromID(_id)}
 }
 
-// @brief Requests Mail to refresh compose session with new information that the extension has. @discussion Extensions can use this call this method to regenerate @c MEAddressAnnotation instances to replace those that were previously generated for this session. This will result in invocations to @c -[MEComposeSessionHandler @c session:annotateAddressesWithCompletionHandler:].
+// Refreshes the compose session with the extension’s new information.
 //
 // ReloadSession calls the underlying ReloadSession.
 func (x *ComposeSession) ReloadSession() {

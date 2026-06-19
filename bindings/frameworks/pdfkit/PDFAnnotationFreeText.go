@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationFreeText object displays text on a page.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext
 type PDFAnnotationFreeText struct {
 	PDFAnnotation

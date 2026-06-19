@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A value that represents a person’s account and their consent to Automatic Sign-In.
+//
 // VSAutoSignInToken wraps [raw.VSAutoSignInToken] with a fluent Go API.
 type VSAutoSignInToken struct {
 	inner *raw.VSAutoSignInToken

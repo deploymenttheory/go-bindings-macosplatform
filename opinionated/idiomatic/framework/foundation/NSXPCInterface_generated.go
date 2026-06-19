@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An interface that may be sent to an exported object or remote object proxy.
+//
 // XPCInterface wraps [raw.NSXPCInterface] with a fluent Go API.
 type XPCInterface struct {
 	inner *raw.NSXPCInterface
@@ -42,21 +44,29 @@ func (x *XPCInterface) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Sets the classes that can appear within the (numerically) specified collection object argument to the specified method.
+//
 // SetClassesForSelectorArgumentIndexOfReply calls the underlying SetClassesForSelectorArgumentIndexOfReply.
 func (x *XPCInterface) SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool) {
 	x.inner.SetClassesForSelectorArgumentIndexOfReply(classes, sel, arg, ofReply)
 }
 
+// Returns the current list of allowed classes that can appear within the specified collection object argument to the specified method.
+//
 // ClassesForSelectorArgumentIndexOfReply calls the underlying ClassesForSelectorArgumentIndexOfReply.
 func (x *XPCInterface) ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *raw.NSSet[objc.Class] {
 	return x.inner.ClassesForSelectorArgumentIndexOfReply(sel, arg, ofReply)
 }
 
+// Configures a specific parameter of a method to be sent as a proxy object instead of copied.
+//
 // SetInterfaceForSelectorArgumentIndexOfReply calls the underlying SetInterfaceForSelectorArgumentIndexOfReply.
 func (x *XPCInterface) SetInterfaceForSelectorArgumentIndexOfReply(ifc *raw.NSXPCInterface, sel objc.SEL, arg uint, ofReply bool) {
 	x.inner.SetInterfaceForSelectorArgumentIndexOfReply(ifc, sel, arg, ofReply)
 }
 
+// Returns the interface previously set for the specified selector and parameter.
+//
 // InterfaceForSelectorArgumentIndexOfReply calls the underlying InterfaceForSelectorArgumentIndexOfReply.
 func (x *XPCInterface) InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *XPCInterface {
 	_r := x.inner.InterfaceForSelectorArgumentIndexOfReply(sel, arg, ofReply)

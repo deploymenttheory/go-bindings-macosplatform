@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility object for generating a list of completion strings based on a partial search string that you provide.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter
 type MKLocalSearchCompleter struct {
 	foundation.NSObject
@@ -48,6 +50,7 @@ func MKLocalSearchCompleterFromID(id objc.ID) *MKLocalSearchCompleter {
 	return o
 }
 
+// Cancels an in-progress search operation.
 func (o *MKLocalSearchCompleter) Cancel() {
 	o.Ptr().Send(_mKLocalSearchCompleterSelCancel)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A subscription that generates push notifications when CloudKit modifies records in a specific record zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckrecordzonesubscription
 type CKRecordZoneSubscription struct {
 	CKSubscription
@@ -35,7 +37,7 @@ func CKRecordZoneSubscriptionFromID(id objc.ID) *CKRecordZoneSubscription {
 	return o
 }
 
-// Creates a subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
+// Creates a subscription for all records in the specified record zone.
 // Deprecated: since macOS 10.12.
 func (o *CKRecordZoneSubscription) InitWithZoneID(zoneID *CKRecordZoneID) *CKRecordZoneSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelInitWithZoneID, zoneID.Ptr())
@@ -45,7 +47,7 @@ func (o *CKRecordZoneSubscription) InitWithZoneID(zoneID *CKRecordZoneID) *CKRec
 	return CKRecordZoneSubscriptionFromID(_ret)
 }
 
-// Creates a named subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
+// Creates a named subscription for all records in the specified record zone.
 func (o *CKRecordZoneSubscription) InitWithZoneIDSubscriptionID(zoneID *CKRecordZoneID, subscriptionID *foundation.NSString) *CKRecordZoneSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelInitWithZoneIDSubscriptionID, zoneID.Ptr(), subscriptionID.Ptr())
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *CKRecordZoneSubscription) InitWithZoneIDSubscriptionID(zoneID *CKRecord
 	return CKRecordZoneSubscriptionFromID(_ret)
 }
 
-// Creates a zone-based subscription from a serialized instance. - Parameters: - aDecoder: The coder for decoding the serialized record zone subscription.
+// Creates a zone-based subscription from a serialized instance.
 func (o *CKRecordZoneSubscription) InitWithCoder(aDecoder *foundation.NSCoder) *CKRecordZoneSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSubscriptionSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {

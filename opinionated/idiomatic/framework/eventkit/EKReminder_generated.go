@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents a reminder in a calendar.
+//
 // Reminder wraps [raw.EKReminder] with a fluent Go API.
 type Reminder struct {
 	inner *raw.EKReminder
@@ -37,7 +39,7 @@ func NewReminder() *Reminder {
 	return &Reminder{inner: raw.EKReminderFromID(_id)}
 }
 
-// @property   startDateComponents @abstract   The start date of the task, as date components. @discussion The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
+// The start date of the task.
 //
 // WithStartDateComponents sets the startDateComponents property and returns the receiver for chaining.
 func (x *Reminder) WithStartDateComponents(startDateComponents *foundation.NSDateComponents) *Reminder {
@@ -45,7 +47,7 @@ func (x *Reminder) WithStartDateComponents(startDateComponents *foundation.NSDat
 	return x
 }
 
-// @property   dueDateComponents @abstract   The date by which this reminder should be completed. @discussion The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
+// The date by which the reminder should be completed.
 //
 // WithDueDateComponents sets the dueDateComponents property and returns the receiver for chaining.
 func (x *Reminder) WithDueDateComponents(dueDateComponents *foundation.NSDateComponents) *Reminder {
@@ -53,7 +55,7 @@ func (x *Reminder) WithDueDateComponents(dueDateComponents *foundation.NSDateCom
 	return x
 }
 
-// @property   completed @abstract   Whether or not the reminder is completed. @discussion Setting it to YES will set the completed date to the current date. Setting it to NO will set the completed date to nil.
+// A Boolean value determining whether or not the reminder is marked completed.
 //
 // WithCompleted sets the completed property and returns the receiver for chaining.
 func (x *Reminder) WithCompleted(completed bool) *Reminder {
@@ -61,7 +63,7 @@ func (x *Reminder) WithCompleted(completed bool) *Reminder {
 	return x
 }
 
-// @property   completionDate @abstract   The date on which this reminder was completed.
+// The date on which the reminder was completed.
 //
 // WithCompletionDate sets the completionDate property and returns the receiver for chaining.
 func (x *Reminder) WithCompletionDate(completionDate *foundation.NSDate) *Reminder {
@@ -69,7 +71,7 @@ func (x *Reminder) WithCompletionDate(completionDate *foundation.NSDate) *Remind
 	return x
 }
 
-// @property   priority @abstract   The priority of the reminder. @discussion Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority. Saving a reminder with any other priority will fail. Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
+// The reminder’s priority.
 //
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *Reminder) WithPriority(priority uint) *Reminder {
@@ -77,7 +79,7 @@ func (x *Reminder) WithPriority(priority uint) *Reminder {
 	return x
 }
 
-// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+// The calendar for the calendar item.
 //
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *Reminder) WithCalendar(calendar *Calendar) *Reminder {
@@ -85,7 +87,7 @@ func (x *Reminder) WithCalendar(calendar *Calendar) *Reminder {
 	return x
 }
 
-// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+// The title for the calendar item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Reminder) WithTitle(title string) *Reminder {
@@ -93,30 +95,40 @@ func (x *Reminder) WithTitle(title string) *Reminder {
 	return x
 }
 
+// The location associated with the calendar item.
+//
 // WithLocation sets the location property and returns the receiver for chaining.
 func (x *Reminder) WithLocation(location string) *Reminder {
 	x.inner.EKCalendarItem.SetLocation(foundation.NSStringStringWithUTF8String(location))
 	return x
 }
 
+// The notes associated with the calendar item.
+//
 // WithNotes sets the notes property and returns the receiver for chaining.
 func (x *Reminder) WithNotes(notes string) *Reminder {
 	x.inner.EKCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
 	return x
 }
 
+// The URL for the calendar item.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *Reminder) WithURL(uRL string) *Reminder {
 	x.inner.EKCalendarItem.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The time zone for the calendar item.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *Reminder) WithTimeZone(timeZone *foundation.NSTimeZone) *Reminder {
 	x.inner.EKCalendarItem.SetTimeZone(timeZone)
 	return x
 }
 
+// The alarms associated with the calendar item, as an array of EKAlarm objects.
+//
 // WithAlarms sets the collection, converting the Go slice to an NSArray.
 func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
 	if len(items) == 0 {
@@ -138,7 +150,7 @@ func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
 	return x
 }
 
-// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+// The recurrence rules for the calendar item.
 //
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *Reminder) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder {

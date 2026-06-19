@@ -7,27 +7,27 @@ import (
 	"unsafe"
 )
 
-// @struct         AudioBuffer @abstract       A structure to hold a buffer of audio data. @var            mNumberChannels The number of interleaved channels in the buffer. @var            mDataByteSize The number of bytes in the buffer pointed at by mData. @var            mData A pointer to the buffer of audio data.
+// A structure that holds a buffer of audio data.
 type AudioBuffer struct {
 	MNumberChannels uint
 	MDataByteSize   uint
 	MData           unsafe.Pointer
 }
 
-// @struct         AudioBufferList @abstract       A variable length array of AudioBuffer structures. @var            mNumberBuffers The number of AudioBuffers in the mBuffers array. @var            mBuffers A variable length array of AudioBuffers.
+// A structure that stores a variable-length array of audio buffers.
 type AudioBufferList struct {
 	MNumberBuffers uint
 	MBuffers       [1]AudioBuffer
 }
 
-// @struct         AudioChannelDescription @abstract       This structure describes a single channel. @var            mChannelLabel The AudioChannelLabel that describes the channel. @var            mChannelFlags Flags that control the interpretation of mCoordinates. @var            mCoordinates An ordered triple that specifies a precise speaker location.
+// A structure that describes a channel of audio data.
 type AudioChannelDescription struct {
 	MChannelLabel uint
 	MChannelFlags AudioChannelFlags
 	MCoordinates  [3]float32
 }
 
-// @struct         AudioChannelLayout @abstract       This structure is used to specify channel layouts in files and hardware. @var            mChannelLayoutTag The AudioChannelLayoutTag that indicates the layout. @var            mChannelBitmap If mChannelLayoutTag is set to kAudioChannelLayoutTag_UseChannelBitmap, this field is the channel usage bitmap. @var            mNumberChannelDescriptions The number of items in the mChannelDescriptions array. @var            mChannelDescriptions A variable length array of AudioChannelDescriptions that describe the layout.
+// A structure that specifies a channel layout in a file or in hardware.
 type AudioChannelLayout struct {
 	MChannelLayoutTag          uint
 	MChannelBitmap             AudioChannelBitmap
@@ -35,7 +35,7 @@ type AudioChannelLayout struct {
 	MChannelDescriptions       [1]AudioChannelDescription
 }
 
-// @struct         AudioClassDescription @abstract       This structure is used to describe codecs installed on the system. @var            mType The four char code codec type. @var            mSubType The four char code codec subtype. @var            mManufacturer The four char code codec manufacturer.
+// A structure that describes an audio codec.
 type AudioClassDescription struct {
 	MType         uint
 	MSubType      uint
@@ -48,7 +48,7 @@ type AudioFormatListItem struct {
 	MChannelLayoutTag uint
 }
 
-// @struct         AudioStreamBasicDescription @abstract       This structure encapsulates all the information for describing the basic format properties of a stream of audio data. @discussion     This structure is sufficient to describe any constant bit rate format that  has channels that are the same size. Extensions are required for variable bit rate data and for constant bit rate data where the channels have unequal sizes. However, where applicable, the appropriate fields will be filled out correctly for these kinds of formats (the extra data is provided via separate properties). In all fields, a value of 0 indicates that the field is either unknown, not applicable or otherwise is inapproprate for the format and should be ignored. Note that 0 is still a valid value for most formats in the mFormatFlags field. In audio data a frame is one sample across all channels. In non-interleaved audio, the per frame fields identify one channel. In interleaved audio, the per frame fields identify the set of n channels. In uncompressed audio, a Packet is one frame, (mFramesPerPacket == 1). In compressed audio, a Packet is an indivisible chunk of compressed data, for example an AAC packet will contain 1024 sample frames. @var            mSampleRate The number of sample frames per second of the data in the stream. @var            mFormatID The AudioFormatID indicating the general kind of data in the stream. @var            mFormatFlags The AudioFormatFlags for the format indicated by mFormatID. @var            mBytesPerPacket The number of bytes in a packet of data. @var            mFramesPerPacket The number of sample frames in each packet of data. @var            mBytesPerFrame The number of bytes in a single sample frame of data. @var            mChannelsPerFrame The number of channels in each frame of data. @var            mBitsPerChannel The number of bits of sample data for each channel in a frame of data. @var            mReserved Pads the structure out to force an even 8 byte alignment.
+// A format specification for an audio stream.
 type AudioStreamBasicDescription struct {
 	MSampleRate       float64
 	MFormatID         uint
@@ -69,14 +69,14 @@ type AudioStreamPacketDependencyDescription struct {
 	MReserved                 uint
 }
 
-// @struct         AudioStreamPacketDescription @abstract       This structure describes the packet layout of a buffer of data where the size of each packet may not be the same or where there is extraneous data between packets. @var            mStartOffset The number of bytes from the start of the buffer to the beginning of the packet. @var            mVariableFramesInPacket The number of sample frames of data in the packet. For formats with a constant number of frames per packet, this field is set to 0. @var            mDataByteSize The number of bytes in the packet.
+// A value that describes a packet in a buffer of audio data.
 type AudioStreamPacketDescription struct {
 	MStartOffset            int64
 	MVariableFramesInPacket uint
 	MDataByteSize           uint
 }
 
-// @struct         AudioTimeStamp @abstract       A structure that holds different representations of the same point in time. @var            mSampleTime The absolute sample frame time. @var            mHostTime The host machine's time base, mach_absolute_time. @var            mRateScalar The ratio of actual host ticks per sample frame to the nominal host ticks per sample frame. @var            mWordClockTime The word clock time. @var            mSMPTETime The SMPTE time. @var            mFlags A set of flags indicating which representations of the time are valid. @var            mReserved Pads the structure out to force an even 8 byte alignment.
+// A structure that represents a timestamp value.
 type AudioTimeStamp struct {
 	MSampleTime    float64
 	MHostTime      uint64
@@ -87,13 +87,13 @@ type AudioTimeStamp struct {
 	MReserved      uint
 }
 
-// @struct         AudioValueRange @abstract       This structure holds a pair of numbers that represent a continuous range of values. @var            mMinimum The minimum value. @var            mMaximum The maximum value.
+// A structure that represents a continuous range of values.
 type AudioValueRange struct {
 	MMinimum float64
 	MMaximum float64
 }
 
-// @struct         AudioValueTranslation @abstract       This stucture holds the buffers necessary for translation operations. @var            mInputData The buffer containing the data to be translated. @var            mInputDataSize The number of bytes in the buffer pointed at by mInputData. @var            mOutputData The buffer to hold the result of the translation. @var            mOutputDataSize The number of bytes in the buffer pointed at by mOutputData.
+// A structure that stores buffers to use in translation operations.
 type AudioValueTranslation struct {
 	MInputData      unsafe.Pointer
 	MInputDataSize  uint
@@ -101,7 +101,7 @@ type AudioValueTranslation struct {
 	MOutputDataSize uint
 }
 
-// @struct         SMPTETime @abstract       A structure for holding a SMPTE time. @var            mSubframes The number of subframes in the full message. @var            mSubframeDivisor The number of subframes per frame (typically 80). @var            mCounter The total number of messages received. @var            mType The kind of SMPTE time using the SMPTE time type constants. @var            mFlags A set of flags that indicate the SMPTE state. @var            mHours The number of hours in the full message. @var            mMinutes The number of minutes in the full message. @var            mSeconds The number of seconds in the full message. @var            mFrames The number of frames in the full message.
+// A structure that defines an SMPTE time value.
 type SMPTETime struct {
 	MSubframes       int16
 	MSubframeDivisor int16

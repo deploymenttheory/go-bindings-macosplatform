@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The behavior configuration to use for a search query.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cssearchquerycontext
 type CSSearchQueryContext struct {
 	foundation.NSObject
@@ -38,21 +40,27 @@ func CSSearchQueryContextFromID(id objc.ID) *CSSearchQueryContext {
 }
 
 func (o *CSSearchQueryContext) FetchAttributes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchQueryContextSelFetchAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQueryContextSelFetchAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchQueryContext) SetFetchAttributes(fetchAttributes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchQueryContextSelSetFetchAttributes, fetchAttributes)
+	o.Ptr().Send(_cSSearchQueryContextSelSetFetchAttributes, fetchAttributes.Ptr())
 }
 
 func (o *CSSearchQueryContext) FilterQueries() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchQueryContextSelFilterQueries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQueryContextSelFilterQueries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchQueryContext) SetFilterQueries(filterQueries *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchQueryContextSelSetFilterQueries, filterQueries)
+	o.Ptr().Send(_cSSearchQueryContextSelSetFilterQueries, filterQueries.Ptr())
 }
 
 func (o *CSSearchQueryContext) KeyboardLanguage() *foundation.NSString {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A display of image data in a frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsimageview
 type NSImageView struct {
 	NSControl
@@ -64,7 +66,7 @@ func NSImageViewFromID(id objc.ID) *NSImageView {
 	return o
 }
 
-// Creates a non-editable image view containing the provided image. The image is scaled proportionally down to fit the view, and is centered within the view. @param image The image to display within the view. @return An initialized image view.
+// Creates a non-editable image view containing the provided image. The image is scaled proportionally down to fit the view, and is centered within the view.
 func NSImageViewImageViewWithImage(image *NSImage) *NSImageView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageView), _nSImageViewSelImageViewWithImage, image.Ptr())
 	if _ret != 0 {
@@ -200,52 +202,52 @@ func (o *NSImageView) AddSymbolEffect(symbolEffect *symbols.NSSymbolEffect) {
 	o.Ptr().Send(_nSImageViewSelAddSymbolEffect, symbolEffect.Ptr())
 }
 
-// Adds a symbol effect to the image view with specified options and default animation.
+// Adds a symbol effect to the image view with the specified options and default animation.
 func (o *NSImageView) AddSymbolEffectOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
 	o.Ptr().Send(_nSImageViewSelAddSymbolEffectOptions, symbolEffect.Ptr(), options.Ptr())
 }
 
-// Adds a symbol effect to the image view with specified options and animation.
+// Adds a symbol effect to the image view with the specified options and animation.
 func (o *NSImageView) AddSymbolEffectOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
 	o.Ptr().Send(_nSImageViewSelAddSymbolEffectOptionsAnimated, symbolEffect.Ptr(), options.Ptr(), animated)
 }
 
-// Removes from the image view the symbol effect matching the type of effect passed in, with default options and animation.
+// Removes the symbol effect that matches the specified effect type.
 func (o *NSImageView) RemoveSymbolEffectOfType(symbolEffect *symbols.NSSymbolEffect) {
 	o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfType, symbolEffect.Ptr())
 }
 
-// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and default animation.
+// Removes the symbol effect that matches the specified effect type, using the specified options.
 func (o *NSImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
 	o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfTypeOptions, symbolEffect.Ptr(), options.Ptr())
 }
 
-// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and animation.
+// Removes the symbol effect that matches the specified effect type, using the specified options and animation setting.
 func (o *NSImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
 	o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfTypeOptionsAnimated, symbolEffect.Ptr(), options.Ptr(), animated)
 }
 
-// Removes all symbol effects from the image view with default options and animation.
+// Removes all symbol effects from the image view.
 func (o *NSImageView) RemoveAllSymbolEffects() {
 	o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffects)
 }
 
-// Removes all symbol effects from the image view with specified options and default animation.
+// Removes all symbol effects from the image view, using the specified options.
 func (o *NSImageView) RemoveAllSymbolEffectsWithOptions(options *symbols.NSSymbolEffectOptions) {
 	o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffectsWithOptions, options.Ptr())
 }
 
-// Removes all symbol effects from the image view with specified options and animation.
+// Removes all symbol effects from the image view, using the specified options and animation setting.
 func (o *NSImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options *symbols.NSSymbolEffectOptions, animated bool) {
 	o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffectsWithOptionsAnimated, options.Ptr(), animated)
 }
 
-// Sets the symbol image on the image view with a symbol content transition and default options. Passing in a non-symbol image will result in undefined behavior.
+// Sets a symbol image using the specified content-transition effect.
 func (o *NSImageView) SetSymbolImageWithContentTransition(symbolImage *NSImage, transition *symbols.NSSymbolContentTransition) {
 	o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransition, symbolImage.Ptr(), transition.Ptr())
 }
 
-// Sets the symbol image on the image view with a symbol content transition and specified options. Passing in a non-symbol image will result in undefined behavior.
+// Sets a symbol image using the specified content-transition effect and options.
 func (o *NSImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *NSImage, transition *symbols.NSSymbolContentTransition, options *symbols.NSSymbolEffectOptions) {
 	o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransitionOptions, symbolImage.Ptr(), transition.Ptr(), options.Ptr())
 }

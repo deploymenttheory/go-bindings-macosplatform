@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tokenizer that segments natural language text into semantic units.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nltokenizer
 type NLTokenizer struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NLTokenizerFromID(id objc.ID) *NLTokenizer {
 	return o
 }
 
+// Creates a tokenizer with the specified unit.
 func (o *NLTokenizer) InitWithUnit(unit NLTokenUnit) *NLTokenizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTokenizerSelInitWithUnit, unit)
 	if _ret != 0 {
@@ -46,25 +49,33 @@ func (o *NLTokenizer) InitWithUnit(unit NLTokenUnit) *NLTokenizer {
 	return NLTokenizerFromID(_ret)
 }
 
+// Sets the language of the text to be tokenized.
 func (o *NLTokenizer) SetLanguage(language *foundation.NSString) {
 	o.Ptr().Send(_nLTokenizerSelSetLanguage, language.Ptr())
 }
 
+// Finds the range of the token at the given index.
 func (o *NLTokenizer) TokenRangeAtIndex(characterIndex uint) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nLTokenizerSelTokenRangeAtIndex, characterIndex)
 	return _ret
 }
 
+// Finds the entire range of all tokens contained completely or partially within the specified range.
 func (o *NLTokenizer) TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nLTokenizerSelTokenRangeForRange, range_)
 	return _ret
 }
 
+// Tokenizes the string within the provided range.
 func (o *NLTokenizer) TokensForRange(range_ foundation.NSRange) *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nLTokenizerSelTokensForRange, range_)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLTokenizerSelTokensForRange, range_)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
+// Enumerates over a given range of the string and calls the specified block for each token.
 func (o *NLTokenizer) EnumerateTokensInRangeUsing(range_ foundation.NSRange, block objc.Block) {
 	o.Ptr().Send(_nLTokenizerSelEnumerateTokensInRangeUsing, range_, block)
 }

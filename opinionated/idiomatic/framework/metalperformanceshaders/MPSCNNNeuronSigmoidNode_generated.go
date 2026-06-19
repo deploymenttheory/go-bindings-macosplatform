@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronSigmoid kernel @discussion For each pixel, applies the following function: @code f(x) = 1 / (1 + e^-x) @endcode
+// A representation of a sigmoid neuron filter.
 //
 // CNNNeuronSigmoidNode wraps [raw.MPSCNNNeuronSigmoidNode] with a fluent Go API.
 type CNNNeuronSigmoidNode struct {

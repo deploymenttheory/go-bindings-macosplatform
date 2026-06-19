@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for a metaparameter defined by text.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasestringmetaparameterdefinition
 type PHASEStringMetaParameterDefinition struct {
 	PHASEMetaParameterDefinition
@@ -31,7 +33,7 @@ func PHASEStringMetaParameterDefinitionFromID(id objc.ID) *PHASEStringMetaParame
 	return o
 }
 
-// @method initWithValue:identifier @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASEStringMetaParameterDefinition object
+// Creates a specification for a named textual metaparameter with the given value.
 func (o *PHASEStringMetaParameterDefinition) InitWithValueIdentifier(value *foundation.NSString, identifier *foundation.NSString) *PHASEStringMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStringMetaParameterDefinitionSelInitWithValueIdentifier, value.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func (o *PHASEStringMetaParameterDefinition) InitWithValueIdentifier(value *foun
 	return PHASEStringMetaParameterDefinitionFromID(_ret)
 }
 
-// @method initWithValue @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @return The new PHASEStringMetaParameterDefinition object
+// Creates a specification for a textual metaparameter with the given value.
 func (o *PHASEStringMetaParameterDefinition) InitWithValue(value *foundation.NSString) *PHASEStringMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStringMetaParameterDefinitionSelInitWithValue, value.Ptr())
 	if _ret != 0 {

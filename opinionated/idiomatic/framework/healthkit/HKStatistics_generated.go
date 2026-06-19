@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the result of calculating the minimum, maximum, average, or sum over a set of samples from the HealthKit store.
+//
 // Statistics wraps [raw.HKStatistics] with a fluent Go API.
 type Statistics struct {
 	inner *raw.HKStatistics
@@ -37,7 +39,7 @@ func NewStatistics() *Statistics {
 	return &Statistics{inner: raw.HKStatisticsFromID(_id)}
 }
 
-// @method        averageQuantityForSource: @abstract      Returns the average quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the average value from all the samples that match the query and that were created by the specified source.
 //
 // AverageQuantityForSource calls the underlying AverageQuantityForSource.
 func (x *Statistics) AverageQuantityForSource(source *raw.HKSource) *Quantity {
@@ -48,7 +50,7 @@ func (x *Statistics) AverageQuantityForSource(source *raw.HKSource) *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        averageQuantity @abstract      Returns the average quantity in the time period represented by the receiver.
+// Returns the average value from all the samples that match the query.
 //
 // AverageQuantity calls the underlying AverageQuantity.
 func (x *Statistics) AverageQuantity() *Quantity {
@@ -59,7 +61,7 @@ func (x *Statistics) AverageQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        minimumQuantityForSource: @abstract      Returns the minimum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the minimum value from all the samples that match the query and that were created by the specified source.
 //
 // MinimumQuantityForSource calls the underlying MinimumQuantityForSource.
 func (x *Statistics) MinimumQuantityForSource(source *raw.HKSource) *Quantity {
@@ -70,7 +72,7 @@ func (x *Statistics) MinimumQuantityForSource(source *raw.HKSource) *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        minimumQuantity @abstract      Returns the minimum quantity in the time period represented by the receiver.
+// Returns the minimum value from all the samples that match the query.
 //
 // MinimumQuantity calls the underlying MinimumQuantity.
 func (x *Statistics) MinimumQuantity() *Quantity {
@@ -81,7 +83,7 @@ func (x *Statistics) MinimumQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        maximumQuantityForSource: @abstract      Returns the maximum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the maximum value from all the samples that match the query and that were created by the specified source.
 //
 // MaximumQuantityForSource calls the underlying MaximumQuantityForSource.
 func (x *Statistics) MaximumQuantityForSource(source *raw.HKSource) *Quantity {
@@ -92,7 +94,7 @@ func (x *Statistics) MaximumQuantityForSource(source *raw.HKSource) *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        maximumQuantity @abstract      Returns the maximum quantity in the time period represented by the receiver.
+// Returns the maximum value from all the samples that match the query.
 //
 // MaximumQuantity calls the underlying MaximumQuantity.
 func (x *Statistics) MaximumQuantity() *Quantity {
@@ -103,7 +105,7 @@ func (x *Statistics) MaximumQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        mostRecentQuantityForSource: @abstract      Returns the most recent quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the most recent value from all the samples that match the query and were created by the specified source.
 //
 // MostRecentQuantityForSource calls the underlying MostRecentQuantityForSource.
 func (x *Statistics) MostRecentQuantityForSource(source *raw.HKSource) *Quantity {
@@ -114,7 +116,7 @@ func (x *Statistics) MostRecentQuantityForSource(source *raw.HKSource) *Quantity
 	return &Quantity{inner: _r}
 }
 
-// @method        mostRecentQuantity @abstract      Returns the most recent quantity in the time period represented by the receiver.
+// Returns the most recent value from all the samples that match the query.
 //
 // MostRecentQuantity calls the underlying MostRecentQuantity.
 func (x *Statistics) MostRecentQuantity() *Quantity {
@@ -125,21 +127,21 @@ func (x *Statistics) MostRecentQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        mostRecentQuantityDateIntervalForSource: @abstract      Returns the date interval of the most recent quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the date interval of the most recent sample that matches the query and was created by the specified source.
 //
 // MostRecentQuantityDateIntervalForSource calls the underlying MostRecentQuantityDateIntervalForSource.
 func (x *Statistics) MostRecentQuantityDateIntervalForSource(source *raw.HKSource) *foundation.NSDateInterval {
 	return x.inner.MostRecentQuantityDateIntervalForSource(source)
 }
 
-// @method        mostRecentQuantityDateInterval @abstract      Returns the date interval of the most recent quantity in the time period represented by the receiver.
+// Returns the date interval of the most recent sample that matches the query.
 //
 // MostRecentQuantityDateInterval calls the underlying MostRecentQuantityDateInterval.
 func (x *Statistics) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
 	return x.inner.MostRecentQuantityDateInterval()
 }
 
-// @method        sumQuantityForSource: @abstract      Returns the sum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the sum of all the samples that match the query and that were created by the specified source.
 //
 // SumQuantityForSource calls the underlying SumQuantityForSource.
 func (x *Statistics) SumQuantityForSource(source *raw.HKSource) *Quantity {
@@ -150,7 +152,7 @@ func (x *Statistics) SumQuantityForSource(source *raw.HKSource) *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        sumQuantity @abstract      Returns the sum of quantities in the time period represented by the receiver.
+// Returns the sum of all the samples that match the query.
 //
 // SumQuantity calls the underlying SumQuantity.
 func (x *Statistics) SumQuantity() *Quantity {
@@ -161,7 +163,7 @@ func (x *Statistics) SumQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// Total duration (in seconds) covered by the samples represented by these statistics. Only present if HKStatisticsOptionDuration is is specified. @method        duration @abstract      Total duration, as a time-unit compatible quantity, covered by the samples represented by these statistics. @discussion    Only present if HKStatisticsOptionDuration is is specified.
+// Returns the total duration covering all the samples that match the query.
 //
 // Duration calls the underlying Duration.
 func (x *Statistics) Duration() *Quantity {
@@ -172,7 +174,7 @@ func (x *Statistics) Duration() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-// @method        durationForSource: @abstract      Returns the duration, as a time-unit compatible quantity, for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the total duration covering all the samples created by the specified source that also match the query.
 //
 // DurationForSource calls the underlying DurationForSource.
 func (x *Statistics) DurationForSource(source *raw.HKSource) *Quantity {

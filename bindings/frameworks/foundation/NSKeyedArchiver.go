@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encoder that stores an object’s data to an archive referenced by keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nskeyedarchiver
 type NSKeyedArchiver struct {
 	NSCoder
@@ -45,7 +47,7 @@ func NSKeyedArchiverFromID(id objc.ID) *NSKeyedArchiver {
 	return o
 }
 
-// Initializes the receiver for encoding an archive, optionally disabling secure coding. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off here; for improved security, however, \c requiresSecureCoding should be left enabled whenever possible. \c requiresSecureCoding ensures that all encoded objects conform to \c NSSecureCoding, preventing the possibility of encoding objects which cannot be decoded later. To produce archives whose structure matches those previously encoded using \c +archivedDataWithRootObject, encode the top-level object in your archive for the \c NSKeyedArchiveRootObjectKey.
+// Creates an archiver to encode data, and optionally disables secure coding.
 func (o *NSKeyedArchiver) InitRequiringSecureCoding(requiresSecureCoding bool) *NSKeyedArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelInitRequiringSecureCoding, requiresSecureCoding)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *NSKeyedArchiver) InitRequiringSecureCoding(requiresSecureCoding bool) *
 	return NSKeyedArchiverFromID(_ret)
 }
 
-// Returns an \c NSData object containing the encoded form of the object graph whose root object is given, optionally disabling secure coding. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off here; for improved security, however, \c requiresSecureCoding should be left enabled whenever possible. \c requiresSecureCoding ensures that all encoded objects conform to \c NSSecureCoding, preventing the possibility of encoding objects which cannot be decoded later. If the object graph cannot be encoded, returns \c nil and sets the \c error out parameter.
+// Encodes an object graph with the given root object into a data representation, optionally requiring secure coding.
 func NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError(object objc.ID, requiresSecureCoding bool) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelArchivedDataWithRootObjectRequiringSecureCodingError, object, requiresSecureCoding, unsafe.Pointer(&_nsErr))
@@ -67,7 +69,7 @@ func NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError(object 
 	return NSDataFromID(_ret), nil
 }
 
-// Initialize the archiver with empty data, ready for writing.
+// Initializes an archiver to encode data.
 // Deprecated: Use -initRequiringSecureCoding: instead
 func (o *NSKeyedArchiver) Init() *NSKeyedArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelInit)
@@ -77,6 +79,7 @@ func (o *NSKeyedArchiver) Init() *NSKeyedArchiver {
 	return NSKeyedArchiverFromID(_ret)
 }
 
+// Initializes an archiver to encode data into a given a mutable-data object.
 // Deprecated: Use -initRequiringSecureCoding: instead
 func (o *NSKeyedArchiver) InitForWritingWithMutableData(data *NSMutableData) *NSKeyedArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelInitForWritingWithMutableData, data.Ptr())
@@ -86,6 +89,7 @@ func (o *NSKeyedArchiver) InitForWritingWithMutableData(data *NSMutableData) *NS
 	return NSKeyedArchiverFromID(_ret)
 }
 
+// Returns a data object that contains the encoded form of the object graph formed by the given root object.
 // Deprecated: Use +archivedDataWithRootObject:requiringSecureCoding:error: instead
 func NSKeyedArchiverArchivedDataWithRootObject(rootObject objc.ID) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelArchivedDataWithRootObject, rootObject)
@@ -95,24 +99,29 @@ func NSKeyedArchiverArchivedDataWithRootObject(rootObject objc.ID) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Archives an object graph rooted at a given object to a file at a given path.
 // Deprecated: Use +archivedDataWithRootObject:requiringSecureCoding:error: and -writeToURL:options:error: instead
 func NSKeyedArchiverArchiveRootObjectToFile(rootObject objc.ID, path *NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelArchiveRootObjectToFile, rootObject, path.Ptr())
 	return _ret
 }
 
+// Instructs the receiver to construct the final data stream.
 func (o *NSKeyedArchiver) FinishEncoding() {
 	o.Ptr().Send(_nSKeyedArchiverSelFinishEncoding)
 }
 
+// Sets a global translation mapping to encode instances of a given class with the provided name, rather than their real name.
 func NSKeyedArchiverSetClassNameForClass(codedName *NSString, cls objc.Class) {
 	objc.ID(_clsNSKeyedArchiver).Send(_nSKeyedArchiverSelSetClassNameForClass, codedName.Ptr(), cls)
 }
 
+// Sets a mapping for this archiver to encode instances of a given class with the provided name, rather than their real name.
 func (o *NSKeyedArchiver) SetClassNameForClass(codedName *NSString, cls objc.Class) {
 	o.Ptr().Send(_nSKeyedArchiverSelSetClassNameForClass, codedName.Ptr(), cls)
 }
 
+// Returns the class name with which the archiver class encodes instances of a given class.
 func NSKeyedArchiverClassNameForClass(cls objc.Class) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedArchiver), _nSKeyedArchiverSelClassNameForClass, cls)
 	if _ret != 0 {
@@ -121,6 +130,7 @@ func NSKeyedArchiverClassNameForClass(cls objc.Class) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the class name with which this archiver encodes instances of a given class.
 func (o *NSKeyedArchiver) ClassNameForClass(cls objc.Class) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedArchiverSelClassNameForClass, cls)
 	if _ret != 0 {

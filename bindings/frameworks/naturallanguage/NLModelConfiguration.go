@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration parameters of a natural language model.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlmodelconfiguration
 type NLModelConfiguration struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func NLModelConfigurationFromID(id objc.ID) *NLModelConfiguration {
 	return o
 }
 
+// Returns the versions of the Natural Language framework the OS supports.
 func NLModelConfigurationSupportedRevisionsForType(type_ NLModelType) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModelConfiguration), _nLModelConfigurationSelSupportedRevisionsForType, type_)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func NLModelConfigurationSupportedRevisionsForType(type_ NLModelType) *foundatio
 	return foundation.NSIndexSetFromID(_ret)
 }
 
+// Returns the current Natural Language framework version in the OS.
 func NLModelConfigurationCurrentRevisionForType(type_ NLModelType) uint {
 	_ret := objc.Send[uint](objc.ID(_clsNLModelConfiguration), _nLModelConfigurationSelCurrentRevisionForType, type_)
 	return _ret

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Produces noise in a checkerboard pattern.
+// A procedural noise generator whose output is an alternating square pattern.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcheckerboardnoisesource
 type GKCheckerboardNoiseSource struct {
@@ -34,6 +34,7 @@ func GKCheckerboardNoiseSourceFromID(id objc.ID) *GKCheckerboardNoiseSource {
 	return o
 }
 
+// Creates a checkerboard noise source with the specified square size.
 func GKCheckerboardNoiseSourceCheckerboardNoiseWithSquareSize(squareSize float64) *GKCheckerboardNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCheckerboardNoiseSource), _gKCheckerboardNoiseSourceSelCheckerboardNoiseWithSquareSize, squareSize)
 	if _ret != 0 {
@@ -42,6 +43,7 @@ func GKCheckerboardNoiseSourceCheckerboardNoiseWithSquareSize(squareSize float64
 	return GKCheckerboardNoiseSourceFromID(_ret)
 }
 
+// Initializes a checkerboard noise source with the specified square size.
 func (o *GKCheckerboardNoiseSource) InitWithSquareSize(squareSize float64) *GKCheckerboardNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKCheckerboardNoiseSourceSelInitWithSquareSize, squareSize)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The language of a body of text.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer
 type NLLanguageRecognizer struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NLLanguageRecognizerFromID(id objc.ID) *NLLanguageRecognizer {
 	return o
 }
 
+// Finds the most likely language of a piece of text.
 func NLLanguageRecognizerDominantLanguageForString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLLanguageRecognizer), _nLLanguageRecognizerSelDominantLanguageForString, string_.Ptr())
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NLLanguageRecognizerDominantLanguageForString(string_ *foundation.NSString)
 	return foundation.NSStringFromID(_ret)
 }
 
+// Creates a recognizer that you can customize.
 func (o *NLLanguageRecognizer) Init() *NLLanguageRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLLanguageRecognizerSelInit)
 	if _ret != 0 {
@@ -55,17 +59,23 @@ func (o *NLLanguageRecognizer) Init() *NLLanguageRecognizer {
 	return NLLanguageRecognizerFromID(_ret)
 }
 
+// Analyzes the piece of text to determine its dominant language.
 func (o *NLLanguageRecognizer) ProcessString(string_ *foundation.NSString) {
 	o.Ptr().Send(_nLLanguageRecognizerSelProcessString, string_.Ptr())
 }
 
+// Resets the recognizer to its initial state.
 func (o *NLLanguageRecognizer) Reset() {
 	o.Ptr().Send(_nLLanguageRecognizerSelReset)
 }
 
+// Generates the probabilities of possible languages for the processed text.
 func (o *NLLanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]](o.Ptr(), _nLLanguageRecognizerSelLanguageHypothesesWithMaximum, maxHypotheses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLLanguageRecognizerSelLanguageHypothesesWithMaximum, maxHypotheses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSNumber](_ret)
 }
 
 func (o *NLLanguageRecognizer) DominantLanguage() *foundation.NSString {
@@ -77,19 +87,25 @@ func (o *NLLanguageRecognizer) DominantLanguage() *foundation.NSString {
 }
 
 func (o *NLLanguageRecognizer) LanguageHints() *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]](o.Ptr(), _nLLanguageRecognizerSelLanguageHints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLLanguageRecognizerSelLanguageHints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSNumber](_ret)
 }
 
 func (o *NLLanguageRecognizer) SetLanguageHints(languageHints *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) {
-	o.Ptr().Send(_nLLanguageRecognizerSelSetLanguageHints, languageHints)
+	o.Ptr().Send(_nLLanguageRecognizerSelSetLanguageHints, languageHints.Ptr())
 }
 
 func (o *NLLanguageRecognizer) LanguageConstraints() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLLanguageRecognizerSelLanguageConstraints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLLanguageRecognizerSelLanguageConstraints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NLLanguageRecognizer) SetLanguageConstraints(languageConstraints *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nLLanguageRecognizerSelSetLanguageConstraints, languageConstraints)
+	o.Ptr().Send(_nLLanguageRecognizerSelSetLanguageConstraints, languageConstraints.Ptr())
 }

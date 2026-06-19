@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility object that converts between a geographic distance and a string-based expression of that distance.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkdistanceformatter
 type MKDistanceFormatter struct {
 	foundation.NSFormatter
@@ -39,6 +41,7 @@ func MKDistanceFormatterFromID(id objc.ID) *MKDistanceFormatter {
 	return o
 }
 
+// Creates a string representation of the specified distance.
 func (o *MKDistanceFormatter) StringFromDistance(distance unsafe.Pointer) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDistanceFormatterSelStringFromDistance, distance)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *MKDistanceFormatter) StringFromDistance(distance unsafe.Pointer) *found
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the distance value parsed from the specified string.
 func (o *MKDistanceFormatter) DistanceFromString(distance *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKDistanceFormatterSelDistanceFromString, distance.Ptr())
 	return _ret

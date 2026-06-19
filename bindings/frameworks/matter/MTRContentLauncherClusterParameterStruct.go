@@ -60,10 +60,13 @@ func (o *MTRContentLauncherClusterParameterStruct) SetValue(value *foundation.NS
 }
 
 func (o *MTRContentLauncherClusterParameterStruct) ExternalIDList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRContentLauncherClusterParameterStructSelExternalIDList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterParameterStructSelExternalIDList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRContentLauncherClusterParameterStructSelSetExternalIDList, externalIDList)
+	o.Ptr().Send(_mTRContentLauncherClusterParameterStructSelSetExternalIDList, externalIDList.Ptr())
 }

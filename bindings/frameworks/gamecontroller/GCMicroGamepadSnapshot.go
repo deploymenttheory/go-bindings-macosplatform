@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A recording of all of the values provided by a GCMicroGamepad object.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcmicrogamepadsnapshot
 // Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 type GCMicroGamepadSnapshot struct {
@@ -34,6 +36,7 @@ func GCMicroGamepadSnapshotFromID(id objc.ID) *GCMicroGamepadSnapshot {
 	return o
 }
 
+// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
 func (o *GCMicroGamepadSnapshot) InitWithSnapshotData(data *foundation.NSData) *GCMicroGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSnapshotSelInitWithSnapshotData, data.Ptr())
 	if _ret != 0 {

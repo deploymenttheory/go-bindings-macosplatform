@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides details about an audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitcomponent
 type AVAudioUnitComponent struct {
 	foundation.NSObject
@@ -53,7 +55,7 @@ func AVAudioUnitComponentFromID(id objc.ID) *AVAudioUnitComponent {
 	return o
 }
 
-// @method supportsNumberInputChannels:outputChannels: @abstract returns YES if the AudioComponent supports the input/output channel configuration
+// Gets a Boolean value that indicates whether the audio unit component supports the specified number of input and output channels.
 func (o *AVAudioUnitComponent) SupportsNumberInputChannelsOutputChannels(numInputChannels int, numOutputChannels int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioUnitComponentSelSupportsNumberInputChannelsOutputChannels, numInputChannels, numOutputChannels)
 	return _ret
@@ -116,8 +118,11 @@ func (o *AVAudioUnitComponent) ComponentURL() *foundation.NSURL {
 
 // @property availableArchitectures @abstract NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
 func (o *AVAudioUnitComponent) AvailableArchitectures() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioUnitComponentSelAvailableArchitectures)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelAvailableArchitectures)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property sandboxSafe @abstract On OSX, YES if the AudioComponent can be loaded into a sandboxed process otherwise NO. On iOS, this is always YES.
@@ -146,18 +151,24 @@ func (o *AVAudioUnitComponent) AudioComponent() unsafe.Pointer {
 
 // @property userTagNames @abstract User tags represent the tags from the current user.
 func (o *AVAudioUnitComponent) UserTagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAudioUnitComponentSelUserTagNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelUserTagNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVAudioUnitComponent) SetUserTagNames(userTagNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_aVAudioUnitComponentSelSetUserTagNames, userTagNames)
+	o.Ptr().Send(_aVAudioUnitComponentSelSetUserTagNames, userTagNames.Ptr())
 }
 
 // @property allTagNames @abstract represent the tags from the current user and the system tags defined by AudioComponent.
 func (o *AVAudioUnitComponent) AllTagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAudioUnitComponentSelAllTagNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelAllTagNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property audioComponentDescription @abstract description of the audio component that can be used in AudioComponent APIs.
@@ -197,6 +208,9 @@ func (o *AVAudioUnitComponent) HasCustomView() bool {
 
 // @property configurationDictionary @abstract A NSDictionary that contains information describing the capabilities of the AudioComponent. The specific information depends on the type and the keys are defined in AudioUnitProperties.h
 func (o *AVAudioUnitComponent) ConfigurationDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAudioUnitComponentSelConfigurationDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentSelConfigurationDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

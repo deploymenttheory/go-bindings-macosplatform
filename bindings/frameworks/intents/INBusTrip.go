@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information describing a bus trip.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inbustrip
 type INBusTrip struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func INBusTripFromID(id objc.ID) *INBusTrip {
 	return o
 }
 
+// Creates a bus trip with the specified contents and attributes.
 func (o *INBusTrip) InitWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform(provider *foundation.NSString, busName *foundation.NSString, busNumber *foundation.NSString, tripDuration *INDateComponentsRange, departureBusStopLocation *corelocation.CLPlacemark, departurePlatform *foundation.NSString, arrivalBusStopLocation *corelocation.CLPlacemark, arrivalPlatform *foundation.NSString) *INBusTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusTripSelInitWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform, provider.Ptr(), busName.Ptr(), busNumber.Ptr(), tripDuration.Ptr(), departureBusStopLocation.Ptr(), departurePlatform.Ptr(), arrivalBusStopLocation.Ptr(), arrivalPlatform.Ptr())
 	if _ret != 0 {

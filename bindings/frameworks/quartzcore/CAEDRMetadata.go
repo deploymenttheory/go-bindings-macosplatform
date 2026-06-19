@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Metadata describing how extended dynamic range (EDR) values should be tone mapped.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caedrmetadata
 type CAEDRMetadata struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func CAEDRMetadataFromID(id objc.ID) *CAEDRMetadata {
 	return o
 }
 
+// Creates EDR metadata for HDR10 content based on mastering display color information and content light levels.
 func CAEDRMetadataHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData *foundation.NSData, contentData *foundation.NSData, scale float32) *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale, displayData.Ptr(), contentData.Ptr(), scale)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func CAEDRMetadataHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(disp
 	return CAEDRMetadataFromID(_ret)
 }
 
+// Creates EDR metadata for HDR10 content based on the luminance characteristics of a mastering display.
 func CAEDRMetadataHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale(minNits float32, maxNits float32, scale float32) *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale, minNits, maxNits, scale)
 	if _ret != 0 {

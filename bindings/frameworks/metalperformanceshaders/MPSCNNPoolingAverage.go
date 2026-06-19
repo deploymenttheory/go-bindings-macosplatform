@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An average pooling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaverage
 type MPSCNNPoolingAverage struct {
 	mpsneuralnetwork.MPSCNNPooling
@@ -37,7 +39,7 @@ func MPSCNNPoolingAverageFromID(id objc.ID) *MPSCNNPoolingAverage {
 	return o
 }
 
-// @abstract   Initialize a MPSCNNPoolingAverage pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNPooling object or nil, if failure.
+// Initializes an average pooling filter.
 func (o *MPSCNNPoolingAverage) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingAverage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingAverageSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *MPSCNNPoolingAverage) InitWithDeviceKernelWidthKernelHeightStrideInPixe
 	return MPSCNNPoolingAverageFromID(_ret)
 }
 
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
+// Initializes an average pooling filter.
 func (o *MPSCNNPoolingAverage) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPoolingAverage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingAverageSelInitWithCoderDevice, aDecoder.Ptr(), device)
 	if _ret != 0 {

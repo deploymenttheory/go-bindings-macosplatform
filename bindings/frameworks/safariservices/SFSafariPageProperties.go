@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that captures information about a webpage.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafaripageproperties
 type SFSafariPageProperties struct {
 	foundation.NSObject

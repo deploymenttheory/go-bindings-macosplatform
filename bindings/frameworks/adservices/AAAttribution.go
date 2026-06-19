@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The parent class that the framework uses to request a token.
+//
 // Apple documentation: https://developer.apple.com/documentation/adservices/aaattribution
 type AAAttribution struct {
 	foundation.NSObject

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The individual node(s) that make up a GKOctree. Used as a hint for faster removal via [GKOctree removeData:WithNode:]
+// A helper class for managing the objects you organize in an octree.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkoctreenode
 type GKOctreeNode struct {

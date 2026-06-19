@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that includes track properties parsed from the media asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/metrackinfo
 type METrackInfo struct {
 	foundation.NSObject
@@ -50,9 +52,9 @@ func METrackInfoFromID(id objc.ID) *METrackInfo {
 	return o
 }
 
-// @method			initWithMediaType @abstract		Initializes a new METrackInfo instance. @discussion		The main initializer for the METrackInfo class. After creating the class, the METrackReader should fill in all the relevant properties with the values read in from the media track. @param			mediaType The media type of the track. @param			trackID An integer identifying the track within the media asset. @param			formatDescriptions The format descriptions for the track, as an NSArray. @result			A new instance of METrackInfo.
+// Creates a new track info object with the media type, track ID, and format descriptions that you specify.
 func (o *METrackInfo) InitWithMediaTypeTrackIDFormatDescriptions(mediaType uint, trackID int32, formatDescriptions *foundation.NSArray[objc.ID]) *METrackInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mETrackInfoSelInitWithMediaTypeTrackIDFormatDescriptions, mediaType, trackID, formatDescriptions)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mETrackInfoSelInitWithMediaTypeTrackIDFormatDescriptions, mediaType, trackID, formatDescriptions.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -83,8 +85,11 @@ func (o *METrackInfo) SetEnabled(enabled bool) {
 
 // @property		formatDescriptions @abstract		The format descriptions for the track, as an NSArray. @discussion		This value is set through the class initializer.
 func (o *METrackInfo) FormatDescriptions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mETrackInfoSelFormatDescriptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mETrackInfoSelFormatDescriptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property		naturalTimescale @abstract		The natural timescale of the track, as a CMTimeScale value.
@@ -99,12 +104,15 @@ func (o *METrackInfo) SetNaturalTimescale(naturalTimescale int32) {
 
 // @property		trackEdits @abstract		Returns the array of edit segments for the given track. @discussion		Each NSValue in the array contains a CMTimeMapping object describing the track edit. The CMTimeMapping.target time ranges for successive edits must partition the time range from 0 to the track's duration. In other words, for edit index = 0 the CMTimeMapping.target.start must be kCMTimeZero, while for edit index > 0, the CMTimeMapping.target.start must match the CMTimeRangeGetEnd(CMTimeMapping.target) for edit (index - 1). It is valid for a track to have an empty trackEdits array; this means that there is nothing at all in the track and the track duration is zero. If this property is implemented for media asset formats that do not support edit segments, it can return nil.
 func (o *METrackInfo) TrackEdits() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _mETrackInfoSelTrackEdits)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mETrackInfoSelTrackEdits)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *METrackInfo) SetTrackEdits(trackEdits *foundation.NSArray[*foundation.NSValue]) {
-	o.Ptr().Send(_mETrackInfoSelSetTrackEdits, trackEdits)
+	o.Ptr().Send(_mETrackInfoSelSetTrackEdits, trackEdits.Ptr())
 }
 
 func (o *METrackInfo) ExtendedLanguageTag() *foundation.NSString {

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Abstract class representing a series of detections of the same subject over time.
+// An object representing a series of detections of the same subject over time.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cndetectiontrack
 type CNDetectionTrack struct {

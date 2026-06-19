@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to specify a search query for records in the Address Book database.
+//
 // Apple documentation: https://developer.apple.com/documentation/addressbook/absearchelement
 type ABSearchElement struct {
 	foundation.NSObject
@@ -31,14 +33,16 @@ func ABSearchElementFromID(id objc.ID) *ABSearchElement {
 	return o
 }
 
+// Returns a compound search element, created by combining the search elements in an array with the given conjunction.
 func ABSearchElementSearchElementForConjunctionChildren(conjuction int, children *foundation.NSArray[objc.ID]) *ABSearchElement {
-	_ret := objc.Send[objc.ID](objc.ID(_clsABSearchElement), _aBSearchElementSelSearchElementForConjunctionChildren, conjuction, children)
+	_ret := objc.Send[objc.ID](objc.ID(_clsABSearchElement), _aBSearchElementSelSearchElementForConjunctionChildren, conjuction, children.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return ABSearchElementFromID(_ret)
 }
 
+// Tests whether or not a record matches a search element.
 func (o *ABSearchElement) MatchesRecord(record *ABRecord) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBSearchElementSelMatchesRecord, record.Ptr())
 	return _ret

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create a multi-head attention layer.
+//
 // MultiheadAttentionDescriptor wraps [raw.MLCMultiheadAttentionDescriptor] with a fluent Go API.
 type MultiheadAttentionDescriptor struct {
 	inner *raw.MLCMultiheadAttentionDescriptor

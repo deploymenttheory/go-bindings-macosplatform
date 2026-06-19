@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that describes the representation of an audio format.
+//
 // AudioFormat wraps [raw.AVAudioFormat] with a fluent Go API.
 type AudioFormat struct {
 	inner *raw.AVAudioFormat
@@ -33,7 +35,7 @@ func AudioFormatFromID(id objc.ID) *AudioFormat {
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(id)}
 }
 
-// @method initWithStreamDescription: @abstract Initialize from an AudioStreamBasicDescription. @param asbd the AudioStreamBasicDescription @discussion If the format specifies more than 2 channels, this method fails (returns nil).
+// Creates an audio format instance from a stream description.
 //
 // NewAudioFormatWithStreamDescription creates a new [AudioFormat].
 func NewAudioFormatWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDescription) *AudioFormat {
@@ -42,7 +44,7 @@ func NewAudioFormatWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDe
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initWithStreamDescription:channelLayout: @abstract Initialize from an AudioStreamBasicDescription and optional channel layout. @param asbd the AudioStreamBasicDescription @param layout the channel layout. Can be nil only if asbd specifies 1 or 2 channels. @discussion If the format specifies more than 2 channels, this method fails (returns nil) unless layout is non-nil.
+// Creates an audio format instance from a stream description and channel layout.
 //
 // NewAudioFormatWithStreamDescriptionChannelLayout creates a new [AudioFormat].
 func NewAudioFormatWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.AudioStreamBasicDescription, layout *raw.AVAudioChannelLayout) *AudioFormat {
@@ -51,7 +53,7 @@ func NewAudioFormatWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.Audio
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initStandardFormatWithSampleRate:channels: @abstract Initialize to deinterleaved float with the specified sample rate and channel count. @param sampleRate the sample rate @param channels the channel count @discussion If the format specifies more than 2 channels, this method fails (returns nil).
+// Creates an audio format instance with the specified sample rate and channel count.
 //
 // NewAudioFormatStandardFormatWithSampleRateChannels creates a new [AudioFormat].
 func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, channels uint32) *AudioFormat {
@@ -60,7 +62,7 @@ func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, chan
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initStandardFormatWithSampleRate:channelLayout: @abstract Initialize to deinterleaved float with the specified sample rate and channel layout. @param sampleRate the sample rate @param layout the channel layout. must not be nil.
+// Creates an audio format instance as a deinterleaved float with the specified sample rate and channel layout.
 //
 // NewAudioFormatStandardFormatWithSampleRateChannelLayout creates a new [AudioFormat].
 func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64, layout *raw.AVAudioChannelLayout) *AudioFormat {
@@ -69,7 +71,7 @@ func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64,
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initWithCommonFormat:sampleRate:channels:interleaved: @abstract Initialize to float with the specified sample rate, channel count and interleavedness. @param format the common format type @param sampleRate the sample rate @param channels the channel count @param interleaved true if interleaved @discussion If the format specifies more than 2 channels, this method fails (returns nil).
+// Creates an audio format instance.
 //
 // NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved creates a new [AudioFormat].
 func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AVAudioCommonFormat, sampleRate float64, channels uint32, interleaved bool) *AudioFormat {
@@ -78,7 +80,7 @@ func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AVAudioC
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initWithCommonFormat:sampleRate:interleaved:channelLayout: @abstract Initialize to float with the specified sample rate, channel layout and interleavedness. @param format the common format type @param sampleRate the sample rate @param interleaved true if interleaved @param layout the channel layout. must not be nil.
+// Creates an audio format instance with the specified audio format, sample rate, interleaved state, and channel layout.
 //
 // NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout creates a new [AudioFormat].
 func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AVAudioCommonFormat, sampleRate float64, interleaved bool, layout *raw.AVAudioChannelLayout) *AudioFormat {
@@ -87,7 +89,7 @@ func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AVA
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initWithSettings: @abstract Initialize using a settings dictionary. @discussion See AVAudioSettings.h. Note that many settings dictionary elements pertain to encoder settings, not the basic format, and will be ignored. Returns nil if a format cannot be constructed with the provided settings, e.g. when: - AVNumberOfChannelsKey specifies more than 2 channels, but AVChannelLayoutKey hasn't been specified or the layout does not match - AVLinearPCMBitDepthKey for linear PCM format specifies less than 8 or greater than 32 bits - values for the keys are not of the expected types
+// Creates an audio format instance using the specified settings dictionary.
 //
 // NewAudioFormatWithSettings creates a new [AudioFormat].
 func NewAudioFormatWithSettings(settings purego.IDer) *AudioFormat {
@@ -96,7 +98,7 @@ func NewAudioFormatWithSettings(settings purego.IDer) *AudioFormat {
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @method initWithCMAudioFormatDescription: @abstract initialize from a CMAudioFormatDescriptionRef. @param formatDescription the CMAudioFormatDescriptionRef. @discussion If formatDescription is invalid, this method fails (returns nil).
+// Creates an audio format instance from a Core Media audio format description.
 //
 // NewAudioFormatWithCMAudioFormatDescription creates a new [AudioFormat].
 func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer) *AudioFormat {
@@ -105,7 +107,7 @@ func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
-// @property magicCookie @abstract The underlying magic cookie, if any. @discussion A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
+// An object that contains metadata that encoders and decoders require.
 //
 // WithMagicCookie sets the magicCookie property and returns the receiver for chaining.
 func (x *AudioFormat) WithMagicCookie(magicCookie *foundation.NSData) *AudioFormat {
@@ -113,7 +115,7 @@ func (x *AudioFormat) WithMagicCookie(magicCookie *foundation.NSData) *AudioForm
 	return x
 }
 
-// @method isEqual: @abstract Determine whether another format is functionally equivalent. @param object the format to compare against @discussion For PCM, interleavedness is ignored for mono. Differences in the AudioStreamBasicDescription alignment and packedness are ignored when they are not significant (e.g. with 1 channel, 2 bytes per frame and 16 bits per channel, neither alignment, the format is implicitly packed and can be interpreted as either high- or low-aligned.) For AVAudioChannelLayout, a layout with standard mono/stereo tag is considered to be equivalent to a nil layout. Otherwise, the layouts are compared for equality.
+// Indicates whether the audio format instance and a specified object are functionally equivalent.
 //
 // IsEqual calls the underlying IsEqual.
 func (x *AudioFormat) IsEqual(object objc.ID) bool {

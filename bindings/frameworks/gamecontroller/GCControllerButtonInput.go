@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control element that represents a button touch or press.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollerbuttoninput
 type GCControllerButtonInput struct {
 	GCControllerElement
@@ -38,7 +40,7 @@ func GCControllerButtonInputFromID(id objc.ID) *GCControllerButtonInput {
 	return o
 }
 
-// Sets the normalized value for the button input. Will update the pressed state of the button. @param value the value to set the input to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value
+// Sets the pressure value of a snapshot of a button.
 func (o *GCControllerButtonInput) SetValue(value float32) {
 	o.Ptr().Send(_gCControllerButtonInputSelSetValue, value)
 }

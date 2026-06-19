@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The element that represents the wheel of a racing wheel controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcsteeringwheelelement
 type GCSteeringWheelElement struct {
 	foundation.NSObject

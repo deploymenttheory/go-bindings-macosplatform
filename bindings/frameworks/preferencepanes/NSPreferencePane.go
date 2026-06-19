@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The interface for providing preference panes to System Preferences or other apps.
+//
 // Apple documentation: https://developer.apple.com/documentation/preferencepanes/nspreferencepane
 type NSPreferencePane struct {
 	foundation.NSObject
@@ -53,6 +55,7 @@ func NSPreferencePaneFromID(id objc.ID) *NSPreferencePane {
 	return o
 }
 
+// Initializes a preference pane with the specified bundle.
 func (o *NSPreferencePane) InitWithBundle(bundle *foundation.NSBundle) *NSPreferencePane {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelInitWithBundle, bundle.Ptr())
 	if _ret != 0 {
@@ -61,6 +64,7 @@ func (o *NSPreferencePane) InitWithBundle(bundle *foundation.NSBundle) *NSPrefer
 	return NSPreferencePaneFromID(_ret)
 }
 
+// Loads the preference pane’s user interface into its main view.
 func (o *NSPreferencePane) LoadMainView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreferencePaneSelLoadMainView)
 	if _ret != 0 {
@@ -69,36 +73,44 @@ func (o *NSPreferencePane) LoadMainView() *appkit.NSView {
 	return appkit.NSViewFromID(_ret)
 }
 
+// Notifies the preference pane that the main view is set up and prepared to be displayed.
 func (o *NSPreferencePane) MainViewDidLoad() {
 	o.Ptr().Send(_nSPreferencePaneSelMainViewDidLoad)
 }
 
+// Locates and assigns the preference pane’s main view from the nib file loaded by loadMainView.
 func (o *NSPreferencePane) AssignMainView() {
 	o.Ptr().Send(_nSPreferencePaneSelAssignMainView)
 }
 
+// Notifies the preference pane that the main app is about to display the preference pane’s main view.
 func (o *NSPreferencePane) WillSelect() {
 	o.Ptr().Send(_nSPreferencePaneSelWillSelect)
 }
 
+// Notifies the preference pane that the main app has just displayed the preference pane’s main view.
 func (o *NSPreferencePane) DidSelect() {
 	o.Ptr().Send(_nSPreferencePaneSelDidSelect)
 }
 
+// Notifies the main application of the preference pane’s ability to be deselected.
 func (o *NSPreferencePane) ReplyToShouldUnselect(shouldUnselect bool) {
 	o.Ptr().Send(_nSPreferencePaneSelReplyToShouldUnselect, shouldUnselect)
 }
 
+// Notifies the preference pane that the main app is about to stop displaying the preference pane’s main view.
 func (o *NSPreferencePane) WillUnselect() {
 	o.Ptr().Send(_nSPreferencePaneSelWillUnselect)
 }
 
+// Notifies the preference pane that the main app has just stopped displaying the preference pane’s main view.
 func (o *NSPreferencePane) DidUnselect() {
 	o.Ptr().Send(_nSPreferencePaneSelDidUnselect)
 }
 
+// Updates the help menu.
 func (o *NSPreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSPreferencePaneSelUpdateHelpMenuWithArray, inArrayOfMenuItems)
+	o.Ptr().Send(_nSPreferencePaneSelUpdateHelpMenuWithArray, inArrayOfMenuItems.Ptr())
 }
 
 func (o *NSPreferencePane) Bundle() *foundation.NSBundle {

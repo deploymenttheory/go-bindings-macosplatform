@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents MIDI note on or off messages.
+//
 // MIDINoteEvent wraps [raw.AVMIDINoteEvent] with a fluent Go API.
 type MIDINoteEvent struct {
 	inner *raw.AVMIDINoteEvent
@@ -29,7 +31,7 @@ func MIDINoteEventFromID(id objc.ID) *MIDINoteEvent {
 	return &MIDINoteEvent{inner: raw.AVMIDINoteEventFromID(id)}
 }
 
-// @method initWithChannel:key:velocity:duration @abstract Initialize the event with a MIDI channel, key number, velocity and duration. @param channel The MIDI channel.  Range: 0-15. @param key The MIDI key number.  Range: 0-127. @param velocity The MIDI velocity.  Range: 0-127 with zero indicating a note-off event. @param duration The duration in beats for this note.  Range: Any non-negative number.
+// Creates an event with a MIDI channel, key number, velocity, and duration.
 //
 // NewMIDINoteEventWithChannelKeyVelocityDuration creates a new [MIDINoteEvent].
 func NewMIDINoteEventWithChannelKeyVelocityDuration(channel uint, keyNum uint, velocity uint, duration float64) *MIDINoteEvent {
@@ -38,7 +40,7 @@ func NewMIDINoteEventWithChannelKeyVelocityDuration(channel uint, keyNum uint, v
 	return &MIDINoteEvent{inner: raw.AVMIDINoteEventFromID(_id)}
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithChannel(channel uint) *MIDINoteEvent {
@@ -46,7 +48,7 @@ func (x *MIDINoteEvent) WithChannel(channel uint) *MIDINoteEvent {
 	return x
 }
 
-// @property key The MIDI key number for the event.  Range: 0-127.
+// The MIDI key number.
 //
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithKey(key uint) *MIDINoteEvent {
@@ -54,7 +56,7 @@ func (x *MIDINoteEvent) WithKey(key uint) *MIDINoteEvent {
 	return x
 }
 
-// @property velocity The MIDI velocity for the event.  Range: 0-127.
+// The MIDI velocity.
 //
 // WithVelocity sets the velocity property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithVelocity(velocity uint) *MIDINoteEvent {
@@ -62,7 +64,7 @@ func (x *MIDINoteEvent) WithVelocity(velocity uint) *MIDINoteEvent {
 	return x
 }
 
-// @property duration The duration of the event in AVMusicTimeStamp beats.  Range: Any non-negative number.
+// The duration for the note, in beats.
 //
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {

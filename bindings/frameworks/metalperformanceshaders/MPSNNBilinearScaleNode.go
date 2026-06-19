@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a bilinear resampling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbilinearscalenode
 type MPSNNBilinearScaleNode struct {
 	mpsneuralnetwork.MPSNNScaleNode

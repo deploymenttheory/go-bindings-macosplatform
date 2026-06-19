@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Retrieve the user’s shortcuts and make shortcut suggestions.
+//
 // VoiceShortcutCenter wraps [raw.INVoiceShortcutCenter] with a fluent Go API.
 type VoiceShortcutCenter struct {
 	inner *raw.INVoiceShortcutCenter
@@ -39,7 +41,7 @@ func NewVoiceShortcutCenter() *VoiceShortcutCenter {
 	return &VoiceShortcutCenter{inner: raw.INVoiceShortcutCenterFromID(_id)}
 }
 
-// @abstract Get all of the shortcuts associated with this app that have been added to Siri. These could have either been added with `INUIAddVoiceShortcutViewController`, or separately by the user in the Shortcuts app.
+// Retrieves all shortcuts added to Siri for your app.
 //
 // GetAllVoiceShortcutsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (*foundation.NSArray[*raw.INVoiceShortcut], error) {
@@ -65,7 +67,7 @@ func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Con
 	}
 }
 
-// @abstract Get a single shortcut (associated with this app) that has been added to Siri, by its identifier.
+// Retrieves a shortcut the user added to Siri.
 //
 // GetVoiceShortcutWithIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier *foundation.NSUUID) (*VoiceShortcut, error) {
@@ -93,7 +95,7 @@ func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx conte
 	}
 }
 
-// @abstract Set some shortcuts that should be suggested to the user to add to Siri. @discussion These suggestions are shown to the user in the Shortcuts app.
+// Suggests shortcuts the user may want to add to Siri.
 //
 // SetShortcutSuggestions calls the underlying SetShortcutSuggestions.
 func (x *VoiceShortcutCenter) SetShortcutSuggestions(suggestions *foundation.NSArray[*raw.INShortcut]) {

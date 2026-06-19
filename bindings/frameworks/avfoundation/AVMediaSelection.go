@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a complete rendition of media selection options on an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmediaselection
 type AVMediaSelection struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func AVMediaSelectionFromID(id objc.ID) *AVMediaSelection {
 	return o
 }
 
-// @method		selectedMediaOptionInMediaSelectionGroup: @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group. @discussion If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
+// Returns the media selection option that’s currently selected in the specified group.
 func (o *AVMediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *AVMediaSelectionOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionSelSelectedMediaOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *AVMediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelecti
 	return AVMediaSelectionOptionFromID(_ret)
 }
 
-// @method		mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup: @abstract		Indicates that specified media selection group is subject to automatic media selection. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		YES if the group is subject to automatic media selection. @discussion	Automatic application of media selection criteria is suspended in any group in which a specific selection has been made via an invocation of -selectMediaOption:inMediaSelectionGroup:.
+// Indicates whether the specified media selection group is subject to automatic media selection.
 func (o *AVMediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMediaSelectionSelMediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup, mediaSelectionGroup.Ptr())
 	return _ret

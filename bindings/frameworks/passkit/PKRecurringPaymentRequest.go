@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a request to set up a recurring payment, typically a subscription.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest
 type PKRecurringPaymentRequest struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func PKRecurringPaymentRequestFromID(id objc.ID) *PKRecurringPaymentRequest {
 	return o
 }
 
+// Create a recurring payment object with a description, regular billing information, and a management URL.
 func (o *PKRecurringPaymentRequest) InitWithPaymentDescriptionRegularBillingManagementURL(paymentDescription *foundation.NSString, regularBilling *PKRecurringPaymentSummaryItem, managementURL *foundation.NSURL) *PKRecurringPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelInitWithPaymentDescriptionRegularBillingManagementURL, paymentDescription.Ptr(), regularBilling.Ptr(), managementURL.Ptr())
 	if _ret != 0 {

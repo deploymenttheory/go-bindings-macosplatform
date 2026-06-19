@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an image that an image-analysis request produces.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnpixelbufferobservation
 type VNPixelBufferObservation struct {
 	VNObservation

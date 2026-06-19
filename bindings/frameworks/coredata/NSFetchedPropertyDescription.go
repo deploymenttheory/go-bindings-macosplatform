@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description object used to define which properties are fetched from Core Data.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsfetchedpropertydescription
 type NSFetchedPropertyDescription struct {
 	NSPropertyDescription
@@ -31,10 +33,13 @@ func NSFetchedPropertyDescriptionFromID(id objc.ID) *NSFetchedPropertyDescriptio
 }
 
 func (o *NSFetchedPropertyDescription) FetchRequest() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](o.Ptr(), _nSFetchedPropertyDescriptionSelFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedPropertyDescriptionSelFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSFetchedPropertyDescription) SetFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) {
-	o.Ptr().Send(_nSFetchedPropertyDescriptionSelSetFetchRequest, fetchRequest)
+	o.Ptr().Send(_nSFetchedPropertyDescriptionSelSetFetchRequest, fetchRequest.Ptr())
 }

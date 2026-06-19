@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An animation that applies a spring-like force to a layer’s properties.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caspringanimation
 type CASpringAnimation struct {
 	CABasicAnimation

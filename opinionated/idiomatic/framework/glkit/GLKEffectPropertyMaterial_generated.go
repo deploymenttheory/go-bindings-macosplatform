@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Surface appearance properties for use in GLKit rendering effects.
+//
 // EffectPropertyMaterial wraps [raw.GLKEffectPropertyMaterial] with a fluent Go API.
 type EffectPropertyMaterial struct {
 	inner *raw.GLKEffectPropertyMaterial
@@ -36,6 +38,8 @@ func NewEffectPropertyMaterial() *EffectPropertyMaterial {
 	return &EffectPropertyMaterial{inner: raw.GLKEffectPropertyMaterialFromID(_id)}
 }
 
+// The shininess of the material, used when calculating specular lighting effects.
+//
 // WithShininess sets the shininess property and returns the receiver for chaining.
 func (x *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPropertyMaterial {
 	x.inner.SetShininess(shininess)

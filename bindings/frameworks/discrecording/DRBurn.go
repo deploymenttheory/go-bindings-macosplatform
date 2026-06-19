@@ -68,8 +68,11 @@ func (o *DRBurn) WriteLayout(layout objc.ID) {
 
 // @method 		status @abstract		Returns a dictionary describing the status of the burn. @discussion		The same dictionary is returned through the @link //apple_ref/occ/data/DRBurnStatusChangedNotification DRBurnStatusChangedNotification @/link notification @result  		An NSDictionary	reporting the status of the burn.
 func (o *DRBurn) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRBurnSelStatus)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSelStatus)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method 		abort @abstract		Stops the burn. @discussion		When this method returns the burn might not actually be fully stopped but it has been cancelled and only cleanup is going on. If a burn has not completed writing data to disc, you just made a coaster. Typically this method is only used as a result of the user hitting a cancel/stop button somewhere in the user interface.
@@ -79,13 +82,16 @@ func (o *DRBurn) Abort() {
 
 // @method 		properties @abstract		Returns the properties dictionary of the burn. @result  		An NSDictionary containing the properties of the burn.
 func (o *DRBurn) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRBurnSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method 		setProperties: @abstract		Sets the properties dictionary of the burn. @param 			properties	NSDictionary of the properties to set.
 func (o *DRBurn) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_dRBurnSelSetProperties, properties)
+	o.Ptr().Send(_dRBurnSelSetProperties, properties.Ptr())
 }
 
 // @method 		device @abstract		Returns the device being used for the burn. @result  		The DRDevice the burn will use.

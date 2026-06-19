@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the destination type of a call.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incalldestinationtyperesolutionresult
 type INCallDestinationTypeResolutionResult struct {
 	INIntentResolutionResult
@@ -30,6 +32,7 @@ func INCallDestinationTypeResolutionResultFromID(id objc.ID) *INCallDestinationT
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType(resolvedCallDestinationType INCallDestinationType) *INCallDestinationTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallDestinationTypeResolutionResult), _iNCallDestinationTypeResolutionResultSelSuccessWithResolvedCallDestinationType, resolvedCallDestinationType)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType
 	return INCallDestinationTypeResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm INCallDestinationType) *INCallDestinationTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallDestinationTypeResolutionResult), _iNCallDestinationTypeResolutionResultSelConfirmationRequiredWithCallDestinationTypeToConfirm, callDestinationTypeToConfirm)
 	if _ret != 0 {

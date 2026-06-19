@@ -34,7 +34,7 @@ func MTRICDManagementClusterRegisterClientResponseParamsFromID(id objc.ID) *MTRI
 	return &MTRICDManagementClusterRegisterClientResponseParams{inner: raw.MTRICDManagementClusterRegisterClientResponseParamsFromID(id)}
 }
 
-// Initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
 // NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError creates a new [MTRICDManagementClusterRegisterClientResponseParams].
 func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRICDManagementClusterRegisterClientResponseParams, error) {

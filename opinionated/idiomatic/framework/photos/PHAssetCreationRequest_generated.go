@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to create a new Photos asset from underlying data resources, for use in a photo library change block.
+//
 // AssetCreationRequest wraps [raw.PHAssetCreationRequest] with a fluent Go API.
 type AssetCreationRequest struct {
 	inner *raw.PHAssetCreationRequest
@@ -36,35 +38,47 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 	return &AssetCreationRequest{inner: raw.PHAssetCreationRequestFromID(_id)}
 }
 
+// The date and time at which the asset claims to have been originally created.
+//
 // WithCreationDate sets the creationDate property and returns the receiver for chaining.
 func (x *AssetCreationRequest) WithCreationDate(creationDate *foundation.NSDate) *AssetCreationRequest {
 	x.inner.PHAssetChangeRequest.SetCreationDate(creationDate)
 	return x
 }
 
+// A Boolean value that indicates whether the asset is marked as one of the user’s favorites.
+//
 // WithFavorite sets the favorite property and returns the receiver for chaining.
 func (x *AssetCreationRequest) WithFavorite(favorite bool) *AssetCreationRequest {
 	x.inner.PHAssetChangeRequest.SetFavorite(favorite)
 	return x
 }
 
+// A Boolean value that indicates whether the asset is hidden in collections.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
 	x.inner.PHAssetChangeRequest.SetHidden(hidden)
 	return x
 }
 
+// The output of an asset content editing session.
+//
 // WithContentEditingOutput sets the contentEditingOutput property and returns the receiver for chaining.
 func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
 	x.inner.PHAssetChangeRequest.SetContentEditingOutput(contentEditingOutput.Unwrap())
 	return x
 }
 
+// Adds a data resource to the asset being created, using the file at the specified URL.
+//
 // AddResourceWithTypeFileURLOptions calls the underlying AddResourceWithTypeFileURLOptions.
 func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions) {
 	x.inner.AddResourceWithTypeFileURLOptions(raw.PHAssetResourceType(type_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
 }
 
+// Adds a data resource to the asset being created, using the specified data.
+//
 // AddResourceWithTypeDataOptions calls the underlying AddResourceWithTypeDataOptions.
 func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions) {
 	x.inner.AddResourceWithTypeDataOptions(raw.PHAssetResourceType(type_), data, options)

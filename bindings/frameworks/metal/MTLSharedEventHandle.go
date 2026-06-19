@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance you use to recreate a shareable event.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlsharedeventhandle
 type MTLSharedEventHandle struct {
 	foundation.NSObject

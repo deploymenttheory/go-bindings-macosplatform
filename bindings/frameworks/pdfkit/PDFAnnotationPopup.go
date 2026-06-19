@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationPopup object provides user interactivity on a PDF page in the form of a pop-up menu.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationpopup
 type PDFAnnotationPopup struct {
 	PDFAnnotation
@@ -29,6 +31,7 @@ func PDFAnnotationPopupFromID(id objc.ID) *PDFAnnotationPopup {
 	return o
 }
 
+// Sets the open state of the pop-up menu.
 func (o *PDFAnnotationPopup) SetIsOpen(isOpen bool) {
 	o.Ptr().Send(_pDFAnnotationPopupSelSetIsOpen, isOpen)
 }

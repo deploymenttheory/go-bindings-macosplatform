@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that uses a delegate object to render an image from a custom format.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscustomimagerep
 type NSCustomImageRep struct {
 	NSImageRep
@@ -34,6 +36,7 @@ func NSCustomImageRepFromID(id objc.ID) *NSCustomImageRep {
 	return o
 }
 
+// Initializes a representation of an image of the specified size and flipped status, using a block to draw its content.
 func (o *NSCustomImageRep) InitWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawingHandlerShouldBeCalledWithFlippedContext bool, drawingHandler objc.Block) *NSCustomImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomImageRepSelInitWithSizeFlippedDrawingHandler, size, drawingHandlerShouldBeCalledWithFlippedContext, drawingHandler)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *NSCustomImageRep) InitWithSizeFlippedDrawingHandler(size corefoundation
 	return NSCustomImageRepFromID(_ret)
 }
 
+// Returns a representation of an image initialized with the specified delegate information.
 func (o *NSCustomImageRep) InitWithDrawSelectorDelegate(selector objc.SEL, delegate objc.ID) *NSCustomImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomImageRepSelInitWithDrawSelectorDelegate, selector, delegate)
 	if _ret != 0 {

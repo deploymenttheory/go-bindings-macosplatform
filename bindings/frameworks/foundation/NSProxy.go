@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass defining an API for objects that act as stand-ins for other objects or for objects that don’t exist yet.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsproxy
 type NSProxy struct {
 	ptr objc.ID
@@ -44,25 +46,30 @@ func NSProxyFromID(id objc.ID) *NSProxy {
 	return o
 }
 
+// Returns a new instance of the receiving class
 func NSProxyAlloc() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProxy), _nSProxySelAlloc)
 	return _ret
 }
 
+// Returns a new instance of the receiving class
 func NSProxyAllocWithZone(zone unsafe.Pointer) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProxy), _nSProxySelAllocWithZone, zone)
 	return _ret
 }
 
+// Returns self (the class object).
 func NSProxyClass() objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSProxy), _nSProxySelClass)
 	return _ret
 }
 
+// Passes a given invocation to the real object the proxy represents.
 func (o *NSProxy) ForwardInvocation(invocation *NSInvocation) {
 	o.Ptr().Send(_nSProxySelForwardInvocation, invocation.Ptr())
 }
 
+// Raises NSInvalidArgumentException. Override this method in your concrete subclass to return a proper NSMethodSignature object for the given selector and the class your proxy objects stand in for.
 func (o *NSProxy) MethodSignatureForSelector(sel objc.SEL) *NSMethodSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProxySelMethodSignatureForSelector, sel)
 	if _ret != 0 {
@@ -71,14 +78,17 @@ func (o *NSProxy) MethodSignatureForSelector(sel objc.SEL) *NSMethodSignature {
 	return NSMethodSignatureFromID(_ret)
 }
 
+// Deallocates the memory occupied by the receiver.
 func (o *NSProxy) Dealloc() {
 	o.Ptr().Send(_nSProxySelDealloc)
 }
 
+// The garbage collector invokes this method on the receiver before disposing of the memory it uses.
 func (o *NSProxy) Finalize() {
 	o.Ptr().Send(_nSProxySelFinalize)
 }
 
+// Returns a Boolean value that indicates whether the receiving class responds to a given selector.
 func NSProxyRespondsToSelector(aSelector objc.SEL) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSProxy), _nSProxySelRespondsToSelector, aSelector)
 	return _ret

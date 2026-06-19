@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A renderer for displaying a SceneKit scene in an existing Metal workflow or OpenGL context.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnrenderer
 type SCNRenderer struct {
 	foundation.NSObject
@@ -46,30 +48,30 @@ func SCNRendererFromID(id objc.ID) *SCNRenderer {
 	return o
 }
 
-// @method rendererWithContext:options: @abstract Creates a new renderer object. @param context The context to render into. @param options An optional dictionary for future extensions.
+// Creates a renderer with the specified OpenGL context.
 func SCNRendererRendererWithContextOptions(context_ unsafe.Pointer, options *foundation.NSDictionary[objc.ID, objc.ID]) *SCNRenderer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNRenderer), _sCNRendererSelRendererWithContextOptions, context_, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNRenderer), _sCNRendererSelRendererWithContextOptions, context_, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNRendererFromID(_ret)
 }
 
-// @method rendererWithDevice:options: @abstract Creates a new renderer object that renders using Metal. @param device The metal device to use. Pass nil to let SceneKit choose a default device. @param options An optional dictionary for future extensions.
+// Creates a renderer with the specified Metal device.
 func SCNRendererRendererWithDeviceOptions(device metal.MTLDevice, options *foundation.NSDictionary[objc.ID, objc.ID]) *SCNRenderer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNRenderer), _sCNRendererSelRendererWithDeviceOptions, device, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNRenderer), _sCNRendererSelRendererWithDeviceOptions, device, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNRendererFromID(_ret)
 }
 
-// @method renderAtTime:viewport:commandBuffer:passDescriptor: @abstract updates and renders the receiver's scene at the specified time (system time) viewport, Metal command buffer and pass descriptor. @discussion Use this method to render using Metal.
+// Renders the scene’s contents at the specified system time in the specified Metal command buffer.
 func (o *SCNRenderer) RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
 	o.Ptr().Send(_sCNRendererSelRenderAtTimeViewportCommandBufferPassDescriptor, time_, viewport, commandBuffer, renderPassDescriptor.Ptr())
 }
 
-// @method renderAtTime: @abstract updates and renders the receiver's scene at the specified time (system time). @discussion This method only work if the receiver was allocated with an OpenGL context. Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+// Renders the scene’s contents at the specified system time in the renderer’s OpenGL context.
 func (o *SCNRenderer) RenderAtTime(time_ float64) {
 	o.Ptr().Send(_sCNRendererSelRenderAtTime, time_)
 }
@@ -84,7 +86,7 @@ func (o *SCNRenderer) RenderWithViewportCommandBufferPassDescriptor(viewport cor
 	o.Ptr().Send(_sCNRendererSelRenderWithViewportCommandBufferPassDescriptor, viewport, commandBuffer, renderPassDescriptor.Ptr())
 }
 
-// @method snapshotAtTime:withSize:antialiasingMode: @abstract renders the receiver's scene at the specified time (system time) into an image.
+// Creates an image by drawing the renderer’s content at the specified system time.
 func (o *SCNRenderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNRendererSelSnapshotAtTimeWithSizeAntialiasingMode, time_, size, antialiasingMode)
 	if _ret != 0 {
@@ -117,7 +119,7 @@ func (o *SCNRenderer) NextFrameTime() float64 {
 	return _ret
 }
 
-// @method render @abstract renders the receiver's scene at the current system time. @discussion This method only work if the receiver was allocated with an OpenGL context and it is deprecated (use renderAtTime: instead). Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+// Renders the scene’s contents in the renderer’s OpenGL context.
 // Deprecated: since macOS 10.11.
 func (o *SCNRenderer) Render() {
 	o.Ptr().Send(_sCNRendererSelRender)

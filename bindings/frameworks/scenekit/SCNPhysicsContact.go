@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Detailed information about a contact between two physics bodies in a scene’s physics simulation.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicscontact
 type SCNPhysicsContact struct {
 	foundation.NSObject

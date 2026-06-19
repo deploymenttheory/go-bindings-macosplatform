@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about an action that causes navigation to occur.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wknavigationaction
 type WKNavigationAction struct {
 	foundation.NSObject

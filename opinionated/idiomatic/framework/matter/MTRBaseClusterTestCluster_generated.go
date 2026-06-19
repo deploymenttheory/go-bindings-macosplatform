@@ -2092,9 +2092,28 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeOctetStringWithMinInterval
 	}
 }
 
-// ReadAttributeListInt8uWithCompletionHandler calls the underlying ReadAttributeListInt8uWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListInt8uWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeListInt8uWithCompletionHandler(completionHandler)
+// ReadAttributeListInt8u blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeListInt8u(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeListInt8uWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // WriteAttributeListInt8uWithValueCompletionHandler calls the underlying WriteAttributeListInt8uWithValueCompletionHandler.
@@ -2107,14 +2126,52 @@ func (x *MTRBaseClusterTestCluster) WriteAttributeListInt8uWithValueParamsComple
 	x.inner.WriteAttributeListInt8uWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-// SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeListOctetStringWithCompletionHandler calls the underlying ReadAttributeListOctetStringWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListOctetStringWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeListOctetStringWithCompletionHandler(completionHandler)
+// ReadAttributeListOctetString blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeListOctetString(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeListOctetStringWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // WriteAttributeListOctetStringWithValueCompletionHandler calls the underlying WriteAttributeListOctetStringWithValueCompletionHandler.
@@ -2127,14 +2184,52 @@ func (x *MTRBaseClusterTestCluster) WriteAttributeListOctetStringWithValueParams
 	x.inner.WriteAttributeListOctetStringWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-// SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeListStructOctetStringWithCompletionHandler calls the underlying ReadAttributeListStructOctetStringWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListStructOctetStringWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeListStructOctetStringWithCompletionHandler(completionHandler)
+// ReadAttributeListStructOctetString blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeListStructOctetString(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeListStructOctetStringWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // WriteAttributeListStructOctetStringWithValueCompletionHandler calls the underlying WriteAttributeListStructOctetStringWithValueCompletionHandler.
@@ -2147,9 +2242,28 @@ func (x *MTRBaseClusterTestCluster) WriteAttributeListStructOctetStringWithValue
 	x.inner.WriteAttributeListStructOctetStringWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-// SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeLongOctetString blocks until the operation completes or ctx is cancelled.
@@ -2508,9 +2622,28 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeVendorIdWithMinIntervalMax
 	}
 }
 
-// ReadAttributeListNullablesAndOptionalsStructWithCompletionHandler calls the underlying ReadAttributeListNullablesAndOptionalsStructWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStructWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeListNullablesAndOptionalsStructWithCompletionHandler(completionHandler)
+// ReadAttributeListNullablesAndOptionalsStruct blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStruct(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeListNullablesAndOptionalsStructWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // WriteAttributeListNullablesAndOptionalsStructWithValueCompletionHandler calls the underlying WriteAttributeListNullablesAndOptionalsStructWithValueCompletionHandler.
@@ -2523,9 +2656,28 @@ func (x *MTRBaseClusterTestCluster) WriteAttributeListNullablesAndOptionalsStruc
 	x.inner.WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-// SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeEnumAttr blocks until the operation completes or ctx is cancelled.
@@ -2880,9 +3032,28 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16sWithM
 	}
 }
 
-// ReadAttributeListLongOctetStringWithCompletionHandler calls the underlying ReadAttributeListLongOctetStringWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListLongOctetStringWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeListLongOctetStringWithCompletionHandler(completionHandler)
+// ReadAttributeListLongOctetString blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeListLongOctetString(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeListLongOctetStringWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // WriteAttributeListLongOctetStringWithValueCompletionHandler calls the underlying WriteAttributeListLongOctetStringWithValueCompletionHandler.
@@ -2895,14 +3066,52 @@ func (x *MTRBaseClusterTestCluster) WriteAttributeListLongOctetStringWithValuePa
 	x.inner.WriteAttributeListLongOctetStringWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-// SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeListFabricScopedWithParamsCompletionHandler calls the underlying ReadAttributeListFabricScopedWithParamsCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParamsCompletionHandler(params *raw.MTRReadParams, completionHandler objc.Block) {
-	x.inner.ReadAttributeListFabricScopedWithParamsCompletionHandler(params, completionHandler)
+// ReadAttributeListFabricScopedWithParams blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParams(ctx context.Context, params *raw.MTRReadParams) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeListFabricScopedWithParamsCompletionHandler(params, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // WriteAttributeListFabricScopedWithValueCompletionHandler calls the underlying WriteAttributeListFabricScopedWithValueCompletionHandler.
@@ -2915,9 +3124,28 @@ func (x *MTRBaseClusterTestCluster) WriteAttributeListFabricScopedWithValueParam
 	x.inner.WriteAttributeListFabricScopedWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-// SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeTimedWriteBoolean blocks until the operation completes or ctx is cancelled.
@@ -5132,34 +5360,148 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeWriteOnlyInt8uWithMinInter
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletionHandler calls the underlying ReadAttributeGeneratedCommandListWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler)
+// ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeGeneratedCommandListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletionHandler calls the underlying ReadAttributeAcceptedCommandListWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler)
+// ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAcceptedCommandListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// ReadAttributeAttributeListWithCompletionHandler calls the underlying ReadAttributeAttributeListWithCompletionHandler.
-func (x *MTRBaseClusterTestCluster) ReadAttributeAttributeListWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.ReadAttributeAttributeListWithCompletionHandler(completionHandler)
+// ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) ReadAttributeAttributeList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAttributeListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
-// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
-func (x *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
-	x.inner.SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
@@ -5406,18 +5748,18 @@ type MTRBaseClusterTestClusterable interface {
 	WriteAttributeOctetStringWithValueCompletionHandler(value *foundation.NSData, completionHandler func(unsafe.Pointer))
 	WriteAttributeOctetStringWithValueParamsCompletionHandler(value *foundation.NSData, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
 	SubscribeAttributeOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSData, error)
-	ReadAttributeListInt8uWithCompletionHandler(completionHandler objc.Block)
+	ReadAttributeListInt8u(ctx context.Context) (*foundation.NSArray[objc.ID], error)
 	WriteAttributeListInt8uWithValueCompletionHandler(value *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer))
 	WriteAttributeListInt8uWithValueParamsCompletionHandler(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
-	SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
-	ReadAttributeListOctetStringWithCompletionHandler(completionHandler objc.Block)
+	SubscribeAttributeListInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeListOctetString(ctx context.Context) (*foundation.NSArray[objc.ID], error)
 	WriteAttributeListOctetStringWithValueCompletionHandler(value *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer))
 	WriteAttributeListOctetStringWithValueParamsCompletionHandler(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
-	SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
-	ReadAttributeListStructOctetStringWithCompletionHandler(completionHandler objc.Block)
+	SubscribeAttributeListOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeListStructOctetString(ctx context.Context) (*foundation.NSArray[objc.ID], error)
 	WriteAttributeListStructOctetStringWithValueCompletionHandler(value *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer))
 	WriteAttributeListStructOctetStringWithValueParamsCompletionHandler(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
-	SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	SubscribeAttributeListStructOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeLongOctetString(ctx context.Context) (*foundation.NSData, error)
 	WriteAttributeLongOctetStringWithValueCompletionHandler(value *foundation.NSData, completionHandler func(unsafe.Pointer))
 	WriteAttributeLongOctetStringWithValueParamsCompletionHandler(value *foundation.NSData, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
@@ -5442,10 +5784,10 @@ type MTRBaseClusterTestClusterable interface {
 	WriteAttributeVendorIdWithValueCompletionHandler(value *foundation.NSNumber, completionHandler func(unsafe.Pointer))
 	WriteAttributeVendorIdWithValueParamsCompletionHandler(value *foundation.NSNumber, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
 	SubscribeAttributeVendorIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeListNullablesAndOptionalsStructWithCompletionHandler(completionHandler objc.Block)
+	ReadAttributeListNullablesAndOptionalsStruct(ctx context.Context) (*foundation.NSArray[objc.ID], error)
 	WriteAttributeListNullablesAndOptionalsStructWithValueCompletionHandler(value *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer))
 	WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletionHandler(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
-	SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	SubscribeAttributeListNullablesAndOptionalsStructWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeEnumAttr(ctx context.Context) (*foundation.NSNumber, error)
 	WriteAttributeEnumAttrWithValueCompletionHandler(value *foundation.NSNumber, completionHandler func(unsafe.Pointer))
 	WriteAttributeEnumAttrWithValueParamsCompletionHandler(value *foundation.NSNumber, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
@@ -5470,14 +5812,14 @@ type MTRBaseClusterTestClusterable interface {
 	WriteAttributeRangeRestrictedInt16sWithValueCompletionHandler(value *foundation.NSNumber, completionHandler func(unsafe.Pointer))
 	WriteAttributeRangeRestrictedInt16sWithValueParamsCompletionHandler(value *foundation.NSNumber, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
 	SubscribeAttributeRangeRestrictedInt16sWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeListLongOctetStringWithCompletionHandler(completionHandler objc.Block)
+	ReadAttributeListLongOctetString(ctx context.Context) (*foundation.NSArray[objc.ID], error)
 	WriteAttributeListLongOctetStringWithValueCompletionHandler(value *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer))
 	WriteAttributeListLongOctetStringWithValueParamsCompletionHandler(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
-	SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
-	ReadAttributeListFabricScopedWithParamsCompletionHandler(params *raw.MTRReadParams, completionHandler objc.Block)
+	SubscribeAttributeListLongOctetStringWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeListFabricScopedWithParams(ctx context.Context, params *raw.MTRReadParams) (*foundation.NSArray[objc.ID], error)
 	WriteAttributeListFabricScopedWithValueCompletionHandler(value *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer))
 	WriteAttributeListFabricScopedWithValueParamsCompletionHandler(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
-	SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	SubscribeAttributeListFabricScopedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeTimedWriteBoolean(ctx context.Context) (*foundation.NSNumber, error)
 	WriteAttributeTimedWriteBooleanWithValueCompletionHandler(value *foundation.NSNumber, completionHandler func(unsafe.Pointer))
 	WriteAttributeTimedWriteBooleanWithValueParamsCompletionHandler(value *foundation.NSNumber, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
@@ -5630,12 +5972,12 @@ type MTRBaseClusterTestClusterable interface {
 	WriteAttributeWriteOnlyInt8uWithValueCompletionHandler(value *foundation.NSNumber, completionHandler func(unsafe.Pointer))
 	WriteAttributeWriteOnlyInt8uWithValueParamsCompletionHandler(value *foundation.NSNumber, params *raw.MTRWriteParams, completionHandler func(unsafe.Pointer))
 	SubscribeAttributeWriteOnlyInt8uWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler objc.Block)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
-	ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler objc.Block)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
-	ReadAttributeAttributeListWithCompletionHandler(completionHandler objc.Block)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	ReadAttributeGeneratedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeAcceptedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
+	ReadAttributeAttributeList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
+	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
 	ReadAttributeFeatureMap(ctx context.Context) (*foundation.NSNumber, error)
 	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
 	ReadAttributeClusterRevision(ctx context.Context) (*foundation.NSNumber, error)

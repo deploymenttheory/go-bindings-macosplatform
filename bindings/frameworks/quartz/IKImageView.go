@@ -16,6 +16,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that allows displaying and minor editing of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikimageview
 type IKImageView struct {
 	appkit.NSView
@@ -86,100 +88,103 @@ func IKImageViewFromID(id objc.ID) *IKImageView {
 	return o
 }
 
-// @method setImage:imageProperties: @abstract Sets the image & metadata (both retrieved from ImageIO).
+// Sets the image to display in an image view.
 func (o *IKImageView) SetImageImageProperties(image unsafe.Pointer, metaData *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iKImageViewSelSetImageImageProperties, image, metaData)
+	o.Ptr().Send(_iKImageViewSelSetImageImageProperties, image, metaData.Ptr())
 }
 
-// @method setImageWithURL: @abstract Initializes an image view with the image specified by a URL.
+// Initializes an image view with the image specified by a URL.
 func (o *IKImageView) SetImageWithURL(url *foundation.NSURL) {
 	o.Ptr().Send(_iKImageViewSelSetImageWithURL, url.Ptr())
 }
 
-// @method image @abstract Returns the image associated with the view, after any image corrections.
+// Returns the image associated with the view, after any image corrections.
 func (o *IKImageView) Image() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iKImageViewSelImage)
 	return _ret
 }
 
-// @method imageSize @abstract Returns the size of the image in the image view.
+// Returns the size of the image in the image view.
 func (o *IKImageView) ImageSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _iKImageViewSelImageSize)
 	return _ret
 }
 
-// @method imageProperties @abstract Returns the metadata for the image in the view.
+// Returns the metadata for the image in the view.
 func (o *IKImageView) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iKImageViewSelImageProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelImageProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
-// @method setRotationAngle:centerPoint: @abstract Sets the rotation angle at the provided origin.
+// Sets the rotation angle at the provided origin.
 func (o *IKImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
 	o.Ptr().Send(_iKImageViewSelSetRotationAngleCenterPoint, rotationAngle, centerPoint)
 }
 
-// @method rotateImageLeft: @abstract Rotates the image left.
+// Rotates the image left (counter-clockwise).
 func (o *IKImageView) RotateImageLeft(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelRotateImageLeft, sender)
 }
 
-// @method rotateImageRight: @abstract Rotates the image right.
+// Rotates the image right (clockwise).
 func (o *IKImageView) RotateImageRight(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelRotateImageRight, sender)
 }
 
-// @method setImageZoomFactor:centerPoint: @abstract Sets the zoom factor at the provided origin.
+// Sets the zoom factor at the provided origin.
 func (o *IKImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
 	o.Ptr().Send(_iKImageViewSelSetImageZoomFactorCenterPoint, zoomFactor, centerPoint)
 }
 
-// @method zoomImageToRect: @abstract Zooms the image so that it fits in the specified rectangle.
+// Zooms the image so that it fits in the specified rectangle.
 func (o *IKImageView) ZoomImageToRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_iKImageViewSelZoomImageToRect, rect)
 }
 
-// @method zoomImageToFit: @abstract Zooms the image so that it fits in the image view.
+// Zooms the image so that it fits in the image view.
 func (o *IKImageView) ZoomImageToFit(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelZoomImageToFit, sender)
 }
 
-// @method zoomImageToActualSize: @abstract Zooms the image so that it is displayed using its true size.
+// Zooms the image so that it is displayed using its true size.
 func (o *IKImageView) ZoomImageToActualSize(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelZoomImageToActualSize, sender)
 }
 
-// @method zoomIn: @abstract Zooms the image in.
+// Zooms the image in.
 func (o *IKImageView) ZoomIn(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelZoomIn, sender)
 }
 
-// @method zoomOut: @abstract Zooms the image out.
+// Zooms the image out.
 func (o *IKImageView) ZoomOut(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelZoomOut, sender)
 }
 
-// @method flipImageHorizontal: @abstract Flips an image along the horizontal axis.
+// Flips an image along the horizontal axis.
 func (o *IKImageView) FlipImageHorizontal(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelFlipImageHorizontal, sender)
 }
 
-// @method flipImageVertical: @abstract Flips an image along the vertical axis.
+// Flips an image along the vertical axis.
 func (o *IKImageView) FlipImageVertical(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelFlipImageVertical, sender)
 }
 
-// @method crop: @abstract Crops the image using the current selection.
+// Crops the image using the current selection.
 func (o *IKImageView) Crop(sender objc.ID) {
 	o.Ptr().Send(_iKImageViewSelCrop, sender)
 }
 
-// @method setOverlay:forType: @abstract Sets an overlay (Core Animation layer) for the image or the image background.
+// Sets an overlay type for a Core Animation layer.
 func (o *IKImageView) SetOverlayForType(layer *quartzcore.CALayer, layerType *foundation.NSString) {
 	o.Ptr().Send(_iKImageViewSelSetOverlayForType, layer.Ptr(), layerType.Ptr())
 }
 
-// @method overlayForType: @abstract Returns the overlay (Core Animation layer) for the image or the image background.
+// Returns the Core Animation layer associated with a layer type.
 func (o *IKImageView) OverlayForType(layerType *foundation.NSString) *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelOverlayForType, layerType.Ptr())
 	if _ret != 0 {
@@ -188,35 +193,35 @@ func (o *IKImageView) OverlayForType(layerType *foundation.NSString) *quartzcore
 	return quartzcore.CALayerFromID(_ret)
 }
 
-// @method scrollToPoint: @abstract Scrolls the view to the specified point.
+// Scrolls the view to the specified point.
 func (o *IKImageView) ScrollToPoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_iKImageViewSelScrollToPoint, point)
 }
 
-// @method scrollToRect: @abstract Scrolls the view so that it includes the provided rectangular area.
+// Scrolls the view so that it includes the provided rectangular area.
 func (o *IKImageView) ScrollToRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_iKImageViewSelScrollToRect, rect)
 }
 
-// @method convertViewPointToImagePoint: @abstract Converts an image view coordinate to an image coordinate.
+// Converts an image view coordinate to an image coordinate.
 func (o *IKImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _iKImageViewSelConvertViewPointToImagePoint, viewPoint)
 	return _ret
 }
 
-// @method convertViewRectToImageRect: @abstract Converts an image view rectangle to an image rectangle.
+// Converts an image view rectangle to an image rectangle.
 func (o *IKImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageViewSelConvertViewRectToImageRect, viewRect)
 	return _ret
 }
 
-// @method convertImagePointToViewPoint: @abstract Converts an image coordinate to an image view coordinate.
+// Converts an image coordinate to an image view coordinate.
 func (o *IKImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _iKImageViewSelConvertImagePointToViewPoint, imagePoint)
 	return _ret
 }
 
-// @method convertImageRectToViewRect: @abstract Converts an image rectangle to an image view rectangle.
+// Converts an image rectangle to an image view rectangle.
 func (o *IKImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageViewSelConvertImageRectToViewRect, imageRect)
 	return _ret

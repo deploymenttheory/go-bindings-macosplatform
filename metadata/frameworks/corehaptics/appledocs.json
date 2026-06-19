@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "framework": "CoreHaptics",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CHHapticDynamicParameter": {
+      "doc": "A value that you send to a haptic pattern player to alter a property value during playback.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter"
+    },
+    "CHHapticEngine": {
+      "doc": "An object that represents the connection to the haptic server.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine"
+    },
+    "CHHapticEvent": {
+      "doc": "An object that describes a single haptic or audio event.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent"
+    },
+    "CHHapticEventParameter": {
+      "doc": "A static parameter value that represents a single property of the haptic pattern.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticeventparameter"
+    },
+    "CHHapticParameterCurve": {
+      "doc": "A curve that you send to a haptic pattern player to alter a property value gradually during playback.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve"
+    },
+    "CHHapticParameterCurveControlPoint": {
+      "doc": "A single control point in a parameter curve.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurvecontrolpoint"
+    },
+    "CHHapticPattern": {
+      "doc": "An object representing a haptic waveform.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern"
+    }
+  },
+  "protocols": {
+    "CHHapticAdvancedPatternPlayer": {
+      "doc": "A protocol that defines an advanced pattern player capable of looping, seeking, pausing, and resuming haptic playback.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticadvancedpatternplayer"
+    },
+    "CHHapticDeviceCapability": {
+      "doc": "A protocol that defines haptics and audio capabilities of a device.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticdevicecapability"
+    },
+    "CHHapticParameterAttributes": {
+      "doc": "A protocol for providing default, mininum, and maximum values of a parameter.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticparameterattributes"
+    },
+    "CHHapticPatternPlayer": {
+      "doc": "A protocol that defines a standard pattern player capable of playing haptic patterns with fixed parameters.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticpatternplayer"
+    }
+  },
+  "enums": {
+    "CHHapticEngineFinishedAction": {
+      "doc": "Possible actions to take after the haptic engine finishes execution.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticenginefinishedaction"
+    },
+    "CHHapticEngineStoppedReason": {
+      "doc": "The enumeration of reasons the haptic engine stopped running.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticenginestoppedreason"
+    },
+    "CHHapticErrorCode": {
+      "doc": "Error codes for framework operations.",
+      "url": "https://developer.apple.com/documentation/corehaptics/chhapticerrorcode"
+    }
+  },
+  "methods": {
+    "CHHapticDynamicParameter": {
+      "-initWithParameterID:value:relativeTime:": {
+        "doc": "Creates a dynamic parameter from its ID, value, and start time.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter/init(parameterid:value:relativetime:)"
+      }
+    },
+    "CHHapticEngine": {
+      "+capabilitiesForHardware": {
+        "doc": "Returns a device capability object that describes the device’s haptic support and limitations.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/capabilitiesforhardware()"
+      },
+      "-createAdvancedPlayerWithPattern:error:": {
+        "doc": "Creates an advanced haptic pattern player from a haptic pattern.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/makeadvancedplayer(with:)"
+      },
+      "-createPlayerWithPattern:error:": {
+        "doc": "Creates a standard haptic pattern player from a haptic pattern.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/makeplayer(with:)"
+      },
+      "-initAndReturnError:": {
+        "doc": "Creates an instance of the haptic engine.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/init()"
+      },
+      "-initWithAudioSession:error:": {
+        "doc": "Creates a haptic engine from an audio session.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/init(audiosession:)"
+      },
+      "-notifyWhenPlayersFinished:": {
+        "doc": "Notifies you when all haptic pattern players have finished playing their haptic patterns.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/notifywhenplayersfinished(finishedhandler:)"
+      },
+      "-playPatternFromData:error:": {
+        "doc": "Plays a pattern from the specified data.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/playpattern(from:)-7u8se"
+      },
+      "-playPatternFromURL:error:": {
+        "doc": "Plays a pattern that’s defined in a file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/playpattern(from:)-6m9m5"
+      },
+      "-registerAudioResource:options:error:": {
+        "doc": "Registers an external audio to use as a custom waveform.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/registeraudioresource(_:options:)"
+      },
+      "-startAndReturnError:": {
+        "doc": "Synchronously starts the haptic engine.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/start()"
+      },
+      "-startWithCompletionHandler:": {
+        "doc": "Asynchronously starts the haptic engine.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/start(completionhandler:)"
+      },
+      "-stopWithCompletionHandler:": {
+        "doc": "Asynchronously stops the haptic engine and executes the completion handler once the engine has stopped.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/stop(completionhandler:)"
+      },
+      "-unregisterAudioResource:error:": {
+        "doc": "Unregisters an external audio file that you previously registered with the engine.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/unregisteraudioresource(_:)"
+      }
+    },
+    "CHHapticEvent": {
+      "-initWithAudioResourceID:parameters:relativeTime:": {
+        "doc": "Initializes a haptic event from a previously loaded audio resource, specifying event parameters and start time.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/init(audioresourceid:parameters:relativetime:)"
+      },
+      "-initWithAudioResourceID:parameters:relativeTime:duration:": {
+        "doc": "Initializes a haptic event from a previously loaded audio resource, specifying event parameters, start time, and duration.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/init(audioresourceid:parameters:relativetime:duration:)"
+      },
+      "-initWithEventType:parameters:relativeTime:": {
+        "doc": "Initializes a haptic event of the specified type, parameters, and start time.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/init(eventtype:parameters:relativetime:)"
+      },
+      "-initWithEventType:parameters:relativeTime:duration:": {
+        "doc": "Initializes a haptic event of the specified type, parameters, start time, and duration.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/init(eventtype:parameters:relativetime:duration:)"
+      }
+    },
+    "CHHapticEventParameter": {
+      "-initWithParameterID:value:": {
+        "doc": "Creates a haptic event parameter from its ID and value.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticeventparameter/init(parameterid:value:)"
+      }
+    },
+    "CHHapticParameterCurve": {
+      "-initWithParameterID:controlPoints:relativeTime:": {
+        "doc": "Creates a parameter curve from its parameter ID, control points, and start time.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve/init(parameterid:controlpoints:relativetime:)"
+      }
+    },
+    "CHHapticPattern": {
+      "-exportDictionaryAndReturnError:": {
+        "doc": "Returns the dictionary representation of the haptic pattern.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/exportdictionary()"
+      },
+      "-initWithContentsOfURL:error:": {
+        "doc": "Creates a haptic pattern with the contents of an AHAP file.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/init(contentsof:)"
+      },
+      "-initWithDictionary:error:": {
+        "doc": "Creates a haptic pattern from a property list dictionary.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/init(dictionary:)"
+      },
+      "-initWithEvents:parameterCurves:error:": {
+        "doc": "Constructs a haptic pattern from a series of events and parameter curves.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/init(events:parametercurves:)"
+      },
+      "-initWithEvents:parameters:error:": {
+        "doc": "Constructs a haptic pattern from a series of events and parameters.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/init(events:parameters:)"
+      }
+    }
+  },
+  "properties": {
+    "CHHapticDynamicParameter": {
+      "CHHapticDynamicParameterID": {
+        "doc": "The identifier that reveals the type of property associated with a dynamic parameter.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter/id"
+      },
+      "parameterID": {
+        "doc": "The dynamic parameter ID defining the type of parameter being modified.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter/parameterid"
+      },
+      "relativeTime": {
+        "doc": "The time at which this dynamic parameter is applied, relative to the start time of the pattern.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter/relativetime"
+      },
+      "value": {
+        "doc": "The value of the dynamic parameter.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticdynamicparameter/value"
+      }
+    },
+    "CHHapticEngine": {
+      "CHHapticCompletionHandler": {
+        "doc": "A typealias for a completion handler that the engine calls after starting or stopping.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/completionhandler"
+      },
+      "CHHapticEngineFinishedAction": {
+        "doc": "Possible actions to take after the haptic engine finishes execution.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/finishedaction"
+      },
+      "CHHapticEngineFinishedHandler": {
+        "doc": "A type alias for a completion handler to execute after finishing haptic playback.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/finishedhandler"
+      },
+      "CHHapticEngineResetHandler": {
+        "doc": "A typealias for the block that the haptic engine calls after being reset.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/resethandler-swift.typealias"
+      },
+      "CHHapticEngineStoppedHandler": {
+        "doc": "A typealias for the block that the haptic engine calls after it stops due to an external cause.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/stoppedhandler-swift.typealias"
+      },
+      "CHHapticEngineStoppedReason": {
+        "doc": "The enumeration of reasons the haptic engine stopped running.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/stoppedreason"
+      },
+      "autoShutdownEnabled": {
+        "doc": "A Boolean value that indicates whether the haptic engine starts and stops automatically on request from one of its pattern players, or when idle.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/isautoshutdownenabled"
+      },
+      "currentTime": {
+        "doc": "The absolute time, in seconds, to use for scheduling haptic and audio events.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/currenttime"
+      },
+      "intendedSpatialExperience": {
+        "doc": "The CHHapticEngine’s intended SpatialAudioExperience.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/intendedspatialexperience-55ca0"
+      },
+      "isMutedForAudio": {
+        "doc": "A Boolean value that indicates whether the engine mutes audio.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/ismutedforaudio"
+      },
+      "isMutedForHaptics": {
+        "doc": "A Boolean value that indicates whether the engine mutes haptics.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/ismutedforhaptics"
+      },
+      "playsAudioOnly": {
+        "doc": "A Boolean value that indicates whether the engine ignores haptic events and plays audio events only.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/playsaudioonly"
+      },
+      "playsHapticsOnly": {
+        "doc": "A Boolean value that indicates whether the engine ignores audio events.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/playshapticsonly"
+      },
+      "resetHandler": {
+        "doc": "A block that the haptic engine calls after recovering from a haptic server error.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/resethandler-swift.property"
+      },
+      "stoppedHandler": {
+        "doc": "A closure the haptic engine calls when it stops due to external causes.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticengine/stoppedhandler-swift.property"
+      }
+    },
+    "CHHapticEvent": {
+      "CHHapticEventParameterID": {
+        "doc": "An identifier for an event parameter.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/parameterid"
+      },
+      "CHHapticEventType": {
+        "doc": "The types of audio and haptic event waveforms.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/eventtype"
+      },
+      "duration": {
+        "doc": "The duration of the haptic event.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/duration"
+      },
+      "eventParameters": {
+        "doc": "An array of event parameters, possibly empty.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/eventparameters"
+      },
+      "relativeTime": {
+        "doc": "The start time of the event, relative to other events in the same pattern.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/relativetime"
+      },
+      "type": {
+        "doc": "The type of the haptic event.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticevent/type"
+      }
+    },
+    "CHHapticEventParameter": {
+      "parameterID": {
+        "doc": "The haptic parameter ID indicating what type of parameter the current event represents.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticeventparameter/parameterid"
+      },
+      "value": {
+        "doc": "The value of the parameter.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticeventparameter/value"
+      }
+    },
+    "CHHapticParameterCurve": {
+      "CHHapticParameterCurveControlPoint": {
+        "doc": "A single control point in a parameter curve.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve/controlpoint"
+      },
+      "controlPoints": {
+        "doc": "An array containing the curve’s control points.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve/controlpoints"
+      },
+      "parameterID": {
+        "doc": "The parameter ID defining the type of parameter that the curve represents.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve/parameterid"
+      },
+      "relativeTime": {
+        "doc": "The time at which this parameter curve is applied, relative to the start time of the pattern.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticparametercurve/relativetime"
+      }
+    },
+    "CHHapticPattern": {
+      "CHHapticPatternKey": {
+        "doc": "Constants that define the keys you use to create a haptic pattern dictionary.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/key"
+      },
+      "duration": {
+        "doc": "The duration of the haptic pattern, in seconds.",
+        "url": "https://developer.apple.com/documentation/corehaptics/chhapticpattern/duration"
+      }
+    }
+  }
+}

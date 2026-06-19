@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the opaque data and other information for a signature.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shsignature
 type SHSignature struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func SHSignatureFromID(id objc.ID) *SHSignature {
 	return o
 }
 
-// Creates a signature object from raw data. - Parameters: - dataRepresentation: The raw data for the signature. - error: The error that occurs; otherwise, `nil`. - Returns: A signature if the raw data is a valid signature; otherwise, `nil`.
+// Creates a signature object from raw data.
 func SHSignatureSignatureWithDataRepresentationError(dataRepresentation *foundation.NSData) (*SHSignature, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHSignature), _sHSignatureSelSignatureWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
@@ -48,7 +50,7 @@ func SHSignatureSignatureWithDataRepresentationError(dataRepresentation *foundat
 	return SHSignatureFromID(_ret), nil
 }
 
-// Creates a signature object from raw data. - Parameters: - dataRepresentation: The raw data for the signature. - error: The error that occurs; otherwise, `nil`. - Returns: A signature if the raw data is a valid signature; otherwise, `nil`.
+// Creates a signature object from raw data.
 func (o *SHSignature) InitWithDataRepresentationError(dataRepresentation *foundation.NSData) (*SHSignature, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHSignatureSelInitWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))

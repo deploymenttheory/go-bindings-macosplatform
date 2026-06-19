@@ -7,6 +7,7 @@ import (
 	"unsafe"
 )
 
+// A structure that defines the three-by-three matrix that performs an affine transform between two coordinate systems.
 type NSAffineTransformStruct struct {
 	M11 float64
 	M12 float64
@@ -16,9 +17,11 @@ type NSAffineTransformStruct struct {
 	TY  float64
 }
 
+// A structure representing a base-10 number.
 type NSDecimal struct {
 }
 
+// A description of the distance between the edges of two rectangles.
 type NSEdgeInsets struct {
 	Top    float64
 	Left   float64
@@ -26,6 +29,7 @@ type NSEdgeInsets struct {
 	Right  float64
 }
 
+// This defines the structure used as contextual information in the NSFastEnumeration protocol.
 type NSFastEnumerationState struct {
 	State        uint
 	ItemsPtr     **ObjcObject
@@ -33,9 +37,11 @@ type NSFastEnumerationState struct {
 	Extra        [5]uint
 }
 
+// Allows successive elements of a hash table to be returned each time this structure is passed to NSNextHashEnumeratorItem.
 type NSHashEnumerator struct {
 }
 
+// Defines a structure that contains the function pointers used to configure behavior of NSHashTable with respect to elements within a hash table.
 type NSHashTableCallBacks struct {
 	Hash     unsafe.Pointer
 	IsEqual  unsafe.Pointer
@@ -44,9 +50,11 @@ type NSHashTableCallBacks struct {
 	Describe unsafe.Pointer
 }
 
+// Allows successive elements of a map table to be returned each time this structure is passed to NSNextMapEnumeratorPair.
 type NSMapEnumerator struct {
 }
 
+// The function pointers used to configure behavior of NSMapTable with respect to key elements within a map table.
 type NSMapTableKeyCallBacks struct {
 	Hash          unsafe.Pointer
 	IsEqual       unsafe.Pointer
@@ -56,12 +64,14 @@ type NSMapTableKeyCallBacks struct {
 	NotAKeyMarker unsafe.Pointer
 }
 
+// The function pointers used to configure behavior of NSMapTable with respect to value elements within a map table.
 type NSMapTableValueCallBacks struct {
 	Retain   unsafe.Pointer
 	Release  unsafe.Pointer
 	Describe unsafe.Pointer
 }
 
+// A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.
 // Deprecated: Not supported
 type NSOperatingSystemVersion struct {
 	MajorVersion int
@@ -69,10 +79,12 @@ type NSOperatingSystemVersion struct {
 	PatchVersion int
 }
 
+// Opaque structure containing endian-independent double value.
 type NSSwappedDouble struct {
 	V uint64
 }
 
+// Opaque type containing an endian-independent float value.
 type NSSwappedFloat struct {
 	V uint
 }

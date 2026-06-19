@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface to all available smart card reader slots.
+//
 // SmartCardSlotManager wraps [raw.TKSmartCardSlotManager] with a fluent Go API.
 type SmartCardSlotManager struct {
 	inner *raw.TKSmartCardSlotManager
@@ -38,7 +40,7 @@ func NewSmartCardSlotManager() *SmartCardSlotManager {
 	return &SmartCardSlotManager{inner: raw.TKSmartCardSlotManagerFromID(_id)}
 }
 
-// Instantiates smartcard reader slot of specified name.  If specified name is not registered, reports nil.
+// Asynchronously calls a block with a Smart Card reader slot for a specified name.
 //
 // GetSlotWithNameReply blocks until the operation completes or ctx is cancelled.
 func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (*SmartCardSlot, error) {
@@ -63,7 +65,7 @@ func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name st
 	}
 }
 
-// Gets SmartCard reader slot with specified name.  If reader slot with this name does not exist, returns nil.
+// Returns the Smart Card slot with a given name.
 //
 // SlotNamed calls the underlying SlotNamed.
 func (x *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {

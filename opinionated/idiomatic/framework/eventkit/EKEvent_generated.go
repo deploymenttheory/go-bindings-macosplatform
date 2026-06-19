@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents an event in a calendar.
+//
 // Event wraps [raw.EKEvent] with a fluent Go API.
 type Event struct {
 	inner *raw.EKEvent
@@ -38,7 +40,7 @@ func NewEvent() *Event {
 	return &Event{inner: raw.EKEventFromID(_id)}
 }
 
-// @property   allDay @abstract   Indicates this event is an 'all day' event.
+// A Boolean value that indicates whether the event is an all-day event.
 //
 // WithAllDay sets the allDay property and returns the receiver for chaining.
 func (x *Event) WithAllDay(allDay bool) *Event {
@@ -46,7 +48,7 @@ func (x *Event) WithAllDay(allDay bool) *Event {
 	return x
 }
 
-// @property   startDate @abstract   The start date for the event. @discussion This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
+// The start date of the event.
 //
 // WithStartDate sets the startDate property and returns the receiver for chaining.
 func (x *Event) WithStartDate(startDate *foundation.NSDate) *Event {
@@ -54,13 +56,15 @@ func (x *Event) WithStartDate(startDate *foundation.NSDate) *Event {
 	return x
 }
 
+// The end date for the event.
+//
 // WithEndDate sets the endDate property and returns the receiver for chaining.
 func (x *Event) WithEndDate(endDate *foundation.NSDate) *Event {
 	x.inner.SetEndDate(endDate)
 	return x
 }
 
-// @property   structuredLocation @abstract   Allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
+// The event’s location with a potential geocoordinate.
 //
 // WithStructuredLocation sets the structuredLocation property and returns the receiver for chaining.
 func (x *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *Event {
@@ -68,7 +72,7 @@ func (x *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *
 	return x
 }
 
-// @property   availability @abstract   The availability setting for this event. @discussion The availability setting is used by CalDAV and Exchange servers to indicate how the time should be treated for scheduling. If the calendar the event is currently in does not support event availability, EKEventAvailabilityNotSupported is returned.
+// The availability setting for the event.
 //
 // WithAvailability sets the availability property and returns the receiver for chaining.
 func (x *Event) WithAvailability(availability EKEventAvailability) *Event {
@@ -76,7 +80,7 @@ func (x *Event) WithAvailability(availability EKEventAvailability) *Event {
 	return x
 }
 
-// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+// The calendar for the calendar item.
 //
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *Event) WithCalendar(calendar *Calendar) *Event {
@@ -84,7 +88,7 @@ func (x *Event) WithCalendar(calendar *Calendar) *Event {
 	return x
 }
 
-// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+// The title for the calendar item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Event) WithTitle(title string) *Event {
@@ -92,30 +96,40 @@ func (x *Event) WithTitle(title string) *Event {
 	return x
 }
 
+// The location associated with the calendar item.
+//
 // WithLocation sets the location property and returns the receiver for chaining.
 func (x *Event) WithLocation(location string) *Event {
 	x.inner.EKCalendarItem.SetLocation(foundation.NSStringStringWithUTF8String(location))
 	return x
 }
 
+// The notes associated with the calendar item.
+//
 // WithNotes sets the notes property and returns the receiver for chaining.
 func (x *Event) WithNotes(notes string) *Event {
 	x.inner.EKCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
 	return x
 }
 
+// The URL for the calendar item.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *Event) WithURL(uRL string) *Event {
 	x.inner.EKCalendarItem.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The time zone for the calendar item.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *Event) WithTimeZone(timeZone *foundation.NSTimeZone) *Event {
 	x.inner.EKCalendarItem.SetTimeZone(timeZone)
 	return x
 }
 
+// The alarms associated with the calendar item, as an array of EKAlarm objects.
+//
 // WithAlarms sets the collection, converting the Go slice to an NSArray.
 func (x *Event) WithAlarms(items ...*raw.EKAlarm) *Event {
 	if len(items) == 0 {
@@ -137,7 +151,7 @@ func (x *Event) WithAlarms(items ...*raw.EKAlarm) *Event {
 	return x
 }
 
-// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+// The recurrence rules for the calendar item.
 //
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *Event) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Event {
@@ -160,7 +174,7 @@ func (x *Event) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Event {
 	return x
 }
 
-// @method     compareStartDateWithEvent @abstract   Comparison function you can pass to sort NSArrays of EKEvents by start date.
+// Compares the start date of the receiving event with the start date of another event.
 //
 // CompareStartDateWithEvent calls the underlying CompareStartDateWithEvent.
 func (x *Event) CompareStartDateWithEvent(other *raw.EKEvent) foundation.NSComparisonResult {

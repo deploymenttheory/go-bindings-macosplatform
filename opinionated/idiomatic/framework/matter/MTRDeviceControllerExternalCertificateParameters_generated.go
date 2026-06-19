@@ -104,7 +104,7 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscri
 	return x
 }
 
-// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
+// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
 //
 // WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
@@ -112,7 +112,7 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorCo
 	return x
 }
 
-// Whether the controller should start out suspended. Defaults to NO.
+// Whether the controller should start out suspended.
 //
 // WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that applies a median filter in a square region centered around each pixel in the source image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemedian
 type MPSImageMedian struct {
 	mpsimage.MPSUnaryImageKernel
@@ -36,6 +38,7 @@ func MPSImageMedianFromID(id objc.ID) *MPSImageMedian {
 	return o
 }
 
+// Initializes a filter for a particular kernel size and device.
 func (o *MPSImageMedian) InitWithDeviceKernelDiameter(device metal.MTLDevice, kernelDiameter uint) *MPSImageMedian {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageMedianSelInitWithDeviceKernelDiameter, device, kernelDiameter)
 	if _ret != 0 {
@@ -53,13 +56,13 @@ func (o *MPSImageMedian) InitWithCoderDevice(aDecoder *foundation.NSCoder, devic
 	return MPSImageMedianFromID(_ret)
 }
 
-// @abstract   The maximum diameter in pixels of the filter window supported by the median filter.
+// Queries the maximum diameter, in pixels, of the filter window supported by the median filter.
 func MPSImageMedianMaxKernelDiameter() uint {
 	_ret := objc.Send[uint](objc.ID(_clsMPSImageMedian), _mPSImageMedianSelMaxKernelDiameter)
 	return _ret
 }
 
-// @abstract   The minimum diameter in pixels of the filter window supported by the median filter.
+// Queries the minimum diameter, in pixels, of the filter window supported by the median filter.
 func MPSImageMedianMinKernelDiameter() uint {
 	_ret := objc.Send[uint](objc.ID(_clsMPSImageMedian), _mPSImageMedianSelMinKernelDiameter)
 	return _ret

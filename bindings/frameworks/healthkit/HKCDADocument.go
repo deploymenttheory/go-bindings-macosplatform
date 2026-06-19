@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a Clinical Document Architecture (CDA) document in HealthKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcdadocument
 type HKCDADocument struct {
 	foundation.NSObject

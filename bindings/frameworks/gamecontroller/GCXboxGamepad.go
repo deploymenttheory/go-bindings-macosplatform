@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supports the Xbox controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcxboxgamepad
 type GCXboxGamepad struct {
 	GCExtendedGamepad

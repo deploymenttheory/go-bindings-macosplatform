@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A legacy class for cross-process rendering.
+//
 // RemoteLayerServer wraps [raw.CARemoteLayerServer] with a fluent Go API.
 type RemoteLayerServer struct {
 	inner *raw.CARemoteLayerServer

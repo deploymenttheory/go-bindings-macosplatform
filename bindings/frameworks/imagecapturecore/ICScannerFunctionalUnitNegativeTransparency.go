@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the transparency unit for scanning negatives on the scanner.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitnegativetransparency
 type ICScannerFunctionalUnitNegativeTransparency struct {
 	ICScannerFunctionalUnit

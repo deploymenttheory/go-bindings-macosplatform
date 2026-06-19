@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tagger that analyzes natural language text.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nltagger
 type NLTagger struct {
 	foundation.NSObject
@@ -50,33 +52,42 @@ func NLTaggerFromID(id objc.ID) *NLTagger {
 	return o
 }
 
+// Creates a linguistic tagger instance using the specified tag schemes and options.
 func (o *NLTagger) InitWithTagSchemes(tagSchemes *foundation.NSArray[*foundation.NSString]) *NLTagger {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelInitWithTagSchemes, tagSchemes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelInitWithTagSchemes, tagSchemes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NLTaggerFromID(_ret)
 }
 
+// Retrieves the tag schemes available for a particular unit (like word or sentence) and language on the current device.
 func NLTaggerAvailableTagSchemesForUnitLanguage(unit NLTokenUnit, language *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNLTagger), _nLTaggerSelAvailableTagSchemesForUnitLanguage, unit, language.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNLTagger), _nLTaggerSelAvailableTagSchemesForUnitLanguage, unit, language.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the range of the linguistic unit containing the specified character index.
 func (o *NLTagger) TokenRangeAtIndexUnit(characterIndex uint, unit NLTokenUnit) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nLTaggerSelTokenRangeAtIndexUnit, characterIndex, unit)
 	return _ret
 }
 
+// Finds the entire range of all tokens of the specified linguistic unit contained completely or partially within the specified range.
 func (o *NLTagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit NLTokenUnit) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nLTaggerSelTokenRangeForRangeUnit, range_, unit)
 	return _ret
 }
 
+// Enumerates a block over the tagger’s string, given a range, token unit, and tag scheme.
 func (o *NLTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, block objc.Block) {
 	o.Ptr().Send(_nLTaggerSelEnumerateTagsInRangeUnitSchemeOptionsUsing, range_, unit, scheme.Ptr(), options, block)
 }
 
+// Finds a tag for a given linguistic unit, for a single scheme, at the specified character position.
 func (o *NLTagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelTagAtIndexUnitSchemeTokenRange, characterIndex, unit, scheme.Ptr(), tokenRange)
 	if _ret != 0 {
@@ -85,28 +96,40 @@ func (o *NLTagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLTo
 	return foundation.NSStringFromID(_ret)
 }
 
+// Finds an array of linguistic tags and token ranges for a given string range and linguistic unit.
 func (o *NLTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges, range_, unit, scheme.Ptr(), options, tokenRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges, range_, unit, scheme.Ptr(), options, tokenRanges.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Finds multiple possible tags for a given linguistic unit, for a single scheme, at the specified character position.
 func (o *NLTagger) TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]](o.Ptr(), _nLTaggerSelTagHypothesesAtIndexUnitSchemeMaximumCountTokenRange, characterIndex, unit, scheme.Ptr(), maximumCount, tokenRange)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelTagHypothesesAtIndexUnitSchemeMaximumCountTokenRange, characterIndex, unit, scheme.Ptr(), maximumCount, tokenRange)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSNumber](_ret)
 }
 
+// Sets the language for a range of text within the tagger’s string.
 func (o *NLTagger) SetLanguageRange(language *foundation.NSString, range_ foundation.NSRange) {
 	o.Ptr().Send(_nLTaggerSelSetLanguageRange, language.Ptr(), range_)
 }
 
+// Sets the orthography for the specified range.
 func (o *NLTagger) SetOrthographyRange(orthography *foundation.NSOrthography, range_ foundation.NSRange) {
 	o.Ptr().Send(_nLTaggerSelSetOrthographyRange, orthography.Ptr(), range_)
 }
 
+// Assigns models for a tag scheme.
 func (o *NLTagger) SetModelsForTagScheme(models *foundation.NSArray[*NLModel], tagScheme *foundation.NSString) {
 	o.Ptr().Send(_nLTaggerSelSetModelsForTagScheme, models.Ptr(), tagScheme.Ptr())
 }
 
+// Returns the models that apply to the given tag scheme.
 func (o *NLTagger) ModelsForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*NLModel] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelModelsForTagScheme, tagScheme.Ptr())
 	if _ret != 0 {
@@ -115,10 +138,12 @@ func (o *NLTagger) ModelsForTagScheme(tagScheme *foundation.NSString) *foundatio
 	return foundation.NSArrayFromID[*NLModel](_ret)
 }
 
+// Attaches gazetteers to a tag scheme, typically one gazetteer per language or one language-independent gazetteer.
 func (o *NLTagger) SetGazetteersForTagScheme(gazetteers *foundation.NSArray[*NLGazetteer], tagScheme *foundation.NSString) {
 	o.Ptr().Send(_nLTaggerSelSetGazetteersForTagScheme, gazetteers.Ptr(), tagScheme.Ptr())
 }
 
+// Retrieves the gazetteers attached to a tag scheme.
 func (o *NLTagger) GazetteersForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*NLGazetteer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelGazetteersForTagScheme, tagScheme.Ptr())
 	if _ret != 0 {
@@ -127,6 +152,7 @@ func (o *NLTagger) GazetteersForTagScheme(tagScheme *foundation.NSString) *found
 	return foundation.NSArrayFromID[*NLGazetteer](_ret)
 }
 
+// Asks the Natural Language framework to load any missing assets for a tag scheme onto the device for the given language.
 func NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler(language *foundation.NSString, tagScheme *foundation.NSString, completionHandler func(NLTaggerAssetsResult, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -139,8 +165,11 @@ func NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler(language *founda
 }
 
 func (o *NLTagger) TagSchemes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLTaggerSelTagSchemes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLTaggerSelTagSchemes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NLTagger) String() *foundation.NSString {

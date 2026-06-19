@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides the interface to control the player’s transport behavior.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayer
 type AVPlayer struct {
 	foundation.NSObject
@@ -105,7 +107,7 @@ func AVPlayerFromID(id objc.ID) *AVPlayer {
 	return o
 }
 
-// Initializes an AVPlayer with no player items.
+// Creates a player object.
 func (o *AVPlayer) Init() *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelInit)
 	if _ret != 0 {
@@ -114,7 +116,7 @@ func (o *AVPlayer) Init() *AVPlayer {
 	return AVPlayerFromID(_ret)
 }
 
-// Returns an instance of AVPlayer that plays a single audiovisual resource referenced by URL. Implicitly creates an AVPlayerItem. Clients can obtain the AVPlayerItem as it becomes the player's currentItem. - Parameter URL: - Returns: An instance of AVPlayer
+// Returns a new player to play a single audiovisual resource referenced by a given URL.
 func AVPlayerPlayerWithURL(uRL *foundation.NSURL) *AVPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -123,7 +125,7 @@ func AVPlayerPlayerWithURL(uRL *foundation.NSURL) *AVPlayer {
 	return AVPlayerFromID(_ret)
 }
 
-// Create an AVPlayer that plays a single audiovisual item. Useful in order to play items for which an AVAsset has previously been created. See -[AVPlayerItem initWithAsset:]. - Parameter item: - Returns: An instance of AVPlayer
+// Returns a new player initialized to play the specified player item.
 func AVPlayerPlayerWithPlayerItem(item *AVPlayerItem) *AVPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithPlayerItem, item.Ptr())
 	if _ret != 0 {
@@ -132,7 +134,7 @@ func AVPlayerPlayerWithPlayerItem(item *AVPlayerItem) *AVPlayer {
 	return AVPlayerFromID(_ret)
 }
 
-// Initializes an AVPlayer that plays a single audiovisual resource referenced by URL. Implicitly creates an AVPlayerItem. Clients can obtain the AVPlayerItem as it becomes the player's currentItem. - Parameter URL: - Returns: An instance of AVPlayer
+// Creates a new player to play a single audiovisual resource referenced by a given URL.
 func (o *AVPlayer) InitWithURL(uRL *foundation.NSURL) *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -141,7 +143,7 @@ func (o *AVPlayer) InitWithURL(uRL *foundation.NSURL) *AVPlayer {
 	return AVPlayerFromID(_ret)
 }
 
-// Create an AVPlayer that plays a single audiovisual item. Useful in order to play items for which an AVAsset has previously been created. See -[AVPlayerItem initWithAsset:]. This method throws an exception if the item is not an AVPlayerItem, or if the item is associated with another AVPlayer. - Parameter item: - Returns: An instance of AVPlayer
+// Creates a new player to play the specified player item.
 func (o *AVPlayer) InitWithPlayerItem(item *AVPlayerItem) *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelInitWithPlayerItem, item.Ptr())
 	if _ret != 0 {
@@ -162,17 +164,17 @@ func (o *AVPlayer) Error() unsafe.Pointer {
 	return _ret
 }
 
-// Signals the desire to begin playback at the rate set in the defaultRate. For releases up to iOS version 16.0, macOS versions 13.0, tvOS 16.0 and watchOS 9.0, this is equivalent to setting the value of rate to `1.0`. Starting from iOS version 16.0, macOS versions 13.0, tvOS 16.0 and watchOS 9.0, this will attempt to use the rate set in the `defaultRate` property. The effective rate of playback may differ from the `defaultRate` due to the reasons mentioned in the documentation of the `rate` property. Clients interested in knowing the effective rate can listen for `AVPlayerRateDidChangeNotification` notification. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue.
+// Begins playback of the current item.
 func (o *AVPlayer) Play() {
 	o.Ptr().Send(_aVPlayerSelPlay)
 }
 
-// Pauses playback. Equivalent to setting the value of rate to 0.0. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue.
+// Pauses playback of the current item.
 func (o *AVPlayer) Pause() {
 	o.Ptr().Send(_aVPlayerSelPause)
 }
 
-// Immediately plays the available media data at the specified rate. When the player's currentItem has a value of NO for playbackBufferEmpty, this method causes the value of rate to change to the specified rate, the value of timeControlStatus to change to AVPlayerTimeControlStatusPlaying, and the receiver to play the available media immediately, whether or not prior buffering of media data is sufficient to ensure smooth playback. If insufficient media data is buffered for playback to start (e.g. if the current item has a value of YES for playbackBufferEmpty), the receiver will act as if the buffer became empty during playback, except that no AVPlayerItemPlaybackStalledNotification will be posted. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue.
+// Plays the available media data immediately, at the specified rate.
 func (o *AVPlayer) PlayImmediatelyAtRate(rate float32) {
 	o.Ptr().Send(_aVPlayerSelPlayImmediatelyAtRate, rate)
 }
@@ -212,7 +214,7 @@ func (o *AVPlayer) ReasonForWaitingToPlay() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// Replaces the player's current item with the specified player item. In all releases of iOS 4, invoking replaceCurrentItemWithPlayerItem: with an AVPlayerItem that's already the receiver's currentItem results in an exception being raised. Starting with iOS 5, it's a no-op. This method throws an exception if the item already exists in the play queue. - Parameter item: The AVPlayerItem that will become the player's current item.
+// Replaces the current item with a new item.
 func (o *AVPlayer) ReplaceCurrentItemWithPlayerItem(item *AVPlayerItem) {
 	o.Ptr().Send(_aVPlayerSelReplaceCurrentItemWithPlayerItem, item.Ptr())
 }
@@ -236,18 +238,18 @@ func (o *AVPlayer) SetActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) {
 	o.Ptr().Send(_aVPlayerSelSetActionAtItemEnd, actionAtItemEnd)
 }
 
-// Returns the current time of the current item. Returns the current time of the current item. Not key-value observable; use -addPeriodicTimeObserverForInterval:queue:usingBlock: instead. - Returns: A CMTime
+// Returns the current time of the current player item.
 func (o *AVPlayer) CurrentTime() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlayerSelCurrentTime)
 	return _ret
 }
 
-// Moves the playback cursor. Use this method to seek to a specified time for the current player item. The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:. - Parameter date:
+// Requests that the player seek to a specified date.
 func (o *AVPlayer) SeekToDate(date *foundation.NSDate) {
 	o.Ptr().Send(_aVPlayerSelSeekToDate, date.Ptr())
 }
 
-// Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the current player item and to be notified when the seek operation is complete. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If no item is attached, the completion handler will be invoked immediately with the finished parameter set to NO. - Parameter date: - Parameter completionHandler:
+// Requests that the player seek to a specified date, and to notify you when the seek is complete.
 func (o *AVPlayer) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -259,17 +261,17 @@ func (o *AVPlayer) SeekToDateCompletionHandler(date *foundation.NSDate, completi
 	o.Ptr().Send(_aVPlayerSelSeekToDateCompletionHandler, date.Ptr(), __block_completionHandler)
 }
 
-// Moves the playback cursor. Use this method to seek to a specified time for the current player item. The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:. - Parameter time:
+// Requests that the player seek to a specified time.
 func (o *AVPlayer) SeekToTime(time_ coremedia.CMTime) {
 	o.Ptr().Send(_aVPlayerSelSeekToTime, time_)
 }
 
-// Moves the playback cursor within a specified time bound. Use this method to seek to a specified time for the current player item. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter:
+// Requests that the player seek to a specified time with the amount of accuracy specified by the time tolerance values.
 func (o *AVPlayer) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
 	o.Ptr().Send(_aVPlayerSelSeekToTimeToleranceBeforeToleranceAfter, time_, toleranceBefore, toleranceAfter)
 }
 
-// Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the current player item and to be notified when the seek operation is complete. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If no item is attached, the completion handler will be invoked immediately with the finished parameter set to NO. - Parameter time: - Parameter completionHandler:
+// Requests that the player seek to a specified time, and to notify you when the seek is complete.
 func (o *AVPlayer) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -281,7 +283,7 @@ func (o *AVPlayer) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completio
 	o.Ptr().Send(_aVPlayerSelSeekToTimeCompletionHandler, time_, __block_completionHandler)
 }
 
-// Moves the playback cursor within a specified time bound and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the current player item and to be notified when the seek operation is complete. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If no item is attached, the completion handler will be invoked immediately with the finished parameter set to NO. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter:
+// Requests that the player seek to a specified time with the amount of accuracy specified by the time tolerance values, and to notify you when the seek is complete.
 func (o *AVPlayer) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -293,12 +295,12 @@ func (o *AVPlayer) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time
 	o.Ptr().Send(_aVPlayerSelSeekToTimeToleranceBeforeToleranceAfterCompletionHandler, time_, toleranceBefore, toleranceAfter, __block_completionHandler)
 }
 
-// Simultaneously sets the playback rate and the relationship between the current item's current time and host time. You can use this function to synchronize playback with an external activity. The current item's timebase is adjusted so that its time will be (or was) itemTime when host time is (or was) hostClockTime. In other words: if hostClockTime is in the past, the timebase's time will be interpolated as though the timebase has been running at the requested rate since that time. If hostClockTime is in the future, the timebase will immediately start running at the requested rate from an earlier time so that it will reach the requested itemTime at the requested hostClockTime. (Note that the item's time will not jump backwards, but instead will sit at itemTime until the timebase reaches that time.) Note that setRate:time:atHostTime: is not supported when automaticallyWaitsToMinimizeStalling is YES. For clients linked against iOS 10.0 and later or macOS 12.0 and later, invoking setRate:time:atHostTime: when automaticallyWaitsToMinimizeStalling is YES will raise an NSInvalidArgument exception. Support for HTTP Live Streaming content requires iOS 11, tvOS 11, macOS 10.13 or later. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter itemTime: The time to start playback from, specified precisely (i.e., with zero tolerance). Pass kCMTimeInvalid to use the current item's current time. - Parameter hostClockTime: The host time at which to start playback. If hostClockTime is specified, the player will not ensure that media data is loaded before the timebase starts moving. If hostClockTime is kCMTimeInvalid, the rate and time will be set together, but without external synchronization; a host time in the near future will be used, allowing some time for media data loading.
+// Synchronizes the playback rate and time of the current item with an external source.
 func (o *AVPlayer) SetRateTimeAtHostTime(rate float32, itemTime coremedia.CMTime, hostClockTime coremedia.CMTime) {
 	o.Ptr().Send(_aVPlayerSelSetRateTimeAtHostTime, rate, itemTime, hostClockTime)
 }
 
-// Begins loading media data to prime the render pipelines for playback from the current time with the given rate. Once the completion handler is called with YES, the player's rate can be set with minimal latency. The completion handler will be called with NO if the preroll is interrupted by a time change or incompatible rate change, or if preroll is not possible for some other reason. Call this method only when the rate is currently zero and only after the AVPlayer's status has become AVPlayerStatusReadyToPlay. This method throws an exception if the status is not AVPlayerStatusReadyToPlay. - Parameter rate: The intended rate for subsequent playback. - Parameter completionHandler: The block that will be called when the preroll is either completed or is interrupted.
+// Begins loading media data to prime the media pipelines for playback.
 func (o *AVPlayer) PrerollAtRateCompletionHandler(rate float32, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -310,7 +312,7 @@ func (o *AVPlayer) PrerollAtRateCompletionHandler(rate float32, completionHandle
 	o.Ptr().Send(_aVPlayerSelPrerollAtRateCompletionHandler, rate, __block_completionHandler)
 }
 
-// Cancel any pending preroll requests and invoke the corresponding completion handlers if present. Use this method to cancel and release the completion handlers for pending prerolls. The finished parameter of the completion handlers will be set to NO.
+// Cancels any pending preroll requests and invokes the corresponding completion handlers, if present.
 func (o *AVPlayer) CancelPendingPrerolls() {
 	o.Ptr().Send(_aVPlayerSelCancelPendingPrerolls)
 }
@@ -336,13 +338,13 @@ func (o *AVPlayer) SetSourceClock(sourceClock unsafe.Pointer) {
 	o.Ptr().Send(_aVPlayerSelSetSourceClock, sourceClock)
 }
 
-// Requests invocation of a block during playback to report changing time. The block is invoked periodically at the interval specified, interpreted according to the timeline of the current item. The block is also invoked whenever time jumps and whenever playback starts or stops. If the interval corresponds to a very short interval in real time, the player may invoke the block less frequently than requested. Even so, the player will invoke the block sufficiently often for the client to update indications of the current time appropriately in its end-user interface. Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:. Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior. - Parameter interval: The interval of invocation of the block during normal playback, according to progress of the current time of the player. - Parameter queue: The serial queue onto which block should be enqueued. If you pass NULL, the main queue (obtained using dispatch_get_main_queue()) will be used. Passing a concurrent queue to this method will result in undefined behavior. - Parameter block: The block to be invoked periodically. - Returns: An object conforming to the NSObject protocol.  You must retain this returned value as long as you want the time observer to be invoked by the player. Pass this object to -removeTimeObserver: to cancel time observation.
+// Requests the periodic invocation of a given block during playback to report changing time.
 func (o *AVPlayer) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelAddPeriodicTimeObserverForIntervalQueueUsing, interval, queue.Ptr(), block)
 	return _ret
 }
 
-// Requests invocation of a block when specified times are traversed during normal playback. Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:. Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior. - Parameter times: The times for which the observer requests notification, supplied as an array of NSValues carrying CMTimes. - Parameter queue: The serial queue onto which block should be enqueued. If you pass NULL, the main queue (obtained using dispatch_get_main_queue()) will be used. Passing a concurrent queue to this method will result in undefined behavior. - Parameter block: The block to be invoked when any of the specified times is crossed during normal playback. - Returns: An object conforming to the NSObject protocol.  You must retain this returned value as long as you want the time observer to be invoked by the player. Pass this object to -removeTimeObserver: to cancel time observation.
+// Requests the invocation of a block when specified times are traversed during normal playback.
 func (o *AVPlayer) AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID {
 	var __block_block objc.Block
 	if block != nil {
@@ -351,11 +353,11 @@ func (o *AVPlayer) AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.N
 		})
 		defer __block_block.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelAddBoundaryTimeObserverForTimesQueueUsing, times, queue.Ptr(), __block_block)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelAddBoundaryTimeObserverForTimesQueueUsing, times.Ptr(), queue.Ptr(), __block_block)
 	return _ret
 }
 
-// Cancels a previously registered time observer. Upon return, the caller is guaranteed that no new time observer blocks will begin executing. Depending on the calling thread and the queue used to add the time observer, an in-flight block may continue to execute after this method returns. You can guarantee synchronous time observer removal by enqueuing the call to -removeTimeObserver: on that queue. Alternatively, call dispatch_sync(queue, ^{}) after -removeTimeObserver: to wait for any in-flight blocks to finish executing. -removeTimeObserver: should be used to explicitly cancel each time observer added using -addPeriodicTimeObserverForInterval:queue:usingBlock: and -addBoundaryTimeObserverForTimes:queue:usingBlock:. This method throws an exception for any of the following reasons: - observer was added by a different instance of AVPlayer - observer was not returned by -addPeriodicTimeObserverForInterval:queue:usingBlock: - observer was not returned by -addBoundaryTimeObserverForTimes:queue:usingBlock: - Parameter observer: An object returned by a previous call to -addPeriodicTimeObserverForInterval:queue:usingBlock: or -addBoundaryTimeObserverForTimes:queue:usingBlock:.
+// Cancels a previously registered periodic or boundary time observer.
 func (o *AVPlayer) RemoveTimeObserver(observer objc.ID) {
 	o.Ptr().Send(_aVPlayerSelRemoveTimeObserver, observer)
 }
@@ -380,12 +382,12 @@ func (o *AVPlayer) SetMuted(muted bool) {
 	o.Ptr().Send(_aVPlayerSelSetMuted, muted)
 }
 
-// Applies automatic selection criteria for media that has the specified media characteristic. Criteria will be applied to an AVPlayerItem when: a) It is made ready to play b) Specific media selections are made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] in a different group. The automatic choice in one group may be influenced by a specific selection in another group. c) Underlying system preferences change, e.g. system language, accessibility captions. Specific selections made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] within any group will override automatic selection in that group until -[AVPlayerItem selectMediaOptionAutomaticallyInMediaSelectionGroup:] is received. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter criteria: An instance of AVPlayerMediaSelectionCriteria. - Parameter mediaCharacteristic: The media characteristic for which the selection criteria are to be applied. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual.
+// Applies automatic selection criteria for media that has the specified media characteristic.
 func (o *AVPlayer) SetMediaSelectionCriteriaForMediaCharacteristic(criteria *AVPlayerMediaSelectionCriteria, mediaCharacteristic *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerSelSetMediaSelectionCriteriaForMediaCharacteristic, criteria.Ptr(), mediaCharacteristic.Ptr())
 }
 
-// Returns the automatic selection criteria for media that has the specified media characteristic. - Parameter mediaCharacteristic: The media characteristic for which the selection criteria is to be returned. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue.
+// Returns the automatic selection criteria for media items with the specified media characteristic.
 func (o *AVPlayer) MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *AVPlayerMediaSelectionCriteria {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelMediaSelectionCriteriaForMediaCharacteristic, mediaCharacteristic.Ptr())
 	if _ret != 0 {

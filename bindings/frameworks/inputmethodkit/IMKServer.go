@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class      IMKServer @abstract   This class manages input sessions. @discussion An input method should create one and only one of these objects.  An IMKServer creates an NSConnection that can be connected to by input clients.  After a connection has been made an IMKServer manages communication between the client and the input method.  For each communication session the IMKServer will create an IMKInputController class as well as delegate classes for that controller.  Each controller object then serves as a proxy for the input session on the client side.  This means that input methods do not have to concern themselves with managing client sessions.  A given controller will only receive communication from a single session. IMKServer's also will manage a basic candidate window for an input method.  See IMKCandidates.h to understand how to create a candidate window and associate the candidate window with the IMKServer object.
+// The IMKServer class manages client connections to your input method. When you write the main function for your input method, you create an IMKServer object. You should never need to override this class.
 //
 // Apple documentation: https://developer.apple.com/documentation/inputmethodkit/imkserver
 type IMKServer struct {
@@ -36,19 +36,19 @@ func IMKServerFromID(id objc.ID) *IMKServer {
 	return o
 }
 
-// @method @abstract   Create a IMKServer from information in the bundle's Info.plist. @discussion This method will look into the info.plist for a controller class and delegate class.  The class names will be loaded, no classes will be instantiated.  Additionally, an NSConnection will be allocated and registered with the name parameter.
+// Creates and returns a server object from property list information contained in the provided bundle.
 func (o *IMKServer) InitWithNameBundleIdentifier(name *foundation.NSString, bundleIdentifier *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKServerSelInitWithNameBundleIdentifier, name.Ptr(), bundleIdentifier.Ptr())
 	return _ret
 }
 
-// @method @abstract   Creates an IMKServer using the parameters. @discussion This method creates an IMKServer object without attempting to examine the bundle instead the class names provided as parameters are used to create input controller objects and delegate objects.
+// Creates and returns a server object initialized with the provided parameters.
 func (o *IMKServer) InitWithNameControllerClassDelegateClass(name *foundation.NSString, controllerClassID objc.Class, delegateClassID objc.Class) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKServerSelInitWithNameControllerClassDelegateClass, name.Ptr(), controllerClassID, delegateClassID)
 	return _ret
 }
 
-// @method @abstract   Returns an NSBundle for the input method. @discussion If the IMKServer contains a bundle identifier the NSBundle is created from that.  Otherwise, the bundle  is created for the main bundle.  The returned NSBundle is an autoreleased object.
+// Returns an NSBundle object for the input method.
 func (o *IMKServer) Bundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKServerSelBundle)
 	if _ret != 0 {

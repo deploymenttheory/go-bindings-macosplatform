@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures new render pipeline state objects for mesh shading.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlmeshrenderpipelinedescriptor
 type MTLMeshRenderPipelineDescriptor struct {
 	foundation.NSObject

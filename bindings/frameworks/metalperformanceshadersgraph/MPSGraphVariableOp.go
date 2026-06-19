@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that defines the parameters for a variable.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphvariableop
 type MPSGraphVariableOp struct {
 	MPSGraphOperation

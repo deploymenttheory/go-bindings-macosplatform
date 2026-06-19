@@ -8,21 +8,34 @@ import (
 	"strings"
 )
 
+// Constants that specify character collections.
 type CTCharacterCollection int64
 
 const (
+	// The character identifier is equal to the glyph index.
 	KCTCharacterCollectionIdentityMapping CTCharacterCollection = 0
-	KCTCharacterCollectionAdobeCNS1       CTCharacterCollection = 1
-	KCTCharacterCollectionAdobeGB1        CTCharacterCollection = 2
-	KCTCharacterCollectionAdobeJapan1     CTCharacterCollection = 3
-	KCTCharacterCollectionAdobeJapan2     CTCharacterCollection = 4
-	KCTCharacterCollectionAdobeKorea1     CTCharacterCollection = 5
+	// The Adobe-CNS1 mapping.
+	KCTCharacterCollectionAdobeCNS1 CTCharacterCollection = 1
+	// The Adobe-GB1 mapping.
+	KCTCharacterCollectionAdobeGB1 CTCharacterCollection = 2
+	// The Adobe-Japan1 mapping.
+	KCTCharacterCollectionAdobeJapan1 CTCharacterCollection = 3
+	// The Adobe-Japan2 mapping.
+	KCTCharacterCollectionAdobeJapan2 CTCharacterCollection = 4
+	// The Adobe-Korea1 mapping.
+	KCTCharacterCollectionAdobeKorea1 CTCharacterCollection = 5
+	// The character identifier is equal to the glyph index.
 	KCTIdentityMappingCharacterCollection CTCharacterCollection = 0
-	KCTAdobeCNS1CharacterCollection       CTCharacterCollection = 1
-	KCTAdobeGB1CharacterCollection        CTCharacterCollection = 2
-	KCTAdobeJapan1CharacterCollection     CTCharacterCollection = 3
-	KCTAdobeJapan2CharacterCollection     CTCharacterCollection = 4
-	KCTAdobeKorea1CharacterCollection     CTCharacterCollection = 5
+	// The Adobe-CNS1 mapping.
+	KCTAdobeCNS1CharacterCollection CTCharacterCollection = 1
+	// The Adobe-GB1 mapping.
+	KCTAdobeGB1CharacterCollection CTCharacterCollection = 2
+	// The Adobe-Japan1 mapping.
+	KCTAdobeJapan1CharacterCollection CTCharacterCollection = 3
+	// The Adobe-Japan2 mapping.
+	KCTAdobeJapan2CharacterCollection CTCharacterCollection = 4
+	// The Adobe-Korea1 mapping.
+	KCTAdobeKorea1CharacterCollection CTCharacterCollection = 5
 )
 
 func (e CTCharacterCollection) String() string {
@@ -44,12 +57,16 @@ func (e CTCharacterCollection) String() string {
 	}
 }
 
+// Option bits for use with CTFontCollectionCopyFontAttribute(s).
 type CTFontCollectionCopyOptions int64
 
 const (
+	// Passing this option indicates that defaults are to be used.
 	KCTFontCollectionCopyDefaultOptions CTFontCollectionCopyOptions = 0
-	KCTFontCollectionCopyUnique         CTFontCollectionCopyOptions = 1
-	KCTFontCollectionCopyStandardSort   CTFontCollectionCopyOptions = 2
+	// Passing this option indicates that duplicate values should be removed from the results.
+	KCTFontCollectionCopyUnique CTFontCollectionCopyOptions = 1
+	// Passing this option indicates that the return values should be sorted in standard UI order, suitable for display to the user. This is the same sorting behavior used by NSFontPanel and Font Book.
+	KCTFontCollectionCopyStandardSort CTFontCollectionCopyOptions = 2
 )
 
 func (e CTFontCollectionCopyOptions) String() string {
@@ -66,18 +83,28 @@ func (e CTFontCollectionCopyOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that track the progress of font descriptor matching.
 type CTFontDescriptorMatchingState int64
 
 const (
-	KCTFontDescriptorMatchingDidBegin             CTFontDescriptorMatchingState = 0
-	KCTFontDescriptorMatchingDidFinish            CTFontDescriptorMatchingState = 1
-	KCTFontDescriptorMatchingWillBeginQuerying    CTFontDescriptorMatchingState = 2
-	KCTFontDescriptorMatchingStalled              CTFontDescriptorMatchingState = 3
+	// A state that indicates matching is about to begin.
+	KCTFontDescriptorMatchingDidBegin CTFontDescriptorMatchingState = 0
+	// A state that indicates matching is done.
+	KCTFontDescriptorMatchingDidFinish CTFontDescriptorMatchingState = 1
+	// A state that indicates communication with the server is about to begin.
+	KCTFontDescriptorMatchingWillBeginQuerying CTFontDescriptorMatchingState = 2
+	// A state that indicates that matching is stalled, such as while waiting for a server response.
+	KCTFontDescriptorMatchingStalled CTFontDescriptorMatchingState = 3
+	// A state that indicates downloading is about to begin.
 	KCTFontDescriptorMatchingWillBeginDownloading CTFontDescriptorMatchingState = 4
-	KCTFontDescriptorMatchingDownloading          CTFontDescriptorMatchingState = 5
+	// A state that indicates downloading is in progress.
+	KCTFontDescriptorMatchingDownloading CTFontDescriptorMatchingState = 5
+	// A state that indicates downloading is done.
 	KCTFontDescriptorMatchingDidFinishDownloading CTFontDescriptorMatchingState = 6
-	KCTFontDescriptorMatchingDidMatch             CTFontDescriptorMatchingState = 7
-	KCTFontDescriptorMatchingDidFailWithError     CTFontDescriptorMatchingState = 8
+	// A state that indicates the font descriptor match is successful.
+	KCTFontDescriptorMatchingDidMatch CTFontDescriptorMatchingState = 7
+	// A state that indicates an error.
+	KCTFontDescriptorMatchingDidFailWithError CTFontDescriptorMatchingState = 8
 )
 
 func (e CTFontDescriptorMatchingState) String() string {
@@ -105,15 +132,22 @@ func (e CTFontDescriptorMatchingState) String() string {
 	}
 }
 
+// The recognized format of the font.
 type CTFontFormat int64
 
 const (
-	KCTFontFormatUnrecognized       CTFontFormat = 0
+	// The font is not a recognized format.
+	KCTFontFormatUnrecognized CTFontFormat = 0
+	// The font is an OpenType format containing PostScript data.
 	KCTFontFormatOpenTypePostScript CTFontFormat = 1
-	KCTFontFormatOpenTypeTrueType   CTFontFormat = 2
-	KCTFontFormatTrueType           CTFontFormat = 3
-	KCTFontFormatPostScript         CTFontFormat = 4
-	KCTFontFormatBitmap             CTFontFormat = 5
+	// The font is an OpenType format containing TrueType data.
+	KCTFontFormatOpenTypeTrueType CTFontFormat = 2
+	// The font is a recognized TrueType format.
+	KCTFontFormatTrueType CTFontFormat = 3
+	// The font is a recognized PostScript format.
+	KCTFontFormatPostScript CTFontFormat = 4
+	// The font is a bitmap-only format.
+	KCTFontFormatBitmap CTFontFormat = 5
 )
 
 func (e CTFontFormat) String() string {
@@ -135,6 +169,7 @@ func (e CTFontFormat) String() string {
 	}
 }
 
+// Sets the auto-activation for the specified bundle identifier.
 type CTFontManagerAutoActivationSetting int64
 
 const (
@@ -159,26 +194,44 @@ func (e CTFontManagerAutoActivationSetting) String() string {
 	}
 }
 
+// Errors that prevent unregistration of fonts for a specified font file URL.
 type CTFontManagerError int64
 
 const (
-	KCTFontManagerErrorFileNotFound            CTFontManagerError = 101
+	// An error that indicates the file doesn’t exist at the specified URL.
+	KCTFontManagerErrorFileNotFound CTFontManagerError = 101
+	// An error that indicates insufficient permissions to access the file.
 	KCTFontManagerErrorInsufficientPermissions CTFontManagerError = 102
-	KCTFontManagerErrorUnrecognizedFormat      CTFontManagerError = 103
-	KCTFontManagerErrorInvalidFontData         CTFontManagerError = 104
-	KCTFontManagerErrorAlreadyRegistered       CTFontManagerError = 105
-	KCTFontManagerErrorExceededResourceLimit   CTFontManagerError = 106
-	KCTFontManagerErrorAssetNotFound           CTFontManagerError = 107
-	KCTFontManagerErrorNotRegistered           CTFontManagerError = 201
-	KCTFontManagerErrorInUse                   CTFontManagerError = 202
-	KCTFontManagerErrorSystemRequired          CTFontManagerError = 203
-	KCTFontManagerErrorRegistrationFailed      CTFontManagerError = 301
-	KCTFontManagerErrorMissingEntitlement      CTFontManagerError = 302
-	KCTFontManagerErrorInsufficientInfo        CTFontManagerError = 303
-	KCTFontManagerErrorCancelledByUser         CTFontManagerError = 304
-	KCTFontManagerErrorDuplicatedName          CTFontManagerError = 305
-	KCTFontManagerErrorInvalidFilePath         CTFontManagerError = 306
-	KCTFontManagerErrorUnsupportedScope        CTFontManagerError = 307
+	// An error that indicates the file’s format is unrecognized or unsupported.
+	KCTFontManagerErrorUnrecognizedFormat CTFontManagerError = 103
+	// An error that indicates the file contains invalid font data that could cause system problems.
+	KCTFontManagerErrorInvalidFontData CTFontManagerError = 104
+	// An error that indicates the file is already registered in the specified scope.
+	KCTFontManagerErrorAlreadyRegistered CTFontManagerError = 105
+	// An error that indicates an operation failure due to a system limitation.
+	KCTFontManagerErrorExceededResourceLimit CTFontManagerError = 106
+	// An error that indicates the asset isn’t found.
+	KCTFontManagerErrorAssetNotFound CTFontManagerError = 107
+	// An error that indicates the file isn’t registered in the specified scope.
+	KCTFontManagerErrorNotRegistered CTFontManagerError = 201
+	// An error that indicates the font file is actively in use and can’t be unregistered.
+	KCTFontManagerErrorInUse CTFontManagerError = 202
+	// An error that indicates the file is required by the system and can’t be unregistered.
+	KCTFontManagerErrorSystemRequired CTFontManagerError = 203
+	// An error that indicates the file can’t be processed due to an unexpected FontProvider error.
+	KCTFontManagerErrorRegistrationFailed CTFontManagerError = 301
+	// An error that indicates the file can’t be processed because the provider doesn’t have a necessary entitlement.
+	KCTFontManagerErrorMissingEntitlement CTFontManagerError = 302
+	// An error that indicates the font descriptor doesn’t have the necessary information to specify a font file.
+	KCTFontManagerErrorInsufficientInfo CTFontManagerError = 303
+	// An error that indicates the user cancelled the operation.
+	KCTFontManagerErrorCancelledByUser CTFontManagerError = 304
+	// An error that indicates the file can’t register because of a duplicate font name.
+	KCTFontManagerErrorDuplicatedName CTFontManagerError = 305
+	// An error that indicates the file isn’t in an allowed location, which must be either in the app’s bundle or an on-demand resource.
+	KCTFontManagerErrorInvalidFilePath CTFontManagerError = 306
+	// An error that indicates the specified scope isn’t supported.
+	KCTFontManagerErrorUnsupportedScope CTFontManagerError = 307
 )
 
 func (e CTFontManagerError) String() string {
@@ -222,14 +275,20 @@ func (e CTFontManagerError) String() string {
 	}
 }
 
+// Constants that define the scope for font registration.
 type CTFontManagerScope int64
 
 const (
-	KCTFontManagerScopeNone       CTFontManagerScope = 0
-	KCTFontManagerScopeProcess    CTFontManagerScope = 1
+	// No scope is defined.
+	KCTFontManagerScopeNone CTFontManagerScope = 0
+	// The font is available to the current process for the duration of the process unless directly unregistered.
+	KCTFontManagerScopeProcess CTFontManagerScope = 1
+	// The font is available to all processes for the current user session and will be available in subsequent sessions unless unregistered.
 	KCTFontManagerScopePersistent CTFontManagerScope = 2
-	KCTFontManagerScopeSession    CTFontManagerScope = 3
-	KCTFontManagerScopeUser       CTFontManagerScope = 2
+	// The font is available to the current user session but won’t be available in subsequent sessions.
+	KCTFontManagerScopeSession CTFontManagerScope = 3
+	// The font is available to all processes for the current user session and will be available in subsequent sessions unless unregistered.
+	KCTFontManagerScopeUser CTFontManagerScope = 2
 )
 
 func (e CTFontManagerScope) String() string {
@@ -247,13 +306,17 @@ func (e CTFontManagerScope) String() string {
 	}
 }
 
+// Options for font creation and descriptor matching.
 type CTFontOptions int64
 
 const (
-	KCTFontOptionsDefault               CTFontOptions = 0
+	// Default options are used.
+	KCTFontOptionsDefault CTFontOptions = 0
+	// Prevents automatic font activation.
 	KCTFontOptionsPreventAutoActivation CTFontOptions = 1
 	KCTFontOptionsPreventAutoDownload   CTFontOptions = 2
-	KCTFontOptionsPreferSystemFont      CTFontOptions = 4
+	// Font matching prefers to match Apple system fonts.
+	KCTFontOptionsPreferSystemFont CTFontOptions = 4
 )
 
 func (e CTFontOptions) String() string {
@@ -273,15 +336,22 @@ func (e CTFontOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The intended rendering orientation of the font for obtaining glyph metrics.
 type CTFontOrientation int64
 
 const (
-	KCTFontOrientationDefault    CTFontOrientation = 0
+	// The native orientation of the font.
+	KCTFontOrientationDefault CTFontOrientation = 0
+	// The horizontal orientation.
 	KCTFontOrientationHorizontal CTFontOrientation = 1
-	KCTFontOrientationVertical   CTFontOrientation = 2
-	KCTFontDefaultOrientation    CTFontOrientation = 0
+	// The vertical orientation.
+	KCTFontOrientationVertical CTFontOrientation = 2
+	// The native orientation of the font.
+	KCTFontDefaultOrientation CTFontOrientation = 0
+	// The horizontal orientation.
 	KCTFontHorizontalOrientation CTFontOrientation = 1
-	KCTFontVerticalOrientation   CTFontOrientation = 2
+	// The vertical orientation.
+	KCTFontVerticalOrientation CTFontOrientation = 2
 )
 
 func (e CTFontOrientation) String() string {
@@ -297,31 +367,54 @@ func (e CTFontOrientation) String() string {
 	}
 }
 
+// The stylistic class values of the font.
 type CTFontStylisticClass int64
 
 const (
-	KCTFontClassUnknown            CTFontStylisticClass = 0
-	KCTFontClassOldStyleSerifs     CTFontStylisticClass = 268435456
+	// The font has no design classification.
+	KCTFontClassUnknown CTFontStylisticClass = 0
+	// A font style based on the Latin printing style of the 15th to 17th century.
+	KCTFontClassOldStyleSerifs CTFontStylisticClass = 268435456
+	// A font style based on the Latin printing style of the 18th to 19th century.
 	KCTFontClassTransitionalSerifs CTFontStylisticClass = 536870912
-	KCTFontClassModernSerifs       CTFontStylisticClass = 805306368
-	KCTFontClassClarendonSerifs    CTFontStylisticClass = 1073741824
-	KCTFontClassSlabSerifs         CTFontStylisticClass = 1342177280
-	KCTFontClassFreeformSerifs     CTFontStylisticClass = 1879048192
-	KCTFontClassSansSerif          CTFontStylisticClass = 2147483648
-	KCTFontClassOrnamentals        CTFontStylisticClass = 2415919104
-	KCTFontClassScripts            CTFontStylisticClass = 2684354560
-	KCTFontClassSymbolic           CTFontStylisticClass = 3221225472
-	KCTFontUnknownClass            CTFontStylisticClass = 0
-	KCTFontOldStyleSerifsClass     CTFontStylisticClass = 268435456
+	// A font style based on the Latin printing style of the 20th century.
+	KCTFontClassModernSerifs CTFontStylisticClass = 805306368
+	// A font style variation of the Oldstyle Serifs and the Transitional Serifs.
+	KCTFontClassClarendonSerifs CTFontStylisticClass = 1073741824
+	// A font style characterized by serifs with a square transition between the strokes and the serifs (no brackets).
+	KCTFontClassSlabSerifs CTFontStylisticClass = 1342177280
+	// A font style that includes serifs but expresses a design freedom that doesn’t generally fit within the other serif design classifications.
+	KCTFontClassFreeformSerifs CTFontStylisticClass = 1879048192
+	// A font style that includes most basic letter forms (excluding Scripts and Ornamentals) that do not have serifs on the strokes.
+	KCTFontClassSansSerif CTFontStylisticClass = 2147483648
+	// A font style that includes highly decorated or stylized character shapes such as those typically used in headlines.
+	KCTFontClassOrnamentals CTFontStylisticClass = 2415919104
+	// A font style among those typefaces designed to simulate handwriting.
+	KCTFontClassScripts CTFontStylisticClass = 2684354560
+	// A generally design-independent font style.
+	KCTFontClassSymbolic CTFontStylisticClass = 3221225472
+	// The font has no design classification.
+	KCTFontUnknownClass CTFontStylisticClass = 0
+	// The font’s style is based on the Latin printing style of the 15th to 17th century.
+	KCTFontOldStyleSerifsClass CTFontStylisticClass = 268435456
+	// The font’s style is based on the Latin printing style of the 18th to 19th century.
 	KCTFontTransitionalSerifsClass CTFontStylisticClass = 536870912
-	KCTFontModernSerifsClass       CTFontStylisticClass = 805306368
-	KCTFontClarendonSerifsClass    CTFontStylisticClass = 1073741824
-	KCTFontSlabSerifsClass         CTFontStylisticClass = 1342177280
-	KCTFontFreeformSerifsClass     CTFontStylisticClass = 1879048192
-	KCTFontSansSerifClass          CTFontStylisticClass = 2147483648
-	KCTFontOrnamentalsClass        CTFontStylisticClass = 2415919104
-	KCTFontScriptsClass            CTFontStylisticClass = 2684354560
-	KCTFontSymbolicClass           CTFontStylisticClass = 3221225472
+	// The font’s style is based on the Latin printing style of the 20th century.
+	KCTFontModernSerifsClass CTFontStylisticClass = 805306368
+	// The font’s style is a variation of the Oldstyle Serifs and the Transitional Serifs.
+	KCTFontClarendonSerifsClass CTFontStylisticClass = 1073741824
+	// The font’s style is characterized by serifs with a square transition between the strokes and the serifs (no brackets).
+	KCTFontSlabSerifsClass CTFontStylisticClass = 1342177280
+	// The font’s style includes serifs but expresses a design freedom that doesn’t generally fit within the other serif design classifications.
+	KCTFontFreeformSerifsClass CTFontStylisticClass = 1879048192
+	// The font’s style includes most basic letter forms (excluding Scripts and Ornamentals) that do not have serifs on the strokes.
+	KCTFontSansSerifClass CTFontStylisticClass = 2147483648
+	// The font’s style includes highly decorated or stylized character shapes such as those typically used in headlines.
+	KCTFontOrnamentalsClass CTFontStylisticClass = 2415919104
+	// The font’s style is among those typefaces designed to simulate handwriting.
+	KCTFontScriptsClass CTFontStylisticClass = 2684354560
+	// The font’s style is generally design independent.
+	KCTFontSymbolicClass CTFontStylisticClass = 3221225472
 )
 
 func (e CTFontStylisticClass) String() string {
@@ -392,29 +485,50 @@ func (e CTFontStylisticClass) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The symbolic representation of stylistic font attributes.
 type CTFontSymbolicTraits int64
 
 const (
-	KCTFontTraitItalic      CTFontSymbolicTraits = 1
-	KCTFontTraitBold        CTFontSymbolicTraits = 2
-	KCTFontTraitExpanded    CTFontSymbolicTraits = 32
-	KCTFontTraitCondensed   CTFontSymbolicTraits = 64
-	KCTFontTraitMonoSpace   CTFontSymbolicTraits = 1024
-	KCTFontTraitVertical    CTFontSymbolicTraits = 2048
+	// The font typestyle is italic.
+	KCTFontTraitItalic CTFontSymbolicTraits = 1
+	// The font typestyle is boldface.
+	KCTFontTraitBold CTFontSymbolicTraits = 2
+	// The font typestyle is expanded.
+	KCTFontTraitExpanded CTFontSymbolicTraits = 32
+	// The font typestyle is condensed.
+	KCTFontTraitCondensed CTFontSymbolicTraits = 64
+	// The font uses fixed-pitch glyphs if available.
+	KCTFontTraitMonoSpace CTFontSymbolicTraits = 1024
+	// The font uses vertical glyph variants and metrics.
+	KCTFontTraitVertical CTFontSymbolicTraits = 2048
+	// The font synthesizes appropriate attributes for user interface rendering, such as control titles, if necessary.
 	KCTFontTraitUIOptimized CTFontSymbolicTraits = 4096
+	// The font contains color glyphs.
 	KCTFontTraitColorGlyphs CTFontSymbolicTraits = 8192
-	KCTFontTraitComposite   CTFontSymbolicTraits = 16384
-	KCTFontTraitClassMask   CTFontSymbolicTraits = 4026531840
-	KCTFontItalicTrait      CTFontSymbolicTraits = 1
-	KCTFontBoldTrait        CTFontSymbolicTraits = 2
-	KCTFontExpandedTrait    CTFontSymbolicTraits = 32
-	KCTFontCondensedTrait   CTFontSymbolicTraits = 64
-	KCTFontMonoSpaceTrait   CTFontSymbolicTraits = 1024
-	KCTFontVerticalTrait    CTFontSymbolicTraits = 2048
+	// The font is in Composite Font Reference format.
+	KCTFontTraitComposite CTFontSymbolicTraits = 16384
+	// Mask for the font class.
+	KCTFontTraitClassMask CTFontSymbolicTraits = 4026531840
+	// The font typestyle is italic.
+	KCTFontItalicTrait CTFontSymbolicTraits = 1
+	// The font typestyle is boldface.
+	KCTFontBoldTrait CTFontSymbolicTraits = 2
+	// The font typestyle is expanded.
+	KCTFontExpandedTrait CTFontSymbolicTraits = 32
+	// The font typestyle is condensed.
+	KCTFontCondensedTrait CTFontSymbolicTraits = 64
+	// The font uses fixed-pitch glyphs if available.
+	KCTFontMonoSpaceTrait CTFontSymbolicTraits = 1024
+	// The font uses vertical glyph variants and metrics.
+	KCTFontVerticalTrait CTFontSymbolicTraits = 2048
+	// The font synthesizes appropriate attributes for user interface rendering, such as control titles, if necessary.
 	KCTFontUIOptimizedTrait CTFontSymbolicTraits = 4096
+	// The font contains color glyphs.
 	KCTFontColorGlyphsTrait CTFontSymbolicTraits = 8192
-	KCTFontCompositeTrait   CTFontSymbolicTraits = 16384
-	KCTFontClassMaskTrait   CTFontSymbolicTraits = 4026531840
+	// The font is in Composite Font Reference format.
+	KCTFontCompositeTrait CTFontSymbolicTraits = 16384
+	// Mask for the font class.
+	KCTFontClassMaskTrait CTFontSymbolicTraits = 4026531840
 )
 
 func (e CTFontSymbolicTraits) String() string {
@@ -485,10 +599,13 @@ func (e CTFontSymbolicTraits) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that describe font table options.
 type CTFontTableOptions int64
 
 const (
-	KCTFontTableOptionNoOptions        CTFontTableOptions = 0
+	// No font table options are specified.
+	KCTFontTableOptionNoOptions CTFontTableOptions = 0
+	// The font table excludes synthetic font data.
 	KCTFontTableOptionExcludeSynthetic CTFontTableOptions = 1
 )
 
@@ -503,65 +620,122 @@ func (e CTFontTableOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that represent the specific user-interface purpose to specify for font creation.
 type CTFontUIFontType int64
 
 const (
-	KCTFontUIFontNone                     CTFontUIFontType = 4294967295
-	KCTFontUIFontUser                     CTFontUIFontType = 0
-	KCTFontUIFontUserFixedPitch           CTFontUIFontType = 1
-	KCTFontUIFontSystem                   CTFontUIFontType = 2
-	KCTFontUIFontEmphasizedSystem         CTFontUIFontType = 3
-	KCTFontUIFontSmallSystem              CTFontUIFontType = 4
-	KCTFontUIFontSmallEmphasizedSystem    CTFontUIFontType = 5
-	KCTFontUIFontMiniSystem               CTFontUIFontType = 6
-	KCTFontUIFontMiniEmphasizedSystem     CTFontUIFontType = 7
-	KCTFontUIFontViews                    CTFontUIFontType = 8
-	KCTFontUIFontApplication              CTFontUIFontType = 9
-	KCTFontUIFontLabel                    CTFontUIFontType = 10
-	KCTFontUIFontMenuTitle                CTFontUIFontType = 11
-	KCTFontUIFontMenuItem                 CTFontUIFontType = 12
-	KCTFontUIFontMenuItemMark             CTFontUIFontType = 13
-	KCTFontUIFontMenuItemCmdKey           CTFontUIFontType = 14
-	KCTFontUIFontWindowTitle              CTFontUIFontType = 15
-	KCTFontUIFontPushButton               CTFontUIFontType = 16
-	KCTFontUIFontUtilityWindowTitle       CTFontUIFontType = 17
-	KCTFontUIFontAlertHeader              CTFontUIFontType = 18
-	KCTFontUIFontSystemDetail             CTFontUIFontType = 19
-	KCTFontUIFontEmphasizedSystemDetail   CTFontUIFontType = 20
-	KCTFontUIFontToolbar                  CTFontUIFontType = 21
-	KCTFontUIFontSmallToolbar             CTFontUIFontType = 22
-	KCTFontUIFontMessage                  CTFontUIFontType = 23
-	KCTFontUIFontPalette                  CTFontUIFontType = 24
-	KCTFontUIFontToolTip                  CTFontUIFontType = 25
-	KCTFontUIFontControlContent           CTFontUIFontType = 26
-	KCTFontNoFontType                     CTFontUIFontType = 4294967295
-	KCTFontUserFontType                   CTFontUIFontType = 0
-	KCTFontUserFixedPitchFontType         CTFontUIFontType = 1
-	KCTFontSystemFontType                 CTFontUIFontType = 2
-	KCTFontEmphasizedSystemFontType       CTFontUIFontType = 3
-	KCTFontSmallSystemFontType            CTFontUIFontType = 4
-	KCTFontSmallEmphasizedSystemFontType  CTFontUIFontType = 5
-	KCTFontMiniSystemFontType             CTFontUIFontType = 6
-	KCTFontMiniEmphasizedSystemFontType   CTFontUIFontType = 7
-	KCTFontViewsFontType                  CTFontUIFontType = 8
-	KCTFontApplicationFontType            CTFontUIFontType = 9
-	KCTFontLabelFontType                  CTFontUIFontType = 10
-	KCTFontMenuTitleFontType              CTFontUIFontType = 11
-	KCTFontMenuItemFontType               CTFontUIFontType = 12
-	KCTFontMenuItemMarkFontType           CTFontUIFontType = 13
-	KCTFontMenuItemCmdKeyFontType         CTFontUIFontType = 14
-	KCTFontWindowTitleFontType            CTFontUIFontType = 15
-	KCTFontPushButtonFontType             CTFontUIFontType = 16
-	KCTFontUtilityWindowTitleFontType     CTFontUIFontType = 17
-	KCTFontAlertHeaderFontType            CTFontUIFontType = 18
-	KCTFontSystemDetailFontType           CTFontUIFontType = 19
+	// The user-interface font type isn’t specified.
+	KCTFontUIFontNone CTFontUIFontType = 4294967295
+	// The default font for documents and other text whose font the user can typically change.
+	KCTFontUIFontUser CTFontUIFontType = 0
+	// The default font for documents and other text under the user’s control when that font is fixed-pitch.
+	KCTFontUIFontUserFixedPitch CTFontUIFontType = 1
+	// The system font for standard user-interface items, such as button labels and menu items.
+	KCTFontUIFontSystem CTFontUIFontType = 2
+	// The system font for emphasis in alerts.
+	KCTFontUIFontEmphasizedSystem CTFontUIFontType = 3
+	// The standard small system font for informative text in alerts, column headings in lists, help tags, and small controls.
+	KCTFontUIFontSmallSystem CTFontUIFontType = 4
+	// The small system font for emphasis.
+	KCTFontUIFontSmallEmphasizedSystem CTFontUIFontType = 5
+	// The standard miniature system font for mini controls and utility window labels and text.
+	KCTFontUIFontMiniSystem CTFontUIFontType = 6
+	// The miniature system font for emphasis.
+	KCTFontUIFontMiniEmphasizedSystem CTFontUIFontType = 7
+	// The default view font for text in lists and tables.
+	KCTFontUIFontViews CTFontUIFontType = 8
+	// The default font for text documents.
+	KCTFontUIFontApplication CTFontUIFontType = 9
+	// The font for labels and tick marks on full-size sliders.
+	KCTFontUIFontLabel CTFontUIFontType = 10
+	// The font for menu titles.
+	KCTFontUIFontMenuTitle CTFontUIFontType = 11
+	// The font for menu items.
+	KCTFontUIFontMenuItem CTFontUIFontType = 12
+	// The font to draw menu-item marks.
+	KCTFontUIFontMenuItemMark CTFontUIFontType = 13
+	// The font for menu-item command-key equivalents.
+	KCTFontUIFontMenuItemCmdKey CTFontUIFontType = 14
+	// The font for window titles.
+	KCTFontUIFontWindowTitle CTFontUIFontType = 15
+	// The font for a push button, a rounded rectangular button with a text label on it.
+	KCTFontUIFontPushButton CTFontUIFontType = 16
+	// The font for utility window titles.
+	KCTFontUIFontUtilityWindowTitle CTFontUIFontType = 17
+	// The font for alert headers.
+	KCTFontUIFontAlertHeader CTFontUIFontType = 18
+	// The standard system font for details.
+	KCTFontUIFontSystemDetail CTFontUIFontType = 19
+	// The system font for emphasis in details.
+	KCTFontUIFontEmphasizedSystemDetail CTFontUIFontType = 20
+	// The font used for labels of toolbar items.
+	KCTFontUIFontToolbar CTFontUIFontType = 21
+	// The small font for labels of toolbar items.
+	KCTFontUIFontSmallToolbar CTFontUIFontType = 22
+	// The font for standard interface items, such as button labels and menu items.
+	KCTFontUIFontMessage CTFontUIFontType = 23
+	// The font in tool palettes.
+	KCTFontUIFontPalette CTFontUIFontType = 24
+	// The font for tool tips.
+	KCTFontUIFontToolTip CTFontUIFontType = 25
+	// The font for contents of user-interface controls.
+	KCTFontUIFontControlContent CTFontUIFontType = 26
+	// The user-interface font type isn’t specified.
+	KCTFontNoFontType CTFontUIFontType = 4294967295
+	// The font used by default for documents and other text under the user’s control.
+	KCTFontUserFontType CTFontUIFontType = 0
+	// The font used by default for documents and other text under the user’s control when that font is fixed-pitch.
+	KCTFontUserFixedPitchFontType CTFontUIFontType = 1
+	// The system font used for standard user-interface items, such as button labels and menu items.
+	KCTFontSystemFontType CTFontUIFontType = 2
+	// The system font used for emphasis in alerts.
+	KCTFontEmphasizedSystemFontType CTFontUIFontType = 3
+	// The standard small system font used for informative text in alerts, column headings in lists, help tags, and small controls.
+	KCTFontSmallSystemFontType CTFontUIFontType = 4
+	// The small system font used for emphasis.
+	KCTFontSmallEmphasizedSystemFontType CTFontUIFontType = 5
+	// The standard miniature system font used for mini controls and utility window labels and text.
+	KCTFontMiniSystemFontType CTFontUIFontType = 6
+	// The miniature system font used for emphasis.
+	KCTFontMiniEmphasizedSystemFontType CTFontUIFontType = 7
+	// The view font used as the default font of text in lists and tables.
+	KCTFontViewsFontType CTFontUIFontType = 8
+	// The default font for text documents.
+	KCTFontApplicationFontType CTFontUIFontType = 9
+	// The font used for labels and tick marks on full-size sliders.
+	KCTFontLabelFontType CTFontUIFontType = 10
+	// The font used for menu titles.
+	KCTFontMenuTitleFontType CTFontUIFontType = 11
+	// The font used for menu items.
+	KCTFontMenuItemFontType CTFontUIFontType = 12
+	// The font used to draw menu-item marks.
+	KCTFontMenuItemMarkFontType CTFontUIFontType = 13
+	// The font used for menu-item command-key equivalents.
+	KCTFontMenuItemCmdKeyFontType CTFontUIFontType = 14
+	// The font used for window titles.
+	KCTFontWindowTitleFontType CTFontUIFontType = 15
+	// The font used for a push button, a rounded rectangular button with a text label on it.
+	KCTFontPushButtonFontType CTFontUIFontType = 16
+	// The font used for utility window titles.
+	KCTFontUtilityWindowTitleFontType CTFontUIFontType = 17
+	// The font used for alert headers.
+	KCTFontAlertHeaderFontType CTFontUIFontType = 18
+	// The standard system font used for details.
+	KCTFontSystemDetailFontType CTFontUIFontType = 19
+	// The system font used for emphasis in details.
 	KCTFontEmphasizedSystemDetailFontType CTFontUIFontType = 20
-	KCTFontToolbarFontType                CTFontUIFontType = 21
-	KCTFontSmallToolbarFontType           CTFontUIFontType = 22
-	KCTFontMessageFontType                CTFontUIFontType = 23
-	KCTFontPaletteFontType                CTFontUIFontType = 24
-	KCTFontToolTipFontType                CTFontUIFontType = 25
-	KCTFontControlContentFontType         CTFontUIFontType = 26
+	// The font used for labels of toolbar items.
+	KCTFontToolbarFontType CTFontUIFontType = 21
+	// The small font used for labels of toolbar items.
+	KCTFontSmallToolbarFontType CTFontUIFontType = 22
+	// The font used for standard interface items, such as button labels and menu items.
+	KCTFontMessageFontType CTFontUIFontType = 23
+	// The font used in tool palettes.
+	KCTFontPaletteFontType CTFontUIFontType = 24
+	// The font used for tool tips.
+	KCTFontToolTipFontType CTFontUIFontType = 25
+	// The font used for contents of user-interface controls.
+	KCTFontControlContentFontType CTFontUIFontType = 26
 )
 
 func (e CTFontUIFontType) String() string {
@@ -627,10 +801,13 @@ func (e CTFontUIFontType) String() string {
 	}
 }
 
+// These constants specify the fill rule used by a frame
 type CTFramePathFillRule int64
 
 const (
-	KCTFramePathFillEvenOdd       CTFramePathFillRule = 0
+	// Paints the area using the even-odd fill rule.
+	KCTFramePathFillEvenOdd CTFramePathFillRule = 0
+	// Paints the area using the nonzero winding number rule.
 	KCTFramePathFillWindingNumber CTFramePathFillRule = 1
 )
 
@@ -645,11 +822,15 @@ func (e CTFramePathFillRule) String() string {
 	}
 }
 
+// Constants that specify frame progression types.
 type CTFrameProgression int64
 
 const (
+	// Lines stack top to bottom for horizontal text.
 	KCTFrameProgressionTopToBottom CTFrameProgression = 0
+	// Lines stack right to left for vertical text.
 	KCTFrameProgressionRightToLeft CTFrameProgression = 1
+	// Lines stack left to right for vertical text.
 	KCTFrameProgressionLeftToRight CTFrameProgression = 2
 )
 
@@ -666,15 +847,22 @@ func (e CTFrameProgression) String() string {
 	}
 }
 
+// Options for getting the bounds of a line of text.
 type CTLineBoundsOptions int64
 
 const (
+	// An option to exclude typographic leading.
 	KCTLineBoundsExcludeTypographicLeading CTLineBoundsOptions = 1
-	KCTLineBoundsExcludeTypographicShifts  CTLineBoundsOptions = 2
-	KCTLineBoundsUseHangingPunctuation     CTLineBoundsOptions = 4
-	KCTLineBoundsUseGlyphPathBounds        CTLineBoundsOptions = 8
-	KCTLineBoundsUseOpticalBounds          CTLineBoundsOptions = 16
-	KCTLineBoundsIncludeLanguageExtents    CTLineBoundsOptions = 32
+	// An option to ignore cross-stream shifts due to positioning, such as kerning or baseline alignment.
+	KCTLineBoundsExcludeTypographicShifts CTLineBoundsOptions = 2
+	// An option to enable hanging punctuation.
+	KCTLineBoundsUseHangingPunctuation CTLineBoundsOptions = 4
+	// An option to use glyph path bounds rather than the default typographic bounds.
+	KCTLineBoundsUseGlyphPathBounds CTLineBoundsOptions = 8
+	// An option to use optical bounds.
+	KCTLineBoundsUseOpticalBounds CTLineBoundsOptions = 16
+	// An option to include additional space based on common glyph sequences for various languages.
+	KCTLineBoundsIncludeLanguageExtents CTLineBoundsOptions = 32
 )
 
 func (e CTLineBoundsOptions) String() string {
@@ -703,6 +891,7 @@ func (e CTLineBoundsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify what happens when a line is too long for its frame.
 type CTLineBreakMode int64
 
 const (
@@ -733,6 +922,7 @@ func (e CTLineBreakMode) String() string {
 	}
 }
 
+// Truncation types required by the CTLineCreateTruncatedLine function to tell the truncation engine which type of truncation is being requested.
 type CTLineTruncationType int64
 
 const (
@@ -754,28 +944,48 @@ func (e CTLineTruncationType) String() string {
 	}
 }
 
+// Constants used to query and modify a paragraph style object.
 type CTParagraphStyleSpecifier int64
 
 const (
-	KCTParagraphStyleSpecifierAlignment              CTParagraphStyleSpecifier = 0
-	KCTParagraphStyleSpecifierFirstLineHeadIndent    CTParagraphStyleSpecifier = 1
-	KCTParagraphStyleSpecifierHeadIndent             CTParagraphStyleSpecifier = 2
-	KCTParagraphStyleSpecifierTailIndent             CTParagraphStyleSpecifier = 3
-	KCTParagraphStyleSpecifierTabStops               CTParagraphStyleSpecifier = 4
-	KCTParagraphStyleSpecifierDefaultTabInterval     CTParagraphStyleSpecifier = 5
-	KCTParagraphStyleSpecifierLineBreakMode          CTParagraphStyleSpecifier = 6
-	KCTParagraphStyleSpecifierLineHeightMultiple     CTParagraphStyleSpecifier = 7
-	KCTParagraphStyleSpecifierMaximumLineHeight      CTParagraphStyleSpecifier = 8
-	KCTParagraphStyleSpecifierMinimumLineHeight      CTParagraphStyleSpecifier = 9
-	KCTParagraphStyleSpecifierLineSpacing            CTParagraphStyleSpecifier = 10
-	KCTParagraphStyleSpecifierParagraphSpacing       CTParagraphStyleSpecifier = 11
+	// The text alignment.
+	KCTParagraphStyleSpecifierAlignment CTParagraphStyleSpecifier = 0
+	// The distance, in points, from the leading margin of a frame to the beginning of the paragraph’s first line.
+	KCTParagraphStyleSpecifierFirstLineHeadIndent CTParagraphStyleSpecifier = 1
+	// The distance, in points, from the leading margin of a text container to the beginning of lines other than the first.
+	KCTParagraphStyleSpecifierHeadIndent CTParagraphStyleSpecifier = 2
+	// The distance, in points, from the margin of a frame to the end of lines.
+	KCTParagraphStyleSpecifierTailIndent CTParagraphStyleSpecifier = 3
+	// The text tab objects, sorted by location, that define the tab stops for the paragraph style.
+	KCTParagraphStyleSpecifierTabStops CTParagraphStyleSpecifier = 4
+	// The document-wide default tab interval.
+	KCTParagraphStyleSpecifierDefaultTabInterval CTParagraphStyleSpecifier = 5
+	// The mode that should be used to break lines when laying out the paragraph’s text.
+	KCTParagraphStyleSpecifierLineBreakMode CTParagraphStyleSpecifier = 6
+	// The line height multiple.
+	KCTParagraphStyleSpecifierLineHeightMultiple CTParagraphStyleSpecifier = 7
+	// The maximum height that any line in the frame will occupy, regardless of the font size or size of any attached graphic.
+	KCTParagraphStyleSpecifierMaximumLineHeight CTParagraphStyleSpecifier = 8
+	// The minimum height that any line in the frame will occupy, regardless of the font size or size of any attached graphic.
+	KCTParagraphStyleSpecifierMinimumLineHeight CTParagraphStyleSpecifier = 9
+	// The space in points added between lines within the paragraph (commonly known as leading).
+	KCTParagraphStyleSpecifierLineSpacing CTParagraphStyleSpecifier = 10
+	// The space added at the end of the paragraph to separate it from the following paragraph.
+	KCTParagraphStyleSpecifierParagraphSpacing CTParagraphStyleSpecifier = 11
+	// The distance between the paragraph’s top and the beginning of its text content.
 	KCTParagraphStyleSpecifierParagraphSpacingBefore CTParagraphStyleSpecifier = 12
-	KCTParagraphStyleSpecifierBaseWritingDirection   CTParagraphStyleSpecifier = 13
-	KCTParagraphStyleSpecifierMaximumLineSpacing     CTParagraphStyleSpecifier = 14
-	KCTParagraphStyleSpecifierMinimumLineSpacing     CTParagraphStyleSpecifier = 15
-	KCTParagraphStyleSpecifierLineSpacingAdjustment  CTParagraphStyleSpecifier = 16
-	KCTParagraphStyleSpecifierLineBoundsOptions      CTParagraphStyleSpecifier = 17
-	KCTParagraphStyleSpecifierCount                  CTParagraphStyleSpecifier = 18
+	// The base writing direction of the lines.
+	KCTParagraphStyleSpecifierBaseWritingDirection CTParagraphStyleSpecifier = 13
+	// The maximum space in points between lines within the paragraph (commonly known as leading).
+	KCTParagraphStyleSpecifierMaximumLineSpacing CTParagraphStyleSpecifier = 14
+	// The minimum space in points between lines within the paragraph (commonly known as leading).
+	KCTParagraphStyleSpecifierMinimumLineSpacing CTParagraphStyleSpecifier = 15
+	// The space in points added between lines within the paragraph (commonly known as leading).
+	KCTParagraphStyleSpecifierLineSpacingAdjustment CTParagraphStyleSpecifier = 16
+	// Options that control the alignment of the line edges with the leading and trailing margins.
+	KCTParagraphStyleSpecifierLineBoundsOptions CTParagraphStyleSpecifier = 17
+	// The number of style specifiers.
+	KCTParagraphStyleSpecifierCount CTParagraphStyleSpecifier = 18
 )
 
 func (e CTParagraphStyleSpecifier) String() string {
@@ -823,17 +1033,26 @@ func (e CTParagraphStyleSpecifier) String() string {
 	}
 }
 
+// Constants that specify how to align the ruby text and the base text relative to each other when they have different lengths.
 type CTRubyAlignment int64
 
 const (
-	KCTRubyAlignmentInvalid          CTRubyAlignment = 255
-	KCTRubyAlignmentAuto             CTRubyAlignment = 0
-	KCTRubyAlignmentStart            CTRubyAlignment = 1
-	KCTRubyAlignmentCenter           CTRubyAlignment = 2
-	KCTRubyAlignmentEnd              CTRubyAlignment = 3
+	// The alignment is invalid.
+	KCTRubyAlignmentInvalid CTRubyAlignment = 255
+	// Core Text automatically determines the alignment.
+	KCTRubyAlignmentAuto CTRubyAlignment = 0
+	// Aligns the ruby text with the starting edge of the base text.
+	KCTRubyAlignmentStart CTRubyAlignment = 1
+	// Centers the ruby text within the width of the base text.
+	KCTRubyAlignmentCenter CTRubyAlignment = 2
+	// Aligns the ruby text with the ending edge of the base text.
+	KCTRubyAlignmentEnd CTRubyAlignment = 3
+	// Distributes the ruby text evenly over the width of the base text, aligning the first and last characters of the ruby text with the first and last characters of the base text.
 	KCTRubyAlignmentDistributeLetter CTRubyAlignment = 4
-	KCTRubyAlignmentDistributeSpace  CTRubyAlignment = 5
-	KCTRubyAlignmentLineEdge         CTRubyAlignment = 6
+	// Distributes the ruby text evenly over the width of the base text, adding space before the first and after the last character.
+	KCTRubyAlignmentDistributeSpace CTRubyAlignment = 5
+	// Aligns the ruby text to an adjacent line edge.
+	KCTRubyAlignmentLineEdge CTRubyAlignment = 6
 )
 
 func (e CTRubyAlignment) String() string {
@@ -859,14 +1078,20 @@ func (e CTRubyAlignment) String() string {
 	}
 }
 
+// Constants that specify whether, and on which side, ruby text can overhang adjacent text if it’s wider than the base text.
 type CTRubyOverhang int64
 
 const (
+	// The overhang specification is invalid.
 	KCTRubyOverhangInvalid CTRubyOverhang = 255
-	KCTRubyOverhangAuto    CTRubyOverhang = 0
-	KCTRubyOverhangStart   CTRubyOverhang = 1
-	KCTRubyOverhangEnd     CTRubyOverhang = 2
-	KCTRubyOverhangNone    CTRubyOverhang = 3
+	// The ruby text can overhang adjacent text on both sides.
+	KCTRubyOverhangAuto CTRubyOverhang = 0
+	// The ruby text can overhang the text that precedes it.
+	KCTRubyOverhangStart CTRubyOverhang = 1
+	// The ruby text can overhang the text that follows it.
+	KCTRubyOverhangEnd CTRubyOverhang = 2
+	// The ruby text can’t overhang the preceding or following text.
+	KCTRubyOverhangNone CTRubyOverhang = 3
 )
 
 func (e CTRubyOverhang) String() string {
@@ -886,14 +1111,20 @@ func (e CTRubyOverhang) String() string {
 	}
 }
 
+// Constants that specify the position of the ruby text relative to to the base text.
 type CTRubyPosition int64
 
 const (
-	KCTRubyPositionBefore         CTRubyPosition = 0
-	KCTRubyPositionAfter          CTRubyPosition = 1
+	// The ruby text is positioned before the base text, appearing above horizontal text and to the right of vertical text.
+	KCTRubyPositionBefore CTRubyPosition = 0
+	// The ruby text is positioned after the base text, appearing below horizontal text and to the left of vertical text.
+	KCTRubyPositionAfter CTRubyPosition = 1
+	// The ruby text is positioned to the right of the base text, regardless of whether it’s horizontal or vertical.
 	KCTRubyPositionInterCharacter CTRubyPosition = 2
-	KCTRubyPositionInline         CTRubyPosition = 3
-	KCTRubyPositionCount          CTRubyPosition = 4
+	// The ruby text follows the base text with no special styling.
+	KCTRubyPositionInline CTRubyPosition = 3
+	// A constant that accounts for all ruby positions during ruby annotation creation.
+	KCTRubyPositionCount CTRubyPosition = 4
 )
 
 func (e CTRubyPosition) String() string {
@@ -913,12 +1144,17 @@ func (e CTRubyPosition) String() string {
 	}
 }
 
+// A bitfield that represents the disposition of the run.
 type CTRunStatus int64
 
 const (
-	KCTRunStatusNoStatus             CTRunStatus = 0
-	KCTRunStatusRightToLeft          CTRunStatus = 1
-	KCTRunStatusNonMonotonic         CTRunStatus = 2
+	// The run has no special attributes.
+	KCTRunStatusNoStatus CTRunStatus = 0
+	// The run proceeds from right to left.
+	KCTRunStatusRightToLeft CTRunStatus = 1
+	// The run isn’t in strictly increasing or decreasing order.
+	KCTRunStatusNonMonotonic CTRunStatus = 2
+	// The run requires a specific text matrix to be set in the current Core Graphics context for proper drawing.
 	KCTRunStatusHasNonIdentityMatrix CTRunStatus = 4
 )
 
@@ -939,19 +1175,30 @@ func (e CTRunStatus) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify text alignment.
 type CTTextAlignment int64
 
 const (
-	KCTTextAlignmentLeft      CTTextAlignment = 0
-	KCTTextAlignmentRight     CTTextAlignment = 1
-	KCTTextAlignmentCenter    CTTextAlignment = 2
+	// Text is visually left-aligned.
+	KCTTextAlignmentLeft CTTextAlignment = 0
+	// Text is visually right-aligned.
+	KCTTextAlignmentRight CTTextAlignment = 1
+	// Text is visually center-aligned.
+	KCTTextAlignmentCenter CTTextAlignment = 2
+	// Text is fully justified.
 	KCTTextAlignmentJustified CTTextAlignment = 3
-	KCTTextAlignmentNatural   CTTextAlignment = 4
-	KCTLeftTextAlignment      CTTextAlignment = 0
-	KCTRightTextAlignment     CTTextAlignment = 1
-	KCTCenterTextAlignment    CTTextAlignment = 2
+	// Text uses the natural alignment of the text’s script.
+	KCTTextAlignmentNatural CTTextAlignment = 4
+	// Text is visually left-aligned.
+	KCTLeftTextAlignment CTTextAlignment = 0
+	// Text is visually right-aligned.
+	KCTRightTextAlignment CTTextAlignment = 1
+	// Text is visually center-aligned.
+	KCTCenterTextAlignment CTTextAlignment = 2
+	// Text is fully justified.
 	KCTJustifiedTextAlignment CTTextAlignment = 3
-	KCTNaturalTextAlignment   CTTextAlignment = 4
+	// Text uses the natural alignment of the text’s script.
+	KCTNaturalTextAlignment CTTextAlignment = 4
 )
 
 func (e CTTextAlignment) String() string {
@@ -971,12 +1218,17 @@ func (e CTTextAlignment) String() string {
 	}
 }
 
+// Underline style specifiers.
 type CTUnderlineStyle int64
 
 const (
-	KCTUnderlineStyleNone   CTUnderlineStyle = 0
+	// A specifier that indicates not to draw an underline.
+	KCTUnderlineStyleNone CTUnderlineStyle = 0
+	// A specifier that indicates to draw an underline consisting of a single line.
 	KCTUnderlineStyleSingle CTUnderlineStyle = 1
-	KCTUnderlineStyleThick  CTUnderlineStyle = 2
+	// A specifier that indicates to draw an underline consisting of a thick line.
+	KCTUnderlineStyleThick CTUnderlineStyle = 2
+	// A specifier that indicates to draw an underline consisting of a double line.
 	KCTUnderlineStyleDouble CTUnderlineStyle = 9
 )
 
@@ -997,13 +1249,19 @@ func (e CTUnderlineStyle) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Underline style modifiers.
 type CTUnderlineStyleModifiers int64
 
 const (
-	KCTUnderlinePatternSolid      CTUnderlineStyleModifiers = 0
-	KCTUnderlinePatternDot        CTUnderlineStyleModifiers = 256
-	KCTUnderlinePatternDash       CTUnderlineStyleModifiers = 512
-	KCTUnderlinePatternDashDot    CTUnderlineStyleModifiers = 768
+	// A modifier that indicates to draw a solid underline.
+	KCTUnderlinePatternSolid CTUnderlineStyleModifiers = 0
+	// A modifier that indicates to draw an underline using a pattern of dots.
+	KCTUnderlinePatternDot CTUnderlineStyleModifiers = 256
+	// A modifier that indicates to draw an underline using a pattern of dashes.
+	KCTUnderlinePatternDash CTUnderlineStyleModifiers = 512
+	// A modifier that indicates to draw an underline using a pattern of alternating dashes and dots.
+	KCTUnderlinePatternDashDot CTUnderlineStyleModifiers = 768
+	// A modifier that indicates to draw an underline using a pattern of a dash followed by two dots.
 	KCTUnderlinePatternDashDotDot CTUnderlineStyleModifiers = 1024
 )
 
@@ -1027,6 +1285,7 @@ func (e CTUnderlineStyleModifiers) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify the writing direction.
 type CTWritingDirection int64
 
 const (

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A parametric softplus neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftplus
 type MPSCNNNeuronSoftPlus struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronSoftPlusFromID(id objc.ID) *MPSCNNNeuronSoftPlus {
 	return o
 }
 
-// @abstract   Initialize a parametric softplus neuron filter @param      device          The device the filter will run on @param      a               Filter property "a". See class discussion. @param      b               Filter property "b". See class discussion. @return     A valid MPSCNNNeuronSoftPlus object or nil, if failure.
+// Initializes a parametric softplus neuron filter.
 func (o *MPSCNNNeuronSoftPlus) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronSoftPlus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftPlusSelInitWithDeviceAB, device, a, b)
 	if _ret != 0 {

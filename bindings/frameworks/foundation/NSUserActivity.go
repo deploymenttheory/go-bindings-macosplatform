@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the state of your app at a moment in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuseractivity
 type NSUserActivity struct {
 	NSObject
@@ -70,6 +72,7 @@ func NSUserActivityFromID(id objc.ID) *NSUserActivity {
 	return o
 }
 
+// Creates a user activity object with the specified type.
 func (o *NSUserActivity) InitWithActivityType(activityType *NSString) *NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelInitWithActivityType, activityType.Ptr())
 	if _ret != 0 {
@@ -78,6 +81,7 @@ func (o *NSUserActivity) InitWithActivityType(activityType *NSString) *NSUserAct
 	return NSUserActivityFromID(_ret)
 }
 
+// Creates a user activity object using the first activity type declared in the app’s information property list file.
 // Deprecated: Use initWithActivityType: with a specific activity type string
 func (o *NSUserActivity) Init() *NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelInit)
@@ -87,22 +91,27 @@ func (o *NSUserActivity) Init() *NSUserActivity {
 	return NSUserActivityFromID(_ret)
 }
 
+// Adds the contents of the specified dictionary to the user info dictionary.
 func (o *NSUserActivity) AddUserInfoEntriesFromDictionary(otherDictionary *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSUserActivitySelAddUserInfoEntriesFromDictionary, otherDictionary)
+	o.Ptr().Send(_nSUserActivitySelAddUserInfoEntriesFromDictionary, otherDictionary.Ptr())
 }
 
+// Marks the activity as currently in use by the user.
 func (o *NSUserActivity) BecomeCurrent() {
 	o.Ptr().Send(_nSUserActivitySelBecomeCurrent)
 }
 
+// Marks this activity object as inactive without invalidating it.
 func (o *NSUserActivity) ResignCurrent() {
 	o.Ptr().Send(_nSUserActivitySelResignCurrent)
 }
 
+// Invalidates an activity and marks it as no longer eligible for continuation.
 func (o *NSUserActivity) Invalidate() {
 	o.Ptr().Send(_nSUserActivitySelInvalidate)
 }
 
+// Requests streams back to the originating app.
 func (o *NSUserActivity) GetContinuationStreamsWithCompletionHandler(completionHandler func(*NSInputStream, *NSOutputStream, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -120,6 +129,7 @@ func (o *NSUserActivity) GetContinuationStreamsWithCompletionHandler(completionH
 	o.Ptr().Send(_nSUserActivitySelGetContinuationStreamsWithCompletionHandler, __block_completionHandler)
 }
 
+// Deletes user activities created by your app that have the specified persistent identifiers.
 func NSUserActivityDeleteSavedUserActivitiesWithPersistentIdentifiersCompletionHandler(persistentIdentifiers *NSArray[*NSString], handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -131,6 +141,7 @@ func NSUserActivityDeleteSavedUserActivitiesWithPersistentIdentifiersCompletionH
 	objc.ID(_clsNSUserActivity).Send(_nSUserActivitySelDeleteSavedUserActivitiesWithPersistentIdentifiersCompletionHandler, persistentIdentifiers.Ptr(), __block_handler)
 }
 
+// Deletes all user activities created by your app.
 func NSUserActivityDeleteAllSavedUserActivitiesWithCompletionHandler(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -164,12 +175,15 @@ func (o *NSUserActivity) SetTitle(title *NSString) {
 }
 
 func (o *NSUserActivity) UserInfo() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSUserActivitySelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSUserActivity) SetUserInfo(userInfo *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSUserActivitySelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSUserActivitySelSetUserInfo, userInfo.Ptr())
 }
 
 func (o *NSUserActivity) RequiredUserInfoKeys() *NSSet[*NSString] {

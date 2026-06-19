@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for specific quantities of dispersion.
+//
 // UnitDispersion wraps [raw.NSUnitDispersion] with a fluent Go API.
 type UnitDispersion struct {
 	inner *raw.NSUnitDispersion

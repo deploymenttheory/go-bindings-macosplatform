@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that creates timed metadata group objects for an asset track.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreaderoutputmetadataadaptor
 type AVAssetReaderOutputMetadataAdaptor struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func AVAssetReaderOutputMetadataAdaptorFromID(id objc.ID) *AVAssetReaderOutputMe
 	return o
 }
 
-// @method assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput: @abstract Creates a new timed metadata group adaptor for retrieving timed metadata group objects from an asset reader output. @param	assetReaderOutput An instance of AVAssetReaderTrackOutput that vends sample buffers containing metadata, e.g. an AVAssetReaderTrackOutput object initialized with a track of media type AVMediaTypeMetadata and nil outputSettings. @result An instance of AVAssetReaderOutputMetadataAdaptor @discussion It is an error to create a timed metadata group adaptor with an asset reader output that does not vend metadata.  It is also an error to create a timed metadata group adaptor with an asset reader output whose asset reader has already started reading, or an asset reader output that already has been used to initialize another timed metadata group adaptor. Clients should not mix calls to -[AVAssetReaderTrackOutput copyNextSampleBuffer] and -[AVAssetReaderOutputMetadataAdaptor nextTimedMetadataGroup].  Once an AVAssetReaderTrackOutput instance has been used to initialize an AVAssetReaderOutputMetadataAdaptor, calling -copyNextSampleBuffer on that instance will result in an exception being thrown.
+// Returns a new object that reads timed metadata groups from an asset reader output.
 func AVAssetReaderOutputMetadataAdaptorAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *AVAssetReaderTrackOutput) *AVAssetReaderOutputMetadataAdaptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderOutputMetadataAdaptor), _aVAssetReaderOutputMetadataAdaptorSelAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput, trackOutput.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func AVAssetReaderOutputMetadataAdaptorAssetReaderOutputMetadataAdaptorWithAsset
 	return AVAssetReaderOutputMetadataAdaptorFromID(_ret)
 }
 
-// @method initWithAssetReaderTrackOutput: @abstract Creates a new timed metadata group adaptor for retrieving timed metadata group objects from an asset reader output. @param	assetReaderOutput An instance of AVAssetReaderTrackOutput that vends sample buffers containing metadata, e.g. an AVAssetReaderTrackOutput object initialized with a track of media type AVMediaTypeMetadata and nil outputSettings. @result An instance of AVAssetReaderOutputMetadataAdaptor @discussion It is an error to create a timed metadata group adaptor with an asset reader output that does not vend metadata.  It is also an error to create a timed metadata group adaptor with an asset reader output whose asset reader has already started reading, or an asset reader output that already has been used to initialize another timed metadata group adaptor. Clients should not mix calls to -[AVAssetReaderTrackOutput copyNextSampleBuffer] and -[AVAssetReaderOutputMetadataAdaptor nextTimedMetadataGroup].  Once an AVAssetReaderTrackOutput instance has been used to initialize an AVAssetReaderOutputMetadataAdaptor, calling -copyNextSampleBuffer on that instance will result in an exception being thrown. This method throws an exception if the track's output was used to initialize another adaptor or if the track output's asset reader has already started reading.
+// Creates an object that reads timed metadata groups from an asset reader output.
 func (o *AVAssetReaderOutputMetadataAdaptor) InitWithAssetReaderTrackOutput(trackOutput *AVAssetReaderTrackOutput) *AVAssetReaderOutputMetadataAdaptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputMetadataAdaptorSelInitWithAssetReaderTrackOutput, trackOutput.Ptr())
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func (o *AVAssetReaderOutputMetadataAdaptor) InitWithAssetReaderTrackOutput(trac
 	return AVAssetReaderOutputMetadataAdaptorFromID(_ret)
 }
 
-// @method nextTimedMetadataGroup @abstract Returns the next timed metadata group for the asset reader output, synchronously. @result An instance of AVTimedMetadataGroup, representing the next logical segment of metadata coming from the source asset reader output. @discussion This method will return nil when all timed metadata groups have been read from the asset reader output, or if there is an error that prevents the timed metadata group adaptor from reading more timed metadata groups.  When this method returns nil, clients should check the value of the associated AVAssetReader's status property to determine why no more samples could be read. Unlike -[AVAssetReaderTrackOutput copyNextSampleBuffer], this method returns an autoreleased object. Before calling this method, you must ensure that the output which underlies the receiver is attached to an AVAssetReader via a prior call to -addOutput: and that -startReading has been called on the asset reader. This method throws an exception if track output is not attached to an asset reader and reading has not yet begun.
+// Returns the next timed metadata group for the asset reader output.
 func (o *AVAssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *AVTimedMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputMetadataAdaptorSelNextTimedMetadataGroup)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object of the CBGroupIdentity class represents a group identity and is used for viewing the attributes of group identities from an identity authority. The principal attributes of a CBGroupIdentity object are a POSIX group identifier (GID) and a list of members.
+//
 // Apple documentation: https://developer.apple.com/documentation/collaboration/cbgroupidentity
 type CBGroupIdentity struct {
 	CBIdentity
@@ -33,7 +35,7 @@ func CBGroupIdentityFromID(id objc.ID) *CBGroupIdentity {
 	return o
 }
 
-// Returns the group identity with the given POSIX GID in the specified identity authority. - Parameters: - gid: The GID of the group identity you are searching for. - authority: An identity authority in which to search for the group identity. - Returns: The group identity object with the given GID in the specified identity authority, or `nil` if no identity exists with the specified GID. ## See Also - [Identity Services Programming Guide](https://developer.apple.com/library/archive/documentation/Networking/Conceptual/IdentityServices_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004490)
+// Returns the group identity with the given POSIX GID in the specified identity authority.
 func CBGroupIdentityGroupIdentityWithPosixGIDAuthority(gid uint, authority *CBIdentityAuthority) *CBGroupIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBGroupIdentity), _cBGroupIdentitySelGroupIdentityWithPosixGIDAuthority, gid, authority.Ptr())
 	if _ret != 0 {
@@ -51,8 +53,11 @@ func (o *CBGroupIdentity) PosixGID() uint {
 // Returns the members of the group. This method only returns direct members of a group, it does not return members of members. Both user and group identities can be members of a group, but a group cannot be a member of itself. You also cannot have “circular” membership, i.e. a group be a member of another group that is a member of the first group. - Returns: An array of `CBIdentity` objects each representing a member of the group identity.
 // Deprecated: since macOS 10.11.
 func (o *CBGroupIdentity) Members() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cBGroupIdentitySelMembers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cBGroupIdentitySelMembers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CBGroupIdentity) MemberIdentities() *foundation.NSArray[*CBIdentity] {

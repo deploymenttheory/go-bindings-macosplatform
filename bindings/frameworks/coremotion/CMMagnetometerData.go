@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Measurements of the Earth’s magnetic field relative to the device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmmagnetometerdata
 type CMMagnetometerData struct {
 	CMLogItem

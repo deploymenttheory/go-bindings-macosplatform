@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronSigmoid kernel @discussion For each pixel, applies the following function: @code f(x) = 1 / (1 + e^-x) @endcode
+// A representation of a sigmoid neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsigmoidnode
 type MPSCNNNeuronSigmoidNode struct {

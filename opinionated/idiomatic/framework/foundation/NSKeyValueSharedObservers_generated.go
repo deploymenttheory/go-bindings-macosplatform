@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A collection of key-value observations which may be registered with multiple observable objects
+//
 // KeyValueSharedObservers wraps [raw.NSKeyValueSharedObservers] with a fluent Go API.
 type KeyValueSharedObservers struct {
 	inner *raw.NSKeyValueSharedObservers
@@ -46,14 +48,14 @@ func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties *r
 	return x
 }
 
-// Add a new observer to the collection. This method works like `-[NSObject addObserver: forKey: options: context:]`, but observations on nested and computed properties are disallowed. Observers are not registered until `setSharedObservers` is called on the observable. - Parameter observer: The observer object to register for KVO notifications. The observer must implement the key-value observing method “observeValue: forKeyPath: of: change: context:“ - Parameter key: key of the property being observed. This cannot be a nested key path or a computed property - Parameter options: A combination of NSKeyValueObservingOptions values that specify what is included in observation notifications. For possible values see NSKeyValueObservingOptions. - Parameter context: Arbitrary data which is passed to the observer object
+// Add a new observer to the collection.
 //
 // AddSharedObserverForKeyOptionsContext calls the underlying AddSharedObserverForKeyOptionsContext.
 func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), raw.NSKeyValueObservingOptions(options), context_)
 }
 
-// A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using “-[NSObject setSharedObservers:]“
+// A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
 //
 // Snapshot calls the underlying Snapshot.
 func (x *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {

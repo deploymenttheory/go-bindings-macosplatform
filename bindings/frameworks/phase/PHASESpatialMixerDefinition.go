@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An audio-layering object that produces environmental effects and plays sound with a 3D position and orientation.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasespatialmixerdefinition
 type PHASESpatialMixerDefinition struct {
 	PHASEMixerDefinition
@@ -38,7 +40,7 @@ func PHASESpatialMixerDefinitionFromID(id objc.ID) *PHASESpatialMixerDefinition 
 	return o
 }
 
-// @method initWithSpatialPipeline @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @return A new PHASESpatialMixerDefinition object
+// Creates a mixer with the designated spatial pipeline.
 func (o *PHASESpatialMixerDefinition) InitWithSpatialPipeline(spatialPipeline *PHASESpatialPipeline) *PHASESpatialMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelInitWithSpatialPipeline, spatialPipeline.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *PHASESpatialMixerDefinition) InitWithSpatialPipeline(spatialPipeline *P
 	return PHASESpatialMixerDefinitionFromID(_ret)
 }
 
-// @method initWithSpatialPipeline:identifier @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @param identifier An optional custom identifier to give to this object @return A new PHASESpatialMixerDefinition object
+// Creates a named mixer with the designated spatial pipeline.
 func (o *PHASESpatialMixerDefinition) InitWithSpatialPipelineIdentifier(spatialPipeline *PHASESpatialPipeline, identifier *foundation.NSString) *PHASESpatialMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelInitWithSpatialPipelineIdentifier, spatialPipeline.Ptr(), identifier.Ptr())
 	if _ret != 0 {

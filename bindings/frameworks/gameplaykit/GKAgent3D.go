@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A 3D specialization of an agent that moves on a 3-axis logical coordinate system.
+// An agent that operates in a three-dimensional space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkagent3d
 type GKAgent3D struct {

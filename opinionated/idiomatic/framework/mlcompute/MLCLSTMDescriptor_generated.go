@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration object you use to create the LSTM layer.
+//
 // LSTMDescriptor wraps [raw.MLCLSTMDescriptor] with a fluent Go API.
 type LSTMDescriptor struct {
 	inner *raw.MLCLSTMDescriptor

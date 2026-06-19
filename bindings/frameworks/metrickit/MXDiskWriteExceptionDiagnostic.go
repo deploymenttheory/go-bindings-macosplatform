@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a diagnostic report for a disk write exception.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiskwriteexceptiondiagnostic
 type MXDiskWriteExceptionDiagnostic struct {
 	MXDiagnostic
@@ -42,6 +44,9 @@ func (o *MXDiskWriteExceptionDiagnostic) CallStackTree() *MXCallStackTree {
 
 // @property      totalWritesCaused @abstract      Total disk writes caused in the scope of this disk write exception. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXDiskWriteExceptionDiagnostic) TotalWritesCaused() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskWriteExceptionDiagnosticSelTotalWritesCaused)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskWriteExceptionDiagnosticSelTotalWritesCaused)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }

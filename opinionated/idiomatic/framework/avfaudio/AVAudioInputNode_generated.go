@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that connects to the system’s audio input.
+//
 // AudioInputNode wraps [raw.AVAudioInputNode] with a fluent Go API.
 type AudioInputNode struct {
 	inner *raw.AVAudioInputNode
@@ -36,7 +38,7 @@ func NewAudioInputNode() *AudioInputNode {
 	return &AudioInputNode{inner: raw.AVAudioInputNodeFromID(_id)}
 }
 
-// @property voiceProcessingBypassed @abstract Bypass all processing for microphone uplink done by the voice processing unit. @discussion Querying this property when voice processing is disabled will return false.
+// A Boolean that indicates whether the node bypasses all microphone uplink processing of the voice-processing unit.
 //
 // WithVoiceProcessingBypassed sets the voiceProcessingBypassed property and returns the receiver for chaining.
 func (x *AudioInputNode) WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode {
@@ -44,7 +46,7 @@ func (x *AudioInputNode) WithVoiceProcessingBypassed(voiceProcessingBypassed boo
 	return x
 }
 
-// @property voiceProcessingAGCEnabled @abstract Enable automatic gain control on the processed microphone uplink. signal. Enabled by default. @discussion Querying this property when voice processing is disabled will return false.
+// A Boolean that indicates whether automatic gain control on the processed microphone uplink signal is active.
 //
 // WithVoiceProcessingAGCEnabled sets the voiceProcessingAGCEnabled property and returns the receiver for chaining.
 func (x *AudioInputNode) WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode {
@@ -52,7 +54,7 @@ func (x *AudioInputNode) WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled
 	return x
 }
 
-// @property voiceProcessingInputMuted @abstract Mutes the input of the voice processing unit. @discussion Querying this property when voice processing is disabled will return false.
+// A Boolean that indicates whether the input of the voice processing unit is in a muted state.
 //
 // WithVoiceProcessingInputMuted sets the voiceProcessingInputMuted property and returns the receiver for chaining.
 func (x *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode {
@@ -60,7 +62,7 @@ func (x *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMuted
 	return x
 }
 
-// @property voiceProcessingOtherAudioDuckingConfiguration @abstract The configuration of ducking other (i.e. non-voice) audio @discussion Configures the ducking of other (i.e. non-voice) audio, including advanced ducking enablement and ducking level. In general, when other audio is played during voice chat, applying a higher level of ducking could increase the intelligibility of the voice chat. If not set, the default ducking configuration is to disable advanced ducking, with a ducking level set to AVAudioVoiceProcessingOtherAudioDuckingLevelDefault.
+// The ducking configuration of nonvoice audio.
 //
 // WithVoiceProcessingOtherAudioDuckingConfiguration sets the voiceProcessingOtherAudioDuckingConfiguration property and returns the receiver for chaining.
 func (x *AudioInputNode) WithVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) *AudioInputNode {
@@ -68,7 +70,7 @@ func (x *AudioInputNode) WithVoiceProcessingOtherAudioDuckingConfiguration(voice
 	return x
 }
 
-// @method setManualRenderingInputPCMFormat:inputBlock: @abstract Supply the data through the input node to the engine operating in the manual rendering mode. @param format The format of the PCM audio data the block will supply to the engine @param block The block the engine will call on the input node to get the audio to send to the output, when operating in the manual rendering mode. See `AVAudioIONodeInputBlock` for more details @return YES for success @discussion This block must be set if the input node is being used when the engine is operating in manual rendering mode. Switching the engine to render to/from an audio device invalidates any previously set block, and makes this method ineffective.
+// Supplies the data through the input node to the engine while operating in the manual rendering mode.
 //
 // SetManualRenderingInputPCMFormatInputBlock calls the underlying SetManualRenderingInputPCMFormatInputBlock.
 func (x *AudioInputNode) SetManualRenderingInputPCMFormatInputBlock(format *raw.AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool {

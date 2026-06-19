@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The sync engine finished fetching record zone changes from the server for a specific zone.
+//
 // SyncEngineWillFetchRecordZoneChangesEvent wraps [raw.CKSyncEngineWillFetchRecordZoneChangesEvent] with a fluent Go API.
 type SyncEngineWillFetchRecordZoneChangesEvent struct {
 	inner *raw.CKSyncEngineWillFetchRecordZoneChangesEvent

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a bar to contain other items.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgrouptouchbaritem
 type NSGroupTouchBarItem struct {
 	NSTouchBarItem
@@ -44,6 +46,7 @@ func NSGroupTouchBarItemFromID(id objc.ID) *NSGroupTouchBarItem {
 	return o
 }
 
+// Initializes and returns a group item whose bar is constructed from the supplied items.
 func NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier *foundation.NSString, items *foundation.NSArray[*NSTouchBarItem]) *NSGroupTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItems, identifier.Ptr(), items.Ptr())
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier *foundation.NSSt
 	return NSGroupTouchBarItemFromID(_ret)
 }
 
+// Initializes and returns a group item whose bar is constructed from the supplied items, and with the specified compression options.
 func NSGroupTouchBarItemGroupItemWithIdentifierItemsAllowedCompressionOptions(identifier *foundation.NSString, items *foundation.NSArray[*NSTouchBarItem], allowedCompressionOptions *NSUserInterfaceCompressionOptions) *NSGroupTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItemsAllowedCompressionOptions, identifier.Ptr(), items.Ptr(), allowedCompressionOptions.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func NSGroupTouchBarItemGroupItemWithIdentifierItemsAllowedCompressionOptions(id
 	return NSGroupTouchBarItemFromID(_ret)
 }
 
+// Initializes and returns a group item configured to match system alerts.
 func NSGroupTouchBarItemAlertStyleGroupItemWithIdentifier(identifier *foundation.NSString) *NSGroupTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelAlertStyleGroupItemWithIdentifier, identifier.Ptr())
 	if _ret != 0 {

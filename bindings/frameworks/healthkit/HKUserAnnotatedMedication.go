@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reference to the tracked medication and the details a person can customize.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkuserannotatedmedication
 type HKUserAnnotatedMedication struct {
 	foundation.NSObject

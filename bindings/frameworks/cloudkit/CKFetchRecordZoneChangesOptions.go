@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that describes the information to fetch from a record zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesoptions
 // Deprecated: since macOS 10.14.
 type CKFetchRecordZoneChangesOptions struct {
@@ -61,10 +63,13 @@ func (o *CKFetchRecordZoneChangesOptions) SetResultsLimit(resultsLimit uint) {
 
 // The fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
 func (o *CKFetchRecordZoneChangesOptions) DesiredKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKFetchRecordZoneChangesOptionsSelDesiredKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesOptionsSelDesiredKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKFetchRecordZoneChangesOptions) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKFetchRecordZoneChangesOptionsSelSetDesiredKeys, desiredKeys)
+	o.Ptr().Send(_cKFetchRecordZoneChangesOptionsSelSetDesiredKeys, desiredKeys.Ptr())
 }

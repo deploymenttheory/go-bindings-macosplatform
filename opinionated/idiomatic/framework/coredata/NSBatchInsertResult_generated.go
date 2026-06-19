@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result that Core Data returns when executing a batch-insertion request.
+//
 // BatchInsertResult wraps [raw.NSBatchInsertResult] with a fluent Go API.
 type BatchInsertResult struct {
 	inner *raw.NSBatchInsertResult

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides an animated transition between a layer’s states.
+//
 // Transition wraps [raw.CATransition] with a fluent Go API.
 type Transition struct {
 	inner *raw.CATransition
@@ -37,48 +39,64 @@ func NewTransition() *Transition {
 	return &Transition{inner: raw.CATransitionFromID(_id)}
 }
 
+// Specifies the predefined transition type.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *Transition) WithType(type_ *foundation.NSString) *Transition {
 	x.inner.SetType(type_)
 	return x
 }
 
+// Specifies an optional subtype that indicates the direction for the predefined motion-based transitions.
+//
 // WithSubtype sets the subtype property and returns the receiver for chaining.
 func (x *Transition) WithSubtype(subtype *foundation.NSString) *Transition {
 	x.inner.SetSubtype(subtype)
 	return x
 }
 
+// Indicates the start point of the receiver as a fraction of the entire transition.
+//
 // WithStartProgress sets the startProgress property and returns the receiver for chaining.
 func (x *Transition) WithStartProgress(startProgress float32) *Transition {
 	x.inner.SetStartProgress(startProgress)
 	return x
 }
 
+// Indicates the end point of the receiver as a fraction of the entire transition.
+//
 // WithEndProgress sets the endProgress property and returns the receiver for chaining.
 func (x *Transition) WithEndProgress(endProgress float32) *Transition {
 	x.inner.SetEndProgress(endProgress)
 	return x
 }
 
+// An optional Core Image filter object that provides the transition.
+//
 // WithFilter sets the filter property and returns the receiver for chaining.
 func (x *Transition) WithFilter(filter objc.ID) *Transition {
 	x.inner.SetFilter(filter)
 	return x
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Transition) WithTimingFunction(timingFunction *MediaTimingFunction) *Transition {
 	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Transition) WithDelegate(delegate raw.CAAnimationDelegate) *Transition {
 	x.inner.CAAnimation.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transition {
 	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)

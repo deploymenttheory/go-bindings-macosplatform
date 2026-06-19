@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for evaluating authentication policies and access controls.
+//
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/lacontext
 type LAContext struct {
 	foundation.NSObject
@@ -52,7 +54,7 @@ func LAContextFromID(id objc.ID) *LAContext {
 	return o
 }
 
-// Determines if a particular policy can be evaluated. @discussion Policies can have certain requirements which, when not satisfied, would always cause the policy evaluation to fail - e.g. a passcode set, a fingerprint enrolled with Touch ID or a face set up with Face ID. This method allows easy checking for such conditions. Applications should consume the returned value immediately and avoid relying on it for an extensive period of time. At least, it is guaranteed to stay valid until the application enters background. @warning    Do not call this method in the reply block of evaluatePolicy:reply: because it could lead to a deadlock. @param policy Policy for which the preflight check should be run. @param error Optional output parameter which is set to nil if the policy can be evaluated, or it contains error information if policy evaluation is not possible. @return YES if the policy can be evaluated, NO otherwise.
+// Assesses whether authentication can proceed for a given policy.
 func (o *LAContext) CanEvaluatePolicyError(policy LAPolicy) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _lAContextSelCanEvaluatePolicyError, policy, unsafe.Pointer(&_nsErr))
@@ -62,7 +64,7 @@ func (o *LAContext) CanEvaluatePolicyError(policy LAPolicy) (bool, error) {
 	return _ret, nil
 }
 
-// Evaluates the specified policy. @discussion Policy evaluation may involve prompting user for various kinds of interaction or authentication. Actual behavior is dependent on evaluated policy, device type, and can be affected by installed configuration profiles. Be sure to keep a strong reference to the context while the evaluation is in progress. Otherwise, an evaluation would be canceled when the context is being deallocated. The method does not block. Instead, the caller must provide a reply block to be called asynchronously when evaluation finishes. The block is executed on a private queue internal to the framework in an unspecified threading context. Other than that, no guarantee is made about which queue, thread, or run-loop the block is executed on. Implications of successful policy evaluation are policy specific. In general, this operation is not idempotent. Policy evaluation may fail for various reasons, including user cancel, system cancel and others, see LAError codes. @param policy Policy to be evaluated. @param reply Reply block that is executed when policy evaluation finishes. success Reply parameter that is YES if the policy has been evaluated successfully or NO if the evaluation failed. error Reply parameter that is nil if the policy has been evaluated successfully, or it contains error information about the evaluation failure. @param localizedReason Application reason for authentication. This string must be provided in correct localization and should be short and clear. It will be eventually displayed in the authentication dialog as a part of the following string: "<appname>" is trying to <localized reason>. For example, if the app name is "TestApp" and localizedReason is passed "access the hidden records", then the authentication prompt will read: "TestApp" is trying to access the hidden records. @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if nil or empty string is specified. @see LAError Typical error codes returned by this call are: @li          LAErrorUserFallback if user tapped the fallback button @li          LAErrorUserCancel if user has tapped the Cancel button @li          LAErrorSystemCancel if some system event interrupted the evaluation (e.g. Home button pressed).
+// Evaluates the specified policy.
 func (o *LAContext) EvaluatePolicyLocalizedReasonReply(policy LAPolicy, localizedReason *foundation.NSString, reply func(bool, unsafe.Pointer)) {
 	var __block_reply objc.Block
 	if reply != nil {
@@ -74,24 +76,24 @@ func (o *LAContext) EvaluatePolicyLocalizedReasonReply(policy LAPolicy, localize
 	o.Ptr().Send(_lAContextSelEvaluatePolicyLocalizedReasonReply, policy, localizedReason.Ptr(), __block_reply)
 }
 
-// Invalidates the context. @discussion The context is invalidated automatically when it is (auto)released. This method allows invalidating it manually while it is still in scope. Invalidation terminates any existing policy evaluation and the respective call will fail with LAErrorAppCancel. After the context has been invalidated, it can not be used for policy evaluation and an attempt to do so will fail with LAErrorInvalidContext. Invalidating a context that has been already invalidated has no effect.
+// Invalidates the authentication context.
 func (o *LAContext) Invalidate() {
 	o.Ptr().Send(_lAContextSelInvalidate)
 }
 
-// Sets a credential to this context. @discussion Some policies allow to bind application-provided credential with them. This method allows credential to be passed to the right context. @param credential Credential to be used with subsequent calls. Setting this parameter to nil will remove any existing credential of the specified type. @param type Type of the provided credential. @return YES if the credential was set successfully, NO otherwise.
+// Sets an application-provided credential to be used when evaluating authentication.
 func (o *LAContext) SetCredentialType(credential *foundation.NSData, type_ LACredentialType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _lAContextSelSetCredentialType, credential.Ptr(), type_)
 	return _ret
 }
 
-// Reveals if credential was set with this context. @param type Type of credential we are asking for. @return YES on success, NO otherwise.
+// Returns a Boolean value indicating whether the specified credential type is set.
 func (o *LAContext) IsCredentialSet(type_ LACredentialType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _lAContextSelIsCredentialSet, type_)
 	return _ret
 }
 
-// Evaluates access control object for the specified operation. @discussion Access control evaluation may involve prompting user for various kinds of interaction or authentication. Actual behavior is dependent on evaluated access control, device type, and can be affected by installed configuration profiles. Be sure to keep a strong reference to the context while the evaluation is in progress. Otherwise, an evaluation would be canceled when the context is being deallocated. The method does not block. Instead, the caller must provide a reply block to be called asynchronously when evaluation finishes. The block is executed on a private queue internal to the framework in an unspecified threading context. Other than that, no guarantee is made about which queue, thread, or run-loop the block is executed on. After successful access control evaluation, the LAContext can be used with keychain operations, so that they do not require user to authenticate. Access control evaluation may fail for various reasons, including user cancel, system cancel and others, see LAError codes. @param accessControl Access control object that is typically created by SecAccessControlCreateWithFlags. @param operation Type of operation the access control will be used with. @param localizedReason Application reason for authentication. This string must be provided in correct localization and should be short and clear. It will be eventually displayed in the authentication dialog as a part of the following string: "<appname>" is trying to <localized reason>. For example, if the app name is "TestApp" and localizedReason is passed "access the hidden records", then the authentication prompt will read: "TestApp" is trying to access the hidden records. @param reply Reply block that is executed when access control evaluation finishes. success Reply parameter that is YES if the access control has been evaluated successfully or NO if the evaluation failed. error Reply parameter that is nil if the access control has been evaluated successfully, or it contains error information about the evaluation failure. @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if nil or empty string is specified.
+// Evaluates an access control for a given operation.
 func (o *LAContext) EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation LAAccessControlOperation, localizedReason *foundation.NSString, reply func(bool, unsafe.Pointer)) {
 	var __block_reply objc.Block
 	if reply != nil {

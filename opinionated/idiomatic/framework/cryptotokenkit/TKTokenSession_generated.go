@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A token session that manages the authentication state of a token.
+//
 // TokenSession wraps [raw.TKTokenSession] with a fluent Go API.
 type TokenSession struct {
 	inner *raw.TKTokenSession
@@ -29,7 +31,7 @@ func TokenSessionFromID(id objc.ID) *TokenSession {
 	return &TokenSession{inner: raw.TKTokenSessionFromID(id)}
 }
 
-// @param token Token instance to which is this session instance bound.
+// Initializes a token session with the specified token.
 //
 // NewTokenSessionWithToken creates a new [TokenSession].
 func NewTokenSessionWithToken(token *raw.TKToken) *TokenSession {
@@ -38,6 +40,8 @@ func NewTokenSessionWithToken(token *raw.TKToken) *TokenSession {
 	return &TokenSession{inner: raw.TKTokenSessionFromID(_id)}
 }
 
+// The token session delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TokenSession) WithDelegate(delegate raw.TKTokenSessionDelegate) *TokenSession {
 	x.inner.SetDelegate(delegate)

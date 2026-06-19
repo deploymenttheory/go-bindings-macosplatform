@@ -129,7 +129,7 @@ func (o *QCView) StartRendering() bool {
 }
 
 func (o *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments)
+	_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments.Ptr())
 	return _ret
 }
 

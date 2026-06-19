@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that determines the affine transform necessary to align the content of two images.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntranslationalimageregistrationrequest
 type VNTranslationalImageRegistrationRequest struct {
 	VNImageRegistrationRequest

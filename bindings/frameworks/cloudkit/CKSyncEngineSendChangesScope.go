@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A scope in which the sync engine will send changes to the server.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginesendchangesscope
 type CKSyncEngineSendChangesScope struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func CKSyncEngineSendChangesScopeFromID(id objc.ID) *CKSyncEngineSendChangesScop
 	return o
 }
 
-// Creates a scope that contains only the given zone IDs. If `zoneIDs` is `nil`, then this scope contains all zones.
+// Creates a scope that contains only the given zone IDs. If zoneIDs is nil, then this scope contains all zones.
 func (o *CKSyncEngineSendChangesScope) InitWithZoneIDs(zoneIDs *foundation.NSSet[*CKRecordZoneID]) *CKSyncEngineSendChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelInitWithZoneIDs, zoneIDs.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func (o *CKSyncEngineSendChangesScope) InitWithExcludedZoneIDs(excludedZoneIDs *
 	return CKSyncEngineSendChangesScopeFromID(_ret)
 }
 
-// Creates a scope that includes only the given record IDs. If `recordIDs` is nil, this scope contains all records.
+// Creates a scope that includes only the given record IDs. If recordIDs is nil, this scope contains all records.
 func (o *CKSyncEngineSendChangesScope) InitWithRecordIDs(recordIDs *foundation.NSSet[*CKRecordID]) *CKSyncEngineSendChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesScopeSelInitWithRecordIDs, recordIDs.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The dashboard that allows players to access their Game Center data in your game.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller
 // Deprecated: since macOS 26.0.
 type GKGameCenterViewController struct {
@@ -56,6 +58,7 @@ func (o *GKGameCenterViewController) SetGameCenterDelegate(gameCenterDelegate GK
 	o.Ptr().Send(_gKGameCenterViewControllerSelSetGameCenterDelegate, gameCenterDelegate)
 }
 
+// Creates a view controller that presents the specified Game Center content.
 func (o *GKGameCenterViewController) InitWithState(state GKGameCenterViewControllerState) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithState, state)
 	if _ret != 0 {
@@ -64,6 +67,7 @@ func (o *GKGameCenterViewController) InitWithState(state GKGameCenterViewControl
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
+// Creates a view controller that presents a leaderboard with data from the specified players and time period.
 func (o *GKGameCenterViewController) InitWithLeaderboardIDPlayerScopeTimeScope(leaderboardID *foundation.NSString, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardIDPlayerScopeTimeScope, leaderboardID.Ptr(), playerScope, timeScope)
 	if _ret != 0 {
@@ -72,6 +76,7 @@ func (o *GKGameCenterViewController) InitWithLeaderboardIDPlayerScopeTimeScope(l
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
+// Creates a view controller that presents a leaderboard with data for the specified players.
 func (o *GKGameCenterViewController) InitWithLeaderboardPlayerScope(leaderboard *GKLeaderboard, playerScope GKLeaderboardPlayerScope) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardPlayerScope, leaderboard.Ptr(), playerScope)
 	if _ret != 0 {
@@ -80,6 +85,7 @@ func (o *GKGameCenterViewController) InitWithLeaderboardPlayerScope(leaderboard 
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
+// Creates a view controller that presents a leaderboard set.
 func (o *GKGameCenterViewController) InitWithLeaderboardSetID(leaderboardSetID *foundation.NSString) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardSetID, leaderboardSetID.Ptr())
 	if _ret != 0 {
@@ -88,6 +94,7 @@ func (o *GKGameCenterViewController) InitWithLeaderboardSetID(leaderboardSetID *
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
+// Creates a view controller that presents an achievement.
 func (o *GKGameCenterViewController) InitWithAchievementID(achievementID *foundation.NSString) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithAchievementID, achievementID.Ptr())
 	if _ret != 0 {
@@ -96,6 +103,7 @@ func (o *GKGameCenterViewController) InitWithAchievementID(achievementID *founda
 	return GKGameCenterViewControllerFromID(_ret)
 }
 
+// Creates a view controller that presents a player’s Game Center profile.
 func (o *GKGameCenterViewController) InitWithPlayer(player *GKPlayer) *GKGameCenterViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithPlayer, player.Ptr())
 	if _ret != 0 {

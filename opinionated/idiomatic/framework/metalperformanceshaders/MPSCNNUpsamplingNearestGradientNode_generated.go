@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNUpsamplingNearest kernel
+// A representation of a gradient nearest spatial upsampling filter.
 //
 // CNNUpsamplingNearestGradientNode wraps [raw.MPSCNNUpsamplingNearestGradientNode] with a fluent Go API.
 type CNNUpsamplingNearestGradientNode struct {

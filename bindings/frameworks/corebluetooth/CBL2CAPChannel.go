@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A live L2CAP connection to a remote device.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbl2capchannel
 type CBL2CAPChannel struct {
 	foundation.NSObject

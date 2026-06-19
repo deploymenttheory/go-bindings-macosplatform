@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object from a data set type stored in an asset catalog.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdataasset
 type NSDataAsset struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func NSDataAssetFromID(id objc.ID) *NSDataAsset {
 	return o
 }
 
-// Equivalent to -initWithName:name bundle:[NSBundle mainBundle];
+// Initializes and returns an object with a reference to the named data asset in an asset catalog.
 func (o *NSDataAsset) InitWithName(name *foundation.NSString) *NSDataAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelInitWithName, name.Ptr())
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *NSDataAsset) InitWithName(name *foundation.NSString) *NSDataAsset {
 	return NSDataAssetFromID(_ret)
 }
 
-// Create a data asset with the given name from the given bundle. Returns nil if the asset was not found.
+// Initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
 func (o *NSDataAsset) InitWithNameBundle(name *foundation.NSString, bundle *foundation.NSBundle) *NSDataAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelInitWithNameBundle, name.Ptr(), bundle.Ptr())
 	if _ret != 0 {

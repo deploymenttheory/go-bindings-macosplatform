@@ -32,10 +32,13 @@ func MTRContentLauncherClusterContentSearchStructFromID(id objc.ID) *MTRContentL
 }
 
 func (o *MTRContentLauncherClusterContentSearchStruct) ParameterList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRContentLauncherClusterContentSearchStructSelParameterList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterContentSearchStructSelParameterList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRContentLauncherClusterContentSearchStruct) SetParameterList(parameterList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRContentLauncherClusterContentSearchStructSelSetParameterList, parameterList)
+	o.Ptr().Send(_mTRContentLauncherClusterContentSearchStructSelSetParameterList, parameterList.Ptr())
 }

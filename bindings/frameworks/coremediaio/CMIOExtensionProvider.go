@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages device connections for a provider.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionprovider
 type CMIOExtensionProvider struct {
 	foundation.NSObject
@@ -43,7 +45,7 @@ func CMIOExtensionProviderFromID(id objc.ID) *CMIOExtensionProvider {
 	return o
 }
 
-// @method startServiceWithProvider: @abstract Starts the CoreMediaIO Extension machinery.
+// Starts the system extension.
 func CMIOExtensionProviderStartServiceWithProvider(provider *CMIOExtensionProvider) {
 	objc.ID(_clsCMIOExtensionProvider).Send(_cMIOExtensionProviderSelStartServiceWithProvider, provider.Ptr())
 }
@@ -53,7 +55,7 @@ func CMIOExtensionProviderStopServiceWithProvider(provider *CMIOExtensionProvide
 	objc.ID(_clsCMIOExtensionProvider).Send(_cMIOExtensionProviderSelStopServiceWithProvider, provider.Ptr())
 }
 
-// @method providerWithSource:clientQueue: @abstract Returns a provider instance. @param source The provider source. @param clientQueue The client dispatch queue, or nil for the default dispatch queue. @result A CMIOExtensionProvider instance.
+// Returns a new extension provider with the specified source and dispatch queue.
 func CMIOExtensionProviderProviderWithSourceClientQueue(source CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *CMIOExtensionProvider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionProvider), _cMIOExtensionProviderSelProviderWithSourceClientQueue, source, clientQueue.Ptr())
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func CMIOExtensionProviderProviderWithSourceClientQueue(source CMIOExtensionProv
 	return CMIOExtensionProviderFromID(_ret)
 }
 
-// @method initWithSource:clientQueue: @abstract Initialize a provider instance. @param source The provider source. @param clientQueue The client dispatch queue, or nil for the default dispatch queue. @result A CMIOExtensionProvider instance.
+// Creates an extension provider with the specified source and dispatch queue.
 func (o *CMIOExtensionProvider) InitWithSourceClientQueue(source CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *CMIOExtensionProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderSelInitWithSourceClientQueue, source, clientQueue.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *CMIOExtensionProvider) InitWithSourceClientQueue(source CMIOExtensionPr
 	return CMIOExtensionProviderFromID(_ret)
 }
 
-// @method addDevice:error: @abstract Add a device to the provider devices array. @param device The device to be added to the provider devices array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Adds a device to a provider.
 func (o *CMIOExtensionProvider) AddDeviceError(device *CMIOExtensionDevice) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cMIOExtensionProviderSelAddDeviceError, device.Ptr(), unsafe.Pointer(&_nsErr))
@@ -81,7 +83,7 @@ func (o *CMIOExtensionProvider) AddDeviceError(device *CMIOExtensionDevice) (boo
 	return _ret, nil
 }
 
-// @method removeDevice:error: @abstract Remove a device from the provider devices array. @param device The device to be removed from the provider devices array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Removes a device from a provider.
 func (o *CMIOExtensionProvider) RemoveDeviceError(device *CMIOExtensionDevice) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cMIOExtensionProviderSelRemoveDeviceError, device.Ptr(), unsafe.Pointer(&_nsErr))
@@ -91,9 +93,9 @@ func (o *CMIOExtensionProvider) RemoveDeviceError(device *CMIOExtensionDevice) (
 	return _ret, nil
 }
 
-// @method notifyPropertiesChanged: @abstract Notify client(s) of device properties changes. @param propertyStates The dictionary of properties having changed.
+// Notifies connected clients of device property changes.
 func (o *CMIOExtensionProvider) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionProviderSelNotifyPropertiesChanged, propertyStates)
+	o.Ptr().Send(_cMIOExtensionProviderSelNotifyPropertiesChanged, propertyStates.Ptr())
 }
 
 // @property source @abstract The provider source.

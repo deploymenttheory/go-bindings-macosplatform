@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A filter that computes the histogram of an image.
+//
 // ImageHistogram wraps [raw.MPSImageHistogram] with a fluent Go API.
 type ImageHistogram struct {
 	inner *raw.MPSImageHistogram
@@ -34,6 +36,8 @@ func ImageHistogramFromID(id objc.ID) *ImageHistogram {
 	return &ImageHistogram{inner: raw.MPSImageHistogramFromID(id)}
 }
 
+// Initializes a histogram with specific information.
+//
 // NewImageHistogramWithDeviceHistogramInfo creates a new [ImageHistogram].
 func NewImageHistogramWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *mpsimage.MPSImageHistogramInfo) *ImageHistogram {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageHistogram")), objc.RegisterName("alloc"))
@@ -50,7 +54,7 @@ func NewImageHistogramWithCoderDevice(aDecoder *foundation.NSCoder, device metal
 	return &ImageHistogram{inner: raw.MPSImageHistogramFromID(_id)}
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+// The source rectangle to use when reading data.
 //
 // WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
 func (x *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram {
@@ -58,7 +62,7 @@ func (x *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *Ima
 	return x
 }
 
-// @property   zeroHistogram @abstract   Zero-initalize the histogram results @discussion Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
+// Determines whether to zero-initialize the histogram results.
 //
 // WithZeroHistogram sets the zeroHistogram property and returns the receiver for chaining.
 func (x *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
@@ -66,7 +70,7 @@ func (x *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageHistogram) WithOptions(options mpscore.MPSKernelOptions) *ImageHistogram {
@@ -74,7 +78,7 @@ func (x *ImageHistogram) WithOptions(options mpscore.MPSKernelOptions) *ImageHis
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageHistogram) WithLabel(label string) *ImageHistogram {
@@ -82,14 +86,14 @@ func (x *ImageHistogram) WithLabel(label string) *ImageHistogram {
 	return x
 }
 
-// @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder. @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer           A valid MTLCommandBuffer. @param  source                  A valid MTLTexture containing the source image for the filter @param  histogram               A valid MTLBuffer to receive the histogram results. @param  histogramOffset         Byte offset into histogram buffer at which to write the histogram results. Must be a multiple of 32 bytes. The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. The histogram results are stored in the histogram buffer as follows: - histogram results for the R channel for all bins followed by - histogram results for the G channel for all bins followed by - histogram results for the B channel for all bins followed by - histogram results for the A channel for all bins
+// Encodes the filter to a command buffer using a compute command encoder.
 //
 // EncodeToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeToCommandBufferSourceTextureHistogramHistogramOffset.
 func (x *ImageHistogram) EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
 }
 
-// @abstract   The amount of space in the output MTLBuffer the histogram will take up. @discussion This convenience function calculates the minimum amount of space needed in the output histogram for the results.  The MTLBuffer should be at least this length, longer if histogramOffset is non-zero. @param      sourceFormat      The MTLPixelFormat of the source image. This is the source parameter of -encodeToCommandBuffer: sourceTexture:histogram:histogramOffset @return     The number of bytes needed to store the result histograms.
+// The amount of space the histogram will take up in the output buffer.
 //
 // HistogramSizeForSourceFormat calls the underlying HistogramSizeForSourceFormat.
 func (x *ImageHistogram) HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint {

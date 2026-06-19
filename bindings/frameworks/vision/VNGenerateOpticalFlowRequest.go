@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that generates directional change vectors for each pixel in the targeted image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest
 type VNGenerateOpticalFlowRequest struct {
 	VNTargetedImageRequest

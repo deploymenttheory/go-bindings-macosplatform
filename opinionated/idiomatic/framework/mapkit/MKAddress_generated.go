@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that contains a full address, and, optionally, a short address.
+//
 // Address wraps [raw.MKAddress] with a fluent Go API.
 type Address struct {
 	inner *raw.MKAddress
@@ -31,6 +33,8 @@ func AddressFromID(id objc.ID) *Address {
 	return &Address{inner: raw.MKAddressFromID(id)}
 }
 
+// Initializes a new address with a location’s full address using a string and a short address that provides an abbreviated form of the address such as a street address.
+//
 // NewAddressWithFullAddressShortAddress creates a new [Address].
 func NewAddressWithFullAddressShortAddress(fullAddress string, shortAddress string) *Address {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddress")), objc.RegisterName("alloc"))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The context in which the current script command is executed.
+//
 // ScriptExecutionContext wraps [raw.NSScriptExecutionContext] with a fluent Go API.
 type ScriptExecutionContext struct {
 	inner *raw.NSScriptExecutionContext
@@ -35,18 +37,24 @@ func NewScriptExecutionContext() *ScriptExecutionContext {
 	return &ScriptExecutionContext{inner: raw.NSScriptExecutionContextFromID(_id)}
 }
 
+// Sets the top-level object for an object-specifier evaluation.
+//
 // WithTopLevelObject sets the topLevelObject property and returns the receiver for chaining.
 func (x *ScriptExecutionContext) WithTopLevelObject(topLevelObject objc.ID) *ScriptExecutionContext {
 	x.inner.SetTopLevelObject(topLevelObject)
 	return x
 }
 
+// Sets the top-level container object currently being tested in a “whose” qualifier to a given object.
+//
 // WithObjectBeingTested sets the objectBeingTested property and returns the receiver for chaining.
 func (x *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested objc.ID) *ScriptExecutionContext {
 	x.inner.SetObjectBeingTested(objectBeingTested)
 	return x
 }
 
+// Sets the top-level container object for a range-specifier evaluation to a give object.
+//
 // WithRangeContainerObject sets the rangeContainerObject property and returns the receiver for chaining.
 func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject objc.ID) *ScriptExecutionContext {
 	x.inner.SetRangeContainerObject(rangeContainerObject)

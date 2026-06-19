@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about the sample location with the media.
+//
 // SampleLocation wraps [raw.MESampleLocation] with a fluent Go API.
 type SampleLocation struct {
 	inner *raw.MESampleLocation
@@ -30,7 +32,7 @@ func SampleLocationFromID(id objc.ID) *SampleLocation {
 	return &SampleLocation{inner: raw.MESampleLocationFromID(id)}
 }
 
-// @property		initWithByteSource @abstract		The initializer for the MESampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			sampleLocation The starting file offset and size in bytes of the sample.
+// Creates a sample location object with the byte source and sample location that you specify.
 //
 // NewSampleLocationWithByteSourceSampleLocation creates a new [SampleLocation].
 func NewSampleLocationWithByteSourceSampleLocation(byteSource *raw.MEByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *SampleLocation {

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronReLU kernel @discussion For each pixel, applies the following function: @code f(x) = x            if x >= 0 = a * x        if x < 0 @endcode
+// A representation a ReLU neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelunode
 type MPSCNNNeuronReLUNode struct {

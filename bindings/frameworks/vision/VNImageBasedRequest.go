@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for image-analysis requests that focus on a specific part of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnimagebasedrequest
 type VNImageBasedRequest struct {
 	VNRequest

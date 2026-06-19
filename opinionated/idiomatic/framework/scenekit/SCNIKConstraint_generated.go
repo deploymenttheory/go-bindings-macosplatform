@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A constraint that applies inverse kinematics to make a chain of nodes “reach” toward a target point.
+//
 // IKConstraint wraps [raw.SCNIKConstraint] with a fluent Go API.
 type IKConstraint struct {
 	inner *raw.SCNIKConstraint
@@ -29,7 +31,7 @@ func IKConstraintFromID(id objc.ID) *IKConstraint {
 	return &IKConstraint{inner: raw.SCNIKConstraintFromID(id)}
 }
 
-// @method initWithChainRootNode: @abstract Creates and returns a SCNIKConstraint object with the specified parameter. @param chainRootNode The root node of the kinematic chain. @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
+// Initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
 //
 // NewIKConstraintWithChainRootNode creates a new [IKConstraint].
 func NewIKConstraintWithChainRootNode(chainRootNode *raw.SCNNode) *IKConstraint {
@@ -38,7 +40,7 @@ func NewIKConstraintWithChainRootNode(chainRootNode *raw.SCNNode) *IKConstraint 
 	return &IKConstraint{inner: raw.SCNIKConstraintFromID(_id)}
 }
 
-// @property target @abstract Specifies the target position (in world space coordinates) of the end joint (i.e the node that owns the IK constraint). Defaults to (0,0,0). Animatable.
+// The desired position for the constrained node, in the scene’s world coordinate space. Animatable.
 //
 // WithTargetPosition sets the targetPosition property and returns the receiver for chaining.
 func (x *IKConstraint) WithTargetPosition(targetPosition raw.SCNVector3) *IKConstraint {
@@ -54,7 +56,7 @@ func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
@@ -70,13 +72,15 @@ func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
 	return x
 }
 
-// @method setMaxAllowedRotationAngle:forJoint: @abstract Specifies the maximum rotation allowed (in degrees) for the specified joint from its initial orientation. Defaults to 180.
+// Sets the rotation limit, in degrees, for the specified node.
 //
 // SetMaxAllowedRotationAngleForJoint calls the underlying SetMaxAllowedRotationAngleForJoint.
 func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode) {
 	x.inner.SetMaxAllowedRotationAngleForJoint(angle, node)
 }
 
+// Returns the rotation limit, in degrees, for the specified node.
+//
 // MaxAllowedRotationAngleForJoint calls the underlying MaxAllowedRotationAngleForJoint.
 func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float64 {
 	return x.inner.MaxAllowedRotationAngleForJoint(node)

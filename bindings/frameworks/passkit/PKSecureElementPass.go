@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A pass with a credential that the device stores in a certified payment information chip.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pksecureelementpass
 type PKSecureElementPass struct {
 	PKPass

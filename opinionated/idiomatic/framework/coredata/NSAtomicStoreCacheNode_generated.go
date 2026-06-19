@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete class that you use to represent basic nodes in a Core Data atomic store.
+//
 // AtomicStoreCacheNode wraps [raw.NSAtomicStoreCacheNode] with a fluent Go API.
 type AtomicStoreCacheNode struct {
 	inner *raw.NSAtomicStoreCacheNode
@@ -30,6 +32,8 @@ func AtomicStoreCacheNodeFromID(id objc.ID) *AtomicStoreCacheNode {
 	return &AtomicStoreCacheNode{inner: raw.NSAtomicStoreCacheNodeFromID(id)}
 }
 
+// Returns a cache node for the given managed object ID.
+//
 // NewAtomicStoreCacheNodeWithObjectID creates a new [AtomicStoreCacheNode].
 func NewAtomicStoreCacheNodeWithObjectID(moid *raw.NSManagedObjectID) *AtomicStoreCacheNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAtomicStoreCacheNode")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewAtomicStoreCacheNodeWithObjectID(moid *raw.NSManagedObjectID) *AtomicSto
 	return &AtomicStoreCacheNode{inner: raw.NSAtomicStoreCacheNodeFromID(_id)}
 }
 
+// The property cache dictionary of the node.
+//
 // WithPropertyCache sets the propertyCache property and returns the receiver for chaining.
 func (x *AtomicStoreCacheNode) WithPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AtomicStoreCacheNode {
 	x.inner.SetPropertyCache(propertyCache)

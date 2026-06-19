@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class representing a stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsstream
 type NSStream struct {
 	NSObject

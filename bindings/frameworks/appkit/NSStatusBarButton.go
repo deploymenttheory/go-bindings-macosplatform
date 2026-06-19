@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The appearance and behavior of an item in the systemwide menu bar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstatusbarbutton
 type NSStatusBarButton struct {
 	NSButton

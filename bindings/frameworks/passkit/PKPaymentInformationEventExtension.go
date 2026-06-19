@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for an extension to collect payment information and sign transaction data in a QR code purchase.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentinformationeventextension
 type PKPaymentInformationEventExtension struct {
 	foundation.NSObject

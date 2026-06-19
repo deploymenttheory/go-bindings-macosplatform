@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that adjusts the video zoom factor of a capture device within the system-recommended range.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturesystemzoomslider
 type AVCaptureSystemZoomSlider struct {
 	AVCaptureControl
@@ -30,7 +32,7 @@ func AVCaptureSystemZoomSliderFromID(id objc.ID) *AVCaptureSystemZoomSlider {
 	return o
 }
 
-// @method initWithDevice: @abstract Initializes an `AVCaptureSystemZoomSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemZoomSlider` may only be initialized with `AVCaptureDevice` instances that support setting `videoZoomFactor`, otherwise an `NSInvalidArgumentException` is thrown.
+// Creates a slider to control the video zoom factor of a capture device.
 func (o *AVCaptureSystemZoomSlider) InitWithDevice(device *AVCaptureDevice) *AVCaptureSystemZoomSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemZoomSliderSelInitWithDevice, device.Ptr())
 	if _ret != 0 {
@@ -39,7 +41,7 @@ func (o *AVCaptureSystemZoomSlider) InitWithDevice(device *AVCaptureDevice) *AVC
 	return AVCaptureSystemZoomSliderFromID(_ret)
 }
 
-// @method initWithDevice:action @abstract Initializes an `AVCaptureSystemZoomSlider` for controlling `device` with a `@MainActor` `action` for handling `videoZoomFactor` changes. @param device The device to control. @param action An action called on `@MainActor` to handle `videoZoomFactor` changes by `AVCaptureSystemZoomSlider`. @discussion `action` is **only** called when `videoZoomFactor` is changed by this control. Clients should not change `videoZoomFactor` on the device when `action` is called. If you need to react to other sources of `videoZoomFactor` changes like `rampToVideoZoomFactor:withRate:` you will still need to use key-value observation. `AVCaptureSystemZoomSlider` may only be initialized with `AVCaptureDevice` instances that support setting `videoZoomFactor`, otherwise an `NSInvalidArgumentException` is thrown.
+// Creates a slider to control the zoom level of the specified capture device with an action to respond to zoom changes.
 func (o *AVCaptureSystemZoomSlider) InitWithDeviceAction(device *AVCaptureDevice, action func(float64)) *AVCaptureSystemZoomSlider {
 	var __block_action objc.Block
 	if action != nil {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier for an object in a collection (or container) by name.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnamespecifier
 type NSNameSpecifier struct {
 	NSScriptObjectSpecifier
@@ -40,6 +42,7 @@ func (o *NSNameSpecifier) InitWithCoder(inCoder *NSCoder) *NSNameSpecifier {
 	return NSNameSpecifierFromID(_ret)
 }
 
+// Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and then sets the name instance variable to name.
 func (o *NSNameSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyName(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, name *NSString) *NSNameSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNameSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyName, classDesc.Ptr(), container.Ptr(), property.Ptr(), name.Ptr())
 	if _ret != 0 {

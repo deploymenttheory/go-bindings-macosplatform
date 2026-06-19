@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that indicates to seek to a new time in the item timeline.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorseekcommand
 type AVDelegatingPlaybackCoordinatorSeekCommand struct {
 	AVDelegatingPlaybackCoordinatorPlaybackControlCommand

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the relationship between skeletal animations and the nodes and geometries they animate.
+//
 // Skinner wraps [raw.SCNSkinner] with a fluent Go API.
 type Skinner struct {
 	inner *raw.SCNSkinner
@@ -38,7 +40,7 @@ func NewSkinner() *Skinner {
 	return &Skinner{inner: raw.SCNSkinnerFromID(_id)}
 }
 
-// @property skeleton @abstract Specifies the skeleton of the receiver. @discussion When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
+// The root node of the skinner object’s animation skeleton.
 //
 // WithSkeleton sets the skeleton property and returns the receiver for chaining.
 func (x *Skinner) WithSkeleton(skeleton NodeProvider) *Skinner {
@@ -46,7 +48,7 @@ func (x *Skinner) WithSkeleton(skeleton NodeProvider) *Skinner {
 	return x
 }
 
-// @property baseGeometry @abstract Specifies the base geometry of the receiver. @discussion Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
+// The geometry whose surface the skinner’s animation skeleton deforms.
 //
 // WithBaseGeometry sets the baseGeometry property and returns the receiver for chaining.
 func (x *Skinner) WithBaseGeometry(baseGeometry GeometryProvider) *Skinner {
@@ -54,7 +56,7 @@ func (x *Skinner) WithBaseGeometry(baseGeometry GeometryProvider) *Skinner {
 	return x
 }
 
-// @property baseGeometryBindTransform @abstract Specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
+// The coordinate transformation for the skinner’s geometry in its default state.
 //
 // WithBaseGeometryBindTransform sets the baseGeometryBindTransform property and returns the receiver for chaining.
 func (x *Skinner) WithBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) *Skinner {

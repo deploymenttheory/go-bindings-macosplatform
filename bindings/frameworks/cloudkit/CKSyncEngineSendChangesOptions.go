@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options to use with a send operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginesendchangesoptions
 type CKSyncEngineSendChangesOptions struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func CKSyncEngineSendChangesOptionsFromID(id objc.ID) *CKSyncEngineSendChangesOp
 	return o
 }
 
-// Initializes a set of options with the specific scope. If no scope is provided, the default scope will include everything.
+// Initializes a set of options with the specific scope.
 func (o *CKSyncEngineSendChangesOptions) InitWithScope(scope *CKSyncEngineSendChangesScope) *CKSyncEngineSendChangesOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesOptionsSelInitWithScope, scope.Ptr())
 	if _ret != 0 {

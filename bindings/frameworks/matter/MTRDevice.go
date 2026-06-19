@@ -72,14 +72,14 @@ func (o *MTRDevice) SetDelegateQueue(delegate MTRDeviceDelegate, queue *foundati
 	o.Ptr().Send(_mTRDeviceSelSetDelegateQueue, delegate, queue.Ptr())
 }
 
-// Adds a delegate to receive asynchronous callbacks about the device. The delegate will be called on the provided queue, for attribute reports, event reports, and device state changes. MTRDevice holds a weak reference to the delegate object.
+// Adds a delegate to receive asynchronous callbacks about the device.
 func (o *MTRDevice) AddDelegateQueue(delegate MTRDeviceDelegate, queue *foundation.NSObject) {
 	o.Ptr().Send(_mTRDeviceSelAddDelegateQueue, delegate, queue.Ptr())
 }
 
-// Adds a delegate to receive asynchronous callbacks about the device, and limit attribute and/or event reports to a specific set of paths. interestedPathsForAttributes may contain either MTRClusterPath or MTRAttributePath to specify interested clusters and attributes, or NSNumber for endpoints. interestedPathsForEvents may contain either MTRClusterPath or MTREventPath to specify interested clusters and events, or NSNumber for endpoints. For both interested paths arguments, if nil is specified, then no filter will be applied. Calling addDelegate: again with the same delegate object will update the interested paths for attributes and events for this delegate. MTRDevice holds a weak reference to the delegate object.
+// Adds a delegate to receive asynchronous callbacks about the device, and limit attribute and/or event reports to a specific set of paths.
 func (o *MTRDevice) AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate MTRDeviceDelegate, queue *foundation.NSObject, interestedPathsForAttributes *foundation.NSArray[objc.ID], interestedPathsForEvents *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceSelAddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents, delegate, queue.Ptr(), interestedPathsForAttributes, interestedPathsForEvents)
+	o.Ptr().Send(_mTRDeviceSelAddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents, delegate, queue.Ptr(), interestedPathsForAttributes.Ptr(), interestedPathsForEvents.Ptr())
 }
 
 // Removes the delegate from receiving callbacks about the device.
@@ -89,8 +89,11 @@ func (o *MTRDevice) RemoveDelegate(delegate MTRDeviceDelegate) {
 
 // Read attribute in a designated attribute path.  If there is no value available for the attribute, whether because the device does not implement it or because the subscription priming read has not yet gotten to this attribute, nil will be returned. TODO: Need to fully document that this returns "the system's best guess" of attribute values. @return a data-value dictionary of the attribute as described in MTRDeviceResponseHandler, or nil if there is no value.
 func (o *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRDeviceSelReadAttributeWithEndpointIDClusterIDAttributeIDParams, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr(), params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelReadAttributeWithEndpointIDClusterIDAttributeIDParams, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr(), params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Write to attribute in a designated attribute path @param value       A data-value NSDictionary object as described in MTRDeviceResponseHandler. @param expectedValueInterval  maximum interval in milliseconds during which reads of the attribute will return the value being written. This value must be within [1, UINT32_MAX], and will be clamped to this range. TODO: document that -readAttribute... will return the expected value for the [endpoint,cluster,attribute] until one of the following: 1. Another write for the same attribute happens. 2. expectedValueIntervalMs (clamped) expires. Need to figure out phrasing here. 3. We succeed at writing the attribute. 4. We fail at writing the attribute and give up on the write @param timeout   timeout in milliseconds for timed write, or nil. This value must be within [1, UINT16_MAX], and will be clamped to this range. TODO: make timeout arguments uniform
@@ -98,30 +101,66 @@ func (o *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpecte
 	o.Ptr().Send(_mTRDeviceSelWriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr(), value, expectedValueInterval.Ptr(), timeout.Ptr())
 }
 
-// Read the attributes identified by the provided attribute paths.  The paths can include wildcards. Paths that do not correspond to any existing attributes, or that the MTRDevice does not have attribute values for, will not be present in the return value from this function. @return an array of response-value dictionaries as described in the documentation for MTRDeviceResponseHandler.  Each one will have an MTRAttributePathKey and an MTRDataKey.
+// Read the attributes identified by the provided attribute paths. The paths can include wildcards.
 func (o *MTRDevice) ReadAttributePaths(attributePaths *foundation.NSArray[*MTRAttributeRequestPath]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceSelReadAttributePaths, attributePaths.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelReadAttributePaths, attributePaths.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// Read all known attributes from descriptor clusters on all known endpoints. @return A dictionary with the paths of the attributes as keys and the data-values (as described in the documentation for MTRDeviceResponseHandler) as values.
+// Read all known attributes from descriptor clusters on all known endpoints.
 func (o *MTRDevice) DescriptorClusters() *foundation.NSDictionary[*MTRAttributePath, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*MTRAttributePath, objc.ID]](o.Ptr(), _mTRDeviceSelDescriptorClusters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelDescriptorClusters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*MTRAttributePath, objc.ID](_ret)
 }
 
 // Invoke a command with a designated command path @param commandFields command fields object. If not nil, the object must be a data-value NSDictionary object as described in the MTRDeviceResponseHandler documentation. The value must be a Structure, i.e., the NSDictionary MTRTypeKey key must have the value MTRStructureValueType. If commandFields is nil, it will be treated as a Structure with no fields. @param expectedValues The expected values of attributes that will be affected by the command, if any.  If these are provided, the relevant attributes will have the provided values when read until one of the following happens: 1. Something (another invoke or a write) sets different expected values. 2. expectedValueInterval elapses without the device reporting the attributes changing their values to the expected values. 3. The command invoke fails. 4. The device reports some other values for these attributes. The dictionaries in this array are expected to be response-value dictionaries as documented in the documentation of MTRDeviceResponseHandler, and each one must have an MTRAttributePathKey. The expectedValues and expectedValueInterval arguments need to be both nil or both non-nil, or both will be both ignored. @param expectedValueInterval  maximum interval in milliseconds during which reads of the attributes that had expected values provided will return the expected values. If the value is less than 1, both this value and expectedValues will be ignored. If this value is greater than UINT32_MAX, it will be clamped to UINT32_MAX. @param completion  response handler will receive either values or error.  A path-specific error status from the command invocation will result in an error being passed to the completion, so values will only be passed in when the command succeeds. If values are passed, the array length will always be 1 and the single response-value in it will have an MTRCommandPathKey.  If the command response is just a success status, there will be no MTRDataKey.  If the command response has data fields, there will be an MTRDataKey, whose value will be of type MTRStructureValueType and describe the response payload.
-func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields, expectedValues, expectedValueInterval.Ptr(), queue.Ptr(), completion)
+func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields.Ptr(), expectedValues.Ptr(), expectedValueInterval.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields, expectedValues, expectedValueInterval.Ptr(), timeout.Ptr(), queue.Ptr(), completion)
+func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields, expectedValues.Ptr(), expectedValueInterval.Ptr(), timeout.Ptr(), queue.Ptr(), __block_completion)
 }
 
-// Invoke one or more groups of commands. For any given group, if any command in any preceding group failed, the group will be skipped.  If all commands in all preceding groups succeeded, the commands within the group will be invoked, with no ordering guarantees within that group. Results from all commands that were invoked will be passed to the provided completion as an array of response-value dictionaries.  Each of these will have the command path of the command (see MTRCommandPathKey) and one of three things: 1) No other fields, indicating that the command invoke returned a succcess status. 2) A field for MTRErrorKey, indicating that the invoke returned a failure status (which is the value of the field). 3) A field for MTRDataKey, indicating that the invoke returned a data response.  In this case the data-value representing the response will be the value of this field.
-func (o *MTRDevice) InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block) {
-	o.Ptr().Send(_mTRDeviceSelInvokeCommandsQueueCompletion, commands, queue.Ptr(), completion)
+// Invoke one or more groups of commands.
+func (o *MTRDevice) InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRDeviceSelInvokeCommandsQueueCompletion, commands.Ptr(), queue.Ptr(), __block_completion)
 }
 
 // Open a commissioning window on the device. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device. @param setupPasscode The setup passcode to use for the commissioning window. See MTRSetupPayload's generateRandomSetupPasscode for generating a valid random passcode. @param discriminator The discriminator to use for the commissionable advertisement. @param duration      Duration, in seconds, during which the commissioning window will be open.
@@ -169,7 +208,7 @@ func (o *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(type_ MTRDiagnosticL
 	o.Ptr().Send(_mTRDeviceSelDownloadLogOfTypeTimeoutQueueCompletion, type_, timeout, queue.Ptr(), __block_completion)
 }
 
-// Sets up the provided completion to be called when any of the following happens: 1) A set of attributes reaches certain values: completion called with nil. 2) The provided timeout expires: completion called with MTRErrorCodeTimeout error. 3) The wait is canceled: completion called with MTRErrorCodeCancelled error. If the MTRAttributeValueWaiter is destroyed before the completion is called, that is treated the same as canceling the waiter. The attributes and values to wait for are represented as a dictionary which has the attribute paths as keys and the expected data-values as values.
+// Sets up the provided completion to be called when any of the following happens:
 func (o *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundation.NSDictionary[*MTRAttributePath, objc.ID], timeout float64, queue *foundation.NSObject, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -178,7 +217,7 @@ func (o *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundat
 		})
 		defer __block_completion.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelWaitForAttributeValuesTimeoutQueueCompletion, values, timeout, queue.Ptr(), __block_completion)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelWaitForAttributeValuesTimeoutQueueCompletion, values.Ptr(), timeout, queue.Ptr(), __block_completion)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -265,6 +304,16 @@ func MTRDeviceDeviceWithNodeIDDeviceController(nodeID uint64, deviceController *
 	return MTRDeviceFromID(_ret)
 }
 
-func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields, expectedValues, expectedValueInterval.Ptr(), timeout.Ptr(), queue.Ptr(), completion)
+func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields, expectedValues.Ptr(), expectedValueInterval.Ptr(), timeout.Ptr(), queue.Ptr(), __block_completion)
 }

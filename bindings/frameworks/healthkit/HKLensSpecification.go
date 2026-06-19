@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for lens specifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hklensspecification
 type HKLensSpecification struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.
+//
 // PreviewReplyAttachment wraps [raw.QLPreviewReplyAttachment] with a fluent Go API.
 type PreviewReplyAttachment struct {
 	inner *raw.QLPreviewReplyAttachment
@@ -31,7 +33,7 @@ func PreviewReplyAttachmentFromID(id objc.ID) *PreviewReplyAttachment {
 	return &PreviewReplyAttachment{inner: raw.QLPreviewReplyAttachmentFromID(id)}
 }
 
-// @abstract Create an attachment for html previews by providing the data and mime type of the attachment. @param data The data content of an html preview @param contentType The UTType of the attachment for an html preview
+// Creates a preview reply attachment with the specified type.
 //
 // NewPreviewReplyAttachmentWithDataContentType creates a new [PreviewReplyAttachment].
 func NewPreviewReplyAttachmentWithDataContentType(data *foundation.NSData, contentType *uniformtypeidentifiers.UTType) *PreviewReplyAttachment {

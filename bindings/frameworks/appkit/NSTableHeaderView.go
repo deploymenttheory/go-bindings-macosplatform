@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that draws headers over a table view’s columns and handles mouse events in those headers.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstableheaderview
 type NSTableHeaderView struct {
 	NSView
@@ -36,11 +38,13 @@ func NSTableHeaderViewFromID(id objc.ID) *NSTableHeaderView {
 	return o
 }
 
+// Returns the rectangle containing the header tile for the column at columnIndex.
 func (o *NSTableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableHeaderViewSelHeaderRectOfColumn, column)
 	return _ret
 }
 
+// Returns the index of the column whose header lies under aPoint in the receiver, or –1 if no such column is found.
 func (o *NSTableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelColumnAtPoint, point)
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface adopted by drawing and writing tools used by a canvas view.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pktool
 type PKTool struct {
 	foundation.NSObject

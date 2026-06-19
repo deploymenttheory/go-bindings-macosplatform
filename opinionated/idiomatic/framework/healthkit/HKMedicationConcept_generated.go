@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a specific medication concept.
+//
 // MedicationConcept wraps [raw.HKMedicationConcept] with a fluent Go API.
 type MedicationConcept struct {
 	inner *raw.HKMedicationConcept

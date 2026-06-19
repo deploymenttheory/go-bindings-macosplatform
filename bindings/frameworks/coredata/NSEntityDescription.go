@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a Core Data entity.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsentitydescription
 type NSEntityDescription struct {
 	foundation.NSObject
@@ -64,6 +66,7 @@ func NSEntityDescriptionFromID(id objc.ID) *NSEntityDescription {
 	return o
 }
 
+// Returns the entity with the specified name from the managed object model associated with the specified managed object context’s persistent store coordinator.
 func NSEntityDescriptionEntityForNameInManagedObjectContext(entityName *foundation.NSString, context_ *NSManagedObjectContext) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEntityDescription), _nSEntityDescriptionSelEntityForNameInManagedObjectContext, entityName.Ptr(), context_.Ptr())
 	if _ret != 0 {
@@ -72,6 +75,7 @@ func NSEntityDescriptionEntityForNameInManagedObjectContext(entityName *foundati
 	return NSEntityDescriptionFromID(_ret)
 }
 
+// Creates, configures, and returns an instance of the class for the entity with a given name.
 func NSEntityDescriptionInsertNewObjectForEntityForNameInManagedObjectContext(entityName *foundation.NSString, context_ *NSManagedObjectContext) *NSManagedObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEntityDescription), _nSEntityDescriptionSelInsertNewObjectForEntityForNameInManagedObjectContext, entityName.Ptr(), context_.Ptr())
 	if _ret != 0 {
@@ -80,6 +84,7 @@ func NSEntityDescriptionInsertNewObjectForEntityForNameInManagedObjectContext(en
 	return NSManagedObjectFromID(_ret)
 }
 
+// Returns an array containing the relationships of the receiver where the entity description of the relationship is a given entity.
 func (o *NSEntityDescription) RelationshipsWithDestinationEntity(entity *NSEntityDescription) *foundation.NSArray[*NSRelationshipDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelRelationshipsWithDestinationEntity, entity.Ptr())
 	if _ret != 0 {
@@ -88,6 +93,7 @@ func (o *NSEntityDescription) RelationshipsWithDestinationEntity(entity *NSEntit
 	return foundation.NSArrayFromID[*NSRelationshipDescription](_ret)
 }
 
+// Returns a Boolean value that indicates whether the receiver is a sub-entity of another given entity.
 func (o *NSEntityDescription) IsKindOfEntity(entity *NSEntityDescription) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityDescriptionSelIsKindOfEntity, entity.Ptr())
 	return _ret
@@ -135,8 +141,11 @@ func (o *NSEntityDescription) SetAbstract(abstract bool) {
 }
 
 func (o *NSEntityDescription) SubentitiesByName() *foundation.NSDictionary[*foundation.NSString, *NSEntityDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSEntityDescription]](o.Ptr(), _nSEntityDescriptionSelSubentitiesByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelSubentitiesByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSEntityDescription](_ret)
 }
 
 func (o *NSEntityDescription) Subentities() *foundation.NSArray[*NSEntityDescription] {
@@ -160,8 +169,11 @@ func (o *NSEntityDescription) Superentity() *NSEntityDescription {
 }
 
 func (o *NSEntityDescription) PropertiesByName() *foundation.NSDictionary[*foundation.NSString, *NSPropertyDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSPropertyDescription]](o.Ptr(), _nSEntityDescriptionSelPropertiesByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelPropertiesByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSPropertyDescription](_ret)
 }
 
 func (o *NSEntityDescription) Properties() *foundation.NSArray[*NSPropertyDescription] {
@@ -177,22 +189,31 @@ func (o *NSEntityDescription) SetProperties(properties *foundation.NSArray[*NSPr
 }
 
 func (o *NSEntityDescription) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSEntityDescriptionSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSEntityDescription) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSEntityDescriptionSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSEntityDescriptionSelSetUserInfo, userInfo.Ptr())
 }
 
 func (o *NSEntityDescription) AttributesByName() *foundation.NSDictionary[*foundation.NSString, *NSAttributeDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSAttributeDescription]](o.Ptr(), _nSEntityDescriptionSelAttributesByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelAttributesByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSAttributeDescription](_ret)
 }
 
 func (o *NSEntityDescription) RelationshipsByName() *foundation.NSDictionary[*foundation.NSString, *NSRelationshipDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSRelationshipDescription]](o.Ptr(), _nSEntityDescriptionSelRelationshipsByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelRelationshipsByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSRelationshipDescription](_ret)
 }
 
 func (o *NSEntityDescription) VersionHash() *foundation.NSData {
@@ -240,23 +261,29 @@ func (o *NSEntityDescription) SetIndexes(indexes *foundation.NSArray[*NSFetchInd
 }
 
 func (o *NSEntityDescription) UniquenessConstraints() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSEntityDescriptionSelUniquenessConstraints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelUniquenessConstraints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSEntityDescription) SetUniquenessConstraints(uniquenessConstraints *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSEntityDescriptionSelSetUniquenessConstraints, uniquenessConstraints)
+	o.Ptr().Send(_nSEntityDescriptionSelSetUniquenessConstraints, uniquenessConstraints.Ptr())
 }
 
 // Deprecated: Use NSEntityDescription.indexes instead
 func (o *NSEntityDescription) CompoundIndexes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSEntityDescriptionSelCompoundIndexes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelCompoundIndexes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use NSEntityDescription.indexes instead
 func (o *NSEntityDescription) SetCompoundIndexes(compoundIndexes *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSEntityDescriptionSelSetCompoundIndexes, compoundIndexes)
+	o.Ptr().Send(_nSEntityDescriptionSelSetCompoundIndexes, compoundIndexes.Ptr())
 }
 
 func (o *NSEntityDescription) CoreSpotlightDisplayNameExpression() *foundation.NSExpression {

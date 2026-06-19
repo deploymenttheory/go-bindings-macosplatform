@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that creates textures from existing data in common image formats.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtktextureloader
 type MTKTextureLoader struct {
 	foundation.NSObject
@@ -52,7 +54,7 @@ func MTKTextureLoaderFromID(id objc.ID) *MTKTextureLoader {
 	return o
 }
 
-// @method initWithDevice: @abstract Initialize the loader @param device Metal device with which to create Metal textures
+// Initializes a new texture loader object.
 func (o *MTKTextureLoader) InitWithDevice(device metal.MTLDevice) *MTKTextureLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKTextureLoaderSelInitWithDevice, device)
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func (o *MTKTextureLoader) InitWithDevice(device metal.MTLDevice) *MTKTextureLoa
 	return MTKTextureLoaderFromID(_ret)
 }
 
-// @method newTextureWithContentsOfURL:options:completionHandler: @abstract Asynchronously create a Metal texture and load image data from the file at URL @param URL Location of image file from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param completionHandler Block called when the texture has been loaded and fully initialized
+// Asynchronously loads image data and creates a new Metal texture from a given URL.
 func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsCompletionHandler(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -70,10 +72,10 @@ func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsCompletionHandler(u
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsCompletionHandler, uRL.Ptr(), options, __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsCompletionHandler, uRL.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTextureWithName:scaleFactor:bundle:options:completionHandler: @abstract Asynchronously create a Metal texture and load image data from a given texture or image asset name @param name A texture or image asset name @param scaleFactor scale factor of the texture to retrieve from the asset catalog.  Typically the value retrieved from -[UIView contentScale] or -[NSWindow backingScaleFactor]. @param bundle Resource bundle in which the asset is located.  Main bundle used if nil. @param options Dictonary of MTKTextureLoaderOptions. The following options are ignormed when used to load a texture asset but can be used when creating a texture from an image asset: MTKTextureLoaderOptionGenerateMipmaps MTKTextureLoaderOptionSRGB MTKTextureLoaderOptionCubeFromVerticalTexture MTKTextureLoaderOptionOrigin @param completionHandler Block called when texture has been loaded and fully initialized @discussion Uses texture data from version of the texture from the texture set in the asset catalog which mathces the device's traits. This method attempts to load a texture asset with thw name iven.  If a texture asset with the name given does not exist, it will attempt to create a texture from an image asset with the given name
+// Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
 func (o *MTKTextureLoader) NewTextureWithNameScaleFactorBundleOptionsCompletionHandler(name *foundation.NSString, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -82,10 +84,10 @@ func (o *MTKTextureLoader) NewTextureWithNameScaleFactorBundleOptionsCompletionH
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsCompletionHandler, name.Ptr(), scaleFactor, bundle.Ptr(), options, __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsCompletionHandler, name.Ptr(), scaleFactor, bundle.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTextureWithName:scaleFactor:displayGamut:bundle:options:completionHandler: @abstract Asynchronously create a Metal texture and load image data from a given texture or image asset name @param name A texture or image asset name @param scaleFactor Scale factor of the texture to retrieve from the asset catalog.  Typically the value retrieved from -[NSWindow backingScaleFactor]. @param displayGamut Version of the texture based upon the "Gamut" trait in Xcode.  You'd typically check -[NSWindow canRepresentDisplayGamut:] with the widest NSDisplayGamut value and pass that value here if it returns YES. @param bundle Resource bundle in which the asset is located.  Main bundle used if nil. @param options Dictonary of MTKTextureLoaderOptions. The following options are ignormed when used to load a texture asset but can be used when creating a texture from an image asset: MTKTextureLoaderOptionGenerateMipmaps MTKTextureLoaderOptionSRGB MTKTextureLoaderOptionCubeFromVerticalTexture MTKTextureLoaderOptionOrigin @param completionHandler Block called when texture has been loaded and fully initialized @discussion Uses texture data from version of the texture from the texture set in the asset catalog which mathces the device's traits. This method attempts to load a texture asset with the name given.  If a texture asset with the name given does not exist, it will attempt to create a texture from an image asset with the given name. This method can be used on macOS to choose between sRGB and P3 versions of a texture asset depending on the gamut of the display rendered to.
+// Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
 func (o *MTKTextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler(name *foundation.NSString, scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -94,25 +96,55 @@ func (o *MTKTextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOption
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler, name.Ptr(), scaleFactor, displayGamut, bundle.Ptr(), options, __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler, name.Ptr(), scaleFactor, displayGamut, bundle.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTexturesWithContentsOfURLs:options:completionHandler: @abstract Asynchronously create an array of Metal textures and load image data from the files at URLs @param URLs Locations of image files from which to create the textures @param options Dictonary of MTKTextureLoaderOptions, which will be used for every texture loaded @param completionHandler Block called when all of the textures have been loaded and fully initialized. The array of MTLTextures will be the same length and in the same order as the requested array of paths. If an error occurs while loading a texture, the corresponding array index will contain NSNull. The NSError will be null if all of the textures are loaded successfully, or will correspond to one of the textures which failed to load.
-func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler objc.Block) {
-	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsCompletionHandler, uRLs, options, completionHandler)
+// Asynchronously loads image data and creates new Metal textures from the specified list of URLs.
+func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[metal.MTLTexture](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsCompletionHandler, uRLs.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTexturesWithNames:scaleFactor:bundle:options:completionHandler: @abstract Asynchronously create Metal textures and load image data from a given texture or image asset names @param names An array texture or image asset names.  If an error occurs while loading a texture, the corresponding index in the returned array contain [NSNull null] @param scaleFactor scale factor of the texture to retrieve from the asset catalog.  Typically the value retrieved from -[UIView contentScale] or -[NSWindow backingScaleFactor]. @param bundle Resource bundle in which the assets are located.  Main bundle used if nil. @param options Dictonary of MTKTextureLoaderOptions. The following options are ignormed when used to load a texture asset but can be used when creating a texture from an image asset MTKTextureLoaderOptionGenerateMipmaps MTKTextureLoaderOptionSRGB MTKTextureLoaderOptionCubeFromVerticalTexture MTKTextureLoaderOptionOrigin @param completionHandler Block called when all of the textures have been loaded and fully initialized. The NSError will be null if all of the textures are loaded successfully, or will correspond to one of the textures which failed to load. @discussion Uses texture data from version of the texture from the texture set in the asset catalog which mathces the device's traits. This method attempts to load a texture asset with each name iven.  If a texture asset with the name given does not exist, it will attempt to create a texture from an image asset with the given name.
-func (o *MTKTextureLoader) NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler objc.Block) {
-	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler, names, scaleFactor, bundle.Ptr(), options, completionHandler)
+// Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.
+func (o *MTKTextureLoader) NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[metal.MTLTexture](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler, names.Ptr(), scaleFactor, bundle.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTexturesWithNames:scaleFactor:displayGamut:bundle:options:completionHandler: @abstract Asynchronously create Metal textures and load image data from given texture or image asset names @param names An array texture or image asset names.  If an error occurs while loading a texture, the corresponding index in the returned array contain [NSNull null] @param scaleFactor Scale factor of the texture to retrieve from the asset catalog.  Typically the value retrieved from -[UIView contentScale] or -[NSWindow backingScaleFactor] @param displayGamut Version of the texture based upon the "Gamut" trait in Xcode.  You'd typically check -[NSWindow canRepresentDisplayGamut:] with the widest NSDisplayGamut value and pass that value here if it returns YES.@param bundle Resource bundle in which the assets are located @param options Dictonary of MTKTextureLoaderOptions. The following options are ignormed when used to load a texture asset but can be used when creating a texture from an image asset MTKTextureLoaderOptionGenerateMipmaps MTKTextureLoaderOptionSRGB MTKTextureLoaderOptionCubeFromVerticalTexture MTKTextureLoaderOptionOrigin @param completionHandler Block called when all of the textures have been loaded and fully initialized. The NSError will be nif if all of the textures are loaded successfully, or will correspond to one of the textures which failed to load. @discussion Uses texture data from version of the texture from the texture sets in the asset catalog which mathces the device's traits. This method attempts to load a texture asset with each name given.  If a texture asset with the name given does not exist, it will attempt to create a texture from an image asset with the given name. This method can be used on macOS to choose between sRGB and P3 versions of a texture asset depending on the gamut of the display rendered to, If a texture with a name fails to load, the correposding index in the returned array will be set to [NSNull null].  An error will also be set.  Thus, if there is a failure to load a texture with a name, other names may succesfully be loaded.  Also, a set error does not necessarily mean all textures in the names array have failed to load.
-func (o *MTKTextureLoader) NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler objc.Block) {
-	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler, names, scaleFactor, displayGamut, bundle.Ptr(), options, completionHandler)
+// Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.
+func (o *MTKTextureLoader) NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[metal.MTLTexture](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler, names.Ptr(), scaleFactor, displayGamut, bundle.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTextureWithData:options:completionHandler: @abstract Asynchronously create a Metal texture and load image data from the NSData object provided @param data NSData object containing image file data from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param completionHandler Block called when texture has been loaded and fully initialized
+// Asynchronously creates a new Metal texture from an in-memory representation of the texture’s data.
 func (o *MTKTextureLoader) NewTextureWithDataOptionsCompletionHandler(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -121,10 +153,10 @@ func (o *MTKTextureLoader) NewTextureWithDataOptionsCompletionHandler(data *foun
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithDataOptionsCompletionHandler, data.Ptr(), options, __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithDataOptionsCompletionHandler, data.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTextureWithCGImage:options:completionHandler: @abstract Asynchronously create a Metal texture and load image data from the given CGImageRef @param cgImage CGImageRef containing image data from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param completionHandler Block called when texture has been loaded and fully initialized
+// Asynchronously loads image data and creates a new Metal texture from a given bitmap image.
 func (o *MTKTextureLoader) NewTextureWithCGImageOptionsCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -133,10 +165,10 @@ func (o *MTKTextureLoader) NewTextureWithCGImageOptionsCompletionHandler(cgImage
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithCGImageOptionsCompletionHandler, cgImage, options, __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithCGImageOptionsCompletionHandler, cgImage, options.Ptr(), __block_completionHandler)
 }
 
-// @method newTextureWithMDLTexture:options:completionHandler: @abstract Asynchronously create a Metal texture and load image data from the given MDLTexture @param texture MDLTexture containing image data from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param completionHandler Block called when texture has been loaded and fully initialized
+// Asynchronously loads image data and creates a Metal texture from the specified Model I/O texture.
 func (o *MTKTextureLoader) NewTextureWithMDLTextureOptionsCompletionHandler(texture *modelio.MDLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -145,73 +177,73 @@ func (o *MTKTextureLoader) NewTextureWithMDLTextureOptionsCompletionHandler(text
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithMDLTextureOptionsCompletionHandler, texture.Ptr(), options, __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithMDLTextureOptionsCompletionHandler, texture.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
-// @method newTextureWithContentsOfURL:options:error: @abstract Synchronously create a Metal texture and load image data from the file at URL @return The Metal texture. nil if an error occured @param URL Location of image file from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param error Pointer to an autoreleased NSError object which will be set if an error occurred
+// Synchronously loads image data and creates a new Metal texture from a given URL.
 func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError, uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @method newTexturesWithContentsOfURLs:options:completionHandler: @abstract Synchronously create an array of Metal textures and load image data from the files at URLs @return An array of MTLTextures of the same length and in the same order as the requested array of paths.  If an error occurs while loading a texture, the corresponding array index will contain [NSNull null]. @param URLs Locations of image files from which to create the textures @param options Dictonary of MTKTextureLoaderOptions, which will be used for every texture loaded @param error Pointer to an autoreleased NSError object which will be set if an error occurred. Will be null if all of the textures are loaded successfully, or will correspond to one of the textures which failed to load.
+// Synchronously loads image data and creates new Metal textures from the specified list of URLs.
 func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[metal.MTLTexture], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[metal.MTLTexture]](o.Ptr(), _mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError, uRLs, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError, uRLs.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[metal.MTLTexture](_ret), nil
 }
 
-// @method newTextureWithData:options:error: @abstract Synchronously create a Metal texture and load image data from the NSData object provided @return The Metal texture. nil if an error occured @param data NSData object containing image file data from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param error Pointer to an autoreleased NSError object which will be set if an error occurred
+// Synchronously creates a new Metal texture from an in-memory representation of the texture’s data.
 func (o *MTKTextureLoader) NewTextureWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithDataOptionsError, data.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @method newTextureWithCGImage:options:error: @abstract Synchronously create a Metal texture and load image data from the given CGImageRef @return The Metal texture. nil if an error occured @param cgImage CGImageRef containing image data from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param error Pointer to an autoreleased NSError object which will be set if an error occurred
+// Synchronously loads image data and creates a new Metal texture from a given bitmap image.
 func (o *MTKTextureLoader) NewTextureWithCGImageOptionsError(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithCGImageOptionsError, cgImage, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithCGImageOptionsError, cgImage, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @method newTextureWithMDLTexture:options:error: @abstract Synchronously create a Metal texture and load image data from the given MDLTexture @return The Metal texture. nil if an error occured @param texture MDLTexture containing image data from which to create the texture @param options Dictonary of MTKTextureLoaderOptions @param error Pointer to an autoreleased NSError object which will be set if an error occurred
+// Synchronously loads image data and creates a Metal texture from the specified Model I/O texture.
 func (o *MTKTextureLoader) NewTextureWithMDLTextureOptionsError(texture *modelio.MDLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithMDLTextureOptionsError, texture.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithMDLTextureOptionsError, texture.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @method newTextursWithName:scaleFactor:bundle:options:error: @abstract Synchronously create a Metal texture with texture data from a given texture or image asset name @return The Metal texture. nil if an error occured @param names An array of texture asset names @param scaleFactor scale factor of the texture to retrieve from the asset catalog.  Typically the value retrieved from -[UIView contentScale] or -[NSWindow backingScaleFactor]. @param bundle Resource bundle in which the asset is located.  Main bundle used if nil. @param options Dictonary of MTKTextureLoaderOptions. The following options are ignormed when used to load a texture asset but can be used when creating a texture from an image asset MTKTextureLoaderOptionGenerateMipmaps MTKTextureLoaderOptionSRGB MTKTextureLoaderOptionCubeFromVerticalTexture MTKTextureLoaderOptionOrigins @discussion Uses texture data from version of the texture from the texture set in the asset catalog which mathces the device's traits. This method attempts to load a texture asset with the name given.  If a texture asset with the name given does not exist, it will attempt to create a texture from an image asset with the given name.
+// Synchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
 func (o *MTKTextureLoader) NewTextureWithNameScaleFactorBundleOptionsError(name *foundation.NSString, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @method newTextursWithName:scaleFactor:displayGamut:bundle:options:error: @abstract Synchronously create a Metal texture with texture data from a given texture or image asset name @return The Metal texture. nil if an error occured @param names An array of texture asset names @param scaleFactor Scale factor of the texture to retrieve from the asset catalog.  Typically the value retrieved from -[UIView contentScale] or -[NSWindow backingScaleFactor]. @param displayGamut Version of the texture based upon the "Gamut" trait in Xcode.  You'd typically check -[NSWindow canRepresentDisplayGamut:] with the widest NSDisplayGamut value and pass that value here if it returns YES.@param bundle Resource bundle in which the assets are located @param bundle Resource bundle in which the asset is located.  Main bundle used if nil. @param options Dictonary of MTKTextureLoaderOptions. The following options are ignormed when used to load a texture asset but can be used when creating a texture from an image asset MTKTextureLoaderOptionGenerateMipmaps MTKTextureLoaderOptionSRGB MTKTextureLoaderOptionCubeFromVerticalTexture MTKTextureLoaderOptionOrigin @discussion Uses texture data from version of the texture from the texture set in the asset catalog which mathces the device's traits. This method attempts to load a texture asset with the name given.  If a texture asset with the name given does not exist, it will attempt to create a texture from an image asset with the given name. This method can be used on macOS to choose between sRGB and P3 versions of a texture asset depending on the gamut of the display rendered to.
+// Synchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog, using a specified display gamut.
 func (o *MTKTextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOptionsError(name *foundation.NSString, scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsError, name.Ptr(), scaleFactor, displayGamut, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsError, name.Ptr(), scaleFactor, displayGamut, bundle.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

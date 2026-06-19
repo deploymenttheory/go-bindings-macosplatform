@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A URL session task that uploads data to the network in a request body.
+//
 // URLSessionUploadTask wraps [raw.NSURLSessionUploadTask] with a fluent Go API.
 type URLSessionUploadTask struct {
 	inner *raw.NSURLSessionUploadTask

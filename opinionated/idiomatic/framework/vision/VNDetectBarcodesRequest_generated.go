@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A request that detects barcodes in an image.
+//
 // DetectBarcodesRequest wraps [raw.VNDetectBarcodesRequest] with a fluent Go API.
 type DetectBarcodesRequest struct {
 	inner *raw.VNDetectBarcodesRequest
@@ -39,7 +41,7 @@ func NewDetectBarcodesRequest() *DetectBarcodesRequest {
 	return &DetectBarcodesRequest{inner: raw.VNDetectBarcodesRequestFromID(_id)}
 }
 
-// @discussion The collection of barcode symbologies that are to be detected in the image.  The default is to scan for all possible symbologies. Setting a revision on the request will reset the symbologies to all symbologies for the specified revision.
+// The barcode symbologies that the request detects in an image.
 //
 // WithSymbologies sets the collection, converting the Go slice to an NSArray.
 func (x *DetectBarcodesRequest) WithSymbologies(items ...*foundation.NSString) *DetectBarcodesRequest {
@@ -62,7 +64,7 @@ func (x *DetectBarcodesRequest) WithSymbologies(items ...*foundation.NSString) *
 	return x
 }
 
-// @discussion An option to coalesce multiple codes if applicable based on the symbology
+// A Boolean value that indicates whether to coalesce multiple codes based on the symbology.
 //
 // WithCoalesceCompositeSymbologies sets the coalesceCompositeSymbologies property and returns the receiver for chaining.
 func (x *DetectBarcodesRequest) WithCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) *DetectBarcodesRequest {
@@ -70,7 +72,7 @@ func (x *DetectBarcodesRequest) WithCoalesceCompositeSymbologies(coalesceComposi
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectBarcodesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectBarcodesRequest {
@@ -78,7 +80,7 @@ func (x *DetectBarcodesRequest) WithRegionOfInterest(regionOfInterest corefounda
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectBarcodesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectBarcodesRequest {
@@ -86,7 +88,7 @@ func (x *DetectBarcodesRequest) WithPreferBackgroundProcessing(preferBackgroundP
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectBarcodesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcodesRequest {
@@ -94,7 +96,7 @@ func (x *DetectBarcodesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcode
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectBarcodesRequest) WithRevision(revision uint) *DetectBarcodesRequest {
@@ -102,7 +104,7 @@ func (x *DetectBarcodesRequest) WithRevision(revision uint) *DetectBarcodesReque
 	return x
 }
 
-// @brief Obtain the collection of barcode symbologies that can be recognized by the request in its current configuration. @discussion    Calling this method could be a potentially expensive operation. @return An array of VNBarcodeSymbology objects describing the symbologies recognized by the request in its current configuration.
+// Returns the barcode symbologies that the request supports.
 //
 // SupportedSymbologies returns the collection as a Go slice.
 func (x *DetectBarcodesRequest) SupportedSymbologies() ([]*foundation.NSString, error) {

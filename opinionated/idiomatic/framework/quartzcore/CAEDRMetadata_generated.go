@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Metadata describing how extended dynamic range (EDR) values should be tone mapped.
+//
 // EDRMetadata wraps [raw.CAEDRMetadata] with a fluent Go API.
 type EDRMetadata struct {
 	inner *raw.CAEDRMetadata

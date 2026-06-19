@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstraction of a physics body’s solid volume for tuning collision detection.
+//
 // PhysicsShape wraps [raw.SCNPhysicsShape] with a fluent Go API.
 type PhysicsShape struct {
 	inner *raw.SCNPhysicsShape

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of points that connect to form a 3D volume.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseshape
 type PHASEShape struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func PHASEShapeFromID(id objc.ID) *PHASEShape {
 	return o
 }
 
-// @method initWithEngine:mesh @abstract Initialize a shape from a mesh. @discussion One PHASEShapeElement will be created for every submesh within the mesh. @note A single shape can be used to create multiple instances of sources and occluders. For example, a client could create a single shape for a window, then create multiple occluders from it. The same can be done with with sources. @param engine The engine this shape will be used with. @param mesh A Model I/O mesh object. @return A new shape object
+// Creates an object that the given geometric data shapes.
 func (o *PHASEShape) InitWithEngineMesh(engine *PHASEEngine, mesh *modelio.MDLMesh) *PHASEShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEShapeSelInitWithEngineMesh, engine.Ptr(), mesh.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *PHASEShape) InitWithEngineMesh(engine *PHASEEngine, mesh *modelio.MDLMe
 	return PHASEShapeFromID(_ret)
 }
 
-// @method initWithEngine:mesh @abstract Initialize a shape from an MDLMesh and a list of materials @param engine The engine this shape will be used with @param mesh A Model I/O mesh object. @param materials An array of PHASEMaterial objects that overrides any acoustical materials within the mesh object @return A new shape object @discussion The materials array cannot be empty and cannot contain nil entries, otherwise an exception is thrown. If the number of submeshes within the mesh are less than or equal to the size of the material array, the material will be assigned to the corresponding element. If the number of submeshes within the mesh is greater than the size of the material array, the material assigned to the element will be the index of the element modulo the number of materials. IE: given a mesh with 6 submeshes and an array of 3 materials, the element at index 5 will be assigned the material at index: 5 % 3 = 2.
+// Creates an object of a specific material that the given geometric data shapes.
 func (o *PHASEShape) InitWithEngineMeshMaterials(engine *PHASEEngine, mesh *modelio.MDLMesh, materials *foundation.NSArray[*PHASEMaterial]) *PHASEShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEShapeSelInitWithEngineMeshMaterials, engine.Ptr(), mesh.Ptr(), materials.Ptr())
 	if _ret != 0 {

@@ -8,6 +8,7 @@ import (
 
 	"github.com/ebitengine/purego/objc"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -16,7 +17,7 @@ import (
 // MEFormatReader wraps the ObjC protocol MEFormatReader.
 type MEFormatReader interface {
 	LoadFileInfoWithCompletionHandler(completionHandler func(*MEFileInfo, unsafe.Pointer))
-	LoadMetadataWithCompletionHandler(completionHandler objc.Block)
+	LoadMetadataWithCompletionHandler(completionHandler func(*foundation.NSArray[*avfoundation.AVMetadataItem], unsafe.Pointer))
 	LoadTrackReadersWithCompletionHandler(completionHandler func(*foundation.NSArray[METrackReader], unsafe.Pointer))
 }
 

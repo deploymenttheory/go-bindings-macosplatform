@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a stepper control for incrementing or decrementing a value.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssteppertouchbaritem
 type NSStepperTouchBarItem struct {
 	NSTouchBarItem
@@ -44,7 +46,7 @@ func NSStepperTouchBarItemFromID(id objc.ID) *NSStepperTouchBarItem {
 	return o
 }
 
-// Creates a `NSStepperTouchBarItem` with a `formatter` to display the stepper's value as text. @param formatter A formatter used to display a textual representation of the stepper's value
+// Creates a NSStepperTouchBarItem with a formatter to display the stepper’s value as text.
 func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierFormatter(identifier *foundation.NSString, formatter *foundation.NSFormatter) *NSStepperTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierFormatter, identifier.Ptr(), formatter.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierFormatter(identifier 
 	return NSStepperTouchBarItemFromID(_ret)
 }
 
-// Creates a `NSStepperTouchBarItem` using the result of `drawingHandler` to display the stepper's value as an image. @param drawingHandler A block that draws a graphical representation of the stepper's value in the specified rectangle. The coordinates of this rectangle are specified in points.
+// Creates a NSStepperTouchBarItem using the result of drawingHandler to display the stepper’s value as an image.
 func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierDrawingHandler(identifier *foundation.NSString, drawingHandler objc.Block) *NSStepperTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierDrawingHandler, identifier.Ptr(), drawingHandler)
 	if _ret != 0 {

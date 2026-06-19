@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A credential that results from a successful Apple ID authentication.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential
 type ASAuthorizationAppleIDCredential struct {
 	foundation.NSObject
@@ -58,8 +60,11 @@ func (o *ASAuthorizationAppleIDCredential) State() *foundation.NSString {
 
 // @abstract This value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on @see ASAuthorizationAppleIDRequest.  The application should query this value to identify which scopes were returned as it maybe different from ones requested.
 func (o *ASAuthorizationAppleIDCredential) AuthorizedScopes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aSAuthorizationAppleIDCredentialSelAuthorizedScopes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDCredentialSelAuthorizedScopes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @abstract A short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.

@@ -7,12 +7,12 @@ import (
 	"unsafe"
 )
 
-// @typedef AuthorizationExternalForm An AuthorizationExternalForm structure can hold the externalized form of an AuthorizationRef. As such, it can be transmitted across IPC channels to other processes, which can re-internalize it to recover a valid AuthorizationRef handle. The data contained in an AuthorizationExternalForm should be considered opaque. SECURITY NOTE: Applications should take care to not disclose the AuthorizationExternalForm to potential attackers since it would authorize rights to them.
+// The external representation of an authorization reference.
 type AuthorizationExternalForm struct {
 	Bytes [32]int8
 }
 
-// @typedef AuthorizationItem Each AuthorizationItem describes a single string-named item with optional parameter value. The value must be contiguous memory of valueLength bytes; internal structure is defined separately for each name. @field name name of the item, as an AuthorizationString. Mandatory. @field valueLength Number of bytes in parameter value. Must be 0 if no parameter value. @field value Pointer to the optional parameter value associated with name. Must be NULL if no parameter value. @field flags Reserved field. Must be set to 0 on creation. Do not modify after that.
+// A structure containing information about an authorization right or the authorization environment.
 type AuthorizationItem struct {
 	Name        string
 	ValueLength uint
@@ -20,7 +20,7 @@ type AuthorizationItem struct {
 	Flags       uint
 }
 
-// @typedef AuthorizationItemSet An AuthorizationItemSet structure represents a set of zero or more AuthorizationItems.  Since it is a set it should not contain any identical AuthorizationItems. @field count Number of items identified by items. @field items Pointer to an array of items.
+// A structure containing a set of authorization items.
 type AuthorizationItemSet struct {
 	Count uint
 	Items *AuthorizationItem
@@ -123,19 +123,23 @@ type OpaqueSecIdentitySearchRef struct{}
 // OpaqueSecTransformImplementation is an opaque type.
 type OpaqueSecTransformImplementation struct{}
 
+// An opaque type that represents an SSL session context object.
 // SSLContext is an opaque type.
 type SSLContext struct{}
 
+// A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.
 type SecAsn1AlgId struct {
 	Algorithm  CssmData
 	Parameters CssmData
 }
 
+// A structure containing a public key and its associated algorithm.
 type SecAsn1PubKeyInfo struct {
 	Algorithm        SecAsn1AlgId
 	SubjectPublicKey CssmData
 }
 
+// A structure that defines one element of a BER or DER encoding.
 type SecAsn1Template_struct struct {
 	Kind   uint32
 	Offset uint32
@@ -143,6 +147,7 @@ type SecAsn1Template_struct struct {
 	Size   uint32
 }
 
+// The import/export parameter structure.
 type SecItemImportExportKeyParameters struct {
 	Version       uint32
 	Flags         SecKeyImportExportFlags
@@ -154,6 +159,7 @@ type SecItemImportExportKeyParameters struct {
 	KeyAttributes unsafe.Pointer
 }
 
+// The legacy import/export parameter structure.
 type SecKeyImportExportParameters struct {
 	Version       uint32
 	Flags         SecKeyImportExportFlags
@@ -165,27 +171,27 @@ type SecKeyImportExportParameters struct {
 	KeyAttributes uint32
 }
 
-// @struct SecKeychainAttribute @abstract Contains keychain attributes. @field tag A 4-byte attribute tag. @field length The length of the buffer pointed to by data. @field data A pointer to the attribute data.
+// A structure that holds a single keychain attribute.
 type SecKeychainAttribute struct {
 	Tag    uint
 	Length uint
 	Data   unsafe.Pointer
 }
 
-// @typedef SecKeychainAttributeInfo @abstract Represents an attribute. @field count The number of tag-format pairs in the respective arrays. @field tag A pointer to the first attribute tag in the array. @field format A pointer to the first CSSM_DB_ATTRIBUTE_FORMAT in the array. @discussion Each tag and format item form a pair.
+// A structure that represents an attribute.
 type SecKeychainAttributeInfo struct {
 	Count  uint
 	Tag    *uint
 	Format *uint
 }
 
-// @typedef SecKeychainAttributeList @abstract Represents a list of keychain attributes. @field count An unsigned 32-bit integer that represents the number of keychain attributes in the array. @field attr A pointer to the first keychain attribute in the array.
+// A list of keychain attributes.
 type SecKeychainAttributeList struct {
 	Count uint
 	Attr  *SecKeychainAttribute
 }
 
-// @typedef SecKeychainCallbackInfo @abstract Contains information about a keychain event. @field version The version of this structure. @field item A reference to the keychain item associated with this event, if any. Note that some events do not involve a particular keychain item. @field keychain A reference to the keychain in which the event occurred. @field pid The id of the process that generated this event. @discussion The SecKeychainCallbackInfo type represents a structure that contains information about the keychain event for which your application is being notified. For information on how to write a keychain event callback function, see SecKeychainCallback.
+// Information about a keychain event that keychain services deliver to your app via a callback function.
 type SecKeychainCallbackInfo struct {
 	Version  uint
 	Item     unsafe.Pointer
@@ -193,7 +199,7 @@ type SecKeychainCallbackInfo struct {
 	Pid      int
 }
 
-// @typedef SecKeychainSettings @abstract Contains keychain settings. @field version An unsigned 32-bit integer representing the keychain version. @field lockOnSleep A boolean value indicating whether the keychain locks when the system sleeps. @field useLockInterval A boolean value indicating whether the keychain automatically locks after a certain period of time. @field lockInterval An unsigned 32-bit integer representing the number of seconds before the keychain locks.
+// A structure that contains information about keychain settings.
 type SecKeychainSettings struct {
 	Version         uint
 	LockOnSleep     uint8

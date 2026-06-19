@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about your app’s disk space usage.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric
 type MXDiskSpaceUsageMetric struct {
 	MXMetric
@@ -39,8 +41,11 @@ func MXDiskSpaceUsageMetricFromID(id objc.ID) *MXDiskSpaceUsageMetric {
 
 // @property      totalBinaryFileSize @abstract      Total fixed size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (o *MXDiskSpaceUsageMetric) TotalBinaryFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalBinaryFileSize)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalBinaryFileSize)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      totalBinaryFileCount @abstract      Total count of fixed files owned by the app.
@@ -51,8 +56,11 @@ func (o *MXDiskSpaceUsageMetric) TotalBinaryFileCount() int {
 
 // @property      totalDataFileSize @abstract      Total data file size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (o *MXDiskSpaceUsageMetric) TotalDataFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDataFileSize)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDataFileSize)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      totalDataFileCount @abstract      Total count of data files owned by the app.
@@ -63,24 +71,36 @@ func (o *MXDiskSpaceUsageMetric) TotalDataFileCount() int {
 
 // @property      totalCacheFolderSize @abstract      Total file size contained within the apps cache folder. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (o *MXDiskSpaceUsageMetric) TotalCacheFolderSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalCacheFolderSize)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalCacheFolderSize)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      totalCloneSize @abstract      Total clone size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (o *MXDiskSpaceUsageMetric) TotalCloneSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalCloneSize)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalCloneSize)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      totalDiskSpaceUsedSize @abstract      Total disk space used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (o *MXDiskSpaceUsageMetric) TotalDiskSpaceUsedSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDiskSpaceUsedSize)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDiskSpaceUsedSize)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      totalDiskSpaceCapacity @abstract      Total disk space capacity of the device @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (o *MXDiskSpaceUsageMetric) TotalDiskSpaceCapacity() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDiskSpaceCapacity)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDiskSpaceCapacity)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }

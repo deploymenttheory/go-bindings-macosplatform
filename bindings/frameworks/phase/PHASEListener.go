@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A central point of reference that defines the location within the scene that’s most audible to the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaselistener
 type PHASEListener struct {
 	PHASEObject
@@ -33,7 +35,7 @@ func PHASEListenerFromID(id objc.ID) *PHASEListener {
 	return o
 }
 
-// @method initWithEngine: @abstract Initialize a new listener.
+// Creates a listener with the given engine.
 func (o *PHASEListener) InitWithEngine(engine *PHASEEngine) *PHASEListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEListenerSelInitWithEngine, engine.Ptr())
 	if _ret != 0 {

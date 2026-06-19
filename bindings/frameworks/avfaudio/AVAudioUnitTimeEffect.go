@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that processes audio in nonreal time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounittimeeffect
 type AVAudioUnitTimeEffect struct {
 	AVAudioUnit
@@ -31,7 +33,7 @@ func AVAudioUnitTimeEffectFromID(id objc.ID) *AVAudioUnitTimeEffect {
 	return o
 }
 
-// @method initWithAudioComponentDescription: @abstract create an AVAudioUnitTimeEffect object @param audioComponentDescription AudioComponentDescription of the audio unit to be initialized @discussion The componentType must be kAudioUnitType_FormatConverter
+// Creates a time effect audio unit with the specified description.
 func (o *AVAudioUnitTimeEffect) InitWithAudioComponentDescription(audioComponentDescription objc.ID) *AVAudioUnitTimeEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitTimeEffectSelInitWithAudioComponentDescription, audioComponentDescription)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type of challenge where a player must beat the leaderboard score of another player.
+//
 // ScoreChallenge wraps [raw.GKScoreChallenge] with a fluent Go API.
 type ScoreChallenge struct {
 	inner *raw.GKScoreChallenge

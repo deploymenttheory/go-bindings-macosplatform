@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a user’s participation in a share.
+//
 // ShareParticipant wraps [raw.CKShareParticipant] with a fluent Go API.
 type ShareParticipant struct {
 	inner *raw.CKShareParticipant

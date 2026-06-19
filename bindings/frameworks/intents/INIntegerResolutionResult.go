@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for an integer value associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inintegerresolutionresult
 type INIntegerResolutionResult struct {
 	INIntentResolutionResult
@@ -31,6 +33,7 @@ func INIntegerResolutionResultFromID(id objc.ID) *INIntegerResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified value.
 func INIntegerResolutionResultSuccessWithResolvedValue(resolvedValue int) *INIntegerResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntegerResolutionResult), _iNIntegerResolutionResultSelSuccessWithResolvedValue, resolvedValue)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func INIntegerResolutionResultSuccessWithResolvedValue(resolvedValue int) *INInt
 	return INIntegerResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INIntegerResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *INIntegerResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntegerResolutionResult), _iNIntegerResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm.Ptr())
 	if _ret != 0 {

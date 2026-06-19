@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient convolution kernel.
+//
 // CNNConvolutionGradientNode wraps [raw.MPSCNNConvolutionGradientNode] with a fluent Go API.
 type CNNConvolutionGradientNode struct {
 	inner *raw.MPSCNNConvolutionGradientNode

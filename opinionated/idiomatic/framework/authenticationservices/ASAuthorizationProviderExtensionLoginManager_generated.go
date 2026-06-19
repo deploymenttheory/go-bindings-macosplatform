@@ -164,16 +164,54 @@ func (x *AuthorizationProviderExtensionLoginManager) ResetUserSecureEnclaveKey()
 
 // @abstract Provides a new or cached attestation for the specified key type. @param keyType The key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
 //
-// AttestKeyClientDataHashCompletion calls the underlying AttestKeyClientDataHashCompletion.
-func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
-	x.inner.AttestKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
+// AttestKeyClientDataHashCompletion blocks until the operation completes or ctx is cancelled.
+func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AttestKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // @abstract Provides a new or cached attestation for the specified pending key type. @param keyType The pending key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the pending key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
 //
-// AttestPendingKeyClientDataHashCompletion calls the underlying AttestPendingKeyClientDataHashCompletion.
-func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
-	x.inner.AttestPendingKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
+// AttestPendingKeyClientDataHashCompletion blocks until the operation completes or ctx is cancelled.
+func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AttestPendingKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // Requests platform single sign-on to show the extension’s view controller to the user.
@@ -299,8 +337,8 @@ type AuthorizationProviderExtensionLoginManagerable interface {
 	ResetKeys()
 	ResetDeviceKeys()
 	ResetUserSecureEnclaveKey()
-	AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block)
-	AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block)
+	AttestKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error)
+	AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error)
 	PresentRegistrationViewControllerWithCompletion(ctx context.Context) error
 	IsDeviceRegistered() bool
 	IsUserRegistered() bool

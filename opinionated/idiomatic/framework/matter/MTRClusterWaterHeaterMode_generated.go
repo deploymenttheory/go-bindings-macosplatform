@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Water Heater Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterWaterHeaterMode wraps [raw.MTRClusterWaterHeaterMode] with a fluent Go API.
 type MTRClusterWaterHeaterMode struct {
 	inner *raw.MTRClusterWaterHeaterMode

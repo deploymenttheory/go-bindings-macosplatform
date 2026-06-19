@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A device that generates data for HealthKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkdevice
 type HKDevice struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func HKDeviceFromID(id objc.ID) *HKDevice {
 	return o
 }
 
-// @method        initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier: @abstract      Initialize a new HKDevice with the specified values. @discussion    This allows initialization of an HKDevice object based on the information provided.
+// Initializes a new device object.
 func (o *HKDevice) InitWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name *foundation.NSString, manufacturer *foundation.NSString, model *foundation.NSString, hardwareVersion *foundation.NSString, firmwareVersion *foundation.NSString, softwareVersion *foundation.NSString, localIdentifier *foundation.NSString, uDIDeviceIdentifier *foundation.NSString) *HKDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDeviceSelInitWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier, name.Ptr(), manufacturer.Ptr(), model.Ptr(), hardwareVersion.Ptr(), firmwareVersion.Ptr(), softwareVersion.Ptr(), localIdentifier.Ptr(), uDIDeviceIdentifier.Ptr())
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func (o *HKDevice) InitWithNameManufacturerModelHardwareVersionFirmwareVersionSo
 	return HKDeviceFromID(_ret)
 }
 
-// @method        localDevice @abstract      Returns a device representing the host. @discussion    If an app chooses to save samples that were retrieved from the local device, e.g. an HKWorkout with a totalDistance HKQuantity gathered from CoreLocation GPS distances, then this would be an appropriate HKDevice to use.
+// returns a device object that represents the current device.
 func HKDeviceLocalDevice() *HKDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKDevice), _hKDeviceSelLocalDevice)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The paragraph or ruler attributes for an attributed string.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsparagraphstyle
 type NSParagraphStyle struct {
 	foundation.NSObject
@@ -53,6 +55,7 @@ func NSParagraphStyleFromID(id objc.ID) *NSParagraphStyle {
 	return o
 }
 
+// Returns the default writing direction for the specified language.
 func NSParagraphStyleDefaultWritingDirectionForLanguage(languageName *foundation.NSString) NSWritingDirection {
 	_ret := objc.Send[NSWritingDirection](objc.ID(_clsNSParagraphStyle), _nSParagraphStyleSelDefaultWritingDirectionForLanguage, languageName.Ptr())
 	return _ret

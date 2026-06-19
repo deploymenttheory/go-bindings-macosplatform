@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for all MIDI messages that operate on a single MIDI channel.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidichannelevent
 type AVMIDIChannelEvent struct {
 	AVMusicEvent

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages image-based content and allows you to perform animations on that content.
+//
 // Layer wraps [raw.CALayer] with a fluent Go API.
 type Layer struct {
 	inner *raw.CALayer
@@ -39,6 +41,8 @@ func NewLayer() *Layer {
 	return &Layer{inner: raw.CALayerFromID(_id)}
 }
 
+// Override to copy or initialize custom fields of the specified layer.
+//
 // NewLayerWithLayer creates a new [Layer].
 func NewLayerWithLayer(layer objc.ID) *Layer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CALayer")), objc.RegisterName("alloc"))
@@ -46,66 +50,88 @@ func NewLayerWithLayer(layer objc.ID) *Layer {
 	return &Layer{inner: raw.CALayerFromID(_id)}
 }
 
+// The layer’s bounds rectangle. Animatable.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Layer) WithBounds(bounds corefoundation.CGRect) *Layer {
 	x.inner.SetBounds(bounds)
 	return x
 }
 
+// The layer’s position in its superlayer’s coordinate space. Animatable.
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *Layer) WithPosition(position corefoundation.CGPoint) *Layer {
 	x.inner.SetPosition(position)
 	return x
 }
 
+// The layer’s position on the z axis. Animatable.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *Layer) WithZPosition(zPosition float64) *Layer {
 	x.inner.SetZPosition(zPosition)
 	return x
 }
 
+// Defines the anchor point of the layer’s bounds rectangle. Animatable.
+//
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *Layer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Layer {
 	x.inner.SetAnchorPoint(anchorPoint)
 	return x
 }
 
+// The anchor point for the layer’s position along the z axis. Animatable.
+//
 // WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
 func (x *Layer) WithAnchorPointZ(anchorPointZ float64) *Layer {
 	x.inner.SetAnchorPointZ(anchorPointZ)
 	return x
 }
 
+// The transform applied to the layer’s contents. Animatable.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Layer) WithTransform(transform raw.CATransform3D) *Layer {
 	x.inner.SetTransform(transform)
 	return x
 }
 
+// The layer’s frame rectangle.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Layer) WithFrame(frame corefoundation.CGRect) *Layer {
 	x.inner.SetFrame(frame)
 	return x
 }
 
+// A Boolean indicating whether the layer is displayed. Animatable.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Layer) WithHidden(hidden bool) *Layer {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+//
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *Layer) WithDoubleSided(doubleSided bool) *Layer {
 	x.inner.SetDoubleSided(doubleSided)
 	return x
 }
 
+// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+//
 // WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
 func (x *Layer) WithGeometryFlipped(geometryFlipped bool) *Layer {
 	x.inner.SetGeometryFlipped(geometryFlipped)
 	return x
 }
 
+// An array containing the layer’s sublayers.
+//
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *Layer) WithSublayers(items ...LayerProvider) *Layer {
 	if len(items) == 0 {
@@ -127,54 +153,72 @@ func (x *Layer) WithSublayers(items ...LayerProvider) *Layer {
 	return x
 }
 
+// Specifies the transform to apply to sublayers when rendering. Animatable.
+//
 // WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
 func (x *Layer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *Layer {
 	x.inner.SetSublayerTransform(sublayerTransform)
 	return x
 }
 
+// An optional layer whose alpha channel is used to mask the layer’s content.
+//
 // WithMask sets the mask property and returns the receiver for chaining.
 func (x *Layer) WithMask(mask LayerProvider) *Layer {
 	x.inner.SetMask(mask.asLayer())
 	return x
 }
 
+// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+//
 // WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
 func (x *Layer) WithMasksToBounds(masksToBounds bool) *Layer {
 	x.inner.SetMasksToBounds(masksToBounds)
 	return x
 }
 
+// An object that provides the contents of the layer. Animatable.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *Layer) WithContents(contents objc.ID) *Layer {
 	x.inner.SetContents(contents)
 	return x
 }
 
+// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+//
 // WithContentsRect sets the contentsRect property and returns the receiver for chaining.
 func (x *Layer) WithContentsRect(contentsRect corefoundation.CGRect) *Layer {
 	x.inner.SetContentsRect(contentsRect)
 	return x
 }
 
+// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+//
 // WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
 func (x *Layer) WithContentsGravity(contentsGravity *foundation.NSString) *Layer {
 	x.inner.SetContentsGravity(contentsGravity)
 	return x
 }
 
+// The scale factor applied to the layer.
+//
 // WithContentsScale sets the contentsScale property and returns the receiver for chaining.
 func (x *Layer) WithContentsScale(contentsScale float64) *Layer {
 	x.inner.SetContentsScale(contentsScale)
 	return x
 }
 
+// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+//
 // WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
 func (x *Layer) WithContentsCenter(contentsCenter corefoundation.CGRect) *Layer {
 	x.inner.SetContentsCenter(contentsCenter)
 	return x
 }
 
+// A hint for the desired storage format of the layer contents.
+//
 // WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
 func (x *Layer) WithContentsFormat(contentsFormat *foundation.NSString) *Layer {
 	x.inner.SetContentsFormat(contentsFormat)
@@ -205,54 +249,72 @@ func (x *Layer) WithContentsHeadroom(contentsHeadroom float64) *Layer {
 	return x
 }
 
+// The filter used when reducing the size of the content.
+//
 // WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
 func (x *Layer) WithMinificationFilter(minificationFilter *foundation.NSString) *Layer {
 	x.inner.SetMinificationFilter(minificationFilter)
 	return x
 }
 
+// The filter used when increasing the size of the content.
+//
 // WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
 func (x *Layer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *Layer {
 	x.inner.SetMagnificationFilter(magnificationFilter)
 	return x
 }
 
+// The bias factor used by the minification filter to determine the levels of detail.
+//
 // WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
 func (x *Layer) WithMinificationFilterBias(minificationFilterBias float32) *Layer {
 	x.inner.SetMinificationFilterBias(minificationFilterBias)
 	return x
 }
 
+// A Boolean value indicating whether the layer contains completely opaque content.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *Layer) WithOpaque(opaque bool) *Layer {
 	x.inner.SetOpaque(opaque)
 	return x
 }
 
+// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+//
 // WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
 func (x *Layer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *Layer {
 	x.inner.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
 	return x
 }
 
+// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+//
 // WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
 func (x *Layer) WithDrawsAsynchronously(drawsAsynchronously bool) *Layer {
 	x.inner.SetDrawsAsynchronously(drawsAsynchronously)
 	return x
 }
 
+// A bitmask defining how the edges of the receiver are rasterized.
+//
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
 func (x *Layer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *Layer {
 	x.inner.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
+//
 // WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
 func (x *Layer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer {
 	x.inner.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
 	return x
 }
 
+// The radius to use when drawing rounded corners for the layer’s background. Animatable.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *Layer) WithCornerRadius(cornerRadius float64) *Layer {
 	x.inner.SetCornerRadius(cornerRadius)
@@ -271,96 +333,128 @@ func (x *Layer) WithCornerCurve(cornerCurve *foundation.NSString) *Layer {
 	return x
 }
 
+// The width of the layer’s border. Animatable.
+//
 // WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
 func (x *Layer) WithBorderWidth(borderWidth float64) *Layer {
 	x.inner.SetBorderWidth(borderWidth)
 	return x
 }
 
+// The opacity of the receiver. Animatable.
+//
 // WithOpacity sets the opacity property and returns the receiver for chaining.
 func (x *Layer) WithOpacity(opacity float32) *Layer {
 	x.inner.SetOpacity(opacity)
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+//
 // WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
 func (x *Layer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *Layer {
 	x.inner.SetAllowsGroupOpacity(allowsGroupOpacity)
 	return x
 }
 
+// A CoreImage filter used to composite the layer and the content behind it. Animatable.
+//
 // WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
 func (x *Layer) WithCompositingFilter(compositingFilter objc.ID) *Layer {
 	x.inner.SetCompositingFilter(compositingFilter)
 	return x
 }
 
+// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *Layer) WithShouldRasterize(shouldRasterize bool) *Layer {
 	x.inner.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+//
 // WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
 func (x *Layer) WithRasterizationScale(rasterizationScale float64) *Layer {
 	x.inner.SetRasterizationScale(rasterizationScale)
 	return x
 }
 
+// The opacity of the layer’s shadow. Animatable.
+//
 // WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
 func (x *Layer) WithShadowOpacity(shadowOpacity float32) *Layer {
 	x.inner.SetShadowOpacity(shadowOpacity)
 	return x
 }
 
+// The offset (in points) of the layer’s shadow. Animatable.
+//
 // WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
 func (x *Layer) WithShadowOffset(shadowOffset corefoundation.CGSize) *Layer {
 	x.inner.SetShadowOffset(shadowOffset)
 	return x
 }
 
+// The blur radius (in points) used to render the layer’s shadow. Animatable.
+//
 // WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
 func (x *Layer) WithShadowRadius(shadowRadius float64) *Layer {
 	x.inner.SetShadowRadius(shadowRadius)
 	return x
 }
 
+// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
+//
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
 func (x *Layer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *Layer {
 	x.inner.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
+// The object responsible for laying out the layer’s sublayers.
+//
 // WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
 func (x *Layer) WithLayoutManager(layoutManager raw.CALayoutManager) *Layer {
 	x.inner.SetLayoutManager(layoutManager)
 	return x
 }
 
+// A dictionary containing layer actions.
+//
 // WithActions sets the actions property and returns the receiver for chaining.
 func (x *Layer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *Layer {
 	x.inner.SetActions(actions)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Layer) WithName(name string) *Layer {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The layer’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Layer) WithDelegate(delegate raw.CALayerDelegate) *Layer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *Layer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *Layer {
 	x.inner.SetStyle(style)
 	return x
 }
 
+// The constraints used to position current layer’s sublayers.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *Layer) WithConstraints(items ...*raw.CAConstraint) *Layer {
 	if len(items) == 0 {
@@ -382,6 +476,8 @@ func (x *Layer) WithConstraints(items ...*raw.CAConstraint) *Layer {
 	return x
 }
 
+// Returns a copy of the presentation layer object that represents the state of the layer as it currently appears onscreen.
+//
 // PresentationLayer calls the underlying PresentationLayer.
 func (x *Layer) PresentationLayer() *Layer {
 	_r := x.inner.PresentationLayer()
@@ -391,6 +487,8 @@ func (x *Layer) PresentationLayer() *Layer {
 	return &Layer{inner: _r}
 }
 
+// Returns the model layer object associated with the receiver, if any.
+//
 // ModelLayer calls the underlying ModelLayer.
 func (x *Layer) ModelLayer() *Layer {
 	_r := x.inner.ModelLayer()
@@ -400,86 +498,120 @@ func (x *Layer) ModelLayer() *Layer {
 	return &Layer{inner: _r}
 }
 
+// Returns a Boolean indicating whether the value of the specified key should be archived.
+//
 // ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
 func (x *Layer) ShouldArchiveValueForKey(key string) bool {
 	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns an affine version of the layer’s transform.
+//
 // AffineTransform calls the underlying AffineTransform.
 func (x *Layer) AffineTransform() corefoundation.CGAffineTransform {
 	return x.inner.AffineTransform()
 }
 
+// Sets the layer’s transform to the specified affine transform.
+//
 // SetAffineTransform calls the underlying SetAffineTransform.
 func (x *Layer) SetAffineTransform(m corefoundation.CGAffineTransform) {
 	x.inner.SetAffineTransform(m)
 }
 
+// Returns a Boolean indicating whether the layer content is implicitly flipped when rendered.
+//
 // ContentsAreFlipped calls the underlying ContentsAreFlipped.
 func (x *Layer) ContentsAreFlipped() bool {
 	return x.inner.ContentsAreFlipped()
 }
 
+// Detaches the layer from its parent layer.
+//
 // RemoveFromSuperlayer calls the underlying RemoveFromSuperlayer.
 func (x *Layer) RemoveFromSuperlayer() {
 	x.inner.RemoveFromSuperlayer()
 }
 
+// Appends the layer to the layer’s list of sublayers.
+//
 // AddSublayer calls the underlying AddSublayer.
 func (x *Layer) AddSublayer(layer *raw.CALayer) {
 	x.inner.AddSublayer(layer)
 }
 
+// Inserts the specified layer into the receiver’s list of sublayers at the specified index.
+//
 // InsertSublayerAtIndex calls the underlying InsertSublayerAtIndex.
 func (x *Layer) InsertSublayerAtIndex(layer *raw.CALayer, idx uint) {
 	x.inner.InsertSublayerAtIndex(layer, idx)
 }
 
+// Inserts the specified sublayer below a different sublayer that already belongs to the receiver.
+//
 // InsertSublayerBelow calls the underlying InsertSublayerBelow.
 func (x *Layer) InsertSublayerBelow(layer *raw.CALayer, sibling *raw.CALayer) {
 	x.inner.InsertSublayerBelow(layer, sibling)
 }
 
+// Inserts the specified sublayer above a different sublayer that already belongs to the receiver.
+//
 // InsertSublayerAbove calls the underlying InsertSublayerAbove.
 func (x *Layer) InsertSublayerAbove(layer *raw.CALayer, sibling *raw.CALayer) {
 	x.inner.InsertSublayerAbove(layer, sibling)
 }
 
+// Replaces the specified sublayer with a different layer object.
+//
 // ReplaceSublayerWith calls the underlying ReplaceSublayerWith.
 func (x *Layer) ReplaceSublayerWith(oldLayer *raw.CALayer, newLayer *raw.CALayer) {
 	x.inner.ReplaceSublayerWith(oldLayer, newLayer)
 }
 
+// Converts the point from the specified layer’s coordinate system to the receiver’s coordinate system.
+//
 // ConvertPointFromLayer calls the underlying ConvertPointFromLayer.
 func (x *Layer) ConvertPointFromLayer(p corefoundation.CGPoint, l *raw.CALayer) corefoundation.CGPoint {
 	return x.inner.ConvertPointFromLayer(p, l)
 }
 
+// Converts the point from the receiver’s coordinate system to the specified layer’s coordinate system.
+//
 // ConvertPointToLayer calls the underlying ConvertPointToLayer.
 func (x *Layer) ConvertPointToLayer(p corefoundation.CGPoint, l *raw.CALayer) corefoundation.CGPoint {
 	return x.inner.ConvertPointToLayer(p, l)
 }
 
+// Converts the rectangle from the specified layer’s coordinate system to the receiver’s coordinate system.
+//
 // ConvertRectFromLayer calls the underlying ConvertRectFromLayer.
 func (x *Layer) ConvertRectFromLayer(r corefoundation.CGRect, l *raw.CALayer) corefoundation.CGRect {
 	return x.inner.ConvertRectFromLayer(r, l)
 }
 
+// Converts the rectangle from the receiver’s coordinate system to the specified layer’s coordinate system.
+//
 // ConvertRectToLayer calls the underlying ConvertRectToLayer.
 func (x *Layer) ConvertRectToLayer(r corefoundation.CGRect, l *raw.CALayer) corefoundation.CGRect {
 	return x.inner.ConvertRectToLayer(r, l)
 }
 
+// Converts the time interval from the specified layer’s time space to the receiver’s time space.
+//
 // ConvertTimeFromLayer calls the underlying ConvertTimeFromLayer.
 func (x *Layer) ConvertTimeFromLayer(t float64, l *raw.CALayer) float64 {
 	return x.inner.ConvertTimeFromLayer(t, l)
 }
 
+// Converts the time interval from the receiver’s time space to the specified layer’s time space
+//
 // ConvertTimeToLayer calls the underlying ConvertTimeToLayer.
 func (x *Layer) ConvertTimeToLayer(t float64, l *raw.CALayer) float64 {
 	return x.inner.ConvertTimeToLayer(t, l)
 }
 
+// Returns the farthest descendant of the receiver in the layer hierarchy (including itself) that contains the specified point.
+//
 // HitTest calls the underlying HitTest.
 func (x *Layer) HitTest(p corefoundation.CGPoint) *Layer {
 	_r := x.inner.HitTest(p)
@@ -489,101 +621,141 @@ func (x *Layer) HitTest(p corefoundation.CGPoint) *Layer {
 	return &Layer{inner: _r}
 }
 
+// Returns whether the receiver contains a specified point.
+//
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *Layer) ContainsPoint(p corefoundation.CGPoint) bool {
 	return x.inner.ContainsPoint(p)
 }
 
+// Reloads the content of this layer.
+//
 // Display calls the underlying Display.
 func (x *Layer) Display() {
 	x.inner.Display()
 }
 
+// Marks the layer’s contents as needing to be updated.
+//
 // SetNeedsDisplay calls the underlying SetNeedsDisplay.
 func (x *Layer) SetNeedsDisplay() {
 	x.inner.SetNeedsDisplay()
 }
 
+// Marks the region within the specified rectangle as needing to be updated.
+//
 // SetNeedsDisplayInRect calls the underlying SetNeedsDisplayInRect.
 func (x *Layer) SetNeedsDisplayInRect(r corefoundation.CGRect) {
 	x.inner.SetNeedsDisplayInRect(r)
 }
 
+// Returns a Boolean indicating whether the layer has been marked as needing an update.
+//
 // NeedsDisplay calls the underlying NeedsDisplay.
 func (x *Layer) NeedsDisplay() bool {
 	return x.inner.NeedsDisplay()
 }
 
+// Initiates the update process for a layer if it is currently marked as needing an update.
+//
 // DisplayIfNeeded calls the underlying DisplayIfNeeded.
 func (x *Layer) DisplayIfNeeded() {
 	x.inner.DisplayIfNeeded()
 }
 
+// Draws the layer’s content using the specified graphics context.
+//
 // DrawInContext calls the underlying DrawInContext.
 func (x *Layer) DrawInContext(ctx unsafe.Pointer) {
 	x.inner.DrawInContext(ctx)
 }
 
+// Renders the layer and its sublayers into the specified context.
+//
 // RenderInContext calls the underlying RenderInContext.
 func (x *Layer) RenderInContext(ctx unsafe.Pointer) {
 	x.inner.RenderInContext(ctx)
 }
 
+// Returns the preferred size of the layer in the coordinate space of its superlayer.
+//
 // PreferredFrameSize calls the underlying PreferredFrameSize.
 func (x *Layer) PreferredFrameSize() corefoundation.CGSize {
 	return x.inner.PreferredFrameSize()
 }
 
+// Invalidates the layer’s layout and marks it as needing an update.
+//
 // SetNeedsLayout calls the underlying SetNeedsLayout.
 func (x *Layer) SetNeedsLayout() {
 	x.inner.SetNeedsLayout()
 }
 
+// Returns a Boolean indicating whether the layer has been marked as needing a layout update.
+//
 // NeedsLayout calls the underlying NeedsLayout.
 func (x *Layer) NeedsLayout() bool {
 	return x.inner.NeedsLayout()
 }
 
+// Recalculate the receiver’s layout, if required.
+//
 // LayoutIfNeeded calls the underlying LayoutIfNeeded.
 func (x *Layer) LayoutIfNeeded() {
 	x.inner.LayoutIfNeeded()
 }
 
+// Tells the layer to update its layout.
+//
 // LayoutSublayers calls the underlying LayoutSublayers.
 func (x *Layer) LayoutSublayers() {
 	x.inner.LayoutSublayers()
 }
 
+// Informs the receiver’s sublayers that the receiver’s size has changed.
+//
 // ResizeSublayersWithOldSize calls the underlying ResizeSublayersWithOldSize.
 func (x *Layer) ResizeSublayersWithOldSize(size corefoundation.CGSize) {
 	x.inner.ResizeSublayersWithOldSize(size)
 }
 
+// Informs the receiver that the size of its superlayer changed.
+//
 // ResizeWithOldSuperlayerSize calls the underlying ResizeWithOldSuperlayerSize.
 func (x *Layer) ResizeWithOldSuperlayerSize(size corefoundation.CGSize) {
 	x.inner.ResizeWithOldSuperlayerSize(size)
 }
 
+// Returns the action object assigned to the specified key.
+//
 // ActionForKey calls the underlying ActionForKey.
 func (x *Layer) ActionForKey(event string) raw.CAAction {
 	return x.inner.ActionForKey(foundation.NSStringStringWithUTF8String(event))
 }
 
+// Add the specified animation object to the layer’s render tree.
+//
 // AddAnimationForKey calls the underlying AddAnimationForKey.
 func (x *Layer) AddAnimationForKey(anim *raw.CAAnimation, key string) {
 	x.inner.AddAnimationForKey(anim, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Remove all animations attached to the layer.
+//
 // RemoveAllAnimations calls the underlying RemoveAllAnimations.
 func (x *Layer) RemoveAllAnimations() {
 	x.inner.RemoveAllAnimations()
 }
 
+// Remove the animation object with the specified key.
+//
 // RemoveAnimationForKey calls the underlying RemoveAnimationForKey.
 func (x *Layer) RemoveAnimationForKey(key string) {
 	x.inner.RemoveAnimationForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns an array of strings that identify the animations currently attached to the layer.
+//
 // AnimationKeys returns the collection as a Go slice.
 func (x *Layer) AnimationKeys() []string {
 	arr := x.inner.AnimationKeys()
@@ -595,6 +767,8 @@ func (x *Layer) AnimationKeys() []string {
 	})
 }
 
+// Returns the animation object with the specified identifier.
+//
 // AnimationForKey calls the underlying AnimationForKey.
 func (x *Layer) AnimationForKey(key string) *Animation {
 	_r := x.inner.AnimationForKey(foundation.NSStringStringWithUTF8String(key))
@@ -1226,6 +1400,8 @@ func (x *Layer) SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetStyle(style)
 }
 
+// Adds the specified constraint to the layer.
+//
 // AddConstraint calls the underlying AddConstraint.
 func (x *Layer) AddConstraint(c *raw.CAConstraint) {
 	x.inner.AddConstraint(c)
@@ -1247,11 +1423,15 @@ func (x *Layer) SetConstraints(constraints *foundation.NSArray[*raw.CAConstraint
 	x.inner.SetConstraints(constraints)
 }
 
+// Initiates a scroll in the layer’s closest ancestor scroll layer so that the specified point lies at the origin of the scroll layer.
+//
 // ScrollPoint calls the underlying ScrollPoint.
 func (x *Layer) ScrollPoint(p corefoundation.CGPoint) {
 	x.inner.ScrollPoint(p)
 }
 
+// Initiates a scroll in the layer’s closest ancestor scroll layer so that the specified rectangle becomes visible.
+//
 // ScrollRectToVisible calls the underlying ScrollRectToVisible.
 func (x *Layer) ScrollRectToVisible(r corefoundation.CGRect) {
 	x.inner.ScrollRectToVisible(r)

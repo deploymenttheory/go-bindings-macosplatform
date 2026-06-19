@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of an HTTP cookie.
+//
 // HTTPCookie wraps [raw.NSHTTPCookie] with a fluent Go API.
 type HTTPCookie struct {
 	inner *raw.NSHTTPCookie

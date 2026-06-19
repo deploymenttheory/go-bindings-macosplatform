@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A node that applies physics effects to nearby nodes.
+//
 // FieldNode wraps [raw.SKFieldNode] with a fluent Go API.
 type FieldNode struct {
 	inner *raw.SKFieldNode
@@ -38,7 +40,7 @@ func NewFieldNode() *FieldNode {
 	return &FieldNode{inner: raw.SKFieldNodeFromID(_id)}
 }
 
-// The region property is the domain of the field's effect. No force is applied to objects outside the region.
+// The area (relative to the node’s origin) that the field affects.
 //
 // WithRegion sets the region property and returns the receiver for chaining.
 func (x *FieldNode) WithRegion(region *Region) *FieldNode {
@@ -46,7 +48,7 @@ func (x *FieldNode) WithRegion(region *Region) *FieldNode {
 	return x
 }
 
-// strength scaling value. default 1.0
+// The strength of the field.
 //
 // WithStrength sets the strength property and returns the receiver for chaining.
 func (x *FieldNode) WithStrength(strength float32) *FieldNode {
@@ -54,7 +56,7 @@ func (x *FieldNode) WithStrength(strength float32) *FieldNode {
 	return x
 }
 
-// The falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff. @see minimumRadius
+// The exponent that defines the rate of decay for the strength of the field as the distance increases between the node and the physics body being affected.
 //
 // WithFalloff sets the falloff property and returns the receiver for chaining.
 func (x *FieldNode) WithFalloff(falloff float32) *FieldNode {
@@ -62,7 +64,7 @@ func (x *FieldNode) WithFalloff(falloff float32) *FieldNode {
 	return x
 }
 
-// minimum radius of effect. Default is very small.
+// The minimum value for distance-based effects.
 //
 // WithMinimumRadius sets the minimumRadius property and returns the receiver for chaining.
 func (x *FieldNode) WithMinimumRadius(minimumRadius float32) *FieldNode {
@@ -70,7 +72,7 @@ func (x *FieldNode) WithMinimumRadius(minimumRadius float32) *FieldNode {
 	return x
 }
 
-// If enabled, a field has an effect. default YES
+// A Boolean value that indicates whether the field is active.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FieldNode) WithEnabled(enabled bool) *FieldNode {
@@ -78,7 +80,7 @@ func (x *FieldNode) WithEnabled(enabled bool) *FieldNode {
 	return x
 }
 
-// If a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect @see region
+// A Boolean value that indicates whether the field node should override all other field nodes that might otherwise affect physics bodies.
 //
 // WithExclusive sets the exclusive property and returns the receiver for chaining.
 func (x *FieldNode) WithExclusive(exclusive bool) *FieldNode {
@@ -86,7 +88,7 @@ func (x *FieldNode) WithExclusive(exclusive bool) *FieldNode {
 	return x
 }
 
-// Logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects. @see SKPhysicsBody.fieldBitMask @see SKEmitterNode.fieldBitMask
+// A mask that defines which categories this field belongs to.
 //
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *FieldNode) WithCategoryBitMask(categoryBitMask uint32) *FieldNode {
@@ -94,7 +96,7 @@ func (x *FieldNode) WithCategoryBitMask(categoryBitMask uint32) *FieldNode {
 	return x
 }
 
-// fields without a smoothness component will return 0 @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
+// The smoothness of the noise used to generate the forces.
 //
 // WithSmoothness sets the smoothness property and returns the receiver for chaining.
 func (x *FieldNode) WithSmoothness(smoothness float32) *FieldNode {
@@ -102,7 +104,7 @@ func (x *FieldNode) WithSmoothness(smoothness float32) *FieldNode {
 	return x
 }
 
-// fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1. @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
+// The rate at which a noise or turbulence field node changes.
 //
 // WithAnimationSpeed sets the animationSpeed property and returns the receiver for chaining.
 func (x *FieldNode) WithAnimationSpeed(animationSpeed float32) *FieldNode {
@@ -110,7 +112,7 @@ func (x *FieldNode) WithAnimationSpeed(animationSpeed float32) *FieldNode {
 	return x
 }
 
-// fields constructed with a texture can be uppdated by assigning a new texture @see velocityFieldWithTexture:velocityTexture
+// A normal texture that specifies the velocities at different points in a velocity field node.
 //
 // WithTexture sets the texture property and returns the receiver for chaining.
 func (x *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
@@ -118,7 +120,7 @@ func (x *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *FieldNode) WithPosition(position corefoundation.CGPoint) *FieldNode {
@@ -126,7 +128,7 @@ func (x *FieldNode) WithPosition(position corefoundation.CGPoint) *FieldNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *FieldNode) WithZPosition(zPosition float64) *FieldNode {
@@ -134,7 +136,7 @@ func (x *FieldNode) WithZPosition(zPosition float64) *FieldNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *FieldNode) WithZRotation(zRotation float64) *FieldNode {
@@ -142,7 +144,7 @@ func (x *FieldNode) WithZRotation(zRotation float64) *FieldNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *FieldNode) WithXScale(xScale float64) *FieldNode {
@@ -150,7 +152,7 @@ func (x *FieldNode) WithXScale(xScale float64) *FieldNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *FieldNode) WithYScale(yScale float64) *FieldNode {
@@ -158,7 +160,7 @@ func (x *FieldNode) WithYScale(yScale float64) *FieldNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *FieldNode) WithSpeed(speed float64) *FieldNode {
@@ -166,7 +168,7 @@ func (x *FieldNode) WithSpeed(speed float64) *FieldNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *FieldNode) WithAlpha(alpha float64) *FieldNode {
@@ -174,7 +176,7 @@ func (x *FieldNode) WithAlpha(alpha float64) *FieldNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *FieldNode) WithPaused(paused bool) *FieldNode {
@@ -182,7 +184,7 @@ func (x *FieldNode) WithPaused(paused bool) *FieldNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *FieldNode) WithHidden(hidden bool) *FieldNode {
@@ -190,7 +192,7 @@ func (x *FieldNode) WithHidden(hidden bool) *FieldNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *FieldNode) WithUserInteractionEnabled(userInteractionEnabled bool) *FieldNode {
@@ -198,7 +200,7 @@ func (x *FieldNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Fie
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FieldNode) WithName(name string) *FieldNode {
@@ -206,7 +208,7 @@ func (x *FieldNode) WithName(name string) *FieldNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
@@ -214,7 +216,7 @@ func (x *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *FieldNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *FieldNode {
@@ -222,7 +224,7 @@ func (x *FieldNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode {
@@ -230,7 +232,7 @@ func (x *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *Fi
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *FieldNode) WithConstraints(items ...*raw.SKConstraint) *FieldNode {
@@ -253,7 +255,7 @@ func (x *FieldNode) WithConstraints(items ...*raw.SKConstraint) *FieldNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *FieldNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *FieldNode {
@@ -261,54 +263,72 @@ func (x *FieldNode) WithAttributeValues(attributeValues *foundation.NSDictionary
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityElement(accessibilityElement bool) *FieldNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityRole(accessibilityRole string) *FieldNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *FieldNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilitySubrole(accessibilitySubrole string) *FieldNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *FieldNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityParent(accessibilityParent objc.ID) *FieldNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityHelp(accessibilityHelp string) *FieldNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityLabel(accessibilityLabel string) *FieldNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *FieldNode) WithAccessibilityEnabled(accessibilityEnabled bool) *FieldNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

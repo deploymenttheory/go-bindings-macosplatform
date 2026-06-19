@@ -39,7 +39,7 @@ func NewRAWProcessingListElementParameterWithNameDescriptionElementID(name strin
 	return &RAWProcessingListElementParameter{inner: raw.MERAWProcessingListElementParameterFromID(_id)}
 }
 
-// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+// A Boolean value that indicates whether the extension enables the parameter.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWProcessingListElementParameter {

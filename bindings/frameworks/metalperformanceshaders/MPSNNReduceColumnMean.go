@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reduction filter that returns the mean value for each column in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducecolumnmean
 type MPSNNReduceColumnMean struct {
 	mpsneuralnetwork.MPSNNReduceUnary

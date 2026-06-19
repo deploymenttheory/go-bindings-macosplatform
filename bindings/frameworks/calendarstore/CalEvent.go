@@ -118,8 +118,11 @@ func (o *CalEvent) SetEndDate(endDate *foundation.NSDate) {
 
 // Deprecated: since macOS 10.8.
 func (o *CalEvent) Attendees() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calEventSelAttendees)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _calEventSelAttendees)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.8.

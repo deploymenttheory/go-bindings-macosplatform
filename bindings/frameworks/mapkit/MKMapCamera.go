@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A virtual camera for defining the appearance of the map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapcamera
 type MKMapCamera struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func MKMapCameraFromID(id objc.ID) *MKMapCamera {
 	return o
 }
 
+// Returns a new camera object for you to configure.
 // Deprecated: Use centerCoordinateDistance
 func MKMapCameraCamera() *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCamera)
@@ -55,6 +58,7 @@ func MKMapCameraCamera() *MKMapCamera {
 	return MKMapCameraFromID(_ret)
 }
 
+// Returns a new camera object using the specified viewing angle information.
 // Deprecated: Use centerCoordinateDistance
 func MKMapCameraCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude(centerCoordinate unsafe.Pointer, eyeCoordinate unsafe.Pointer, eyeAltitude unsafe.Pointer) *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude, centerCoordinate, eyeCoordinate, eyeAltitude)
@@ -64,6 +68,7 @@ func MKMapCameraCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude(cent
 	return MKMapCameraFromID(_ret)
 }
 
+// Returns a new camera object using the specified distance, pitch, and heading information.
 func MKMapCameraCameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCoordinate unsafe.Pointer, distance unsafe.Pointer, pitch float64, heading unsafe.Pointer) *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCameraLookingAtCenterCoordinateFromDistancePitchHeading, centerCoordinate, distance, pitch, heading)
 	if _ret != 0 {
@@ -72,6 +77,7 @@ func MKMapCameraCameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCo
 	return MKMapCameraFromID(_ret)
 }
 
+// Returns a new camera object using the specified map item, view size, and pitch.
 func MKMapCameraCameraLookingAtMapItemForViewSizeAllowPitch(mapItem *MKMapItem, viewSize corefoundation.CGSize, allowPitch bool) *MKMapCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKMapCamera), _mKMapCameraSelCameraLookingAtMapItemForViewSizeAllowPitch, mapItem.Ptr(), viewSize, allowPitch)
 	if _ret != 0 {

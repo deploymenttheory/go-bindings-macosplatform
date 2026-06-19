@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of methods implemented by arranged objects to give access to information about those objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdictionarycontrollerkeyvaluepair
 type NSDictionaryControllerKeyValuePair struct {
 	foundation.NSObject

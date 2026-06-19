@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A slider control that selects a value from a bounded range.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureslider
 type AVCaptureSlider struct {
 	AVCaptureControl
@@ -43,7 +45,7 @@ func AVCaptureSliderFromID(id objc.ID) *AVCaptureSlider {
 	return o
 }
 
-// @method initWithLocalizedTitle:symbolName:minValue:maxValue: @abstract Initializes an `AVCaptureSlider` as a continuous slider between `minValue` and `maxValue`. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param minValue The minimum value the slider can have. `minValue` must be less than `maxValue`, otherwise an `NSInvalidArgumentException` is thrown. @param maxValue The maximum value the slider can have. `maxValue` must be greater than `minValue`, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureSlider` instance as a continuous slider between `minValue` and `maxValue`. @discussion Continuous sliders are used when any value in the range `minValue...maxValue` is supported.
+// Creates a continuous slider control that selects a value from a bounded range.
 func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameMinValueMaxValue(localizedTitle *foundation.NSString, symbolName *foundation.NSString, minValue float32, maxValue float32) *AVCaptureSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValue, localizedTitle.Ptr(), symbolName.Ptr(), minValue, maxValue)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameMinValueMaxValue(local
 	return AVCaptureSliderFromID(_ret)
 }
 
-// @method initWithLocalizedTitle:symbolName:minValue:maxValue:step: @abstract Initializes an `AVCaptureSlider` as a discrete slider where the valid values are between `minValue` and `maxValue` with `step` distance between each value. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param minValue The minimum value the slider can have. `minValue` must be less than `maxValue`, otherwise an `NSInvalidArgumentException` is thrown. @param maxValue The maximum value the slider can have. `maxValue` must be greater than `minValue`, otherwise an `NSInvalidArgumentException` is thrown. @param step The distance between each valid value. `step` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureSlider` instance as a discrete slider where the valid values are between `minValue` and `maxValue` with `step` distance between each value. @discussion Discrete sliders are used when only specific values are valid.
+// Creates a discrete slider control that selects a stepped value from a bounded range.
 func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedTitle *foundation.NSString, symbolName *foundation.NSString, minValue float32, maxValue float32, step float32) *AVCaptureSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameMinValueMaxValueStep, localizedTitle.Ptr(), symbolName.Ptr(), minValue, maxValue, step)
 	if _ret != 0 {
@@ -61,16 +63,16 @@ func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameMinValueMaxValueStep(l
 	return AVCaptureSliderFromID(_ret)
 }
 
-// @method initWithLocalizedTitle:symbolName:values: @abstract Initializes an `AVCaptureSlider` as a discrete slider where `values` contains the valid values. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param values The only values the slider can have. @result An `AVCaptureSlider` instance as a discrete slider where `values` contains the valid values. @discussion Discrete sliders are used when only specific values are valid.
+// Creates a discrete slider control that selects a value from a list.
 func (o *AVCaptureSlider) InitWithLocalizedTitleSymbolNameValues(localizedTitle *foundation.NSString, symbolName *foundation.NSString, values *foundation.NSArray[*foundation.NSNumber]) *AVCaptureSlider {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameValues, localizedTitle.Ptr(), symbolName.Ptr(), values)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelInitWithLocalizedTitleSymbolNameValues, localizedTitle.Ptr(), symbolName.Ptr(), values.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVCaptureSliderFromID(_ret)
 }
 
-// @method setActionQueue:action: @abstract Configures the slider's `action` which is called on `actionQueue` whenever the value of the slider is changed. @param actionQueue A queue for the `action` to be called. @param action An action called on `actionQueue` whenever the value of the slider is changed. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `action` is always called on an internal `DispatchSerialQueue` targeted at `actionQueue`. If `action` modifies a property of the camera system, `actionQueue` must represent the same exclusive execution context as the camera system (see `isSameExclusiveExecutionContext`).
+// Sets the action to perform on the specified dispatch queue when the slider’s value changes.
 func (o *AVCaptureSlider) SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32)) {
 	var __block_action objc.Block
 	if action != nil {
@@ -107,12 +109,15 @@ func (o *AVCaptureSlider) SetLocalizedValueFormat(localizedValueFormat *foundati
 
 // @property prominentValues @abstract Values in this array may receive unique visual representations or behaviors.
 func (o *AVCaptureSlider) ProminentValues() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCaptureSliderSelProminentValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSliderSelProminentValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *AVCaptureSlider) SetProminentValues(prominentValues *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aVCaptureSliderSelSetProminentValues, prominentValues)
+	o.Ptr().Send(_aVCaptureSliderSelSetProminentValues, prominentValues.Ptr())
 }
 
 // @property localizedTitle @abstract A localized string that describes the slider's `action`.

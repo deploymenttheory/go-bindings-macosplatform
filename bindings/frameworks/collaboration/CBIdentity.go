@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A CBIdentity object is used for accessing the attributes of an identity stored in an identity authority. You can use an identity object for finding identities, and storing them in an access control list (ACL). If you need to edit these attributes, take advantage of the CSIdentity class in Core Services.
+//
 // Apple documentation: https://developer.apple.com/documentation/collaboration/cbidentity
 type CBIdentity struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func CBIdentityFromID(id objc.ID) *CBIdentity {
 	return o
 }
 
-// Returns the identity object with the given name from the specified identity authority. The name is compared against all valid identity names, including full names, short names, email addresses, and aliases. - Parameters: - name: The name of the identity. - authority: The identity authority to search. - Returns: The identity object, or `nil` if no identity is found with the specified name.
+// Returns the identity object with the given name from the specified identity authority.
 func CBIdentityIdentityWithNameAuthority(name *foundation.NSString, authority *CBIdentityAuthority) *CBIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentity), _cBIdentitySelIdentityWithNameAuthority, name.Ptr(), authority.Ptr())
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func CBIdentityIdentityWithUniqueIdentifierAuthority(uuid *foundation.NSUUID, au
 	return CBIdentityFromID(_ret)
 }
 
-// Returns the identity object with the given UUID from the specified identity authority. - Parameters: - uuid: The UUID of the identity you are searching for. - authority: The identity authority to search. - Returns: The identity object, or `nil` if no identity is found with the matching criteria.
+// Returns the identity object with the given UUID from the specified identity authority.
 // Deprecated: since macOS 10.11.
 func CBIdentityIdentityWithUUIDStringAuthority(uuid *foundation.NSString, authority *CBIdentityAuthority) *CBIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentity), _cBIdentitySelIdentityWithUUIDStringAuthority, uuid.Ptr(), authority.Ptr())
@@ -76,7 +78,7 @@ func CBIdentityIdentityWithUUIDStringAuthority(uuid *foundation.NSString, author
 	return CBIdentityFromID(_ret)
 }
 
-// Returns the identity object matching the persistent reference data. A persistent reference is an opaque data object suitable for persistent storage. - Parameters: - data: The persistent data object that refers to an identity. - Returns: The identity object matching the persistent data object, or `nil` if the identity is not found.
+// Returns the identity object matching the persistent reference data.
 func CBIdentityIdentityWithPersistentReference(data *foundation.NSData) *CBIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentity), _cBIdentitySelIdentityWithPersistentReference, data.Ptr())
 	if _ret != 0 {
@@ -85,7 +87,7 @@ func CBIdentityIdentityWithPersistentReference(data *foundation.NSData) *CBIdent
 	return CBIdentityFromID(_ret)
 }
 
-// Returns an identity object created from the specified Core Services Identity opaque object. This method is used for interoperability with the Core Services Identity API. - Parameters: - csIdentity: The Core Services Identity opaque object. - Returns: The identity object for use with the Collaboration framework.
+// Returns an identity object created from the specified Core Services Identity opaque object.
 func CBIdentityIdentityWithCSIdentity(csIdentity unsafe.Pointer) *CBIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentity), _cBIdentitySelIdentityWithCSIdentity, csIdentity)
 	if _ret != 0 {
@@ -94,7 +96,7 @@ func CBIdentityIdentityWithCSIdentity(csIdentity unsafe.Pointer) *CBIdentity {
 	return CBIdentityFromID(_ret)
 }
 
-// Returns a Boolean value indicating whether the identity is a member of the specified group. - Parameters: - group: The group to check for membership. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is a member of the group; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
+// Returns a Boolean value indicating whether the identity is a member of the specified group.
 func (o *CBIdentity) IsMemberOfGroup(group *CBGroupIdentity) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBIdentitySelIsMemberOfGroup, group.Ptr())
 	return _ret
@@ -147,8 +149,11 @@ func (o *CBIdentity) PosixName() *foundation.NSString {
 
 // Returns an array of aliases (alternate names) for the identity. An identity can have zero or more aliases. Like the full and short names, two identities cannot share an alias. - Returns: An array of `NSString` objects containing the alternate names for the identity.
 func (o *CBIdentity) Aliases() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cBIdentitySelAliases)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cBIdentitySelAliases)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Returns the email address of an identity. - Returns: The email address of an identity or `nil` if none exists.

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of an individual host on the network.
+//
 // Host wraps [raw.NSHost] with a fluent Go API.
 type Host struct {
 	inner *raw.NSHost

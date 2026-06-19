@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Produces 3D spherical noise with an infinite number of spheres-within-spheres of constantly-increasing radius.
+// A procedural noise generator whose output is a 3D field of concentric spherical shells.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkspheresnoisesource
 type GKSpheresNoiseSource struct {
@@ -34,6 +34,7 @@ func GKSpheresNoiseSourceFromID(id objc.ID) *GKSpheresNoiseSource {
 	return o
 }
 
+// Creates a sphere noise source with the specified frequency.
 func GKSpheresNoiseSourceSpheresNoiseWithFrequency(frequency float64) *GKSpheresNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSpheresNoiseSource), _gKSpheresNoiseSourceSelSpheresNoiseWithFrequency, frequency)
 	if _ret != 0 {
@@ -42,6 +43,7 @@ func GKSpheresNoiseSourceSpheresNoiseWithFrequency(frequency float64) *GKSpheres
 	return GKSpheresNoiseSourceFromID(_ret)
 }
 
+// Initializes a sphere noise source with the specified frequency.
 func (o *GKSpheresNoiseSource) InitWithFrequency(frequency float64) *GKSpheresNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSpheresNoiseSourceSelInitWithFrequency, frequency)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A placeholder node denoting the position of a neural network image in a graph.
+//
 // NNImageNode wraps [raw.MPSNNImageNode] with a fluent Go API.
 type NNImageNode struct {
 	inner *raw.MPSNNImageNode

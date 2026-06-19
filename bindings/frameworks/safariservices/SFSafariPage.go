@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for a Safari webpage.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafaripage
 type SFSafariPage struct {
 	foundation.NSObject
@@ -35,17 +37,17 @@ func SFSafariPageFromID(id objc.ID) *SFSafariPage {
 	return o
 }
 
-// Dispatches a message to the content script injected in this page.
+// Dispatches a message from the app extension to the content script injected in this page.
 func (o *SFSafariPage) DispatchMessageToScriptWithNameUserInfo(messageName *foundation.NSString, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_sFSafariPageSelDispatchMessageToScriptWithNameUserInfo, messageName.Ptr(), userInfo)
+	o.Ptr().Send(_sFSafariPageSelDispatchMessageToScriptWithNameUserInfo, messageName.Ptr(), userInfo.Ptr())
 }
 
-// Reloads the page.
+// Tells Safari to reload the webpage.
 func (o *SFSafariPage) Reload() {
 	o.Ptr().Send(_sFSafariPageSelReload)
 }
 
-// This calls the completion handler with the properties of the page.
+// Retrieves the properties of the webpage.
 func (o *SFSafariPage) GetPagePropertiesWithCompletionHandler(completionHandler func(*SFSafariPageProperties)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

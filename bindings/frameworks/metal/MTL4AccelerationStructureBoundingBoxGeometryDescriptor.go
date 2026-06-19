@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes bounding-box geometry suitable for ray tracing.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4accelerationstructureboundingboxgeometrydescriptor
 type MTL4AccelerationStructureBoundingBoxGeometryDescriptor struct {
 	MTL4AccelerationStructureGeometryDescriptor

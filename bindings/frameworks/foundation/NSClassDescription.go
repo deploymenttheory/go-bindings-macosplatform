@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that provides the interface for querying the relationships and properties of a class.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsclassdescription
 type NSClassDescription struct {
 	NSObject
@@ -31,14 +33,17 @@ func NSClassDescriptionFromID(id objc.ID) *NSClassDescription {
 	return o
 }
 
+// Registers an NSClassDescription object for a given class in the NSClassDescription cache.
 func NSClassDescriptionRegisterClassDescriptionForClass(description *NSClassDescription, aClass objc.Class) {
 	objc.ID(_clsNSClassDescription).Send(_nSClassDescriptionSelRegisterClassDescriptionForClass, description.Ptr(), aClass)
 }
 
+// Removes all NSClassDescription objects from the cache.
 func NSClassDescriptionInvalidateClassDescriptionCache() {
 	objc.ID(_clsNSClassDescription).Send(_nSClassDescriptionSelInvalidateClassDescriptionCache)
 }
 
+// Returns the class description for a given class.
 func NSClassDescriptionClassDescriptionForClass(aClass objc.Class) *NSClassDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSClassDescription), _nSClassDescriptionSelClassDescriptionForClass, aClass)
 	if _ret != 0 {

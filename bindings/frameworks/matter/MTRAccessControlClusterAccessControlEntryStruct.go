@@ -64,21 +64,27 @@ func (o *MTRAccessControlClusterAccessControlEntryStruct) SetAuthMode(authMode *
 }
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) Subjects() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelSubjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelSubjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) SetSubjects(subjects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRAccessControlClusterAccessControlEntryStructSelSetSubjects, subjects)
+	o.Ptr().Send(_mTRAccessControlClusterAccessControlEntryStructSelSetSubjects, subjects.Ptr())
 }
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) Targets() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelTargets)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlEntryStructSelTargets)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) SetTargets(targets *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRAccessControlClusterAccessControlEntryStructSelSetTargets, targets)
+	o.Ptr().Send(_mTRAccessControlClusterAccessControlEntryStructSelSetTargets, targets.Ptr())
 }
 
 func (o *MTRAccessControlClusterAccessControlEntryStruct) FabricIndex() *foundation.NSNumber {

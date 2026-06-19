@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A template object for sounds that can play in reaction to environmental state.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasesoundeventnodeasset
 type PHASESoundEventNodeAsset struct {
 	PHASEAsset

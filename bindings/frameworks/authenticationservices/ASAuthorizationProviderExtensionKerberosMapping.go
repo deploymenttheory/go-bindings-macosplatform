@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of Kerberos mappings that the system login process uses.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping
 type ASAuthorizationProviderExtensionKerberosMapping struct {
 	foundation.NSObject

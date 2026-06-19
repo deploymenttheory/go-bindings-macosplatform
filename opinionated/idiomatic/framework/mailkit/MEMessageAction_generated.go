@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An action the system performs on a message, such as setting a color or archiving it.
+//
 // MessageAction wraps [raw.MEMessageAction] with a fluent Go API.
 type MessageAction struct {
 	inner *raw.MEMessageAction

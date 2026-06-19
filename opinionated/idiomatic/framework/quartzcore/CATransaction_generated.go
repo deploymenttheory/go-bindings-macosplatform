@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for grouping multiple layer-tree operations into atomic updates to the render tree.
+//
 // Transaction wraps [raw.CATransaction] with a fluent Go API.
 type Transaction struct {
 	inner *raw.CATransaction

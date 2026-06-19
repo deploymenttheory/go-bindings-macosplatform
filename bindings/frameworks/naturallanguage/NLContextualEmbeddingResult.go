@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the embedding vector result from applying a contextual embedding to a string.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult
 type NLContextualEmbeddingResult struct {
 	foundation.NSObject
@@ -34,15 +36,18 @@ func NLContextualEmbeddingResultFromID(id objc.ID) *NLContextualEmbeddingResult 
 	return o
 }
 
-// Iterates over the embedding vectors corresponding to the subword tokens within the specified range of the input string. - Parameters: - range: The range in the string to enumerate. - block: A block that contains each token's embedding vector and its corresponding character range in the string. Use this method to access the individual (subword) token embeddings. You can apply pooling or combination techniques to aggregate these subword vectors into a single representation for a word, phrase, or entire input. Common pooling techniques include: * Mean pooling to take the average of subword vectors. * Max pooling for finding the element-wise maximum across tokens. * Use the embeddings of the first or last subword tokens to represent the entire input.
+// Iterates over the embedding vectors corresponding to the subword tokens within the specified range of the input string.
 func (o *NLContextualEmbeddingResult) EnumerateTokenVectorsInRangeUsing(range_ foundation.NSRange, block objc.Block) {
 	o.Ptr().Send(_nLContextualEmbeddingResultSelEnumerateTokenVectorsInRangeUsing, range_, block)
 }
 
-// Returns a token vector at the specified character index. - Parameters: - characterIndex: The index to get the token vector at. - tokenRange: The character range of the token in the input string.
+// Returns a token vector at the specified character index.
 func (o *NLContextualEmbeddingResult) TokenVectorAtIndexTokenRange(characterIndex uint, tokenRange *foundation.NSRange) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nLContextualEmbeddingResultSelTokenVectorAtIndexTokenRange, characterIndex, tokenRange)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLContextualEmbeddingResultSelTokenVectorAtIndexTokenRange, characterIndex, tokenRange)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // A copy of the input string used to generate the embedding vectors.

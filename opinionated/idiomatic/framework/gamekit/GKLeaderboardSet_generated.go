@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// Organizes leaderboards into logical and coherent groups.
+//
 // LeaderboardSet wraps [raw.GKLeaderboardSet] with a fluent Go API.
 type LeaderboardSet struct {
 	inner *raw.GKLeaderboardSet
@@ -40,7 +42,7 @@ func NewLeaderboardSet() *LeaderboardSet {
 	return &LeaderboardSet{inner: raw.GKLeaderboardSetFromID(_id)}
 }
 
-// leaderboard set.
+// The identifier for the leaderboard set.
 //
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
@@ -48,7 +50,7 @@ func (x *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
 	return x
 }
 
-// Loads array with all classic leaderboards and current instances of recurring leaderboards for this leaderboardSet Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads the leaderboards in the leaderboard set.
 //
 // LoadLeaderboardsWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
@@ -112,7 +114,7 @@ func (x *LeaderboardSet) SetIdentifier(identifier string) {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 }
 
-// Loads array with all leaderboards for the leaderboardSet Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads all of the leaderboards for the current leaderboard set.
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
 func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
@@ -138,7 +140,7 @@ func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (*foundation.NSAr
 	}
 }
 
-// Asynchronously load the image. Error will be nil on success.
+// Loads the localized image that you associate with the leaderboard set.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (x *LeaderboardSet) LoadImage(ctx context.Context) (*appkit.NSImage, error) {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that provides a generic user interface for a Cocoa audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/augenericview
 type AUGenericView struct {
 	appkit.NSView
@@ -35,7 +37,7 @@ func AUGenericViewFromID(id objc.ID) *AUGenericView {
 	return o
 }
 
-// @method initWithAudioUnit: @abstract initializer used to create the view for a specific audio unit @param au  The Audio Unit associated with the view @result  Returns the newly created view object
+// Creates a generic view for an audio unit, setting all display flags.
 func (o *AUGenericView) InitWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGenericView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnit, au)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *AUGenericView) InitWithAudioUnit(au *carboncore.ComponentInstanceRecord
 	return AUGenericViewFromID(_ret)
 }
 
-// @method initWithAudioUnit:displayFlags: @abstract initializer used to create the view for a specific audio unit with a parameter for view flags @param au  The Audio Unit associated with the view @param inFlags  The flags specifying display properties (multiple flags can be combined using the or '|' operator) @result  Returns the newly created view object
+// Initializes a generic view for an audio unit, setting specific display flags.
 func (o *AUGenericView) InitWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnitDisplayFlags, inAudioUnit, inFlags)
 	if _ret != 0 {

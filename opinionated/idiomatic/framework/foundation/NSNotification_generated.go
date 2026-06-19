@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for information broadcast through a notification center to all registered observers.
+//
 // Notification wraps [raw.NSNotification] with a fluent Go API.
 type Notification struct {
 	inner *raw.NSNotification
@@ -30,6 +32,8 @@ func NotificationFromID(id objc.ID) *Notification {
 	return &Notification{inner: raw.NSNotificationFromID(id)}
 }
 
+// Initializes a notification with a specified name, object, and user information.
+//
 // NewNotificationWithNameObjectUserInfo creates a new [Notification].
 func NewNotificationWithNameObjectUserInfo(name *raw.NSString, object objc.ID, userInfo purego.IDer) *Notification {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNotification")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewNotificationWithNameObjectUserInfo(name *raw.NSString, object objc.ID, u
 	return &Notification{inner: raw.NSNotificationFromID(_id)}
 }
 
+// Initializes a notification with the data from an unarchiver.
+//
 // NewNotificationWithCoder creates a new [Notification].
 func NewNotificationWithCoder(coder *raw.NSCoder) *Notification {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNotification")), objc.RegisterName("alloc"))

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A legacy class for cross-process rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caremotelayerclient
 type CARemoteLayerClient struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func CARemoteLayerClientFromID(id objc.ID) *CARemoteLayerClient {
 	return o
 }
 
+// Creates a layer client from a server port.
 func (o *CARemoteLayerClient) InitWithServerPort(port uint) *CARemoteLayerClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cARemoteLayerClientSelInitWithServerPort, port)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *CARemoteLayerClient) InitWithServerPort(port uint) *CARemoteLayerClient
 	return CARemoteLayerClientFromID(_ret)
 }
 
+// Invalidates a remote layer client.
 func (o *CARemoteLayerClient) Invalidate() {
 	o.Ptr().Send(_cARemoteLayerClientSelInvalidate)
 }

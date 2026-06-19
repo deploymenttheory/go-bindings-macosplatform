@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that enables you to start and stop URL requests.
+//
 // URLConnection wraps [raw.NSURLConnection] with a fluent Go API.
 type URLConnection struct {
 	inner *raw.NSURLConnection
@@ -29,6 +31,8 @@ func URLConnectionFromID(id objc.ID) *URLConnection {
 	return &URLConnection{inner: raw.NSURLConnectionFromID(id)}
 }
 
+// Returns an initialized URL connection and begins to load the data for the URL request, if specified.
+//
 // NewURLConnectionWithRequestDelegateStartImmediately creates a new [URLConnection].
 func NewURLConnectionWithRequestDelegateStartImmediately(request *raw.NSURLRequest, delegate objc.ID, startImmediately bool) *URLConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLConnection")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewURLConnectionWithRequestDelegateStartImmediately(request *raw.NSURLReque
 	return &URLConnection{inner: raw.NSURLConnectionFromID(_id)}
 }
 
+// Returns an initialized URL connection and begins to load the data for the URL request.
+//
 // NewURLConnectionWithRequestDelegate creates a new [URLConnection].
 func NewURLConnectionWithRequestDelegate(request *raw.NSURLRequest, delegate objc.ID) *URLConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLConnection")), objc.RegisterName("alloc"))
@@ -49,26 +55,36 @@ func (x *URLConnection) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Causes the connection to begin loading data, if it has not already.
+//
 // Start calls the underlying Start.
 func (x *URLConnection) Start() {
 	x.inner.Start()
 }
 
+// Cancels an asynchronous load of a request.
+//
 // Cancel calls the underlying Cancel.
 func (x *URLConnection) Cancel() {
 	x.inner.Cancel()
 }
 
+// Determines the run loop and mode that the connection uses to call methods on its delegate.
+//
 // ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
 func (x *URLConnection) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
 	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
 }
 
+// Causes the connection to stop calling delegate methods in the specified run loop and mode.
+//
 // UnscheduleFromRunLoopForMode calls the underlying UnscheduleFromRunLoopForMode.
 func (x *URLConnection) UnscheduleFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
 	x.inner.UnscheduleFromRunLoopForMode(aRunLoop, mode)
 }
 
+// Determines the operation queue that is used to call methods on the connection’s delegate.
+//
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *URLConnection) SetDelegateQueue(queue *raw.NSOperationQueue) {
 	x.inner.SetDelegateQueue(queue)

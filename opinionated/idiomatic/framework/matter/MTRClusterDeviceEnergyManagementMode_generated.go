@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Device Energy Management Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterDeviceEnergyManagementMode wraps [raw.MTRClusterDeviceEnergyManagementMode] with a fluent Go API.
 type MTRClusterDeviceEnergyManagementMode struct {
 	inner *raw.MTRClusterDeviceEnergyManagementMode

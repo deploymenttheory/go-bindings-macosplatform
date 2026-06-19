@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides the ability to present the dashboard in macOS games.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkdialogcontroller
 type GKDialogController struct {
 	appkit.NSResponder
@@ -34,11 +36,13 @@ func GKDialogControllerFromID(id objc.ID) *GKDialogController {
 	return o
 }
 
+// Presents the dashboard in the window.
 func (o *GKDialogController) PresentViewController(viewController *appkit.NSViewController) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKDialogControllerSelPresentViewController, viewController.Ptr())
 	return _ret
 }
 
+// Dismisses the dashboard.
 func (o *GKDialogController) Dismiss(sender objc.ID) {
 	o.Ptr().Send(_gKDialogControllerSelDismiss, sender)
 }
@@ -55,6 +59,7 @@ func (o *GKDialogController) SetParentWindow(parentWindow *appkit.NSWindow) {
 	o.Ptr().Send(_gKDialogControllerSelSetParentWindow, parentWindow.Ptr())
 }
 
+// Retrieves the shared instance of the dialog controller.
 func GKDialogControllerSharedDialogController() *GKDialogController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKDialogController), _gKDialogControllerSelSharedDialogController)
 	if _ret != 0 {

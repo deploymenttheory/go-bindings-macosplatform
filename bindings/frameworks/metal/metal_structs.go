@@ -31,7 +31,7 @@ type MTL4CopySparseTextureMappingOperation struct {
 	DestinationSlice  uint
 }
 
-// Represents a timestamp data entry in a counter heap of type `MTL4CounterHeapTypeTimestamp`.
+// Represents a timestamp data entry in a counter heap of type MTL4CounterHeapTypeTimestamp.
 type MTL4TimestampHeapEntry struct {
 	Timestamp uint64
 }
@@ -43,7 +43,7 @@ type MTL4UpdateSparseBufferMappingOperation struct {
 	HeapOffset  uint
 }
 
-// Groups together arguments for an operation to update a sparse texture mapping. When performing a sparse mapping update, you are responsible for issuing a barrier against stage `MTLStageResourceState`. You can determine the sparse texture tier by calling “MTLTexture/sparseTextureTier“.
+// Groups together arguments for an operation to update a sparse texture mapping.
 type MTL4UpdateSparseTextureMappingOperation struct {
 	Mode          MTLSparseTextureMappingMode
 	TextureRegion MTLRegion
@@ -52,6 +52,7 @@ type MTL4UpdateSparseTextureMappingOperation struct {
 	HeapOffset    uint
 }
 
+// A description of an instance in an instanced geometry acceleration structure.
 type MTLAccelerationStructureInstanceDescriptor struct {
 	TransformationMatrix            MTLPackedFloat4x3
 	Options                         MTLAccelerationStructureInstanceOptions
@@ -60,6 +61,7 @@ type MTLAccelerationStructureInstanceDescriptor struct {
 	AccelerationStructureIndex      uint32
 }
 
+// A description of an instance in an instanced geometry acceleration structure, with the instance including a user identifier and motion data for the instance.
 type MTLAccelerationStructureMotionInstanceDescriptor struct {
 	Options                         MTLAccelerationStructureInstanceOptions
 	Mask                            uint32
@@ -74,13 +76,14 @@ type MTLAccelerationStructureMotionInstanceDescriptor struct {
 	MotionEndTime                   float32
 }
 
-// @brief Describes the memory requirements for an acceleration structure
+// The expected sizes for a ray-tracing acceleration structure.
 type MTLAccelerationStructureSizes struct {
 	AccelerationStructureSize uint
 	BuildScratchBufferSize    uint
 	RefitScratchBufferSize    uint
 }
 
+// A description of an instance in an instanced geometry acceleration structure, with the instance including a user identifier for the instance.
 type MTLAccelerationStructureUserIDInstanceDescriptor struct {
 	TransformationMatrix            MTLPackedFloat4x3
 	Options                         MTLAccelerationStructureInstanceOptions
@@ -90,6 +93,7 @@ type MTLAccelerationStructureUserIDInstanceDescriptor struct {
 	UserID                          uint32
 }
 
+// An RGBA value used for a color pixel.
 type MTLClearColor struct {
 	Red   float64
 	Green float64
@@ -106,6 +110,7 @@ type MTLComponentTransform struct {
 	Translation MTLPackedFloat3
 }
 
+// The data structure for storing the data you resolve from a stage-utilization counter set.
 type MTLCounterResultStageUtilization struct {
 	TotalCycles                  uint64
 	VertexCycles                 uint64
@@ -115,6 +120,7 @@ type MTLCounterResultStageUtilization struct {
 	RenderTargetCycles           uint64
 }
 
+// The data structure for storing the data you resolve from a statistic counter set.
 type MTLCounterResultStatistic struct {
 	TessellationInputPatches          uint64
 	VertexInvocations                 uint64
@@ -126,10 +132,12 @@ type MTLCounterResultStatistic struct {
 	ComputeKernelInvocations          uint64
 }
 
+// The data structure for storing the data you resolve from a timestamp counter set.
 type MTLCounterResultTimestamp struct {
 	Timestamp uint64
 }
 
+// The data layout required for arguments needed to specify the size of threadgroups.
 type MTLDispatchThreadgroupsIndirectArguments struct {
 	ThreadgroupsPerGrid [3]uint32
 }
@@ -139,6 +147,7 @@ type MTLDispatchThreadsIndirectArguments struct {
 	ThreadsPerThreadgroup [3]uint32
 }
 
+// The data layout required for drawing indexed primitives via indirect buffer calls.
 type MTLDrawIndexedPrimitivesIndirectArguments struct {
 	IndexCount    uint32
 	InstanceCount uint32
@@ -147,6 +156,7 @@ type MTLDrawIndexedPrimitivesIndirectArguments struct {
 	BaseInstance  uint32
 }
 
+// The data layout required for drawing patches via indirect buffer calls.
 type MTLDrawPatchIndirectArguments struct {
 	PatchCount    uint32
 	InstanceCount uint32
@@ -154,6 +164,7 @@ type MTLDrawPatchIndirectArguments struct {
 	BaseInstance  uint32
 }
 
+// The data layout required for drawing primitives via indirect buffer calls.
 type MTLDrawPrimitivesIndirectArguments struct {
 	VertexCount   uint32
 	InstanceCount uint32
@@ -161,6 +172,7 @@ type MTLDrawPrimitivesIndirectArguments struct {
 	BaseInstance  uint32
 }
 
+// A description of an instance in an instanced geometry acceleration structure that the GPU can populate.
 type MTLIndirectAccelerationStructureInstanceDescriptor struct {
 	TransformationMatrix            MTLPackedFloat4x3
 	Options                         MTLAccelerationStructureInstanceOptions
@@ -170,6 +182,7 @@ type MTLIndirectAccelerationStructureInstanceDescriptor struct {
 	AccelerationStructureID         MTLResourceID
 }
 
+// A description of an instance in an acceleration structure that the GPU can populate, with motion data for the instance.
 type MTLIndirectAccelerationStructureMotionInstanceDescriptor struct {
 	Options                         MTLAccelerationStructureInstanceOptions
 	Mask                            uint32
@@ -184,7 +197,7 @@ type MTLIndirectAccelerationStructureMotionInstanceDescriptor struct {
 	MotionEndTime                   float32
 }
 
-// @abstract The data layout required for specifying an indirect command buffer execution range.
+// A range of commands in an indirect command buffer.
 type MTLIndirectCommandBufferExecutionRange struct {
 	Location uint32
 	Length   uint32
@@ -197,7 +210,7 @@ type MTLIntersectionFunctionBufferArguments struct {
 	IntersectionFunctionStride     uint64
 }
 
-// @enum MTLMapIndirectArguments @abstract Structure describing indirect mapping region. This structure is used to populate a buffer for the method  'MTLResourceStateCommandEncoder updateTextureMapping:indirectBuffer:indirectBufferOffset:' @discussion The correct data format for the buffer used in 'MTLResourceStateCommandEncoder updateTextureMapping:indirectBuffer:indirectBufferOffset: is the following: struct MTLMapIndirectBufferFormat{ uint32_t numMappings; MTLMapIndirectArguments mappings[numMappings]; }
+// The data layout for mapping sparse texture regions when using indirect commands.
 type MTLMapIndirectArguments struct {
 	RegionOriginX    uint32
 	RegionOriginY    uint32
@@ -209,7 +222,7 @@ type MTLMapIndirectArguments struct {
 	SliceId          uint32
 }
 
-// @struct MTLOrigin @abstract Identify a pixel in an image. MTLOrigin is ususally used as the upper-left corner of a region of a texture.
+// The coordinates for the front upper-left corner of a region.
 type MTLOrigin struct {
 	X uint
 	Y uint
@@ -223,11 +236,13 @@ type MTLPackedFloatQuaternion struct {
 	W float32
 }
 
+// The per-patch tessellation factors for a quad patch.
 type MTLQuadTessellationFactorsHalf struct {
 	EdgeTessellationFactor   [4]uint16
 	InsideTessellationFactor [2]uint16
 }
 
+// The bounds for a subset of an instance’s elements.
 type MTLRegion struct {
 	Origin MTLOrigin
 	Size   MTLSize
@@ -237,11 +252,13 @@ type MTLRegion struct {
 type MTLResourceID struct {
 }
 
+// A subpixel sample position for use in multisample antialiasing (MSAA).
 type MTLSamplePosition struct {
 	X float32
 	Y float32
 }
 
+// A rectangle for the scissor fragment test.
 type MTLScissorRect struct {
 	X      uint
 	Y      uint
@@ -249,24 +266,26 @@ type MTLScissorRect struct {
 	Height uint
 }
 
-// @typedef MTLSize @abstract A set of dimensions to declare the size of an object, such as an image, texture, threadgroup, or grid.
+// A type that represents one, two, or three dimensions of a type instance, such as an array or texture.
 type MTLSize struct {
 	Width  uint
 	Height uint
 	Depth  uint
 }
 
-// @abstract Represent a memory size and alignment in bytes.
+// The size and alignment of a resource, in bytes.
 type MTLSizeAndAlign struct {
 	Size  uint
 	Align uint
 }
 
+// The data layout required for the arguments needed to specify the stage-in region.
 type MTLStageInRegionIndirectArguments struct {
 	StageInOrigin [3]uint32
 	StageInSize   [3]uint32
 }
 
+// A pattern that modifies the data read or sampled from a texture by rearranging or duplicating the elements of a vector.
 type MTLTextureSwizzleChannels struct {
 	Red   MTLTextureSwizzle
 	Green MTLTextureSwizzle
@@ -274,16 +293,19 @@ type MTLTextureSwizzleChannels struct {
 	Alpha MTLTextureSwizzle
 }
 
+// The per-patch tessellation factors for a triangle patch.
 type MTLTriangleTessellationFactorsHalf struct {
 	EdgeTessellationFactor   [3]uint16
 	InsideTessellationFactor uint16
 }
 
+// An offset applied to a render target index and viewport index.
 type MTLVertexAmplificationViewMapping struct {
 	ViewportArrayIndexOffset     uint32
 	RenderTargetArrayIndexOffset uint32
 }
 
+// A 3D rectangular region for the viewport clipping.
 type MTLViewport struct {
 	OriginX float64
 	OriginY float64

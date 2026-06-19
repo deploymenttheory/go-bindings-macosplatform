@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// An obstacle with an impassible radius in 3D space For use with GKAgent3D.  Using this with a GKAgent2D is no different than using GKCircleObstacle.
+// A spherical impassable volume to be avoided by agents.
 //
 // SphereObstacle wraps [raw.GKSphereObstacle] with a fluent Go API.
 type SphereObstacle struct {
@@ -32,6 +32,8 @@ func SphereObstacleFromID(id objc.ID) *SphereObstacle {
 	return &SphereObstacle{inner: raw.GKSphereObstacleFromID(id)}
 }
 
+// Initializes a spherical obstacle with the specified radius.
+//
 // NewSphereObstacleWithRadius creates a new [SphereObstacle].
 func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSphereObstacle")), objc.RegisterName("alloc"))
@@ -39,7 +41,7 @@ func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
 	return &SphereObstacle{inner: raw.GKSphereObstacleFromID(_id)}
 }
 
-// Radius of the impassible circle
+// The radius of the obstacle.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {

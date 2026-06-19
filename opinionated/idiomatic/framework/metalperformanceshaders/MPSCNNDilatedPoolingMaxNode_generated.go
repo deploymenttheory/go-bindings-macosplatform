@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract  A node for a MPSCNNDilatedPooling kernel @discussion This class corresponds to the MPSCNNDilatedPooling class.
+// A representation of a dilated max pooling filter.
 //
 // CNNDilatedPoolingMaxNode wraps [raw.MPSCNNDilatedPoolingMaxNode] with a fluent Go API.
 type CNNDilatedPoolingMaxNode struct {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Settings common to both IKEv2 and IPsec VPN configurations.
+//
 // NEVPNProtocol wraps [raw.NEVPNProtocol] with a fluent Go API.
 type NEVPNProtocol struct {
 	inner *raw.NEVPNProtocol
@@ -37,7 +39,7 @@ func NewNEVPNProtocol() *NEVPNProtocol {
 	return &NEVPNProtocol{inner: raw.NEVPNProtocolFromID(_id)}
 }
 
-// @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
+// The address of the VPN server.
 //
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithServerAddress(serverAddress string) *NEVPNProtocol {
@@ -45,7 +47,7 @@ func (x *NEVPNProtocol) WithServerAddress(serverAddress string) *NEVPNProtocol {
 	return x
 }
 
-// @property username @discussion The username component of the VPN authentication credential.
+// The user name component of the tunneling protocol authentication credential.
 //
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithUsername(username string) *NEVPNProtocol {
@@ -53,7 +55,7 @@ func (x *NEVPNProtocol) WithUsername(username string) *NEVPNProtocol {
 	return x
 }
 
-// @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
+// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
 //
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocol {
@@ -61,7 +63,7 @@ func (x *NEVPNProtocol) WithPasswordReference(passwordReference *foundation.NSDa
 	return x
 }
 
-// @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
+// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
 //
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocol {
@@ -69,7 +71,7 @@ func (x *NEVPNProtocol) WithIdentityReference(identityReference *foundation.NSDa
 	return x
 }
 
-// @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
+// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
 //
 // WithIdentityData sets the identityData property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithIdentityData(identityData *foundation.NSData) *NEVPNProtocol {
@@ -77,7 +79,7 @@ func (x *NEVPNProtocol) WithIdentityData(identityData *foundation.NSData) *NEVPN
 	return x
 }
 
-// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+// The password for the PKCS12 tunneling protocol authentication credentials.
 //
 // WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocol {
@@ -85,7 +87,7 @@ func (x *NEVPNProtocol) WithIdentityDataPassword(identityDataPassword string) *N
 	return x
 }
 
-// @property disconnectOnSleep @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
+// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
 //
 // WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocol {
@@ -93,7 +95,7 @@ func (x *NEVPNProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProt
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
+// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocol {
@@ -101,7 +103,7 @@ func (x *NEVPNProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEVPN
 	return x
 }
 
-// @property includeAllNetworks @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
+// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
 //
 // WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocol {
@@ -109,7 +111,7 @@ func (x *NEVPNProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNPr
 	return x
 }
 
-// @property excludeLocalNetworks @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
+// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 //
 // WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocol {
@@ -117,7 +119,7 @@ func (x *NEVPNProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEV
 	return x
 }
 
-// @property excludeCellularServices @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 //
 // WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocol {
@@ -125,7 +127,7 @@ func (x *NEVPNProtocol) WithExcludeCellularServices(excludeCellularServices bool
 	return x
 }
 
-// @property excludeAPNs @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 //
 // WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocol {
@@ -141,7 +143,7 @@ func (x *NEVPNProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunicatio
 	return x
 }
 
-// @property enforceRoutes @discussion If YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
+// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 //
 // WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
 func (x *NEVPNProtocol) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocol {

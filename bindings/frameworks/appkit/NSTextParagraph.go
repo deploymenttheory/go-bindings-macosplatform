@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a single paragraph backed by an attributed string as the contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextparagraph
 type NSTextParagraph struct {
 	NSTextElement
@@ -33,6 +35,7 @@ func NSTextParagraphFromID(id objc.ID) *NSTextParagraph {
 	return o
 }
 
+// Creates a new paragraph with the attributed string you provide.
 func (o *NSTextParagraph) InitWithAttributedString(attributedString *foundation.NSAttributedString) *NSTextParagraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelInitWithAttributedString, attributedString.Ptr())
 	if _ret != 0 {

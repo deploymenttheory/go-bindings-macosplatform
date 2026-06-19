@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A button that allows the user to add or edit a shortcut.
+//
 // Apple documentation: https://developer.apple.com/documentation/intentsui/inuiaddvoiceshortcutbutton
 type INUIAddVoiceShortcutButton struct {
 	appkit.NSButton
@@ -39,6 +41,7 @@ func INUIAddVoiceShortcutButtonFromID(id objc.ID) *INUIAddVoiceShortcutButton {
 	return o
 }
 
+// Creates an Add to Siri button with the specified style.
 func (o *INUIAddVoiceShortcutButton) InitWithStyle(style INUIAddVoiceShortcutButtonStyle) *INUIAddVoiceShortcutButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelInitWithStyle, style)
 	if _ret != 0 {

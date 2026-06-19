@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object representing the currently signed-in iCloud user.
+//
 // CloudPlayer wraps [raw.GKCloudPlayer] with a fluent Go API.
 type CloudPlayer struct {
 	inner *raw.GKCloudPlayer

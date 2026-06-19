@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for updating the payment request after the user makes changes on the payment sheet.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate
 type PKPaymentRequestUpdate struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func PKPaymentRequestUpdateFromID(id objc.ID) *PKPaymentRequestUpdate {
 	return o
 }
 
+// Creates a payment request update with the specified payment summary items.
 func (o *PKPaymentRequestUpdate) InitWithPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*PKPaymentSummaryItem]) *PKPaymentRequestUpdate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestUpdateSelInitWithPaymentSummaryItems, paymentSummaryItems.Ptr())
 	if _ret != 0 {

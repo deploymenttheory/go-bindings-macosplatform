@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A textual representation of the specified speech in its entirety, as recognized by the speech recognizer.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sftranscription
 type SFTranscription struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Objects that define custom content and the timing of its output.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axcustomcontent
 type AXCustomContent struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func AXCustomContentFromID(id objc.ID) *AXCustomContent {
 	return o
 }
 
+// Creates new custom content with a label and value.
 func AXCustomContentCustomContentWithLabelValue(label *foundation.NSString, value *foundation.NSString) *AXCustomContent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXCustomContent), _aXCustomContentSelCustomContentWithLabelValue, label.Ptr(), value.Ptr())
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func AXCustomContentCustomContentWithLabelValue(label *foundation.NSString, valu
 	return AXCustomContentFromID(_ret)
 }
 
+// Creates new custom content with an attributed string and attributed value.
 func AXCustomContentCustomContentWithAttributedLabelAttributedValue(label *foundation.NSAttributedString, value *foundation.NSAttributedString) *AXCustomContent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXCustomContent), _aXCustomContentSelCustomContentWithAttributedLabelAttributedValue, label.Ptr(), value.Ptr())
 	if _ret != 0 {

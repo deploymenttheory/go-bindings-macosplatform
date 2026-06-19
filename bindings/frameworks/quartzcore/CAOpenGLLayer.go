@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that provides a layer suitable for rendering OpenGL content.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caopengllayer
 type CAOpenGLLayer struct {
 	CALayer
@@ -41,29 +43,35 @@ func CAOpenGLLayerFromID(id objc.ID) *CAOpenGLLayer {
 	return o
 }
 
+// Returns whether the receiver should draw OpenGL content for the specified time.
 func (o *CAOpenGLLayer) CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cAOpenGLLayerSelCanDrawInCGLContextPixelFormatForLayerTimeDisplayTime, ctx, pf, t, ts)
 	return _ret
 }
 
+// Draws the OpenGL content for the specified time.
 func (o *CAOpenGLLayer) DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) {
 	o.Ptr().Send(_cAOpenGLLayerSelDrawInCGLContextPixelFormatForLayerTimeDisplayTime, ctx, pf, t, ts)
 }
 
+// Returns the OpenGL pixel format suitable for rendering to the set of displays specified by the display mask.
 func (o *CAOpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cAOpenGLLayerSelCopyCGLPixelFormatForDisplayMask, mask)
 	return _ret
 }
 
+// Releases the specified OpenGL pixel format object.
 func (o *CAOpenGLLayer) ReleaseCGLPixelFormat(pf unsafe.Pointer) {
 	o.Ptr().Send(_cAOpenGLLayerSelReleaseCGLPixelFormat, pf)
 }
 
+// Returns the rendering context the receiver requires for the specified pixel format.
 func (o *CAOpenGLLayer) CopyCGLContextForPixelFormat(pf unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cAOpenGLLayerSelCopyCGLContextForPixelFormat, pf)
 	return _ret
 }
 
+// Releases the specified rendering context.
 func (o *CAOpenGLLayer) ReleaseCGLContext(ctx unsafe.Pointer) {
 	o.Ptr().Send(_cAOpenGLLayerSelReleaseCGLContext, ctx)
 }

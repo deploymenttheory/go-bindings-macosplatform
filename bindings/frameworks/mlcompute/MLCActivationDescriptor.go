@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create an activation layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor
 type MLCActivationDescriptor struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func MLCActivationDescriptorFromID(id objc.ID) *MLCActivationDescriptor {
 	return o
 }
 
-// @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @return    A new neuron descriptor or nil if failure
+// Creates an activation descriptor with the activation type you specify.
 func MLCActivationDescriptorDescriptorWithType(activationType MLCActivationType) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithType, activationType)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func MLCActivationDescriptorDescriptorWithType(activationType MLCActivationType)
 	return MLCActivationDescriptorFromID(_ret)
 }
 
-// @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @param     a                      Parameter "a". @return    A new neuron descriptor or nil if failure
+// Creates an activation descriptor with the activation type and parameter a that you specify.
 func MLCActivationDescriptorDescriptorWithTypeA(activationType MLCActivationType, a float32) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithTypeA, activationType, a)
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func MLCActivationDescriptorDescriptorWithTypeA(activationType MLCActivationType
 	return MLCActivationDescriptorFromID(_ret)
 }
 
-// @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @param     a                      Parameter "a". @param     b                      Parameter "b". @return    A new neuron descriptor or nil if failure
+// Creates an activation descriptor with the activation type and parameters a and b that you specify.
 func MLCActivationDescriptorDescriptorWithTypeAB(activationType MLCActivationType, a float32, b float32) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithTypeAB, activationType, a, b)
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func MLCActivationDescriptorDescriptorWithTypeAB(activationType MLCActivationTyp
 	return MLCActivationDescriptorFromID(_ret)
 }
 
-// @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @param     a                      Parameter "a". @param     b                      Parameter "b". @param     c                      Parameter "c". @return    A new neuron descriptor or nil if failure
+// Creates an activation descriptor with the activation type and parameters a, b, and c that you specify.
 func MLCActivationDescriptorDescriptorWithTypeABC(activationType MLCActivationType, a float32, b float32, c float32) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithTypeABC, activationType, a, b, c)
 	if _ret != 0 {

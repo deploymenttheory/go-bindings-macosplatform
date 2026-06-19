@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A general-purpose recorder of operations that enables undo and redo.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsundomanager
 type NSUndoManager struct {
 	NSObject
@@ -123,7 +125,7 @@ func (o *NSUndoManager) PrepareWithInvocationTarget(target objc.ID) objc.ID {
 	return _ret
 }
 
-// Records a single undo operation for a given target so that when an undo is performed, it executes the specified block. As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block. - Parameter target: The target of the undo operation. - Parameter undoHandler: The block to be executed when an operation is undone. The block takes a single argument, the target of the undo operation.
+// Records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
 func (o *NSUndoManager) RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID)) {
 	var __block_undoHandler objc.Block
 	if undoHandler != nil {

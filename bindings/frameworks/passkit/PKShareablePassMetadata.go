@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information that you use to configure the sharing sheet for a pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkshareablepassmetadata
 type PKShareablePassMetadata struct {
 	foundation.NSObject
@@ -52,6 +54,7 @@ func PKShareablePassMetadataFromID(id objc.ID) *PKShareablePassMetadata {
 	return o
 }
 
+// Creates a shareable pass metadata object.
 func (o *PKShareablePassMetadata) InitWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription(credentialIdentifier *foundation.NSString, cardConfigurationIdentifier *foundation.NSString, sharingInstanceIdentifier *foundation.NSString, passThumbnailImage unsafe.Pointer, ownerDisplayName *foundation.NSString, localizedDescription *foundation.NSString) *PKShareablePassMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKShareablePassMetadataSelInitWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription, credentialIdentifier.Ptr(), cardConfigurationIdentifier.Ptr(), sharingInstanceIdentifier.Ptr(), passThumbnailImage, ownerDisplayName.Ptr(), localizedDescription.Ptr())
 	if _ret != 0 {

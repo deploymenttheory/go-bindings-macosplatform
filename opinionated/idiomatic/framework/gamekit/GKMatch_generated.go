@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A peer-to-peer network between a group of players that sign into Game Center.
+//
 // Match wraps [raw.GKMatch] with a fluent Go API.
 type Match struct {
 	inner *raw.GKMatch
@@ -39,34 +41,36 @@ func NewMatch() *Match {
 	return &Match{inner: raw.GKMatchFromID(_id)}
 }
 
+// The delegate that handles communication between players in a match.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Match) WithDelegate(delegate raw.GKMatchDelegate) *Match {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Asynchronously send data to one or more GKPlayers. Returns YES if delivery started, NO if unable to start sending and error will be set.
+// Transmits data to one or more players connected to the match.
 //
 // SendDataToPlayersDataModeError calls the underlying SendDataToPlayersDataModeError.
 func (x *Match) SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode GKMatchSendDataMode) (bool, error) {
 	return x.inner.SendDataToPlayersDataModeError(data, players, raw.GKMatchSendDataMode(mode))
 }
 
-// Asynchronously broadcasts data to all players. Returns YES if delivery started, NO if unable to start sending and error will be set.
+// Transmits data to all players connected to the match.
 //
 // SendDataToAllPlayersWithDataModeError calls the underlying SendDataToAllPlayersWithDataModeError.
 func (x *Match) SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode GKMatchSendDataMode) (bool, error) {
 	return x.inner.SendDataToAllPlayersWithDataModeError(data, raw.GKMatchSendDataMode(mode))
 }
 
-// Disconnect the match. This will show all other players in the match that the local player has disconnected. This should be called before releasing the match instance.
+// Disconnects the local player from the match.
 //
 // Disconnect calls the underlying Disconnect.
 func (x *Match) Disconnect() {
 	x.inner.Disconnect()
 }
 
-// Choose the best host from among the connected players using gathered estimates for bandwidth and packet loss. This is intended for applications that wish to implement a client-server model on top of the match. The returned player ID will be nil if the best host cannot currently be determined (e.g. players are still connecting).
+// Determines the best player in the game to act as the server for a client-server topology.
 //
 // ChooseBestHostingPlayer blocks until the operation completes or ctx is cancelled.
 func (x *Match) ChooseBestHostingPlayer(ctx context.Context) (*Player, error) {
@@ -91,7 +95,7 @@ func (x *Match) ChooseBestHostingPlayer(ctx context.Context) (*Player, error) {
 	}
 }
 
-// Automatching to recreate a previous peer-to-peer match that became disconnected. A new match with the same set of players will be returned by the completion handler. All players should perform this when the match has ended for automatching to succeed. Error will be nil on success. Possible reasons for error: 1. Communications failure 2. Timeout
+// Creates a new match with the players from an existing match.
 //
 // Rematch blocks until the operation completes or ctx is cancelled.
 func (x *Match) Rematch(ctx context.Context) (*Match, error) {
@@ -119,7 +123,7 @@ func (x *Match) Rematch(ctx context.Context) (*Match, error) {
 	}
 }
 
-// * This method is deprecated. GKVoiceChat is no longer supported. **
+// Joins the local player to a voice channel.
 //
 // VoiceChatWithName calls the underlying VoiceChatWithName.
 func (x *Match) VoiceChatWithName(name string) *VoiceChat {
@@ -166,7 +170,7 @@ func (x *Match) PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.
 	return x.inner.PlayerProperties()
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Determines the best player in the game to act as the server for a client-server match.
 //
 // ChooseBestHostPlayer blocks until the operation completes or ctx is cancelled.
 func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
@@ -191,7 +195,7 @@ func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
 	}
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Transmits data to a list of connected players.
 //
 // SendDataToPlayersWithDataModeError calls the underlying SendDataToPlayersWithDataModeError.
 func (x *Match) SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode GKMatchSendDataMode) (bool, error) {

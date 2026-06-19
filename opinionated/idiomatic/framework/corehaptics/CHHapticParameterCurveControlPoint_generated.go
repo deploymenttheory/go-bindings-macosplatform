@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single control point in a parameter curve.
+//
 // HapticParameterCurveControlPoint wraps [raw.CHHapticParameterCurveControlPoint] with a fluent Go API.
 type HapticParameterCurveControlPoint struct {
 	inner *raw.CHHapticParameterCurveControlPoint

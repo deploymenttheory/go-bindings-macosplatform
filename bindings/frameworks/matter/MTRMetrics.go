@@ -52,6 +52,9 @@ func (o *MTRMetrics) UniqueIdentifier() *foundation.NSUUID {
 
 // @brief Returns the names of all the metrics data items collected.
 func (o *MTRMetrics) AllKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mTRMetricsSelAllKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMetricsSelAllKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

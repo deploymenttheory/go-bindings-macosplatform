@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that validates the identity of a merchant for a payment request.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentmerchantsession
 type PKPaymentMerchantSession struct {
 	foundation.NSObject
@@ -30,8 +32,9 @@ func PKPaymentMerchantSessionFromID(id objc.ID) *PKPaymentMerchantSession {
 	return o
 }
 
+// Creates an object that validates the identity of a merchant for a payment request.
 func (o *PKPaymentMerchantSession) InitWithDictionary(dictionary *foundation.NSDictionary[objc.ID, objc.ID]) *PKPaymentMerchantSession {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMerchantSessionSelInitWithDictionary, dictionary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMerchantSessionSelInitWithDictionary, dictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

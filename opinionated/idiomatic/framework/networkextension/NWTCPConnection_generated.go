@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object to manage a TCP connection, with or without TLS.
+//
 // NWTCPConnection wraps [raw.NWTCPConnection] with a fluent Go API.
 type NWTCPConnection struct {
 	inner *raw.NWTCPConnection
@@ -33,7 +35,7 @@ func NWTCPConnectionFromID(id objc.ID) *NWTCPConnection {
 	return &NWTCPConnection{inner: raw.NWTCPConnectionFromID(id)}
 }
 
-// @method initWithUpgradeForConnection: @discussion This convenience initializer can be used to create a new connection that would only be connected if there exists a better path (as determined by the system) to the destination endpoint of the original connection. It will be initialized using the same destination endpoint and set of parameters from the original connection. If the original connection becomes disconnected or cancelled, the new "upgrade" connection would automatically be considered better. The caller should create an NWTCPConnection and watch for the hasBetterPath property. When this property is YES, the caller should attempt to create a new upgrade connection, with the goal to start transferring data on the new better path as soon as possible to reduce power and potentially monetary cost. When the new upgrade connection becomes connected and when the caller wraps up the previous caller session on the original connection, the caller can start using the new upgrade connection and tear down the original one. @param connection The original connection from which the caller will upgrade @return An initialized NWTCPConnection
+// This convenience initializer can be used to create a new connection that will only be connected if there exists a better path (as determined by the system) to the remote endpoint of the original connection.
 //
 // NewNWTCPConnectionWithUpgradeForConnection creates a new [NWTCPConnection].
 func NewNWTCPConnectionWithUpgradeForConnection(connection *raw.NWTCPConnection) *NWTCPConnection {
@@ -42,14 +44,14 @@ func NewNWTCPConnectionWithUpgradeForConnection(connection *raw.NWTCPConnection)
 	return &NWTCPConnection{inner: raw.NWTCPConnectionFromID(_id)}
 }
 
-// @method cancel: @discussion Cancel the connection. This will clean up the resources associated with this object and transition this object to NWTCPConnectionStateCancelled state.
+// Cancel the connection.
 //
 // Cancel calls the underlying Cancel.
 func (x *NWTCPConnection) Cancel() {
 	x.inner.Cancel()
 }
 
-// @method readLength:completionHandler: @discussion Read "length" number of bytes. See readMinimumLength:maximumLength:completionHandler: for a complete discussion of the callback behavior. @param length The exact number of bytes the application wants to read @param completion The completion handler to be invoked when there is data to read or an error occurred
+// Read a certain number of bytes on a connection.
 //
 // ReadLength blocks until the operation completes or ctx is cancelled.
 func (x *NWTCPConnection) ReadLength(ctx context.Context, length uint) (*foundation.NSData, error) {
@@ -75,7 +77,7 @@ func (x *NWTCPConnection) ReadLength(ctx context.Context, length uint) (*foundat
 	}
 }
 
-// @method readMinimumLength:maximumLength:completionHandler: @discussion Read the requested range of bytes. The completion handler will be invoked when: - Exactly "length" number of bytes have been read. 'data' will be non-nil. - Fewer than "length" number of bytes, including 0 bytes, have been read, and the connection's read side has been closed. 'data' might be nil, depending on whether there was any data to be read when the connection's read side was closed. - Some fatal error has occurred, and 'data' will be nil. To know when to schedule a read again, check for the condition whether an error has occurred. For better performance, the caller should pick the effective minimum and maximum lengths. For example, if the caller absolutely needs a specific number of bytes before it can make any progress, use that value as the minimum. The maximum bytes can be the upperbound that the caller wants to read. Typically, the minimum length can be the caller protocol fixed-size header and the maximum length can be the maximum size of the payload or the size of the current read buffer. @param minimum The minimum number of bytes the caller wants to read @param maximum The maximum number of bytes the caller wants to read @param completion The completion handler to be invoked when there is data to read or an error occurred
+// Read the requested range of bytes.
 //
 // ReadMinimumLengthMaximumLength blocks until the operation completes or ctx is cancelled.
 func (x *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, minimum uint, maximum uint) (*foundation.NSData, error) {
@@ -101,7 +103,7 @@ func (x *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, mi
 	}
 }
 
-// @method write:completionHandler: @discussion Write the given data object content. Callers should wait until the completionHandler is executed before issuing another write. @param data The data object whose content will be written @param completion The completion handler to be invoked when the data content has been written or an error has occurred. If the error is nil, the write succeeded and the caller can write more data.
+// Write the data to the connection.
 //
 // Write blocks until the operation completes or ctx is cancelled.
 func (x *NWTCPConnection) Write(ctx context.Context, data *foundation.NSData) error {
@@ -121,7 +123,7 @@ func (x *NWTCPConnection) Write(ctx context.Context, data *foundation.NSData) er
 	}
 }
 
-// @method writeClose: @discussion Close this connection's write side such that further write requests won't succeed. Note that this has the effect of closing the read side of the peer connection. When the connection's read side and write side are closed, the connection is considered disconnected and will transition to the appropriate state.
+// Close the connection for writing.
 //
 // WriteClose calls the underlying WriteClose.
 func (x *NWTCPConnection) WriteClose() {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The standard set of gamepad controls.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcgamepad
 // Deprecated: since macOS 10.12.
 type GCGamepad struct {
@@ -40,7 +42,7 @@ func GCGamepadFromID(id objc.ID) *GCGamepad {
 	return o
 }
 
-// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken.
+// Saves a snapshot of all of the profile’s elements.
 func (o *GCGamepad) SaveSnapshot() *GCGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSelSaveSnapshot)
 	if _ret != 0 {

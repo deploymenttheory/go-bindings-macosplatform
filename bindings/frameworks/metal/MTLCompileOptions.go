@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Compilation settings for a Metal shader library.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcompileoptions
 type MTLCompileOptions struct {
 	foundation.NSObject
@@ -61,12 +63,15 @@ func MTLCompileOptionsFromID(id objc.ID) *MTLCompileOptions {
 
 // @property preprocessorNames @abstract List of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. @discussion The default value is nil.
 func (o *MTLCompileOptions) PreprocessorMacros() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]](o.Ptr(), _mTLCompileOptionsSelPreprocessorMacros)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTLCompileOptionsSelPreprocessorMacros)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSObject](_ret)
 }
 
 func (o *MTLCompileOptions) SetPreprocessorMacros(preprocessorMacros *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
-	o.Ptr().Send(_mTLCompileOptionsSelSetPreprocessorMacros, preprocessorMacros)
+	o.Ptr().Send(_mTLCompileOptionsSelSetPreprocessorMacros, preprocessorMacros.Ptr())
 }
 
 // @property fastMathEnabled @abstract If YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a subprocess of the current process.
+//
 // Task wraps [raw.NSTask] with a fluent Go API.
 type Task struct {
 	inner *raw.NSTask

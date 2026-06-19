@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that represents a display device.
+//
 // Display wraps [raw.SCDisplay] with a fluent Go API.
 type Display struct {
 	inner *raw.SCDisplay

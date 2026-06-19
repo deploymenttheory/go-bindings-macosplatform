@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier for a range of objects in a container.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsrangespecifier
 type NSRangeSpecifier struct {
 	NSScriptObjectSpecifier
@@ -42,6 +44,7 @@ func (o *NSRangeSpecifier) InitWithCoder(inCoder *NSCoder) *NSRangeSpecifier {
 	return NSRangeSpecifierFromID(_ret)
 }
 
+// Returns a range specifier initialized with the given properties.
 func (o *NSRangeSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, startSpec *NSScriptObjectSpecifier, endSpec *NSScriptObjectSpecifier) *NSRangeSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRangeSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier, classDesc.Ptr(), container.Ptr(), property.Ptr(), startSpec.Ptr(), endSpec.Ptr())
 	if _ret != 0 {

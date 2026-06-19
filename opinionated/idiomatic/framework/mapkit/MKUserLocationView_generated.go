@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configurable annotation that shows the user’s location using the default MapKit style.
+//
 // UserLocationView wraps [raw.MKUserLocationView] with a fluent Go API.
 type UserLocationView struct {
 	inner *raw.MKUserLocationView
@@ -38,126 +40,168 @@ func NewUserLocationView() *UserLocationView {
 	return &UserLocationView{inner: raw.MKUserLocationViewFromID(_id)}
 }
 
+// The annotation object associated with the view.
+//
 // WithAnnotation sets the annotation property and returns the receiver for chaining.
 func (x *UserLocationView) WithAnnotation(annotation raw.MKAnnotation) *UserLocationView {
 	x.inner.MKAnnotationView.SetAnnotation(annotation)
 	return x
 }
 
+// The image the annotation view displays.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *UserLocationView) WithImage(image *appkit.NSImage) *UserLocationView {
 	x.inner.MKAnnotationView.SetImage(image)
 	return x
 }
 
+// The offset (in points) at which to display the view.
+//
 // WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
 func (x *UserLocationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView {
 	x.inner.MKAnnotationView.SetCenterOffset(centerOffset)
 	return x
 }
 
+// An offset that changes the accessory’s default anchor point.
+//
 // WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
 func (x *UserLocationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView {
 	x.inner.MKAnnotationView.SetAccessoryOffset(accessoryOffset)
 	return x
 }
 
+// The offset (in points) at which to place the callout.
+//
 // WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
 func (x *UserLocationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView {
 	x.inner.MKAnnotationView.SetCalloutOffset(calloutOffset)
 	return x
 }
 
+// The offset in points from the middle-left of the annotation view.
+//
 // WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
 func (x *UserLocationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView {
 	x.inner.MKAnnotationView.SetLeftCalloutOffset(leftCalloutOffset)
 	return x
 }
 
+// The offset in points from the middle-right of the annotation view.
+//
 // WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
 func (x *UserLocationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView {
 	x.inner.MKAnnotationView.SetRightCalloutOffset(rightCalloutOffset)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation is in an enabled state.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *UserLocationView) WithEnabled(enabled bool) *UserLocationView {
 	x.inner.MKAnnotationView.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map view highlights the annotation view.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *UserLocationView) WithHighlighted(highlighted bool) *UserLocationView {
 	x.inner.MKAnnotationView.SetHighlighted(highlighted)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is in a selected state.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *UserLocationView) WithSelected(selected bool) *UserLocationView {
 	x.inner.MKAnnotationView.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
+//
 // WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
 func (x *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocationView {
 	x.inner.MKAnnotationView.SetCanShowCallout(canShowCallout)
 	return x
 }
 
+// The view to display on the left side of the standard callout.
+//
 // WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
 func (x *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *UserLocationView {
 	x.inner.MKAnnotationView.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
 	return x
 }
 
+// The view to display on the right side of the standard callout.
+//
 // WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
 func (x *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *UserLocationView {
 	x.inner.MKAnnotationView.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
 	return x
 }
 
+// The detail accessory view to use in the standard callout.
+//
 // WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
 func (x *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *UserLocationView {
 	x.inner.MKAnnotationView.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is draggable.
+//
 // WithDraggable sets the draggable property and returns the receiver for chaining.
 func (x *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
 	x.inner.MKAnnotationView.SetDraggable(draggable)
 	return x
 }
 
+// The drag state of the annotation view.
+//
 // WithDragState sets the dragState property and returns the receiver for chaining.
 func (x *UserLocationView) WithDragState(dragState MKAnnotationViewDragState) *UserLocationView {
 	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
+// An identifier that determines whether the annotation view participates in clustering.
+//
 // WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
 func (x *UserLocationView) WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView {
 	x.inner.MKAnnotationView.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
 	return x
 }
 
+// The display priority of the annotation view.
+//
 // WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
 func (x *UserLocationView) WithDisplayPriority(displayPriority float32) *UserLocationView {
 	x.inner.MKAnnotationView.SetDisplayPriority(displayPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
+//
 // WithZPriority sets the zPriority property and returns the receiver for chaining.
 func (x *UserLocationView) WithZPriority(zPriority float32) *UserLocationView {
 	x.inner.MKAnnotationView.SetZPriority(zPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
+//
 // WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
 func (x *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *UserLocationView {
 	x.inner.MKAnnotationView.SetSelectedZPriority(selectedZPriority)
 	return x
 }
 
+// The collision mode to use when interpreting the collision frame rectangle.
+//
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
 func (x *UserLocationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *UserLocationView {
 	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))

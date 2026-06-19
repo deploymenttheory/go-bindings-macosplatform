@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides the ability to load, compile, and execute scripts.
+//
 // AppleScript wraps [raw.NSAppleScript] with a fluent Go API.
 type AppleScript struct {
 	inner *raw.NSAppleScript
@@ -31,6 +33,8 @@ func AppleScriptFromID(id objc.ID) *AppleScript {
 	return &AppleScript{inner: raw.NSAppleScriptFromID(id)}
 }
 
+// Initializes a newly allocated script instance from the source identified by the passed URL.
+//
 // NewAppleScriptWithContentsOfURLError creates a new [AppleScript].
 func NewAppleScriptWithContentsOfURLError(url string, errorInfo purego.IDer) *AppleScript {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleScript")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewAppleScriptWithContentsOfURLError(url string, errorInfo purego.IDer) *Ap
 	return &AppleScript{inner: raw.NSAppleScriptFromID(_id)}
 }
 
+// Initializes a newly allocated script instance from the passed source.
+//
 // NewAppleScriptWithSource creates a new [AppleScript].
 func NewAppleScriptWithSource(source string) *AppleScript {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleScript")), objc.RegisterName("alloc"))
@@ -51,11 +57,15 @@ func (x *AppleScript) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// Compiles the receiver, if it is not already compiled.
+//
 // CompileAndReturnError calls the underlying CompileAndReturnError.
 func (x *AppleScript) CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
 	return x.inner.CompileAndReturnError(errorInfo)
 }
 
+// Executes the receiver, compiling it first if it is not already compiled.
+//
 // ExecuteAndReturnError calls the underlying ExecuteAndReturnError.
 func (x *AppleScript) ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
 	_r := x.inner.ExecuteAndReturnError(errorInfo)
@@ -65,6 +75,8 @@ func (x *AppleScript) ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSS
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
+//
 // ExecuteAppleEventError calls the underlying ExecuteAppleEventError.
 func (x *AppleScript) ExecuteAppleEventError(event *raw.NSAppleEventDescriptor, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
 	_r := x.inner.ExecuteAppleEventError(event, errorInfo)

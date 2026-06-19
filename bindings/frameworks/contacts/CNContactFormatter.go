@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to format contact information before displaying it to the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactformatter
 type CNContactFormatter struct {
 	foundation.NSFormatter
@@ -40,13 +42,13 @@ func CNContactFormatterFromID(id objc.ID) *CNContactFormatter {
 	return o
 }
 
-// @abstract The contact key descriptor required for the formatter. @discussion Use to fetch all contact keys required for the formatter style. Can combine key descriptors for different formatter styles in the fetch. @param style The formatting style to be used for the contact name. @return The contact key descriptor for the formatting style.
+// Returns the required key descriptor for the specified formatting style of the contact.
 func CNContactFormatterDescriptorForRequiredKeysForStyle(style CNContactFormatterStyle) CNKeyDescriptor {
 	_ret := objc.Send[CNKeyDescriptor](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelDescriptorForRequiredKeysForStyle, style)
 	return _ret
 }
 
-// @abstract Formats the contact name. @param contact The contact whose name is to be formatted. @param style The formatting style to be used for the contact name. @return The formatted contact name.
+// Returns the contact name, formatted with the specified formatter.
 func CNContactFormatterStringFromContactStyle(contact *CNContact, style CNContactFormatterStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelStringFromContactStyle, contact.Ptr(), style)
 	if _ret != 0 {
@@ -55,22 +57,22 @@ func CNContactFormatterStringFromContactStyle(contact *CNContact, style CNContac
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract Formats the contact name returning an attributed string. @discussion This behaves like +stringFromContact:style: except it returns an attributed string. Includes the attribute key CNContactPropertyAttribute. @param contact The contact whose name is to be formatted. @param style The formatting style to be used for the contact name. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted contact name as an attributed string.
+// Formats the contact name as an attributed string.
 func CNContactFormatterAttributedStringFromContactStyleDefaultAttributes(contact *CNContact, style CNContactFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelAttributedStringFromContactStyleDefaultAttributes, contact.Ptr(), style, attributes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelAttributedStringFromContactStyleDefaultAttributes, contact.Ptr(), style, attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
-// @abstract The recommended name order for a given contact.
+// Returns the display name order.
 func CNContactFormatterNameOrderForContact(contact *CNContact) CNContactDisplayNameOrder {
 	_ret := objc.Send[CNContactDisplayNameOrder](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelNameOrderForContact, contact.Ptr())
 	return _ret
 }
 
-// @abstract The recommended delimiter to use between name components for a given contact.
+// Returns the delimiter to use between name components.
 func CNContactFormatterDelimiterForContact(contact *CNContact) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactFormatter), _cNContactFormatterSelDelimiterForContact, contact.Ptr())
 	if _ret != 0 {
@@ -79,7 +81,7 @@ func CNContactFormatterDelimiterForContact(contact *CNContact) *foundation.NSStr
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract Formats the contact name. @param contact The contact whose name is to be formatted. @return The formatted contact name.
+// Formats the contact name.
 func (o *CNContactFormatter) StringFromContact(contact *CNContact) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFormatterSelStringFromContact, contact.Ptr())
 	if _ret != 0 {
@@ -88,9 +90,9 @@ func (o *CNContactFormatter) StringFromContact(contact *CNContact) *foundation.N
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract Formats the contact name returning an attributed string. @discussion This behaves like -stringFromContact:style: except it returns an attributed string. CNContactPropertyAttribute key has the value of a CNContact name property key. @param contact The contact whose name is to be formatted. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted contact name as an attributed string.
+// Formats the contact name as an attributed string.
 func (o *CNContactFormatter) AttributedStringFromContactDefaultAttributes(contact *CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFormatterSelAttributedStringFromContactDefaultAttributes, contact.Ptr(), attributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFormatterSelAttributedStringFromContactDefaultAttributes, contact.Ptr(), attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

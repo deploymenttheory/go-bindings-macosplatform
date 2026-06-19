@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for Photos model objects (assets and collections).
+//
 // Object wraps [raw.PHObject] with a fluent Go API.
 type Object struct {
 	inner *raw.PHObject

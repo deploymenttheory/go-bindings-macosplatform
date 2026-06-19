@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A panel that prompts the user to select a file to open.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsopenpanel
 type NSOpenPanel struct {
 	NSSavePanel
@@ -52,6 +54,7 @@ func NSOpenPanelFromID(id objc.ID) *NSOpenPanel {
 	return o
 }
 
+// Creates a new Open panel and initializes it with a default configuration.
 func NSOpenPanelOpenPanel() *NSOpenPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenPanel), _nSOpenPanelSelOpenPanel)
 	if _ret != 0 {
@@ -61,8 +64,11 @@ func NSOpenPanelOpenPanel() *NSOpenPanel {
 }
 
 func (o *NSOpenPanel) URLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _nSOpenPanelSelURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenPanelSelURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
 func (o *NSOpenPanel) ResolvesAliases() bool {
@@ -130,28 +136,31 @@ func (o *NSOpenPanel) SetAccessoryViewDisclosed(accessoryViewDisclosed bool) {
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) Filenames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSOpenPanelSelFilenames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenPanelSelFilenames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo(path *foundation.NSString, name *foundation.NSString, fileTypes *foundation.NSArray[objc.ID], docWindow *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSOpenPanelSelBeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes, docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	o.Ptr().Send(_nSOpenPanelSelBeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo(path *foundation.NSString, name *foundation.NSString, fileTypes *foundation.NSArray[objc.ID], delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSOpenPanelSelBeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes, delegate, didEndSelector, contextInfo)
+	o.Ptr().Send(_nSOpenPanelSelBeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes.Ptr(), delegate, didEndSelector, contextInfo)
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) RunModalForDirectoryFileTypes(path *foundation.NSString, name *foundation.NSString, fileTypes *foundation.NSArray[objc.ID]) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForDirectoryFileTypes, path.Ptr(), name.Ptr(), fileTypes)
+	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForDirectoryFileTypes, path.Ptr(), name.Ptr(), fileTypes.Ptr())
 	return _ret
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) RunModalForTypes(fileTypes *foundation.NSArray[objc.ID]) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForTypes, fileTypes)
+	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForTypes, fileTypes.Ptr())
 	return _ret
 }

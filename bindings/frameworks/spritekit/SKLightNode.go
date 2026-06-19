@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that lights surrounding nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sklightnode
 type SKLightNode struct {
 	SKNode

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A string parser that scans for substrings or characters in a character set, and for numeric values from decimal, hexadecimal, and floating-point representations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscanner
 type NSScanner struct {
 	NSObject
@@ -181,6 +183,7 @@ func (o *NSScanner) ScanUpToCharactersFromSetIntoString(set *NSCharacterSet, res
 	return _ret
 }
 
+// Returns an NSScanner object that scans a given string.
 func NSScannerScannerWithString(string_ *NSString) *NSScanner {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScanner), _nSScannerSelScannerWithString, string_.Ptr())
 	if _ret != 0 {

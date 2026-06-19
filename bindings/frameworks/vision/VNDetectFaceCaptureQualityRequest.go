@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that produces a floating-point number that represents the capture quality of a face in a photo.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectfacecapturequalityrequest
 type VNDetectFaceCaptureQualityRequest struct {
 	VNImageBasedRequest

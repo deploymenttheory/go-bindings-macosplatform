@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dynamic plain-text Unicode string object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutablestring
 type NSMutableString struct {
 	NSString
@@ -38,40 +40,49 @@ func NSMutableStringFromID(id objc.ID) *NSMutableString {
 	return o
 }
 
+// Replaces the characters from range with those in aString.
 func (o *NSMutableString) ReplaceCharactersInRangeWithString(range_ NSRange, aString *NSString) {
 	o.Ptr().Send(_nSMutableStringSelReplaceCharactersInRangeWithString, range_, aString.Ptr())
 }
 
+// Inserts into the receiver the characters of a given string at a given location.
 func (o *NSMutableString) InsertStringAtIndex(aString *NSString, loc uint) {
 	o.Ptr().Send(_nSMutableStringSelInsertStringAtIndex, aString.Ptr(), loc)
 }
 
+// Removes from the receiver the characters in a given range.
 func (o *NSMutableString) DeleteCharactersInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableStringSelDeleteCharactersInRange, range_)
 }
 
+// Adds to the end of the receiver the characters of a given string.
 func (o *NSMutableString) AppendString(aString *NSString) {
 	o.Ptr().Send(_nSMutableStringSelAppendString, aString.Ptr())
 }
 
+// Adds a constructed string to the receiver.
 func (o *NSMutableString) AppendFormat(format *NSString) {
 	o.Ptr().Send(_nSMutableStringSelAppendFormat, format.Ptr())
 }
 
+// Replaces the characters of the receiver with those in a given string.
 func (o *NSMutableString) SetString(aString *NSString) {
 	o.Ptr().Send(_nSMutableStringSelSetString, aString.Ptr())
 }
 
+// Replaces all occurrences of a given string in a given range with another given string, returning the number of replacements.
 func (o *NSMutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target *NSString, replacement *NSString, options NSStringCompareOptions, searchRange NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMutableStringSelReplaceOccurrencesOfStringWithStringOptionsRange, target.Ptr(), replacement.Ptr(), options, searchRange)
 	return _ret
 }
 
+// Transliterates the receiver by applying a specified ICU string transform.
 func (o *NSMutableString) ApplyTransformReverseRangeUpdatedRange(transform *NSString, reverse bool, range_ NSRange, resultingRange *NSRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMutableStringSelApplyTransformReverseRangeUpdatedRange, transform.Ptr(), reverse, range_, resultingRange)
 	return _ret
 }
 
+// Returns an NSMutableString object initialized with initial storage for a given number of characters,
 func (o *NSMutableString) InitWithCapacity(capacity uint) *NSMutableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableStringSelInitWithCapacity, capacity)
 	if _ret != 0 {
@@ -80,6 +91,7 @@ func (o *NSMutableString) InitWithCapacity(capacity uint) *NSMutableString {
 	return NSMutableStringFromID(_ret)
 }
 
+// Returns an empty NSMutableString object with initial storage for a given number of characters.
 func NSMutableStringStringWithCapacity(capacity uint) *NSMutableString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableString), _nSMutableStringSelStringWithCapacity, capacity)
 	if _ret != 0 {

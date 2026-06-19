@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a custom extension of a MIDI note on event.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avextendednoteonevent
 type AVExtendedNoteOnEvent struct {
 	AVMusicEvent
@@ -40,7 +42,7 @@ func AVExtendedNoteOnEventFromID(id objc.ID) *AVExtendedNoteOnEvent {
 	return o
 }
 
-// @method initWithMIDINote:velocity:groupID:duration @abstract Initialize the event with a midi note, velocity, instrument and group ID, and a duration. @param midiNote The MIDI velocity represented as a floating point.  Range: Destination-dependent, usually 0.0 - 127.0. @param velocity The MIDI velocity represented as a floating point.  Range: Destination-dependent, usually 0.0 - 127.0. @param groupID An index indicating the AudioUnitElement within the Group Scope which should handle this event (see AudioUnitElement). This normally maps to a channel within the audio unit. Range: normally between 0 and 15, but may be higher if the AVMusicTrack's destinationAudioUnit supports more channels. @param duration The duration of this event in AVMusicTimeStamp beats.  Range:  Any nonnegative number.
+// Creates an event with a MIDI note, velocity, group identifier, and duration.
 func (o *AVExtendedNoteOnEvent) InitWithMIDINoteVelocityGroupIDDuration(midiNote float32, velocity float32, groupID uint, duration float64) *AVExtendedNoteOnEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExtendedNoteOnEventSelInitWithMIDINoteVelocityGroupIDDuration, midiNote, velocity, groupID, duration)
 	if _ret != 0 {
@@ -49,6 +51,7 @@ func (o *AVExtendedNoteOnEvent) InitWithMIDINoteVelocityGroupIDDuration(midiNote
 	return AVExtendedNoteOnEventFromID(_ret)
 }
 
+// Creates a note on event with the default instrument.
 func (o *AVExtendedNoteOnEvent) InitWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiNote float32, velocity float32, instrumentID uint, groupID uint, duration float64) *AVExtendedNoteOnEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExtendedNoteOnEventSelInitWithMIDINoteVelocityInstrumentIDGroupIDDuration, midiNote, velocity, instrumentID, groupID, duration)
 	if _ret != 0 {

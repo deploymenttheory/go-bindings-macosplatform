@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The parameters to use when searching for points of interest on the map.
+//
 // LocalSearchRequest wraps [raw.MKLocalSearchRequest] with a fluent Go API.
 type LocalSearchRequest struct {
 	inner *raw.MKLocalSearchRequest

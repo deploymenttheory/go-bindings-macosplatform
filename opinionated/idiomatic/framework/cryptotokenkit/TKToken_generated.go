@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a hardware-based cryptographic token.
+//
 // Token wraps [raw.TKToken] with a fluent Go API.
 type Token struct {
 	inner *raw.TKToken
@@ -30,7 +32,7 @@ func TokenFromID(id objc.ID) *Token {
 	return &Token{inner: raw.TKTokenFromID(id)}
 }
 
-// @discussion Initializes token instance @param tokenDriver Creating token driver. @param instanceID Unique, persistent identifier of this token.
+// Initializes a token with the driver you specify.
 //
 // NewTokenWithTokenDriverInstanceID creates a new [Token].
 func NewTokenWithTokenDriverInstanceID(tokenDriver *raw.TKTokenDriver, instanceID *foundation.NSString) *Token {
@@ -39,6 +41,8 @@ func NewTokenWithTokenDriverInstanceID(tokenDriver *raw.TKTokenDriver, instanceI
 	return &Token{inner: raw.TKTokenFromID(_id)}
 }
 
+// The token delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Token) WithDelegate(delegate raw.TKTokenDelegate) *Token {
 	x.inner.SetDelegate(delegate)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a lodging reservation.
+//
 // LodgingReservation wraps [raw.INLodgingReservation] with a fluent Go API.
 type LodgingReservation struct {
 	inner *raw.INLodgingReservation
@@ -31,6 +33,8 @@ func LodgingReservationFromID(id objc.ID) *LodgingReservation {
 	return &LodgingReservation{inner: raw.INLodgingReservationFromID(id)}
 }
 
+// Creates a lodging reservation with the specified contents and attributes.
+//
 // NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new [LodgingReservation].
 func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *raw.INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *LodgingReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INLodgingReservation")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservati
 	return &LodgingReservation{inner: raw.INLodgingReservationFromID(_id)}
 }
 
+// Creates a new lodging reservation with the provided information.
+//
 // NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new [LodgingReservation].
 func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *raw.INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *LodgingReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INLodgingReservation")), objc.RegisterName("alloc"))

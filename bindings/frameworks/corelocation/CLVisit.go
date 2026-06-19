@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the user’s location during a specific period of time.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clvisit
 type CLVisit struct {
 	foundation.NSObject

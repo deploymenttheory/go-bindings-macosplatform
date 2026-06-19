@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for optimization layers.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizer
 type MPSNNOptimizer struct {
 	mpscore.MPSKernel

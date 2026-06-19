@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a top-level group node that contains all of an audio unit’s parameters.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auparametertree
 type AUParameterTree struct {
 	AUParameterGroup
@@ -36,7 +38,7 @@ func AUParameterTreeFromID(id objc.ID) *AUParameterTree {
 	return o
 }
 
-// @method	parameterWithAddress: @brief	Search a tree for a parameter with a specific address. @return The parameter corresponding to the supplied address, or nil if no such parameter exists.
+// Searches the tree for a parameter with a specific address.
 func (o *AUParameterTree) ParameterWithAddress(address uint64) *AUParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterTreeSelParameterWithAddress, address)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *AUParameterTree) ParameterWithAddress(address uint64) *AUParameter {
 	return AUParameterFromID(_ret)
 }
 
-// @method	parameterWithID:scope:element: @brief	Search a tree for a specific v2 audio unit parameter. @discussion V2 audio units publish parameters identified by a parameter ID, scope, and element. A host that knows that it is dealing with a v2 unit can locate parameters using this method, for example, for the Apple-supplied system audio units. @return The parameter corresponding to the supplied ID/scope/element, or nil if no such parameter exists, or if the audio unit is not a v2 unit.
+// Searches the tree for a specific version 2 audio unit parameter.
 func (o *AUParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *AUParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterTreeSelParameterWithIDScopeElement, paramID, scope, element)
 	if _ret != 0 {
@@ -54,16 +56,16 @@ func (o *AUParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, 
 	return AUParameterFromID(_ret)
 }
 
-// Create an AUParameter. See AUParameter's properties for descriptions of the arguments.
+// Creates a single parameter object.
 func AUParameterTreeCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier *foundation.NSString, name *foundation.NSString, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName *foundation.NSString, flags AudioUnitParameterOptions, valueStrings *foundation.NSArray[*foundation.NSString], dependentParameters *foundation.NSArray[*foundation.NSNumber]) *AUParameter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAUParameterTree), _aUParameterTreeSelCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters, identifier.Ptr(), name.Ptr(), address, min, max, unit, unitName.Ptr(), flags, valueStrings, dependentParameters)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAUParameterTree), _aUParameterTreeSelCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters, identifier.Ptr(), name.Ptr(), address, min, max, unit, unitName.Ptr(), flags, valueStrings.Ptr(), dependentParameters.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AUParameterFromID(_ret)
 }
 
-// @brief	Create an AUParameterGroup. @param identifier	An identifier for the group (non-localized, persistent). @param name			The group's human-readable name (localized). @param children		The group's child nodes.
+// Creates a parameter group object.
 func AUParameterTreeCreateGroupWithIdentifierNameChildren(identifier *foundation.NSString, name *foundation.NSString, children *foundation.NSArray[*AUParameterNode]) *AUParameterGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAUParameterTree), _aUParameterTreeSelCreateGroupWithIdentifierNameChildren, identifier.Ptr(), name.Ptr(), children.Ptr())
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func AUParameterTreeCreateGroupWithIdentifierNameChildren(identifier *foundation
 	return AUParameterGroupFromID(_ret)
 }
 
-// @brief		Create a template group which may be used as a prototype for further group instances. @discussion Template groups provide a way to construct multiple instances of identical parameter groups, sharing certain immutable state between the instances. Template groups may not appear in trees except at the root.
+// Creates a template group which may be used as a prototype for further group instances.
 func AUParameterTreeCreateGroupTemplate(children *foundation.NSArray[*AUParameterNode]) *AUParameterGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAUParameterTree), _aUParameterTreeSelCreateGroupTemplate, children.Ptr())
 	if _ret != 0 {
@@ -81,7 +83,7 @@ func AUParameterTreeCreateGroupTemplate(children *foundation.NSArray[*AUParamete
 	return AUParameterGroupFromID(_ret)
 }
 
-// @brief	Initialize a group as a copied instance of a template group. @param templateGroup	A group to be used as a template and largely copied. @param identifier		An identifier for the new group (non-localized, persistent). @param name				The new group's human-readable name (localized). @param addressOffset	The new group's parameters' addresses will be offset from those in the template by this value.
+// Initializes a group as a copied instance of a template group.
 func AUParameterTreeCreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup *AUParameterGroup, identifier *foundation.NSString, name *foundation.NSString, addressOffset uint64) *AUParameterGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAUParameterTree), _aUParameterTreeSelCreateGroupFromTemplateIdentifierNameAddressOffset, templateGroup.Ptr(), identifier.Ptr(), name.Ptr(), addressOffset)
 	if _ret != 0 {
@@ -90,7 +92,7 @@ func AUParameterTreeCreateGroupFromTemplateIdentifierNameAddressOffset(templateG
 	return AUParameterGroupFromID(_ret)
 }
 
-// @brief	Create an AUParameterTree. @param children		The tree's top-level child nodes.
+// Creates a parameter tree object.
 func AUParameterTreeCreateTreeWithChildren(children *foundation.NSArray[*AUParameterNode]) *AUParameterTree {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAUParameterTree), _aUParameterTreeSelCreateTreeWithChildren, children.Ptr())
 	if _ret != 0 {

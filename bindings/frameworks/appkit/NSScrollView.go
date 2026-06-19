@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays a portion of a document view and provides scroll bars that allow the user to move the document view within the scroll view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrollview
 type NSScrollView struct {
 	NSView
@@ -133,44 +135,53 @@ func (o *NSScrollView) InitWithCoder(coder *foundation.NSCoder) *NSScrollView {
 	return NSScrollViewFromID(_ret)
 }
 
+// Returns the frame size of a scroll view that contains a content view with the specified size.
 func NSScrollViewFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(cSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ NSBorderType, controlSize NSControlSize, scrollerStyle NSScrollerStyle) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle, cSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
 	return _ret
 }
 
+// Returns the content size calculated from the frame size and the specified specifications.
 func NSScrollViewContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(fSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ NSBorderType, controlSize NSControlSize, scrollerStyle NSScrollerStyle) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle, fSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
 	return _ret
 }
 
+// Returns the frame size of an scroll view that contains a content view with the specified size.
 // Deprecated: Use +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func NSScrollViewFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType(cSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ NSBorderType) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType, cSize, hFlag, vFlag, type_)
 	return _ret
 }
 
+// Returns the content size calculated from the frame size and the specified specifications.
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func NSScrollViewContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType(fSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ NSBorderType) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType, fSize, hFlag, vFlag, type_)
 	return _ret
 }
 
+// Lays out the components of the receiver: the content view, the scrollers, and the ruler views.
 func (o *NSScrollView) Tile() {
 	o.Ptr().Send(_nSScrollViewSelTile)
 }
 
+// Flash the overlay scroll bars.
 func (o *NSScrollView) FlashScrollers() {
 	o.Ptr().Send(_nSScrollViewSelFlashScrollers)
 }
 
+// Magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
 func (o *NSScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSScrollViewSelMagnifyToFitRect, rect)
 }
 
+// Magnify the content by the given amount and center the result on the given point.
 func (o *NSScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSScrollViewSelSetMagnificationCenteredAtPoint, magnification, point)
 }
 
+// Adds a floating subview to the document view.
 func (o *NSScrollView) AddFloatingSubviewForAxis(view *NSView, axis NSEventGestureAxis) {
 	o.Ptr().Send(_nSScrollViewSelAddFloatingSubviewForAxis, view.Ptr(), axis)
 }

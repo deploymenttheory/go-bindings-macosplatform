@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Parameters used to perform specific key exchange operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyexchangeparameters
 type TKTokenKeyExchangeParameters struct {
 	foundation.NSObject

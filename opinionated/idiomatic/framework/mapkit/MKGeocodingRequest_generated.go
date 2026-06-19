@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that looks up a geographic coordinate using the provided string.
+//
 // GeocodingRequest wraps [raw.MKGeocodingRequest] with a fluent Go API.
 type GeocodingRequest struct {
 	inner *raw.MKGeocodingRequest
@@ -33,6 +35,8 @@ func GeocodingRequestFromID(id objc.ID) *GeocodingRequest {
 	return &GeocodingRequest{inner: raw.MKGeocodingRequestFromID(id)}
 }
 
+// Initializes a new geocoder request object with the provided address string.
+//
 // NewGeocodingRequestWithAddressString creates a new [GeocodingRequest].
 func NewGeocodingRequestWithAddressString(addressString string) *GeocodingRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKGeocodingRequest")), objc.RegisterName("alloc"))
@@ -40,18 +44,24 @@ func NewGeocodingRequestWithAddressString(addressString string) *GeocodingReques
 	return &GeocodingRequest{inner: raw.MKGeocodingRequestFromID(_id)}
 }
 
+// The geographic region for the framework to use as the bounds for the request; defaults to a region that covers the whole world.
+//
 // WithRegion sets the region property and returns the receiver for chaining.
 func (x *GeocodingRequest) WithRegion(region raw.MKCoordinateRegion) *GeocodingRequest {
 	x.inner.SetRegion(region)
 	return x
 }
 
+// A value that indicates the default locale the geocoder should use when processing requests.
+//
 // WithPreferredLocale sets the preferredLocale property and returns the receiver for chaining.
 func (x *GeocodingRequest) WithPreferredLocale(preferredLocale *foundation.NSLocale) *GeocodingRequest {
 	x.inner.SetPreferredLocale(preferredLocale)
 	return x
 }
 
+// Returns the map items relevant to the geocoded location.
+//
 // GetMapItems blocks until the operation completes or ctx is cancelled.
 func (x *GeocodingRequest) GetMapItems(ctx context.Context) (*foundation.NSArray[*raw.MKMapItem], error) {
 	type _result struct {
@@ -76,6 +86,8 @@ func (x *GeocodingRequest) GetMapItems(ctx context.Context) (*foundation.NSArray
 	}
 }
 
+// A function you call to cancel a geocoding request that’s in progress.
+//
 // Cancel calls the underlying Cancel.
 func (x *GeocodingRequest) Cancel() {
 	x.inner.Cancel()

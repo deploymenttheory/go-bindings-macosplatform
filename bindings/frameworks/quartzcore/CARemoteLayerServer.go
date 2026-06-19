@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A legacy class for cross-process rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caremotelayerserver
 type CARemoteLayerServer struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func CARemoteLayerServerFromID(id objc.ID) *CARemoteLayerServer {
 	return o
 }
 
+// Returns the (singleton) instance of the shared remote layer server.
 func CARemoteLayerServerSharedServer() *CARemoteLayerServer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCARemoteLayerServer), _cARemoteLayerServerSelSharedServer)
 	if _ret != 0 {

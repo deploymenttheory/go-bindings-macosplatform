@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The behavior of repetition to use when a symbol effect is animating.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior
 type NSSymbolEffectOptionsRepeatBehavior struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func NSSymbolEffectOptionsRepeatBehaviorFromID(id objc.ID) *NSSymbolEffectOption
 	return o
 }
 
-// Creates and returns a repeat behavior that prefers to repeat indefinitely using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time. - Returns: A new behavior that prefers to repeat indefinitely using periodic animations.
+// Creates and returns a repeat behavior that prefers to repeat indefinitely using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodic() *NSSymbolEffectOptionsRepeatBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptionsRepeatBehavior), _nSSymbolEffectOptionsRepeatBehaviorSelBehaviorPeriodic)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodic() *NSSymbolEffectOption
 	return NSSymbolEffectOptionsRepeatBehaviorFromID(_ret)
 }
 
-// Creates and returns a repeat behavior with a preferred play count using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time. - Parameter count: The preferred number of times to play the effect. Very large or small values may be clamped. - Returns: A new behavior with the preferred play count using periodic animations.
+// Creates and returns a repeat behavior with a preferred play count using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodicWithCount(count int) *NSSymbolEffectOptionsRepeatBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptionsRepeatBehavior), _nSSymbolEffectOptionsRepeatBehaviorSelBehaviorPeriodicWithCount, count)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodicWithCount(count int) *NS
 	return NSSymbolEffectOptionsRepeatBehaviorFromID(_ret)
 }
 
-// Creates and returns a repeat behavior with a preferred repeat delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time. - Parameter delay: The preferred delay between repetitions, in seconds. - Returns: A new behavior that prefers to repeat indefinitely with a specified delay using periodic animations.
+// Creates and returns a repeat behavior with a preferred repeat delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodicWithDelay(delay float64) *NSSymbolEffectOptionsRepeatBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptionsRepeatBehavior), _nSSymbolEffectOptionsRepeatBehaviorSelBehaviorPeriodicWithDelay, delay)
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodicWithDelay(delay float64)
 	return NSSymbolEffectOptionsRepeatBehaviorFromID(_ret)
 }
 
-// Creates and returns a repeat behavior with a preferred play count and delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time. - Parameter count: The preferred number of times to play the effect. Very large or small values may be clamped. - Parameter delay: The preferred delay between repetitions, in seconds. - Returns: A new behavior with the preferred play count and delay using periodic animations.
+// Creates and returns a repeat behavior with a preferred play count and delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodicWithCountDelay(count int, delay float64) *NSSymbolEffectOptionsRepeatBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptionsRepeatBehavior), _nSSymbolEffectOptionsRepeatBehaviorSelBehaviorPeriodicWithCountDelay, count, delay)
 	if _ret != 0 {
@@ -70,7 +72,7 @@ func NSSymbolEffectOptionsRepeatBehaviorBehaviorPeriodicWithCountDelay(count int
 	return NSSymbolEffectOptionsRepeatBehaviorFromID(_ret)
 }
 
-// Creates and returns a repeat behavior that prefers to repeat indefinitely, using continuous animations if available. Continuous animations have an intro, a body that runs as long as the effect is enabled, and an outro. If available these animations provide a smoother animation when an effect repeats indefinitely. - Returns: A new behavior that prefers to repeat indefinitely with continuous animations.
+// Creates and returns a repeat behavior that prefers to repeat indefinitely, using continuous animations if available. Continuous animations have an intro, a body that runs as long as the effect is enabled, and an outro. If available these animations provide a smoother animation when an effect repeats indefinitely.
 func NSSymbolEffectOptionsRepeatBehaviorBehaviorContinuous() *NSSymbolEffectOptionsRepeatBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptionsRepeatBehavior), _nSSymbolEffectOptionsRepeatBehaviorSelBehaviorContinuous)
 	if _ret != 0 {

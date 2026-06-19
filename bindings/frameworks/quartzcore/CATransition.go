@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides an animated transition between a layer’s states.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/catransition
 type CATransition struct {
 	CAAnimation

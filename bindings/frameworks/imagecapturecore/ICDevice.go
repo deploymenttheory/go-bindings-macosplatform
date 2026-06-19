@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract object that represents a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icdevice
 type ICDevice struct {
 	foundation.NSObject
@@ -64,22 +66,22 @@ func ICDeviceFromID(id objc.ID) *ICDevice {
 	return o
 }
 
-// @method requestOpenSession @abstract This message requests to open a session on the device. @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. @note Execution of the delegate callback will occur on the main thread.
+// Requests to open a session on the device.
 func (o *ICDevice) RequestOpenSession() {
 	o.Ptr().Send(_iCDeviceSelRequestOpenSession)
 }
 
-// @method requestCloseSession @abstract This message requests to close a previously opened session on this device. @discussion This request is completed when the delegate receives a "device:didCloseSessionWithError:" message. @note Execution of the delegate callback will occur on the main thread.
+// Requests to close an open session on the device.
 func (o *ICDevice) RequestCloseSession() {
 	o.Ptr().Send(_iCDeviceSelRequestCloseSession)
 }
 
-// @method requestEject @abstract Eject the media if permitted by the device, or disconnect from a remote device.
+// Requests to eject the media if permitted by the device, or to disconnect from a remote device.
 func (o *ICDevice) RequestEject() {
 	o.Ptr().Send(_iCDeviceSelRequestEject)
 }
 
-// @method requestOpenSessionWithOptions:completion @abstract This message requests to open a session on the device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to open a session on the device, then executes the completion handler.
 func (o *ICDevice) RequestOpenSessionWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -88,10 +90,10 @@ func (o *ICDevice) RequestOpenSessionWithOptionsCompletion(options *foundation.N
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_iCDeviceSelRequestOpenSessionWithOptionsCompletion, options, __block_completion)
+	o.Ptr().Send(_iCDeviceSelRequestOpenSessionWithOptionsCompletion, options.Ptr(), __block_completion)
 }
 
-// @method requestCloseSessionWithOptions:completion @abstract This message requests to close a previously opened session on this device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to close an open session on the device, then executes the completion handler.
 func (o *ICDevice) RequestCloseSessionWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -100,10 +102,10 @@ func (o *ICDevice) RequestCloseSessionWithOptionsCompletion(options *foundation.
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_iCDeviceSelRequestCloseSessionWithOptionsCompletion, options, __block_completion)
+	o.Ptr().Send(_iCDeviceSelRequestCloseSessionWithOptionsCompletion, options.Ptr(), __block_completion)
 }
 
-// @method requestEjectWithCompletion: @abstract Eject the media, or disconnect the device - if permitted by the device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to eject the media if permitted by the device, or to disconnect from a remote device, then executes the completion handler.
 func (o *ICDevice) RequestEjectWithCompletion(completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -115,17 +117,17 @@ func (o *ICDevice) RequestEjectWithCompletion(completion func(unsafe.Pointer)) {
 	o.Ptr().Send(_iCDeviceSelRequestEjectWithCompletion, __block_completion)
 }
 
-// @method requestSendMessage:outData:maxReturnDataSize:sendMessageDelegate:didSendMessageSelector:contextInfo: @abstract This method asynchronously sends an arbitrary message with optional data to a device. @discussion This method allows developers to send a private message from a client application to a device module. The response to this command will be delivered using didSendMessageSelector of sendMessageDelegate. The didSendMessageSelector should have the same signature as: - (void)didSendMessage:(UInt32)messageCode inData:(NSData*)data error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully. @note This method should not be used to send PTP pass-through commands to a PTP camera. Please refer to 'requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo:' defined in ICCameraDevice.h for sending PTP pass-through commands. @note Execution of the delegate callback will occur on the main thread.
+// Asynchronously sends an arbitrary message with optional data to a device.
 func (o *ICDevice) RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_iCDeviceSelRequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo, messageCode, data.Ptr(), maxReturnedDataSize, sendMessageDelegate, selector, contextInfo)
 }
 
-// @method requestEjectOrDisconnect @abstract Eject the media if permitted by the device, or disconnect from a remote device.
+// Requests to eject the media if permitted by the device, or to disconnect from a remote device.
 func (o *ICDevice) RequestEjectOrDisconnect() {
 	o.Ptr().Send(_iCDeviceSelRequestEjectOrDisconnect)
 }
 
-// @method requestYield @abstract This message requests the device module in control of this device to yield control. @discussion This message should be used only if the client is planning on communicating with the device directly. The device module may not yield control of the device if it has an open session.
+// Requests that device module in control of this device yield control.
 func (o *ICDevice) RequestYield() {
 	o.Ptr().Send(_iCDeviceSelRequestYield)
 }
@@ -148,8 +150,11 @@ func (o *ICDevice) Type() ICDeviceType {
 
 // @property capabilities @abstract ￼The capabilities of the device as reported by the device module.
 func (o *ICDevice) Capabilities() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _iCDeviceSelCapabilities)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelCapabilities)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property name @abstract ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. @note This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
@@ -217,8 +222,11 @@ func (o *ICDevice) HasOpenSession() bool {
 
 // @property userData @abstract ￼Client convenience bookkeeping object retained by the framework.
 func (o *ICDevice) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _iCDeviceSelUserData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceSelUserData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property modulePath @abstract ￼Filesystem path of the device module that is associated with this device. Camera-specific capabilities are defined in ICCameraDevice.h and scanner-specific capabilities are defined in ICScannerDevice.h.

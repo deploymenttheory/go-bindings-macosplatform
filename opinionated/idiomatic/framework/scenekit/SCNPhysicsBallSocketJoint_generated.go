@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A physics behavior that connects two physics bodies and allows them to pivot around each other in any direction.
+//
 // PhysicsBallSocketJoint wraps [raw.SCNPhysicsBallSocketJoint] with a fluent Go API.
 type PhysicsBallSocketJoint struct {
 	inner *raw.SCNPhysicsBallSocketJoint
@@ -35,12 +37,16 @@ func NewPhysicsBallSocketJoint() *PhysicsBallSocketJoint {
 	return &PhysicsBallSocketJoint{inner: raw.SCNPhysicsBallSocketJointFromID(_id)}
 }
 
+// The point at which the joint connects, relative to the node containing the first body.
+//
 // WithAnchorA sets the anchorA property and returns the receiver for chaining.
 func (x *PhysicsBallSocketJoint) WithAnchorA(anchorA raw.SCNVector3) *PhysicsBallSocketJoint {
 	x.inner.SetAnchorA(anchorA)
 	return x
 }
 
+// The point at which the joint connects, relative to the node containing the second body.
+//
 // WithAnchorB sets the anchorB property and returns the receiver for chaining.
 func (x *PhysicsBallSocketJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsBallSocketJoint {
 	x.inner.SetAnchorB(anchorB)

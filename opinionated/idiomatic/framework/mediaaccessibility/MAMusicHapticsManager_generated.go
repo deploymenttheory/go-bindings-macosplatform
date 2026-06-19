@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that reports information about the Music Haptics feature.
+//
 // MusicHapticsManager wraps [raw.MAMusicHapticsManager] with a fluent Go API.
 type MusicHapticsManager struct {
 	inner *raw.MAMusicHapticsManager
@@ -36,20 +38,22 @@ func NewMusicHapticsManager() *MusicHapticsManager {
 	return &MusicHapticsManager{inner: raw.MAMusicHapticsManagerFromID(_id)}
 }
 
-// @abstract In an asynchronous completion handler, returns whether a specific media track with the supplied ISRC has an available haptic track.
+// Checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
 //
 // CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler calls the underlying CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler.
 func (x *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
 	x.inner.CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(foundation.NSStringStringWithUTF8String(internationalStandardRecordingCode), completionHandler)
 }
 
-// @abstract Determine the status of haptic playback for the now playing track asynchronously. This will only be delivered for the app that is the active Now Playing app.
+// Adds an observer to monitor the status of haptic playback for the Now Playing song.
 //
 // AddStatusObserver calls the underlying AddStatusObserver.
 func (x *MusicHapticsManager) AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying {
 	return x.inner.AddStatusObserver(statusHandler)
 }
 
+// Removes the observer monitoring the status of haptic playback for the Now Playing song.
+//
 // RemoveStatusObserver calls the underlying RemoveStatusObserver.
 func (x *MusicHapticsManager) RemoveStatusObserver(registrationToken foundation.NSCopying) {
 	x.inner.RemoveStatusObserver(registrationToken)

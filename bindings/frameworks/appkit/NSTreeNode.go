@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node in a tree of nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstreenode
 type NSTreeNode struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSTreeNodeFromID(id objc.ID) *NSTreeNode {
 	return o
 }
 
+// Creates and returns a tree node that represents the specified object.
 func NSTreeNodeTreeNodeWithRepresentedObject(modelObject objc.ID) *NSTreeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTreeNode), _nSTreeNodeSelTreeNodeWithRepresentedObject, modelObject)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NSTreeNodeTreeNodeWithRepresentedObject(modelObject objc.ID) *NSTreeNode {
 	return NSTreeNodeFromID(_ret)
 }
 
+// Initializes a newly allocated tree node that represents the specified object.
 func (o *NSTreeNode) InitWithRepresentedObject(modelObject objc.ID) *NSTreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelInitWithRepresentedObject, modelObject)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func (o *NSTreeNode) InitWithRepresentedObject(modelObject objc.ID) *NSTreeNode 
 	return NSTreeNodeFromID(_ret)
 }
 
+// Returns the receiver’s descendant at the specified index path.
 func (o *NSTreeNode) DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath) *NSTreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeNodeSelDescendantNodeAtIndexPath, indexPath.Ptr())
 	if _ret != 0 {
@@ -63,8 +68,9 @@ func (o *NSTreeNode) DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath
 	return NSTreeNodeFromID(_ret)
 }
 
+// Sorts the receiver’s subtree using the values of the represented objects with the specified sort descriptors.
 func (o *NSTreeNode) SortWithSortDescriptorsRecursively(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], recursively bool) {
-	o.Ptr().Send(_nSTreeNodeSelSortWithSortDescriptorsRecursively, sortDescriptors, recursively)
+	o.Ptr().Send(_nSTreeNodeSelSortWithSortDescriptorsRecursively, sortDescriptors.Ptr(), recursively)
 }
 
 func (o *NSTreeNode) RepresentedObject() objc.ID {

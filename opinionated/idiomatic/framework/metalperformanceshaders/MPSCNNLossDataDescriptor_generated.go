@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies properties used by a loss data descriptor.
+//
 // CNNLossDataDescriptor wraps [raw.MPSCNNLossDataDescriptor] with a fluent Go API.
 type CNNLossDataDescriptor struct {
 	inner *raw.MPSCNNLossDataDescriptor

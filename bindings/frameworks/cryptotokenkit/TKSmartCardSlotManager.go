@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface to all available smart card reader slots.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager
 type TKSmartCardSlotManager struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func TKSmartCardSlotManagerFromID(id objc.ID) *TKSmartCardSlotManager {
 	return o
 }
 
-// Instantiates smartcard reader slot of specified name.  If specified name is not registered, reports nil.
+// Asynchronously calls a block with a Smart Card reader slot for a specified name.
 func (o *TKSmartCardSlotManager) GetSlotWithNameReply(name *foundation.NSString, reply func(*TKSmartCardSlot)) {
 	var __block_reply objc.Block
 	if reply != nil {
@@ -48,7 +50,7 @@ func (o *TKSmartCardSlotManager) GetSlotWithNameReply(name *foundation.NSString,
 	o.Ptr().Send(_tKSmartCardSlotManagerSelGetSlotWithNameReply, name.Ptr(), __block_reply)
 }
 
-// Gets SmartCard reader slot with specified name.  If reader slot with this name does not exist, returns nil.
+// Returns the Smart Card slot with a given name.
 func (o *TKSmartCardSlotManager) SlotNamed(name *foundation.NSString) *TKSmartCardSlot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotManagerSelSlotNamed, name.Ptr())
 	if _ret != 0 {
@@ -68,6 +70,9 @@ func TKSmartCardSlotManagerDefaultManager() *TKSmartCardSlotManager {
 
 // Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
 func (o *TKSmartCardSlotManager) SlotNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _tKSmartCardSlotManagerSelSlotNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotManagerSelSlotNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the signed or encrypted representation of a message’s RFC 2822 data.
+//
 // EncodedOutgoingMessage wraps [raw.MEEncodedOutgoingMessage] with a fluent Go API.
 type EncodedOutgoingMessage struct {
 	inner *raw.MEEncodedOutgoingMessage
@@ -30,6 +32,8 @@ func EncodedOutgoingMessageFromID(id objc.ID) *EncodedOutgoingMessage {
 	return &EncodedOutgoingMessage{inner: raw.MEEncodedOutgoingMessageFromID(id)}
 }
 
+// Creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
+//
 // NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates a new [EncodedOutgoingMessage].
 func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData *foundation.NSData, isSigned bool, isEncrypted bool) *EncodedOutgoingMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEEncodedOutgoingMessage")), objc.RegisterName("alloc"))

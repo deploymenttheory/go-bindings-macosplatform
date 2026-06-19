@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for reading and writing data to and from a UDP conversation being proxied by the provider.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neappproxyudpflow
 type NEAppProxyUDPFlow struct {
 	NEAppProxyFlow
@@ -38,14 +40,37 @@ func NEAppProxyUDPFlowFromID(id objc.ID) *NEAppProxyUDPFlow {
 }
 
 // @method readDatagramsAndFlowEndpointsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
-func (o *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_nEAppProxyUDPFlowSelReadDatagramsAndFlowEndpointsWithCompletionHandler, completionHandler)
+func (o *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer, unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer, blockParam2 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSData](blockParam0), blockParam1, blockParam2)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nEAppProxyUDPFlowSelReadDatagramsAndFlowEndpointsWithCompletionHandler, __block_completionHandler)
 }
 
-// @method readDatagramsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
+// Read datagrams from the flow.
 // Deprecated: since macOS 15.0.
-func (o *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_nEAppProxyUDPFlowSelReadDatagramsWithCompletionHandler, completionHandler)
+func (o *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSData](blockParam0), foundation.NSArrayFromID[objc.ID](blockParam1), blockParam2)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nEAppProxyUDPFlowSelReadDatagramsWithCompletionHandler, __block_completionHandler)
 }
 
 // @method writeDatagrams:sentByFlowEndpoints:completionHandler: @discussion Write datagrams to the flow. @param datagrams An array of NSData objects containing the data to be written. @param remoteEndpoints The source endpoints of the datagrams. @param completionHandler A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer.
@@ -57,10 +82,10 @@ func (o *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpointsCompletionHandler(d
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nEAppProxyUDPFlowSelWriteDatagramsSentByFlowEndpointsCompletionHandler, datagrams, remoteEndpoints, __block_completionHandler)
+	o.Ptr().Send(_nEAppProxyUDPFlowSelWriteDatagramsSentByFlowEndpointsCompletionHandler, datagrams.Ptr(), remoteEndpoints, __block_completionHandler)
 }
 
-// @method writeDatagrams:sentByEndpoint:completionHandler: @discussion Write datagrams to the flow. @param datagrams An array of NSData objects containing the data to be written. @param remoteEndpoints The source endpoints of the datagrams. @param completionHandler A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer.
+// Write datagrams to the flow.
 // Deprecated: since macOS 15.0.
 func (o *NEAppProxyUDPFlow) WriteDatagramsSentByEndpointsCompletionHandler(datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -70,7 +95,7 @@ func (o *NEAppProxyUDPFlow) WriteDatagramsSentByEndpointsCompletionHandler(datag
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nEAppProxyUDPFlowSelWriteDatagramsSentByEndpointsCompletionHandler, datagrams, remoteEndpoints, __block_completionHandler)
+	o.Ptr().Send(_nEAppProxyUDPFlowSelWriteDatagramsSentByEndpointsCompletionHandler, datagrams.Ptr(), remoteEndpoints.Ptr(), __block_completionHandler)
 }
 
 // @property localFlowEndpoint @discussion An `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.

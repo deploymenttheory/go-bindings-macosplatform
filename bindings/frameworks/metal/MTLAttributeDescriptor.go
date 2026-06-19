@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A descriptor of an argument’s format and where its data is in memory.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlattributedescriptor
 type MTLAttributeDescriptor struct {
 	foundation.NSObject

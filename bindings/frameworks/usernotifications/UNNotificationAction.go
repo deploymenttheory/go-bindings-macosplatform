@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A task your app performs in response to a notification that the system delivers.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationaction
 type UNNotificationAction struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func UNNotificationActionFromID(id objc.ID) *UNNotificationAction {
 	return o
 }
 
+// Creates an action object by using the specified title and options.
 func UNNotificationActionActionWithIdentifierTitleOptions(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions) *UNNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAction), _uNNotificationActionSelActionWithIdentifierTitleOptions, identifier.Ptr(), title.Ptr(), options)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func UNNotificationActionActionWithIdentifierTitleOptions(identifier *foundation
 	return UNNotificationActionFromID(_ret)
 }
 
+// Creates an action object by using the specified title, options, and icon.
 func UNNotificationActionActionWithIdentifierTitleOptionsIcon(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions, icon *UNNotificationActionIcon) *UNNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAction), _uNNotificationActionSelActionWithIdentifierTitleOptionsIcon, identifier.Ptr(), title.Ptr(), options, icon.Ptr())
 	if _ret != 0 {

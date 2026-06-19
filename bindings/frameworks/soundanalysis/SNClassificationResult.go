@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A result that contains the highest-ranking classifications in a time range.
+//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snclassificationresult
 type SNClassificationResult struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func SNClassificationResultFromID(id objc.ID) *SNClassificationResult {
 	return o
 }
 
-// Retrieves the classification candidate with the specified identifier. - Parameter identifier: An identifier on which to query for a particular classification candidate. The query will match to any classification candidate whose `identifier` property (see `identifier` property of `SNClassification`) contains a value equal to the provided argument. - Returns: The classification candidate which has the specified identifier, if it exists. If no such candidate exists, `nil` will be returned.
+// Returns the classification for an identifier.
 func (o *SNClassificationResult) ClassificationForIdentifier(identifier *foundation.NSString) *SNClassification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassificationResultSelClassificationForIdentifier, identifier.Ptr())
 	if _ret != 0 {

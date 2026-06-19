@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An observation that provides the animal body points the analysis recognizes.
+//
 // AnimalBodyPoseObservation wraps [raw.VNAnimalBodyPoseObservation] with a fluent Go API.
 type AnimalBodyPoseObservation struct {
 	inner *raw.VNAnimalBodyPoseObservation
@@ -37,7 +39,7 @@ func NewAnimalBodyPoseObservation() *AnimalBodyPoseObservation {
 	return &AnimalBodyPoseObservation{inner: raw.VNAnimalBodyPoseObservationFromID(_id)}
 }
 
-// @brief Obtain a specific normalized point for a named animal body joint. @param jointName The name of the animal body joint. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the point could not be obtained.
+// Returns the point for a joint name the observation recognizes.
 //
 // RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
 func (x *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
@@ -51,7 +53,7 @@ func (x *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName *
 	return &RecognizedPoint{inner: _r}, nil
 }
 
-// @brief Obtains the collection of points associated with a named animal body joints group. @discussion The obtained collection is a dictionary that provides the mapping of animal join names to the recognized point. @param jointsGroupName The name of the animal body joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+// Returns the points for a joint group name the observation recognizes.
 //
 // RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
 func (x *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a single state in a state machine. By default, states allow transitions freely to and from the states in the machine. If a more restricted set of valid transitions are needed in the state machine, you may override isValidNextState: where applicable. @see GKStateMachine @see isValidNextState:
+// The abstract superclass for defining state-specific logic as part of a state machine.
 //
 // State wraps [raw.GKState] with a fluent Go API.
 type State struct {
@@ -37,28 +37,28 @@ func NewState() *State {
 	return &State{inner: raw.GKStateFromID(_id)}
 }
 
-// Returns YES if the given class is a valid next state to enter. By default GKState will return YES for any class that is subclass of GKState. Override this in a subclass to enforce limited edge traversals in the state machine. @see GKStateMachine.canEnterState: @see GKStateMachine.enterState: @param stateClass the class to be checked @return YES if the class is kind of GKState and the state transition is valid, else NO.
+// Returns a Boolean value indicating whether a state machine currently in this state is allowed to transition into the specified state.
 //
 // IsValidNextState calls the underlying IsValidNextState.
 func (x *State) IsValidNextState(stateClass objc.Class) bool {
 	return x.inner.IsValidNextState(stateClass)
 }
 
-// Called by GKStateMachine when this state is entered. @param previousState the state that was exited to enter this state.  This is nil if this is the state machine's first entered state. @see stateMachineWithStates:initialStateClass:
+// Performs custom actions when a state machine transitions into this state.
 //
 // DidEnterWithPreviousState calls the underlying DidEnterWithPreviousState.
 func (x *State) DidEnterWithPreviousState(previousState *raw.GKState) {
 	x.inner.DidEnterWithPreviousState(previousState)
 }
 
-// Called by GKStateMachine when it is updated @param seconds the time in seconds since the last update
+// Performs custom actions when a state machine updates while in this state.
 //
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *State) UpdateWithDeltaTime(seconds float64) {
 	x.inner.UpdateWithDeltaTime(seconds)
 }
 
-// Called by GKStateMachine when this state is exited @param nextState the state that is being entered next
+// Performs custom actions when a state machine transitions out of this state.
 //
 // WillExitWithNextState calls the underlying WillExitWithNextState.
 func (x *State) WillExitWithNextState(nextState *raw.GKState) {

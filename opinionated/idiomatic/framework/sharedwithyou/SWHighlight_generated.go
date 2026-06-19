@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a universal link to share by any number of contacts in one or more conversations.
+//
 // Highlight wraps [raw.SWHighlight] with a fluent Go API.
 type Highlight struct {
 	inner *raw.SWHighlight

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimizer that represents the stochastic gradient decent algorithm.
+//
 // SGDOptimizer wraps [raw.MLCSGDOptimizer] with a fluent Go API.
 type SGDOptimizer struct {
 	inner *raw.MLCSGDOptimizer
@@ -35,7 +37,7 @@ func NewSGDOptimizer() *SGDOptimizer {
 	return &SGDOptimizer{inner: raw.MLCSGDOptimizerFromID(_id)}
 }
 
-// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+// The learning rate.
 //
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
@@ -43,7 +45,7 @@ func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
 	return x
 }
 
-// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+// A Boolean value that indicates whether you apply gradient clipping.
 //
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {

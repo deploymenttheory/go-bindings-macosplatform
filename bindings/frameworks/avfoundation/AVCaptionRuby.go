@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that presents ruby characters.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionruby
 type AVCaptionRuby struct {
 	foundation.NSObject

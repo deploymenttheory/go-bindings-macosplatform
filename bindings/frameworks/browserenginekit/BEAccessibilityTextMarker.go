@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a location in an element’s accessibility text.
+//
 // Apple documentation: https://developer.apple.com/documentation/browserenginekit/beaccessibilitytextmarker
 type BEAccessibilityTextMarker struct {
 	foundation.NSObject

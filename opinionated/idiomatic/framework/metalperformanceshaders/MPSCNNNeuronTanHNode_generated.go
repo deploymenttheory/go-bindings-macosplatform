@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronTanH kernel @discussion For each pixel, applies the following function: @code f(x) = a * tanh(b * x) @endcode
+// A representation of a hyperbolic tangent neuron filter.
 //
 // CNNNeuronTanHNode wraps [raw.MPSCNNNeuronTanHNode] with a fluent Go API.
 type CNNNeuronTanHNode struct {

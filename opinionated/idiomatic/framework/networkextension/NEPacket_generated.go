@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network packet and its associated properties.
+//
 // NEPacket wraps [raw.NEPacket] with a fluent Go API.
 type NEPacket struct {
 	inner *raw.NEPacket

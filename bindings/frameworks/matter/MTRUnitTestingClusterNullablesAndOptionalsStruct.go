@@ -162,28 +162,37 @@ func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalSt
 }
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableList(nullableList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableList, nullableList)
+	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableList, nullableList.Ptr())
 }
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelOptionalList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalList(optionalList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalList, optionalList)
+	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetOptionalList, optionalList.Ptr())
 }
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNullablesAndOptionalsStructSelNullableOptionalList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalList, nullableOptionalList)
+	o.Ptr().Send(_mTRUnitTestingClusterNullablesAndOptionalsStructSelSetNullableOptionalList, nullableOptionalList.Ptr())
 }

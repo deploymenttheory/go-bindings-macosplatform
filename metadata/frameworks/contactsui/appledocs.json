@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "framework": "ContactsUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CNContactPicker": {
+      "doc": "A popover-based interface for selecting a contact.",
+      "url": "https://developer.apple.com/documentation/contactsui/cncontactpicker"
+    },
+    "CNContactViewController": {
+      "doc": "A view controller that displays a new, unknown, or existing contact.",
+      "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller"
+    }
+  },
+  "protocols": {
+    "CNContactPickerDelegate": {
+      "doc": "The methods that you implement to respond to contact-picker user events.",
+      "url": "https://developer.apple.com/documentation/contactsui/cncontactpickerdelegate"
+    }
+  },
+  "methods": {
+    "CNContactPicker": {
+      "-close": {
+        "doc": "Closes the popover.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactpicker/close()"
+      },
+      "-showRelativeToRect:ofView:preferredEdge:": {
+        "doc": "Shows the picker popover anchored to the specified view.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactpicker/showrelative(to:of:preferrededge:)"
+      }
+    },
+    "CNContactViewController": {
+      "+descriptorForRequiredKeys": {
+        "doc": "Returns the descriptor for all the keys that must be fetched on the contact before setting it on the view controller.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/descriptorforrequiredkeys()"
+      },
+      "+viewControllerForContact:": {
+        "doc": "Initializes a view controller for an existing contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/init(for:)"
+      },
+      "+viewControllerForNewContact:": {
+        "doc": "Initializes a view controller for a new contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/init(fornewcontact:)"
+      },
+      "+viewControllerForUnknownContact:": {
+        "doc": "Initializes a view controller for an unknown contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/init(forunknowncontact:)"
+      },
+      "-highlightPropertyWithKey:identifier:": {
+        "doc": "Highlights the property of the contact being displayed.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/highlightproperty(withkey:identifier:)"
+      }
+    }
+  },
+  "properties": {
+    "CNContactPicker": {
+      "delegate": {
+        "doc": "The picker delegate to be notified when the user chooses a contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactpicker/delegate"
+      },
+      "displayedKeys": {
+        "doc": "The keys to be displayed when a contact is expanded.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactpicker/displayedkeys"
+      }
+    },
+    "CNContactViewController": {
+      "allowsActions": {
+        "doc": "Determines whether to display buttons for actions such as sending a text message or initiating a FaceTime call.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/allowsactions"
+      },
+      "allowsEditing": {
+        "doc": "Determines whether the user can edit the contact’s information.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/allowsediting"
+      },
+      "alternateName": {
+        "doc": "The name to use if the contact has no display name.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/alternatename"
+      },
+      "contact": {
+        "doc": "The contact being displayed.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/contact"
+      },
+      "contactStore": {
+        "doc": "The contact store from which the contact was fetched or to which it will be saved.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/contactstore"
+      },
+      "delegate": {
+        "doc": "The delegate to be notified.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/delegate"
+      },
+      "displayedPropertyKeys": {
+        "doc": "The contact property keys to display.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/displayedpropertykeys"
+      },
+      "init(forContact:)": {
+        "doc": "Initializes a view controller for an existing contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/init(forcontact:)"
+      },
+      "message": {
+        "doc": "The message displayed under the name of the contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/message"
+      },
+      "parentContainer": {
+        "doc": "The container in which to add a new contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/parentcontainer"
+      },
+      "parentGroup": {
+        "doc": "The group in which to add a new contact.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/parentgroup"
+      },
+      "shouldShowLinkedContacts": {
+        "doc": "Determines whether to display data from contacts that are linked to the contact being displayed.",
+        "url": "https://developer.apple.com/documentation/contactsui/cncontactviewcontroller/shouldshowlinkedcontacts"
+      }
+    }
+  }
+}

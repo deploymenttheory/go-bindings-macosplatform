@@ -39,7 +39,7 @@ func MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsFromID(id obj
 // Initialize an MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -50,12 +50,15 @@ func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) InitWit
 }
 
 func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) GroupKeySetIDs() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsSelGroupKeySetIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsSelGroupKeySetIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) SetGroupKeySetIDs(groupKeySetIDs *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsSelSetGroupKeySetIDs, groupKeySetIDs)
+	o.Ptr().Send(_mTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsSelSetGroupKeySetIDs, groupKeySetIDs.Ptr())
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.

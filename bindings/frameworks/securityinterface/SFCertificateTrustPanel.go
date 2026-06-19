@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class SFCertificateTrustPanel @abstract SFCertificateTrustPanel is a panel and sheet interface that allows a user to make trust decisions when one or more certificates involved in an operation are invalid or cannot be verified. It should be used whenever confirmation is required before proceeding with a certificate-related operation. It can also be displayed as an informative alert without requiring a decision to be made (if the operation or transaction has already occurred.)
+// A panel or sheet that lets the user edit the trust settings in any of the certificates in a certificate chain.
 //
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel
 type SFCertificateTrustPanel struct {
@@ -39,7 +39,7 @@ func SFCertificateTrustPanelFromID(id objc.ID) *SFCertificateTrustPanel {
 	return o
 }
 
-// @method sharedCertificateTrustPanel @abstract Returns a shared instance of SFCertificateTrustPanel. @discussion If your application can display multiple SFCertificateTrustPanels at once, you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
+// Returns a fully initialized, singleton certificate trust panel object.
 func SFCertificateTrustPanelSharedCertificateTrustPanel() *SFCertificateTrustPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificateTrustPanel), _sFCertificateTrustPanelSelSharedCertificateTrustPanel)
 	if _ret != 0 {
@@ -48,23 +48,23 @@ func SFCertificateTrustPanelSharedCertificateTrustPanel() *SFCertificateTrustPan
 	return SFCertificateTrustPanelFromID(_ret)
 }
 
-// @method runModalForTrust:message: @abstract Displays a modal panel that shows the results of a certificate trust evaluation. Returns NSOKButton if the default button is pressed, or NSCancelButton if the alternate button is pressed. Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed to obtain the current trust result for the SecTrustRef. @param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>). @param message Client-defined message string to display in the panel.
+// Displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (o *SFCertificateTrustPanel) RunModalForTrustMessage(trust unsafe.Pointer, message *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _sFCertificateTrustPanelSelRunModalForTrustMessage, trust, message.Ptr())
 	return _ret
 }
 
-// @method beginSheetForWindow:trust:message:modalDelegate:didEndSelector:contextInfo: @abstract Displays a modal sheet that shows the results of a certificate trust evaluation. @discussion The didEndSelector method should have the following signature: - (void)certificateTrustSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo returnCode will contain either NSOKButton or NSCancelButton. Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed to obtain the current trust result for the SecTrustRef. @param docWindow The parent window to which the sheet is attached. @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed. @param didEndSelector This method is called when the sheet is dismissed. @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method. @param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>). @param message Client-defined message string to display in the panel.
+// Displays a modal sheet that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (o *SFCertificateTrustPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, message *foundation.NSString) {
 	o.Ptr().Send(_sFCertificateTrustPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, trust, message.Ptr())
 }
 
-// @method setInformativeText: @abstract Sets the optional informative text displayed in the SFCertificateTrustPanel. @param informativeText The informative text to display in the panel. @discussion By default, informative text describing the current certificate trust status is displayed. Call this method only if your application needs to customize the displayed informative text.
+// Sets the (optional) informative text displayed in the panel.
 func (o *SFCertificateTrustPanel) SetInformativeText(informativeText *foundation.NSString) {
 	o.Ptr().Send(_sFCertificateTrustPanelSelSetInformativeText, informativeText.Ptr())
 }
 
-// @method informativeText @abstract Returns the informative text currently displayed in the SFCertificateTrustPanel.
+// Returns the (optional) informative text currently displayed in the panel.
 func (o *SFCertificateTrustPanel) InformativeText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateTrustPanelSelInformativeText)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A coder that stores an object’s data to an archive.
+//
 // Archiver wraps [raw.NSArchiver] with a fluent Go API.
 type Archiver struct {
 	inner *raw.NSArchiver
@@ -30,6 +32,8 @@ func ArchiverFromID(id objc.ID) *Archiver {
 	return &Archiver{inner: raw.NSArchiverFromID(id)}
 }
 
+// Returns an archiver, initialized to encode stream and version information into a given mutable data object.
+//
 // NewArchiverForWritingWithMutableData creates a new [Archiver].
 func NewArchiverForWritingWithMutableData(mdata *raw.NSMutableData) *Archiver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArchiver")), objc.RegisterName("alloc"))
@@ -43,11 +47,15 @@ func (x *Archiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// Encodes a substitute name for the class with a given true name.
+//
 // EncodeClassNameIntoClassName calls the underlying EncodeClassNameIntoClassName.
 func (x *Archiver) EncodeClassNameIntoClassName(trueName string, inArchiveName string) {
 	x.inner.EncodeClassNameIntoClassName(foundation.NSStringStringWithUTF8String(trueName), foundation.NSStringStringWithUTF8String(inArchiveName))
 }
 
+// Returns the name of the class used to archive instances of the class with a given true name.
+//
 // ClassNameEncodedForTrueClassName calls the underlying ClassNameEncodedForTrueClassName.
 func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) *String {
 	_r := x.inner.ClassNameEncodedForTrueClassName(foundation.NSStringStringWithUTF8String(trueName))
@@ -57,6 +65,8 @@ func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) *String {
 	return &String{inner: _r}
 }
 
+// Causes the receiver to treat subsequent requests to encode a given object as though they were requests to encode another given object.
+//
 // ReplaceObjectWithObject calls the underlying ReplaceObjectWithObject.
 func (x *Archiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
 	x.inner.ReplaceObjectWithObject(object, newObject)

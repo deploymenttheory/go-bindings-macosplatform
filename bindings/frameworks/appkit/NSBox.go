@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A stylized rectangular box with an optional title.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbox
 type NSBox struct {
 	NSView
@@ -60,10 +62,12 @@ func NSBoxFromID(id objc.ID) *NSBox {
 	return o
 }
 
+// Resizes and moves the receiver’s content view so it just encloses its subviews.
 func (o *NSBox) SizeToFit() {
 	o.Ptr().Send(_nSBoxSelSizeToFit)
 }
 
+// Places the receiver so its content view lies on the specified frame.
 func (o *NSBox) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
 	o.Ptr().Send(_nSBoxSelSetFrameFromContentFrame, contentFrame)
 }
@@ -197,6 +201,7 @@ func (o *NSBox) SetFillColor(fillColor *NSColor) {
 	o.Ptr().Send(_nSBoxSelSetFillColor, fillColor.Ptr())
 }
 
+// Sets the title of the receiver with a character denoted as an access key.
 // Deprecated: since macOS 10.8.
 func (o *NSBox) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSBoxSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A torus, or ring-shaped geometry.
+//
 // Torus wraps [raw.SCNTorus] with a fluent Go API.
 type Torus struct {
 	inner *raw.SCNTorus
@@ -37,7 +39,7 @@ func NewTorus() *Torus {
 	return &Torus{inner: raw.SCNTorusFromID(_id)}
 }
 
-// @property ringRadius @abstract The radius of the torus ring. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+// The major radius of the torus, defining a circle in the x- and z-axis dimensions. Animatable.
 //
 // WithRingRadius sets the ringRadius property and returns the receiver for chaining.
 func (x *Torus) WithRingRadius(ringRadius float64) *Torus {
@@ -45,7 +47,7 @@ func (x *Torus) WithRingRadius(ringRadius float64) *Torus {
 	return x
 }
 
-// @property pipeRadius @abstract The radius of the torus pipe. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.25.
+// The minor radius of the torus, defining the pipe that encircles the torus ring. Animatable.
 //
 // WithPipeRadius sets the pipeRadius property and returns the receiver for chaining.
 func (x *Torus) WithPipeRadius(pipeRadius float64) *Torus {
@@ -53,7 +55,7 @@ func (x *Torus) WithPipeRadius(pipeRadius float64) *Torus {
 	return x
 }
 
-// @property ringSegmentCount @abstract The number of subdivisions of the ring. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+// The number of subdivisions around the torus ring. Animatable.
 //
 // WithRingSegmentCount sets the ringSegmentCount property and returns the receiver for chaining.
 func (x *Torus) WithRingSegmentCount(ringSegmentCount int) *Torus {
@@ -61,7 +63,7 @@ func (x *Torus) WithRingSegmentCount(ringSegmentCount int) *Torus {
 	return x
 }
 
-// @property pipeSegmentCount @abstract The number of subdivisions of the pipe. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 24.
+// The number of subdivisions around the torus pipe. Animatable.
 //
 // WithPipeSegmentCount sets the pipeSegmentCount property and returns the receiver for chaining.
 func (x *Torus) WithPipeSegmentCount(pipeSegmentCount int) *Torus {
@@ -69,7 +71,7 @@ func (x *Torus) WithPipeSegmentCount(pipeSegmentCount int) *Torus {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Torus) WithName(name string) *Torus {
@@ -77,7 +79,7 @@ func (x *Torus) WithName(name string) *Torus {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
@@ -100,7 +102,7 @@ func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Torus) WithFirstMaterial(firstMaterial *Material) *Torus {
@@ -108,7 +110,7 @@ func (x *Torus) WithFirstMaterial(firstMaterial *Material) *Torus {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Torus) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus {
@@ -137,7 +139,7 @@ func (x *Torus) WithTessellator(tessellator *GeometryTessellator) *Torus {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Torus) WithSubdivisionLevel(subdivisionLevel uint) *Torus {
@@ -153,7 +155,7 @@ func (x *Torus) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tor
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus {
@@ -161,7 +163,7 @@ func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tor
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Torus) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus {

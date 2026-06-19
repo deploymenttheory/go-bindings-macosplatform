@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A logarithmic softmax kernel that operates on matrices.
+//
 // MatrixLogSoftMax wraps [raw.MPSMatrixLogSoftMax] with a fluent Go API.
 type MatrixLogSoftMax struct {
 	inner *raw.MPSMatrixLogSoftMax
@@ -87,7 +89,7 @@ func (x *MatrixLogSoftMax) WithBatchSize(batchSize uint) *MatrixLogSoftMax {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithOptions(options mpscore.MPSKernelOptions) *MatrixLogSoftMax {
@@ -95,7 +97,7 @@ func (x *MatrixLogSoftMax) WithOptions(options mpscore.MPSKernelOptions) *Matrix
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithLabel(label string) *MatrixLogSoftMax {

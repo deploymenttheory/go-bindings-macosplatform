@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for electric potential difference.
+//
 // UnitElectricPotentialDifference wraps [raw.NSUnitElectricPotentialDifference] with a fluent Go API.
 type UnitElectricPotentialDifference struct {
 	inner *raw.NSUnitElectricPotentialDifference

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for filter verdict classes.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterverdict
 type NEFilterVerdict struct {
 	foundation.NSObject

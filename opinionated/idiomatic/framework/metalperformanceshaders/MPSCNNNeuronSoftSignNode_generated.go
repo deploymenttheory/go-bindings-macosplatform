@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronSoftSign kernel @discussion For each pixel, applies the following function: @code f(x) = x / (1 + abs(x)) @endcode
+// A representation of a softsign neuron filter.
 //
 // CNNNeuronSoftSignNode wraps [raw.MPSCNNNeuronSoftSignNode] with a fluent Go API.
 type CNNNeuronSoftSignNode struct {

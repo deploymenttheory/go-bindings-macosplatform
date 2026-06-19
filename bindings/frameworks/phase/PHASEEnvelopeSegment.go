@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A curved portion of an envelope.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseenvelopesegment
 type PHASEEnvelopeSegment struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func PHASEEnvelopeSegmentFromID(id objc.ID) *PHASEEnvelopeSegment {
 	return o
 }
 
-// @method initWithEndPoint:curveType @abstract Initialize an envelope segment with an endPoint and a curveType. @param endPoint The end point of the segment. @param curveType The curve type. @return A new envelope.
+// Creates a curved portion of an envelope.
 func (o *PHASEEnvelopeSegment) InitWithEndPointCurveType(endPoint unsafe.Pointer, curveType PHASECurveType) *PHASEEnvelopeSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSegmentSelInitWithEndPointCurveType, endPoint, curveType)
 	if _ret != 0 {

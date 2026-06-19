@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronPower kernel @discussion For each pixel, applies the following function: @code f(x) = (a * x + b) ^ c @endcode
+// A representation of a power neuron filter.
 //
 // CNNNeuronPowerNode wraps [raw.MPSCNNNeuronPowerNode] with a fluent Go API.
 type CNNNeuronPowerNode struct {

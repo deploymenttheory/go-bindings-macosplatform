@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Base class for all Metal 4 acceleration structure geometry descriptors.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4accelerationstructuregeometrydescriptor
 type MTL4AccelerationStructureGeometryDescriptor struct {
 	foundation.NSObject

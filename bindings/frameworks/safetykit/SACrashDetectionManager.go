@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Provides registration and management of Crash Detection events.
+//
 // Apple documentation: https://developer.apple.com/documentation/safetykit/sacrashdetectionmanager
 type SACrashDetectionManager struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func SACrashDetectionManagerFromID(id objc.ID) *SACrashDetectionManager {
 	return o
 }
 
-// @discussion Requests the user’s permission to access Crash Detection information. @param handler Completion handler invoked with the status of the authorization request.
+// Requests permission to access Crash Detection information.
 func (o *SACrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

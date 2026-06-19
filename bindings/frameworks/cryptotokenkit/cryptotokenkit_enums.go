@@ -64,6 +64,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Error codes from CryptoTokenKit.
 type TKErrorCode int64
 
 const (
@@ -106,6 +107,7 @@ func (e TKErrorCode) String() string {
 	}
 }
 
+// Possible PIN character sets.
 type TKSmartCardPINCharset int64
 
 const (
@@ -183,6 +185,7 @@ func (e TKSmartCardPINConfirmation) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Possible PIN encoding types.
 type TKSmartCardPINEncoding int64
 
 const (
@@ -207,6 +210,7 @@ func (e TKSmartCardPINEncoding) String() string {
 	}
 }
 
+// Possible PIN justification types
 type TKSmartCardPINJustification int64
 
 const (
@@ -227,6 +231,7 @@ func (e TKSmartCardPINJustification) String() string {
 	}
 }
 
+// Smart Card transmission protocols.
 type TKSmartCardProtocol uint64
 
 const (
@@ -257,6 +262,7 @@ func (e TKSmartCardProtocol) String() string {
 	return strings.Join(parts, "|")
 }
 
+// All smart card slot states.
 type TKSmartCardSlotState int64
 
 const (
@@ -289,6 +295,7 @@ func (e TKSmartCardSlotState) String() string {
 	}
 }
 
+// Operations that can be performed with a token’s keys and certificates.
 type TKTokenOperation int64
 
 const (

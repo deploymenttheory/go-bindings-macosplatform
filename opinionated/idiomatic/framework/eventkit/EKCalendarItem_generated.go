@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract superclass for calendar events and reminders.
+//
 // CalendarItem wraps [raw.EKCalendarItem] with a fluent Go API.
 type CalendarItem struct {
 	inner *raw.EKCalendarItem
@@ -38,7 +40,7 @@ func NewCalendarItem() *CalendarItem {
 	return &CalendarItem{inner: raw.EKCalendarItemFromID(_id)}
 }
 
-// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+// The calendar for the calendar item.
 //
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *CalendarItem) WithCalendar(calendar *Calendar) *CalendarItem {
@@ -46,7 +48,7 @@ func (x *CalendarItem) WithCalendar(calendar *Calendar) *CalendarItem {
 	return x
 }
 
-// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+// The title for the calendar item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CalendarItem) WithTitle(title string) *CalendarItem {
@@ -54,30 +56,40 @@ func (x *CalendarItem) WithTitle(title string) *CalendarItem {
 	return x
 }
 
+// The location associated with the calendar item.
+//
 // WithLocation sets the location property and returns the receiver for chaining.
 func (x *CalendarItem) WithLocation(location string) *CalendarItem {
 	x.inner.SetLocation(foundation.NSStringStringWithUTF8String(location))
 	return x
 }
 
+// The notes associated with the calendar item.
+//
 // WithNotes sets the notes property and returns the receiver for chaining.
 func (x *CalendarItem) WithNotes(notes string) *CalendarItem {
 	x.inner.SetNotes(foundation.NSStringStringWithUTF8String(notes))
 	return x
 }
 
+// The URL for the calendar item.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *CalendarItem) WithURL(uRL string) *CalendarItem {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The time zone for the calendar item.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *CalendarItem) WithTimeZone(timeZone *foundation.NSTimeZone) *CalendarItem {
 	x.inner.SetTimeZone(timeZone)
 	return x
 }
 
+// The alarms associated with the calendar item, as an array of EKAlarm objects.
+//
 // WithAlarms sets the collection, converting the Go slice to an NSArray.
 func (x *CalendarItem) WithAlarms(items ...*raw.EKAlarm) *CalendarItem {
 	if len(items) == 0 {
@@ -99,7 +111,7 @@ func (x *CalendarItem) WithAlarms(items ...*raw.EKAlarm) *CalendarItem {
 	return x
 }
 
-// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+// The recurrence rules for the calendar item.
 //
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *CalendarItem) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *CalendarItem {
@@ -122,25 +134,29 @@ func (x *CalendarItem) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Cale
 	return x
 }
 
-// @method     addAlarm: @abstract   Adds an alarm to this item. @discussion This method add an alarm to an item. Be warned that some calendars can only allow a certain maximum number of alarms. When this item is saved, it will truncate any extra alarms from the array.
+// Adds an alarm to the receiver.
 //
 // AddAlarm calls the underlying AddAlarm.
 func (x *CalendarItem) AddAlarm(alarm *raw.EKAlarm) {
 	x.inner.AddAlarm(alarm)
 }
 
-// @method     removeAlarm: @abstract   Removes an alarm from this item.
+// Removes an alarm from the calendar item.
 //
 // RemoveAlarm calls the underlying RemoveAlarm.
 func (x *CalendarItem) RemoveAlarm(alarm *raw.EKAlarm) {
 	x.inner.RemoveAlarm(alarm)
 }
 
+// Adds a recurrence rule to the recurrence rule array.
+//
 // AddRecurrenceRule calls the underlying AddRecurrenceRule.
 func (x *CalendarItem) AddRecurrenceRule(rule *raw.EKRecurrenceRule) {
 	x.inner.AddRecurrenceRule(rule)
 }
 
+// Removes a recurrence rule from the recurrence rule array.
+//
 // RemoveRecurrenceRule calls the underlying RemoveRecurrenceRule.
 func (x *CalendarItem) RemoveRecurrenceRule(rule *raw.EKRecurrenceRule) {
 	x.inner.RemoveRecurrenceRule(rule)

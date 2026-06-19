@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A right circular cone or frustum geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scncone
 type SCNCone struct {
 	SCNGeometry
@@ -39,7 +41,7 @@ func SCNConeFromID(id objc.ID) *SCNCone {
 	return o
 }
 
-// @method coneWithTopRadius:bottomRadius:height: @abstract Creates and returns a cone with given top radius, bottom radius and height. @param topRadius The radius at the top of the cone. @param bottomRadius The radius at the bottom of the cone. @param height The height of the cone.
+// Creates a cone geometry with the given top radius, bottom radius, and height.
 func SCNConeConeWithTopRadiusBottomRadiusHeight(topRadius float64, bottomRadius float64, height float64) *SCNCone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCone), _sCNConeSelConeWithTopRadiusBottomRadiusHeight, topRadius, bottomRadius, height)
 	if _ret != 0 {

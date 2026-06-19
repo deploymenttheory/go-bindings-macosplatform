@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A configuration object that describes the information to fetch from a record zone.
+//
 // FetchRecordZoneChangesOptions wraps [raw.CKFetchRecordZoneChangesOptions] with a fluent Go API.
 type FetchRecordZoneChangesOptions struct {
 	inner *raw.CKFetchRecordZoneChangesOptions

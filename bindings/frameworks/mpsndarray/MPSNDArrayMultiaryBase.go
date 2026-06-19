@@ -97,7 +97,7 @@ func (o *MPSNDArrayMultiaryBase) EncodeWithCoder(coder *foundation.NSCoder) {
 }
 
 func (o *MPSNDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelResultStateForSourceArraysSourceStatesDestinationArray, sourceArrays, sourceStates, destinationArray.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelResultStateForSourceArraysSourceStatesDestinationArray, sourceArrays.Ptr(), sourceStates.Ptr(), destinationArray.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -106,7 +106,7 @@ func (o *MPSNDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinati
 
 // @abstract   Return a descriptor suitable for allocating a NSArray to receive the result @discussion The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results. @param      sources     The list of sources passed into the -encode call @param      state       The source state object, if any passed to the -encode call @return     a valid MPSNDArrayDescriptor that may be used to create a MPSNDArray to used to hold the results of this kernel.
 func (o *MPSNDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelDestinationArrayDescriptorForSourceArraysSourceState, sources, state.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryBaseSelDestinationArrayDescriptorForSourceArraysSourceState, sources.Ptr(), state.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

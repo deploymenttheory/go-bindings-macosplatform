@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that represents the relationship between one contact to another.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactrelation
 type CNContactRelation struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func CNContactRelationFromID(id objc.ID) *CNContactRelation {
 	return o
 }
 
+// Instantiate a class instance with the name of the related contact.
 func CNContactRelationContactRelationWithName(name *foundation.NSString) *CNContactRelation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactRelation), _cNContactRelationSelContactRelationWithName, name.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func CNContactRelationContactRelationWithName(name *foundation.NSString) *CNCont
 	return CNContactRelationFromID(_ret)
 }
 
+// Creates an object with the name of the related contact.
 func (o *CNContactRelation) InitWithName(name *foundation.NSString) *CNContactRelation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactRelationSelInitWithName, name.Ptr())
 	if _ret != 0 {

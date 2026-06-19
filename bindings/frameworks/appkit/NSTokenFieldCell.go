@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text field cell subclass that enables tokenized editing of an array of objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstokenfieldcell
 type NSTokenFieldCell struct {
 	NSTextFieldCell

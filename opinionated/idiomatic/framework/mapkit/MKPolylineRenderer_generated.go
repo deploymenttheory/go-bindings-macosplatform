@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A visual representation of any polyline overlay object.
+//
 // PolylineRenderer wraps [raw.MKPolylineRenderer] with a fluent Go API.
 type PolylineRenderer struct {
 	inner *raw.MKPolylineRenderer
@@ -33,6 +35,8 @@ func PolylineRendererFromID(id objc.ID) *PolylineRenderer {
 	return &PolylineRenderer{inner: raw.MKPolylineRendererFromID(id)}
 }
 
+// Creates a new overlay view using the specified polyline overlay object.
+//
 // NewPolylineRendererWithPolyline creates a new [PolylineRenderer].
 func NewPolylineRendererWithPolyline(polyline *raw.MKPolyline) *PolylineRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPolylineRenderer")), objc.RegisterName("alloc"))
@@ -40,60 +44,80 @@ func NewPolylineRendererWithPolyline(polyline *raw.MKPolyline) *PolylineRenderer
 	return &PolylineRenderer{inner: raw.MKPolylineRendererFromID(_id)}
 }
 
+// The unit distance along the line where the stroke starts.
+//
 // WithStrokeStart sets the strokeStart property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithStrokeStart(strokeStart float64) *PolylineRenderer {
 	x.inner.SetStrokeStart(strokeStart)
 	return x
 }
 
+// The unit distance along the line where the stroke ends.
+//
 // WithStrokeEnd sets the strokeEnd property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithStrokeEnd(strokeEnd float64) *PolylineRenderer {
 	x.inner.SetStrokeEnd(strokeEnd)
 	return x
 }
 
+// The fill color to use for the path.
+//
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithFillColor(fillColor *appkit.NSColor) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
 	return x
 }
 
+// The stroke color to use for the path.
+//
 // WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
 	return x
 }
 
+// The stroke width to use for the path.
+//
 // WithLineWidth sets the lineWidth property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithLineWidth(lineWidth float64) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
 	return x
 }
 
+// The line join style to apply to the corners of the path.
+//
 // WithLineJoin sets the lineJoin property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
 	return x
 }
 
+// The line cap style to apply to the open ends of the path.
+//
 // WithLineCap sets the lineCap property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
 	return x
 }
 
+// The limiting value that helps avoid spikes at junctions between connected line segments.
+//
 // WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithMiterLimit(miterLimit float64) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
 	return x
 }
 
+// The offset (in points) at which to start drawing the dash pattern.
+//
 // WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithLineDashPhase(lineDashPhase float64) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
 	return x
 }
 
+// An array of numbers specifying the dash pattern to use for the path.
+//
 // WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
 func (x *PolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *PolylineRenderer {
 	if len(items) == 0 {
@@ -115,12 +139,16 @@ func (x *PolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *P
 	return x
 }
 
+// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithShouldRasterize(shouldRasterize bool) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The amount of transparency to apply to the overlay.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithAlpha(alpha float64) *PolylineRenderer {
 	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)

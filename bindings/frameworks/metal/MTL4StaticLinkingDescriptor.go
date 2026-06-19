@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties to drive a static linking process.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4staticlinkingdescriptor
 type MTL4StaticLinkingDescriptor struct {
 	foundation.NSObject
@@ -63,10 +65,13 @@ func (o *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunct
 
 // Assigns groups of functions to match call-site attributes in shader code. Function groups help the compiler reduce the number of candidate functions it needs to evaluate for shader function calls, potentially increasing runtime performance.
 func (o *MTL4StaticLinkingDescriptor) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTL4StaticLinkingDescriptorSelGroups)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4StaticLinkingDescriptorSelGroups)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTL4StaticLinkingDescriptor) SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_mTL4StaticLinkingDescriptorSelSetGroups, groups)
+	o.Ptr().Send(_mTL4StaticLinkingDescriptorSelSetGroups, groups.Ptr())
 }

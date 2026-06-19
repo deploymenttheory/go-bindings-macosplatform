@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized view that displays and controls the zoom level of the map view.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkzoomcontrol
 type MKZoomControl struct {
 	appkit.NSView
@@ -32,6 +34,7 @@ func MKZoomControlFromID(id objc.ID) *MKZoomControl {
 	return o
 }
 
+// Creates a zoom control and associates it with the specified map view.
 func MKZoomControlZoomControlWithMapView(mapView *MKMapView) *MKZoomControl {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKZoomControl), _mKZoomControlSelZoomControlWithMapView, mapView.Ptr())
 	if _ret != 0 {

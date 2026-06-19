@@ -94,12 +94,15 @@ func (o *ODAttributeMap) SetCustomTranslationFunction(customTranslationFunction 
 }
 
 func (o *ODAttributeMap) CustomAttributes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDAttributeMapSelCustomAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDAttributeMapSelCustomAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODAttributeMap) SetCustomAttributes(customAttributes *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDAttributeMapSelSetCustomAttributes, customAttributes)
+	o.Ptr().Send(_oDAttributeMapSelSetCustomAttributes, customAttributes.Ptr())
 }
 
 func (o *ODAttributeMap) Value() *foundation.NSString {

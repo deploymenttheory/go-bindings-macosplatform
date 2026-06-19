@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An action that the user can take in response to receiving a notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsusernotificationaction
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 type NSUserNotificationAction struct {
@@ -32,6 +34,7 @@ func NSUserNotificationActionFromID(id objc.ID) *NSUserNotificationAction {
 	return o
 }
 
+// Creates a user notification action with a specified identifier and title.
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 func NSUserNotificationActionActionWithIdentifierTitle(identifier *NSString, title *NSString) *NSUserNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserNotificationAction), _nSUserNotificationActionSelActionWithIdentifierTitle, identifier.Ptr(), title.Ptr())

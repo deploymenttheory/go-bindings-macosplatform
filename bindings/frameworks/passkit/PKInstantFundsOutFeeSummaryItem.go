@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A summary item that represents a fee for an instant funds out transfer.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkinstantfundsoutfeesummaryitem
 type PKInstantFundsOutFeeSummaryItem struct {
 	PKPaymentSummaryItem

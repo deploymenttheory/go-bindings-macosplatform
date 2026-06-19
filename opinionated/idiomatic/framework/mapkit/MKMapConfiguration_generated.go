@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that represents the shared elements of map configurations.
+//
 // MapConfiguration wraps [raw.MKMapConfiguration] with a fluent Go API.
 type MapConfiguration struct {
 	inner *raw.MKMapConfiguration
@@ -35,6 +37,8 @@ func NewMapConfiguration() *MapConfiguration {
 	return &MapConfiguration{inner: raw.MKMapConfigurationFromID(_id)}
 }
 
+// The value that indicates the map’s elevation style.
+//
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
 func (x *MapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *MapConfiguration {
 	x.inner.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))

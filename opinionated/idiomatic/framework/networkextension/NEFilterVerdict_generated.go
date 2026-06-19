@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for filter verdict classes.
+//
 // NEFilterVerdict wraps [raw.NEFilterVerdict] with a fluent Go API.
 type NEFilterVerdict struct {
 	inner *raw.NEFilterVerdict
@@ -35,7 +37,7 @@ func NewNEFilterVerdict() *NEFilterVerdict {
 	return &NEFilterVerdict{inner: raw.NEFilterVerdictFromID(_id)}
 }
 
-// @property shouldReport @discussion Whether or not to send a report to the control provider's -[NEFilterProvider handleReport:] method when processing this verdict and when the flow is closed. Since the data provider does not need to wait for a response from the control provider before continuing to process the flow, this is a more efficient way to report a flow to the control provider than returning a "need rules" verdict. If the verdict originates in the control provider, this property has no effect. This property applies when the action taken upon a flow is allow, deny, remediate, or filterData (filterData for new flows only). Setting this flag on a verdict for a socket flow will also cause the data provider's -[NEFilterProvider handleReport:] method to be called when the flow is closed.
+// A Boolean value that indicates whether to send a report to the control provider when processing this verdict.
 //
 // WithShouldReport sets the shouldReport property and returns the receiver for chaining.
 func (x *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict {

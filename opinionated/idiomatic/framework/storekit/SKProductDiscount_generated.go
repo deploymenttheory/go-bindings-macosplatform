@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The details of an introductory offer or a promotional offer for an auto-renewable subscription.
+//
 // ProductDiscount wraps [raw.SKProductDiscount] with a fluent Go API.
 type ProductDiscount struct {
 	inner *raw.SKProductDiscount

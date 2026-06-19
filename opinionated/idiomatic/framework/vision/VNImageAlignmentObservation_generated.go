@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for image-analysis results that describe the relative alignment of two images.
+//
 // ImageAlignmentObservation wraps [raw.VNImageAlignmentObservation] with a fluent Go API.
 type ImageAlignmentObservation struct {
 	inner *raw.VNImageAlignmentObservation

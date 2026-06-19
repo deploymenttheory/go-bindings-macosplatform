@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable request to the App Store to process payment for additional functionality that your app offers.
+//
 // MutablePayment wraps [raw.SKMutablePayment] with a fluent Go API.
 type MutablePayment struct {
 	inner *raw.SKMutablePayment
@@ -37,36 +39,48 @@ func NewMutablePayment() *MutablePayment {
 	return &MutablePayment{inner: raw.SKMutablePaymentFromID(_id)}
 }
 
+// A string that associates the transaction with a user account on your service.
+//
 // WithApplicationUsername sets the applicationUsername property and returns the receiver for chaining.
 func (x *MutablePayment) WithApplicationUsername(applicationUsername string) *MutablePayment {
 	x.inner.SetApplicationUsername(foundation.NSStringStringWithUTF8String(applicationUsername))
 	return x
 }
 
+// The details of the discount offer to apply to the payment.
+//
 // WithPaymentDiscount sets the paymentDiscount property and returns the receiver for chaining.
 func (x *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
 	x.inner.SetPaymentDiscount(paymentDiscount.Unwrap())
 	return x
 }
 
+// A string that identifies a product that can be purchased from within your app.
+//
 // WithProductIdentifier sets the productIdentifier property and returns the receiver for chaining.
 func (x *MutablePayment) WithProductIdentifier(productIdentifier string) *MutablePayment {
 	x.inner.SetProductIdentifier(foundation.NSStringStringWithUTF8String(productIdentifier))
 	return x
 }
 
+// The number of items the user wants to purchase.
+//
 // WithQuantity sets the quantity property and returns the receiver for chaining.
 func (x *MutablePayment) WithQuantity(quantity int) *MutablePayment {
 	x.inner.SetQuantity(quantity)
 	return x
 }
 
+// Reserved for future use.
+//
 // WithRequestData sets the requestData property and returns the receiver for chaining.
 func (x *MutablePayment) WithRequestData(requestData *foundation.NSData) *MutablePayment {
 	x.inner.SetRequestData(requestData)
 	return x
 }
 
+// A Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
+//
 // WithSimulatesAskToBuyInSandbox sets the simulatesAskToBuyInSandbox property and returns the receiver for chaining.
 func (x *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment {
 	x.inner.SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox)

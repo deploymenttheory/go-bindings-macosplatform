@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The mutability options for a buffer that a render or compute pipeline uses.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlpipelinebufferdescriptor
 type MTLPipelineBufferDescriptor struct {
 	foundation.NSObject

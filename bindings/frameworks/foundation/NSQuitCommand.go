@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that quits the specified app.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsquitcommand
 type NSQuitCommand struct {
 	NSScriptCommand

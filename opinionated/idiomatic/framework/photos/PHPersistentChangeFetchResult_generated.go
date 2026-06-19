@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a fetch result and allows you to enumerate a very large set of change records.
+//
 // PersistentChangeFetchResult wraps [raw.PHPersistentChangeFetchResult] with a fluent Go API.
 type PersistentChangeFetchResult struct {
 	inner *raw.PHPersistentChangeFetchResult
@@ -35,6 +37,8 @@ func NewPersistentChangeFetchResult() *PersistentChangeFetchResult {
 	return &PersistentChangeFetchResult{inner: raw.PHPersistentChangeFetchResultFromID(_id)}
 }
 
+// Executes the block you specify by using the objects in the fetch result.
+//
 // EnumerateChangesWith calls the underlying EnumerateChangesWith.
 func (x *PersistentChangeFetchResult) EnumerateChangesWith(block func(*raw.PHPersistentChange, *bool)) {
 	x.inner.EnumerateChangesWith(block)

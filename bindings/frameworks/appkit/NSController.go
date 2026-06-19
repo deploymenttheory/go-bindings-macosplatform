@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that implements the NSEditor and NSEditorRegistration informal protocols required for controller classes.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscontroller
 type NSController struct {
 	foundation.NSObject
@@ -55,23 +57,28 @@ func (o *NSController) InitWithCoder(coder *foundation.NSCoder) *NSController {
 	return NSControllerFromID(_ret)
 }
 
+// Invoked to inform the receiver that editor has uncommitted changes that can affect the receiver.
 func (o *NSController) ObjectDidBeginEditing(editor NSEditor) {
 	o.Ptr().Send(_nSControllerSelObjectDidBeginEditing, editor)
 }
 
+// Invoked to inform the receiver that editor has committed or discarded its changes.
 func (o *NSController) ObjectDidEndEditing(editor NSEditor) {
 	o.Ptr().Send(_nSControllerSelObjectDidEndEditing, editor)
 }
 
+// Discards any pending changes by registered editors.
 func (o *NSController) DiscardEditing() {
 	o.Ptr().Send(_nSControllerSelDiscardEditing)
 }
 
+// Attempts to commit any pending edits.
 func (o *NSController) CommitEditing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSControllerSelCommitEditing)
 	return _ret
 }
 
+// Attempts to commit any pending changes in known editors of the receiver.
 func (o *NSController) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo, delegate, didCommitSelector, contextInfo)
 }

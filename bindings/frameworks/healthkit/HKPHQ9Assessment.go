@@ -35,7 +35,7 @@ func HKPHQ9AssessmentFromID(id objc.ID) *HKPHQ9Assessment {
 
 // Creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
 func HKPHQ9AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber]) *HKPHQ9Assessment {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKPHQ9Assessment), _hKPHQ9AssessmentSelAssessmentWithDateAnswers, date.Ptr(), answers)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKPHQ9Assessment), _hKPHQ9AssessmentSelAssessmentWithDateAnswers, date.Ptr(), answers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -44,7 +44,7 @@ func HKPHQ9AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers 
 
 // Creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
 func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKPHQ9Assessment {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKPHQ9Assessment), _hKPHQ9AssessmentSelAssessmentWithDateAnswersMetadata, date.Ptr(), answers, metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKPHQ9Assessment), _hKPHQ9AssessmentSelAssessmentWithDateAnswersMetadata, date.Ptr(), answers.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -53,8 +53,11 @@ func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, 
 
 // Answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
 func (o *HKPHQ9Assessment) Answers() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _hKPHQ9AssessmentSelAnswers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKPHQ9AssessmentSelAnswers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   risk @discussion The risk determined by the score on a PHQ-9 assessment.

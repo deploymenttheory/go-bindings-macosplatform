@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation for executing queries in a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckqueryoperation
 type CKQueryOperation struct {
 	CKDatabaseOperation
@@ -59,7 +61,7 @@ func (o *CKQueryOperation) Init() *CKQueryOperation {
 	return CKQueryOperationFromID(_ret)
 }
 
-// Creates an operation that searches for records in the specified record zone. - Parameters: - query: The query for the search. You can use the operation that this method returns only once to perform a search, but you can reuse the query that you provide. During execution, the operation performs a new search and returns the first batch of results. If there are more results available, you must create a separate query object using the provided cursor object.
+// Creates an operation that searches for records in the specified record zone.
 func (o *CKQueryOperation) InitWithQuery(query *CKQuery) *CKQueryOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelInitWithQuery, query.Ptr())
 	if _ret != 0 {
@@ -68,7 +70,7 @@ func (o *CKQueryOperation) InitWithQuery(query *CKQuery) *CKQueryOperation {
 	return CKQueryOperationFromID(_ret)
 }
 
-// Creates an operation with additional results from a previous search. - Parameters: - cursor: The cursor that identifies the previous search. CloudKit passes this value to the completion handler of the previous search. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. Use this method to create an operation that retrieves the next batch of results from a previous search. When executing searches for a cursor, don't cache cursors for a long time before using them. A cursor isn't a snapshot of the previous search results; it stores a relative offset into the results list. An operation that you create from a cursor performs a new search, sorts the new set of results, and uses the previous offset value to determine where the next batch of results starts.
+// Creates an operation with additional results from a previous search.
 func (o *CKQueryOperation) InitWithCursor(cursor *CKQueryCursor) *CKQueryOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelInitWithCursor, cursor.Ptr())
 	if _ret != 0 {
@@ -128,12 +130,15 @@ func (o *CKQueryOperation) SetResultsLimit(resultsLimit uint) {
 
 // The fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
 func (o *CKQueryOperation) DesiredKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKQueryOperationSelDesiredKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKQueryOperationSelDesiredKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKQueryOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKQueryOperationSelSetDesiredKeys, desiredKeys)
+	o.Ptr().Send(_cKQueryOperationSelSetDesiredKeys, desiredKeys.Ptr())
 }
 
 // The closure to execute when a record becomes available. The closure returns no value and takes the following parameter: - A single record that matches the search criteria. After identifying and sorting the records, the query operation executes this closure once for each of the result's records. The closure executes serially with respect to all other closures of the operation, so you can expect only one closure at a time to execute for this operation. Set the property's value before you execute the operation or submit it to a queue. - Warning: Query indexes update asynchronously so they aren't always current. If you query for records that you recently changed and don't allow enough time for those changes to process, the query's results may be incorrect. The results may not contain the correct records, and the records may be out of order.

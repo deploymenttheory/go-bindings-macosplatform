@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a bus reservation.
+//
 // BusReservation wraps [raw.INBusReservation] with a fluent Go API.
 type BusReservation struct {
 	inner *raw.INBusReservation
@@ -30,6 +32,8 @@ func BusReservationFromID(id objc.ID) *BusReservation {
 	return &BusReservation{inner: raw.INBusReservationFromID(id)}
 }
 
+// Creates a bus reservation with the specified contents and attributes.
+//
 // NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a new [BusReservation].
 func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, busTrip *raw.INBusTrip) *BusReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBusReservation")), objc.RegisterName("alloc"))

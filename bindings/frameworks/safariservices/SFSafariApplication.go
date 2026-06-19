@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for the Safari app.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariapplication
 type SFSafariApplication struct {
 	foundation.NSObject
@@ -69,7 +71,7 @@ func SFSafariApplicationGetAllWindowsWithCompletionHandler(completionHandler fun
 	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelGetAllWindowsWithCompletionHandler, __block_completionHandler)
 }
 
-// Opens a new window with a tab containing the URL to pass in.
+// Opens a new window with the desired webpage.
 func SFSafariApplicationOpenWindowWithURLCompletionHandler(url *foundation.NSURL, completionHandler func(*SFSafariWindow)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -84,7 +86,7 @@ func SFSafariApplicationOpenWindowWithURLCompletionHandler(url *foundation.NSURL
 	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelOpenWindowWithURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
-// This will cause -validateToolbarItemInWindow:completionHandler: to be called on all windows, to let the extension update enabled states or badges of its toolbar items.
+// Updates the enabled states and badges of toolbar items.
 func SFSafariApplicationSetToolbarItemsNeedUpdate() {
 	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelSetToolbarItemsNeedUpdate)
 }
@@ -104,7 +106,7 @@ func SFSafariApplicationGetHostApplicationWithCompletionHandler(completionHandle
 	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelGetHostApplicationWithCompletionHandler, __block_completionHandler)
 }
 
-// Opens Safari Extensions preferences and selects extension with the identifier.
+// Launches Safari and opens the preferences panel for a Safari app extension.
 func SFSafariApplicationShowPreferencesForExtensionWithIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -116,6 +118,7 @@ func SFSafariApplicationShowPreferencesForExtensionWithIdentifierCompletionHandl
 	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelShowPreferencesForExtensionWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
+// Sends a message to a Safari app extension, launching Safari if necessary.
 func SFSafariApplicationDispatchMessageWithNameToExtensionWithIdentifierUserInfoCompletionHandler(messageName *foundation.NSString, identifier *foundation.NSString, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -124,5 +127,5 @@ func SFSafariApplicationDispatchMessageWithNameToExtensionWithIdentifierUserInfo
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelDispatchMessageWithNameToExtensionWithIdentifierUserInfoCompletionHandler, messageName.Ptr(), identifier.Ptr(), userInfo, __block_completionHandler)
+	objc.ID(_clsSFSafariApplication).Send(_sFSafariApplicationSelDispatchMessageWithNameToExtensionWithIdentifierUserInfoCompletionHandler, messageName.Ptr(), identifier.Ptr(), userInfo.Ptr(), __block_completionHandler)
 }

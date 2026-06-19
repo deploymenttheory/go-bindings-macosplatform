@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that coordinates the operation of multiple threads of execution within the same application.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslock
 type NSLock struct {
 	NSObject
@@ -32,11 +34,13 @@ func NSLockFromID(id objc.ID) *NSLock {
 	return o
 }
 
+// Attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (o *NSLock) TryLock() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSLockSelTryLock)
 	return _ret
 }
 
+// Attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
 func (o *NSLock) LockBeforeDate(limit *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSLockSelLockBeforeDate, limit.Ptr())
 	return _ret

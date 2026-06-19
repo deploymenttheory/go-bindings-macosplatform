@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel that is used to find a list of keypoints.
+//
 // ImageFindKeypoints wraps [raw.MPSImageFindKeypoints] with a fluent Go API.
 type ImageFindKeypoints struct {
 	inner *raw.MPSImageFindKeypoints
@@ -49,7 +51,7 @@ func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageFindKeypoints) WithOptions(options mpscore.MPSKernelOptions) *ImageFindKeypoints {
@@ -57,7 +59,7 @@ func (x *ImageFindKeypoints) WithOptions(options mpscore.MPSKernelOptions) *Imag
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {

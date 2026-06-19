@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IKDeviceBrowserView allows you to select a camera or scanner from a list of the available devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikdevicebrowserview
 type IKDeviceBrowserView struct {
 	appkit.NSView

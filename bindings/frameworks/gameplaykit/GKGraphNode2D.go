@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// GKGraphNode coupled with a 2D position
+// A node in a navigation graph, associated with a point in continuous 2D space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgraphnode2d
 type GKGraphNode2D struct {
@@ -36,6 +36,7 @@ func GKGraphNode2DFromID(id objc.ID) *GKGraphNode2D {
 	return o
 }
 
+// Creates a graph node with the specified point.
 func GKGraphNode2DNodeWithPoint(point unsafe.Pointer) *GKGraphNode2D {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGraphNode2D), _gKGraphNode2DSelNodeWithPoint, point)
 	if _ret != 0 {
@@ -44,6 +45,7 @@ func GKGraphNode2DNodeWithPoint(point unsafe.Pointer) *GKGraphNode2D {
 	return GKGraphNode2DFromID(_ret)
 }
 
+// Initializes a graph node with the specified point.
 func (o *GKGraphNode2D) InitWithPoint(point unsafe.Pointer) *GKGraphNode2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNode2DSelInitWithPoint, point)
 	if _ret != 0 {

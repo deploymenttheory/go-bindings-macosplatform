@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text field optimized for performing text-based searches.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssearchfield
 type NSSearchField struct {
 	NSTextField
@@ -66,12 +68,15 @@ func (o *NSSearchField) CancelButtonBounds() corefoundation.CGRect {
 }
 
 func (o *NSSearchField) RecentSearches() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSearchFieldSelRecentSearches)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelRecentSearches)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSearchField) SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSearchFieldSelSetRecentSearches, recentSearches)
+	o.Ptr().Send(_nSSearchFieldSelSetRecentSearches, recentSearches.Ptr())
 }
 
 func (o *NSSearchField) RecentsAutosaveName() *foundation.NSString {
@@ -125,18 +130,21 @@ func (o *NSSearchField) SetSendsSearchStringImmediately(sendsSearchStringImmedia
 	o.Ptr().Send(_nSSearchFieldSelSetSendsSearchStringImmediately, sendsSearchStringImmediately)
 }
 
+// The rectangle for the search text within the bounds of the field.
 // Deprecated: since macOS 12.0.
 func (o *NSSearchField) RectForSearchTextWhenCentered(isCentered bool) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForSearchTextWhenCentered, isCentered)
 	return _ret
 }
 
+// The rectangle for the search button within the bounds of the search field.
 // Deprecated: since macOS 12.0.
 func (o *NSSearchField) RectForSearchButtonWhenCentered(isCentered bool) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForSearchButtonWhenCentered, isCentered)
 	return _ret
 }
 
+// The rectangle for the cancel button within the bounds of the search field.
 // Deprecated: since macOS 12.0.
 func (o *NSSearchField) RectForCancelButtonWhenCentered(isCentered bool) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForCancelButtonWhenCentered, isCentered)

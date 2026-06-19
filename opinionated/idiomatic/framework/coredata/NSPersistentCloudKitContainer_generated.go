@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A container that encapsulates the Core Data stack in your app, and mirrors select persistent stores to a CloudKit private database.
+//
 // PersistentCloudKitContainer wraps [raw.NSPersistentCloudKitContainer] with a fluent Go API.
 type PersistentCloudKitContainer struct {
 	inner *raw.NSPersistentCloudKitContainer
@@ -32,6 +34,8 @@ func PersistentCloudKitContainerFromID(id objc.ID) *PersistentCloudKitContainer 
 	return &PersistentCloudKitContainer{inner: raw.NSPersistentCloudKitContainerFromID(id)}
 }
 
+// Creates the CloudKit schema for all stores in the container that manage a CloudKit database.
+//
 // NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError creates a new [PersistentCloudKitContainer].
 func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options NSPersistentCloudKitContainerSchemaInitializationOptions) (*PersistentCloudKitContainer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentCloudKitContainer")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options 
 	return &PersistentCloudKitContainer{inner: raw.NSPersistentCloudKitContainerFromID(_id)}, nil
 }
 
+// The descriptions of the container’s persistent stores.
+//
 // WithPersistentStoreDescriptions sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items ...*raw.NSPersistentStoreDescription) *PersistentCloudKitContainer {
 	if len(items) == 0 {
@@ -64,36 +70,50 @@ func (x *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items ...*
 	return x
 }
 
+// Returns the CloudKit record for the specified managed object ID.
+//
 // RecordForManagedObjectID calls the underlying RecordForManagedObjectID.
 func (x *PersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID {
 	return x.inner.RecordForManagedObjectID(managedObjectID)
 }
 
+// Returns a dictionary that contains the CloudKit records for the specified managed object IDs.
+//
 // RecordsForManagedObjectIDs calls the underlying RecordsForManagedObjectIDs.
 func (x *PersistentCloudKitContainer) RecordsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID] {
 	return x.inner.RecordsForManagedObjectIDs(managedObjectIDs)
 }
 
+// Returns the CloudKit record ID for the specified managed object ID.
+//
 // RecordIDForManagedObjectID calls the underlying RecordIDForManagedObjectID.
 func (x *PersistentCloudKitContainer) RecordIDForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID {
 	return x.inner.RecordIDForManagedObjectID(managedObjectID)
 }
 
+// Returns a dictionary that contains the CloudKit record IDs for the specified managed object IDs.
+//
 // RecordIDsForManagedObjectIDs calls the underlying RecordIDsForManagedObjectIDs.
 func (x *PersistentCloudKitContainer) RecordIDsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID] {
 	return x.inner.RecordIDsForManagedObjectIDs(managedObjectIDs)
 }
 
+// Returns a Boolean value that indicates whether the user can modify the managed object’s underlying CloudKit record.
+//
 // CanUpdateRecordForManagedObjectWithID calls the underlying CanUpdateRecordForManagedObjectWithID.
 func (x *PersistentCloudKitContainer) CanUpdateRecordForManagedObjectWithID(objectID *raw.NSManagedObjectID) bool {
 	return x.inner.CanUpdateRecordForManagedObjectWithID(objectID)
 }
 
+// Returns a Boolean value that indicates whether the user can delete the managed object’s underlying CloudKit record.
+//
 // CanDeleteRecordForManagedObjectWithID calls the underlying CanDeleteRecordForManagedObjectWithID.
 func (x *PersistentCloudKitContainer) CanDeleteRecordForManagedObjectWithID(objectID *raw.NSManagedObjectID) bool {
 	return x.inner.CanDeleteRecordForManagedObjectWithID(objectID)
 }
 
+// Returns a Boolean value that indicates whether the user can modify the specified persistent store.
+//
 // CanModifyManagedObjectsInStore calls the underlying CanModifyManagedObjectsInStore.
 func (x *PersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *raw.NSPersistentStore) bool {
 	return x.inner.CanModifyManagedObjectsInStore(store)

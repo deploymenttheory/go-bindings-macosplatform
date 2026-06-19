@@ -142,7 +142,7 @@ func (x *MultiArray) GetBytesWithHandler(handler func(unsafe.Pointer, int)) {
 // Get the underlying buffer pointer to mutate.
 //
 // GetMutableBytesWithHandler calls the underlying GetMutableBytesWithHandler.
-func (x *MultiArray) GetMutableBytesWithHandler(handler objc.Block) {
+func (x *MultiArray) GetMutableBytesWithHandler(handler func(unsafe.Pointer, int, *foundation.NSArray[*foundation.NSNumber])) {
 	x.inner.GetMutableBytesWithHandler(handler)
 }
 
@@ -191,7 +191,7 @@ type MultiArrayable interface {
 	Count() int
 	PixelBuffer() unsafe.Pointer
 	GetBytesWithHandler(handler func(unsafe.Pointer, int))
-	GetMutableBytesWithHandler(handler objc.Block)
+	GetMutableBytesWithHandler(handler func(unsafe.Pointer, int, *foundation.NSArray[*foundation.NSNumber]))
 	ObjectAtIndexedSubscript(idx int) *foundation.NSNumber
 	ObjectForKeyedSubscript(key *foundation.NSArray[*foundation.NSNumber]) *foundation.NSNumber
 	SetObjectAtIndexedSubscript(obj *foundation.NSNumber, idx int)

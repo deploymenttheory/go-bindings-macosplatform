@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single item that appears in a window’s toolbar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstoolbaritem
 type NSToolbarItem struct {
 	foundation.NSObject
@@ -80,7 +82,7 @@ func NSToolbarItemFromID(id objc.ID) *NSToolbarItem {
 	return o
 }
 
-// Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.
+// Creates a toolbar item with the specified identifier.
 func (o *NSToolbarItem) InitWithItemIdentifier(itemIdentifier *foundation.NSString) *NSToolbarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelInitWithItemIdentifier, itemIdentifier.Ptr())
 	if _ret != 0 {
@@ -89,7 +91,7 @@ func (o *NSToolbarItem) InitWithItemIdentifier(itemIdentifier *foundation.NSStri
 	return NSToolbarItemFromID(_ret)
 }
 
-// Typically you should not invoke this method. This method is called by its toolbar during validation. Standard items validate themselves by sending the `-validateToolbarItem:` validate message to the current validator. Since items with custom views don't always have meaningful target/actions, they do nothing. So for your custom items it may be useful to override this method and invent your own validation.
+// Validates the toolbar item’s menu and its ability to perfrom its action.
 func (o *NSToolbarItem) Validate() {
 	o.Ptr().Send(_nSToolbarItemSelValidate)
 }
@@ -139,12 +141,15 @@ func (o *NSToolbarItem) SetPaletteLabel(paletteLabel *foundation.NSString) {
 
 // An array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
 func (o *NSToolbarItem) PossibleLabels() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _nSToolbarItemSelPossibleLabels)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelPossibleLabels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSToolbarItem) SetPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_nSToolbarItemSelSetPossibleLabels, possibleLabels)
+	o.Ptr().Send(_nSToolbarItemSelSetPossibleLabels, possibleLabels.Ptr())
 }
 
 // Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)

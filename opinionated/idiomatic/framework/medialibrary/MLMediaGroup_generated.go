@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.
+//
 // MediaGroup wraps [raw.MLMediaGroup] with a fluent Go API.
 type MediaGroup struct {
 	inner *raw.MLMediaGroup

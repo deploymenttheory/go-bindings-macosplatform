@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The IPv4 settings of an IP layer network tunnel.
+//
 // NEIPv4Settings wraps [raw.NEIPv4Settings] with a fluent Go API.
 type NEIPv4Settings struct {
 	inner *raw.NEIPv4Settings
@@ -32,7 +34,7 @@ func NEIPv4SettingsFromID(id objc.ID) *NEIPv4Settings {
 	return &NEIPv4Settings{inner: raw.NEIPv4SettingsFromID(id)}
 }
 
-// @method initWithAddresses:subnetMasks: @discussion Initialize a newly-allocated NEIPv4Settings object. @param addresses An array of IPv4 addresses represented as dotted decimal strings. @param subnetMasks An array of IPv4 subnet masks represented as dotted decimal strings. @return The initialized object.
+// Initializes an IPv4 settings object.
 //
 // NewNEIPv4SettingsWithAddressesSubnetMasks creates a new [NEIPv4Settings].
 func NewNEIPv4SettingsWithAddressesSubnetMasks(addresses *foundation.NSArray[*foundation.NSString], subnetMasks *foundation.NSArray[*foundation.NSString]) *NEIPv4Settings {
@@ -41,7 +43,7 @@ func NewNEIPv4SettingsWithAddressesSubnetMasks(addresses *foundation.NSArray[*fo
 	return &NEIPv4Settings{inner: raw.NEIPv4SettingsFromID(_id)}
 }
 
-// @property router @discussion The address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.
+// The address of the next-hop gateway router represented as a dotted decimal string.
 //
 // WithRouter sets the router property and returns the receiver for chaining.
 func (x *NEIPv4Settings) WithRouter(router string) *NEIPv4Settings {
@@ -49,7 +51,7 @@ func (x *NEIPv4Settings) WithRouter(router string) *NEIPv4Settings {
 	return x
 }
 
-// @property includedRoutes @discussion An array of NEIPv4Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
+// The IPv4 network traffic that the system routes to the TUN interface.
 //
 // WithIncludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv4Settings) WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings {
@@ -72,7 +74,7 @@ func (x *NEIPv4Settings) WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Se
 	return x
 }
 
-// @property excludedRoutes @discussion An array of NEIPv4Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
+// The IPv4 network traffic that the system routes to the primary physical interface, not the TUN interface.
 //
 // WithExcludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv4Settings) WithExcludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings {

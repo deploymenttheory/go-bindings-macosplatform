@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about disk usage.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiskiometric
 type MXDiskIOMetric struct {
 	MXMetric
@@ -31,6 +33,9 @@ func MXDiskIOMetricFromID(id objc.ID) *MXDiskIOMetric {
 }
 
 func (o *MXDiskIOMetric) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskIOMetricSelCumulativeLogicalWrites)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskIOMetricSelCumulativeLogicalWrites)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }

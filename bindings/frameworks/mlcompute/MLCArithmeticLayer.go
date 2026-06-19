@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that performs an arithmetic operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcarithmeticlayer
 type MLCArithmeticLayer struct {
 	MLCLayer
@@ -30,7 +32,7 @@ func MLCArithmeticLayerFromID(id objc.ID) *MLCArithmeticLayer {
 	return o
 }
 
-// @abstract   Create an arithmetic layer @param      operation    The arithmetic operation @return     A new arithmetic layer
+// Creates an arithmetic layer with the operation you specify.
 func MLCArithmeticLayerLayerWithOperation(operation MLCArithmeticOperation) *MLCArithmeticLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCArithmeticLayer), _mLCArithmeticLayerSelLayerWithOperation, operation)
 	if _ret != 0 {

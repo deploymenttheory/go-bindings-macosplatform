@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents an alarm.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekalarm
 type EKAlarm struct {
 	EKObject
@@ -46,7 +48,7 @@ func EKAlarmFromID(id objc.ID) *EKAlarm {
 	return o
 }
 
-// @method     alarmWithAbsoluteDate: @abstract   Creates a new autoreleased alarm with an absolute trigger time. @param      date    The date the alarm should fire.
+// Creates and returns an alarm with an absolute date.
 func EKAlarmAlarmWithAbsoluteDate(date *foundation.NSDate) *EKAlarm {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKAlarm), _eKAlarmSelAlarmWithAbsoluteDate, date.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func EKAlarmAlarmWithAbsoluteDate(date *foundation.NSDate) *EKAlarm {
 	return EKAlarmFromID(_ret)
 }
 
-// @method     alarmWithRelativeOffset: @abstract   Creates a new autoreleased alarm with a relative trigger time. @discussion Creates a new autoreleased alarm with a relative trigger time. This offset is added to the start date of the event. @param      offset    The offset from the event start that the alarm should fire.
+// Creates and returns an alarm with a relative offset.
 func EKAlarmAlarmWithRelativeOffset(offset float64) *EKAlarm {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKAlarm), _eKAlarmSelAlarmWithRelativeOffset, offset)
 	if _ret != 0 {

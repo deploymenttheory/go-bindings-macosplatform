@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller object that displays iOS devices that support inter-device audio.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/cainterdeviceaudioviewcontroller
 type CAInterDeviceAudioViewController struct {
 	appkit.NSViewController

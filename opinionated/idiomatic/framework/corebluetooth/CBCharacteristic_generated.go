@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A characteristic of a remote peripheral’s service.
+//
 // Characteristic wraps [raw.CBCharacteristic] with a fluent Go API.
 type Characteristic struct {
 	inner *raw.CBCharacteristic

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that performs the initial, nominal glyph generation phase in the layout process.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsglyphgenerator
 type NSGlyphGenerator struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func NSGlyphGeneratorFromID(id objc.ID) *NSGlyphGenerator {
 	return o
 }
 
+// Generates glyphs for the specified glyph storage object (NSLayoutManager by default).
 func (o *NSGlyphGenerator) GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage NSGlyphStorage, nChars uint, glyphIndex *uint, charIndex *uint) {
 	o.Ptr().Send(_nSGlyphGeneratorSelGenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex, glyphStorage, nChars, glyphIndex, charIndex)
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A texture for use in convolutional neural networks that stores transient data to be used and discarded promptly.
+//
 // TemporaryImage wraps [raw.MPSTemporaryImage] with a fluent Go API.
 type TemporaryImage struct {
 	inner *raw.MPSTemporaryImage
@@ -37,13 +39,15 @@ func NewTemporaryImage() *TemporaryImage {
 	return &TemporaryImage{inner: raw.MPSTemporaryImageFromID(_id)}
 }
 
+// The number of times a temporary image may be read by a CNN kernel before its contents become undefined.
+//
 // WithReadCount sets the readCount property and returns the receiver for chaining.
 func (x *TemporaryImage) WithReadCount(readCount uint) *TemporaryImage {
 	x.inner.SetReadCount(readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// A string to help identify this object.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TemporaryImage) WithLabel(label string) *TemporaryImage {

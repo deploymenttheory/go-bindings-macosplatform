@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents barcode information that an image analysis request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnbarcodeobservation
 type VNBarcodeObservation struct {
 	VNRectangleObservation

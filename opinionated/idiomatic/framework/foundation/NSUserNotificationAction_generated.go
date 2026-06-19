@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An action that the user can take in response to receiving a notification.
+//
 // UserNotificationAction wraps [raw.NSUserNotificationAction] with a fluent Go API.
 type UserNotificationAction struct {
 	inner *raw.NSUserNotificationAction

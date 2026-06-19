@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains details about the person who signed a message.
+//
 // MessageSigner wraps [raw.MEMessageSigner] with a fluent Go API.
 type MessageSigner struct {
 	inner *raw.MEMessageSigner
@@ -31,6 +33,8 @@ func MessageSignerFromID(id objc.ID) *MessageSigner {
 	return &MessageSigner{inner: raw.MEMessageSignerFromID(id)}
 }
 
+// Creates a new message signer object that contains the email addresses of the signers, a label, and context data.
+//
 // NewMessageSignerWithEmailAddressesSignatureLabelContext creates a new [MessageSigner].
 func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses *foundation.NSArray[*raw.MEEmailAddress], label string, context_ *foundation.NSData) *MessageSigner {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageSigner")), objc.RegisterName("alloc"))

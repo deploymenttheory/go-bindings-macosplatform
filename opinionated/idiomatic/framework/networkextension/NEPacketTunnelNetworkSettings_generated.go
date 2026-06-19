@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration for a packet tunnel provider’s virtual interface.
+//
 // NEPacketTunnelNetworkSettings wraps [raw.NEPacketTunnelNetworkSettings] with a fluent Go API.
 type NEPacketTunnelNetworkSettings struct {
 	inner *raw.NEPacketTunnelNetworkSettings
@@ -36,7 +38,7 @@ func NewNEPacketTunnelNetworkSettings() *NEPacketTunnelNetworkSettings {
 	return &NEPacketTunnelNetworkSettings{inner: raw.NEPacketTunnelNetworkSettingsFromID(_id)}
 }
 
-// @property IPv4Settings @discussion An NEIPv4Settings object that contains the desired tunnel IPv4 settings.
+// The tunnel IP version 4 settings.
 //
 // WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings {
@@ -44,7 +46,7 @@ func (x *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Set
 	return x
 }
 
-// @property IPv6Settings @discussion An NEIPv6Settings object that contains the desired tunnel IPv6 settings.
+// The tunnel IP version 6 settings.
 //
 // WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings {
@@ -52,7 +54,7 @@ func (x *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Set
 	return x
 }
 
-// @property tunnelOverheadBytes @discussion An NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
+// The number of bytes added to each tunneled packet for storing tunneling protocol headers.
 //
 // WithTunnelOverheadBytes sets the tunnelOverheadBytes property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings {
@@ -60,7 +62,7 @@ func (x *NEPacketTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBy
 	return x
 }
 
-// @property MTU @discussion An NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
+// The size of the maximum trasnmission unit, in bytes.
 //
 // WithMTU sets the mTU property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings {
@@ -68,7 +70,7 @@ func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEPac
 	return x
 }
 
-// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+// The tunnel DNS settings.
 //
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings {
@@ -76,7 +78,7 @@ func (x *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSetting
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+// The tunnel HTTP proxy settings.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings {

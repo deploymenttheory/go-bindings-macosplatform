@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for vertex data forming part of the definition for a three-dimensional object, or geometry.
+//
 // GeometrySource wraps [raw.SCNGeometrySource] with a fluent Go API.
 type GeometrySource struct {
 	inner *raw.SCNGeometrySource

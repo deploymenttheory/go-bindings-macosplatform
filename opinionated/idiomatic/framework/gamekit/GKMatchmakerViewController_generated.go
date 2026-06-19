@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface that allows a player to invite other players to a real-time game and automatch to fill any empty slots.
+//
 // MatchmakerViewController wraps [raw.GKMatchmakerViewController] with a fluent Go API.
 type MatchmakerViewController struct {
 	inner *raw.GKMatchmakerViewController
@@ -31,7 +33,7 @@ func MatchmakerViewControllerFromID(id objc.ID) *MatchmakerViewController {
 	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(id)}
 }
 
-// Initialize with a matchmaking request, allowing the user to send invites and/or start matchmaking
+// Creates a matchmaker view controller for the local player to start inviting other players.
 //
 // NewMatchmakerViewControllerWithMatchRequest creates a new [MatchmakerViewController].
 func NewMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *MatchmakerViewController {
@@ -40,7 +42,7 @@ func NewMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *M
 	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(_id)}
 }
 
-// Initialize with an accepted invite, allowing the user to see the status of other invited players and get notified when the game starts
+// Creates a matchmaker view controller to present to a player who accepts an invitation.
 //
 // NewMatchmakerViewControllerWithInvite creates a new [MatchmakerViewController].
 func NewMatchmakerViewControllerWithInvite(invite *raw.GKInvite) *MatchmakerViewController {
@@ -49,13 +51,15 @@ func NewMatchmakerViewControllerWithInvite(invite *raw.GKInvite) *MatchmakerView
 	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(_id)}
 }
 
+// The object that handles matchmaker view controller changes.
+//
 // WithMatchmakerDelegate sets the matchmakerDelegate property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) *MatchmakerViewController {
 	x.inner.SetMatchmakerDelegate(matchmakerDelegate)
 	return x
 }
 
-// set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
+// A Boolean value that indicates whether the match is hosted or peer-to-peer.
 //
 // WithHosted sets the hosted property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewController {
@@ -63,7 +67,7 @@ func (x *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewContro
 	return x
 }
 
-// this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
+// The mode that a multiplayer game uses to find players.
 //
 // WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *MatchmakerViewController {
@@ -71,7 +75,7 @@ func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchma
 	return x
 }
 
-// A BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is NO, and the multiplayer match can only proceed after all players are connected. If the value is set to YES, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
+// A Boolean value that indicates whether your game can start after a minimum number of players join a match.
 //
 // WithCanStartWithMinimumPlayers sets the canStartWithMinimumPlayers property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController {
@@ -79,7 +83,7 @@ func (x *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMi
 	return x
 }
 
-// deprecated, set the message on the match request instead
+// The default invitation message sent to a player.
 //
 // WithDefaultInvitationMessage sets the defaultInvitationMessage property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController {
@@ -87,13 +91,15 @@ func (x *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitatio
 	return x
 }
 
-// Add additional players (not currently connected) to an existing peer-to-peer match. Apps should elect a single device to do this, otherwise conflicts could arise resulting in unexpected connection errors.
+// Invites additional players to join an existing match.
 //
 // AddPlayersToMatch calls the underlying AddPlayersToMatch.
 func (x *MatchmakerViewController) AddPlayersToMatch(match *raw.GKMatch) {
 	x.inner.AddPlayersToMatch(match)
 }
 
+// Updates the connection status of a player in a hosted game.
+//
 // SetHostedPlayerDidConnect calls the underlying SetHostedPlayerDidConnect.
 func (x *MatchmakerViewController) SetHostedPlayerDidConnect(player *raw.GKPlayer, connected bool) {
 	x.inner.SetHostedPlayerDidConnect(player, connected)
@@ -170,7 +176,7 @@ func (x *MatchmakerViewController) SetDefaultInvitationMessage(defaultInvitation
 	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Updates a player’s status on the view to show that the player has connected or disconnected from your server.
 //
 // SetHostedPlayerConnected calls the underlying SetHostedPlayerConnected.
 func (x *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {

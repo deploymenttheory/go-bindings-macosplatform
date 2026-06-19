@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request that detects a human hand pose.
+//
 // DetectHumanHandPoseRequest wraps [raw.VNDetectHumanHandPoseRequest] with a fluent Go API.
 type DetectHumanHandPoseRequest struct {
 	inner *raw.VNDetectHumanHandPoseRequest
@@ -38,7 +40,7 @@ func NewDetectHumanHandPoseRequest() *DetectHumanHandPoseRequest {
 	return &DetectHumanHandPoseRequest{inner: raw.VNDetectHumanHandPoseRequestFromID(_id)}
 }
 
-// @brief Defines an upper bounds to the maximum number of hands that will be processed for key points in an image. @discussion The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2. The maximum value for VNDetectHumanHandPoseRequestRevision1 is 6.
+// The maximum number of hands to detect in an image.
 //
 // WithMaximumHandCount sets the maximumHandCount property and returns the receiver for chaining.
 func (x *DetectHumanHandPoseRequest) WithMaximumHandCount(maximumHandCount uint) *DetectHumanHandPoseRequest {
@@ -46,7 +48,7 @@ func (x *DetectHumanHandPoseRequest) WithMaximumHandCount(maximumHandCount uint)
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectHumanHandPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanHandPoseRequest {
@@ -54,7 +56,7 @@ func (x *DetectHumanHandPoseRequest) WithRegionOfInterest(regionOfInterest coref
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectHumanHandPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanHandPoseRequest {
@@ -62,7 +64,7 @@ func (x *DetectHumanHandPoseRequest) WithPreferBackgroundProcessing(preferBackgr
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectHumanHandPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanHandPoseRequest {
@@ -70,7 +72,7 @@ func (x *DetectHumanHandPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHu
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectHumanHandPoseRequest) WithRevision(revision uint) *DetectHumanHandPoseRequest {
@@ -78,7 +80,7 @@ func (x *DetectHumanHandPoseRequest) WithRevision(revision uint) *DetectHumanHan
 	return x
 }
 
-// @brief Obtain the collection of human hand joint names that are supported by a given request object configured with a specific revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanHandPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+// Retrieves the supported joint names.
 //
 // SupportedJointNames returns the collection as a Go slice.
 func (x *DetectHumanHandPoseRequest) SupportedJointNames() ([]*foundation.NSString, error) {
@@ -94,7 +96,7 @@ func (x *DetectHumanHandPoseRequest) SupportedJointNames() ([]*foundation.NSStri
 	}), nil
 }
 
-// @brief Obtain the collection of human hand joints group names that are supported by a given request object configured with a specific revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanHandPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
+// Retrieves the supported joint group names.
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
 func (x *DetectHumanHandPoseRequest) SupportedJointsGroupNames() ([]*foundation.NSString, error) {

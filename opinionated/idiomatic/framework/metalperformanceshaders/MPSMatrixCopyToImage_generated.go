@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A kernel that copies matrix data to a Metal Performance Shaders image.
+//
 // MatrixCopyToImage wraps [raw.MPSMatrixCopyToImage] with a fluent Go API.
 type MatrixCopyToImage struct {
 	inner *raw.MPSMatrixCopyToImage
@@ -67,7 +69,7 @@ func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex ui
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixCopyToImage) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopyToImage {
@@ -75,7 +77,7 @@ func (x *MatrixCopyToImage) WithOptions(options mpscore.MPSKernelOptions) *Matri
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixCopyToImage) WithLabel(label string) *MatrixCopyToImage {

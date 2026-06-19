@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for the color or texture of one of a material’s visual properties.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnmaterialproperty
 type SCNMaterialProperty struct {
 	foundation.NSObject
@@ -61,7 +63,7 @@ func SCNMaterialPropertyFromID(id objc.ID) *SCNMaterialProperty {
 	return o
 }
 
-// @method materialPropertyWithContents: @abstract Creates and initialize a property instance with the specified contents.
+// Creates a new material property object with the specified contents.
 func SCNMaterialPropertyMaterialPropertyWithContents(contents objc.ID) *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNMaterialProperty), _sCNMaterialPropertySelMaterialPropertyWithContents, contents)
 	if _ret != 0 {

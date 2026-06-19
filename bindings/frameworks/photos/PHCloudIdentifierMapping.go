@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcloudidentifiermapping
 type PHCloudIdentifierMapping struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An asset that represents media at a local or remote URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avurlasset
 type AVURLAsset struct {
 	AVAsset
@@ -48,37 +50,43 @@ func AVURLAssetFromID(id objc.ID) *AVURLAsset {
 	return o
 }
 
-// Provides the file types the AVURLAsset class understands. - Returns: An NSArray of UTIs identifying the file types the AVURLAsset class understands.
+// Returns an array of the file types the asset supports.
 // Deprecated: Use audiovisualContentTypes instead
 func AVURLAssetAudiovisualTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVURLAsset), _aVURLAssetSelAudiovisualTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelAudiovisualTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Provides the MIME types the AVURLAsset class understands. - Returns: An NSArray of NSStrings containing MIME types the AVURLAsset class understands.
+// Returns an array of the MIME types the asset supports.
 func AVURLAssetAudiovisualMIMETypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVURLAsset), _aVURLAssetSelAudiovisualMIMETypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelAudiovisualMIMETypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Returns YES if asset is playable with the codec(s) and container type specified in extendedMIMEType. Returns NO otherwise. On releases prior to macOS 14, iOS 17, tvOS 17, and watchOS 10, regardless of the specified MIME type this method interprets all codecs parameters according to the ISO family syntax defined by RFC 6381 and evaluates playability according to whether the indicated codecs are supported when carried in container formats that conform to the ISO BMFF specification, such as the MPEG-4 file format. On releases starting with macOS 14, iOS 17, tvOS 17, and watchOS 10, this method interprets codecs parameters according to the syntax and namespace determined by the specified MIME type and evaluates playability according to whether the indicated codecs are supported when carried in the container format indicated by that MIME type. Codecs parameters for each of the following MIME types are supported: video/mp4 (per RFC 6381, ISO/IEC 14496-15 Annex E, et al), video/quicktime (RFC 6381 et al), video/mp2t (ISO/IEC 13818-1), audio/vnd.wave (RFC 2361), audio/aiff (using the CoreAudio AudioFormatID namespace), audio/x-caf (also using the CoreAudio AudioFormatID namespace), and audio/mpeg (e.g. codecs="mp3"). MIME types supported as alternatives for the same container formats, e.g audio/mp4, are equivalently treated. If the indicated MIME type defines no supported syntax and namespace for codecs parameters, when any codecs parameter is present this method returns NO. - Parameter extendedMIMEType: - Returns: YES or NO.
+// Returns a Boolean value that indicates whether the asset is playable with the specified codecs and container type.
 func AVURLAssetIsPlayableExtendedMIMEType(extendedMIMEType *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsAVURLAsset), _aVURLAssetSelIsPlayableExtendedMIMEType, extendedMIMEType.Ptr())
 	return _ret
 }
 
-// Returns an instance of AVURLAsset for inspection of a media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVURLAsset.
+// Returns an asset that models the media resource found at the specified URL.
 func AVURLAssetURLAssetWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelURLAssetWithURLOptions, uRL.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelURLAssetWithURLOptions, uRL.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVURLAssetFromID(_ret)
 }
 
-// Initializes an instance of AVURLAsset for inspection of a media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVURLAsset.
+// Creates an asset that models the media resource at the specified URL.
 func (o *AVURLAsset) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelInitWithURLOptions, uRL.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelInitWithURLOptions, uRL.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -87,8 +95,11 @@ func (o *AVURLAsset) InitWithURLOptions(uRL *foundation.NSURL, options *foundati
 
 // Provides the content types the AVURLAsset class understands. - Returns: An NSArray of UTTypes identifying the content types the AVURLAsset class understands.
 func AVURLAssetAudiovisualContentTypes() *foundation.NSArray[*uniformtypeidentifiers.UTType] {
-	_ret := objc.Send[*foundation.NSArray[*uniformtypeidentifiers.UTType]](objc.ID(_clsAVURLAsset), _aVURLAssetSelAudiovisualContentTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelAudiovisualContentTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](_ret)
 }
 
 // Indicates the URL with which the instance of AVURLAsset was initialized.
@@ -125,7 +136,7 @@ func (o *AVURLAsset) AssetCache() *AVAssetCache {
 	return AVAssetCacheFromID(_ret)
 }
 
-// Provides a reference to an AVAssetTrack of the target from which any timeRange can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). Finds a track of the target with content that can be accommodated by the specified composition track. The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:]. - Parameter compositionTrack: The composition track for which a compatible AVAssetTrack is requested. - Returns: an instance of AVAssetTrack
+// Returns an asset track from which you can insert any time range into a given composition track.
 // Deprecated: Use findCompatibleTrackForCompositionTrack:completionHandler: instead
 func (o *AVURLAsset) CompatibleTrackForCompositionTrack(compositionTrack *AVCompositionTrack) *AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelCompatibleTrackForCompositionTrack, compositionTrack.Ptr())
@@ -135,7 +146,7 @@ func (o *AVURLAsset) CompatibleTrackForCompositionTrack(compositionTrack *AVComp
 	return AVAssetTrackFromID(_ret)
 }
 
-// Loads a reference to an AVAssetTrack of the target from which any timeRange can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). Finds a track of the target with content that can be accommodated by the specified composition track. The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:]. - Parameter compositionTrack: The composition track for which a compatible AVAssetTrack is requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending an instance of AVAssetTrack or an error.
+// Loads an asset track from which you can insert any time range into the composition track.
 func (o *AVURLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *AVCompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -4,6 +4,8 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -30,6 +32,16 @@ func MTRAttributeCacheContainerFromID(id objc.ID) *MTRAttributeCacheContainer {
 	return o
 }
 
-func (o *MTRAttributeCacheContainer) ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion objc.Block) {
-	o.Ptr().Send(_mTRAttributeCacheContainerSelReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion, endpointId.Ptr(), clusterId.Ptr(), attributeId.Ptr(), clientQueue.Ptr(), completion)
+func (o *MTRAttributeCacheContainer) ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRAttributeCacheContainerSelReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion, endpointId.Ptr(), clusterId.Ptr(), attributeId.Ptr(), clientQueue.Ptr(), __block_completion)
 }

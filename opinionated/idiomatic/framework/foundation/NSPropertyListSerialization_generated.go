@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that converts between a property list and one of several serialized representations.
+//
 // PropertyListSerialization wraps [raw.NSPropertyListSerialization] with a fluent Go API.
 type PropertyListSerialization struct {
 	inner *raw.NSPropertyListSerialization

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The detailed metadata for a searchable item.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset
 type CSSearchableItemAttributeSet struct {
 	foundation.NSObject
@@ -408,6 +410,7 @@ func CSSearchableItemAttributeSetFromID(id objc.ID) *CSSearchableItemAttributeSe
 	return o
 }
 
+// Creates an attribute set for the specified content type.
 // Deprecated: Use initWithContentType instead
 func (o *CSSearchableItemAttributeSet) InitWithItemContentType(itemContentType *foundation.NSString) *CSSearchableItemAttributeSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInitWithItemContentType, itemContentType.Ptr())
@@ -417,6 +420,7 @@ func (o *CSSearchableItemAttributeSet) InitWithItemContentType(itemContentType *
 	return CSSearchableItemAttributeSetFromID(_ret)
 }
 
+// Creates an attribute set for the specified content type.
 func (o *CSSearchableItemAttributeSet) InitWithContentType(contentType *uniformtypeidentifiers.UTType) *CSSearchableItemAttributeSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInitWithContentType, contentType.Ptr())
 	if _ret != 0 {
@@ -425,10 +429,12 @@ func (o *CSSearchableItemAttributeSet) InitWithContentType(contentType *uniformt
 	return CSSearchableItemAttributeSetFromID(_ret)
 }
 
+// Sets the value for a custom attribute key.
 func (o *CSSearchableItemAttributeSet) SetValueForCustomKey(value foundation.NSSecureCoding, key *CSCustomAttributeKey) {
 	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetValueForCustomKey, value, key.Ptr())
 }
 
+// Returns the value associated with the specified custom attribute key.
 func (o *CSSearchableItemAttributeSet) ValueForCustomKey(key *CSCustomAttributeKey) foundation.NSSecureCoding {
 	_ret := objc.Send[foundation.NSSecureCoding](o.Ptr(), _cSSearchableItemAttributeSetSelValueForCustomKey, key.Ptr())
 	return _ret
@@ -447,12 +453,15 @@ func (o *CSSearchableItemAttributeSet) SetDisplayName(displayName *foundation.NS
 }
 
 func (o *CSSearchableItemAttributeSet) AlternateNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelAlternateNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAlternateNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetAlternateNames(alternateNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAlternateNames, alternateNames)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAlternateNames, alternateNames.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Path() *foundation.NSString {
@@ -561,21 +570,27 @@ func (o *CSSearchableItemAttributeSet) SetContentType(contentType *foundation.NS
 }
 
 func (o *CSSearchableItemAttributeSet) ContentTypeTree() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelContentTypeTree)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentTypeTree)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetContentTypeTree(contentTypeTree *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContentTypeTree, contentTypeTree)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContentTypeTree, contentTypeTree.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Keywords() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelKeywords)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelKeywords)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetKeywords(keywords *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetKeywords, keywords)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetKeywords, keywords.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Title() *foundation.NSString {
@@ -804,12 +819,15 @@ func (o *CSSearchableItemAttributeSet) SetIdentifier(identifier *foundation.NSSt
 }
 
 func (o *CSSearchableItemAttributeSet) Audiences() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelAudiences)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAudiences)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetAudiences(audiences *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAudiences, audiences)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAudiences, audiences.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) FileSize() *foundation.NSNumber {
@@ -885,12 +903,15 @@ func (o *CSSearchableItemAttributeSet) SetCreator(creator *foundation.NSString) 
 }
 
 func (o *CSSearchableItemAttributeSet) EncodingApplications() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelEncodingApplications)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEncodingApplications)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetEncodingApplications(encodingApplications *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEncodingApplications, encodingApplications)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEncodingApplications, encodingApplications.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Kind() *foundation.NSString {
@@ -906,12 +927,15 @@ func (o *CSSearchableItemAttributeSet) SetKind(kind *foundation.NSString) {
 }
 
 func (o *CSSearchableItemAttributeSet) FontNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelFontNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelFontNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetFontNames(fontNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetFontNames, fontNames)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetFontNames, fontNames.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) DueDate() *foundation.NSDate {
@@ -963,12 +987,15 @@ func (o *CSSearchableItemAttributeSet) SetEndDate(endDate *foundation.NSDate) {
 }
 
 func (o *CSSearchableItemAttributeSet) ImportantDates() *foundation.NSArray[*foundation.NSDate] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSDate]](o.Ptr(), _cSSearchableItemAttributeSetSelImportantDates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelImportantDates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSDate](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetImportantDates(importantDates *foundation.NSArray[*foundation.NSDate]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetImportantDates, importantDates)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetImportantDates, importantDates.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) AllDay() *foundation.NSNumber {
@@ -996,12 +1023,15 @@ func (o *CSSearchableItemAttributeSet) SetAccountIdentifier(accountIdentifier *f
 }
 
 func (o *CSSearchableItemAttributeSet) AccountHandles() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelAccountHandles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAccountHandles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetAccountHandles(accountHandles *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAccountHandles, accountHandles)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAccountHandles, accountHandles.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) HTMLContentData() *foundation.NSData {
@@ -1077,102 +1107,135 @@ func (o *CSSearchableItemAttributeSet) SetHiddenAdditionalRecipients(hiddenAddit
 }
 
 func (o *CSSearchableItemAttributeSet) EmailHeaders() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cSSearchableItemAttributeSetSelEmailHeaders)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEmailHeaders)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetEmailHeaders(emailHeaders *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEmailHeaders, emailHeaders)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEmailHeaders, emailHeaders.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) MailboxIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelMailboxIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMailboxIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetMailboxIdentifiers(mailboxIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetMailboxIdentifiers, mailboxIdentifiers)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetMailboxIdentifiers, mailboxIdentifiers.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) AuthorNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelAuthorNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAuthorNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetAuthorNames(authorNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAuthorNames, authorNames)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAuthorNames, authorNames.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) RecipientNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelRecipientNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRecipientNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetRecipientNames(recipientNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRecipientNames, recipientNames)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRecipientNames, recipientNames.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) AuthorEmailAddresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelAuthorEmailAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAuthorEmailAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetAuthorEmailAddresses(authorEmailAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAuthorEmailAddresses, authorEmailAddresses)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAuthorEmailAddresses, authorEmailAddresses.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) RecipientEmailAddresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelRecipientEmailAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRecipientEmailAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetRecipientEmailAddresses(recipientEmailAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRecipientEmailAddresses, recipientEmailAddresses)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRecipientEmailAddresses, recipientEmailAddresses.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) AuthorAddresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelAuthorAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelAuthorAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetAuthorAddresses(authorAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAuthorAddresses, authorAddresses)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetAuthorAddresses, authorAddresses.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) RecipientAddresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelRecipientAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelRecipientAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetRecipientAddresses(recipientAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRecipientAddresses, recipientAddresses)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetRecipientAddresses, recipientAddresses.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) PhoneNumbers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelPhoneNumbers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPhoneNumbers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetPhoneNumbers(phoneNumbers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetPhoneNumbers, phoneNumbers)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetPhoneNumbers, phoneNumbers.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) EmailAddresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelEmailAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEmailAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEmailAddresses, emailAddresses)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEmailAddresses, emailAddresses.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) InstantMessageAddresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelInstantMessageAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelInstantMessageAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetInstantMessageAddresses(instantMessageAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetInstantMessageAddresses, instantMessageAddresses)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetInstantMessageAddresses, instantMessageAddresses.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) IsLikelyJunk() *foundation.NSNumber {
@@ -1196,39 +1259,51 @@ func (o *CSSearchableItemAttributeSet) IsPriority() *foundation.NSNumber {
 }
 
 func (o *CSSearchableItemAttributeSet) Editors() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelEditors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelEditors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetEditors(editors *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEditors, editors)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEditors, editors.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Participants() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelParticipants)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelParticipants)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetParticipants(participants *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetParticipants, participants)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetParticipants, participants.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Projects() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelProjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelProjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetProjects(projects *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProjects, projects)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetProjects, projects.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) ContentSources() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelContentSources)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContentSources)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetContentSources(contentSources *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContentSources, contentSources)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContentSources, contentSources.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Comment() *foundation.NSString {
@@ -1328,30 +1403,39 @@ func (o *CSSearchableItemAttributeSet) SetDuration(duration *foundation.NSNumber
 }
 
 func (o *CSSearchableItemAttributeSet) ContactKeywords() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelContactKeywords)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContactKeywords)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetContactKeywords(contactKeywords *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContactKeywords, contactKeywords)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContactKeywords, contactKeywords.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Codecs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelCodecs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCodecs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetCodecs(codecs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetCodecs, codecs)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetCodecs, codecs.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) MediaTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelMediaTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelMediaTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetMediaTypes(mediaTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetMediaTypes, mediaTypes)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetMediaTypes, mediaTypes.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) IsStreamable() *foundation.NSNumber {
@@ -1415,12 +1499,15 @@ func (o *CSSearchableItemAttributeSet) SetDeliveryType(deliveryType *foundation.
 }
 
 func (o *CSSearchableItemAttributeSet) Organizations() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelOrganizations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelOrganizations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetOrganizations(organizations *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetOrganizations, organizations)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetOrganizations, organizations.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Role() *foundation.NSString {
@@ -1436,12 +1523,15 @@ func (o *CSSearchableItemAttributeSet) SetRole(role *foundation.NSString) {
 }
 
 func (o *CSSearchableItemAttributeSet) Languages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetLanguages(languages *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetLanguages, languages)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetLanguages, languages.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Rights() *foundation.NSString {
@@ -1457,30 +1547,39 @@ func (o *CSSearchableItemAttributeSet) SetRights(rights *foundation.NSString) {
 }
 
 func (o *CSSearchableItemAttributeSet) Publishers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelPublishers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPublishers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetPublishers(publishers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetPublishers, publishers)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetPublishers, publishers.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Contributors() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelContributors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelContributors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetContributors(contributors *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContributors, contributors)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetContributors, contributors.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Coverage() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelCoverage)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelCoverage)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetCoverage(coverage *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetCoverage, coverage)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetCoverage, coverage.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Rating() *foundation.NSNumber {
@@ -1568,12 +1667,15 @@ func (o *CSSearchableItemAttributeSet) SetGenre(genre *foundation.NSString) {
 }
 
 func (o *CSSearchableItemAttributeSet) Performers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelPerformers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelPerformers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetPerformers(performers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetPerformers, performers)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetPerformers, performers.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) OriginalFormat() *foundation.NSString {
@@ -1997,12 +2099,15 @@ func (o *CSSearchableItemAttributeSet) SetOrientation(orientation *foundation.NS
 }
 
 func (o *CSSearchableItemAttributeSet) LayerNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cSSearchableItemAttributeSetSelLayerNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemAttributeSetSelLayerNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CSSearchableItemAttributeSet) SetLayerNames(layerNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetLayerNames, layerNames)
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetLayerNames, layerNames.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) WhiteBalance() *foundation.NSNumber {

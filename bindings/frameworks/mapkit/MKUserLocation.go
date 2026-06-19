@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An annotation that reflects the user’s location on the map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkuserlocation
 type MKUserLocation struct {
 	foundation.NSObject

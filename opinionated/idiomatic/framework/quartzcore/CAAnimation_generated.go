@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for animations in Core Animation.
+//
 // Animation wraps [raw.CAAnimation] with a fluent Go API.
 type Animation struct {
 	inner *raw.CAAnimation
@@ -36,18 +38,24 @@ func NewAnimation() *Animation {
 	return &Animation{inner: raw.CAAnimationFromID(_id)}
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
 	x.inner.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Animation) WithDelegate(delegate raw.CAAnimationDelegate) *Animation {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
 	x.inner.SetRemovedOnCompletion(removedOnCompletion)
@@ -60,6 +68,8 @@ func (x *Animation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFr
 	return x
 }
 
+// Specifies whether the value of the property for a given key is archived.
+//
 // ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
 func (x *Animation) ShouldArchiveValueForKey(key string) bool {
 	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))

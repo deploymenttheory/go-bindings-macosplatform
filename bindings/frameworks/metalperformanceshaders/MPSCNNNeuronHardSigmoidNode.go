@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronHardSigmoid kernel @discussion For each pixel, applies the following function: @code f(x) = clamp((a * x) + b, 0, 1) @endcode
+// A representation of a hard sigmoid neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronhardsigmoidnode
 type MPSCNNNeuronHardSigmoidNode struct {

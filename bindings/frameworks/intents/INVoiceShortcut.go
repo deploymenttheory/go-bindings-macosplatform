@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A shortcut the user added to Siri.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/invoiceshortcut
 type INVoiceShortcut struct {
 	foundation.NSObject

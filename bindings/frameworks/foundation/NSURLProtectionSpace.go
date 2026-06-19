@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A server or an area on a server, commonly referred to as a realm, that requires authentication.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlprotectionspace
 type NSURLProtectionSpace struct {
 	NSObject

@@ -1,0 +1,695 @@
+{
+  "schema_version": 1,
+  "framework": "ScreenCaptureKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SCContentFilter": {
+      "doc": "An instance that filters the content a stream captures.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter"
+    },
+    "SCContentSharingPicker": {
+      "doc": "An instance of a picker presented by the operating system for managing frame-capture streams.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker"
+    },
+    "SCContentSharingPickerConfiguration": {
+      "doc": "An instance for configuring the system content-sharing picker.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerconfiguration"
+    },
+    "SCDisplay": {
+      "doc": "An instance that represents a display device.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scdisplay"
+    },
+    "SCRecordingOutput": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/screcordingoutput"
+    },
+    "SCRecordingOutputConfiguration": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/screcordingoutputconfiguration"
+    },
+    "SCRunningApplication": {
+      "doc": "An instance that represents an app running on a device.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scrunningapplication"
+    },
+    "SCScreenshotConfiguration": {
+      "doc": "An object that contains screenshot properties such as output width, height, and image quality specifications.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration"
+    },
+    "SCScreenshotManager": {
+      "doc": "An instance for the capture of single frames from a stream.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotmanager"
+    },
+    "SCScreenshotOutput": {
+      "doc": "An object that contains all images requested by the client.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotoutput"
+    },
+    "SCShareableContent": {
+      "doc": "An instance that represents a set of displays, apps, and windows that your app can capture.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent"
+    },
+    "SCShareableContentInfo": {
+      "doc": "An instance that provides information for the content in a given stream.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentinfo"
+    },
+    "SCStream": {
+      "doc": "An instance that represents a stream of shareable content.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstream"
+    },
+    "SCStreamConfiguration": {
+      "doc": "An instance that provides the output configuration for a stream.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration"
+    },
+    "SCWindow": {
+      "doc": "An instance that represents an onscreen window.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scwindow"
+    }
+  },
+  "protocols": {
+    "SCContentSharingPickerObserver": {
+      "doc": "An observer protocol your app implements to receive messages from the operating system’s content picker.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickerobserver"
+    },
+    "SCRecordingOutputDelegate": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/screcordingoutputdelegate"
+    },
+    "SCStreamDelegate": {
+      "doc": "A delegate protocol your app implements to respond to stream events.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamdelegate"
+    },
+    "SCStreamOutput": {
+      "doc": "A delegate protocol your app implements to receive capture stream output events.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamoutput"
+    }
+  },
+  "enums": {
+    "SCCaptureDynamicRange": {
+      "doc": "Specifies whether the captured screen output is standard or high dynamic range.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccapturedynamicrange",
+      "members": {
+        "SCCaptureDynamicRangeHDRCanonicalDisplay": {
+          "doc": "Specifies that the system captures the screen in high dynamic range with attributes of the canonical display.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccapturedynamicrange/hdrcanonicaldisplay"
+        },
+        "SCCaptureDynamicRangeHDRLocalDisplay": {
+          "doc": "Specifies that the system captures the screen in high dynamic range with attributes of the local display.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccapturedynamicrange/hdrlocaldisplay"
+        },
+        "SCCaptureDynamicRangeSDR": {
+          "doc": "Specifies that the system captures the screen in standard dynamic range.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccapturedynamicrange/sdr"
+        }
+      }
+    },
+    "SCCaptureResolutionType": {
+      "doc": "Available resolutions for content capture.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccaptureresolutiontype",
+      "members": {
+        "SCCaptureResolutionAutomatic": {
+          "doc": "Allow ScreenCaptureKit to automatically select the quality of content depending on factors such as network connection.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccaptureresolutiontype/automatic"
+        },
+        "SCCaptureResolutionBest": {
+          "doc": "Capture streaming content at the best available resolution.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccaptureresolutiontype/best"
+        },
+        "SCCaptureResolutionNominal": {
+          "doc": "Capture streaming content with a one point to one pixel conversion factor.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccaptureresolutiontype/nominal"
+        }
+      }
+    },
+    "SCContentSharingPickerMode": {
+      "doc": "Available modes for selecting streaming content from a picker presented by the operating system.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode",
+      "members": {
+        "SCContentSharingPickerModeMultipleApplications": {
+          "doc": "The mode allowing the selection of multiple applications through the presented picker.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode/multipleapplications"
+        },
+        "SCContentSharingPickerModeMultipleWindows": {
+          "doc": "The mode allowing the selection of multiple windows through the presented picker.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode/multiplewindows"
+        },
+        "SCContentSharingPickerModeSingleApplication": {
+          "doc": "The mode allowing the selection of a single application through the presented picker.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode/singleapplication"
+        },
+        "SCContentSharingPickerModeSingleDisplay": {
+          "doc": "The mode allowing the selection of a single display through the presented picker.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode/singledisplay"
+        },
+        "SCContentSharingPickerModeSingleWindow": {
+          "doc": "The mode allowing the selection of a single window through the presented picker.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode/singlewindow"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a sharing-picker mode.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpickermode/init(rawvalue:)"
+        }
+      }
+    },
+    "SCFrameStatus": {
+      "doc": "Status values for a frame from a stream.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus",
+      "members": {
+        "SCFrameStatusBlank": {
+          "doc": "A status that indicates the system didn’t generate a new frame because the display is blank.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus/blank"
+        },
+        "SCFrameStatusComplete": {
+          "doc": "A status that indicates the system successfully generated a new frame.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus/complete"
+        },
+        "SCFrameStatusIdle": {
+          "doc": "A status that indicates the system didn’t generate a new frame because the display didn’t change.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus/idle"
+        },
+        "SCFrameStatusStarted": {
+          "doc": "A status that indicates the frame is the first one sent after the stream starts.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus/started"
+        },
+        "SCFrameStatusStopped": {
+          "doc": "A status that indicates the frame is in a stopped state.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus/stopped"
+        },
+        "SCFrameStatusSuspended": {
+          "doc": "A status that indicates the system didn’t generate a new frame because you suspended updates.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scframestatus/suspended"
+        }
+      }
+    },
+    "SCPresenterOverlayAlertSetting": {
+      "doc": "Configures how to present streaming notifications to a streamer of Presenter Overlay.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scpresenteroverlayalertsetting",
+      "members": {
+        "SCPresenterOverlayAlertSettingAlways": {
+          "doc": "Always display an alert when using Presenter Overlay.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scpresenteroverlayalertsetting/always"
+        },
+        "SCPresenterOverlayAlertSettingNever": {
+          "doc": "Never display an alert when using Presenter Overlay.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scpresenteroverlayalertsetting/never"
+        },
+        "SCPresenterOverlayAlertSettingSystem": {
+          "doc": "Displays an alert when using Presenter Overlay based on the System Settings.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scpresenteroverlayalertsetting/system"
+        }
+      }
+    },
+    "SCShareableContentStyle": {
+      "doc": "The style of content presented in a stream.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentstyle",
+      "members": {
+        "SCShareableContentStyleApplication": {
+          "doc": "The stream is currently presenting one or more applications.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentstyle/application"
+        },
+        "SCShareableContentStyleDisplay": {
+          "doc": "The stream is currently presenting a complete display.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentstyle/display"
+        },
+        "SCShareableContentStyleNone": {
+          "doc": "The stream isn’t currently presenting any content.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentstyle/none"
+        },
+        "SCShareableContentStyleWindow": {
+          "doc": "The stream is currently presenting one or more windows.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentstyle/window"
+        }
+      }
+    },
+    "SCStreamConfigurationPreset": {
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfigurationpreset"
+    },
+    "SCStreamErrorCode": {
+      "doc": "Codes for user cancellation events and errors that can occur in ScreenCaptureKit.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamerrorcode"
+    },
+    "SCStreamOutputType": {
+      "doc": "Constants that represent output types for a stream frame.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamoutputtype",
+      "members": {
+        "SCStreamOutputTypeAudio": {
+          "doc": "An output type that represents an audio capture sample buffer.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scstreamoutputtype/audio"
+        },
+        "SCStreamOutputTypeScreen": {
+          "doc": "An output type that represents a screen capture sample buffer.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scstreamoutputtype/screen"
+        }
+      }
+    },
+    "SCStreamType": {
+      "doc": "The display type of the presented stream.",
+      "url": "https://developer.apple.com/documentation/screencapturekit/scstreamtype",
+      "members": {
+        "SCStreamTypeDisplay": {
+          "doc": "The stream is currently on a complete display.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scstreamtype/display"
+        },
+        "SCStreamTypeWindow": {
+          "doc": "The stream is currently presented as a window.",
+          "url": "https://developer.apple.com/documentation/screencapturekit/scstreamtype/window"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SCContentFilter": {
+      "-initWithDesktopIndependentWindow:": {
+        "doc": "Creates a filter that captures only the specified window.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/init(desktopindependentwindow:)"
+      },
+      "-initWithDisplay:excludingApplications:exceptingWindows:": {
+        "doc": "Creates a filter that captures a display, excluding windows of the specified apps.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/init(display:excludingapplications:exceptingwindows:)"
+      },
+      "-initWithDisplay:excludingWindows:": {
+        "doc": "Creates a filter that captures the contents of a display, excluding the specified windows.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/init(display:excludingwindows:)"
+      },
+      "-initWithDisplay:includingApplications:exceptingWindows:": {
+        "doc": "Creates a filter that captures a display, including only windows of the specified apps.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/init(display:including:exceptingwindows:)"
+      },
+      "-initWithDisplay:includingWindows:": {
+        "doc": "Creates a filter that captures only specific windows from a display.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/init(display:including:)"
+      }
+    },
+    "SCContentSharingPicker": {
+      "-addObserver:": {
+        "doc": "Adds an observer instance to notify of changes in the content-sharing picker.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/add(_:)"
+      },
+      "-present": {
+        "doc": "Displays the picker with no active selection for capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/present()"
+      },
+      "-presentPickerForStream:": {
+        "doc": "Displays the picker with an already running capture stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/present(for:)"
+      },
+      "-presentPickerForStream:usingContentStyle:": {
+        "doc": "Displays the picker with an existing capture stream, allowing for a single type of capture selection.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/present(for:using:)"
+      },
+      "-presentPickerUsingContentStyle:": {
+        "doc": "Displays the picker for a single type of capture selection.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/present(using:)"
+      },
+      "-removeObserver:": {
+        "doc": "Removes an observer instance from the content-sharing picker.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/remove(_:)"
+      },
+      "-setConfiguration:forStream:": {
+        "doc": "Sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/setconfiguration:forstream:"
+      }
+    },
+    "SCScreenshotManager": {
+      "+captureImageWithFilter:configuration:completionHandler:": {
+        "doc": "Captures a single frame from a stream as an image, using a filter.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotmanager/captureimage(contentfilter:configuration:completionhandler:)"
+      },
+      "+captureSampleBufferWithFilter:configuration:completionHandler:": {
+        "doc": "Captures a single frame directly from a stream’s buffer, using a filter.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotmanager/capturesamplebuffer(contentfilter:configuration:completionhandler:)"
+      }
+    },
+    "SCShareableContent": {
+      "+getShareableContentExcludingDesktopWindows:onScreenWindowsOnly:completionHandler:": {
+        "doc": "Retrieves the displays, apps, and windows that match your criteria.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/getexcludingdesktopwindows(_:onscreenwindowsonly:completionhandler:)"
+      },
+      "+getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyAboveWindow:completionHandler:": {
+        "doc": "Retrieves the displays, apps, and windows that are in front of the specified window.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/getexcludingdesktopwindows(_:onscreenwindowsonlyabove:completionhandler:)"
+      },
+      "+getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyBelowWindow:completionHandler:": {
+        "doc": "Retrieves the displays, apps, and windows that are behind the specified window.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/getexcludingdesktopwindows(_:onscreenwindowsonlybelow:completionhandler:)"
+      },
+      "+getShareableContentWithCompletionHandler:": {
+        "doc": "Retrieves the displays, apps, and windows that your app can capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/getwithcompletionhandler(_:)"
+      },
+      "+infoForFilter:": {
+        "doc": "Retrieves any available sharable content information that matches the provided filter.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/info(for:)"
+      }
+    },
+    "SCStream": {
+      "-addStreamOutput:type:sampleHandlerQueue:error:": {
+        "doc": "Adds a destination that receives the stream output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/addstreamoutput(_:type:samplehandlerqueue:)"
+      },
+      "-initWithFilter:configuration:delegate:": {
+        "doc": "Creates a stream with a content filter and configuration.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/init(filter:configuration:delegate:)"
+      },
+      "-removeStreamOutput:type:error:": {
+        "doc": "Removes a destination from receiving stream output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/removestreamoutput(_:type:)"
+      },
+      "-startCaptureWithCompletionHandler:": {
+        "doc": "Starts the stream with a callback to indicate whether it successfully starts.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/startcapture(completionhandler:)"
+      },
+      "-stopCaptureWithCompletionHandler:": {
+        "doc": "Stops the stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/stopcapture(completionhandler:)"
+      },
+      "-updateConfiguration:completionHandler:": {
+        "doc": "Updates the stream with a new configuration.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/updateconfiguration(_:completionhandler:)"
+      },
+      "-updateContentFilter:completionHandler:": {
+        "doc": "Updates the stream by applying a new content filter.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/updatecontentfilter(_:completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "SCContentFilter": {
+      "contentRect": {
+        "doc": "The size and location of the content to filter, in screen points.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/contentrect"
+      },
+      "pointPixelScale": {
+        "doc": "The scaling factor used to translate screen points into pixels.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/pointpixelscale"
+      },
+      "streamType": {
+        "doc": "The type of the streaming content.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/streamtype"
+      },
+      "style": {
+        "doc": "The display style of the sharable content.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentfilter/style"
+      }
+    },
+    "SCContentSharingPicker": {
+      "active": {
+        "doc": "A Boolean value that indicates if the picker is active.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/isactive"
+      },
+      "configuration": {
+        "doc": "Sets the configuration for the content capture picker for all streams, providing allowed selection modes and content excluded from selection.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/configuration"
+      },
+      "defaultConfiguration": {
+        "doc": "The default configuration to use for the content capture picker.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/defaultconfiguration-94q2b"
+      },
+      "maximumStreamCount": {
+        "doc": "The maximum number of streams the content capture picker allows.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/maximumstreamcount-66khx"
+      },
+      "setConfiguration(_:for:)": {
+        "doc": "Sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/setconfiguration(_:for:)"
+      },
+      "sharedPicker": {
+        "doc": "The system-provided picker UI instance for capturing display and audio content from someone’s Mac.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/shared"
+      }
+    },
+    "SCDisplay": {
+      "displayID": {
+        "doc": "The Core Graphics display identifier.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scdisplay/displayid"
+      },
+      "frame": {
+        "doc": "The frame of the display.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scdisplay/frame"
+      },
+      "height": {
+        "doc": "The height of the display in points.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scdisplay/height"
+      },
+      "width": {
+        "doc": "The width of the display in points.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scdisplay/width"
+      }
+    },
+    "SCRunningApplication": {
+      "applicationName": {
+        "doc": "The display name of the app.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scrunningapplication/applicationname"
+      },
+      "bundleIdentifier": {
+        "doc": "The unique bundle identifier of the app.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scrunningapplication/bundleidentifier"
+      },
+      "processID": {
+        "doc": "The system process identifier of the app.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scrunningapplication/processid"
+      }
+    },
+    "SCScreenshotConfiguration": {
+      "SCScreenshotDisplayIntent": {
+        "doc": "A value that specifies the type of display a screenshot rendering optimizes for.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/displayintent-swift.enum"
+      },
+      "SCScreenshotDynamicRange": {
+        "doc": "Specifies the type of images returned to the client; standard dynamic range, high dynamic range, or both.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/dynamicrange-swift.enum"
+      },
+      "contentType": {
+        "doc": "A uniform type identifier that specifies the screenshot’s file format; HEIC, JPEG, or PNG.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/contenttype"
+      },
+      "destinationRect": {
+        "doc": "A rectangle that specifies whether to output screenshots in a subset of the output image.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/destinationrect"
+      },
+      "displayIntent": {
+        "doc": "Specifies whether the screen capture uses attributes of the local or canonical display.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/displayintent-swift.property"
+      },
+      "dynamicRange": {
+        "doc": "Specifies the type of image returned to the client; standard dynamic range, high dynamic range, or both.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/dynamicrange-swift.property"
+      },
+      "fileURL": {
+        "doc": "Specifies the URL where the screenshot process saves the output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/fileurl"
+      },
+      "height": {
+        "doc": "An integer value that specifies the output height, measured in pixels.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/height"
+      },
+      "ignoreClipping": {
+        "doc": "A Boolean value that specifies whether to ignore framing on windows when using content filters.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/ignoreclipping"
+      },
+      "ignoreShadows": {
+        "doc": "A Boolean value that specifies whether to ignore framing on windows.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/ignoreshadows"
+      },
+      "includeChildWindows": {
+        "doc": "A Boolean that specifies whether the screenshot captures subwindows of the included apps and windows.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/includechildwindows"
+      },
+      "showsCursor": {
+        "doc": "A Boolean value that specifies whether the pointer appears in the screenshot.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/showscursor"
+      },
+      "sourceRect": {
+        "doc": "A rectangle that specifies that the screenshot only samples a subset of the frame input.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/sourcerect"
+      },
+      "supportedContentTypes": {
+        "doc": "An array of uniform type identifiers that correspond to file formats the output image supports.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/supportedcontenttypes"
+      },
+      "width": {
+        "doc": "An integer value that specifies the output width in pixels.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration/width"
+      }
+    },
+    "SCScreenshotOutput": {
+      "fileURL": {
+        "doc": "A URL property that specifies the location of the saved image.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotoutput/fileurl"
+      },
+      "hdrImage": {
+        "doc": "An output property that specifies the high dynamic range version of the screenshot.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotoutput/hdrimage"
+      },
+      "sdrImage": {
+        "doc": "An output property that specifies the standard dynamic range version of the screenshot.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scscreenshotoutput/sdrimage"
+      }
+    },
+    "SCShareableContent": {
+      "applications": {
+        "doc": "The apps available for capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/applications"
+      },
+      "displays": {
+        "doc": "The displays available for capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/displays"
+      },
+      "windows": {
+        "doc": "The windows available for capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontent/windows"
+      }
+    },
+    "SCShareableContentInfo": {
+      "contentRect": {
+        "doc": "The size and location of content for the stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentinfo/contentrect"
+      },
+      "pointPixelScale": {
+        "doc": "The scaling from points to output pixel resolution for the stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentinfo/pointpixelscale"
+      },
+      "style": {
+        "doc": "The current presentation style of the stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scshareablecontentinfo/style"
+      }
+    },
+    "SCStream": {
+      "synchronizationClock": {
+        "doc": "A clock to use for output synchronization.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstream/synchronizationclock"
+      }
+    },
+    "SCStreamConfiguration": {
+      "backgroundColor": {
+        "doc": "A background color for the output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/backgroundcolor"
+      },
+      "captureResolution": {
+        "doc": "The resolution at which to capture source content.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/captureresolution"
+      },
+      "capturesAudio": {
+        "doc": "A Boolean value that indicates whether to capture audio.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/capturesaudio"
+      },
+      "capturesShadowsOnly": {
+        "doc": "A Boolean value that indicates if the stream only captures shadows.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/capturesshadowsonly"
+      },
+      "channelCount": {
+        "doc": "The number of audio channels to capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/channelcount"
+      },
+      "colorMatrix": {
+        "doc": "A color matrix to apply to the output surface.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/colormatrix"
+      },
+      "colorSpaceName": {
+        "doc": "A color space to use for the output buffer.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/colorspacename"
+      },
+      "destinationRect": {
+        "doc": "A rectangle that specifies a destination into which to write the output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/destinationrect"
+      },
+      "excludesCurrentProcessAudio": {
+        "doc": "A Boolean value that indicates whether to exclude audio from your app during capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/excludescurrentprocessaudio"
+      },
+      "height": {
+        "doc": "The height of the output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/height"
+      },
+      "ignoreGlobalClipDisplay": {
+        "doc": "A Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in display style.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/ignoreglobalclipdisplay"
+      },
+      "ignoreGlobalClipSingleWindow": {
+        "doc": "A Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in window style.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/ignoreglobalclipsinglewindow"
+      },
+      "ignoreShadowsDisplay": {
+        "doc": "A Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in display style.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/ignoreshadowsdisplay"
+      },
+      "ignoreShadowsSingleWindow": {
+        "doc": "A Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in window style.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/ignoreshadowssinglewindow"
+      },
+      "minimumFrameInterval": {
+        "doc": "The desired minimum time between frame updates, in seconds.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/minimumframeinterval"
+      },
+      "pixelFormat": {
+        "doc": "A pixel format for sample buffers that a stream outputs.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/pixelformat"
+      },
+      "presenterOverlayPrivacyAlertSetting": {
+        "doc": "A value indicating if alerts appear to presenters while using Presenter Overlay.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/presenteroverlayprivacyalertsetting"
+      },
+      "preservesAspectRatio": {
+        "doc": "A Boolean value that determines if the stream preserves aspect ratio.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/preservesaspectratio"
+      },
+      "queueDepth": {
+        "doc": "The maximum number of frames for the queue to store.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/queuedepth"
+      },
+      "sampleRate": {
+        "doc": "The sample rate for audio capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/samplerate"
+      },
+      "scalesToFit": {
+        "doc": "A Boolean value that indicates whether to scale the output to fit the configured width and height.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/scalestofit"
+      },
+      "shouldBeOpaque": {
+        "doc": "A Boolean value that indicates if semitransparent content presents as opaque.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/shouldbeopaque"
+      },
+      "showsCursor": {
+        "doc": "A Boolean value that determines whether the cursor is visible in the stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/showscursor"
+      },
+      "sourceRect": {
+        "doc": "A rectangle that specifies the source area to capture.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/sourcerect"
+      },
+      "streamName": {
+        "doc": "A name that you provide for identifying the stream.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/streamname"
+      },
+      "width": {
+        "doc": "The width of the output.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration/width"
+      }
+    },
+    "SCWindow": {
+      "active": {
+        "doc": "A Boolean value that indicates if the window is currently streaming.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/isactive"
+      },
+      "frame": {
+        "doc": "A rectangle the represents the frame of the window within a display.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/frame"
+      },
+      "onScreen": {
+        "doc": "A Boolean value that indicates whether the window is on screen.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/isonscreen"
+      },
+      "owningApplication": {
+        "doc": "The app that owns the window.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/owningapplication"
+      },
+      "title": {
+        "doc": "The string that displays in a window’s title bar.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/title"
+      },
+      "windowID": {
+        "doc": "The Core Graphics window identifier.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/windowid"
+      },
+      "windowLayer": {
+        "doc": "The layer of the window relative to other windows.",
+        "url": "https://developer.apple.com/documentation/screencapturekit/scwindow/windowlayer"
+      }
+    }
+  }
+}

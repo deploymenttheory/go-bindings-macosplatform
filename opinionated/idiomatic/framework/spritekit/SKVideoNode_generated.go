@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A graphical element that plays video content.
+//
 // VideoNode wraps [raw.SKVideoNode] with a fluent Go API.
 type VideoNode struct {
 	inner *raw.SKVideoNode
@@ -33,7 +35,7 @@ func VideoNodeFromID(id objc.ID) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(id)}
 }
 
-// Designated Initializer. Initialize a video node from an AVPlayer. You can use the AVPlayer to control playback.
+// Initializes a video node using an existing AVPlayer object.
 //
 // NewVideoNodeWithAVPlayer creates a new [VideoNode].
 func NewVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *VideoNode {
@@ -42,7 +44,7 @@ func NewVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(_id)}
 }
 
-// Initialize a video node from a file.
+// Initializes a video node using a video file stored in the app bundle.
 //
 // NewVideoNodeWithVideoFileNamed creates a new [VideoNode].
 func NewVideoNodeWithVideoFileNamed(videoFile string) *VideoNode {
@@ -51,6 +53,8 @@ func NewVideoNodeWithVideoFileNamed(videoFile string) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(_id)}
 }
 
+// Initializes a video node using a video file stored in the app bundle.
+//
 // NewVideoNodeWithFileNamed creates a new [VideoNode].
 func NewVideoNodeWithFileNamed(videoFile string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKVideoNode")), objc.RegisterName("alloc"))
@@ -58,6 +62,8 @@ func NewVideoNodeWithFileNamed(videoFile string) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(_id)}
 }
 
+// Initializes a video node using a URL that points to a video file.
+//
 // NewVideoNodeWithVideoURL creates a new [VideoNode].
 func NewVideoNodeWithVideoURL(url string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKVideoNode")), objc.RegisterName("alloc"))
@@ -65,6 +71,8 @@ func NewVideoNodeWithVideoURL(url string) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(_id)}
 }
 
+// Initializes a video node using a URL.
+//
 // NewVideoNodeWithURL creates a new [VideoNode].
 func NewVideoNodeWithURL(url string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKVideoNode")), objc.RegisterName("alloc"))
@@ -72,7 +80,7 @@ func NewVideoNodeWithURL(url string) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(_id)}
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Tells you when to initialize a video node that was created from an archive.
 //
 // NewVideoNodeWithCoder creates a new [VideoNode].
 func NewVideoNodeWithCoder(aDecoder *foundation.NSCoder) *VideoNode {
@@ -81,7 +89,7 @@ func NewVideoNodeWithCoder(aDecoder *foundation.NSCoder) *VideoNode {
 	return &VideoNode{inner: raw.SKVideoNodeFromID(_id)}
 }
 
-// The display size of the video (in parent's coordinate space)
+// The dimensions of the video node, in points.
 //
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *VideoNode) WithSize(size corefoundation.CGSize) *VideoNode {
@@ -89,7 +97,7 @@ func (x *VideoNode) WithSize(size corefoundation.CGSize) *VideoNode {
 	return x
 }
 
-// The location in the video that maps to its 'position' in the parent's coordinate space. (0.0-1.0)
+// The point in the sprite that corresponds to the node’s position.
 //
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *VideoNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNode {
@@ -97,7 +105,7 @@ func (x *VideoNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNo
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *VideoNode) WithPosition(position corefoundation.CGPoint) *VideoNode {
@@ -105,7 +113,7 @@ func (x *VideoNode) WithPosition(position corefoundation.CGPoint) *VideoNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *VideoNode) WithZPosition(zPosition float64) *VideoNode {
@@ -113,7 +121,7 @@ func (x *VideoNode) WithZPosition(zPosition float64) *VideoNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *VideoNode) WithZRotation(zRotation float64) *VideoNode {
@@ -121,7 +129,7 @@ func (x *VideoNode) WithZRotation(zRotation float64) *VideoNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *VideoNode) WithXScale(xScale float64) *VideoNode {
@@ -129,7 +137,7 @@ func (x *VideoNode) WithXScale(xScale float64) *VideoNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *VideoNode) WithYScale(yScale float64) *VideoNode {
@@ -137,7 +145,7 @@ func (x *VideoNode) WithYScale(yScale float64) *VideoNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *VideoNode) WithSpeed(speed float64) *VideoNode {
@@ -145,7 +153,7 @@ func (x *VideoNode) WithSpeed(speed float64) *VideoNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *VideoNode) WithAlpha(alpha float64) *VideoNode {
@@ -153,7 +161,7 @@ func (x *VideoNode) WithAlpha(alpha float64) *VideoNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *VideoNode) WithPaused(paused bool) *VideoNode {
@@ -161,7 +169,7 @@ func (x *VideoNode) WithPaused(paused bool) *VideoNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *VideoNode) WithHidden(hidden bool) *VideoNode {
@@ -169,7 +177,7 @@ func (x *VideoNode) WithHidden(hidden bool) *VideoNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *VideoNode) WithUserInteractionEnabled(userInteractionEnabled bool) *VideoNode {
@@ -177,7 +185,7 @@ func (x *VideoNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Vid
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *VideoNode) WithName(name string) *VideoNode {
@@ -185,7 +193,7 @@ func (x *VideoNode) WithName(name string) *VideoNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
@@ -193,7 +201,7 @@ func (x *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *VideoNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *VideoNode {
@@ -201,7 +209,7 @@ func (x *VideoNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *VideoNode) WithReachConstraints(reachConstraints *ReachConstraints) *VideoNode {
@@ -209,7 +217,7 @@ func (x *VideoNode) WithReachConstraints(reachConstraints *ReachConstraints) *Vi
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *VideoNode) WithConstraints(items ...*raw.SKConstraint) *VideoNode {
@@ -232,7 +240,7 @@ func (x *VideoNode) WithConstraints(items ...*raw.SKConstraint) *VideoNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *VideoNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *VideoNode {
@@ -240,65 +248,87 @@ func (x *VideoNode) WithAttributeValues(attributeValues *foundation.NSDictionary
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityElement(accessibilityElement bool) *VideoNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityRole(accessibilityRole string) *VideoNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *VideoNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilitySubrole(accessibilitySubrole string) *VideoNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *VideoNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityParent(accessibilityParent objc.ID) *VideoNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityHelp(accessibilityHelp string) *VideoNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityLabel(accessibilityLabel string) *VideoNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *VideoNode) WithAccessibilityEnabled(accessibilityEnabled bool) *VideoNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
+// Starts video playback.
+//
 // Play calls the underlying Play.
 func (x *VideoNode) Play() {
 	x.inner.Play()
 }
 
+// Pauses video playback.
+//
 // Pause calls the underlying Pause.
 func (x *VideoNode) Pause() {
 	x.inner.Pause()

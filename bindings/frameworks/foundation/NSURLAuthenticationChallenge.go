@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A challenge from a server requiring authentication from the client.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlauthenticationchallenge
 type NSURLAuthenticationChallenge struct {
 	NSObject

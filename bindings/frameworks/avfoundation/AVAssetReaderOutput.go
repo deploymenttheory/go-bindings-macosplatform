@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the interface to read media samples from an asset reader.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreaderoutput
 type AVAssetReaderOutput struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func AVAssetReaderOutputFromID(id objc.ID) *AVAssetReaderOutput {
 	return o
 }
 
-// @method copyNextSampleBuffer @abstract Copies the next sample buffer for the output synchronously. @result A CMSampleBuffer object referencing the output sample buffer. @discussion The client is responsible for calling CFRelease on the returned CMSampleBuffer object when finished with it. This method will return NULL if there are no more sample buffers available for the receiver within the time range specified by its AVAssetReader's timeRange property, or if there is an error that prevents the AVAssetReader from reading more media data. When this method returns NULL, clients should check the value of the associated AVAssetReader's status property to determine why no more samples could be read. In certain configurations, such as when outputSettings is nil, copyNextSampleBuffer may return marker-only sample buffers as well as sample buffers containing media data. Marker-only sample buffers can be identified by CMSampleBufferGetNumSamples returning 0. Clients who do not need the information attached to marker-only sample buffers may skip them. This method throws an exception if this output is not added to an instance of AVAssetReader (using -addOutput:) and -startReading is not called on that asset reader.
+// Copies the next sample buffer from the output.
 func (o *AVAssetReaderOutput) CopyNextSampleBuffer() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAssetReaderOutputSelCopyNextSampleBuffer)
 	return _ret
@@ -65,12 +67,12 @@ func (o *AVAssetReaderOutput) SetAlwaysCopiesSampleData(alwaysCopiesSampleData b
 	o.Ptr().Send(_aVAssetReaderOutputSelSetAlwaysCopiesSampleData, alwaysCopiesSampleData)
 }
 
-// @method resetForReadingTimeRanges: @abstract Starts reading over with a new set of time ranges. @param timeRanges An NSArray of NSValue objects, each representing a single CMTimeRange structure @discussion This method may only be used if supportsRandomAccess has been set to YES and may not be called after -markConfigurationAsFinal has been invoked. This method is often used in conjunction with AVAssetWriter multi-pass (see AVAssetWriterInput category AVAssetWriterInputMultiPass).  In this usage, the caller will invoke -copyNextSampleBuffer until that method returns NULL and then ask the AVAssetWriterInput for a set of time ranges from which it thinks media data should be re-encoded.  These time ranges are then given to this method to set up the asset reader output for the next pass. The time ranges set here override the time range set on AVAssetReader.timeRange.  Just as with that property, for each time range in the array the intersection of that time range and CMTimeRangeMake(kCMTimeZero, asset.duration) will take effect. If this method is invoked after the status of the attached AVAssetReader has become AVAssetReaderStatusFailed or AVAssetReaderStatusCancelled, no change in status will occur and the result of the next call to -copyNextSampleBuffer will be NULL. This method throws an exception if the following conditions are not honored: - each item in time ranges must be an NSValue - the start of each time range must be numeric - see CMTIME_IS_NUMERIC - the duration of each time range must be nonnegative and numeric, or kCMTimePositiveInfinity - the start of each time range must be greater than or equal to the end of the previous time range - start times must be strictly increasing - time ranges must not overlap - cannot be called before -startReading has been invoked on the attached asset reader - cannot be called until all samples of media data have been read (i.e. copyNextSampleBuffer returns NULL and the asset reader has not entered a failure state) - cannot be called without setting "supportsRandomAccess" to YES - cannot be called after calling -markConfigurationAsFinal
+// Restarts reading with a new set of time ranges.
 func (o *AVAssetReaderOutput) ResetForReadingTimeRanges(timeRanges *foundation.NSArray[*foundation.NSValue]) {
-	o.Ptr().Send(_aVAssetReaderOutputSelResetForReadingTimeRanges, timeRanges)
+	o.Ptr().Send(_aVAssetReaderOutputSelResetForReadingTimeRanges, timeRanges.Ptr())
 }
 
-// @method markConfigurationAsFinal @abstract Informs the receiver that no more reconfiguration of time ranges is necessary and allows the attached AVAssetReader to advance to AVAssetReaderStatusCompleted. @discussion When the value of supportsRandomAccess is YES, the attached asset reader will not advance to AVAssetReaderStatusCompleted until this method is called. When the destination of media data vended by the receiver is an AVAssetWriterInput configured for multi-pass encoding, a convenient time to invoke this method is after the asset writer input indicates that no more passes will be performed. Once this method has been called, further invocations of -resetForReadingTimeRanges: are disallowed.
+// Tells the output that it’s finished reconfiguring time ranges, and allows the asset reader to advance to a completed state.
 func (o *AVAssetReaderOutput) MarkConfigurationAsFinal() {
 	o.Ptr().Send(_aVAssetReaderOutputSelMarkConfigurationAsFinal)
 }

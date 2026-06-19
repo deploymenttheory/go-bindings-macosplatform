@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores a value for a given unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquantity
 type HKQuantity struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func HKQuantityFromID(id objc.ID) *HKQuantity {
 	return o
 }
 
-// @method        quantityWithUnit:doubleValue: @abstract      Returns a new object representing a quantity measurement with the given unit.
+// Instantiates and returns a new quantity object.
 func HKQuantityQuantityWithUnitDoubleValue(unit *HKUnit, value float64) *HKQuantity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantity), _hKQuantitySelQuantityWithUnitDoubleValue, unit.Ptr(), value)
 	if _ret != 0 {
@@ -42,19 +44,19 @@ func HKQuantityQuantityWithUnitDoubleValue(unit *HKUnit, value float64) *HKQuant
 	return HKQuantityFromID(_ret)
 }
 
-// @method        isCompatibleWithUnit: @abstract      Returns yes if the receiver's value can be converted to a value of the given unit.
+// Returns a boolean value indicating whether the quantity is compatible with the provided unit.
 func (o *HKQuantity) IsCompatibleWithUnit(unit *HKUnit) bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKQuantitySelIsCompatibleWithUnit, unit.Ptr())
 	return _ret
 }
 
-// @method        doubleValueForUnit: @abstract      Returns the quantity value converted to the given unit. @discussion    Throws an exception if the receiver's value cannot be converted to one of the requested unit.
+// Returns the quantity’s value in the provided unit.
 func (o *HKQuantity) DoubleValueForUnit(unit *HKUnit) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _hKQuantitySelDoubleValueForUnit, unit.Ptr())
 	return _ret
 }
 
-// @method        compare: @abstract      Returns an NSComparisonResult value that indicates whether the receiver is greater than, equal to, or less than a given quantity. @discussion    Throws an exception if the unit of the given quantity is not compatible with the receiver's unit.
+// Compares two values after converting them to the same units.
 func (o *HKQuantity) Compare(quantity *HKQuantity) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _hKQuantitySelCompare, quantity.Ptr())
 	return _ret

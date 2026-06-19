@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of multiple matrix copy operations.
+//
 // MatrixCopyDescriptor wraps [raw.MPSMatrixCopyDescriptor] with a fluent Go API.
 type MatrixCopyDescriptor struct {
 	inner *raw.MPSMatrixCopyDescriptor

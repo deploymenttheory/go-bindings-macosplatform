@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Display-related attributes that a webpage requests for its window.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwindowfeatures
 type WKWindowFeatures struct {
 	foundation.NSObject

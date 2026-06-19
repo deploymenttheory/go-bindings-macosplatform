@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The definition of a particle emitted by a particle layer.
+//
 // EmitterCell wraps [raw.CAEmitterCell] with a fluent Go API.
 type EmitterCell struct {
 	inner *raw.CAEmitterCell
@@ -39,198 +41,264 @@ func NewEmitterCell() *EmitterCell {
 	return &EmitterCell{inner: raw.CAEmitterCellFromID(_id)}
 }
 
+// The name of the cell.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EmitterCell) WithName(name string) *EmitterCell {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value indicating whether or not cells from this emitter are rendered.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *EmitterCell) WithEnabled(enabled bool) *EmitterCell {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The number of emitted objects created every second. Animatable.
+//
 // WithBirthRate sets the birthRate property and returns the receiver for chaining.
 func (x *EmitterCell) WithBirthRate(birthRate float32) *EmitterCell {
 	x.inner.SetBirthRate(birthRate)
 	return x
 }
 
+// The lifetime of the cell, in seconds. Animatable.
+//
 // WithLifetime sets the lifetime property and returns the receiver for chaining.
 func (x *EmitterCell) WithLifetime(lifetime float32) *EmitterCell {
 	x.inner.SetLifetime(lifetime)
 	return x
 }
 
+// The mean value by which the lifetime of the cell can vary. Animatable.
+//
 // WithLifetimeRange sets the lifetimeRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithLifetimeRange(lifetimeRange float32) *EmitterCell {
 	x.inner.SetLifetimeRange(lifetimeRange)
 	return x
 }
 
+// The latitudinal orientation of the emission angle. Animatable.
+//
 // WithEmissionLatitude sets the emissionLatitude property and returns the receiver for chaining.
 func (x *EmitterCell) WithEmissionLatitude(emissionLatitude float64) *EmitterCell {
 	x.inner.SetEmissionLatitude(emissionLatitude)
 	return x
 }
 
+// The longitudinal orientation of the emission angle. Animatable.
+//
 // WithEmissionLongitude sets the emissionLongitude property and returns the receiver for chaining.
 func (x *EmitterCell) WithEmissionLongitude(emissionLongitude float64) *EmitterCell {
 	x.inner.SetEmissionLongitude(emissionLongitude)
 	return x
 }
 
+// The angle, in radians, defining a cone around the emission angle. Animatable.
+//
 // WithEmissionRange sets the emissionRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithEmissionRange(emissionRange float64) *EmitterCell {
 	x.inner.SetEmissionRange(emissionRange)
 	return x
 }
 
+// The initial velocity of the cell. Animatable.
+//
 // WithVelocity sets the velocity property and returns the receiver for chaining.
 func (x *EmitterCell) WithVelocity(velocity float64) *EmitterCell {
 	x.inner.SetVelocity(velocity)
 	return x
 }
 
+// The amount by which the velocity of the cell can vary. Animatable.
+//
 // WithVelocityRange sets the velocityRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithVelocityRange(velocityRange float64) *EmitterCell {
 	x.inner.SetVelocityRange(velocityRange)
 	return x
 }
 
+// The x component of an acceleration vector applied to cell.
+//
 // WithXAcceleration sets the xAcceleration property and returns the receiver for chaining.
 func (x *EmitterCell) WithXAcceleration(xAcceleration float64) *EmitterCell {
 	x.inner.SetXAcceleration(xAcceleration)
 	return x
 }
 
+// The y component of an acceleration vector applied to cell.
+//
 // WithYAcceleration sets the yAcceleration property and returns the receiver for chaining.
 func (x *EmitterCell) WithYAcceleration(yAcceleration float64) *EmitterCell {
 	x.inner.SetYAcceleration(yAcceleration)
 	return x
 }
 
+// The z component of an acceleration vector applied to cell.
+//
 // WithZAcceleration sets the zAcceleration property and returns the receiver for chaining.
 func (x *EmitterCell) WithZAcceleration(zAcceleration float64) *EmitterCell {
 	x.inner.SetZAcceleration(zAcceleration)
 	return x
 }
 
+// Specifies the scale factor applied to the cell. Animatable.
+//
 // WithScale sets the scale property and returns the receiver for chaining.
 func (x *EmitterCell) WithScale(scale float64) *EmitterCell {
 	x.inner.SetScale(scale)
 	return x
 }
 
+// Specifies the range over which the scale value can vary. Animatable.
+//
 // WithScaleRange sets the scaleRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithScaleRange(scaleRange float64) *EmitterCell {
 	x.inner.SetScaleRange(scaleRange)
 	return x
 }
 
+// The speed at which the scale changes over the lifetime of the cell. Animatable.
+//
 // WithScaleSpeed sets the scaleSpeed property and returns the receiver for chaining.
 func (x *EmitterCell) WithScaleSpeed(scaleSpeed float64) *EmitterCell {
 	x.inner.SetScaleSpeed(scaleSpeed)
 	return x
 }
 
+// The rotational velocity, measured in radians per second, to apply to the cell. Animatable.
+//
 // WithSpin sets the spin property and returns the receiver for chaining.
 func (x *EmitterCell) WithSpin(spin float64) *EmitterCell {
 	x.inner.SetSpin(spin)
 	return x
 }
 
+// The amount by which the spin of the cell can vary over its lifetime. Animatable.
+//
 // WithSpinRange sets the spinRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithSpinRange(spinRange float64) *EmitterCell {
 	x.inner.SetSpinRange(spinRange)
 	return x
 }
 
+// The amount by which the red color component of the cell can vary. Animatable.
+//
 // WithRedRange sets the redRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithRedRange(redRange float32) *EmitterCell {
 	x.inner.SetRedRange(redRange)
 	return x
 }
 
+// The amount by which the green color component of the cell can vary. Animatable.
+//
 // WithGreenRange sets the greenRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithGreenRange(greenRange float32) *EmitterCell {
 	x.inner.SetGreenRange(greenRange)
 	return x
 }
 
+// The amount by which the blue color component of the cell can vary. Animatable.
+//
 // WithBlueRange sets the blueRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithBlueRange(blueRange float32) *EmitterCell {
 	x.inner.SetBlueRange(blueRange)
 	return x
 }
 
+// The amount by which the alpha component of the cell can vary. Animatable.
+//
 // WithAlphaRange sets the alphaRange property and returns the receiver for chaining.
 func (x *EmitterCell) WithAlphaRange(alphaRange float32) *EmitterCell {
 	x.inner.SetAlphaRange(alphaRange)
 	return x
 }
 
+// The speed, in seconds, at which the red color component changes over the lifetime of the cell. Animatable.
+//
 // WithRedSpeed sets the redSpeed property and returns the receiver for chaining.
 func (x *EmitterCell) WithRedSpeed(redSpeed float32) *EmitterCell {
 	x.inner.SetRedSpeed(redSpeed)
 	return x
 }
 
+// The speed, in seconds, at which the green color component changes over the lifetime of the cell. Animatable.
+//
 // WithGreenSpeed sets the greenSpeed property and returns the receiver for chaining.
 func (x *EmitterCell) WithGreenSpeed(greenSpeed float32) *EmitterCell {
 	x.inner.SetGreenSpeed(greenSpeed)
 	return x
 }
 
+// The speed, in seconds, at which the blue color component changes over the lifetime of the cell. Animatable.
+//
 // WithBlueSpeed sets the blueSpeed property and returns the receiver for chaining.
 func (x *EmitterCell) WithBlueSpeed(blueSpeed float32) *EmitterCell {
 	x.inner.SetBlueSpeed(blueSpeed)
 	return x
 }
 
+// The speed, in seconds, at which the alpha component changes over the lifetime of the cell. Animatable.
+//
 // WithAlphaSpeed sets the alphaSpeed property and returns the receiver for chaining.
 func (x *EmitterCell) WithAlphaSpeed(alphaSpeed float32) *EmitterCell {
 	x.inner.SetAlphaSpeed(alphaSpeed)
 	return x
 }
 
+// An object that provides the contents of the layer. Animatable.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *EmitterCell) WithContents(contents objc.ID) *EmitterCell {
 	x.inner.SetContents(contents)
 	return x
 }
 
+// A rectangle (in the unit coordinate space) that specifies the portion of contents that the receiver should draw. Animatable.
+//
 // WithContentsRect sets the contentsRect property and returns the receiver for chaining.
 func (x *EmitterCell) WithContentsRect(contentsRect corefoundation.CGRect) *EmitterCell {
 	x.inner.SetContentsRect(contentsRect)
 	return x
 }
 
+// The scale factor of the cell contents.
+//
 // WithContentsScale sets the contentsScale property and returns the receiver for chaining.
 func (x *EmitterCell) WithContentsScale(contentsScale float64) *EmitterCell {
 	x.inner.SetContentsScale(contentsScale)
 	return x
 }
 
+// The filter used when reducing the size of the content.
+//
 // WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
 func (x *EmitterCell) WithMinificationFilter(minificationFilter string) *EmitterCell {
 	x.inner.SetMinificationFilter(foundation.NSStringStringWithUTF8String(minificationFilter))
 	return x
 }
 
+// The filter used when increasing the size of the content.
+//
 // WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
 func (x *EmitterCell) WithMagnificationFilter(magnificationFilter string) *EmitterCell {
 	x.inner.SetMagnificationFilter(foundation.NSStringStringWithUTF8String(magnificationFilter))
 	return x
 }
 
+// The bias factor used by the minification filter to determine the levels of detail.
+//
 // WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
 func (x *EmitterCell) WithMinificationFilterBias(minificationFilterBias float32) *EmitterCell {
 	x.inner.SetMinificationFilterBias(minificationFilterBias)
 	return x
 }
 
+// An optional array containing the sub-cells of this cell.
+//
 // WithEmitterCells sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterCell) WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterCell {
 	if len(items) == 0 {
@@ -252,12 +320,16 @@ func (x *EmitterCell) WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterCell
 	return x
 }
 
+// An optional dictionary containing additional style values that are not explicitly defined by the receiver.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *EmitterCell) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterCell {
 	x.inner.SetStyle(style)
 	return x
 }
 
+// Returns a Boolean value indicating whether the value for a given key should be archived.
+//
 // ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
 func (x *EmitterCell) ShouldArchiveValueForKey(key string) bool {
 	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))

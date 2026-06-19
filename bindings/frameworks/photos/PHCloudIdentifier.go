@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that identifies an asset or collection that syncs through iCloud Photos.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcloudidentifier
 type PHCloudIdentifier struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func PHCloudIdentifierFromID(id objc.ID) *PHCloudIdentifier {
 	return o
 }
 
-// Deserialization
+// Deserializes a cloud identifier from its string value.
 func (o *PHCloudIdentifier) InitWithStringValue(stringValue *foundation.NSString) *PHCloudIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierSelInitWithStringValue, stringValue.Ptr())
 	if _ret != 0 {

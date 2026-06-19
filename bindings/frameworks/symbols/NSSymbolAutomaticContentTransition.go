@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that applies the default animation to a symbol-based image in a context-sensitive manner.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolautomaticcontenttransition
 type NSSymbolAutomaticContentTransition struct {
 	NSSymbolContentTransition
@@ -29,7 +31,7 @@ func NSSymbolAutomaticContentTransitionFromID(id objc.ID) *NSSymbolAutomaticCont
 	return o
 }
 
-// The default automatic transition, determined by the system.
+// A transition that applies the default animation to a symbol-based image in a context-sensitive manner.
 func NSSymbolAutomaticContentTransitionTransition() *NSSymbolAutomaticContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAutomaticContentTransition), _nSSymbolAutomaticContentTransitionSelTransition)
 	if _ret != 0 {

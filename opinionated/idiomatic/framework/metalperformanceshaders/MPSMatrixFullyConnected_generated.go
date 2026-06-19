@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A kernel for applying a fully connected neural network layer.
+//
 // MatrixFullyConnected wraps [raw.MPSMatrixFullyConnected] with a fluent Go API.
 type MatrixFullyConnected struct {
 	inner *raw.MPSMatrixFullyConnected
@@ -123,7 +125,7 @@ func (x *MatrixFullyConnected) WithBatchSize(batchSize uint) *MatrixFullyConnect
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixFullyConnected) WithOptions(options mpscore.MPSKernelOptions) *MatrixFullyConnected {
@@ -131,7 +133,7 @@ func (x *MatrixFullyConnected) WithOptions(options mpscore.MPSKernelOptions) *Ma
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixFullyConnected) WithLabel(label string) *MatrixFullyConnected {

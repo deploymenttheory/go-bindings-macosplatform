@@ -83,6 +83,9 @@ func (o *MDLAnimatedValue) SetInterpolation(interpolation MDLAnimatedValueInterp
 }
 
 func (o *MDLAnimatedValue) KeyTimes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mDLAnimatedValueSelKeyTimes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAnimatedValueSelKeyTimes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

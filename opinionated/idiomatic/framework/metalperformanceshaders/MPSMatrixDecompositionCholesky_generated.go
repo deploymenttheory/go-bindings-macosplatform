@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel for computing the Cholesky factorization of a matrix.
+//
 // MatrixDecompositionCholesky wraps [raw.MPSMatrixDecompositionCholesky] with a fluent Go API.
 type MatrixDecompositionCholesky struct {
 	inner *raw.MPSMatrixDecompositionCholesky
@@ -74,7 +76,7 @@ func (x *MatrixDecompositionCholesky) WithBatchSize(batchSize uint) *MatrixDecom
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixDecompositionCholesky) WithOptions(options mpscore.MPSKernelOptions) *MatrixDecompositionCholesky {
@@ -82,7 +84,7 @@ func (x *MatrixDecompositionCholesky) WithOptions(options mpscore.MPSKernelOptio
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixDecompositionCholesky) WithLabel(label string) *MatrixDecompositionCholesky {

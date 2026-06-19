@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A descriptor for a virtual display.
+//
 // Apple documentation: https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor
 type PGDisplayDescriptor struct {
 	foundation.NSObject

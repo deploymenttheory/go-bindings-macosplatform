@@ -37,7 +37,7 @@ func MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID(id objc
 // Initialize an MTRRVCOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 func (o *MTRRVCOperationalStateClusterOperationalCommandResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

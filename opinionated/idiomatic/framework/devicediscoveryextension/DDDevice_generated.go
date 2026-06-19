@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a discovered device of interest.
+//
 // DDDevice wraps [raw.DDDevice] with a fluent Go API.
 type DDDevice struct {
 	inner *raw.DDDevice
@@ -32,7 +34,7 @@ func DDDeviceFromID(id objc.ID) *DDDevice {
 	return &DDDevice{inner: raw.DDDeviceFromID(id)}
 }
 
-// Initializes a DD device with display name, category, protocol type, and identifier.
+// Creates an object that describes a discovered device.
 //
 // NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier creates a new [DDDevice].
 func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string, category DDDeviceCategory, protocolType *uniformtypeidentifiers.UTType, identifier string) *DDDevice {
@@ -49,7 +51,7 @@ func (x *DDDevice) WithDeviceSupports(deviceSupports DDDeviceSupports) *DDDevice
 	return x
 }
 
-// Identifier to communicate with the device via Bluetooth.
+// An identifier to communicate with the device through Bluetooth wireless technology.
 //
 // WithBluetoothIdentifier sets the bluetoothIdentifier property and returns the receiver for chaining.
 func (x *DDDevice) WithBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID) *DDDevice {
@@ -57,7 +59,7 @@ func (x *DDDevice) WithBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUI
 	return x
 }
 
-// Category of the device.
+// An option that determies the icon that the picker UI displays for the device.
 //
 // WithCategory sets the category property and returns the receiver for chaining.
 func (x *DDDevice) WithCategory(category DDDeviceCategory) *DDDevice {
@@ -73,7 +75,7 @@ func (x *DDDevice) WithDisplayImageName(displayImageName string) *DDDevice {
 	return x
 }
 
-// Name of the device. Should be suitable for displaying to a user.
+// A name for the device to display to the user.
 //
 // WithDisplayName sets the displayName property and returns the receiver for chaining.
 func (x *DDDevice) WithDisplayName(displayName string) *DDDevice {
@@ -81,7 +83,7 @@ func (x *DDDevice) WithDisplayName(displayName string) *DDDevice {
 	return x
 }
 
-// Identifier of the device.
+// A unique identifier for the device.
 //
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *DDDevice) WithIdentifier(identifier string) *DDDevice {
@@ -89,7 +91,7 @@ func (x *DDDevice) WithIdentifier(identifier string) *DDDevice {
 	return x
 }
 
-// Current state of media playback on this device.
+// A playback status for the device’s current media.
 //
 // WithMediaPlaybackState sets the mediaPlaybackState property and returns the receiver for chaining.
 func (x *DDDevice) WithMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) *DDDevice {
@@ -97,7 +99,7 @@ func (x *DDDevice) WithMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlayba
 	return x
 }
 
-// Title of the media content being played.
+// A title for the current media that the device plays.
 //
 // WithMediaContentTitle sets the mediaContentTitle property and returns the receiver for chaining.
 func (x *DDDevice) WithMediaContentTitle(mediaContentTitle string) *DDDevice {
@@ -105,7 +107,7 @@ func (x *DDDevice) WithMediaContentTitle(mediaContentTitle string) *DDDevice {
 	return x
 }
 
-// Subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
+// A subtitle for the current media that the device plays.
 //
 // WithMediaContentSubtitle sets the mediaContentSubtitle property and returns the receiver for chaining.
 func (x *DDDevice) WithMediaContentSubtitle(mediaContentSubtitle string) *DDDevice {
@@ -113,7 +115,7 @@ func (x *DDDevice) WithMediaContentSubtitle(mediaContentSubtitle string) *DDDevi
 	return x
 }
 
-// Endpoint to communicate with the device via networking.
+// An object that describes a local-network device.
 //
 // WithNetworkEndpoint sets the networkEndpoint property and returns the receiver for chaining.
 func (x *DDDevice) WithNetworkEndpoint(networkEndpoint *foundation.NSObject) *DDDevice {
@@ -121,7 +123,7 @@ func (x *DDDevice) WithNetworkEndpoint(networkEndpoint *foundation.NSObject) *DD
 	return x
 }
 
-// Protocol of the device.
+// The manner in which the system applies your app’s device discovery extension.
 //
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *DDDevice) WithProtocol(protocol DDDeviceProtocol) *DDDevice {
@@ -129,7 +131,7 @@ func (x *DDDevice) WithProtocol(protocol DDDeviceProtocol) *DDDevice {
 	return x
 }
 
-// Uniform Type for the protocol.
+// A custom universal type that describes the device’s manner of communication with the extension.
 //
 // WithProtocolType sets the protocolType property and returns the receiver for chaining.
 func (x *DDDevice) WithProtocolType(protocolType *uniformtypeidentifiers.UTType) *DDDevice {
@@ -137,7 +139,7 @@ func (x *DDDevice) WithProtocolType(protocolType *uniformtypeidentifiers.UTType)
 	return x
 }
 
-// State of the device.
+// A state that represents the level of user interaction with the device.
 //
 // WithState sets the state property and returns the receiver for chaining.
 func (x *DDDevice) WithState(state DDDeviceState) *DDDevice {
@@ -153,7 +155,7 @@ func (x *DDDevice) WithSSID(sSID string) *DDDevice {
 	return x
 }
 
-// Whether the device supports grouping with other devices with the same protocol.
+// A Boolean value that indicates whether to group the device with others in the AirPlay UI.
 //
 // WithSupportsGrouping sets the supportsGrouping property and returns the receiver for chaining.
 func (x *DDDevice) WithSupportsGrouping(supportsGrouping bool) *DDDevice {
@@ -161,7 +163,7 @@ func (x *DDDevice) WithSupportsGrouping(supportsGrouping bool) *DDDevice {
 	return x
 }
 
-// TXT record of the device.
+// A dictionary of metadata for the device that the extension communicates with over the local network.
 //
 // WithTxtRecordData sets the txtRecordData property and returns the receiver for chaining.
 func (x *DDDevice) WithTxtRecordData(txtRecordData *foundation.NSData) *DDDevice {
@@ -169,7 +171,7 @@ func (x *DDDevice) WithTxtRecordData(txtRecordData *foundation.NSData) *DDDevice
 	return x
 }
 
-// URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
+// A resource locator for the simple service discovery protocol.
 //
 // WithUrl sets the url property and returns the receiver for chaining.
 func (x *DDDevice) WithUrl(url string) *DDDevice {
@@ -177,7 +179,7 @@ func (x *DDDevice) WithUrl(url string) *DDDevice {
 	return x
 }
 
-// Device's Wi-Fi Aware's service name.
+// Device’s Wi-Fi Aware’s service name.
 //
 // WithWifiAwareServiceName sets the wifiAwareServiceName property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevice {
@@ -185,7 +187,7 @@ func (x *DDDevice) WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevi
 	return x
 }
 
-// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+// Device’s Wi-Fi Aware’s service. Default is DDDeviceWiFiAwareServiceRoleSubscriber
 //
 // WithWifiAwareServiceRole sets the wifiAwareServiceRole property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) *DDDevice {
@@ -193,7 +195,7 @@ func (x *DDDevice) WithWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwa
 	return x
 }
 
-// Device's Wi-Fi Aware model name.
+// Device’s Wi-Fi Aware model name.
 //
 // WithWifiAwareModelName sets the wifiAwareModelName property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareModelName(wifiAwareModelName string) *DDDevice {
@@ -201,7 +203,7 @@ func (x *DDDevice) WithWifiAwareModelName(wifiAwareModelName string) *DDDevice {
 	return x
 }
 
-// Device's Wi-Fi Aware vendor name.
+// Device’s Wi-Fi Aware vendor name.
 //
 // WithWifiAwareVendorName sets the wifiAwareVendorName property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice {

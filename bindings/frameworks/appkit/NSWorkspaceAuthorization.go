@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The authorization granted to the app by the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsworkspaceauthorization
 type NSWorkspaceAuthorization struct {
 	foundation.NSObject

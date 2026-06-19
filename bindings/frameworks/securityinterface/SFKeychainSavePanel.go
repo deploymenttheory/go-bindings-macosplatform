@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class SFKeychainSavePanel @abstract SFKeychainSavePanel is a panel and sheet interface used to create a keychain using the NSSavePanel UI.
+// A panel or sheet that allows the user to create a keychain.
 //
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel
 type SFKeychainSavePanel struct {
@@ -38,7 +38,7 @@ func SFKeychainSavePanelFromID(id objc.ID) *SFKeychainSavePanel {
 	return o
 }
 
-// @method sharedKeychainSavePanel @abstract Returns a global instance of SFKeychainSavePanel object.
+// Returns a shared keychain save panel object.
 func SFKeychainSavePanelSharedKeychainSavePanel() *SFKeychainSavePanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFKeychainSavePanel), _sFKeychainSavePanelSelSharedKeychainSavePanel)
 	if _ret != 0 {
@@ -47,18 +47,18 @@ func SFKeychainSavePanelSharedKeychainSavePanel() *SFKeychainSavePanel {
 	return SFKeychainSavePanelFromID(_ret)
 }
 
-// @method setPassword: @abstract Specifies the password for the keychain that will be created. @param The password string object.
+// Specifies the password for the keychain that will be created.
 func (o *SFKeychainSavePanel) SetPassword(password *foundation.NSString) {
 	o.Ptr().Send(_sFKeychainSavePanelSelSetPassword, password.Ptr())
 }
 
-// @method keychain @abstract Returns the keychain created by the SFKeychainSavePanel. @result The keychain object.
+// Returns the keychain created by the keychain save panel.
 func (o *SFKeychainSavePanel) Keychain() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelKeychain)
 	return _ret
 }
 
-// @method error @abstract Returns the last error encountered by SFKeychainSavePanel. @result The error object.
+// Returns the last error encountered by the keychain save panel.
 func (o *SFKeychainSavePanel) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelError)
 	return _ret

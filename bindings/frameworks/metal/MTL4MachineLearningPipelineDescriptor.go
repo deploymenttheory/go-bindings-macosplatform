@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Description for a machine learning pipeline state.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4machinelearningpipelinedescriptor
 type MTL4MachineLearningPipelineDescriptor struct {
 	MTL4PipelineDescriptor
@@ -35,17 +37,17 @@ func MTL4MachineLearningPipelineDescriptorFromID(id objc.ID) *MTL4MachineLearnin
 	return o
 }
 
-// Sets the dimension of an input tensor at a buffer index. - Parameters: - dimensions: the dimensions of the tensor. - bufferIndex: Index of the tensor to modify.
+// Sets the dimension of an input tensor at a buffer index.
 func (o *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *MTLTensorExtents, bufferIndex int) {
 	o.Ptr().Send(_mTL4MachineLearningPipelineDescriptorSelSetInputDimensionsAtBufferIndex, dimensions.Ptr(), bufferIndex)
 }
 
-// Sets the dimensions of multiple input tensors on a range of buffer bindings. Use this method to specify the dimensions of multiple input tensors at a range of indices in a single call. You can indicate that any tensors in the range have unspecified dimensions by providing `NSNull` at the their corresponding index location in the array. - Important: The range's length property needs to match the number of dimensions you provide. Specifically, `range.length` needs to match `dimensions.count`. - Parameters: - dimensions: An array of tensor extents. - range: The range of inputs of the `dimensions` argument. The range's `length` needs to match the dimensions' `count` property.
+// Sets the dimensions of multiple input tensors on a range of buffer bindings.
 func (o *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions *foundation.NSArray[*MTLTensorExtents], range_ foundation.NSRange) {
 	o.Ptr().Send(_mTL4MachineLearningPipelineDescriptorSelSetInputDimensionsWithRange, dimensions.Ptr(), range_)
 }
 
-// Obtains the dimensions of the input tensor at `bufferIndex` if set, `nil` otherwise.
+// Obtains the dimensions of the input tensor at bufferIndex if set, nil otherwise.
 func (o *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4MachineLearningPipelineDescriptorSelInputDimensionsAtBufferIndex, bufferIndex)
 	if _ret != 0 {

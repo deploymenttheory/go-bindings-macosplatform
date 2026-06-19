@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A gradient neuron activation kernel that operates on matrices.
+//
 // MatrixNeuronGradient wraps [raw.MPSMatrixNeuronGradient] with a fluent Go API.
 type MatrixNeuronGradient struct {
 	inner *raw.MPSMatrixNeuronGradient
@@ -115,7 +117,7 @@ func (x *MatrixNeuronGradient) WithBatchSize(batchSize uint) *MatrixNeuronGradie
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuronGradient {
@@ -123,7 +125,7 @@ func (x *MatrixNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *Ma
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixNeuronGradient) WithLabel(label string) *MatrixNeuronGradient {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable data object containing bytes that can be discarded when they’re no longer needed.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspurgeabledata
 type NSPurgeableData struct {
 	NSMutableData

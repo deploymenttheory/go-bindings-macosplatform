@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about a finished send operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginedidsendchangesevent
 type CKSyncEngineDidSendChangesEvent struct {
 	CKSyncEngineEvent

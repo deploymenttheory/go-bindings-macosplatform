@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification of how to create a visible function table.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvisiblefunctiontabledescriptor
 type MTLVisibleFunctionTableDescriptor struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MTLVisibleFunctionTableDescriptorFromID(id objc.ID) *MTLVisibleFunctionTabl
 	return o
 }
 
-// @method visibleFunctionTableDescriptor @abstract Create an autoreleased visible function table descriptor
+// Creates a default visible function table descriptor.
 func MTLVisibleFunctionTableDescriptorVisibleFunctionTableDescriptor() *MTLVisibleFunctionTableDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLVisibleFunctionTableDescriptor), _mTLVisibleFunctionTableDescriptorSelVisibleFunctionTableDescriptor)
 	if _ret != 0 {

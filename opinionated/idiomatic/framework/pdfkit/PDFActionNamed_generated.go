@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// PDFActionNamed defines methods used to work with actions in PDF documents, some of which are named in the Adobe PDF Specification.
+//
 // ActionNamed wraps [raw.PDFActionNamed] with a fluent Go API.
 type ActionNamed struct {
 	inner *raw.PDFActionNamed
@@ -29,6 +31,8 @@ func ActionNamedFromID(id objc.ID) *ActionNamed {
 	return &ActionNamed{inner: raw.PDFActionNamedFromID(id)}
 }
 
+// Initializes the PDFActionName object with the specified named action.
+//
 // NewActionNamedWithName creates a new [ActionNamed].
 func NewActionNamedWithName(name PDFActionNamedName) *ActionNamed {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionNamed")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewActionNamedWithName(name PDFActionNamedName) *ActionNamed {
 	return &ActionNamed{inner: raw.PDFActionNamedFromID(_id)}
 }
 
+// Returns the name of the named action.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ActionNamed) WithName(name PDFActionNamedName) *ActionNamed {
 	x.inner.SetName(raw.PDFActionNamedName(name))

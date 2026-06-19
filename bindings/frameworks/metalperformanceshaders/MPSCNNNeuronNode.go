@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The virtual base class for MPS CNN neuron nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronnode
 type MPSCNNNeuronNode struct {
 	mpsneuralnetwork.MPSNNFilterNode

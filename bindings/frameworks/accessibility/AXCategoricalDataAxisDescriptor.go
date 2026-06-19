@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an axis of categorical data.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axcategoricaldataaxisdescriptor
 type AXCategoricalDataAxisDescriptor struct {
 	foundation.NSObject
@@ -33,16 +35,18 @@ func AXCategoricalDataAxisDescriptorFromID(id objc.ID) *AXCategoricalDataAxisDes
 	return o
 }
 
+// Creates a categorical data axis with the specified title and an array of categories in the specified order.
 func (o *AXCategoricalDataAxisDescriptor) InitWithTitleCategoryOrder(title *foundation.NSString, categoryOrder *foundation.NSArray[*foundation.NSString]) *AXCategoricalDataAxisDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelInitWithTitleCategoryOrder, title.Ptr(), categoryOrder)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelInitWithTitleCategoryOrder, title.Ptr(), categoryOrder.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AXCategoricalDataAxisDescriptorFromID(_ret)
 }
 
+// Creates a categorical data axis with the specified attributed title and an array of categories in the specified order.
 func (o *AXCategoricalDataAxisDescriptor) InitWithAttributedTitleCategoryOrder(attributedTitle *foundation.NSAttributedString, categoryOrder *foundation.NSArray[*foundation.NSString]) *AXCategoricalDataAxisDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelInitWithAttributedTitleCategoryOrder, attributedTitle.Ptr(), categoryOrder)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelInitWithAttributedTitleCategoryOrder, attributedTitle.Ptr(), categoryOrder.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -51,10 +55,13 @@ func (o *AXCategoricalDataAxisDescriptor) InitWithAttributedTitleCategoryOrder(a
 
 // The order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
 func (o *AXCategoricalDataAxisDescriptor) CategoryOrder() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aXCategoricalDataAxisDescriptorSelCategoryOrder)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXCategoricalDataAxisDescriptorSelCategoryOrder)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AXCategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_aXCategoricalDataAxisDescriptorSelSetCategoryOrder, categoryOrder)
+	o.Ptr().Send(_aXCategoricalDataAxisDescriptorSelSetCategoryOrder, categoryOrder.Ptr())
 }

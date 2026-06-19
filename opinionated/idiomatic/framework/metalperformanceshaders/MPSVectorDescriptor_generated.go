@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the length and data type of a vector.
+//
 // VectorDescriptor wraps [raw.MPSVectorDescriptor] with a fluent Go API.
 type VectorDescriptor struct {
 	inner *raw.MPSVectorDescriptor

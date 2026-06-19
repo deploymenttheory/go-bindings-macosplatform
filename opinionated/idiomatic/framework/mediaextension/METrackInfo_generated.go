@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that includes track properties parsed from the media asset.
+//
 // TrackInfo wraps [raw.METrackInfo] with a fluent Go API.
 type TrackInfo struct {
 	inner *raw.METrackInfo
@@ -33,7 +35,7 @@ func TrackInfoFromID(id objc.ID) *TrackInfo {
 	return &TrackInfo{inner: raw.METrackInfoFromID(id)}
 }
 
-// @method			initWithMediaType @abstract		Initializes a new METrackInfo instance. @discussion		The main initializer for the METrackInfo class. After creating the class, the METrackReader should fill in all the relevant properties with the values read in from the media track. @param			mediaType The media type of the track. @param			trackID An integer identifying the track within the media asset. @param			formatDescriptions The format descriptions for the track, as an NSArray. @result			A new instance of METrackInfo.
+// Creates a new track info object with the media type, track ID, and format descriptions that you specify.
 //
 // NewTrackInfoWithMediaTypeTrackIDFormatDescriptions creates a new [TrackInfo].
 func NewTrackInfoWithMediaTypeTrackIDFormatDescriptions(mediaType uint, trackID int32, formatDescriptions *foundation.NSArray[objc.ID]) *TrackInfo {
@@ -42,7 +44,7 @@ func NewTrackInfoWithMediaTypeTrackIDFormatDescriptions(mediaType uint, trackID 
 	return &TrackInfo{inner: raw.METrackInfoFromID(_id)}
 }
 
-// @property		enabled @abstract		A BOOL value indicating whether the track is enabled by default.
+// A Boolean value that indicates whether the track is enabled by default.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TrackInfo) WithEnabled(enabled bool) *TrackInfo {
@@ -50,7 +52,7 @@ func (x *TrackInfo) WithEnabled(enabled bool) *TrackInfo {
 	return x
 }
 
-// @property		naturalTimescale @abstract		The natural timescale of the track, as a CMTimeScale value.
+// The natural timescale of the track.
 //
 // WithNaturalTimescale sets the naturalTimescale property and returns the receiver for chaining.
 func (x *TrackInfo) WithNaturalTimescale(naturalTimescale int32) *TrackInfo {
@@ -58,7 +60,7 @@ func (x *TrackInfo) WithNaturalTimescale(naturalTimescale int32) *TrackInfo {
 	return x
 }
 
-// @property		trackEdits @abstract		Returns the array of edit segments for the given track. @discussion		Each NSValue in the array contains a CMTimeMapping object describing the track edit. The CMTimeMapping.target time ranges for successive edits must partition the time range from 0 to the track's duration. In other words, for edit index = 0 the CMTimeMapping.target.start must be kCMTimeZero, while for edit index > 0, the CMTimeMapping.target.start must match the CMTimeRangeGetEnd(CMTimeMapping.target) for edit (index - 1). It is valid for a track to have an empty trackEdits array; this means that there is nothing at all in the track and the track duration is zero. If this property is implemented for media asset formats that do not support edit segments, it can return nil.
+// An array of edit segments for the given track.
 //
 // WithTrackEdits sets the collection, converting the Go slice to an NSArray.
 func (x *TrackInfo) WithTrackEdits(items ...*foundation.NSValue) *TrackInfo {
@@ -81,7 +83,7 @@ func (x *TrackInfo) WithTrackEdits(items ...*foundation.NSValue) *TrackInfo {
 	return x
 }
 
-// @property		extendedLanguageTag @abstract		Indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier. @discussion		This property may be used by the MediaToolbox to group similar language tracks together or to match audio and caption tracks. If no language tag is indicated, this property should be set to nil.
+// A string that indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier.
 //
 // WithExtendedLanguageTag sets the extendedLanguageTag property and returns the receiver for chaining.
 func (x *TrackInfo) WithExtendedLanguageTag(extendedLanguageTag string) *TrackInfo {
@@ -89,7 +91,7 @@ func (x *TrackInfo) WithExtendedLanguageTag(extendedLanguageTag string) *TrackIn
 	return x
 }
 
-// @property		naturalSize @abstract		Indicates the natural dimensions of the media data referenced by the track as a CGSize. @discussion		This property is only valid for tracks with visual media types and should return CGSizeZero if implemented for other track types.
+// Indicates the natural dimensions of the media data referenced by the track.
 //
 // WithNaturalSize sets the naturalSize property and returns the receiver for chaining.
 func (x *TrackInfo) WithNaturalSize(naturalSize corefoundation.CGSize) *TrackInfo {
@@ -97,7 +99,7 @@ func (x *TrackInfo) WithNaturalSize(naturalSize corefoundation.CGSize) *TrackInf
 	return x
 }
 
-// @property		preferredTransform @abstract		Indicates the preferred affine display transform of the track media for visual display. @discussion		Returns an CGAffineTransform representing the preferred affine transform of the track for visual display. This property is only valid for tracks with visual media types and should return CGAffineTransformIdentity if implemented for other track types.
+// Indicates the preferred affine display transform of the track media for visual display.
 //
 // WithPreferredTransform sets the preferredTransform property and returns the receiver for chaining.
 func (x *TrackInfo) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *TrackInfo {
@@ -105,7 +107,7 @@ func (x *TrackInfo) WithPreferredTransform(preferredTransform corefoundation.CGA
 	return x
 }
 
-// @property		nominalFrameRate @abstract		The frame rate of the track, in frames per second, as a 32-bit floating point number. @discussion		For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate. This information from this property may be used by the MediaToolbox to calculate the maximum playback speed.
+// The frame rate of the track in frames per second, as a 32-bit floating point number.
 //
 // WithNominalFrameRate sets the nominalFrameRate property and returns the receiver for chaining.
 func (x *TrackInfo) WithNominalFrameRate(nominalFrameRate float32) *TrackInfo {
@@ -113,7 +115,7 @@ func (x *TrackInfo) WithNominalFrameRate(nominalFrameRate float32) *TrackInfo {
 	return x
 }
 
-// @property		requiresFrameReordering @abstract		Indicates whether frame reordering occurs in the track. @discussion		The value is YES if frame reordering occurs, NO otherwise. This property is only valid for tracks with video media type and should return NO for if implemented for other track types.
+// A Boolean value that indicates whether frame reordering occurs in the track.
 //
 // WithRequiresFrameReordering sets the requiresFrameReordering property and returns the receiver for chaining.
 func (x *TrackInfo) WithRequiresFrameReordering(requiresFrameReordering bool) *TrackInfo {

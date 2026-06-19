@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of segments that connect to graph a complex curve over a linear input.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseenvelope
 type PHASEEnvelope struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func PHASEEnvelopeFromID(id objc.ID) *PHASEEnvelope {
 	return o
 }
 
-// @method initWithStartPoint:segments @abstract Initialize an envelope from a start point and an array of segments. @discussion If the segment array is empty (i.e., count == 0), the envelope will internally create a single segment with an end point matching the start point. If the segment array has more than one segment, segments will be sorted internally in ascending order of x value. Note that the startPoint.x value must be <= the segment with the lowest x value provided in segments. Failure to do so will cause this function to return nil. @param startPoint The start point of the envelope. @param segments An array of segments. @return A new envelope.
+// Creates an envelope with a start point and segments.
 func (o *PHASEEnvelope) InitWithStartPointSegments(startPoint unsafe.Pointer, segments *foundation.NSArray[*PHASEEnvelopeSegment]) *PHASEEnvelope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSelInitWithStartPointSegments, startPoint, segments.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *PHASEEnvelope) InitWithStartPointSegments(startPoint unsafe.Pointer, se
 	return PHASEEnvelopeFromID(_ret)
 }
 
-// @method evaluateForValue @abstract Evaluates the envelope. @discussion If required, x will be clamped to the envelope's domain. @param x The input along the x-axis. @return The output along the y-axis.
+// Provides the height of the envelope for an input value.
 func (o *PHASEEnvelope) EvaluateForValue(x float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pHASEEnvelopeSelEvaluateForValue, x)
 	return _ret

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The public portion of an asymmetric key pair.
+//
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/lapublickey
 type LAPublicKey struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func LAPublicKeyFromID(id objc.ID) *LAPublicKey {
 	return o
 }
 
-// @brief Exports public key bytes. @param handler Completion handler with the raw bytes of the public key or an error on failure
+// Exports the data that represents a public key.
 func (o *LAPublicKey) ExportBytesWithCompletion(handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -51,7 +53,7 @@ func (o *LAPublicKey) ExportBytesWithCompletion(handler func(*foundation.NSData,
 	o.Ptr().Send(_lAPublicKeySelExportBytesWithCompletion, __block_handler)
 }
 
-// @brief Encrypts the given data @param data The data to encrypt. @param algorithm A @c SecKeyAlgorithm suitable for encrypting with this key –e.g: @c kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM . @param handler Completion handler with the cipher text or an error on failure.
+// Encrypts the data you supply with a given algorithm.
 func (o *LAPublicKey) EncryptDataSecKeyAlgorithmCompletion(data *foundation.NSData, algorithm unsafe.Pointer, handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -66,13 +68,13 @@ func (o *LAPublicKey) EncryptDataSecKeyAlgorithmCompletion(data *foundation.NSDa
 	o.Ptr().Send(_lAPublicKeySelEncryptDataSecKeyAlgorithmCompletion, data.Ptr(), algorithm, __block_handler)
 }
 
-// @brief Checks if the the provided algorithm can be used for encryption with the key. @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+// Checks whether the algorithm you supply is valid for encrypting data with the key.
 func (o *LAPublicKey) CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _lAPublicKeySelCanEncryptUsingSecKeyAlgorithm, algorithm)
 	return _ret
 }
 
-// @brief Verifies a digital signature for the given data. @param signedData The signed data. @param signature The signature of the given data. @param algorithm One of @c SecKeyAlgorithm suitable for verifying signatures with this key –e.g: @c kSecKeyAlgorithmECDSASignatureMessageX962SHA256 @param handler Completion handler with the signature of given data or an error on failure.
+// Verifies a digital signature for the data you supply.
 func (o *LAPublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(signedData *foundation.NSData, signature *foundation.NSData, algorithm unsafe.Pointer, handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -84,7 +86,7 @@ func (o *LAPublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(signedData *f
 	o.Ptr().Send(_lAPublicKeySelVerifyDataSignatureSecKeyAlgorithmCompletion, signedData.Ptr(), signature.Ptr(), algorithm, __block_handler)
 }
 
-// @brief Checks if the the provided algorithm can be used for verifying signatures with the key. @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+// Checks whether the algorithm you supply is valid for verifying signatures with the key.
 func (o *LAPublicKey) CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _lAPublicKeySelCanVerifyUsingSecKeyAlgorithm, algorithm)
 	return _ret

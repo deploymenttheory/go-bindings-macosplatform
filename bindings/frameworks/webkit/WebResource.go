@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class WebResource @discussion A WebResource represents a fully downloaded URL. It includes the data of the resource as well as the metadata associated with the resource.
+// A WebResource object represents a downloaded URL. It encapsulates the data of the download as well as other resource properties such as the URL, MIME type, and frame name.
 //
 // Apple documentation: https://developer.apple.com/documentation/webkit/webresource
 type WebResource struct {
@@ -37,7 +37,7 @@ func WebResourceFromID(id objc.ID) *WebResource {
 	return o
 }
 
-// @method initWithData:URL:MIMEType:textEncodingName:frameName @abstract The initializer for WebResource. @param data The data of the resource. @param URL The URL of the resource. @param MIMEType The MIME type of the resource. @param textEncodingName The text encoding name of the resource (can be nil). @param frameName The frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil). @result An initialized WebResource.
+// Initializes and returns a web resource instance.
 func (o *WebResource) InitWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation.NSData, uRL *foundation.NSURL, mIMEType *foundation.NSString, textEncodingName *foundation.NSString, frameName *foundation.NSString) *WebResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webResourceSelInitWithDataURLMIMETypeTextEncodingNameFrameName, data.Ptr(), uRL.Ptr(), mIMEType.Ptr(), textEncodingName.Ptr(), frameName.Ptr())
 	if _ret != 0 {

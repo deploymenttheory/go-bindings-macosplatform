@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates all information about a person in the Address Book database.
+//
 // Person wraps [raw.ABPerson] with a fluent Go API.
 type Person struct {
 	inner *raw.ABPerson
@@ -37,31 +39,43 @@ func NewPersonWithVCardRepresentation(vCardData *foundation.NSData) *Person {
 	return &Person{inner: raw.ABPersonFromID(_id)}
 }
 
+// Returns an array of the address book groups that this person belongs to.
+//
 // ParentGroups calls the underlying ParentGroups.
 func (x *Person) ParentGroups() *foundation.NSArray[objc.ID] {
 	return x.inner.ParentGroups()
 }
 
+// Returns the array of all person records that are linked to the person this record represents.
+//
 // LinkedPeople calls the underlying LinkedPeople.
 func (x *Person) LinkedPeople() *foundation.NSArray[objc.ID] {
 	return x.inner.LinkedPeople()
 }
 
+// Returns the vCard representation of the person record as a data object in vCard format.
+//
 // VCardRepresentation calls the underlying VCardRepresentation.
 func (x *Person) VCardRepresentation() *foundation.NSData {
 	return x.inner.VCardRepresentation()
 }
 
+// Sets the image for this person to the given data.
+//
 // SetImageData calls the underlying SetImageData.
 func (x *Person) SetImageData(data *foundation.NSData) bool {
 	return x.inner.SetImageData(data)
 }
 
+// Returns data that contains a picture of this person.
+//
 // ImageData calls the underlying ImageData.
 func (x *Person) ImageData() *foundation.NSData {
 	return x.inner.ImageData()
 }
 
+// Starts an asynchronous fetch for image data in all locations
+//
 // BeginLoadingImageDataForClient calls the underlying BeginLoadingImageDataForClient.
 func (x *Person) BeginLoadingImageDataForClient(client raw.ABImageClient) int {
 	return x.inner.BeginLoadingImageDataForClient(client)

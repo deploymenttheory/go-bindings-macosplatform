@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A symbol effect applies the MagicReplace animation to symbol images.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolmagicreplacecontenttransition
 type NSSymbolMagicReplaceContentTransition struct {
 	NSSymbolContentTransition

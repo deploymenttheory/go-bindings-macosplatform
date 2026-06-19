@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that describes the format of a media stream.
+//
 // ExtensionStreamFormat wraps [raw.CMIOExtensionStreamFormat] with a fluent Go API.
 type ExtensionStreamFormat struct {
 	inner *raw.CMIOExtensionStreamFormat
@@ -32,7 +34,7 @@ func ExtensionStreamFormatFromID(id objc.ID) *ExtensionStreamFormat {
 	return &ExtensionStreamFormat{inner: raw.CMIOExtensionStreamFormatFromID(id)}
 }
 
-// @method initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations: @abstract Initialize a stream format instance. @param formatDescription The format description of the samples delivered by the stream. @param maxFrameDuration The maximum frame duration. @param minFrameDuration The minimum frame duration. @param validFrameDurations The list of valid CMTime as dictionaries if nil the full range between min and max is valid. The CMTime in dictionary format are made with CMTimeCopyAsDictionary. @result A CMIOExtensionStreamFormat instance that describes the stream format. @discussion A frame duration is the reciprocal of a frame rate. If a CMIOExtensionStreamFormat's validFrameDurations property is not nil and not empty, the frame duration are discrete and can only have a certain set of value. Current frame duration and maximum frame duration can be changed with the properties CMIOExtensionPropertyStreamFrameDuration and CMIOExtensionPropertyStreamMaxFrameDuration.
+// Creates a stream format with a format description and frame durations.
 //
 // NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations creates a new [ExtensionStreamFormat].
 func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription unsafe.Pointer, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations *foundation.NSArray[objc.ID]) *ExtensionStreamFormat {

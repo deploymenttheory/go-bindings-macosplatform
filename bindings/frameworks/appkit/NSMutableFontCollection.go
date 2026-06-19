@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable collection of font descriptors taken together as a single object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmutablefontcollection
 type NSMutableFontCollection struct {
 	NSFontCollection
@@ -38,6 +40,7 @@ func NSMutableFontCollectionFromID(id objc.ID) *NSMutableFontCollection {
 	return o
 }
 
+// Creates a mutable font collection containing the fonts that match the specified font descriptors.
 func NSMutableFontCollectionFontCollectionWithDescriptors(queryDescriptors *foundation.NSArray[*NSFontDescriptor]) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithDescriptors, queryDescriptors.Ptr())
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func NSMutableFontCollectionFontCollectionWithDescriptors(queryDescriptors *foun
 	return NSMutableFontCollectionFromID(_ret)
 }
 
+// Creates a mutable font collection containing fonts suitable for the specified locale.
 func NSMutableFontCollectionFontCollectionWithLocale(locale *foundation.NSLocale) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -54,6 +58,7 @@ func NSMutableFontCollectionFontCollectionWithLocale(locale *foundation.NSLocale
 	return NSMutableFontCollectionFromID(_ret)
 }
 
+// Creates a mutable named font collection object.
 func NSMutableFontCollectionFontCollectionWithName(name *foundation.NSString) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithName, name.Ptr())
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func NSMutableFontCollectionFontCollectionWithName(name *foundation.NSString) *N
 	return NSMutableFontCollectionFromID(_ret)
 }
 
+// Creates a mutable font collection with the specified name and font visibility.
 func NSMutableFontCollectionFontCollectionWithNameVisibility(name *foundation.NSString, visibility NSFontCollectionVisibility) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithNameVisibility, name.Ptr(), visibility)
 	if _ret != 0 {
@@ -70,10 +76,12 @@ func NSMutableFontCollectionFontCollectionWithNameVisibility(name *foundation.NS
 	return NSMutableFontCollectionFromID(_ret)
 }
 
+// Edits the query and exclusion arrays by adding the specified font descriptors.
 func (o *NSMutableFontCollection) AddQueryForDescriptors(descriptors *foundation.NSArray[*NSFontDescriptor]) {
 	o.Ptr().Send(_nSMutableFontCollectionSelAddQueryForDescriptors, descriptors.Ptr())
 }
 
+// Edits the query and exclusion arrays by removing the specified font descriptors.
 func (o *NSMutableFontCollection) RemoveQueryForDescriptors(descriptors *foundation.NSArray[*NSFontDescriptor]) {
 	o.Ptr().Send(_nSMutableFontCollectionSelRemoveQueryForDescriptors, descriptors.Ptr())
 }

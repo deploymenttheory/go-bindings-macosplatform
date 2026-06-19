@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network service browser that finds published services on a network using multicast DNS.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnetservicebrowser
 // Deprecated: Use nw_browser_t in Network framework instead
 type NSNetServiceBrowser struct {

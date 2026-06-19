@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a device or communicates its change in status.
+//
 // DDDeviceEvent wraps [raw.DDDeviceEvent] with a fluent Go API.
 type DDDeviceEvent struct {
 	inner *raw.DDDeviceEvent
@@ -29,7 +31,7 @@ func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(id)}
 }
 
-// Initializes a device event.
+// Creates an event object that conveys status for a discovered device of interest.
 //
 // NewDDDeviceEventWithEventTypeDevice creates a new [DDDeviceEvent].
 func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *raw.DDDevice) *DDDeviceEvent {

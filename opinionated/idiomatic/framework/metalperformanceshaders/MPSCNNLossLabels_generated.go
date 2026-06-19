@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that stores the per-element weight buffer used by loss and gradient loss kernels.
+//
 // CNNLossLabels wraps [raw.MPSCNNLossLabels] with a fluent Go API.
 type CNNLossLabels struct {
 	inner *raw.MPSCNNLossLabels

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the edits made to an asset’s photo, video, or Live Photo content, which allows your app to reconstruct or revert the effects of prior editing sessions.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phadjustmentdata
 type PHAdjustmentData struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func PHAdjustmentDataFromID(id objc.ID) *PHAdjustmentData {
 	return o
 }
 
+// Initializes an adjustment object with the specified format and data.
 func (o *PHAdjustmentData) InitWithFormatIdentifierFormatVersionData(formatIdentifier *foundation.NSString, formatVersion *foundation.NSString, data *foundation.NSData) *PHAdjustmentData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAdjustmentDataSelInitWithFormatIdentifierFormatVersionData, formatIdentifier.Ptr(), formatVersion.Ptr(), data.Ptr())
 	if _ret != 0 {

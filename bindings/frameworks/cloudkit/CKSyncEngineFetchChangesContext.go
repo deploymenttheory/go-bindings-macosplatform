@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The context of an attempt to fetch changes from the server.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetchchangescontext
 type CKSyncEngineFetchChangesContext struct {
 	foundation.NSObject

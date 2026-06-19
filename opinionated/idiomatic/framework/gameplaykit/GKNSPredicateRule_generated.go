@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A convenient subclass of GKRule that leverages existing NSPRedicate functionality for evaluating the predicate of the rule.
+// A rule for use in a rule system that uses a Foundation NSPredicate object to evaluate itself.
 //
 // NSPredicateRule wraps [raw.GKNSPredicateRule] with a fluent Go API.
 type NSPredicateRule struct {
@@ -32,7 +32,7 @@ func NSPredicateRuleFromID(id objc.ID) *NSPredicateRule {
 	return &NSPredicateRule{inner: raw.GKNSPredicateRuleFromID(id)}
 }
 
-// Initializes a new rule with the given NSPredicate
+// Initializes a rule with the specified predicate.
 //
 // NewNSPredicateRuleWithPredicate creates a new [NSPredicateRule].
 func NewNSPredicateRuleWithPredicate(predicate *foundation.NSPredicate) *NSPredicateRule {
@@ -41,7 +41,7 @@ func NewNSPredicateRuleWithPredicate(predicate *foundation.NSPredicate) *NSPredi
 	return &NSPredicateRule{inner: raw.GKNSPredicateRuleFromID(_id)}
 }
 
-// Salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0. @see GKRuleSystem.agenda
+// The importance of the rule relative to others in a rule system’s agenda.
 //
 // WithSalience sets the salience property and returns the receiver for chaining.
 func (x *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that produces a matte image for a person it finds in the input image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest
 type VNGeneratePersonSegmentationRequest struct {
 	VNStatefulRequest
@@ -39,11 +41,13 @@ func VNGeneratePersonSegmentationRequestFromID(id objc.ID) *VNGeneratePersonSegm
 	return o
 }
 
+// Returns a new generate person segmentation request.
 func VNGeneratePersonSegmentationRequestNew() *VNGeneratePersonSegmentationRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNGeneratePersonSegmentationRequest), _vNGeneratePersonSegmentationRequestSelNew)
 	return VNGeneratePersonSegmentationRequestFromID(_ret)
 }
 
+// Creates a generate person segmentation request.
 func (o *VNGeneratePersonSegmentationRequest) Init() *VNGeneratePersonSegmentationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNGeneratePersonSegmentationRequestSelInit)
 	if _ret != 0 {
@@ -52,6 +56,7 @@ func (o *VNGeneratePersonSegmentationRequest) Init() *VNGeneratePersonSegmentati
 	return VNGeneratePersonSegmentationRequestFromID(_ret)
 }
 
+// Creates a generate person segmentation request with a completion handler.
 func (o *VNGeneratePersonSegmentationRequest) InitWithCompletionHandler(completionHandler func(*VNRequest, unsafe.Pointer)) *VNGeneratePersonSegmentationRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -70,14 +75,17 @@ func (o *VNGeneratePersonSegmentationRequest) InitWithCompletionHandler(completi
 	return VNGeneratePersonSegmentationRequestFromID(_ret)
 }
 
-// @brief Obtain the collection of supported output pixel formats for the configured request.
+// Returns a list of output pixel formats that the request supports.
 func (o *VNGeneratePersonSegmentationRequest) SupportedOutputPixelFormatsAndReturnError() (*foundation.NSArray[*foundation.NSNumber], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vNGeneratePersonSegmentationRequestSelSupportedOutputPixelFormatsAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNGeneratePersonSegmentationRequestSelSupportedOutputPixelFormatsAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret), nil
 }
 
 // @brief The quality level selects which techniques will be used during the person segmentation. There are trade-offs between performance and accuracy.

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A lock that multiple applications on multiple hosts can use to restrict access to some shared resource, such as a file.
+//
 // DistributedLock wraps [raw.NSDistributedLock] with a fluent Go API.
 type DistributedLock struct {
 	inner *raw.NSDistributedLock
@@ -30,6 +32,8 @@ func DistributedLockFromID(id objc.ID) *DistributedLock {
 	return &DistributedLock{inner: raw.NSDistributedLockFromID(id)}
 }
 
+// Initializes an NSDistributedLock object to use as the lock the file-system entry specified by a given path.
+//
 // NewDistributedLockWithPath creates a new [DistributedLock].
 func NewDistributedLockWithPath(path string) *DistributedLock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistributedLock")), objc.RegisterName("alloc"))
@@ -43,16 +47,22 @@ func (x *DistributedLock) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
+//
 // TryLock calls the underlying TryLock.
 func (x *DistributedLock) TryLock() bool {
 	return x.inner.TryLock()
 }
 
+// Relinquishes the receiver.
+//
 // Unlock calls the underlying Unlock.
 func (x *DistributedLock) Unlock() {
 	x.inner.Unlock()
 }
 
+// Forces the lock to be relinquished.
+//
 // BreakLock calls the underlying BreakLock.
 func (x *DistributedLock) BreakLock() {
 	x.inner.BreakLock()

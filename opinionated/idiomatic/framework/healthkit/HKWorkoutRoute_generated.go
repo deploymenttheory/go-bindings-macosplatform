@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that contains a workout’s route data.
+//
 // WorkoutRoute wraps [raw.HKWorkoutRoute] with a fluent Go API.
 type WorkoutRoute struct {
 	inner *raw.HKWorkoutRoute

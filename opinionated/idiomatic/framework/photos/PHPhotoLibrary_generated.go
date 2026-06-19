@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages access and changes to the user’s photo library.
+//
 // PhotoLibrary wraps [raw.PHPhotoLibrary] with a fluent Go API.
 type PhotoLibrary struct {
 	inner *raw.PHPhotoLibrary
@@ -37,36 +39,50 @@ func NewPhotoLibrary() *PhotoLibrary {
 	return &PhotoLibrary{inner: raw.PHPhotoLibraryFromID(_id)}
 }
 
+// Registers an object to observe changes to the photo library’s availability.
+//
 // RegisterAvailabilityObserver calls the underlying RegisterAvailabilityObserver.
 func (x *PhotoLibrary) RegisterAvailabilityObserver(observer raw.PHPhotoLibraryAvailabilityObserver) {
 	x.inner.RegisterAvailabilityObserver(observer)
 }
 
+// Unregisters an object from observing changes to the photo library’s availability.
+//
 // UnregisterAvailabilityObserver calls the underlying UnregisterAvailabilityObserver.
 func (x *PhotoLibrary) UnregisterAvailabilityObserver(observer raw.PHPhotoLibraryAvailabilityObserver) {
 	x.inner.UnregisterAvailabilityObserver(observer)
 }
 
+// Asynchronously runs a block that requests changes to the photo library.
+//
 // PerformChangesCompletionHandler calls the underlying PerformChangesCompletionHandler.
 func (x *PhotoLibrary) PerformChangesCompletionHandler(changeBlock func(), completionHandler func(bool, unsafe.Pointer)) {
 	x.inner.PerformChangesCompletionHandler(changeBlock, completionHandler)
 }
 
+// Synchronously runs a block that requests changes to be performed in the photo library.
+//
 // PerformChangesAndWaitError calls the underlying PerformChangesAndWaitError.
 func (x *PhotoLibrary) PerformChangesAndWaitError(changeBlock func()) (bool, error) {
 	return x.inner.PerformChangesAndWaitError(changeBlock)
 }
 
+// Registers an object to receive messages when objects in the photo library change.
+//
 // RegisterChangeObserver calls the underlying RegisterChangeObserver.
 func (x *PhotoLibrary) RegisterChangeObserver(observer raw.PHPhotoLibraryChangeObserver) {
 	x.inner.RegisterChangeObserver(observer)
 }
 
+// Unregisters an object so that it no longer receives change messages.
+//
 // UnregisterChangeObserver calls the underlying UnregisterChangeObserver.
 func (x *PhotoLibrary) UnregisterChangeObserver(observer raw.PHPhotoLibraryChangeObserver) {
 	x.inner.UnregisterChangeObserver(observer)
 }
 
+// Retrieves the Photos library changes since the token you specify.
+//
 // FetchPersistentChangesSinceTokenError calls the underlying FetchPersistentChangesSinceTokenError.
 func (x *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *raw.PHPersistentChangeToken) (*PersistentChangeFetchResult, error) {
 	_r, _err := x.inner.FetchPersistentChangesSinceTokenError(token)
@@ -93,27 +109,29 @@ func (x *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
 	return &PersistentChangeToken{inner: _r}
 }
 
-// @abstract Returns a dictionary that maps each cloud identifier from the provided array to a PLLocalIdentifierMapping result containing the local identifier found for that cloud identifier. @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a local identifier for a given cloud identifier fails, the error parameter will indicate the reason. @param cloudIdentifiers The array of \c PHCloudIdentifier instances whose local identifiers are to being requested.
+// Retrieves the local identifier mappings for the list of cloud identifiers.
 //
 // LocalIdentifierMappingsForCloudIdentifiers calls the underlying LocalIdentifierMappingsForCloudIdentifiers.
 func (x *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSDictionary[*raw.PHCloudIdentifier, *raw.PHLocalIdentifierMapping] {
 	return x.inner.LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers)
 }
 
-// @abstract Returns a dictionary that maps each local identifier from the provided array to a PLCloudIdentifierMapping result containing the cloud identifier found for that local identifier @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a cloud identifier for a given local identifier fails, the error parameter will indicate the reason. @param localIdentifiers The array of \c NSString instances whose cloud identifiers are to being requested.
+// Retrieves the cloud identifier mappings for the list of local identifiers.
 //
 // CloudIdentifierMappingsForLocalIdentifiers calls the underlying CloudIdentifierMappingsForLocalIdentifiers.
 func (x *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *raw.PHCloudIdentifierMapping] {
 	return x.inner.CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers)
 }
 
-// DEPRECATED: These two methods can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.
+// Retrieves the equivalent local identifiers for the list of iCloud identifiers.
 //
 // LocalIdentifiersForCloudIdentifiers calls the underlying LocalIdentifiersForCloudIdentifiers.
 func (x *PhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.LocalIdentifiersForCloudIdentifiers(cloudIdentifiers)
 }
 
+// Retrieves the equivalent iCloud identifiers for the list of local identifiers.
+//
 // CloudIdentifiersForLocalIdentifiers calls the underlying CloudIdentifiersForLocalIdentifiers.
 func (x *PhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.PHCloudIdentifier] {
 	return x.inner.CloudIdentifiersForLocalIdentifiers(localIdentifiers)

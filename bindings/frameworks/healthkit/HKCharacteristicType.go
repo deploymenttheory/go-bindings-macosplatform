@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that represents data that doesn’t typically change over time.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcharacteristictype
 type HKCharacteristicType struct {
 	HKObjectType

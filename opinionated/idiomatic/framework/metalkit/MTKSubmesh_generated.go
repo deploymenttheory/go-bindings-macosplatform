@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for the index data of a Model I/O submesh, suitable for use in a Metal app.
+//
 // Submesh wraps [raw.MTKSubmesh] with a fluent Go API.
 type Submesh struct {
 	inner *raw.MTKSubmesh
@@ -38,7 +40,7 @@ func NewSubmesh() *Submesh {
 	return &Submesh{inner: raw.MTKSubmeshFromID(_id)}
 }
 
-// @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
+// The name of the submesh.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Submesh) WithName(name string) *Submesh {

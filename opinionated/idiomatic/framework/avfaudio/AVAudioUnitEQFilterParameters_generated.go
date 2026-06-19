@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates the parameters that the equalizer uses.
+//
 // AudioUnitEQFilterParameters wraps [raw.AVAudioUnitEQFilterParameters] with a fluent Go API.
 type AudioUnitEQFilterParameters struct {
 	inner *raw.AVAudioUnitEQFilterParameters
@@ -35,7 +37,7 @@ func NewAudioUnitEQFilterParameters() *AudioUnitEQFilterParameters {
 	return &AudioUnitEQFilterParameters{inner: raw.AVAudioUnitEQFilterParametersFromID(_id)}
 }
 
-// @property filterType @abstract AVAudioUnitEQFilterType @discussion Default:    AVAudioUnitEQFilterTypeParametric
+// The equalizer filter type.
 //
 // WithFilterType sets the filterType property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithFilterType(filterType AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters {
@@ -43,7 +45,7 @@ func (x *AudioUnitEQFilterParameters) WithFilterType(filterType AVAudioUnitEQFil
 	return x
 }
 
-// @property frequency @abstract Frequency in Hertz. @discussion Range:      20 -> (SampleRate/2) Unit:       Hertz
+// The frequency of the equalizer filter, in hertz.
 //
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithFrequency(frequency float32) *AudioUnitEQFilterParameters {
@@ -51,7 +53,7 @@ func (x *AudioUnitEQFilterParameters) WithFrequency(frequency float32) *AudioUni
 	return x
 }
 
-// @property bandwidth @abstract Bandwidth in octaves. @discussion Range:      0.05 -> 5.0 Unit:       Octaves
+// The bandwidth of the equalizer filter, in octaves.
 //
 // WithBandwidth sets the bandwidth property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters {
@@ -59,7 +61,7 @@ func (x *AudioUnitEQFilterParameters) WithBandwidth(bandwidth float32) *AudioUni
 	return x
 }
 
-// @property gain @abstract Gain in dB. @discussion Range:      -96 -> 24 Default:    0 Unit:       dB
+// The gain of the equalizer filter, in decibels.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithGain(gain float32) *AudioUnitEQFilterParameters {
@@ -67,7 +69,7 @@ func (x *AudioUnitEQFilterParameters) WithGain(gain float32) *AudioUnitEQFilterP
 	return x
 }
 
-// @property bypass @abstract bypass state of band. @discussion Default:    YES
+// The bypass state of the equalizer filter band.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilterParameters {

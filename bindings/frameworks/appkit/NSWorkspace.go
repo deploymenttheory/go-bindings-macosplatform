@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A workspace that can launch other apps and perform a variety of file-handling services.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsworkspace
 type NSWorkspace struct {
 	foundation.NSObject
@@ -114,11 +116,13 @@ func NSWorkspaceFromID(id objc.ID) *NSWorkspace {
 	return o
 }
 
+// Opens the location at the specified URL.
 func (o *NSWorkspace) OpenURL(url *foundation.NSURL) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelOpenURL, url.Ptr())
 	return _ret
 }
 
+// Opens a URL asynchronously using the provided options.
 func (o *NSWorkspace) OpenURLConfigurationCompletionHandler(url *foundation.NSURL, configuration *NSWorkspaceOpenConfiguration, completionHandler func(*NSRunningApplication, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -133,6 +137,7 @@ func (o *NSWorkspace) OpenURLConfigurationCompletionHandler(url *foundation.NSUR
 	o.Ptr().Send(_nSWorkspaceSelOpenURLConfigurationCompletionHandler, url.Ptr(), configuration.Ptr(), __block_completionHandler)
 }
 
+// Opens one or more URLs asynchronously in the specified app using the provided options.
 func (o *NSWorkspace) OpenURLsWithApplicationAtURLConfigurationCompletionHandler(urls *foundation.NSArray[*foundation.NSURL], applicationURL *foundation.NSURL, configuration *NSWorkspaceOpenConfiguration, completionHandler func(*NSRunningApplication, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -144,9 +149,10 @@ func (o *NSWorkspace) OpenURLsWithApplicationAtURLConfigurationCompletionHandler
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSWorkspaceSelOpenURLsWithApplicationAtURLConfigurationCompletionHandler, urls, applicationURL.Ptr(), configuration.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_nSWorkspaceSelOpenURLsWithApplicationAtURLConfigurationCompletionHandler, urls.Ptr(), applicationURL.Ptr(), configuration.Ptr(), __block_completionHandler)
 }
 
+// Launches the app at the specified URL and asynchronously reports back on the app’s status.
 func (o *NSWorkspace) OpenApplicationAtURLConfigurationCompletionHandler(applicationURL *foundation.NSURL, configuration *NSWorkspaceOpenConfiguration, completionHandler func(*NSRunningApplication, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -161,29 +167,35 @@ func (o *NSWorkspace) OpenApplicationAtURLConfigurationCompletionHandler(applica
 	o.Ptr().Send(_nSWorkspaceSelOpenApplicationAtURLConfigurationCompletionHandler, applicationURL.Ptr(), configuration.Ptr(), __block_completionHandler)
 }
 
+// Selects the file at the specified path.
 func (o *NSWorkspace) SelectFileInFileViewerRootedAtPath(fullPath *foundation.NSString, rootFullPath *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelSelectFileInFileViewerRootedAtPath, fullPath.Ptr(), rootFullPath.Ptr())
 	return _ret
 }
 
+// Activates the Finder, and opens one or more windows selecting the specified files.
 func (o *NSWorkspace) ActivateFileViewerSelectingURLs(fileURLs *foundation.NSArray[*foundation.NSURL]) {
-	o.Ptr().Send(_nSWorkspaceSelActivateFileViewerSelectingURLs, fileURLs)
+	o.Ptr().Send(_nSWorkspaceSelActivateFileViewerSelectingURLs, fileURLs.Ptr())
 }
 
+// Displays a Spotlight search results window in Finder for the specified query string.
 func (o *NSWorkspace) ShowSearchResultsForQueryString(queryString *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelShowSearchResultsForQueryString, queryString.Ptr())
 	return _ret
 }
 
+// Informs the workspace object that the file system changed at the specified path.
 func (o *NSWorkspace) NoteFileSystemChanged(path *foundation.NSString) {
 	o.Ptr().Send(_nSWorkspaceSelNoteFileSystemChanged, path.Ptr())
 }
 
+// Determines whether the specified path is a file package.
 func (o *NSWorkspace) IsFilePackageAtPath(fullPath *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelIsFilePackageAtPath, fullPath.Ptr())
 	return _ret
 }
 
+// Returns an image containing the icon for the specified file.
 func (o *NSWorkspace) IconForFile(fullPath *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForFile, fullPath.Ptr())
 	if _ret != 0 {
@@ -192,14 +204,16 @@ func (o *NSWorkspace) IconForFile(fullPath *foundation.NSString) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Returns an image containing the icon for the specified files.
 func (o *NSWorkspace) IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForFiles, fullPaths)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForFiles, fullPaths.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSImageFromID(_ret)
 }
 
+// Returns an image containing the icon for the specified content type.
 func (o *NSWorkspace) IconForContentType(contentType *uniformtypeidentifiers.UTType) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelIconForContentType, contentType.Ptr())
 	if _ret != 0 {
@@ -208,29 +222,55 @@ func (o *NSWorkspace) IconForContentType(contentType *uniformtypeidentifiers.UTT
 	return NSImageFromID(_ret)
 }
 
+// Sets the icon for the file or directory at the specified path.
 func (o *NSWorkspace) SetIconForFileOptions(image *NSImage, fullPath *foundation.NSString, options NSWorkspaceIconCreationOptions) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelSetIconForFileOptions, image.Ptr(), fullPath.Ptr(), options)
 	return _ret
 }
 
-func (o *NSWorkspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block) {
-	o.Ptr().Send(_nSWorkspaceSelRecycleURLsCompletionHandler, uRLs, handler)
+// Moves the specified URLs to the trash in the same manner as the Finder.
+func (o *NSWorkspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			handler(foundation.NSDictionaryFromID[*foundation.NSURL, *foundation.NSURL](blockParam0), blockParam1)
+		})
+		defer __block_handler.Release()
+	}
+	o.Ptr().Send(_nSWorkspaceSelRecycleURLsCompletionHandler, uRLs.Ptr(), __block_handler)
 }
 
-func (o *NSWorkspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block) {
-	o.Ptr().Send(_nSWorkspaceSelDuplicateURLsCompletionHandler, uRLs, handler)
+// Duplicates the specified URLS asynchronously in the same manner as the Finder.
+func (o *NSWorkspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			handler(foundation.NSDictionaryFromID[*foundation.NSURL, *foundation.NSURL](blockParam0), blockParam1)
+		})
+		defer __block_handler.Release()
+	}
+	o.Ptr().Send(_nSWorkspaceSelDuplicateURLsCompletionHandler, uRLs.Ptr(), __block_handler)
 }
 
+// Returns information about the file system at the specified path.
 func (o *NSWorkspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath *foundation.NSString, removableFlag *bool, writableFlag *bool, unmountableFlag *bool, description *foundation.NSString, fileSystemType *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelGetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType, fullPath.Ptr(), removableFlag, writableFlag, unmountableFlag, description.Ptr(), fileSystemType.Ptr())
 	return _ret
 }
 
+// Unmounts and ejects the device at the specified path.
 func (o *NSWorkspace) UnmountAndEjectDeviceAtPath(path *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelUnmountAndEjectDeviceAtPath, path.Ptr())
 	return _ret
 }
 
+// Attempts to eject the volume mounted at the given path.
 func (o *NSWorkspace) UnmountAndEjectDeviceAtURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelUnmountAndEjectDeviceAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -240,15 +280,18 @@ func (o *NSWorkspace) UnmountAndEjectDeviceAtURLError(url *foundation.NSURL) (bo
 	return _ret, nil
 }
 
+// Requests the system wait for the specified amount of time before turning off the power or logging out the user.
 func (o *NSWorkspace) ExtendPowerOffBy(requested int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSWorkspaceSelExtendPowerOffBy, requested)
 	return _ret
 }
 
+// Hides all applications other than the sender.
 func (o *NSWorkspace) HideOtherApplications() {
 	o.Ptr().Send(_nSWorkspaceSelHideOtherApplications)
 }
 
+// Returns the URL to the default app with the specified bundle identifier.
 func (o *NSWorkspace) URLForApplicationWithBundleIdentifier(bundleIdentifier *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLForApplicationWithBundleIdentifier, bundleIdentifier.Ptr())
 	if _ret != 0 {
@@ -257,11 +300,16 @@ func (o *NSWorkspace) URLForApplicationWithBundleIdentifier(bundleIdentifier *fo
 	return foundation.NSURLFromID(_ret)
 }
 
+// Returns an array of URLs to all available applications that can open the specified bundle identifier.
 func (o *NSWorkspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier *foundation.NSString) *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _nSWorkspaceSelURLsForApplicationsWithBundleIdentifier, bundleIdentifier.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLsForApplicationsWithBundleIdentifier, bundleIdentifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
+// Returns the URL to the default app to open the specified URL.
 func (o *NSWorkspace) URLForApplicationToOpenURL(url *foundation.NSURL) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLForApplicationToOpenURL, url.Ptr())
 	if _ret != 0 {
@@ -270,11 +318,16 @@ func (o *NSWorkspace) URLForApplicationToOpenURL(url *foundation.NSURL) *foundat
 	return foundation.NSURLFromID(_ret)
 }
 
+// Returns an array of URLs to all available applications that can open the URL.
 func (o *NSWorkspace) URLsForApplicationsToOpenURL(url *foundation.NSURL) *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _nSWorkspaceSelURLsForApplicationsToOpenURL, url.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLsForApplicationsToOpenURL, url.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
+// Sets the default app to use when opening files of a specific content type defined by a file URL.
 func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLCompletionHandler(applicationURL *foundation.NSURL, url *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -286,6 +339,7 @@ func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLComp
 	o.Ptr().Send(_nSWorkspaceSelSetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLCompletionHandler, applicationURL.Ptr(), url.Ptr(), __block_completionHandler)
 }
 
+// Sets the default app to use when opening files of a specific scheme.
 func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler(applicationURL *foundation.NSURL, urlScheme *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -297,6 +351,7 @@ func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHa
 	o.Ptr().Send(_nSWorkspaceSelSetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler, applicationURL.Ptr(), urlScheme.Ptr(), __block_completionHandler)
 }
 
+// Sets the default app to use when opening a specific file.
 func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler(applicationURL *foundation.NSURL, url *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -308,6 +363,7 @@ func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler
 	o.Ptr().Send(_nSWorkspaceSelSetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler, applicationURL.Ptr(), url.Ptr(), __block_completionHandler)
 }
 
+// Returns the URL to the default app to open the specified content type.
 func (o *NSWorkspace) URLForApplicationToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLForApplicationToOpenContentType, contentType.Ptr())
 	if _ret != 0 {
@@ -316,11 +372,16 @@ func (o *NSWorkspace) URLForApplicationToOpenContentType(contentType *uniformtyp
 	return foundation.NSURLFromID(_ret)
 }
 
+// Returns an array of URLs to all available applications that can open the specified content type.
 func (o *NSWorkspace) URLsForApplicationsToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _nSWorkspaceSelURLsForApplicationsToOpenContentType, contentType.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelURLsForApplicationsToOpenContentType, contentType.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
+// Sets the default app to use when opening files of a specific content type.
 func (o *NSWorkspace) SetDefaultApplicationAtURLToOpenContentTypeCompletionHandler(applicationURL *foundation.NSURL, contentType *uniformtypeidentifiers.UTType, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -349,8 +410,11 @@ func (o *NSWorkspace) NotificationCenter() *foundation.NSNotificationCenter {
 }
 
 func (o *NSWorkspace) FileLabels() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSWorkspaceSelFileLabels)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelFileLabels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSWorkspace) FileLabelColors() *foundation.NSArray[*NSColor] {
@@ -377,15 +441,17 @@ func (o *NSWorkspace) MenuBarOwningApplication() *NSRunningApplication {
 	return NSRunningApplicationFromID(_ret)
 }
 
+// Sets the desktop image for the given screen to the image at the specified URL.
 func (o *NSWorkspace) SetDesktopImageURLForScreenOptionsError(url *foundation.NSURL, screen *NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelSetDesktopImageURLForScreenOptionsError, url.Ptr(), screen.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelSetDesktopImageURLForScreenOptionsError, url.Ptr(), screen.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Returns the URL for the desktop image for the given screen.
 func (o *NSWorkspace) DesktopImageURLForScreen(screen *NSScreen) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelDesktopImageURLForScreen, screen.Ptr())
 	if _ret != 0 {
@@ -394,11 +460,16 @@ func (o *NSWorkspace) DesktopImageURLForScreen(screen *NSScreen) *foundation.NSU
 	return foundation.NSURLFromID(_ret)
 }
 
+// Returns the desktop image options for the given screen.
 func (o *NSWorkspace) DesktopImageOptionsForScreen(screen *NSScreen) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSWorkspaceSelDesktopImageOptionsForScreen, screen.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelDesktopImageOptionsForScreen, screen.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Requests authorization to perform a privileged file operation.
 func (o *NSWorkspace) RequestAuthorizationOfTypeCompletionHandler(type_ NSWorkspaceAuthorizationType, completionHandler func(*NSWorkspaceAuthorization, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -440,7 +511,7 @@ func (o *NSWorkspace) LaunchApplication(appName *foundation.NSString) bool {
 // Deprecated: Use -[NSWorkspace openApplicationAtURL:configuration:completionHandler:] instead.
 func (o *NSWorkspace) LaunchApplicationAtURLOptionsConfigurationError(url *foundation.NSURL, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSRunningApplication, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLaunchApplicationAtURLOptionsConfigurationError, url.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLaunchApplicationAtURLOptionsConfigurationError, url.Ptr(), options, configuration.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -453,7 +524,7 @@ func (o *NSWorkspace) LaunchApplicationAtURLOptionsConfigurationError(url *found
 // Deprecated: Use -[NSWorkspace openURL:configuration:completionHandler:] instead.
 func (o *NSWorkspace) OpenURLOptionsConfigurationError(url *foundation.NSURL, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSRunningApplication, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLOptionsConfigurationError, url.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLOptionsConfigurationError, url.Ptr(), options, configuration.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -466,7 +537,7 @@ func (o *NSWorkspace) OpenURLOptionsConfigurationError(url *foundation.NSURL, op
 // Deprecated: Use -[NSWorkspace openURLs:withApplicationAtURL:configuration:completionHandler:] instead.
 func (o *NSWorkspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL *foundation.NSURL, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSRunningApplication, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLsWithApplicationAtURLOptionsConfigurationError, urls, applicationURL.Ptr(), options, configuration, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelOpenURLsWithApplicationAtURLOptionsConfigurationError, urls.Ptr(), applicationURL.Ptr(), options, configuration.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -508,7 +579,7 @@ func (o *NSWorkspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDe
 
 // Deprecated: Use -[NSWorkspace openURLs:withApplicationAtURL:configuration:completionHandler:] instead.
 func (o *NSWorkspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier *foundation.NSString, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelOpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers, urls, bundleIdentifier.Ptr(), options, descriptor.Ptr(), identifiers)
+	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelOpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers, urls.Ptr(), bundleIdentifier.Ptr(), options, descriptor.Ptr(), identifiers.Ptr())
 	return _ret
 }
 
@@ -557,32 +628,47 @@ func (o *NSWorkspace) UserDefaultsChanged() bool {
 
 // Deprecated: since macOS 10.6.
 func (o *NSWorkspace) MountNewRemovableMedia() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSWorkspaceSelMountNewRemovableMedia)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelMountNewRemovableMedia)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSWorkspace frontmostApplication] instead.
 func (o *NSWorkspace) ActiveApplication() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSWorkspaceSelActiveApplication)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelActiveApplication)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSFileManager mountedVolumeURLsIncludingResourceValuesForKeys:options:] instead.
 func (o *NSWorkspace) MountedLocalVolumePaths() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSWorkspaceSelMountedLocalVolumePaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelMountedLocalVolumePaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSFileManager mountedVolumeURLsIncludingResourceValuesForKeys:options:] instead.
 func (o *NSWorkspace) MountedRemovableMedia() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSWorkspaceSelMountedRemovableMedia)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelMountedRemovableMedia)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSWorkspace runningApplications] instead.
 func (o *NSWorkspace) LaunchedApplications() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSWorkspaceSelLaunchedApplications)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLaunchedApplications)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSWorkspace openURL:] instead.
@@ -593,10 +679,11 @@ func (o *NSWorkspace) OpenFileFromImageAtInView(fullPath *foundation.NSString, i
 
 // Deprecated: since macOS 10.11.
 func (o *NSWorkspace) PerformFileOperationSourceDestinationFilesTag(operation *foundation.NSString, source *foundation.NSString, destination *foundation.NSString, files *foundation.NSArray[objc.ID], tag *int64) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelPerformFileOperationSourceDestinationFilesTag, operation.Ptr(), source.Ptr(), destination.Ptr(), files, tag)
+	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelPerformFileOperationSourceDestinationFilesTag, operation.Ptr(), source.Ptr(), destination.Ptr(), files.Ptr(), tag)
 	return _ret
 }
 
+// Retrieves information about the specified file.
 // Deprecated: Use -[NSWorkspace URLForApplicationToOpenURL:] to get the URL of an application that will open a given item, or -[NSURL getResourceValue:forKey:error:] with NSURLContentTypeKey to get the type of the given item.
 func (o *NSWorkspace) GetInfoForFileApplicationType(fullPath *foundation.NSString, appName *foundation.NSString, type_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelGetInfoForFileApplicationType, fullPath.Ptr(), appName.Ptr(), type_.Ptr())
@@ -612,6 +699,7 @@ func (o *NSWorkspace) IconForFileType(fileType *foundation.NSString) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Returns the uniform type identifier of the specified file, if it can be determined.
 // Deprecated: Use -[NSURL getResourceValue:forKey:error:] with NSURLContentTypeKey instead.
 func (o *NSWorkspace) TypeOfFileError(absoluteFilePath *foundation.NSString) (*foundation.NSString, error) {
 	var _nsErr uintptr
@@ -625,6 +713,7 @@ func (o *NSWorkspace) TypeOfFileError(absoluteFilePath *foundation.NSString) (*f
 	return foundation.NSStringFromID(_ret), nil
 }
 
+// Returns the localized description for the specified Uniform Type Identifier (UTI).
 // Deprecated: Use UTType.localizedDescription instead.
 func (o *NSWorkspace) LocalizedDescriptionForType(typeName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelLocalizedDescriptionForType, typeName.Ptr())
@@ -634,6 +723,7 @@ func (o *NSWorkspace) LocalizedDescriptionForType(typeName *foundation.NSString)
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the preferred filename extension for the specified Uniform Type Identifier (UTI).
 // Deprecated: Use UTType.preferredFilenameExtension instead.
 func (o *NSWorkspace) PreferredFilenameExtensionForType(typeName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceSelPreferredFilenameExtensionForType, typeName.Ptr())
@@ -643,12 +733,14 @@ func (o *NSWorkspace) PreferredFilenameExtensionForType(typeName *foundation.NSS
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns whether the specified filename extension is appropriate for the Uniform Type Identifier (UTI).
 // Deprecated: Use +[UTType typesWithTag:tagClass:conformingToType:] to get a list of candidate types, then check if the input type conforms to any of them.
 func (o *NSWorkspace) FilenameExtensionIsValidForType(filenameExtension *foundation.NSString, typeName *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelFilenameExtensionIsValidForType, filenameExtension.Ptr(), typeName.Ptr())
 	return _ret
 }
 
+// Returns a Boolean indicating that the first Uniform Type Identifier (UTI) conforms to the second UTI.
 // Deprecated: Use -[UTType conformsToType:] instead.
 func (o *NSWorkspace) TypeConformsToType(firstTypeName *foundation.NSString, secondTypeName *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWorkspaceSelTypeConformsToType, firstTypeName.Ptr(), secondTypeName.Ptr())

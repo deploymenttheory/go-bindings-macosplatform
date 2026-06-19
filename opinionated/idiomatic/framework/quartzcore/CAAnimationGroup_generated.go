@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that allows multiple animations to be grouped and run concurrently.
+//
 // AnimationGroup wraps [raw.CAAnimationGroup] with a fluent Go API.
 type AnimationGroup struct {
 	inner *raw.CAAnimationGroup
@@ -38,6 +40,8 @@ func NewAnimationGroup() *AnimationGroup {
 	return &AnimationGroup{inner: raw.CAAnimationGroupFromID(_id)}
 }
 
+// An array of CAAnimation objects to be evaluated in the time space of the receiver.
+//
 // WithAnimations sets the collection, converting the Go slice to an NSArray.
 func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGroup {
 	if len(items) == 0 {
@@ -59,18 +63,24 @@ func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGr
 	return x
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
 	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AnimationGroup) WithDelegate(delegate raw.CAAnimationDelegate) *AnimationGroup {
 	x.inner.CAAnimation.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup {
 	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)

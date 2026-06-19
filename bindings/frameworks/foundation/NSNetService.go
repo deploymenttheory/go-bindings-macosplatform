@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network service that broadcasts its availability using multicast DNS.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnetservice
 // Deprecated: Use nw_connection_t or nw_listener_t in Network framework instead
 type NSNetService struct {

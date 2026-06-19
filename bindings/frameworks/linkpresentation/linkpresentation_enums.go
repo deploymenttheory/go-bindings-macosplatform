@@ -56,6 +56,7 @@ func (e EvCmd) String() string {
 	}
 }
 
+// Possible error values that can be returned from LinkPresentation APIs.
 type LPErrorCode int64
 
 const (

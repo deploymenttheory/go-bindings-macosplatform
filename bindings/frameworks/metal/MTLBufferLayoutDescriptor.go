@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of how a compute function fetches input data for an attribute.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlbufferlayoutdescriptor
 type MTLBufferLayoutDescriptor struct {
 	foundation.NSObject

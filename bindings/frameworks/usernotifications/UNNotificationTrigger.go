@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common behavior for subclasses that trigger the delivery of a local or remote notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationtrigger
 type UNNotificationTrigger struct {
 	foundation.NSObject

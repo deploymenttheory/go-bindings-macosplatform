@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of properties that configure a frame interpolator, and a factory method that creates the effect.
+//
 // FrameInterpolatorDescriptor wraps [raw.MTLFXFrameInterpolatorDescriptor] with a fluent Go API.
 type FrameInterpolatorDescriptor struct {
 	inner *raw.MTLFXFrameInterpolatorDescriptor
@@ -68,7 +70,7 @@ func (x *FrameInterpolatorDescriptor) WithMotionTextureFormat(motionTextureForma
 	return x
 }
 
-// The pixel format for the frame interpolator of an input texture containing your game's custom UI.
+// The pixel format for the frame interpolator of an input texture containing your game’s custom UI.
 //
 // WithUiTextureFormat sets the uiTextureFormat property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithUiTextureFormat(uiTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
@@ -114,14 +116,14 @@ func (x *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight uint) *Frame
 	return x
 }
 
-// Creates a frame interpolator instance for a Metal device. - Parameters: - device: The Metal device that creates the frame interpolator. - Returns: A new frame interpolator instance upon success, or `nil` otherwise.
+// Creates a frame interpolator instance for a Metal device.
 //
 // NewFrameInterpolatorWithDevice calls the underlying NewFrameInterpolatorWithDevice.
 func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDevice(device metal.MTLDevice) raw.MTLFXFrameInterpolator {
 	return x.inner.NewFrameInterpolatorWithDevice(device)
 }
 
-// Creates a frame interpolator instance for a Metal device. - Parameters: - device: The Metal device that creates the frame interpolator. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new frame interpolator instance upon success, or `nil` otherwise.
+// Creates a frame interpolator instance for a Metal device.
 //
 // NewFrameInterpolatorWithDeviceCompiler calls the underlying NewFrameInterpolatorWithDeviceCompiler.
 func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXFrameInterpolator {

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Temperature Control Attributes and commands for configuring the temperature control, and reporting temperature.
+//
 // MTRClusterTemperatureControl wraps [raw.MTRClusterTemperatureControl] with a fluent Go API.
 type MTRClusterTemperatureControl struct {
 	inner *raw.MTRClusterTemperatureControl

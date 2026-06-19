@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A URL session task that returns downloaded data directly to the app in memory.
+//
 // URLSessionDataTask wraps [raw.NSURLSessionDataTask] with a fluent Go API.
 type URLSessionDataTask struct {
 	inner *raw.NSURLSessionDataTask

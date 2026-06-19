@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of conflicts that occur during an attempt to save changes in a managed object context.
+//
 // MergeConflict wraps [raw.NSMergeConflict] with a fluent Go API.
 type MergeConflict struct {
 	inner *raw.NSMergeConflict
@@ -31,6 +33,8 @@ func MergeConflictFromID(id objc.ID) *MergeConflict {
 	return &MergeConflict{inner: raw.NSMergeConflictFromID(id)}
 }
 
+// Initializes a merge conflict.
+//
 // NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot creates a new [MergeConflict].
 func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *raw.NSManagedObject, newvers uint, oldvers uint, cachesnap purego.IDer, persnap purego.IDer) *MergeConflict {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMergeConflict")), objc.RegisterName("alloc"))

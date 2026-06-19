@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The rules and other settings that define the operation of a filter.
+//
 // NEFilterSettings wraps [raw.NEFilterSettings] with a fluent Go API.
 type NEFilterSettings struct {
 	inner *raw.NEFilterSettings
@@ -31,7 +33,7 @@ func NEFilterSettingsFromID(id objc.ID) *NEFilterSettings {
 	return &NEFilterSettings{inner: raw.NEFilterSettingsFromID(id)}
 }
 
-// @method initWithRules:defaultAction: @discussion Initialize a newly-allocated NEFilterSettings object with a set of filtering rules and a default filter action to takke if none of the rules match. @param rules An NSArray containing an ordered list of NEFilterRule objects. The maximum number of rules that this array can contain is 1000. @param defaultAction The NEFilterAction to take for flows of network (non-loopback) data that do not match any of the specified rules. The default defaultAction is NEFilterActionFilterData. If defaultAction is NEFilterActionAllow or NEFilterActionDrop, then the rules array must contain at least one NEFilterRule. The default action for loopback traffic is NEFilterActionAllow and cannot be changed. To filter loopback traffic you must include rules in the rules array that specifically match loopback traffic and have an action of NEFilterActionFilterData. @return the newly-initialized NEFilterSettings object.
+// Creates a new settings instance from an array of rules and a default action.
 //
 // NewNEFilterSettingsWithRulesDefaultAction creates a new [NEFilterSettings].
 func NewNEFilterSettingsWithRulesDefaultAction(rules *foundation.NSArray[*raw.NEFilterRule], defaultAction NEFilterAction) *NEFilterSettings {

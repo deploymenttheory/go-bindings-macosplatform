@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the properties of a device.
+//
 // ExtensionDeviceProperties wraps [raw.CMIOExtensionDeviceProperties] with a fluent Go API.
 type ExtensionDeviceProperties struct {
 	inner *raw.CMIOExtensionDeviceProperties
@@ -31,7 +33,7 @@ func ExtensionDevicePropertiesFromID(id objc.ID) *ExtensionDeviceProperties {
 	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(id)}
 }
 
-// @method initWithDictionary: @abstract Initialize a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
+// Creates a properties object with a dictionary of property states.
 //
 // NewExtensionDevicePropertiesWithDictionary creates a new [ExtensionDeviceProperties].
 func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionDeviceProperties {
@@ -40,7 +42,7 @@ func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary purego.IDer
 	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(_id)}
 }
 
-// @property model @abstract The device model. @discussion The property key is CMIOExtensionPropertyDeviceModel.
+// A device model string.
 //
 // WithModel sets the model property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithModel(model string) *ExtensionDeviceProperties {
@@ -48,7 +50,7 @@ func (x *ExtensionDeviceProperties) WithModel(model string) *ExtensionDeviceProp
 	return x
 }
 
-// @property suspended @abstract Indicates whether the device is suspended. @discussion The property key is CMIOExtensionPropertyDeviceIsSuspended.
+// A Boolean value that indicates whether the device is in a suspended state.
 //
 // WithSuspended sets the suspended property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithSuspended(suspended *foundation.NSNumber) *ExtensionDeviceProperties {
@@ -56,7 +58,7 @@ func (x *ExtensionDeviceProperties) WithSuspended(suspended *foundation.NSNumber
 	return x
 }
 
-// @property transportType @abstract The transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. @discussion The property key is CMIOExtensionPropertyDeviceTransportType.
+// The transport type of the device, such as USB or HDMI.
 //
 // WithTransportType sets the transportType property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithTransportType(transportType *foundation.NSNumber) *ExtensionDeviceProperties {
@@ -64,7 +66,7 @@ func (x *ExtensionDeviceProperties) WithTransportType(transportType *foundation.
 	return x
 }
 
-// @property linkedCoreAudioDeviceUID @abstract The device linked CoreAudio device UID. @discussion The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
+// A universal identifier of the audio device linked to this device.
 //
 // WithLinkedCoreAudioDeviceUID sets the linkedCoreAudioDeviceUID property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) *ExtensionDeviceProperties {
@@ -72,7 +74,7 @@ func (x *ExtensionDeviceProperties) WithLinkedCoreAudioDeviceUID(linkedCoreAudio
 	return x
 }
 
-// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+// A dictionary of properties for a device.
 //
 // WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties {
@@ -80,7 +82,7 @@ func (x *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionar
 	return x
 }
 
-// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+// Sets the value of a device property.
 //
 // SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
 func (x *ExtensionDeviceProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {

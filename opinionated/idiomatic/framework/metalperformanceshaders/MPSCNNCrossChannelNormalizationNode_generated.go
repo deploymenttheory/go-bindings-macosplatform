@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a normalization kernel across feature channels.
+//
 // CNNCrossChannelNormalizationNode wraps [raw.MPSCNNCrossChannelNormalizationNode] with a fluent Go API.
 type CNNCrossChannelNormalizationNode struct {
 	inner *raw.MPSCNNCrossChannelNormalizationNode

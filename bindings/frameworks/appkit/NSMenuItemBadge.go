@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that provides additional quantitative information specific to a menu item, such as the number of available updates.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmenuitembadge
 type NSMenuItemBadge struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func NSMenuItemBadgeFromID(id objc.ID) *NSMenuItemBadge {
 	return o
 }
 
-// Creates a badge with an integer count and a label representing the number of available updates.
+// Creates an update-style badge with an integer count and a predefined label that represents the number of available updates.
 func NSMenuItemBadgeUpdatesWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItemBadge), _nSMenuItemBadgeSelUpdatesWithCount, itemCount)
 	if _ret != 0 {
@@ -47,13 +49,13 @@ func NSMenuItemBadgeUpdatesWithCount(itemCount int) *NSMenuItemBadge {
 	return NSMenuItemBadgeFromID(_ret)
 }
 
-// Creates a badge with an integer count and a label representing the number of new items.
+// Creates a new item-style badge with an integer count and a predefined label that represents the number of new items.
 func NSMenuItemBadgeNewItemsWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItemBadge), _nSMenuItemBadgeSelNewItemsWithCount, itemCount)
 	return NSMenuItemBadgeFromID(_ret)
 }
 
-// Creates a badge with an integer count and a label representing the number of alerts.
+// Creates an alert-style badge with an integer count and a predefined label that represents the number of alerts.
 func NSMenuItemBadgeAlertsWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItemBadge), _nSMenuItemBadgeSelAlertsWithCount, itemCount)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *NSMenuItemBadge) InitWithCountType(itemCount int, type_ NSMenuItemBadge
 	return NSMenuItemBadgeFromID(_ret)
 }
 
-// Initializes the badge with an integer count and an empty string.
+// Creates a badge with a count and an empty string.
 func (o *NSMenuItemBadge) InitWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemBadgeSelInitWithCount, itemCount)
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func (o *NSMenuItemBadge) InitWithCount(itemCount int) *NSMenuItemBadge {
 	return NSMenuItemBadgeFromID(_ret)
 }
 
-// Initializes the badge with the provided custom string.
+// Creates a badge with the provided custom string.
 func (o *NSMenuItemBadge) InitWithString(string_ *foundation.NSString) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemBadgeSelInitWithString, string_.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that handles the measurement and display of a single menu item in its encompassing frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmenuitemcell
 type NSMenuItemCell struct {
 	NSButtonCell
@@ -67,40 +69,49 @@ func (o *NSMenuItemCell) InitWithCoder(coder *foundation.NSCoder) *NSMenuItemCel
 	return NSMenuItemCellFromID(_ret)
 }
 
+// Calculates the minimum required width and height of the receiver’s menu item.
 func (o *NSMenuItemCell) CalcSize() {
 	o.Ptr().Send(_nSMenuItemCellSelCalcSize)
 }
 
+// Returns the rectangle into which the menu item’s state image should be drawn.
 func (o *NSMenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMenuItemCellSelStateImageRectForBounds, cellFrame)
 	return _ret
 }
 
+// Returns the rectangle into which the menu item’s key equivalent should be drawn.
 func (o *NSMenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMenuItemCellSelKeyEquivalentRectForBounds, cellFrame)
 	return _ret
 }
 
+// Draws a menu item separator.
 func (o *NSMenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSMenuItemCellSelDrawSeparatorItemWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Draws the state image associated with the menu item.
 func (o *NSMenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSMenuItemCellSelDrawStateImageWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Draws the image associated with the menu item.
 func (o *NSMenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSMenuItemCellSelDrawImageWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Draws the title associated with the menu item.
 func (o *NSMenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSMenuItemCellSelDrawTitleWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Draws the key equivalent associated with the menu item.
 func (o *NSMenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSMenuItemCellSelDrawKeyEquivalentWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Draws the borders and background associated with the receiver’s menu item (if any).
 func (o *NSMenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSMenuItemCellSelDrawBorderAndBackgroundWithFrameInView, cellFrame, controlView.Ptr())
 }

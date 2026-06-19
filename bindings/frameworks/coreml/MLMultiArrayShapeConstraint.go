@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The lists of shapes or ranges of shapes that constrain a multiarray feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstraint
 type MLMultiArrayShapeConstraint struct {
 	foundation.NSObject
@@ -38,11 +40,17 @@ func (o *MLMultiArrayShapeConstraint) Type() MLMultiArrayShapeConstraintType {
 }
 
 func (o *MLMultiArrayShapeConstraint) SizeRangeForDimension() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _mLMultiArrayShapeConstraintSelSizeRangeForDimension)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArrayShapeConstraintSelSizeRangeForDimension)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *MLMultiArrayShapeConstraint) EnumeratedShapes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mLMultiArrayShapeConstraintSelEnumeratedShapes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArrayShapeConstraintSelEnumeratedShapes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

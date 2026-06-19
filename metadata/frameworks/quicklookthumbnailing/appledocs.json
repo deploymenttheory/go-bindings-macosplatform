@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "framework": "QuickLookThumbnailing",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "QLFileThumbnailRequest": {
+      "doc": "A request to generate a thumbnail for a custom file type.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest"
+    },
+    "QLThumbnailGenerationRequest": {
+      "doc": "A request to generate a thumbnail for a file.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerationrequest"
+    },
+    "QLThumbnailGenerator": {
+      "doc": "An object that generates thumbnail images based on provided requirements.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator"
+    },
+    "QLThumbnailProvider": {
+      "doc": "An abstract base class for creating thumbnails of custom file types.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailprovider"
+    },
+    "QLThumbnailReply": {
+      "doc": "The object that provides a thumbnail for a custom file type.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailreply"
+    },
+    "QLThumbnailRepresentation": {
+      "doc": "Information about the thumbnail that the thumbnail generator returns.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation"
+    }
+  },
+  "enums": {
+    "QLThumbnailError": {
+      "doc": "Error information that might return when you generate a thumbnail.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailerror"
+    },
+    "QLThumbnailGenerationRequestRepresentationTypes": {
+      "doc": "The various types of thumbnails that you can request.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerationrequestrepresentationtypes"
+    },
+    "QLThumbnailRepresentationType": {
+      "doc": "The different types of thumbnails that you can create.",
+      "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentationtype"
+    }
+  },
+  "methods": {
+    "QLThumbnailGenerator": {
+      "-cancelRequest:": {
+        "doc": "Cancels the generation of a thumbnail for a given request.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/cancel(_:)"
+      },
+      "-generateBestRepresentationForRequest:completionHandler:": {
+        "doc": "Generates the best possible thumbnail representation for a file and calls a handler upon completion.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/generatebestrepresentation(for:completion:)"
+      },
+      "-generateRepresentationsForRequest:updateHandler:": {
+        "doc": "Generates various thumbnail representations for a file and calls the update handler for each thumbnail representation.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/generaterepresentations(for:update:)"
+      },
+      "-saveBestRepresentationForRequest:toFileAtURL:asContentType:completionHandler:": {
+        "doc": "Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/savebestrepresentation(for:to:as:completion:)"
+      },
+      "-saveBestRepresentationForRequest:toFileAtURL:withContentType:completionHandler:": {
+        "doc": "Saves the best representation of thumbnail for a specific request to the specified URL.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/savebestrepresentation(for:to:contenttype:completion:)"
+      }
+    },
+    "QLThumbnailProvider": {
+      "-provideThumbnailForFileRequest:completionHandler:": {
+        "doc": "Creates a thumbnail of a custom file type for a specific request.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailprovider/providethumbnail(for:_:)"
+      }
+    },
+    "QLThumbnailReply": {
+      "+replyWithContextSize:currentContextDrawingBlock:": {
+        "doc": "Creates a new thumbnail for a custom file type in the current context.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailreply/init(contextsize:currentcontextdrawing:)"
+      },
+      "+replyWithContextSize:drawingBlock:": {
+        "doc": "Creates a new thumbnail for a custom file type in the given context.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailreply/init(contextsize:drawing:)"
+      },
+      "+replyWithImageFileURL:": {
+        "doc": "Creates a new thumbnail for a custom file type using a file at the given URL.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailreply/init(imagefileurl:)"
+      }
+    }
+  },
+  "properties": {
+    "QLFileThumbnailRequest": {
+      "fileURL": {
+        "doc": "The URL of the image file to use for the thumbnail.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest/fileurl"
+      },
+      "maximumSize": {
+        "doc": "The maximum accepted size of a thumbnail.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest/maximumsize"
+      },
+      "minimumSize": {
+        "doc": "The minimum accepted size of a thumbnail.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest/minimumsize"
+      },
+      "scale": {
+        "doc": "The scale of the requested thumbnail.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest/scale"
+      }
+    },
+    "QLThumbnailGenerator": {
+      "QLThumbnailGenerationRequest": {
+        "doc": "A request to generate a thumbnail for a file.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/request"
+      },
+      "sharedGenerator": {
+        "doc": "The singleton thumbnail generator instance.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator/shared"
+      }
+    },
+    "QLThumbnailReply": {
+      "extensionBadge": {
+        "doc": "A short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailreply/extensionbadge"
+      }
+    },
+    "QLThumbnailRepresentation": {
+      "CGImage": {
+        "doc": "A thumbnail in the form of a Core Graphics image object.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation/cgimage"
+      },
+      "NSImage": {
+        "doc": "A thumbnail in the form of an AppKit image object.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation/nsimage"
+      },
+      "QLThumbnailRepresentationType": {
+        "doc": "The different types of thumbnails that you can create.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation/representationtype"
+      },
+      "UIImage": {
+        "doc": "A thumbnail in the form of a UIKit image object.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation/uiimage"
+      },
+      "contentRect": {
+        "doc": "The rectangle within the thumbnail image of the document that represents its contents.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation/contentrect"
+      },
+      "type": {
+        "doc": "The type of thumbnail.",
+        "url": "https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation/type"
+      }
+    }
+  }
+}

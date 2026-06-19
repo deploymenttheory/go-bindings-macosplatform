@@ -16,6 +16,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An editing session for modifying the photo, video, and audio content of a Live Photo.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phlivephotoeditingcontext
 type PHLivePhotoEditingContext struct {
 	foundation.NSObject
@@ -47,7 +49,7 @@ func PHLivePhotoEditingContextFromID(id objc.ID) *PHLivePhotoEditingContext {
 	return o
 }
 
-// Initializer from the specified live photo input Return nil if the specified input is not for a live photo
+// Creates a Live Photo editing context for the specified editing input.
 func (o *PHLivePhotoEditingContext) InitWithLivePhotoEditingInput(livePhotoInput *PHContentEditingInput) *PHLivePhotoEditingContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoEditingContextSelInitWithLivePhotoEditingInput, livePhotoInput.Ptr())
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *PHLivePhotoEditingContext) InitWithLivePhotoEditingInput(livePhotoInput
 	return PHLivePhotoEditingContextFromID(_ret)
 }
 
-// Asynchronously generate a new live photo suitable for playback in a PHLivePhotoView of the specified target size The options dictionary can contain additional options, see below
+// Processes a Live Photo with your edits for viewing.
 func (o *PHLivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptionsCompletionHandler(targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(*PHLivePhoto, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -68,10 +70,10 @@ func (o *PHLivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOpt
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_pHLivePhotoEditingContextSelPrepareLivePhotoForPlaybackWithTargetSizeOptionsCompletionHandler, targetSize, options, __block_handler)
+	o.Ptr().Send(_pHLivePhotoEditingContextSelPrepareLivePhotoForPlaybackWithTargetSizeOptionsCompletionHandler, targetSize, options.Ptr(), __block_handler)
 }
 
-// Asynchronously process and save the edited live photo to the specified content editing output Options dictionary should be nil, reserved for future expansion
+// Processes and saves a full-quality Live Photo as the output of your editing session.
 func (o *PHLivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandler(output *PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -80,10 +82,10 @@ func (o *PHLivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandle
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_pHLivePhotoEditingContextSelSaveLivePhotoToOutputOptionsCompletionHandler, output.Ptr(), options, __block_handler)
+	o.Ptr().Send(_pHLivePhotoEditingContextSelSaveLivePhotoToOutputOptionsCompletionHandler, output.Ptr(), options.Ptr(), __block_handler)
 }
 
-// Cancel the current asynchronous operation This is implicitly called whenever prepare or save is called A canceled operation will call its completion handler with an appropriate error code
+// Aborts any Live Photo processing in progress.
 func (o *PHLivePhotoEditingContext) Cancel() {
 	o.Ptr().Send(_pHLivePhotoEditingContextSelCancel)
 }

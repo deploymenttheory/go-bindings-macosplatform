@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface for allocating a MetalKit buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtkmeshbufferallocator
 type MTKMeshBufferAllocator struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MTKMeshBufferAllocatorFromID(id objc.ID) *MTKMeshBufferAllocator {
 	return o
 }
 
-// @method initWithDevice @abstract Initialize the allocator with a device to be used to create buffers. @discussion The designated initializer for this class.
+// Initializes a new allocator object.
 func (o *MTKMeshBufferAllocator) InitWithDevice(device metal.MTLDevice) *MTKMeshBufferAllocator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKMeshBufferAllocatorSelInitWithDevice, device)
 	if _ret != 0 {

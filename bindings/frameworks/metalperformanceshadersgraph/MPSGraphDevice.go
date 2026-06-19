@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that describes the compute device.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphdevice
 type MPSGraphDevice struct {
 	MPSGraphObject
@@ -32,7 +34,7 @@ func MPSGraphDeviceFromID(id objc.ID) *MPSGraphDevice {
 	return o
 }
 
-// Creates a device from a given Metal device. - Parameters: - metalDevice: `MTLDevice` to create an MPSGraphDevice from. - Returns: A valid device.
+// Creates a device from a given Metal device.
 func MPSGraphDeviceDeviceWithMTLDevice(metalDevice metal.MTLDevice) *MPSGraphDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDevice), _mPSGraphDeviceSelDeviceWithMTLDevice, metalDevice)
 	if _ret != 0 {

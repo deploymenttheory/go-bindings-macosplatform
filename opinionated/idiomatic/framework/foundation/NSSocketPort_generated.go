@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A port that represents a BSD socket.
+//
 // SocketPort wraps [raw.NSSocketPort] with a fluent Go API.
 type SocketPort struct {
 	inner *raw.NSSocketPort

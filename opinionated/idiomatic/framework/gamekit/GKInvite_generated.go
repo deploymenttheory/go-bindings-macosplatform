@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An invitation to join a match sent to the local player from another player.
+//
 // Invite wraps [raw.GKInvite] with a fluent Go API.
 type Invite struct {
 	inner *raw.GKInvite

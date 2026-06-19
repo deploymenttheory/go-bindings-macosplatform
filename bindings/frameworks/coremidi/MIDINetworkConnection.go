@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that connects a session to a host.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midinetworkconnection
 type MIDINetworkConnection struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MIDINetworkConnectionFromID(id objc.ID) *MIDINetworkConnection {
 	return o
 }
 
+// Creates a connection to the specified host.
 func MIDINetworkConnectionConnectionWithHost(host *MIDINetworkHost) *MIDINetworkConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkConnection), _mIDINetworkConnectionSelConnectionWithHost, host.Ptr())
 	if _ret != 0 {

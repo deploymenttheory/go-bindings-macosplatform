@@ -45,8 +45,11 @@ func DRCDTextBlockFromID(id objc.ID) *DRCDTextBlock {
 
 // @method		arrayOfCDTextBlocksFromPacks: @abstract	Parses raw CD-Text data from a disc into DRCDTextBlock objects. @discussion	This method can be used to parse any data blob containing CD-Text PACKs, such as the result of +[DRDevice readCDText], or the data returned by the IOKit ioctl DKIOCCDREADTOC with format=5. The NSData should be sized to fit the exact number of PACKs.  Each PACK occupies 18 bytes, and the 4-byte header from a READ TOC command may optionally be included. @param		packs		NSData containing raw CD-Text PACKs. @result		An autoreleased array of DRCDTextBlock objects describing the information in the raw PACKs, or nil if the data could not be parsed.
 func DRCDTextBlockArrayOfCDTextBlocksFromPacks(packs *foundation.NSData) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsDRCDTextBlock), _dRCDTextBlockSelArrayOfCDTextBlocksFromPacks, packs.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsDRCDTextBlock), _dRCDTextBlockSelArrayOfCDTextBlocksFromPacks, packs.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method		cdTextBlockWithLanguage:encoding: @abstract	Creates a CD-Text block. @param		lang		ISO 639 language code describing the language in which the strings are provided.  CD-Text allows the concept of an unknown language, which can be represented here by an empty string. @param		enc			Character encoding into which the strings should be converted. @result		An autoreleased DRCDTextBlock object.
@@ -66,24 +69,30 @@ func (o *DRCDTextBlock) InitWithLanguageEncoding(lang *foundation.NSString, enc 
 
 // @method 		properties @abstract		Returns the properties dictionary of the CD-Text block. @result  		An NSDictionary containing the properties of the block.
 func (o *DRCDTextBlock) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRCDTextBlockSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRCDTextBlockSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method 		setProperties: @abstract		Sets the properties dictionary of the CD-Text block. @param 			properties	NSDictionary of the properties to set.
 func (o *DRCDTextBlock) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_dRCDTextBlockSelSetProperties, properties)
+	o.Ptr().Send(_dRCDTextBlockSelSetProperties, properties.Ptr())
 }
 
 // @method		trackDictionaries @abstract	Returns a copy of the array of track dictionaries for the block. @result		An autoreleased NSArray of CFDictionaries of CFStrings, containing the CD-Text information. @discussion	Each item in the array is a dictionary, which in turn holds key-value encoded information about the track/disc.  Array index 0 holds information about the disc, index 1 holds information about track 1, index 2 holds information about track 2, etc.
 func (o *DRCDTextBlock) TrackDictionaries() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _dRCDTextBlockSelTrackDictionaries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRCDTextBlockSelTrackDictionaries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method		setTrackDictionaries: @abstract	Sets the array of track dictionaries for the block. @param		tracks		An NSArray of NSDictionaries of NSStrings, containing the CD-Text information. @discussion	Each item in the array is a dictionary, which in turn holds key-value encoded information about the track/disc.  Array index 0 holds information about the disc, index 1 holds information about track 1, index 2 holds information about track 2, etc. Any incoming strings are automatically modified to conform to the character set specified in the language block. Calling -trackDictionaries immediately after -setTrackDictionaries: will provide the modified values.  These may not be the same as the ones you passed in, but instead correspond to what will actually be used.
 func (o *DRCDTextBlock) SetTrackDictionaries(tracks *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_dRCDTextBlockSelSetTrackDictionaries, tracks)
+	o.Ptr().Send(_dRCDTextBlockSelSetTrackDictionaries, tracks.Ptr())
 }
 
 // @method		objectForKey:ofTrack: @abstract	Returns a single value from the block. @param		key			Key to get the value of. @param		trackIndex	One-based index of the track to query, or 0 to query the disc. @result		Autoreleased NSObject for the key, or nil if not present.

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of color attachment descriptions for a render pipeline.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4renderpipelinecolorattachmentdescriptorarray
 type MTL4RenderPipelineColorAttachmentDescriptorArray struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTL4Ren
 	return o
 }
 
-// Accesses a color attachment at a specific index. - Parameter attachmentIndex: Index of the attachment to access.
+// Accesses a color attachment at a specific index.
 func (o *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscr
 	return MTL4RenderPipelineColorAttachmentDescriptorFromID(_ret)
 }
 
-// Sets an attachment at an index. This function offers 'copy' semantics. You can safely set the color attachment at any legal index to nil. This has the effect of resetting that attachment descriptor's state to its default values. - Parameters: - attachment: the descriptor of the attachment to set. - attachmentIndex: the index of the attachment within the array.
+// Sets an attachment at an index.
 func (o *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }

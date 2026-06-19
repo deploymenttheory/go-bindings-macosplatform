@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to generate a thumbnail for a custom file type.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookthumbnailing/qlfilethumbnailrequest
 type QLFileThumbnailRequest struct {
 	foundation.NSObject

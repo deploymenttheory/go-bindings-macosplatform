@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A definition for a grid-based deformation of nodes that conform to SKWarpable.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skwarpgeometrygrid
 type SKWarpGeometryGrid struct {
 	SKWarpGeometry
@@ -43,6 +45,7 @@ func SKWarpGeometryGridFromID(id objc.ID) *SKWarpGeometryGrid {
 	return o
 }
 
+// Tells you when to intialize a grid that was loaded from an archive.
 func (o *SKWarpGeometryGrid) InitWithCoder(aDecoder *foundation.NSCoder) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -51,6 +54,7 @@ func (o *SKWarpGeometryGrid) InitWithCoder(aDecoder *foundation.NSCoder) *SKWarp
 	return SKWarpGeometryGridFromID(_ret)
 }
 
+// Initializes a new empty grid.
 func SKWarpGeometryGridGrid() *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKWarpGeometryGrid), _sKWarpGeometryGridSelGrid)
 	if _ret != 0 {
@@ -59,6 +63,7 @@ func SKWarpGeometryGridGrid() *SKWarpGeometryGrid {
 	return SKWarpGeometryGridFromID(_ret)
 }
 
+// Creates a warp geometry grid of a specified size.
 func SKWarpGeometryGridGridWithColumnsRows(cols int, rows int) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKWarpGeometryGrid), _sKWarpGeometryGridSelGridWithColumnsRows, cols, rows)
 	if _ret != 0 {
@@ -75,6 +80,7 @@ func SKWarpGeometryGridGridWithColumnsRowsSourcePositionsDestPositions(cols int,
 	return SKWarpGeometryGridFromID(_ret)
 }
 
+// Creates a warp geometry grid of a specific size and warp translation, in pointers to point arrays.
 func (o *SKWarpGeometryGrid) InitWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelInitWithColumnsRowsSourcePositionsDestPositions, cols, rows, sourcePositions, destPositions)
 	if _ret != 0 {
@@ -83,16 +89,19 @@ func (o *SKWarpGeometryGrid) InitWithColumnsRowsSourcePositionsDestPositions(col
 	return SKWarpGeometryGridFromID(_ret)
 }
 
+// Returns the source position of a vertex.
 func (o *SKWarpGeometryGrid) SourcePositionAtIndex(index int) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKWarpGeometryGridSelSourcePositionAtIndex, index)
 	return _ret
 }
 
+// Returns the destination position of a vertex.
 func (o *SKWarpGeometryGrid) DestPositionAtIndex(index int) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKWarpGeometryGridSelDestPositionAtIndex, index)
 	return _ret
 }
 
+// Returns a copy of the receiver with the source positions replaced by a specified array.
 func (o *SKWarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelGridByReplacingSourcePositions, sourcePositions)
 	if _ret != 0 {
@@ -101,6 +110,7 @@ func (o *SKWarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsa
 	return SKWarpGeometryGridFromID(_ret)
 }
 
+// Returns a copy of the receiver with the destination positions replaced by a specified array.
 func (o *SKWarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *SKWarpGeometryGrid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKWarpGeometryGridSelGridByReplacingDestPositions, destPositions)
 	if _ret != 0 {

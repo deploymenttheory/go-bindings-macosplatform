@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that defines the parameters for an image to column or column to image operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphimtocolopdescriptor
 type MPSGraphImToColOpDescriptor struct {
 	MPSGraphObject
@@ -53,7 +55,7 @@ func MPSGraphImToColOpDescriptorFromID(id objc.ID) *MPSGraphImToColOpDescriptor 
 	return o
 }
 
-// Creates an image to column descriptor with given values for parameters. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property. - dataLayout: See `dataLayout` property. - Returns: A valid MPSGraphImToColOpDescriptor on autoreleasepool.
+// Creates an image to column descriptor with given values for parameters.
 func MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphImToColOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphImToColOpDescriptor), _mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, dataLayout)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXSt
 	return MPSGraphImToColOpDescriptorFromID(_ret)
 }
 
-// Creates column to image descriptor with given values for parameters. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - dataLayout: See `dataLayout` property. - Returns: A valid MPSGraphImToColOpDescriptor on autoreleasepool.
+// Creates column to image descriptor with given values for parameters.
 func MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphImToColOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphImToColOpDescriptor), _mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, dataLayout)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXSt
 	return MPSGraphImToColOpDescriptorFromID(_ret)
 }
 
-// Sets the descriptor's padding to the given values. - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the descriptor’s padding to the given values.
 func (o *MPSGraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	o.Ptr().Send(_mPSGraphImToColOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom, paddingLeft, paddingRight, paddingTop, paddingBottom)
 }

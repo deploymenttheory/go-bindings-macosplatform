@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object indicating the source of a HealthKit sample.
+//
 // SourceRevision wraps [raw.HKSourceRevision] with a fluent Go API.
 type SourceRevision struct {
 	inner *raw.HKSourceRevision
@@ -31,7 +33,7 @@ func SourceRevisionFromID(id objc.ID) *SourceRevision {
 	return &SourceRevision{inner: raw.HKSourceRevisionFromID(id)}
 }
 
-// @method        initWithSource:version:productType:operatingSystemVersion: @abstract      Initializes a new HKSourceRevision with the given source, version, product type, and operating system version.
+// Initializes a new source revision object with the provided source, version, product type, and operating system.
 //
 // NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion creates a new [SourceRevision].
 func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source *raw.HKSource, version string, productType string, operatingSystemVersion foundation.NSOperatingSystemVersion) *SourceRevision {
@@ -40,7 +42,7 @@ func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source 
 	return &SourceRevision{inner: raw.HKSourceRevisionFromID(_id)}
 }
 
-// @method        initWithSource:version: @abstract      Initializes a new HKSourceRevision with the given source and version.
+// Initializes a new source revision object with the provided source and version information.
 //
 // NewSourceRevisionWithSourceVersion creates a new [SourceRevision].
 func NewSourceRevisionWithSourceVersion(source *raw.HKSource, version string) *SourceRevision {

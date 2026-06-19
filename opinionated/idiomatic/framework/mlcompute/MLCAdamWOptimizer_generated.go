@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimizer that represents the Adam algorithm with weight decay.
+//
 // AdamWOptimizer wraps [raw.MLCAdamWOptimizer] with a fluent Go API.
 type AdamWOptimizer struct {
 	inner *raw.MLCAdamWOptimizer
@@ -35,7 +37,7 @@ func NewAdamWOptimizer() *AdamWOptimizer {
 	return &AdamWOptimizer{inner: raw.MLCAdamWOptimizerFromID(_id)}
 }
 
-// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+// The learning rate.
 //
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *AdamWOptimizer) WithLearningRate(learningRate float32) *AdamWOptimizer {
@@ -43,7 +45,7 @@ func (x *AdamWOptimizer) WithLearningRate(learningRate float32) *AdamWOptimizer 
 	return x
 }
 
-// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+// A Boolean value that indicates whether you apply gradient clipping.
 //
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *AdamWOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamWOptimizer {

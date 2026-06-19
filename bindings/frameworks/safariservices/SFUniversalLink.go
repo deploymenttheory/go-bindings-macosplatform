@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides browsers with the ability to discover associations between an app and a website.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfuniversallink
 type SFUniversalLink struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func SFUniversalLinkFromID(id objc.ID) *SFUniversalLink {
 	return o
 }
 
-// Initialize the receiver with a web URL that may or may not be a universal link.
+// Creates a universal link object with the URL.
 func (o *SFUniversalLink) InitWithWebpageURL(url *foundation.NSURL) *SFUniversalLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFUniversalLinkSelInitWithWebpageURL, url.Ptr())
 	if _ret != 0 {

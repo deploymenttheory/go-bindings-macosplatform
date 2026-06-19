@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains information about a single, connected hardware accessory.
+//
 // Accessory wraps [raw.EAAccessory] with a fluent Go API.
 type Accessory struct {
 	inner *raw.EAAccessory

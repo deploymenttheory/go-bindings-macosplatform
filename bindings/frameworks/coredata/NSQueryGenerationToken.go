@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A token that indicates which generation of the persistent store is being accessed.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsquerygenerationtoken
 type NSQueryGenerationToken struct {
 	foundation.NSObject

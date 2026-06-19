@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A discrete part of an entire transcription, as identified by the speech recognizer.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sftranscriptionsegment
 type SFTranscriptionSegment struct {
 	foundation.NSObject
@@ -71,8 +73,11 @@ func (o *SFTranscriptionSegment) Confidence() float32 {
 
 // An array of alternate interpretations of the utterance in the transcription segment.
 func (o *SFTranscriptionSegment) AlternativeSubstrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sFTranscriptionSegmentSelAlternativeSubstrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFTranscriptionSegmentSelAlternativeSubstrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // An analysis of the transcription segment's vocal properties.

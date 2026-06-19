@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a slider control for choosing a value in a range.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsslidertouchbaritem
 type NSSliderTouchBarItem struct {
 	NSTouchBarItem

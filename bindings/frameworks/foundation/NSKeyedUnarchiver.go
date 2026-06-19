@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A decoder that restores data from an archive referenced by keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nskeyedunarchiver
 type NSKeyedUnarchiver struct {
 	NSCoder
@@ -49,7 +51,7 @@ func NSKeyedUnarchiverFromID(id objc.ID) *NSKeyedUnarchiver {
 	return o
 }
 
-// Initializes the receiver for decoding an archive previously encoded by \c NSKeyedUnarchiver. Enables \c requiresSecureCoding by default. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off manually; for improved security, \c requiresSecureCoding should be left enabled whenever possible. Sets the unarchiver's \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid, and sets the \c error out parameter.
+// Initializes an archiver to decode data from the specified location.
 func (o *NSKeyedUnarchiver) InitForReadingFromDataError(data *NSData) (*NSKeyedUnarchiver, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInitForReadingFromDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -62,7 +64,7 @@ func (o *NSKeyedUnarchiver) InitForReadingFromDataError(data *NSData) (*NSKeyedU
 	return NSKeyedUnarchiverFromID(_ret), nil
 }
 
-// Decodes the root object of the given class from the given archive, previously encoded by \c NSKeyedArchiver. Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+// Decodes a previously-archived object graph, that returns the root object as the specified type.
 func NSKeyedUnarchiverUnarchivedObjectOfClassFromDataError(cls objc.Class, data *NSData) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataError, cls, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -72,56 +74,69 @@ func NSKeyedUnarchiverUnarchivedObjectOfClassFromDataError(cls objc.Class, data 
 	return _ret, nil
 }
 
-// Decodes the \c NSArray root object from \c data which should be an \c NSArray<cls> containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver. Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+// Decodes the \c NSArray root object from \c data which should be an \c NSArray containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
 func NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassFromDataError(cls objc.Class, data *NSData) (*NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSArray[objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassFromDataError, cls, data.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassFromDataError, cls, data.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSArrayFromID[objc.ID](_ret), nil
 }
 
-// Decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary<keyCls,objectCls>  with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver. Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+// Decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary<keyCls,objectCls> with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
 func NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError(keyCls objc.Class, valueCls objc.Class, data *NSData) (*NSDictionary[objc.ID, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError, keyCls, valueCls, data.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError, keyCls, valueCls, data.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret), nil
 }
 
-// Decodes the root object of one of the given classes from the given archive, previously encoded by \c NSKeyedArchiver. Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+// Decodes a previously-archived object graph, returning the root object as one of the specified classes.
 func NSKeyedUnarchiverUnarchivedObjectOfClassesFromDataError(classes *NSSet[objc.Class], data *NSData) (objc.ID, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataError, classes, data.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataError, classes.Ptr(), data.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// Decodes the \c NSArray root object from \c data which should be an \c NSArray, containing the given non-collection classes in \c classes  (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver. Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+// Decodes the \c NSArray root object from \c data which should be an \c NSArray, containing the given non-collection classes in \c classes (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
 func NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassesFromDataError(classes *NSSet[objc.Class], data *NSData) (*NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSArray[objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassesFromDataError, classes, data.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassesFromDataError, classes.Ptr(), data.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSArrayFromID[objc.ID](_ret), nil
 }
 
-// Decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver. Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+// Decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
 func NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError(keyClasses *NSSet[objc.Class], valueClasses *NSSet[objc.Class], data *NSData) (*NSDictionary[objc.ID, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError, keyClasses, valueClasses, data.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError, keyClasses.Ptr(), valueClasses.Ptr(), data.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret), nil
 }
 
+// Initializes an archiver to decode data.
 // Deprecated: Use -initForReadingFromData:error: instead
 func (o *NSKeyedUnarchiver) Init() *NSKeyedUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInit)
@@ -131,6 +146,7 @@ func (o *NSKeyedUnarchiver) Init() *NSKeyedUnarchiver {
 	return NSKeyedUnarchiverFromID(_ret)
 }
 
+// Initializes an archiver to decode data from the specified location.
 // Deprecated: Use -initForReadingFromData:error: instead
 func (o *NSKeyedUnarchiver) InitForReadingWithData(data *NSData) *NSKeyedUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInitForReadingWithData, data.Ptr())
@@ -140,12 +156,14 @@ func (o *NSKeyedUnarchiver) InitForReadingWithData(data *NSData) *NSKeyedUnarchi
 	return NSKeyedUnarchiverFromID(_ret)
 }
 
+// Decodes and returns the object graph previously encoded by NSKeyedArchiver and stored in a given NSData object.
 // Deprecated: Use +unarchivedObjectOfClass:fromData:error: instead
 func NSKeyedUnarchiverUnarchiveObjectWithData(data *NSData) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchiveObjectWithData, data.Ptr())
 	return _ret
 }
 
+// Decodes a previously-archived object graph, returning the root object.
 // Deprecated: Use +unarchivedObjectOfClass:fromData:error: instead
 func NSKeyedUnarchiverUnarchiveTopLevelObjectWithDataError(data *NSData) (objc.ID, error) {
 	var _nsErr uintptr
@@ -156,29 +174,35 @@ func NSKeyedUnarchiverUnarchiveTopLevelObjectWithDataError(data *NSData) (objc.I
 	return _ret, nil
 }
 
+// Decodes and returns the object graph previously encoded by NSKeyedArchiver written to the file at a given path.
 // Deprecated: Use +unarchivedObjectOfClass:fromData:error: instead
 func NSKeyedUnarchiverUnarchiveObjectWithFile(path *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelUnarchiveObjectWithFile, path.Ptr())
 	return _ret
 }
 
+// Tells the receiver that you are finished decoding objects.
 func (o *NSKeyedUnarchiver) FinishDecoding() {
 	o.Ptr().Send(_nSKeyedUnarchiverSelFinishDecoding)
 }
 
+// Sets a global translation mapping to decode objects encoded with a given class name as instances of a given class instead.
 func NSKeyedUnarchiverSetClassForClassName(cls objc.Class, codedName *NSString) {
 	objc.ID(_clsNSKeyedUnarchiver).Send(_nSKeyedUnarchiverSelSetClassForClassName, cls, codedName.Ptr())
 }
 
+// Sets a translation mapping on this unarchiver to decode objects encoded with a given class name as instances of a given class instead.
 func (o *NSKeyedUnarchiver) SetClassForClassName(cls objc.Class, codedName *NSString) {
 	o.Ptr().Send(_nSKeyedUnarchiverSelSetClassForClassName, cls, codedName.Ptr())
 }
 
+// Returns the class from which this unarchiver instantiates an encoded object with a given class name.
 func NSKeyedUnarchiverClassForClassName(codedName *NSString) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSKeyedUnarchiver), _nSKeyedUnarchiverSelClassForClassName, codedName.Ptr())
 	return _ret
 }
 
+// Returns the class from which this unarchiver instantiates an encoded object with a given class name.
 func (o *NSKeyedUnarchiver) ClassForClassName(codedName *NSString) objc.Class {
 	_ret := objc.Send[objc.Class](o.Ptr(), _nSKeyedUnarchiverSelClassForClassName, codedName.Ptr())
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that filters which address options to include or exclude in search results.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkaddressfilter
 type MKAddressFilter struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MKAddressFilterFromID(id objc.ID) *MKAddressFilter {
 	return o
 }
 
+// Creates an address filter with options for including results in a search.
 func (o *MKAddressFilter) InitIncludingOptions(options MKAddressFilterOption) *MKAddressFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressFilterSelInitIncludingOptions, options)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *MKAddressFilter) InitIncludingOptions(options MKAddressFilterOption) *M
 	return MKAddressFilterFromID(_ret)
 }
 
+// Creates an address filter with options for excluding results in a search.
 func (o *MKAddressFilter) InitExcludingOptions(options MKAddressFilterOption) *MKAddressFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressFilterSelInitExcludingOptions, options)
 	if _ret != 0 {
@@ -51,11 +55,13 @@ func (o *MKAddressFilter) InitExcludingOptions(options MKAddressFilterOption) *M
 	return MKAddressFilterFromID(_ret)
 }
 
+// Indicates whether options are included for filtering.
 func (o *MKAddressFilter) IncludesOptions(options MKAddressFilterOption) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKAddressFilterSelIncludesOptions, options)
 	return _ret
 }
 
+// Indicates whether options are excluded from filtering.
 func (o *MKAddressFilter) ExcludesOptions(options MKAddressFilterOption) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKAddressFilterSelExcludesOptions, options)
 	return _ret

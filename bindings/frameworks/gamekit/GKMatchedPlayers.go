@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkmatchedplayers
 type GKMatchedPlayers struct {
 	foundation.NSObject
@@ -48,6 +50,9 @@ func (o *GKMatchedPlayers) Players() *foundation.NSArray[*GKPlayer] {
 }
 
 func (o *GKMatchedPlayers) PlayerProperties() *foundation.NSDictionary[*GKPlayer, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*GKPlayer, objc.ID]](o.Ptr(), _gKMatchedPlayersSelPlayerProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchedPlayersSelPlayerProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*GKPlayer, objc.ID](_ret)
 }

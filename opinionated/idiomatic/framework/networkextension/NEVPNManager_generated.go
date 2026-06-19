@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object to create and manage a Personal VPN configuration.
+//
 // NEVPNManager wraps [raw.NEVPNManager] with a fluent Go API.
 type NEVPNManager struct {
 	inner *raw.NEVPNManager
@@ -39,7 +41,7 @@ func NewNEVPNManager() *NEVPNManager {
 	return &NEVPNManager{inner: raw.NEVPNManagerFromID(_id)}
 }
 
-// @property onDemandRules @discussion An array of NEOnDemandRule objects.
+// An ordered list of Connect On Demand rules.
 //
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPNManager {
@@ -62,7 +64,7 @@ func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPN
 	return x
 }
 
-// @property onDemandEnabled @discussion Toggles VPN On Demand.
+// A Boolean used to toggle the Connect On Demand capability.
 //
 // WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
 func (x *NEVPNManager) WithOnDemandEnabled(onDemandEnabled bool) *NEVPNManager {
@@ -70,7 +72,7 @@ func (x *NEVPNManager) WithOnDemandEnabled(onDemandEnabled bool) *NEVPNManager {
 	return x
 }
 
-// @property localizedDescription @discussion A string containing a description of the VPN.
+// A string containing the display name of the VPN configuration.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEVPNManager) WithLocalizedDescription(localizedDescription string) *NEVPNManager {
@@ -78,7 +80,7 @@ func (x *NEVPNManager) WithLocalizedDescription(localizedDescription string) *NE
 	return x
 }
 
-// @property protocol @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 //
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *NEVPNManager) WithProtocol(protocol NEVPNProtocolProvider) *NEVPNManager {
@@ -86,7 +88,7 @@ func (x *NEVPNManager) WithProtocol(protocol NEVPNProtocolProvider) *NEVPNManage
 	return x
 }
 
-// @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 //
 // WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
 func (x *NEVPNManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEVPNManager {
@@ -94,7 +96,7 @@ func (x *NEVPNManager) WithProtocolConfiguration(protocolConfiguration NEVPNProt
 	return x
 }
 
-// @property enabled @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+// A Boolean used to toggle the enabled state of the VPN configuration.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEVPNManager) WithEnabled(enabled bool) *NEVPNManager {
@@ -102,7 +104,7 @@ func (x *NEVPNManager) WithEnabled(enabled bool) *NEVPNManager {
 	return x
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current VPN configuration from the caller's VPN preferences. @param completionHandler A block that will be called on the main thread when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load the VPN configuration from the Network Extension preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
@@ -122,7 +124,7 @@ func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the VPN configuration from the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN is disabled and the VPN On Demand rules are de-activated. @param completionHandler A block that will be called on the main thread when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove the VPN configuration from the Network Extension preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
@@ -142,7 +144,7 @@ func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the VPN configuration in the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN On Demand rules are activated. @param completionHandler A block that will be called on the main thread when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save the VPN configuration in the Network Extension preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {

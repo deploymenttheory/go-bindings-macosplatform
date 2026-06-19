@@ -74,20 +74,29 @@ func (o *ODRecordMap) SetNative(native *foundation.NSString) {
 }
 
 func (o *ODRecordMap) OdPredicate() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordMapSelOdPredicate)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordMapSelOdPredicate)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *ODRecordMap) SetOdPredicate(odPredicate *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_oDRecordMapSelSetOdPredicate, odPredicate)
+	o.Ptr().Send(_oDRecordMapSelSetOdPredicate, odPredicate.Ptr())
 }
 
 func (o *ODRecordMap) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _oDRecordMapSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordMapSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *ODRecordMap) StandardAttributeTypes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDRecordMapSelStandardAttributeTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordMapSelStandardAttributeTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A block of text laid out in a subregion of the text container.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextblock
 type NSTextBlock struct {
 	foundation.NSObject
@@ -51,6 +53,7 @@ func NSTextBlockFromID(id objc.ID) *NSTextBlock {
 	return o
 }
 
+// Initializes and returns an empty text block object.
 func (o *NSTextBlock) Init() *NSTextBlock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextBlockSelInit)
 	if _ret != 0 {
@@ -59,46 +62,56 @@ func (o *NSTextBlock) Init() *NSTextBlock {
 	return NSTextBlockFromID(_ret)
 }
 
+// Sets a dimension of the text block.
 func (o *NSTextBlock) SetValueTypeForDimension(val float64, type_ NSTextBlockValueType, dimension NSTextBlockDimension) {
 	o.Ptr().Send(_nSTextBlockSelSetValueTypeForDimension, val, type_, dimension)
 }
 
+// Returns the value of the specified text block dimension.
 func (o *NSTextBlock) ValueForDimension(dimension NSTextBlockDimension) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextBlockSelValueForDimension, dimension)
 	return _ret
 }
 
+// Returns the value type of the specified text block dimension.
 func (o *NSTextBlock) ValueTypeForDimension(dimension NSTextBlockDimension) NSTextBlockValueType {
 	_ret := objc.Send[NSTextBlockValueType](o.Ptr(), _nSTextBlockSelValueTypeForDimension, dimension)
 	return _ret
 }
 
+// Sets the width of the text block.
 func (o *NSTextBlock) SetContentWidthType(val float64, type_ NSTextBlockValueType) {
 	o.Ptr().Send(_nSTextBlockSelSetContentWidthType, val, type_)
 }
 
+// Sets the width of a specified edge of a specified layer of the text block.
 func (o *NSTextBlock) SetWidthTypeForLayerEdge(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, edge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayerEdge, val, type_, layer, edge)
 }
 
+// Sets the width of all edges of a specified layer of the text block.
 func (o *NSTextBlock) SetWidthTypeForLayer(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer) {
 	o.Ptr().Send(_nSTextBlockSelSetWidthTypeForLayer, val, type_, layer)
 }
 
+// Returns the width of an edge of a specified layer of the text block.
 func (o *NSTextBlock) WidthForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextBlockSelWidthForLayerEdge, layer, edge)
 	return _ret
 }
 
+// Returns the value type of an edge of a specified layer of the text block.
 func (o *NSTextBlock) WidthValueTypeForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) NSTextBlockValueType {
 	_ret := objc.Send[NSTextBlockValueType](o.Ptr(), _nSTextBlockSelWidthValueTypeForLayerEdge, layer, edge)
 	return _ret
 }
 
+// Sets the border color of the specified edge of the text block.
 func (o *NSTextBlock) SetBorderColorForEdge(color *NSColor, edge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSTextBlockSelSetBorderColorForEdge, color.Ptr(), edge)
 }
 
+// Sets the color of all borders of the text block.
 func (o *NSTextBlock) SetBorderColor(color *NSColor) {
 	o.Ptr().Send(_nSTextBlockSelSetBorderColor, color.Ptr())
 }
@@ -111,16 +124,19 @@ func (o *NSTextBlock) BorderColorForEdge(edge foundation.NSRectEdge) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Returns the rectangle within which glyphs should be laid out for the specified arguments.
 func (o *NSTextBlock) RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextBlockSelRectForLayoutAtPointInRectTextContainerCharacterRange, startingPoint, rect, textContainer.Ptr(), charRange)
 	return _ret
 }
 
+// Returns the rectangle the text in the block actually occupies, including padding, borders, and margins.
 func (o *NSTextBlock) BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextBlockSelBoundsRectForContentRectInRectTextContainerCharacterRange, contentRect, rect, textContainer.Ptr(), charRange)
 	return _ret
 }
 
+// Called by the layout manager to draw any colors and other decorations before the text is drawn.
 func (o *NSTextBlock) DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect corefoundation.CGRect, controlView *NSView, charRange foundation.NSRange, layoutManager *NSLayoutManager) {
 	o.Ptr().Send(_nSTextBlockSelDrawBackgroundWithFrameInViewCharacterRangeLayoutManager, frameRect, controlView.Ptr(), charRange, layoutManager.Ptr())
 }

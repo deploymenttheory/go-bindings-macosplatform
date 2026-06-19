@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of the behavior and progression of a Force Touch trackpad as it responds to specific events.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspressureconfiguration
 type NSPressureConfiguration struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func NSPressureConfigurationFromID(id objc.ID) *NSPressureConfiguration {
 	return o
 }
 
+// Initializes a pressure configuration object with a specified pressure behavior.
 func (o *NSPressureConfiguration) InitWithPressureBehavior(pressureBehavior NSPressureBehavior) *NSPressureConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPressureConfigurationSelInitWithPressureBehavior, pressureBehavior)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func (o *NSPressureConfiguration) InitWithPressureBehavior(pressureBehavior NSPr
 	return NSPressureConfigurationFromID(_ret)
 }
 
+// Changes the pressure configuration of the trackpad to the initialized pressure configuration.
 func (o *NSPressureConfiguration) Set() {
 	o.Ptr().Send(_nSPressureConfigurationSelSet)
 }

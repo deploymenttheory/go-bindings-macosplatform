@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract class you extend to create custom image processors that can integrate with Core Image workflows.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel
 type CIImageProcessorKernel struct {
 	foundation.NSObject
@@ -43,41 +45,41 @@ func CIImageProcessorKernelFromID(id objc.ID) *CIImageProcessorKernel {
 	return o
 }
 
-// Override this class method to implement your Core Image Processor Kernel subclass. When a `CIImage` containing your `CIImageProcessorKernel` class is rendered, your class' implementation of this method will be called as needed for that render.  The method may be called more than once if Core Image needs to tile to limit memory usage. When your implementation of this class method is called, use the provided `inputs` and `arguments` objects to return processed pixel data to Core Image via `output`. > Important: this is a class method so that you cannot use or capture any state by accident. All the parameters that affect the output results must be passed to “applyWithExtent:inputs:arguments:error:“. - Parameters: - inputs: An array of `id<CIImageProcessorInput>` that the class consumes to produce its output. The `input.region` may be larger than the rect returned by “roiForInput:arguments:outputRect:“. - arguments: the arguments dictionary that was passed to “applyWithExtent:inputs:arguments:error:“. - output: The `id<CIImageProcessorOutput>` that the `CIImageProcessorKernel` must provide results to. - error: Pointer to the `NSError` object into which processing errors will be written. - Returns: Returns YES if processing succeeded, and NO if processing failed.
+// Override this class method to implement your Core Image Processor Kernel subclass.
 func CIImageProcessorKernelProcessWithInputsArgumentsOutputError(inputs *foundation.NSArray[CIImageProcessorInput], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], output CIImageProcessorOutput) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelProcessWithInputsArgumentsOutputError, inputs.Ptr(), arguments, output, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelProcessWithInputsArgumentsOutputError, inputs.Ptr(), arguments.Ptr(), output, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// Override this class method to implement your processor’s ROI callback. This will be called one or more times per render to determine what portion of the input images are needed to render a given 'outputRect' of the output. This will not be called if processor has no input images. The default implementation would return outputRect. > Important: this is a class method so that you cannot use or capture any state by accident. All the parameters that affect the output results must be passed to “applyWithExtent:inputs:arguments:error:“. - Parameters: - inputIndex: the index that tells you which processor input for which to return the ROI rectangle. - arguments: the arguments dictionary that was passed to “applyWithExtent:inputs:arguments:error:“. - outputRect: the output `CGRect` that processor will be asked to output. - Returns: The `CGRect` of the `inputIndex`th input that is required for the above `outputRect`
+// Override this class method to implement your processor’s ROI callback.
 func CIImageProcessorKernelRoiForInputArgumentsOutputRect(inputIndex int, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputRect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelRoiForInputArgumentsOutputRect, inputIndex, arguments, outputRect)
+	_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelRoiForInputArgumentsOutputRect, inputIndex, arguments.Ptr(), outputRect)
 	return _ret
 }
 
-// Override this class method to implement your processor’s tiled ROI callback. This will be called one or more times per render to determine what tiles of the input images are needed to render a given `outputRect` of the output. If the processor implements this method, then when rendered; * as CoreImage prepares for a render, this method will be called for each input to return an ROI tile array. * as CoreImage performs the render, the method “processWithInputs:arguments:output:error:“ will be called once for each tile. > Important: this is a class method so that you cannot use or capture any state by accident. All the parameters that affect the output results must be passed to “applyWithExtent:inputs:arguments:error:“. - Parameters: - inputIndex: the index that tells you which processor input for which to return the array of ROI rectangles - arguments: the arguments dictionary that was passed to “applyWithExtent:inputs:arguments:error:“. - outputRect: the output `CGRect` that processor will be asked to output. - Returns: An array of “CIVector“ that specify tile regions of the `inputIndex`'th input that is required for the above `outputRect` Each region tile in the array is a created by calling “/CIVector/vectorWithCGRect:/“ The tiles may overlap but should fully cover the area of 'input' that is needed. If a processor has multiple inputs, then each input should return the same number of region tiles.
+// Override this class method to implement your processor’s tiled ROI callback.
 func CIImageProcessorKernelRoiTileArrayForInputArgumentsOutputRect(inputIndex int, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputRect corefoundation.CGRect) *foundation.NSArray[*CIVector] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelRoiTileArrayForInputArgumentsOutputRect, inputIndex, arguments, outputRect)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelRoiTileArrayForInputArgumentsOutputRect, inputIndex, arguments.Ptr(), outputRect)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*CIVector](_ret)
 }
 
-// Override this class method if you want your any of the inputs to be in a specific pixel format. The format must be one of `kCIFormatBGRA8`, `kCIFormatRGBAh`, `kCIFormatRGBAf` or `kCIFormatR8`. On iOS 12 and macOS 10.14, the formats `kCIFormatRh` and `kCIFormatRf` are also supported. If the requested inputFormat is `0`, then the input will be a supported format that best matches the rendering context's “/CIContext/workingFormat“. If a processor wants data in a colorspace other than the context's working color space, then call “/CIImage/imageByColorMatchingWorkingSpaceToColorSpace:“ on the processor input. If a processor wants it input as alpha-unpremultiplied RGBA data, then call “/CIImage/imageByUnpremultiplyingAlpha“ on the processor input.
+// Override this class method if you want your any of the inputs to be in a specific pixel format.
 func CIImageProcessorKernelFormatForInputAtIndex(inputIndex int) int {
 	_ret := objc.Send[int](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelFormatForInputAtIndex, inputIndex)
 	return _ret
 }
 
-// Call this method on your Core Image Processor Kernel subclass to create a new image of the specified extent. The inputs and arguments will be retained so that your subclass can be called when the image is drawn. This method will return `nil` and an error if: * calling “outputFormat“ on your subclass returns an unsupported format. * calling “formatForInputAtIndex:“ on your subclass returns an unsupported format. * your subclass does not implement “processWithInputs:arguments:output:error:“ - Parameters: - extent: The bounding `CGRect` of pixels that the `CIImageProcessorKernel` can produce. This method will return “/CIImage/emptyImage“ if extent is empty. - inputs: An array of “CIImage“ objects to use as input. - arguments: This dictionary contains any additional parameters that the processor needs to produce its output. The argument objects can be of any type but in order for CoreImage  to cache intermediates, they must be of the following immutable types: `NSArray`, `NSDictionary`, `NSNumber`, `NSValue`, `NSData`, `NSString`, `NSNull`, “CIVector“, “CIColor“, `CGImage`, `CGColorSpace`, or `MLModel`. - error: Pointer to the `NSError` object into which processing errors will be written. - Returns: An autoreleased “CIImage“
+// Call this method on your Core Image Processor Kernel subclass to create a new image of the specified extent.
 func CIImageProcessorKernelApplyWithExtentInputsArgumentsError(extent corefoundation.CGRect, inputs *foundation.NSArray[*CIImage], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*CIImage, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithExtentInputsArgumentsError, extent, inputs.Ptr(), arguments, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithExtentInputsArgumentsError, extent, inputs.Ptr(), arguments.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -105,26 +107,26 @@ func CIImageProcessorKernelSynchronizeInputs() bool {
 	return _ret
 }
 
-// Override this class method of your Core Image Processor Kernel subclass if it needs to produce multiple outputs. This supports 0, 1, 2 or more input images and 2 or more output images. When a `CIImage` containing your `CIImageProcessorKernel` class is rendered, your class' implementation of this method will be called as needed for that render.  The method may be called more than once if Core Image needs to tile to limit memory usage. When your implementation of this class method is called, use the provided `inputs` and `arguments` objects to return processed pixel data to Core Image via multiple `outputs`. > Important: this is a class method so that you cannot use or capture any state by accident. All the parameters that affect the output results must be passed to “applyWithExtent:inputs:arguments:error:“. - Parameters: - inputs: An array of `id<CIImageProcessorInput>` that the class consumes to produce its output. The `input.region` may be larger than the rect returned by “roiForInput:arguments:outputRect:“. - arguments: the arguments dictionary that was passed to “applyWithExtent:inputs:arguments:error:“. - outputs: An array `id<CIImageProcessorOutput>` that the `CIImageProcessorKernel` must provide results to. - error: Pointer to the `NSError` object into which processing errors will be written. - Returns: Returns YES if processing succeeded, and NO if processing failed.
+// Override this class method of your Core Image Processor Kernel subclass if it needs to produce multiple outputs.
 func CIImageProcessorKernelProcessWithInputsArgumentsOutputsError(inputs *foundation.NSArray[CIImageProcessorInput], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputs *foundation.NSArray[CIImageProcessorOutput]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelProcessWithInputsArgumentsOutputsError, inputs.Ptr(), arguments, outputs.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelProcessWithInputsArgumentsOutputsError, inputs.Ptr(), arguments.Ptr(), outputs.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// Override this class method if your processor has more than one output and you want your processor's output to be in a specific supported `CIPixelFormat`. The format must be one of `kCIFormatBGRA8`, `kCIFormatRGBAh`, `kCIFormatRGBAf` or `kCIFormatR8`. On iOS 12 and macOS 10.14, the formats `kCIFormatRh` and `kCIFormatRf` are also supported. If the outputFormat is `0`, then the output will be a supported format that best matches the rendering context's “/CIContext/workingFormat“. - Parameters: - outputIndex: the index that tells you which processor output for which to return the desired `CIPixelFormat` - arguments: the arguments dictionary that was passed to “applyWithExtent:inputs:arguments:error:“. - Returns: Return the desired `CIPixelFormat`
+// Override this class method if your processor has more than one output and you want your processor’s output to be in a specific supported CIPixelFormat.
 func CIImageProcessorKernelOutputFormatAtIndexArguments(outputIndex int, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID]) int {
-	_ret := objc.Send[int](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelOutputFormatAtIndexArguments, outputIndex, arguments)
+	_ret := objc.Send[int](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelOutputFormatAtIndexArguments, outputIndex, arguments.Ptr())
 	return _ret
 }
 
-// Call this method on your multiple-output Core Image Processor Kernel subclass to create an array of new image objects given the specified array of extents. The inputs and arguments will be retained so that your subclass can be called when the image is drawn. This method will return `nil` and an error if: * calling “outputFormatAtIndex:arguments:“ on your subclass returns an unsupported format. * calling “formatForInputAtIndex:“ on your subclass returns an unsupported format. * your subclass does not implement “processWithInputs:arguments:output:error:“ - Parameters: - extents: The array of bounding rectangles  that the `CIImageProcessorKernel` can produce. Each rectangle in the array is an object created using “/CIVector/vectorWithCGRect:“ This method will return `CIImage.emptyImage` if a rectangle in the array is empty. - inputs: An array of “CIImage“ objects to use as input. - arguments: This dictionary contains any additional parameters that the processor needs to produce its output. The argument objects can be of any type but in order for CoreImage  to cache intermediates, they must be of the following immutable types: `NSArray`, `NSDictionary`, `NSNumber`, `NSValue`, `NSData`, `NSString`, `NSNull`, “CIVector“, “CIColor“, `CGImage`, `CGColorSpace`, or `MLModel`. - error: Pointer to the `NSError` object into which processing errors will be written. - Returns: An autoreleased “CIImage“
+// Call this method on your multiple-output Core Image Processor Kernel subclass to create an array of new image objects given the specified array of extents.
 func CIImageProcessorKernelApplyWithExtentsInputsArgumentsError(extents *foundation.NSArray[*CIVector], inputs *foundation.NSArray[*CIImage], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[*CIImage], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithExtentsInputsArgumentsError, extents.Ptr(), inputs.Ptr(), arguments, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageProcessorKernel), _cIImageProcessorKernelSelApplyWithExtentsInputsArgumentsError, extents.Ptr(), inputs.Ptr(), arguments.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

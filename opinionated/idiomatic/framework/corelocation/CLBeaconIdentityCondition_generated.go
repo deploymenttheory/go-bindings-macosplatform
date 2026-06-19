@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A condition that describes the identity characteristics of a beacon.
+//
 // BeaconIdentityCondition wraps [raw.CLBeaconIdentityCondition] with a fluent Go API.
 type BeaconIdentityCondition struct {
 	inner *raw.CLBeaconIdentityCondition
@@ -30,6 +32,8 @@ func BeaconIdentityConditionFromID(id objc.ID) *BeaconIdentityCondition {
 	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(id)}
 }
 
+// Creates a new beacon identity condition with the identifier you specify.
+//
 // NewBeaconIdentityConditionWithUUID creates a new [BeaconIdentityCondition].
 func NewBeaconIdentityConditionWithUUID(uuid *foundation.NSUUID) *BeaconIdentityCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewBeaconIdentityConditionWithUUID(uuid *foundation.NSUUID) *BeaconIdentity
 	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(_id)}
 }
 
+// Creates a new beacon identity condition with the identifier and major value you specify.
+//
 // NewBeaconIdentityConditionWithUUIDMajor creates a new [BeaconIdentityCondition].
 func NewBeaconIdentityConditionWithUUIDMajor(uuid *foundation.NSUUID, major uint16) *BeaconIdentityCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewBeaconIdentityConditionWithUUIDMajor(uuid *foundation.NSUUID, major uint
 	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(_id)}
 }
 
+// Creates a new beacon identity condition with the identifier, and major and minor values you specify.
+//
 // NewBeaconIdentityConditionWithUUIDMajorMinor creates a new [BeaconIdentityCondition].
 func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid *foundation.NSUUID, major uint16, minor uint16) *BeaconIdentityCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))

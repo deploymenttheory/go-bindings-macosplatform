@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that encapsulates the match data for games where players take turns.
+//
 // TurnBasedMatch wraps [raw.GKTurnBasedMatch] with a fluent Go API.
 type TurnBasedMatch struct {
 	inner *raw.GKTurnBasedMatch
@@ -39,17 +41,23 @@ func NewTurnBasedMatch() *TurnBasedMatch {
 	return &TurnBasedMatch{inner: raw.GKTurnBasedMatchFromID(_id)}
 }
 
+// A message from the current participant to all other participants when you end a turn, forfeit a match, or end a match.
+//
 // WithMessage sets the message property and returns the receiver for chaining.
 func (x *TurnBasedMatch) WithMessage(message string) *TurnBasedMatch {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 	return x
 }
 
+// Sends a localized message from the current participant to all other participants when you end a turn, forfeit a match, or end a match.
+//
 // SetLocalizableMessageWithKeyArguments calls the underlying SetLocalizableMessageWithKeyArguments.
 func (x *TurnBasedMatch) SetLocalizableMessageWithKeyArguments(key string, arguments *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetLocalizableMessageWithKeyArguments(foundation.NSStringStringWithUTF8String(key), arguments)
 }
 
+// Creates a new turn-based match with the same participants from an existing match.
+//
 // Rematch blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) Rematch(ctx context.Context) (*TurnBasedMatch, error) {
 	type _result struct {
@@ -76,6 +84,8 @@ func (x *TurnBasedMatch) Rematch(ctx context.Context) (*TurnBasedMatch, error) {
 	}
 }
 
+// Accepts an invitation for the local player to join a turn-based match.
+//
 // AcceptInvite blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) AcceptInvite(ctx context.Context) (*TurnBasedMatch, error) {
 	type _result struct {
@@ -102,6 +112,8 @@ func (x *TurnBasedMatch) AcceptInvite(ctx context.Context) (*TurnBasedMatch, err
 	}
 }
 
+// Declines an invitation for the local player to join a turn-based match.
+//
 // DeclineInvite blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) DeclineInvite(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -120,6 +132,8 @@ func (x *TurnBasedMatch) DeclineInvite(ctx context.Context) error {
 	}
 }
 
+// Removes a match from Game Center that the local player participants in.
+//
 // Remove blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) Remove(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -138,11 +152,15 @@ func (x *TurnBasedMatch) Remove(ctx context.Context) error {
 	}
 }
 
+// Fetches your game-specific data that you store in Game Center when ending a turn, saving a turn, or leaving a match.
+//
 // LoadMatchDataWithCompletionHandler calls the underlying LoadMatchDataWithCompletionHandler.
 func (x *TurnBasedMatch) LoadMatchDataWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.LoadMatchDataWithCompletionHandler(completionHandler)
 }
 
+// Passes the turn from the current participant to the next participant.
+//
 // EndTurnWithNextParticipantsTurnTimeoutMatchData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx context.Context, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -161,6 +179,8 @@ func (x *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx con
 	}
 }
 
+// Forfeits the match on behalf of the local player when it’s their turn.
+//
 // ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -179,6 +199,8 @@ func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTim
 	}
 }
 
+// Forfeits the match on behalf of the local player when it’s not their turn.
+//
 // ParticipantQuitOutOfTurnWithOutcome blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome) error {
 	_ch := make(chan error, 1)
@@ -197,6 +219,8 @@ func (x *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Context
 	}
 }
 
+// Ends the match.
+//
 // EndMatchInTurnWithMatchData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) EndMatchInTurnWithMatchData(ctx context.Context, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -215,6 +239,8 @@ func (x *TurnBasedMatch) EndMatchInTurnWithMatchData(ctx context.Context, matchD
 	}
 }
 
+// Ends the match while submitting all of the scores and achievements.
+//
 // EndMatchInTurnWithMatchDataScoresAchievements blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievements(ctx context.Context, matchData *foundation.NSData, scores *foundation.NSArray[*raw.GKScore], achievements *foundation.NSArray[*raw.GKAchievement]) error {
 	_ch := make(chan error, 1)
@@ -233,6 +259,8 @@ func (x *TurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievements(ctx conte
 	}
 }
 
+// Ends the match while submitting scores and achievements for all of the participants.
+//
 // EndMatchInTurnWithMatchDataLeaderboardScoresAchievements blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchievements(ctx context.Context, matchData *foundation.NSData, scores *foundation.NSArray[*raw.GKLeaderboardScore], achievements *foundation.NSArray[objc.ID]) error {
 	_ch := make(chan error, 1)
@@ -251,6 +279,8 @@ func (x *TurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchievement
 	}
 }
 
+// Saves your match data in Game Center without ending the turn.
+//
 // SaveCurrentTurnWithMatchData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) SaveCurrentTurnWithMatchData(ctx context.Context, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -269,6 +299,8 @@ func (x *TurnBasedMatch) SaveCurrentTurnWithMatchData(ctx context.Context, match
 	}
 }
 
+// Saves match data for completed exchanges without ending the turn.
+//
 // SaveMergedMatchDataWithResolvedExchanges blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) SaveMergedMatchDataWithResolvedExchanges(ctx context.Context, matchData *foundation.NSData, exchanges *foundation.NSArray[*raw.GKTurnBasedExchange]) error {
 	_ch := make(chan error, 1)
@@ -287,6 +319,8 @@ func (x *TurnBasedMatch) SaveMergedMatchDataWithResolvedExchanges(ctx context.Co
 	}
 }
 
+// Sends an exchange request that contains your game data to one or more participants.
+//
 // SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout(ctx context.Context, participants *foundation.NSArray[*raw.GKTurnBasedParticipant], data *foundation.NSData, key string, arguments *foundation.NSArray[*foundation.NSString], timeout float64) (*TurnBasedExchange, error) {
 	type _result struct {
@@ -313,6 +347,8 @@ func (x *TurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyArgu
 	}
 }
 
+// Sends a reminder from one participant to a specific set of other participants.
+//
 // SendReminderToParticipantsLocalizableMessageKeyArguments blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArguments(ctx context.Context, participants *foundation.NSArray[*raw.GKTurnBasedParticipant], key string, arguments *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
@@ -331,6 +367,8 @@ func (x *TurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArgument
 	}
 }
 
+// Updates the data stored on Game Center for the current match.
+//
 // EndTurnWithNextParticipantMatchData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Context, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -349,6 +387,8 @@ func (x *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Context
 	}
 }
 
+// Resigns the current player from the match without ending the match.
+//
 // ParticipantQuitInTurnWithOutcomeNextParticipantMatchData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that stores weights and biases.
+//
 // CNNConvolutionWeightsAndBiasesState wraps [raw.MPSCNNConvolutionWeightsAndBiasesState] with a fluent Go API.
 type CNNConvolutionWeightsAndBiasesState struct {
 	inner *raw.MPSCNNConvolutionWeightsAndBiasesState

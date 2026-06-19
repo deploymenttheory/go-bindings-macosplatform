@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a list of triangle primitives to turn into an acceleration structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlaccelerationstructuretrianglegeometrydescriptor
 type MTLAccelerationStructureTriangleGeometryDescriptor struct {
 	MTLAccelerationStructureGeometryDescriptor
@@ -51,6 +53,7 @@ func MTLAccelerationStructureTriangleGeometryDescriptorFromID(id objc.ID) *MTLAc
 	return o
 }
 
+// Creates a new triangle descriptor.
 func MTLAccelerationStructureTriangleGeometryDescriptorDescriptor() *MTLAccelerationStructureTriangleGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureTriangleGeometryDescriptor), _mTLAccelerationStructureTriangleGeometryDescriptorSelDescriptor)
 	if _ret != 0 {

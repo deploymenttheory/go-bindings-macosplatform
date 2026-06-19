@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient local-contrast normalization kernel.
+//
 // CNNLocalContrastNormalizationGradientNode wraps [raw.MPSCNNLocalContrastNormalizationGradientNode] with a fluent Go API.
 type CNNLocalContrastNormalizationGradientNode struct {
 	inner *raw.MPSCNNLocalContrastNormalizationGradientNode

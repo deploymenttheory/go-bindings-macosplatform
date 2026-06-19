@@ -119,12 +119,13 @@ func (e NSFileProviderContentPolicy) String() string {
 	}
 }
 
+// Options for creating items.
 type NSFileProviderCreateItemOptions uint64
 
 const (
-	// The imported item may already exist. This can happen because: 1. The imported item was found on disk after the synchronisation state was lost, for example following the restoration of a backup, or the migration to a new device. 2. Two directories are merged together, due to the extension returning the same itemIdentifier for both directories on the createItem completion handler. Each child resulting of the merge may be recreated with the mayAlreadyExist option. This allows the extension to recursively merge directories. The Extension should assess whether the item could actually be a disk representation of an already existing item. The best user experience is to match the requested item to one on the server, if the extension is able to confirm that the disk item is representing an item already on the server. Given that this flag may be set when the system is reimporting all items from disk, it is advised that the Extension attempts assessment methods for each item in order from cheapest to most expensive (in terms of CPU and network), in order to avoid unnecessary work. When all the items pending reimport have been processed, the system will call -[NSFileProviderExtension importDidFinishWithCompletionHandler:].
+	// An option indicating that the item may already exist in your remote storage.
 	NSFileProviderCreateItemMayAlreadyExist NSFileProviderCreateItemOptions = 1
-	// This item is recreated after the system failed to apply a deletion requested by the extension because the item was found to be edited locally. This happens only if the edit wasn't yet known by the system at the time the deletion was requested.
+	// A value indicating a conflict for a deleted item.
 	NSFileProviderCreateItemDeletionConflicted NSFileProviderCreateItemOptions = 2
 )
 
@@ -142,10 +143,11 @@ func (e NSFileProviderCreateItemOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for deleting items.
 type NSFileProviderDeleteItemOptions uint64
 
 const (
-	// The deletion of the item is recursive.
+	// A value indicating that the delete operation removes the item and all of its children.
 	NSFileProviderDeleteItemRecursive NSFileProviderDeleteItemOptions = 1
 )
 
@@ -160,6 +162,7 @@ func (e NSFileProviderDeleteItemOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A mode indicating how the system handles user data when removing a domain.
 type NSFileProviderDomainRemovalMode int64
 
 const (
@@ -184,6 +187,7 @@ func (e NSFileProviderDomainRemovalMode) String() string {
 	}
 }
 
+// Modes that modify the system’s behavior while testing.
 type NSFileProviderDomainTestingModes uint64
 
 const (
@@ -207,6 +211,7 @@ func (e NSFileProviderDomainTestingModes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The error codes for the File Provider extension.
 type NSFileProviderErrorCode int64
 
 const (
@@ -216,7 +221,7 @@ const (
 	NSFileProviderErrorFilenameCollision NSFileProviderErrorCode = -1001
 	// The value of the sync anchor is too old, and the system must re-sync from scratch
 	NSFileProviderErrorSyncAnchorExpired NSFileProviderErrorCode = -1002
-	// The value of the page token is too old, and the system must re-sync from scratch
+	// An error indicating that the page is too old, and that the system must restart the enumeration operation from the beginning.
 	NSFileProviderErrorPageExpired NSFileProviderErrorCode = -1002
 	// The item has not been uploaded because it would push the account over quota
 	NSFileProviderErrorInsufficientQuota NSFileProviderErrorCode = -1003
@@ -304,10 +309,11 @@ func (e NSFileProviderErrorCode) String() string {
 	}
 }
 
+// Options for fetching a range of data from a file.
 type NSFileProviderFetchContentsOptions uint64
 
 const (
-	// Set by the system to inform the provider that any other content version than the requested one will be discarded. If the provider cannot supply this version, it should fail with NSFileProviderErrorVersionNoLongerAvailable.
+	// An option that indicates the system requires an exact match of the requested item’s version.
 	NSFileProviderFetchContentsOptionsStrictVersioning NSFileProviderFetchContentsOptions = 1
 )
 
@@ -322,18 +328,19 @@ func (e NSFileProviderFetchContentsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags that define an item’s on-disk properties and its appearance in the user interface.
 type NSFileProviderFileSystemFlags uint64
 
 const (
-	// Item has the POSIX user-executable (u+x) permission.
+	// The user can execute the item.
 	NSFileProviderFileSystemUserExecutable NSFileProviderFileSystemFlags = 1
-	// Item has the POSIX user-readable (u+r) permission.
+	// The user can read the item.
 	NSFileProviderFileSystemUserReadable NSFileProviderFileSystemFlags = 2
-	// Item has the POSIX user-writable (u+w) permission.
+	// The user can modify the item.
 	NSFileProviderFileSystemUserWritable NSFileProviderFileSystemFlags = 4
-	// Item should not be presented in the file viewers. This includes both the UF_HIDDEN BSD flag and the Invisible bit from the FinderInfo. When syncing down, the system only sets the UF_HIDDEN flag.
+	// By default, the system hides the item when the user views the file system.
 	NSFileProviderFileSystemHidden NSFileProviderFileSystemFlags = 8
-	// The extension of the item should not be presented in the file viewers.
+	// By default, the system hides the item’s extension when showing its filename.
 	NSFileProviderFileSystemPathExtensionHidden NSFileProviderFileSystemFlags = 16
 )
 
@@ -360,30 +367,32 @@ func (e NSFileProviderFileSystemFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// An item’s capabilities, which define the actions that the user can perform in the document browser.
 type NSFileProviderItemCapabilities uint64
 
 const (
-	// Indicates that the file can be opened for reading.  If set on a folder this is equivalent to @c .allowsContentEnumerating.
+	// A value indicating that the value can be read from.
 	NSFileProviderItemCapabilitiesAllowsReading NSFileProviderItemCapabilities = 1
-	// Indicates that the file can be opened for writing. If set on a folder, this is equivalent to @c .allowsAddingSubItems.
+	// A value indicating that the item can be written to.
 	NSFileProviderItemCapabilitiesAllowsWriting NSFileProviderItemCapabilities = 2
-	// Indicates that the item can be moved to another folder
+	// A value indicating that the item can be moved.
 	NSFileProviderItemCapabilitiesAllowsReparenting NSFileProviderItemCapabilities = 4
-	// Indicates that the item can be renamed
+	// A value indicating that the item can be renamed.
 	NSFileProviderItemCapabilitiesAllowsRenaming NSFileProviderItemCapabilities = 8
-	// Indicates that the item can be moved to the trash
+	// A value indicating that the item can be moved to the trash.
 	NSFileProviderItemCapabilitiesAllowsTrashing NSFileProviderItemCapabilities = 16
-	// Indicates that the item can be deleted
+	// A value indicating that the item can be deleted.
 	NSFileProviderItemCapabilitiesAllowsDeleting NSFileProviderItemCapabilities = 32
-	// Indicates that the item can be evicted. If this capability is set on an item, the item will become evictable when the item is fully uploaded (-[NSFileProviderItem isUploaded] not implemented or set to YES), is not actively used and contains no local changes. The eviction can happen either because the user selected the "Remove Download" option in Finder, because the provider decided to evict the item using `-[NSFileProviderManager evictItemWithIdentifier:completionHandler:]`, or because the system ran into a low-disk space scenario. If this capability is not present, the item will never be evicted. If the provider wishes to only suppress the user's ability to evict the item in the UI (but retain the ability of the OS or the provider's program to evict items), the provider can set the following key to false in their Info.plist, in the NSExtension section: NSExtensionFileProviderAllowsUserControlledEviction
+	// A value indicating that the system can delete the local copy of the item.
 	NSFileProviderItemCapabilitiesAllowsEvicting NSFileProviderItemCapabilities = 64
-	// Indicates that the item can be excluded from sync. The user can choose to exclude the item in the UI (Finder), in which case the system will stop monitoring changes for the item and its children and will remove the item from the provider. This capability can be used to allow an item to be excluded from sync.
+	// A value indicating that the user can exclude the item from sync operations.
 	NSFileProviderItemCapabilitiesAllowsExcludingFromSync NSFileProviderItemCapabilities = 128
-	// Indicates that items can be imported to the folder. If set on a file, this is equivalent to @c .allowsWriting.
+	// A value indicating that the user can add subitems.
 	NSFileProviderItemCapabilitiesAllowsAddingSubItems NSFileProviderItemCapabilities = 2
-	// Indicates that the folder can be enumerated. If set on a file, this is equivalent to @c .allowsReading.
+	// A value indicating that the item’s contents can be enumerated.
 	NSFileProviderItemCapabilitiesAllowsContentEnumerating NSFileProviderItemCapabilities = 1
-	NSFileProviderItemCapabilitiesAllowsAll                NSFileProviderItemCapabilities = 63
+	// A convenience value for enabling all capabilities.
+	NSFileProviderItemCapabilitiesAllowsAll NSFileProviderItemCapabilities = 63
 )
 
 func (e NSFileProviderItemCapabilities) String() string {
@@ -427,20 +436,32 @@ func (e NSFileProviderItemCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Fields that specify which of the item’s properties have changed.
 type NSFileProviderItemFields uint64
 
 const (
-	NSFileProviderItemContents                NSFileProviderItemFields = 1
-	NSFileProviderItemFilename                NSFileProviderItemFields = 2
-	NSFileProviderItemParentItemIdentifier    NSFileProviderItemFields = 4
-	NSFileProviderItemLastUsedDate            NSFileProviderItemFields = 8
-	NSFileProviderItemTagData                 NSFileProviderItemFields = 16
-	NSFileProviderItemFavoriteRank            NSFileProviderItemFields = 32
-	NSFileProviderItemCreationDate            NSFileProviderItemFields = 64
+	// The item’s content.
+	NSFileProviderItemContents NSFileProviderItemFields = 1
+	// The item’s filename.
+	NSFileProviderItemFilename NSFileProviderItemFields = 2
+	// The identity of the directory that contains the item.
+	NSFileProviderItemParentItemIdentifier NSFileProviderItemFields = 4
+	// The date the item was last used.
+	NSFileProviderItemLastUsedDate NSFileProviderItemFields = 8
+	// The tags for the item.
+	NSFileProviderItemTagData NSFileProviderItemFields = 16
+	// The item’s favorite rank.
+	NSFileProviderItemFavoriteRank NSFileProviderItemFields = 32
+	// The item’s creation date.
+	NSFileProviderItemCreationDate NSFileProviderItemFields = 64
+	// The item’s modification date.
 	NSFileProviderItemContentModificationDate NSFileProviderItemFields = 128
-	NSFileProviderItemFileSystemFlags         NSFileProviderItemFields = 256
-	NSFileProviderItemExtendedAttributes      NSFileProviderItemFields = 512
-	NSFileProviderItemTypeAndCreator          NSFileProviderItemFields = 1024
+	// The flags describing the item’s on-disk representation.
+	NSFileProviderItemFileSystemFlags NSFileProviderItemFields = 256
+	// The item’s extended attributes.
+	NSFileProviderItemExtendedAttributes NSFileProviderItemFields = 512
+	// The file type and creator codes for the item.
+	NSFileProviderItemTypeAndCreator NSFileProviderItemFields = 1024
 )
 
 func (e NSFileProviderItemFields) String() string {
@@ -484,6 +505,7 @@ func (e NSFileProviderItemFields) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that identify known folders.
 type NSFileProviderKnownFolders uint64
 
 const (
@@ -505,6 +527,7 @@ func (e NSFileProviderKnownFolders) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for disconnecting a domain from the extension.
 type NSFileProviderManagerDisconnectionOptions uint64
 
 const (
@@ -522,10 +545,11 @@ func (e NSFileProviderManagerDisconnectionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags that provides additional information about the provided content.
 type NSFileProviderMaterializationFlags uint64
 
 const (
-	// By default, the system will track which parts of the returned file are sparse; those parts will remain non-materialized and trigger subsequent calls to the materialization methods on access. Returning this flag will instead cause the entire file to be marked as materialized. This is useful if the resulting file is known to contain sparse parts, and all the remaining parts have been filled in. This flag is ignored if the provided range doesn't cover the entire file (ie. [0, EOF]). This flag is not functional prior to macOS 13.3.
+	// A flag indicating that the system should consider the file fully materialized, even if it’s a sparse file.
 	NSFileProviderMaterializationFlagsKnownSparseRanges NSFileProviderMaterializationFlags = 1
 )
 
@@ -540,14 +564,15 @@ func (e NSFileProviderMaterializationFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for modifying items.
 type NSFileProviderModifyItemOptions uint64
 
 const (
-	// An option that indicates the changes may already exist in your remote storage. This option applies when moving the item to a location where it may refer to an item that already exists. This situation may occur when merging two directories together.
+	// An option that indicates the changes may already exist in your remote storage.
 	NSFileProviderModifyItemMayAlreadyExist NSFileProviderModifyItemOptions = 1
-	// An option to fail an upload in the event of a version conflict. If you adopt this option, and an uploaded item's base version doesn't match the version on the server, fail and return ``NSFileProviderError/localVersionConflictingWithServer`` (Swift) or ``NSFileProviderErrorCode/NSFileProviderErrorLocalVersionConflictingWithServer`` (Objective-C) in your implementation of `modifyItem`. To support the fail-on-conflict behavior in your file provider, indicate the support by adding the following key/value pair to the extension's Info pane. ``` <key>NSExtension</key> <dict> <key>NSExtensionFileProviderSupportsFailingUploadOnConflict</key> <true/> </dict> ```
+	// An option to fail an upload in the event of a version conflict.
 	NSFileProviderModifyItemFailOnConflict NSFileProviderModifyItemOptions = 2
-	// An option to require the upload to complete before calling the completion handler. This option allows the calling application to know when the uploaded version of the file is on the server.
+	// An option to require the upload to complete before calling the completion handler.
 	NSFileProviderModifyItemIsImmediateUploadRequestByPresentingApplication NSFileProviderModifyItemOptions = 4
 )
 
@@ -568,12 +593,13 @@ func (e NSFileProviderModifyItemOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The location where the operation takes place.
 type NSFileProviderTestingOperationSide uint64
 
 const (
-	// The operation reads or writes the disk.
+	// The File Provider extension’s local storage.
 	NSFileProviderTestingOperationSideDisk NSFileProviderTestingOperationSide = 0
-	// The operation reads or writes the file provider extension.
+	// The File Provider extension’s remote storage.
 	NSFileProviderTestingOperationSideFileProvider NSFileProviderTestingOperationSide = 1
 )
 
@@ -588,16 +614,25 @@ func (e NSFileProviderTestingOperationSide) String() string {
 	}
 }
 
+// The action that an operation performs.
 type NSFileProviderTestingOperationType int64
 
 const (
-	NSFileProviderTestingOperationTypeIngestion           NSFileProviderTestingOperationType = 0
-	NSFileProviderTestingOperationTypeLookup              NSFileProviderTestingOperationType = 1
-	NSFileProviderTestingOperationTypeCreation            NSFileProviderTestingOperationType = 2
-	NSFileProviderTestingOperationTypeModification        NSFileProviderTestingOperationType = 3
-	NSFileProviderTestingOperationTypeDeletion            NSFileProviderTestingOperationType = 4
-	NSFileProviderTestingOperationTypeContentFetch        NSFileProviderTestingOperationType = 5
+	// Alerts the system to changes to either the local or remote storage.
+	NSFileProviderTestingOperationTypeIngestion NSFileProviderTestingOperationType = 0
+	// Looks up an item.
+	NSFileProviderTestingOperationTypeLookup NSFileProviderTestingOperationType = 1
+	// Propagates the creation of a source item to the target location.
+	NSFileProviderTestingOperationTypeCreation NSFileProviderTestingOperationType = 2
+	// Propagates a change from the source item to the target location.
+	NSFileProviderTestingOperationTypeModification NSFileProviderTestingOperationType = 3
+	// Propagates the deletion of the source item from the target location.
+	NSFileProviderTestingOperationTypeDeletion NSFileProviderTestingOperationType = 4
+	// Fetches an item’s content.
+	NSFileProviderTestingOperationTypeContentFetch NSFileProviderTestingOperationType = 5
+	// Lists an item’s content.
 	NSFileProviderTestingOperationTypeChildrenEnumeration NSFileProviderTestingOperationType = 6
+	// Resolves a collision by renaming the new item.
 	NSFileProviderTestingOperationTypeCollisionResolution NSFileProviderTestingOperationType = 7
 )
 
@@ -624,6 +659,7 @@ func (e NSFileProviderTestingOperationType) String() string {
 	}
 }
 
+// Constants that describe why an external volume might not be eligible for storing a domain.
 type NSFileProviderVolumeUnsupportedReason uint64
 
 const (

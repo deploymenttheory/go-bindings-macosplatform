@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized configuration object that PassKit uses when it creates a digital car key.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddcarkeypassconfiguration
 type PKAddCarKeyPassConfiguration struct {
 	PKAddSecureElementPassConfiguration
@@ -40,6 +42,7 @@ func PKAddCarKeyPassConfigurationFromID(id objc.ID) *PKAddCarKeyPassConfiguratio
 	return o
 }
 
+// Creates a digital car key configuration object.
 func (o *PKAddCarKeyPassConfiguration) Init() *PKAddCarKeyPassConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddCarKeyPassConfigurationSelInit)
 	if _ret != 0 {

@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "framework": "IdentityLookup",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ILCallClassificationRequest": {
+      "doc": "A classification request for phone calls.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilcallclassificationrequest"
+    },
+    "ILCallCommunication": {
+      "doc": "A concrete subclass representing a phone call.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilcallcommunication"
+    },
+    "ILClassificationRequest": {
+      "doc": "The abstract superclass for classification requests.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationrequest"
+    },
+    "ILClassificationResponse": {
+      "doc": "A response object that tells the system how to handle the reported communications.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationresponse"
+    },
+    "ILCommunication": {
+      "doc": "An abstract superclass representing a message or call to the user.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilcommunication"
+    },
+    "ILMessageClassificationRequest": {
+      "doc": "A classification request for SMS messages.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessageclassificationrequest"
+    },
+    "ILMessageCommunication": {
+      "doc": "A concrete subclass representing a SMS message.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagecommunication"
+    },
+    "ILMessageFilterCapabilitiesQueryRequest": {
+      "doc": "A request to query a Message Filter extension about sharing its sub-category capabilities.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltercapabilitiesqueryrequest"
+    },
+    "ILMessageFilterCapabilitiesQueryResponse": {
+      "doc": "A response to a message filter capabilities query request.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltercapabilitiesqueryresponse"
+    },
+    "ILMessageFilterExtension": {
+      "doc": "The abstract base class for the principal class of a Message Filter app extension.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterextension"
+    },
+    "ILMessageFilterExtensionContext": {
+      "doc": "The extension context for a Message Filter app extension.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterextensioncontext"
+    },
+    "ILMessageFilterQueryRequest": {
+      "doc": "A request for a Message Filter app extension to determine the status of a message received from an unknown sender.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryrequest"
+    },
+    "ILMessageFilterQueryResponse": {
+      "doc": "A response to a message filter query request.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryresponse"
+    },
+    "ILNetworkResponse": {
+      "doc": "A response to an HTTPS network request performed on behalf of a Message Filter app extension.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilnetworkresponse"
+    }
+  },
+  "protocols": {
+    "ILMessageFilterCapabilitiesQueryHandling": {
+      "doc": "A set of methods implemented by a Message Filter app extension to handle capabilities query requests.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltercapabilitiesqueryhandling"
+    },
+    "ILMessageFilterQueryHandling": {
+      "doc": "A set of methods implemented by a Message Filter app extension to handle query requests.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryhandling"
+    }
+  },
+  "enums": {
+    "ILClassificationAction": {
+      "doc": "The actions the system can take in response to the reported communication.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationaction",
+      "members": {
+        "ILClassificationActionNone": {
+          "doc": "No action is required.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationaction/none"
+        },
+        "ILClassificationActionReportJunk": {
+          "doc": "The system should report the communication as junk.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationaction/reportjunk"
+        },
+        "ILClassificationActionReportJunkAndBlockSender": {
+          "doc": "The system should report the communication as junk and add the number to the system’s block list.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationaction/reportjunkandblocksender"
+        },
+        "ILClassificationActionReportNotJunk": {
+          "doc": "The system should report that the communication is not junk.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationaction/reportnotjunk"
+        }
+      }
+    },
+    "ILMessageFilterAction": {
+      "doc": "Responds to a received message with a filter action.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction",
+      "members": {
+        "ILMessageFilterActionAllow": {
+          "doc": "Allows the system to show the message unfiltered.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction/allow"
+        },
+        "ILMessageFilterActionFilter": {
+          "doc": "Prevents the system from showing the message unfiltered.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction/filter"
+        },
+        "ILMessageFilterActionJunk": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Junk message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction/junk"
+        },
+        "ILMessageFilterActionNone": {
+          "doc": "Allows the system to show the message unfiltered due to insufficient information to determine an action.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction/none"
+        },
+        "ILMessageFilterActionPromotion": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Promotional message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction/promotion"
+        },
+        "ILMessageFilterActionTransaction": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Transactional message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilteraction/transaction"
+        }
+      }
+    },
+    "ILMessageFilterError": {
+      "doc": "An error type that indicates problems with network requests and responses related to IdentityLookup APIs.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltererror"
+    },
+    "ILMessageFilterSubAction": {
+      "doc": "Responds to a received message with a filter subaction.",
+      "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction",
+      "members": {
+        "ILMessageFilterSubActionNone": {
+          "doc": "Allows the system to show the message unfiltered due to insufficient information to determine an action.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/none"
+        },
+        "ILMessageFilterSubActionPromotionalCoupons": {
+          "doc": "Prevents the system from showing the message normally, filtered as an Coupons message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/promotionalcoupons"
+        },
+        "ILMessageFilterSubActionPromotionalOffers": {
+          "doc": "Prevents the system from showing the message normally, filtered as an Offers message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/promotionaloffers"
+        },
+        "ILMessageFilterSubActionPromotionalOthers": {
+          "doc": "Prevents the system from showing the message normally, filtered as an Others message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/promotionalothers"
+        },
+        "ILMessageFilterSubActionTransactionalCarrier": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Carrier message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalcarrier"
+        },
+        "ILMessageFilterSubActionTransactionalFinance": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Finance message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalfinance"
+        },
+        "ILMessageFilterSubActionTransactionalHealth": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Health message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalhealth"
+        },
+        "ILMessageFilterSubActionTransactionalOrders": {
+          "doc": "Prevents the system from showing the message normally, filtered as an Orders (eCommerce) message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalorders"
+        },
+        "ILMessageFilterSubActionTransactionalOthers": {
+          "doc": "Prevents the system from showing the message normally, filtered as an Others message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalothers"
+        },
+        "ILMessageFilterSubActionTransactionalPublicServices": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Government message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalpublicservices"
+        },
+        "ILMessageFilterSubActionTransactionalReminders": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Reminder message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalreminders"
+        },
+        "ILMessageFilterSubActionTransactionalRewards": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Rewards message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalrewards"
+        },
+        "ILMessageFilterSubActionTransactionalWeather": {
+          "doc": "Prevents the system from showing the message normally, filtered as a Weather message.",
+          "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltersubaction/transactionalweather"
+        }
+      }
+    }
+  },
+  "methods": {
+    "ILCallCommunication": {
+      "-isEqualToCallCommunication:": {
+        "doc": "Indicates whether the current phone call is equal to the provided argument.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilcallcommunication/isequaltocallcommunication:"
+      }
+    },
+    "ILClassificationResponse": {
+      "-initWithClassificationAction:": {
+        "doc": "Creates a new response using the provided classification.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationresponse/init(action:)"
+      }
+    },
+    "ILCommunication": {
+      "-isEqualToCommunication:": {
+        "doc": "Indicates whether the current communication is equal to the provided argument.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilcommunication/isequaltocommunication:"
+      }
+    },
+    "ILMessageCommunication": {
+      "-isEqualToMessageCommunication:": {
+        "doc": "Indicates whether the current message is equal to the provided argument.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagecommunication/isequaltomessagecommunication:"
+      }
+    },
+    "ILMessageFilterExtensionContext": {
+      "-deferQueryRequestToNetworkWithCompletion:": {
+        "doc": "Tells the system to pass the current query request to the app extension’s associated network service.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterextensioncontext/deferqueryrequesttonetwork(completion:)"
+      }
+    }
+  },
+  "properties": {
+    "ILCallClassificationRequest": {
+      "callCommunications": {
+        "doc": "The calls the user selected to report.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilcallclassificationrequest/callcommunications"
+      }
+    },
+    "ILClassificationResponse": {
+      "action": {
+        "doc": "A classification that determines what action the system takes.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationresponse/action"
+      },
+      "userInfo": {
+        "doc": "JSON data included in a response sent over the network.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationresponse/userinfo"
+      },
+      "userString": {
+        "doc": "Text included in a response sent over SMS.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilclassificationresponse/userstring"
+      }
+    },
+    "ILCommunication": {
+      "dateReceived": {
+        "doc": "The date and time when the system received the message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilcommunication/datereceived"
+      },
+      "sender": {
+        "doc": "The email address or phone number of the sender.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilcommunication/sender"
+      }
+    },
+    "ILMessageClassificationRequest": {
+      "messageCommunications": {
+        "doc": "The messages the user selected to report.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessageclassificationrequest/messagecommunications"
+      }
+    },
+    "ILMessageCommunication": {
+      "messageBody": {
+        "doc": "The content of the SMS message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagecommunication/messagebody"
+      }
+    },
+    "ILMessageFilterCapabilitiesQueryResponse": {
+      "promotionalSubActions": {
+        "doc": "The promotional action the Message Filter app extension recommends that the system perform on the queried message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltercapabilitiesqueryresponse/promotionalsubactions-5d9c5"
+      },
+      "transactionalSubActions": {
+        "doc": "The transactional action the Message Filter app extension recommends that the system perform on the queried message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefiltercapabilitiesqueryresponse/transactionalsubactions-5fmpl"
+      }
+    },
+    "ILMessageFilterQueryRequest": {
+      "messageBody": {
+        "doc": "The body of a message received from an unknown sender.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryrequest/messagebody"
+      },
+      "receiverISOCountryCode": {
+        "doc": "The ISO Country Code of the receiving phone number, in format specified by the ISO 3166-2 standard.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryrequest/receiverisocountrycode"
+      },
+      "sender": {
+        "doc": "The sender of the message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryrequest/sender"
+      }
+    },
+    "ILMessageFilterQueryResponse": {
+      "action": {
+        "doc": "The action the Message Filter app extension recommends that the system perform on the queried message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryresponse/action"
+      },
+      "subAction": {
+        "doc": "The subaction the Message Filter app extension recommends that the system perform on the queried message.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilmessagefilterqueryresponse/subaction"
+      }
+    },
+    "ILNetworkResponse": {
+      "data": {
+        "doc": "The data returned in the HTTPS response.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilnetworkresponse/data"
+      },
+      "urlResponse": {
+        "doc": "Encapsulation of an HTTPS URL response.",
+        "url": "https://developer.apple.com/documentation/identitylookup/ilnetworkresponse/urlresponse"
+      }
+    }
+  }
+}

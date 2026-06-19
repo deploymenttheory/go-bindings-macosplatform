@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies properties used by a neuron kernel.
+//
 // NNNeuronDescriptor wraps [raw.MPSNNNeuronDescriptor] with a fluent Go API.
 type NNNeuronDescriptor struct {
 	inner *raw.MPSNNNeuronDescriptor

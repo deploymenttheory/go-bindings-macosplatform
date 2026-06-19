@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract base class for creating thumbnails of custom file types.
+//
 // ThumbnailProvider wraps [raw.QLThumbnailProvider] with a fluent Go API.
 type ThumbnailProvider struct {
 	inner *raw.QLThumbnailProvider
@@ -38,7 +40,7 @@ func NewThumbnailProvider() *ThumbnailProvider {
 	return &ThumbnailProvider{inner: raw.QLThumbnailProviderFromID(_id)}
 }
 
-// Subclass this method to provide a QLThumbnailReply that either contains a drawing block or an image file URL. @param request An object which contains information about the thumbnail that should be provided. It contains the URL of the file to provide a thumbnail for. @param handler Call the completion handler with a QLThumbnailReply if you can provide a thumbnail, or with an NSError if you cannot. If an error is passed or reply is nil, no thumbnail will be drawn. The handler can be called asynchronously after the method has returned.
+// Creates a thumbnail of a custom file type for a specific request.
 //
 // ProvideThumbnailForFileRequest blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *raw.QLFileThumbnailRequest) (*ThumbnailReply, error) {

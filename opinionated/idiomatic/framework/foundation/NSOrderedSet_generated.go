@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A static, ordered collection of unique objects.
+//
 // OrderedSet wraps [raw.NSOrderedSet] with a fluent Go API.
 type OrderedSet struct {
 	inner *raw.NSOrderedSet[objc.ID]
@@ -36,6 +38,8 @@ func NewOrderedSet() *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with a specified number of objects from a given C array of objects.
+//
 // NewOrderedSetWithObjectsCount creates a new [OrderedSet].
 func NewOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -50,6 +54,8 @@ func NewOrderedSetWithCoder(coder *raw.NSCoder) *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a new ordered set with the object.
+//
 // NewOrderedSetWithObject creates a new [OrderedSet].
 func NewOrderedSetWithObject(object objc.ID) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -57,6 +63,8 @@ func NewOrderedSetWithObject(object objc.ID) *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with members taken from the specified list of objects.
+//
 // NewOrderedSetWithObjects creates a new [OrderedSet].
 func NewOrderedSetWithObjects(firstObj objc.ID) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -64,6 +72,8 @@ func NewOrderedSetWithObjects(firstObj objc.ID) *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a new ordered set with the contents of a set.
+//
 // NewOrderedSetWithOrderedSet creates a new [OrderedSet].
 func NewOrderedSetWithOrderedSet(set *raw.NSOrderedSet[objc.ID]) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -71,6 +81,8 @@ func NewOrderedSetWithOrderedSet(set *raw.NSOrderedSet[objc.ID]) *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a new ordered set with the contents of a set, optionally copying the items.
+//
 // NewOrderedSetWithOrderedSetCopyItems creates a new [OrderedSet].
 func NewOrderedSetWithOrderedSetCopyItems(set *raw.NSOrderedSet[objc.ID], flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -78,6 +90,8 @@ func NewOrderedSetWithOrderedSetCopyItems(set *raw.NSOrderedSet[objc.ID], flag b
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a new ordered set with the contents of an ordered set, optionally copying the items.
+//
 // NewOrderedSetWithOrderedSetRangeCopyItems creates a new [OrderedSet].
 func NewOrderedSetWithOrderedSetRangeCopyItems(set *raw.NSOrderedSet[objc.ID], range_ raw.NSRange, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -85,6 +99,8 @@ func NewOrderedSetWithOrderedSetRangeCopyItems(set *raw.NSOrderedSet[objc.ID], r
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with the objects that are contained in a given array.
+//
 // NewOrderedSetWithArray creates a new [OrderedSet].
 func NewOrderedSetWithArray(array *raw.NSArray[objc.ID]) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -92,6 +108,8 @@ func NewOrderedSetWithArray(array *raw.NSArray[objc.ID]) *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with the objects that are contained in a given array, optionally copying the items.
+//
 // NewOrderedSetWithArrayCopyItems creates a new [OrderedSet].
 func NewOrderedSetWithArrayCopyItems(set *raw.NSArray[objc.ID], flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -99,6 +117,8 @@ func NewOrderedSetWithArrayCopyItems(set *raw.NSArray[objc.ID], flag bool) *Orde
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with the objects that are contained in the specified range of an array, optionally copying the items.
+//
 // NewOrderedSetWithArrayRangeCopyItems creates a new [OrderedSet].
 func NewOrderedSetWithArrayRangeCopyItems(set *raw.NSArray[objc.ID], range_ raw.NSRange, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -106,6 +126,8 @@ func NewOrderedSetWithArrayRangeCopyItems(set *raw.NSArray[objc.ID], range_ raw.
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a new ordered set with the contents of a set.
+//
 // NewOrderedSetWithSet creates a new [OrderedSet].
 func NewOrderedSetWithSet(set *raw.NSSet[objc.ID]) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -113,6 +135,8 @@ func NewOrderedSetWithSet(set *raw.NSSet[objc.ID]) *OrderedSet {
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// Initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
+//
 // NewOrderedSetWithSetCopyItems creates a new [OrderedSet].
 func NewOrderedSetWithSetCopyItems(set *raw.NSSet[objc.ID], flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -126,11 +150,15 @@ func (x *OrderedSet) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Returns the object at the specified index of the set.
+//
 // ObjectAtIndex calls the underlying ObjectAtIndex.
 func (x *OrderedSet) ObjectAtIndex(idx uint) objc.ID {
 	return x.inner.ObjectAtIndex(idx)
 }
 
+// Returns the index of the specified object.
+//
 // IndexOfObject calls the underlying IndexOfObject.
 func (x *OrderedSet) IndexOfObject(object objc.ID) uint {
 	return x.inner.IndexOfObject(object)
@@ -141,91 +169,127 @@ func (x *OrderedSet) Count() uint {
 	return x.inner.Count()
 }
 
+// Copies the objects contained in the ordered set that fall within the specified range to objects.
+//
 // GetObjectsRange calls the underlying GetObjectsRange.
 func (x *OrderedSet) GetObjectsRange(objects unsafe.Pointer, range_ raw.NSRange) {
 	x.inner.GetObjectsRange(objects, range_)
 }
 
+// Returns the objects in the ordered set at the specified indexes.
+//
 // ObjectsAtIndexes calls the underlying ObjectsAtIndexes.
 func (x *OrderedSet) ObjectsAtIndexes(indexes *raw.NSIndexSet) *raw.NSArray[objc.ID] {
 	return x.inner.ObjectsAtIndexes(indexes)
 }
 
+// Compares the receiving ordered set to another ordered set.
+//
 // IsEqualToOrderedSet calls the underlying IsEqualToOrderedSet.
 func (x *OrderedSet) IsEqualToOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool {
 	return x.inner.IsEqualToOrderedSet(other)
 }
 
+// Returns a Boolean value that indicates whether a given object is present in the ordered set.
+//
 // ContainsObject calls the underlying ContainsObject.
 func (x *OrderedSet) ContainsObject(object objc.ID) bool {
 	return x.inner.ContainsObject(object)
 }
 
+// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
+//
 // IntersectsOrderedSet calls the underlying IntersectsOrderedSet.
 func (x *OrderedSet) IntersectsOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool {
 	return x.inner.IntersectsOrderedSet(other)
 }
 
+// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
+//
 // IntersectsSet calls the underlying IntersectsSet.
 func (x *OrderedSet) IntersectsSet(set *raw.NSSet[objc.ID]) bool {
 	return x.inner.IntersectsSet(set)
 }
 
+// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
+//
 // IsSubsetOfOrderedSet calls the underlying IsSubsetOfOrderedSet.
 func (x *OrderedSet) IsSubsetOfOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool {
 	return x.inner.IsSubsetOfOrderedSet(other)
 }
 
+// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
+//
 // IsSubsetOfSet calls the underlying IsSubsetOfSet.
 func (x *OrderedSet) IsSubsetOfSet(set *raw.NSSet[objc.ID]) bool {
 	return x.inner.IsSubsetOfSet(set)
 }
 
+// Returns the object at the specified index of the set.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *OrderedSet) ObjectAtIndexedSubscript(idx uint) objc.ID {
 	return x.inner.ObjectAtIndexedSubscript(idx)
 }
 
+// Returns an enumerator object that lets you access each object in the ordered set.
+//
 // ObjectEnumerator calls the underlying ObjectEnumerator.
 func (x *OrderedSet) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.ObjectEnumerator()
 }
 
+// Returns an enumerator object that lets you access each object in the ordered set.
+//
 // ReverseObjectEnumerator calls the underlying ReverseObjectEnumerator.
 func (x *OrderedSet) ReverseObjectEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.ReverseObjectEnumerator()
 }
 
+// Executes a given block using each object in the ordered set.
+//
 // EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
 func (x *OrderedSet) EnumerateObjectsUsing(block objc.Block) {
 	x.inner.EnumerateObjectsUsing(block)
 }
 
+// Executes a given block using each object in the set, using the specified enumeration options.
+//
 // EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
 func (x *OrderedSet) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
+// Executes a given block using the objects in the ordered set at the specified indexes.
+//
 // EnumerateObjectsAtIndexesOptionsUsing calls the underlying EnumerateObjectsAtIndexesOptionsUsing.
 func (x *OrderedSet) EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, raw.NSEnumerationOptions(opts), block)
 }
 
+// Returns the index of the object in the ordered set that passes a test in a given block.
+//
 // IndexOfObjectPassingTest calls the underlying IndexOfObjectPassingTest.
 func (x *OrderedSet) IndexOfObjectPassingTest(predicate objc.Block) uint {
 	return x.inner.IndexOfObjectPassingTest(predicate)
 }
 
+// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
+//
 // IndexOfObjectWithOptionsPassingTest calls the underlying IndexOfObjectWithOptionsPassingTest.
 func (x *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint {
 	return x.inner.IndexOfObjectWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 }
 
+// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
+//
 // IndexOfObjectAtIndexesOptionsPassingTest calls the underlying IndexOfObjectAtIndexesOptionsPassingTest.
 func (x *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint {
 	return x.inner.IndexOfObjectAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
 }
 
+// Returns the index of the object in the ordered set that passes a test in a given block.
+//
 // IndexesOfObjectsPassingTest calls the underlying IndexesOfObjectsPassingTest.
 func (x *OrderedSet) IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet {
 	_r := x.inner.IndexesOfObjectsPassingTest(predicate)
@@ -235,6 +299,8 @@ func (x *OrderedSet) IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet
 	return &IndexSet{inner: _r}
 }
 
+// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
+//
 // IndexesOfObjectsWithOptionsPassingTest calls the underlying IndexesOfObjectsWithOptionsPassingTest.
 func (x *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
 	_r := x.inner.IndexesOfObjectsWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
@@ -244,6 +310,8 @@ func (x *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOp
 	return &IndexSet{inner: _r}
 }
 
+// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
+//
 // IndexesOfObjectsAtIndexesOptionsPassingTest calls the underlying IndexesOfObjectsAtIndexesOptionsPassingTest.
 func (x *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
 	_r := x.inner.IndexesOfObjectsAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
@@ -253,21 +321,29 @@ func (x *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexS
 	return &IndexSet{inner: _r}
 }
 
+// Returns the index, within a specified range, of an object compared with elements in the ordered set using a given NSComparator block.
+//
 // IndexOfObjectInSortedRangeOptionsUsingComparator calls the underlying IndexOfObjectInSortedRangeOptionsUsingComparator.
 func (x *OrderedSet) IndexOfObjectInSortedRangeOptionsUsingComparator(object objc.ID, range_ raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint {
 	return x.inner.IndexOfObjectInSortedRangeOptionsUsingComparator(object, range_, raw.NSBinarySearchingOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmp(_a0, _a1)) })
 }
 
+// Returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block
+//
 // SortedArrayUsingComparator calls the underlying SortedArrayUsingComparator.
 func (x *OrderedSet) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
 	return x.inner.SortedArrayUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
+//
 // SortedArrayWithOptionsUsingComparator calls the underlying SortedArrayWithOptionsUsingComparator.
 func (x *OrderedSet) SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
 	return x.inner.SortedArrayWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Returns a string that represents the contents of the ordered set, formatted as a property list.
+//
 // DescriptionWithLocale calls the underlying DescriptionWithLocale.
 func (x *OrderedSet) DescriptionWithLocale(locale objc.ID) *String {
 	_r := x.inner.DescriptionWithLocale(locale)
@@ -277,6 +353,8 @@ func (x *OrderedSet) DescriptionWithLocale(locale objc.ID) *String {
 	return &String{inner: _r}
 }
 
+// Returns a string that represents the contents of the ordered set, formatted as a property list.
+//
 // DescriptionWithLocaleIndent calls the underlying DescriptionWithLocaleIndent.
 func (x *OrderedSet) DescriptionWithLocaleIndent(locale objc.ID, level uint) *String {
 	_r := x.inner.DescriptionWithLocaleIndent(locale, level)
@@ -311,31 +389,43 @@ func (x *OrderedSet) Set() *raw.NSSet[objc.ID] {
 	return x.inner.Set()
 }
 
+// Compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
+//
 // DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest calls the underlying DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest.
 func (x *OrderedSet) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other *raw.NSOrderedSet[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
 	return x.inner.DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options), block)
 }
 
+// Compares two ordered sets, with options, to create a difference object that represents the changes between them.
+//
 // DifferenceFromOrderedSetWithOptions calls the underlying DifferenceFromOrderedSetWithOptions.
 func (x *OrderedSet) DifferenceFromOrderedSetWithOptions(other *raw.NSOrderedSet[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID] {
 	return x.inner.DifferenceFromOrderedSetWithOptions(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options))
 }
 
+// Compares two ordered sets to create a difference object that represents the changes between them.
+//
 // DifferenceFromOrderedSet calls the underlying DifferenceFromOrderedSet.
 func (x *OrderedSet) DifferenceFromOrderedSet(other *raw.NSOrderedSet[objc.ID]) *raw.NSOrderedCollectionDifference[objc.ID] {
 	return x.inner.DifferenceFromOrderedSet(other)
 }
 
+// Creates a new ordered set by applying a difference object to an existing ordered set.
+//
 // OrderedSetByApplyingDifference calls the underlying OrderedSetByApplyingDifference.
 func (x *OrderedSet) OrderedSetByApplyingDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) *raw.NSOrderedSet[objc.ID] {
 	return x.inner.OrderedSetByApplyingDifference(difference)
 }
 
+// Returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
+//
 // SortedArrayUsingDescriptors calls the underlying SortedArrayUsingDescriptors.
 func (x *OrderedSet) SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID] {
 	return x.inner.SortedArrayUsingDescriptors(sortDescriptors)
 }
 
+// Evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
+//
 // FilteredOrderedSetUsingPredicate calls the underlying FilteredOrderedSetUsingPredicate.
 func (x *OrderedSet) FilteredOrderedSetUsingPredicate(p *raw.NSPredicate) *raw.NSOrderedSet[objc.ID] {
 	return x.inner.FilteredOrderedSetUsingPredicate(p)

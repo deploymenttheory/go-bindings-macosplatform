@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Your app’s response to a send message intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/insendmessageintentresponse
 type INSendMessageIntentResponse struct {
 	INIntentResponse
@@ -33,6 +35,7 @@ func INSendMessageIntentResponseFromID(id objc.ID) *INSendMessageIntentResponse 
 	return o
 }
 
+// Initializes the response object with the specified code and user activity object.
 func (o *INSendMessageIntentResponse) InitWithCodeUserActivity(code INSendMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *INSendMessageIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
 	if _ret != 0 {
@@ -47,10 +50,13 @@ func (o *INSendMessageIntentResponse) Code() INSendMessageIntentResponseCode {
 }
 
 func (o *INSendMessageIntentResponse) SentMessages() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iNSendMessageIntentResponseSelSentMessages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentResponseSelSentMessages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *INSendMessageIntentResponse) SetSentMessages(sentMessages *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iNSendMessageIntentResponseSelSetSentMessages, sentMessages)
+	o.Ptr().Send(_iNSendMessageIntentResponseSelSetSentMessages, sentMessages.Ptr())
 }

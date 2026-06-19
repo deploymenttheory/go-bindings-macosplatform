@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents when playback stalls.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeritemstallevent
 type AVMetricPlayerItemStallEvent struct {
 	AVMetricPlayerItemRateChangeEvent

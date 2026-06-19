@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to decompress audio and play compressed or uncompressed audio.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebufferaudiorenderer
 type AVSampleBufferAudioRenderer struct {
 	foundation.NSObject
@@ -109,7 +111,7 @@ func (o *AVSampleBufferAudioRenderer) SetMuted(muted bool) {
 	o.Ptr().Send(_aVSampleBufferAudioRendererSelSetMuted, muted)
 }
 
-// @method			flushFromSourceTime:completionHandler: @abstract		Flushes enqueued sample buffers with presentation time stamps later than or equal to the specified time. @param			completionHandler A block that is invoked, possibly asynchronously, after the flush operation completes or fails. @discussion This method can be used to replace media data scheduled to be rendered in the future, without interrupting playback.  One example of this is when the data that has already been enqueued is from a sequence of two songs and the second song is swapped for a new song.  In this case, this method would be called with the time stamp of the first sample buffer from the second song.  After the completion handler is executed with a YES parameter, media data may again be enqueued with timestamps at the specified time. If NO is provided to the completion handler, the flush did not succeed and the set of enqueued sample buffers remains unchanged.  A flush can fail becuse the source time was too close to (or earlier than) the current time or because the current configuration of the receiver does not support flushing at a particular time.  In these cases, the caller can choose to flush all enqueued media data by invoking the -flush method.
+// Flushes queued sample buffers with presentation time stamps later than or equal to the specified time.
 func (o *AVSampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

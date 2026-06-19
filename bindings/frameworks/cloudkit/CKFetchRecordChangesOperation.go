@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that reports on the changed and deleted records in the specified record zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchrecordchangesoperation
 // Deprecated: since macOS 10.12.
 type CKFetchRecordChangesOperation struct {
@@ -59,7 +61,7 @@ func (o *CKFetchRecordChangesOperation) Init() *CKFetchRecordChangesOperation {
 	return CKFetchRecordChangesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching changes in the specified record zone. - Parameters: - recordZoneID: The zone that contains the records you want to fetch. You can fetch changes in a custom zone. CloudKit doesn't support syncing the default zone. - previousServerChangeToken: The change token from a previous fetch operation. This is the token that the system passes to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler during a previous fetch operation. Use this token to limit the returned data to only those changes that occur after that fetch request. If you specify `nil` for this parameter, the operation object fetches all records and their contents. - Returns: An initialized operation object. When initializing the operation object, use the token from a previous fetch request if you have one. You can archive tokens and write them to disk for later use. The returned operation object retrieves all changed fields of the record, including any assets in those fields. If you want to minimize the amount of data that returns even further, configure the “CKFetchRecordChangesOperation/desiredKeys“ property with the subset of keys that have values you want to fetch. After initializing the operation, associate at least one progress block with the operation object (excluding the completion block) to process the results.
+// Creates an operation for fetching changes in the specified record zone.
 func (o *CKFetchRecordChangesOperation) InitWithRecordZoneIDPreviousServerChangeToken(recordZoneID *CKRecordZoneID, previousServerChangeToken *CKServerChangeToken) *CKFetchRecordChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordChangesOperationSelInitWithRecordZoneIDPreviousServerChangeToken, recordZoneID.Ptr(), previousServerChangeToken.Ptr())
 	if _ret != 0 {
@@ -106,12 +108,15 @@ func (o *CKFetchRecordChangesOperation) SetResultsLimit(resultsLimit uint) {
 
 // The fields to fetch for the requested records. Use this property to limit the amount of data that the system retrieves for each record during the fetch operation. This property contains an array of strings, each of which contains the name of a field from the target records. When you retrieve a record, the returned records only include fields with names that match one of the keys in this property. The default value is `nil`, which causes the system to fetch all keys of the record. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
 func (o *CKFetchRecordChangesOperation) DesiredKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKFetchRecordChangesOperationSelDesiredKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordChangesOperationSelDesiredKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKFetchRecordChangesOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetDesiredKeys, desiredKeys)
+	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetDesiredKeys, desiredKeys.Ptr())
 }
 
 // The block to execute with the contents of a changed record. The block returns no value and takes the following parameters: - term `record`: The changed record. If you specify a value for the “CKFetchRecordChangesOperation/desiredKeys“ property, the record only contains the fields in the “CKFetchRecordChangesOperation/desiredKeys“ property. The operation object executes this block once for each record in the zone with changes since the previous fetch request. Each time the block executes, it executes serially with respect to the other progress blocks of the operation. If no records change, the block doesn't execute. If you intend to use this block to process results, set it before executing the operation or submitting it to a queue.

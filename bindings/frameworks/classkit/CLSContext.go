@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An area of your app that represents an assignable task, like a quiz or a chapter.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clscontext
 type CLSContext struct {
 	CLSObject
@@ -71,7 +73,7 @@ func CLSContextFromID(id objc.ID) *CLSContext {
 	return o
 }
 
-// @abstract      Initialize and configure the type of content this context represents. @param         identifier     App-assigned identifier for this context. 256 characters max length. @param         type           The type of content this context represents. @param         title          Title for what this context represents. 256 characters max length.
+// Initializes a new context.
 func (o *CLSContext) InitWithTypeIdentifierTitle(type_ CLSContextType, identifier *foundation.NSString, title *foundation.NSString) *CLSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelInitWithTypeIdentifierTitle, type_, identifier.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -80,35 +82,38 @@ func (o *CLSContext) InitWithTypeIdentifierTitle(type_ CLSContextType, identifie
 	return CLSContextFromID(_ret)
 }
 
-// @abstract      Marks contexts as active. @discussion    If a context is already active, it will remain active. If another context is active, the other will resign active before this one becomes active.
+// Tells a context to become the active context.
 func (o *CLSContext) BecomeActive() {
 	o.Ptr().Send(_cLSContextSelBecomeActive)
 }
 
-// @abstract      Resign being active. @discussion    This method does nothing if the reciever of the message is not active.
+// Tells a context to stop being the active context.
 func (o *CLSContext) ResignActive() {
 	o.Ptr().Send(_cLSContextSelResignActive)
 }
 
-// @abstract      Sets the type. @discussion    Use this to update a previously saved context.
+// Updates the kind of content that a context represents.
 func (o *CLSContext) SetType(type_ CLSContextType) {
 	o.Ptr().Send(_cLSContextSelSetType, type_)
 }
 
-// @abstract      Add or replace additional progress reporting capabilities of the app for this context. @discussion    If this parameter contains multiple items with the same value for kind, then one of them will be arbitrarily selected and used. If this parameter contains a capability of kind CLSProgressReportingCapabilityKindDuration, it will be ignored. @param         capabilities    Progress reporting capabilities to add or replace existing capabilties.
+// Adds a progress reporting capability to the set of capabilities for the context.
 func (o *CLSContext) AddProgressReportingCapabilities(capabilities *foundation.NSSet[*CLSProgressReportingCapability]) {
 	o.Ptr().Send(_cLSContextSelAddProgressReportingCapabilities, capabilities.Ptr())
 }
 
-// @abstract      Clears CLSProgressReportingCapability objects added to the receiver. @discussion    Removes all capabilities added via '-addProgressReportingCapabilities:'. The context will have the default progress reporting capability of kind CLSProgressReportingCapabilityKindDuration.
+// Resets the set of capabilities for the context.
 func (o *CLSContext) ResetProgressReportingCapabilities() {
 	o.Ptr().Send(_cLSContextSelResetProgressReportingCapabilities)
 }
 
 // @abstract      Context identifier path of this context. @discussion    The identifier path starts with the main app context object and finishes with the identifier of this context. This is the identifier path that one would use in @code -[CLSDataStore contextsMatchingIdintifierPath:completion:] @endcode to find `this' context.
 func (o *CLSContext) IdentifierPath() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cLSContextSelIdentifierPath)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelIdentifierPath)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @abstract      App-assigned identifier. This identifier should work across users and devices and be unique with regards to its siblings within its parent. @discussion    The identifier could be used to embed information later used for deep linking. For example: @em hydrogen-element, or @em chapter-1.
@@ -256,17 +261,17 @@ func (o *CLSContext) IsActive() bool {
 	return _ret
 }
 
-// @abstract      Removes this child context from its parent. @discussion    If you remove a context from its parent and do not add it as a child of another context, it will be deleted when you call -save on the dataStore.
+// Removes the context from its parent.
 func (o *CLSContext) RemoveFromParent() {
 	o.Ptr().Send(_cLSContextSelRemoveFromParent)
 }
 
-// @abstract      Adds a child context. @discussion    A context can only have a single parent. @note          objectID of child context may change after it's been added.
+// Adds the specifed context as a child of the context receiving the method call.
 func (o *CLSContext) AddChildContext(child *CLSContext) {
 	o.Ptr().Send(_cLSContextSelAddChildContext, child.Ptr())
 }
 
-// @abstract      Returns a descendant of this context matching the context path you provide. Context path must start with an identifier of a child context of the context to which this message is sent. @discussion    If there are any missing contexts, they will be filled in by calling the following method on the context's data store's delegate: @code -[CLSDataStoreDelegate createContextForIdentifier:parentContext:parentIdentifierPath:] @endcode If the dataStore does not have a delegate and there are missing contexts then an incomplete list of contexts will be passed to the completion handler. Completion block is called on a background thread.
+// Finds the context with the given identifier path relative to this context.
 func (o *CLSContext) DescendantMatchingIdentifierPathCompletion(identifierPath *foundation.NSArray[*foundation.NSString], completion func(*CLSContext, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -278,15 +283,15 @@ func (o *CLSContext) DescendantMatchingIdentifierPathCompletion(identifierPath *
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_cLSContextSelDescendantMatchingIdentifierPathCompletion, identifierPath, __block_completion)
+	o.Ptr().Send(_cLSContextSelDescendantMatchingIdentifierPathCompletion, identifierPath.Ptr(), __block_completion)
 }
 
-// @abstract      Adds a child context to specify the user can navigate to the child from this context. @discussion    Used only for presentation purpose. Unlike @code -[CLSContext addChildContext:] @endcode, this method does not affect the identifierPath.
+// Adds a child context that users can navigate to from this context.
 func (o *CLSContext) AddNavigationChildContext(child *CLSContext) {
 	o.Ptr().Send(_cLSContextSelAddNavigationChildContext, child.Ptr())
 }
 
-// @abstract      Removes the navigation path to the child context from this context. @discussion    Used only for presentation purpose. Unlike @code -[CLSContext removeFromParent:] @endcode, this method does not affect the identiferPath.
+// Removes the specified context as a presentable child of this context.
 func (o *CLSContext) RemoveNavigationChildContext(child *CLSContext) {
 	o.Ptr().Send(_cLSContextSelRemoveNavigationChildContext, child.Ptr())
 }
@@ -309,7 +314,7 @@ func (o *CLSContext) NavigationChildContexts() *foundation.NSArray[*CLSContext] 
 	return foundation.NSArrayFromID[*CLSContext](_ret)
 }
 
-// @abstract      Creates a new activity @discussion    Creates a new activity and sets it as the current activity.
+// Creates and returns a new activity instance for the context.
 func (o *CLSContext) CreateNewActivity() *CLSActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSContextSelCreateNewActivity)
 	if _ret != 0 {

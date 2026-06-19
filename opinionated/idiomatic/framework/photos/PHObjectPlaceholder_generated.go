@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A read-only proxy object that represents a Photos asset or collection to create.
+//
 // ObjectPlaceholder wraps [raw.PHObjectPlaceholder] with a fluent Go API.
 type ObjectPlaceholder struct {
 	inner *raw.PHObjectPlaceholder

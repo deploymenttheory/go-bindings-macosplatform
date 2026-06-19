@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the configuration of a subscription’s push notifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cknotificationinfo
 type CKNotificationInfo struct {
 	foundation.NSObject
@@ -189,12 +191,15 @@ func (o *CKNotificationInfo) SetSoundName(soundName unsafe.Pointer) {
 
 // The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
 func (o *CKNotificationInfo) DesiredKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKNotificationInfoSelDesiredKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationInfoSelDesiredKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKNotificationInfo) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKNotificationInfoSelSetDesiredKeys, desiredKeys)
+	o.Ptr().Send(_cKNotificationInfoSelSetDesiredKeys, desiredKeys.Ptr())
 }
 
 // A Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.

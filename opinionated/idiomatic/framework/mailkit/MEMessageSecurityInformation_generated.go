@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.
+//
 // MessageSecurityInformation wraps [raw.MEMessageSecurityInformation] with a fluent Go API.
 type MessageSecurityInformation struct {
 	inner *raw.MEMessageSecurityInformation
@@ -32,6 +34,8 @@ func MessageSecurityInformationFromID(id objc.ID) *MessageSecurityInformation {
 	return &MessageSecurityInformation{inner: raw.MEMessageSecurityInformationFromID(id)}
 }
 
+// Creates a message security information object that indicates if a message is encrypted, who signed it, or if an error occurred when decoding the message.
+//
 // NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionError creates a new [MessageSecurityInformation].
 func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionError(signers *foundation.NSArray[*raw.MEMessageSigner], isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageSecurityInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageSecurityInformation")), objc.RegisterName("alloc"))

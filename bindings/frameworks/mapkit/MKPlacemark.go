@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A user-friendly description of a location on the map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkplacemark
 // Deprecated: Use MKMapItem's location, address and addressRepresentations properties instead. Use MKAddressRepresentations for formatted address strings for MapKit provided MKMapItems
 type MKPlacemark struct {
@@ -38,6 +40,7 @@ func MKPlacemarkFromID(id objc.ID) *MKPlacemark {
 	return o
 }
 
+// Creates and returns a placemark object using the specified coordinate.
 func (o *MKPlacemark) InitWithCoordinate(coordinate unsafe.Pointer) *MKPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinate, coordinate)
 	if _ret != 0 {
@@ -46,14 +49,16 @@ func (o *MKPlacemark) InitWithCoordinate(coordinate unsafe.Pointer) *MKPlacemark
 	return MKPlacemarkFromID(_ret)
 }
 
+// Creates and returns a placemark object using the specified coordinate and Address Book dictionary.
 func (o *MKPlacemark) InitWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MKPlacemark {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinateAddressDictionary, coordinate, addressDictionary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinateAddressDictionary, coordinate, addressDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MKPlacemarkFromID(_ret)
 }
 
+// Creates and returns a placemark object with the specified coordinate and postal address from the user’s Contacts database.
 func (o *MKPlacemark) InitWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAddress *contacts.CNPostalAddress) *MKPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinatePostalAddress, coordinate, postalAddress.Ptr())
 	if _ret != 0 {

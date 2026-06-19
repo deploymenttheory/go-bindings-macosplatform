@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a change that occurred in the photo library.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phchange
 type PHChange struct {
 	foundation.NSObject
@@ -31,12 +33,20 @@ func PHChangeFromID(id objc.ID) *PHChange {
 	return o
 }
 
+// Returns detailed change information for the specified asset or collection.
 func (o *PHChange) ChangeDetailsForObject(object *PHObject) *PHObjectChangeDetails[objc.ID] {
-	_ret := objc.Send[*PHObjectChangeDetails[objc.ID]](o.Ptr(), _pHChangeSelChangeDetailsForObject, object.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHChangeSelChangeDetailsForObject, object.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHObjectChangeDetailsFromID[objc.ID](_ret)
 }
 
+// Returns detailed change information for a fetch result.
 func (o *PHChange) ChangeDetailsForFetchResult(object *PHFetchResult[objc.ID]) *PHFetchResultChangeDetails[objc.ID] {
-	_ret := objc.Send[*PHFetchResultChangeDetails[objc.ID]](o.Ptr(), _pHChangeSelChangeDetailsForFetchResult, object)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHChangeSelChangeDetailsForFetchResult, object.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return PHFetchResultChangeDetailsFromID[objc.ID](_ret)
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A visual representation of any polyline overlay object with a gradient.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer
 type MKGradientPolylineRenderer struct {
 	MKPolylineRenderer
@@ -33,16 +35,23 @@ func MKGradientPolylineRendererFromID(id objc.ID) *MKGradientPolylineRenderer {
 	return o
 }
 
+// Sets the colors and corresponding unit distance values to create gradients.
 func (o *MKGradientPolylineRenderer) SetColorsAtLocations(colors *foundation.NSArray[*appkit.NSColor], locations *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mKGradientPolylineRendererSelSetColorsAtLocations, colors, locations)
+	o.Ptr().Send(_mKGradientPolylineRendererSelSetColorsAtLocations, colors.Ptr(), locations.Ptr())
 }
 
 func (o *MKGradientPolylineRenderer) Locations() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mKGradientPolylineRendererSelLocations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKGradientPolylineRendererSelLocations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MKGradientPolylineRenderer) Colors() *foundation.NSArray[*appkit.NSColor] {
-	_ret := objc.Send[*foundation.NSArray[*appkit.NSColor]](o.Ptr(), _mKGradientPolylineRendererSelColors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKGradientPolylineRendererSelColors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*appkit.NSColor](_ret)
 }

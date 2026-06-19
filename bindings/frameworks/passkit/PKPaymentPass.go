@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a provisioned payment card for in-app payments.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentpass
 type PKPaymentPass struct {
 	PKSecureElementPass

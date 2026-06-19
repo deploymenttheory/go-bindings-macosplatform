@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A matrix-vector multiplication kernel
+//
 // MatrixVectorMultiplication wraps [raw.MPSMatrixVectorMultiplication] with a fluent Go API.
 type MatrixVectorMultiplication struct {
 	inner *raw.MPSMatrixVectorMultiplication
@@ -91,7 +93,7 @@ func (x *MatrixVectorMultiplication) WithBatchSize(batchSize uint) *MatrixVector
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithOptions(options mpscore.MPSKernelOptions) *MatrixVectorMultiplication {
@@ -99,7 +101,7 @@ func (x *MatrixVectorMultiplication) WithOptions(options mpscore.MPSKernelOption
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithLabel(label string) *MatrixVectorMultiplication {

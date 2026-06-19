@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Descriptor for an “indirect” instance acceleration structure that allows providing the instance count and motion transform count indirectly, through buffer references.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4indirectinstanceaccelerationstructuredescriptor
 type MTL4IndirectInstanceAccelerationStructureDescriptor struct {
 	MTL4AccelerationStructureDescriptor

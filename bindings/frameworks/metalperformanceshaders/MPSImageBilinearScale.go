@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that resizes and changes the aspect ratio of an image using Bilinear resampling.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebilinearscale
 type MPSImageBilinearScale struct {
 	mpsimage.MPSImageScale

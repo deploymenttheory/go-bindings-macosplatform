@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The main object you use to access the Address Book database.
+//
 // AddressBook wraps [raw.ABAddressBook] with a fluent Go API.
 type AddressBook struct {
 	inner *raw.ABAddressBook
@@ -37,27 +39,37 @@ func NewAddressBook() *AddressBook {
 	return &AddressBook{inner: raw.ABAddressBookFromID(_id)}
 }
 
+// Returns an array of records that match the given search element, or returns an empty array if no records match the search element.
+//
 // RecordsMatchingSearchElement calls the underlying RecordsMatchingSearchElement.
 func (x *AddressBook) RecordsMatchingSearchElement(search *raw.ABSearchElement) *foundation.NSArray[objc.ID] {
 	return x.inner.RecordsMatchingSearchElement(search)
 }
 
+// Saves all the changes made since the last save.
+//
 // Save calls the underlying Save.
 func (x *AddressBook) Save() bool {
 	return x.inner.Save()
 }
 
+// Saves all the changes made since the last save.
+//
 // SaveAndReturnError returns any validation error.
 func (x *AddressBook) SaveAndReturnError() error {
 	_, err := x.inner.SaveAndReturnError()
 	return err
 }
 
+// Indicates whether an address book has changes that have not been saved to the Address Book database.
+//
 // HasUnsavedChanges calls the underlying HasUnsavedChanges.
 func (x *AddressBook) HasUnsavedChanges() bool {
 	return x.inner.HasUnsavedChanges()
 }
 
+// Returns the ABPerson record that represents the logged-in user.
+//
 // Me calls the underlying Me.
 func (x *AddressBook) Me() *Person {
 	_r := x.inner.Me()
@@ -67,11 +79,15 @@ func (x *AddressBook) Me() *Person {
 	return &Person{inner: _r}
 }
 
+// Sets the record that represents the logged-in user.
+//
 // SetMe calls the underlying SetMe.
 func (x *AddressBook) SetMe(moi *raw.ABPerson) {
 	x.inner.SetMe(moi)
 }
 
+// Returns the person or group record that matches the given unique ID.
+//
 // RecordForUniqueId calls the underlying RecordForUniqueId.
 func (x *AddressBook) RecordForUniqueId(uniqueId string) *Record {
 	_r := x.inner.RecordForUniqueId(foundation.NSStringStringWithUTF8String(uniqueId))
@@ -81,36 +97,50 @@ func (x *AddressBook) RecordForUniqueId(uniqueId string) *Record {
 	return &Record{inner: _r}
 }
 
+// Adds an ABPerson or ABGroup record to the Address Book database.
+//
 // AddRecordError calls the underlying AddRecordError.
 func (x *AddressBook) AddRecordError(record *raw.ABRecord) (bool, error) {
 	return x.inner.AddRecordError(record)
 }
 
+// Adds an ABPerson or ABGroup record to the Address Book database.
+//
 // AddRecord calls the underlying AddRecord.
 func (x *AddressBook) AddRecord(record *raw.ABRecord) bool {
 	return x.inner.AddRecord(record)
 }
 
+// Removes an ABPerson or ABGroup record from the Address Book database.
+//
 // RemoveRecordError calls the underlying RemoveRecordError.
 func (x *AddressBook) RemoveRecordError(record *raw.ABRecord) (bool, error) {
 	return x.inner.RemoveRecordError(record)
 }
 
+// Removes an ABPerson or ABGroup record from the Address Book database.
+//
 // RemoveRecord calls the underlying RemoveRecord.
 func (x *AddressBook) RemoveRecord(record *raw.ABRecord) bool {
 	return x.inner.RemoveRecord(record)
 }
 
+// Returns an array of all the people in the Address Book database.
+//
 // People calls the underlying People.
 func (x *AddressBook) People() *foundation.NSArray[objc.ID] {
 	return x.inner.People()
 }
 
+// Returns an array of all the groups in the Address Book database.
+//
 // Groups calls the underlying Groups.
 func (x *AddressBook) Groups() *foundation.NSArray[objc.ID] {
 	return x.inner.Groups()
 }
 
+// Returns the class name of the record that matches the given unique ID.
+//
 // RecordClassFromUniqueId calls the underlying RecordClassFromUniqueId.
 func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
 	_r := x.inner.RecordClassFromUniqueId(foundation.NSStringStringWithUTF8String(uniqueId))
@@ -120,11 +150,15 @@ func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns an attributed string containing the formatted address.
+//
 // FormattedAddressFromDictionary calls the underlying FormattedAddressFromDictionary.
 func (x *AddressBook) FormattedAddressFromDictionary(address *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
 	return x.inner.FormattedAddressFromDictionary(address)
 }
 
+// Returns the default country code for records with unspecified country codes.
+//
 // DefaultCountryCode calls the underlying DefaultCountryCode.
 func (x *AddressBook) DefaultCountryCode() string {
 	_r := x.inner.DefaultCountryCode()
@@ -134,6 +168,8 @@ func (x *AddressBook) DefaultCountryCode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the default name ordering defined by the user in the Address Book application’s preferences.
+//
 // DefaultNameOrdering calls the underlying DefaultNameOrdering.
 func (x *AddressBook) DefaultNameOrdering() int {
 	return x.inner.DefaultNameOrdering()

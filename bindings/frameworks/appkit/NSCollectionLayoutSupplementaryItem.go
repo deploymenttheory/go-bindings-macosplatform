@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to add an extra visual decoration to an item in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutsupplementaryitem
 type NSCollectionLayoutSupplementaryItem struct {
 	NSCollectionLayoutItem
@@ -36,6 +38,7 @@ func NSCollectionLayoutSupplementaryItemFromID(id objc.ID) *NSCollectionLayoutSu
 	return o
 }
 
+// Creates a supplementary item of the specified size and element kind, with an anchor relative to a container.
 func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKindContainerAnchor(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, containerAnchor *NSCollectionLayoutAnchor) *NSCollectionLayoutSupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKi
 	return NSCollectionLayoutSupplementaryItemFromID(_ret)
 }
 
+// Creates a supplementary item of the specified size and element kind, an anchor relative to a container, and an anchor relative to an item.
 func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, containerAnchor *NSCollectionLayoutAnchor, itemAnchor *NSCollectionLayoutAnchor) *NSCollectionLayoutSupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr(), itemAnchor.Ptr())
 	if _ret != 0 {

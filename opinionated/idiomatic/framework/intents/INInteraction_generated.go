@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An interaction between the user and your app involving an intent object.
+//
 // Interaction wraps [raw.INInteraction] with a fluent Go API.
 type Interaction struct {
 	inner *raw.INInteraction
@@ -33,6 +35,8 @@ func InteractionFromID(id objc.ID) *Interaction {
 	return &Interaction{inner: raw.INInteractionFromID(id)}
 }
 
+// Initializes and returns an interaction object with an intent object and your app’s response.
+//
 // NewInteractionWithIntentResponse creates a new [Interaction].
 func NewInteractionWithIntentResponse(intent *raw.INIntent, response *raw.INIntentResponse) *Interaction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INInteraction")), objc.RegisterName("alloc"))
@@ -40,30 +44,40 @@ func NewInteractionWithIntentResponse(intent *raw.INIntent, response *raw.INInte
 	return &Interaction{inner: raw.INInteractionFromID(_id)}
 }
 
+// The direction in which information flowed to or from the device.
+//
 // WithDirection sets the direction property and returns the receiver for chaining.
 func (x *Interaction) WithDirection(direction INInteractionDirection) *Interaction {
 	x.inner.SetDirection(raw.INInteractionDirection(direction))
 	return x
 }
 
+// The time at which the interaction started and its duration.
+//
 // WithDateInterval sets the dateInterval property and returns the receiver for chaining.
 func (x *Interaction) WithDateInterval(dateInterval *foundation.NSDateInterval) *Interaction {
 	x.inner.SetDateInterval(dateInterval)
 	return x
 }
 
+// The unique identifier of the interaction.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *Interaction) WithIdentifier(identifier string) *Interaction {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// The unique identifier of the interaction’s group.
+//
 // WithGroupIdentifier sets the groupIdentifier property and returns the receiver for chaining.
 func (x *Interaction) WithGroupIdentifier(groupIdentifier string) *Interaction {
 	x.inner.SetGroupIdentifier(foundation.NSStringStringWithUTF8String(groupIdentifier))
 	return x
 }
 
+// Donates this interaction object to the system.
+//
 // DonateInteractionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Interaction) DonateInteractionWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)

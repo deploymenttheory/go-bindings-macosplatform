@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// The object you use to identify connected accessories, and begin delivery of connection and disconnection notifications.
+//
 // AccessoryManager wraps [raw.EAAccessoryManager] with a fluent Go API.
 type AccessoryManager struct {
 	inner *raw.EAAccessoryManager

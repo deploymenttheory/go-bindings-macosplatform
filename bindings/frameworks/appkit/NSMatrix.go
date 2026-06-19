@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A legacy interface for grouping radio buttons or other types of cells together.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmatrix
 type NSMatrix struct {
 	NSControl
@@ -122,6 +124,7 @@ func NSMatrixFromID(id objc.ID) *NSMatrix {
 	return o
 }
 
+// Initializes a newly allocated matrix with the specified frame.
 func (o *NSMatrix) InitWithFrame(frameRect corefoundation.CGRect) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrame, frameRect)
 	if _ret != 0 {
@@ -130,6 +133,7 @@ func (o *NSMatrix) InitWithFrame(frameRect corefoundation.CGRect) *NSMatrix {
 	return NSMatrixFromID(_ret)
 }
 
+// Initializes and returns a newly allocated matrix of the specified size using the given cell as a prototype.
 func (o *NSMatrix) InitWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, cell *NSCell, rowsHigh int, colsWide int) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModePrototypeNumberOfRowsNumberOfColumns, frameRect, mode, cell.Ptr(), rowsHigh, colsWide)
 	if _ret != 0 {
@@ -138,6 +142,7 @@ func (o *NSMatrix) InitWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRe
 	return NSMatrixFromID(_ret)
 }
 
+// Initializes and returns a newly allocated matrix of the specified size using cells of the given class.
 func (o *NSMatrix) InitWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, factoryId objc.Class, rowsHigh int, colsWide int) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModeCellClassNumberOfRowsNumberOfColumns, frameRect, mode, factoryId, rowsHigh, colsWide)
 	if _ret != 0 {
@@ -146,6 +151,7 @@ func (o *NSMatrix) InitWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRe
 	return NSMatrixFromID(_ret)
 }
 
+// Creates a new cell at the location specified by the given row and column in the receiver.
 func (o *NSMatrix) MakeCellAtRowColumn(row int, col int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelMakeCellAtRowColumn, row, col)
 	if _ret != 0 {
@@ -154,55 +160,68 @@ func (o *NSMatrix) MakeCellAtRowColumn(row int, col int) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Iterates through the cells in the receiver, sending the specified selector to an object for each cell.
 func (o *NSMatrix) SendActionToForAllCells(selector objc.SEL, object objc.ID, flag bool) {
 	o.Ptr().Send(_nSMatrixSelSendActionToForAllCells, selector, object, flag)
 }
 
+// Sorts the receiver’s cells in ascending order as defined by the comparison method.
 func (o *NSMatrix) SortUsingSelector(comparator objc.SEL) {
 	o.Ptr().Send(_nSMatrixSelSortUsingSelector, comparator)
 }
 
+// Sorts the receiver’s cells in ascending order as defined by the specified comparison function.
 func (o *NSMatrix) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSMatrixSelSortUsingFunctionContext, compare, context_)
 }
 
+// Programmatically selects a range of cells.
 func (o *NSMatrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
 	o.Ptr().Send(_nSMatrixSelSetSelectionFromToAnchorHighlight, startPos, endPos, anchorPos, lit)
 }
 
+// Deselects the selected cell or cells.
 func (o *NSMatrix) DeselectSelectedCell() {
 	o.Ptr().Send(_nSMatrixSelDeselectSelectedCell)
 }
 
+// Deselects all cells in the receiver and, if necessary, redisplays the receiver.
 func (o *NSMatrix) DeselectAllCells() {
 	o.Ptr().Send(_nSMatrixSelDeselectAllCells)
 }
 
+// Selects the cell at the specified row and column within the receiver.
 func (o *NSMatrix) SelectCellAtRowColumn(row int, col int) {
 	o.Ptr().Send(_nSMatrixSelSelectCellAtRowColumn, row, col)
 }
 
+// Selects and highlights all cells in the receiver.
 func (o *NSMatrix) SelectAll(sender objc.ID) {
 	o.Ptr().Send(_nSMatrixSelSelectAll, sender)
 }
 
+// Selects the last cell with the given tag.
 func (o *NSMatrix) SelectCellWithTag(tag int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelSelectCellWithTag, tag)
 	return _ret
 }
 
+// Specifies whether the cells in the matrix are scrollable.
 func (o *NSMatrix) SetScrollable(flag bool) {
 	o.Ptr().Send(_nSMatrixSelSetScrollable, flag)
 }
 
+// Sets the state of the cell at specified location.
 func (o *NSMatrix) SetStateAtRowColumn(value int, row int, col int) {
 	o.Ptr().Send(_nSMatrixSelSetStateAtRowColumn, value, row, col)
 }
 
+// Obtains the number of rows and columns in the receiver.
 func (o *NSMatrix) GetNumberOfRowsColumns(rowCount *int64, colCount *int64) {
 	o.Ptr().Send(_nSMatrixSelGetNumberOfRowsColumns, rowCount, colCount)
 }
 
+// Returns the cell at the specified row and column.
 func (o *NSMatrix) CellAtRowColumn(row int, col int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellAtRowColumn, row, col)
 	if _ret != 0 {
@@ -211,69 +230,85 @@ func (o *NSMatrix) CellAtRowColumn(row int, col int) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Returns the frame rectangle of the cell that would be drawn at the specified location.
 func (o *NSMatrix) CellFrameAtRowColumn(row int, col int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMatrixSelCellFrameAtRowColumn, row, col)
 	return _ret
 }
 
+// Searches the receiver for the specified cell and returns the row and column of the cell
 func (o *NSMatrix) GetRowColumnOfCell(row *int64, col *int64, cell *NSCell) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelGetRowColumnOfCell, row, col, cell.Ptr())
 	return _ret
 }
 
+// Indicates whether the specified point lies within one of the cells of the matrix and returns the location of the cell within which the point lies.
 func (o *NSMatrix) GetRowColumnForPoint(row *int64, col *int64, point corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelGetRowColumnForPoint, row, col, point)
 	return _ret
 }
 
+// Changes the number of rows and columns in the receiver.
 func (o *NSMatrix) RenewRowsColumns(newRows int, newCols int) {
 	o.Ptr().Send(_nSMatrixSelRenewRowsColumns, newRows, newCols)
 }
 
+// Replaces the cell at the specified row and column with the new cell.
 func (o *NSMatrix) PutCellAtRowColumn(newCell *NSCell, row int, col int) {
 	o.Ptr().Send(_nSMatrixSelPutCellAtRowColumn, newCell.Ptr(), row, col)
 }
 
+// Adds a new row of cells below the last row.
 func (o *NSMatrix) AddRow() {
 	o.Ptr().Send(_nSMatrixSelAddRow)
 }
 
+// Adds a new row of cells below the last row, using the specified cells.
 func (o *NSMatrix) AddRowWithCells(newCells *foundation.NSArray[*NSCell]) {
 	o.Ptr().Send(_nSMatrixSelAddRowWithCells, newCells.Ptr())
 }
 
+// Inserts a new row of cells before the specified row.
 func (o *NSMatrix) InsertRow(row int) {
 	o.Ptr().Send(_nSMatrixSelInsertRow, row)
 }
 
+// Inserts a new row of cells before the specified row, using the given cells.
 func (o *NSMatrix) InsertRowWithCells(row int, newCells *foundation.NSArray[*NSCell]) {
 	o.Ptr().Send(_nSMatrixSelInsertRowWithCells, row, newCells.Ptr())
 }
 
+// Removes the specified row from the receiver.
 func (o *NSMatrix) RemoveRow(row int) {
 	o.Ptr().Send(_nSMatrixSelRemoveRow, row)
 }
 
+// Adds a new column of cells to the right of the last column.
 func (o *NSMatrix) AddColumn() {
 	o.Ptr().Send(_nSMatrixSelAddColumn)
 }
 
+// Adds a new column of cells to the right of the last column, using the given cells.
 func (o *NSMatrix) AddColumnWithCells(newCells *foundation.NSArray[*NSCell]) {
 	o.Ptr().Send(_nSMatrixSelAddColumnWithCells, newCells.Ptr())
 }
 
+// Inserts a new column of cells at the specified location.
 func (o *NSMatrix) InsertColumn(column int) {
 	o.Ptr().Send(_nSMatrixSelInsertColumn, column)
 }
 
+// Inserts a new column of cells before the specified column, using the given cells.
 func (o *NSMatrix) InsertColumnWithCells(column int, newCells *foundation.NSArray[*NSCell]) {
 	o.Ptr().Send(_nSMatrixSelInsertColumnWithCells, column, newCells.Ptr())
 }
 
+// Removes the specified column at from the receiver.
 func (o *NSMatrix) RemoveColumn(col int) {
 	o.Ptr().Send(_nSMatrixSelRemoveColumn, col)
 }
 
+// Searches the receiver and returns the last cell matching the specified tag.
 func (o *NSMatrix) CellWithTag(tag int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellWithTag, tag)
 	if _ret != 0 {
@@ -282,61 +317,75 @@ func (o *NSMatrix) CellWithTag(tag int) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Changes the width and the height of the receiver’s frame so it exactly contains the cells.
 func (o *NSMatrix) SizeToCells() {
 	o.Ptr().Send(_nSMatrixSelSizeToCells)
 }
 
+// Specifies whether the receiver’s size information is validated.
 func (o *NSMatrix) SetValidateSize(flag bool) {
 	o.Ptr().Send(_nSMatrixSelSetValidateSize, flag)
 }
 
+// Displays the cell at the specified row and column.
 func (o *NSMatrix) DrawCellAtRowColumn(row int, col int) {
 	o.Ptr().Send(_nSMatrixSelDrawCellAtRowColumn, row, col)
 }
 
+// Highlights or unhighlights the cell at the specified row and column location.
 func (o *NSMatrix) HighlightCellAtRowColumn(flag bool, row int, col int) {
 	o.Ptr().Send(_nSMatrixSelHighlightCellAtRowColumn, flag, row, col)
 }
 
+// Scrolls the receiver so the specified cell is visible.
 func (o *NSMatrix) ScrollCellToVisibleAtRowColumn(row int, col int) {
 	o.Ptr().Send(_nSMatrixSelScrollCellToVisibleAtRowColumn, row, col)
 }
 
+// If the selected cell has both an action and a target, sends its action to its target.
 func (o *NSMatrix) SendAction() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelSendAction)
 	return _ret
 }
 
+// Sends the double-click action message to the target of the receiver.
 func (o *NSMatrix) SendDoubleAction() {
 	o.Ptr().Send(_nSMatrixSelSendDoubleAction)
 }
 
+// Requests permission to begin editing text.
 func (o *NSMatrix) TextShouldBeginEditing(textObject *NSText) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTextShouldBeginEditing, textObject.Ptr())
 	return _ret
 }
 
+// Requests permission to end editing.
 func (o *NSMatrix) TextShouldEndEditing(textObject *NSText) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTextShouldEndEditing, textObject.Ptr())
 	return _ret
 }
 
+// Invoked when there’s a change in the text after the receiver gains first responder status.
 func (o *NSMatrix) TextDidBeginEditing(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSMatrixSelTextDidBeginEditing, notification.Ptr())
 }
 
+// Invoked when text editing ends.
 func (o *NSMatrix) TextDidEndEditing(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSMatrixSelTextDidEndEditing, notification.Ptr())
 }
 
+// Invoked when a key-down event or paste operation occurs that changes the receiver’s contents.
 func (o *NSMatrix) TextDidChange(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSMatrixSelTextDidChange, notification.Ptr())
 }
 
+// Selects text in the currently selected cell or in the key cell.
 func (o *NSMatrix) SelectText(sender objc.ID) {
 	o.Ptr().Send(_nSMatrixSelSelectText, sender)
 }
 
+// Selects the text in the cell at the specified location and returns the cell.
 func (o *NSMatrix) SelectTextAtRowColumn(row int, col int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectTextAtRowColumn, row, col)
 	if _ret != 0 {
@@ -345,10 +394,12 @@ func (o *NSMatrix) SelectTextAtRowColumn(row int, col int) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Sets the tooltip for the cell.
 func (o *NSMatrix) SetToolTipForCell(toolTipString *foundation.NSString, cell *NSCell) {
 	o.Ptr().Send(_nSMatrixSelSetToolTipForCell, toolTipString.Ptr(), cell.Ptr())
 }
 
+// Returns the tooltip for the specified cell.
 func (o *NSMatrix) ToolTipForCell(cell *NSCell) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelToolTipForCell, cell.Ptr())
 	if _ret != 0 {

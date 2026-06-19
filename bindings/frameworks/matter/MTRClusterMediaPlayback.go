@@ -98,7 +98,7 @@ func (o *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -112,7 +112,7 @@ func (o *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCom
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -126,7 +126,7 @@ func (o *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInte
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -140,7 +140,7 @@ func (o *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCo
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -154,7 +154,7 @@ func (o *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -168,7 +168,7 @@ func (o *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCom
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -182,7 +182,7 @@ func (o *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValue
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -196,7 +196,7 @@ func (o *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterv
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -210,7 +210,7 @@ func (o *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueI
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -224,7 +224,7 @@ func (o *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterva
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -238,7 +238,7 @@ func (o *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -252,7 +252,7 @@ func (o *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCom
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -266,7 +266,7 @@ func (o *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInt
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -280,7 +280,7 @@ func (o *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalC
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -294,7 +294,7 @@ func (o *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedVal
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -308,7 +308,7 @@ func (o *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInte
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -322,7 +322,7 @@ func (o *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedVal
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -336,7 +336,7 @@ func (o *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedVa
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -350,7 +350,7 @@ func (o *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelSeekWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelSeekWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterActivateAudioTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -361,7 +361,7 @@ func (o *MTRClusterMediaPlayback) ActivateAudioTrackWithParamsExpectedValuesExpe
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterActivateTextTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -372,7 +372,7 @@ func (o *MTRClusterMediaPlayback) ActivateTextTrackWithParamsExpectedValuesExpec
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterDeactivateTextTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -383,7 +383,7 @@ func (o *MTRClusterMediaPlayback) DeactivateTextTrackWithParamsExpectedValuesExp
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelDeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelDeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
@@ -394,67 +394,103 @@ func (o *MTRClusterMediaPlayback) DeactivateTextTrackWithExpectedValuesExpectedV
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelDeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelDeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeCurrentStateWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeCurrentStateWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeCurrentStateWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeStartTimeWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeStartTimeWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeStartTimeWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeDurationWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeDurationWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeDurationWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeSampledPositionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeSampledPositionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeSampledPositionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributePlaybackSpeedWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributePlaybackSpeedWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributePlaybackSpeedWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeSeekRangeEndWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeSeekRangeEndWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeSeekRangeEndWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeSeekRangeStartWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeSeekRangeStartWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeSeekRangeStartWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterMediaPlayback) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaPlaybackSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
@@ -485,7 +521,7 @@ func (o *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -499,7 +535,7 @@ func (o *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCom
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPlayWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -513,7 +549,7 @@ func (o *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -527,7 +563,7 @@ func (o *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCo
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPauseWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -541,7 +577,7 @@ func (o *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedVa
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopPlaybackWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopPlaybackWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -555,7 +591,7 @@ func (o *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInt
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopPlaybackWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStopPlaybackWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -569,7 +605,7 @@ func (o *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValue
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -583,7 +619,7 @@ func (o *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterv
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelStartOverWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -597,7 +633,7 @@ func (o *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueI
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -611,7 +647,7 @@ func (o *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterva
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelPreviousWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -625,7 +661,7 @@ func (o *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -639,7 +675,7 @@ func (o *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCom
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelNextWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -653,7 +689,7 @@ func (o *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInt
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -667,7 +703,7 @@ func (o *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalC
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelRewindWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -681,7 +717,7 @@ func (o *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedVal
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -695,7 +731,7 @@ func (o *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelFastForwardWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -709,7 +745,7 @@ func (o *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedVal
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -723,7 +759,7 @@ func (o *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedVa
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelSkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRMediaPlaybackClusterPlaybackResponseParams, unsafe.Pointer)) {
@@ -737,5 +773,5 @@ func (o *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInter
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterMediaPlaybackSelSeekWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterMediaPlaybackSelSeekWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

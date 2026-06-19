@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a property of a contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactproperty
 type CNContactProperty struct {
 	foundation.NSObject

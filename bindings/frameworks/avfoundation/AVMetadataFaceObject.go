@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Face information detected by a metadata capture output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadatafaceobject
 type AVMetadataFaceObject struct {
 	AVMetadataObject

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores information required to execute a gradient pass for instance normalization.
+//
 // CNNInstanceNormalizationGradientState wraps [raw.MPSCNNInstanceNormalizationGradientState] with a fluent Go API.
 type CNNInstanceNormalizationGradientState struct {
 	inner *raw.MPSCNNInstanceNormalizationGradientState

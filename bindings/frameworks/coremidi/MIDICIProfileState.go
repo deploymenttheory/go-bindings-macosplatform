@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midiciprofilestate
 type MIDICIProfileState struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func MIDICIProfileStateFromID(id objc.ID) *MIDICIProfileState {
 	return o
 }
 
+// Creates a new profile state object for the specified MIDI channel and profiles.
 // Deprecated: since macOS 15.0.
 func (o *MIDICIProfileState) InitWithChannelEnabledProfilesDisabledProfiles(midiChannelNum uint8, enabled *foundation.NSArray[*MIDICIProfile], disabled *foundation.NSArray[*MIDICIProfile]) *MIDICIProfileState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileStateSelInitWithChannelEnabledProfilesDisabledProfiles, midiChannelNum, enabled.Ptr(), disabled.Ptr())
@@ -43,6 +46,7 @@ func (o *MIDICIProfileState) InitWithChannelEnabledProfilesDisabledProfiles(midi
 	return MIDICIProfileStateFromID(_ret)
 }
 
+// Creates a new profile state object for the specified profiles.
 // Deprecated: since macOS 15.0.
 func (o *MIDICIProfileState) InitWithEnabledProfilesDisabledProfiles(enabled *foundation.NSArray[*MIDICIProfile], disabled *foundation.NSArray[*MIDICIProfile]) *MIDICIProfileState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileStateSelInitWithEnabledProfilesDisabledProfiles, enabled.Ptr(), disabled.Ptr())

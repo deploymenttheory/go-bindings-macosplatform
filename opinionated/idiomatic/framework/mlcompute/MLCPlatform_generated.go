@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A utility class for setting global properties in the framework.
+//
 // Platform wraps [raw.MLCPlatform] with a fluent Go API.
 type Platform struct {
 	inner *raw.MLCPlatform

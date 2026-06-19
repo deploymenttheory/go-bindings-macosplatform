@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An image that a snapshotter object generates.
+//
 // MapSnapshot wraps [raw.MKMapSnapshot] with a fluent Go API.
 type MapSnapshot struct {
 	inner *raw.MKMapSnapshot

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The values to use as inputs to the salts for deriving the symmetric key.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninputvalues
 type ASAuthorizationPublicKeyCredentialPRFAssertionInputValues struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id objc.ID)
 	return o
 }
 
+// Initializes an input values object with the given salts.
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues) InitWithSaltInput1SaltInput2(saltInput1 *foundation.NSData, saltInput2 *foundation.NSData) *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputValuesSelInitWithSaltInput1SaltInput2, saltInput1.Ptr(), saltInput2.Ptr())
 	if _ret != 0 {

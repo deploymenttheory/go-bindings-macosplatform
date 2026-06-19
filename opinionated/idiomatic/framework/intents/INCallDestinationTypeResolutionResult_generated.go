@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the destination type of a call.
+//
 // CallDestinationTypeResolutionResult wraps [raw.INCallDestinationTypeResolutionResult] with a fluent Go API.
 type CallDestinationTypeResolutionResult struct {
 	inner *raw.INCallDestinationTypeResolutionResult

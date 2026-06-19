@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable collection of unique integer values that represent indexes in another collection.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsindexset
 type NSIndexSet struct {
 	NSObject
@@ -60,6 +62,7 @@ func NSIndexSetFromID(id objc.ID) *NSIndexSet {
 	return o
 }
 
+// Creates an empty index set.
 func NSIndexSetIndexSet() *NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexSet), _nSIndexSetSelIndexSet)
 	if _ret != 0 {
@@ -68,6 +71,7 @@ func NSIndexSetIndexSet() *NSIndexSet {
 	return NSIndexSetFromID(_ret)
 }
 
+// Creates an index set with an index.
 func NSIndexSetIndexSetWithIndex(value uint) *NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexSet), _nSIndexSetSelIndexSetWithIndex, value)
 	if _ret != 0 {
@@ -76,6 +80,7 @@ func NSIndexSetIndexSetWithIndex(value uint) *NSIndexSet {
 	return NSIndexSetFromID(_ret)
 }
 
+// Creates an index set with an index range.
 func NSIndexSetIndexSetWithIndexesInRange(range_ NSRange) *NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexSet), _nSIndexSetSelIndexSetWithIndexesInRange, range_)
 	if _ret != 0 {
@@ -84,6 +89,7 @@ func NSIndexSetIndexSetWithIndexesInRange(range_ NSRange) *NSIndexSet {
 	return NSIndexSetFromID(_ret)
 }
 
+// Initializes an allocated NSIndexSet object with an index range.
 func (o *NSIndexSet) InitWithIndexesInRange(range_ NSRange) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelInitWithIndexesInRange, range_)
 	if _ret != 0 {
@@ -92,6 +98,7 @@ func (o *NSIndexSet) InitWithIndexesInRange(range_ NSRange) *NSIndexSet {
 	return NSIndexSetFromID(_ret)
 }
 
+// Initializes an allocated NSIndexSet object with an index set.
 func (o *NSIndexSet) InitWithIndexSet(indexSet *NSIndexSet) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelInitWithIndexSet, indexSet.Ptr())
 	if _ret != 0 {
@@ -100,6 +107,7 @@ func (o *NSIndexSet) InitWithIndexSet(indexSet *NSIndexSet) *NSIndexSet {
 	return NSIndexSetFromID(_ret)
 }
 
+// Initializes an allocated NSIndexSet object with an index.
 func (o *NSIndexSet) InitWithIndex(value uint) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelInitWithIndex, value)
 	if _ret != 0 {
@@ -108,61 +116,73 @@ func (o *NSIndexSet) InitWithIndex(value uint) *NSIndexSet {
 	return NSIndexSetFromID(_ret)
 }
 
+// Indicates whether the indexes in the receiving index set are the same indexes contained in another index set.
 func (o *NSIndexSet) IsEqualToIndexSet(indexSet *NSIndexSet) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSIndexSetSelIsEqualToIndexSet, indexSet.Ptr())
 	return _ret
 }
 
+// Returns either the closest index in the index set that is greater than a specific index or the not-found indicator.
 func (o *NSIndexSet) IndexGreaterThanIndex(value uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelIndexGreaterThanIndex, value)
 	return _ret
 }
 
+// Returns either the closest index in the index set that is less than a specific index or the not-found indicator.
 func (o *NSIndexSet) IndexLessThanIndex(value uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelIndexLessThanIndex, value)
 	return _ret
 }
 
+// Returns either the closest index in the index set that is greater than or equal to a specific index or the not-found indicator.
 func (o *NSIndexSet) IndexGreaterThanOrEqualToIndex(value uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelIndexGreaterThanOrEqualToIndex, value)
 	return _ret
 }
 
+// Returns either the closest index in the index set that is less than or equal to a specific index or the not-found indicator.
 func (o *NSIndexSet) IndexLessThanOrEqualToIndex(value uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelIndexLessThanOrEqualToIndex, value)
 	return _ret
 }
 
+// The index set fills an index buffer with the indexes contained both in the index set and in an index range, returning the number of indexes copied.
 func (o *NSIndexSet) GetIndexesMaxCountInIndexRange(indexBuffer *uint, bufferSize uint, range_ *NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelGetIndexesMaxCountInIndexRange, indexBuffer, bufferSize, range_)
 	return _ret
 }
 
+// Returns the number of indexes in the index set that are members of a given range.
 func (o *NSIndexSet) CountOfIndexesInRange(range_ NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelCountOfIndexesInRange, range_)
 	return _ret
 }
 
+// Indicates whether the index set contains a specific index.
 func (o *NSIndexSet) ContainsIndex(value uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSIndexSetSelContainsIndex, value)
 	return _ret
 }
 
+// Indicates whether the index set contains the indexes represented by an index range.
 func (o *NSIndexSet) ContainsIndexesInRange(range_ NSRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSIndexSetSelContainsIndexesInRange, range_)
 	return _ret
 }
 
+// Indicates whether the receiving index set contains a superset of the indexes in another index set.
 func (o *NSIndexSet) ContainsIndexes(indexSet *NSIndexSet) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSIndexSetSelContainsIndexes, indexSet.Ptr())
 	return _ret
 }
 
+// Indicates whether the index set contains any of the indexes in a range.
 func (o *NSIndexSet) IntersectsIndexesInRange(range_ NSRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSIndexSetSelIntersectsIndexesInRange, range_)
 	return _ret
 }
 
+// Executes a given Block using each object in the index set.
 func (o *NSIndexSet) EnumerateIndexesUsing(block func(uint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -174,6 +194,7 @@ func (o *NSIndexSet) EnumerateIndexesUsing(block func(uint, *bool)) {
 	o.Ptr().Send(_nSIndexSetSelEnumerateIndexesUsing, __block_block)
 }
 
+// Executes a given Block over the index set’s indexes, using the specified enumeration options.
 func (o *NSIndexSet) EnumerateIndexesWithOptionsUsing(opts NSEnumerationOptions, block func(uint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -185,6 +206,7 @@ func (o *NSIndexSet) EnumerateIndexesWithOptionsUsing(opts NSEnumerationOptions,
 	o.Ptr().Send(_nSIndexSetSelEnumerateIndexesWithOptionsUsing, opts, __block_block)
 }
 
+// Executes a given Block using the indexes in the specified range, using the specified enumeration options.
 func (o *NSIndexSet) EnumerateIndexesInRangeOptionsUsing(range_ NSRange, opts NSEnumerationOptions, block func(uint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -196,6 +218,7 @@ func (o *NSIndexSet) EnumerateIndexesInRangeOptionsUsing(range_ NSRange, opts NS
 	o.Ptr().Send(_nSIndexSetSelEnumerateIndexesInRangeOptionsUsing, range_, opts, __block_block)
 }
 
+// Returns the index of the first object that passes the predicate Block test.
 func (o *NSIndexSet) IndexPassingTest(predicate func(uint, *bool) bool) uint {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -208,6 +231,7 @@ func (o *NSIndexSet) IndexPassingTest(predicate func(uint, *bool) bool) uint {
 	return _ret
 }
 
+// Returns the index of the first object that passes the predicate Block test using the specified enumeration options.
 func (o *NSIndexSet) IndexWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -220,6 +244,7 @@ func (o *NSIndexSet) IndexWithOptionsPassingTest(opts NSEnumerationOptions, pred
 	return _ret
 }
 
+// Returns the index of the first object in the specified range that passes the predicate Block test.
 func (o *NSIndexSet) IndexInRangeOptionsPassingTest(range_ NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -232,6 +257,7 @@ func (o *NSIndexSet) IndexInRangeOptionsPassingTest(range_ NSRange, opts NSEnume
 	return _ret
 }
 
+// Returns an NSIndexSet containing the receiving index set’s objects that pass the Block test.
 func (o *NSIndexSet) IndexesPassingTest(predicate func(uint, *bool) bool) *NSIndexSet {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -247,6 +273,7 @@ func (o *NSIndexSet) IndexesPassingTest(predicate func(uint, *bool) bool) *NSInd
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns an NSIndexSet containing the receiving index set’s objects that pass the Block test using the specified enumeration options.
 func (o *NSIndexSet) IndexesWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) *NSIndexSet {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -262,6 +289,7 @@ func (o *NSIndexSet) IndexesWithOptionsPassingTest(opts NSEnumerationOptions, pr
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns an NSIndexSet containing the receiving index set’s objects in the specified range that pass the Block test.
 func (o *NSIndexSet) IndexesInRangeOptionsPassingTest(range_ NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) *NSIndexSet {
 	var __block_predicate objc.Block
 	if predicate != nil {
@@ -277,14 +305,17 @@ func (o *NSIndexSet) IndexesInRangeOptionsPassingTest(range_ NSRange, opts NSEnu
 	return NSIndexSetFromID(_ret)
 }
 
+// Executes a given block using each object in the index set, in the specified ranges.
 func (o *NSIndexSet) EnumerateRangesUsing(block objc.Block) {
 	o.Ptr().Send(_nSIndexSetSelEnumerateRangesUsing, block)
 }
 
+// Executes a given block using each object in the index set, in the specified ranges.
 func (o *NSIndexSet) EnumerateRangesWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSIndexSetSelEnumerateRangesWithOptionsUsing, opts, block)
 }
 
+// Enumerates over the ranges in the range of objects using the block
 func (o *NSIndexSet) EnumerateRangesInRangeOptionsUsing(range_ NSRange, opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSIndexSetSelEnumerateRangesInRangeOptionsUsing, range_, opts, block)
 }

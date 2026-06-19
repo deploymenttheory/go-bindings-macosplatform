@@ -36,12 +36,15 @@ func MTRTimeSynchronizationClusterSetTimeZoneParamsFromID(id objc.ID) *MTRTimeSy
 }
 
 func (o *MTRTimeSynchronizationClusterSetTimeZoneParams) TimeZone() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRTimeSynchronizationClusterSetTimeZoneParamsSelTimeZone)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterSetTimeZoneParamsSelTimeZone)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterSetTimeZoneParams) SetTimeZone(timeZone *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRTimeSynchronizationClusterSetTimeZoneParamsSelSetTimeZone, timeZone)
+	o.Ptr().Send(_mTRTimeSynchronizationClusterSetTimeZoneParamsSelSetTimeZone, timeZone.Ptr())
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.

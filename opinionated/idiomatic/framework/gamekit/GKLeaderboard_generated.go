@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A leaderboard for a game that Game Center stores.
+//
 // Leaderboard wraps [raw.GKLeaderboard] with a fluent Go API.
 type Leaderboard struct {
 	inner *raw.GKLeaderboard
@@ -103,14 +105,14 @@ func (x *Leaderboard) WithRange(range_ foundation.NSRange) *Leaderboard {
 	return x
 }
 
-// Loads the occurrence preceding this occurrence for a recurring leaderboard in which the local player submitted a score. If no previous occurrence is found that the player submitted a score to, then the most recent previous occurrence is returned.
+// Loads the previous recurring leaderboard occurrence that the player submits a score to.
 //
 // LoadPreviousOccurrenceWithCompletionHandler calls the underlying LoadPreviousOccurrenceWithCompletionHandler.
 func (x *Leaderboard) LoadPreviousOccurrenceWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.LoadPreviousOccurrenceWithCompletionHandler(completionHandler)
 }
 
-// Instance method to submit a single score to the leaderboard associated with this instance score - earned by the player context - developer supplied metadata associated with the player's score player - the player for whom this score is being submitted
+// Submits a score to the leaderboard.
 //
 // SubmitScoreContextPlayer blocks until the operation completes or ctx is cancelled.
 func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, context_ uint, player *raw.GKPlayer) error {
@@ -130,14 +132,14 @@ func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, c
 	}
 }
 
-// Loads leaderboard entries based on the supplied parameters. playerScope - Friends or Global timeScope - Today, Week, All Time (Only applicable to classic leaderboards) range - Range of ranked entries to return (minimum start index 1, maximum length 100) Upon completion, will return: localPlayerEntry - entry for the local player entries - requested entries matching supplied parameters totalPlayerCount - total player count matching specified scope
+// Returns the scores for the local player and other players for the specified type of player, time period, and ranks.
 //
 // LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler calls the underlying LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler.
 func (x *Leaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], int, unsafe.Pointer)) {
 	x.inner.LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(raw.GKLeaderboardPlayerScope(playerScope), raw.GKLeaderboardTimeScope(timeScope), range_, completionHandler)
 }
 
-// Loads leaderboard entries for specific players based on the supplied parameters. players - Array of players to load entries for timeScope - Today, Week, All Time (Only applicable to classic leaderboards) Upon completion, will return: localPlayerEntry - entry for the local player entries - requested entries matching supplied parameters
+// Returns the scores for the local player and other players for the specified time period.
 //
 // LoadEntriesForPlayersTimeScopeCompletionHandler calls the underlying LoadEntriesForPlayersTimeScopeCompletionHandler.
 func (x *Leaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*raw.GKPlayer], timeScope GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], unsafe.Pointer)) {
@@ -376,7 +378,7 @@ func (x *Leaderboard) IsLoading() bool {
 	return x.inner.IsLoading()
 }
 
-// Asynchronously load the image. Error will be nil on success.
+// Loads the image for the leaderboard.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (x *Leaderboard) LoadImage(ctx context.Context) (*appkit.NSImage, error) {

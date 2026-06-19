@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Settings for an IKEv2 VPN configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnprotocolikev2
 type NEVPNProtocolIKEv2 struct {
 	NEVPNProtocolIPSec

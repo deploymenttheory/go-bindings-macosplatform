@@ -1,0 +1,602 @@
+{
+  "schema_version": 1,
+  "framework": "EndpointSecurity",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "es_action_type_t": {
+      "doc": "The type of the message’s action.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_action_type_t"
+    },
+    "es_address_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_address_type_t"
+    },
+    "es_auth_result_t": {
+      "doc": "Values used when responding to an authorization event.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_auth_result_t"
+    },
+    "es_authentication_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_authentication_type_t"
+    },
+    "es_authorization_rule_class_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_authorization_rule_class_t"
+    },
+    "es_auto_unlock_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_auto_unlock_type_t"
+    },
+    "es_btm_item_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_btm_item_type_t"
+    },
+    "es_clear_cache_result_t": {
+      "doc": "Values that indicate the result of clearing a cache.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_clear_cache_result_t"
+    },
+    "es_cs_validation_category_t": {
+      "doc": "es_cs_validation_category",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_cs_validation_category_t"
+    },
+    "es_destination_type_t": {
+      "doc": "A type that indicates how a file event presents its destination to the client.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_destination_type_t"
+    },
+    "es_event_type_t": {
+      "doc": "A type used to identify a message’s event type and subscribe to events of that type.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_type_t"
+    },
+    "es_gatekeeper_user_override_file_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_gatekeeper_user_override_file_type_t"
+    },
+    "es_get_task_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_get_task_type_t"
+    },
+    "es_mount_disposition_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_mount_disposition_t"
+    },
+    "es_mute_inversion_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_mute_inversion_type_t"
+    },
+    "es_mute_inverted_return_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_mute_inverted_return_t"
+    },
+    "es_mute_path_type_t": {
+      "doc": "The type of a path argument, such as a prefix or a path literal.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_mute_path_type_t"
+    },
+    "es_new_client_result_t": {
+      "doc": "The result of an attempt to create a new client.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_new_client_result_t"
+    },
+    "es_od_account_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_od_account_type_t"
+    },
+    "es_od_member_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_od_member_type_t"
+    },
+    "es_od_record_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_od_record_type_t"
+    },
+    "es_openssh_login_result_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_openssh_login_result_type_t"
+    },
+    "es_proc_check_type_t": {
+      "doc": "The type of call used when a process checks on the access of the target process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_proc_check_type_t"
+    },
+    "es_proc_suspend_resume_type_t": {
+      "doc": "The type of a process suspension or resumption event.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_proc_suspend_resume_type_t"
+    },
+    "es_profile_source_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_profile_source_t"
+    },
+    "es_respond_result_t": {
+      "doc": "Values that indicate the result of responding to a message.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_respond_result_t"
+    },
+    "es_result_type_t": {
+      "doc": "A type that indicates the type of a message’s result.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_result_type_t"
+    },
+    "es_return_t": {
+      "doc": "Values that indicate the result of an Endpoint Security action that can only succeed or fail.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_return_t"
+    },
+    "es_set_or_clear_t": {
+      "doc": "A type that indicates whether an event represents setting or clearing a file’s access control list.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_set_or_clear_t"
+    },
+    "es_sudo_plugin_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_sudo_plugin_type_t"
+    },
+    "es_tcc_authorization_reason_t": {
+      "doc": "ess_tcc_authorization_reason_t",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_tcc_authorization_reason_t"
+    },
+    "es_tcc_authorization_right_t": {
+      "doc": "ess_tcc_authorization_right_t",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_tcc_authorization_right_t"
+    },
+    "es_tcc_event_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_tcc_event_type_t"
+    },
+    "es_tcc_identity_type_t": {
+      "doc": "es_tcc_identity_type_t",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_tcc_identity_type_t"
+    },
+    "es_touchid_mode_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_touchid_mode_t"
+    },
+    "es_xpc_domain_type_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_xpc_domain_type_t"
+    }
+  },
+  "structs": {
+    "es_authorization_result_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_authorization_result_t"
+    },
+    "es_btm_launch_item_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_btm_launch_item_t"
+    },
+    "es_event_access_t": {
+      "doc": "A type for an event that indicates the checking of a file’s access permission.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_access_t"
+    },
+    "es_event_authentication_auto_unlock_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authentication_auto_unlock_t"
+    },
+    "es_event_authentication_od_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authentication_od_t"
+    },
+    "es_event_authentication_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authentication_t"
+    },
+    "es_event_authentication_token_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authentication_token_t"
+    },
+    "es_event_authentication_touchid_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authentication_touchid_t"
+    },
+    "es_event_authorization_judgement_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authorization_judgement_t"
+    },
+    "es_event_authorization_petition_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_authorization_petition_t"
+    },
+    "es_event_btm_launch_item_add_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_btm_launch_item_add_t"
+    },
+    "es_event_btm_launch_item_remove_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_btm_launch_item_remove_t"
+    },
+    "es_event_chdir_t": {
+      "doc": "A type for an event that indicates a change to a process’s working directory.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_chdir_t"
+    },
+    "es_event_chroot_t": {
+      "doc": "A type for an event that indicates a change to a process’s root directory.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_chroot_t"
+    },
+    "es_event_clone_t": {
+      "doc": "A type for an event that indicates the cloning of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_clone_t"
+    },
+    "es_event_close_t": {
+      "doc": "A type for an event that indicates the closing of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_close_t"
+    },
+    "es_event_copyfile_t": {
+      "doc": "A type for an event that indicates the copying of a file by use of a system call.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_copyfile_t"
+    },
+    "es_event_create_t": {
+      "doc": "A type for an event that indicates the creation of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_create_t"
+    },
+    "es_event_cs_invalidated_t": {
+      "doc": "A type for an event that indicates the invalidation of a process’ code signing status.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_cs_invalidated_t"
+    },
+    "es_event_deleteextattr_t": {
+      "doc": "A type for an event that indicates the deletion of an extended attribute from a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_deleteextattr_t"
+    },
+    "es_event_dup_t": {
+      "doc": "A type for an event that indicates the duplication of a file descriptor.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_dup_t"
+    },
+    "es_event_exchangedata_t": {
+      "doc": "A type for an event that indicates the exchange of data between two files.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_exchangedata_t"
+    },
+    "es_event_exec_t": {
+      "doc": "A type for an event that indicates the execution of a process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_exec_t"
+    },
+    "es_event_exit_t": {
+      "doc": "A type for an event that indicates a process exiting.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_exit_t"
+    },
+    "es_event_fcntl_t": {
+      "doc": "A type for an event that indicates the manipulation of a file descriptor.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_fcntl_t"
+    },
+    "es_event_file_provider_materialize_t": {
+      "doc": "A type for an event that indicates the materialization of a file provider.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_file_provider_materialize_t"
+    },
+    "es_event_file_provider_update_t": {
+      "doc": "A type for an event that indicates an update to a file provider.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_file_provider_update_t"
+    },
+    "es_event_fork_t": {
+      "doc": "A type for an event that indicates the forking of a process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_fork_t"
+    },
+    "es_event_fsgetpath_t": {
+      "doc": "A type for an event that indicates the retrieval of a file-system path.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_fsgetpath_t"
+    },
+    "es_event_gatekeeper_user_override_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_gatekeeper_user_override_t"
+    },
+    "es_event_get_task_inspect_t": {
+      "doc": "A type for an event that indicates the retrieval of a task’s inspect port.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_get_task_inspect_t"
+    },
+    "es_event_get_task_name_t": {
+      "doc": "A type for an event that indicates the retrieval of a task’s name port.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_get_task_name_t"
+    },
+    "es_event_get_task_read_t": {
+      "doc": "A type for an event that indicates the retrieval of a task’s read port.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_get_task_read_t"
+    },
+    "es_event_get_task_t": {
+      "doc": "A type for an event that indicates the retrieval of a task’s control port.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_get_task_t"
+    },
+    "es_event_getattrlist_t": {
+      "doc": "A type for an event that indicates the retrieval of attributes from a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_getattrlist_t"
+    },
+    "es_event_getextattr_t": {
+      "doc": "A type for an event that indicates the retrieval of an extended attribute from a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_getextattr_t"
+    },
+    "es_event_id_t": {
+      "doc": "An opaque identifier for events.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_id_t"
+    },
+    "es_event_iokit_open_t": {
+      "doc": "A type for an event that indicates the opening of an IOKit device.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_iokit_open_t"
+    },
+    "es_event_kextload_t": {
+      "doc": "A type for an event that indicates the loading of a kernel extension.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_kextload_t"
+    },
+    "es_event_kextunload_t": {
+      "doc": "A type for an event that indicates the unloading of a Kernel Extension (KEXT).",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_kextunload_t"
+    },
+    "es_event_link_t": {
+      "doc": "A type for an event that indicates the creation of a hard link.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_link_t"
+    },
+    "es_event_listextattr_t": {
+      "doc": "A type for an event that indicates the retrieval of multiple extended attributes from a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_listextattr_t"
+    },
+    "es_event_login_login_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_login_login_t"
+    },
+    "es_event_login_logout_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_login_logout_t"
+    },
+    "es_event_lookup_t": {
+      "doc": "A type for an event that indicates the lookup of a file’s path.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_lookup_t"
+    },
+    "es_event_lw_session_lock_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_lw_session_lock_t"
+    },
+    "es_event_lw_session_login_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_lw_session_login_t"
+    },
+    "es_event_lw_session_logout_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_lw_session_logout_t"
+    },
+    "es_event_lw_session_unlock_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_lw_session_unlock_t"
+    },
+    "es_event_mmap_t": {
+      "doc": "A type for an event that indicates the mapping of memory to a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_mmap_t"
+    },
+    "es_event_mount_t": {
+      "doc": "A type for an event that indicates the mounting of a file system.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_mount_t"
+    },
+    "es_event_mprotect_t": {
+      "doc": "A type for an event that indicates a change to protection of memory-mapped pages.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_mprotect_t"
+    },
+    "es_event_od_attribute_set_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_attribute_set_t"
+    },
+    "es_event_od_attribute_value_add_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_attribute_value_add_t"
+    },
+    "es_event_od_attribute_value_remove_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_attribute_value_remove_t"
+    },
+    "es_event_od_create_group_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_create_group_t"
+    },
+    "es_event_od_create_user_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_create_user_t"
+    },
+    "es_event_od_delete_group_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_delete_group_t"
+    },
+    "es_event_od_delete_user_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_delete_user_t"
+    },
+    "es_event_od_disable_user_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_disable_user_t"
+    },
+    "es_event_od_enable_user_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_enable_user_t"
+    },
+    "es_event_od_group_add_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_group_add_t"
+    },
+    "es_event_od_group_remove_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_group_remove_t"
+    },
+    "es_event_od_group_set_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_group_set_t"
+    },
+    "es_event_od_modify_password_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_od_modify_password_t"
+    },
+    "es_event_open_t": {
+      "doc": "A type for an event that indicates the opening of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_open_t"
+    },
+    "es_event_openssh_login_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_openssh_login_t"
+    },
+    "es_event_openssh_logout_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_openssh_logout_t"
+    },
+    "es_event_proc_check_t": {
+      "doc": "A type that indicates the call used and the data returned when a process checks on the access of the target process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_proc_check_t"
+    },
+    "es_event_proc_suspend_resume_t": {
+      "doc": "A type for an event that indicates a call to suspend, resume, or shut down sockets for a process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_proc_suspend_resume_t"
+    },
+    "es_event_profile_add_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_profile_add_t"
+    },
+    "es_event_profile_remove_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_profile_remove_t"
+    },
+    "es_event_pty_close_t": {
+      "doc": "A type for an event that indicates the closing of a pseudoterminal device.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_pty_close_t"
+    },
+    "es_event_pty_grant_t": {
+      "doc": "A type for an event that indicates the granting of a pseudoterminal device to a user.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_pty_grant_t"
+    },
+    "es_event_readdir_t": {
+      "doc": "A type for an event that indicates the reading of a file-system directory.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_readdir_t"
+    },
+    "es_event_readlink_t": {
+      "doc": "A type for an event that indicates the reading of a symbolic link.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_readlink_t"
+    },
+    "es_event_remote_thread_create_t": {
+      "doc": "A type for an event that indicates an attempt by one process to create a thread in another process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_remote_thread_create_t"
+    },
+    "es_event_remount_t": {
+      "doc": "A type for an event that indicates the unmounting of a file system.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_remount_t"
+    },
+    "es_event_rename_t": {
+      "doc": "A type for an event that indicates the renaming of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_rename_t"
+    },
+    "es_event_screensharing_attach_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_screensharing_attach_t"
+    },
+    "es_event_screensharing_detach_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_screensharing_detach_t"
+    },
+    "es_event_searchfs_t": {
+      "doc": "A type for an event that indicates searching a volume or mounted file system.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_searchfs_t"
+    },
+    "es_event_setacl_t": {
+      "doc": "A type for an event that indicates the setting of a file’s access control list.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setacl_t"
+    },
+    "es_event_setattrlist_t": {
+      "doc": "A type for an event that indicates the setting of a file attribute.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setattrlist_t"
+    },
+    "es_event_setegid_t": {
+      "doc": "A type for an event that indicates the setting of a process’s effective group ID.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setegid_t"
+    },
+    "es_event_seteuid_t": {
+      "doc": "A type for an event that indicates the setting of a process’s effective user ID.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_seteuid_t"
+    },
+    "es_event_setextattr_t": {
+      "doc": "A type for an event that indicates the setting of a file’s extended attribute.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setextattr_t"
+    },
+    "es_event_setflags_t": {
+      "doc": "A type for an event that indicates the setting of a file’s flags.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setflags_t"
+    },
+    "es_event_setgid_t": {
+      "doc": "A type for an event that indicates the setting of a process’s group ID.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setgid_t"
+    },
+    "es_event_setmode_t": {
+      "doc": "A type for an event that indicates the setting of a file’s mode.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setmode_t"
+    },
+    "es_event_setowner_t": {
+      "doc": "A type for an event that indicates the setting of a file’s owner.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setowner_t"
+    },
+    "es_event_setregid_t": {
+      "doc": "A type for an event that indicates the setting of a process’s real and effective group IDs.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setregid_t"
+    },
+    "es_event_setreuid_t": {
+      "doc": "A type for an event that indicates the setting of a process’s real and effective user IDs.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setreuid_t"
+    },
+    "es_event_settime_t": {
+      "doc": "A type for an event that indicates the modification of the system time.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_settime_t"
+    },
+    "es_event_setuid_t": {
+      "doc": "A type for an event that indicates the setting of a process’s user ID.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_setuid_t"
+    },
+    "es_event_signal_t": {
+      "doc": "A type for an event that indicates the sending of a signal to a process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_signal_t"
+    },
+    "es_event_stat_t": {
+      "doc": "A type for an event that indicates the retrieval of a file’s status.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_stat_t"
+    },
+    "es_event_su_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_su_t"
+    },
+    "es_event_sudo_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_sudo_t"
+    },
+    "es_event_tcc_modify_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_tcc_modify_t"
+    },
+    "es_event_trace_t": {
+      "doc": "A type for an event that indicates an attempt by one process to attach to another process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_trace_t"
+    },
+    "es_event_truncate_t": {
+      "doc": "A type for an event that indicates the truncation of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_truncate_t"
+    },
+    "es_event_uipc_bind_t": {
+      "doc": "A type for an event that indicates the binding of a socket to a path.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_uipc_bind_t"
+    },
+    "es_event_uipc_connect_t": {
+      "doc": "A type for an event that indicates the connection of a socket.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_uipc_connect_t"
+    },
+    "es_event_unlink_t": {
+      "doc": "A type for an event that indicates the deletion of a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_unlink_t"
+    },
+    "es_event_unmount_t": {
+      "doc": "A type for an event that indicates the unmounting of a file system.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_unmount_t"
+    },
+    "es_event_utimes_t": {
+      "doc": "A type for an event that indicates a change to a file’s access time or modification time.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_utimes_t"
+    },
+    "es_event_write_t": {
+      "doc": "A type for an event that indicates the writing of data to a file.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_write_t"
+    },
+    "es_event_xp_malware_detected_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_xp_malware_detected_t"
+    },
+    "es_event_xp_malware_remediated_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_xp_malware_remediated_t"
+    },
+    "es_event_xpc_connect_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_event_xpc_connect_t"
+    },
+    "es_fd_t": {
+      "doc": "A structure that describes an open file descriptor.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_fd_t"
+    },
+    "es_file_t": {
+      "doc": "A type that represents a file related to an Endpoint Security event.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_file_t"
+    },
+    "es_message_t": {
+      "doc": "A message from the Endpoint Security subsystem that describes a security event.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_message_t"
+    },
+    "es_muted_path_t": {
+      "doc": "A structure that describes a path’s muted events.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_muted_path_t"
+    },
+    "es_muted_paths_t": {
+      "doc": "A structure for a set of muted paths.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_muted_paths_t"
+    },
+    "es_muted_process_t": {
+      "doc": "A structure that describes a process’s muted events.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_muted_process_t"
+    },
+    "es_muted_processes_t": {
+      "doc": "A structure for a set of muted processes.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_muted_processes_t"
+    },
+    "es_od_member_id_array_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_od_member_id_array_t"
+    },
+    "es_od_member_id_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_od_member_id_t"
+    },
+    "es_process_t": {
+      "doc": "A type that describes a process, as delivered by an Endpoint Security message.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_process_t"
+    },
+    "es_profile_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_profile_t"
+    },
+    "es_result_t": {
+      "doc": "The result of the Endpoint Security subsystem authorization process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_result_t"
+    },
+    "es_signed_file_info_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_signed_file_info_t"
+    },
+    "es_string_token_t": {
+      "doc": "A pointer to a null-terminated string, and the length in bytes of that string.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_string_token_t"
+    },
+    "es_sudo_reject_info_t": {
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_sudo_reject_info_t"
+    },
+    "es_thread_state_t": {
+      "doc": "A description of a thread’s machine-specfiic state.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_thread_state_t"
+    },
+    "es_thread_t": {
+      "doc": "A structure that represents a thread in a process.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_thread_t"
+    },
+    "es_token_t": {
+      "doc": "An arbitrary buffer of data with its size.",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/es_token_t"
+    }
+  }
+}

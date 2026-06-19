@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronLogarithm kernel @discussion For each pixel, applies the following function: @code f(x) = log_c(a * x + b) @endcode
+// A representation of a logarithm neuron filter.
 //
 // CNNNeuronLogarithmNode wraps [raw.MPSCNNNeuronLogarithmNode] with a fluent Go API.
 type CNNNeuronLogarithmNode struct {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The device’s orientation relative to a known frame of reference at a point in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmattitude
 type CMAttitude struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func CMAttitudeFromID(id objc.ID) *CMAttitude {
 	return o
 }
 
+// Yields the change in attitude given a specific attitude.
 func (o *CMAttitude) MultiplyByInverseOfAttitude(attitude *CMAttitude) {
 	o.Ptr().Send(_cMAttitudeSelMultiplyByInverseOfAttitude, attitude.Ptr())
 }

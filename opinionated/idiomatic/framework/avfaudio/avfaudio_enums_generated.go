@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Constants that indicate the app’s permission to record audio.
 type AVAudioApplicationRecordPermission int64
 
 const (
@@ -30,14 +31,20 @@ func (e AVAudioApplicationRecordPermission) String() string {
 	}
 }
 
+// The format options that describe common audio formats.
 type AVAudioCommonFormat uint64
 
 const (
-	AVAudioOtherFormat      AVAudioCommonFormat = 0
+	// A format other than one the enumeration specifies.
+	AVAudioOtherFormat AVAudioCommonFormat = 0
+	// A format that represents the standard format as native-endian floats.
 	AVAudioPCMFormatFloat32 AVAudioCommonFormat = 1
+	// A format that represents native-endian doubles.
 	AVAudioPCMFormatFloat64 AVAudioCommonFormat = 2
-	AVAudioPCMFormatInt16   AVAudioCommonFormat = 3
-	AVAudioPCMFormatInt32   AVAudioCommonFormat = 4
+	// A format that represents signed 16-bit native-endian integers.
+	AVAudioPCMFormatInt16 AVAudioCommonFormat = 3
+	// A format that represents signed 32-bit native-endian integers.
+	AVAudioPCMFormatInt32 AVAudioCommonFormat = 4
 )
 
 func (e AVAudioCommonFormat) String() string {
@@ -135,16 +142,17 @@ func (e AVAudioContentSource) String() string {
 	}
 }
 
+// An option that indicates the return status of an audio converter method.
 type AVAudioConverterOutputStatus int64
 
 const (
-	// All of the requested data was returned.
+	// A status that indicates that the method returns all of the requested data.
 	AVAudioConverterOutputStatus_HaveData AVAudioConverterOutputStatus = 0
-	// Not enough input was available to satisfy the request at the current time. The output buffer contains as much as could be converted.
+	// A status that indicates the method doesn’t have enough input available to satisfy the request.
 	AVAudioConverterOutputStatus_InputRanDry AVAudioConverterOutputStatus = 1
-	// The end of stream has been reached. No data was returned.
+	// A status that indicates the method reaches the end of the stream, and doesn’t return any data.
 	AVAudioConverterOutputStatus_EndOfStream AVAudioConverterOutputStatus = 2
-	// An error occurred.
+	// A status that indicates the method encounters an error.
 	AVAudioConverterOutputStatus_Error AVAudioConverterOutputStatus = 3
 )
 
@@ -163,14 +171,15 @@ func (e AVAudioConverterOutputStatus) String() string {
 	}
 }
 
+// Options for the prime method property.
 type AVAudioConverterPrimeMethod int64
 
 const (
-	// Primes with leading + trailing input frames.
+	// An option to prime with leading and trailing input frames.
 	AVAudioConverterPrimeMethod_Pre AVAudioConverterPrimeMethod = 0
-	// Only primes with trailing (zero latency). Leading frames are assumed to be silence.
+	// An option to prime with trailing (zero latency) frames where the converter assumes the leading frames are silence.
 	AVAudioConverterPrimeMethod_Normal AVAudioConverterPrimeMethod = 1
-	// Acts in "latency" mode. Both leading and trailing frames assumed to be silence.
+	// An option to prime the converter assumes leading and trailing frames are silence.
 	AVAudioConverterPrimeMethod_None AVAudioConverterPrimeMethod = 2
 )
 
@@ -214,10 +223,13 @@ func (e AVAudioDynamicRangeControlConfiguration) String() string {
 	}
 }
 
+// The two modes for manual rendering.
 type AVAudioEngineManualRenderingMode int64
 
 const (
-	AVAudioEngineManualRenderingModeOffline  AVAudioEngineManualRenderingMode = 0
+	// An engine that operates in an offline mode.
+	AVAudioEngineManualRenderingModeOffline AVAudioEngineManualRenderingMode = 0
+	// An engine that operates under real-time constraints and doesn’t make blocking calls while rendering.
 	AVAudioEngineManualRenderingModeRealtime AVAudioEngineManualRenderingMode = 1
 )
 
@@ -232,13 +244,18 @@ func (e AVAudioEngineManualRenderingMode) String() string {
 	}
 }
 
+// Status codes that return from the render call to the engine operating in manual rendering mode.
 type AVAudioEngineManualRenderingStatus int64
 
 const (
-	AVAudioEngineManualRenderingStatusError                         AVAudioEngineManualRenderingStatus = -1
-	AVAudioEngineManualRenderingStatusSuccess                       AVAudioEngineManualRenderingStatus = 0
+	// A problem that occurs during rendering and results in no data returning.
+	AVAudioEngineManualRenderingStatusError AVAudioEngineManualRenderingStatus = -1
+	// A status that indicates the successful return of the requested data.
+	AVAudioEngineManualRenderingStatusSuccess AVAudioEngineManualRenderingStatus = 0
+	// A condition that occurs when the input node doesn’t return enough input data to satisfy the render request at the time of the request.
 	AVAudioEngineManualRenderingStatusInsufficientDataFromInputNode AVAudioEngineManualRenderingStatus = 1
-	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext      AVAudioEngineManualRenderingStatus = 2
+	// An operation that the system can’t perform under the current conditions.
+	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext AVAudioEngineManualRenderingStatus = 2
 )
 
 func (e AVAudioEngineManualRenderingStatus) String() string {
@@ -256,12 +273,16 @@ func (e AVAudioEngineManualRenderingStatus) String() string {
 	}
 }
 
+// Types of distance attenuation models.
 type AVAudioEnvironmentDistanceAttenuationModel int64
 
 const (
+	// An exponential model that describes the drop-off in gain as the source moves away from the listener.
 	AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModel = 1
-	AVAudioEnvironmentDistanceAttenuationModelInverse     AVAudioEnvironmentDistanceAttenuationModel = 2
-	AVAudioEnvironmentDistanceAttenuationModelLinear      AVAudioEnvironmentDistanceAttenuationModel = 3
+	// An inverse model that describes the drop-off in gain as the source moves away from the listener.
+	AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModel = 2
+	// A linear model that describes the drop-off in gain as the source moves away from the listener.
+	AVAudioEnvironmentDistanceAttenuationModelLinear AVAudioEnvironmentDistanceAttenuationModel = 3
 )
 
 func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
@@ -277,12 +298,17 @@ func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
 	}
 }
 
+// The output types for using with the automatic 3D mixing rendering algorithm.
 type AVAudioEnvironmentOutputType int64
 
 const (
-	AVAudioEnvironmentOutputTypeAuto             AVAudioEnvironmentOutputType = 0
-	AVAudioEnvironmentOutputTypeHeadphones       AVAudioEnvironmentOutputType = 1
-	AVAudioEnvironmentOutputTypeBuiltInSpeakers  AVAudioEnvironmentOutputType = 2
+	// Automatically detects the playback route and picks the correct output.
+	AVAudioEnvironmentOutputTypeAuto AVAudioEnvironmentOutputType = 0
+	// Renders the audio output for headphones.
+	AVAudioEnvironmentOutputTypeHeadphones AVAudioEnvironmentOutputType = 1
+	// Renders the audio output for built-in speakers on the current hardware.
+	AVAudioEnvironmentOutputTypeBuiltInSpeakers AVAudioEnvironmentOutputType = 2
+	// Renders the audio output for external speakers according to the audio environment node’s output channel layout.
 	AVAudioEnvironmentOutputTypeExternalSpeakers AVAudioEnvironmentOutputType = 3
 )
 
@@ -301,12 +327,16 @@ func (e AVAudioEnvironmentOutputType) String() string {
 	}
 }
 
+// The buffer options that control the playback scheduling.
 // Bitmask — values may be combined with |.
 type AVAudioPlayerNodeBufferOptions uint64
 
 const (
-	AVAudioPlayerNodeBufferLoops            AVAudioPlayerNodeBufferOptions = 1
-	AVAudioPlayerNodeBufferInterrupts       AVAudioPlayerNodeBufferOptions = 2
+	// An option that indicates the buffer loops indefinitely.
+	AVAudioPlayerNodeBufferLoops AVAudioPlayerNodeBufferOptions = 1
+	// An option that indicates the buffer interrupts any buffer in a playing state.
+	AVAudioPlayerNodeBufferInterrupts AVAudioPlayerNodeBufferOptions = 2
+	// An option that indicates the buffer interrupts any buffer in a playing state at its loop point.
 	AVAudioPlayerNodeBufferInterruptsAtLoop AVAudioPlayerNodeBufferOptions = 4
 )
 
@@ -327,11 +357,15 @@ func (e AVAudioPlayerNodeBufferOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify when the framework must invoke the completion handler.
 type AVAudioPlayerNodeCompletionCallbackType int64
 
 const (
-	AVAudioPlayerNodeCompletionDataConsumed   AVAudioPlayerNodeCompletionCallbackType = 0
-	AVAudioPlayerNodeCompletionDataRendered   AVAudioPlayerNodeCompletionCallbackType = 1
+	// A completion handler that indicates the player consumes the buffer or file data.
+	AVAudioPlayerNodeCompletionDataConsumed AVAudioPlayerNodeCompletionCallbackType = 0
+	// A completion handler that indicates the player renders the buffer or file data.
+	AVAudioPlayerNodeCompletionDataRendered AVAudioPlayerNodeCompletionCallbackType = 1
+	// A completion handler that indicates the player finishes the buffer or file data.
 	AVAudioPlayerNodeCompletionDataPlayedBack AVAudioPlayerNodeCompletionCallbackType = 2
 )
 
@@ -348,6 +382,7 @@ func (e AVAudioPlayerNodeCompletionCallbackType) String() string {
 	}
 }
 
+// Categories that describe the general nature of your app’s audio use.
 type AVAudioRoutingArbitrationCategory int64
 
 const (
@@ -369,31 +404,54 @@ func (e AVAudioRoutingArbitrationCategory) String() string {
 	}
 }
 
+// Constants that represent preset audio distortions.
 type AVAudioUnitDistortionPreset int64
 
 const (
-	AVAudioUnitDistortionPresetDrumsBitBrush            AVAudioUnitDistortionPreset = 0
-	AVAudioUnitDistortionPresetDrumsBufferBeats         AVAudioUnitDistortionPreset = 1
-	AVAudioUnitDistortionPresetDrumsLoFi                AVAudioUnitDistortionPreset = 2
-	AVAudioUnitDistortionPresetMultiBrokenSpeaker       AVAudioUnitDistortionPreset = 3
-	AVAudioUnitDistortionPresetMultiCellphoneConcert    AVAudioUnitDistortionPreset = 4
-	AVAudioUnitDistortionPresetMultiDecimated1          AVAudioUnitDistortionPreset = 5
-	AVAudioUnitDistortionPresetMultiDecimated2          AVAudioUnitDistortionPreset = 6
-	AVAudioUnitDistortionPresetMultiDecimated3          AVAudioUnitDistortionPreset = 7
-	AVAudioUnitDistortionPresetMultiDecimated4          AVAudioUnitDistortionPreset = 8
-	AVAudioUnitDistortionPresetMultiDistortedFunk       AVAudioUnitDistortionPreset = 9
-	AVAudioUnitDistortionPresetMultiDistortedCubed      AVAudioUnitDistortionPreset = 10
-	AVAudioUnitDistortionPresetMultiDistortedSquared    AVAudioUnitDistortionPreset = 11
-	AVAudioUnitDistortionPresetMultiEcho1               AVAudioUnitDistortionPreset = 12
-	AVAudioUnitDistortionPresetMultiEcho2               AVAudioUnitDistortionPreset = 13
-	AVAudioUnitDistortionPresetMultiEchoTight1          AVAudioUnitDistortionPreset = 14
-	AVAudioUnitDistortionPresetMultiEchoTight2          AVAudioUnitDistortionPreset = 15
-	AVAudioUnitDistortionPresetMultiEverythingIsBroken  AVAudioUnitDistortionPreset = 16
-	AVAudioUnitDistortionPresetSpeechAlienChatter       AVAudioUnitDistortionPreset = 17
+	// A preset that represents a bit brush drums distortion.
+	AVAudioUnitDistortionPresetDrumsBitBrush AVAudioUnitDistortionPreset = 0
+	// A preset that represents a buffer beat drums distortion.
+	AVAudioUnitDistortionPresetDrumsBufferBeats AVAudioUnitDistortionPreset = 1
+	// A preset that represents a low fidelity drums distortion.
+	AVAudioUnitDistortionPresetDrumsLoFi AVAudioUnitDistortionPreset = 2
+	// A preset that represents a broken speaker distortion.
+	AVAudioUnitDistortionPresetMultiBrokenSpeaker AVAudioUnitDistortionPreset = 3
+	// A preset that represents a cellphone concert distortion.
+	AVAudioUnitDistortionPresetMultiCellphoneConcert AVAudioUnitDistortionPreset = 4
+	// A preset that represents a variant of the decimated distortion.
+	AVAudioUnitDistortionPresetMultiDecimated1 AVAudioUnitDistortionPreset = 5
+	// A preset that represents a variant of the decimated distortion.
+	AVAudioUnitDistortionPresetMultiDecimated2 AVAudioUnitDistortionPreset = 6
+	// A preset that represents a variant of the decimated distortion.
+	AVAudioUnitDistortionPresetMultiDecimated3 AVAudioUnitDistortionPreset = 7
+	// A preset that represents a variant of the decimated distortion.
+	AVAudioUnitDistortionPresetMultiDecimated4 AVAudioUnitDistortionPreset = 8
+	// A preset that represents a distorted funk distortion.
+	AVAudioUnitDistortionPresetMultiDistortedFunk AVAudioUnitDistortionPreset = 9
+	// A preset that represents a distorted cubed distortion.
+	AVAudioUnitDistortionPresetMultiDistortedCubed AVAudioUnitDistortionPreset = 10
+	// A preset that represents a distorted squared distortion.
+	AVAudioUnitDistortionPresetMultiDistortedSquared AVAudioUnitDistortionPreset = 11
+	// A preset that represents a variant of an echo distortion.
+	AVAudioUnitDistortionPresetMultiEcho1 AVAudioUnitDistortionPreset = 12
+	// A preset that represents a variant of an echo distortion.
+	AVAudioUnitDistortionPresetMultiEcho2 AVAudioUnitDistortionPreset = 13
+	// A preset that represents a variant of a tight echo distortion.
+	AVAudioUnitDistortionPresetMultiEchoTight1 AVAudioUnitDistortionPreset = 14
+	// A preset that represents a variant of a tight echo distortion.
+	AVAudioUnitDistortionPresetMultiEchoTight2 AVAudioUnitDistortionPreset = 15
+	// A preset that represents an everything-is-broken distortion.
+	AVAudioUnitDistortionPresetMultiEverythingIsBroken AVAudioUnitDistortionPreset = 16
+	// A preset that represents an alien chatter distortion.
+	AVAudioUnitDistortionPresetSpeechAlienChatter AVAudioUnitDistortionPreset = 17
+	// A preset that represents a cosmic interference distortion.
 	AVAudioUnitDistortionPresetSpeechCosmicInterference AVAudioUnitDistortionPreset = 18
-	AVAudioUnitDistortionPresetSpeechGoldenPi           AVAudioUnitDistortionPreset = 19
-	AVAudioUnitDistortionPresetSpeechRadioTower         AVAudioUnitDistortionPreset = 20
-	AVAudioUnitDistortionPresetSpeechWaves              AVAudioUnitDistortionPreset = 21
+	// A preset that represents a golden pi distortion.
+	AVAudioUnitDistortionPresetSpeechGoldenPi AVAudioUnitDistortionPreset = 19
+	// A preset that represents a radio tower distortion.
+	AVAudioUnitDistortionPresetSpeechRadioTower AVAudioUnitDistortionPreset = 20
+	// A preset that represents a speech wave distortion.
+	AVAudioUnitDistortionPresetSpeechWaves AVAudioUnitDistortionPreset = 21
 )
 
 func (e AVAudioUnitDistortionPreset) String() string {
@@ -447,19 +505,31 @@ func (e AVAudioUnitDistortionPreset) String() string {
 	}
 }
 
+// Filter types available to use with the filter type property.
 type AVAudioUnitEQFilterType int64
 
 const (
-	AVAudioUnitEQFilterTypeParametric        AVAudioUnitEQFilterType = 0
-	AVAudioUnitEQFilterTypeLowPass           AVAudioUnitEQFilterType = 1
-	AVAudioUnitEQFilterTypeHighPass          AVAudioUnitEQFilterType = 2
-	AVAudioUnitEQFilterTypeResonantLowPass   AVAudioUnitEQFilterType = 3
-	AVAudioUnitEQFilterTypeResonantHighPass  AVAudioUnitEQFilterType = 4
-	AVAudioUnitEQFilterTypeBandPass          AVAudioUnitEQFilterType = 5
-	AVAudioUnitEQFilterTypeBandStop          AVAudioUnitEQFilterType = 6
-	AVAudioUnitEQFilterTypeLowShelf          AVAudioUnitEQFilterType = 7
-	AVAudioUnitEQFilterTypeHighShelf         AVAudioUnitEQFilterType = 8
-	AVAudioUnitEQFilterTypeResonantLowShelf  AVAudioUnitEQFilterType = 9
+	// A type that represents a parametric filter that derives from a Butterworth analog prototype.
+	AVAudioUnitEQFilterTypeParametric AVAudioUnitEQFilterType = 0
+	// A type that represents a simple Butterworth second-order low-pass filter.
+	AVAudioUnitEQFilterTypeLowPass AVAudioUnitEQFilterType = 1
+	// A type that represents a simple Butterworth second-order high-pass filter.
+	AVAudioUnitEQFilterTypeHighPass AVAudioUnitEQFilterType = 2
+	// A type that represents a low-pass filter with resonance support using the bandwidth parameter.
+	AVAudioUnitEQFilterTypeResonantLowPass AVAudioUnitEQFilterType = 3
+	// A type that represents a high-pass filter with resonance support using the bandwidth parameter.
+	AVAudioUnitEQFilterTypeResonantHighPass AVAudioUnitEQFilterType = 4
+	// A type that represents a bandpass filter.
+	AVAudioUnitEQFilterTypeBandPass AVAudioUnitEQFilterType = 5
+	// A type that represents a band-stop filter, also known as a notch filter.
+	AVAudioUnitEQFilterTypeBandStop AVAudioUnitEQFilterType = 6
+	// A type that represents a low-shelf filter.
+	AVAudioUnitEQFilterTypeLowShelf AVAudioUnitEQFilterType = 7
+	// A type that represents a high-shelf filter.
+	AVAudioUnitEQFilterTypeHighShelf AVAudioUnitEQFilterType = 8
+	// A type that represents a low-shelf filter with resonance support using the bandwidth parameter.
+	AVAudioUnitEQFilterTypeResonantLowShelf AVAudioUnitEQFilterType = 9
+	// A type that represents a high-shelf filter with resonance support using the bandwidth parameter.
 	AVAudioUnitEQFilterTypeResonantHighShelf AVAudioUnitEQFilterType = 10
 )
 
@@ -492,22 +562,36 @@ func (e AVAudioUnitEQFilterType) String() string {
 	}
 }
 
+// Constants that represent preset reverbs.
 type AVAudioUnitReverbPreset int64
 
 const (
-	AVAudioUnitReverbPresetSmallRoom     AVAudioUnitReverbPreset = 0
-	AVAudioUnitReverbPresetMediumRoom    AVAudioUnitReverbPreset = 1
-	AVAudioUnitReverbPresetLargeRoom     AVAudioUnitReverbPreset = 2
-	AVAudioUnitReverbPresetMediumHall    AVAudioUnitReverbPreset = 3
-	AVAudioUnitReverbPresetLargeHall     AVAudioUnitReverbPreset = 4
-	AVAudioUnitReverbPresetPlate         AVAudioUnitReverbPreset = 5
+	// A preset that represents a reverb with the acoustic characteristics of a small-sized room environment.
+	AVAudioUnitReverbPresetSmallRoom AVAudioUnitReverbPreset = 0
+	// A preset that represents a reverb with the acoustic characteristics of a medium-sized room environment.
+	AVAudioUnitReverbPresetMediumRoom AVAudioUnitReverbPreset = 1
+	// A preset that represents a reverb with the acoustic characteristics of a large-sized room environment.
+	AVAudioUnitReverbPresetLargeRoom AVAudioUnitReverbPreset = 2
+	// A preset that represents a reverb with the acoustic characteristics of a medium-sized hall environment.
+	AVAudioUnitReverbPresetMediumHall AVAudioUnitReverbPreset = 3
+	// A preset that represents a reverb with the acoustic characteristics of a large-sized hall environment.
+	AVAudioUnitReverbPresetLargeHall AVAudioUnitReverbPreset = 4
+	// A preset that represents a reverb with the acoustic characteristics of a plate environment.
+	AVAudioUnitReverbPresetPlate AVAudioUnitReverbPreset = 5
+	// A preset that represents a reverb with the acoustic characteristics of a medium-sized chamber environment.
 	AVAudioUnitReverbPresetMediumChamber AVAudioUnitReverbPreset = 6
-	AVAudioUnitReverbPresetLargeChamber  AVAudioUnitReverbPreset = 7
-	AVAudioUnitReverbPresetCathedral     AVAudioUnitReverbPreset = 8
-	AVAudioUnitReverbPresetLargeRoom2    AVAudioUnitReverbPreset = 9
-	AVAudioUnitReverbPresetMediumHall2   AVAudioUnitReverbPreset = 10
-	AVAudioUnitReverbPresetMediumHall3   AVAudioUnitReverbPreset = 11
-	AVAudioUnitReverbPresetLargeHall2    AVAudioUnitReverbPreset = 12
+	// A preset that represents a reverb with the acoustic characteristics of a large-sized chamber environment.
+	AVAudioUnitReverbPresetLargeChamber AVAudioUnitReverbPreset = 7
+	// A preset that represents a reverb with the acoustic characteristics of a cathedral environment.
+	AVAudioUnitReverbPresetCathedral AVAudioUnitReverbPreset = 8
+	// A preset that represents a reverb with the acoustic characteristics of an alternative large-sized room environment.
+	AVAudioUnitReverbPresetLargeRoom2 AVAudioUnitReverbPreset = 9
+	// A preset that represents a reverb with the acoustic characteristics of an alternative medium-sized hall environment.
+	AVAudioUnitReverbPresetMediumHall2 AVAudioUnitReverbPreset = 10
+	// A preset that represents a reverb with the acoustic characteristics of an alternative medium-sized hall environment.
+	AVAudioUnitReverbPresetMediumHall3 AVAudioUnitReverbPreset = 11
+	// A preset that represents a reverb with the acoustic characteristics of an alternative large-sized hall environment.
+	AVAudioUnitReverbPresetLargeHall2 AVAudioUnitReverbPreset = 12
 )
 
 func (e AVAudioUnitReverbPreset) String() string {
@@ -543,11 +627,14 @@ func (e AVAudioUnitReverbPreset) String() string {
 	}
 }
 
+// Types of speech activity events.
 type AVAudioVoiceProcessingSpeechActivityEvent int64
 
 const (
+	// Indicates the start of speech activity.
 	AVAudioVoiceProcessingSpeechActivityStarted AVAudioVoiceProcessingSpeechActivityEvent = 0
-	AVAudioVoiceProcessingSpeechActivityEnded   AVAudioVoiceProcessingSpeechActivityEvent = 1
+	// Indicates the end of speech activity.
+	AVAudioVoiceProcessingSpeechActivityEnded AVAudioVoiceProcessingSpeechActivityEvent = 1
 )
 
 func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
@@ -561,6 +648,7 @@ func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
 	}
 }
 
+// Constants that represents control change event types.
 type AVMIDIControlChangeMessageType int64
 
 const (
@@ -678,6 +766,7 @@ func (e AVMIDIControlChangeMessageType) String() string {
 	}
 }
 
+// Constants that represent the types of meta events.
 type AVMIDIMetaEventType int64
 
 const (
@@ -738,11 +827,14 @@ func (e AVMIDIMetaEventType) String() string {
 	}
 }
 
+// A structure that defines whether data on different MIDI channels map to multiple tracks, or whether the framework preserves the tracks as they are.
 // Bitmask — values may be combined with |.
 type AVMusicSequenceLoadOptions uint64
 
 const (
-	AVMusicSequenceLoadSMF_PreserveTracks   AVMusicSequenceLoadOptions = 0
+	// An option that preserves the tracks as they are.
+	AVMusicSequenceLoadSMF_PreserveTracks AVMusicSequenceLoadOptions = 0
+	// An option that represents data on different MIDI channels mapped to multiple tracks.
 	AVMusicSequenceLoadSMF_ChannelsToTracks AVMusicSequenceLoadOptions = 1
 )
 
@@ -757,11 +849,14 @@ func (e AVMusicSequenceLoadOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Specifies when to pause or stop speech.
 type AVSpeechBoundary int64
 
 const (
+	// Indicates to pause or stop speech immediately.
 	AVSpeechBoundaryImmediate AVSpeechBoundary = 0
-	AVSpeechBoundaryWord      AVSpeechBoundary = 1
+	// Indicates to pause or stop speech after the synthesizer finishes speaking the current word.
+	AVSpeechBoundaryWord AVSpeechBoundary = 1
 )
 
 func (e AVSpeechBoundary) String() string {
@@ -775,6 +870,7 @@ func (e AVSpeechBoundary) String() string {
 	}
 }
 
+// Constants that describe the type of text.
 type AVSpeechSynthesisMarkerMark int64
 
 const (
@@ -802,6 +898,7 @@ func (e AVSpeechSynthesisMarkerMark) String() string {
 	}
 }
 
+// An enumeration that models the personal voices authorization status.
 type AVSpeechSynthesisPersonalVoiceAuthorizationStatus uint64
 
 const (
@@ -830,12 +927,16 @@ func (e AVSpeechSynthesisPersonalVoiceAuthorizationStatus) String() string {
 	}
 }
 
+// The gender for a voice.
 type AVSpeechSynthesisVoiceGender int64
 
 const (
+	// The nonspecific gender option.
 	AVSpeechSynthesisVoiceGenderUnspecified AVSpeechSynthesisVoiceGender = 0
-	AVSpeechSynthesisVoiceGenderMale        AVSpeechSynthesisVoiceGender = 1
-	AVSpeechSynthesisVoiceGenderFemale      AVSpeechSynthesisVoiceGender = 2
+	// The male voice option.
+	AVSpeechSynthesisVoiceGenderMale AVSpeechSynthesisVoiceGender = 1
+	// The female voice option.
+	AVSpeechSynthesisVoiceGenderFemale AVSpeechSynthesisVoiceGender = 2
 )
 
 func (e AVSpeechSynthesisVoiceGender) String() string {
@@ -851,12 +952,16 @@ func (e AVSpeechSynthesisVoiceGender) String() string {
 	}
 }
 
+// The speech quality of a voice.
 type AVSpeechSynthesisVoiceQuality int64
 
 const (
-	AVSpeechSynthesisVoiceQualityDefault  AVSpeechSynthesisVoiceQuality = 1
+	// A basic quality voice that’s available on the device by default.
+	AVSpeechSynthesisVoiceQualityDefault AVSpeechSynthesisVoiceQuality = 1
+	// An enhanced quality voice that you must download to use.
 	AVSpeechSynthesisVoiceQualityEnhanced AVSpeechSynthesisVoiceQuality = 2
-	AVSpeechSynthesisVoiceQualityPremium  AVSpeechSynthesisVoiceQuality = 3
+	// A premium quality voice that you must download to use.
+	AVSpeechSynthesisVoiceQualityPremium AVSpeechSynthesisVoiceQuality = 3
 )
 
 func (e AVSpeechSynthesisVoiceQuality) String() string {
@@ -872,10 +977,12 @@ func (e AVSpeechSynthesisVoiceQuality) String() string {
 	}
 }
 
+// Traits that describe a voice.
 // Bitmask — values may be combined with |.
 type AVSpeechSynthesisVoiceTraits uint64
 
 const (
+	// The trait that indicates a voice is a regular voice.
 	AVSpeechSynthesisVoiceTraitNone AVSpeechSynthesisVoiceTraits = 0
 	// The voice is generally for novelty purposes, for example a character's voice in a game.
 	AVSpeechSynthesisVoiceTraitIsNoveltyVoice AVSpeechSynthesisVoiceTraits = 1

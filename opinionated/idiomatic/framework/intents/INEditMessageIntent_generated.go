@@ -38,6 +38,8 @@ func NewEditMessageIntentWithMessageIdentifierEditedContent(messageIdentifier st
 	return &EditMessageIntent{inner: raw.INEditMessageIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

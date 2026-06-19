@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a custom intent parameter or response property.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inobject
 type INObject struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func INObjectFromID(id objc.ID) *INObject {
 	return o
 }
 
+// Creates a custom intent object with the specified attributes.
 func (o *INObject) InitWithIdentifierDisplayStringPronunciationHint(identifier *foundation.NSString, displayString *foundation.NSString, pronunciationHint *foundation.NSString) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayStringPronunciationHint, identifier.Ptr(), displayString.Ptr(), pronunciationHint.Ptr())
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func (o *INObject) InitWithIdentifierDisplayStringPronunciationHint(identifier *
 	return INObjectFromID(_ret)
 }
 
+// Creates a custom intent object with the specified identifier and display string.
 func (o *INObject) InitWithIdentifierDisplayString(identifier *foundation.NSString, displayString *foundation.NSString) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayString, identifier.Ptr(), displayString.Ptr())
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func (o *INObject) InitWithIdentifierDisplayString(identifier *foundation.NSStri
 	return INObjectFromID(_ret)
 }
 
+// Creates a custom intent object with full display information.
 func (o *INObject) InitWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier *foundation.NSString, displayString *foundation.NSString, subtitleString *foundation.NSString, displayImage *INImage) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayStringSubtitleStringDisplayImage, identifier.Ptr(), displayString.Ptr(), subtitleString.Ptr(), displayImage.Ptr())
 	if _ret != 0 {
@@ -66,6 +71,7 @@ func (o *INObject) InitWithIdentifierDisplayStringSubtitleStringDisplayImage(ide
 	return INObjectFromID(_ret)
 }
 
+// Creates a custom intent object with the specified attributes.
 func (o *INObject) InitWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage(identifier *foundation.NSString, displayString *foundation.NSString, pronunciationHint *foundation.NSString, subtitleString *foundation.NSString, displayImage *INImage) *INObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectSelInitWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage, identifier.Ptr(), displayString.Ptr(), pronunciationHint.Ptr(), subtitleString.Ptr(), displayImage.Ptr())
 	if _ret != 0 {

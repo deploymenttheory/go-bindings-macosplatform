@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract  A node representing a MPSCNNPoolingMax kernel @discussion The default edge mode is MPSImageEdgeModeClamp
+// A representation of a max pooling filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmaxnode
 type MPSCNNPoolingMaxNode struct {

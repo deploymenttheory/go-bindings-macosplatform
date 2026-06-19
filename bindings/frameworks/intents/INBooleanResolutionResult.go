@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a Boolean value associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inbooleanresolutionresult
 type INBooleanResolutionResult struct {
 	INIntentResolutionResult
@@ -31,6 +33,7 @@ func INBooleanResolutionResultFromID(id objc.ID) *INBooleanResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified value.
 func INBooleanResolutionResultSuccessWithResolvedValue(resolvedValue bool) *INBooleanResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINBooleanResolutionResult), _iNBooleanResolutionResultSelSuccessWithResolvedValue, resolvedValue)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func INBooleanResolutionResultSuccessWithResolvedValue(resolvedValue bool) *INBo
 	return INBooleanResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INBooleanResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *INBooleanResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINBooleanResolutionResult), _iNBooleanResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type of challenge where a player must earn another player’s achievement.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkachievementchallenge
 // Deprecated: since macOS 26.0.
 type GKAchievementChallenge struct {

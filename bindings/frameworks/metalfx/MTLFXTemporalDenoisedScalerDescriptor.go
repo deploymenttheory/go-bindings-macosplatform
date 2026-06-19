@@ -80,37 +80,37 @@ func MTLFXTemporalDenoisedScalerDescriptorFromID(id objc.ID) *MTLFXTemporalDenoi
 	return o
 }
 
-// Creates a denoiser scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the denoiser scaler. - Returns: A denoiser scaler instance upon success, or `nil` otherwise.
+// Creates a denoiser scaler instance for a Metal device.
 func (o *MTLFXTemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDevice(device metal.MTLDevice) MTLFXTemporalDenoisedScaler {
 	_ret := objc.Send[MTLFXTemporalDenoisedScaler](o.Ptr(), _mTLFXTemporalDenoisedScalerDescriptorSelNewTemporalDenoisedScalerWithDevice, device)
 	return _ret
 }
 
-// Creates a denoiser scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the denoiser scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A denoiser scaler instance upon success, or `nil` otherwise.
+// Creates a denoiser scaler instance for a Metal device.
 func (o *MTLFXTemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) MTL4FXTemporalDenoisedScaler {
 	_ret := objc.Send[MTL4FXTemporalDenoisedScaler](o.Ptr(), _mTLFXTemporalDenoisedScalerDescriptorSelNewTemporalDenoisedScalerWithDeviceCompiler, device, compiler)
 	return _ret
 }
 
-// Returns the smallest temporal scaling factor the device supports as a floating-point value. - Parameters: - device: The Metal device for which this method checks the minimum input content scale it supports. - Returns: the minimum input content scale the GPU device supports.
+// Returns the smallest temporal scaling factor the device supports as a floating-point value.
 func MTLFXTemporalDenoisedScalerDescriptorSupportedInputContentMinScaleForDevice(device metal.MTLDevice) float32 {
 	_ret := objc.Send[float32](objc.ID(_clsMTLFXTemporalDenoisedScalerDescriptor), _mTLFXTemporalDenoisedScalerDescriptorSelSupportedInputContentMinScaleForDevice, device)
 	return _ret
 }
 
-// Returns the largest temporal scaling factor the device supports as a floating-point value. - Parameters: - device: The Metal device for which this method checks the maximum input content scale it supports. - Returns: the maximum input content scale the GPU device supports.
+// Returns the largest temporal scaling factor the device supports as a floating-point value.
 func MTLFXTemporalDenoisedScalerDescriptorSupportedInputContentMaxScaleForDevice(device metal.MTLDevice) float32 {
 	_ret := objc.Send[float32](objc.ID(_clsMTLFXTemporalDenoisedScalerDescriptor), _mTLFXTemporalDenoisedScalerDescriptorSelSupportedInputContentMaxScaleForDevice, device)
 	return _ret
 }
 
-// Queries whether a Metal device supports denosing scaling compatible on Metal 4. - Parameters: - device: The GPU device for which this methods tests support. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports denoising scaling for Metal 4, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Queries whether a Metal device supports denosing scaling compatible on Metal 4.
 func MTLFXTemporalDenoisedScalerDescriptorSupportsMetal4FX(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXTemporalDenoisedScalerDescriptor), _mTLFXTemporalDenoisedScalerDescriptorSelSupportsMetal4FX, device)
 	return _ret
 }
 
-// Queries whether a Metal device supports denoising scaling. - Parameters: - device: The GPU device for which this methods tests support. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports denoising scaling, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Queries whether a Metal device supports denoising scaling.
 func MTLFXTemporalDenoisedScalerDescriptorSupportsDevice(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXTemporalDenoisedScalerDescriptor), _mTLFXTemporalDenoisedScalerDescriptorSelSupportsDevice, device)
 	return _ret

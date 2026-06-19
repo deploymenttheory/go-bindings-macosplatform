@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for mass.
+//
 // UnitMass wraps [raw.NSUnitMass] with a fluent Go API.
 type UnitMass struct {
 	inner *raw.NSUnitMass

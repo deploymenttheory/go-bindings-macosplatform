@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information describing a bus trip.
+//
 // BusTrip wraps [raw.INBusTrip] with a fluent Go API.
 type BusTrip struct {
 	inner *raw.INBusTrip
@@ -32,6 +34,8 @@ func BusTripFromID(id objc.ID) *BusTrip {
 	return &BusTrip{inner: raw.INBusTripFromID(id)}
 }
 
+// Creates a bus trip with the specified contents and attributes.
+//
 // NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform creates a new [BusTrip].
 func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform(provider string, busName string, busNumber string, tripDuration *raw.INDateComponentsRange, departureBusStopLocation *corelocation.CLPlacemark, departurePlatform string, arrivalBusStopLocation *corelocation.CLPlacemark, arrivalPlatform string) *BusTrip {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBusTrip")), objc.RegisterName("alloc"))

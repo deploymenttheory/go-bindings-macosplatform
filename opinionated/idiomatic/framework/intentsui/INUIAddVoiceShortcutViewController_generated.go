@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller that guides the user through the steps for adding a shortcut to Siri.
+//
 // AddVoiceShortcutViewController wraps [raw.INUIAddVoiceShortcutViewController] with a fluent Go API.
 type AddVoiceShortcutViewController struct {
 	inner *raw.INUIAddVoiceShortcutViewController
@@ -32,7 +34,7 @@ func AddVoiceShortcutViewControllerFromID(id objc.ID) *AddVoiceShortcutViewContr
 	return &AddVoiceShortcutViewController{inner: raw.INUIAddVoiceShortcutViewControllerFromID(id)}
 }
 
-// @param shortcut The shortcut is what will be run when the resulting voice shortcut is invoked. It also provides the suggested invocation phrase, via the @c suggestedInvocationPhrase property on the intent or user activity.
+// Creates a view controller with a shortcut the user can add to Siri.
 //
 // NewAddVoiceShortcutViewControllerWithShortcut creates a new [AddVoiceShortcutViewController].
 func NewAddVoiceShortcutViewControllerWithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutViewController {
@@ -41,6 +43,8 @@ func NewAddVoiceShortcutViewControllerWithShortcut(shortcut *intents.INShortcut)
 	return &AddVoiceShortcutViewController{inner: raw.INUIAddVoiceShortcutViewControllerFromID(_id)}
 }
 
+// The object that retrieves notifications from the view controller.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AddVoiceShortcutViewController) WithDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate) *AddVoiceShortcutViewController {
 	x.inner.SetDelegate(delegate)

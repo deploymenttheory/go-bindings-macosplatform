@@ -99,9 +99,28 @@ func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functi
 
 // The list of function names in the model asset.
 //
-// FunctionNamesWithCompletionHandler calls the underlying FunctionNamesWithCompletionHandler.
-func (x *ModelAsset) FunctionNamesWithCompletionHandler(handler objc.Block) {
-	x.inner.FunctionNamesWithCompletionHandler(handler)
+// FunctionNames blocks until the operation completes or ctx is cancelled.
+func (x *ModelAsset) FunctionNames(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FunctionNamesWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // ModelAssetable is the interface implemented by [ModelAsset], for mocking and DI.
@@ -109,7 +128,7 @@ type ModelAssetable interface {
 	Unwrap() *raw.MLModelAsset
 	ModelDescription(ctx context.Context) (*ModelDescription, error)
 	ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (*ModelDescription, error)
-	FunctionNamesWithCompletionHandler(handler objc.Block)
+	FunctionNames(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
 }
 
 var _ ModelAssetable = (*ModelAsset)(nil)

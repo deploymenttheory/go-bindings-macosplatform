@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supports the extended set of gamepad controls.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcextendedgamepad
 type GCExtendedGamepad struct {
 	GCPhysicalInputProfile
@@ -49,7 +51,7 @@ func GCExtendedGamepadFromID(id objc.ID) *GCExtendedGamepad {
 	return o
 }
 
-// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken.
+// Saves a snapshot of all of the profile’s elements.
 // Deprecated: Use the -[GCController capture] method instead
 func (o *GCExtendedGamepad) SaveSnapshot() *GCExtendedGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCExtendedGamepadSelSaveSnapshot)
@@ -59,7 +61,7 @@ func (o *GCExtendedGamepad) SaveSnapshot() *GCExtendedGamepadSnapshot {
 	return GCExtendedGamepadSnapshotFromID(_ret)
 }
 
-// Sets the state vector of the extended gamepad to a copy of the input extended gamepad's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+// Copies the input values from a specified extended gamepad to a snapshot of an extended gamepad.
 func (o *GCExtendedGamepad) SetStateFromExtendedGamepad(extendedGamepad *GCExtendedGamepad) {
 	o.Ptr().Send(_gCExtendedGamepadSelSetStateFromExtendedGamepad, extendedGamepad.Ptr())
 }

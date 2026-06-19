@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A multipage interface that displays one page at a time.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstabview
 type NSTabView struct {
 	NSView
@@ -69,50 +71,62 @@ func NSTabViewFromID(id objc.ID) *NSTabView {
 	return o
 }
 
+// Selects the specified tab view item.
 func (o *NSTabView) SelectTabViewItem(tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewSelSelectTabViewItem, tabViewItem.Ptr())
 }
 
+// Selects the tab view item specified by index.
 func (o *NSTabView) SelectTabViewItemAtIndex(index int) {
 	o.Ptr().Send(_nSTabViewSelSelectTabViewItemAtIndex, index)
 }
 
+// Selects the tab view item specified by identifier.
 func (o *NSTabView) SelectTabViewItemWithIdentifier(identifier objc.ID) {
 	o.Ptr().Send(_nSTabViewSelSelectTabViewItemWithIdentifier, identifier)
 }
 
+// Sets the selected tab view item to the selected item obtained from the sender.
 func (o *NSTabView) TakeSelectedTabViewItemFromSender(sender objc.ID) {
 	o.Ptr().Send(_nSTabViewSelTakeSelectedTabViewItemFromSender, sender)
 }
 
+// This action method selects the first tab view item.
 func (o *NSTabView) SelectFirstTabViewItem(sender objc.ID) {
 	o.Ptr().Send(_nSTabViewSelSelectFirstTabViewItem, sender)
 }
 
+// This action method selects the last tab view item.
 func (o *NSTabView) SelectLastTabViewItem(sender objc.ID) {
 	o.Ptr().Send(_nSTabViewSelSelectLastTabViewItem, sender)
 }
 
+// This action method selects the next tab view item in the sequence.
 func (o *NSTabView) SelectNextTabViewItem(sender objc.ID) {
 	o.Ptr().Send(_nSTabViewSelSelectNextTabViewItem, sender)
 }
 
+// This action method selects the previous tab view item in the sequence.
 func (o *NSTabView) SelectPreviousTabViewItem(sender objc.ID) {
 	o.Ptr().Send(_nSTabViewSelSelectPreviousTabViewItem, sender)
 }
 
+// Adds the specified tab item.
 func (o *NSTabView) AddTabViewItem(tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewSelAddTabViewItem, tabViewItem.Ptr())
 }
 
+// Inserts the specified item into the tab view’s array of tab view items at the specified index.
 func (o *NSTabView) InsertTabViewItemAtIndex(tabViewItem *NSTabViewItem, index int) {
 	o.Ptr().Send(_nSTabViewSelInsertTabViewItemAtIndex, tabViewItem.Ptr(), index)
 }
 
+// Removes the specified item from the tab view’s array of tab view items.
 func (o *NSTabView) RemoveTabViewItem(tabViewItem *NSTabViewItem) {
 	o.Ptr().Send(_nSTabViewSelRemoveTabViewItem, tabViewItem.Ptr())
 }
 
+// Returns the tab view item at the specified point.
 func (o *NSTabView) TabViewItemAtPoint(point corefoundation.CGPoint) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtPoint, point)
 	if _ret != 0 {
@@ -121,11 +135,13 @@ func (o *NSTabView) TabViewItemAtPoint(point corefoundation.CGPoint) *NSTabViewI
 	return NSTabViewItemFromID(_ret)
 }
 
+// Returns the index of the specified item in the tab view.
 func (o *NSTabView) IndexOfTabViewItem(tabViewItem *NSTabViewItem) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTabViewSelIndexOfTabViewItem, tabViewItem.Ptr())
 	return _ret
 }
 
+// Returns the tab view item at index in the tab view’s array of items.
 func (o *NSTabView) TabViewItemAtIndex(index int) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtIndex, index)
 	if _ret != 0 {
@@ -134,6 +150,7 @@ func (o *NSTabView) TabViewItemAtIndex(index int) *NSTabViewItem {
 	return NSTabViewItemFromID(_ret)
 }
 
+// Returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
 func (o *NSTabView) IndexOfTabViewItemWithIdentifier(identifier objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTabViewSelIndexOfTabViewItemWithIdentifier, identifier)
 	return _ret

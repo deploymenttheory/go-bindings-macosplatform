@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an OpenGL graphics context, into which all OpenGL calls are rendered.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsopenglcontext
 // Deprecated: since macOS 10.14.
 type NSOpenGLContext struct {
@@ -57,6 +59,7 @@ func NSOpenGLContextFromID(id objc.ID) *NSOpenGLContext {
 	return o
 }
 
+// Returns an OpenGL context object initialized with the specified pixel format information.
 func (o *NSOpenGLContext) InitWithFormatShareContext(format *NSOpenGLPixelFormat, share *NSOpenGLContext) *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelInitWithFormatShareContext, format.Ptr(), share.Ptr())
 	if _ret != 0 {
@@ -65,6 +68,7 @@ func (o *NSOpenGLContext) InitWithFormatShareContext(format *NSOpenGLPixelFormat
 	return NSOpenGLContextFromID(_ret)
 }
 
+// Initializes and returns an OpenGL context object using an existing CGL context.
 func (o *NSOpenGLContext) InitWithCGLContextObj(context_ unsafe.Pointer) *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelInitWithCGLContextObj, context_)
 	if _ret != 0 {
@@ -78,53 +82,64 @@ func (o *NSOpenGLContext) SetView(view *NSView) {
 	o.Ptr().Send(_nSOpenGLContextSelSetView, view.Ptr())
 }
 
+// Sets the OpenGL context to full-screen mode.
 // Deprecated: Use a fullscreen NSOpenGLView instead
 func (o *NSOpenGLContext) SetFullScreen() {
 	o.Ptr().Send(_nSOpenGLContextSelSetFullScreen)
 }
 
+// Instructs the OpenGL context to render into an offscreen buffer with the specified attributes.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) SetOffScreenWidthHeightRowbytes(baseaddr unsafe.Pointer, width int32, height int32, rowbytes int32) {
 	o.Ptr().Send(_nSOpenGLContextSelSetOffScreenWidthHeightRowbytes, baseaddr, width, height, rowbytes)
 }
 
+// Disassociates the OpenGL context from its viewport.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) ClearDrawable() {
 	o.Ptr().Send(_nSOpenGLContextSelClearDrawable)
 }
 
+// Updates the OpenGL context’s drawable object.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) Update() {
 	o.Ptr().Send(_nSOpenGLContextSelUpdate)
 }
 
+// Copies the back buffer to the front buffer of the OpenGL context.
 func (o *NSOpenGLContext) FlushBuffer() {
 	o.Ptr().Send(_nSOpenGLContextSelFlushBuffer)
 }
 
+// Sets the context as the current OpenGL context object.
 func (o *NSOpenGLContext) MakeCurrentContext() {
 	o.Ptr().Send(_nSOpenGLContextSelMakeCurrentContext)
 }
 
+// Clears the current context.
 func NSOpenGLContextClearCurrentContext() {
 	objc.ID(_clsNSOpenGLContext).Send(_nSOpenGLContextSelClearCurrentContext)
 }
 
+// Copies selected groups of state variables to the OpenGL context.
 // Deprecated: since macOS 10.8.
 func (o *NSOpenGLContext) CopyAttributesFromContextWithMask(context_ *NSOpenGLContext, mask uint32) {
 	o.Ptr().Send(_nSOpenGLContextSelCopyAttributesFromContextWithMask, context_.Ptr(), mask)
 }
 
+// Sets the value of the specified parameter.
 // Deprecated: since macOS 10.8.
 func (o *NSOpenGLContext) SetValuesForParameter(vals *int32, param NSOpenGLContextParameter) {
 	o.Ptr().Send(_nSOpenGLContextSelSetValuesForParameter, vals, param)
 }
 
+// Returns the value of the requested parameter.
 // Deprecated: since macOS 10.8.
 func (o *NSOpenGLContext) GetValuesForParameter(vals *int32, param NSOpenGLContextParameter) {
 	o.Ptr().Send(_nSOpenGLContextSelGetValuesForParameter, vals, param)
 }
 
+// Creates a new texture from the contents of the specified view.
 // Deprecated: since macOS 10.8.
 func (o *NSOpenGLContext) CreateTextureFromViewInternalFormat(target uint32, view *NSView, format uint32) {
 	o.Ptr().Send(_nSOpenGLContextSelCreateTextureFromViewInternalFormat, target, view.Ptr(), format)
@@ -170,11 +185,13 @@ func (o *NSOpenGLContext) CGLContextObj() unsafe.Pointer {
 	return _ret
 }
 
+// Attaches the specified pixel buffer to the OpenGL context.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer *NSOpenGLPixelBuffer, face uint32, level int32, screen int32) {
 	o.Ptr().Send(_nSOpenGLContextSelSetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen, pixelBuffer.Ptr(), face, level, screen)
 }
 
+// Returns the pixel-buffer object attached to the OpenGL context.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) PixelBuffer() *NSOpenGLPixelBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelPixelBuffer)
@@ -184,18 +201,21 @@ func (o *NSOpenGLContext) PixelBuffer() *NSOpenGLPixelBuffer {
 	return NSOpenGLPixelBufferFromID(_ret)
 }
 
+// Returns the cube map face of the pixel buffer attached to the OpenGL context.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) PixelBufferCubeMapFace() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _nSOpenGLContextSelPixelBufferCubeMapFace)
 	return _ret
 }
 
+// Returns the mipmap level of the pixel buffer attached to the OpenGL context.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) PixelBufferMipMapLevel() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _nSOpenGLContextSelPixelBufferMipMapLevel)
 	return _ret
 }
 
+// Attaches the image data in the specified pixel buffer to the texture object currently bound by the OpenGL context.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) SetTextureImageToPixelBufferColorBuffer(pixelBuffer *NSOpenGLPixelBuffer, source uint32) {
 	o.Ptr().Send(_nSOpenGLContextSelSetTextureImageToPixelBufferColorBuffer, pixelBuffer.Ptr(), source)

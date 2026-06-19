@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A light source that can be attached to a node to illuminate the scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnlight
 type SCNLight struct {
 	foundation.NSObject
@@ -118,7 +120,7 @@ func SCNLightFromID(id objc.ID) *SCNLight {
 	return o
 }
 
-// @method light @abstract Creates and returns a light instance.
+// Creates a new light object.
 func SCNLightLight() *SCNLight {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLight), _sCNLightSelLight)
 	if _ret != 0 {
@@ -508,12 +510,15 @@ func (o *SCNLight) SetAreaExtents(areaExtents unsafe.Pointer) {
 
 // @property areaPolygonVertices @abstract Determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. @discussion An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
 func (o *SCNLight) AreaPolygonVertices() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _sCNLightSelAreaPolygonVertices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelAreaPolygonVertices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *SCNLight) SetAreaPolygonVertices(areaPolygonVertices *foundation.NSArray[*foundation.NSValue]) {
-	o.Ptr().Send(_sCNLightSelSetAreaPolygonVertices, areaPolygonVertices)
+	o.Ptr().Send(_sCNLightSelSetAreaPolygonVertices, areaPolygonVertices.Ptr())
 }
 
 // @property drawsArea @abstract Determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
@@ -555,14 +560,14 @@ func (o *SCNLight) SetCategoryBitMask(categoryBitMask uint) {
 	o.Ptr().Send(_sCNLightSelSetCategoryBitMask, categoryBitMask)
 }
 
-// @method attributeForKey: @param key The key for which to return the corresponding attribute. @abstract Returns the attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
+// Returns the value of a lighting attribute.
 // Deprecated: Use SCNLight properties instead
 func (o *SCNLight) AttributeForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLightSelAttributeForKey, key.Ptr())
 	return _ret
 }
 
-// @method setAttribute:forKey: @param attribute The attribute for the property identified by key. @param key The name of a property. @abstract Set the specified attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
+// Sets the value for a lighting attribute.
 // Deprecated: Use SCNLight properties instead
 func (o *SCNLight) SetAttributeForKey(attribute objc.ID, key *foundation.NSString) {
 	o.Ptr().Send(_sCNLightSelSetAttributeForKey, attribute, key.Ptr())

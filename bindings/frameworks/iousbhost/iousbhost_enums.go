@@ -8,11 +8,14 @@ import (
 	"strings"
 )
 
+// Options for aborting pending input/output requests.
 type IOUSBHostAbortOption uint64
 
 const (
+	// The option to abort input/output requests asynchronously.
 	IOUSBHostAbortOptionAsynchronous IOUSBHostAbortOption = 0
-	IOUSBHostAbortOptionSynchronous  IOUSBHostAbortOption = 1
+	// The option to abort input/output requests synchronously.
+	IOUSBHostAbortOptionSynchronous IOUSBHostAbortOption = 1
 )
 
 func (e IOUSBHostAbortOption) String() string {
@@ -503,10 +506,13 @@ func (e IOUSBHostObjectDestroyOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for initializing the host object.
 type IOUSBHostObjectInitOptions uint64
 
 const (
-	IOUSBHostObjectInitOptionsNone          IOUSBHostObjectInitOptions = 0
+	// The default argument for initializing the host object.
+	IOUSBHostObjectInitOptionsNone IOUSBHostObjectInitOptions = 0
+	// The option to capture the device and terminate existing drivers.
 	IOUSBHostObjectInitOptionsDeviceCapture IOUSBHostObjectInitOptions = 1
 	IOUSBHostObjectInitOptionsDeviceSeize   IOUSBHostObjectInitOptions = 2
 )

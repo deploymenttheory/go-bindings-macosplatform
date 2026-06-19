@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that provides localized representations of units and measurements.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmeasurementformatter
 type NSMeasurementFormatter struct {
 	NSFormatter
@@ -39,7 +41,7 @@ func NSMeasurementFormatterFromID(id objc.ID) *NSMeasurementFormatter {
 }
 
 func (o *NSMeasurementFormatter) StringFromMeasurement(measurement *NSMeasurement[objc.ID]) *NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelStringFromMeasurement, measurement)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementFormatterSelStringFromMeasurement, measurement.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

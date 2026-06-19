@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
+//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/sntimedurationconstraint
 type SNTimeDurationConstraint struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func SNTimeDurationConstraintFromID(id objc.ID) *SNTimeDurationConstraint {
 
 // Initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
 func (o *SNTimeDurationConstraint) InitWithEnumeratedDurations(enumeratedDurations *foundation.NSArray[*foundation.NSValue]) *SNTimeDurationConstraint {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sNTimeDurationConstraintSelInitWithEnumeratedDurations, enumeratedDurations)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sNTimeDurationConstraintSelInitWithEnumeratedDurations, enumeratedDurations.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -61,8 +63,11 @@ func (o *SNTimeDurationConstraint) Type() SNTimeDurationConstraintType {
 
 // If the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
 func (o *SNTimeDurationConstraint) EnumeratedDurations() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _sNTimeDurationConstraintSelEnumeratedDurations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sNTimeDurationConstraintSelEnumeratedDurations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // If the constraint type is range, then the range of allowable window durations. - Returns: If the constraint type is range, a CMTimeRange representing the range of allowable window durations. If the constraint type is not range, `kCMTimeRangeInvalid`. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'range'. The constraint type is considered to be 'range' if the `type` property is equal to `SNTimeDurationConstraintTypeRange`.

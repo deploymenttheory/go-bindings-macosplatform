@@ -1283,8 +1283,8 @@
         "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/inputhandler"
       },
       "intendedSpatialExperience": {
-        "doc": "The AUAudioUnit’s intended spatial experience.",
-        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/intendedspatialexperience-1dvhd"
+        "doc": "The AUAudioUnit’s intended spatial audio experience.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/intendedspatialexperience-7uqrm"
       },
       "internalRenderBlock": {
         "doc": "The block which you must provide, via a getter, in order to implement rendering.",

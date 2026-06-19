@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable 2D vector represented by its x-axis and y-axis projections.
+//
 // Vector wraps [raw.VNVector] with a fluent Go API.
 type Vector struct {
 	inner *raw.VNVector
@@ -29,7 +31,7 @@ func VectorFromID(id objc.ID) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(id)}
 }
 
-// @brief Initializes a vector in Cartesian Coordinate space, using its X and Y axis projections.
+// Creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
 //
 // NewVectorWithXComponentYComponent creates a new [Vector].
 func NewVectorWithXComponentYComponent(x float64, y float64) *Vector {
@@ -38,7 +40,7 @@ func NewVectorWithXComponentYComponent(x float64, y float64) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(_id)}
 }
 
-// @brief Initializes a vector in polar coordinate space, using R and Theta (radians), where R is the length of the vector and Theta is the ange that the vector forms with the positive direction of X axis.
+// Creates a new vector in polar coordinate space.
 //
 // NewVectorWithRTheta creates a new [Vector].
 func NewVectorWithRTheta(r float64, theta float64) *Vector {
@@ -47,7 +49,7 @@ func NewVectorWithRTheta(r float64, theta float64) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(_id)}
 }
 
-// @brief Initializes a vector in Cartesian Coordinate space, using two VNPoints - the head and the tail of the vector.
+// Creates a new vector in Cartesian coordinate space.
 //
 // NewVectorWithVectorHeadTail creates a new [Vector].
 func NewVectorWithVectorHeadTail(head *raw.VNPoint, tail *raw.VNPoint) *Vector {

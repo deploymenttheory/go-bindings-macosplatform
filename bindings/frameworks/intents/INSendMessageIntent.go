@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to send a message to the designated recipients.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/insendmessageintent
 type INSendMessageIntent struct {
 	INIntent
@@ -42,6 +44,7 @@ func INSendMessageIntentFromID(id objc.ID) *INSendMessageIntent {
 	return o
 }
 
+// Creates a send message intent object with the specified content and recipients.
 func (o *INSendMessageIntent) InitWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments(recipients *foundation.NSArray[*INPerson], outgoingMessageType INOutgoingMessageType, content *foundation.NSString, speakableGroupName *INSpeakableString, conversationIdentifier *foundation.NSString, serviceName *foundation.NSString, sender *INPerson, attachments *foundation.NSArray[*INSendMessageAttachment]) *INSendMessageIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentSelInitWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments, recipients.Ptr(), outgoingMessageType, content.Ptr(), speakableGroupName.Ptr(), conversationIdentifier.Ptr(), serviceName.Ptr(), sender.Ptr(), attachments.Ptr())
 	if _ret != 0 {
@@ -111,6 +114,7 @@ func (o *INSendMessageIntent) Attachments() *foundation.NSArray[*INSendMessageAt
 	return foundation.NSArrayFromID[*INSendMessageAttachment](_ret)
 }
 
+// Initializes a send message intent object with the specified content and recipients.
 func (o *INSendMessageIntent) InitWithRecipientsContentGroupNameServiceNameSender(recipients *foundation.NSArray[*INPerson], content *foundation.NSString, groupName *foundation.NSString, serviceName *foundation.NSString, sender *INPerson) *INSendMessageIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentSelInitWithRecipientsContentGroupNameServiceNameSender, recipients.Ptr(), content.Ptr(), groupName.Ptr(), serviceName.Ptr(), sender.Ptr())
 	if _ret != 0 {
@@ -119,6 +123,7 @@ func (o *INSendMessageIntent) InitWithRecipientsContentGroupNameServiceNameSende
 	return INSendMessageIntentFromID(_ret)
 }
 
+// Initializes a send message intent object with the specified content and recipients.
 // Deprecated: Use the designated initializer with outgoingMessageType instead
 func (o *INSendMessageIntent) InitWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients *foundation.NSArray[*INPerson], content *foundation.NSString, speakableGroupName *INSpeakableString, conversationIdentifier *foundation.NSString, serviceName *foundation.NSString, sender *INPerson) *INSendMessageIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentSelInitWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender, recipients.Ptr(), content.Ptr(), speakableGroupName.Ptr(), conversationIdentifier.Ptr(), serviceName.Ptr(), sender.Ptr())
@@ -128,6 +133,7 @@ func (o *INSendMessageIntent) InitWithRecipientsContentSpeakableGroupNameConvers
 	return INSendMessageIntentFromID(_ret)
 }
 
+// Initializes a send message intent object with the specified content and recipients.
 // Deprecated: Use the designated initializer with attachments instead instead
 func (o *INSendMessageIntent) InitWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients *foundation.NSArray[*INPerson], outgoingMessageType INOutgoingMessageType, content *foundation.NSString, speakableGroupName *INSpeakableString, conversationIdentifier *foundation.NSString, serviceName *foundation.NSString, sender *INPerson) *INSendMessageIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentSelInitWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender, recipients.Ptr(), outgoingMessageType, content.Ptr(), speakableGroupName.Ptr(), conversationIdentifier.Ptr(), serviceName.Ptr(), sender.Ptr())

@@ -8,19 +8,31 @@ import (
 	"fmt"
 )
 
+// A 64-bit representation of a tag’s category.
 type CMTagCategory int64
 
 const (
-	KCMTagCategory_Undefined                CMTagCategory = 0
-	KCMTagCategory_MediaType                CMTagCategory = 1835297121
-	KCMTagCategory_MediaSubType             CMTagCategory = 1836283234
-	KCMTagCategory_TrackID                  CMTagCategory = 1953653099
-	KCMTagCategory_ChannelID                CMTagCategory = 1986226286
-	KCMTagCategory_VideoLayerID             CMTagCategory = 1986814329
-	KCMTagCategory_PixelFormat              CMTagCategory = 1885960294
-	KCMTagCategory_PackingType              CMTagCategory = 1885430635
-	KCMTagCategory_ProjectionType           CMTagCategory = 1886547818
-	KCMTagCategory_StereoView               CMTagCategory = 1702454643
+	// An unknown or undefined tag category.
+	KCMTagCategory_Undefined CMTagCategory = 0
+	// A category used for tagging media type metadata.
+	KCMTagCategory_MediaType CMTagCategory = 1835297121
+	// A category used for tagging media subtype metadata.
+	KCMTagCategory_MediaSubType CMTagCategory = 1836283234
+	// A category used for tagging a track ID.
+	KCMTagCategory_TrackID CMTagCategory = 1953653099
+	// A category used for tagging a channel ID.
+	KCMTagCategory_ChannelID CMTagCategory = 1986226286
+	// A category used for tagging a video layer ID.
+	KCMTagCategory_VideoLayerID CMTagCategory = 1986814329
+	// A category used for tagging pixel format information.
+	KCMTagCategory_PixelFormat CMTagCategory = 1885960294
+	// A category used for tagging frame-packing information.
+	KCMTagCategory_PackingType CMTagCategory = 1885430635
+	// A category used for tagging projection surface information.
+	KCMTagCategory_ProjectionType CMTagCategory = 1886547818
+	// A category used for tagging eye information for 3D video.
+	KCMTagCategory_StereoView CMTagCategory = 1702454643
+	// A category used for tagging how to interpret stereo view metadata.
 	KCMTagCategory_StereoViewInterpretation CMTagCategory = 1702455664
 )
 
@@ -53,14 +65,20 @@ func (e CMTagCategory) String() string {
 	}
 }
 
+// The data type of a tag’s value.
 type CMTagDataType int64
 
 const (
+	// The tag value isn’t associated with any known data type.
 	KCMTagDataType_Invalid CMTagDataType = 0
-	KCMTagDataType_SInt64  CMTagDataType = 2
+	// The tag value is a signed 64-bit integer.
+	KCMTagDataType_SInt64 CMTagDataType = 2
+	// The tag value is a 64-bit floating point number.
 	KCMTagDataType_Float64 CMTagDataType = 3
-	KCMTagDataType_OSType  CMTagDataType = 5
-	KCMTagDataType_Flags   CMTagDataType = 7
+	// The tag value is a 64-bit identifier used by the operating system.
+	KCMTagDataType_OSType CMTagDataType = 5
+	// The tag value is a 64-bit wide bitflag field.
+	KCMTagDataType_Flags CMTagDataType = 7
 )
 
 func (e CMTagDataType) String() string {
@@ -80,16 +98,24 @@ func (e CMTagDataType) String() string {
 	}
 }
 
+// An enumeration of rounding methods to use when performing time calculations.
 type CMTimeRoundingMethod int64
 
 const (
-	KCMTimeRoundingMethod_RoundHalfAwayFromZero       CMTimeRoundingMethod = 1
-	KCMTimeRoundingMethod_RoundTowardZero             CMTimeRoundingMethod = 2
-	KCMTimeRoundingMethod_RoundAwayFromZero           CMTimeRoundingMethod = 3
-	KCMTimeRoundingMethod_QuickTime                   CMTimeRoundingMethod = 4
+	// Rounds half away from zero.
+	KCMTimeRoundingMethod_RoundHalfAwayFromZero CMTimeRoundingMethod = 1
+	// Rounds toward zero.
+	KCMTimeRoundingMethod_RoundTowardZero CMTimeRoundingMethod = 2
+	// Rounds away from zero.
+	KCMTimeRoundingMethod_RoundAwayFromZero CMTimeRoundingMethod = 3
+	// Rounds using the QuickTime method.
+	KCMTimeRoundingMethod_QuickTime CMTimeRoundingMethod = 4
+	// Rounds toward positive infinity.
 	KCMTimeRoundingMethod_RoundTowardPositiveInfinity CMTimeRoundingMethod = 5
+	// Rounds toward negative infinity.
 	KCMTimeRoundingMethod_RoundTowardNegativeInfinity CMTimeRoundingMethod = 6
-	KCMTimeRoundingMethod_Default                     CMTimeRoundingMethod = 1
+	// The default rounding method.
+	KCMTimeRoundingMethod_Default CMTimeRoundingMethod = 1
 )
 
 func (e CMTimeRoundingMethod) String() string {

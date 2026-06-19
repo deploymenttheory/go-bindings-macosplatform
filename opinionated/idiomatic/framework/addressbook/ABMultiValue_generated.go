@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable representation of a property that might have multiple values.
+//
 // MultiValue wraps [raw.ABMultiValue] with a fluent Go API.
 type MultiValue struct {
 	inner *raw.ABMultiValue
@@ -37,16 +39,22 @@ func NewMultiValue() *MultiValue {
 	return &MultiValue{inner: raw.ABMultiValueFromID(_id)}
 }
 
+// Returns the number of entries in a multivalue list.
+//
 // Count calls the underlying Count.
 func (x *MultiValue) Count() uint {
 	return x.inner.Count()
 }
 
+// Returns the value for the given index.
+//
 // ValueAtIndex calls the underlying ValueAtIndex.
 func (x *MultiValue) ValueAtIndex(index uint) objc.ID {
 	return x.inner.ValueAtIndex(index)
 }
 
+// Returns the label for the given index.
+//
 // LabelAtIndex calls the underlying LabelAtIndex.
 func (x *MultiValue) LabelAtIndex(index uint) string {
 	_r := x.inner.LabelAtIndex(index)
@@ -56,6 +64,8 @@ func (x *MultiValue) LabelAtIndex(index uint) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the identifier for the given index.
+//
 // IdentifierAtIndex calls the underlying IdentifierAtIndex.
 func (x *MultiValue) IdentifierAtIndex(index uint) string {
 	_r := x.inner.IdentifierAtIndex(index)
@@ -65,11 +75,15 @@ func (x *MultiValue) IdentifierAtIndex(index uint) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the index for the given identifier.
+//
 // IndexForIdentifier calls the underlying IndexForIdentifier.
 func (x *MultiValue) IndexForIdentifier(identifier string) uint {
 	return x.inner.IndexForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 }
 
+// Returns the identifier for the primary value.
+//
 // PrimaryIdentifier calls the underlying PrimaryIdentifier.
 func (x *MultiValue) PrimaryIdentifier() string {
 	_r := x.inner.PrimaryIdentifier()
@@ -79,16 +93,22 @@ func (x *MultiValue) PrimaryIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the type for the values in a multivalue list.
+//
 // PropertyType calls the underlying PropertyType.
 func (x *MultiValue) PropertyType() int {
 	return x.inner.PropertyType()
 }
 
+// Returns the value for the given identifier.
+//
 // ValueForIdentifier calls the underlying ValueForIdentifier.
 func (x *MultiValue) ValueForIdentifier(identifier string) objc.ID {
 	return x.inner.ValueForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 }
 
+// Returns the label for the given identifier.
+//
 // LabelForIdentifier calls the underlying LabelForIdentifier.
 func (x *MultiValue) LabelForIdentifier(identifier string) objc.ID {
 	return x.inner.LabelForIdentifier(foundation.NSStringStringWithUTF8String(identifier))

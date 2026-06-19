@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that arranges an array of views horizontally or vertically and updates their placement and sizing when the window size changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstackview
 type NSStackView struct {
 	NSView
@@ -65,6 +67,7 @@ func NSStackViewFromID(id objc.ID) *NSStackView {
 	return o
 }
 
+// Creates and returns a stack view with a specified array of views.
 func NSStackViewStackViewWithViews(views *foundation.NSArray[*NSView]) *NSStackView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStackView), _nSStackViewSelStackViewWithViews, views.Ptr())
 	if _ret != 0 {
@@ -73,53 +76,61 @@ func NSStackViewStackViewWithViews(views *foundation.NSArray[*NSView]) *NSStackV
 	return NSStackViewFromID(_ret)
 }
 
+// Specifies the custom spacing, in points, between a specified view and the view that follows it in the stack view.
 func (o *NSStackView) SetCustomSpacingAfterView(spacing float64, view *NSView) {
 	o.Ptr().Send(_nSStackViewSelSetCustomSpacingAfterView, spacing, view.Ptr())
 }
 
+// Returns the custom spacing, in points, between a specified view in the stack view and the view that follows it.
 func (o *NSStackView) CustomSpacingAfterView(view *NSView) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSStackViewSelCustomSpacingAfterView, view.Ptr())
 	return _ret
 }
 
-// Adds a view to the end of the arrangedSubviews list. If the view is not a subview of the receiver, it will be added as one.
+// Adds the specified view to the end of the arranged subviews list.
 func (o *NSStackView) AddArrangedSubview(view *NSView) {
 	o.Ptr().Send(_nSStackViewSelAddArrangedSubview, view.Ptr())
 }
 
-// Adds a view to the arrangedSubviews list at a specific index. If the view is already in the arrangedSubviews list, it will move the view to the specified index (but not change the subview index). If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
+// Adds the provided view to the array of arranged subviews at the specified index.
 func (o *NSStackView) InsertArrangedSubviewAtIndex(view *NSView, index int) {
 	o.Ptr().Send(_nSStackViewSelInsertArrangedSubviewAtIndex, view.Ptr(), index)
 }
 
-// Removes a subview from the list of arranged subviews without removing it as a subview of the receiver. Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
+// Removes the provided view from the stack’s array of arranged subviews.
 func (o *NSStackView) RemoveArrangedSubview(view *NSView) {
 	o.Ptr().Send(_nSStackViewSelRemoveArrangedSubview, view.Ptr())
 }
 
+// Sets the Auto Layout priority for a view to remain attached to the stack view when Auto Layout reduces the stack view’s size.
 func (o *NSStackView) SetVisibilityPriorityForView(priority float32, view *NSView) {
 	o.Ptr().Send(_nSStackViewSelSetVisibilityPriorityForView, priority, view.Ptr())
 }
 
+// Returns the visibility priority for a specified view in the stack view.
 func (o *NSStackView) VisibilityPriorityForView(view *NSView) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelVisibilityPriorityForView, view.Ptr())
 	return _ret
 }
 
+// Returns the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
 func (o *NSStackView) ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelClippingResistancePriorityForOrientation, orientation)
 	return _ret
 }
 
+// Sets the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
 func (o *NSStackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation) {
 	o.Ptr().Send(_nSStackViewSelSetClippingResistancePriorityForOrientation, clippingResistancePriority, orientation)
 }
 
+// Returns the Auto Layout priority for the stack view to minimize its size to fit its contained views as closely as possible, for a specified user interface axis.
 func (o *NSStackView) HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelHuggingPriorityForOrientation, orientation)
 	return _ret
 }
 
+// Sets the Auto Layout priority for the stack view to minimize its size, for a specified user interface axis.
 func (o *NSStackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation) {
 	o.Ptr().Send(_nSStackViewSelSetHuggingPriorityForOrientation, huggingPriority, orientation)
 }
@@ -217,18 +228,22 @@ func (o *NSStackView) DetachedViews() *foundation.NSArray[*NSView] {
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
+// Adds a view to the end of the stack view gravity area.
 func (o *NSStackView) AddViewInGravity(view *NSView, gravity NSStackViewGravity) {
 	o.Ptr().Send(_nSStackViewSelAddViewInGravity, view.Ptr(), gravity)
 }
 
+// Adds a view to a stack view gravity area at a specified index position.
 func (o *NSStackView) InsertViewAtIndexInGravity(view *NSView, index uint, gravity NSStackViewGravity) {
 	o.Ptr().Send(_nSStackViewSelInsertViewAtIndexInGravity, view.Ptr(), index, gravity)
 }
 
+// Removes a specified view from the stack view.
 func (o *NSStackView) RemoveView(view *NSView) {
 	o.Ptr().Send(_nSStackViewSelRemoveView, view.Ptr())
 }
 
+// Returns the array of views in the specified gravity area in the stack view.
 func (o *NSStackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViewsInGravity, gravity)
 	if _ret != 0 {
@@ -237,6 +252,7 @@ func (o *NSStackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSA
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
+// Specifies an array of views for a specified gravity area in the stack view, replacing any previous views in that area.
 func (o *NSStackView) SetViewsInGravity(views *foundation.NSArray[*NSView], gravity NSStackViewGravity) {
 	o.Ptr().Send(_nSStackViewSelSetViewsInGravity, views.Ptr(), gravity)
 }

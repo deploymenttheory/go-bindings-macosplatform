@@ -5,7 +5,9 @@
 package avfoundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -39,15 +41,31 @@ func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 
 // Loads playback configuration options for an asset.
 //
-// LoadPlaybackConfigurationOptionsWithCompletionHandler calls the underlying LoadPlaybackConfigurationOptionsWithCompletionHandler.
-func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler)
+// LoadPlaybackConfigurationOptions blocks until the operation completes or ctx is cancelled.
+func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadPlaybackConfigurationOptionsWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // AssetPlaybackAssistantable is the interface implemented by [AssetPlaybackAssistant], for mocking and DI.
 type AssetPlaybackAssistantable interface {
 	Unwrap() *raw.AVAssetPlaybackAssistant
-	LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block)
+	LoadPlaybackConfigurationOptions(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
 }
 
 var _ AssetPlaybackAssistantable = (*AssetPlaybackAssistant)(nil)

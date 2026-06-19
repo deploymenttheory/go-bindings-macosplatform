@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains file properties from the media asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mefileinfo
 type MEFileInfo struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A convenient interface to the contents of the file system, and the primary means of interacting with it.
+//
 // FileManager wraps [raw.NSFileManager] with a fluent Go API.
 type FileManager struct {
 	inner *raw.NSFileManager
@@ -247,21 +249,29 @@ func (x *FileManager) CreateDirectoryAtPathAttributes(path string, attributes *r
 	return x.inner.CreateDirectoryAtPathAttributes(foundation.NSStringStringWithUTF8String(path), attributes)
 }
 
+// Creates a link from a source to a destination.
+//
 // LinkPathToPathHandler calls the underlying LinkPathToPathHandler.
 func (x *FileManager) LinkPathToPathHandler(src string, dest string, handler objc.ID) bool {
 	return x.inner.LinkPathToPathHandler(foundation.NSStringStringWithUTF8String(src), foundation.NSStringStringWithUTF8String(dest), handler)
 }
 
+// Copies the directory or file specified in a given path to a different location in the file system identified by another path.
+//
 // CopyPathToPathHandler calls the underlying CopyPathToPathHandler.
 func (x *FileManager) CopyPathToPathHandler(src string, dest string, handler objc.ID) bool {
 	return x.inner.CopyPathToPathHandler(foundation.NSStringStringWithUTF8String(src), foundation.NSStringStringWithUTF8String(dest), handler)
 }
 
+// Moves the directory or file specified by a given path to a different location in the file system identified by another path.
+//
 // MovePathToPathHandler calls the underlying MovePathToPathHandler.
 func (x *FileManager) MovePathToPathHandler(src string, dest string, handler objc.ID) bool {
 	return x.inner.MovePathToPathHandler(foundation.NSStringStringWithUTF8String(src), foundation.NSStringStringWithUTF8String(dest), handler)
 }
 
+// Deletes the file, link, or directory (including, recursively, all subdirectories, files, and links in the directory) identified by a given path.
+//
 // RemoveFileAtPathHandler calls the underlying RemoveFileAtPathHandler.
 func (x *FileManager) RemoveFileAtPathHandler(path string, handler objc.ID) bool {
 	return x.inner.RemoveFileAtPathHandler(foundation.NSStringStringWithUTF8String(path), handler)
@@ -326,6 +336,8 @@ func (x *FileManager) EnumeratorAtPath(path string) *raw.NSDirectoryEnumerator[*
 	return x.inner.EnumeratorAtPath(foundation.NSStringStringWithUTF8String(path))
 }
 
+// Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL.
+//
 // EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler calls the underlying EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler.
 func (x *FileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL] {
 	return x.inner.EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, raw.NSDirectoryEnumerationOptions(mask), handler)

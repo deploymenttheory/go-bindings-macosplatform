@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object-oriented wrapper for a file descriptor.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilehandle
 type NSFileHandle struct {
 	NSObject
@@ -91,6 +93,7 @@ func (o *NSFileHandle) InitWithCoder(coder *NSCoder) *NSFileHandle {
 	return NSFileHandleFromID(_ret)
 }
 
+// Reads the available data synchronously up to the end of file or maximum number of bytes.
 func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataToEndOfFileAndReturnError, unsafe.Pointer(&_nsErr))
@@ -103,6 +106,7 @@ func (o *NSFileHandle) ReadDataToEndOfFileAndReturnError() (*NSData, error) {
 	return NSDataFromID(_ret), nil
 }
 
+// Reads data synchronously up to the specified number of bytes.
 func (o *NSFileHandle) ReadDataUpToLengthError(length uint) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileHandleSelReadDataUpToLengthError, length, unsafe.Pointer(&_nsErr))
@@ -115,6 +119,7 @@ func (o *NSFileHandle) ReadDataUpToLengthError(length uint) (*NSData, error) {
 	return NSDataFromID(_ret), nil
 }
 
+// Writes the specified data synchronously to the file handle.
 func (o *NSFileHandle) WriteDataError(data *NSData) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelWriteDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -124,6 +129,7 @@ func (o *NSFileHandle) WriteDataError(data *NSData) (bool, error) {
 	return _ret, nil
 }
 
+// Get the current position of the file pointer within the file.
 func (o *NSFileHandle) GetOffsetError(offsetInFile *uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelGetOffsetError, offsetInFile, unsafe.Pointer(&_nsErr))
@@ -133,6 +139,7 @@ func (o *NSFileHandle) GetOffsetError(offsetInFile *uint64) (bool, error) {
 	return _ret, nil
 }
 
+// Places the file pointer at the end of the file referenced by the file handle and returns the new file offset.
 func (o *NSFileHandle) SeekToEndReturningOffsetError(offsetInFile *uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileHandleSelSeekToEndReturningOffsetError, offsetInFile, unsafe.Pointer(&_nsErr))

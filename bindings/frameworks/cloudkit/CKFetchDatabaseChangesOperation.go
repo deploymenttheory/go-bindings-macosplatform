@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that fetches database changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchdatabasechangesoperation
 type CKFetchDatabaseChangesOperation struct {
 	CKDatabaseOperation
@@ -59,7 +61,7 @@ func (o *CKFetchDatabaseChangesOperation) Init() *CKFetchDatabaseChangesOperatio
 	return CKFetchDatabaseChangesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching database changes. - Parameters: - previousServerChangeToken: The change token that CloudKit uses to determine which database changes to return. After creating the operation, assign a handler to the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ property so that you can process the operation's results. If this is your first fetch, or if you want to refetch all zones, pass `nil` for the change token. If you provide a change token from a previous “CKFetchDatabaseChangesOperation“, CloudKit returns only the zones with changes since that token. The per-database “CKServerChangeToken“ isn't the same as the per-record zone “CKServerChangeToken“ from “CKFetchRecordZoneChangesOperation“.
+// Creates an operation for fetching database changes.
 func (o *CKFetchDatabaseChangesOperation) InitWithPreviousServerChangeToken(previousServerChangeToken *CKServerChangeToken) *CKFetchDatabaseChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchDatabaseChangesOperationSelInitWithPreviousServerChangeToken, previousServerChangeToken.Ptr())
 	if _ret != 0 {

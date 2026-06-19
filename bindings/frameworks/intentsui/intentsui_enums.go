@@ -56,12 +56,17 @@ func (e EvCmd) String() string {
 	}
 }
 
+// The styles for the Add to Siri button.
 type INUIAddVoiceShortcutButtonStyle uint64
 
 const (
-	INUIAddVoiceShortcutButtonStyleWhite            INUIAddVoiceShortcutButtonStyle = 0
-	INUIAddVoiceShortcutButtonStyleWhiteOutline     INUIAddVoiceShortcutButtonStyle = 1
-	INUIAddVoiceShortcutButtonStyleBlack            INUIAddVoiceShortcutButtonStyle = 2
+	// A button with a white background.
+	INUIAddVoiceShortcutButtonStyleWhite INUIAddVoiceShortcutButtonStyle = 0
+	// A button with a white background, and a border outlining the button.
+	INUIAddVoiceShortcutButtonStyleWhiteOutline INUIAddVoiceShortcutButtonStyle = 1
+	// A button with a black background.
+	INUIAddVoiceShortcutButtonStyleBlack INUIAddVoiceShortcutButtonStyle = 2
+	// A button with a black background, and a border outlining the button.
 	INUIAddVoiceShortcutButtonStyleBlackOutline     INUIAddVoiceShortcutButtonStyle = 3
 	INUIAddVoiceShortcutButtonStyleAutomatic        INUIAddVoiceShortcutButtonStyle = 4
 	INUIAddVoiceShortcutButtonStyleAutomaticOutline INUIAddVoiceShortcutButtonStyle = 5

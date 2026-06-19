@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The FHIR version.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkfhirversion
 type HKFHIRVersion struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func HKFHIRVersionFromID(id objc.ID) *HKFHIRVersion {
 	return o
 }
 
+// Creates an FHIR version object from a string representation of the version.
 func HKFHIRVersionVersionFromVersionStringError(versionString *foundation.NSString) (*HKFHIRVersion, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKFHIRVersion), _hKFHIRVersionSelVersionFromVersionStringError, versionString.Ptr(), unsafe.Pointer(&_nsErr))
@@ -51,6 +54,7 @@ func HKFHIRVersionVersionFromVersionStringError(versionString *foundation.NSStri
 	return HKFHIRVersionFromID(_ret), nil
 }
 
+// Returns the primary Second Draft Standard for Trial Use (DSTU2) version.
 func HKFHIRVersionPrimaryDSTU2Version() *HKFHIRVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKFHIRVersion), _hKFHIRVersionSelPrimaryDSTU2Version)
 	if _ret != 0 {
@@ -59,6 +63,7 @@ func HKFHIRVersionPrimaryDSTU2Version() *HKFHIRVersion {
 	return HKFHIRVersionFromID(_ret)
 }
 
+// Returns the primary Release 4 (R4) version.
 func HKFHIRVersionPrimaryR4Version() *HKFHIRVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKFHIRVersion), _hKFHIRVersionSelPrimaryR4Version)
 	if _ret != 0 {

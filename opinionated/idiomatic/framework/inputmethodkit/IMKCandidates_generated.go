@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The IMKCandidates class presents candidates to users and notifies the appropriate IMKInputController object when the user selects a candidate. Candidates are alternate characters for a given input sequence. The IMKCandidates class supports using a candidates window in your input method; using IMKCandidates is optional. Not all input methods require them.
+//
 // Candidates wraps [raw.IMKCandidates] with a fluent Go API.
 type Candidates struct {
 	inner *raw.IMKCandidates
@@ -32,6 +34,8 @@ func CandidatesFromID(id objc.ID) *Candidates {
 	return &Candidates{inner: raw.IMKCandidatesFromID(id)}
 }
 
+// Returns the initialized IMKCandidates object.
+//
 // NewCandidatesWithServerPanelType creates a new [Candidates].
 func NewCandidatesWithServerPanelType(server *raw.IMKServer, panelType uint) *Candidates {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKCandidates")), objc.RegisterName("alloc"))
@@ -46,49 +50,49 @@ func NewCandidatesWithServerPanelTypeStyleType(server *raw.IMKServer, panelType 
 	return &Candidates{inner: raw.IMKCandidatesFromID(_id)}
 }
 
-// @method @abstract   Return the panel type.
+// Returns the style of the candidates window.
 //
 // PanelType calls the underlying PanelType.
 func (x *Candidates) PanelType() uint {
 	return x.inner.PanelType()
 }
 
-// @method @abstract   Change the panel type.
+// Sets the style of the candidates window.
 //
 // SetPanelType calls the underlying SetPanelType.
 func (x *Candidates) SetPanelType(panelType uint) {
 	x.inner.SetPanelType(panelType)
 }
 
-// @method @abstract   If a candidate window type has been provided, show the candidate window. The caller provides a location hint that is used to position the window. Input methods call this method when it is appropriate, during text conversion, to display a list of candidates.
+// Shows the candidates window.
 //
 // Show calls the underlying Show.
 func (x *Candidates) Show(locationHint uint) {
 	x.inner.Show(locationHint)
 }
 
-// @method @abstract   If the candidate window is visible, hide it.
+// Hides a candidates window, if it is visible.
 //
 // Hide calls the underlying Hide.
 func (x *Candidates) Hide() {
 	x.inner.Hide()
 }
 
-// @method @abstract   Utility method returns YES if a candidate display is visible.
+// Returns whether or not the candidates window is visible.
 //
 // IsVisible calls the underlying IsVisible.
 func (x *Candidates) IsVisible() bool {
 	return x.inner.IsVisible()
 }
 
-// @method @abstract   Call this method to update the candidates displayed in the candidate window. @discussion Calling this method will result in a call being made to the IMKInputController's candidates method. Note that the candidate list will be updated, but the window's visible state will not change; that is to say, if the window is hidden it will remain hidden, and vice versa.
+// Updates the candidates that are displayed in the candidates window.
 //
 // UpdateCandidates calls the underlying UpdateCandidates.
 func (x *Candidates) UpdateCandidates() {
 	x.inner.UpdateCandidates()
 }
 
-// @method @abstract   Displays an annotation window whose contents are the annotationString. @discussion An annotation is additional text that explains or somehow adds to the candidate string in a candidate window. Annotations are displayed in a small borderless window that is aligned with the current candidate panel. An input method calls showAnnotation: when the method [IMKInputController candidateSelectionChanged:] is called, and the candidateString has annotations.
+// Displays an annotation string in an annotation window.
 //
 // ShowAnnotation calls the underlying ShowAnnotation.
 func (x *Candidates) ShowAnnotation(annotationString *foundation.NSAttributedString) {
@@ -105,56 +109,56 @@ func (x *Candidates) CandidateFrame() corefoundation.CGRect {
 	return x.inner.CandidateFrame()
 }
 
-// @method @abstract   Set the selection keys for the candidates. @discussion Selection keys are an array of NSNumbers where each NSNumber is a virtual key code that the controller will map to characters that are displayed either across the top of the candidates, if the candidates are laid out horizontally, or along the left edge of the candidates, if they are aligned vertically. The number of selection keys determines how many candidates are displayed per page.  For example, if you passed an array of 4 key codes, then 4 candidates are displayed per page.  If you passed 11 key codes, then 11 candidates would be displayed. By default the key codes are mapped using the keyboard layout whose source id is com.apple.keylayout.US.  The default layout can be replaced by calling setSelectionKeysKeylayout (see below). The default selection keys are the digits 1 through 9, or in terms of key codes: 18-21,23,22, 26, 28, 25.
+// Sets the selection keys for the candidates.
 //
 // SetSelectionKeys calls the underlying SetSelectionKeys.
 func (x *Candidates) SetSelectionKeys(keyCodes *foundation.NSArray[objc.ID]) {
 	x.inner.SetSelectionKeys(keyCodes)
 }
 
-// @method @abstract   Returns an NSArray of NSNumbers where each NSNumber is a virtual key code. The NSArray is an autoreleased object. Do not release unless it is first retained.
+// Returns an array of NSNumber objects where each NSNumber object represents a virtual key code.
 //
 // SelectionKeys calls the underlying SelectionKeys.
 func (x *Candidates) SelectionKeys() *foundation.NSArray[objc.ID] {
 	return x.inner.SelectionKeys()
 }
 
-// @method @abstract   Sets the key layout that is used to map virtual key codes to characters.
+// Sets the key layout that is used to map virtual key codes to characters.
 //
 // SetSelectionKeysKeylayout calls the underlying SetSelectionKeysKeylayout.
 func (x *Candidates) SetSelectionKeysKeylayout(layout unsafe.Pointer) {
 	x.inner.SetSelectionKeysKeylayout(layout)
 }
 
-// @method @abstract   Returns the key layout that is used to map virtual key codes for the selection keys.  By default this is the key layout whose source id is com.apple.keylayout.US. This is an autoreleased object.  Retain it if you need to keep it.
+// Returns the key layout that maps virtual key codes to selection keys.
 //
 // SelectionKeysKeylayout calls the underlying SelectionKeysKeylayout.
 func (x *Candidates) SelectionKeysKeylayout() unsafe.Pointer {
 	return x.inner.SelectionKeysKeylayout()
 }
 
-// @method @abstract   Sets the "style" attributes for the candidates window.  The keys for the attributes dictionary and the values are: NSFontAttributeName (value = NSFont)  Setting the font attribute sets the font that is used to draw Candidates.  It does not effect the selection keys which are always drawn in the same font.  Note that to set the font size you should use this key/value pair. IMKCandidatesOpacityAttributeName (value = NSNumber with a float value between 0 and 1).  Sets the opacity level to transparent (0.0) to completely opaque (1.0). The default opacity is 1.0.  This constant is declared above. NSForegroundColorAttributeName (value = NSColor) Sets the text color used for the candidate text.  By default it is black. NSBackgroundColorDocumentAttribute (value = NSColor).  Set the background color that is drawn behind the candidate text. IMKCandidatesSendServerKeyEventFirst (value = NSNumber).  NO (default) gives the candidate window first chance at key events.  YES causes events to first be routed to the current IMKInputController.  In that case, if the event is not handled, it will then be sent to the candidate window.
+// Sets the style attributes for the candidates window.
 //
 // SetAttributes calls the underlying SetAttributes.
 func (x *Candidates) SetAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetAttributes(attributes)
 }
 
-// @method @abstract   Returns the attributes dictionary.
+// Returns a dictionary of the style attributes used for the candidates window..
 //
 // Attributes calls the underlying Attributes.
 func (x *Candidates) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Attributes()
 }
 
-// @method @abstract   Setting the dismissesAutomatically flag determines what happens to displayed candidates when the return key or enter key is typed. @discussion By default, if a return or enter key is typed, the candidates are dismissed and a candidateSelected: message is sent to the input controller.  However  if setDismissesAutomatically is passed a NO flag  the candidate display will not be dismissed when a return or enter key is typed.  The input controller will still be sent the candidatesSelected: message, but, as stated, the candidates display will not be dismissed. Setting this flag to NO lets an input method process text input while keeping a dynamically changing candidates display in view throughout the text input process. When you set this to NO the candidate display will still be hidden when when a session deactivates.
+// Sets the state of the flag that determines whether the candidates window dismisses automatically.
 //
 // SetDismissesAutomatically calls the underlying SetDismissesAutomatically.
 func (x *Candidates) SetDismissesAutomatically(flag bool) {
 	x.inner.SetDismissesAutomatically(flag)
 }
 
-// @method @abstract   Returns the dismissesAutomatically flag.
+// Returns the state of the flag that determines whether the candidates window dismisses automatically.
 //
 // DismissesAutomatically calls the underlying DismissesAutomatically.
 func (x *Candidates) DismissesAutomatically() bool {

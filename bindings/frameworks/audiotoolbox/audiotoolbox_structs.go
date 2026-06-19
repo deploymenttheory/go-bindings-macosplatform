@@ -12,13 +12,13 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 )
 
-// @struct			AUChannelInfo @abstract		Define an audio unit's channel handling capabilities
+// The audio input and output channel capabilities for an audio unit.
 type AUChannelInfo struct {
 	InChannels  int16
 	OutChannels int16
 }
 
-// @struct			AUDependentParameter @abstract		Used to represent a dependent parameter that can change as a result of its parent meta-parameter changing
+// An audio unit parameter whose value can change in response to a change in its parent metaparameter.
 type AUDependentParameter struct {
 	MScope       uint
 	MParameterID uint
@@ -36,13 +36,13 @@ type AUHostIdentifier struct {
 	HostVersion AUNumVersion
 }
 
-// @struct			AUHostVersionIdentifier @abstract		Used to describe the name and version of the audio unit's host
+// The name and version of an audio unit’s host application.
 type AUHostVersionIdentifier struct {
 	HostName    unsafe.Pointer
 	HostVersion uint
 }
 
-// @struct			AUInputSamplesInOutputCallbackStruct @abstract		Used by a host when registering a callback with an audio unit, to provide input-to-output samples mapping
+// The callback function and custom data for providing input-to-output sample mapping for an audio unit.
 type AUInputSamplesInOutputCallbackStruct struct {
 	InputToOutputCallback unsafe.Pointer
 	UserData              unsafe.Pointer
@@ -52,7 +52,7 @@ type AUInputSamplesInOutputCallbackStruct struct {
 // AUListenerBase is an opaque type.
 type AUListenerBase struct{}
 
-// Describes a single scheduled MIDI event.
+// A structure that describes a scheduled MIDI event.
 type AUMIDIEvent struct {
 	Next            unsafe.Pointer
 	EventSampleTime int64
@@ -73,19 +73,19 @@ type AUMIDIEventList struct {
 	EventList       objc.ID
 }
 
-// @struct			AUMIDIOutputCallbackStruct @abstract		Set by host application to provide the callback and user data for an audio unit that provides MIDI output
+// The callback function and custom data for an audio unit that provides MIDI output.
 type AUMIDIOutputCallbackStruct struct {
 	MidiOutputCallback unsafe.Pointer
 	UserData           unsafe.Pointer
 }
 
-// @struct		AUNodeInteraction @abstract	Used to describe the interaction between/with a node This structure contains information about the interaction between two nodes (in the case of a connection), or the input to a node (in the case of a callback). The type of the interaction is used to determine how to interpret the contents of the following union. There may be other nodal interactions in the future, so NO ASSUMPTIONS should be made that these are the only 2 nodal interaction types; you must always check the nodeInteractionType and only act on those types you understand Arrays of these structs can be returned, the addition of new members to the nodeInteraction union will NOT change the size of this structure @var  		nodeInteractionType		the interaction type @var  		nodeInteraction			a union providing information about the specified interaction
+// Describes the interaction between two node objects.
 type AUNodeInteraction struct {
 	NodeInteractionType uint
 	NodeInteraction     unsafe.Pointer
 }
 
-// @struct		AUNodeRenderCallback @abstract	A callback used to provide input to an audio unit Used to contain information when a callback is used to provide input to the specific node's specified input @var  		destNode @var  		destInputNumber @var  		cback
+// A callback used to provide input to an audio unit.
 type AUNodeRenderCallback struct {
 	DestNode        int
 	DestInputNumber uint
@@ -108,7 +108,7 @@ type AUParameterAutomationEvent struct {
 	Reserved  uint64
 }
 
-// Describes a scheduled parameter change.
+// A structure that describes a scheduled parameter event.
 type AUParameterEvent struct {
 	Next                     unsafe.Pointer
 	EventSampleTime          int64
@@ -134,33 +134,33 @@ type AUParameterMIDIMapping struct {
 	Reserved3    uint
 }
 
-// @struct			AUPreset @abstract		Used to publish and set factory presets on an audio unit @var  			presetNumber If < 0, then preset is a user preset If >= 0, then this field is used to select the factory preset @var  			presetName If a factory preset, the name of the specified factory preset
+// Used to set factory presets for an audio unit.
 type AUPreset struct {
 	PresetNumber int
 	PresetName   unsafe.Pointer
 }
 
-// @struct		AUPresetEvent @discussion	The parameters to specify a preset for an audio unit.
+// Describes an audio unit preset.
 type AUPresetEvent struct {
 	Scope   uint
 	Element uint
 	Preset  unsafe.Pointer
 }
 
-// @typedef	AURecordedParameterEvent @brief		An event recording the changing of a parameter at a particular host time.
+// An event recording the changing of a parameter at a particular host time.
 type AURecordedParameterEvent struct {
 	HostTime uint64
 	Address  uint64
 	Value    float32
 }
 
-// @struct			AURenderCallbackStruct @abstract		Used by a host when registering a callback with the audio unit to provide input
+// Used for registering an input callback function with an audio unit.
 type AURenderCallbackStruct struct {
 	InputProc       unsafe.Pointer
 	InputProcRefCon unsafe.Pointer
 }
 
-// Common header for an AURenderEvent.
+// The common header for a render event.
 type AURenderEventHeader struct {
 	Next            unsafe.Pointer
 	EventSampleTime int64
@@ -184,13 +184,13 @@ type AUSamplerInstrumentData struct {
 	PresetID       uint8
 }
 
-// @struct          AUVoiceIOOtherAudioDuckingConfiguration @abstract        The configuration of ducking other (i.e. non-voice) audio @var             mEnableAdvancedDucking Enables advanced ducking which ducks other audio based on the presence of voice activity from local and/or remote chat participants. @var             mDuckingLevel Ducking level of other audio
+// A structure that you use to configure ducking of other non-voice audio in a voice chat.
 type AUVoiceIOOtherAudioDuckingConfiguration struct {
 	MEnableAdvancedDucking uint8
 	MDuckingLevel          AUVoiceIOOtherAudioDuckingLevel
 }
 
-// @struct		AudioBalanceFade @abstract   this struct is used with kAudioFormatProperty_BalanceFade @var        mLeftRightBalance -1 is full left, 0 is center, +1 is full right @var        mBackFrontFade -1 is full rear, 0 is center, +1 is full front @var        mType an AudioBalanceFadeType constant @var        mChannelLayout a pointer to an AudioChannelLayout
+// Describes audio left/right balance and front/back fade values.
 type AudioBalanceFade struct {
 	MLeftRightBalance float32
 	MBackFrontFade    float32
@@ -198,7 +198,7 @@ type AudioBalanceFade struct {
 	MChannelLayout    *coreaudiotypes.AudioChannelLayout
 }
 
-// @struct		AudioBytePacketTranslation @abstract   used for properties kAudioFileByteToPacket and kAudioFilePacketToByte @discussion See description of kAudioFileByteToPacket and kAudioFilePacketToByte @var        mByte		a byte number. @var        mPacket		a packet number. @var        mByteOffsetInPacket		a byte offset in a packet. @var        mFlags		if kBytePacketTranslationFlag_IsEstimate is set, then the value is an estimate.
+// A data structure used by the kAudioFilePropertyByteToPacket and kAudioFilePropertyPacketToByte properties.
 type AudioBytePacketTranslation struct {
 	MByte               int64
 	MPacket             int64
@@ -206,18 +206,19 @@ type AudioBytePacketTranslation struct {
 	MFlags              AudioBytePacketTranslationFlags
 }
 
-// @struct AudioCodecMagicCookieInfo @abstract Structure holding the <em>magic cookie</em> information. @discussion Passed as input to AudioCodecGetProperty for kAudioCodecPropertyFormatList. The first four + sizeof(void *) bytes of the buffer pointed at by outPropertyData will contain this struct. @var   mMagicCookieSize The size of the magic cookie @var   mMagicCookie Generic const pointer to magic cookie
+// A structure holding magic cookie information needed by some codecs.
 type AudioCodecMagicCookieInfo struct {
 	MMagicCookieSize uint
 	MMagicCookie     unsafe.Pointer
 }
 
-// @struct			AudioCodecPrimeInfo @discussion		Specifies the number of leading and trailing empty frames which have to be inserted. @var  			leadingFrames An unsigned integer specifying the number of leading empty frames @var  			trailingFrames An unsigned integer specifying the number of trailing empty frames
+// A structure specifying the number of leading and trailing empty frames to be inserted.
 type AudioCodecPrimeInfo struct {
 	LeadingFrames  uint
 	TrailingFrames uint
 }
 
+// Identifying information for an audio component.
 type AudioComponentDescription struct {
 	ComponentType         uint
 	ComponentSubType      uint
@@ -234,7 +235,7 @@ type AudioComponentPlugInInterface struct {
 	Reserved unsafe.Pointer
 }
 
-// @struct     AudioConverterPrimeInfo @abstract   Specifies priming information. When using AudioConverterFillComplexBuffer() (either a single call or a series of calls), some conversions, particularly involving sample-rate conversion, ideally require a certain number of input frames previous to the normal start input frame and beyond the end of the last expected input frame in order to yield high-quality results. These are expressed in the leadingFrames and trailingFrames members of the structure. The very first call to AudioConverterFillComplexBuffer(), or first call after AudioConverterReset(), will request additional input frames beyond those normally expected in the input proc callback to fulfill this first AudioConverterFillComplexBuffer() request. The number of additional frames requested, depending on the prime method, will be approximately: Prime method                  | Additional frames ------------------------------|---------------------- kConverterPrimeMethod_Pre     | leadingFrames + trailingFrames kConverterPrimeMethod_Normal  | trailingFrames kConverterPrimeMethod_None    | 0 Thus, in effect, the first input proc callback(s) may provide not only the leading frames, but also may "read ahead" by an additional number of trailing frames depending on the prime method. kConverterPrimeMethod_None is useful in a real-time application processing live input, in which case trailingFrames (relative to input sample rate) of through latency will be seen at the beginning of the output of the AudioConverter.  In other real-time applications such as DAW systems, it may be possible to provide these initial extra audio frames since they are stored on disk or in memory somewhere and kConverterPrimeMethod_Pre may be preferable.  The default method is kConverterPrimeMethod_Normal, which requires no pre-seeking of the input stream and generates no latency at the output. @var        leadingFrames Specifies the number of leading (previous) input frames, relative to the normal/desired start input frame, required by the converter to perform a high quality conversion. If using kConverterPrimeMethod_Pre, the client should "pre-seek" the input stream provided through the input proc by leadingFrames. If no frames are available previous to the desired input start frame (because, for example, the desired start frame is at the very beginning of available audio), then provide "leadingFrames" worth of initial zero frames in the input proc.  Do not "pre-seek" in the default case of kConverterPrimeMethod_Normal or when using kConverterPrimeMethod_None. @var        trailingFrames Specifies the number of trailing input frames (past the normal/expected end input frame) required by the converter to perform a high quality conversion.  The client should be prepared to provide this number of additional input frames except when using kConverterPrimeMethod_None. If no more frames of input are available in the input stream (because, for example, the desired end frame is at the end of an audio file), then zero (silent) trailing frames will be synthesized for the client.
+// Specifies priming information for an audio converter.
 type AudioConverterPrimeInfo struct {
 	LeadingFrames  uint
 	TrailingFrames uint
@@ -272,7 +273,7 @@ type AudioFileFDFTableExtended struct {
 	MReadPacketDataFDF  unsafe.Pointer
 }
 
-// @struct		AudioFileMarker @abstract   A marker annotates a position in an audio file with additional information. @discussion (description) @var        mFramePosition	The frame in the file counting from the start of the audio data. @var        mName			The name of this marker. @var        mMarkerID		A unique ID for this marker. @var        mSMPTETime		The SMPTE time for this marker. @var        mType			The marker type. @var        mReserved		A reserved field. Set to zero. @var        mChannel		The channel number that the marker refers to. Set to zero if marker applies to all channels.
+// Annotates a position in an audio file.
 type AudioFileMarker struct {
 	MFramePosition float64
 	MName          unsafe.Pointer
@@ -283,21 +284,21 @@ type AudioFileMarker struct {
 	MChannel       uint16
 }
 
-// @struct		AudioFileMarkerList @abstract   A list of AudioFileMarker. @var        mSMPTE_TimeType This defines the SMPTE timing scheme used in the marker list. See CAFFile.h for the values used here. @var        mNumberMarkers The number of markers in the mMarkers list. @var        mMarkers A list of AudioFileMarker.
+// A list of markers associated with an audio file, including their SMPTE time type, the number of markers, and the markers themselves.
 type AudioFileMarkerList struct {
 	MSMPTE_TimeType uint
 	MNumberMarkers  uint
 	MMarkers        [1]AudioFileMarker
 }
 
-// @struct		AudioFilePacketTableInfo @abstract   This contains information about the number of valid frames in a file and where they begin and end. @discussion	Some data formats may have packets whose contents are not completely valid, but represent priming or remainder frames that are not meant to be played. For example a file with 100 packets of AAC is nominally 1024 * 100 = 102400 frames of data. However the first 2112 frames of that may be priming frames and there may be some number of remainder frames added to pad out to a full packet of 1024 frames. The priming and remainder frames should be discarded. The total number of packets in the file times the frames per packet (or counting each packet's frames individually for a variable frames per packet format) minus mPrimingFrames, minus mRemainderFrames, should equal mNumberValidFrames. @var        mNumberValidFrames the number of valid frames in the file. @var        mPrimingFrames the number of invalid frames at the beginning of the file. @var        mRemainderFrames the number of invalid frames at the end of the file.
+// Contains information about the number of valid frames in a file and where they begin and end.
 type AudioFilePacketTableInfo struct {
 	MNumberValidFrames int64
 	MPrimingFrames     int
 	MRemainderFrames   int
 }
 
-// @struct		AudioFileRegion @abstract   An AudioFileRegion specifies a segment of audio data. @discussion Generally a region consists of at least two markers marking the beginning and end of the segment. There may also be other markers defining other meta information such as sync point. @var        mRegionID each region must have a unique ID. @var        mName The name of the region. @var        mFlags AudioFileRegionFlags. @var        mNumberMarkers The number of markers in the mMarkers array. @var        mMarkers A variable length array of AudioFileMarkers.
+// An audio file region specifies a segment of audio data.
 type AudioFileRegion struct {
 	MRegionID      uint
 	MName          unsafe.Pointer
@@ -306,20 +307,20 @@ type AudioFileRegion struct {
 	MMarkers       [1]AudioFileMarker
 }
 
-// @struct		AudioFileRegionList @abstract   A list of the AudioFileRegions in a file. @discussion This is the struct used by the kAudioFilePropertyRegionList property. @var        mSMPTE_TimeType This defines the SMPTE timing scheme used in the file. See CAFFile.h for the values used here. @var        mNumberRegions The number of regions in the mRegions list. @var        mRegions A list of AudioFileRegions. Note that AudioFileMarkers are variable length, so this list cannot be accessed as an array. Use the NextAudioFileRegion macro for traversing the list instead.
+// A list of the audio file regions in a file.
 type AudioFileRegionList struct {
 	MSMPTE_TimeType uint
 	MNumberRegions  uint
 	MRegions        [1]AudioFileRegion
 }
 
-// @struct		AudioFileTypeAndFormatID @abstract   This is used as a specifier for kAudioFileGlobalInfo_AvailableStreamDescriptions @discussion This struct is used to specify a desired audio file type and data format ID  so that a list of stream descriptions of available formats can be obtained. @var        mFileType a four char code for the file type such as kAudioFileAIFFType, kAudioFileCAFType, etc. @var        mFormatID a four char code for the format ID such as kAudioFormatLinearPCM, kAudioFormatMPEG4AAC, etc.
+// A specifier for the constantkAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat.
 type AudioFileTypeAndFormatID struct {
 	MFileType uint
 	MFormatID uint
 }
 
-// @struct		AudioFile_SMPTE_Time @abstract   A struct for describing a SMPTE time. @var        mHours						The hours. @var        mMinutes					The minutes. @var        mSeconds					The seconds. @var        mFrames						The frames. @var        mSubFrameSampleOffset		The sample offset within a frame.
+// A data structure for describing SMPTE (Society of Motion Picture and Television Engineers) time.
 type AudioFile_SMPTE_Time struct {
 	MHours                int8
 	MMinutes              uint8
@@ -328,14 +329,14 @@ type AudioFile_SMPTE_Time struct {
 	MSubFrameSampleOffset uint
 }
 
-// @struct		AudioFormatInfo @abstract   this struct is used as a specifier for the kAudioFormatProperty_FormatList property @var        mASBD an AudioStreamBasicDescription @var        mMagicCookie a pointer to the decompression info for the data described in mASBD @var        mMagicCookieSize the size in bytes of mMagicCookie
+// A structure that specifies an audio format.
 type AudioFormatInfo struct {
 	MASBD            coreaudiotypes.AudioStreamBasicDescription
 	MMagicCookie     unsafe.Pointer
 	MMagicCookieSize uint
 }
 
-// @struct		AudioFramePacketTranslation @abstract   used for properties kAudioFilePropertyPacketToFrame and kAudioFilePropertyFrameToPacket @discussion See description of kAudioFilePropertyPacketToFrame and kAudioFilePropertyFrameToPacket @var        mFrame		a frame number. @var        mPacket		a packet number. @var        mFrameOffsetInPacket		a frame offset in a packet.
+// A structure that specifies frame and packet translations.
 type AudioFramePacketTranslation struct {
 	MFrame               int64
 	MPacket              int64
@@ -355,7 +356,7 @@ type AudioOutputUnitMIDICallbacks struct {
 	MIDISysExProc unsafe.Pointer
 }
 
-// @struct			AudioOutputUnitStartAtTimeParams
+// A timestamp for scheduled starting of an I/O audio unit.
 type AudioOutputUnitStartAtTimeParams struct {
 	MTimestamp coreaudiotypes.AudioTimeStamp
 	MFlags     uint
@@ -381,7 +382,7 @@ type AudioPacketRollDistanceTranslation struct {
 	MRollDistance int64
 }
 
-// @struct		AudioPanningInfo @abstract   This struct is for use with kAudioFormatProperty_PanningMatrix. @var        mPanningMode			the PanningMode to be used for the pan @var        mCoordinateFlags		the coordinates are specified as in the AudioChannelDescription struct in CoreAudioTypes.h @var        mCoordinates			the coordinates are specified as in the AudioChannelDescription struct in CoreAudioTypes.h @var        mGainScale mGainScale is used to multiply the panning values. In typical usage you are applying an existing volume. value in 0 -> 1 (where 1 is unity gain) to the panned values. 1 would give you panning at unity. 0 would give you back a matrix of zeroes. @var        mOutputChannelMap This is the channel map that is going to be used to determine channel volumes for this pan.
+// Audio panning information.
 type AudioPanningInfo struct {
 	MPanningMode      AudioPanningMode
 	MCoordinateFlags  uint
@@ -390,6 +391,7 @@ type AudioPanningInfo struct {
 	MOutputChannelMap *coreaudiotypes.AudioChannelLayout
 }
 
+// Defines an audio queue buffer.
 type AudioQueueBuffer struct {
 	MAudioDataBytesCapacity    uint
 	MAudioData                 unsafe.Pointer
@@ -406,25 +408,25 @@ type AudioQueueChannelAssignment struct {
 	MChannelNumber uint
 }
 
-// @struct     AudioQueueLevelMeterState @abstract   Specifies the current level metering information for one channel of an audio queue. @var        mAveragePower The audio channel's average RMS power. @var        mPeakPower The audio channel's peak RMS power
+// Specifies the current level metering information for one channel of an audio queue.
 type AudioQueueLevelMeterState struct {
 	MAveragePower float32
 	MPeakPower    float32
 }
 
-// @struct     AudioQueueParameterEvent @abstract   Specifies a value for an audio queue parameter. Two ways are available to supply an audio queue with parameters: - Provide one or more parameters by calling the AudioQueueEnqueueBufferWithParameters function. In this case, the parameters are applied to the specified buffer when it is played. - Assign a parameter value immediately to an audio queue by calling the AudioQueueSetParameter function. Note that the AudioQueueGetParameter function always returns the actual value of the parameter. In macOS v10.5, audio queues have one parameter available: kAudioQueueParam_Volume, which controls the queue's playback volume. @var        mID The parameter. @var        mValue The value of the specified parameter.
+// Specifies an audio queue parameter and associated value.
 type AudioQueueParameterEvent struct {
 	MID    uint
 	MValue float32
 }
 
-// @struct			AudioUnitCocoaViewInfo @abstract		The location and class name of one or more view factory objects an Audio Unit publishes @var  			mCocoaAUViewBundleLocation Contains the location of the bundle which the host app can then use to locate the bundle @var  			mCocoaAUViewClass Contains the names of the classes that implements the required protocol (AUCocoaUIBase). This class is a view factory that creates the NSView object that is the AudioUnit view.
+// The name and number of custom Cocoa views for an audio unit.
 type AudioUnitCocoaViewInfo struct {
 	MCocoaAUViewBundleLocation unsafe.Pointer
 	MCocoaAUViewClass          [1]unsafe.Pointer
 }
 
-// @struct         AudioUnitConnection @abstract       This structure contains the information needed to make a connection between a source and destination audio unit. @discussion		The structure is set on the destination audio unit's input element @var            sourceAudioUnit The audio unit that is the source for the connection @var            sourceOutputNumber The source audio unit's output element to be used in the connection @var            destInputNumber The destination audio unit's input element to be used in the connection
+// An audio unit source-to-destination connection specification.
 type AudioUnitConnection struct {
 	SourceAudioUnit    *carboncore.ComponentInstanceRecord
 	SourceOutputNumber uint
@@ -437,13 +439,13 @@ type AudioUnitEvent struct {
 	MArgument  unsafe.Pointer
 }
 
-// @struct			AudioUnitExternalBuffer @abstract		Allow a host to tell an audio unit to use the provided memory for its input callback
+// Allows an audio unit host application to tell an audio unit to use a specified buffer for its input callback.
 type AudioUnitExternalBuffer struct {
 	Buffer *uint8
 	Size   uint
 }
 
-// @struct			AudioUnitFrequencyResponseBin @abstract		Structure used to get the magnitude of the frequency response at a particular frequency via kAudioUnitProperty_FrequencyResponse. @discussion		An array of AudioUnitFrequencyResponseBin are passed in to kAudioUnitProperty_FrequencyResponse with the mFrequency field filled in. The array is returned with the mMagnitude fields filled in. If fewer than kNumberOfResponseFrequencies are needed, then the first unused bin should be marked with a negative frequency.
+// An audio unit’s audio level at a particular frequency.
 type AudioUnitFrequencyResponseBin struct {
 	MFrequency float64
 	MMagnitude float64
@@ -457,14 +459,14 @@ type AudioUnitMIDIControlMapping struct {
 	Parameter   uint
 }
 
-// @struct			AudioUnitMeterClipping @var  			peakValueSinceLastCall; The maximum value seen on the channel since the last time the property was retrieved. @var  			sawInfinity; TRUE if there was an infinite value on this channel. @var  			sawNotANumber TRUE if there was a floating point Not-A-Number value on this channel.
+// Audio clipping that has occurred in a mixer unit.
 type AudioUnitMeterClipping struct {
 	PeakValueSinceLastCall float32
 	SawInfinity            uint8
 	SawNotANumber          uint8
 }
 
-// @struct		AudioUnitNodeConnection @abstract	A connection between two nodes @var  		sourceNode @var  		sourceOutputNumber @var  		destNode @var  		destInputNumber
+// A connection between two node objects in an audio processing graph.
 type AudioUnitNodeConnection struct {
 	SourceNode         int
 	SourceOutputNumber uint
@@ -478,7 +480,7 @@ type AudioUnitOtherPluginDesc struct {
 	Plugin coreaudiotypes.AudioClassDescription
 }
 
-// @struct			AudioUnitParameter @discussion		An audio unit parameter is defined by the triplet of audio unit scope, element and parameterID. This struct is used with the functions in AudioUnitUtilities.h to deal with audio unit parameters, but is included in this header file for completeness. @var  			mAudioUnit The audio unit instance to which the specified parameter applies. @var  			mParameterID The parameterID for the parameter @var  			mScope The scope for the parameter @var  			mElement The element for the parameter
+// An adjustable audio unit attribute such as volume, pitch, or filter cutoff frequency.
 type AudioUnitParameter struct {
 	MAudioUnit   *carboncore.ComponentInstanceRecord
 	MParameterID uint
@@ -486,7 +488,7 @@ type AudioUnitParameter struct {
 	MElement     uint
 }
 
-// @struct			AudioUnitParameterEvent @discussion		A parameter event describes a change to a parameter's value, where the type of the event describes how that change is to be applied (see AUParameterEventType). A parameter is uniquely defined through the triplet of scope, element and parameterID. See AudioUnitScheduleParameters @var  			scope The scope for the parameter @var  			element The element for the parameter @var  			parameter The parameterID for the parameter @var  			eventType The event type. This field further defines how the union described by eventValues is to be interpreted. @var  			eventValues If the parameter event type is _Immediate, then the immediate struct of this union should be used. If the parameter event type is _Ramped, then the ramp struct of this union should be used.
+// A scheduled change to an audio unit parameter’s value.
 type AudioUnitParameterEvent struct {
 	Scope       uint
 	Element     uint
@@ -495,7 +497,7 @@ type AudioUnitParameterEvent struct {
 	EventValues unsafe.Pointer
 }
 
-// @struct			AudioUnitParameterHistoryInfo @abstract		This structure contains the suggested update rate and history duration for parameters which have the kAudioUnitParameterFlag_PlotHistory flag set. The structure is filled out by getting kAudioUnitProperty_ParameterHistoryInfo. @var  			updatesPerSecond This is the number of times per second that it is suggested that the host get the value of this parameter. @var  			historyDurationInSeconds This is the duration in seconds of history that should be plotted.
+// The suggested update rate and history duration for parameters which have the kAudioUnitParameterFlag_PlotHistory flag set.
 type AudioUnitParameterHistoryInfo struct {
 	UpdatesPerSecond         float32
 	HistoryDurationInSeconds float32
@@ -514,21 +516,21 @@ type AudioUnitParameterInfo struct {
 	Flags        AudioUnitParameterOptions
 }
 
-// @struct			AudioUnitParameterNameInfo @abstract		Used to provide shorter names for a specified parameter
+// A short version of the name for an audio unit parameter.
 type AudioUnitParameterNameInfo struct {
 	InID            uint
 	InDesiredLength int
 	OutName         unsafe.Pointer
 }
 
-// @struct			AudioUnitParameterStringFromValue @abstract		Provide a string representation of a parameter's value
+// A string representation of a parameter’s value.
 type AudioUnitParameterStringFromValue struct {
 	InParamID uint
 	InValue   *float32
 	OutString unsafe.Pointer
 }
 
-// @struct			AudioUnitParameterValueFromString @abstract		Provide the parameter's value for a given string representation of it
+// A parameter’s value based on a string representation of the value.
 type AudioUnitParameterValueFromString struct {
 	InParamID uint
 	InString  unsafe.Pointer
@@ -568,7 +570,7 @@ type AudioUnitPresetMAS_Settings struct {
 	Settings         [1]AudioUnitPresetMAS_SettingData
 }
 
-// @struct			AudioUnitProperty @discussion		An audio unit property is defined by the triplet of audio unit scope, element and propertyID. This struct is used with the functions in AudioUnitUtilities.h to deal with audio unit properties, but is included in this header file for completeness. @var  			mAudioUnit The audio unit instance which the specified property applies too @var  			mPropertyID The propertyID for the property @var  			mScope The scope for the property @var  			mElement The element for the property
+// A key-value pair that declares an attribute or behavior for an audio unit.
 type AudioUnitProperty struct {
 	MAudioUnit  *carboncore.ComponentInstanceRecord
 	MPropertyID uint
@@ -576,6 +578,7 @@ type AudioUnitProperty struct {
 	MElement    uint
 }
 
+// A structure that contains thread context information for a real-time rendering operation.
 type AudioUnitRenderContext struct {
 	Workgroup unsafe.Pointer
 	Reserved  [6]uint32
@@ -747,7 +750,7 @@ type ComponentDescription struct{}
 // ComponentInstanceRecord is an opaque type.
 type ComponentInstanceRecord struct{}
 
-// @struct		ExtendedAudioFormatInfo @abstract   this struct is used as a specifier for the kAudioFormatProperty_FormatList property @var        mASBD an AudioStreamBasicDescription @var        mMagicCookie a pointer to the decompression info for the data described in mASBD @var        mMagicCookieSize the size in bytes of mMagicCookie @var  		mClassDescription an AudioClassDescription specifying the codec to be used in answering the question.
+// A specifier for the kAudioFormatProperty_FormatList property, including the codec to use.
 type ExtendedAudioFormatInfo struct {
 	MASBD             coreaudiotypes.AudioStreamBasicDescription
 	MMagicCookie      unsafe.Pointer
@@ -761,7 +764,7 @@ type ExtendedControlEvent struct {
 	Value     float32
 }
 
-// @struct		ExtendedNoteOnEvent @discussion	The parameters to specify an extended note on event
+// Describes a note-on event with extended parameters.
 type ExtendedNoteOnEvent struct {
 	InstrumentID   uint
 	GroupID        uint
@@ -769,7 +772,7 @@ type ExtendedNoteOnEvent struct {
 	ExtendedParams MusicDeviceNoteParams
 }
 
-// @struct		ExtendedTempoEvent @discussion	specifies the value for a tempo in beats per minute
+// Describes a music track tempo in beats-per-minute.
 type ExtendedTempoEvent struct {
 	Bpm float64
 }
@@ -777,7 +780,7 @@ type ExtendedTempoEvent struct {
 // FSRef is an opaque type.
 type FSRef struct{}
 
-// @struct			HostCallbackInfo @abstract		Contains the various callbacks for an audio unit to call @discussion Any callback can be NULL.
+// The time- and transport-related callback functions for an audio unit.
 type HostCallbackInfo struct {
 	HostUserData            unsafe.Pointer
 	BeatAndTempoProc        unsafe.Pointer
@@ -786,7 +789,7 @@ type HostCallbackInfo struct {
 	TransportStateProc2     unsafe.Pointer
 }
 
-// @struct		MIDIChannelMessage @discussion	The parameters to specify a MIDI channel message
+// Describes a MIDI channel message.
 type MIDIChannelMessage struct {
 	Status   uint8
 	Data1    uint8
@@ -794,11 +797,11 @@ type MIDIChannelMessage struct {
 	Reserved uint8
 }
 
-// @struct         MIDIEventList @abstract       Forward declaration of MIDIEventList found in <CoreMIDI/MIDIServices.h>
+// A variable-length list of MIDI event packets.
 // MIDIEventList is an opaque type.
 type MIDIEventList struct{}
 
-// @struct		MIDIMetaEvent @discussion	The parameters to specify a MIDI meta event
+// Describes a MIDI metaevent such as lyric text, time signature, and so on.
 type MIDIMetaEvent struct {
 	MetaEventType uint8
 	Unused1       uint8
@@ -808,7 +811,7 @@ type MIDIMetaEvent struct {
 	Data          [1]uint8
 }
 
-// @struct		MIDINoteMessage @discussion	The parameters to specify a MIDI note
+// Describes a MIDI note.
 type MIDINoteMessage struct {
 	Channel         uint8
 	Note            uint8
@@ -817,11 +820,11 @@ type MIDINoteMessage struct {
 	Duration        float32
 }
 
-// @struct			MIDIPacketList @abstract		Forward declaration of MIDIPacketList found in <CoreMIDI/MIDIServices.h>
+// A list of MIDI events the system sends to or receives from an endpoint.
 // MIDIPacketList is an opaque type.
 type MIDIPacketList struct{}
 
-// @struct		MIDIRawData @discussion	Generally used to represent a MIDI SysEx message
+// Describes a MIDI system-exclusive (SysEx) message.
 type MIDIRawData struct {
 	Length uint
 	Data   [1]uint8
@@ -849,13 +852,13 @@ type MusicDeviceStdNoteParams struct {
 	MVelocity float32
 }
 
-// @struct		MusicEventUserData @discussion	Provides a general struct for specifying a user defined event. @var  		length the size in bytes of the data @var  		data size bytes of user defined event data
+// Describes a user-defined event.
 type MusicEventUserData struct {
 	Length uint
 	Data   [1]uint8
 }
 
-// @struct		MusicTrackLoopInfo @discussion	Used to control the looping behaviour of a track
+// Supports control of the looping behavior of a music track.
 type MusicTrackLoopInfo struct {
 	LoopDuration  float64
 	NumberOfLoops int
@@ -914,7 +917,7 @@ type OpaqueMusicSequence struct{}
 // OpaqueMusicTrack is an opaque type.
 type OpaqueMusicTrack struct{}
 
-// @struct		ParameterEvent @discussion	The parameters to specify a parameter event to an audio unit.
+// Describes an audio unit parameter automation event.
 type ParameterEvent struct {
 	ParameterID uint
 	Scope       uint

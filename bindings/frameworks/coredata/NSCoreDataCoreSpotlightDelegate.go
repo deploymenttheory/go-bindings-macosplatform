@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of methods that enable integration with Core Spotlight.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate
 type NSCoreDataCoreSpotlightDelegate struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func NSCoreDataCoreSpotlightDelegateFromID(id objc.ID) *NSCoreDataCoreSpotlightD
 	return o
 }
 
+// Returns the domain identifier.
 func (o *NSCoreDataCoreSpotlightDelegate) DomainIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelDomainIdentifier)
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func (o *NSCoreDataCoreSpotlightDelegate) DomainIdentifier() *foundation.NSStrin
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the index’s name.
 func (o *NSCoreDataCoreSpotlightDelegate) IndexName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelIndexName)
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func (o *NSCoreDataCoreSpotlightDelegate) IndexName() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Creates a Core Spotlight delegate with the specified store description and coordinator.
 func (o *NSCoreDataCoreSpotlightDelegate) InitForStoreWithDescriptionCoordinator(description *NSPersistentStoreDescription, psc *NSPersistentStoreCoordinator) *NSCoreDataCoreSpotlightDelegate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionCoordinator, description.Ptr(), psc.Ptr())
 	if _ret != 0 {
@@ -66,6 +71,7 @@ func (o *NSCoreDataCoreSpotlightDelegate) InitForStoreWithDescriptionCoordinator
 	return NSCoreDataCoreSpotlightDelegateFromID(_ret)
 }
 
+// Creates a Core Spotlight delegate with the specified store description and managed object model.
 // Deprecated: since macOS 12.0.
 func (o *NSCoreDataCoreSpotlightDelegate) InitForStoreWithDescriptionModel(description *NSPersistentStoreDescription, model *NSManagedObjectModel) *NSCoreDataCoreSpotlightDelegate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionModel, description.Ptr(), model.Ptr())
@@ -75,14 +81,17 @@ func (o *NSCoreDataCoreSpotlightDelegate) InitForStoreWithDescriptionModel(descr
 	return NSCoreDataCoreSpotlightDelegateFromID(_ret)
 }
 
+// Starts the indexing of the store’s entities.
 func (o *NSCoreDataCoreSpotlightDelegate) StartSpotlightIndexing() {
 	o.Ptr().Send(_nSCoreDataCoreSpotlightDelegateSelStartSpotlightIndexing)
 }
 
+// Stops the indexing of the store’s entities.
 func (o *NSCoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
 	o.Ptr().Send(_nSCoreDataCoreSpotlightDelegateSelStopSpotlightIndexing)
 }
 
+// Deletes all searchable items from the configured index.
 func (o *NSCoreDataCoreSpotlightDelegate) DeleteSpotlightIndexWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -94,11 +103,13 @@ func (o *NSCoreDataCoreSpotlightDelegate) DeleteSpotlightIndexWithCompletionHand
 	o.Ptr().Send(_nSCoreDataCoreSpotlightDelegateSelDeleteSpotlightIndexWithCompletionHandler, __block_completionHandler)
 }
 
+// Returns the searchable attributes for the specified managed object.
 func (o *NSCoreDataCoreSpotlightDelegate) AttributeSetForObject(object *NSManagedObject) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelAttributeSetForObject, object.Ptr())
 	return _ret
 }
 
+// Reindexes all searchable items and clears any local state.
 func (o *NSCoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(searchableIndex objc.ID, acknowledgementHandler func()) {
 	var __block_acknowledgementHandler objc.Block
 	if acknowledgementHandler != nil {
@@ -110,6 +121,7 @@ func (o *NSCoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableIte
 	o.Ptr().Send(_nSCoreDataCoreSpotlightDelegateSelSearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler, searchableIndex, __block_acknowledgementHandler)
 }
 
+// Reindexes the searchable items for the specified identifiers.
 func (o *NSCoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(searchableIndex objc.ID, identifiers *foundation.NSArray[*foundation.NSString], acknowledgementHandler func()) {
 	var __block_acknowledgementHandler objc.Block
 	if acknowledgementHandler != nil {
@@ -118,7 +130,7 @@ func (o *NSCoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsW
 		})
 		defer __block_acknowledgementHandler.Release()
 	}
-	o.Ptr().Send(_nSCoreDataCoreSpotlightDelegateSelSearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler, searchableIndex, identifiers, __block_acknowledgementHandler)
+	o.Ptr().Send(_nSCoreDataCoreSpotlightDelegateSelSearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler, searchableIndex, identifiers.Ptr(), __block_acknowledgementHandler)
 }
 
 func (o *NSCoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {

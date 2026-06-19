@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for configuring all attributes of a render task’s destination and issuing asynchronous render tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cirenderdestination
 type CIRenderDestination struct {
 	foundation.NSObject
@@ -56,6 +58,7 @@ func CIRenderDestinationFromID(id objc.ID) *CIRenderDestination {
 	return o
 }
 
+// Creates a render destination based on a Core Video pixel buffer.
 func (o *CIRenderDestination) InitWithPixelBuffer(pixelBuffer unsafe.Pointer) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithPixelBuffer, pixelBuffer)
 	if _ret != 0 {
@@ -64,6 +67,7 @@ func (o *CIRenderDestination) InitWithPixelBuffer(pixelBuffer unsafe.Pointer) *C
 	return CIRenderDestinationFromID(_ret)
 }
 
+// Creates a render destination based on an IOSurface object.
 func (o *CIRenderDestination) InitWithIOSurface(surface unsafe.Pointer) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithIOSurface, surface)
 	if _ret != 0 {
@@ -72,6 +76,7 @@ func (o *CIRenderDestination) InitWithIOSurface(surface unsafe.Pointer) *CIRende
 	return CIRenderDestinationFromID(_ret)
 }
 
+// Creates a render destination based on a Metal texture.
 func (o *CIRenderDestination) InitWithMTLTextureCommandBuffer(texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithMTLTextureCommandBuffer, texture, commandBuffer)
 	if _ret != 0 {
@@ -80,6 +85,7 @@ func (o *CIRenderDestination) InitWithMTLTextureCommandBuffer(texture metal.MTLT
 	return CIRenderDestinationFromID(_ret)
 }
 
+// Creates a render destination based on a Metal texture with specified pixel format.
 func (o *CIRenderDestination) InitWithWidthHeightPixelFormatCommandBufferMtlTextureProvider(width uint, height uint, pixelFormat metal.MTLPixelFormat, commandBuffer metal.MTLCommandBuffer, block objc.Block) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithWidthHeightPixelFormatCommandBufferMtlTextureProvider, width, height, pixelFormat, commandBuffer, block)
 	if _ret != 0 {
@@ -88,6 +94,7 @@ func (o *CIRenderDestination) InitWithWidthHeightPixelFormatCommandBufferMtlText
 	return CIRenderDestinationFromID(_ret)
 }
 
+// Creates a render destination based on an OpenGL texture.
 func (o *CIRenderDestination) InitWithGLTextureTargetWidthHeight(texture uint, target uint, width uint, height uint) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithGLTextureTargetWidthHeight, texture, target, width, height)
 	if _ret != 0 {
@@ -96,6 +103,7 @@ func (o *CIRenderDestination) InitWithGLTextureTargetWidthHeight(texture uint, t
 	return CIRenderDestinationFromID(_ret)
 }
 
+// Creates a render destination based on a client-managed buffer.
 func (o *CIRenderDestination) InitWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.Pointer, width uint, height uint, bytesPerRow uint, format int) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithBitmapDataWidthHeightBytesPerRowFormat, data, width, height, bytesPerRow, format)
 	if _ret != 0 {

@@ -3,28 +3,31 @@
 
 package gamecontroller
 
-// A 3 dimensional acceleration vector measured as scalar multiples of earth's gravitational acceleration, G. The azimuth direction is assumed to be (0, 0, 1), so a device held at rest with the z axis aligned with the azimuth is assumed to have gravitation applying the vector (0, 0, -1). @field x X-axis acceleration as a scalar multiple of earth's gravitational acceleration, G. @field y Y-axis acceleration as a scalar multiple of earth's gravitational acceleration, G. @field z Z-axis acceleration as a scalar multiple of earth's gravitational acceleration, G.
+// A three-dimensional acceleration vector.
 type GCAcceleration struct {
 	X float64
 	Y float64
 	Z float64
 }
 
+// The amplitudes for multiple positions on a trigger.
 type GCDualSenseAdaptiveTriggerPositionalAmplitudes struct {
 	Values [10]float32
 }
 
+// The resistive strengths for multiple positions on a trigger.
 type GCDualSenseAdaptiveTriggerPositionalResistiveStrengths struct {
 	Values [10]float32
 }
 
-// A structure containing 3-axis rotation data. The angles are rotated in order or pitch then yaw then roll. @field pitch X-axis rotation in radians. The sign follows the right hand rule (i.e. if the right hand is wrapped around the X axis such that the tip of the thumb points toward positive X, a positive rotation is one toward the tips of the other 4 fingers). @field yaw   Y-axis rotation in radians. The sign follows the right hand rule (i.e. if the right hand is wrapped around the Y axis such that the tip of the thumb points toward positive Y, a positive rotation is one toward the tips of the other 4 fingers). @field roll  Z-axis rotation in radians. The sign follows the right hand rule (i.e. if the right hand is wrapped around the Z axis such that the tip of the thumb points toward positive Z, a positive rotation is one toward the tips of the other 4 fingers).
+// A structure that specifies the controller’s attitude as a series of rotations around the x, y, and z axes.
 type GCEulerAngles struct {
 	Pitch float64
 	Yaw   float64
 	Roll  float64
 }
 
+// A structure that holds a snapshot of an extended gamepad controller’s input data.
 type GCExtendedGamepadSnapShotDataV100 struct {
 	Version          uint16
 	Size             uint16
@@ -67,6 +70,7 @@ type GCExtendedGamepadSnapshotData struct {
 	RightThumbstickButton        bool
 }
 
+// A structure that holds a snapshot of a gamepad controller’s input data.
 type GCGamepadSnapShotDataV100 struct {
 	Version       uint16
 	Size          uint16
@@ -80,6 +84,7 @@ type GCGamepadSnapShotDataV100 struct {
 	RightShoulder float32
 }
 
+// A structure that holds a snapshot of a micro gamepad controller’s input data.
 type GCMicroGamepadSnapShotDataV100 struct {
 	Version uint16
 	Size    uint16
@@ -99,12 +104,13 @@ type GCMicroGamepadSnapshotData struct {
 	ButtonX float32
 }
 
+// A structure that represents a normalized point in a two-dimensional coordinate system.
 type GCPoint2 struct {
 	X float32
 	Y float32
 }
 
-// Represents a quaternion (one way of parameterizing attitude). If q is an instance of GCQuaternion, mathematically it represents the following quaternion: q.x*i + q.y*j + q.z*k + q.w
+// A quaternion that represents a controller’s measurement of attitude.
 type GCQuaternion struct {
 	X float64
 	Y float64
@@ -112,7 +118,7 @@ type GCQuaternion struct {
 	W float64
 }
 
-// A structure containing 3-axis rotation rate data. @field x   X-axis rotation rate in radians/second. The sign follows the right hand rule (i.e. if the right hand is wrapped around the X axis such that the tip of the thumb points toward positive X, a positive rotation is one toward the tips of the other 4 fingers). @field y   Y-axis rotation rate in radians/second. The sign follows the right hand rule (i.e. if the right hand is wrapped around the Y axis such that the tip of the thumb points toward positive Y, a positive rotation is one toward the tips of the other 4 fingers). @field z Z-axis rotation rate in radians/second. The sign follows the right hand rule (i.e. if the right hand is wrapped around the Z axis such that the tip of the thumb points toward positive Z, a positive rotation is one toward the tips of the other 4 fingers).
+// A structure that represents rotation rates around the x, y, and z axes.
 type GCRotationRate struct {
 	X float64
 	Y float64

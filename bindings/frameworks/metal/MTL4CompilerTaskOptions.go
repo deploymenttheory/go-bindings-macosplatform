@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration options that control the behavior of a compilation task for a Metal 4 compiler instance.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4compilertaskoptions
 type MTL4CompilerTaskOptions struct {
 	foundation.NSObject

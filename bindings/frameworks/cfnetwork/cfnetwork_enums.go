@@ -8,11 +8,15 @@ import (
 	"strings"
 )
 
+// Values indicating the type of data that is to be resolved or the type of data that was resolved.
 type CFHostInfoType int32
 
 const (
-	KCFHostAddresses    CFHostInfoType = 0
-	KCFHostNames        CFHostInfoType = 1
+	// Specifies that addresses are to be resolved or that addresses were resolved.
+	KCFHostAddresses CFHostInfoType = 0
+	// Specifies that names are to be resolved or that names were resolved.
+	KCFHostNames CFHostInfoType = 1
+	// Specifies that reachability information is to be resolved or that reachability information was resolved.
 	KCFHostReachability CFHostInfoType = 2
 )
 
@@ -29,14 +33,20 @@ func (e CFHostInfoType) String() string {
 	}
 }
 
+// Constants for diagnostic status values.
 type CFNetDiagnosticStatusValues int32
 
 const (
-	KCFNetDiagnosticNoErr                   CFNetDiagnosticStatusValues = 0
-	KCFNetDiagnosticErr                     CFNetDiagnosticStatusValues = -66560
-	KCFNetDiagnosticConnectionUp            CFNetDiagnosticStatusValues = -66559
+	// No error occurred but there is no status.
+	KCFNetDiagnosticNoErr CFNetDiagnosticStatusValues = 0
+	// An error occurred that prevented the call from completing.
+	KCFNetDiagnosticErr CFNetDiagnosticStatusValues = -66560
+	// The connection appears to be working.
+	KCFNetDiagnosticConnectionUp CFNetDiagnosticStatusValues = -66559
+	// The status of the connection is not known.
 	KCFNetDiagnosticConnectionIndeterminate CFNetDiagnosticStatusValues = -66558
-	KCFNetDiagnosticConnectionDown          CFNetDiagnosticStatusValues = -66557
+	// The connection does not appear to be working.
+	KCFNetDiagnosticConnectionDown CFNetDiagnosticStatusValues = -66557
 )
 
 func (e CFNetDiagnosticStatusValues) String() string {
@@ -56,14 +66,19 @@ func (e CFNetDiagnosticStatusValues) String() string {
 	}
 }
 
+// Flags that the system passes to net service browser callbacks.
 type CFNetServiceBrowserFlags int64
 
 const (
-	KCFNetServiceFlagMoreComing           CFNetServiceBrowserFlags = 1
-	KCFNetServiceFlagIsDomain             CFNetServiceBrowserFlags = 2
+	// A hint that the system will call the client’s callback function again soon.
+	KCFNetServiceFlagMoreComing CFNetServiceBrowserFlags = 1
+	// Specifies whether the result pertains to a search for domains or services.
+	KCFNetServiceFlagIsDomain CFNetServiceBrowserFlags = 2
+	// Specifies whether the resulting domain is the default registration or browse domain.
 	KCFNetServiceFlagIsDefault            CFNetServiceBrowserFlags = 4
 	KCFNetServiceFlagIsRegistrationDomain CFNetServiceBrowserFlags = 4
-	KCFNetServiceFlagRemove               CFNetServiceBrowserFlags = 8
+	// Specifies whether the client should remove the result instead of adding it.
+	KCFNetServiceFlagRemove CFNetServiceBrowserFlags = 8
 )
 
 func (e CFNetServiceBrowserFlags) String() string {
@@ -89,9 +104,11 @@ func (e CFNetServiceBrowserFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Record type specifier used to tell a service monitor the type of record changes to watch for.
 type CFNetServiceMonitorType int32
 
 const (
+	// Watch for TXT record changes.
 	KCFNetServiceMonitorTXT CFNetServiceMonitorType = 1
 )
 
@@ -104,9 +121,11 @@ func (e CFNetServiceMonitorType) String() string {
 	}
 }
 
+// Options to use when registering a service on the network.
 type CFNetServiceRegisterFlags int64
 
 const (
+	// Causes registrations to fail if a name conflict occurs.
 	KCFNetServiceFlagNoAutoRename CFNetServiceRegisterFlags = 1
 )
 
@@ -121,17 +140,27 @@ func (e CFNetServiceRegisterFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Error codes that may be returned by CFNetServices functions or passed to CFNetServices callback functions.
 type CFNetServicesError int32
 
 const (
-	KCFNetServicesErrorUnknown                      CFNetServicesError = -72000
-	KCFNetServicesErrorCollision                    CFNetServicesError = -72001
-	KCFNetServicesErrorNotFound                     CFNetServicesError = -72002
-	KCFNetServicesErrorInProgress                   CFNetServicesError = -72003
-	KCFNetServicesErrorBadArgument                  CFNetServicesError = -72004
-	KCFNetServicesErrorCancel                       CFNetServicesError = -72005
-	KCFNetServicesErrorInvalid                      CFNetServicesError = -72006
-	KCFNetServicesErrorTimeout                      CFNetServicesError = -72007
+	// An unknown CFNetService error occurred.
+	KCFNetServicesErrorUnknown CFNetServicesError = -72000
+	// An attempt was made to use a name that is already in use.
+	KCFNetServicesErrorCollision CFNetServicesError = -72001
+	// Not used.
+	KCFNetServicesErrorNotFound CFNetServicesError = -72002
+	// A search is already in progress.
+	KCFNetServicesErrorInProgress CFNetServicesError = -72003
+	// A required argument was not provided.
+	KCFNetServicesErrorBadArgument CFNetServicesError = -72004
+	// The search or service was canceled.
+	KCFNetServicesErrorCancel CFNetServicesError = -72005
+	// Invalid data was passed to a CFNetServices function.
+	KCFNetServicesErrorInvalid CFNetServicesError = -72006
+	// Resolution failed because the timeout was reached.
+	KCFNetServicesErrorTimeout CFNetServicesError = -72007
+	// A required configuration for local network access is missing.
 	KCFNetServicesErrorMissingRequiredConfiguration CFNetServicesError = -72008
 )
 
@@ -160,93 +189,178 @@ func (e CFNetServicesError) String() string {
 	}
 }
 
+// This enumeration contains error codes returned under the error domain kCFErrorDomainCFNetwork.
 type CFNetworkErrors int32
 
 const (
-	KCFHostErrorHostNotFound                                         CFNetworkErrors = 1
-	KCFHostErrorUnknown                                              CFNetworkErrors = 2
-	KCFSOCKSErrorUnknownClientVersion                                CFNetworkErrors = 100
-	KCFSOCKSErrorUnsupportedServerVersion                            CFNetworkErrors = 101
-	KCFSOCKS4ErrorRequestFailed                                      CFNetworkErrors = 110
-	KCFSOCKS4ErrorIdentdFailed                                       CFNetworkErrors = 111
-	KCFSOCKS4ErrorIdConflict                                         CFNetworkErrors = 112
-	KCFSOCKS4ErrorUnknownStatusCode                                  CFNetworkErrors = 113
-	KCFSOCKS5ErrorBadState                                           CFNetworkErrors = 120
-	KCFSOCKS5ErrorBadResponseAddr                                    CFNetworkErrors = 121
-	KCFSOCKS5ErrorBadCredentials                                     CFNetworkErrors = 122
-	KCFSOCKS5ErrorUnsupportedNegotiationMethod                       CFNetworkErrors = 123
-	KCFSOCKS5ErrorNoAcceptableMethod                                 CFNetworkErrors = 124
-	KCFFTPErrorUnexpectedStatusCode                                  CFNetworkErrors = 200
-	KCFErrorHTTPAuthenticationTypeUnsupported                        CFNetworkErrors = 300
-	KCFErrorHTTPBadCredentials                                       CFNetworkErrors = 301
-	KCFErrorHTTPConnectionLost                                       CFNetworkErrors = 302
-	KCFErrorHTTPParseFailure                                         CFNetworkErrors = 303
-	KCFErrorHTTPRedirectionLoopDetected                              CFNetworkErrors = 304
-	KCFErrorHTTPBadURL                                               CFNetworkErrors = 305
-	KCFErrorHTTPProxyConnectionFailure                               CFNetworkErrors = 306
-	KCFErrorHTTPBadProxyCredentials                                  CFNetworkErrors = 307
-	KCFErrorPACFileError                                             CFNetworkErrors = 308
-	KCFErrorPACFileAuth                                              CFNetworkErrors = 309
-	KCFErrorHTTPSProxyConnectionFailure                              CFNetworkErrors = 310
+	// The specified host wasn’t found.
+	KCFHostErrorHostNotFound CFNetworkErrors = 1
+	// An unknown error.
+	KCFHostErrorUnknown CFNetworkErrors = 2
+	// The SOCKS server rejected access because it doesn’t support connections with the requested SOCKS version.
+	KCFSOCKSErrorUnknownClientVersion CFNetworkErrors = 100
+	// The SOCKS server doesn’t support the requested version.
+	KCFSOCKSErrorUnsupportedServerVersion CFNetworkErrors = 101
+	// The server rejected the request, or the request failed.
+	KCFSOCKS4ErrorRequestFailed CFNetworkErrors = 110
+	// The server couldn’t connect to the identd daemon on the client and rejected the request.
+	KCFSOCKS4ErrorIdentdFailed CFNetworkErrors = 111
+	// The server rejected the request because the client program and the identd daemon reported different user IDs.
+	KCFSOCKS4ErrorIdConflict CFNetworkErrors = 112
+	// The server returned an unknown status code.
+	KCFSOCKS4ErrorUnknownStatusCode CFNetworkErrors = 113
+	// The stream isn’t in a state that allows the requested operation.
+	KCFSOCKS5ErrorBadState CFNetworkErrors = 120
+	// The address type returned isn’t supported.
+	KCFSOCKS5ErrorBadResponseAddr CFNetworkErrors = 121
+	// The SOCKS server refused the client connection because of bad login credentials.
+	KCFSOCKS5ErrorBadCredentials CFNetworkErrors = 122
+	// The requested method isn’t supported.
+	KCFSOCKS5ErrorUnsupportedNegotiationMethod CFNetworkErrors = 123
+	// The client and server couldn’t find a mutually agreeable authentication method.
+	KCFSOCKS5ErrorNoAcceptableMethod CFNetworkErrors = 124
+	// The server returned an unexpected status code.
+	KCFFTPErrorUnexpectedStatusCode CFNetworkErrors = 200
+	// The client and server couldn’t agree on a supported authentication type.
+	KCFErrorHTTPAuthenticationTypeUnsupported CFNetworkErrors = 300
+	// The server rejected the credentials provided for an authenticated connection.
+	KCFErrorHTTPBadCredentials CFNetworkErrors = 301
+	// The connection to the server was dropped.
+	KCFErrorHTTPConnectionLost CFNetworkErrors = 302
+	// The HTTP server response couldn’t be parsed.
+	KCFErrorHTTPParseFailure CFNetworkErrors = 303
+	// Too many HTTP redirects occurred before reaching a page that didn’t redirect the client to another page.
+	KCFErrorHTTPRedirectionLoopDetected CFNetworkErrors = 304
+	// The requested URL couldn’t be retrieved.
+	KCFErrorHTTPBadURL CFNetworkErrors = 305
+	// A connection to the HTTPS proxy couldn’t be established.
+	KCFErrorHTTPProxyConnectionFailure CFNetworkErrors = 306
+	// The proxy rejected the authentication credentials provided for logging in.
+	KCFErrorHTTPBadProxyCredentials CFNetworkErrors = 307
+	// An error occurred with the proxy autoconfiguration file.
+	KCFErrorPACFileError CFNetworkErrors = 308
+	// The authentication credentials provided by the proxy autoconfiguration file were rejected.
+	KCFErrorPACFileAuth CFNetworkErrors = 309
+	// A connection couldn’t be established to the HTTPS proxy.
+	KCFErrorHTTPSProxyConnectionFailure CFNetworkErrors = 310
+	// The HTTPS proxy returned an unexpected status code, such as a 3xx redirect.
 	KCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod CFNetworkErrors = 311
-	KCFURLErrorBackgroundSessionInUseByAnotherProcess                CFNetworkErrors = -996
-	KCFURLErrorBackgroundSessionWasDisconnected                      CFNetworkErrors = -997
-	KCFURLErrorUnknown                                               CFNetworkErrors = -998
-	KCFURLErrorCancelled                                             CFNetworkErrors = -999
-	KCFURLErrorBadURL                                                CFNetworkErrors = -1000
-	KCFURLErrorTimedOut                                              CFNetworkErrors = -1001
-	KCFURLErrorUnsupportedURL                                        CFNetworkErrors = -1002
-	KCFURLErrorCannotFindHost                                        CFNetworkErrors = -1003
-	KCFURLErrorCannotConnectToHost                                   CFNetworkErrors = -1004
-	KCFURLErrorNetworkConnectionLost                                 CFNetworkErrors = -1005
-	KCFURLErrorDNSLookupFailed                                       CFNetworkErrors = -1006
-	KCFURLErrorHTTPTooManyRedirects                                  CFNetworkErrors = -1007
-	KCFURLErrorResourceUnavailable                                   CFNetworkErrors = -1008
-	KCFURLErrorNotConnectedToInternet                                CFNetworkErrors = -1009
-	KCFURLErrorRedirectToNonExistentLocation                         CFNetworkErrors = -1010
-	KCFURLErrorBadServerResponse                                     CFNetworkErrors = -1011
-	KCFURLErrorUserCancelledAuthentication                           CFNetworkErrors = -1012
-	KCFURLErrorUserAuthenticationRequired                            CFNetworkErrors = -1013
-	KCFURLErrorZeroByteResource                                      CFNetworkErrors = -1014
-	KCFURLErrorCannotDecodeRawData                                   CFNetworkErrors = -1015
-	KCFURLErrorCannotDecodeContentData                               CFNetworkErrors = -1016
-	KCFURLErrorCannotParseResponse                                   CFNetworkErrors = -1017
-	KCFURLErrorInternationalRoamingOff                               CFNetworkErrors = -1018
-	KCFURLErrorCallIsActive                                          CFNetworkErrors = -1019
-	KCFURLErrorDataNotAllowed                                        CFNetworkErrors = -1020
-	KCFURLErrorRequestBodyStreamExhausted                            CFNetworkErrors = -1021
-	KCFURLErrorAppTransportSecurityRequiresSecureConnection          CFNetworkErrors = -1022
-	KCFURLErrorFileDoesNotExist                                      CFNetworkErrors = -1100
-	KCFURLErrorFileIsDirectory                                       CFNetworkErrors = -1101
-	KCFURLErrorNoPermissionsToReadFile                               CFNetworkErrors = -1102
-	KCFURLErrorDataLengthExceedsMaximum                              CFNetworkErrors = -1103
-	KCFURLErrorFileOutsideSafeArea                                   CFNetworkErrors = -1104
-	KCFURLErrorSecureConnectionFailed                                CFNetworkErrors = -1200
-	KCFURLErrorServerCertificateHasBadDate                           CFNetworkErrors = -1201
-	KCFURLErrorServerCertificateUntrusted                            CFNetworkErrors = -1202
-	KCFURLErrorServerCertificateHasUnknownRoot                       CFNetworkErrors = -1203
-	KCFURLErrorServerCertificateNotYetValid                          CFNetworkErrors = -1204
-	KCFURLErrorClientCertificateRejected                             CFNetworkErrors = -1205
-	KCFURLErrorClientCertificateRequired                             CFNetworkErrors = -1206
-	KCFURLErrorCannotLoadFromNetwork                                 CFNetworkErrors = -2000
-	KCFURLErrorCannotCreateFile                                      CFNetworkErrors = -3000
-	KCFURLErrorCannotOpenFile                                        CFNetworkErrors = -3001
-	KCFURLErrorCannotCloseFile                                       CFNetworkErrors = -3002
-	KCFURLErrorCannotWriteToFile                                     CFNetworkErrors = -3003
-	KCFURLErrorCannotRemoveFile                                      CFNetworkErrors = -3004
-	KCFURLErrorCannotMoveFile                                        CFNetworkErrors = -3005
-	KCFURLErrorDownloadDecodingFailedMidStream                       CFNetworkErrors = -3006
-	KCFURLErrorDownloadDecodingFailedToComplete                      CFNetworkErrors = -3007
-	KCFHTTPCookieCannotParseCookieFile                               CFNetworkErrors = -4000
-	KCFNetServiceErrorUnknown                                        CFNetworkErrors = -72000
-	KCFNetServiceErrorCollision                                      CFNetworkErrors = -72001
-	KCFNetServiceErrorNotFound                                       CFNetworkErrors = -72002
-	KCFNetServiceErrorInProgress                                     CFNetworkErrors = -72003
-	KCFNetServiceErrorBadArgument                                    CFNetworkErrors = -72004
-	KCFNetServiceErrorCancel                                         CFNetworkErrors = -72005
-	KCFNetServiceErrorInvalid                                        CFNetworkErrors = -72006
-	KCFNetServiceErrorTimeout                                        CFNetworkErrors = -72007
-	KCFNetServiceErrorDNSServiceFailure                              CFNetworkErrors = -73000
+	// The background session failed because it was in use by another process.
+	KCFURLErrorBackgroundSessionInUseByAnotherProcess CFNetworkErrors = -996
+	// The background session failed because it was disconnected.
+	KCFURLErrorBackgroundSessionWasDisconnected CFNetworkErrors = -997
+	// An unknown error occurred.
+	KCFURLErrorUnknown CFNetworkErrors = -998
+	// The connection was cancelled.
+	KCFURLErrorCancelled CFNetworkErrors = -999
+	// The connection failed due to a malformed URL.
+	KCFURLErrorBadURL CFNetworkErrors = -1000
+	// The connection timed out.
+	KCFURLErrorTimedOut CFNetworkErrors = -1001
+	// The connection failed due to an unsupported URL scheme.
+	KCFURLErrorUnsupportedURL CFNetworkErrors = -1002
+	// The connection failed because the host couldn’t be found.
+	KCFURLErrorCannotFindHost CFNetworkErrors = -1003
+	// The connection failed because a connection can’t be made to the host.
+	KCFURLErrorCannotConnectToHost CFNetworkErrors = -1004
+	// The connection failed because the network connection was lost.
+	KCFURLErrorNetworkConnectionLost CFNetworkErrors = -1005
+	// The connection failed because the DNS lookup failed.
+	KCFURLErrorDNSLookupFailed CFNetworkErrors = -1006
+	// The HTTP connection failed due to too many redirects.
+	KCFURLErrorHTTPTooManyRedirects CFNetworkErrors = -1007
+	// The connection’s resource is unavailable.
+	KCFURLErrorResourceUnavailable CFNetworkErrors = -1008
+	// The connection failed because the device isn’t connected to the internet.
+	KCFURLErrorNotConnectedToInternet CFNetworkErrors = -1009
+	// The connection was redirected to a nonexistent location.
+	KCFURLErrorRedirectToNonExistentLocation CFNetworkErrors = -1010
+	// The connection received an invalid server response.
+	KCFURLErrorBadServerResponse CFNetworkErrors = -1011
+	// The connection failed because the user cancelled required authentication.
+	KCFURLErrorUserCancelledAuthentication CFNetworkErrors = -1012
+	// The connection failed because it requires authentication.
+	KCFURLErrorUserAuthenticationRequired CFNetworkErrors = -1013
+	// The resource retrieved by the connection is zero bytes.
+	KCFURLErrorZeroByteResource CFNetworkErrors = -1014
+	// The connection can’t decode data encoded with a known content encoding.
+	KCFURLErrorCannotDecodeRawData CFNetworkErrors = -1015
+	// The connection can’t decode data encoded with an unknown content encoding.
+	KCFURLErrorCannotDecodeContentData CFNetworkErrors = -1016
+	// The connection can’t parse the server’s response.
+	KCFURLErrorCannotParseResponse CFNetworkErrors = -1017
+	// The connection failed because international roaming is disabled on the device.
+	KCFURLErrorInternationalRoamingOff CFNetworkErrors = -1018
+	// The connection failed because a call is active.
+	KCFURLErrorCallIsActive CFNetworkErrors = -1019
+	// The connection failed because data use isn’t currently allowed on the device.
+	KCFURLErrorDataNotAllowed CFNetworkErrors = -1020
+	// The connection failed because the request’s body stream was exhausted.
+	KCFURLErrorRequestBodyStreamExhausted CFNetworkErrors = -1021
+	// The connection failed because the App Transport Security configuration requires a secure connection.
+	KCFURLErrorAppTransportSecurityRequiresSecureConnection CFNetworkErrors = -1022
+	// The file operation failed because the file doesn’t exist.
+	KCFURLErrorFileDoesNotExist CFNetworkErrors = -1100
+	// The file operation failed because the file is a directory.
+	KCFURLErrorFileIsDirectory CFNetworkErrors = -1101
+	// The file operation failed because it doesn’t have permission to read the file.
+	KCFURLErrorNoPermissionsToReadFile CFNetworkErrors = -1102
+	// The file operation failed because the file is too large.
+	KCFURLErrorDataLengthExceedsMaximum CFNetworkErrors = -1103
+	// The file is outside of the safe area.
+	KCFURLErrorFileOutsideSafeArea CFNetworkErrors = -1104
+	// The secure connection failed for an unknown reason.
+	KCFURLErrorSecureConnectionFailed CFNetworkErrors = -1200
+	// The secure connection failed because the server’s certificate has an invalid date.
+	KCFURLErrorServerCertificateHasBadDate CFNetworkErrors = -1201
+	// The secure connection failed because the server’s certificate isn’t trusted.
+	KCFURLErrorServerCertificateUntrusted CFNetworkErrors = -1202
+	// The secure connection failed because the server’s certificate has an unknown root.
+	KCFURLErrorServerCertificateHasUnknownRoot CFNetworkErrors = -1203
+	// The secure connection failed because the server’s certificate isn’t valid yet.
+	KCFURLErrorServerCertificateNotYetValid CFNetworkErrors = -1204
+	// The secure connection failed because the client’s certificate was rejected.
+	KCFURLErrorClientCertificateRejected CFNetworkErrors = -1205
+	// The secure connection failed because the server requires a client certificate.
+	KCFURLErrorClientCertificateRequired CFNetworkErrors = -1206
+	// The connection failed because it’s being required to return a cached resource, but one isn’t available.
+	KCFURLErrorCannotLoadFromNetwork CFNetworkErrors = -2000
+	// The file can’t be created.
+	KCFURLErrorCannotCreateFile CFNetworkErrors = -3000
+	// The file can’t be opened.
+	KCFURLErrorCannotOpenFile CFNetworkErrors = -3001
+	// The file can’t be closed.
+	KCFURLErrorCannotCloseFile CFNetworkErrors = -3002
+	// The file can’t be written.
+	KCFURLErrorCannotWriteToFile CFNetworkErrors = -3003
+	// The file can’t be removed.
+	KCFURLErrorCannotRemoveFile CFNetworkErrors = -3004
+	// The file can’t be moved.
+	KCFURLErrorCannotMoveFile CFNetworkErrors = -3005
+	// The download failed because decoding of the downloaded data failed midstream.
+	KCFURLErrorDownloadDecodingFailedMidStream CFNetworkErrors = -3006
+	// The download failed because decoding of the downloaded data failed to complete.
+	KCFURLErrorDownloadDecodingFailedToComplete CFNetworkErrors = -3007
+	// The cookie file can’t be parsed.
+	KCFHTTPCookieCannotParseCookieFile CFNetworkErrors = -4000
+	// An error of unknown type has occurred.
+	KCFNetServiceErrorUnknown CFNetworkErrors = -72000
+	// An attempt was made to use a name that’s already in use.
+	KCFNetServiceErrorCollision CFNetworkErrors = -72001
+	// This error isn’t used.
+	KCFNetServiceErrorNotFound CFNetworkErrors = -72002
+	// A new search couldn’t be started because a search is already in progress.
+	KCFNetServiceErrorInProgress CFNetworkErrors = -72003
+	// A required argument either wasn’t provided or wasn’t valid.
+	KCFNetServiceErrorBadArgument CFNetworkErrors = -72004
+	// The search or service was canceled.
+	KCFNetServiceErrorCancel CFNetworkErrors = -72005
+	// Invalid data was passed to a CFNetServices function.
+	KCFNetServiceErrorInvalid CFNetworkErrors = -72006
+	// Resolution failed because the timeout was reached.
+	KCFNetServiceErrorTimeout CFNetworkErrors = -72007
+	// The DNS service discovery returned an error.
+	KCFNetServiceErrorDNSServiceFailure CFNetworkErrors = -73000
 )
 
 func (e CFNetworkErrors) String() string {
@@ -424,12 +538,16 @@ func (e CFNetworkErrors) String() string {
 	}
 }
 
+// Error codes that a read stream for an HTTP request may return.
 type CFStreamErrorHTTP int32
 
 const (
-	KCFStreamErrorHTTPParseFailure    CFStreamErrorHTTP = -1
+	// A parsing error occurred while an incoming message was being deserialized and appended to a message object. The headers of the incoming message may be formatted improperly.
+	KCFStreamErrorHTTPParseFailure CFStreamErrorHTTP = -1
+	// A redirection loop has been detected.
 	KCFStreamErrorHTTPRedirectionLoop CFStreamErrorHTTP = -2
-	KCFStreamErrorHTTPBadURL          CFStreamErrorHTTP = -3
+	// The URL is not properly formatted.
+	KCFStreamErrorHTTPBadURL CFStreamErrorHTTP = -3
 )
 
 func (e CFStreamErrorHTTP) String() string {
@@ -445,12 +563,16 @@ func (e CFStreamErrorHTTP) String() string {
 	}
 }
 
+// Authentication error codes that may be returned when trying to apply authentication to a request.
 type CFStreamErrorHTTPAuthentication int32
 
 const (
+	// Specified authentication type is not supported.
 	KCFStreamErrorHTTPAuthenticationTypeUnsupported CFStreamErrorHTTPAuthentication = -1000
-	KCFStreamErrorHTTPAuthenticationBadUserName     CFStreamErrorHTTPAuthentication = -1001
-	KCFStreamErrorHTTPAuthenticationBadPassword     CFStreamErrorHTTPAuthentication = -1002
+	// User name is in a format that is not suitable for the request. Currently, user names are decoded using kCFStringEncodingISOLatin1.
+	KCFStreamErrorHTTPAuthenticationBadUserName CFStreamErrorHTTPAuthentication = -1001
+	// Password is in a format that is not suitable for the request. Currently, passwords are decoded using kCFStringEncodingISOLatin1.
+	KCFStreamErrorHTTPAuthenticationBadPassword CFStreamErrorHTTPAuthentication = -1002
 )
 
 func (e CFStreamErrorHTTPAuthentication) String() string {

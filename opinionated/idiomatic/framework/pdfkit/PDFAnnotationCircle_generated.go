@@ -39,96 +39,128 @@ func NewAnnotationCircle() *AnnotationCircle {
 	return &AnnotationCircle{inner: raw.PDFAnnotationCircleFromID(_id)}
 }
 
+// Returns the page that the annotation is associated with.
+//
 // WithPage sets the page property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithPage(page *Page) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
+// Returns the type of the annotation.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithType(type_ string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
 	return x
 }
 
+// Returns the bounding box for the annotation in page space.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithBounds(bounds corefoundation.CGRect) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetBounds(bounds)
 	return x
 }
 
+// Returns a Boolean value indicating whether the annotation should be displayed.
+//
 // WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithShouldDisplay(shouldDisplay bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
 	return x
 }
 
+// Returns a Boolean value indicating whether the annotation should appear when the document is printed.
+//
 // WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithShouldPrint(shouldPrint bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithHighlighted(highlighted bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetHighlighted(highlighted)
 	return x
 }
 
+// The font the annotation uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithFont(font *appkit.NSFont) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetFont(font)
 	return x
 }
 
+// The font color the annotation uses to display text.
+//
 // WithFontColor sets the fontColor property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithFontColor(fontColor *appkit.NSColor) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetFontColor(fontColor)
 	return x
 }
 
+// The fill color for drawing a circle, line, or square annotation.
+//
 // WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
 	return x
 }
 
+// The alignment of the free text and text widget annotation’s text content.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetAlignment(alignment)
 	return x
 }
 
+// The point where a line begins, in annotation-space coordinates.
+//
 // WithStartPoint sets the startPoint property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetStartPoint(startPoint)
 	return x
 }
 
+// The point where a line ends, in annotation-space coordinates.
+//
 // WithEndPoint sets the endPoint property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetEndPoint(endPoint)
 	return x
 }
 
+// The style of the line annotation’s starting point, such as square or filled arrowhead.
+//
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
+// The style of the line annotation’s ending point, such as square or filled arrowhead.
+//
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
+// The type of icon to display for a pop-up text annotation.
+//
 // WithIconType sets the iconType property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
+// An array of values that represents the points bounding the marked-up text.
+//
 // WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationCircle) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationCircle {
 	if len(items) == 0 {
@@ -150,72 +182,96 @@ func (x *AnnotationCircle) WithQuadrilateralPoints(items ...*foundation.NSValue)
 	return x
 }
 
+// The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
+//
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithMarkupType(markupType PDFMarkupType) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
+// The type of button widget control, either radio button, push button, or checkbox.
+//
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
+// A Boolean value that indicates whether the text widget annotation displays multiple lines.
+//
 // WithMultiline sets the multiline property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithMultiline(multiline bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetMultiline(multiline)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
+//
 // WithComb sets the comb property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithComb(comb bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetComb(comb)
 	return x
 }
 
+// The maximum number of characters the text widget annotation allows.
+//
 // WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithMaximumLength(maximumLength int) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
 	return x
 }
 
+// The string value of the widget annotation.
+//
 // WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithWidgetStringValue(widgetStringValue string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
 	return x
 }
 
+// The string value that the widget reverts to when performing a reset form action.
+//
 // WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
 	return x
 }
 
+// A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
+//
 // WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
 	return x
 }
 
+// A Boolean value that indicates whether radio buttons in a group turn on and off in unison.
+//
 // WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithRadiosInUnison(radiosInUnison bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
 	return x
 }
 
+// A Boolean value that determines whether the widget is editable.
+//
 // WithReadOnly sets the readOnly property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithReadOnly(readOnly bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetReadOnly(readOnly)
 	return x
 }
 
+// A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
+//
 // WithListChoice sets the listChoice property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithListChoice(listChoice bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetListChoice(listChoice)
 	return x
 }
 
+// An array of strings that specifies the options in either a list or a pop-up menu.
+//
 // WithChoices sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationCircle) WithChoices(items ...*foundation.NSString) *AnnotationCircle {
 	if len(items) == 0 {
@@ -237,6 +293,8 @@ func (x *AnnotationCircle) WithChoices(items ...*foundation.NSString) *Annotatio
 	return x
 }
 
+// An array of strings that specifies the export values for items in a list or a pop-up menu.
+//
 // WithValues sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationCircle) WithValues(items ...*foundation.NSString) *AnnotationCircle {
 	if len(items) == 0 {
@@ -258,54 +316,72 @@ func (x *AnnotationCircle) WithValues(items ...*foundation.NSString) *Annotation
 	return x
 }
 
+// The current state of the button widget annotation.
+//
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
+// A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
+//
 // WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
 	return x
 }
 
+// A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
+//
 // WithOpen sets the open property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithOpen(open bool) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetOpen(open)
 	return x
 }
 
+// The destination for a link annotation.
+//
 // WithDestination sets the destination property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithDestination(destination *Destination) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
+// A URL for a link annotation.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithURL(uRL string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The widget identifier for form annotation actions and behaviors.
+//
 // WithFieldName sets the fieldName property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithFieldName(fieldName string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
 	return x
 }
 
+// The title of push button widget annotations.
+//
 // WithCaption sets the caption property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithCaption(caption string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
 	return x
 }
 
+// The color of the widget’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
 	return x
 }
 
+// The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
+//
 // WithStampName sets the stampName property and returns the receiver for chaining.
 func (x *AnnotationCircle) WithStampName(stampName string) *AnnotationCircle {
 	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))

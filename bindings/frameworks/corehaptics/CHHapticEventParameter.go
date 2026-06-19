@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static parameter value that represents a single property of the haptic pattern.
+//
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticeventparameter
 type CHHapticEventParameter struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func CHHapticEventParameterFromID(id objc.ID) *CHHapticEventParameter {
 	return o
 }
 
+// Creates a haptic event parameter from its ID and value.
 func (o *CHHapticEventParameter) InitWithParameterIDValue(parameterID *foundation.NSString, value float32) *CHHapticEventParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventParameterSelInitWithParameterIDValue, parameterID.Ptr(), value)
 	if _ret != 0 {

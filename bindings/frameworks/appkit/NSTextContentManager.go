@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the interface and a default implementation for managing the text document contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextcontentmanager
 type NSTextContentManager struct {
 	foundation.NSObject
@@ -49,6 +51,7 @@ func NSTextContentManagerFromID(id objc.ID) *NSTextContentManager {
 	return o
 }
 
+// Creates a new content manager.
 func (o *NSTextContentManager) Init() *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelInit)
 	if _ret != 0 {
@@ -57,6 +60,7 @@ func (o *NSTextContentManager) Init() *NSTextContentManager {
 	return NSTextContentManagerFromID(_ret)
 }
 
+// Creates a new content manager object from data in an unarchiver.
 func (o *NSTextContentManager) InitWithCoder(coder *foundation.NSCoder) *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -65,14 +69,17 @@ func (o *NSTextContentManager) InitWithCoder(coder *foundation.NSCoder) *NSTextC
 	return NSTextContentManagerFromID(_ret)
 }
 
+// Adds the layout manager you provide to the list of layout managers.
 func (o *NSTextContentManager) AddTextLayoutManager(textLayoutManager *NSTextLayoutManager) {
 	o.Ptr().Send(_nSTextContentManagerSelAddTextLayoutManager, textLayoutManager.Ptr())
 }
 
+// Removes the layout manager you specifiy from the list of layout managers.
 func (o *NSTextContentManager) RemoveTextLayoutManager(textLayoutManager *NSTextLayoutManager) {
 	o.Ptr().Send(_nSTextContentManagerSelRemoveTextLayoutManager, textLayoutManager.Ptr())
 }
 
+// Synchronizes changes to all nonprimary text layout managers.
 func (o *NSTextContentManager) SynchronizeTextLayoutManagers(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -84,6 +91,7 @@ func (o *NSTextContentManager) SynchronizeTextLayoutManagers(completionHandler f
 	o.Ptr().Send(_nSTextContentManagerSelSynchronizeTextLayoutManagers, __block_completionHandler)
 }
 
+// Returns an array of text elements that intersect with the range you specify.
 func (o *NSTextContentManager) TextElementsForRange(range_ *NSTextRange) *foundation.NSArray[*NSTextElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentManagerSelTextElementsForRange, range_.Ptr())
 	if _ret != 0 {
@@ -92,6 +100,7 @@ func (o *NSTextContentManager) TextElementsForRange(range_ *NSTextRange) *founda
 	return foundation.NSArrayFromID[*NSTextElement](_ret)
 }
 
+// Performs an editing transaction and invokes a block upon completion.
 func (o *NSTextContentManager) PerformEditingTransactionUsing(transaction func()) {
 	var __block_transaction objc.Block
 	if transaction != nil {
@@ -103,6 +112,7 @@ func (o *NSTextContentManager) PerformEditingTransactionUsing(transaction func()
 	o.Ptr().Send(_nSTextContentManagerSelPerformEditingTransactionUsing, __block_transaction)
 }
 
+// Records information about an edit action to the transaction.
 func (o *NSTextContentManager) RecordEditActionInRangeNewTextRange(originalTextRange *NSTextRange, newTextRange *NSTextRange) {
 	o.Ptr().Send(_nSTextContentManagerSelRecordEditActionInRangeNewTextRange, originalTextRange.Ptr(), newTextRange.Ptr())
 }

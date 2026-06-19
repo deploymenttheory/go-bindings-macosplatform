@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for analysis results.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnobservation
 type VNObservation struct {
 	foundation.NSObject

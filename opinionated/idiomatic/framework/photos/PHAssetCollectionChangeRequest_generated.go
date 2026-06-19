@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to create, delete, or modify a Photos asset collection, for use in a photo library change block.
+//
 // AssetCollectionChangeRequest wraps [raw.PHAssetCollectionChangeRequest] with a fluent Go API.
 type AssetCollectionChangeRequest struct {
 	inner *raw.PHAssetCollectionChangeRequest
@@ -37,37 +39,51 @@ func NewAssetCollectionChangeRequest() *AssetCollectionChangeRequest {
 	return &AssetCollectionChangeRequest{inner: raw.PHAssetCollectionChangeRequestFromID(_id)}
 }
 
+// The displayed name of the asset collection.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollectionChangeRequest {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// Adds the specified assets to the asset collection.
+//
 // AddAssets calls the underlying AddAssets.
 func (x *AssetCollectionChangeRequest) AddAssets(assets foundation.NSFastEnumeration) {
 	x.inner.AddAssets(assets)
 }
 
+// Inserts the specified assets into the collection at the specified indexes.
+//
 // InsertAssetsAtIndexes calls the underlying InsertAssetsAtIndexes.
 func (x *AssetCollectionChangeRequest) InsertAssetsAtIndexes(assets foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
 	x.inner.InsertAssetsAtIndexes(assets, indexes)
 }
 
+// Removes the specified assets from the asset collection.
+//
 // RemoveAssets calls the underlying RemoveAssets.
 func (x *AssetCollectionChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
 	x.inner.RemoveAssets(assets)
 }
 
+// Removes the assets at the specified indexes from the asset collection.
+//
 // RemoveAssetsAtIndexes calls the underlying RemoveAssetsAtIndexes.
 func (x *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes *foundation.NSIndexSet) {
 	x.inner.RemoveAssetsAtIndexes(indexes)
 }
 
+// Replaces the assets at the specified indexes in the asset collection with the specified assets.
+//
 // ReplaceAssetsAtIndexesWithAssets calls the underlying ReplaceAssetsAtIndexesWithAssets.
 func (x *AssetCollectionChangeRequest) ReplaceAssetsAtIndexesWithAssets(indexes *foundation.NSIndexSet, assets foundation.NSFastEnumeration) {
 	x.inner.ReplaceAssetsAtIndexesWithAssets(indexes, assets)
 }
 
+// Moves the assets at the specified indexes in the asset collection to a new index.
+//
 // MoveAssetsAtIndexesToIndex calls the underlying MoveAssetsAtIndexesToIndex.
 func (x *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes *foundation.NSIndexSet, toIndex uint) {
 	x.inner.MoveAssetsAtIndexesToIndex(fromIndexes, toIndex)

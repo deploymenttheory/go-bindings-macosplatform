@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A model that computes sequences of embedding vectors for natural language utterances.
+//
 // ContextualEmbedding wraps [raw.NLContextualEmbedding] with a fluent Go API.
 type ContextualEmbedding struct {
 	inner *raw.NLContextualEmbedding
@@ -38,7 +40,7 @@ func NewContextualEmbedding() *ContextualEmbedding {
 	return &ContextualEmbedding{inner: raw.NLContextualEmbeddingFromID(_id)}
 }
 
-// The instance method that loads the embedding model. - Returns: A Boolean value that indicates whether the load succeeds. When you create a contextual embedding, the framework doesn't load the model until you need it. Use “NLContextualEmbedding/load()“ and “NLContextualEmbedding/unload()“ to control when to load and unload the model. The first time load can be expensive, make sure you load the model before you need to use it. The method fails if the necessary assets aren't on device for the model you specify. Use “NLContextualEmbedding/hasAvailableAssets“ and “NLContextualEmbedding/requestAssets(completionHandler:)“ to manage the assets.
+// The instance method that loads the embedding model.
 //
 // Load returns any validation error.
 func (x *ContextualEmbedding) Load() error {
@@ -53,7 +55,7 @@ func (x *ContextualEmbedding) Unload() {
 	x.inner.Unload()
 }
 
-// Applies an embedding to a string and obtains the resulting embedding vectors. - Parameters: - string: The string to apply an embedding to. - language: The language of the string. - error: On output, a pointer to an error object that describes why the method failed, or nil if no error occurred. If you are not interested in the error information, pass nil for this parameter. - Returns: An embedding result. On failure, this method returns nil.
+// Applies an embedding to a string and obtains the resulting embedding vectors.
 //
 // EmbeddingResultForStringLanguageError calls the underlying EmbeddingResultForStringLanguageError.
 func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error) {
@@ -67,7 +69,7 @@ func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ stri
 	return &ContextualEmbeddingResult{inner: _r}, nil
 }
 
-// Requests embedding model assets and downloads them if available. - Parameter completionHandler: A closure that notifies your app when the asset request completes. ## Asynchronous alternative You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: ```swift func requestAssets() async throws -> NLContextualEmbedding.AssetsResult ``` For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. ## Discussion You use a contextual embedding after loading the necessary assets onto the device. Use “NLContextualEmbedding/hasAvailableAssets“ to determine whether assets are available. This method returns immediately if the framework knows the state of the assets or if an error occurs.
+// Requests embedding model assets and downloads them if available.
 //
 // RequestEmbeddingAssetsWithCompletionHandler calls the underlying RequestEmbeddingAssetsWithCompletionHandler.
 func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {

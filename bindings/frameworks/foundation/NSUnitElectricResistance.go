@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for electric resistance.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitelectricresistance
 type NSUnitElectricResistance struct {
 	NSDimension

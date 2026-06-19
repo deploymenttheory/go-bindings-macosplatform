@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A coder that encodes and decodes objects that your app sends over an XPC connection.
+//
 // XPCCoder wraps [raw.NSXPCCoder] with a fluent Go API.
 type XPCCoder struct {
 	inner *raw.NSXPCCoder
@@ -37,6 +39,8 @@ func NewXPCCoder() *XPCCoder {
 	return &XPCCoder{inner: raw.NSXPCCoderFromID(_id)}
 }
 
+// An optional user information object associated with the coder.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *XPCCoder) WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder {
 	x.inner.SetUserInfo(userInfo)
@@ -49,11 +53,15 @@ func (x *XPCCoder) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// Encodes an object to send over an XPC connection.
+//
 // EncodeXPCObjectForKey calls the underlying EncodeXPCObjectForKey.
 func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string) {
 	x.inner.EncodeXPCObjectForKey(xpcObject, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes an object and validates that its type matches the type a service provides over XPC.
+//
 // DecodeXPCObjectOfTypeForKey calls the underlying DecodeXPCObjectOfTypeForKey.
 func (x *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key string) *Object {
 	_r := x.inner.DecodeXPCObjectOfTypeForKey(type_, foundation.NSStringStringWithUTF8String(key))

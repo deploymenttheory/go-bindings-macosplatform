@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Ridged noise is similar to Perlin noise, with sharply-defined, relatively thin peaks.
+// A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.
 //
 // RidgedNoiseSource wraps [raw.GKRidgedNoiseSource] with a fluent Go API.
 type RidgedNoiseSource struct {
@@ -31,6 +31,8 @@ func RidgedNoiseSourceFromID(id objc.ID) *RidgedNoiseSource {
 	return &RidgedNoiseSource{inner: raw.GKRidgedNoiseSourceFromID(id)}
 }
 
+// Initializes a ridged noise source with the specified parameters.
+//
 // NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed creates a new [RidgedNoiseSource].
 func NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *RidgedNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRidgedNoiseSource")), objc.RegisterName("alloc"))
@@ -38,24 +40,32 @@ func NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float6
 	return &RidgedNoiseSource{inner: raw.GKRidgedNoiseSourceFromID(_id)}
 }
 
+// A value that determines the size and spacing of features in generated noise.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *RidgedNoiseSource) WithFrequency(frequency float64) *RidgedNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
 	return x
 }
 
+// The number of octaves of the underlying noise function to use for generating noise.
+//
 // WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
 func (x *RidgedNoiseSource) WithOctaveCount(octaveCount int) *RidgedNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
 	return x
 }
 
+// The rate at which successive octaves of the noise function increase in frequency.
+//
 // WithLacunarity sets the lacunarity property and returns the receiver for chaining.
 func (x *RidgedNoiseSource) WithLacunarity(lacunarity float64) *RidgedNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
 	return x
 }
 
+// The value that determines the specific configuration of noise produced by the noise source.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
 	x.inner.GKCoherentNoiseSource.SetSeed(seed)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that represents a single 2D point in an image.
+//
 // Point wraps [raw.VNPoint] with a fluent Go API.
 type Point struct {
 	inner *raw.VNPoint
@@ -30,7 +32,7 @@ func PointFromID(id objc.ID) *Point {
 	return &Point{inner: raw.VNPointFromID(id)}
 }
 
-// @brief Initializes a VNPoint object from X and Y coordinates.
+// Creates a point object with the specified coordinates.
 //
 // NewPointWithXY creates a new [Point].
 func NewPointWithXY(x float64, y float64) *Point {
@@ -39,7 +41,7 @@ func NewPointWithXY(x float64, y float64) *Point {
 	return &Point{inner: raw.VNPointFromID(_id)}
 }
 
-// @brief Initializes a VNPoint object from a CGPoint.
+// Creates a point object from the specified Core Graphics point.
 //
 // NewPointWithLocation creates a new [Point].
 func NewPointWithLocation(location corefoundation.CGPoint) *Point {
@@ -48,7 +50,7 @@ func NewPointWithLocation(location corefoundation.CGPoint) *Point {
 	return &Point{inner: raw.VNPointFromID(_id)}
 }
 
-// @brief Returns the Euclidean distance to another point. @param point The destination point. @return the Euclidean distance between the target and specified points.
+// Returns the distance to another point.
 //
 // DistanceToPoint calls the underlying DistanceToPoint.
 func (x *Point) DistanceToPoint(point *raw.VNPoint) float64 {

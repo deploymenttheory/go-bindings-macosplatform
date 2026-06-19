@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IKSaveOptions class initializes, adds, and manages user interface options for saving image data.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/iksaveoptions
 type IKSaveOptions struct {
 	foundation.NSObject
@@ -40,16 +42,16 @@ func IKSaveOptionsFromID(id objc.ID) *IKSaveOptions {
 	return o
 }
 
-// @method initWithImageProperties:imageUTType: @abstract Initializes IKSaveOptions with metadata and UTType.
+// Initializes a save options accessory pane for the provided image properties and uniform type identifier.
 func (o *IKSaveOptions) InitWithImagePropertiesImageUTType(imageProperties *foundation.NSDictionary[objc.ID, objc.ID], imageUTType *foundation.NSString) *IKSaveOptions {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKSaveOptionsSelInitWithImagePropertiesImageUTType, imageProperties, imageUTType.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKSaveOptionsSelInitWithImagePropertiesImageUTType, imageProperties.Ptr(), imageUTType.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return IKSaveOptionsFromID(_ret)
 }
 
-// @method addSaveOptionsAccessoryViewToSavePanel: @abstract Adds IKSaveOptions UI to a NSSavePanel.
+// Adds IKSaveOptions accessory view to a NSSavePanel.
 func (o *IKSaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel) {
 	o.Ptr().Send(_iKSaveOptionsSelAddSaveOptionsAccessoryViewToSavePanel, savePanel.Ptr())
 }
@@ -71,8 +73,11 @@ func (o *IKSaveOptions) SetDelegate(delegate objc.ID) {
 
 // @property imageProperties @abstract current imageProperties (respecting user UI selection).
 func (o *IKSaveOptions) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iKSaveOptionsSelImageProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKSaveOptionsSelImageProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property imageUTType @abstract current imageUTType (respecting user UI selection).
@@ -86,8 +91,11 @@ func (o *IKSaveOptions) ImageUTType() *foundation.NSString {
 
 // @property userSelection @abstract information about the UI settings.
 func (o *IKSaveOptions) UserSelection() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iKSaveOptionsSelUserSelection)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKSaveOptionsSelUserSelection)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property rememberLastSetting @abstract If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]

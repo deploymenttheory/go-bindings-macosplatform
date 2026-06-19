@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that defines the end of a recurrence rule.
+//
 // RecurrenceEnd wraps [raw.EKRecurrenceEnd] with a fluent Go API.
 type RecurrenceEnd struct {
 	inner *raw.EKRecurrenceEnd

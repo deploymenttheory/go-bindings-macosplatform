@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A matrix allocated on GPU private memory.
+//
 // TemporaryMatrix wraps [raw.MPSTemporaryMatrix] with a fluent Go API.
 type TemporaryMatrix struct {
 	inner *raw.MPSTemporaryMatrix

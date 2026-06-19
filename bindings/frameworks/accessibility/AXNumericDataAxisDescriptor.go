@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an axis of numerical data.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor
 type AXNumericDataAxisDescriptor struct {
 	foundation.NSObject
@@ -41,16 +43,18 @@ func AXNumericDataAxisDescriptorFromID(id objc.ID) *AXNumericDataAxisDescriptor 
 	return o
 }
 
+// Creates a numeric data axis with the specified title, lower bound value, upper bound value, gridline positions, and value description provider block.
 func (o *AXNumericDataAxisDescriptor) InitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(title *foundation.NSString, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *AXNumericDataAxisDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelInitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider, title.Ptr(), lowerbound, upperBound, gridlinePositions, valueDescriptionProvider)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelInitWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider, title.Ptr(), lowerbound, upperBound, gridlinePositions.Ptr(), valueDescriptionProvider)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AXNumericDataAxisDescriptorFromID(_ret)
 }
 
+// Creates a numeric data axis with the specified attributed title, lower bound value, upper bound value, gridline positions, and value description provider block.
 func (o *AXNumericDataAxisDescriptor) InitWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(attributedTitle *foundation.NSAttributedString, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *AXNumericDataAxisDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelInitWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider, attributedTitle.Ptr(), lowerbound, upperBound, gridlinePositions, valueDescriptionProvider)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelInitWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider, attributedTitle.Ptr(), lowerbound, upperBound, gridlinePositions.Ptr(), valueDescriptionProvider)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -99,10 +103,13 @@ func (o *AXNumericDataAxisDescriptor) SetValueDescriptionProvider(valueDescripti
 
 // The positions of any gridlines along this axis.
 func (o *AXNumericDataAxisDescriptor) GridlinePositions() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aXNumericDataAxisDescriptorSelGridlinePositions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXNumericDataAxisDescriptorSelGridlinePositions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *AXNumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aXNumericDataAxisDescriptorSelSetGridlinePositions, gridlinePositions)
+	o.Ptr().Send(_aXNumericDataAxisDescriptorSelSetGridlinePositions, gridlinePositions.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A policy object that you use to resolve conflicts between the persistent store and in-memory versions of managed objects.
+//
 // MergePolicy wraps [raw.NSMergePolicy] with a fluent Go API.
 type MergePolicy struct {
 	inner *raw.NSMergePolicy
@@ -30,6 +32,8 @@ func MergePolicyFromID(id objc.ID) *MergePolicy {
 	return &MergePolicy{inner: raw.NSMergePolicyFromID(id)}
 }
 
+// Returns a merge policy initialized with a given policy type.
+//
 // NewMergePolicyWithMergeType creates a new [MergePolicy].
 func NewMergePolicyWithMergeType(ty NSMergePolicyType) *MergePolicy {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMergePolicy")), objc.RegisterName("alloc"))
@@ -37,16 +41,22 @@ func NewMergePolicyWithMergeType(ty NSMergePolicyType) *MergePolicy {
 	return &MergePolicy{inner: raw.NSMergePolicyFromID(_id)}
 }
 
+// Resolves the conflicts in a given list.
+//
 // ResolveConflictsError calls the underlying ResolveConflictsError.
 func (x *MergePolicy) ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error) {
 	return x.inner.ResolveConflictsError(list)
 }
 
+// Resolves the conflicts in a given list.
+//
 // ResolveOptimisticLockingVersionConflictsError calls the underlying ResolveOptimisticLockingVersionConflictsError.
 func (x *MergePolicy) ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*raw.NSMergeConflict]) (bool, error) {
 	return x.inner.ResolveOptimisticLockingVersionConflictsError(list)
 }
 
+// Resolves the conflicts in a given list.
+//
 // ResolveConstraintConflictsError calls the underlying ResolveConstraintConflictsError.
 func (x *MergePolicy) ResolveConstraintConflictsError(list *foundation.NSArray[*raw.NSConstraintConflict]) (bool, error) {
 	return x.inner.ResolveConstraintConflictsError(list)

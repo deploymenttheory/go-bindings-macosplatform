@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The concrete class that the GKRuleSystem uses to evaluate the current state and facts with predicated rules. These are sharable between systems, so don't retain any state in the rules themselves. Use the system-provided state storage. @see GKRuleSystem.state
+// A rule to be used in the context of a rule system, with a predicate to be tested and an action to be executed when the test succeeds.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkrule
 type GKRule struct {
@@ -38,18 +38,18 @@ func GKRuleFromID(id objc.ID) *GKRule {
 	return o
 }
 
-// Called by the rule system when it is this rule's turn to be evaluated. If the predicate returns YES then the action for the rule will be performed. Once the action is performed the rule will move to the system's executed list until the agenda is reset. @see performAction @see GKRuleSystem.agenda @see GKRuleSystem.executed @see GKRuleSystem.reset @return YES is the predicate passes and the action needs to be performed, NO otherwise.
+// Returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.
 func (o *GKRule) EvaluatePredicateWithSystem(system *GKRuleSystem) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKRuleSelEvaluatePredicateWithSystem, system.Ptr())
 	return _ret
 }
 
-// Performs the action consequence for the rule. This will only be called if the predicate evaluates to YES. Any facts asserted or retracted by the action on the system will cause the system to evaluate the agenda rule set again once the action completes.
+// Performs actions that should result when the rule is satisfied in the context of the specified rule system.
 func (o *GKRule) PerformActionWithSystem(system *GKRuleSystem) {
 	o.Ptr().Send(_gKRuleSelPerformActionWithSystem, system.Ptr())
 }
 
-// Create a data-driven rule that uses NSPredicate and a single assert as the action.
+// Creates a data-driven rule with the specified predicate, whose action asserts a fact in the rule system evaluating the rule.
 func GKRuleRuleWithPredicateAssertingFactGrade(predicate *foundation.NSPredicate, fact foundation.NSObjectProtocol, grade float32) *GKRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRule), _gKRuleSelRuleWithPredicateAssertingFactGrade, predicate.Ptr(), fact, grade)
 	if _ret != 0 {
@@ -58,7 +58,7 @@ func GKRuleRuleWithPredicateAssertingFactGrade(predicate *foundation.NSPredicate
 	return GKRuleFromID(_ret)
 }
 
-// Short hand for data-driven rule that uses NSPredicate and a single retract as the action.
+// Creates a data-driven rule with the specified predicate, whose action retracts a fact in the rule system evaluating the rule.
 func GKRuleRuleWithPredicateRetractingFactGrade(predicate *foundation.NSPredicate, fact foundation.NSObjectProtocol, grade float32) *GKRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRule), _gKRuleSelRuleWithPredicateRetractingFactGrade, predicate.Ptr(), fact, grade)
 	if _ret != 0 {
@@ -67,7 +67,7 @@ func GKRuleRuleWithPredicateRetractingFactGrade(predicate *foundation.NSPredicat
 	return GKRuleFromID(_ret)
 }
 
-// Short hand for making a rule that uses blocks for the predicate and action. This rule is not able to be archived using NSKeyedArchiver so use a subclass or NSPredicate based rule if serialization of the rule is needed.
+// Creates a rule whose predicate is evaluated and action is executed through the specified blocks.
 func GKRuleRuleWithBlockPredicateAction(predicate func(*GKRuleSystem) bool, action func(*GKRuleSystem)) *GKRule {
 	var __block_predicate objc.Block
 	if predicate != nil {

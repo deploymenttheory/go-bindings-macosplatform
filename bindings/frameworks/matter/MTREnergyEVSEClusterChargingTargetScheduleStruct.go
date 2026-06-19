@@ -46,10 +46,13 @@ func (o *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetDayOfWeekForSequen
 }
 
 func (o *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTREnergyEVSEClusterChargingTargetScheduleStructSelChargingTargets)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterChargingTargetScheduleStructSelChargingTargets)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetChargingTargets(chargingTargets *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTREnergyEVSEClusterChargingTargetScheduleStructSelSetChargingTargets, chargingTargets)
+	o.Ptr().Send(_mTREnergyEVSEClusterChargingTargetScheduleStructSelSetChargingTargets, chargingTargets.Ptr())
 }

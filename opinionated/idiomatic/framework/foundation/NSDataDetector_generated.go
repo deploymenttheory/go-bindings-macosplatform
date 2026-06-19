@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A specialized regular expression object that matches natural language text for predefined data patterns.
+//
 // DataDetector wraps [raw.NSDataDetector] with a fluent Go API.
 type DataDetector struct {
 	inner *raw.NSDataDetector
@@ -31,6 +33,8 @@ func DataDetectorFromID(id objc.ID) *DataDetector {
 	return &DataDetector{inner: raw.NSDataDetectorFromID(id)}
 }
 
+// Initializes and returns a data detector instance.
+//
 // NewDataDetectorWithTypesError creates a new [DataDetector].
 func NewDataDetectorWithTypesError(checkingTypes uint64) (*DataDetector, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDataDetector")), objc.RegisterName("alloc"))

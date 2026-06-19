@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that describes an interface for custom parameter settings provided by the audio unit developer.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounitpreset
 type AUAudioUnitPreset struct {
 	foundation.NSObject

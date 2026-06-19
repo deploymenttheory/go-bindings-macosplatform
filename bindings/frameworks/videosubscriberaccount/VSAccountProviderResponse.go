@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the response from the account provider.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsaccountproviderresponse
 type VSAccountProviderResponse struct {
 	foundation.NSObject

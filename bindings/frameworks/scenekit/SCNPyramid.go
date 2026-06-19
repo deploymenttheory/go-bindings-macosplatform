@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A right rectangular pyramid geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnpyramid
 type SCNPyramid struct {
 	SCNGeometry
@@ -41,7 +43,7 @@ func SCNPyramidFromID(id objc.ID) *SCNPyramid {
 	return o
 }
 
-// @method pyramidWithWidth:height:length: @abstract Creates and returns a pyramid with given width, height, and length. @param width The width of the pyramid. @param height The height of the pyramid. @param length The length of the pyramid.
+// Creates a pyramid geometry with the specified width, height, and length.
 func SCNPyramidPyramidWithWidthHeightLength(width float64, height float64, length float64) *SCNPyramid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPyramid), _sCNPyramidSelPyramidWithWidthHeightLength, width, height, length)
 	if _ret != 0 {

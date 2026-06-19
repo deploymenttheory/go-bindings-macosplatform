@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller
 // Deprecated: No longer supported.
 type GKFriendRequestComposeViewController struct {
@@ -38,31 +40,33 @@ func GKFriendRequestComposeViewControllerFromID(id objc.ID) *GKFriendRequestComp
 	return o
 }
 
-// Get the maximum number of recipients permitted
+// Returns the maximum number of recipients permitted in a single request.
 // Deprecated: No longer supported.
 func GKFriendRequestComposeViewControllerMaxNumberOfRecipients() uint {
 	_ret := objc.Send[uint](objc.ID(_clsGKFriendRequestComposeViewController), _gKFriendRequestComposeViewControllerSelMaxNumberOfRecipients)
 	return _ret
 }
 
-// Specify the message sent to the invitee. A default message will be used if you don't specify one.
+// Sets the text message included in the friend invitation.
 func (o *GKFriendRequestComposeViewController) SetMessage(message *foundation.NSString) {
 	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelSetMessage, message.Ptr())
 }
 
-// Add recipients to the request. If you don't specify at least one recipient before presenting the view, the recipients field will be made firstResponder, to encourage the user to add some. If you add more than maxNumberOfRecipients recipients, these methods will throw an exception.
+// Adds recipients based on their Game Center player identifiers.
 func (o *GKFriendRequestComposeViewController) AddRecipientPlayers(players *foundation.NSArray[*GKPlayer]) {
 	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientPlayers, players.Ptr())
 }
 
+// Adds recipients based on their Game Center player identifiers.
 // Deprecated: since macOS 10.10.
 func (o *GKFriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithPlayerIDs, playerIDs)
+	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithPlayerIDs, playerIDs.Ptr())
 }
 
+// Adds recipients based on their email addresses.
 // Deprecated: since macOS 10.10.
 func (o *GKFriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithEmailAddresses, emailAddresses)
+	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithEmailAddresses, emailAddresses.Ptr())
 }
 
 // Deprecated: No longer supported.

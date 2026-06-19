@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for building token drivers.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokendriver
 type TKTokenDriver struct {
 	foundation.NSObject

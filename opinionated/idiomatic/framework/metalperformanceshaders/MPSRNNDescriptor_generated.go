@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a recursive neural network block or layer.
+//
 // RNNDescriptor wraps [raw.MPSRNNDescriptor] with a fluent Go API.
 type RNNDescriptor struct {
 	inner *raw.MPSRNNDescriptor

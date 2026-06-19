@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the attributes used to create an MPSImage.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor
 type MPSImageDescriptor struct {
 	foundation.NSObject
@@ -53,7 +55,7 @@ func MPSImageDescriptorFromID(id objc.ID) *MPSImageDescriptor {
 	return o
 }
 
-// @abstract   Create a MPSImageDescriptor for a single read/write cnn image.
+// Creates an image descriptor for a single image.
 func MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat mpscore.MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint) *MPSImageDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSImageDescriptor), _mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannels, channelFormat, width, height, featureChannels)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannel
 	return MPSImageDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MPSImageDescriptor for a read/write cnn image with option to set usage and batch size (numberOfImages).
+// Creates an image descriptor for an image container with options to set texture usage and batch size (number of images).
 func MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(channelFormat mpscore.MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint, numberOfImages uint, usage metal.MTLTextureUsage) *MPSImageDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSImageDescriptor), _mPSImageDescriptorSelImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage, channelFormat, width, height, featureChannels, numberOfImages, usage)
 	if _ret != 0 {

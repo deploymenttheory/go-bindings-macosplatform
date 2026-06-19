@@ -472,7 +472,7 @@ func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, cont
 }
 
 // LoadCategoriesWithCompletionHandler calls the underlying GKLeaderboardLoadCategoriesWithCompletionHandler.
-func LoadCategoriesWithCompletionHandler(completionHandler objc.Block) {
+func LoadCategoriesWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
 	raw.GKLeaderboardLoadCategoriesWithCompletionHandler(completionHandler)
 }
 

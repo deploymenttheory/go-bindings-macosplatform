@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network service browser that finds published services on a network using multicast DNS.
+//
 // NetServiceBrowser wraps [raw.NSNetServiceBrowser] with a fluent Go API.
 type NetServiceBrowser struct {
 	inner *raw.NSNetServiceBrowser

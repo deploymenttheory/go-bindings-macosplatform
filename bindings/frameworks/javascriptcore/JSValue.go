@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A JavaScript value.
+//
 // Apple documentation: https://developer.apple.com/documentation/javascriptcore/jsvalue
 type JSValue struct {
 	foundation.NSObject
@@ -106,7 +108,7 @@ func JSValueFromID(id objc.ID) *JSValue {
 	return o
 }
 
-// @methodgroup Creating JavaScript Values @method @abstract Create a JSValue by converting an Objective-C object. @discussion The resulting JSValue retains the provided Objective-C object. @param value The Objective-C object to be converted. @result The new JSValue.
+// Creates a JavaScript value by converting the specified native object.
 func JSValueValueWithObjectInContext(value objc.ID, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithObjectInContext, value, context_.Ptr())
 	if _ret != 0 {
@@ -115,7 +117,7 @@ func JSValueValueWithObjectInContext(value objc.ID, context_ *JSContext) *JSValu
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a JavaScript value from a BOOL primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
+// Creates a JavaScript representation of the specified Boolean value.
 func JSValueValueWithBoolInContext(value bool, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithBoolInContext, value, context_.Ptr())
 	if _ret != 0 {
@@ -124,7 +126,7 @@ func JSValueValueWithBoolInContext(value bool, context_ *JSContext) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a JavaScript value from a double primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
+// Creates a JavaScript representation of the specified floating-point value.
 func JSValueValueWithDoubleInContext(value float64, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithDoubleInContext, value, context_.Ptr())
 	if _ret != 0 {
@@ -133,7 +135,7 @@ func JSValueValueWithDoubleInContext(value float64, context_ *JSContext) *JSValu
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a JavaScript value from an <code>int32_t</code> primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
+// Creates a JavaScript representation of the specified signed integer value.
 func JSValueValueWithInt32InContext(value int32, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithInt32InContext, value, context_.Ptr())
 	if _ret != 0 {
@@ -142,7 +144,7 @@ func JSValueValueWithInt32InContext(value int32, context_ *JSContext) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a JavaScript value from a <code>uint32_t</code> primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
+// Creates a JavaScript representation of the specified unsigned integer value.
 func JSValueValueWithUInt32InContext(value uint32, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithUInt32InContext, value, context_.Ptr())
 	if _ret != 0 {
@@ -151,7 +153,7 @@ func JSValueValueWithUInt32InContext(value uint32, context_ *JSContext) *JSValue
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new, empty JavaScript object. @param context The JSContext in which the resulting object will be created. @result The new JavaScript object.
+// Creates a new, empty JavaScript object value.
 func JSValueValueWithNewObjectInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewObjectInContext, context_.Ptr())
 	if _ret != 0 {
@@ -160,7 +162,7 @@ func JSValueValueWithNewObjectInContext(context_ *JSContext) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new, empty JavaScript array. @param context The JSContext in which the resulting array will be created. @result The new JavaScript array.
+// Creates a new, empty JavaScript array value.
 func JSValueValueWithNewArrayInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewArrayInContext, context_.Ptr())
 	if _ret != 0 {
@@ -169,7 +171,7 @@ func JSValueValueWithNewArrayInContext(context_ *JSContext) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new JavaScript regular expression object. @param pattern The regular expression pattern. @param flags The regular expression flags. @param context The JSContext in which the resulting regular expression object will be created. @result The new JavaScript regular expression object.
+// Creates a JavaScript regular expression value from the specified pattern.
 func JSValueValueWithNewRegularExpressionFromPatternFlagsInContext(pattern *foundation.NSString, flags *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewRegularExpressionFromPatternFlagsInContext, pattern.Ptr(), flags.Ptr(), context_.Ptr())
 	if _ret != 0 {
@@ -178,7 +180,7 @@ func JSValueValueWithNewRegularExpressionFromPatternFlagsInContext(pattern *foun
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new JavaScript error object. @param message The error message. @param context The JSContext in which the resulting error object will be created. @result The new JavaScript error object.
+// Creates a JavaScript error value with the specified error message.
 func JSValueValueWithNewErrorFromMessageInContext(message *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewErrorFromMessageInContext, message.Ptr(), context_.Ptr())
 	if _ret != 0 {
@@ -187,7 +189,7 @@ func JSValueValueWithNewErrorFromMessageInContext(message *foundation.NSString, 
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new promise object using the provided executor callback. @param callback A callback block invoked while the promise object is being initialized. The resolve and reject parameters are functions that can be called to notify any pending reactions about the state of the new promise object. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a new promise JavaScript object. @discussion This method is equivalent to calling the Promise constructor in JavaScript. the resolve and reject callbacks each normally take a single value, which they forward to all relevent pending reactions. While inside the executor callback context will act as if it were in any other callback, except calleeFunction will be <code>nil</code>. This also means means the new promise object may be accessed via <code>[context thisValue]</code>.
+// Creates a promise object using the specified executor callback.
 func JSValueValueWithNewPromiseInContextFromExecutor(context_ *JSContext, callback func(*JSValue, *JSValue)) *JSValue {
 	var __block_callback objc.Block
 	if callback != nil {
@@ -209,7 +211,7 @@ func JSValueValueWithNewPromiseInContextFromExecutor(context_ *JSContext, callba
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new resolved promise object with the provided value. @param result The result value to be passed to any reactions. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a new promise JavaScript object. @discussion This method is equivalent to calling <code>[JSValue valueWithNewPromiseFromExecutor:^(JSValue *resolve, JSValue *reject) { [resolve callWithArguments:@[result]]; } inContext:context]</code>
+// Creates a resolved promise object with the specified value.
 func JSValueValueWithNewPromiseResolvedWithResultInContext(result objc.ID, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewPromiseResolvedWithResultInContext, result, context_.Ptr())
 	if _ret != 0 {
@@ -218,7 +220,7 @@ func JSValueValueWithNewPromiseResolvedWithResultInContext(result objc.ID, conte
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new rejected promise object with the provided value. @param reason The result value to be passed to any reactions. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a new promise JavaScript object. @discussion This method is equivalent to calling <code>[JSValue valueWithNewPromiseFromExecutor:^(JSValue *resolve, JSValue *reject) { [reject callWithArguments:@[reason]]; } inContext:context]</code>
+// Creates a rejected promise object with the specified value.
 func JSValueValueWithNewPromiseRejectedWithReasonInContext(reason objc.ID, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewPromiseRejectedWithReasonInContext, reason, context_.Ptr())
 	if _ret != 0 {
@@ -227,7 +229,7 @@ func JSValueValueWithNewPromiseRejectedWithReasonInContext(reason objc.ID, conte
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create a new, unique, symbol object. @param description The description of the symbol object being created. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a unique JavaScript value with type symbol.
+// Creates a unique symbol object.
 func JSValueValueWithNewSymbolFromDescriptionInContext(description *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewSymbolFromDescriptionInContext, description.Ptr(), context_.Ptr())
 	if _ret != 0 {
@@ -272,7 +274,7 @@ func JSValueValueWithNewBigIntFromDoubleInContext(value float64, context_ *JSCon
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create the JavaScript value <code>null</code>. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing the JavaScript value <code>null</code>.
+// Creates a JavaScript null value.
 func JSValueValueWithNullInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNullInContext, context_.Ptr())
 	if _ret != 0 {
@@ -281,7 +283,7 @@ func JSValueValueWithNullInContext(context_ *JSContext) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Create the JavaScript value <code>undefined</code>. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing the JavaScript value <code>undefined</code>.
+// Creates a JavaScript undefined value.
 func JSValueValueWithUndefinedInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithUndefinedInContext, context_.Ptr())
 	if _ret != 0 {
@@ -290,37 +292,37 @@ func JSValueValueWithUndefinedInContext(context_ *JSContext) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @methodgroup Converting to Objective-C Types @discussion When converting between JavaScript values and Objective-C objects a copy is performed. Values of types listed below are copied to the corresponding types on conversion in each direction. For NSDictionaries, entries in the dictionary that are keyed by strings are copied onto a JavaScript object. For dictionaries and arrays, conversion is recursive, with the same object conversion being applied to all entries in the collection. <pre> @textblock Objective-C type  |   JavaScript type --------------------+--------------------- nil         |     undefined NSNull       |        null NSString      |       string NSNumber      |   number, boolean NSDictionary    |   Object object NSArray       |    Array object NSDate       |     Date object NSBlock (1)   |   Function object (1) id (2)     |   Wrapper object (2) Class (3)    | Constructor object (3) @/textblock </pre> (1) Instances of NSBlock with supported arguments types will be presented to JavaScript as a callable Function object. For more information on supported argument types see JSExport.h. If a JavaScript Function originating from an Objective-C block is converted back to an Objective-C object the block will be returned. All other JavaScript functions will be converted in the same manner as a JavaScript object of type Object. (2) For Objective-C instances that do not derive from the set of types listed above, a wrapper object to provide a retaining handle to the Objective-C instance from JavaScript. For more information on these wrapper objects, see JSExport.h. When a JavaScript wrapper object is converted back to Objective-C the Objective-C instance being retained by the wrapper is returned. (3) For Objective-C Class objects a constructor object containing exported class methods will be returned. See JSExport.h for more information on constructor objects. For all methods taking arguments of type id, arguments will be converted into a JavaScript value according to the above conversion. @method @abstract Convert this JSValue to an Objective-C object. @discussion The JSValue is converted to an Objective-C object according to the conversion rules specified above. @result The Objective-C representation of this JSValue.
+// Converts the JavaScript value to a native object.
 func (o *JSValue) ToObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToObject)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to an Objective-C object of a specific class. @discussion The JSValue is converted to an Objective-C object of the specified Class. If the result is not of the specified Class then <code>nil</code> will be returned. @result An Objective-C object of the specified Class or <code>nil</code>.
+// Converts the JavaScript value to a native object of the specified class.
 func (o *JSValue) ToObjectOfClass(expectedClass objc.Class) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToObjectOfClass, expectedClass)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to a boolean. @discussion The JSValue is converted to a boolean according to the rules specified by the JavaScript language. @result The boolean result of the conversion.
+// Converts the JavaScript value to a native Boolean value.
 func (o *JSValue) ToBool() bool {
 	_ret := objc.Send[bool](o.Ptr(), _jSValueSelToBool)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to a double. @result The double result of the conversion. @discussion Convert the JSValue to a number according to the rules specified by the JavaScript language. Unless the JSValue is a BigInt then this is equivalent to <code>Number(value)</code> in JavaScript.
+// Converts the JavaScript value to a native floating-point value.
 func (o *JSValue) ToDouble() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _jSValueSelToDouble)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to an <code>int32_t</code>. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the JSValue is a BigInt, then the value is truncated to an <code>int32_t</code>. @result The <code>int32_t</code> result of the conversion.
+// Converts the JavaScript value to a native signed integer value.
 func (o *JSValue) ToInt32() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _jSValueSelToInt32)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to a <code>uint32_t</code>. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the JSValue is a BigInt, then the value is truncated to a <code>uint32_t</code>. @result The <code>uint32_t</code> result of the conversion.
+// Converts the JavaScript value to a native unsigned integer value.
 func (o *JSValue) ToUInt32() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _jSValueSelToUInt32)
 	return _ret
@@ -338,7 +340,7 @@ func (o *JSValue) ToUInt64() uint64 {
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to a NSNumber. @discussion If the JSValue represents a boolean, a NSNumber value of YES or NO will be returned. For all other types, the result is equivalent to <code>Number(value)</code> in JavaScript. @result The NSNumber result of the conversion.
+// Converts the JavaScript value to a NSNumber object.
 func (o *JSValue) ToNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToNumber)
 	if _ret != 0 {
@@ -347,7 +349,7 @@ func (o *JSValue) ToNumber() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-// @method @abstract Convert a JSValue to a NSString. @discussion The JSValue is converted to a string according to the rules specified by the JavaScript language. @result The NSString containing the result of the conversion.
+// Converts the JavaScript value to a native string.
 func (o *JSValue) ToString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToString)
 	if _ret != 0 {
@@ -356,7 +358,7 @@ func (o *JSValue) ToString() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method @abstract Convert a JSValue to a NSDate. @discussion The value is converted to a number representing a time interval since 1970 which is then used to create a new NSDate instance. @result The NSDate created using the converted time interval.
+// Converts the JavaScript value to a date object.
 func (o *JSValue) ToDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToDate)
 	if _ret != 0 {
@@ -365,31 +367,37 @@ func (o *JSValue) ToDate() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
-// @method @abstract Convert a JSValue to a NSArray. @discussion If the value is <code>null</code> or <code>undefined</code> then <code>nil</code> is returned. If the value is not an object then a JavaScript TypeError will be thrown. The property <code>length</code> is read from the object, converted to an unsigned integer, and an NSArray of this size is allocated. Properties corresponding to indices within the array bounds will be copied to the array, with JSValues converted to equivalent Objective-C objects as specified. @result The NSArray containing the recursively converted contents of the converted JavaScript array.
+// Converts the JavaScript value to an array.
 func (o *JSValue) ToArray() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _jSValueSelToArray)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToArray)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// @method @abstract Convert a JSValue to a NSDictionary. @discussion If the value is <code>null</code> or <code>undefined</code> then <code>nil</code> is returned. If the value is not an object then a JavaScript TypeError will be thrown. All enumerable properties of the object are copied to the dictionary, with JSValues converted to equivalent Objective-C objects as specified. @result The NSDictionary containing the recursively converted contents of the converted JavaScript object.
+// Converts the JavaScript value to a dictionary.
 func (o *JSValue) ToDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _jSValueSelToDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
-// @method @abstract Check if a JSValue is an instance of another object. @discussion This method has the same function as the JavaScript operator <code>instanceof</code>. If an object other than a JSValue is passed, it will first be converted according to the aforementioned rules.
+// Returns a Boolean value indicating whether the value is an instance of another JavaScript object value.
 func (o *JSValue) IsInstanceOf(value objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _jSValueSelIsInstanceOf, value)
 	return _ret
 }
 
-// @method @abstract Compare two JSValues using JavaScript's <code>===</code> operator.
+// Compares the value to another for strict equality.
 func (o *JSValue) IsEqualToObject(value objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _jSValueSelIsEqualToObject, value)
 	return _ret
 }
 
-// @method @abstract Compare two JSValues using JavaScript's <code>==</code> operator.
+// Compares the value to another for equivalence, allowing type conversion.
 func (o *JSValue) IsEqualWithTypeCoercionToObject(value objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _jSValueSelIsEqualWithTypeCoercionToObject, value)
 	return _ret
@@ -419,27 +427,27 @@ func (o *JSValue) CompareDouble(other float64) JSRelationCondition {
 	return _ret
 }
 
-// @methodgroup Calling Functions and Constructors @method @abstract Invoke a JSValue as a function. @discussion In JavaScript, if a function doesn't explicitly return a value then it implicitly returns the JavaScript value <code>undefined</code>. @param arguments The arguments to pass to the function. @result The return value of the function call.
+// Invokes the value as a JavaScript function.
 func (o *JSValue) CallWithArguments(arguments *foundation.NSArray[objc.ID]) *JSValue {
-	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelCallWithArguments, arguments)
+	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelCallWithArguments, arguments.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Invoke a JSValue as a constructor. @discussion This is equivalent to using the <code>new</code> syntax in JavaScript. @param arguments The arguments to pass to the constructor. @result The return value of the constructor call.
+// Invokes the value as a JavaScript constructor.
 func (o *JSValue) ConstructWithArguments(arguments *foundation.NSArray[objc.ID]) *JSValue {
-	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelConstructWithArguments, arguments)
+	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelConstructWithArguments, arguments.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Invoke a method on a JSValue. @discussion Accesses the property named <code>method</code> from this value and calls the resulting value as a function, passing this JSValue as the <code>this</code> value along with the specified arguments. @param method The name of the method to be invoked. @param arguments The arguments to pass to the method. @result The return value of the method call.
+// Calls the named JavaScript method on the value.
 func (o *JSValue) InvokeMethodWithArguments(method *foundation.NSString, arguments *foundation.NSArray[objc.ID]) *JSValue {
-	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelInvokeMethodWithArguments, method.Ptr(), arguments)
+	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelInvokeMethodWithArguments, method.Ptr(), arguments.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -551,31 +559,31 @@ func JSValueValueWithSizeInContext(size corefoundation.CGSize, context_ *JSConte
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Convert a JSValue to a CGPoint. @discussion Reads the properties named <code>x</code> and <code>y</code> from this JSValue, and converts the results to double. @result The new CGPoint.
+// Converts the value to a point structure.
 func (o *JSValue) ToPoint() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _jSValueSelToPoint)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to an NSRange. @discussion Reads the properties named <code>location</code> and <code>length</code> from this JSValue and converts the results to double. @result The new NSRange.
+// Converts the value to a range.
 func (o *JSValue) ToRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _jSValueSelToRange)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to a CGRect. @discussion Reads the properties named <code>x</code>, <code>y</code>, <code>width</code>, and <code>height</code> from this JSValue and converts the results to double. @result The new CGRect.
+// Converts the value to a rectangle structure.
 func (o *JSValue) ToRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _jSValueSelToRect)
 	return _ret
 }
 
-// @method @abstract Convert a JSValue to a CGSize. @discussion Reads the properties named <code>width</code> and <code>height</code> from this JSValue and converts the results to double. @result The new CGSize.
+// Converts the value to a size.
 func (o *JSValue) ToSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _jSValueSelToSize)
 	return _ret
 }
 
-// @method @abstract Access a property of a JSValue. @result The JSValue for the requested property or the JSValue <code>undefined</code> if the property does not exist. @discussion Corresponds to the JavaScript operation <code>object[property]</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+// Returns the value of the named property in the JavaScript object value.
 func (o *JSValue) ValueForProperty(property objc.ID) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelValueForProperty, property)
 	if _ret != 0 {
@@ -584,29 +592,29 @@ func (o *JSValue) ValueForProperty(property objc.ID) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Set a property on a JSValue. @discussion Corresponds to the JavaScript operation <code>object[property] = value</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+// Sets the value of the named property in the JavaScript object value.
 func (o *JSValue) SetValueForProperty(value objc.ID, property objc.ID) {
 	o.Ptr().Send(_jSValueSelSetValueForProperty, value, property)
 }
 
-// @method @abstract Delete a property from a JSValue. @result YES if deletion is successful, NO otherwise. @discussion Corresponds to the JavaScript operation <code>delete object[property]</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+// Deletes the named property from the JavaScript object value.
 func (o *JSValue) DeleteProperty(property objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _jSValueSelDeleteProperty, property)
 	return _ret
 }
 
-// @method @abstract Check if a JSValue has a property. @discussion This method has the same function as the JavaScript operator <code>in</code>. @result Returns YES if property is present on the value. @discussion Corresponds to the JavaScript operation <code>property in object</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+// Returns a Boolean value indicating whether the JavaScript value has a defined property with the specified name.
 func (o *JSValue) HasProperty(property objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _jSValueSelHasProperty, property)
 	return _ret
 }
 
-// @method @abstract Define properties with custom descriptors on JSValues. @discussion This method may be used to create a data or accessor property on an object. This method operates in accordance with the Object.defineProperty method in the JavaScript language. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+// Defines a property on the JavaScript object value or modifies a property’s definition.
 func (o *JSValue) DefinePropertyDescriptor(property objc.ID, descriptor objc.ID) {
 	o.Ptr().Send(_jSValueSelDefinePropertyDescriptor, property, descriptor)
 }
 
-// @method @abstract Access an indexed (numerical) property on a JSValue. @result The JSValue for the property at the specified index. Returns the JavaScript value <code>undefined</code> if no property exists at that index.
+// Returns the value at the specified numeric index in the JavaScript object value.
 func (o *JSValue) ValueAtIndex(index uint) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelValueAtIndex, index)
 	if _ret != 0 {
@@ -615,11 +623,12 @@ func (o *JSValue) ValueAtIndex(index uint) *JSValue {
 	return JSValueFromID(_ret)
 }
 
-// @method @abstract Set an indexed (numerical) property on a JSValue. @discussion For JSValues that are JavaScript arrays, indices greater than UINT_MAX - 1 will not affect the length of the array.
+// Sets the value at the specified numeric index in the JavaScript object value.
 func (o *JSValue) SetValueAtIndex(value objc.ID, index uint) {
 	o.Ptr().Send(_jSValueSelSetValueAtIndex, value, index)
 }
 
+// Returns the value’s JavaScript property named with the specified key, allowing subscript syntax.
 func (o *JSValue) ObjectForKeyedSubscript(key objc.ID) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelObjectForKeyedSubscript, key)
 	if _ret != 0 {
@@ -628,6 +637,7 @@ func (o *JSValue) ObjectForKeyedSubscript(key objc.ID) *JSValue {
 	return JSValueFromID(_ret)
 }
 
+// Returns the value’s JavaScript property at the specified index, allowing subscript syntax.
 func (o *JSValue) ObjectAtIndexedSubscript(index uint) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -636,10 +646,12 @@ func (o *JSValue) ObjectAtIndexedSubscript(index uint) *JSValue {
 	return JSValueFromID(_ret)
 }
 
+// Sets the value’s JavaScript property named with the specified key, allowing subscript syntax.
 func (o *JSValue) SetObjectForKeyedSubscript(object objc.ID, key objc.ID) {
 	o.Ptr().Send(_jSValueSelSetObjectForKeyedSubscript, object, key)
 }
 
+// Sets the value’s JavaScript property at the specified index, allowing subscript syntax.
 func (o *JSValue) SetObjectAtIndexedSubscript(object objc.ID, index uint) {
 	o.Ptr().Send(_jSValueSelSetObjectAtIndexedSubscript, object, index)
 }

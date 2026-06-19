@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample with values from a short list of possible values.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcategorysample
 type HKCategorySample struct {
 	HKSample
@@ -34,16 +36,16 @@ func HKCategorySampleFromID(id objc.ID) *HKCategorySample {
 	return o
 }
 
-// @method     categorySampleWithType:value:startDate:endDate:metadata: @abstract   Creates a new HKCategorySample. @param      type       The type of the sample. @param      value      The enumeration value for the sample. See HKCategoryTypeIdentifier for appropriate value. @param      startDate  The start date of the sample. @param      endDate    The end date of the sample. @param      metadata   Metadata for the sample (optional).
+// Creates a newly instantiated category sample with the provided metadata.
 func HKCategorySampleCategorySampleWithTypeValueStartDateEndDateMetadata(type_ *HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKCategorySample {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateMetadata, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateMetadata, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKCategorySampleFromID(_ret)
 }
 
-// @method     categorySampleWithType:value:startDate:endDate: @abstract   Creates a new HKCategorySample. @param      type       The type of the sample. @param      value      The enumeration value for the sample. See HKCategoryTypeIdentifier for appropriate value. @param      startDate  The start date of the sample. @param      endDate    The end date of the sample.
+// Creates a newly instantiated category sample.
 func HKCategorySampleCategorySampleWithTypeValueStartDateEndDate(type_ *HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate) *HKCategorySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDate, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr())
 	if _ret != 0 {
@@ -52,9 +54,9 @@ func HKCategorySampleCategorySampleWithTypeValueStartDateEndDate(type_ *HKCatego
 	return HKCategorySampleFromID(_ret)
 }
 
-// @method     categorySampleWithType:value:startDate:endDate:device:metadata: @abstract   Creates a new HKCategorySample. @param      type       The type of the sample. @param      value      The enumeration value for the sample. See HKCategoryTypeIdentifier for appropriate value. @param      startDate  The start date of the sample. @param      endDate    The end date of the sample. @param      device     The HKDevice that generated the sample (optional). @param      metadata   Metadata for the sample (optional).
+// Creates a newly instantiated category sample including the provided device and metadata.
 func HKCategorySampleCategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKCategorySample {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateDeviceMetadata, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateDeviceMetadata, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

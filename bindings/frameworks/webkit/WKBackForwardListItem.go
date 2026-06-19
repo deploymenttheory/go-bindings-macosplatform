@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a webpage that the web view previously visited.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkbackforwardlistitem
 type WKBackForwardListItem struct {
 	foundation.NSObject

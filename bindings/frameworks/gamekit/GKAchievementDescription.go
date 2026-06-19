@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing the text and artwork used to present an achievement to a player.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkachievementdescription
 type GKAchievementDescription struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func GKAchievementDescriptionFromID(id objc.ID) *GKAchievementDescription {
 	return o
 }
 
-// Asynchronously load all achievement descriptions
+// Downloads the localized descriptions of achievements from Game Center.
 func GKAchievementDescriptionLoadAchievementDescriptionsWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKAchievementDescription], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -152,10 +154,14 @@ func (o *GKAchievementDescription) ActivityIdentifier() *foundation.NSString {
 
 // The properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
 func (o *GKAchievementDescription) ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _gKAchievementDescriptionSelActivityProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelActivityProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
+// Loads the image to display when the player completes the achievement.
 // Deprecated: since macOS 14.2.
 func (o *GKAchievementDescription) LoadImageWithCompletionHandler(completionHandler func(*appkit.NSImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -171,6 +177,7 @@ func (o *GKAchievementDescription) LoadImageWithCompletionHandler(completionHand
 	o.Ptr().Send(_gKAchievementDescriptionSelLoadImageWithCompletionHandler, __block_completionHandler)
 }
 
+// A common image that you can display when the player hasn’t completed the achievement.
 func GKAchievementDescriptionIncompleteAchievementImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKAchievementDescription), _gKAchievementDescriptionSelIncompleteAchievementImage)
 	if _ret != 0 {
@@ -179,6 +186,7 @@ func GKAchievementDescriptionIncompleteAchievementImage() *appkit.NSImage {
 	return appkit.NSImageFromID(_ret)
 }
 
+// A placeholder image that you can display when the player completes the achievement.
 func GKAchievementDescriptionPlaceholderCompletedAchievementImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKAchievementDescription), _gKAchievementDescriptionSelPlaceholderCompletedAchievementImage)
 	if _ret != 0 {

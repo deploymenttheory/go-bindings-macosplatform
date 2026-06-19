@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for capture outputs that can record captured data to a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturefileoutput
 type AVCaptureFileOutput struct {
 	AVCaptureOutput
@@ -47,22 +49,22 @@ func AVCaptureFileOutputFromID(id objc.ID) *AVCaptureFileOutput {
 	return o
 }
 
-// @method startRecordingToOutputFileURL:recordingDelegate: @abstract Tells the receiver to start recording to a new file, and specifies a delegate that will be notified when recording is finished. @param outputFileURL An NSURL object containing the URL of the output file. This method throws an NSInvalidArgumentException if the URL is not a valid file URL. @param delegate An object conforming to the AVCaptureFileOutputRecordingDelegate protocol. Clients must specify a delegate so that they can be notified when recording to the given URL is finished. @discussion The method sets the file URL to which the receiver is currently writing output media. If a file at the given URL already exists when capturing starts, recording to the new file will fail. Clients need not call stopRecording before calling this method while another recording is in progress. On macOS, if this method is invoked while an existing output file was already being recorded, no media samples will be discarded between the old file and the new file. When recording is stopped either by calling stopRecording, by changing files using this method, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, clients must specify a delegate that will be notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. The recording delegate can also optionally implement methods that inform it when data starts being written, when recording is paused and resumed, and when recording is about to be finished. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method. Note: AVCaptureAudioFileOutput does not support -startRecordingToOutputFileURL:recordingDelegate:. Use -startRecordingToOutputFileURL:outputFileType:recordingDelegate: instead.
+// Starts recording media to the specified output URL.
 func (o *AVCaptureFileOutput) StartRecordingToOutputFileURLRecordingDelegate(outputFileURL *foundation.NSURL, delegate AVCaptureFileOutputRecordingDelegate) {
 	o.Ptr().Send(_aVCaptureFileOutputSelStartRecordingToOutputFileURLRecordingDelegate, outputFileURL.Ptr(), delegate)
 }
 
-// @method stopRecording @abstract Tells the receiver to stop recording to the current file. @discussion Clients can call this method when they want to stop recording new samples to the current file, and do not want to continue recording to another file. Clients that want to switch from one file to another should not call this method. Instead they should simply call startRecordingToOutputFileURL:recordingDelegate: with the new file URL. When recording is stopped either by calling this method, by changing files using startRecordingToOutputFileURL:recordingDelegate:, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, before using the file, clients must wait until the delegate that was specified in startRecordingToOutputFileURL:recordingDelegate: is notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
+// Tells the receiver to stop recording to the current file.
 func (o *AVCaptureFileOutput) StopRecording() {
 	o.Ptr().Send(_aVCaptureFileOutputSelStopRecording)
 }
 
-// @method pauseRecording @abstract Pauses recording to the current output file. @discussion This method causes the receiver to stop writing captured samples to the current output file returned by outputFileURL, but leaves the file open so that samples can be written to it in the future, when resumeRecording is called. This allows clients to record multiple media segments that are not contiguous in time to a single file. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method. A recording can be stopped as normal, even when it's paused. A format or device change will result in the recording being stopped, even when it's paused.
+// Pauses recording to the current output file.
 func (o *AVCaptureFileOutput) PauseRecording() {
 	o.Ptr().Send(_aVCaptureFileOutputSelPauseRecording)
 }
 
-// @method resumeRecording @abstract Resumes recording to the current output file after it was previously paused using pauseRecording. @discussion This method causes the receiver to resume writing captured samples to the current output file returned by outputFileURL, after recording was previously paused using pauseRecording. This allows clients to record multiple media segments that are not contiguous in time to a single file. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the current file are guaranteed to be those contained in the sample buffer passed to that method.
+// Resumes recording to the current output file after it was previously paused using pauseRecording.
 func (o *AVCaptureFileOutput) ResumeRecording() {
 	o.Ptr().Send(_aVCaptureFileOutputSelResumeRecording)
 }

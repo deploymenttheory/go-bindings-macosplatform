@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the glasses prescription data for one eye.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkglasseslensspecification
 type HKGlassesLensSpecification struct {
 	HKLensSpecification
@@ -33,7 +35,7 @@ func HKGlassesLensSpecificationFromID(id objc.ID) *HKGlassesLensSpecification {
 	return o
 }
 
-// @method        initWithSphere:cylinder:axis:addPower:vertexDistance:prism:farPupillaryDistance:nearPupillaryDistance @param         sphere                  The lens power to correct nearsightedness or farsightedness @param         cylinder                The lens power required to correct astigmatism @param         axis                    The angle along which cylindrical power should be positioned to correct astigmatism @param         addPower                The power adjustment applied to a multifocal lens to correct presbyopia @param         vertexDistance          The distance between the back of the eyeglass lens and the eye @param         prism                   The object encapsulating the prism fields @param         farPupillaryDistance    The distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value. @param         nearPupillaryDistance   The distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
+// Creates a new glasses lens specification, containing the prescription data for one eye.
 func (o *HKGlassesLensSpecification) InitWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance(sphere *HKQuantity, cylinder *HKQuantity, axis *HKQuantity, addPower *HKQuantity, vertexDistance *HKQuantity, prism *HKVisionPrism, farPupillaryDistance *HKQuantity, nearPupillaryDistance *HKQuantity) *HKGlassesLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKGlassesLensSpecificationSelInitWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance, sphere.Ptr(), cylinder.Ptr(), axis.Ptr(), addPower.Ptr(), vertexDistance.Ptr(), prism.Ptr(), farPupillaryDistance.Ptr(), nearPupillaryDistance.Ptr())
 	if _ret != 0 {

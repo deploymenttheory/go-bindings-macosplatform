@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// TLS properties for creating a connection.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nwtlsparameters
 // Deprecated: Use `sec_protocol_options_t` in Security framework instead, see deprecation notice in <NetworkExtension/NWTLSParameters.h>
 type NWTLSParameters struct {
@@ -57,14 +59,17 @@ func (o *NWTLSParameters) SetTLSSessionID(tLSSessionID *foundation.NSData) {
 // @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
 // Deprecated: Use `sec_protocol_options_append_tls_ciphersuite` in Security framework instead, see deprecation notice in <NetworkExtension/NWTLSParameters.h>
 func (o *NWTLSParameters) SSLCipherSuites() *foundation.NSSet[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _nWTLSParametersSelSSLCipherSuites)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nWTLSParametersSelSSLCipherSuites)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSNumber](_ret)
 }
 
 // @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
 // Deprecated: Use `sec_protocol_options_append_tls_ciphersuite` in Security framework instead, see deprecation notice in <NetworkExtension/NWTLSParameters.h>
 func (o *NWTLSParameters) SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) {
-	o.Ptr().Send(_nWTLSParametersSelSetSSLCipherSuites, sSLCipherSuites)
+	o.Ptr().Send(_nWTLSParametersSelSetSSLCipherSuites, sSLCipherSuites.Ptr())
 }
 
 // @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.

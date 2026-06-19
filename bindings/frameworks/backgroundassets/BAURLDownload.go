@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a remote asset to download.
+//
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/baurldownload
 type BAURLDownload struct {
 	BADownload
@@ -51,7 +53,7 @@ func (o *BAURLDownload) InitWithIdentifierRequestEssentialFileSizeApplicationGro
 	return BAURLDownloadFromID(_ret)
 }
 
-// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request. @param identifier A unique identifier that is used to track the download across the app and extension. @param request The request used to perform the download. The URL provided inside of the request must be a https scheme. @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download.
+// Creates a download that uses the specified identifier and App Group.
 // Deprecated: since macOS 13.3.
 func (o *BAURLDownload) InitWithIdentifierRequestApplicationGroupIdentifier(identifier *foundation.NSString, request *foundation.NSURLRequest, applicationGroupIdentifier *foundation.NSString) *BAURLDownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAURLDownloadSelInitWithIdentifierRequestApplicationGroupIdentifier, identifier.Ptr(), request.Ptr(), applicationGroupIdentifier.Ptr())
@@ -61,7 +63,7 @@ func (o *BAURLDownload) InitWithIdentifierRequestApplicationGroupIdentifier(iden
 	return BAURLDownloadFromID(_ret)
 }
 
-// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request. @param identifier A unique identifier that is used to track the download across the app and extension. @param request The request used to perform the download. The URL provided inside of the request must be a https scheme. @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download. @param priority A priority between @c BADownloaderPriorityMin - @c BADownloaderPriorityMax which is used to order the downloads for this process. It is recommended to use  @c BADownloaderPriorityDefault if download priority does not matter.
+// Creates a prioritized download that uses the specified identifier and App Group.
 // Deprecated: since macOS 13.3.
 func (o *BAURLDownload) InitWithIdentifierRequestApplicationGroupIdentifierPriority(identifier *foundation.NSString, request *foundation.NSURLRequest, applicationGroupIdentifier *foundation.NSString, priority int) *BAURLDownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAURLDownloadSelInitWithIdentifierRequestApplicationGroupIdentifierPriority, identifier.Ptr(), request.Ptr(), applicationGroupIdentifier.Ptr(), priority)

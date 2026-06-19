@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a face detected in a still or video image.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cifacefeature
 type CIFaceFeature struct {
 	CIFeature

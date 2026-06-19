@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to specify a search query for records in the Address Book database.
+//
 // SearchElement wraps [raw.ABSearchElement] with a fluent Go API.
 type SearchElement struct {
 	inner *raw.ABSearchElement
@@ -35,6 +37,8 @@ func NewSearchElement() *SearchElement {
 	return &SearchElement{inner: raw.ABSearchElementFromID(_id)}
 }
 
+// Tests whether or not a record matches a search element.
+//
 // MatchesRecord calls the underlying MatchesRecord.
 func (x *SearchElement) MatchesRecord(record *raw.ABRecord) bool {
 	return x.inner.MatchesRecord(record)

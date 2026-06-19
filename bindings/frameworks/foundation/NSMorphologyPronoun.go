@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A custom pronoun for referring to a third person.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmorphologypronoun
 type NSMorphologyPronoun struct {
 	NSObject

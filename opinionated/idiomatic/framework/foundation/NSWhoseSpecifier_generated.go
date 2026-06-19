@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier that indicates every object in a collection matching a condition.
+//
 // WhoseSpecifier wraps [raw.NSWhoseSpecifier] with a fluent Go API.
 type WhoseSpecifier struct {
 	inner *raw.NSWhoseSpecifier
@@ -37,6 +39,8 @@ func NewWhoseSpecifierWithCoder(inCoder *raw.NSCoder) *WhoseSpecifier {
 	return &WhoseSpecifier{inner: raw.NSWhoseSpecifierFromID(_id)}
 }
 
+// Returns an NSWhoseSpecifier object initialized with the given attributes.
+//
 // NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest creates a new [WhoseSpecifier].
 func NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, test *raw.NSScriptWhoseTest) *WhoseSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWhoseSpecifier")), objc.RegisterName("alloc"))
@@ -44,72 +48,96 @@ func NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest(cla
 	return &WhoseSpecifier{inner: raw.NSWhoseSpecifierFromID(_id)}
 }
 
+// Returns the test object encapsulated by the receiver.
+//
 // WithTest sets the test property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier {
 	x.inner.SetTest(test.asScriptWhoseTest())
 	return x
 }
 
+// Returns the start sub-element identifier for the receiver.
+//
 // WithStartSubelementIdentifier sets the startSubelementIdentifier property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier {
 	x.inner.SetStartSubelementIdentifier(raw.NSWhoseSubelementIdentifier(startSubelementIdentifier))
 	return x
 }
 
+// Returns the index position of the first sub-element within the range of objects being tested that pass the receiver’s test.
+//
 // WithStartSubelementIndex sets the startSubelementIndex property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithStartSubelementIndex(startSubelementIndex int) *WhoseSpecifier {
 	x.inner.SetStartSubelementIndex(startSubelementIndex)
 	return x
 }
 
+// Sets the end sub-element identifier for the specifier to the value of a given sub-element.
+//
 // WithEndSubelementIdentifier sets the endSubelementIdentifier property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier {
 	x.inner.SetEndSubelementIdentifier(raw.NSWhoseSubelementIdentifier(endSubelementIdentifier))
 	return x
 }
 
+// Sets the index position of the last sub-element within the range of objects being tested that pass the specifier’s test.
+//
 // WithEndSubelementIndex sets the endSubelementIndex property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithEndSubelementIndex(endSubelementIndex int) *WhoseSpecifier {
 	x.inner.SetEndSubelementIndex(endSubelementIndex)
 	return x
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithKey(key string) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *WhoseSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *WhoseSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)

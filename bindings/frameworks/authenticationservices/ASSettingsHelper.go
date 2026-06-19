@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that opens Settings and navigates to the settings for configuring credential providers.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/assettingshelper
 type ASSettingsHelper struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func ASSettingsHelperFromID(id objc.ID) *ASSettingsHelper {
 	return o
 }
 
-// Calling this method will open the Settings app and navigate directly to the AutoFill provider settings.
+// Open the Settings app and navigate to the AutoFill provider settings.
 func ASSettingsHelperOpenCredentialProviderAppSettingsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -46,7 +48,7 @@ func ASSettingsHelperOpenCredentialProviderAppSettingsWithCompletionHandler(comp
 	objc.ID(_clsASSettingsHelper).Send(_aSSettingsHelperSelOpenCredentialProviderAppSettingsWithCompletionHandler, __block_completionHandler)
 }
 
-// Calling this method will open the Settings app and navigate directly to the Verification Code provider settings.
+// Open the Settings app and navigate to the verification code provider settings.
 func ASSettingsHelperOpenVerificationCodeAppSettingsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

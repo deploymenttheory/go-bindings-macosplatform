@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webarchive
 type WebArchive struct {
 	foundation.NSObject
@@ -35,16 +37,16 @@ func WebArchiveFromID(id objc.ID) *WebArchive {
 	return o
 }
 
-// @method initWithMainResource:subresources:subframeArchives: @abstract The initializer for WebArchive. @param mainResource The main resource of the archive. @param subresources The subresources of the archive (can be nil). @param subframeArchives The archives representing the subframes of the archive (can be nil). @result An initialized WebArchive.
+// Initializes the receiver with a resource and optional subresources and subframe archives..
 func (o *WebArchive) InitWithMainResourceSubresourcesSubframeArchives(mainResource *WebResource, subresources *foundation.NSArray[objc.ID], subframeArchives *foundation.NSArray[objc.ID]) *WebArchive {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelInitWithMainResourceSubresourcesSubframeArchives, mainResource.Ptr(), subresources, subframeArchives)
+	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelInitWithMainResourceSubresourcesSubframeArchives, mainResource.Ptr(), subresources.Ptr(), subframeArchives.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return WebArchiveFromID(_ret)
 }
 
-// @method initWithData: @abstract The initializer for creating a WebArchive from data. @param data The data representing the archive. This can be obtained using WebArchive's data method. @result An initialized WebArchive.
+// Initializes and returns the receiver, specifying the initial content data.
 func (o *WebArchive) InitWithData(data *foundation.NSData) *WebArchive {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -64,14 +66,20 @@ func (o *WebArchive) MainResource() *WebResource {
 
 // @property subresources @abstract The subresource of the archive (can be nil).
 func (o *WebArchive) Subresources() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webArchiveSelSubresources)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelSubresources)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property subframeArchives @abstract The archives representing the subframes of the archive (can be nil).
 func (o *WebArchive) SubframeArchives() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webArchiveSelSubframeArchives)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelSubframeArchives)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property data @abstract The data representation of the archive. @discussion The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.

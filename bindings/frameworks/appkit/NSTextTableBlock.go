@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text block that appears as a cell in a text table.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstexttableblock
 type NSTextTableBlock struct {
 	NSTextBlock
@@ -34,6 +36,7 @@ func NSTextTableBlockFromID(id objc.ID) *NSTextTableBlock {
 	return o
 }
 
+// Returns an initialized text table block.
 func (o *NSTextTableBlock) InitWithTableStartingRowRowSpanStartingColumnColumnSpan(table *NSTextTable, row int, rowSpan int, col int, colSpan int) *NSTextTableBlock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTableBlockSelInitWithTableStartingRowRowSpanStartingColumnColumnSpan, table.Ptr(), row, rowSpan, col, colSpan)
 	if _ret != 0 {

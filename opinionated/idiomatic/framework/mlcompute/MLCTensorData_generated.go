@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An encapsulation of the memory that tensor data uses.
+//
 // TensorData wraps [raw.MLCTensorData] with a fluent Go API.
 type TensorData struct {
 	inner *raw.MLCTensorData

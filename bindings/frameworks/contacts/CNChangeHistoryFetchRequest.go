@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the criteria for fetching change history.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest
 type CNChangeHistoryFetchRequest struct {
 	CNFetchRequest
@@ -99,10 +101,13 @@ func (o *CNChangeHistoryFetchRequest) SetIncludeGroupChanges(includeGroupChanges
 
 // @abstract    Exclude changes made by certain authors. @discussion  If set, transactions made by the specified authors will be excluded from the results. Use this, in conjunction with @c CNSaveRequest.transactionAuthor, to suppress processing of changes you already know about.
 func (o *CNChangeHistoryFetchRequest) ExcludedTransactionAuthors() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cNChangeHistoryFetchRequestSelExcludedTransactionAuthors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryFetchRequestSelExcludedTransactionAuthors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CNChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransactionAuthors *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cNChangeHistoryFetchRequestSelSetExcludedTransactionAuthors, excludedTransactionAuthors)
+	o.Ptr().Send(_cNChangeHistoryFetchRequestSelSetExcludedTransactionAuthors, excludedTransactionAuthors.Ptr())
 }

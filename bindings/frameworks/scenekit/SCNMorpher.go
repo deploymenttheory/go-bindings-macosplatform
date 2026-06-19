@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages smooth transitions between a node’s base geometry and one or more target geometries.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnmorpher
 type SCNMorpher struct {
 	foundation.NSObject
@@ -41,12 +43,12 @@ func SCNMorpherFromID(id objc.ID) *SCNMorpher {
 	return o
 }
 
-// @method setWeight:forTargetAtIndex: @abstract Sets the weight for the target at the specified index. Animatable implicitly or explicitly with the keyPath "weights[index]" or "weights["targetName"]" (targetName is the name of the target geometry).
+// Specifies a weight value at a specified target index.
 func (o *SCNMorpher) SetWeightForTargetAtIndex(weight float64, targetIndex uint) {
 	o.Ptr().Send(_sCNMorpherSelSetWeightForTargetAtIndex, weight, targetIndex)
 }
 
-// @method weightForTargetAtIndex: @abstract Retrieves the weight for the target at the specified index.
+// Returns the weight value for the specified target index.
 func (o *SCNMorpher) WeightForTargetAtIndex(targetIndex uint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sCNMorpherSelWeightForTargetAtIndex, targetIndex)
 	return _ret
@@ -78,12 +80,15 @@ func (o *SCNMorpher) SetTargets(targets *foundation.NSArray[*SCNGeometry]) {
 
 // @property weights @abstract Access to all the weights of all the targets.
 func (o *SCNMorpher) Weights() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _sCNMorpherSelWeights)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMorpherSelWeights)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *SCNMorpher) SetWeights(weights *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_sCNMorpherSelSetWeights, weights)
+	o.Ptr().Send(_sCNMorpherSelSetWeights, weights.Ptr())
 }
 
 // @property calculationMode @abstract Specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.

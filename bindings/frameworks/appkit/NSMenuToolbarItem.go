@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that presents a menu in a window’s toolbar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmenutoolbaritem
 type NSMenuToolbarItem struct {
 	NSToolbarItem

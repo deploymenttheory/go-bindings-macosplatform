@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete class used to represent basic nodes in a Core Data incremental store.
+//
 // IncrementalStoreNode wraps [raw.NSIncrementalStoreNode] with a fluent Go API.
 type IncrementalStoreNode struct {
 	inner *raw.NSIncrementalStoreNode
@@ -31,6 +33,8 @@ func IncrementalStoreNodeFromID(id objc.ID) *IncrementalStoreNode {
 	return &IncrementalStoreNode{inner: raw.NSIncrementalStoreNodeFromID(id)}
 }
 
+// Returns an object initialized with the given values.
+//
 // NewIncrementalStoreNodeWithObjectIDWithValuesVersion creates a new [IncrementalStoreNode].
 func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *raw.NSManagedObjectID, values purego.IDer, version uint64) *IncrementalStoreNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIncrementalStoreNode")), objc.RegisterName("alloc"))
@@ -38,11 +42,15 @@ func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *raw.NSManage
 	return &IncrementalStoreNode{inner: raw.NSIncrementalStoreNodeFromID(_id)}
 }
 
+// Update the values and version to reflect new data being saved to or loaded from the external store.
+//
 // UpdateWithValuesVersion calls the underlying UpdateWithValuesVersion.
 func (x *IncrementalStoreNode) UpdateWithValuesVersion(values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) {
 	x.inner.UpdateWithValuesVersion(values, version)
 }
 
+// Returns the value for the given property.
+//
 // ValueForPropertyDescription calls the underlying ValueForPropertyDescription.
 func (x *IncrementalStoreNode) ValueForPropertyDescription(prop *raw.NSPropertyDescription) objc.ID {
 	return x.inner.ValueForPropertyDescription(prop)

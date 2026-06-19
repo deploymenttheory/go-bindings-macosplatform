@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about standard time conventions associated with a specific geopolitical region.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nstimezone
 type NSTimeZone struct {
 	NSObject
@@ -57,11 +59,13 @@ func NSTimeZoneFromID(id objc.ID) *NSTimeZone {
 	return o
 }
 
+// Returns the difference in seconds between the receiver and Greenwich Mean Time at a given date.
 func (o *NSTimeZone) SecondsFromGMTForDate(aDate *NSDate) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTimeZoneSelSecondsFromGMTForDate, aDate.Ptr())
 	return _ret
 }
 
+// Returns the abbreviation for the receiver at a given date.
 func (o *NSTimeZone) AbbreviationForDate(aDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelAbbreviationForDate, aDate.Ptr())
 	if _ret != 0 {
@@ -70,16 +74,19 @@ func (o *NSTimeZone) AbbreviationForDate(aDate *NSDate) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Indicates whether the receiver uses daylight saving time on a given date.
 func (o *NSTimeZone) IsDaylightSavingTimeForDate(aDate *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTimeZoneSelIsDaylightSavingTimeForDate, aDate.Ptr())
 	return _ret
 }
 
+// Returns the daylight saving time offset for a given date.
 func (o *NSTimeZone) DaylightSavingTimeOffsetForDate(aDate *NSDate) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTimeZoneSelDaylightSavingTimeOffsetForDate, aDate.Ptr())
 	return _ret
 }
 
+// Returns the next daylight saving time transition after a given date.
 func (o *NSTimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelNextDaylightSavingTimeTransitionAfterDate, aDate.Ptr())
 	if _ret != 0 {
@@ -104,6 +111,7 @@ func (o *NSTimeZone) Data() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Clears any time zone value cached for the systemTimeZone property.
 func NSTimeZoneResetSystemTimeZone() {
 	objc.ID(_clsNSTimeZone).Send(_nSTimeZoneSelResetSystemTimeZone)
 }
@@ -116,11 +124,13 @@ func NSTimeZoneAbbreviationDictionary() *NSDictionary[*NSString, *NSString] {
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
+// Indicates whether the receiver has the same name and data as the specified time zone.
 func (o *NSTimeZone) IsEqualToTimeZone(aTimeZone *NSTimeZone) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTimeZoneSelIsEqualToTimeZone, aTimeZone.Ptr())
 	return _ret
 }
 
+// Returns the localized name of the time zone.
 func (o *NSTimeZone) LocalizedNameLocale(style NSTimeZoneNameStyle, locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelLocalizedNameLocale, style, locale.Ptr())
 	if _ret != 0 {
@@ -208,6 +218,7 @@ func (o *NSTimeZone) NextDaylightSavingTimeTransition() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns the time zone object identified by a given identifier.
 func NSTimeZoneTimeZoneWithName(tzName *NSString) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneWithName, tzName.Ptr())
 	if _ret != 0 {
@@ -216,6 +227,7 @@ func NSTimeZoneTimeZoneWithName(tzName *NSString) *NSTimeZone {
 	return NSTimeZoneFromID(_ret)
 }
 
+// Returns the time zone with a given identifier whose data has been initialized using given data.
 func NSTimeZoneTimeZoneWithNameData(tzName *NSString, aData *NSData) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneWithNameData, tzName.Ptr(), aData.Ptr())
 	if _ret != 0 {
@@ -224,6 +236,7 @@ func NSTimeZoneTimeZoneWithNameData(tzName *NSString, aData *NSData) *NSTimeZone
 	return NSTimeZoneFromID(_ret)
 }
 
+// Returns a time zone initialized with a given identifier.
 func (o *NSTimeZone) InitWithName(tzName *NSString) *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelInitWithName, tzName.Ptr())
 	if _ret != 0 {
@@ -232,6 +245,7 @@ func (o *NSTimeZone) InitWithName(tzName *NSString) *NSTimeZone {
 	return NSTimeZoneFromID(_ret)
 }
 
+// Initializes a time zone with a given identifier and time zone data.
 func (o *NSTimeZone) InitWithNameData(tzName *NSString, aData *NSData) *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelInitWithNameData, tzName.Ptr(), aData.Ptr())
 	if _ret != 0 {
@@ -240,6 +254,7 @@ func (o *NSTimeZone) InitWithNameData(tzName *NSString, aData *NSData) *NSTimeZo
 	return NSTimeZoneFromID(_ret)
 }
 
+// Returns a time zone object offset from Greenwich Mean Time by a given number of seconds.
 func NSTimeZoneTimeZoneForSecondsFromGMT(seconds int) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneForSecondsFromGMT, seconds)
 	if _ret != 0 {
@@ -248,6 +263,7 @@ func NSTimeZoneTimeZoneForSecondsFromGMT(seconds int) *NSTimeZone {
 	return NSTimeZoneFromID(_ret)
 }
 
+// Returns the time zone object identified by a given abbreviation.
 func NSTimeZoneTimeZoneWithAbbreviation(abbreviation *NSString) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneWithAbbreviation, abbreviation.Ptr())
 	if _ret != 0 {

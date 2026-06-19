@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tube or pipe geometry—a right circular cylinder with a circular hole along its central axis.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scntube
 type SCNTube struct {
 	SCNGeometry
@@ -39,7 +41,7 @@ func SCNTubeFromID(id objc.ID) *SCNTube {
 	return o
 }
 
-// @method tubeWithInnerRadius:outerRadius:height: @abstract Creates and returns a tube with given inner radius, outer radius and height. @param innerRadius The inner radius of the tube. @param outerRadius The outer radius of the tube. @param height The height of the tube.
+// Creates a tube geometry with the specified inner radius, outer radius, and height.
 func SCNTubeTubeWithInnerRadiusOuterRadiusHeight(innerRadius float64, outerRadius float64, height float64) *SCNTube {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTube), _sCNTubeSelTubeWithInnerRadiusOuterRadiusHeight, innerRadius, outerRadius, height)
 	if _ret != 0 {

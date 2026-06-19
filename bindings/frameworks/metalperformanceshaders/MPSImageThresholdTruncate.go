@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that clamps the return value to an upper specified value.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtruncate
 type MPSImageThresholdTruncate struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,7 +37,7 @@ func MPSImageThresholdTruncateFromID(id objc.ID) *MPSImageThresholdTruncate {
 	return o
 }
 
-// @abstract   initialize a MPSImageThresholdTruncate filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
+// Initializes the kernel.
 func (o *MPSImageThresholdTruncate) InitWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *MPSImageThresholdTruncate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdTruncateSelInitWithDeviceThresholdValueLinearGrayColorTransform, device, thresholdValue, transform)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The value of a voice analysis metric.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfacousticfeature
 type SFAcousticFeature struct {
 	foundation.NSObject
@@ -33,8 +35,11 @@ func SFAcousticFeatureFromID(id objc.ID) *SFAcousticFeature {
 
 // An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.
 func (o *SFAcousticFeature) AcousticFeatureValuePerFrame() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _sFAcousticFeatureSelAcousticFeatureValuePerFrame)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFAcousticFeatureSelAcousticFeatureValuePerFrame)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The duration of the audio frame.

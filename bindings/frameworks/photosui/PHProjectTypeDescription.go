@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An extensible enumerator for PHProjectType that’s presented to users in the project picker.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojecttypedescription
 type PHProjectTypeDescription struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func PHProjectTypeDescriptionFromID(id objc.ID) *PHProjectTypeDescription {
 	return o
 }
 
-// Designated initalizer for instances with the full subtype hierarchy upfront.
+// A designated initializer for project type descriptions with the full subtype hierarchy specified up front and a standard string for description text.
 func (o *PHProjectTypeDescription) InitWithProjectTypeTitleDescriptionImageSubtypeDescriptions(projectType *foundation.NSString, localizedTitle *foundation.NSString, localizedDescription *foundation.NSString, image *appkit.NSImage, subtypeDescriptions *foundation.NSArray[*PHProjectTypeDescription]) *PHProjectTypeDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTypeDescriptionSelInitWithProjectTypeTitleDescriptionImageSubtypeDescriptions, projectType.Ptr(), localizedTitle.Ptr(), localizedDescription.Ptr(), image.Ptr(), subtypeDescriptions.Ptr())
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func (o *PHProjectTypeDescription) InitWithProjectTypeTitleDescriptionImageSubty
 	return PHProjectTypeDescriptionFromID(_ret)
 }
 
-// Designated initalizer for instances with the full subtype hierarchy upfront and an attributed string for the description text.
+// A designated initializer for project type descriptions with the full subtype hierarchy specified up front and an attributed string for description text.
 func (o *PHProjectTypeDescription) InitWithProjectTypeTitleAttributedDescriptionImageSubtypeDescriptions(projectType *foundation.NSString, localizedTitle *foundation.NSString, localizedAttributedDescription *foundation.NSAttributedString, image *appkit.NSImage, subtypeDescriptions *foundation.NSArray[*PHProjectTypeDescription]) *PHProjectTypeDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTypeDescriptionSelInitWithProjectTypeTitleAttributedDescriptionImageSubtypeDescriptions, projectType.Ptr(), localizedTitle.Ptr(), localizedAttributedDescription.Ptr(), image.Ptr(), subtypeDescriptions.Ptr())
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func (o *PHProjectTypeDescription) InitWithProjectTypeTitleAttributedDescription
 	return PHProjectTypeDescriptionFromID(_ret)
 }
 
-// Convenience initializer without subtype descriptions.
+// A convenience initializer without subtype descriptions.
 func (o *PHProjectTypeDescription) InitWithProjectTypeTitleDescriptionImage(projectType *foundation.NSString, localizedTitle *foundation.NSString, localizedDescription *foundation.NSString, image *appkit.NSImage) *PHProjectTypeDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTypeDescriptionSelInitWithProjectTypeTitleDescriptionImage, projectType.Ptr(), localizedTitle.Ptr(), localizedDescription.Ptr(), image.Ptr())
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *PHProjectTypeDescription) InitWithProjectTypeTitleDescriptionImage(proj
 	return PHProjectTypeDescriptionFromID(_ret)
 }
 
-// Designated initalizer for instances with lazily fetched subtypes.
+// A designated initializer for project type descriptions with lazily fetched subtypes and a standard description string.
 func (o *PHProjectTypeDescription) InitWithProjectTypeTitleDescriptionImageCanProvideSubtypes(projectType *foundation.NSString, localizedTitle *foundation.NSString, localizedDescription *foundation.NSString, image *appkit.NSImage, canProvideSubtypes bool) *PHProjectTypeDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTypeDescriptionSelInitWithProjectTypeTitleDescriptionImageCanProvideSubtypes, projectType.Ptr(), localizedTitle.Ptr(), localizedDescription.Ptr(), image.Ptr(), canProvideSubtypes)
 	if _ret != 0 {
@@ -78,7 +80,7 @@ func (o *PHProjectTypeDescription) InitWithProjectTypeTitleDescriptionImageCanPr
 	return PHProjectTypeDescriptionFromID(_ret)
 }
 
-// Designated initalizer for instances with lazily fetched subtypes and an attributed string for the description text.
+// A designated initializer for project type descriptions with lazily fetched subtypes and an attributed description string.
 func (o *PHProjectTypeDescription) InitWithProjectTypeTitleAttributedDescriptionImageCanProvideSubtypes(projectType *foundation.NSString, localizedTitle *foundation.NSString, localizedAttributedDescription *foundation.NSAttributedString, image *appkit.NSImage, canProvideSubtypes bool) *PHProjectTypeDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTypeDescriptionSelInitWithProjectTypeTitleAttributedDescriptionImageCanProvideSubtypes, projectType.Ptr(), localizedTitle.Ptr(), localizedAttributedDescription.Ptr(), image.Ptr(), canProvideSubtypes)
 	if _ret != 0 {

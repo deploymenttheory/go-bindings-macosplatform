@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together parameters for creating a command allocator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4commandallocatordescriptor
 type MTL4CommandAllocatorDescriptor struct {
 	foundation.NSObject

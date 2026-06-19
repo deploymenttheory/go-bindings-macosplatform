@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that contains the Markdown formatting for blocks of text, like paragraphs, lists, code blocks, and parts of tables.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspresentationintent
 type NSPresentationIntent struct {
 	NSObject
@@ -52,6 +54,7 @@ func NSPresentationIntentFromID(id objc.ID) *NSPresentationIntent {
 	return o
 }
 
+// Creates a paragraph intent with the provided information.
 func NSPresentationIntentParagraphIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelParagraphIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
 	if _ret != 0 {
@@ -60,6 +63,7 @@ func NSPresentationIntentParagraphIntentWithIdentityNestedInsideIntent(identity 
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a header intent with the provided information.
 func NSPresentationIntentHeaderIntentWithIdentityLevelNestedInsideIntent(identity int, level int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelHeaderIntentWithIdentityLevelNestedInsideIntent, identity, level, parent.Ptr())
 	if _ret != 0 {
@@ -68,6 +72,7 @@ func NSPresentationIntentHeaderIntentWithIdentityLevelNestedInsideIntent(identit
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates an code-block intent with the provided information.
 func NSPresentationIntentCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent(identity int, languageHint *NSString, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent, identity, languageHint.Ptr(), parent.Ptr())
 	if _ret != 0 {
@@ -76,6 +81,7 @@ func NSPresentationIntentCodeBlockIntentWithIdentityLanguageHintNestedInsideInte
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a thematic break intent with the provided information.
 func NSPresentationIntentThematicBreakIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelThematicBreakIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
 	if _ret != 0 {
@@ -84,6 +90,7 @@ func NSPresentationIntentThematicBreakIntentWithIdentityNestedInsideIntent(ident
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates an ordered-list intent with the provided information.
 func NSPresentationIntentOrderedListIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelOrderedListIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
 	if _ret != 0 {
@@ -92,6 +99,7 @@ func NSPresentationIntentOrderedListIntentWithIdentityNestedInsideIntent(identit
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates an unordered-list intent with the provided information.
 func NSPresentationIntentUnorderedListIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelUnorderedListIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
 	if _ret != 0 {
@@ -100,6 +108,7 @@ func NSPresentationIntentUnorderedListIntentWithIdentityNestedInsideIntent(ident
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates an item for an ordered list with the provided information.
 func NSPresentationIntentListItemIntentWithIdentityOrdinalNestedInsideIntent(identity int, ordinal int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelListItemIntentWithIdentityOrdinalNestedInsideIntent, identity, ordinal, parent.Ptr())
 	if _ret != 0 {
@@ -108,6 +117,7 @@ func NSPresentationIntentListItemIntentWithIdentityOrdinalNestedInsideIntent(ide
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a block-quote intent with the provided information.
 func NSPresentationIntentBlockQuoteIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelBlockQuoteIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
 	if _ret != 0 {
@@ -116,6 +126,7 @@ func NSPresentationIntentBlockQuoteIntentWithIdentityNestedInsideIntent(identity
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a table intent with the provided information.
 func NSPresentationIntentTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent(identity int, columnCount int, alignments *NSArray[*NSNumber], parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent, identity, columnCount, alignments.Ptr(), parent.Ptr())
 	if _ret != 0 {
@@ -124,6 +135,7 @@ func NSPresentationIntentTableIntentWithIdentityColumnCountAlignmentsNestedInsid
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a table header intent with the provided information.
 func NSPresentationIntentTableHeaderRowIntentWithIdentityNestedInsideIntent(identity int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableHeaderRowIntentWithIdentityNestedInsideIntent, identity, parent.Ptr())
 	if _ret != 0 {
@@ -132,6 +144,7 @@ func NSPresentationIntentTableHeaderRowIntentWithIdentityNestedInsideIntent(iden
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a table row intent with the provided information.
 func NSPresentationIntentTableRowIntentWithIdentityRowNestedInsideIntent(identity int, row int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableRowIntentWithIdentityRowNestedInsideIntent, identity, row, parent.Ptr())
 	if _ret != 0 {
@@ -140,6 +153,7 @@ func NSPresentationIntentTableRowIntentWithIdentityRowNestedInsideIntent(identit
 	return NSPresentationIntentFromID(_ret)
 }
 
+// Creates a table cell intent with the provided information.
 func NSPresentationIntentTableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column int, parent *NSPresentationIntent) *NSPresentationIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPresentationIntent), _nSPresentationIntentSelTableCellIntentWithIdentityColumnNestedInsideIntent, identity, column, parent.Ptr())
 	if _ret != 0 {
@@ -148,7 +162,7 @@ func NSPresentationIntentTableCellIntentWithIdentityColumnNestedInsideIntent(ide
 	return NSPresentationIntentFromID(_ret)
 }
 
-// Returns `YES` if this intent is equivalent to the other presentation intent. Equivalence is the same as equality except that identity is not taken into account.
+// Returns a Boolean value that indicates whether the current intent is equivalent to the specified intent.
 func (o *NSPresentationIntent) IsEquivalentToPresentationIntent(other *NSPresentationIntent) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPresentationIntentSelIsEquivalentToPresentationIntent, other.Ptr())
 	return _ret

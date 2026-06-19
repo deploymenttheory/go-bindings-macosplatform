@@ -54,7 +54,7 @@ func (o *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValues
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelQueryImageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelQueryImageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, unsafe.Pointer)) {
@@ -68,7 +68,7 @@ func (o *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpect
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOtaSoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
@@ -79,5 +79,5 @@ func (o *MTRClusterOtaSoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpec
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

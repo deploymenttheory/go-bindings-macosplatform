@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class describes a media item (a track) in the iTunes library, such as a song, a video, or a podcast.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibmediaitem
 type ITLibMediaItem struct {
 	ITLibMediaEntity

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that responds to user-initiated Picture in Picture playback of video in a floating, resizable window.
+//
 // Apple documentation: https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller
 type AVPictureInPictureController struct {
 	foundation.NSObject
@@ -49,13 +51,13 @@ func AVPictureInPictureControllerFromID(id objc.ID) *AVPictureInPictureControlle
 	return o
 }
 
-// @method		isPictureInPictureSupported @abstract	Whether or not Picture in Picture is supported on the current device. @discussion	When NO, all initializers will return nil.
+// Returns a Boolean value that indicates whether the current device supports Picture in Picture.
 func AVPictureInPictureControllerIsPictureInPictureSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsAVPictureInPictureController), _aVPictureInPictureControllerSelIsPictureInPictureSupported)
 	return _ret
 }
 
-// @method     initWithContentSource: @param      contentSource The content source to be shown in Picture in Picture. @abstract   Use this initializer for content that may be a sample buffer display layer or a player layer.
+// Creates a Picture in Picture controller with a content source.
 func (o *AVPictureInPictureController) InitWithContentSource(contentSource *AVPictureInPictureControllerContentSource) *AVPictureInPictureController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerSelInitWithContentSource, contentSource.Ptr())
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func (o *AVPictureInPictureController) InitWithContentSource(contentSource *AVPi
 	return AVPictureInPictureControllerFromID(_ret)
 }
 
-// @method		initWithPlayerLayer: @param		playerLayer The player layer from which to source the media content for the Picture in Picture controller. @abstract	Initialize the picture in picture controller with a player layer.
+// Creates a Picture in Picture controller with a player layer.
 func (o *AVPictureInPictureController) InitWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *AVPictureInPictureController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerSelInitWithPlayerLayer, playerLayer.Ptr())
 	if _ret != 0 {
@@ -73,12 +75,12 @@ func (o *AVPictureInPictureController) InitWithPlayerLayer(playerLayer *avfounda
 	return AVPictureInPictureControllerFromID(_ret)
 }
 
-// @method		startPictureInPicture @abstract	Start Picture in Picture for the provided AVPlayerLayer if possible. @discussion	Receiver will call -pictureInPictureControllerWillStartPictureInPicture: if Picture in Picture is currently possible and -pictureInPictureControllerDidStartPictureInPicture: after a successful start. If starting Picture in Picture fails, -pictureInPictureControllerFailedToStartPictureInPicture:withError: is called on the delegate instead. Client can stop Picture in Picture by calling -stopPictureInPicture. In addition the user can stop Picture in Picture through user interaction. It is also possible that Picture in Picture is stopped by the Picture in Picture controller at any time. In all these cases receiver calls -pictureInPictureControllerWillStopPictureInPicture: on the delegate and -pictureInPictureControllerDidStopPictureInPicture:after the stop animation completed.
+// Starts Picture in Picture, if possible.
 func (o *AVPictureInPictureController) StartPictureInPicture() {
 	o.Ptr().Send(_aVPictureInPictureControllerSelStartPictureInPicture)
 }
 
-// @method		stopPictureInPicture @abstract	Stop the local Picture in Picture if currently active. On tvOS, this can also stop Picture in Picture sessions for other applications. @discussion	See startPictureInPicture for details.
+// Stops Picture in Picture, if active.
 func (o *AVPictureInPictureController) StopPictureInPicture() {
 	o.Ptr().Send(_aVPictureInPictureControllerSelStopPictureInPicture)
 }
@@ -161,7 +163,7 @@ func (o *AVPictureInPictureController) SetRequiresLinearPlayback(requiresLinearP
 	o.Ptr().Send(_aVPictureInPictureControllerSelSetRequiresLinearPlayback, requiresLinearPlayback)
 }
 
-// @method		invalidatePlaybackState @abstract	Informs Picture in Picture controller that it should request an updated playback state from its sampleBufferPlaybackDelegate. @discussion	This should always be called whenever playback is paused or unpaused, or the underlying content duration changes.
+// Invalidates the controller’s current playback state and fetches the updated state from the sample buffer playback delegate object.
 func (o *AVPictureInPictureController) InvalidatePlaybackState() {
 	o.Ptr().Send(_aVPictureInPictureControllerSelInvalidatePlaybackState)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A logarithmic softmax kernel that operates on matrices.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixlogsoftmax
 type MPSMatrixLogSoftMax struct {
 	mpsmatrix.MPSMatrixSoftMax

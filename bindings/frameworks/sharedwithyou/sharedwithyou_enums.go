@@ -151,6 +151,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// The background styling of the attribution view’s contents.
 type SWAttributionViewBackgroundStyle int64
 
 const (
@@ -175,6 +176,7 @@ func (e SWAttributionViewBackgroundStyle) String() string {
 	}
 }
 
+// The context for the content that influences the ranking of this view’s highlight.
 type SWAttributionViewDisplayContext int64
 
 const (
@@ -195,6 +197,7 @@ func (e SWAttributionViewDisplayContext) String() string {
 	}
 }
 
+// The horizontal alignment of attribution view’s contents.
 type SWAttributionViewHorizontalAlignment int64
 
 const (
@@ -223,13 +226,18 @@ func (e SWAttributionViewHorizontalAlignment) String() string {
 	}
 }
 
+// The error codes for the highlight center.
 type SWHighlightCenterErrorCode int64
 
 const (
-	SWHighlightCenterErrorCodeNoError       SWHighlightCenterErrorCode = 0
+	// Reports no error.
+	SWHighlightCenterErrorCodeNoError SWHighlightCenterErrorCode = 0
+	// Reports an internal error.
 	SWHighlightCenterErrorCodeInternalError SWHighlightCenterErrorCode = 1
-	SWHighlightCenterErrorCodeInvalidURL    SWHighlightCenterErrorCode = 2
-	SWHighlightCenterErrorCodeAccessDenied  SWHighlightCenterErrorCode = 3
+	// Reports an invalid URL error.
+	SWHighlightCenterErrorCodeInvalidURL SWHighlightCenterErrorCode = 2
+	// Reports and access denied error.
+	SWHighlightCenterErrorCodeAccessDenied SWHighlightCenterErrorCode = 3
 )
 
 func (e SWHighlightCenterErrorCode) String() string {
@@ -247,10 +255,13 @@ func (e SWHighlightCenterErrorCode) String() string {
 	}
 }
 
+// The type of change event for the highlight
 type SWHighlightChangeEventTrigger int64
 
 const (
-	SWHighlightChangeEventTriggerEdit    SWHighlightChangeEventTrigger = 1
+	// Signifies a highlight edit.
+	SWHighlightChangeEventTriggerEdit SWHighlightChangeEventTrigger = 1
+	// Signifies a highlight comment.
 	SWHighlightChangeEventTriggerComment SWHighlightChangeEventTrigger = 2
 )
 
@@ -265,10 +276,13 @@ func (e SWHighlightChangeEventTrigger) String() string {
 	}
 }
 
+// The type of membership event for the highlight.
 type SWHighlightMembershipEventTrigger int64
 
 const (
-	SWHighlightMembershipEventTriggerAddedCollaborator   SWHighlightMembershipEventTrigger = 1
+	// Signifies the system added a collaborator.
+	SWHighlightMembershipEventTriggerAddedCollaborator SWHighlightMembershipEventTrigger = 1
+	// Signifies the system removed a collaborator.
 	SWHighlightMembershipEventTriggerRemovedCollaborator SWHighlightMembershipEventTrigger = 2
 )
 
@@ -283,13 +297,18 @@ func (e SWHighlightMembershipEventTrigger) String() string {
 	}
 }
 
+// Signifies the type of persistence event trigger.
 type SWHighlightPersistenceEventTrigger int64
 
 const (
+	// Signifies a creation event.
 	SWHighlightPersistenceEventTriggerCreated SWHighlightPersistenceEventTrigger = 1
+	// Signifies a deletion event.
 	SWHighlightPersistenceEventTriggerDeleted SWHighlightPersistenceEventTrigger = 2
+	// Signifies a rename event.
 	SWHighlightPersistenceEventTriggerRenamed SWHighlightPersistenceEventTrigger = 3
-	SWHighlightPersistenceEventTriggerMoved   SWHighlightPersistenceEventTrigger = 4
+	// Signifies a move event.
+	SWHighlightPersistenceEventTriggerMoved SWHighlightPersistenceEventTrigger = 4
 )
 
 func (e SWHighlightPersistenceEventTrigger) String() string {

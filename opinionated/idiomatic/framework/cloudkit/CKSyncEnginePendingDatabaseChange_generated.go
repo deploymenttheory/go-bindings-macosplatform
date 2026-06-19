@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an unsent database modification.
+//
 // SyncEnginePendingDatabaseChange wraps [raw.CKSyncEnginePendingDatabaseChange] with a fluent Go API.
 type SyncEnginePendingDatabaseChange struct {
 	inner *raw.CKSyncEnginePendingDatabaseChange

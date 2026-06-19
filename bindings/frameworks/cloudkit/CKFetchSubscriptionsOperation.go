@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation for fetching subscriptions.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchsubscriptionsoperation
 type CKFetchSubscriptionsOperation struct {
 	CKDatabaseOperation
@@ -40,7 +42,7 @@ func CKFetchSubscriptionsOperationFromID(id objc.ID) *CKFetchSubscriptionsOperat
 	return o
 }
 
-// Returns an operation that fetches all of the user's subscriptions. After creating the operation, set the “CKFetchSubscriptionsOperation/fetchSubscriptionCompletionBlock-207ep“ property to process the results.
+// Returns an operation that fetches all of the user’s subscriptions.
 func CKFetchSubscriptionsOperationFetchAllSubscriptionsOperation() *CKFetchSubscriptionsOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKFetchSubscriptionsOperation), _cKFetchSubscriptionsOperationSelFetchAllSubscriptionsOperation)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func CKFetchSubscriptionsOperationFetchAllSubscriptionsOperation() *CKFetchSubsc
 	return CKFetchSubscriptionsOperationFromID(_ret)
 }
 
-// Creates an empty fetch subscriptions operation. You must set the “CKFetchSubscriptionsOperation/subscriptionIDs-714ct“ property before you execute the operation.
+// Creates an empty fetch subscriptions operation.
 func (o *CKFetchSubscriptionsOperation) Init() *CKFetchSubscriptionsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchSubscriptionsOperationSelInit)
 	if _ret != 0 {
@@ -58,9 +60,9 @@ func (o *CKFetchSubscriptionsOperation) Init() *CKFetchSubscriptionsOperation {
 	return CKFetchSubscriptionsOperationFromID(_ret)
 }
 
-// Creates an operation for fetching the specified subscriptions. - Parameters: - subscriptionIDs: An array of strings where each one is an ID of a subscription that you want to retrieve. This parameter sets the “CKFetchSubscriptionsOperation/subscriptionIDs-714ct“ property's value. If you specify `nil`, you must set the `subscriptionIDs` property before you execute the operation. After creating the operation, assign a block to the “CKFetchSubscriptionsOperation/fetchSubscriptionCompletionBlock-207ep“ property to process the results.
+// Creates an operation for fetching the specified subscriptions.
 func (o *CKFetchSubscriptionsOperation) InitWithSubscriptionIDs(subscriptionIDs *foundation.NSArray[*foundation.NSString]) *CKFetchSubscriptionsOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchSubscriptionsOperationSelInitWithSubscriptionIDs, subscriptionIDs)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchSubscriptionsOperationSelInitWithSubscriptionIDs, subscriptionIDs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -69,12 +71,15 @@ func (o *CKFetchSubscriptionsOperation) InitWithSubscriptionIDs(subscriptionIDs 
 
 // The IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
 func (o *CKFetchSubscriptionsOperation) SubscriptionIDs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKFetchSubscriptionsOperationSelSubscriptionIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchSubscriptionsOperationSelSubscriptionIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKFetchSubscriptionsOperation) SetSubscriptionIDs(subscriptionIDs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKFetchSubscriptionsOperationSelSetSubscriptionIDs, subscriptionIDs)
+	o.Ptr().Send(_cKFetchSubscriptionsOperationSelSetSubscriptionIDs, subscriptionIDs.Ptr())
 }
 
 // The closure to execute as the operation fetches individual subscriptions. The closure returns no value and takes the following parameters: - The ID of the subscription. - The subscription, or `nil` if CloudKit can't fetch the subscription. - If CloudKit can't fetch the subscription, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each subscription ID in the “CKFetchSubscriptionsOperation/subscriptionIDs-714ct“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
@@ -106,6 +111,16 @@ func (o *CKFetchSubscriptionsOperation) FetchSubscriptionCompletionBlock() objc.
 	return _ret
 }
 
-func (o *CKFetchSubscriptionsOperation) SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block) {
-	o.Ptr().Send(_cKFetchSubscriptionsOperationSelSetFetchSubscriptionCompletionBlock, fetchSubscriptionCompletionBlock)
+func (o *CKFetchSubscriptionsOperation) SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock func(*foundation.NSDictionary[*foundation.NSString, *CKSubscription], unsafe.Pointer)) {
+	var __block_fetchSubscriptionCompletionBlock objc.Block
+	if fetchSubscriptionCompletionBlock != nil {
+		__block_fetchSubscriptionCompletionBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			fetchSubscriptionCompletionBlock(foundation.NSDictionaryFromID[*foundation.NSString, *CKSubscription](blockParam0), blockParam1)
+		})
+		defer __block_fetchSubscriptionCompletionBlock.Release()
+	}
+	o.Ptr().Send(_cKFetchSubscriptionsOperationSelSetFetchSubscriptionCompletionBlock, __block_fetchSubscriptionCompletionBlock)
 }

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that recognizes animals in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizeanimalsrequest
 type VNRecognizeAnimalsRequest struct {
 	VNImageBasedRequest
@@ -33,23 +35,29 @@ func VNRecognizeAnimalsRequestFromID(id objc.ID) *VNRecognizeAnimalsRequest {
 	return o
 }
 
-// @brief This class method returns a list of all animals supported by the recognition algorithm @details This request will generate a collection of names for supported animals by current recognition algorithm.
+// Returns a list of animal identifiers the recognition algorithm supports for the specified revision.
 // Deprecated: since macOS 12.0.
 func VNRecognizeAnimalsRequestKnownAnimalIdentifiersForRevisionError(requestRevision uint) (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNRecognizeAnimalsRequest), _vNRecognizeAnimalsRequestSelKnownAnimalIdentifiersForRevisionError, requestRevision, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsVNRecognizeAnimalsRequest), _vNRecognizeAnimalsRequestSelKnownAnimalIdentifiersForRevisionError, requestRevision, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of identifiers supported by the target request. @discussion This method will return the collection of all possible classification identifiers that are produced by the target request based on its current state of configuration at the time of the call. @param error The address of the variable that will be populated with the error if the call fails. @return The collection of classification identifiers, or nil if a failure occurs.
+// Returns the identifiers of the animals that the request detects.
 func (o *VNRecognizeAnimalsRequest) SupportedIdentifiersAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizeAnimalsRequestSelSupportedIdentifiersAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizeAnimalsRequestSelSupportedIdentifiersAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }

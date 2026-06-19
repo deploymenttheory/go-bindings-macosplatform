@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.
+//
 // AssetResource wraps [raw.PHAssetResource] with a fluent Go API.
 type AssetResource struct {
 	inner *raw.PHAssetResource

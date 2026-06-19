@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class responsible for displaying a lock icon that can be used to indicate that a user interface has restricted access.
+//
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfauthorizationview
 type SFAuthorizationView struct {
 	appkit.NSView
@@ -46,23 +48,23 @@ func SFAuthorizationViewFromID(id objc.ID) *SFAuthorizationView {
 	return o
 }
 
-// @method setString: @abstract A convenience method to specify an authorization rights set containing a single item with the name set to the specified string. @param authorizationString Authorization string.
+// Sets the requested-right string to use with the default authorization rights set.
 func (o *SFAuthorizationView) SetString(authorizationString string) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetString, authorizationString)
 }
 
-// @method setAuthorizationRights: @abstract Sets the authorization rights for this view. @param authorizationRights Authorization rights.
+// Sets the authorization rights for this view.
 func (o *SFAuthorizationView) SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetAuthorizationRights, authorizationRights)
 }
 
-// @method authorizationRights @abstract Returns the authorization rights for this view.
+// Returns the authorization rights for this view.
 func (o *SFAuthorizationView) AuthorizationRights() *security.AuthorizationItemSet {
 	_ret := objc.Send[*security.AuthorizationItemSet](o.Ptr(), _sFAuthorizationViewSelAuthorizationRights)
 	return _ret
 }
 
-// @method authorization @abstract Returns the authorization object associated with this view.
+// Returns the authorization object associated with this view.
 func (o *SFAuthorizationView) Authorization() *securityfoundation.SFAuthorization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelAuthorization)
 	if _ret != 0 {
@@ -71,62 +73,62 @@ func (o *SFAuthorizationView) Authorization() *securityfoundation.SFAuthorizatio
 	return securityfoundation.SFAuthorizationFromID(_ret)
 }
 
-// @method updateStatus: @abstract This method is called when the state of the authorization object has changed. @param inSender The action that is marked for updateStatus.
+// Manually updates the authorization view.
 func (o *SFAuthorizationView) UpdateStatus(inSender objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelUpdateStatus, inSender)
 	return _ret
 }
 
-// @method setAutoupdate:
+// Sets the authorization view to update itself automatically.
 func (o *SFAuthorizationView) SetAutoupdate(autoupdate bool) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetAutoupdate, autoupdate)
 }
 
-// @method setAutoUpdate:interval:
+// Sets the authorization view to update itself at a specific interval.
 func (o *SFAuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetAutoupdateInterval, autoupdate, interval)
 }
 
-// @method authorizationState @abstract Returns the current state of the authorization view.
+// Returns the current state of the authorization view.
 func (o *SFAuthorizationView) AuthorizationState() SFAuthorizationViewState {
 	_ret := objc.Send[SFAuthorizationViewState](o.Ptr(), _sFAuthorizationViewSelAuthorizationState)
 	return _ret
 }
 
-// @method setEnabled: @abstract Sets the current state of the authorization view. @param enabled Enable flag.
+// Sets the current state of the authorization view.
 func (o *SFAuthorizationView) SetEnabled(enabled bool) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetEnabled, enabled)
 }
 
-// @method isEnabled @abstract Indicates if the authorization view is enabled or disabled.
+// Indicates whether the authorization view is enabled (true) or disabled (false).
 func (o *SFAuthorizationView) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelIsEnabled)
 	return _ret
 }
 
-// @method setFlags: @abstract Sets the current authorization flags for the view. @param flags Authorization flags.
+// Sets the current authorization flags for the view.
 func (o *SFAuthorizationView) SetFlags(flags security.AuthorizationFlags) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetFlags, flags)
 }
 
-// @method setDelegate: @abstract Sets the delegate for this authorization view. If you want to hear state changes (for example, the user clicked the button), set your delegate and implement the delegate methods mentioned for SFAuthorizationViewDelegate @param delegate The client's delegate object.
+// Sets the delegate for this authorization view.
 func (o *SFAuthorizationView) SetDelegate(delegate objc.ID) {
 	o.Ptr().Send(_sFAuthorizationViewSelSetDelegate, delegate)
 }
 
-// @method delegate @abstract
+// Returns the delegate for this view.
 func (o *SFAuthorizationView) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelDelegate)
 	return _ret
 }
 
-// @method authorize: @abstract
+// Attempts to unlock the lock icon in the view.
 func (o *SFAuthorizationView) Authorize(inSender objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelAuthorize, inSender)
 	return _ret
 }
 
-// @method deauthorize: @abstract
+// Sets the authorization state to unauthorized and locks the lock icon in the view.
 func (o *SFAuthorizationView) Deauthorize(inSender objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelDeauthorize, inSender)
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that mediates resource requests from a URL asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetresourceloader
 type AVAssetResourceLoader struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func AVAssetResourceLoaderFromID(id objc.ID) *AVAssetResourceLoader {
 	return o
 }
 
-// @method 		setDelegate:queue: @abstract		Sets the receiver's delegate that will mediate resource loading and the dispatch queue on which delegate methods will be invoked. @param			delegate An object conforming to the AVAssetResourceLoaderDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be invoked. @discussion If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES — its default value — when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface. You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback.
+// Sets the delegate and dispatch queue to use with the resource loader.
 func (o *AVAssetResourceLoader) SetDelegateQueue(delegate AVAssetResourceLoaderDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVAssetResourceLoaderSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that deletes objects in the SQLite persistent store without loading them into memory.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsbatchdeleterequest
 type NSBatchDeleteRequest struct {
 	NSPersistentStoreRequest
@@ -34,14 +36,16 @@ func NSBatchDeleteRequestFromID(id objc.ID) *NSBatchDeleteRequest {
 	return o
 }
 
+// Creates a request that deletes the results of the specified fetch request.
 func (o *NSBatchDeleteRequest) InitWithFetchRequest(fetch *NSFetchRequest[objc.ID]) *NSBatchDeleteRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchDeleteRequestSelInitWithFetchRequest, fetch)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchDeleteRequestSelInitWithFetchRequest, fetch.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSBatchDeleteRequestFromID(_ret)
 }
 
+// Creates a request that deletes the managed objects with the specified identifiers.
 func (o *NSBatchDeleteRequest) InitWithObjectIDs(objects *foundation.NSArray[*NSManagedObjectID]) *NSBatchDeleteRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchDeleteRequestSelInitWithObjectIDs, objects.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,9 @@ func (o *NSBatchDeleteRequest) SetResultType(resultType NSBatchDeleteRequestResu
 }
 
 func (o *NSBatchDeleteRequest) FetchRequest() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](o.Ptr(), _nSBatchDeleteRequestSelFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchDeleteRequestSelFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }

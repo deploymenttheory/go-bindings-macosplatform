@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for image-analysis requests that align images according to their content.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnimageregistrationrequest
 type VNImageRegistrationRequest struct {
 	VNTargetedImageRequest

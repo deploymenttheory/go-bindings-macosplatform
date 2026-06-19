@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for representing and performing arithmetic on base-10 numbers.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdecimalnumber
 type NSDecimalNumber struct {
 	NSNumber
@@ -56,6 +58,7 @@ func NSDecimalNumberFromID(id objc.ID) *NSDecimalNumber {
 	return o
 }
 
+// Initializes a decimal number using the given mantissa, exponent, and sign.
 func (o *NSDecimalNumber) InitWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithMantissaExponentIsNegative, mantissa, exponent, flag)
 	if _ret != 0 {
@@ -64,6 +67,7 @@ func (o *NSDecimalNumber) InitWithMantissaExponentIsNegative(mantissa uint64, ex
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Initializes a decimal number to represent a given decimal.
 func (o *NSDecimalNumber) InitWithDecimal(dcm NSDecimal) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithDecimal, dcm)
 	if _ret != 0 {
@@ -72,6 +76,7 @@ func (o *NSDecimalNumber) InitWithDecimal(dcm NSDecimal) *NSDecimalNumber {
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Initializes a decimal number so that its value is equivalent to that in a given numeric string.
 func (o *NSDecimalNumber) InitWithString(numberValue *NSString) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithString, numberValue.Ptr())
 	if _ret != 0 {
@@ -80,6 +85,7 @@ func (o *NSDecimalNumber) InitWithString(numberValue *NSString) *NSDecimalNumber
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
 func (o *NSDecimalNumber) InitWithStringLocale(numberValue *NSString, locale objc.ID) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelInitWithStringLocale, numberValue.Ptr(), locale)
 	if _ret != 0 {
@@ -88,6 +94,7 @@ func (o *NSDecimalNumber) InitWithStringLocale(numberValue *NSString, locale obj
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Creates and returns a decimal number equivalent to the number specified by the arguments.
 func NSDecimalNumberDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithMantissaExponentIsNegative, mantissa, exponent, flag)
 	if _ret != 0 {
@@ -96,6 +103,7 @@ func NSDecimalNumberDecimalNumberWithMantissaExponentIsNegative(mantissa uint64,
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Creates and returns a decimal number equivalent to a given decimal structure.
 func NSDecimalNumberDecimalNumberWithDecimal(dcm NSDecimal) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithDecimal, dcm)
 	if _ret != 0 {
@@ -104,6 +112,7 @@ func NSDecimalNumberDecimalNumberWithDecimal(dcm NSDecimal) *NSDecimalNumber {
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Creates a decimal number whose value is equivalent to that in a given numeric string.
 func NSDecimalNumberDecimalNumberWithString(numberValue *NSString) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithString, numberValue.Ptr())
 	if _ret != 0 {
@@ -112,6 +121,7 @@ func NSDecimalNumberDecimalNumberWithString(numberValue *NSString) *NSDecimalNum
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Creates a decimal number whose value is equivalent to that in a given numeric string, interpreted using a given locale.
 func NSDecimalNumberDecimalNumberWithStringLocale(numberValue *NSString, locale objc.ID) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumber), _nSDecimalNumberSelDecimalNumberWithStringLocale, numberValue.Ptr(), locale)
 	if _ret != 0 {
@@ -120,6 +130,7 @@ func NSDecimalNumberDecimalNumberWithStringLocale(numberValue *NSString, locale 
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Adds this number to another given number.
 func (o *NSDecimalNumber) DecimalNumberByAdding(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByAdding, decimalNumber.Ptr())
 	if _ret != 0 {
@@ -128,6 +139,7 @@ func (o *NSDecimalNumber) DecimalNumberByAdding(decimalNumber *NSDecimalNumber) 
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Adds this number to another given number using the specified behavior.
 func (o *NSDecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByAddingWithBehavior, decimalNumber.Ptr(), behavior)
 	if _ret != 0 {
@@ -136,6 +148,7 @@ func (o *NSDecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *NSDec
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Subtracts another given number from this one.
 func (o *NSDecimalNumber) DecimalNumberBySubtracting(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberBySubtracting, decimalNumber.Ptr())
 	if _ret != 0 {
@@ -144,6 +157,7 @@ func (o *NSDecimalNumber) DecimalNumberBySubtracting(decimalNumber *NSDecimalNum
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Subtracts this a given number from this one using the specified behavior.
 func (o *NSDecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberBySubtractingWithBehavior, decimalNumber.Ptr(), behavior)
 	if _ret != 0 {
@@ -152,6 +166,7 @@ func (o *NSDecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Multiplies the number by another given number.
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingBy, decimalNumber.Ptr())
 	if _ret != 0 {
@@ -160,6 +175,7 @@ func (o *NSDecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *NSDecimalN
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Multiplies this number by another given number using the specified behavior.
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingByWithBehavior, decimalNumber.Ptr(), behavior)
 	if _ret != 0 {
@@ -168,6 +184,7 @@ func (o *NSDecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Divides the number by another given number.
 func (o *NSDecimalNumber) DecimalNumberByDividingBy(decimalNumber *NSDecimalNumber) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByDividingBy, decimalNumber.Ptr())
 	if _ret != 0 {
@@ -176,6 +193,7 @@ func (o *NSDecimalNumber) DecimalNumberByDividingBy(decimalNumber *NSDecimalNumb
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Divides this number by another given number using the specified behavior.
 func (o *NSDecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *NSDecimalNumber, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByDividingByWithBehavior, decimalNumber.Ptr(), behavior)
 	if _ret != 0 {
@@ -184,6 +202,7 @@ func (o *NSDecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *N
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Raises the number to a given power.
 func (o *NSDecimalNumber) DecimalNumberByRaisingToPower(power uint) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByRaisingToPower, power)
 	if _ret != 0 {
@@ -192,6 +211,7 @@ func (o *NSDecimalNumber) DecimalNumberByRaisingToPower(power uint) *NSDecimalNu
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Raises the number to a given power using the specified behavior.
 func (o *NSDecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByRaisingToPowerWithBehavior, power, behavior)
 	if _ret != 0 {
@@ -200,6 +220,7 @@ func (o *NSDecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, 
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Multiplies the number by 10 raised to the given power.
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10, power)
 	if _ret != 0 {
@@ -208,6 +229,7 @@ func (o *NSDecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *NS
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Multiplies the number by 10 raised to the given power using the specified behavior.
 func (o *NSDecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByMultiplyingByPowerOf10WithBehavior, power, behavior)
 	if _ret != 0 {
@@ -216,6 +238,7 @@ func (o *NSDecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(powe
 	return NSDecimalNumberFromID(_ret)
 }
 
+// Returns a rounded version of the decimal number using the specified rounding behavior.
 func (o *NSDecimalNumber) DecimalNumberByRoundingAccordingToBehavior(behavior NSDecimalNumberBehaviors) *NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberSelDecimalNumberByRoundingAccordingToBehavior, behavior)
 	if _ret != 0 {

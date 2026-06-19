@@ -8,10 +8,13 @@ import (
 	"strings"
 )
 
+// Constants that specify the value measured by the Move ring on the user’s device.
 type HKActivityMoveMode int64
 
 const (
-	HKActivityMoveModeActiveEnergy  HKActivityMoveMode = 1
+	// A value that indicates the Move ring measures active energy burned.
+	HKActivityMoveModeActiveEnergy HKActivityMoveMode = 1
+	// A value that indicates the Activity app’s Move ring measures Apple Move Time.
 	HKActivityMoveModeAppleMoveTime HKActivityMoveMode = 2
 )
 
@@ -26,10 +29,13 @@ func (e HKActivityMoveMode) String() string {
 	}
 }
 
+// Version numbers for the algorithm Apple Watch uses to generate an ECG reading.
 type HKAppleECGAlgorithmVersion int64
 
 const (
+	// The version 1 algorithm.
 	HKAppleECGAlgorithmVersion1 HKAppleECGAlgorithmVersion = 1
+	// The version 2 algorithm.
 	HKAppleECGAlgorithmVersion2 HKAppleECGAlgorithmVersion = 2
 )
 
@@ -62,11 +68,15 @@ func (e HKAppleSleepingBreathingDisturbancesClassification) String() string {
 	}
 }
 
+// A classification of a score based on the steadiness of the user’s gait.
 type HKAppleWalkingSteadinessClassification int64
 
 const (
-	HKAppleWalkingSteadinessClassificationOK      HKAppleWalkingSteadinessClassification = 1
-	HKAppleWalkingSteadinessClassificationLow     HKAppleWalkingSteadinessClassification = 2
+	// A classification indicating that the stability of the user’s gait is within the normal range.
+	HKAppleWalkingSteadinessClassificationOK HKAppleWalkingSteadinessClassification = 1
+	// A classification indicating that the stability of the user’s gate is below normal.
+	HKAppleWalkingSteadinessClassificationLow HKAppleWalkingSteadinessClassification = 2
+	// A classification indicating that the stability of the user’s gate is considerably below normal.
 	HKAppleWalkingSteadinessClassificationVeryLow HKAppleWalkingSteadinessClassification = 3
 )
 
@@ -116,12 +126,16 @@ func (e HKAudiogramSensitivityTestSide) String() string {
 	}
 }
 
+// Values that indicate whether your app needs to request authorization from the user.
 type HKAuthorizationRequestStatus int64
 
 const (
-	HKAuthorizationRequestStatusUnknown       HKAuthorizationRequestStatus = 0
+	// The authorization request status could not be determined because an error occurred.
+	HKAuthorizationRequestStatusUnknown HKAuthorizationRequestStatus = 0
+	// The application has not yet requested authorization for all the specified data types.
 	HKAuthorizationRequestStatusShouldRequest HKAuthorizationRequestStatus = 1
-	HKAuthorizationRequestStatusUnnecessary   HKAuthorizationRequestStatus = 2
+	// The application has already requested authorization for all the specified data types.
+	HKAuthorizationRequestStatusUnnecessary HKAuthorizationRequestStatus = 2
 )
 
 func (e HKAuthorizationRequestStatus) String() string {
@@ -137,11 +151,15 @@ func (e HKAuthorizationRequestStatus) String() string {
 	}
 }
 
+// Constants indicating the authorization status for a particular data type.
 type HKAuthorizationStatus int64
 
 const (
-	HKAuthorizationStatusNotDetermined     HKAuthorizationStatus = 0
-	HKAuthorizationStatusSharingDenied     HKAuthorizationStatus = 1
+	// The user has not yet chosen to authorize access to the specified data type.
+	HKAuthorizationStatusNotDetermined HKAuthorizationStatus = 0
+	// The user has explicitly denied your app permission to save data of the specified type.
+	HKAuthorizationStatusSharingDenied HKAuthorizationStatus = 1
+	// The user has explicitly authorized your app to save data of the specified type.
 	HKAuthorizationStatusSharingAuthorized HKAuthorizationStatus = 2
 )
 
@@ -158,13 +176,18 @@ func (e HKAuthorizationStatus) String() string {
 	}
 }
 
+// Constants indicating the user’s sex.
 type HKBiologicalSex int64
 
 const (
+	// A constant indicating that either the user’s biological sex characteristic type is not set, or the user has not granted your app permission to read that characteristic type.
 	HKBiologicalSexNotSet HKBiologicalSex = 0
+	// A constant indicating that the user is female.
 	HKBiologicalSexFemale HKBiologicalSex = 1
-	HKBiologicalSexMale   HKBiologicalSex = 2
-	HKBiologicalSexOther  HKBiologicalSex = 3
+	// A constant indicating that the user is male.
+	HKBiologicalSexMale HKBiologicalSex = 2
+	// A constant indicating that the user is otherwise not categorized as either male or female.
+	HKBiologicalSexOther HKBiologicalSex = 3
 )
 
 func (e HKBiologicalSex) String() string {
@@ -182,10 +205,13 @@ func (e HKBiologicalSex) String() string {
 	}
 }
 
+// Constants indicating the timing of a blood glucose sample relative to a meal.
 type HKBloodGlucoseMealTime int64
 
 const (
-	HKBloodGlucoseMealTimePreprandial  HKBloodGlucoseMealTime = 1
+	// A blood glucose sample taken just before eating a meal.
+	HKBloodGlucoseMealTimePreprandial HKBloodGlucoseMealTime = 1
+	// A blood glucose sample taken just after eating a meal.
 	HKBloodGlucoseMealTimePostprandial HKBloodGlucoseMealTime = 2
 )
 
@@ -200,18 +226,28 @@ func (e HKBloodGlucoseMealTime) String() string {
 	}
 }
 
+// Constants indicating the user’s blood type.
 type HKBloodType int64
 
 const (
-	HKBloodTypeNotSet     HKBloodType = 0
-	HKBloodTypeAPositive  HKBloodType = 1
-	HKBloodTypeANegative  HKBloodType = 2
-	HKBloodTypeBPositive  HKBloodType = 3
-	HKBloodTypeBNegative  HKBloodType = 4
+	// Either the user’s blood type is not set, or the user has not granted your app permission to read the blood type.
+	HKBloodTypeNotSet HKBloodType = 0
+	// The user has an A+ blood type.
+	HKBloodTypeAPositive HKBloodType = 1
+	// The user has an A– blood type.
+	HKBloodTypeANegative HKBloodType = 2
+	// The user has an B+ blood type.
+	HKBloodTypeBPositive HKBloodType = 3
+	// The user has an B– blood type.
+	HKBloodTypeBNegative HKBloodType = 4
+	// The user has an AB+ blood type.
 	HKBloodTypeABPositive HKBloodType = 5
+	// The user has an AB– blood type.
 	HKBloodTypeABNegative HKBloodType = 6
-	HKBloodTypeOPositive  HKBloodType = 7
-	HKBloodTypeONegative  HKBloodType = 8
+	// The user has an O+ blood type.
+	HKBloodTypeOPositive HKBloodType = 7
+	// The user has an O– blood type.
+	HKBloodTypeONegative HKBloodType = 8
 )
 
 func (e HKBloodType) String() string {
@@ -239,21 +275,34 @@ func (e HKBloodType) String() string {
 	}
 }
 
+// Constants that indicate where on the body a temperature reading was taken.
 type HKBodyTemperatureSensorLocation int64
 
 const (
-	HKBodyTemperatureSensorLocationOther            HKBodyTemperatureSensorLocation = 0
-	HKBodyTemperatureSensorLocationArmpit           HKBodyTemperatureSensorLocation = 1
-	HKBodyTemperatureSensorLocationBody             HKBodyTemperatureSensorLocation = 2
-	HKBodyTemperatureSensorLocationEar              HKBodyTemperatureSensorLocation = 3
-	HKBodyTemperatureSensorLocationFinger           HKBodyTemperatureSensorLocation = 4
+	// The temperature was taken at a location that is not otherwise in this list.
+	HKBodyTemperatureSensorLocationOther HKBodyTemperatureSensorLocation = 0
+	// The temperature was taken in the armpit.
+	HKBodyTemperatureSensorLocationArmpit HKBodyTemperatureSensorLocation = 1
+	// The temperature was taken on the body.
+	HKBodyTemperatureSensorLocationBody HKBodyTemperatureSensorLocation = 2
+	// The temperature was taken in the ear.
+	HKBodyTemperatureSensorLocationEar HKBodyTemperatureSensorLocation = 3
+	// The temperature was taken at the finger.
+	HKBodyTemperatureSensorLocationFinger HKBodyTemperatureSensorLocation = 4
+	// The temperature was taken inside the gastrointestinal tract.
 	HKBodyTemperatureSensorLocationGastroIntestinal HKBodyTemperatureSensorLocation = 5
-	HKBodyTemperatureSensorLocationMouth            HKBodyTemperatureSensorLocation = 6
-	HKBodyTemperatureSensorLocationRectum           HKBodyTemperatureSensorLocation = 7
-	HKBodyTemperatureSensorLocationToe              HKBodyTemperatureSensorLocation = 8
-	HKBodyTemperatureSensorLocationEarDrum          HKBodyTemperatureSensorLocation = 9
-	HKBodyTemperatureSensorLocationTemporalArtery   HKBodyTemperatureSensorLocation = 10
-	HKBodyTemperatureSensorLocationForehead         HKBodyTemperatureSensorLocation = 11
+	// The temperature was taken in the mouth.
+	HKBodyTemperatureSensorLocationMouth HKBodyTemperatureSensorLocation = 6
+	// The temperature was taken in the rectum.
+	HKBodyTemperatureSensorLocationRectum HKBodyTemperatureSensorLocation = 7
+	// The temperature was taken at the toe.
+	HKBodyTemperatureSensorLocationToe HKBodyTemperatureSensorLocation = 8
+	// The temperature was taken on the eardrum.
+	HKBodyTemperatureSensorLocationEarDrum HKBodyTemperatureSensorLocation = 9
+	// The temperature was taken at the temporal artery.
+	HKBodyTemperatureSensorLocationTemporalArtery HKBodyTemperatureSensorLocation = 10
+	// The temperature was taken on the forehead.
+	HKBodyTemperatureSensorLocationForehead HKBodyTemperatureSensorLocation = 11
 )
 
 func (e HKBodyTemperatureSensorLocation) String() string {
@@ -287,9 +336,11 @@ func (e HKBodyTemperatureSensorLocation) String() string {
 	}
 }
 
+// Categories that are undefined.
 type HKCategoryValue int64
 
 const (
+	// A category value for types that don’t have a defined value.
 	HKCategoryValueNotApplicable HKCategoryValue = 0
 )
 
@@ -302,13 +353,18 @@ func (e HKCategoryValue) String() string {
 	}
 }
 
+// Categories that represent change in appetite.
 type HKCategoryValueAppetiteChanges int64
 
 const (
+	// An unspecified change in appetite.
 	HKCategoryValueAppetiteChangesUnspecified HKCategoryValueAppetiteChanges = 0
-	HKCategoryValueAppetiteChangesNoChange    HKCategoryValueAppetiteChanges = 1
-	HKCategoryValueAppetiteChangesDecreased   HKCategoryValueAppetiteChanges = 2
-	HKCategoryValueAppetiteChangesIncreased   HKCategoryValueAppetiteChanges = 3
+	// No change in the user’s appetite.
+	HKCategoryValueAppetiteChangesNoChange HKCategoryValueAppetiteChanges = 1
+	// The user’s appetite decreased.
+	HKCategoryValueAppetiteChangesDecreased HKCategoryValueAppetiteChanges = 2
+	// The user’s appetite increased.
+	HKCategoryValueAppetiteChangesIncreased HKCategoryValueAppetiteChanges = 3
 )
 
 func (e HKCategoryValueAppetiteChanges) String() string {
@@ -326,11 +382,14 @@ func (e HKCategoryValueAppetiteChanges) String() string {
 	}
 }
 
+// Categories that the system used to indicate whether the user stood during the sample’s duration.
 type HKCategoryValueAppleStandHour int64
 
 const (
+	// The user stood up and moved for at least one continuous minute during the sample.
 	HKCategoryValueAppleStandHourStood HKCategoryValueAppleStandHour = 0
-	HKCategoryValueAppleStandHourIdle  HKCategoryValueAppleStandHour = 1
+	// The user didn’t stand up and move for at least one continuous minute during the sample.
+	HKCategoryValueAppleStandHourIdle HKCategoryValueAppleStandHour = 1
 )
 
 func (e HKCategoryValueAppleStandHour) String() string {
@@ -344,13 +403,18 @@ func (e HKCategoryValueAppleStandHour) String() string {
 	}
 }
 
+// The value of an event triggered by a reduced score for the steadiness of the user’s gait.
 type HKCategoryValueAppleWalkingSteadinessEvent int64
 
 const (
-	HKCategoryValueAppleWalkingSteadinessEventInitialLow     HKCategoryValueAppleWalkingSteadinessEvent = 1
+	// The user received a below-normal steadiness score for their gait while walking.
+	HKCategoryValueAppleWalkingSteadinessEventInitialLow HKCategoryValueAppleWalkingSteadinessEvent = 1
+	// The user received a steadiness score for their gait while walking that was considerably below normal.
 	HKCategoryValueAppleWalkingSteadinessEventInitialVeryLow HKCategoryValueAppleWalkingSteadinessEvent = 2
-	HKCategoryValueAppleWalkingSteadinessEventRepeatLow      HKCategoryValueAppleWalkingSteadinessEvent = 3
-	HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow  HKCategoryValueAppleWalkingSteadinessEvent = 4
+	// The user’s below-normal score persists over a significant period of time.
+	HKCategoryValueAppleWalkingSteadinessEventRepeatLow HKCategoryValueAppleWalkingSteadinessEvent = 3
+	// The user’s considerably below-normal score persists over a significant period of time.
+	HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow HKCategoryValueAppleWalkingSteadinessEvent = 4
 )
 
 func (e HKCategoryValueAppleWalkingSteadinessEvent) String() string {
@@ -368,9 +432,11 @@ func (e HKCategoryValueAppleWalkingSteadinessEvent) String() string {
 	}
 }
 
+// Categories that indicate audio exposure events.
 type HKCategoryValueAudioExposureEvent int64
 
 const (
+	// Exposure to a loud environment.
 	HKCategoryValueAudioExposureEventLoudEnvironment HKCategoryValueAudioExposureEvent = 1
 )
 
@@ -383,13 +449,19 @@ func (e HKCategoryValueAudioExposureEvent) String() string {
 	}
 }
 
+// Categories that represent the user’s cervical mucus quality.
 type HKCategoryValueCervicalMucusQuality int64
 
 const (
-	HKCategoryValueCervicalMucusQualityDry      HKCategoryValueCervicalMucusQuality = 1
-	HKCategoryValueCervicalMucusQualitySticky   HKCategoryValueCervicalMucusQuality = 2
-	HKCategoryValueCervicalMucusQualityCreamy   HKCategoryValueCervicalMucusQuality = 3
-	HKCategoryValueCervicalMucusQualityWatery   HKCategoryValueCervicalMucusQuality = 4
+	// Little or no mucus.
+	HKCategoryValueCervicalMucusQualityDry HKCategoryValueCervicalMucusQuality = 1
+	// Sticky mucus.
+	HKCategoryValueCervicalMucusQualitySticky HKCategoryValueCervicalMucusQuality = 2
+	// Creamy mucus.
+	HKCategoryValueCervicalMucusQualityCreamy HKCategoryValueCervicalMucusQuality = 3
+	// Watery mucus.
+	HKCategoryValueCervicalMucusQualityWatery HKCategoryValueCervicalMucusQuality = 4
+	// Mucus the color and consistency of egg whites.
 	HKCategoryValueCervicalMucusQualityEggWhite HKCategoryValueCervicalMucusQuality = 5
 )
 
@@ -410,16 +482,24 @@ func (e HKCategoryValueCervicalMucusQuality) String() string {
 	}
 }
 
+// The type of contraceptive.
 type HKCategoryValueContraceptive int64
 
 const (
-	HKCategoryValueContraceptiveUnspecified        HKCategoryValueContraceptive = 1
-	HKCategoryValueContraceptiveImplant            HKCategoryValueContraceptive = 2
-	HKCategoryValueContraceptiveInjection          HKCategoryValueContraceptive = 3
+	// An unspecified type of contraceptive.
+	HKCategoryValueContraceptiveUnspecified HKCategoryValueContraceptive = 1
+	// A contraceptive implant.
+	HKCategoryValueContraceptiveImplant HKCategoryValueContraceptive = 2
+	// An injectable contraceptive.
+	HKCategoryValueContraceptiveInjection HKCategoryValueContraceptive = 3
+	// An intrauterine device (IUD).
 	HKCategoryValueContraceptiveIntrauterineDevice HKCategoryValueContraceptive = 4
-	HKCategoryValueContraceptiveIntravaginalRing   HKCategoryValueContraceptive = 5
-	HKCategoryValueContraceptiveOral               HKCategoryValueContraceptive = 6
-	HKCategoryValueContraceptivePatch              HKCategoryValueContraceptive = 7
+	// A contraceptive intravaginal ring.
+	HKCategoryValueContraceptiveIntravaginalRing HKCategoryValueContraceptive = 5
+	// An oral contraceptive.
+	HKCategoryValueContraceptiveOral HKCategoryValueContraceptive = 6
+	// A contraceptive patch.
+	HKCategoryValueContraceptivePatch HKCategoryValueContraceptive = 7
 )
 
 func (e HKCategoryValueContraceptive) String() string {
@@ -443,9 +523,11 @@ func (e HKCategoryValueContraceptive) String() string {
 	}
 }
 
+// Exposure events for environmental audio.
 type HKCategoryValueEnvironmentalAudioExposureEvent int64
 
 const (
+	// A brief exposure to a loud environment.
 	HKCategoryValueEnvironmentalAudioExposureEventMomentaryLimit HKCategoryValueEnvironmentalAudioExposureEvent = 1
 )
 
@@ -458,9 +540,11 @@ func (e HKCategoryValueEnvironmentalAudioExposureEvent) String() string {
 	}
 }
 
+// Exposure events for headphone audio.
 type HKCategoryValueHeadphoneAudioExposureEvent int64
 
 const (
+	// Exposure to significant audio levels from headphones over a seven-day period.
 	HKCategoryValueHeadphoneAudioExposureEventSevenDayLimit HKCategoryValueHeadphoneAudioExposureEvent = 1
 )
 
@@ -473,9 +557,11 @@ func (e HKCategoryValueHeadphoneAudioExposureEvent) String() string {
 	}
 }
 
+// A value that indicates a low-level cardio fitness event.
 type HKCategoryValueLowCardioFitnessEvent int64
 
 const (
+	// An event that indicates a low level of cardio fitness, based on the VO2 max readings from the user’s Apple Watch.
 	HKCategoryValueLowCardioFitnessEventLowFitness HKCategoryValueLowCardioFitnessEvent = 1
 )
 
@@ -488,15 +574,21 @@ func (e HKCategoryValueLowCardioFitnessEvent) String() string {
 	}
 }
 
+// Categories that indicate the amount of menstrual flow for a given sample.
 // Deprecated: since macOS 15.0.
 type HKCategoryValueMenstrualFlow int64
 
 const (
+	// An unspecified amount of menstrual flow.
 	HKCategoryValueMenstrualFlowUnspecified HKCategoryValueMenstrualFlow = 1
-	HKCategoryValueMenstrualFlowLight       HKCategoryValueMenstrualFlow = 2
-	HKCategoryValueMenstrualFlowMedium      HKCategoryValueMenstrualFlow = 3
-	HKCategoryValueMenstrualFlowHeavy       HKCategoryValueMenstrualFlow = 4
-	HKCategoryValueMenstrualFlowNone        HKCategoryValueMenstrualFlow = 5
+	// Light menstrual flow.
+	HKCategoryValueMenstrualFlowLight HKCategoryValueMenstrualFlow = 2
+	// Medium menstrual flow.
+	HKCategoryValueMenstrualFlowMedium HKCategoryValueMenstrualFlow = 3
+	// Heavy menstrual flow.
+	HKCategoryValueMenstrualFlowHeavy HKCategoryValueMenstrualFlow = 4
+	// No menstrual flow.
+	HKCategoryValueMenstrualFlowNone HKCategoryValueMenstrualFlow = 5
 )
 
 func (e HKCategoryValueMenstrualFlow) String() string {
@@ -516,14 +608,20 @@ func (e HKCategoryValueMenstrualFlow) String() string {
 	}
 }
 
+// Categories that represent the result of an ovulation home test.
 type HKCategoryValueOvulationTestResult int64
 
 const (
-	HKCategoryValueOvulationTestResultNegative                HKCategoryValueOvulationTestResult = 1
+	// The ovulation test is negative.
+	HKCategoryValueOvulationTestResultNegative HKCategoryValueOvulationTestResult = 1
+	// The ovulation test detected a surge in the luteinizing hormone. This value often refers to a Positive or Peak result.
 	HKCategoryValueOvulationTestResultLuteinizingHormoneSurge HKCategoryValueOvulationTestResult = 2
-	HKCategoryValueOvulationTestResultPositive                HKCategoryValueOvulationTestResult = 2
-	HKCategoryValueOvulationTestResultIndeterminate           HKCategoryValueOvulationTestResult = 3
-	HKCategoryValueOvulationTestResultEstrogenSurge           HKCategoryValueOvulationTestResult = 4
+	// The ovulation test is positive.
+	HKCategoryValueOvulationTestResultPositive HKCategoryValueOvulationTestResult = 2
+	// The ovulation test is inconclusive.
+	HKCategoryValueOvulationTestResultIndeterminate HKCategoryValueOvulationTestResult = 3
+	// The ovulation test detected a surge in estrogen. This value often refers to a High result.
+	HKCategoryValueOvulationTestResultEstrogenSurge HKCategoryValueOvulationTestResult = 4
 )
 
 func (e HKCategoryValueOvulationTestResult) String() string {
@@ -541,11 +639,15 @@ func (e HKCategoryValueOvulationTestResult) String() string {
 	}
 }
 
+// Category values that indicate the results of a home pregnancy test.
 type HKCategoryValuePregnancyTestResult int64
 
 const (
-	HKCategoryValuePregnancyTestResultNegative      HKCategoryValuePregnancyTestResult = 1
-	HKCategoryValuePregnancyTestResultPositive      HKCategoryValuePregnancyTestResult = 2
+	// The test returned a negative result.
+	HKCategoryValuePregnancyTestResultNegative HKCategoryValuePregnancyTestResult = 1
+	// The test returned a positive result.
+	HKCategoryValuePregnancyTestResultPositive HKCategoryValuePregnancyTestResult = 2
+	// The test was inconclusive.
 	HKCategoryValuePregnancyTestResultIndeterminate HKCategoryValuePregnancyTestResult = 3
 )
 
@@ -562,10 +664,13 @@ func (e HKCategoryValuePregnancyTestResult) String() string {
 	}
 }
 
+// Categories that indicate whether a symptom is present.
 type HKCategoryValuePresence int64
 
 const (
-	HKCategoryValuePresencePresent    HKCategoryValuePresence = 0
+	// The symptom is present.
+	HKCategoryValuePresencePresent HKCategoryValuePresence = 0
+	// The symptom isn’t present.
 	HKCategoryValuePresenceNotPresent HKCategoryValuePresence = 1
 )
 
@@ -580,11 +685,15 @@ func (e HKCategoryValuePresence) String() string {
 	}
 }
 
+// A category value that indicates the result from a home progesterone test.
 type HKCategoryValueProgesteroneTestResult int64
 
 const (
-	HKCategoryValueProgesteroneTestResultNegative      HKCategoryValueProgesteroneTestResult = 1
-	HKCategoryValueProgesteroneTestResultPositive      HKCategoryValueProgesteroneTestResult = 2
+	// The test returned a negative result.
+	HKCategoryValueProgesteroneTestResultNegative HKCategoryValueProgesteroneTestResult = 1
+	// The test returned a positive result.
+	HKCategoryValueProgesteroneTestResultPositive HKCategoryValueProgesteroneTestResult = 2
+	// The test was inconclusive.
 	HKCategoryValueProgesteroneTestResultIndeterminate HKCategoryValueProgesteroneTestResult = 3
 )
 
@@ -601,14 +710,20 @@ func (e HKCategoryValueProgesteroneTestResult) String() string {
 	}
 }
 
+// Categories that represent the severity of a symptom.
 type HKCategoryValueSeverity int64
 
 const (
+	// The symptom’s severity is not specified.
 	HKCategoryValueSeverityUnspecified HKCategoryValueSeverity = 0
-	HKCategoryValueSeverityNotPresent  HKCategoryValueSeverity = 1
-	HKCategoryValueSeverityMild        HKCategoryValueSeverity = 2
-	HKCategoryValueSeverityModerate    HKCategoryValueSeverity = 3
-	HKCategoryValueSeveritySevere      HKCategoryValueSeverity = 4
+	// The symptom is not present.
+	HKCategoryValueSeverityNotPresent HKCategoryValueSeverity = 1
+	// The symptom is mild.
+	HKCategoryValueSeverityMild HKCategoryValueSeverity = 2
+	// The symptom is moderate.
+	HKCategoryValueSeverityModerate HKCategoryValueSeverity = 3
+	// The symptom is severe.
+	HKCategoryValueSeveritySevere HKCategoryValueSeverity = 4
 )
 
 func (e HKCategoryValueSeverity) String() string {
@@ -628,16 +743,24 @@ func (e HKCategoryValueSeverity) String() string {
 	}
 }
 
+// Categories that represent the result of a sleep analysis.
 type HKCategoryValueSleepAnalysis int64
 
 const (
-	HKCategoryValueSleepAnalysisInBed             HKCategoryValueSleepAnalysis = 0
+	// The user is in bed.
+	HKCategoryValueSleepAnalysisInBed HKCategoryValueSleepAnalysis = 0
+	// The user is asleep, but the specific stage isn’t known.
 	HKCategoryValueSleepAnalysisAsleepUnspecified HKCategoryValueSleepAnalysis = 1
-	HKCategoryValueSleepAnalysisAsleep            HKCategoryValueSleepAnalysis = 1
-	HKCategoryValueSleepAnalysisAwake             HKCategoryValueSleepAnalysis = 2
-	HKCategoryValueSleepAnalysisAsleepCore        HKCategoryValueSleepAnalysis = 3
-	HKCategoryValueSleepAnalysisAsleepDeep        HKCategoryValueSleepAnalysis = 4
-	HKCategoryValueSleepAnalysisAsleepREM         HKCategoryValueSleepAnalysis = 5
+	// The user is sleeping.
+	HKCategoryValueSleepAnalysisAsleep HKCategoryValueSleepAnalysis = 1
+	// The user is awake.
+	HKCategoryValueSleepAnalysisAwake HKCategoryValueSleepAnalysis = 2
+	// The user is in light or intermediate sleep.
+	HKCategoryValueSleepAnalysisAsleepCore HKCategoryValueSleepAnalysis = 3
+	// The user is in deep sleep.
+	HKCategoryValueSleepAnalysisAsleepDeep HKCategoryValueSleepAnalysis = 4
+	// The user is in REM sleep.
+	HKCategoryValueSleepAnalysisAsleepREM HKCategoryValueSleepAnalysis = 5
 )
 
 func (e HKCategoryValueSleepAnalysis) String() string {
@@ -659,14 +782,20 @@ func (e HKCategoryValueSleepAnalysis) String() string {
 	}
 }
 
+// A value that indicates the intensity of vaginal bleeding.
 type HKCategoryValueVaginalBleeding int64
 
 const (
+	// A value that indicates an unspecified amount of vaginal bleeding.
 	HKCategoryValueVaginalBleedingUnspecified HKCategoryValueVaginalBleeding = 1
-	HKCategoryValueVaginalBleedingLight       HKCategoryValueVaginalBleeding = 2
-	HKCategoryValueVaginalBleedingMedium      HKCategoryValueVaginalBleeding = 3
-	HKCategoryValueVaginalBleedingHeavy       HKCategoryValueVaginalBleeding = 4
-	HKCategoryValueVaginalBleedingNone        HKCategoryValueVaginalBleeding = 5
+	// A value that indicates light vaginal bleeding.
+	HKCategoryValueVaginalBleedingLight HKCategoryValueVaginalBleeding = 2
+	// A value that indicates a medium amount of vaginal bleeding.
+	HKCategoryValueVaginalBleedingMedium HKCategoryValueVaginalBleeding = 3
+	// A value that indicates a heavy amount of vaginal bleeding.
+	HKCategoryValueVaginalBleedingHeavy HKCategoryValueVaginalBleeding = 4
+	// A value that indicates no vaginal bleeding.
+	HKCategoryValueVaginalBleedingNone HKCategoryValueVaginalBleeding = 5
 )
 
 func (e HKCategoryValueVaginalBleeding) String() string {
@@ -710,12 +839,17 @@ func (e HKCyclingFunctionalThresholdPowerTestType) String() string {
 	}
 }
 
+// Values that indicate the placement of the device that measured a sample.
 type HKDevicePlacementSide int64
 
 const (
+	// The system couldn’t determine the device’s placement.
 	HKDevicePlacementSideUnknown HKDevicePlacementSide = 0
-	HKDevicePlacementSideLeft    HKDevicePlacementSide = 1
-	HKDevicePlacementSideRight   HKDevicePlacementSide = 2
+	// A device predominately located on the left side.
+	HKDevicePlacementSideLeft HKDevicePlacementSide = 1
+	// A device predominately located on the right side.
+	HKDevicePlacementSideRight HKDevicePlacementSide = 2
+	// A device predominately located near the center of the body.
 	HKDevicePlacementSideCentral HKDevicePlacementSide = 3
 )
 
@@ -734,6 +868,7 @@ func (e HKDevicePlacementSide) String() string {
 	}
 }
 
+// Classifications returned by Apple Watch’s ECG algorithm.
 type HKElectrocardiogramClassification int64
 
 const (
@@ -770,6 +905,7 @@ func (e HKElectrocardiogramClassification) String() string {
 	}
 }
 
+// The lead used to record a voltage measurement.
 type HKElectrocardiogramLead int64
 
 const (
@@ -785,6 +921,7 @@ func (e HKElectrocardiogramLead) String() string {
 	}
 }
 
+// Values indicating whether the user entered a symptom when they recorded the ECG.
 type HKElectrocardiogramSymptomsStatus int64
 
 const (
@@ -806,10 +943,12 @@ func (e HKElectrocardiogramSymptomsStatus) String() string {
 	}
 }
 
+// Error codes returned by HealthKit.
 type HKErrorCode int64
 
 const (
-	HKUnknownError                            HKErrorCode = 0
+	HKUnknownError HKErrorCode = 0
+	// No error occurred.
 	HKNoError                                 HKErrorCode = 0
 	HKErrorHealthDataUnavailable              HKErrorCode = 1
 	HKErrorHealthDataRestricted               HKErrorCode = 2
@@ -867,16 +1006,24 @@ func (e HKErrorCode) String() string {
 	}
 }
 
+// Categories representing the user’s skin type based on the Fitzpatrick scale.
 type HKFitzpatrickSkinType int64
 
 const (
+	// Either the user’s skin type is not set, or the user has not granted your app permission to read the skin type.
 	HKFitzpatrickSkinTypeNotSet HKFitzpatrickSkinType = 0
-	HKFitzpatrickSkinTypeI      HKFitzpatrickSkinType = 1
-	HKFitzpatrickSkinTypeII     HKFitzpatrickSkinType = 2
-	HKFitzpatrickSkinTypeIII    HKFitzpatrickSkinType = 3
-	HKFitzpatrickSkinTypeIV     HKFitzpatrickSkinType = 4
-	HKFitzpatrickSkinTypeV      HKFitzpatrickSkinType = 5
-	HKFitzpatrickSkinTypeVI     HKFitzpatrickSkinType = 6
+	// Pale white skin that always burns easily in the sun and never tans.
+	HKFitzpatrickSkinTypeI HKFitzpatrickSkinType = 1
+	// White skin that burns easily and tans minimally.
+	HKFitzpatrickSkinTypeII HKFitzpatrickSkinType = 2
+	// White to light brown skin that burns moderately and tans uniformly.
+	HKFitzpatrickSkinTypeIII HKFitzpatrickSkinType = 3
+	// Beige-olive, lightly tanned skin that burns minimally and tans moderately.
+	HKFitzpatrickSkinTypeIV HKFitzpatrickSkinType = 4
+	// Brown skin that rarely burns and tans profusely.
+	HKFitzpatrickSkinTypeV HKFitzpatrickSkinType = 5
+	// Dark brown to black skin that never burns and tans profusely.
+	HKFitzpatrickSkinTypeVI HKFitzpatrickSkinType = 6
 )
 
 func (e HKFitzpatrickSkinType) String() string {
@@ -948,12 +1095,16 @@ func (e HKGAD7AssessmentRisk) String() string {
 	}
 }
 
+// Values that indicate the user’s level of activity when the heart rate sample was measured.
 type HKHeartRateMotionContext int64
 
 const (
-	HKHeartRateMotionContextNotSet    HKHeartRateMotionContext = 0
+	// A value indicating that the user’s activity level could not be determined.
+	HKHeartRateMotionContextNotSet HKHeartRateMotionContext = 0
+	// A value indicating that the user has been still for at least 5 minutes prior to the heart rate sample.
 	HKHeartRateMotionContextSedentary HKHeartRateMotionContext = 1
-	HKHeartRateMotionContextActive    HKHeartRateMotionContext = 2
+	// A value indicating that the user was in motion during the heart rate sample.
+	HKHeartRateMotionContextActive HKHeartRateMotionContext = 2
 )
 
 func (e HKHeartRateMotionContext) String() string {
@@ -969,12 +1120,16 @@ func (e HKHeartRateMotionContext) String() string {
 	}
 }
 
+// The test that measured a person’s heart-rate recovery.
 type HKHeartRateRecoveryTestType int64
 
 const (
-	HKHeartRateRecoveryTestTypeMaxExercise              HKHeartRateRecoveryTestType = 1
+	// Measures a person’s actual heart-rate recovery.
+	HKHeartRateRecoveryTestTypeMaxExercise HKHeartRateRecoveryTestType = 1
+	// A test that estimates a person’s heart-rate recovery using lower-intensity exercise.
 	HKHeartRateRecoveryTestTypePredictionSubMaxExercise HKHeartRateRecoveryTestType = 2
-	HKHeartRateRecoveryTestTypePredictionNonExercise    HKHeartRateRecoveryTestType = 3
+	// A test that estimates a person’s heart-rate recovery without using exercise.
+	HKHeartRateRecoveryTestTypePredictionNonExercise HKHeartRateRecoveryTestType = 3
 )
 
 func (e HKHeartRateRecoveryTestType) String() string {
@@ -990,16 +1145,24 @@ func (e HKHeartRateRecoveryTestType) String() string {
 	}
 }
 
+// Constants that indicate where on the body the heart rate sensor is located.
 type HKHeartRateSensorLocation int64
 
 const (
-	HKHeartRateSensorLocationOther   HKHeartRateSensorLocation = 0
-	HKHeartRateSensorLocationChest   HKHeartRateSensorLocation = 1
-	HKHeartRateSensorLocationWrist   HKHeartRateSensorLocation = 2
-	HKHeartRateSensorLocationFinger  HKHeartRateSensorLocation = 3
-	HKHeartRateSensorLocationHand    HKHeartRateSensorLocation = 4
+	// The heart rate sensor’s location is not otherwise on this list.
+	HKHeartRateSensorLocationOther HKHeartRateSensorLocation = 0
+	// The heart rate sensor is located on the user’s chest.
+	HKHeartRateSensorLocationChest HKHeartRateSensorLocation = 1
+	// The heart rate sensor is located on the user’s wrist.
+	HKHeartRateSensorLocationWrist HKHeartRateSensorLocation = 2
+	// The heart rate sensor is located on the user’s finger.
+	HKHeartRateSensorLocationFinger HKHeartRateSensorLocation = 3
+	// The heart rate sensor is located on the user’s hand.
+	HKHeartRateSensorLocationHand HKHeartRateSensorLocation = 4
+	// The heart rate sensor is located on the user’s earlobe.
 	HKHeartRateSensorLocationEarLobe HKHeartRateSensorLocation = 5
-	HKHeartRateSensorLocationFoot    HKHeartRateSensorLocation = 6
+	// The heart rate sensor is located on the user’s foot.
+	HKHeartRateSensorLocationFoot HKHeartRateSensorLocation = 6
 )
 
 func (e HKHeartRateSensorLocation) String() string {
@@ -1023,10 +1186,13 @@ func (e HKHeartRateSensorLocation) String() string {
 	}
 }
 
+// Possible reasons for administering insulin.
 type HKInsulinDeliveryReason int64
 
 const (
+	// Insulin administered to meet the user’s basic metabolic needs.
 	HKInsulinDeliveryReasonBasal HKInsulinDeliveryReason = 1
+	// Insulin administered to meet the user’s episodic requirements.
 	HKInsulinDeliveryReasonBolus HKInsulinDeliveryReason = 2
 )
 
@@ -1097,23 +1263,38 @@ func (e HKMedicationDoseEventScheduleType) String() string {
 	}
 }
 
+// Prefixes that can be added to SI units to change the order of magnitude.
 type HKMetricPrefix int64
 
 const (
-	HKMetricPrefixNone  HKMetricPrefix = 0
+	// A prefix that does not modify the base unit.
+	HKMetricPrefixNone HKMetricPrefix = 0
+	// A prefix that multiplies the base unit by 1e-15.
 	HKMetricPrefixFemto HKMetricPrefix = 13
-	HKMetricPrefixPico  HKMetricPrefix = 1
-	HKMetricPrefixNano  HKMetricPrefix = 2
+	// A prefix that multiplies the base unit by 1e-12.
+	HKMetricPrefixPico HKMetricPrefix = 1
+	// A prefix that multiplies the base unit by 1e-9.
+	HKMetricPrefixNano HKMetricPrefix = 2
+	// A prefix that multiplies the base unit by 1e-6.
 	HKMetricPrefixMicro HKMetricPrefix = 3
+	// A prefix that multiplies the base unit by 0.001.
 	HKMetricPrefixMilli HKMetricPrefix = 4
+	// A prefix that multiplies the base unit by 0.01.
 	HKMetricPrefixCenti HKMetricPrefix = 5
-	HKMetricPrefixDeci  HKMetricPrefix = 6
-	HKMetricPrefixDeca  HKMetricPrefix = 7
+	// A prefix that multiplies the base unit by 0.1.
+	HKMetricPrefixDeci HKMetricPrefix = 6
+	// A prefix that multiplies the base unit by 10.
+	HKMetricPrefixDeca HKMetricPrefix = 7
+	// A prefix that multiplies the base unit by 100.
 	HKMetricPrefixHecto HKMetricPrefix = 8
-	HKMetricPrefixKilo  HKMetricPrefix = 9
-	HKMetricPrefixMega  HKMetricPrefix = 10
-	HKMetricPrefixGiga  HKMetricPrefix = 11
-	HKMetricPrefixTera  HKMetricPrefix = 12
+	// A prefix that multiplies the base unit by 1000.
+	HKMetricPrefixKilo HKMetricPrefix = 9
+	// A prefix that multiplies the base unit by 1e6.
+	HKMetricPrefixMega HKMetricPrefix = 10
+	// A prefix that multiplies the base unit by 1e9.
+	HKMetricPrefixGiga HKMetricPrefix = 11
+	// A prefix that multiplies the base unit by 1e12.
+	HKMetricPrefixTera HKMetricPrefix = 12
 )
 
 func (e HKMetricPrefix) String() string {
@@ -1223,14 +1404,20 @@ func (e HKPhysicalEffortEstimationType) String() string {
 	}
 }
 
+// The orientation of the prism correction, represented by the location of the prism’s base (the thickest part of the prism).
 type HKPrismBase int64
 
 const (
+	// No prism correction.
 	HKPrismBaseNone HKPrismBase = 0
-	HKPrismBaseUp   HKPrismBase = 1
+	// The prism’s base is at the top of the lens.
+	HKPrismBaseUp HKPrismBase = 1
+	// The prism’s base is at the bottom of the lens.
 	HKPrismBaseDown HKPrismBase = 2
-	HKPrismBaseIn   HKPrismBase = 3
-	HKPrismBaseOut  HKPrismBase = 4
+	// The prism base is on the inside edge of the lens.
+	HKPrismBaseIn HKPrismBase = 3
+	// The prism base is on the outside edge of the lens.
+	HKPrismBaseOut HKPrismBase = 4
 )
 
 func (e HKPrismBase) String() string {
@@ -1250,13 +1437,19 @@ func (e HKPrismBase) String() string {
 	}
 }
 
+// Constant values that describe how quantities can be aggregated over time.
 type HKQuantityAggregationStyle int64
 
 const (
-	HKQuantityAggregationStyleCumulative                        HKQuantityAggregationStyle = 0
-	HKQuantityAggregationStyleDiscreteArithmetic                HKQuantityAggregationStyle = 1
-	HKQuantityAggregationStyleDiscrete                          HKQuantityAggregationStyle = 1
-	HKQuantityAggregationStyleDiscreteTemporallyWeighted        HKQuantityAggregationStyle = 2
+	// Cumulative samples that can be summed over time.
+	HKQuantityAggregationStyleCumulative HKQuantityAggregationStyle = 0
+	// Discrete samples that can be averaged over time using an arithmetic mean.
+	HKQuantityAggregationStyleDiscreteArithmetic HKQuantityAggregationStyle = 1
+	// Discrete samples may be averaged over time.
+	HKQuantityAggregationStyleDiscrete HKQuantityAggregationStyle = 1
+	// Discrete samples that can be averaged over a time interval using a temporally weighted integration function.
+	HKQuantityAggregationStyleDiscreteTemporallyWeighted HKQuantityAggregationStyle = 2
+	// Discrete samples that can be combined over a time interval by computing the equivalent continuous sound level.
 	HKQuantityAggregationStyleDiscreteEquivalentContinuousLevel HKQuantityAggregationStyle = 3
 )
 
@@ -1275,12 +1468,16 @@ func (e HKQuantityAggregationStyle) String() string {
 	}
 }
 
+// Constants that describe how a sample’s time period overlaps with the target time period.
 type HKQueryOptions uint64
 
 const (
-	HKQueryOptionNone            HKQueryOptions = 0
+	// The sample’s time period must overlap part of the target time period.
+	HKQueryOptionNone HKQueryOptions = 0
+	// The sample’s start time must fall within the target time period.
 	HKQueryOptionStrictStartDate HKQueryOptions = 1
-	HKQueryOptionStrictEndDate   HKQueryOptions = 2
+	// The sample’s end time must fall within the target time period.
+	HKQueryOptionStrictEndDate HKQueryOptions = 2
 )
 
 func (e HKQueryOptions) String() string {
@@ -1540,18 +1737,28 @@ func (e HKStateOfMindValenceClassification) String() string {
 	}
 }
 
+// Options for specifying the statistic to calculate.
 type HKStatisticsOptions uint64
 
 const (
-	HKStatisticsOptionNone               HKStatisticsOptions = 0
-	HKStatisticsOptionSeparateBySource   HKStatisticsOptions = 1
-	HKStatisticsOptionDiscreteAverage    HKStatisticsOptions = 2
-	HKStatisticsOptionDiscreteMin        HKStatisticsOptions = 4
-	HKStatisticsOptionDiscreteMax        HKStatisticsOptions = 8
-	HKStatisticsOptionCumulativeSum      HKStatisticsOptions = 16
-	HKStatisticsOptionMostRecent         HKStatisticsOptions = 32
+	// An option indicating that the system will not calculate any statistics values.
+	HKStatisticsOptionNone HKStatisticsOptions = 0
+	// An option indicating that the system calculates the specified statistics separately for each source.
+	HKStatisticsOptionSeparateBySource HKStatisticsOptions = 1
+	// An option indicating that the system calculates the average quantity for the samples.
+	HKStatisticsOptionDiscreteAverage HKStatisticsOptions = 2
+	// An option indicating that the system calculates the minimum quantity for the samples.
+	HKStatisticsOptionDiscreteMin HKStatisticsOptions = 4
+	// An option indicating that the system calculates the maximum quantity for the samples.
+	HKStatisticsOptionDiscreteMax HKStatisticsOptions = 8
+	// An option indicating that the system calculates the sum of all the quantities for the samples.
+	HKStatisticsOptionCumulativeSum HKStatisticsOptions = 16
+	// An option indicating that the system returns the most recent quantity from the matching samples.
+	HKStatisticsOptionMostRecent HKStatisticsOptions = 32
+	// An option indicating that the system returns the most recent quantity from the matching samples.
 	HKStatisticsOptionDiscreteMostRecent HKStatisticsOptions = 32
-	HKStatisticsOptionDuration           HKStatisticsOptions = 64
+	// An option indicating that the system calculates the total duration covering all the samples.
+	HKStatisticsOptionDuration HKStatisticsOptions = 64
 )
 
 func (e HKStatisticsOptions) String() string {
@@ -1586,16 +1793,24 @@ func (e HKStatisticsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The style of stroke while swimming.
 type HKSwimmingStrokeStyle int64
 
 const (
-	HKSwimmingStrokeStyleUnknown      HKSwimmingStrokeStyle = 0
-	HKSwimmingStrokeStyleMixed        HKSwimmingStrokeStyle = 1
-	HKSwimmingStrokeStyleFreestyle    HKSwimmingStrokeStyle = 2
-	HKSwimmingStrokeStyleBackstroke   HKSwimmingStrokeStyle = 3
+	// The user’s stroke could not be determined.
+	HKSwimmingStrokeStyleUnknown HKSwimmingStrokeStyle = 0
+	// The user swam a mixture of strokes.
+	HKSwimmingStrokeStyleMixed HKSwimmingStrokeStyle = 1
+	// The user swam the freestyle stroke.
+	HKSwimmingStrokeStyleFreestyle HKSwimmingStrokeStyle = 2
+	// The user swam the backstroke.
+	HKSwimmingStrokeStyleBackstroke HKSwimmingStrokeStyle = 3
+	// The user swam the breaststroke.
 	HKSwimmingStrokeStyleBreaststroke HKSwimmingStrokeStyle = 4
-	HKSwimmingStrokeStyleButterfly    HKSwimmingStrokeStyle = 5
-	HKSwimmingStrokeStyleKickboard    HKSwimmingStrokeStyle = 6
+	// The user swam the butterfly stroke.
+	HKSwimmingStrokeStyleButterfly HKSwimmingStrokeStyle = 5
+	// The user swam using a kickboard.
+	HKSwimmingStrokeStyleKickboard HKSwimmingStrokeStyle = 6
 )
 
 func (e HKSwimmingStrokeStyle) String() string {
@@ -1619,13 +1834,18 @@ func (e HKSwimmingStrokeStyle) String() string {
 	}
 }
 
+// Constants that determine how often the system launches your app in response to changes to HealthKit data.
 type HKUpdateFrequency int64
 
 const (
+	// The system launches your app every time it detects a change.
 	HKUpdateFrequencyImmediate HKUpdateFrequency = 1
-	HKUpdateFrequencyHourly    HKUpdateFrequency = 2
-	HKUpdateFrequencyDaily     HKUpdateFrequency = 3
-	HKUpdateFrequencyWeekly    HKUpdateFrequency = 4
+	// The system launches your app at most once an hour in response to changes.
+	HKUpdateFrequencyHourly HKUpdateFrequency = 2
+	// The system launches your app at most once a day in response to changes.
+	HKUpdateFrequencyDaily HKUpdateFrequency = 3
+	// The system launches your app at most once per week in response to changes.
+	HKUpdateFrequencyWeekly HKUpdateFrequency = 4
 )
 
 func (e HKUpdateFrequency) String() string {
@@ -1643,12 +1863,16 @@ func (e HKUpdateFrequency) String() string {
 	}
 }
 
+// The type of motion performed during the sample.
 type HKUserMotionContext int64
 
 const (
-	HKUserMotionContextNotSet     HKUserMotionContext = 0
+	// The person’s motion was not specified.
+	HKUserMotionContextNotSet HKUserMotionContext = 0
+	// The person was stationary during the sample.
 	HKUserMotionContextStationary HKUserMotionContext = 1
-	HKUserMotionContextActive     HKUserMotionContext = 2
+	// The person was active during the sample.
+	HKUserMotionContextActive HKUserMotionContext = 2
 )
 
 func (e HKUserMotionContext) String() string {
@@ -1664,13 +1888,17 @@ func (e HKUserMotionContext) String() string {
 	}
 }
 
+// Methods for calculating the user’s VO2 max rate.
 type HKVO2MaxTestType int64
 
 const (
-	HKVO2MaxTestTypeMaxExercise              HKVO2MaxTestType = 1
+	// A test that measures VO2 max rate by monitoring exercise to the user’s physical limit.
+	HKVO2MaxTestTypeMaxExercise HKVO2MaxTestType = 1
+	// A calculation that estimates VO2 max rate based on low-intensity exercise.
 	HKVO2MaxTestTypePredictionSubMaxExercise HKVO2MaxTestType = 2
-	HKVO2MaxTestTypePredictionNonExercise    HKVO2MaxTestType = 3
-	HKVO2MaxTestTypePredictionStepTest       HKVO2MaxTestType = 4
+	// A calculation that estimates VO2 max rate without any exercise.
+	HKVO2MaxTestTypePredictionNonExercise HKVO2MaxTestType = 3
+	HKVO2MaxTestTypePredictionStepTest    HKVO2MaxTestType = 4
 )
 
 func (e HKVO2MaxTestType) String() string {
@@ -1688,10 +1916,13 @@ func (e HKVO2MaxTestType) String() string {
 	}
 }
 
+// A value that specifies the eye for a vision prescription.
 type HKVisionEye int64
 
 const (
-	HKVisionEyeLeft  HKVisionEye = 1
+	// The left eye.
+	HKVisionEyeLeft HKVisionEye = 1
+	// The right eye.
 	HKVisionEyeRight HKVisionEye = 2
 )
 
@@ -1706,10 +1937,13 @@ func (e HKVisionEye) String() string {
 	}
 }
 
+// The type of vision prescription, for example a prescription for glasses or for contacts.
 type HKVisionPrescriptionType uint64
 
 const (
-	HKVisionPrescriptionTypeGlasses  HKVisionPrescriptionType = 1
+	// A prescription for glasses.
+	HKVisionPrescriptionTypeGlasses HKVisionPrescriptionType = 1
+	// A prescription for contacts.
 	HKVisionPrescriptionTypeContacts HKVisionPrescriptionType = 2
 )
 
@@ -1742,37 +1976,66 @@ func (e HKWaterSalinity) String() string {
 	}
 }
 
+// Constants that indicate a type of weather.
 type HKWeatherCondition int64
 
 const (
-	HKWeatherConditionNone              HKWeatherCondition = 0
-	HKWeatherConditionClear             HKWeatherCondition = 1
-	HKWeatherConditionFair              HKWeatherCondition = 2
-	HKWeatherConditionPartlyCloudy      HKWeatherCondition = 3
-	HKWeatherConditionMostlyCloudy      HKWeatherCondition = 4
-	HKWeatherConditionCloudy            HKWeatherCondition = 5
-	HKWeatherConditionFoggy             HKWeatherCondition = 6
-	HKWeatherConditionHaze              HKWeatherCondition = 7
-	HKWeatherConditionWindy             HKWeatherCondition = 8
-	HKWeatherConditionBlustery          HKWeatherCondition = 9
-	HKWeatherConditionSmoky             HKWeatherCondition = 10
-	HKWeatherConditionDust              HKWeatherCondition = 11
-	HKWeatherConditionSnow              HKWeatherCondition = 12
-	HKWeatherConditionHail              HKWeatherCondition = 13
-	HKWeatherConditionSleet             HKWeatherCondition = 14
-	HKWeatherConditionFreezingDrizzle   HKWeatherCondition = 15
-	HKWeatherConditionFreezingRain      HKWeatherCondition = 16
-	HKWeatherConditionMixedRainAndHail  HKWeatherCondition = 17
-	HKWeatherConditionMixedRainAndSnow  HKWeatherCondition = 18
+	// The weather condition is unknown or irrelevant.
+	HKWeatherConditionNone HKWeatherCondition = 0
+	// The weather condition is clear.
+	HKWeatherConditionClear HKWeatherCondition = 1
+	// The weather condition is fair.
+	HKWeatherConditionFair HKWeatherCondition = 2
+	// The weather condition is partly cloudy.
+	HKWeatherConditionPartlyCloudy HKWeatherCondition = 3
+	// The weather condition is mostly cloudy.
+	HKWeatherConditionMostlyCloudy HKWeatherCondition = 4
+	// The weather condition is cloudy.
+	HKWeatherConditionCloudy HKWeatherCondition = 5
+	// The weather condition is foggy.
+	HKWeatherConditionFoggy HKWeatherCondition = 6
+	// The weather condition is hazy.
+	HKWeatherConditionHaze HKWeatherCondition = 7
+	// The weather condition is windy.
+	HKWeatherConditionWindy HKWeatherCondition = 8
+	// The weather condition is blustery.
+	HKWeatherConditionBlustery HKWeatherCondition = 9
+	// The weather condition is smoky.
+	HKWeatherConditionSmoky HKWeatherCondition = 10
+	// The weather condition is dust.
+	HKWeatherConditionDust HKWeatherCondition = 11
+	// The weather condition is snow.
+	HKWeatherConditionSnow HKWeatherCondition = 12
+	// The weather condition is hail.
+	HKWeatherConditionHail HKWeatherCondition = 13
+	// The weather condition is sleet.
+	HKWeatherConditionSleet HKWeatherCondition = 14
+	// The weather condition is freezing drizzle.
+	HKWeatherConditionFreezingDrizzle HKWeatherCondition = 15
+	// The weather condition is freezing rain.
+	HKWeatherConditionFreezingRain HKWeatherCondition = 16
+	// The weather condition is mixed rain and hail.
+	HKWeatherConditionMixedRainAndHail HKWeatherCondition = 17
+	// The weather condition is mixed rain and snow.
+	HKWeatherConditionMixedRainAndSnow HKWeatherCondition = 18
+	// The weather condition is mixed rain and sleet.
 	HKWeatherConditionMixedRainAndSleet HKWeatherCondition = 19
+	// The weather condition is mixed snow and sleet.
 	HKWeatherConditionMixedSnowAndSleet HKWeatherCondition = 20
-	HKWeatherConditionDrizzle           HKWeatherCondition = 21
-	HKWeatherConditionScatteredShowers  HKWeatherCondition = 22
-	HKWeatherConditionShowers           HKWeatherCondition = 23
-	HKWeatherConditionThunderstorms     HKWeatherCondition = 24
-	HKWeatherConditionTropicalStorm     HKWeatherCondition = 25
-	HKWeatherConditionHurricane         HKWeatherCondition = 26
-	HKWeatherConditionTornado           HKWeatherCondition = 27
+	// The weather condition is drizzle.
+	HKWeatherConditionDrizzle HKWeatherCondition = 21
+	// The weather condition is scattered showers.
+	HKWeatherConditionScatteredShowers HKWeatherCondition = 22
+	// The weather condition is showers.
+	HKWeatherConditionShowers HKWeatherCondition = 23
+	// The weather condition is thunderstorms.
+	HKWeatherConditionThunderstorms HKWeatherCondition = 24
+	// The weather condition is tropical storm.
+	HKWeatherConditionTropicalStorm HKWeatherCondition = 25
+	// The weather condition is hurricane.
+	HKWeatherConditionHurricane HKWeatherCondition = 26
+	// The weather condition is tornado.
+	HKWeatherConditionTornado HKWeatherCondition = 27
 )
 
 func (e HKWeatherCondition) String() string {
@@ -1838,12 +2101,16 @@ func (e HKWeatherCondition) String() string {
 	}
 }
 
+// Constants indicating the user’s wheelchair use.
 type HKWheelchairUse int64
 
 const (
+	// Either the wheelchair use is not set or the user has not granted your app permission to read that information.
 	HKWheelchairUseNotSet HKWheelchairUse = 0
-	HKWheelchairUseNo     HKWheelchairUse = 1
-	HKWheelchairUseYes    HKWheelchairUse = 2
+	// The user does not use a wheelchair.
+	HKWheelchairUseNo HKWheelchairUse = 1
+	// The user uses a wheelchair.
+	HKWheelchairUseYes HKWheelchairUse = 2
 )
 
 func (e HKWheelchairUse) String() string {
@@ -1859,93 +2126,178 @@ func (e HKWheelchairUse) String() string {
 	}
 }
 
+// The type of activity performed during a workout.
 type HKWorkoutActivityType uint64
 
 const (
-	HKWorkoutActivityTypeAmericanFootball              HKWorkoutActivityType = 1
-	HKWorkoutActivityTypeArchery                       HKWorkoutActivityType = 2
-	HKWorkoutActivityTypeAustralianFootball            HKWorkoutActivityType = 3
-	HKWorkoutActivityTypeBadminton                     HKWorkoutActivityType = 4
-	HKWorkoutActivityTypeBaseball                      HKWorkoutActivityType = 5
-	HKWorkoutActivityTypeBasketball                    HKWorkoutActivityType = 6
-	HKWorkoutActivityTypeBowling                       HKWorkoutActivityType = 7
-	HKWorkoutActivityTypeBoxing                        HKWorkoutActivityType = 8
-	HKWorkoutActivityTypeClimbing                      HKWorkoutActivityType = 9
-	HKWorkoutActivityTypeCricket                       HKWorkoutActivityType = 10
-	HKWorkoutActivityTypeCrossTraining                 HKWorkoutActivityType = 11
-	HKWorkoutActivityTypeCurling                       HKWorkoutActivityType = 12
-	HKWorkoutActivityTypeCycling                       HKWorkoutActivityType = 13
-	HKWorkoutActivityTypeDance                         HKWorkoutActivityType = 14
-	HKWorkoutActivityTypeDanceInspiredTraining         HKWorkoutActivityType = 15
-	HKWorkoutActivityTypeElliptical                    HKWorkoutActivityType = 16
-	HKWorkoutActivityTypeEquestrianSports              HKWorkoutActivityType = 17
-	HKWorkoutActivityTypeFencing                       HKWorkoutActivityType = 18
-	HKWorkoutActivityTypeFishing                       HKWorkoutActivityType = 19
-	HKWorkoutActivityTypeFunctionalStrengthTraining    HKWorkoutActivityType = 20
-	HKWorkoutActivityTypeGolf                          HKWorkoutActivityType = 21
-	HKWorkoutActivityTypeGymnastics                    HKWorkoutActivityType = 22
-	HKWorkoutActivityTypeHandball                      HKWorkoutActivityType = 23
-	HKWorkoutActivityTypeHiking                        HKWorkoutActivityType = 24
-	HKWorkoutActivityTypeHockey                        HKWorkoutActivityType = 25
-	HKWorkoutActivityTypeHunting                       HKWorkoutActivityType = 26
-	HKWorkoutActivityTypeLacrosse                      HKWorkoutActivityType = 27
-	HKWorkoutActivityTypeMartialArts                   HKWorkoutActivityType = 28
-	HKWorkoutActivityTypeMindAndBody                   HKWorkoutActivityType = 29
-	HKWorkoutActivityTypeMixedMetabolicCardioTraining  HKWorkoutActivityType = 30
-	HKWorkoutActivityTypePaddleSports                  HKWorkoutActivityType = 31
-	HKWorkoutActivityTypePlay                          HKWorkoutActivityType = 32
-	HKWorkoutActivityTypePreparationAndRecovery        HKWorkoutActivityType = 33
-	HKWorkoutActivityTypeRacquetball                   HKWorkoutActivityType = 34
-	HKWorkoutActivityTypeRowing                        HKWorkoutActivityType = 35
-	HKWorkoutActivityTypeRugby                         HKWorkoutActivityType = 36
-	HKWorkoutActivityTypeRunning                       HKWorkoutActivityType = 37
-	HKWorkoutActivityTypeSailing                       HKWorkoutActivityType = 38
-	HKWorkoutActivityTypeSkatingSports                 HKWorkoutActivityType = 39
-	HKWorkoutActivityTypeSnowSports                    HKWorkoutActivityType = 40
-	HKWorkoutActivityTypeSoccer                        HKWorkoutActivityType = 41
-	HKWorkoutActivityTypeSoftball                      HKWorkoutActivityType = 42
-	HKWorkoutActivityTypeSquash                        HKWorkoutActivityType = 43
-	HKWorkoutActivityTypeStairClimbing                 HKWorkoutActivityType = 44
-	HKWorkoutActivityTypeSurfingSports                 HKWorkoutActivityType = 45
-	HKWorkoutActivityTypeSwimming                      HKWorkoutActivityType = 46
-	HKWorkoutActivityTypeTableTennis                   HKWorkoutActivityType = 47
-	HKWorkoutActivityTypeTennis                        HKWorkoutActivityType = 48
-	HKWorkoutActivityTypeTrackAndField                 HKWorkoutActivityType = 49
-	HKWorkoutActivityTypeTraditionalStrengthTraining   HKWorkoutActivityType = 50
-	HKWorkoutActivityTypeVolleyball                    HKWorkoutActivityType = 51
-	HKWorkoutActivityTypeWalking                       HKWorkoutActivityType = 52
-	HKWorkoutActivityTypeWaterFitness                  HKWorkoutActivityType = 53
-	HKWorkoutActivityTypeWaterPolo                     HKWorkoutActivityType = 54
-	HKWorkoutActivityTypeWaterSports                   HKWorkoutActivityType = 55
-	HKWorkoutActivityTypeWrestling                     HKWorkoutActivityType = 56
-	HKWorkoutActivityTypeYoga                          HKWorkoutActivityType = 57
-	HKWorkoutActivityTypeBarre                         HKWorkoutActivityType = 58
-	HKWorkoutActivityTypeCoreTraining                  HKWorkoutActivityType = 59
-	HKWorkoutActivityTypeCrossCountrySkiing            HKWorkoutActivityType = 60
-	HKWorkoutActivityTypeDownhillSkiing                HKWorkoutActivityType = 61
-	HKWorkoutActivityTypeFlexibility                   HKWorkoutActivityType = 62
+	// The constant for playing American football.
+	HKWorkoutActivityTypeAmericanFootball HKWorkoutActivityType = 1
+	// The constant for shooting archery.
+	HKWorkoutActivityTypeArchery HKWorkoutActivityType = 2
+	// The constant for playing Australian football.
+	HKWorkoutActivityTypeAustralianFootball HKWorkoutActivityType = 3
+	// The constant for playing badminton.
+	HKWorkoutActivityTypeBadminton HKWorkoutActivityType = 4
+	// The constant for playing baseball.
+	HKWorkoutActivityTypeBaseball HKWorkoutActivityType = 5
+	// The constant for playing basketball.
+	HKWorkoutActivityTypeBasketball HKWorkoutActivityType = 6
+	// The constant for bowling.
+	HKWorkoutActivityTypeBowling HKWorkoutActivityType = 7
+	// The constant for boxing.
+	HKWorkoutActivityTypeBoxing HKWorkoutActivityType = 8
+	// The constant for climbing.
+	HKWorkoutActivityTypeClimbing HKWorkoutActivityType = 9
+	// The constant for playing cricket.
+	HKWorkoutActivityTypeCricket HKWorkoutActivityType = 10
+	// The constant for exercise that includes any mixture of cardio, strength, and/or flexibility training.
+	HKWorkoutActivityTypeCrossTraining HKWorkoutActivityType = 11
+	// The constant for curling.
+	HKWorkoutActivityTypeCurling HKWorkoutActivityType = 12
+	// The constant for cycling.
+	HKWorkoutActivityTypeCycling HKWorkoutActivityType = 13
+	// The constant for dancing.
+	HKWorkoutActivityTypeDance HKWorkoutActivityType = 14
+	// The constant for workouts inspired by dance, including Pilates, Barre, and Feldenkrais.
+	HKWorkoutActivityTypeDanceInspiredTraining HKWorkoutActivityType = 15
+	// The constant for workouts on an elliptical machine.
+	HKWorkoutActivityTypeElliptical HKWorkoutActivityType = 16
+	// The constant for activities that involve riding a horse, including polo, horse racing, and horse riding.
+	HKWorkoutActivityTypeEquestrianSports HKWorkoutActivityType = 17
+	// The constant for fencing.
+	HKWorkoutActivityTypeFencing HKWorkoutActivityType = 18
+	// The constant for fishing.
+	HKWorkoutActivityTypeFishing HKWorkoutActivityType = 19
+	// The constant for strength training, primarily with free weights and body weight.
+	HKWorkoutActivityTypeFunctionalStrengthTraining HKWorkoutActivityType = 20
+	// The constant for playing golf.
+	HKWorkoutActivityTypeGolf HKWorkoutActivityType = 21
+	// Performing gymnastics.
+	HKWorkoutActivityTypeGymnastics HKWorkoutActivityType = 22
+	// The constant for playing handball.
+	HKWorkoutActivityTypeHandball HKWorkoutActivityType = 23
+	// The constant for hiking.
+	HKWorkoutActivityTypeHiking HKWorkoutActivityType = 24
+	// The constant for playing hockey, including ice hockey, field hockey, and related sports.
+	HKWorkoutActivityTypeHockey HKWorkoutActivityType = 25
+	// The constant for hunting.
+	HKWorkoutActivityTypeHunting HKWorkoutActivityType = 26
+	// The constant for playing lacrosse.
+	HKWorkoutActivityTypeLacrosse HKWorkoutActivityType = 27
+	// The constant for practicing martial arts.
+	HKWorkoutActivityTypeMartialArts HKWorkoutActivityType = 28
+	// The constant for performing activities like walking meditation, Gyrotonic exercise, and Qigong.
+	HKWorkoutActivityTypeMindAndBody HKWorkoutActivityType = 29
+	// The constant for performing any mix of cardio-focused exercises.
+	HKWorkoutActivityTypeMixedMetabolicCardioTraining HKWorkoutActivityType = 30
+	// The constant for canoeing, kayaking, paddling an outrigger, paddling a stand-up paddle board, and related sports.
+	HKWorkoutActivityTypePaddleSports HKWorkoutActivityType = 31
+	// The constant for play-based activities like tag, dodgeball, hopscotch, tetherball, and playing on a jungle gym.
+	HKWorkoutActivityTypePlay HKWorkoutActivityType = 32
+	// The constant for warm-up and therapeutic activities like foam rolling and stretching.
+	HKWorkoutActivityTypePreparationAndRecovery HKWorkoutActivityType = 33
+	// The constant for playing racquetball.
+	HKWorkoutActivityTypeRacquetball HKWorkoutActivityType = 34
+	// The constant for rowing.
+	HKWorkoutActivityTypeRowing HKWorkoutActivityType = 35
+	// The constant for playing rugby.
+	HKWorkoutActivityTypeRugby HKWorkoutActivityType = 36
+	// The constant for running and jogging.
+	HKWorkoutActivityTypeRunning HKWorkoutActivityType = 37
+	// The constant for sailing.
+	HKWorkoutActivityTypeSailing HKWorkoutActivityType = 38
+	// The constant for skating activities, including ice skating, speed skating, inline skating, and skateboarding.
+	HKWorkoutActivityTypeSkatingSports HKWorkoutActivityType = 39
+	// The constant for a variety of snow sports, including sledding, snowmobiling, or building a snowman.
+	HKWorkoutActivityTypeSnowSports HKWorkoutActivityType = 40
+	// The constant for playing soccer.
+	HKWorkoutActivityTypeSoccer HKWorkoutActivityType = 41
+	// The constant for playing softball.
+	HKWorkoutActivityTypeSoftball HKWorkoutActivityType = 42
+	// The constant for playing squash.
+	HKWorkoutActivityTypeSquash HKWorkoutActivityType = 43
+	// The constant for workouts using a stair climbing machine.
+	HKWorkoutActivityTypeStairClimbing HKWorkoutActivityType = 44
+	// The constant for a variety of surf sports, including surfing, kite surfing, and wind surfing.
+	HKWorkoutActivityTypeSurfingSports HKWorkoutActivityType = 45
+	// The constant for swimming.
+	HKWorkoutActivityTypeSwimming HKWorkoutActivityType = 46
+	// The constant for playing table tennis.
+	HKWorkoutActivityTypeTableTennis HKWorkoutActivityType = 47
+	// The constant for playing tennis.
+	HKWorkoutActivityTypeTennis HKWorkoutActivityType = 48
+	// Participating in track and field events, including shot put, javelin, pole vaulting, and related sports.
+	HKWorkoutActivityTypeTrackAndField HKWorkoutActivityType = 49
+	// The constant for strength training exercises primarily using machines or free weights.
+	HKWorkoutActivityTypeTraditionalStrengthTraining HKWorkoutActivityType = 50
+	// The constant for playing volleyball.
+	HKWorkoutActivityTypeVolleyball HKWorkoutActivityType = 51
+	// The constant for walking.
+	HKWorkoutActivityTypeWalking HKWorkoutActivityType = 52
+	// The constant for aerobic exercise performed in shallow water.
+	HKWorkoutActivityTypeWaterFitness HKWorkoutActivityType = 53
+	// The constant for playing water polo.
+	HKWorkoutActivityTypeWaterPolo HKWorkoutActivityType = 54
+	// The constant for a variety of water sports, including water skiing, wake boarding, and related activities.
+	HKWorkoutActivityTypeWaterSports HKWorkoutActivityType = 55
+	// The constant for wrestling.
+	HKWorkoutActivityTypeWrestling HKWorkoutActivityType = 56
+	// The constant for practicing yoga.
+	HKWorkoutActivityTypeYoga HKWorkoutActivityType = 57
+	// The constant for barre workout.
+	HKWorkoutActivityTypeBarre HKWorkoutActivityType = 58
+	// The constant for core training.
+	HKWorkoutActivityTypeCoreTraining HKWorkoutActivityType = 59
+	// The constant for cross country skiing.
+	HKWorkoutActivityTypeCrossCountrySkiing HKWorkoutActivityType = 60
+	// The constant for downhill skiing.
+	HKWorkoutActivityTypeDownhillSkiing HKWorkoutActivityType = 61
+	// The constant for a flexibility workout.
+	HKWorkoutActivityTypeFlexibility HKWorkoutActivityType = 62
+	// The constant for high intensity interval training.
 	HKWorkoutActivityTypeHighIntensityIntervalTraining HKWorkoutActivityType = 63
-	HKWorkoutActivityTypeJumpRope                      HKWorkoutActivityType = 64
-	HKWorkoutActivityTypeKickboxing                    HKWorkoutActivityType = 65
-	HKWorkoutActivityTypePilates                       HKWorkoutActivityType = 66
-	HKWorkoutActivityTypeSnowboarding                  HKWorkoutActivityType = 67
-	HKWorkoutActivityTypeStairs                        HKWorkoutActivityType = 68
-	HKWorkoutActivityTypeStepTraining                  HKWorkoutActivityType = 69
-	HKWorkoutActivityTypeWheelchairWalkPace            HKWorkoutActivityType = 70
-	HKWorkoutActivityTypeWheelchairRunPace             HKWorkoutActivityType = 71
-	HKWorkoutActivityTypeTaiChi                        HKWorkoutActivityType = 72
-	HKWorkoutActivityTypeMixedCardio                   HKWorkoutActivityType = 73
-	HKWorkoutActivityTypeHandCycling                   HKWorkoutActivityType = 74
-	HKWorkoutActivityTypeDiscSports                    HKWorkoutActivityType = 75
-	HKWorkoutActivityTypeFitnessGaming                 HKWorkoutActivityType = 76
-	HKWorkoutActivityTypeCardioDance                   HKWorkoutActivityType = 77
-	HKWorkoutActivityTypeSocialDance                   HKWorkoutActivityType = 78
-	HKWorkoutActivityTypePickleball                    HKWorkoutActivityType = 79
-	HKWorkoutActivityTypeCooldown                      HKWorkoutActivityType = 80
-	HKWorkoutActivityTypeSwimBikeRun                   HKWorkoutActivityType = 82
-	HKWorkoutActivityTypeTransition                    HKWorkoutActivityType = 83
-	HKWorkoutActivityTypeUnderwaterDiving              HKWorkoutActivityType = 84
-	HKWorkoutActivityTypeOther                         HKWorkoutActivityType = 3000
+	// The constant for jumping rope.
+	HKWorkoutActivityTypeJumpRope HKWorkoutActivityType = 64
+	// The constant for kickboxing.
+	HKWorkoutActivityTypeKickboxing HKWorkoutActivityType = 65
+	// The constant for a pilates workout.
+	HKWorkoutActivityTypePilates HKWorkoutActivityType = 66
+	// The constant for snowboarding.
+	HKWorkoutActivityTypeSnowboarding HKWorkoutActivityType = 67
+	// The constant for running, walking, or other drills using stairs (for example, in a stadium or inside a multilevel building).
+	HKWorkoutActivityTypeStairs HKWorkoutActivityType = 68
+	// The constant for training using a step bench.
+	HKWorkoutActivityTypeStepTraining HKWorkoutActivityType = 69
+	// The constant for a wheelchair workout at walking pace.
+	HKWorkoutActivityTypeWheelchairWalkPace HKWorkoutActivityType = 70
+	// The constant for wheelchair workout at running pace.
+	HKWorkoutActivityTypeWheelchairRunPace HKWorkoutActivityType = 71
+	// The constant for tai chi.
+	HKWorkoutActivityTypeTaiChi HKWorkoutActivityType = 72
+	// The constant for workouts that mix a variety of cardio exercise machines or modalities.
+	HKWorkoutActivityTypeMixedCardio HKWorkoutActivityType = 73
+	// The constant for hand cycling.
+	HKWorkoutActivityTypeHandCycling HKWorkoutActivityType = 74
+	// The constant for playing disc sports such as Ultimate and Disc Golf.
+	HKWorkoutActivityTypeDiscSports HKWorkoutActivityType = 75
+	// The constant for playing fitness-based video games.
+	HKWorkoutActivityTypeFitnessGaming HKWorkoutActivityType = 76
+	// The constant for cardiovascular dance workouts.
+	HKWorkoutActivityTypeCardioDance HKWorkoutActivityType = 77
+	// The constant for dancing with a partner or partners, such as swing, salsa, or folk dances.
+	HKWorkoutActivityTypeSocialDance HKWorkoutActivityType = 78
+	// The constant for playing pickleball.
+	HKWorkoutActivityTypePickleball HKWorkoutActivityType = 79
+	// The constant for low intensity stretching and mobility exercises following a more vigorous workout.
+	HKWorkoutActivityTypeCooldown HKWorkoutActivityType = 80
+	// The constant for multisport activities like triathlons.
+	HKWorkoutActivityTypeSwimBikeRun HKWorkoutActivityType = 82
+	// A constant for the transition time between activities in a multisport workout.
+	HKWorkoutActivityTypeTransition HKWorkoutActivityType = 83
+	// The constant for underwater diving.
+	HKWorkoutActivityTypeUnderwaterDiving HKWorkoutActivityType = 84
+	// The constant for a workout that does not match any of the other workout activity types.
+	HKWorkoutActivityTypeOther HKWorkoutActivityType = 3000
 )
 
 func (e HKWorkoutActivityType) String() string {
@@ -2141,16 +2493,25 @@ func (e HKWorkoutEffortRelationshipQueryOptions) String() string {
 	}
 }
 
+// Constants that represent events occurring during a workout.
 type HKWorkoutEventType int64
 
 const (
-	HKWorkoutEventTypePause                HKWorkoutEventType = 1
-	HKWorkoutEventTypeResume               HKWorkoutEventType = 2
-	HKWorkoutEventTypeLap                  HKWorkoutEventType = 3
-	HKWorkoutEventTypeMarker               HKWorkoutEventType = 4
-	HKWorkoutEventTypeMotionPaused         HKWorkoutEventType = 5
-	HKWorkoutEventTypeMotionResumed        HKWorkoutEventType = 6
-	HKWorkoutEventTypeSegment              HKWorkoutEventType = 7
+	// A constant indicating that the workout has paused.
+	HKWorkoutEventTypePause HKWorkoutEventType = 1
+	// A constant indicating that the workout has resumed.
+	HKWorkoutEventTypeResume HKWorkoutEventType = 2
+	// A constant indicating a lap.
+	HKWorkoutEventTypeLap HKWorkoutEventType = 3
+	// A constant indicating a point of interest during a workout session.
+	HKWorkoutEventTypeMarker HKWorkoutEventType = 4
+	// A constant indicating that the system has automatically paused a workout session.
+	HKWorkoutEventTypeMotionPaused HKWorkoutEventType = 5
+	// A constant indicating that the system has automatically resumed a workout session.
+	HKWorkoutEventTypeMotionResumed HKWorkoutEventType = 6
+	// A constant indicating a period of time of interest during a workout.
+	HKWorkoutEventTypeSegment HKWorkoutEventType = 7
+	// A constant indicating that the user has requested a pause or resume.
 	HKWorkoutEventTypePauseOrResumeRequest HKWorkoutEventType = 8
 )
 
@@ -2177,11 +2538,15 @@ func (e HKWorkoutEventType) String() string {
 	}
 }
 
+// A constant indicating whether the workout session takes place indoors or outdoors.
 type HKWorkoutSessionLocationType int64
 
 const (
+	// It is not known whether the workout session is taking place indoors or outdoors.
 	HKWorkoutSessionLocationTypeUnknown HKWorkoutSessionLocationType = 1
-	HKWorkoutSessionLocationTypeIndoor  HKWorkoutSessionLocationType = 2
+	// The workout session is indoors.
+	HKWorkoutSessionLocationTypeIndoor HKWorkoutSessionLocationType = 2
+	// The workout session is outdoors.
 	HKWorkoutSessionLocationTypeOutdoor HKWorkoutSessionLocationType = 3
 )
 
@@ -2198,15 +2563,22 @@ func (e HKWorkoutSessionLocationType) String() string {
 	}
 }
 
+// A workout session’s state.
 type HKWorkoutSessionState int64
 
 const (
+	// The workout session has not started.
 	HKWorkoutSessionStateNotStarted HKWorkoutSessionState = 1
-	HKWorkoutSessionStateRunning    HKWorkoutSessionState = 2
-	HKWorkoutSessionStateEnded      HKWorkoutSessionState = 3
-	HKWorkoutSessionStatePaused     HKWorkoutSessionState = 4
-	HKWorkoutSessionStatePrepared   HKWorkoutSessionState = 5
-	HKWorkoutSessionStateStopped    HKWorkoutSessionState = 6
+	// The workout session is running.
+	HKWorkoutSessionStateRunning HKWorkoutSessionState = 2
+	// The workout session has ended.
+	HKWorkoutSessionStateEnded HKWorkoutSessionState = 3
+	// The workout session has paused.
+	HKWorkoutSessionStatePaused HKWorkoutSessionState = 4
+	// The session is ready but not yet running.
+	HKWorkoutSessionStatePrepared HKWorkoutSessionState = 5
+	// The session has stopped.
+	HKWorkoutSessionStateStopped HKWorkoutSessionState = 6
 )
 
 func (e HKWorkoutSessionState) String() string {
@@ -2228,10 +2600,13 @@ func (e HKWorkoutSessionState) String() string {
 	}
 }
 
+// The type of session.
 type HKWorkoutSessionType int64
 
 const (
-	HKWorkoutSessionTypePrimary  HKWorkoutSessionType = 0
+	// A primary session running on watchOS.
+	HKWorkoutSessionTypePrimary HKWorkoutSessionType = 0
+	// A mirrored session, running on the companion iOS device.
 	HKWorkoutSessionTypeMirrored HKWorkoutSessionType = 1
 )
 
@@ -2246,11 +2621,15 @@ func (e HKWorkoutSessionType) String() string {
 	}
 }
 
+// The possible locations for swimming.
 type HKWorkoutSwimmingLocationType int64
 
 const (
-	HKWorkoutSwimmingLocationTypeUnknown   HKWorkoutSwimmingLocationType = 0
-	HKWorkoutSwimmingLocationTypePool      HKWorkoutSwimmingLocationType = 1
+	// The swimming location could not be determined.
+	HKWorkoutSwimmingLocationTypeUnknown HKWorkoutSwimmingLocationType = 0
+	// The user swam in a pool.
+	HKWorkoutSwimmingLocationTypePool HKWorkoutSwimmingLocationType = 1
+	// The user swam in open water like a lake or ocean.
 	HKWorkoutSwimmingLocationTypeOpenWater HKWorkoutSwimmingLocationType = 2
 )
 

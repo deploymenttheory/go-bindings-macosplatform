@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier for an object in a collection (or container) by unique ID.
+//
 // UniqueIDSpecifier wraps [raw.NSUniqueIDSpecifier] with a fluent Go API.
 type UniqueIDSpecifier struct {
 	inner *raw.NSUniqueIDSpecifier
@@ -37,6 +39,8 @@ func NewUniqueIDSpecifierWithCoder(inCoder *raw.NSCoder) *UniqueIDSpecifier {
 	return &UniqueIDSpecifier{inner: raw.NSUniqueIDSpecifierFromID(_id)}
 }
 
+// Returns an NSUniqueIDSpecifier object, initialized with the given arguments.
+//
 // NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID creates a new [UniqueIDSpecifier].
 func NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, uniqueID objc.ID) *UniqueIDSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUniqueIDSpecifier")), objc.RegisterName("alloc"))
@@ -44,48 +48,64 @@ func NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqu
 	return &UniqueIDSpecifier{inner: raw.NSUniqueIDSpecifierFromID(_id)}
 }
 
+// Returns the ID encapsulated by the receiver.
+//
 // WithUniqueID sets the uniqueID property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithUniqueID(uniqueID objc.ID) *UniqueIDSpecifier {
 	x.inner.SetUniqueID(uniqueID)
 	return x
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithKey(key string) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *UniqueIDSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)

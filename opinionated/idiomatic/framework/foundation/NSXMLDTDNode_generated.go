@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class NSXMLDTDNode @abstract The nodes that are exclusive to a DTD @discussion Every DTD node has a name. Object value is defined as follows:<ul> <li><b>Entity declaration</b> - the string that that entity resolves to eg "&lt;"</li> <li><b>Attribute declaration</b> - the default value, if any</li> <li><b>Element declaration</b> - the validation string</li> <li><b>Notation declaration</b> - no objectValue</li></ul>
+// A representation of element, attribute-list, entity, and notation declarations in a Document Type Definition.
 //
 // XMLDTDNode wraps [raw.NSXMLDTDNode] with a fluent Go API.
 type XMLDTDNode struct {

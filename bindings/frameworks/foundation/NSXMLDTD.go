@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class NSXMLDTD @abstract Defines the order, repetition, and allowable values for a document
+// A representation of a Document Type Definition.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmldtd
 type NSXMLDTD struct {

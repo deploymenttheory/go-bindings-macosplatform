@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A definition of the relationships between calendar units and absolute points in time, providing features for calculation and comparison of dates.
+//
 // Calendar wraps [raw.NSCalendar] with a fluent Go API.
 type Calendar struct {
 	inner *raw.NSCalendar
@@ -30,6 +32,8 @@ func CalendarFromID(id objc.ID) *Calendar {
 	return &Calendar{inner: raw.NSCalendarFromID(id)}
 }
 
+// Initializes a calendar according to a given identifier.
+//
 // NewCalendarWithCalendarIdentifier creates a new [Calendar].
 func NewCalendarWithCalendarIdentifier(ident *raw.NSString) *Calendar {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCalendar")), objc.RegisterName("alloc"))
@@ -37,24 +41,32 @@ func NewCalendarWithCalendarIdentifier(ident *raw.NSString) *Calendar {
 	return &Calendar{inner: raw.NSCalendarFromID(_id)}
 }
 
+// The locale of the receiver.
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *Calendar) WithLocale(locale *Locale) *Calendar {
 	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
+// The time zone for the calendar.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *Calendar) WithTimeZone(timeZone *TimeZone) *Calendar {
 	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
+// The index of the first weekday of the receiver.
+//
 // WithFirstWeekday sets the firstWeekday property and returns the receiver for chaining.
 func (x *Calendar) WithFirstWeekday(firstWeekday uint) *Calendar {
 	x.inner.SetFirstWeekday(firstWeekday)
 	return x
 }
 
+// The minimum number of days in the first week of the receiver.
+//
 // WithMinimumDaysInFirstWeek sets the minimumDaysInFirstWeek property and returns the receiver for chaining.
 func (x *Calendar) WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Calendar {
 	x.inner.SetMinimumDaysInFirstWeek(minimumDaysInFirstWeek)
@@ -67,31 +79,43 @@ func (x *Calendar) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// Returns the minimum range limits of the values that a given unit can take on.
+//
 // MinimumRangeOfUnit calls the underlying MinimumRangeOfUnit.
 func (x *Calendar) MinimumRangeOfUnit(unit NSCalendarUnit) raw.NSRange {
 	return x.inner.MinimumRangeOfUnit(raw.NSCalendarUnit(unit))
 }
 
+// Returns the maximum range limits of the values that a given unit can take on.
+//
 // MaximumRangeOfUnit calls the underlying MaximumRangeOfUnit.
 func (x *Calendar) MaximumRangeOfUnit(unit NSCalendarUnit) raw.NSRange {
 	return x.inner.MaximumRangeOfUnit(raw.NSCalendarUnit(unit))
 }
 
+// Returns the range of absolute time values that a smaller calendar unit (such as a day) can take on in a larger calendar unit (such as a month) that includes a specified absolute time.
+//
 // RangeOfUnitInUnitForDate calls the underlying RangeOfUnitInUnitForDate.
 func (x *Calendar) RangeOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *raw.NSDate) raw.NSRange {
 	return x.inner.RangeOfUnitInUnitForDate(raw.NSCalendarUnit(smaller), raw.NSCalendarUnit(larger), date)
 }
 
+// Returns, for a given absolute time, the ordinal number of a smaller calendar unit (such as a day) within a specified larger calendar unit (such as a week).
+//
 // OrdinalityOfUnitInUnitForDate calls the underlying OrdinalityOfUnitInUnitForDate.
 func (x *Calendar) OrdinalityOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *raw.NSDate) uint {
 	return x.inner.OrdinalityOfUnitInUnitForDate(raw.NSCalendarUnit(smaller), raw.NSCalendarUnit(larger), date)
 }
 
+// Returns by reference the starting time and duration of a given calendar unit that contains a given date.
+//
 // RangeOfUnitStartDateIntervalForDate calls the underlying RangeOfUnitStartDateIntervalForDate.
 func (x *Calendar) RangeOfUnitStartDateIntervalForDate(unit NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool {
 	return x.inner.RangeOfUnitStartDateIntervalForDate(raw.NSCalendarUnit(unit), datep, tip, date)
 }
 
+// Returns a date representing the absolute time calculated from given components.
+//
 // DateFromComponents calls the underlying DateFromComponents.
 func (x *Calendar) DateFromComponents(comps *raw.NSDateComponents) *Date {
 	_r := x.inner.DateFromComponents(comps)
@@ -101,6 +125,8 @@ func (x *Calendar) DateFromComponents(comps *raw.NSDateComponents) *Date {
 	return &Date{inner: _r}
 }
 
+// Returns the date components representing a given date.
+//
 // ComponentsFromDate calls the underlying ComponentsFromDate.
 func (x *Calendar) ComponentsFromDate(unitFlags NSCalendarUnit, date *raw.NSDate) *DateComponents {
 	_r := x.inner.ComponentsFromDate(raw.NSCalendarUnit(unitFlags), date)
@@ -110,6 +136,8 @@ func (x *Calendar) ComponentsFromDate(unitFlags NSCalendarUnit, date *raw.NSDate
 	return &DateComponents{inner: _r}
 }
 
+// Returns a date representing the absolute time calculated by adding given components to a given date.
+//
 // DateByAddingComponentsToDateOptions calls the underlying DateByAddingComponentsToDateOptions.
 func (x *Calendar) DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts NSCalendarOptions) *Date {
 	_r := x.inner.DateByAddingComponentsToDateOptions(comps, date, raw.NSCalendarOptions(opts))
@@ -119,6 +147,8 @@ func (x *Calendar) DateByAddingComponentsToDateOptions(comps *raw.NSDateComponen
 	return &Date{inner: _r}
 }
 
+// Returns the difference between two supplied dates as date components.
+//
 // ComponentsFromDateToDateOptions calls the underlying ComponentsFromDateToDateOptions.
 func (x *Calendar) ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts NSCalendarOptions) *DateComponents {
 	_r := x.inner.ComponentsFromDateToDateOptions(raw.NSCalendarUnit(unitFlags), startingDate, resultDate, raw.NSCalendarOptions(opts))
@@ -128,26 +158,36 @@ func (x *Calendar) ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, sta
 	return &DateComponents{inner: _r}
 }
 
+// Returns by reference the era, year, week of year, and weekday component values for a given date.
+//
 // GetEraYearMonthDayFromDate calls the underlying GetEraYearMonthDayFromDate.
 func (x *Calendar) GetEraYearMonthDayFromDate(eraValuePointer *int64, yearValuePointer *int64, monthValuePointer *int64, dayValuePointer *int64, date *raw.NSDate) {
 	x.inner.GetEraYearMonthDayFromDate(eraValuePointer, yearValuePointer, monthValuePointer, dayValuePointer, date)
 }
 
+// Returns by reference the era, year, week of year, and weekday component values for a given date.
+//
 // GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate calls the underlying GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate.
 func (x *Calendar) GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer *int64, yearValuePointer *int64, weekValuePointer *int64, weekdayValuePointer *int64, date *raw.NSDate) {
 	x.inner.GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer, yearValuePointer, weekValuePointer, weekdayValuePointer, date)
 }
 
+// Returns by reference the hour, minute, second, and nanosecond component values for a given date.
+//
 // GetHourMinuteSecondNanosecondFromDate calls the underlying GetHourMinuteSecondNanosecondFromDate.
 func (x *Calendar) GetHourMinuteSecondNanosecondFromDate(hourValuePointer *int64, minuteValuePointer *int64, secondValuePointer *int64, nanosecondValuePointer *int64, date *raw.NSDate) {
 	x.inner.GetHourMinuteSecondNanosecondFromDate(hourValuePointer, minuteValuePointer, secondValuePointer, nanosecondValuePointer, date)
 }
 
+// Returns the specified date component from a given date.
+//
 // ComponentFromDate calls the underlying ComponentFromDate.
 func (x *Calendar) ComponentFromDate(unit NSCalendarUnit, date *raw.NSDate) int {
 	return x.inner.ComponentFromDate(raw.NSCalendarUnit(unit), date)
 }
 
+// Returns a date created with the given components.
+//
 // DateWithEraYearMonthDayHourMinuteSecondNanosecond calls the underlying DateWithEraYearMonthDayHourMinuteSecondNanosecond.
 func (x *Calendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date {
 	_r := x.inner.DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue, yearValue, monthValue, dayValue, hourValue, minuteValue, secondValue, nanosecondValue)
@@ -157,6 +197,8 @@ func (x *Calendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue in
 	return &Date{inner: _r}
 }
 
+// Returns a new date created with the given components base on a week-of-year value.
+//
 // DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond calls the underlying DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond.
 func (x *Calendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date {
 	_r := x.inner.DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue, yearValue, weekValue, weekdayValue, hourValue, minuteValue, secondValue, nanosecondValue)
@@ -166,6 +208,8 @@ func (x *Calendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecond
 	return &Date{inner: _r}
 }
 
+// Returns the first moment of a given date as a date instance.
+//
 // StartOfDayForDate calls the underlying StartOfDayForDate.
 func (x *Calendar) StartOfDayForDate(date *raw.NSDate) *Date {
 	_r := x.inner.StartOfDayForDate(date)
@@ -175,6 +219,8 @@ func (x *Calendar) StartOfDayForDate(date *raw.NSDate) *Date {
 	return &Date{inner: _r}
 }
 
+// Returns all the date components of a date, as if in a given time zone (instead of the receiving calendar’s time zone).
+//
 // ComponentsInTimeZoneFromDate calls the underlying ComponentsInTimeZoneFromDate.
 func (x *Calendar) ComponentsInTimeZoneFromDate(timezone *raw.NSTimeZone, date *raw.NSDate) *DateComponents {
 	_r := x.inner.ComponentsInTimeZoneFromDate(timezone, date)
@@ -184,51 +230,71 @@ func (x *Calendar) ComponentsInTimeZoneFromDate(timezone *raw.NSTimeZone, date *
 	return &DateComponents{inner: _r}
 }
 
+// Indicates the ordering of two given dates based on their components down to a given unit granularity.
+//
 // CompareDateToDateToUnitGranularity calls the underlying CompareDateToDateToUnitGranularity.
 func (x *Calendar) CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit NSCalendarUnit) NSComparisonResult {
 	return NSComparisonResult(x.inner.CompareDateToDateToUnitGranularity(date1, date2, raw.NSCalendarUnit(unit)))
 }
 
+// Indicates whether two dates are equal to a given unit of granularity.
+//
 // IsDateEqualToDateToUnitGranularity calls the underlying IsDateEqualToDateToUnitGranularity.
 func (x *Calendar) IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit NSCalendarUnit) bool {
 	return x.inner.IsDateEqualToDateToUnitGranularity(date1, date2, raw.NSCalendarUnit(unit))
 }
 
+// Indicates whether two dates are in the same day.
+//
 // IsDateInSameDayAsDate calls the underlying IsDateInSameDayAsDate.
 func (x *Calendar) IsDateInSameDayAsDate(date1 *raw.NSDate, date2 *raw.NSDate) bool {
 	return x.inner.IsDateInSameDayAsDate(date1, date2)
 }
 
+// Indicates whether the given date is in “today.”
+//
 // IsDateInToday calls the underlying IsDateInToday.
 func (x *Calendar) IsDateInToday(date *raw.NSDate) bool {
 	return x.inner.IsDateInToday(date)
 }
 
+// Indicates whether the given date is in “yesterday.”
+//
 // IsDateInYesterday calls the underlying IsDateInYesterday.
 func (x *Calendar) IsDateInYesterday(date *raw.NSDate) bool {
 	return x.inner.IsDateInYesterday(date)
 }
 
+// Indicates whether the given date is in “tomorrow.”
+//
 // IsDateInTomorrow calls the underlying IsDateInTomorrow.
 func (x *Calendar) IsDateInTomorrow(date *raw.NSDate) bool {
 	return x.inner.IsDateInTomorrow(date)
 }
 
+// Indicates whether a given date falls within a weekend period, as defined by the calendar and the calendar’s locale.
+//
 // IsDateInWeekend calls the underlying IsDateInWeekend.
 func (x *Calendar) IsDateInWeekend(date *raw.NSDate) bool {
 	return x.inner.IsDateInWeekend(date)
 }
 
+// Returns whether a given date falls within a weekend period, and if so, returns by reference the start date and time interval of the weekend range.
+//
 // RangeOfWeekendStartDateIntervalContainingDate calls the underlying RangeOfWeekendStartDateIntervalContainingDate.
 func (x *Calendar) RangeOfWeekendStartDateIntervalContainingDate(datep *raw.NSDate, tip *float64, date *raw.NSDate) bool {
 	return x.inner.RangeOfWeekendStartDateIntervalContainingDate(datep, tip, date)
 }
 
+// Returns by reference the starting date and time interval range of the next weekend period after a given date.
+//
 // NextWeekendStartDateIntervalOptionsAfterDate calls the underlying NextWeekendStartDateIntervalOptionsAfterDate.
 func (x *Calendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options NSCalendarOptions, date *raw.NSDate) bool {
 	return x.inner.NextWeekendStartDateIntervalOptionsAfterDate(datep, tip, raw.NSCalendarOptions(options), date)
 }
 
+// Returns the difference between start and end dates given as date components.
+//
 // ComponentsFromDateComponentsToDateComponentsOptions calls the underlying ComponentsFromDateComponentsToDateComponentsOptions.
 func (x *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options NSCalendarOptions) *DateComponents {
 	_r := x.inner.ComponentsFromDateComponentsToDateComponentsOptions(raw.NSCalendarUnit(unitFlags), startingDateComp, resultDateComp, raw.NSCalendarOptions(options))
@@ -238,6 +304,8 @@ func (x *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags
 	return &DateComponents{inner: _r}
 }
 
+// Returns a date representing the absolute time calculated by adding the value of a given component to a given date.
+//
 // DateByAddingUnitValueToDateOptions calls the underlying DateByAddingUnitValueToDateOptions.
 func (x *Calendar) DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, value int, date *raw.NSDate, options NSCalendarOptions) *Date {
 	_r := x.inner.DateByAddingUnitValueToDateOptions(raw.NSCalendarUnit(unit), value, date, raw.NSCalendarOptions(options))
@@ -247,11 +315,15 @@ func (x *Calendar) DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, value
 	return &Date{inner: _r}
 }
 
+// Computes the dates that match (or most closely match) a given set of components, and calls the block once for each of them, until the enumeration is stopped.
+//
 // EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing calls the underlying EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing.
 func (x *Calendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts NSCalendarOptions, block func(*raw.NSDate, bool, *bool)) {
 	x.inner.EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start, comps, raw.NSCalendarOptions(opts), block)
 }
 
+// Returns the next date after a given date matching the given components.
+//
 // NextDateAfterDateMatchingComponentsOptions calls the underlying NextDateAfterDateMatchingComponentsOptions.
 func (x *Calendar) NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options NSCalendarOptions) *Date {
 	_r := x.inner.NextDateAfterDateMatchingComponentsOptions(date, comps, raw.NSCalendarOptions(options))
@@ -261,6 +333,8 @@ func (x *Calendar) NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, 
 	return &Date{inner: _r}
 }
 
+// Returns the next date after a given date matching the given calendar unit value.
+//
 // NextDateAfterDateMatchingUnitValueOptions calls the underlying NextDateAfterDateMatchingUnitValueOptions.
 func (x *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit NSCalendarUnit, value int, options NSCalendarOptions) *Date {
 	_r := x.inner.NextDateAfterDateMatchingUnitValueOptions(date, raw.NSCalendarUnit(unit), value, raw.NSCalendarOptions(options))
@@ -270,6 +344,8 @@ func (x *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, u
 	return &Date{inner: _r}
 }
 
+// Returns the next date after a given date that matches the given hour, minute, and second, component values.
+//
 // NextDateAfterDateMatchingHourMinuteSecondOptions calls the underlying NextDateAfterDateMatchingHourMinuteSecondOptions.
 func (x *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options NSCalendarOptions) *Date {
 	_r := x.inner.NextDateAfterDateMatchingHourMinuteSecondOptions(date, hourValue, minuteValue, secondValue, raw.NSCalendarOptions(options))
@@ -279,6 +355,8 @@ func (x *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NS
 	return &Date{inner: _r}
 }
 
+// Returns a new date representing the date calculated by setting a specific component of a given date to a given value, while trying to keep lower components the same.
+//
 // DateBySettingUnitValueOfDateOptions calls the underlying DateBySettingUnitValueOfDateOptions.
 func (x *Calendar) DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v int, date *raw.NSDate, opts NSCalendarOptions) *Date {
 	_r := x.inner.DateBySettingUnitValueOfDateOptions(raw.NSCalendarUnit(unit), v, date, raw.NSCalendarOptions(opts))
@@ -288,6 +366,8 @@ func (x *Calendar) DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v in
 	return &Date{inner: _r}
 }
 
+// Creates a new date calculated with the given time.
+//
 // DateBySettingHourMinuteSecondOfDateOptions calls the underlying DateBySettingHourMinuteSecondOfDateOptions.
 func (x *Calendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts NSCalendarOptions) *Date {
 	_r := x.inner.DateBySettingHourMinuteSecondOfDateOptions(h, m, s, date, raw.NSCalendarOptions(opts))
@@ -297,6 +377,8 @@ func (x *Calendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s in
 	return &Date{inner: _r}
 }
 
+// Returns whether a given date matches all of the given date components.
+//
 // DateMatchesComponents calls the underlying DateMatchesComponents.
 func (x *Calendar) DateMatchesComponents(date *raw.NSDate, components *raw.NSDateComponents) bool {
 	return x.inner.DateMatchesComponents(date, components)

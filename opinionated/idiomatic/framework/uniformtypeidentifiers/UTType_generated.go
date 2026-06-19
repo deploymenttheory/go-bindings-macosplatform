@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// \brief A class representing a type in a type hierarchy. Types may represent files on disk, abstract data types with no on-disk representation, or even entirely unrelated hierarchical classification systems such as hardware. Older API that does not use \c UTType typically uses an untyped \c NSString or \c CFStringRef to refer to a type by its identifier. To get the identifier of a type for use with these APIs, use the \c identifier property of this class. \sa https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/
+// A structure that represents a type of data to load, send, or receive.
 //
 // Type wraps [raw.UTType] with a fluent Go API.
 type Type struct {

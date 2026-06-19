@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for changing the values of the subattributes in a paragraph style attribute.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmutableparagraphstyle
 type NSMutableParagraphStyle struct {
 	NSParagraphStyle
@@ -54,14 +56,17 @@ func NSMutableParagraphStyleFromID(id objc.ID) *NSMutableParagraphStyle {
 	return o
 }
 
+// Adds the specified tab stop to the paragraph.
 func (o *NSMutableParagraphStyle) AddTabStop(anObject *NSTextTab) {
 	o.Ptr().Send(_nSMutableParagraphStyleSelAddTabStop, anObject.Ptr())
 }
 
+// Removes the first text tab with a location and type equal to the specified tab stop.
 func (o *NSMutableParagraphStyle) RemoveTabStop(anObject *NSTextTab) {
 	o.Ptr().Send(_nSMutableParagraphStyleSelRemoveTabStop, anObject.Ptr())
 }
 
+// Replaces the subattributes of the paragraph with those in the specified paragraph style object.
 func (o *NSMutableParagraphStyle) SetParagraphStyle(obj *NSParagraphStyle) {
 	o.Ptr().Send(_nSMutableParagraphStyleSelSetParagraphStyle, obj.Ptr())
 }

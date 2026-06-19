@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network endpoint specified as a Bonjour service name, type, and domain.
+//
 // NWBonjourServiceEndpoint wraps [raw.NWBonjourServiceEndpoint] with a fluent Go API.
 type NWBonjourServiceEndpoint struct {
 	inner *raw.NWBonjourServiceEndpoint

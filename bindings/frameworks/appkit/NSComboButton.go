@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A button with a pull-down menu and a default action.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscombobutton
 type NSComboButton struct {
 	NSControl
@@ -40,7 +42,7 @@ func NSComboButtonFromID(id objc.ID) *NSComboButton {
 	return o
 }
 
-// Creates a standard combo button with a title, menu, and primary action. @param title The localized title string that is displayed on the button. @param menu The additional menu to display on the button. @param target The target object that receives primary action messages from the control. @param action The action message sent by the primary action portion of the control.
+// Creates a combo button that displays a title.
 func NSComboButtonComboButtonWithTitleMenuTargetAction(title *foundation.NSString, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleMenuTargetAction, title.Ptr(), menu.Ptr(), target, action)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func NSComboButtonComboButtonWithTitleMenuTargetAction(title *foundation.NSStrin
 	return NSComboButtonFromID(_ret)
 }
 
-// Creates a standard combo button with a image, menu, and primary action. @param image The image to display in the body of the button. @param menu The additional menu to display on the button. @param target The target object that receives primary action messages from the control. @param action The action message sent by the primary action portion of the control.
+// Creates a combo button that displays an image.
 func NSComboButtonComboButtonWithImageMenuTargetAction(image *NSImage, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithImageMenuTargetAction, image.Ptr(), menu.Ptr(), target, action)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func NSComboButtonComboButtonWithImageMenuTargetAction(image *NSImage, menu *NSM
 	return NSComboButtonFromID(_ret)
 }
 
-// Creates a standard combo button with a title, image, menu, and primary action. @param title The localized title string that is displayed on the button. @param image The image to display in the body of the button. @param menu The additional menu to display on the button. @param target The target object that receives primary action messages from the control. @param action The action message sent by the primary action portion of the control.
+// Creates a combo button that displays both a title and image.
 func NSComboButtonComboButtonWithTitleImageMenuTargetAction(title *foundation.NSString, image *NSImage, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleImageMenuTargetAction, title.Ptr(), image.Ptr(), menu.Ptr(), target, action)
 	if _ret != 0 {

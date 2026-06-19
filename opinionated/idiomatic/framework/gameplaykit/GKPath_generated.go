@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A polygonal path that can be followed by an agent.
+//
 // Path wraps [raw.GKPath] with a fluent Go API.
 type Path struct {
 	inner *raw.GKPath
@@ -31,6 +33,8 @@ func PathFromID(id objc.ID) *Path {
 	return &Path{inner: raw.GKPathFromID(id)}
 }
 
+// Initializes a path with the specified array of 2D points.
+//
 // NewPathWithPointsCountRadiusCyclical creates a new [Path].
 func NewPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *Path {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPath")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, rad
 	return &Path{inner: raw.GKPathFromID(_id)}
 }
 
+// Initializes a path with the specified array of 3D points.
+//
 // NewPathWithFloat3PointsCountRadiusCyclical creates a new [Path].
 func NewPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *Path {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPath")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uin
 	return &Path{inner: raw.GKPathFromID(_id)}
 }
 
+// Initializes a path using the positions of the specified graph nodes.
+//
 // NewPathWithGraphNodesRadius creates a new [Path].
 func NewPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*raw.GKGraphNode], radius float32) *Path {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPath")), objc.RegisterName("alloc"))
@@ -52,7 +60,7 @@ func NewPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*raw.GKGraphNode
 	return &Path{inner: raw.GKPathFromID(_id)}
 }
 
-// Radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
+// The radius of the path.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Path) WithRadius(radius float32) *Path {
@@ -60,7 +68,7 @@ func (x *Path) WithRadius(radius float32) *Path {
 	return x
 }
 
-// Does this path loop back on itself, creating a cycle?
+// A Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
 //
 // WithCyclical sets the cyclical property and returns the receiver for chaining.
 func (x *Path) WithCyclical(cyclical bool) *Path {
@@ -68,16 +76,22 @@ func (x *Path) WithCyclical(cyclical bool) *Path {
 	return x
 }
 
+// Returns the 2D point at the specified index in the path’s list of vertices.
+//
 // PointAtIndex calls the underlying PointAtIndex.
 func (x *Path) PointAtIndex(index uint) unsafe.Pointer {
 	return x.inner.PointAtIndex(index)
 }
 
+// Returns the 2D point at the specified index in the path’s list of vertices.
+//
 // Float2AtIndex calls the underlying Float2AtIndex.
 func (x *Path) Float2AtIndex(index uint) unsafe.Pointer {
 	return x.inner.Float2AtIndex(index)
 }
 
+// Returns the 3D point at the specified index in the path’s list of vertices.
+//
 // Float3AtIndex calls the underlying Float3AtIndex.
 func (x *Path) Float3AtIndex(index uint) unsafe.Pointer {
 	return x.inner.Float3AtIndex(index)

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that presents a list of nearby media receivers.
+//
 // Apple documentation: https://developer.apple.com/documentation/avkit/avroutepickerview
 type AVRoutePickerView struct {
 	appkit.NSView
@@ -38,7 +40,7 @@ func AVRoutePickerViewFromID(id objc.ID) *AVRoutePickerView {
 	return o
 }
 
-// @method		routePickerButtonColorForState: @param			state The state for which to get the picker button color. @abstract		Returns the color of the picker button for a given state.
+// Returns the color of the picker button for the specified state.
 func (o *AVRoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelRoutePickerButtonColorForState, state)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *AVRoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerVi
 	return appkit.NSColorFromID(_ret)
 }
 
-// @method		setRoutePickerButtonColor:forState: @param			color The color the button should have for a given state. @param			state The state for which to set the color of the button image. @abstract		Sets the color of the picker button for a given state. @discussion	If set to nil, the default color will be used for the given state.
+// Sets the route picker button color for the specified state.
 func (o *AVRoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState) {
 	o.Ptr().Send(_aVRoutePickerViewSelSetRoutePickerButtonColorForState, color.Ptr(), state)
 }

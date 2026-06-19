@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A rectangular, one-sided plane geometry of specified width and height.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnplane
 type SCNPlane struct {
 	SCNGeometry
@@ -41,7 +43,7 @@ func SCNPlaneFromID(id objc.ID) *SCNPlane {
 	return o
 }
 
-// @method planeWithWidth:height: @abstract Creates and returns a plane with given width and height. @param width The width of the plane. @param height The height of the plane.
+// Creates a plane geometry with the specified width and height.
 func SCNPlanePlaneWithWidthHeight(width float64, height float64) *SCNPlane {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPlane), _sCNPlaneSelPlaneWithWidthHeight, width, height)
 	if _ret != 0 {

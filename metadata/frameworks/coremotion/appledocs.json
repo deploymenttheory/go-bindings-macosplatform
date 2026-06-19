@@ -1,0 +1,1218 @@
+{
+  "schema_version": 1,
+  "framework": "CoreMotion",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CMAbsoluteAltitudeData": {
+      "doc": "Data that records a change in absolute altitude.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmabsolutealtitudedata"
+    },
+    "CMAccelerometerData": {
+      "doc": "A data sample from the device’s three accelerometers.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmaccelerometerdata"
+    },
+    "CMAltimeter": {
+      "doc": "An object that initiates the delivery of altitude-related changes.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter"
+    },
+    "CMAltitudeData": {
+      "doc": "Data for a recorded change in altitude.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmaltitudedata"
+    },
+    "CMAmbientPressureData": {
+      "doc": "A measurement of the ambient pressure and temperature.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmambientpressuredata"
+    },
+    "CMAttitude": {
+      "doc": "The device’s orientation relative to a known frame of reference at a point in time.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmattitude"
+    },
+    "CMBatchedSensorManager": {
+      "url": "https://developer.apple.com/documentation/coremotion/cmbatchedsensormanager"
+    },
+    "CMDeviceMotion": {
+      "doc": "Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion"
+    },
+    "CMDyskineticSymptomResult": {
+      "doc": "A result object that contains data about the likely presence of dyskinetic symptoms during a one-minute interval.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmdyskineticsymptomresult"
+    },
+    "CMFallDetectionEvent": {
+      "doc": "An object that contains data about a fall detection event.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionevent"
+    },
+    "CMFallDetectionManager": {
+      "doc": "An object for managing fall detection events.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionmanager"
+    },
+    "CMGyroData": {
+      "doc": "A single measurement of the device’s rotation rate.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmgyrodata"
+    },
+    "CMHeadphoneActivityManager": {
+      "doc": "An object that starts and manages headphone activity services.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager"
+    },
+    "CMHeadphoneMotionManager": {
+      "doc": "An object that starts and manages headphone motion services.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager"
+    },
+    "CMHighFrequencyHeartRateData": {
+      "doc": "A class that represents heart rate data collected at 1 Hz.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedata"
+    },
+    "CMLogItem": {
+      "doc": "The base class for all motion-related data objects.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmlogitem"
+    },
+    "CMMagnetometerData": {
+      "doc": "Measurements of the Earth’s magnetic field relative to the device.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmagnetometerdata"
+    },
+    "CMMotionActivity": {
+      "doc": "The data for a single motion update event.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity"
+    },
+    "CMMotionActivityManager": {
+      "doc": "An object that manages access to the motion data stored by the device.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager"
+    },
+    "CMMotionManager": {
+      "doc": "The object for starting and managing motion services.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager"
+    },
+    "CMMovementDisorderManager": {
+      "doc": "A manager for recording and querying movement disorder data.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager"
+    },
+    "CMOdometerData": {
+      "doc": "A class that represents odometer data for workouts.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata"
+    },
+    "CMPedometer": {
+      "doc": "An object for fetching the system-generated live walking data.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmpedometer"
+    },
+    "CMPedometerData": {
+      "doc": "Information about the distance traveled by a user on foot.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata"
+    },
+    "CMPedometerEvent": {
+      "doc": "A change in the user’s pedestrian activity.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmpedometerevent"
+    },
+    "CMRecordedAccelerometerData": {
+      "doc": "A single piece of accelerometer data that was recorded by the device.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmrecordedaccelerometerdata"
+    },
+    "CMRecordedPressureData": {
+      "doc": "A recorded measurement of pressure data.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmrecordedpressuredata"
+    },
+    "CMRecordedRotationRateData": {
+      "doc": "A data object that contains a single rotation-rate measurement at a specific time.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmrecordedrotationratedata"
+    },
+    "CMRotationRateData": {
+      "doc": "A data object that contains a single rotation-rate measurement.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmrotationratedata"
+    },
+    "CMSensorDataList": {
+      "doc": "A list of the accelerometer data recorded by the system.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmsensordatalist"
+    },
+    "CMSensorRecorder": {
+      "doc": "An object that gathers and retrieves accelerometer data from a device.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmsensorrecorder"
+    },
+    "CMStepCounter": {
+      "doc": "The number of steps the user has taken with the device.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmstepcounter"
+    },
+    "CMTremorResult": {
+      "doc": "A result object that contains data about the presence and strength of tremors during a one-minute interval.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult"
+    },
+    "CMWaterSubmersionEvent": {
+      "doc": "An event indicating that the device’s submersion state has changed.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionevent"
+    },
+    "CMWaterSubmersionManager": {
+      "doc": "An object for managing the collection of pressure and temperature data during submersion.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmanager"
+    },
+    "CMWaterSubmersionMeasurement": {
+      "doc": "An update that contains data about the pressure and depth.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement"
+    },
+    "CMWaterTemperature": {
+      "doc": "An update that contains data about the water temperature.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatertemperature"
+    }
+  },
+  "protocols": {
+    "CMFallDetectionDelegate": {
+      "doc": "A delegate that receives information about fall detection events and authorization status changes.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectiondelegate"
+    },
+    "CMHeadphoneMotionManagerDelegate": {
+      "doc": "A set of methods that defines an interface for connecting and disconnecting headphones.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanagerdelegate"
+    },
+    "CMWaterSubmersionManagerDelegate": {
+      "doc": "A delegate that receives updates about ambient pressure, water pressure, water temperature, and submersion events.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmanagerdelegate"
+    }
+  },
+  "enums": {
+    "CMAttitudeReferenceFrame": {
+      "doc": "Constants that indicate the frame of reference for attitude-related motion data.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmattitudereferenceframe",
+      "members": {
+        "CMAttitudeReferenceFrameXArbitraryCorrectedZVertical": {
+          "doc": "A reference frame where the Z axis is vertical and has improved rotation accuracy, and the X axis points in an arbitrary direction in the horizontal plane.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmattitudereferenceframe/xarbitrarycorrectedzvertical"
+        },
+        "CMAttitudeReferenceFrameXArbitraryZVertical": {
+          "doc": "A reference frame where the Z axis is vertical and the X axis points in an arbitrary direction in the horizontal plane.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmattitudereferenceframe/xarbitraryzvertical"
+        },
+        "CMAttitudeReferenceFrameXMagneticNorthZVertical": {
+          "doc": "A reference frame where the Z axis is vertical and the X axis points to the magnetic north pole.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmattitudereferenceframe/xmagneticnorthzvertical"
+        },
+        "CMAttitudeReferenceFrameXTrueNorthZVertical": {
+          "doc": "A reference frame where the Z axis is vertical and the X axis points to the geographic north pole.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmattitudereferenceframe/xtruenorthzvertical"
+        }
+      }
+    },
+    "CMAuthorizationStatus": {
+      "doc": "The authorization status for motion-related features.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmauthorizationstatus",
+      "members": {
+        "CMAuthorizationStatusAuthorized": {
+          "doc": "Access was granted by the user.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmauthorizationstatus/authorized"
+        },
+        "CMAuthorizationStatusDenied": {
+          "doc": "Access was denied by the user.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmauthorizationstatus/denied"
+        },
+        "CMAuthorizationStatusNotDetermined": {
+          "doc": "The status has not yet been determined.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmauthorizationstatus/notdetermined"
+        },
+        "CMAuthorizationStatusRestricted": {
+          "doc": "Access is denied due to system-wide restrictions.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmauthorizationstatus/restricted"
+        }
+      }
+    },
+    "CMDeviceMotionSensorLocation": {
+      "doc": "Defines the device’s sensor locations.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotionsensorlocation"
+    },
+    "CMError": {
+      "doc": "Defines motion errors.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmerror"
+    },
+    "CMFallDetectionEventUserResolution": {
+      "doc": "User resolutions for fall detection events.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectioneventuserresolution"
+    },
+    "CMHeadphoneActivityStatus": {
+      "doc": "Headphone connection status updates.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitystatus"
+    },
+    "CMHighFrequencyHeartRateDataConfidence": {
+      "doc": "The level of confidence in the accuracy of the heart rate data.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedataconfidence",
+      "members": {
+        "CMHighFrequencyHeartRateDataConfidenceHigh": {
+          "doc": "A high level of confidence in the heart rate data.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedataconfidence/high"
+        },
+        "CMHighFrequencyHeartRateDataConfidenceHighest": {
+          "doc": "The highest level of confidence in the heart rate data.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedataconfidence/highest"
+        },
+        "CMHighFrequencyHeartRateDataConfidenceLow": {
+          "doc": "A low level of confidence in the heart rate data.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedataconfidence/low"
+        },
+        "CMHighFrequencyHeartRateDataConfidenceMedium": {
+          "doc": "A medium level of confidence in the heart rate data.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedataconfidence/medium"
+        }
+      }
+    },
+    "CMMagneticFieldCalibrationAccuracy": {
+      "doc": "Indicates the calibration accuracy of a magnetic field estimate",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmagneticfieldcalibrationaccuracy",
+      "members": {
+        "CMMagneticFieldCalibrationAccuracyHigh": {
+          "doc": "The accuracy of the magnetic field calibration is high.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmagneticfieldcalibrationaccuracy/high"
+        },
+        "CMMagneticFieldCalibrationAccuracyLow": {
+          "doc": "The accuracy of the magnetic field calibration is low.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmagneticfieldcalibrationaccuracy/low"
+        },
+        "CMMagneticFieldCalibrationAccuracyMedium": {
+          "doc": "The accuracy of the magnetic field calibration is medium.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmagneticfieldcalibrationaccuracy/medium"
+        },
+        "CMMagneticFieldCalibrationAccuracyUncalibrated": {
+          "doc": "The magnetic field estimate is not calibrated.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmagneticfieldcalibrationaccuracy/uncalibrated"
+        }
+      }
+    },
+    "CMMotionActivityConfidence": {
+      "doc": "The confidence that the motion data is accurate.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivityconfidence",
+      "members": {
+        "CMMotionActivityConfidenceHigh": {
+          "doc": "Confidence is high.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivityconfidence/high"
+        },
+        "CMMotionActivityConfidenceLow": {
+          "doc": "Confidence is low.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivityconfidence/low"
+        },
+        "CMMotionActivityConfidenceMedium": {
+          "doc": "Confidence is good.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivityconfidence/medium"
+        }
+      }
+    },
+    "CMOdometerOriginDevice": {
+      "doc": "The device that the odometer sample originates from.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmodometerorigindevice",
+      "members": {
+        "CMOdometerOriginDeviceLocal": {
+          "doc": "The origin of the odometer sample comes from the same device that requests the sample.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmodometerorigindevice/local"
+        },
+        "CMOdometerOriginDeviceRemote": {
+          "doc": "The origin of the odometer sample comes from a device that’s paired with the local device.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmodometerorigindevice/remote"
+        },
+        "CMOdometerOriginDeviceUnknown": {
+          "doc": "The origin of the odometer sample is unknown.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmodometerorigindevice/unknown"
+        }
+      }
+    },
+    "CMPedometerEventType": {
+      "doc": "Constants indicating the change that occurred to the user’s pedestrian activity.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmpedometereventtype",
+      "members": {
+        "CMPedometerEventTypePause": {
+          "doc": "The user’s pedestrian activity stopped.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmpedometereventtype/pause"
+        },
+        "CMPedometerEventTypeResume": {
+          "doc": "The user’s pedestrian activity resumed.",
+          "url": "https://developer.apple.com/documentation/coremotion/cmpedometereventtype/resume"
+        }
+      }
+    },
+    "CMWaterSubmersionDepthState": {
+      "doc": "A state based on the device’s depth under water.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersiondepthstate"
+    },
+    "CMWaterSubmersionState": {
+      "doc": "The device’s submersion state.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionstate"
+    }
+  },
+  "structs": {
+    "CMAcceleration": {
+      "doc": "The type of a structure containing 3-axis acceleration values.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmacceleration"
+    },
+    "CMCalibratedMagneticField": {
+      "doc": "Calibrated magnetic field data and an estimate of the accuracy of the calibration.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmcalibratedmagneticfield"
+    },
+    "CMMagneticField": {
+      "doc": "A structure containing 3-axis magnetometer data",
+      "url": "https://developer.apple.com/documentation/coremotion/cmmagneticfield"
+    },
+    "CMQuaternion": {
+      "doc": "The type for a quaternion representing a measurement of attitude.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmquaternion"
+    },
+    "CMRotationMatrix": {
+      "doc": "The type of a structure representing a rotation matrix.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmrotationmatrix"
+    },
+    "CMRotationRate": {
+      "doc": "The type of structures representing a measurement of rotation rate.",
+      "url": "https://developer.apple.com/documentation/coremotion/cmrotationrate"
+    }
+  },
+  "methods": {
+    "CMAltimeter": {
+      "+authorizationStatus": {
+        "doc": "Returns a value indicating whether the app is authorized to retrieve altimeter data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/authorizationstatus()"
+      },
+      "+isAbsoluteAltitudeAvailable": {
+        "doc": "Returns a Boolean value indicating whether the current device reports changes in the absolute altitude.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/isabsolutealtitudeavailable()"
+      },
+      "+isRelativeAltitudeAvailable": {
+        "doc": "Returns a Boolean value indicating whether the current device supports generating data for relative altitude changes.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/isrelativealtitudeavailable()"
+      },
+      "-startAbsoluteAltitudeUpdatesToQueue:withHandler:": {
+        "doc": "Starts the delivery of absolute altitude data to the specified handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/startabsolutealtitudeupdates(to:withhandler:)"
+      },
+      "-startRelativeAltitudeUpdatesToQueue:withHandler:": {
+        "doc": "Starts the delivery of relative altitude data to the specified handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/startrelativealtitudeupdates(to:withhandler:)"
+      },
+      "-stopAbsoluteAltitudeUpdates": {
+        "doc": "Stops the delivery of absolute altitude data for this altimeter object.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/stopabsolutealtitudeupdates()"
+      },
+      "-stopRelativeAltitudeUpdates": {
+        "doc": "Stops the delivery of relative altitude data for the altimeter object.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltimeter/stoprelativealtitudeupdates()"
+      }
+    },
+    "CMAttitude": {
+      "-multiplyByInverseOfAttitude:": {
+        "doc": "Yields the change in attitude given a specific attitude.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmattitude/multiply(byinverseof:)"
+      }
+    },
+    "CMFallDetectionManager": {
+      "-requestAuthorizationWithHandler:": {
+        "doc": "Requests authorization to receive notifications about fall detection events.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionmanager/requestauthorization(handler:)"
+      }
+    },
+    "CMHeadphoneActivityManager": {
+      "+authorizationStatus": {
+        "doc": "Returns the authorization status for monitoring headphone activity.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/authorizationstatus()"
+      },
+      "-startActivityUpdatesToQueue:withHandler:": {
+        "doc": "Starts headphone activity updates, providing data to the given handler through the given queue.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/startactivityupdates(to:withhandler:)"
+      },
+      "-startStatusUpdatesToQueue:withHandler:": {
+        "doc": "Starts headphone status updates, providing data to the given handler through the given queue.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/startstatusupdates(to:withhandler:)"
+      },
+      "-stopActivityUpdates": {
+        "doc": "Stops headphone activity updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/stopactivityupdates()"
+      },
+      "-stopStatusUpdates": {
+        "doc": "Stops headphone status updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/stopstatusupdates()"
+      }
+    },
+    "CMHeadphoneMotionManager": {
+      "+authorizationStatus": {
+        "doc": "Returns the authorization status for monitoring headphone motion.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/authorizationstatus()"
+      },
+      "-startDeviceMotionUpdates": {
+        "doc": "Starts device-motion updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/startdevicemotionupdates()"
+      },
+      "-startDeviceMotionUpdatesToQueue:withHandler:": {
+        "doc": "Starts device-motion updates with a handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/startdevicemotionupdates(to:withhandler:)"
+      },
+      "-stopDeviceMotionUpdates": {
+        "doc": "Stops device-motion updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/stopdevicemotionupdates()"
+      }
+    },
+    "CMMotionActivityManager": {
+      "+authorizationStatus": {
+        "doc": "Returns a value indicating whether the app is authorized to retrieve stored motion data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/authorizationstatus()"
+      },
+      "+isActivityAvailable": {
+        "doc": "Returns a Boolean indicating whether motion data is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/isactivityavailable()"
+      },
+      "-queryActivityStartingFromDate:toDate:toQueue:withHandler:": {
+        "doc": "Gathers and returns historical motion data for the specified time period",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/queryactivitystarting(from:to:to:withhandler:)"
+      },
+      "-startActivityUpdatesToQueue:withHandler:": {
+        "doc": "Starts the delivery of current motion data updates to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/startactivityupdates(to:withhandler:)"
+      },
+      "-stopActivityUpdates": {
+        "doc": "Stops the delivery of motion updates to your app",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/stopactivityupdates()"
+      }
+    },
+    "CMMotionManager": {
+      "+availableAttitudeReferenceFrames": {
+        "doc": "Returns a bitmask of the available reference frames for reporting the attitude of the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/availableattitudereferenceframes()"
+      },
+      "-startAccelerometerUpdates": {
+        "doc": "Starts accelerometer updates without a handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startaccelerometerupdates()"
+      },
+      "-startAccelerometerUpdatesToQueue:withHandler:": {
+        "doc": "Starts accelerometer updates on an operation queue and with a specified handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startaccelerometerupdates(to:withhandler:)"
+      },
+      "-startDeviceMotionUpdates": {
+        "doc": "Starts device-motion updates without a block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startdevicemotionupdates()"
+      },
+      "-startDeviceMotionUpdatesToQueue:withHandler:": {
+        "doc": "Starts device-motion updates on an operation queue and using a specified block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startdevicemotionupdates(to:withhandler:)"
+      },
+      "-startDeviceMotionUpdatesUsingReferenceFrame:": {
+        "doc": "Starts device-motion updates using a reference frame but without a block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startdevicemotionupdates(using:)"
+      },
+      "-startDeviceMotionUpdatesUsingReferenceFrame:toQueue:withHandler:": {
+        "doc": "Starts device-motion updates on an operation queue and using a specified reference frame and block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startdevicemotionupdates(using:to:withhandler:)"
+      },
+      "-startGyroUpdates": {
+        "doc": "Starts gyroscope updates without a handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startgyroupdates()"
+      },
+      "-startGyroUpdatesToQueue:withHandler:": {
+        "doc": "Starts gyroscope updates on an operation queue and with a specified handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startgyroupdates(to:withhandler:)"
+      },
+      "-startMagnetometerUpdates": {
+        "doc": "Starts magnetometer updates without a block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startmagnetometerupdates()"
+      },
+      "-startMagnetometerUpdatesToQueue:withHandler:": {
+        "doc": "Starts magnetometer updates on an operation queue and with a specified handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/startmagnetometerupdates(to:withhandler:)"
+      },
+      "-stopAccelerometerUpdates": {
+        "doc": "Stops accelerometer updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/stopaccelerometerupdates()"
+      },
+      "-stopDeviceMotionUpdates": {
+        "doc": "Stops device-motion updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/stopdevicemotionupdates()"
+      },
+      "-stopGyroUpdates": {
+        "doc": "Stops gyroscope updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/stopgyroupdates()"
+      },
+      "-stopMagnetometerUpdates": {
+        "doc": "Stops magnetometer updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/stopmagnetometerupdates()"
+      }
+    },
+    "CMMovementDisorderManager": {
+      "+authorizationStatus": {
+        "doc": "A value indicating whether the user has authorized the app to monitor and query for movement disorder data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/authorizationstatus()"
+      },
+      "+isAvailable": {
+        "doc": "A Boolean value indicating whether the current device supports the movement disorder manager.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/isavailable()"
+      },
+      "+version": {
+        "doc": "Returns a string that describes the movement disorder algorithm’s current version.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/version()"
+      },
+      "-lastProcessedDate": {
+        "doc": "Returns the date of the most recently calculated results.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/lastprocesseddate()"
+      },
+      "-monitorKinesiasExpirationDate": {
+        "doc": "Returns the expiration date for the most recent monitoring period.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/monitorkinesiasexpirationdate()"
+      },
+      "-monitorKinesiasForDuration:": {
+        "doc": "Calculate and store tremor and dyskinetic symptom results for the duration of the specified time interval.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/monitorkinesias(forduration:)"
+      },
+      "-queryDyskineticSymptomFromDate:toDate:withHandler:": {
+        "doc": "Query for dyskinetic symptoms from the provided time interval.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/querydyskineticsymptom(from:to:withhandler:)"
+      },
+      "-queryTremorFromDate:toDate:withHandler:": {
+        "doc": "Query for tremor results from the provided time interval.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmovementdisordermanager/querytremor(from:to:withhandler:)"
+      }
+    },
+    "CMPedometer": {
+      "+authorizationStatus": {
+        "doc": "Returns a value indicating whether the app is authorized to gather pedometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/authorizationstatus()"
+      },
+      "+isCadenceAvailable": {
+        "doc": "Returns a Boolean value indicating whether cadence information is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/iscadenceavailable()"
+      },
+      "+isDistanceAvailable": {
+        "doc": "Returns a Boolean value indicating whether distance estimation is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/isdistanceavailable()"
+      },
+      "+isFloorCountingAvailable": {
+        "doc": "Returns a Boolean value indicating whether floor counting is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/isfloorcountingavailable()"
+      },
+      "+isPaceAvailable": {
+        "doc": "Returns a Boolean value indicating whether pace information is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/ispaceavailable()"
+      },
+      "+isPedometerEventTrackingAvailable": {
+        "doc": "Returns a Boolean value indicating whether pedometer events are available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/ispedometereventtrackingavailable()"
+      },
+      "+isStepCountingAvailable": {
+        "doc": "Returns a Boolean value indicating whether step counting is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/isstepcountingavailable()"
+      },
+      "-queryPedometerDataFromDate:toDate:withHandler:": {
+        "doc": "Retrieves the data between the specified start and end dates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/querypedometerdata(from:to:withhandler:)"
+      },
+      "-startPedometerEventUpdatesWithHandler:": {
+        "doc": "Starts the delivery of pedometer events to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/starteventupdates(handler:)"
+      },
+      "-startPedometerUpdatesFromDate:withHandler:": {
+        "doc": "Starts the delivery of recent pedestrian-related data to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/startupdates(from:withhandler:)"
+      },
+      "-stopPedometerEventUpdates": {
+        "doc": "Stops the delivery of pedometer events to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/stopeventupdates()"
+      },
+      "-stopPedometerUpdates": {
+        "doc": "Stops the delivery of recent pedestrian data updates to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometer/stopupdates()"
+      }
+    },
+    "CMSensorRecorder": {
+      "+authorizationStatus": {
+        "doc": "Returns a value indicating whether the app is authorized to record sensor data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmsensorrecorder/authorizationstatus()"
+      },
+      "+isAccelerometerRecordingAvailable": {
+        "doc": "Returns a Boolean value indicating whether accelerometer recording is supported on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmsensorrecorder/isaccelerometerrecordingavailable()"
+      },
+      "+isAuthorizedForRecording": {
+        "doc": "Returns a Boolean value indicating whether the app is authorized to record sensor data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmsensorrecorder/isauthorizedforrecording()"
+      },
+      "-accelerometerDataFromDate:toDate:": {
+        "doc": "Retrieves the accelerometer data collected between the specified dates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmsensorrecorder/accelerometerdata(from:to:)"
+      },
+      "-recordAccelerometerForDuration:": {
+        "doc": "Begins recording accelerometer data for the specified period of time.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmsensorrecorder/recordaccelerometer(forduration:)"
+      }
+    },
+    "CMStepCounter": {
+      "+isStepCountingAvailable": {
+        "doc": "Returns a Boolean indicating whether step-counting support is available on the current device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmstepcounter/isstepcountingavailable()"
+      },
+      "-queryStepCountStartingFrom:to:toQueue:withHandler:": {
+        "doc": "Gathers and returns historical step count data for the specified time period.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmstepcounter/querystepcountstarting(from:to:to:withhandler:)"
+      },
+      "-startStepCountingUpdatesToQueue:updateOn:withHandler:": {
+        "doc": "Starts the delivery of current step-counting data to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmstepcounter/startstepcountingupdates(to:updateon:withhandler:)"
+      },
+      "-stopStepCountingUpdates": {
+        "doc": "Stops the delivery of step-counting updates to your app.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmstepcounter/stopstepcountingupdates()"
+      }
+    }
+  },
+  "properties": {
+    "CMAbsoluteAltitudeData": {
+      "accuracy": {
+        "doc": "The estimated uncertainty of the altimeter in meters, based on one standard deviation.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmabsolutealtitudedata/accuracy"
+      },
+      "altitude": {
+        "doc": "The absolute altitude of the device relative to sea level, measured in meters.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmabsolutealtitudedata/altitude"
+      },
+      "precision": {
+        "doc": "The recommended resolution for the altitude, in meters.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmabsolutealtitudedata/precision"
+      }
+    },
+    "CMAccelerometerData": {
+      "acceleration": {
+        "doc": "The acceleration measured by the accelerometer.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaccelerometerdata/acceleration"
+      }
+    },
+    "CMAltitudeData": {
+      "pressure": {
+        "doc": "The recorded pressure, in kilopascals.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltitudedata/pressure"
+      },
+      "relativeAltitude": {
+        "doc": "The change in altitude (in meters) since the first reported event.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmaltitudedata/relativealtitude"
+      }
+    },
+    "CMAmbientPressureData": {
+      "pressure": {
+        "doc": "The ambient pressure.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmambientpressuredata/pressure"
+      },
+      "temperature": {
+        "doc": "The temperature.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmambientpressuredata/temperature"
+      }
+    },
+    "CMAttitude": {
+      "pitch": {
+        "doc": "The pitch of the device, in radians.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmattitude/pitch"
+      },
+      "quaternion": {
+        "doc": "Returns a quaternion representing the device’s attitude.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmattitude/quaternion"
+      },
+      "roll": {
+        "doc": "The roll of the device, in radians.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmattitude/roll"
+      },
+      "rotationMatrix": {
+        "doc": "Returns a rotation matrix representing the device’s attitude.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmattitude/rotationmatrix"
+      },
+      "yaw": {
+        "doc": "The yaw of the device, in radians.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmattitude/yaw"
+      }
+    },
+    "CMDeviceMotion": {
+      "CMDeviceMotionSensorLocation": {
+        "doc": "Defines the device’s sensor locations.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/sensorlocation-swift.enum"
+      },
+      "attitude": {
+        "doc": "The attitude of the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/attitude"
+      },
+      "gravity": {
+        "doc": "The gravity acceleration vector expressed in the device’s reference frame.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/gravity"
+      },
+      "heading": {
+        "doc": "The heading angle (measured in degrees) relative to the current reference frame.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/heading"
+      },
+      "magneticField": {
+        "doc": "Returns the magnetic field vector with respect to the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/magneticfield"
+      },
+      "rotationRate": {
+        "doc": "The rotation rate of the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/rotationrate"
+      },
+      "sensorLocation": {
+        "doc": "The location of the sensors that compute the device-motion data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/sensorlocation-swift.property"
+      },
+      "userAcceleration": {
+        "doc": "The acceleration that the user is giving to the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdevicemotion/useracceleration"
+      }
+    },
+    "CMDyskineticSymptomResult": {
+      "endDate": {
+        "doc": "The result’s end time and date.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdyskineticsymptomresult/enddate"
+      },
+      "percentLikely": {
+        "doc": "The percentage of time when dyskinetic symptoms were likely.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdyskineticsymptomresult/percentlikely"
+      },
+      "percentUnlikely": {
+        "doc": "The percentage of time when dyskinetic symptoms were unlikely.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdyskineticsymptomresult/percentunlikely"
+      },
+      "startDate": {
+        "doc": "The result’s start time and date.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmdyskineticsymptomresult/startdate"
+      }
+    },
+    "CMFallDetectionEvent": {
+      "CMFallDetectionEventUserResolution": {
+        "doc": "User resolutions for fall detection events.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionevent/userresolution"
+      },
+      "date": {
+        "doc": "The event’s time and date.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionevent/date"
+      },
+      "resolution": {
+        "doc": "The event’s resolution.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionevent/resolution"
+      }
+    },
+    "CMFallDetectionManager": {
+      "authorizationStatus": {
+        "doc": "The authorization status for receiving fall detection event notifications.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionmanager/authorizationstatus"
+      },
+      "available": {
+        "doc": "A Boolean value that indicates whether the current device supports fall detection.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionmanager/isavailable"
+      },
+      "delegate": {
+        "doc": "A delegate that can receive notifications about fall detection events.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmfalldetectionmanager/delegate"
+      }
+    },
+    "CMGyroData": {
+      "rotationRate": {
+        "doc": "The rotation rate as measured by the device’s gyroscope.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmgyrodata/rotationrate"
+      }
+    },
+    "CMHeadphoneActivityManager": {
+      "CMHeadphoneActivityHandler": {
+        "doc": "The type for a handler to be invoked when headphone motion activity data is available.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/activityhandler"
+      },
+      "CMHeadphoneActivityStatus": {
+        "doc": "Headphone connection status updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/status"
+      },
+      "CMHeadphoneActivityStatusHandler": {
+        "doc": "The type for a handler to be invoked with status updates.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/statushandler"
+      },
+      "activityActive": {
+        "doc": "A Boolean value that indicates whether headphone motion activity is active.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/isactivityactive"
+      },
+      "activityAvailable": {
+        "doc": "A Boolean value that indicates whether the current device supports headphone activity.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/isactivityavailable"
+      },
+      "statusActive": {
+        "doc": "A Boolean value that indicates whether headphone status is active.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/isstatusactive"
+      },
+      "statusAvailable": {
+        "doc": "A Boolean value that indicates whether the current device supports headphone status.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphoneactivitymanager/isstatusavailable"
+      }
+    },
+    "CMHeadphoneMotionManager": {
+      "delegate": {
+        "doc": "The object that receives headphone motion manager events.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/delegate"
+      },
+      "deviceMotion": {
+        "doc": "The latest device-motion data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/devicemotion"
+      },
+      "deviceMotionActive": {
+        "doc": "A Boolean value that indicates whether the headphone motion manager is active.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/isdevicemotionactive"
+      },
+      "deviceMotionAvailable": {
+        "doc": "A Boolean value that indicates whether the current device supports the headphone motion manager.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager/isdevicemotionavailable"
+      }
+    },
+    "CMHighFrequencyHeartRateData": {
+      "confidence": {
+        "doc": "The confidence level of the heart rate value.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedata/confidence"
+      },
+      "date": {
+        "doc": "The time the heart rate value occurs.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedata/date"
+      },
+      "heartRate": {
+        "doc": "The heart rate value in units of beats per minute (BPM).",
+        "url": "https://developer.apple.com/documentation/coremotion/cmhighfrequencyheartratedata/heartrate"
+      }
+    },
+    "CMLogItem": {
+      "timestamp": {
+        "doc": "The time when the logged item is valid.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmlogitem/timestamp"
+      }
+    },
+    "CMMagnetometerData": {
+      "magneticField": {
+        "doc": "Returns the magnetic field measured by the magnetometer.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmagnetometerdata/magneticfield"
+      }
+    },
+    "CMMotionActivity": {
+      "automotive": {
+        "doc": "A Boolean indicating whether the device is in an automobile.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/automotive"
+      },
+      "confidence": {
+        "doc": "The confidence in the assessment of the motion type.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/confidence"
+      },
+      "cycling": {
+        "doc": "A Boolean indicating whether the device is in a bicycle.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/cycling"
+      },
+      "running": {
+        "doc": "A Boolean indicating whether the device is on a running person.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/running"
+      },
+      "startDate": {
+        "doc": "The time at which the change in motion occurred.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/startdate"
+      },
+      "stationary": {
+        "doc": "A Boolean indicating whether the device is stationary.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/stationary"
+      },
+      "unknown": {
+        "doc": "A Boolean indicating whether the type of motion is unknown.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/unknown"
+      },
+      "walking": {
+        "doc": "A Boolean indicating whether the device is on a walking person.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionactivity/walking"
+      }
+    },
+    "CMMotionManager": {
+      "accelerometerActive": {
+        "doc": "A Boolean value that indicates whether accelerometer updates are currently happening.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/isaccelerometeractive"
+      },
+      "accelerometerAvailable": {
+        "doc": "A Boolean value that indicates whether an accelerometer is available on the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/isaccelerometeravailable"
+      },
+      "accelerometerData": {
+        "doc": "The latest sample of accelerometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/accelerometerdata"
+      },
+      "accelerometerUpdateInterval": {
+        "doc": "The interval, in seconds, for providing accelerometer updates to the block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/accelerometerupdateinterval"
+      },
+      "attitudeReferenceFrame": {
+        "doc": "Returns either the reference frame currently being used or the default attitude reference frame.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/attitudereferenceframe"
+      },
+      "deviceMotion": {
+        "doc": "The latest sample of device-motion data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/devicemotion"
+      },
+      "deviceMotionActive": {
+        "doc": "A Boolean value that determines whether the app is receiving updates from the device-motion service.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/isdevicemotionactive"
+      },
+      "deviceMotionAvailable": {
+        "doc": "A Boolean value that indicates whether the device-motion service is available on the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/isdevicemotionavailable"
+      },
+      "deviceMotionUpdateInterval": {
+        "doc": "The interval, in seconds, for providing device-motion updates to the block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/devicemotionupdateinterval"
+      },
+      "gyroActive": {
+        "doc": "A Boolean value that determines whether gyroscope updates are currently happening.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/isgyroactive"
+      },
+      "gyroAvailable": {
+        "doc": "A Boolean value that indicates whether a gyroscope is available on the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/isgyroavailable"
+      },
+      "gyroData": {
+        "doc": "The latest sample of gyroscope data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/gyrodata"
+      },
+      "gyroUpdateInterval": {
+        "doc": "The interval, in seconds, for providing gyroscope updates to the block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/gyroupdateinterval"
+      },
+      "magnetometerActive": {
+        "doc": "A Boolean value that determines whether magnetometer updates are currently happening.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/ismagnetometeractive"
+      },
+      "magnetometerAvailable": {
+        "doc": "A Boolean value that indicates whether a magnetometer is available on the device.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/ismagnetometeravailable"
+      },
+      "magnetometerData": {
+        "doc": "The latest sample of magnetometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/magnetometerdata"
+      },
+      "magnetometerUpdateInterval": {
+        "doc": "The interval, in seconds, at which the system delivers magnetometer data to the block handler.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/magnetometerupdateinterval"
+      },
+      "showsDeviceMovementDisplay": {
+        "doc": "Controls whether the device-movement display is shown.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmmotionmanager/showsdevicemovementdisplay"
+      }
+    },
+    "CMOdometerData": {
+      "deltaAltitude": {
+        "doc": "The change in altitude above mean sea level associated with the location, measured in meters.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/deltaaltitude"
+      },
+      "deltaDistance": {
+        "doc": "The change in distance that the user travels since the last location, measured in meters.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/deltadistance"
+      },
+      "deltaDistanceAccuracy": {
+        "doc": "The accuracy of the change in distance value.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/deltadistanceaccuracy"
+      },
+      "endDate": {
+        "doc": "The time that the device stops recording the odometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/enddate"
+      },
+      "gpsDate": {
+        "doc": "The time of the GPS measurement associated with the location.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/gpsdate"
+      },
+      "maxAbsSlope": {
+        "doc": "The maximum absolute slope at the location toward all directions, measured in degrees.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/maxabsslope-96ulr"
+      },
+      "originDevice": {
+        "doc": "The device that measures the data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/origindevice"
+      },
+      "slope": {
+        "doc": "The slope at the location toward the direction of travel, measured in degrees.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/slope-96hlt"
+      },
+      "speed": {
+        "doc": "The instantaneous velocity of the device, measured in meters per second.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/speed"
+      },
+      "speedAccuracy": {
+        "doc": "The accuracy of the speed value.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/speedaccuracy"
+      },
+      "startDate": {
+        "doc": "The time that the device starts recording the odometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/startdate"
+      },
+      "verticalAccuracy": {
+        "doc": "The validity of the altitude values and their estimated uncertainty, measured in meters.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/verticalaccuracy"
+      }
+    },
+    "CMPedometerData": {
+      "averageActivePace": {
+        "doc": "The average pace of the user, measured in seconds per meter.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/averageactivepace"
+      },
+      "currentCadence": {
+        "doc": "The rate at which steps are taken, measured in steps per second.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/currentcadence"
+      },
+      "currentPace": {
+        "doc": "The current pace of the user, measured in seconds per meter.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/currentpace"
+      },
+      "distance": {
+        "doc": "The estimated distance (in meters) traveled by the user.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/distance"
+      },
+      "endDate": {
+        "doc": "The end time for the pedometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/enddate"
+      },
+      "floorsAscended": {
+        "doc": "The approximate number of floors ascended by walking.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/floorsascended"
+      },
+      "floorsDescended": {
+        "doc": "The approximate number of floors descended by walking.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/floorsdescended"
+      },
+      "numberOfSteps": {
+        "doc": "The number of steps taken by the user.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/numberofsteps"
+      },
+      "startDate": {
+        "doc": "The start time for the pedometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerdata/startdate"
+      }
+    },
+    "CMPedometerEvent": {
+      "date": {
+        "doc": "The date on which the pedometer event was recorded.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerevent/date"
+      },
+      "type": {
+        "doc": "The type of change that occurred.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmpedometerevent/type"
+      }
+    },
+    "CMRecordedAccelerometerData": {
+      "identifier": {
+        "doc": "The unique identifier for the accelerometer data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmrecordedaccelerometerdata/identifier"
+      },
+      "startDate": {
+        "doc": "The wall clock time when the sensor sample was recorded.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmrecordedaccelerometerdata/startdate"
+      }
+    },
+    "CMRecordedPressureData": {
+      "identifier": {
+        "doc": "A value that uniquely identifies this measurement.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmrecordedpressuredata/identifier"
+      },
+      "startDate": {
+        "doc": "The time and date when the system recorded the measurement.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmrecordedpressuredata/startdate"
+      }
+    },
+    "CMRecordedRotationRateData": {
+      "startDate": {
+        "doc": "The time when the gyroscope measured the rotation data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmrecordedrotationratedata/startdate"
+      }
+    },
+    "CMRotationRateData": {
+      "rotationRate": {
+        "doc": "The rotation rate measured by the gyroscope.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmrotationratedata/rotationrate"
+      }
+    },
+    "CMTremorResult": {
+      "endDate": {
+        "doc": "The result’s end time and date.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/enddate"
+      },
+      "percentMild": {
+        "doc": "The percentage of time when a tremor was likely, and the displacement amplitude was mild.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/percentmild"
+      },
+      "percentModerate": {
+        "doc": "The percentage of time when a tremor was likely, and the displacement amplitude was moderate.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/percentmoderate"
+      },
+      "percentNone": {
+        "doc": "The percentage of time when no tremor was detected.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/percentnone"
+      },
+      "percentSlight": {
+        "doc": "The percentage of time when a tremor was likely, and the displacement amplitude was slight.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/percentslight"
+      },
+      "percentStrong": {
+        "doc": "The percentage of time when a tremor was likely, and the displacement amplitude was strong.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/percentstrong"
+      },
+      "percentUnknown": {
+        "doc": "The percentage of time when the algorithm couldn’t make a determination.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/percentunknown"
+      },
+      "startDate": {
+        "doc": "The result’s start time and date.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmtremorresult/startdate"
+      }
+    },
+    "CMWaterSubmersionEvent": {
+      "CMWaterSubmersionState": {
+        "doc": "The device’s submersion state.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionevent/state-swift.enum"
+      },
+      "date": {
+        "doc": "The time and date of the event.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionevent/date"
+      },
+      "state": {
+        "doc": "The new submersion state.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionevent/state-swift.property"
+      }
+    },
+    "CMWaterSubmersionManager": {
+      "authorizationStatus": {
+        "doc": "A value indicating whether the app has user authorization to receive submersion data.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmanager/authorizationstatus"
+      },
+      "delegate": {
+        "doc": "The object that receives updates about submersion data and events.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmanager/delegate"
+      },
+      "maximumDepth": {
+        "doc": "The maximum depth supported by the water submersion manager.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmanager/maximumdepth"
+      },
+      "waterSubmersionAvailable": {
+        "doc": "A Boolean value indicating whether the current device supports the submersion manager.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmanager/watersubmersionavailable"
+      }
+    },
+    "CMWaterSubmersionMeasurement": {
+      "CMWaterSubmersionDepthState": {
+        "doc": "A state based on the device’s depth under water.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement/depthstate"
+      },
+      "date": {
+        "doc": "The time and date when the system recorded the measurements.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement/date"
+      },
+      "depth": {
+        "doc": "The depth under water.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement/depth"
+      },
+      "pressure": {
+        "doc": "The water pressure.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement/pressure"
+      },
+      "submersionState": {
+        "doc": "The depth state.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement/submersionstate"
+      },
+      "surfacePressure": {
+        "doc": "The surface air pressure.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatersubmersionmeasurement/surfacepressure"
+      }
+    },
+    "CMWaterTemperature": {
+      "date": {
+        "doc": "The time and date when the system recorded the measurements.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatertemperature/date"
+      },
+      "temperature": {
+        "doc": "The water temperature.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatertemperature/temperature"
+      },
+      "temperatureUncertainty": {
+        "doc": "The amount of uncertainty in the measurement of the water temperature.",
+        "url": "https://developer.apple.com/documentation/coremotion/cmwatertemperature/temperatureuncertainty"
+      }
+    }
+  }
+}

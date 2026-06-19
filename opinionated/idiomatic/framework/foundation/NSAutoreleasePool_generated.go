@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that supports Cocoa’s reference-counted memory management system.
+//
 // AutoreleasePool wraps [raw.NSAutoreleasePool] with a fluent Go API.
 type AutoreleasePool struct {
 	inner *raw.NSAutoreleasePool
@@ -41,11 +43,15 @@ func (x *AutoreleasePool) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Adds a given object to the receiver
+//
 // AddObject calls the underlying AddObject.
 func (x *AutoreleasePool) AddObject(anObject objc.ID) {
 	x.inner.AddObject(anObject)
 }
 
+// In a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
+//
 // Drain calls the underlying Drain.
 func (x *AutoreleasePool) Drain() {
 	x.inner.Drain()

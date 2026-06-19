@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// A texture to be mapped onto SKSpriteNode instances.
+// An image, decoded on the GPU, that can be used to render various SpriteKit objects.
 //
 // Texture wraps [raw.SKTexture] with a fluent Go API.
 type Texture struct {
@@ -41,7 +41,7 @@ func NewTexture() *Texture {
 	return &Texture{inner: raw.SKTextureFromID(_id)}
 }
 
-// The filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
+// The filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
 //
 // WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
 func (x *Texture) WithFilteringMode(filteringMode SKTextureFilteringMode) *Texture {
@@ -49,7 +49,7 @@ func (x *Texture) WithFilteringMode(filteringMode SKTextureFilteringMode) *Textu
 	return x
 }
 
-// Request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
+// A Boolean value that indicates whether the texture attempts to generate mipmaps.
 //
 // WithUsesMipmaps sets the usesMipmaps property and returns the receiver for chaining.
 func (x *Texture) WithUsesMipmaps(usesMipmaps bool) *Texture {
@@ -90,28 +90,28 @@ func (x *Texture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness 
 	return &Texture{inner: _r}
 }
 
-// Used to choose the area of the texture you want to display. The origin and size should both be in the range 0.0 - 1.0, values outside of this range produces unpredictable results. Defaults to the entire texture {(0,0) (1,1)}.
+// Gets a rectangle that defines the portion of the texture used to render its image.
 //
 // TextureRect calls the underlying TextureRect.
 func (x *Texture) TextureRect() corefoundation.CGRect {
 	return x.inner.TextureRect()
 }
 
-// The size of the texture's bitmap data in points.
+// Gets the size of the texture.
 //
 // Size calls the underlying Size.
 func (x *Texture) Size() corefoundation.CGSize {
 	return x.inner.Size()
 }
 
-// Convert the current SKTexture into a CGImageRef object
+// Returns the texture’s image data as a Quartz 2D image.
 //
 // CGImage calls the underlying CGImage.
 func (x *Texture) CGImage() unsafe.Pointer {
 	return x.inner.CGImage()
 }
 
-// Request that this texture be loaded into vram on the next render update, with a callback handler.
+// Load texture data into memory, calling a completion handler after the task completes.
 //
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *Texture) Preload(ctx context.Context) error {

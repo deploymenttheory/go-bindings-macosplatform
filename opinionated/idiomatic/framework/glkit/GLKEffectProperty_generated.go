@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for configuration information used in GLKit rendering effects.
+//
 // EffectProperty wraps [raw.GLKEffectProperty] with a fluent Go API.
 type EffectProperty struct {
 	inner *raw.GLKEffectProperty

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that provides localized representations of units and measurements.
+//
 // MeasurementFormatter wraps [raw.NSMeasurementFormatter] with a fluent Go API.
 type MeasurementFormatter struct {
 	inner *raw.NSMeasurementFormatter

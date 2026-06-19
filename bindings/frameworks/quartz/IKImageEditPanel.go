@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikimageeditpanel
 type IKImageEditPanel struct {
 	appkit.NSPanel
@@ -35,13 +37,13 @@ func IKImageEditPanelFromID(id objc.ID) *IKImageEditPanel {
 	return o
 }
 
-// @method sharedImageEditPanel @abstract Creates a shared instance of an image editing panel.
+// Creates a shared instance of an image editing panel.
 func IKImageEditPanelSharedImageEditPanel() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIKImageEditPanel), _iKImageEditPanelSelSharedImageEditPanel)
 	return _ret
 }
 
-// @method reloadData @abstract Reloads the data from the data associated with an image editing panel.
+// Reloads the data from the data associated with an image editing panel.
 func (o *IKImageEditPanel) ReloadData() {
 	o.Ptr().Send(_iKImageEditPanelSelReloadData)
 }
@@ -58,6 +60,9 @@ func (o *IKImageEditPanel) SetDataSource(dataSource objc.ID) {
 
 // @property filterArray @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (o *IKImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iKImageEditPanelSelFilterArray)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageEditPanelSelFilterArray)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

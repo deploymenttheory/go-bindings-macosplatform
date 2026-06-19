@@ -34,5 +34,5 @@ func BCChatActionFromID(id objc.ID) *BCChatAction {
 // Open the chat transcript configured for a given business. @param businessIdentifier The business identifier for the given business. @param intentParameters Parameters to be sent with the initial message.
 // Deprecated: since macOS 13.0.
 func BCChatActionOpenTranscriptIntentParameters(businessIdentifier *foundation.NSString, intentParameters *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	objc.ID(_clsBCChatAction).Send(_bCChatActionSelOpenTranscriptIntentParameters, businessIdentifier.Ptr(), intentParameters)
+	objc.ID(_clsBCChatAction).Send(_bCChatActionSelOpenTranscriptIntentParameters, businessIdentifier.Ptr(), intentParameters.Ptr())
 }

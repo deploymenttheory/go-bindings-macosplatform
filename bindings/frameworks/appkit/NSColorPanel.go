@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A standard user interface for selecting color in an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorpanel
 type NSColorPanel struct {
 	NSPanel
@@ -50,31 +52,38 @@ func NSColorPanelFromID(id objc.ID) *NSColorPanel {
 	return o
 }
 
+// Drags a color into a destination view from the specified source view.
 func NSColorPanelDragColorWithEventFromView(color *NSColor, event *NSEvent, sourceView *NSView) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelDragColorWithEventFromView, color.Ptr(), event.Ptr(), sourceView.Ptr())
 	return _ret
 }
 
+// Determines which color selection modes are available in an application’s NSColorPanel.
 func NSColorPanelSetPickerMask(mask NSColorPanelOptions) {
 	objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMask, mask)
 }
 
+// Specifies the color panel’s initial picker.
 func NSColorPanelSetPickerMode(mode NSColorPanelMode) {
 	objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMode, mode)
 }
 
+// Sets the color panel’s action message.
 func (o *NSColorPanel) SetAction(selector objc.SEL) {
 	o.Ptr().Send(_nSColorPanelSelSetAction, selector)
 }
 
+// Sets the target of the receiver.
 func (o *NSColorPanel) SetTarget(target objc.ID) {
 	o.Ptr().Send(_nSColorPanelSelSetTarget, target)
 }
 
+// Adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
 func (o *NSColorPanel) AttachColorList(colorList *NSColorList) {
 	o.Ptr().Send(_nSColorPanelSelAttachColorList, colorList.Ptr())
 }
 
+// Removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
 func (o *NSColorPanel) DetachColorList(colorList *NSColorList) {
 	o.Ptr().Send(_nSColorPanelSelDetachColorList, colorList.Ptr())
 }

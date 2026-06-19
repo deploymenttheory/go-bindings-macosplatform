@@ -15,7 +15,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Information associated with an AVAsset for a cinematic video.
+// An object that provides Cinematic-specific information about an asset, including its tracks.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnassetinfo
 type CNAssetInfo struct {
@@ -87,8 +87,11 @@ func (o *CNAssetInfo) Asset() *avfoundation.AVAsset {
 }
 
 func (o *CNAssetInfo) AllCinematicTracks() *foundation.NSArray[*avfoundation.AVAssetTrack] {
-	_ret := objc.Send[*foundation.NSArray[*avfoundation.AVAssetTrack]](o.Ptr(), _cNAssetInfoSelAllCinematicTracks)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelAllCinematicTracks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*avfoundation.AVAssetTrack](_ret)
 }
 
 func (o *CNAssetInfo) CinematicVideoTrack() *avfoundation.AVAssetTrack {
@@ -150,18 +153,27 @@ func (o *CNAssetInfo) FrameTimingTrack() *avfoundation.AVAssetTrack {
 
 // Tracks required to construct AVAssetReaderVideoCompositionOutput.
 func (o *CNAssetInfo) VideoCompositionTracks() *foundation.NSArray[*avfoundation.AVAssetTrack] {
-	_ret := objc.Send[*foundation.NSArray[*avfoundation.AVAssetTrack]](o.Ptr(), _cNAssetInfoSelVideoCompositionTracks)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelVideoCompositionTracks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*avfoundation.AVAssetTrack](_ret)
 }
 
 // Source video track IDs required to implement AVVideoCompositionInstruction protocol
 func (o *CNAssetInfo) VideoCompositionTrackIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cNAssetInfoSelVideoCompositionTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelVideoCompositionTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Source metadata track IDs required to implement AVVideoCompositionInstruction protocol
 func (o *CNAssetInfo) SampleDataTrackIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cNAssetInfoSelSampleDataTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelSampleDataTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

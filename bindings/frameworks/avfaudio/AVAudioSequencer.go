@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that plays audio from a collection of MIDI events the system organizes into music tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiosequencer
 type AVAudioSequencer struct {
 	foundation.NSObject
@@ -58,7 +60,7 @@ func AVAudioSequencerFromID(id objc.ID) *AVAudioSequencer {
 	return o
 }
 
-// @method init @abstract Initialize a new sequencer, which will not be connected to an audio engine. @discussion This is used to create a sequencer whose tracks will only send events to external MIDI endpoints.
+// Creates an audio sequencer object.
 func (o *AVAudioSequencer) Init() *AVAudioSequencer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelInit)
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func (o *AVAudioSequencer) Init() *AVAudioSequencer {
 	return AVAudioSequencerFromID(_ret)
 }
 
-// @method initWithAudioEngine: @abstract Initialize a new sequencer, handing it the audio engine.
+// Creates an audio sequencer that the framework attaches to an audio engine instance.
 func (o *AVAudioSequencer) InitWithAudioEngine(engine *AVAudioEngine) *AVAudioSequencer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelInitWithAudioEngine, engine.Ptr())
 	if _ret != 0 {
@@ -76,7 +78,7 @@ func (o *AVAudioSequencer) InitWithAudioEngine(engine *AVAudioEngine) *AVAudioSe
 	return AVAudioSequencerFromID(_ret)
 }
 
-// @method loadFromURL:options:error: @abstract Load the file referenced by the URL and add the events to the sequence @param fileURL the URL to the file @param options determines how the file's contents are mapped to tracks inside the sequence @param outError on exit, if an error occurs, a description of the error
+// Loads the file the URL references and adds the events to the sequence.
 func (o *AVAudioSequencer) LoadFromURLOptionsError(fileURL *foundation.NSURL, options AVMusicSequenceLoadOptions) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelLoadFromURLOptionsError, fileURL.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -86,7 +88,7 @@ func (o *AVAudioSequencer) LoadFromURLOptionsError(fileURL *foundation.NSURL, op
 	return _ret, nil
 }
 
-// @method loadFromData:options:error: @abstract Parse the data and add the its events to the sequence @param data the data to load from @param options determines how the contents are mapped to tracks inside the sequence @param outError on exit, if an error occurs, a description of the error
+// Parses the data and adds its events to the sequence.
 func (o *AVAudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, options AVMusicSequenceLoadOptions) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelLoadFromDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -96,7 +98,7 @@ func (o *AVAudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, opt
 	return _ret, nil
 }
 
-// @method writeToURL:SMPTEResolution:replaceExisting:error: @abstract Create and write a MIDI file containing the events and complete state of the sequence @param fileURL the path for the file to be created @param resolution the relationship between "tick" and quarter note for saving to a Standard MIDI File - pass in zero to use default - this will be the value that is currently set on the tempo track @param replace if the file already exists, YES will cause it to be overwritten with the new data. Otherwise the call will fail with a permission error. @param outError on exit, if an error occurs, a description of the error @discussion A MIDI file saved via this method will contain not only the complete MIDI content of the sequence, but also the state of all tracks, including muting, loop points and enablement, etc.  It will also contain all non-MIDI AVMusicEvent types which had been added to the sequence's track. MIDI files are normally beat based, but can also have a SMPTE (or real-time rather than beat time) representation. The relationship between "tick" and quarter note for saving to Standard MIDI File - pass in zero to use default - this will be the value that is currently set on the tempo track
+// Creates and writes a MIDI file from the events in the sequence.
 func (o *AVAudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL *foundation.NSURL, resolution int, replace bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelWriteToURLSMPTEResolutionReplaceExistingError, fileURL.Ptr(), resolution, replace, unsafe.Pointer(&_nsErr))
@@ -106,7 +108,7 @@ func (o *AVAudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL
 	return _ret, nil
 }
 
-// @method dataWithSMPTEResolution:error: @abstract Return a data object containing the events from the sequence @discussion All details regarding the SMPTE resolution apply here as well. The returned NSData lifetime is controlled by the client.
+// Gets a data object that contains the events from the sequence.
 func (o *AVAudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelDataWithSMPTEResolutionError, sMPTEResolution, unsafe.Pointer(&_nsErr))
@@ -119,24 +121,24 @@ func (o *AVAudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*f
 	return foundation.NSDataFromID(_ret), nil
 }
 
-// @method secondsForBeats: @abstract Get the time in seconds for the given beat position (timestamp) in the AVMusicTrack
+// Gets the time for the specified beat position (timestamp) in the track, in seconds.
 func (o *AVAudioSequencer) SecondsForBeats(beats float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVAudioSequencerSelSecondsForBeats, beats)
 	return _ret
 }
 
-// @method beatsForSeconds: @abstract Get the beat position (timestamp) for the given time in the AVMusicTrack
+// Gets the beat position (timestamp) for the specified time in the track.
 func (o *AVAudioSequencer) BeatsForSeconds(seconds float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVAudioSequencerSelBeatsForSeconds, seconds)
 	return _ret
 }
 
-// @method reverseEvents: @abstract Reverse the order of all events in all AVMusicTracks, including the tempo track
+// Reverses the order of all events in all music tracks, including the tempo track.
 func (o *AVAudioSequencer) ReverseEvents() {
 	o.Ptr().Send(_aVAudioSequencerSelReverseEvents)
 }
 
-// @method createAndAppendTrack: @abstract Create a new AVMusicTrack and append it to the AVMusicSequencer's list
+// Creates a new music track and appends it to the sequencer’s list.
 func (o *AVAudioSequencer) CreateAndAppendTrack() *AVMusicTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelCreateAndAppendTrack)
 	if _ret != 0 {
@@ -145,13 +147,13 @@ func (o *AVAudioSequencer) CreateAndAppendTrack() *AVMusicTrack {
 	return AVMusicTrackFromID(_ret)
 }
 
-// @method removeTrack: @abstract Remove the given AVMusicTrack from the AVMusicSequencer. @discussion This does not destroy the AVMusicTrack because it may be re-used.
+// Removes the music track from the sequencer.
 func (o *AVAudioSequencer) RemoveTrack(track *AVMusicTrack) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelRemoveTrack, track.Ptr())
 	return _ret
 }
 
-// @method setUserCallback: @abstract Add a block which will be called each time the AVAudioSequencer encounters an AVMusicUserEvent during playback. @discussion The same callback is called for events which occur on any track in the sequencer. Set the block to nil to disable it.
+// Adds a callback that the sequencer calls each time it encounters a user event during playback.
 func (o *AVAudioSequencer) SetUserCallback(userCallback func(*AVMusicTrack, *foundation.NSData, float64)) {
 	var __block_userCallback objc.Block
 	if userCallback != nil {
@@ -189,11 +191,14 @@ func (o *AVAudioSequencer) TempoTrack() *AVMusicTrack {
 
 // @property userInfo @abstract A dictionary containing meta-data derived from a sequence @discussion The dictionary can contain one or more of the values accessible via the AVAudioSequencerInfoDictionaryKeys.
 func (o *AVAudioSequencer) UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAudioSequencerSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
-// @method hostTimeForBeats:error: @abstract Returns the host time that will be (or was) played at the specified beat. @discussion This call is only valid if the player is playing and will return 0 with an error if the player is not playing or if the starting position of the player (its "starting beat") was after the specified beat.  The method uses the sequence's tempo map to translate a beat time from the starting time and beat of the player.
+// Gets the host time the sequence plays at the specified position.
 func (o *AVAudioSequencer) HostTimeForBeatsError(inBeats float64) (uint64, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[uint64](o.Ptr(), _aVAudioSequencerSelHostTimeForBeatsError, inBeats, unsafe.Pointer(&_nsErr))
@@ -203,7 +208,7 @@ func (o *AVAudioSequencer) HostTimeForBeatsError(inBeats float64) (uint64, error
 	return _ret, nil
 }
 
-// @method beatsForHostTime:error: @abstract Returns the beat that will be (or was) played at the specified host time. @discussion This call is only valid if the player is playing and will return 0 with an error if the player is not playing or if the starting time of the player was after the specified host time.  The method uses the sequence's tempo map to retrieve a beat time from the starting and specified host time.
+// Gets the beat the system plays at the specified host time.
 func (o *AVAudioSequencer) BeatsForHostTimeError(inHostTime uint64) (float64, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[float64](o.Ptr(), _aVAudioSequencerSelBeatsForHostTimeError, inHostTime, unsafe.Pointer(&_nsErr))
@@ -213,12 +218,12 @@ func (o *AVAudioSequencer) BeatsForHostTimeError(inHostTime uint64) (float64, er
 	return _ret, nil
 }
 
-// @method prepareToPlay @abstract Get ready to play the sequence by prerolling all events @discussion Happens automatically on play if it has not already been called, but may produce a delay in startup.
+// Gets ready to play the sequence by prerolling all events.
 func (o *AVAudioSequencer) PrepareToPlay() {
 	o.Ptr().Send(_aVAudioSequencerSelPrepareToPlay)
 }
 
-// @method	startAndReturnError: @abstract	Start the sequencer's player @discussion If the AVAudioSequencer has not been prerolled, it will pre-roll itself and then start. When the sequencer is associated with an audio engine, the sequencer's player will only play if the audio engine is running.
+// Starts the sequencer’s player.
 func (o *AVAudioSequencer) StartAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioSequencerSelStartAndReturnError, unsafe.Pointer(&_nsErr))
@@ -228,7 +233,7 @@ func (o *AVAudioSequencer) StartAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method	stop @abstract	Stop the sequencer's player @discussion Stopping the player leaves it in an un-prerolled state, but stores the playback position so that a subsequent call to startAndReturnError will resume where it left off. This action will not stop an associated audio engine.
+// Stops the sequencer’s player.
 func (o *AVAudioSequencer) Stop() {
 	o.Ptr().Send(_aVAudioSequencerSelStop)
 }

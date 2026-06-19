@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the list of previously loaded webpages, which the web view uses for forward and backward navigation.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkbackforwardlist
 type WKBackForwardList struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func WKBackForwardListFromID(id objc.ID) *WKBackForwardList {
 	return o
 }
 
-// @abstract Returns the item at a specified distance from the current item. @param index Index of the desired list item relative to the current item: 0 for the current item, -1 for the immediately preceding item, 1 for the immediately following item, and so on. @result The item at the specified distance from the current item, or nil if the index parameter exceeds the limits of the list.
+// Returns the item at the relative offset from the current item.
 func (o *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelItemAtIndex, index)
 	if _ret != 0 {

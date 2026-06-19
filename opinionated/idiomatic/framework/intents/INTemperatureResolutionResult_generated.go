@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the units to use with a temperature value.
+//
 // TemperatureResolutionResult wraps [raw.INTemperatureResolutionResult] with a fluent Go API.
 type TemperatureResolutionResult struct {
 	inner *raw.INTemperatureResolutionResult

@@ -7,6 +7,7 @@ import (
 	"unsafe"
 )
 
+// A structure containing user-defined data and callbacks for CFHost objects.
 type CFHostClientContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -15,6 +16,7 @@ type CFHostClientContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A structure provided when a CFNetService is associated with a callback function or when a CFNetServiceBrowser is created.
 type CFNetServiceClientContext struct {
 	Version         int
 	Info            unsafe.Pointer

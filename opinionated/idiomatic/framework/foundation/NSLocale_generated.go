@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about linguistic, cultural, and technological conventions for use in formatting data for presentation.
+//
 // Locale wraps [raw.NSLocale] with a fluent Go API.
 type Locale struct {
 	inner *raw.NSLocale
@@ -30,6 +32,8 @@ func LocaleFromID(id objc.ID) *Locale {
 	return &Locale{inner: raw.NSLocaleFromID(id)}
 }
 
+// Initializes a locale using a given locale identifier.
+//
 // NewLocaleWithLocaleIdentifier creates a new [Locale].
 func NewLocaleWithLocaleIdentifier(string_ string) *Locale {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLocale")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewLocaleWithLocaleIdentifier(string_ string) *Locale {
 	return &Locale{inner: raw.NSLocaleFromID(_id)}
 }
 
+// Returns a locale initialized from data in the given unarchiver.
+//
 // NewLocaleWithCoder creates a new [Locale].
 func NewLocaleWithCoder(coder *raw.NSCoder) *Locale {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLocale")), objc.RegisterName("alloc"))
@@ -50,11 +56,15 @@ func (x *Locale) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*
 	return x
 }
 
+// Returns the value of the component corresponding to the specified key.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Locale) ObjectForKey(key *raw.NSString) objc.ID {
 	return x.inner.ObjectForKey(key)
 }
 
+// Returns the display name for the given locale component value.
+//
 // DisplayNameForKeyValue calls the underlying DisplayNameForKeyValue.
 func (x *Locale) DisplayNameForKeyValue(key *raw.NSString, value objc.ID) *String {
 	_r := x.inner.DisplayNameForKeyValue(key, value)
@@ -64,6 +74,8 @@ func (x *Locale) DisplayNameForKeyValue(key *raw.NSString, value objc.ID) *Strin
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified locale identifier.
+//
 // LocalizedStringForLocaleIdentifier calls the underlying LocalizedStringForLocaleIdentifier.
 func (x *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) *String {
 	_r := x.inner.LocalizedStringForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
@@ -73,6 +85,8 @@ func (x *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) *St
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified language code.
+//
 // LocalizedStringForLanguageCode calls the underlying LocalizedStringForLanguageCode.
 func (x *Locale) LocalizedStringForLanguageCode(languageCode string) *String {
 	_r := x.inner.LocalizedStringForLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
@@ -82,6 +96,8 @@ func (x *Locale) LocalizedStringForLanguageCode(languageCode string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the localized string for a country or region code.
+//
 // LocalizedStringForCountryCode calls the underlying LocalizedStringForCountryCode.
 func (x *Locale) LocalizedStringForCountryCode(countryCode string) *String {
 	_r := x.inner.LocalizedStringForCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
@@ -91,6 +107,8 @@ func (x *Locale) LocalizedStringForCountryCode(countryCode string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified script code.
+//
 // LocalizedStringForScriptCode calls the underlying LocalizedStringForScriptCode.
 func (x *Locale) LocalizedStringForScriptCode(scriptCode string) *String {
 	_r := x.inner.LocalizedStringForScriptCode(foundation.NSStringStringWithUTF8String(scriptCode))
@@ -100,6 +118,8 @@ func (x *Locale) LocalizedStringForScriptCode(scriptCode string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified variant code.
+//
 // LocalizedStringForVariantCode calls the underlying LocalizedStringForVariantCode.
 func (x *Locale) LocalizedStringForVariantCode(variantCode string) *String {
 	_r := x.inner.LocalizedStringForVariantCode(foundation.NSStringStringWithUTF8String(variantCode))
@@ -109,6 +129,8 @@ func (x *Locale) LocalizedStringForVariantCode(variantCode string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified calendar identifier.
+//
 // LocalizedStringForCalendarIdentifier calls the underlying LocalizedStringForCalendarIdentifier.
 func (x *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) *String {
 	_r := x.inner.LocalizedStringForCalendarIdentifier(foundation.NSStringStringWithUTF8String(calendarIdentifier))
@@ -118,6 +140,8 @@ func (x *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string)
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified collation identifier.
+//
 // LocalizedStringForCollationIdentifier calls the underlying LocalizedStringForCollationIdentifier.
 func (x *Locale) LocalizedStringForCollationIdentifier(collationIdentifier string) *String {
 	_r := x.inner.LocalizedStringForCollationIdentifier(foundation.NSStringStringWithUTF8String(collationIdentifier))
@@ -127,6 +151,8 @@ func (x *Locale) LocalizedStringForCollationIdentifier(collationIdentifier strin
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified currency code.
+//
 // LocalizedStringForCurrencyCode calls the underlying LocalizedStringForCurrencyCode.
 func (x *Locale) LocalizedStringForCurrencyCode(currencyCode string) *String {
 	_r := x.inner.LocalizedStringForCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
@@ -136,6 +162,8 @@ func (x *Locale) LocalizedStringForCurrencyCode(currencyCode string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the localized string for the specified collator identifier.
+//
 // LocalizedStringForCollatorIdentifier calls the underlying LocalizedStringForCollatorIdentifier.
 func (x *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) *String {
 	_r := x.inner.LocalizedStringForCollatorIdentifier(foundation.NSStringStringWithUTF8String(collatorIdentifier))

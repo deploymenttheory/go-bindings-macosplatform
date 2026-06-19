@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class for managing the units of measure within HealthKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkunit
 type HKUnit struct {
 	foundation.NSObject
@@ -104,6 +106,7 @@ func HKUnitFromID(id objc.ID) *HKUnit {
 	return o
 }
 
+// Returns the unit instance described by the provided string.
 func HKUnitUnitFromString(string_ *foundation.NSString) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelUnitFromString, string_.Ptr())
 	if _ret != 0 {
@@ -112,6 +115,7 @@ func HKUnitUnitFromString(string_ *foundation.NSString) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Converts a mass formatter enumeration value into a corresponding HealthKit unit object.
 func HKUnitUnitFromMassFormatterUnit(massFormatterUnit foundation.NSMassFormatterUnit) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelUnitFromMassFormatterUnit, massFormatterUnit)
 	if _ret != 0 {
@@ -120,11 +124,13 @@ func HKUnitUnitFromMassFormatterUnit(massFormatterUnit foundation.NSMassFormatte
 	return HKUnitFromID(_ret)
 }
 
+// Converts a HealthKit unit object into a corresponding mass formatter enumeration value.
 func HKUnitMassFormatterUnitFromUnit(unit *HKUnit) foundation.NSMassFormatterUnit {
 	_ret := objc.Send[foundation.NSMassFormatterUnit](objc.ID(_clsHKUnit), _hKUnitSelMassFormatterUnitFromUnit, unit.Ptr())
 	return _ret
 }
 
+// Converts a length formatter enumeration value into a corresponding HealthKit object.
 func HKUnitUnitFromLengthFormatterUnit(lengthFormatterUnit foundation.NSLengthFormatterUnit) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelUnitFromLengthFormatterUnit, lengthFormatterUnit)
 	if _ret != 0 {
@@ -133,11 +139,13 @@ func HKUnitUnitFromLengthFormatterUnit(lengthFormatterUnit foundation.NSLengthFo
 	return HKUnitFromID(_ret)
 }
 
+// Converts a HealthKit unit object into a corresponding length formatter enumeration value.
 func HKUnitLengthFormatterUnitFromUnit(unit *HKUnit) foundation.NSLengthFormatterUnit {
 	_ret := objc.Send[foundation.NSLengthFormatterUnit](objc.ID(_clsHKUnit), _hKUnitSelLengthFormatterUnitFromUnit, unit.Ptr())
 	return _ret
 }
 
+// Converts an energy formatter enumeration value into a corresponding HealthKit unit object.
 func HKUnitUnitFromEnergyFormatterUnit(energyFormatterUnit foundation.NSEnergyFormatterUnit) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelUnitFromEnergyFormatterUnit, energyFormatterUnit)
 	if _ret != 0 {
@@ -146,11 +154,13 @@ func HKUnitUnitFromEnergyFormatterUnit(energyFormatterUnit foundation.NSEnergyFo
 	return HKUnitFromID(_ret)
 }
 
+// Converts a HealthKit unit object into a corresponding energy formatter enumeration value.
 func HKUnitEnergyFormatterUnitFromUnit(unit *HKUnit) foundation.NSEnergyFormatterUnit {
 	_ret := objc.Send[foundation.NSEnergyFormatterUnit](objc.ID(_clsHKUnit), _hKUnitSelEnergyFormatterUnitFromUnit, unit.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the unit is null.
 func (o *HKUnit) IsNull() bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKUnitSelIsNull)
 	return _ret
@@ -165,6 +175,7 @@ func (o *HKUnit) UnitString() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass, using gram units with the provided prefix.
 func HKUnitGramUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelGramUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -173,6 +184,7 @@ func HKUnitGramUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass in grams.
 func HKUnitGramUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelGramUnit)
 	if _ret != 0 {
@@ -181,6 +193,7 @@ func HKUnitGramUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass in ounces.
 func HKUnitOunceUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelOunceUnit)
 	if _ret != 0 {
@@ -189,6 +202,7 @@ func HKUnitOunceUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass in pounds.
 func HKUnitPoundUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPoundUnit)
 	if _ret != 0 {
@@ -197,6 +211,7 @@ func HKUnitPoundUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass in stones.
 func HKUnitStoneUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelStoneUnit)
 	if _ret != 0 {
@@ -205,6 +220,7 @@ func HKUnitStoneUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass in moles, with the given prefix and molar mass.
 func HKUnitMoleUnitWithMetricPrefixMolarMass(prefix HKMetricPrefix, gramsPerMole float64) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMoleUnitWithMetricPrefixMolarMass, prefix, gramsPerMole)
 	if _ret != 0 {
@@ -213,6 +229,7 @@ func HKUnitMoleUnitWithMetricPrefixMolarMass(prefix HKMetricPrefix, gramsPerMole
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring mass in moles for a given molar mass.
 func HKUnitMoleUnitWithMolarMass(gramsPerMole float64) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMoleUnitWithMolarMass, gramsPerMole)
 	if _ret != 0 {
@@ -221,6 +238,7 @@ func HKUnitMoleUnitWithMolarMass(gramsPerMole float64) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring length, using meter units with the provided prefix.
 func HKUnitMeterUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMeterUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -229,6 +247,7 @@ func HKUnitMeterUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring length in meters.
 func HKUnitMeterUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMeterUnit)
 	if _ret != 0 {
@@ -237,6 +256,7 @@ func HKUnitMeterUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring length in inches.
 func HKUnitInchUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelInchUnit)
 	if _ret != 0 {
@@ -245,6 +265,7 @@ func HKUnitInchUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring length in feet.
 func HKUnitFootUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelFootUnit)
 	if _ret != 0 {
@@ -253,6 +274,7 @@ func HKUnitFootUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring length in yards.
 func HKUnitYardUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelYardUnit)
 	if _ret != 0 {
@@ -261,6 +283,7 @@ func HKUnitYardUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring length in miles.
 func HKUnitMileUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMileUnit)
 	if _ret != 0 {
@@ -269,6 +292,7 @@ func HKUnitMileUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume, using liter units with the provided prefix.
 func HKUnitLiterUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelLiterUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -277,6 +301,7 @@ func HKUnitLiterUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in liters.
 func HKUnitLiterUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelLiterUnit)
 	if _ret != 0 {
@@ -285,6 +310,7 @@ func HKUnitLiterUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in US fluid ounces.
 func HKUnitFluidOunceUSUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelFluidOunceUSUnit)
 	if _ret != 0 {
@@ -293,6 +319,7 @@ func HKUnitFluidOunceUSUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in imperial fluid ounces.
 func HKUnitFluidOunceImperialUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelFluidOunceImperialUnit)
 	if _ret != 0 {
@@ -301,6 +328,7 @@ func HKUnitFluidOunceImperialUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in US pints.
 func HKUnitPintUSUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPintUSUnit)
 	if _ret != 0 {
@@ -309,6 +337,7 @@ func HKUnitPintUSUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in imperial pints.
 func HKUnitPintImperialUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPintImperialUnit)
 	if _ret != 0 {
@@ -317,6 +346,7 @@ func HKUnitPintImperialUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in US cups.
 func HKUnitCupUSUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelCupUSUnit)
 	if _ret != 0 {
@@ -325,6 +355,7 @@ func HKUnitCupUSUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring volume in imperial cups.
 func HKUnitCupImperialUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelCupImperialUnit)
 	if _ret != 0 {
@@ -333,6 +364,7 @@ func HKUnitCupImperialUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring pressure, using pascal units with the provided prefix.
 func HKUnitPascalUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPascalUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -341,6 +373,7 @@ func HKUnitPascalUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring pressure in pascals.
 func HKUnitPascalUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPascalUnit)
 	if _ret != 0 {
@@ -349,6 +382,7 @@ func HKUnitPascalUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring pressure in millimeters of mercury.
 func HKUnitMillimeterOfMercuryUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMillimeterOfMercuryUnit)
 	if _ret != 0 {
@@ -357,6 +391,7 @@ func HKUnitMillimeterOfMercuryUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring pressure in centimeters of water.
 func HKUnitCentimeterOfWaterUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelCentimeterOfWaterUnit)
 	if _ret != 0 {
@@ -365,6 +400,7 @@ func HKUnitCentimeterOfWaterUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring pressure in atmospheres.
 func HKUnitAtmosphereUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelAtmosphereUnit)
 	if _ret != 0 {
@@ -373,6 +409,7 @@ func HKUnitAtmosphereUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring the difference between the local pressure and the ambient atmospheric pressure caused by sound.
 func HKUnitDecibelAWeightedSoundPressureLevelUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDecibelAWeightedSoundPressureLevelUnit)
 	if _ret != 0 {
@@ -381,6 +418,7 @@ func HKUnitDecibelAWeightedSoundPressureLevelUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring pressure in inches of mercury.
 func HKUnitInchesOfMercuryUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelInchesOfMercuryUnit)
 	if _ret != 0 {
@@ -389,6 +427,7 @@ func HKUnitInchesOfMercuryUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring time, using second units with the provided prefix.
 func HKUnitSecondUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelSecondUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -397,6 +436,7 @@ func HKUnitSecondUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring time in seconds.
 func HKUnitSecondUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelSecondUnit)
 	if _ret != 0 {
@@ -405,6 +445,7 @@ func HKUnitSecondUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring time in minutes.
 func HKUnitMinuteUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelMinuteUnit)
 	if _ret != 0 {
@@ -413,6 +454,7 @@ func HKUnitMinuteUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring time in hours.
 func HKUnitHourUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelHourUnit)
 	if _ret != 0 {
@@ -421,6 +463,7 @@ func HKUnitHourUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring time in days.
 func HKUnitDayUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDayUnit)
 	if _ret != 0 {
@@ -429,6 +472,7 @@ func HKUnitDayUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring energy, using joule units with the provided prefix.
 func HKUnitJouleUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelJouleUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -437,6 +481,7 @@ func HKUnitJouleUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring energy in joules.
 func HKUnitJouleUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelJouleUnit)
 	if _ret != 0 {
@@ -445,6 +490,7 @@ func HKUnitJouleUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring energy in kilocalories.
 func HKUnitKilocalorieUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelKilocalorieUnit)
 	if _ret != 0 {
@@ -453,6 +499,7 @@ func HKUnitKilocalorieUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring energy in small calories (cal).
 func HKUnitSmallCalorieUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelSmallCalorieUnit)
 	if _ret != 0 {
@@ -461,6 +508,7 @@ func HKUnitSmallCalorieUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring energy in large calories (Cal).
 func HKUnitLargeCalorieUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelLargeCalorieUnit)
 	if _ret != 0 {
@@ -469,6 +517,7 @@ func HKUnitLargeCalorieUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring energy in calories.
 func HKUnitCalorieUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelCalorieUnit)
 	if _ret != 0 {
@@ -477,6 +526,7 @@ func HKUnitCalorieUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring temperature in degrees Celsius.
 func HKUnitDegreeCelsiusUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDegreeCelsiusUnit)
 	if _ret != 0 {
@@ -485,6 +535,7 @@ func HKUnitDegreeCelsiusUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring temperature in degrees Fahrenheit.
 func HKUnitDegreeFahrenheitUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDegreeFahrenheitUnit)
 	if _ret != 0 {
@@ -493,6 +544,7 @@ func HKUnitDegreeFahrenheitUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring temperature in kelvins.
 func HKUnitKelvinUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelKelvinUnit)
 	if _ret != 0 {
@@ -501,6 +553,7 @@ func HKUnitKelvinUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring electrical conductance, using siemen units with the provided prefix.
 func HKUnitSiemenUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelSiemenUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -509,6 +562,7 @@ func HKUnitSiemenUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring electrical conductance in siemens.
 func HKUnitSiemenUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelSiemenUnit)
 	if _ret != 0 {
@@ -517,6 +571,7 @@ func HKUnitSiemenUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit that measures the amount of a biologically active substance in international units (IU).
 func HKUnitInternationalUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelInternationalUnit)
 	if _ret != 0 {
@@ -525,6 +580,7 @@ func HKUnitInternationalUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring counts.
 func HKUnitCountUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelCountUnit)
 	if _ret != 0 {
@@ -533,6 +589,7 @@ func HKUnitCountUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring percentages.
 func HKUnitPercentUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPercentUnit)
 	if _ret != 0 {
@@ -541,6 +598,7 @@ func HKUnitPercentUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring the intensity of a sound.
 func HKUnitDecibelHearingLevelUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDecibelHearingLevelUnit)
 	if _ret != 0 {
@@ -549,6 +607,7 @@ func HKUnitDecibelHearingLevelUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Creates a complex unit by multiplying the receiving unit with another unit.
 func (o *HKUnit) UnitMultipliedByUnit(unit *HKUnit) *HKUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUnitSelUnitMultipliedByUnit, unit.Ptr())
 	if _ret != 0 {
@@ -557,6 +616,7 @@ func (o *HKUnit) UnitMultipliedByUnit(unit *HKUnit) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Creates a complex unit by dividing the receiving unit by another unit.
 func (o *HKUnit) UnitDividedByUnit(unit *HKUnit) *HKUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUnitSelUnitDividedByUnit, unit.Ptr())
 	if _ret != 0 {
@@ -565,6 +625,7 @@ func (o *HKUnit) UnitDividedByUnit(unit *HKUnit) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Creates a complex unit by raising the unit to the given power.
 func (o *HKUnit) UnitRaisedToPower(power int) *HKUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUnitSelUnitRaisedToPower, power)
 	if _ret != 0 {
@@ -573,6 +634,7 @@ func (o *HKUnit) UnitRaisedToPower(power int) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a complex unit representing the unit’s reciprocal.
 func (o *HKUnit) ReciprocalUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUnitSelReciprocalUnit)
 	if _ret != 0 {
@@ -581,6 +643,7 @@ func (o *HKUnit) ReciprocalUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring frequency in hertz with the provided prefix.
 func HKUnitHertzUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelHertzUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -589,6 +652,7 @@ func HKUnitHertzUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring frequency in hertz.
 func HKUnitHertzUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelHertzUnit)
 	if _ret != 0 {
@@ -597,6 +661,7 @@ func HKUnitHertzUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring the electrical potential difference in volts with the provided prefix.
 func HKUnitVoltUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelVoltUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -605,6 +670,7 @@ func HKUnitVoltUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring the difference in electrical potential using volts.
 func HKUnitVoltUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelVoltUnit)
 	if _ret != 0 {
@@ -613,6 +679,7 @@ func HKUnitVoltUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring power, using watt units with the provided prefix.
 func HKUnitWattUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelWattUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -621,6 +688,7 @@ func HKUnitWattUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring power in watts.
 func HKUnitWattUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelWattUnit)
 	if _ret != 0 {
@@ -629,6 +697,7 @@ func HKUnitWattUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring the optical power of a lens using diopter units.
 func HKUnitDiopterUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDiopterUnit)
 	if _ret != 0 {
@@ -637,6 +706,7 @@ func HKUnitDiopterUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring the prismatic deviation of a lens using prism diopter units.
 func HKUnitPrismDiopterUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelPrismDiopterUnit)
 	if _ret != 0 {
@@ -645,6 +715,7 @@ func HKUnitPrismDiopterUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring angles, using radian units with the provided prefix.
 func HKUnitRadianAngleUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelRadianAngleUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -653,6 +724,7 @@ func HKUnitRadianAngleUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring angles using radians.
 func HKUnitRadianAngleUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelRadianAngleUnit)
 	if _ret != 0 {
@@ -661,6 +733,7 @@ func HKUnitRadianAngleUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring angles using degrees.
 func HKUnitDegreeAngleUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelDegreeAngleUnit)
 	if _ret != 0 {
@@ -669,6 +742,7 @@ func HKUnitDegreeAngleUnit() *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring illuminance, using lux units with the provided prefix.
 func HKUnitLuxUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelLuxUnitWithMetricPrefix, prefix)
 	if _ret != 0 {
@@ -677,6 +751,7 @@ func HKUnitLuxUnitWithMetricPrefix(prefix HKMetricPrefix) *HKUnit {
 	return HKUnitFromID(_ret)
 }
 
+// Returns a HealthKit unit for measuring illuminance in lux.
 func HKUnitLuxUnit() *HKUnit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKUnit), _hKUnitSelLuxUnit)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass for all classes that identify a specific type of sample when working with the HealthKit store.
+//
 // SampleType wraps [raw.HKSampleType] with a fluent Go API.
 type SampleType struct {
 	inner *raw.HKSampleType

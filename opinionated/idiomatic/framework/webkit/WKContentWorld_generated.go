@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.
+//
 // WKContentWorld wraps [raw.WKContentWorld] with a fluent Go API.
 type WKContentWorld struct {
 	inner *raw.WKContentWorld

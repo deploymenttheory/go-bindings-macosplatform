@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an adjustment to correct a problem found during validation of a caption conversion.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionconversionadjustment
 type AVCaptionConversionAdjustment struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationChoiceWidget object provides user interactivity on a page of a PDF document, in the form of pop-up menus and lists.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget
 type PDFAnnotationChoiceWidget struct {
 	PDFAnnotation
@@ -32,6 +34,7 @@ func PDFAnnotationChoiceWidgetFromID(id objc.ID) *PDFAnnotationChoiceWidget {
 	return o
 }
 
+// Returns the selection in the widget annotation.
 func (o *PDFAnnotationChoiceWidget) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationChoiceWidgetSelStringValue)
 	if _ret != 0 {
@@ -40,10 +43,12 @@ func (o *PDFAnnotationChoiceWidget) StringValue() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the selection in the widget annotation.
 func (o *PDFAnnotationChoiceWidget) SetStringValue(value *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationChoiceWidgetSelSetStringValue, value.Ptr())
 }
 
+// Sets whether the widget annotation is a list.
 func (o *PDFAnnotationChoiceWidget) SetIsListChoice(isList bool) {
 	o.Ptr().Send(_pDFAnnotationChoiceWidgetSelSetIsListChoice, isList)
 }

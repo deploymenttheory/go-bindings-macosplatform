@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for index data describing how vertices connect to define a three-dimensional object, or geometry.
+//
 // GeometryElement wraps [raw.SCNGeometryElement] with a fluent Go API.
 type GeometryElement struct {
 	inner *raw.SCNGeometryElement
@@ -36,7 +38,7 @@ func NewGeometryElement() *GeometryElement {
 	return &GeometryElement{inner: raw.SCNGeometryElementFromID(_id)}
 }
 
-// @property primitiveRange @abstract Specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0). @discussion When the location of the range is set to NSNotFound, the entire geometry element is rendered.
+// The range of primitives from the geometry element to render.
 //
 // WithPrimitiveRange sets the primitiveRange property and returns the receiver for chaining.
 func (x *GeometryElement) WithPrimitiveRange(primitiveRange foundation.NSRange) *GeometryElement {
@@ -44,7 +46,7 @@ func (x *GeometryElement) WithPrimitiveRange(primitiveRange foundation.NSRange) 
 	return x
 }
 
-// @property pointSize @abstract Specifies the size of the point in local space. Defaults to 1
+// The width of each point in the geometry element, as measured in the geometry’s local 3D coordinate space.
 //
 // WithPointSize sets the pointSize property and returns the receiver for chaining.
 func (x *GeometryElement) WithPointSize(pointSize float64) *GeometryElement {
@@ -52,7 +54,7 @@ func (x *GeometryElement) WithPointSize(pointSize float64) *GeometryElement {
 	return x
 }
 
-// @property minimumPointScreenSpaceRadius @abstract Specifies the minimum size in screen-space (in pixel). Defaults to 1
+// The smallest radius, measured in screen points, at which to render any point in the geometry element.
 //
 // WithMinimumPointScreenSpaceRadius sets the minimumPointScreenSpaceRadius property and returns the receiver for chaining.
 func (x *GeometryElement) WithMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) *GeometryElement {
@@ -60,7 +62,7 @@ func (x *GeometryElement) WithMinimumPointScreenSpaceRadius(minimumPointScreenSp
 	return x
 }
 
-// @property maximumPointScreenSpaceRadius @abstract Specifies the maximum size in screen-space (in pixel). Defaults to 1
+// The largest radius, measured in screen points, at which to render any point in the geometry element.
 //
 // WithMaximumPointScreenSpaceRadius sets the maximumPointScreenSpaceRadius property and returns the receiver for chaining.
 func (x *GeometryElement) WithMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) *GeometryElement {

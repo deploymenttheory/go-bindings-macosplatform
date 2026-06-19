@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The NSMetadataQueryResultGroup class represents a collection of grouped attribute results returned by an NSMetadataQuery object.
+//
 // MetadataQueryResultGroup wraps [raw.NSMetadataQueryResultGroup] with a fluent Go API.
 type MetadataQueryResultGroup struct {
 	inner *raw.NSMetadataQueryResultGroup
@@ -42,6 +44,8 @@ func (x *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties *
 	return x
 }
 
+// Returns the query result at a specific index.
+//
 // ResultAtIndex calls the underlying ResultAtIndex.
 func (x *MetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
 	return x.inner.ResultAtIndex(idx)

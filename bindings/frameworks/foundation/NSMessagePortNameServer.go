@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A server takes and returns message ports.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmessageportnameserver
 // Deprecated: Use NSXPCConnection instead
 type NSMessagePortNameServer struct {
@@ -30,6 +32,7 @@ func NSMessagePortNameServerFromID(id objc.ID) *NSMessagePortNameServer {
 	return o
 }
 
+// Returns the singleton instance of NSMessagePortNameServer.
 func NSMessagePortNameServerSharedInstance() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMessagePortNameServer), _nSMessagePortNameServerSelSharedInstance)
 	return _ret

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable, unordered collection of distinct objects that may appear more than once in the collection.
+//
 // CountedSet wraps [raw.NSCountedSet] with a fluent Go API.
 type CountedSet struct {
 	inner *raw.NSCountedSet[objc.ID]
@@ -29,6 +31,8 @@ func CountedSetFromID(id objc.ID) *CountedSet {
 	return &CountedSet{inner: raw.NSCountedSetFromID[objc.ID](id)}
 }
 
+// Returns a counted set object initialized with enough memory to hold a given number of objects.
+//
 // NewCountedSetWithCapacity creates a new [CountedSet].
 func NewCountedSetWithCapacity(numItems uint) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCountedSet")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewCountedSetWithCapacity(numItems uint) *CountedSet {
 	return &CountedSet{inner: raw.NSCountedSetFromID[objc.ID](_id)}
 }
 
+// Returns a counted set object initialized with the contents of a given array.
+//
 // NewCountedSetWithArray creates a new [CountedSet].
 func NewCountedSetWithArray(array *raw.NSArray[objc.ID]) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCountedSet")), objc.RegisterName("alloc"))
@@ -43,6 +49,8 @@ func NewCountedSetWithArray(array *raw.NSArray[objc.ID]) *CountedSet {
 	return &CountedSet{inner: raw.NSCountedSetFromID[objc.ID](_id)}
 }
 
+// Returns a counted set object initialized with the contents of a given set.
+//
 // NewCountedSetWithSet creates a new [CountedSet].
 func NewCountedSetWithSet(set *raw.NSSet[objc.ID]) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCountedSet")), objc.RegisterName("alloc"))
@@ -56,6 +64,8 @@ func (x *CountedSet) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Returns the count associated with a given object in the set.
+//
 // CountForObject calls the underlying CountForObject.
 func (x *CountedSet) CountForObject(object objc.ID) uint {
 	return x.inner.CountForObject(object)

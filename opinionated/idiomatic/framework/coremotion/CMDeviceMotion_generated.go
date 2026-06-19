@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
+//
 // DeviceMotion wraps [raw.CMDeviceMotion] with a fluent Go API.
 type DeviceMotion struct {
 	inner *raw.CMDeviceMotion

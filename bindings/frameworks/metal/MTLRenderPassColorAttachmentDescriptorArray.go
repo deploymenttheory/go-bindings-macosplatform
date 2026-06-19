@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of render pass color attachment descriptor objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpasscolorattachmentdescriptorarray
 type MTLRenderPassColorAttachmentDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLRenderPassColorAttachmentDescriptorArrayFromID(id objc.ID) *MTLRenderPas
 	return o
 }
 
+// Returns the descriptor object for the specified color attachment.
 func (o *MTLRenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLRenderPassColorAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassColorAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLRenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(a
 	return MTLRenderPassColorAttachmentDescriptorFromID(_ret)
 }
 
+// Sets the descriptor for the specified color attachment.
 func (o *MTLRenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLRenderPassColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }

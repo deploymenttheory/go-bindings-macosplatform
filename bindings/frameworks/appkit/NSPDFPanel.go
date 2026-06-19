@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Save or Export as PDF panel that’s consistent with the macOS user interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspdfpanel
 type NSPDFPanel struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSPDFPanelFromID(id objc.ID) *NSPDFPanel {
 	return o
 }
 
+// Returns a new NSPDFPanel object.
 func NSPDFPanelPanel() *NSPDFPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPDFPanel), _nSPDFPanelSelPanel)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func NSPDFPanelPanel() *NSPDFPanel {
 	return NSPDFPanelFromID(_ret)
 }
 
+// Presents a document-modal PDF panel.
 func (o *NSPDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *NSPDFInfo, docWindow *NSWindow, completionHandler func(int)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

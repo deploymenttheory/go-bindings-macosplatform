@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single control point in a parameter curve.
+//
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticparametercurvecontrolpoint
 type CHHapticParameterCurveControlPoint struct {
 	foundation.NSObject

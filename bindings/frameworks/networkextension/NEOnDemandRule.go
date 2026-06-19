@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class shared by all VPN On Demand rules.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neondemandrule
 type NEOnDemandRule struct {
 	foundation.NSObject
@@ -48,22 +50,28 @@ func (o *NEOnDemandRule) Action() NEOnDemandRuleAction {
 
 // @property DNSSearchDomainMatch @discussion An array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
 func (o *NEOnDemandRule) DNSSearchDomainMatch() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEOnDemandRuleSelDNSSearchDomainMatch)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEOnDemandRuleSelDNSSearchDomainMatch)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEOnDemandRule) SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEOnDemandRuleSelSetDNSSearchDomainMatch, dNSSearchDomainMatch)
+	o.Ptr().Send(_nEOnDemandRuleSelSetDNSSearchDomainMatch, dNSSearchDomainMatch.Ptr())
 }
 
 // @property DNSServerAddressMatch @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
 func (o *NEOnDemandRule) DNSServerAddressMatch() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEOnDemandRuleSelDNSServerAddressMatch)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEOnDemandRuleSelDNSServerAddressMatch)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEOnDemandRuleSelSetDNSServerAddressMatch, dNSServerAddressMatch)
+	o.Ptr().Send(_nEOnDemandRuleSelSetDNSServerAddressMatch, dNSServerAddressMatch.Ptr())
 }
 
 // @property interfaceTypeMatch @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
@@ -78,12 +86,15 @@ func (o *NEOnDemandRule) SetInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRule
 
 // @property SSIDMatch @discussion An array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
 func (o *NEOnDemandRule) SSIDMatch() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEOnDemandRuleSelSSIDMatch)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEOnDemandRuleSelSSIDMatch)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEOnDemandRule) SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEOnDemandRuleSelSetSSIDMatch, sSIDMatch)
+	o.Ptr().Send(_nEOnDemandRuleSelSetSSIDMatch, sSIDMatch.Ptr())
 }
 
 // @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.

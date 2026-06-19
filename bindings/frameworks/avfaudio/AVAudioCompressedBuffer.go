@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an audio buffer that you use for compressed audio formats.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer
 type AVAudioCompressedBuffer struct {
 	AVAudioBuffer
@@ -43,7 +45,7 @@ func AVAudioCompressedBufferFromID(id objc.ID) *AVAudioCompressedBuffer {
 	return o
 }
 
-// @method initWithFormat:packetCapacity:maximumPacketSize: @abstract Initialize a buffer that is to contain compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @param maximumPacketSize The maximum size in bytes of a compressed packet. The maximum packet size can be obtained from the maximumOutputPacketSize property of an AVAudioConverter configured for encoding this format. @discussion An exception is raised if the format is PCM.
+// Creates a buffer that contains audio data in a compressed state.
 func (o *AVAudioCompressedBuffer) InitWithFormatPacketCapacityMaximumPacketSize(format *AVAudioFormat, packetCapacity uint32, maximumPacketSize int) *AVAudioCompressedBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioCompressedBufferSelInitWithFormatPacketCapacityMaximumPacketSize, format.Ptr(), packetCapacity, maximumPacketSize)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func (o *AVAudioCompressedBuffer) InitWithFormatPacketCapacityMaximumPacketSize(
 	return AVAudioCompressedBufferFromID(_ret)
 }
 
-// @method initWithFormat:packetCapacity: @abstract Initialize a buffer that is to contain constant bytes per packet compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @discussion This fails if the format is PCM or if the format has variable bytes per packet (format.streamDescription->mBytesPerPacket == 0).
+// Creates a buffer that contains constant bytes per packet of audio data in a compressed state.
 func (o *AVAudioCompressedBuffer) InitWithFormatPacketCapacity(format *AVAudioFormat, packetCapacity uint32) *AVAudioCompressedBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioCompressedBufferSelInitWithFormatPacketCapacity, format.Ptr(), packetCapacity)
 	if _ret != 0 {

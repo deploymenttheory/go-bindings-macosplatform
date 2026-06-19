@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents an impassible area in 2D space. Able to be avoided by GKAgent's steering functions GKGraph can generate navigation graphs from a list of obstacles
+// The abstract base class for objects representing impassable areas in a game world.
 //
 // Obstacle wraps [raw.GKObstacle] with a fluent Go API.
 type Obstacle struct {

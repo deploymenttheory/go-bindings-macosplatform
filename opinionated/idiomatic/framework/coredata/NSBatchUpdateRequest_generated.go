@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A request to Core Data to do a batch update of data in a persistent store without loading any data into memory.
+//
 // BatchUpdateRequest wraps [raw.NSBatchUpdateRequest] with a fluent Go API.
 type BatchUpdateRequest struct {
 	inner *raw.NSBatchUpdateRequest
@@ -32,6 +34,8 @@ func BatchUpdateRequestFromID(id objc.ID) *BatchUpdateRequest {
 	return &BatchUpdateRequest{inner: raw.NSBatchUpdateRequestFromID(id)}
 }
 
+// Creates a batch-update request for a named managed entity.
+//
 // NewBatchUpdateRequestWithEntityName creates a new [BatchUpdateRequest].
 func NewBatchUpdateRequestWithEntityName(entityName string) *BatchUpdateRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewBatchUpdateRequestWithEntityName(entityName string) *BatchUpdateRequest 
 	return &BatchUpdateRequest{inner: raw.NSBatchUpdateRequestFromID(_id)}
 }
 
+// Creates a batch-update request for a managed entity.
+//
 // NewBatchUpdateRequestWithEntity creates a new [BatchUpdateRequest].
 func NewBatchUpdateRequestWithEntity(entity *raw.NSEntityDescription) *BatchUpdateRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
@@ -46,30 +52,40 @@ func NewBatchUpdateRequestWithEntity(entity *raw.NSEntityDescription) *BatchUpda
 	return &BatchUpdateRequest{inner: raw.NSBatchUpdateRequestFromID(_id)}
 }
 
+// A predicate that identifies the objects to update.
+//
 // WithPredicate sets the predicate property and returns the receiver for chaining.
 func (x *BatchUpdateRequest) WithPredicate(predicate *foundation.NSPredicate) *BatchUpdateRequest {
 	x.inner.SetPredicate(predicate)
 	return x
 }
 
+// A Boolean value that indicates whether to update subentities.
+//
 // WithIncludesSubentities sets the includesSubentities property and returns the receiver for chaining.
 func (x *BatchUpdateRequest) WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest {
 	x.inner.SetIncludesSubentities(includesSubentities)
 	return x
 }
 
+// The type of result that Core Data returns from the request.
+//
 // WithResultType sets the resultType property and returns the receiver for chaining.
 func (x *BatchUpdateRequest) WithResultType(resultType NSBatchUpdateRequestResultType) *BatchUpdateRequest {
 	x.inner.SetResultType(raw.NSBatchUpdateRequestResultType(resultType))
 	return x
 }
 
+// A dictionary of property description pairs that describe the updates.
+//
 // WithPropertiesToUpdate sets the propertiesToUpdate property and returns the receiver for chaining.
 func (x *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest {
 	x.inner.SetPropertiesToUpdate(propertiesToUpdate)
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest {
 	if len(items) == 0 {

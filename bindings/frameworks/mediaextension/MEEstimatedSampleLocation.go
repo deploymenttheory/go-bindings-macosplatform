@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about the estimated sample location with the media.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/meestimatedsamplelocation
 type MEEstimatedSampleLocation struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MEEstimatedSampleLocationFromID(id objc.ID) *MEEstimatedSampleLocation {
 	return o
 }
 
-// @property		initWithByteSource @abstract		The initializer for the MEEstimatedSampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			estimatedSampleLocation The estimated starting file offset and size in bytes of the sample. @param			refinementDataLocation The starting file offset and size in bytes of the the data necessary to provide an accurate sample location.
+// Creates an estimated sample location object with the byte source, sample location, and data location that you specify.
 func (o *MEEstimatedSampleLocation) InitWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *MEByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *MEEstimatedSampleLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEstimatedSampleLocationSelInitWithByteSourceEstimatedSampleLocationRefinementDataLocation, byteSource.Ptr(), estimatedSampleLocation, refinementDataLocation)
 	if _ret != 0 {

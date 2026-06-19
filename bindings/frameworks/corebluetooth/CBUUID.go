@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A universally unique identifier, as defined by Bluetooth standards.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbuuid
 type CBUUID struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func CBUUIDFromID(id objc.ID) *CBUUID {
 	return o
 }
 
-// @method UUIDWithString: @discussion Creates a CBUUID with a 16-bit, 32-bit, or 128-bit UUID string representation. The expected format for 128-bit UUIDs is a string punctuated by hyphens, for example 68753A44-4D6F-1226-9C60-0050E4C00067.
+// Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID string.
 func CBUUIDUUIDWithString(theString *foundation.NSString) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithString, theString.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func CBUUIDUUIDWithString(theString *foundation.NSString) *CBUUID {
 	return CBUUIDFromID(_ret)
 }
 
-// @method UUIDWithData: @discussion Creates a CBUUID with a 16-bit, 32-bit, or 128-bit UUID data container.
+// Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID data container.
 func CBUUIDUUIDWithData(theData *foundation.NSData) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithData, theData.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func CBUUIDUUIDWithData(theData *foundation.NSData) *CBUUID {
 	return CBUUIDFromID(_ret)
 }
 
-// @method UUIDWithCFUUID: @discussion Creates a CBUUID with a CFUUIDRef.
+// Creates a Core Bluetooth UUID object from a Core Foundation UUID object.
 // Deprecated: since macOS 10.13.
 func CBUUIDUUIDWithCFUUID(theUUID unsafe.Pointer) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithCFUUID, theUUID)
@@ -65,7 +67,7 @@ func CBUUIDUUIDWithCFUUID(theUUID unsafe.Pointer) *CBUUID {
 	return CBUUIDFromID(_ret)
 }
 
-// @method UUIDWithNSUUID: @discussion Creates a CBUUID with an NSUUID.
+// Creates a Core Bluetooth UUID object from a Foundation UUID object.
 func CBUUIDUUIDWithNSUUID(theUUID *foundation.NSUUID) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithNSUUID, theUUID.Ptr())
 	if _ret != 0 {

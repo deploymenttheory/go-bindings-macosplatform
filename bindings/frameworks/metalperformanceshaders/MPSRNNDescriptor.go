@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a recursive neural network block or layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnndescriptor
 type MPSRNNDescriptor struct {
 	foundation.NSObject

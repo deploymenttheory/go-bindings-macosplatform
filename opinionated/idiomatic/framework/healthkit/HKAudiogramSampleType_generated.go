@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that contain audiogram data.
+//
 // AudiogramSampleType wraps [raw.HKAudiogramSampleType] with a fluent Go API.
 type AudiogramSampleType struct {
 	inner *raw.HKAudiogramSampleType

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that coordinates a group of related, network data transfer tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsession
 type NSURLSession struct {
 	NSObject

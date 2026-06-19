@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A tile set contains all of the tile definitions that are available for use in a tile map. In addition, it also contains tile groups, which define collections of related tile definitions and the rules that govern their placement.
+// A container for related tile groups.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktileset
 type SKTileSet struct {
@@ -66,7 +66,7 @@ func SKTileSetTileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*S
 	return SKTileSetFromID(_ret)
 }
 
-// Initilize a tile set with the specified tile groups. @param tileGroups the tile groups that will be available for use with this set
+// Initializes a new tile set with an array of tile groups and rectangular grid layout.
 func (o *SKTileSet) InitWithTileGroups(tileGroups *foundation.NSArray[*SKTileGroup]) *SKTileSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelInitWithTileGroups, tileGroups.Ptr())
 	if _ret != 0 {
@@ -75,7 +75,7 @@ func (o *SKTileSet) InitWithTileGroups(tileGroups *foundation.NSArray[*SKTileGro
 	return SKTileSetFromID(_ret)
 }
 
-// Initilize a tile set with the specified tile groups and tile set type. @param tileGroups the tile groups that will be available for use with this set @param tileSetType the type of tile set this will be
+// Initializes a new tile set with an array of tile groups and specified layout.
 func (o *SKTileSet) InitWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*SKTileGroup], tileSetType SKTileSetType) *SKTileSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelInitWithTileGroupsTileSetType, tileGroups.Ptr(), tileSetType)
 	if _ret != 0 {
@@ -84,7 +84,7 @@ func (o *SKTileSet) InitWithTileGroupsTileSetType(tileGroups *foundation.NSArray
 	return SKTileSetFromID(_ret)
 }
 
-// Gets the tile set with the specified name from the SpriteKit resource bundle. Returns nil if a tile set with a matching name cannot be found. @param name the name of the tile set to search for
+// Initializes a tile set by searching the app bundle for an archived .sks file by name.
 func SKTileSetTileSetNamed(name *foundation.NSString) *SKTileSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileSet), _sKTileSetSelTileSetNamed, name.Ptr())
 	if _ret != 0 {
@@ -93,7 +93,7 @@ func SKTileSetTileSetNamed(name *foundation.NSString) *SKTileSet {
 	return SKTileSetFromID(_ret)
 }
 
-// Creates a tile set from the specified tile set file. Returns nil if the URL doesn't point to a valid tile set file. @param url the URL of the tile set file
+// Initializes a tile set from a URL to an archived .sks file.
 func SKTileSetTileSetFromURL(url *foundation.NSURL) *SKTileSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileSet), _sKTileSetSelTileSetFromURL, url.Ptr())
 	if _ret != 0 {

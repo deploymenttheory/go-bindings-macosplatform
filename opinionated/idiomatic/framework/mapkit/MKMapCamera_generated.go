@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A virtual camera for defining the appearance of the map.
+//
 // MapCamera wraps [raw.MKMapCamera] with a fluent Go API.
 type MapCamera struct {
 	inner *raw.MKMapCamera
@@ -36,6 +38,8 @@ func NewMapCamera() *MapCamera {
 	return &MapCamera{inner: raw.MKMapCameraFromID(_id)}
 }
 
+// The viewing angle of the camera, in degrees.
+//
 // WithPitch sets the pitch property and returns the receiver for chaining.
 func (x *MapCamera) WithPitch(pitch float64) *MapCamera {
 	x.inner.SetPitch(pitch)

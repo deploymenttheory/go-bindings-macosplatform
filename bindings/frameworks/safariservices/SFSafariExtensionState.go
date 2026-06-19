@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The state of a Safari extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariextensionstate
 type SFSafariExtensionState struct {
 	foundation.NSObject

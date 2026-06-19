@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Refrigerator And Temperature Controlled Cabinet Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterRefrigeratorAndTemperatureControlledCabinetMode wraps [raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode] with a fluent Go API.
 type MTRClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
 	inner *raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode

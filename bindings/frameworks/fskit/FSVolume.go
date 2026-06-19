@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A directory structure for files and folders.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsvolume
 type FSVolume struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func FSVolumeFromID(id objc.ID) *FSVolume {
 	return o
 }
 
-// Creates a volume with the given identifier and name. - Parameters: - volumeID: An “FSVolumeIdentifier“ to uniquely identify the volume. For a network file system that supports multiple authenticated users, disambiguate the users by using qualifying data in the identifier. - volumeName: A name for the volume.
+// Creates a volume with the given identifier and name.
 func (o *FSVolume) InitWithVolumeIDVolumeName(volumeID *FSVolumeIdentifier, volumeName *FSFileName) *FSVolume {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSVolumeSelInitWithVolumeIDVolumeName, volumeID.Ptr(), volumeName.Ptr())
 	if _ret != 0 {

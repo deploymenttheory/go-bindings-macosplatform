@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result of a request to fetch persistent history.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistenthistoryresult
 type NSPersistentHistoryResult struct {
 	NSPersistentStoreResult

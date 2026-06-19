@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A notification center buffer.
+//
 // NotificationQueue wraps [raw.NSNotificationQueue] with a fluent Go API.
 type NotificationQueue struct {
 	inner *raw.NSNotificationQueue

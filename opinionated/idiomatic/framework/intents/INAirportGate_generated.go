@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes an arrival or departure gate for a flight.
+//
 // AirportGate wraps [raw.INAirportGate] with a fluent Go API.
 type AirportGate struct {
 	inner *raw.INAirportGate
@@ -31,6 +33,8 @@ func AirportGateFromID(id objc.ID) *AirportGate {
 	return &AirportGate{inner: raw.INAirportGateFromID(id)}
 }
 
+// Creates a new gate object for a flight.
+//
 // NewAirportGateWithAirportTerminalGate creates a new [AirportGate].
 func NewAirportGateWithAirportTerminalGate(airport *raw.INAirport, terminal string, gate string) *AirportGate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAirportGate")), objc.RegisterName("alloc"))

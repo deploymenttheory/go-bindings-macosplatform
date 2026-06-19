@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient normalization kernel applied across feature channels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalizationgradient
 type MPSCNNCrossChannelNormalizationGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

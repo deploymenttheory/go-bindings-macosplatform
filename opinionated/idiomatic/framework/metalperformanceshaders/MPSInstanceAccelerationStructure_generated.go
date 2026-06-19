@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// An acceleration structure built over instances of other acceleration structures.
+//
 // InstanceAccelerationStructure wraps [raw.MPSInstanceAccelerationStructure] with a fluent Go API.
 type InstanceAccelerationStructure struct {
 	inner *raw.MPSInstanceAccelerationStructure
@@ -138,7 +140,7 @@ func (x *InstanceAccelerationStructure) WithUsage(usage mpsrayintersector.MPSAcc
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *InstanceAccelerationStructure {
@@ -146,7 +148,7 @@ func (x *InstanceAccelerationStructure) WithOptions(options mpscore.MPSKernelOpt
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithLabel(label string) *InstanceAccelerationStructure {

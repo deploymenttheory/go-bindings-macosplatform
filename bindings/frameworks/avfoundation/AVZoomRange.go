@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines an inclusive range of zoom values.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avzoomrange
 type AVZoomRange struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func AVZoomRangeFromID(id objc.ID) *AVZoomRange {
 	return o
 }
 
-// @method containsZoomFactor: @abstract Tests if a given zoom factor is within the zoom range. @param zoomFactor The zoom factor to test. @result Returns YES if the given zoom factor is within the zoom range, NO otherwise. @discussion Note that the zoom ranges are inclusive.
+// Returns a Boolean value that indicates whether the specified zoom factor exists in the range.
 func (o *AVZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVZoomRangeSelContainsZoomFactor, zoomFactor)
 	return _ret

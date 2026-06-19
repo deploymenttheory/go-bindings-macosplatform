@@ -8,14 +8,15 @@ import (
 	"fmt"
 )
 
+// The color space modes for the input and output textures you use with a spatial scaling effect instance.
 type MTLFXSpatialScalerColorProcessingMode int64
 
 const (
-	// Indicates your input and output textures use a perceptual color space (sRGB).
+	// Indicates your input and output textures use a perceptual color space.
 	MTLFXSpatialScalerColorProcessingModePerceptual MTLFXSpatialScalerColorProcessingMode = 0
-	// Indicates your input and output textures use a linear color space in the `[0,1]` range.
+	// Indicates your input and output textures use a linear color space.
 	MTLFXSpatialScalerColorProcessingModeLinear MTLFXSpatialScalerColorProcessingMode = 1
-	// Indicates your input and output textures use a high dynamic range color space, beyond the `[0,1]` range. When you configure this mode, MetalFX performs a reversible tone mapping operation to convert your data to the `[0,1]` range.
+	// Indicates your input and output textures use a high dynamic range color space.
 	MTLFXSpatialScalerColorProcessingModeHDR MTLFXSpatialScalerColorProcessingMode = 2
 )
 

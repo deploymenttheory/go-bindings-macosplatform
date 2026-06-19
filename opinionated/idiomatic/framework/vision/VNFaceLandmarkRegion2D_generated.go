@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// 2D geometry information for a specific facial feature.
+//
 // FaceLandmarkRegion2D wraps [raw.VNFaceLandmarkRegion2D] with a fluent Go API.
 type FaceLandmarkRegion2D struct {
 	inner *raw.VNFaceLandmarkRegion2D
@@ -39,7 +41,7 @@ func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: raw.VNFaceLandmarkRegion2DFromID(_id)}
 }
 
-// @brief	Provides the array of landmark points in the coordinate space of a specific image size. @discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points in the coordinate space of a specific image size.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does. @param	imageSize			The pixel dimensions of the image in which the landmark points are being presented. @return the address of the array of pointCount points, or NULL if the conversion could not take place.
+// A buffer in memory containing landmark points in the coordinate space of the specified image size.
 //
 // PointsInImageOfSize calls the underlying PointsInImageOfSize.
 func (x *FaceLandmarkRegion2D) PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint {

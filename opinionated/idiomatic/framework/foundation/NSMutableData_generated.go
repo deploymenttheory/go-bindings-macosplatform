@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object representing a dynamic byte buffer in memory.
+//
 // MutableData wraps [raw.NSMutableData] with a fluent Go API.
 type MutableData struct {
 	inner *raw.NSMutableData
@@ -30,6 +32,8 @@ func MutableDataFromID(id objc.ID) *MutableData {
 	return &MutableData{inner: raw.NSMutableDataFromID(id)}
 }
 
+// Returns an initialized mutable data object capable of holding the specified number of bytes.
+//
 // NewMutableDataWithCapacity creates a new [MutableData].
 func NewMutableDataWithCapacity(capacity uint) *MutableData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableData")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewMutableDataWithCapacity(capacity uint) *MutableData {
 	return &MutableData{inner: raw.NSMutableDataFromID(_id)}
 }
 
+// Initializes and returns a mutable data object containing a given number of zeroed bytes.
+//
 // NewMutableDataWithLength creates a new [MutableData].
 func NewMutableDataWithLength(length uint) *MutableData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableData")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewMutableDataWithLength(length uint) *MutableData {
 	return &MutableData{inner: raw.NSMutableDataFromID(_id)}
 }
 
+// The number of bytes contained in the mutable data object.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *MutableData) WithLength(length uint) *MutableData {
 	x.inner.SetLength(length)
@@ -66,46 +74,64 @@ func (x *MutableData) SetLength(length uint) {
 	x.inner.SetLength(length)
 }
 
+// Appends to the receiver a given number of bytes from a given buffer.
+//
 // AppendBytesLength calls the underlying AppendBytesLength.
 func (x *MutableData) AppendBytesLength(bytes_ unsafe.Pointer, length uint) {
 	x.inner.AppendBytesLength(bytes_, length)
 }
 
+// Appends the content of another data object to the receiver.
+//
 // AppendData calls the underlying AppendData.
 func (x *MutableData) AppendData(other *raw.NSData) {
 	x.inner.AppendData(other)
 }
 
+// Increases the length of the receiver by a given number of bytes.
+//
 // IncreaseLengthBy calls the underlying IncreaseLengthBy.
 func (x *MutableData) IncreaseLengthBy(extraLength uint) {
 	x.inner.IncreaseLengthBy(extraLength)
 }
 
+// Replaces with a given set of bytes a given range within the contents of the receiver.
+//
 // ReplaceBytesInRangeWithBytes calls the underlying ReplaceBytesInRangeWithBytes.
 func (x *MutableData) ReplaceBytesInRangeWithBytes(range_ raw.NSRange, bytes_ unsafe.Pointer) {
 	x.inner.ReplaceBytesInRangeWithBytes(range_, bytes_)
 }
 
+// Replaces with zeroes the contents of the receiver in a given range.
+//
 // ResetBytesInRange calls the underlying ResetBytesInRange.
 func (x *MutableData) ResetBytesInRange(range_ raw.NSRange) {
 	x.inner.ResetBytesInRange(range_)
 }
 
+// Replaces the entire contents of the receiver with the contents of another data object.
+//
 // SetData calls the underlying SetData.
 func (x *MutableData) SetData(data *raw.NSData) {
 	x.inner.SetData(data)
 }
 
+// Replaces with a given set of bytes a given range within the contents of the receiver.
+//
 // ReplaceBytesInRangeWithBytesLength calls the underlying ReplaceBytesInRangeWithBytesLength.
 func (x *MutableData) ReplaceBytesInRangeWithBytesLength(range_ raw.NSRange, replacementBytes unsafe.Pointer, replacementLength uint) {
 	x.inner.ReplaceBytesInRangeWithBytesLength(range_, replacementBytes, replacementLength)
 }
 
+// Decompresses the data object’s bytes.
+//
 // DecompressUsingAlgorithmError calls the underlying DecompressUsingAlgorithmError.
 func (x *MutableData) DecompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error) {
 	return x.inner.DecompressUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
 }
 
+// Compresses the data object’s bytes using an algorithm that you specify.
+//
 // CompressUsingAlgorithmError calls the underlying CompressUsingAlgorithmError.
 func (x *MutableData) CompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error) {
 	return x.inner.CompressUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))

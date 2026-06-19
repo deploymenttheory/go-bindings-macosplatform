@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains options to pass to a format reader extension.
+//
 // FormatReaderInstantiationOptions wraps [raw.MEFormatReaderInstantiationOptions] with a fluent Go API.
 type FormatReaderInstantiationOptions struct {
 	inner *raw.MEFormatReaderInstantiationOptions

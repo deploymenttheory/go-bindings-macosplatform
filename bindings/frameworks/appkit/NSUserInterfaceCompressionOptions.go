@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies how user interface elements resize themselves when space is constrained.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsuserinterfacecompressionoptions
 type NSUserInterfaceCompressionOptions struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func NSUserInterfaceCompressionOptionsFromID(id objc.ID) *NSUserInterfaceCompres
 	return o
 }
 
+// Creates an option object containing no options.
 func (o *NSUserInterfaceCompressionOptions) Init() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInit)
 	if _ret != 0 {
@@ -51,6 +54,7 @@ func (o *NSUserInterfaceCompressionOptions) Init() *NSUserInterfaceCompressionOp
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
+// Creates an option object from data in an unarchiver.
 func (o *NSUserInterfaceCompressionOptions) InitWithCoder(coder *foundation.NSCoder) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -59,6 +63,7 @@ func (o *NSUserInterfaceCompressionOptions) InitWithCoder(coder *foundation.NSCo
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
+// Creates an option object with the given identifier string.
 func (o *NSUserInterfaceCompressionOptions) InitWithIdentifier(identifier *foundation.NSString) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -67,6 +72,7 @@ func (o *NSUserInterfaceCompressionOptions) InitWithIdentifier(identifier *found
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
+// Creates an option object that represents the union of the supplied options.
 func (o *NSUserInterfaceCompressionOptions) InitWithCompressionOptions(options *foundation.NSSet[*NSUserInterfaceCompressionOptions]) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelInitWithCompressionOptions, options.Ptr())
 	if _ret != 0 {
@@ -75,16 +81,19 @@ func (o *NSUserInterfaceCompressionOptions) InitWithCompressionOptions(options *
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
+// Determines whether the supplied compression options are all present in the current instance.
 func (o *NSUserInterfaceCompressionOptions) ContainsOptions(options *NSUserInterfaceCompressionOptions) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserInterfaceCompressionOptionsSelContainsOptions, options.Ptr())
 	return _ret
 }
 
+// Determines whether the supplied compression options intersect with the current instance’s options.
 func (o *NSUserInterfaceCompressionOptions) IntersectsOptions(options *NSUserInterfaceCompressionOptions) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUserInterfaceCompressionOptionsSelIntersectsOptions, options.Ptr())
 	return _ret
 }
 
+// Creates a new compression options object representing the union with the provided options.
 func (o *NSUserInterfaceCompressionOptions) OptionsByAddingOptions(options *NSUserInterfaceCompressionOptions) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelOptionsByAddingOptions, options.Ptr())
 	if _ret != 0 {
@@ -93,6 +102,7 @@ func (o *NSUserInterfaceCompressionOptions) OptionsByAddingOptions(options *NSUs
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
+// Creates a new compression options object with the supplied options removed.
 func (o *NSUserInterfaceCompressionOptions) OptionsByRemovingOptions(options *NSUserInterfaceCompressionOptions) *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserInterfaceCompressionOptionsSelOptionsByRemovingOptions, options.Ptr())
 	if _ret != 0 {

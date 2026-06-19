@@ -61,12 +61,15 @@ func (o *MDLAnimationBindComponent) SetJointAnimation(jointAnimation MDLJointAni
 }
 
 func (o *MDLAnimationBindComponent) JointPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mDLAnimationBindComponentSelJointPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAnimationBindComponentSelJointPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *MDLAnimationBindComponent) SetJointPaths(jointPaths *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_mDLAnimationBindComponentSelSetJointPaths, jointPaths)
+	o.Ptr().Send(_mDLAnimationBindComponentSelSetJointPaths, jointPaths.Ptr())
 }
 
 func (o *MDLAnimationBindComponent) GeometryBindTransform() unsafe.Pointer {

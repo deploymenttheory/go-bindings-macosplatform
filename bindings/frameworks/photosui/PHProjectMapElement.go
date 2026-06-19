@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An element that represents a map within project section content.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectmapelement
 type PHProjectMapElement struct {
 	PHProjectElement
@@ -65,6 +67,9 @@ func (o *PHProjectMapElement) Altitude() unsafe.Pointer {
 }
 
 func (o *PHProjectMapElement) Annotations() *foundation.NSArray[mapkit.MKAnnotation] {
-	_ret := objc.Send[*foundation.NSArray[mapkit.MKAnnotation]](o.Ptr(), _pHProjectMapElementSelAnnotations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectMapElementSelAnnotations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[mapkit.MKAnnotation](_ret)
 }

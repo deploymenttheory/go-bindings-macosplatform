@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a condition and its associated information that a location monitor is monitoring.
+//
 // MonitoringRecord wraps [raw.CLMonitoringRecord] with a fluent Go API.
 type MonitoringRecord struct {
 	inner *raw.CLMonitoringRecord

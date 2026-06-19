@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements a reverb effect.
+//
 // AudioUnitReverb wraps [raw.AVAudioUnitReverb] with a fluent Go API.
 type AudioUnitReverb struct {
 	inner *raw.AVAudioUnitReverb
@@ -35,7 +37,7 @@ func NewAudioUnitReverb() *AudioUnitReverb {
 	return &AudioUnitReverb{inner: raw.AVAudioUnitReverbFromID(_id)}
 }
 
-// @property wetDryMix @abstract Blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Unit:       Percent
+// The blend of the wet and dry signals.
 //
 // WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
 func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
@@ -43,7 +45,7 @@ func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
 	return x
 }
 
-// @property bypass @abstract Bypass state of the audio unit.
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
@@ -51,7 +53,7 @@ func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
 	return x
 }
 
-// @method loadFactoryPreset: @abstract load a reverb preset Default:    AVAudioUnitReverbPresetMediumHall
+// Configures the audio unit as a reverb preset.
 //
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
 func (x *AudioUnitReverb) LoadFactoryPreset(preset AVAudioUnitReverbPreset) {

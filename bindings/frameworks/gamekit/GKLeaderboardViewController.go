@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkleaderboardviewcontroller
 // Deprecated: since macOS 10.10.
 type GKLeaderboardViewController struct {

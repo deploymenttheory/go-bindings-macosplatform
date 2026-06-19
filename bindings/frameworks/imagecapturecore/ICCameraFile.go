@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a file on a camera.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/iccamerafile
 type ICCameraFile struct {
 	ICCameraItem
@@ -72,7 +74,7 @@ func ICCameraFileFingerprintForFileAtURL(url *foundation.NSURL) *foundation.NSSt
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method requestThumbnailDataWithOptions:completion @abstract ￼Perform a thumbnail request and execute the block callback in place of the delegate. @param options Options dictionary - 'kCGImageSourceThumbnailMaxPixelSize' - Request a width different from the embedded EXIF thumbnail @param completion Completion block called with an NSData* object representing the JPG, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests a thumbnail and executes the completion block in place of the delegate.
 func (o *ICCameraFile) RequestThumbnailDataWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -84,15 +86,25 @@ func (o *ICCameraFile) RequestThumbnailDataWithOptionsCompletion(options *founda
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_iCCameraFileSelRequestThumbnailDataWithOptionsCompletion, options, __block_completion)
+	o.Ptr().Send(_iCCameraFileSelRequestThumbnailDataWithOptionsCompletion, options.Ptr(), __block_completion)
 }
 
-// @method requestMetadataDictionaryWithOptions:completion @abstract ￼Perform a metadata request and execute the block callback in place of the delegate. @param options Options dictionary @param completion Completion block called with an NSDictionary* object containing the metadata, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
-func (o *ICCameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion objc.Block) {
-	o.Ptr().Send(_iCCameraFileSelRequestMetadataDictionaryWithOptionsCompletion, options, completion)
+// Requests metadata and executes the completion block in place of the delegate.
+func (o *ICCameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_iCCameraFileSelRequestMetadataDictionaryWithOptionsCompletion, options.Ptr(), __block_completion)
 }
 
-// @method requestDownloadWithOptions:progressDelegate:completion @abstract ￼Perform a download request and execute the block callback in place of the delegate. @param options Dictionary Keys: - `ICDownloadsDirectoryURL` - `ICSaveAsFilename` - `ICOverwriteExistingFile` - `ICDeleteAfterDownload` - `ICAdjustCreationDate` @param completion Completion block to executed after request has returned, @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests a download and executes the completion block in place of the delegate.
 func (o *ICCameraFile) RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -104,14 +116,14 @@ func (o *ICCameraFile) RequestDownloadWithOptionsCompletion(options *foundation.
 		})
 		defer __block_completion.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelRequestDownloadWithOptionsCompletion, options, __block_completion)
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelRequestDownloadWithOptionsCompletion, options.Ptr(), __block_completion)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSProgressFromID(_ret)
 }
 
-// @method requestReadDataAtOffset:length:completion @abstract This method asynchronously reads data of a specified length from a specified offset. @param offset The offset into the file to start reading from @param length The length of data to be read. @param completion Completion block called with an NSData* object representing the data, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to asynchronously read data of a specified length from a specified offset, then executes the completion block.
 func (o *ICCameraFile) RequestReadDataAtOffsetLengthCompletion(offset int64, length int64, completion func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

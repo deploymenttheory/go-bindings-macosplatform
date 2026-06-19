@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reports the result of the flashing lights processor.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessorresult
 type MAFlashingLightsProcessorResult struct {
 	foundation.NSObject

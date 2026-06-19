@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a request to set up an automatic reload payment, such as a store card top-up or a prepaid account.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest
 type PKAutomaticReloadPaymentRequest struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func PKAutomaticReloadPaymentRequestFromID(id objc.ID) *PKAutomaticReloadPayment
 	return o
 }
 
+// Create an automatic reload payment object with a description, automatic billing information, and a management URL.
 func (o *PKAutomaticReloadPaymentRequest) InitWithPaymentDescriptionAutomaticReloadBillingManagementURL(paymentDescription *foundation.NSString, automaticReloadBilling *PKAutomaticReloadPaymentSummaryItem, managementURL *foundation.NSURL) *PKAutomaticReloadPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAutomaticReloadPaymentRequestSelInitWithPaymentDescriptionAutomaticReloadBillingManagementURL, paymentDescription.Ptr(), automaticReloadBilling.Ptr(), managementURL.Ptr())
 	if _ret != 0 {

@@ -38,13 +38,13 @@ func ISyncChangeFromID(id objc.ID) *ISyncChange {
 
 // Deprecated: since macOS 10.7.
 func ISyncChangeChangeWithTypeRecordIdentifierChanges(type_ int, recordIdentifier *foundation.NSString, changes *foundation.NSArray[objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsISyncChange), _iSyncChangeSelChangeWithTypeRecordIdentifierChanges, type_, recordIdentifier.Ptr(), changes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsISyncChange), _iSyncChangeSelChangeWithTypeRecordIdentifierChanges, type_, recordIdentifier.Ptr(), changes.Ptr())
 	return _ret
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncChange) InitWithChangeTypeRecordIdentifierChanges(type_ int, recordIdentifier *foundation.NSString, changes *foundation.NSArray[objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncChangeSelInitWithChangeTypeRecordIdentifierChanges, type_, recordIdentifier.Ptr(), changes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncChangeSelInitWithChangeTypeRecordIdentifierChanges, type_, recordIdentifier.Ptr(), changes.Ptr())
 	return _ret
 }
 
@@ -65,12 +65,18 @@ func (o *ISyncChange) RecordIdentifier() *foundation.NSString {
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncChange) Record() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iSyncChangeSelRecord)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncChangeSelRecord)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncChange) Changes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncChangeSelChanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncChangeSelChanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

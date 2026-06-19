@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object that provides a thumbnail for a custom file type.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailreply
 type QLThumbnailReply struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func QLThumbnailReplyFromID(id objc.ID) *QLThumbnailReply {
 	return o
 }
 
-// You can create a reply with a drawing block that will draw into a given context with the coordinate system of Core Graphics. @param contextSize The desired size of the context that will be passed to the drawing block. It should be as close as possible to the maximumSize of the QLFileThumbnailRequest and it has to be greater than or equal to its minimumSize. Ideally, at least either contextSize's width matches maximumSize's width or contextSize's height matches maximumSize's height. The context size will be scaled to QLFileThumbnailRequest's scale value (if you pass (x, y), the size of the context will be (scale * x, scale * y)). @param drawingBlock The thumbnail should be drawn into the context passed to this block. It is a context of type CGBitmapContext, set up to be used with the coordinate system of Core Graphics. Return YES if the thumbnail was successfully drawn into the context. Return NO otherwise.
+// Creates a new thumbnail for a custom file type in the given context.
 func QLThumbnailReplyReplyWithContextSizeDrawingBlock(contextSize corefoundation.CGSize, drawingBlock func(unsafe.Pointer) bool) *QLThumbnailReply {
 	var __block_drawingBlock objc.Block
 	if drawingBlock != nil {
@@ -53,7 +55,7 @@ func QLThumbnailReplyReplyWithContextSizeDrawingBlock(contextSize corefoundation
 	return QLThumbnailReplyFromID(_ret)
 }
 
-// You can create a reply with a drawing block that will draw into the current context with the coordinate system of UIKit or AppKit. @param contextSize The desired size of the context that will be passed to the drawing block. It should be as close as possible to the maximumSize of the QLFileThumbnailRequest and it has to be greater than or equal to its minimumSize. Ideally, at least either contextSize's width matches maximumSize's width or contextSize's height matches maximumSize's height. The context size will be scaled to QLFileThumbnailRequest's scale value (if you pass (x, y), the size of the context will be (scale * x, scale * y)). @param drawingBlock A block that draws the thumbnail into the current context which you can access via UIGraphicsGetCurrentContext() or [NSGraphicsContext currentContext]. It is a context of type CGBitmapContext, set up to be used with the coordinate system of UIKit or AppKit. Return YES if the thumbnail was successfully drawn into the current context. Return NO otherwise.
+// Creates a new thumbnail for a custom file type in the current context.
 func QLThumbnailReplyReplyWithContextSizeCurrentContextDrawingBlock(contextSize corefoundation.CGSize, drawingBlock func() bool) *QLThumbnailReply {
 	var __block_drawingBlock objc.Block
 	if drawingBlock != nil {
@@ -69,7 +71,7 @@ func QLThumbnailReplyReplyWithContextSizeCurrentContextDrawingBlock(contextSize 
 	return QLThumbnailReplyFromID(_ret)
 }
 
-// You can create a reply object with a file URL of an image that will be used as the thumbnail. The image will be downscaled to fit the size of the QLFileThumbnailRequest if necessary.
+// Creates a new thumbnail for a custom file type using a file at the given URL.
 func QLThumbnailReplyReplyWithImageFileURL(fileURL *foundation.NSURL) *QLThumbnailReply {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLThumbnailReply), _qLThumbnailReplySelReplyWithImageFileURL, fileURL.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The user signed in or out of their account.
+//
 // SyncEngineAccountChangeEvent wraps [raw.CKSyncEngineAccountChangeEvent] with a fluent Go API.
 type SyncEngineAccountChangeEvent struct {
 	inner *raw.CKSyncEngineAccountChangeEvent

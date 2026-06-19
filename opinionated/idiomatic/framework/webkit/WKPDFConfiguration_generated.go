@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration data to use when generating a PDF representation of a web view’s contents.
+//
 // WKPDFConfiguration wraps [raw.WKPDFConfiguration] with a fluent Go API.
 type WKPDFConfiguration struct {
 	inner *raw.WKPDFConfiguration
@@ -36,7 +38,7 @@ func NewWKPDFConfiguration() *WKPDFConfiguration {
 	return &WKPDFConfiguration{inner: raw.WKPDFConfigurationFromID(_id)}
 }
 
-// @abstract The rect to capture in web page coordinates @discussion If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
+// The portion of your web view to capture, specified as a rectangle in the view’s coordinate system.
 //
 // WithRect sets the rect property and returns the receiver for chaining.
 func (x *WKPDFConfiguration) WithRect(rect corefoundation.CGRect) *WKPDFConfiguration {
@@ -44,7 +46,7 @@ func (x *WKPDFConfiguration) WithRect(rect corefoundation.CGRect) *WKPDFConfigur
 	return x
 }
 
-// @abstract A Boolean value indicating whether the PDF should allow transparent backgrounds. @discussion The default value is `NO`.
+// A Boolean value that indicates whether the PDF may have a transparent background.
 //
 // WithAllowTransparentBackground sets the allowTransparentBackground property and returns the receiver for chaining.
 func (x *WKPDFConfiguration) WithAllowTransparentBackground(allowTransparentBackground bool) *WKPDFConfiguration {

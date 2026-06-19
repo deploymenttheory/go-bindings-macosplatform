@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A reference to the tracked medication and the details a person can customize.
+//
 // UserAnnotatedMedication wraps [raw.HKUserAnnotatedMedication] with a fluent Go API.
 type UserAnnotatedMedication struct {
 	inner *raw.HKUserAnnotatedMedication

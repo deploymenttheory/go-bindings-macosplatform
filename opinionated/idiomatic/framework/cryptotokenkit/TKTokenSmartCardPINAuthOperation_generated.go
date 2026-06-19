@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Smart Card PIN authentication operation.
+//
 // TokenSmartCardPINAuthOperation wraps [raw.TKTokenSmartCardPINAuthOperation] with a fluent Go API.
 type TokenSmartCardPINAuthOperation struct {
 	inner *raw.TKTokenSmartCardPINAuthOperation
@@ -39,7 +41,7 @@ func NewTokenSmartCardPINAuthOperation() *TokenSmartCardPINAuthOperation {
 	return &TokenSmartCardPINAuthOperation{inner: raw.TKTokenSmartCardPINAuthOperationFromID(_id)}
 }
 
-// @discussion PIN formatting properties. @note The property is initialized with a default instance of TKSmartCardPINFormat.
+// The PIN format.
 //
 // WithPINFormat sets the pINFormat property and returns the receiver for chaining.
 func (x *TokenSmartCardPINAuthOperation) WithPINFormat(pINFormat *SmartCardPINFormat) *TokenSmartCardPINAuthOperation {
@@ -47,7 +49,7 @@ func (x *TokenSmartCardPINAuthOperation) WithPINFormat(pINFormat *SmartCardPINFo
 	return x
 }
 
-// @discussion APDU template into which PIN gets filled in. If set to nil, the system will not attempt to authenticate by sending the formatted APDU to the SmartCard, but rather the token itself is expected to perform the authentication.  It is preferred to provide APDUTemplate if possible, because it allows using hardware PINPad for secure PIN entry (provided that the reader has one).
+// The template into which the PIN is filled in. nil by default.
 //
 // WithAPDUTemplate sets the aPDUTemplate property and returns the receiver for chaining.
 func (x *TokenSmartCardPINAuthOperation) WithAPDUTemplate(aPDUTemplate *foundation.NSData) *TokenSmartCardPINAuthOperation {
@@ -55,7 +57,7 @@ func (x *TokenSmartCardPINAuthOperation) WithAPDUTemplate(aPDUTemplate *foundati
 	return x
 }
 
-// @discussion Offset in bytes within APDU template to mark the location for filling in the PIN.
+// The offset, in bytes, within the APDU template to mark the location for filling in the PIN.
 //
 // WithPINByteOffset sets the pINByteOffset property and returns the receiver for chaining.
 func (x *TokenSmartCardPINAuthOperation) WithPINByteOffset(pINByteOffset int) *TokenSmartCardPINAuthOperation {
@@ -63,7 +65,7 @@ func (x *TokenSmartCardPINAuthOperation) WithPINByteOffset(pINByteOffset int) *T
 	return x
 }
 
-// @discussion TKSmartCard to which the formatted APDU gets sent in order to authenticate (used only if 'APDUTemplate' is set).
+// A Smart Card to which the formatted APDU is sent in order to authenticate.
 //
 // WithSmartCard sets the smartCard property and returns the receiver for chaining.
 func (x *TokenSmartCardPINAuthOperation) WithSmartCard(smartCard *SmartCard) *TokenSmartCardPINAuthOperation {
@@ -71,7 +73,7 @@ func (x *TokenSmartCardPINAuthOperation) WithSmartCard(smartCard *SmartCard) *To
 	return x
 }
 
-// @discussion PIN value which will be set when 'finishWithError:' gets triggered.  Note that the PIN is not set in case that APDUTemplate was set.  In this case, PIN was already sent to the card using specified template.
+// The PIN value resulting from performing the operation.
 //
 // WithPIN sets the pIN property and returns the receiver for chaining.
 func (x *TokenSmartCardPINAuthOperation) WithPIN(pIN string) *TokenSmartCardPINAuthOperation {

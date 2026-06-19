@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qccompositionrepository
 type QCCompositionRepository struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func QCCompositionRepositoryFromID(id objc.ID) *QCCompositionRepository {
 	return o
 }
 
+// Returns the shared instance of the composition repository.
 func QCCompositionRepositorySharedCompositionRepository() *QCCompositionRepository {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionRepository), _qCCompositionRepositorySelSharedCompositionRepository)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func QCCompositionRepositorySharedCompositionRepository() *QCCompositionReposito
 	return QCCompositionRepositoryFromID(_ret)
 }
 
+// Returns the composition that corresponds to the identifier.
 func (o *QCCompositionRepository) CompositionWithIdentifier(identifier *foundation.NSString) *QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionRepositorySelCompositionWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -49,12 +53,20 @@ func (o *QCCompositionRepository) CompositionWithIdentifier(identifier *foundati
 	return QCCompositionFromID(_ret)
 }
 
+// Returns an array of compositions that match a set of criteria.
 func (o *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionRepositorySelCompositionsWithProtocolsAndAttributes, protocols, attributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionRepositorySelCompositionsWithProtocolsAndAttributes, protocols.Ptr(), attributes.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns an array that contains all compositions currently in the composition repository.
 func (o *QCCompositionRepository) AllCompositions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionRepositorySelAllCompositions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionRepositorySelAllCompositions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

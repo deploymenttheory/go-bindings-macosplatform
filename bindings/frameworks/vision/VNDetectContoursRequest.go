@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects the contours of the edges of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectcontoursrequest
 type VNDetectContoursRequest struct {
 	VNImageBasedRequest

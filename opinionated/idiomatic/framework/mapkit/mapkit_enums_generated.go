@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// A structure that contains options for filtering results in a search.
 // Bitmask — values may be combined with |.
 type MKAddressFilterOption uint64
 
@@ -68,6 +69,7 @@ func (e MKAddressRepresentationsContextStyle) String() string {
 	}
 }
 
+// Constants that indicates how to interpret the collision frame rectangle of an annotation view.
 type MKAnnotationViewCollisionMode int64
 
 const (
@@ -89,6 +91,7 @@ func (e MKAnnotationViewCollisionMode) String() string {
 	}
 }
 
+// Constants that indicate the drag state of an annotation view.
 type MKAnnotationViewDragState uint64
 
 const (
@@ -116,6 +119,7 @@ func (e MKAnnotationViewDragState) String() string {
 	}
 }
 
+// Options that modify how the framework selects routes when calculating directions.
 type MKDirectionsRoutePreference int64
 
 const (
@@ -134,15 +138,21 @@ func (e MKDirectionsRoutePreference) String() string {
 	}
 }
 
+// Constants that specify the type of conveyance to use.
 // Bitmask — values may be combined with |.
 type MKDirectionsTransportType uint64
 
 const (
+	// Directions suitable for use while driving.
 	MKDirectionsTransportTypeAutomobile MKDirectionsTransportType = 1
-	MKDirectionsTransportTypeWalking    MKDirectionsTransportType = 2
-	MKDirectionsTransportTypeTransit    MKDirectionsTransportType = 4
-	MKDirectionsTransportTypeCycling    MKDirectionsTransportType = 8
-	MKDirectionsTransportTypeAny        MKDirectionsTransportType = 268435455
+	// Directions suitable for a pedestrian.
+	MKDirectionsTransportTypeWalking MKDirectionsTransportType = 2
+	// Directions suitable for public transportation.
+	MKDirectionsTransportTypeTransit MKDirectionsTransportType = 4
+	// Directions suitable for use while cycling.
+	MKDirectionsTransportTypeCycling MKDirectionsTransportType = 8
+	// Directions suitable for any transportation option.
+	MKDirectionsTransportTypeAny MKDirectionsTransportType = 268435455
 )
 
 func (e MKDirectionsTransportType) String() string {
@@ -168,6 +178,7 @@ func (e MKDirectionsTransportType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The preferred style for units.
 type MKDistanceFormatterUnitStyle uint64
 
 const (
@@ -189,6 +200,7 @@ func (e MKDistanceFormatterUnitStyle) String() string {
 	}
 }
 
+// Constants that reflect the type of units to use in the string.
 type MKDistanceFormatterUnits uint64
 
 const (
@@ -213,6 +225,7 @@ func (e MKDistanceFormatterUnits) String() string {
 	}
 }
 
+// Error constants for the MapKit framework.
 type MKErrorCode uint64
 
 const (
@@ -243,12 +256,16 @@ func (e MKErrorCode) String() string {
 	}
 }
 
+// Constants that indicate the visibility of different map features.
 type MKFeatureVisibility int64
 
 const (
+	// A constant indicating that the feature adapts to the current map state.
 	MKFeatureVisibilityAdaptive MKFeatureVisibility = 0
-	MKFeatureVisibilityHidden   MKFeatureVisibility = 1
-	MKFeatureVisibilityVisible  MKFeatureVisibility = 2
+	// A constant indicating that the feature is hidden.
+	MKFeatureVisibilityHidden MKFeatureVisibility = 1
+	// A constant indicating that the feature is visible.
+	MKFeatureVisibilityVisible MKFeatureVisibility = 2
 )
 
 func (e MKFeatureVisibility) String() string {
@@ -264,6 +281,7 @@ func (e MKFeatureVisibility) String() string {
 	}
 }
 
+// Options that indicate types of search completions.
 // Bitmask — values may be combined with |.
 type MKLocalSearchCompleterResultType uint64
 
@@ -295,10 +313,13 @@ func (e MKLocalSearchCompleterResultType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A value that indicates the importance of the configured region.
 type MKLocalSearchRegionPriority int64
 
 const (
-	MKLocalSearchRegionPriorityDefault  MKLocalSearchRegionPriority = 0
+	// A value indicating that the results can originate from outside the specified region.
+	MKLocalSearchRegionPriorityDefault MKLocalSearchRegionPriority = 0
+	// A value indicating that no results can originate from outside the specified region.
 	MKLocalSearchRegionPriorityRequired MKLocalSearchRegionPriority = 1
 )
 
@@ -313,6 +334,7 @@ func (e MKLocalSearchRegionPriority) String() string {
 	}
 }
 
+// Options that indicate types of search results.
 // Bitmask — values may be combined with |.
 type MKLocalSearchResultType uint64
 
@@ -339,11 +361,15 @@ func (e MKLocalSearchResultType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that control the position of badges on LookAround views.
 type MKLookAroundBadgePosition int64
 
 const (
-	MKLookAroundBadgePositionTopLeading     MKLookAroundBadgePosition = 0
-	MKLookAroundBadgePositionTopTrailing    MKLookAroundBadgePosition = 1
+	// The value that indicates the top-left badge position.
+	MKLookAroundBadgePositionTopLeading MKLookAroundBadgePosition = 0
+	// The value that indicates the top-right badge position.
+	MKLookAroundBadgePositionTopTrailing MKLookAroundBadgePosition = 1
+	// The value that indicates the bottom-right badge position.
 	MKLookAroundBadgePositionBottomTrailing MKLookAroundBadgePosition = 2
 )
 
@@ -360,6 +386,7 @@ func (e MKLookAroundBadgePosition) String() string {
 	}
 }
 
+// Values that control the map’s elevation style.
 type MKMapElevationStyle int64
 
 const (
@@ -378,6 +405,7 @@ func (e MKMapElevationStyle) String() string {
 	}
 }
 
+// The style to use for a map item detail callout presentation.
 type MKMapItemDetailSelectionAccessoryCalloutStyle int64
 
 const (
@@ -399,15 +427,22 @@ func (e MKMapItemDetailSelectionAccessoryCalloutStyle) String() string {
 	}
 }
 
+// The type of map to display.
 type MKMapType uint64
 
 const (
-	MKMapTypeStandard         MKMapType = 0
-	MKMapTypeSatellite        MKMapType = 1
-	MKMapTypeHybrid           MKMapType = 2
+	// A street map that shows the position of all roads and some road names.
+	MKMapTypeStandard MKMapType = 0
+	// Satellite imagery of the area.
+	MKMapTypeSatellite MKMapType = 1
+	// A satellite image of the area with road and road name information layered on top.
+	MKMapTypeHybrid MKMapType = 2
+	// A satellite image of the area with flyover data where available.
 	MKMapTypeSatelliteFlyover MKMapType = 3
-	MKMapTypeHybridFlyover    MKMapType = 4
-	MKMapTypeMutedStandard    MKMapType = 5
+	// A hybrid satellite image with flyover data where available.
+	MKMapTypeHybridFlyover MKMapType = 4
+	// A street map where MapKit emphasizes your data over the underlying map details.
+	MKMapTypeMutedStandard MKMapType = 5
 )
 
 func (e MKMapType) String() string {
@@ -429,10 +464,13 @@ func (e MKMapType) String() string {
 	}
 }
 
+// Constants that indicate the position of overlays relative to other content.
 type MKOverlayLevel int64
 
 const (
-	MKOverlayLevelAboveRoads  MKOverlayLevel = 0
+	// Place the overlay above roadways but below map labels, shields, or point-of-interest icons.
+	MKOverlayLevelAboveRoads MKOverlayLevel = 0
+	// Place the overlay above map labels, shields, or point-of-interest icons but below annotations and 3D projections of buildings.
 	MKOverlayLevelAboveLabels MKOverlayLevel = 1
 )
 
@@ -447,6 +485,7 @@ func (e MKOverlayLevel) String() string {
 	}
 }
 
+// The supported colors for pin annotations.
 type MKPinAnnotationColor uint64
 
 const (
@@ -468,6 +507,8 @@ func (e MKPinAnnotationColor) String() string {
 	}
 }
 
+// Constants indicating the types of search completions to return.
+//
 // Deprecated: Use MKLocalSearchCompleterResultType
 type MKSearchCompletionFilterType int64
 
@@ -487,6 +528,7 @@ func (e MKSearchCompletionFilterType) String() string {
 	}
 }
 
+// Values that control how the framework emphasizes map features.
 type MKStandardMapEmphasisStyle int64
 
 const (
@@ -505,10 +547,13 @@ func (e MKStandardMapEmphasisStyle) String() string {
 	}
 }
 
+// The mode to use for tracking the user’s location on the map.
 type MKUserTrackingMode int64
 
 const (
-	MKUserTrackingModeNone   MKUserTrackingMode = 0
+	// The map doesn’t follow the user’s location.
+	MKUserTrackingModeNone MKUserTrackingMode = 0
+	// The map follows the user location.
 	MKUserTrackingModeFollow MKUserTrackingMode = 1
 )
 

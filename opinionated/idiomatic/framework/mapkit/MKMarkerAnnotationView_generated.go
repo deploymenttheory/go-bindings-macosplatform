@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An annotation view that displays a balloon-shaped marker at the designated location.
+//
 // MarkerAnnotationView wraps [raw.MKMarkerAnnotationView] with a fluent Go API.
 type MarkerAnnotationView struct {
 	inner *raw.MKMarkerAnnotationView
@@ -39,174 +41,232 @@ func NewMarkerAnnotationView() *MarkerAnnotationView {
 	return &MarkerAnnotationView{inner: raw.MKMarkerAnnotationViewFromID(_id)}
 }
 
+// The visibility of the title text rendered beneath the marker balloon.
+//
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithTitleVisibility(titleVisibility MKFeatureVisibility) *MarkerAnnotationView {
 	x.inner.SetTitleVisibility(raw.MKFeatureVisibility(titleVisibility))
 	return x
 }
 
+// The visibility of the subtitle text rendered beneath the marker balloon.
+//
 // WithSubtitleVisibility sets the subtitleVisibility property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility MKFeatureVisibility) *MarkerAnnotationView {
 	x.inner.SetSubtitleVisibility(raw.MKFeatureVisibility(subtitleVisibility))
 	return x
 }
 
+// The background color of the marker balloon.
+//
 // WithMarkerTintColor sets the markerTintColor property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithMarkerTintColor(markerTintColor *appkit.NSColor) *MarkerAnnotationView {
 	x.inner.SetMarkerTintColor(markerTintColor)
 	return x
 }
 
+// The color to apply to the glyph text or image.
+//
 // WithGlyphTintColor sets the glyphTintColor property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithGlyphTintColor(glyphTintColor *appkit.NSColor) *MarkerAnnotationView {
 	x.inner.SetGlyphTintColor(glyphTintColor)
 	return x
 }
 
+// The text to display in the marker balloon.
+//
 // WithGlyphText sets the glyphText property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithGlyphText(glyphText string) *MarkerAnnotationView {
 	x.inner.SetGlyphText(foundation.NSStringStringWithUTF8String(glyphText))
 	return x
 }
 
+// An image to display in the marker balloon.
+//
 // WithGlyphImage sets the glyphImage property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithGlyphImage(glyphImage *appkit.NSImage) *MarkerAnnotationView {
 	x.inner.SetGlyphImage(glyphImage)
 	return x
 }
 
+// An image to display when the user selects the marker.
+//
 // WithSelectedGlyphImage sets the selectedGlyphImage property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) *MarkerAnnotationView {
 	x.inner.SetSelectedGlyphImage(selectedGlyphImage)
 	return x
 }
 
+// A Boolean that indicates whether the marker animates into position onscreen.
+//
 // WithAnimatesWhenAdded sets the animatesWhenAdded property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView {
 	x.inner.SetAnimatesWhenAdded(animatesWhenAdded)
 	return x
 }
 
+// The annotation object associated with the view.
+//
 // WithAnnotation sets the annotation property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithAnnotation(annotation raw.MKAnnotation) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetAnnotation(annotation)
 	return x
 }
 
+// The image the annotation view displays.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithImage(image *appkit.NSImage) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetImage(image)
 	return x
 }
 
+// The offset (in points) at which to display the view.
+//
 // WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetCenterOffset(centerOffset)
 	return x
 }
 
+// An offset that changes the accessory’s default anchor point.
+//
 // WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetAccessoryOffset(accessoryOffset)
 	return x
 }
 
+// The offset (in points) at which to place the callout.
+//
 // WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetCalloutOffset(calloutOffset)
 	return x
 }
 
+// The offset in points from the middle-left of the annotation view.
+//
 // WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetLeftCalloutOffset(leftCalloutOffset)
 	return x
 }
 
+// The offset in points from the middle-right of the annotation view.
+//
 // WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetRightCalloutOffset(rightCalloutOffset)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation is in an enabled state.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithEnabled(enabled bool) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map view highlights the annotation view.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithHighlighted(highlighted bool) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetHighlighted(highlighted)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is in a selected state.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithSelected(selected bool) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
+//
 // WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithCanShowCallout(canShowCallout bool) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetCanShowCallout(canShowCallout)
 	return x
 }
 
+// The view to display on the left side of the standard callout.
+//
 // WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
 	return x
 }
 
+// The view to display on the right side of the standard callout.
+//
 // WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
 	return x
 }
 
+// The detail accessory view to use in the standard callout.
+//
 // WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is draggable.
+//
 // WithDraggable sets the draggable property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithDraggable(draggable bool) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetDraggable(draggable)
 	return x
 }
 
+// The drag state of the annotation view.
+//
 // WithDragState sets the dragState property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithDragState(dragState MKAnnotationViewDragState) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
+// An identifier that determines whether the annotation view participates in clustering.
+//
 // WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
 	return x
 }
 
+// The display priority of the annotation view.
+//
 // WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithDisplayPriority(displayPriority float32) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetDisplayPriority(displayPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
+//
 // WithZPriority sets the zPriority property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithZPriority(zPriority float32) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetZPriority(zPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
+//
 // WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetSelectedZPriority(selectedZPriority)
 	return x
 }
 
+// The collision mode to use when interpreting the collision frame rectangle.
+//
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *MarkerAnnotationView {
 	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))

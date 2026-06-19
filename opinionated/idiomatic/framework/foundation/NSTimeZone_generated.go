@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about standard time conventions associated with a specific geopolitical region.
+//
 // TimeZone wraps [raw.NSTimeZone] with a fluent Go API.
 type TimeZone struct {
 	inner *raw.NSTimeZone
@@ -30,6 +32,8 @@ func TimeZoneFromID(id objc.ID) *TimeZone {
 	return &TimeZone{inner: raw.NSTimeZoneFromID(id)}
 }
 
+// Returns a time zone initialized with a given identifier.
+//
 // NewTimeZoneWithName creates a new [TimeZone].
 func NewTimeZoneWithName(tzName string) *TimeZone {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTimeZone")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewTimeZoneWithName(tzName string) *TimeZone {
 	return &TimeZone{inner: raw.NSTimeZoneFromID(_id)}
 }
 
+// Initializes a time zone with a given identifier and time zone data.
+//
 // NewTimeZoneWithNameData creates a new [TimeZone].
 func NewTimeZoneWithNameData(tzName string, aData *raw.NSData) *TimeZone {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTimeZone")), objc.RegisterName("alloc"))
@@ -50,11 +56,15 @@ func (x *TimeZone) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// Returns the difference in seconds between the receiver and Greenwich Mean Time at a given date.
+//
 // SecondsFromGMTForDate calls the underlying SecondsFromGMTForDate.
 func (x *TimeZone) SecondsFromGMTForDate(aDate *raw.NSDate) int {
 	return x.inner.SecondsFromGMTForDate(aDate)
 }
 
+// Returns the abbreviation for the receiver at a given date.
+//
 // AbbreviationForDate calls the underlying AbbreviationForDate.
 func (x *TimeZone) AbbreviationForDate(aDate *raw.NSDate) *String {
 	_r := x.inner.AbbreviationForDate(aDate)
@@ -64,16 +74,22 @@ func (x *TimeZone) AbbreviationForDate(aDate *raw.NSDate) *String {
 	return &String{inner: _r}
 }
 
+// Indicates whether the receiver uses daylight saving time on a given date.
+//
 // IsDaylightSavingTimeForDate calls the underlying IsDaylightSavingTimeForDate.
 func (x *TimeZone) IsDaylightSavingTimeForDate(aDate *raw.NSDate) bool {
 	return x.inner.IsDaylightSavingTimeForDate(aDate)
 }
 
+// Returns the daylight saving time offset for a given date.
+//
 // DaylightSavingTimeOffsetForDate calls the underlying DaylightSavingTimeOffsetForDate.
 func (x *TimeZone) DaylightSavingTimeOffsetForDate(aDate *raw.NSDate) float64 {
 	return x.inner.DaylightSavingTimeOffsetForDate(aDate)
 }
 
+// Returns the next daylight saving time transition after a given date.
+//
 // NextDaylightSavingTimeTransitionAfterDate calls the underlying NextDaylightSavingTimeTransitionAfterDate.
 func (x *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *raw.NSDate) *Date {
 	_r := x.inner.NextDaylightSavingTimeTransitionAfterDate(aDate)
@@ -101,11 +117,15 @@ func (x *TimeZone) Data() *Data {
 	return &Data{inner: _r}
 }
 
+// Indicates whether the receiver has the same name and data as the specified time zone.
+//
 // IsEqualToTimeZone calls the underlying IsEqualToTimeZone.
 func (x *TimeZone) IsEqualToTimeZone(aTimeZone *raw.NSTimeZone) bool {
 	return x.inner.IsEqualToTimeZone(aTimeZone)
 }
 
+// Returns the localized name of the time zone.
+//
 // LocalizedNameLocale calls the underlying LocalizedNameLocale.
 func (x *TimeZone) LocalizedNameLocale(style NSTimeZoneNameStyle, locale *raw.NSLocale) *String {
 	_r := x.inner.LocalizedNameLocale(raw.NSTimeZoneNameStyle(style), locale)

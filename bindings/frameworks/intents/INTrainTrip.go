@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a train trip.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/intraintrip
 type INTrainTrip struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func INTrainTripFromID(id objc.ID) *INTrainTrip {
 	return o
 }
 
+// Creates a new train trip with the specified contents and attributes.
 func (o *INTrainTrip) InitWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider *foundation.NSString, trainName *foundation.NSString, trainNumber *foundation.NSString, tripDuration *INDateComponentsRange, departureStationLocation *corelocation.CLPlacemark, departurePlatform *foundation.NSString, arrivalStationLocation *corelocation.CLPlacemark, arrivalPlatform *foundation.NSString) *INTrainTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainTripSelInitWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform, provider.Ptr(), trainName.Ptr(), trainNumber.Ptr(), tripDuration.Ptr(), departureStationLocation.Ptr(), departurePlatform.Ptr(), arrivalStationLocation.Ptr(), arrivalPlatform.Ptr())
 	if _ret != 0 {

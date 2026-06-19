@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the behaviors to use when loading and rendering page content.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebpagepreferences
 type WKWebpagePreferences struct {
 	foundation.NSObject

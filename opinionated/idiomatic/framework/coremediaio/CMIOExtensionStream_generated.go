@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a stream of media data.
+//
 // ExtensionStream wraps [raw.CMIOExtensionStream] with a fluent Go API.
 type ExtensionStream struct {
 	inner *raw.CMIOExtensionStream
@@ -32,7 +34,7 @@ func ExtensionStreamFromID(id objc.ID) *ExtensionStream {
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(id)}
 }
 
-// @method initWithLocalizedName:streamID:direction:clockType:source: @abstract Initialize a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param clockType The stream clock type. @param source The stream source. @result A CMIOExtensionStream instance that provides data. @discussion Note that the clockType parameter may not be CMIOExtensionStreamClockTypeCustom; that value is reserved for streams created with a custom clock configuration. For streams that have a custom clock, use streamWithLocalizedName:streamID:direction:customClockConfiguration:source:.
+// Creates a stream.
 //
 // NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource creates a new [ExtensionStream].
 func NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
@@ -41,6 +43,8 @@ func NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localiz
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
 }
 
+// Creates a stream that uses a custom clock configuration.
+//
 // NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource creates a new [ExtensionStream].
 func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStream")), objc.RegisterName("alloc"))
@@ -48,21 +52,21 @@ func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfiguratio
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
 }
 
-// @method notifyPropertiesChanged: @abstract Notify client(s) of stream properties changes. @param propertyStates The dictionary of properties having changed.
+// Notifies clients about stream property changes.
 //
 // NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
 func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.NotifyPropertiesChanged(propertyStates)
 }
 
-// @method sendSampleBuffer:discontinuity:hostTimeInNanoseconds: @abstract Send media sample to client(s). @param sampleBuffer The sample buffer containing media data. @param discontinuity The discontinuity flag indicating if the sample buffer represents a discontinuity boundary. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was captured. @discussion The sample will be deliver to clients whose media type authorization status is authorized. The sample buffer timestamps should be relative to the clock timebase specified with clockType. Attempting to send a sample buffer on a sink stream will throw an exception.
+// Sends a media sample to stream client.
 //
 // SendSampleBufferDiscontinuityHostTimeInNanoseconds calls the underlying SendSampleBufferDiscontinuityHostTimeInNanoseconds.
 func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
 	x.inner.SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer, raw.CMIOExtensionStreamDiscontinuityFlags(discontinuity), hostTimeInNanoseconds)
 }
 
-// @method consumeSampleBufferFromClient:completionHandler: @abstract Consume a sample buffer from a client. @param client The client. @param completionHandler A block that will be called when the operation is completed. If the capture request is successful, the "sampleBuffer" parameter contains a valid CMSampleBuffer, the "sampleBufferSequenceNumber" parameter is the sample buffer sequence number, the "discontinuity" parameter is the discontinuity flag, the "hasMoreSampleBuffers" parameter indicates whether or not more sample buffers are available, the "error" parameter is nil.
+// Consumes a sample buffer from a client.
 //
 // ConsumeSampleBufferFromClientCompletionHandler calls the underlying ConsumeSampleBufferFromClientCompletionHandler.
 func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
@@ -71,7 +75,7 @@ func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client 
 	})
 }
 
-// @method notifyScheduledOutputChanged: @abstract Notify client(s) when a particular buffer was output. @param scheduledOutput The stream scheduled output.
+// Notifies clients when a particular buffer is output.
 //
 // NotifyScheduledOutputChanged calls the underlying NotifyScheduledOutputChanged.
 func (x *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput) {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a mass associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inmassresolutionresult
 type INMassResolutionResult struct {
 	INIntentResolutionResult
@@ -32,24 +34,27 @@ func INMassResolutionResultFromID(id objc.ID) *INMassResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INMassResolutionResultSuccessWithResolvedMass(resolvedMass *foundation.NSMeasurement[*foundation.NSUnitMass]) *INMassResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelSuccessWithResolvedMass, resolvedMass)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelSuccessWithResolvedMass, resolvedMass.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INMassResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INMassResolutionResultDisambiguationWithMassToDisambiguate(massToDisambiguate *foundation.NSArray[objc.ID]) *INMassResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelDisambiguationWithMassToDisambiguate, massToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelDisambiguationWithMassToDisambiguate, massToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INMassResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INMassResolutionResultConfirmationRequiredWithMassToConfirm(massToConfirm *foundation.NSMeasurement[*foundation.NSUnitMass]) *INMassResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelConfirmationRequiredWithMassToConfirm, massToConfirm)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINMassResolutionResult), _iNMassResolutionResultSelConfirmationRequiredWithMassToConfirm, massToConfirm.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

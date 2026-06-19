@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for generating requests to authenticate users based on their Apple ID.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovider
 type ASAuthorizationAppleIDProvider struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func ASAuthorizationAppleIDProviderFromID(id objc.ID) *ASAuthorizationAppleIDPro
 	return o
 }
 
-// @abstract This method initializes and returns an instance of @see ASAuthorizationAppleIDRequest to be serviced by @see ASAuthorizationController.
+// Creates a new Apple ID authorization request.
 func (o *ASAuthorizationAppleIDProvider) CreateRequest() *ASAuthorizationAppleIDRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDProviderSelCreateRequest)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *ASAuthorizationAppleIDProvider) CreateRequest() *ASAuthorizationAppleID
 	return ASAuthorizationAppleIDRequestFromID(_ret)
 }
 
-// @abstract This method can be used to get the current state of an opaque user ID previously given. @param userID Opaque user identifier that will be checked for state. @param completion A completion block that will return one of 3 possible states @see ASAuthorizationAppleIDProviderCredentialState. @note If credentialState is @see ASAuthorizationAppleIDProviderCredentialNotFound, an error will also be passed in the completion block.
+// Returns the credential state for the given user in a completion handler.
 func (o *ASAuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID *foundation.NSString, completion func(ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

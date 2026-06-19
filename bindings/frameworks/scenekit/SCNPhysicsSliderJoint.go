@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A physics behavior that connects two bodies and allows them to slide against each other and rotate around their connecting points.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicssliderjoint
 type SCNPhysicsSliderJoint struct {
 	SCNPhysicsBehavior
@@ -56,6 +58,7 @@ func SCNPhysicsSliderJointFromID(id objc.ID) *SCNPhysicsSliderJoint {
 	return o
 }
 
+// Creates a slider joint connecting two physics bodies.
 func SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *SCNPhysicsBody, axisA SCNVector3, anchorA SCNVector3, bodyB *SCNPhysicsBody, axisB SCNVector3, anchorB SCNVector3) *SCNPhysicsSliderJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsSliderJoint), _sCNPhysicsSliderJointSelJointWithBodyAAxisAAnchorABodyBAxisBAnchorB, bodyA.Ptr(), axisA, anchorA, bodyB.Ptr(), axisB, anchorB)
 	if _ret != 0 {
@@ -64,6 +67,7 @@ func SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *SCN
 	return SCNPhysicsSliderJointFromID(_ret)
 }
 
+// Creates a slider joint that anchors a single physics body in space and allows it to slide along a specific axis.
 func SCNPhysicsSliderJointJointWithBodyAxisAnchor(body *SCNPhysicsBody, axis SCNVector3, anchor SCNVector3) *SCNPhysicsSliderJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsSliderJoint), _sCNPhysicsSliderJointSelJointWithBodyAxisAnchor, body.Ptr(), axis, anchor)
 	if _ret != 0 {

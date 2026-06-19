@@ -49,7 +49,7 @@ func (o *VZMultipleDirectoryShare) Init() *VZMultipleDirectoryShare {
 
 // Creates the directory share with a set of directories on the host.
 func (o *VZMultipleDirectoryShare) InitWithDirectories(directories *foundation.NSDictionary[*foundation.NSString, *VZSharedDirectory]) *VZMultipleDirectoryShare {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelInitWithDirectories, directories)
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelInitWithDirectories, directories.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -77,6 +77,9 @@ func VZMultipleDirectoryShareCanonicalizedNameFromName(name *foundation.NSString
 
 // @abstract The directories on the host to expose to the guest. @discussion The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised. @see +[VZMultipleDirectoryShare validateName:error:]
 func (o *VZMultipleDirectoryShare) Directories() *foundation.NSDictionary[*foundation.NSString, *VZSharedDirectory] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VZSharedDirectory]](o.Ptr(), _vZMultipleDirectoryShareSelDirectories)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelDirectories)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *VZSharedDirectory](_ret)
 }

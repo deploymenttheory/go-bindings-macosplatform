@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The minimum rasterization rates to apply to sections of a layer in the render target.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrasterizationratelayerdescriptor
 type MTLRasterizationRateLayerDescriptor struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func MTLRasterizationRateLayerDescriptorFromID(id objc.ID) *MTLRasterizationRate
 	return o
 }
 
-// @method initWithSampleCount: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @discussion All values are initialized to zero.
+// Initializes the layer map with an empty grid.
 func (o *MTLRasterizationRateLayerDescriptor) InitWithSampleCount(sampleCount MTLSize) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerDescriptorSelInitWithSampleCount, sampleCount)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *MTLRasterizationRateLayerDescriptor) InitWithSampleCount(sampleCount MT
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
-// @method initWithSampleCount:horizontal:vertical: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @param horizontal The initial sample values on the horizontal axis. Must point to an array of sampleCount.width elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @param vertical The initial sample values on the vertical axis. Must point to an array of sampleCount.height elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @discussion Use initWithSampleCount: to initialize with zeroes instead.
+// Initializes the layer map with the provided grid size and rasterization rates.
 func (o *MTLRasterizationRateLayerDescriptor) InitWithSampleCountHorizontalVertical(sampleCount MTLSize, horizontal *float32, vertical *float32) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerDescriptorSelInitWithSampleCountHorizontalVertical, sampleCount, horizontal, vertical)
 	if _ret != 0 {

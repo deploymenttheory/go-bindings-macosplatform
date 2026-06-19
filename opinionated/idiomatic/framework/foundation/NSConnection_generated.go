@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the communication between objects in different threads or between a thread and a process running on a local or remote system.
+//
 // Connection wraps [raw.NSConnection] with a fluent Go API.
 type Connection struct {
 	inner *raw.NSConnection
@@ -31,6 +33,8 @@ func ConnectionFromID(id objc.ID) *Connection {
 	return &Connection{inner: raw.NSConnectionFromID(id)}
 }
 
+// Returns an NSConnection object initialized with given send and receive ports.
+//
 // NewConnectionWithReceivePortSendPort creates a new [Connection].
 func NewConnectionWithReceivePortSendPort(receivePort *raw.NSPort, sendPort *raw.NSPort) *Connection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSConnection")), objc.RegisterName("alloc"))
@@ -38,30 +42,40 @@ func NewConnectionWithReceivePortSendPort(receivePort *raw.NSPort, sendPort *raw
 	return &Connection{inner: raw.NSConnectionFromID(_id)}
 }
 
+// The timeout interval for outgoing remote messages.
+//
 // WithRequestTimeout sets the requestTimeout property and returns the receiver for chaining.
 func (x *Connection) WithRequestTimeout(requestTimeout float64) *Connection {
 	x.inner.SetRequestTimeout(requestTimeout)
 	return x
 }
 
+// The timeout interval for replies to outgoing remote messages.
+//
 // WithReplyTimeout sets the replyTimeout property and returns the receiver for chaining.
 func (x *Connection) WithReplyTimeout(replyTimeout float64) *Connection {
 	x.inner.SetReplyTimeout(replyTimeout)
 	return x
 }
 
+// The object that the receiver (or its parent) makes available to other applications or threads.
+//
 // WithRootObject sets the rootObject property and returns the receiver for chaining.
 func (x *Connection) WithRootObject(rootObject objc.ID) *Connection {
 	x.inner.SetRootObject(rootObject)
 	return x
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Connection) WithDelegate(delegate raw.NSConnectionDelegate) *Connection {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver handles remote messages atomically.
+//
 // WithIndependentConversationQueueing sets the independentConversationQueueing property and returns the receiver for chaining.
 func (x *Connection) WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection {
 	x.inner.SetIndependentConversationQueueing(independentConversationQueueing)
@@ -74,51 +88,71 @@ func (x *Connection) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Invalidates the receiver.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *Connection) Invalidate() {
 	x.inner.Invalidate()
 }
 
+// Adds mode to the set of run-loop input modes that the receiver uses for connection requests.
+//
 // AddRequestMode calls the underlying AddRequestMode.
 func (x *Connection) AddRequestMode(rmode string) {
 	x.inner.AddRequestMode(foundation.NSStringStringWithUTF8String(rmode))
 }
 
+// Removes mode from the set of run-loop input modes the receiver uses for connection requests.
+//
 // RemoveRequestMode calls the underlying RemoveRequestMode.
 func (x *Connection) RemoveRequestMode(rmode string) {
 	x.inner.RemoveRequestMode(foundation.NSStringStringWithUTF8String(rmode))
 }
 
+// Registers the specified service using with the default system port name server.
+//
 // RegisterName calls the underlying RegisterName.
 func (x *Connection) RegisterName(name string) bool {
 	return x.inner.RegisterName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Registers a service with the specified port name server.
+//
 // RegisterNameWithNameServer calls the underlying RegisterNameWithNameServer.
 func (x *Connection) RegisterNameWithNameServer(name string, server *raw.NSPortNameServer) bool {
 	return x.inner.RegisterNameWithNameServer(foundation.NSStringStringWithUTF8String(name), server)
 }
 
+// Configures the receiver to allow requests from multiple threads to the remote object, without requiring each thread to each maintain its own connection.
+//
 // EnableMultipleThreads calls the underlying EnableMultipleThreads.
 func (x *Connection) EnableMultipleThreads() {
 	x.inner.EnableMultipleThreads()
 }
 
+// Adds the specified run loop to the list of run loops the receiver monitors and from which it responds to requests.
+//
 // AddRunLoop calls the underlying AddRunLoop.
 func (x *Connection) AddRunLoop(runloop *raw.NSRunLoop) {
 	x.inner.AddRunLoop(runloop)
 }
 
+// Removes a given NSRunLoop object from the list of run loops the receiver monitors and from which it responds to requests.
+//
 // RemoveRunLoop calls the underlying RemoveRunLoop.
 func (x *Connection) RemoveRunLoop(runloop *raw.NSRunLoop) {
 	x.inner.RemoveRunLoop(runloop)
 }
 
+// Creates and starts a new NSThread object and then runs the receiving connection in the new thread.
+//
 // RunInNewThread calls the underlying RunInNewThread.
 func (x *Connection) RunInNewThread() {
 	x.inner.RunInNewThread()
 }
 
+// Allows subclasses to ask a connection object to dispatch component data.
+//
 // DispatchWithComponents calls the underlying DispatchWithComponents.
 func (x *Connection) DispatchWithComponents(components *raw.NSArray[objc.ID]) {
 	x.inner.DispatchWithComponents(components)

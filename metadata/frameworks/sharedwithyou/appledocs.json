@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "framework": "SharedWithYou",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SWAttributionView": {
+      "doc": "A view that displays the sender who shares a highlight and provides related actions.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview"
+    },
+    "SWCollaborationHighlight": {
+      "doc": "A highlight object that represents an active collaboration.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationhighlight"
+    },
+    "SWCollaborationView": {
+      "doc": "A view that contains the collaboration content and options.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview"
+    },
+    "SWHighlight": {
+      "doc": "An object that represents a universal link to share by any number of contacts in one or more conversations.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlight"
+    },
+    "SWHighlightCenter": {
+      "doc": "An object that contains a priority-ordered list of universal links to share with the current user.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter"
+    },
+    "SWHighlightChangeEvent": {
+      "doc": "An object that represents change activity for a highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeevent"
+    },
+    "SWHighlightMembershipEvent": {
+      "doc": "An object that represents membership activity for a highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipevent"
+    },
+    "SWHighlightMentionEvent": {
+      "doc": "An object that represents mention activity for a highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmentionevent"
+    },
+    "SWHighlightPersistenceEvent": {
+      "doc": "An object that represents persistence activity for a highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceevent"
+    },
+    "SWRemoveParticipantAlert": {
+      "doc": "An alert that prompts the user to remove a participant from a Messages group.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swremoveparticipantalert"
+    }
+  },
+  "protocols": {
+    "SWCollaborationViewDelegate": {
+      "doc": "A delegate object that the system notifies about changes to the collaboration popover state.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationviewdelegate"
+    },
+    "SWHighlightCenterDelegate": {
+      "doc": "The protocol you use to notify the delegate when the list or rank order of surfaced highlights changes.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenterdelegate"
+    },
+    "SWHighlightEvent": {
+      "doc": "A protocol that defines an activity that the system posts in response to a user action for a highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightevent"
+    }
+  },
+  "enums": {
+    "SWAttributionViewBackgroundStyle": {
+      "doc": "The background styling of the attribution view’s contents.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionviewbackgroundstyle"
+    },
+    "SWAttributionViewDisplayContext": {
+      "doc": "The context for the content that influences the ranking of this view’s highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionviewdisplaycontext"
+    },
+    "SWAttributionViewHorizontalAlignment": {
+      "doc": "The horizontal alignment of attribution view’s contents.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionviewhorizontalalignment"
+    },
+    "SWHighlightCenterErrorCode": {
+      "doc": "The error codes for the highlight center.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcentererrorcode",
+      "members": {
+        "SWHighlightCenterErrorCodeAccessDenied": {
+          "doc": "Reports and access denied error.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcentererrorcode/accessdenied"
+        },
+        "SWHighlightCenterErrorCodeInternalError": {
+          "doc": "Reports an internal error.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcentererrorcode/internalerror"
+        },
+        "SWHighlightCenterErrorCodeInvalidURL": {
+          "doc": "Reports an invalid URL error.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcentererrorcode/invalidurl"
+        },
+        "SWHighlightCenterErrorCodeNoError": {
+          "doc": "Reports no error.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcentererrorcode/noerror"
+        }
+      }
+    },
+    "SWHighlightChangeEventTrigger": {
+      "doc": "The type of change event for the highlight",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeeventtrigger",
+      "members": {
+        "SWHighlightChangeEventTriggerComment": {
+          "doc": "Signifies a highlight comment.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeeventtrigger/comment"
+        },
+        "SWHighlightChangeEventTriggerEdit": {
+          "doc": "Signifies a highlight edit.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeeventtrigger/edit"
+        }
+      }
+    },
+    "SWHighlightMembershipEventTrigger": {
+      "doc": "The type of membership event for the highlight.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipeventtrigger",
+      "members": {
+        "SWHighlightMembershipEventTriggerAddedCollaborator": {
+          "doc": "Signifies the system added a collaborator.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipeventtrigger/addedcollaborator"
+        },
+        "SWHighlightMembershipEventTriggerRemovedCollaborator": {
+          "doc": "Signifies the system removed a collaborator.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipeventtrigger/removedcollaborator"
+        }
+      }
+    },
+    "SWHighlightPersistenceEventTrigger": {
+      "doc": "Signifies the type of persistence event trigger.",
+      "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceeventtrigger",
+      "members": {
+        "SWHighlightPersistenceEventTriggerCreated": {
+          "doc": "Signifies a creation event.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceeventtrigger/created"
+        },
+        "SWHighlightPersistenceEventTriggerDeleted": {
+          "doc": "Signifies a deletion event.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceeventtrigger/deleted"
+        },
+        "SWHighlightPersistenceEventTriggerMoved": {
+          "doc": "Signifies a move event.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceeventtrigger/moved"
+        },
+        "SWHighlightPersistenceEventTriggerRenamed": {
+          "doc": "Signifies a rename event.",
+          "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceeventtrigger/renamed"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SWCollaborationView": {
+      "-dismissPopover:": {
+        "doc": "Dismisses the popover.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/dismisspopover(_:)"
+      },
+      "-initWithItemProvider:": {
+        "doc": "Creates and initializes a collaboration view.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/init(itemprovider:)"
+      },
+      "-setContentView:": {
+        "doc": "Sets the content view.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/setcontent(_:)"
+      },
+      "-setShowManageButton:": {
+        "doc": "A Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/setshowmanagebutton(_:)"
+      }
+    },
+    "SWHighlightCenter": {
+      "-clearNoticesForHighlight:": {
+        "doc": "Clears the notices for a specified collaboration highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/clearnotices(for:)"
+      },
+      "-collaborationHighlightForIdentifier:error:": {
+        "doc": "Returns a collaboration highlight for a specified collaboration identifier.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/collaborationhighlight(foridentifier:)-23ytv"
+      },
+      "-getCollaborationHighlightForURL:completionHandler:": {
+        "doc": "Returns a collaboration highlight for a specified URL.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/getcollaborationhighlight(for:completionhandler:)"
+      },
+      "-getHighlightForURL:completionHandler:": {
+        "doc": "Returns a highlight for a specified URL.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/gethighlightfor(_:completionhandler:)"
+      },
+      "-getSignedIdentityProofForCollaborationHighlight:usingData:completionHandler:": {
+        "doc": "Signs passed-in data with the local device’s private key.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/getsignedidentityproof(for:using:completionhandler:)"
+      },
+      "-postNoticeForHighlightEvent:": {
+        "doc": "Posts a specified event to the highlight center for display.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/postnotice(for:)"
+      }
+    },
+    "SWHighlightChangeEvent": {
+      "-initWithHighlight:trigger:": {
+        "doc": "Creates and initializes a change event.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeevent/init(highlight:trigger:)"
+      }
+    },
+    "SWHighlightMembershipEvent": {
+      "-initWithHighlight:trigger:": {
+        "doc": "Creates and initializes a membership event.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipevent/init(highlight:trigger:)"
+      }
+    },
+    "SWHighlightMentionEvent": {
+      "-initWithHighlight:mentionedPersonCloudKitShareHandle:": {
+        "doc": "Creates and initializes a mention event.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmentionevent/init(highlight:mentionedpersoncloudkitsharehandle:)"
+      },
+      "-initWithHighlight:mentionedPersonIdentity:": {
+        "doc": "Creates and initializes a mention event.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmentionevent/init(highlight:mentionedpersonidentity:)"
+      }
+    },
+    "SWHighlightPersistenceEvent": {
+      "-initWithHighlight:trigger:": {
+        "doc": "Creates and initializes a persistence event.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceevent/init(highlight:trigger:)"
+      }
+    }
+  },
+  "properties": {
+    "SWAttributionView": {
+      "SWAttributionViewBackgroundStyle": {
+        "doc": "The background styling of the attribution view’s contents.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/backgroundstyle-swift.enum"
+      },
+      "SWAttributionViewDisplayContext": {
+        "doc": "The context for the content that influences the ranking of this view’s highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/displaycontext-swift.enum"
+      },
+      "SWAttributionViewHorizontalAlignment": {
+        "doc": "The horizontal alignment of attribution view’s contents.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/horizontalalignment-swift.enum"
+      },
+      "backgroundStyle": {
+        "doc": "The background style of the child view that contains names and avatars.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/backgroundstyle-swift.property"
+      },
+      "displayContext": {
+        "doc": "The context for the content the system displays with this view.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/displaycontext-swift.property"
+      },
+      "enablesMarquee": {
+        "doc": "Automatically enables a marquee effect.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/enablesmarquee"
+      },
+      "highlight": {
+        "doc": "The highlight you use to display this attribution.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/highlight"
+      },
+      "highlightMenu": {
+        "doc": "A menu with a list of system actions specific to this hightlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/highlightmenu"
+      },
+      "horizontalAlignment": {
+        "doc": "The horizontal alignment of the view.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/horizontalalignment-swift.property"
+      },
+      "menuTitleForHideAction": {
+        "doc": "A localized string the system uses as a custom title for the hide menu item.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/menutitleforhideaction"
+      },
+      "preferredMaxLayoutWidth": {
+        "doc": "A width the system uses to constrain the view contents.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/preferredmaxlayoutwidth"
+      },
+      "supplementalMenu": {
+        "doc": "A supplemental menu to augment the attribution view’s existing menu.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swattributionview/supplementalmenu"
+      }
+    },
+    "SWCollaborationHighlight": {
+      "collaborationIdentifier": {
+        "doc": "A unique identifier that the app hosting the collaboration provides.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationhighlight/collaborationidentifier"
+      },
+      "contentType": {
+        "doc": "The UTI type for this collaboration highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationhighlight/contenttype"
+      },
+      "creationDate": {
+        "doc": "The date the system creates this file.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationhighlight/creationdate"
+      },
+      "title": {
+        "doc": "The title of the collaboration highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationhighlight/title"
+      }
+    },
+    "SWCollaborationView": {
+      "activeParticipantCount": {
+        "doc": "The number of participants in a collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/activeparticipantcount"
+      },
+      "cloudSharingControllerDelegate": {
+        "doc": "A reference to an object that conforms to the CloudKit sharing controller delegate protocol.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/cloudsharingcontrollerdelegate"
+      },
+      "cloudSharingDelegate": {
+        "doc": "The delegate object for the cloud-sharing controller.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/cloudsharingdelegate"
+      },
+      "cloudSharingServiceDelegate": {
+        "doc": "A reference to an object that conforms to the cloud-sharing service delegate protocol.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/cloudsharingservicedelegate"
+      },
+      "delegate": {
+        "doc": "The delegate object for the collaboration view.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/delegate"
+      },
+      "headerImage": {
+        "doc": "The image that the system displays in the header.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/headerimage"
+      },
+      "headerSubtitle": {
+        "doc": "The subtitle that the system displays in the header.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/headersubtitle"
+      },
+      "headerTitle": {
+        "doc": "The title that the system displays in the header.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/headertitle"
+      },
+      "manageButtonTitle": {
+        "doc": "The manage button title that the system displays in the header.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/managebuttontitle"
+      },
+      "menuFormRepresentation": {
+        "doc": "Returns a menu item suitable to display the collaboration detail view from the toolbar overflow menu.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/menuformrepresentation-55skx"
+      },
+      "setDetailViewListContent(_:)": {
+        "doc": "Sets the detail view for the list content from view builder closures.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swcollaborationview/setdetailviewlistcontent(_:)-8ml1c"
+      }
+    },
+    "SWHighlight": {
+      "URL": {
+        "doc": "The surfaced content URL for the highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlight/url"
+      },
+      "identifier": {
+        "doc": "The unique identifier for the highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlight/identifier"
+      }
+    },
+    "SWHighlightCenter": {
+      "collaborationHighlight(forIdentifier:)": {
+        "doc": "Returns a collaboration highlight for a specified identifier string.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/collaborationhighlight(foridentifier:)-87lhr"
+      },
+      "delegate": {
+        "doc": "The delegate object for the highlight center.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/delegate"
+      },
+      "highlightCollectionTitle": {
+        "doc": "A localized title to display with a collection of highlights.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/highlightcollectiontitle"
+      },
+      "highlights": {
+        "doc": "An array of shared highlights.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/highlights"
+      },
+      "systemCollaborationSupportAvailable": {
+        "doc": "A Boolean value that represents full support for Messages collaboration features.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter/issystemcollaborationsupportavailable"
+      }
+    },
+    "SWHighlightChangeEvent": {
+      "changeEventTrigger": {
+        "doc": "The type of change event for the highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeevent/changeeventtrigger"
+      },
+      "highlightURL": {
+        "doc": "The URL of the hightlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeevent/highlighturl"
+      }
+    },
+    "SWHighlightMembershipEvent": {
+      "membershipEventTrigger": {
+        "doc": "The type of membership event for the highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipevent/membershipeventtrigger"
+      }
+    },
+    "SWHighlightMentionEvent": {
+      "mentionedPersonHandle": {
+        "doc": "The handle of the person the sender mentions.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightmentionevent/mentionedpersonhandle"
+      }
+    },
+    "SWHighlightPersistenceEvent": {
+      "persistenceEventTrigger": {
+        "doc": "The persistence event trigger for the highlight.",
+        "url": "https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceevent/persistenceeventtrigger"
+      }
+    }
+  }
+}

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A texture for use in convolutional neural networks that stores transient data to be used and discarded promptly.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryimage
 type MPSTemporaryImage struct {
 	mpscore.MPSImage
@@ -44,7 +46,7 @@ func MPSTemporaryImageDefaultAllocator() mpscore.MPSImageAllocator {
 	return _ret
 }
 
-// @abstract   Initialize a MPSTemporaryImage for use on a MTLCommandBuffer @param      commandBuffer   The MTLCommandBuffer on which the MPSTemporaryImage will be exclusively used @param      imageDescriptor A valid imageDescriptor describing the MPSImage format to create. @return     A valid MPSTemporaryImage.  The object will be released when the command buffer is committed. The underlying texture will become invalid before this time due to the action of the readCount property.
+// Initializes a temporary image for use on a command buffer.
 func MPSTemporaryImageTemporaryImageWithCommandBufferImageDescriptor(commandBuffer metal.MTLCommandBuffer, imageDescriptor *mpscore.MPSImageDescriptor) *MPSTemporaryImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryImage), _mPSTemporaryImageSelTemporaryImageWithCommandBufferImageDescriptor, commandBuffer, imageDescriptor.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func MPSTemporaryImageTemporaryImageWithCommandBufferImageDescriptor(commandBuff
 	return MPSTemporaryImageFromID(_ret)
 }
 
-// @abstract       Low level interface for creating a MPSTemporaryImage using a MTLTextureDescriptor @discussion     This function provides access to MTLPixelFormats not typically covered by -initForCommandBuffer:imageDescriptor: The feature channels will be inferred from the MTLPixelFormat without changing the width. The following restrictions apply: MTLTextureType must be MTLTextureType2D or MTLTextureType2DArray MTLTextureUsage must contain at least one of MTLTextureUsageShaderRead, MTLTextureUsageShaderWrite MTLStorageMode must be MTLStorageModePrivate depth must be 1 @param commandBuffer        The command buffer on which the MPSTemporaryImage may be used @param textureDescriptor    A texture descriptor describing the MPSTemporaryImage texture @return     A valid MPSTemporaryImage.  The object will be released when the command buffer is committed. The underlying texture will become invalid before this time due to the action of the readCount property.
+// Low-level interface for creating a temporary image using a texture descriptor.
 func MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptor(commandBuffer metal.MTLCommandBuffer, textureDescriptor *metal.MTLTextureDescriptor) *MPSTemporaryImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryImage), _mPSTemporaryImageSelTemporaryImageWithCommandBufferTextureDescriptor, commandBuffer, textureDescriptor.Ptr())
 	if _ret != 0 {
@@ -71,9 +73,9 @@ func MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptorFeatureCha
 	return MPSTemporaryImageFromID(_ret)
 }
 
-// @abstract       Help MPS decide which allocations to make ahead of time @discussion     The texture cache that underlies the MPSTemporaryImage can automatically allocate new storage as needed as you create new temporary images.  However, sometimes a more global view of what you plan to make is useful for maximizing memory reuse to get the most efficient operation. This class method hints to the cache what the list of images will be. It is never necessary to call this method. It is purely a performance and memory optimization. This method makes a conservative estimate of memory required and may not fully cover temporary memory needs, resulting in additional allocations later that could encounter pathological behavior, if they are too small. If the full extent and timing of the workload is known in advance, it is recommended that MPSHintTemporaryMemoryHighWaterMark() be used instead. @param commandBuffer        The command buffer on which the MPSTemporaryImages will be used @param descriptorList       A NSArray of MPSImageDescriptors, indicating images that will be created
+// A method that helps the framework decide which allocations to make ahead of time.
 func MPSTemporaryImagePrefetchStorageWithCommandBufferImageDescriptorList(commandBuffer metal.MTLCommandBuffer, descriptorList *foundation.NSArray[*mpscore.MPSImageDescriptor]) {
-	objc.ID(_clsMPSTemporaryImage).Send(_mPSTemporaryImageSelPrefetchStorageWithCommandBufferImageDescriptorList, commandBuffer, descriptorList)
+	objc.ID(_clsMPSTemporaryImage).Send(_mPSTemporaryImageSelPrefetchStorageWithCommandBufferImageDescriptorList, commandBuffer, descriptorList.Ptr())
 }
 
 func (o *MPSTemporaryImage) ReadCount() uint {

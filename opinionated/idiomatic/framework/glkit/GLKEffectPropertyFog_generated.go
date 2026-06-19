@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Fog drawing information for use in GLKit rendering effects.
+//
 // EffectPropertyFog wraps [raw.GLKEffectPropertyFog] with a fluent Go API.
 type EffectPropertyFog struct {
 	inner *raw.GLKEffectPropertyFog
@@ -36,30 +38,40 @@ func NewEffectPropertyFog() *EffectPropertyFog {
 	return &EffectPropertyFog{inner: raw.GLKEffectPropertyFogFromID(_id)}
 }
 
+// A Boolean value that indicates whether fog is applied to the fragment color.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *EffectPropertyFog) WithEnabled(enabled uint8) *EffectPropertyFog {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The algorithm used to compute the density of the fog applied to the fragment color.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *EffectPropertyFog) WithMode(mode int32) *EffectPropertyFog {
 	x.inner.SetMode(mode)
 	return x
 }
 
+// The rate at which the fog exponent increases.
+//
 // WithDensity sets the density property and returns the receiver for chaining.
 func (x *EffectPropertyFog) WithDensity(density float32) *EffectPropertyFog {
 	x.inner.SetDensity(density)
 	return x
 }
 
+// The minimum distance in eye coordinates before fog is applied to the fragment color.
+//
 // WithStart sets the start property and returns the receiver for chaining.
 func (x *EffectPropertyFog) WithStart(start float32) *EffectPropertyFog {
 	x.inner.SetStart(start)
 	return x
 }
 
+// The distance in eye coordinates where fog completely covers the color fragment.
+//
 // WithEnd sets the end property and returns the receiver for chaining.
 func (x *EffectPropertyFog) WithEnd(end float32) *EffectPropertyFog {
 	x.inner.SetEnd(end)

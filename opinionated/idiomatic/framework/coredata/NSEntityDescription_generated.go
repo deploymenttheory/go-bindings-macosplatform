@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of a Core Data entity.
+//
 // EntityDescription wraps [raw.NSEntityDescription] with a fluent Go API.
 type EntityDescription struct {
 	inner *raw.NSEntityDescription
@@ -38,24 +40,32 @@ func NewEntityDescription() *EntityDescription {
 	return &EntityDescription{inner: raw.NSEntityDescriptionFromID(_id)}
 }
 
+// The name of the class that represents the receiver’s entity.
+//
 // WithManagedObjectClassName sets the managedObjectClassName property and returns the receiver for chaining.
 func (x *EntityDescription) WithManagedObjectClassName(managedObjectClassName string) *EntityDescription {
 	x.inner.SetManagedObjectClassName(foundation.NSStringStringWithUTF8String(managedObjectClassName))
 	return x
 }
 
+// The entity name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EntityDescription) WithName(name string) *EntityDescription {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver represents an abstract entity.
+//
 // WithAbstract sets the abstract property and returns the receiver for chaining.
 func (x *EntityDescription) WithAbstract(abstract bool) *EntityDescription {
 	x.inner.SetAbstract(abstract)
 	return x
 }
 
+// An array containing the sub-entities of the receiver.
+//
 // WithSubentities sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithSubentities(items ...*raw.NSEntityDescription) *EntityDescription {
 	if len(items) == 0 {
@@ -77,6 +87,8 @@ func (x *EntityDescription) WithSubentities(items ...*raw.NSEntityDescription) *
 	return x
 }
 
+// An array containing the properties of the receiver.
+//
 // WithProperties sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithProperties(items ...PropertyDescriptionProvider) *EntityDescription {
 	if len(items) == 0 {
@@ -98,24 +110,32 @@ func (x *EntityDescription) WithProperties(items ...PropertyDescriptionProvider)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *EntityDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *EntityDescription {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *EntityDescription) WithVersionHashModifier(versionHashModifier string) *EntityDescription {
 	x.inner.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *EntityDescription) WithRenamingIdentifier(renamingIdentifier string) *EntityDescription {
 	x.inner.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
 	return x
 }
 
+// An array of fetch index descriptions for the entity.
+//
 // WithIndexes sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithIndexes(items ...*raw.NSFetchIndexDescription) *EntityDescription {
 	if len(items) == 0 {
@@ -137,6 +157,8 @@ func (x *EntityDescription) WithIndexes(items ...*raw.NSFetchIndexDescription) *
 	return x
 }
 
+// An array of arrays that contains one or more attributes with a value that must be unique over the instances of that entity.
+//
 // WithUniquenessConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithUniquenessConstraints(items ...*foundation.NSArray[objc.ID]) *EntityDescription {
 	if len(items) == 0 {
@@ -158,6 +180,8 @@ func (x *EntityDescription) WithUniquenessConstraints(items ...*foundation.NSArr
 	return x
 }
 
+// The compound indexes for the entity as an array of arrays.
+//
 // WithCompoundIndexes sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithCompoundIndexes(items ...*foundation.NSArray[objc.ID]) *EntityDescription {
 	if len(items) == 0 {
@@ -179,17 +203,23 @@ func (x *EntityDescription) WithCompoundIndexes(items ...*foundation.NSArray[obj
 	return x
 }
 
+// The expression that computes the CoreSpotlight display name for instances of the entity.
+//
 // WithCoreSpotlightDisplayNameExpression sets the coreSpotlightDisplayNameExpression property and returns the receiver for chaining.
 func (x *EntityDescription) WithCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression *foundation.NSExpression) *EntityDescription {
 	x.inner.SetCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression)
 	return x
 }
 
+// Returns an array containing the relationships of the receiver where the entity description of the relationship is a given entity.
+//
 // RelationshipsWithDestinationEntity calls the underlying RelationshipsWithDestinationEntity.
 func (x *EntityDescription) RelationshipsWithDestinationEntity(entity *raw.NSEntityDescription) *foundation.NSArray[*raw.NSRelationshipDescription] {
 	return x.inner.RelationshipsWithDestinationEntity(entity)
 }
 
+// Returns a Boolean value that indicates whether the receiver is a sub-entity of another given entity.
+//
 // IsKindOfEntity calls the underlying IsKindOfEntity.
 func (x *EntityDescription) IsKindOfEntity(entity *raw.NSEntityDescription) bool {
 	return x.inner.IsKindOfEntity(entity)

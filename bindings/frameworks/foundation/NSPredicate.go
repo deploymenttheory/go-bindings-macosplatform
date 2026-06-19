@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A definition of logical conditions for constraining a search for a fetch or for in-memory filtering.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspredicate
 type NSPredicate struct {
 	NSObject
@@ -42,14 +44,16 @@ func NSPredicateFromID(id objc.ID) *NSPredicate {
 	return o
 }
 
+// Creates a predicate by substituting the values in a specified array into a format string and parsing the result.
 func NSPredicatePredicateWithFormatArgumentArray(predicateFormat *NSString, arguments *NSArray[objc.ID]) *NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormatArgumentArray, predicateFormat.Ptr(), arguments)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormatArgumentArray, predicateFormat.Ptr(), arguments.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPredicateFromID(_ret)
 }
 
+// Creates and returns a new predicate formed by creating a new string with a specified format and parsing the result.
 func NSPredicatePredicateWithFormat(predicateFormat *NSString) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormat, predicateFormat.Ptr())
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func NSPredicatePredicateWithFormat(predicateFormat *NSString) *NSPredicate {
 	return NSPredicateFromID(_ret)
 }
 
+// Creates a predicate by substituting the values in an argument list into a format string and parsing the result.
 func NSPredicatePredicateWithFormatArguments(predicateFormat *NSString, argList string) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormatArguments, predicateFormat.Ptr(), argList)
 	if _ret != 0 {
@@ -66,6 +71,7 @@ func NSPredicatePredicateWithFormatArguments(predicateFormat *NSString, argList 
 	return NSPredicateFromID(_ret)
 }
 
+// Creates a predicate with a metadata query string.
 func NSPredicatePredicateFromMetadataQueryString(queryString *NSString) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateFromMetadataQueryString, queryString.Ptr())
 	if _ret != 0 {
@@ -74,6 +80,7 @@ func NSPredicatePredicateFromMetadataQueryString(queryString *NSString) *NSPredi
 	return NSPredicateFromID(_ret)
 }
 
+// Creates and returns a predicate that always evaluates to a specified Boolean value.
 func NSPredicatePredicateWithValue(value bool) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithValue, value)
 	if _ret != 0 {
@@ -82,32 +89,47 @@ func NSPredicatePredicateWithValue(value bool) *NSPredicate {
 	return NSPredicateFromID(_ret)
 }
 
-func NSPredicatePredicateWith(block objc.Block) *NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWith, block)
+// Creates a predicate that evaluates using a specified block object and bindings dictionary.
+func NSPredicatePredicateWith(block func(objc.ID, *NSDictionary[*NSString, objc.ID]) bool) *NSPredicate {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) bool {
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			return block(blockParam0, NSDictionaryFromID[*NSString, objc.ID](blockParam1))
+		})
+		defer __block_block.Release()
+	}
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWith, __block_block)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPredicateFromID(_ret)
 }
 
+// Returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
 func (o *NSPredicate) PredicateWithSubstitutionVariables(variables *NSDictionary[*NSString, objc.ID]) *NSPredicate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateSelPredicateWithSubstitutionVariables, variables)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateSelPredicateWithSubstitutionVariables, variables.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPredicateFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
 func (o *NSPredicate) EvaluateWithObject(object objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPredicateSelEvaluateWithObject, object)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
 func (o *NSPredicate) EvaluateWithObjectSubstitutionVariables(object objc.ID, bindings *NSDictionary[*NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPredicateSelEvaluateWithObjectSubstitutionVariables, object, bindings)
+	_ret := objc.Send[bool](o.Ptr(), _nSPredicateSelEvaluateWithObjectSubstitutionVariables, object, bindings.Ptr())
 	return _ret
 }
 
+// Forces a securely decoded predicate to allow evaluation.
 func (o *NSPredicate) AllowEvaluation() {
 	o.Ptr().Send(_nSPredicateSelAllowEvaluation)
 }

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that analyzes media for sensitive content.
+//
 // Apple documentation: https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer
 type SCSensitivityAnalyzer struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func SCSensitivityAnalyzerFromID(id objc.ID) *SCSensitivityAnalyzer {
 	return o
 }
 
+// Creates a sensitivity analyzer.
 func (o *SCSensitivityAnalyzer) Init() *SCSensitivityAnalyzer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCSensitivityAnalyzerSelInit)
 	if _ret != 0 {
@@ -44,7 +47,7 @@ func (o *SCSensitivityAnalyzer) Init() *SCSensitivityAnalyzer {
 	return SCSensitivityAnalyzerFromID(_ret)
 }
 
-// Analyze sensitivity of Image File on disk (only local fileURL) @param fileURL  Image file location on disk @param completionHandler  Block to be called on completion (callback is called on unspecified queue)
+// Analyzes an image file on disk at a URL and runs code on completion.
 func (o *SCSensitivityAnalyzer) AnalyzeImageFileCompletionHandler(fileURL *foundation.NSURL, completionHandler func(*SCSensitivityAnalysis, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -59,7 +62,7 @@ func (o *SCSensitivityAnalyzer) AnalyzeImageFileCompletionHandler(fileURL *found
 	o.Ptr().Send(_sCSensitivityAnalyzerSelAnalyzeImageFileCompletionHandler, fileURL.Ptr(), __block_completionHandler)
 }
 
-// Analyze sensitivity of CGImage in memory @param image  CGImage reference @param completionHandler  Block to be called on completion (callback is called on unspecified queue)
+// Analyzes an image for sensitive content and runs code on completion.
 func (o *SCSensitivityAnalyzer) AnalyzeCGImageCompletionHandler(image unsafe.Pointer, completionHandler func(*SCSensitivityAnalysis, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -74,7 +77,7 @@ func (o *SCSensitivityAnalyzer) AnalyzeCGImageCompletionHandler(image unsafe.Poi
 	o.Ptr().Send(_sCSensitivityAnalyzerSelAnalyzeCGImageCompletionHandler, image, __block_completionHandler)
 }
 
-// Analyze sensitivity of Video File on disk. @param fileURL  Video file location on disk @param completionHandler  Block to be called on completion (callback is called on unspecified queue) @return An NSProgress instance for tracking video file analysis progress
+// Analyzes a video file on disk at the given URL and runs the given code on completion.
 func (o *SCSensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL *foundation.NSURL, completionHandler func(*SCSensitivityAnalysis, unsafe.Pointer)) *foundation.NSProgress {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

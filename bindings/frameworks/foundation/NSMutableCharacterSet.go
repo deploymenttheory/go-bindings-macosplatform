@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a mutable set of Unicode character values for use in search operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutablecharacterset
 type NSMutableCharacterSet struct {
 	NSCharacterSet
@@ -54,34 +56,42 @@ func NSMutableCharacterSetFromID(id objc.ID) *NSMutableCharacterSet {
 	return o
 }
 
+// Adds to the receiver the characters whose Unicode values are in a given range.
 func (o *NSMutableCharacterSet) AddCharactersInRange(aRange NSRange) {
 	o.Ptr().Send(_nSMutableCharacterSetSelAddCharactersInRange, aRange)
 }
 
+// Removes from the receiver the characters whose Unicode values are in a given range.
 func (o *NSMutableCharacterSet) RemoveCharactersInRange(aRange NSRange) {
 	o.Ptr().Send(_nSMutableCharacterSetSelRemoveCharactersInRange, aRange)
 }
 
+// Adds to the receiver the characters in a given string.
 func (o *NSMutableCharacterSet) AddCharactersInString(aString *NSString) {
 	o.Ptr().Send(_nSMutableCharacterSetSelAddCharactersInString, aString.Ptr())
 }
 
+// Removes from the receiver the characters in a given string.
 func (o *NSMutableCharacterSet) RemoveCharactersInString(aString *NSString) {
 	o.Ptr().Send(_nSMutableCharacterSetSelRemoveCharactersInString, aString.Ptr())
 }
 
+// Modifies the receiver so it contains all characters that exist in either the receiver or another set.
 func (o *NSMutableCharacterSet) FormUnionWithCharacterSet(otherSet *NSCharacterSet) {
 	o.Ptr().Send(_nSMutableCharacterSetSelFormUnionWithCharacterSet, otherSet.Ptr())
 }
 
+// Modifies the receiver so it contains only characters that exist in both the receiver and another set.
 func (o *NSMutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *NSCharacterSet) {
 	o.Ptr().Send(_nSMutableCharacterSetSelFormIntersectionWithCharacterSet, otherSet.Ptr())
 }
 
+// Replaces all the characters in the receiver with all the characters it didn’t previously contain.
 func (o *NSMutableCharacterSet) Invert() {
 	o.Ptr().Send(_nSMutableCharacterSetSelInvert)
 }
 
+// Returns a character set containing the characters in Unicode General Category Cc and Cf.
 func NSMutableCharacterSetControlCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelControlCharacterSet)
 	if _ret != 0 {
@@ -90,6 +100,7 @@ func NSMutableCharacterSetControlCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category Zs and CHARACTER TABULATION (U+0009).
 func NSMutableCharacterSetWhitespaceCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelWhitespaceCharacterSet)
 	if _ret != 0 {
@@ -98,6 +109,7 @@ func NSMutableCharacterSetWhitespaceCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing characters in Unicode General Category Z*, U+000A ~ U+000D, and U+0085.
 func NSMutableCharacterSetWhitespaceAndNewlineCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelWhitespaceAndNewlineCharacterSet)
 	if _ret != 0 {
@@ -106,6 +118,7 @@ func NSMutableCharacterSetWhitespaceAndNewlineCharacterSet() *NSMutableCharacter
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in the category of decimal numbers.
 func NSMutableCharacterSetDecimalDigitCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelDecimalDigitCharacterSet)
 	if _ret != 0 {
@@ -114,6 +127,7 @@ func NSMutableCharacterSetDecimalDigitCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category L* & M*.
 func NSMutableCharacterSetLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelLetterCharacterSet)
 	if _ret != 0 {
@@ -122,6 +136,7 @@ func NSMutableCharacterSetLetterCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category Ll.
 func NSMutableCharacterSetLowercaseLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelLowercaseLetterCharacterSet)
 	if _ret != 0 {
@@ -130,6 +145,7 @@ func NSMutableCharacterSetLowercaseLetterCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category Lu and Lt.
 func NSMutableCharacterSetUppercaseLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelUppercaseLetterCharacterSet)
 	if _ret != 0 {
@@ -138,6 +154,7 @@ func NSMutableCharacterSetUppercaseLetterCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category M*.
 func NSMutableCharacterSetNonBaseCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelNonBaseCharacterSet)
 	if _ret != 0 {
@@ -146,6 +163,7 @@ func NSMutableCharacterSetNonBaseCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Categories L*, M*, and N*.
 func NSMutableCharacterSetAlphanumericCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelAlphanumericCharacterSet)
 	if _ret != 0 {
@@ -154,6 +172,7 @@ func NSMutableCharacterSetAlphanumericCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing individual Unicode characters that can also be represented as composed character sequences (such as for letters with accents), by the definition of “standard decomposition” in version 3.2 of the Unicode character encoding standard.
 func NSMutableCharacterSetDecomposableCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelDecomposableCharacterSet)
 	if _ret != 0 {
@@ -162,6 +181,7 @@ func NSMutableCharacterSetDecomposableCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing values in the category of Non-Characters or that have not yet been defined in version 3.2 of the Unicode standard.
 func NSMutableCharacterSetIllegalCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelIllegalCharacterSet)
 	if _ret != 0 {
@@ -170,6 +190,7 @@ func NSMutableCharacterSetIllegalCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category P*.
 func NSMutableCharacterSetPunctuationCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelPunctuationCharacterSet)
 	if _ret != 0 {
@@ -178,6 +199,7 @@ func NSMutableCharacterSetPunctuationCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category Lt.
 func NSMutableCharacterSetCapitalizedLetterCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCapitalizedLetterCharacterSet)
 	if _ret != 0 {
@@ -186,6 +208,7 @@ func NSMutableCharacterSetCapitalizedLetterCharacterSet() *NSMutableCharacterSet
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in Unicode General Category S*.
 func NSMutableCharacterSetSymbolCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelSymbolCharacterSet)
 	if _ret != 0 {
@@ -194,6 +217,7 @@ func NSMutableCharacterSetSymbolCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the newline characters (U+000A ~ U+000D, U+0085, U+2028, and U+2029).
 func NSMutableCharacterSetNewlineCharacterSet() *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelNewlineCharacterSet)
 	if _ret != 0 {
@@ -202,6 +226,7 @@ func NSMutableCharacterSetNewlineCharacterSet() *NSMutableCharacterSet {
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing characters with Unicode values in a given range.
 func NSMutableCharacterSetCharacterSetWithRange(aRange NSRange) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithRange, aRange)
 	if _ret != 0 {
@@ -210,6 +235,7 @@ func NSMutableCharacterSetCharacterSetWithRange(aRange NSRange) *NSMutableCharac
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in a given string.
 func NSMutableCharacterSetCharacterSetWithCharactersInString(aString *NSString) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithCharactersInString, aString.Ptr())
 	if _ret != 0 {
@@ -218,6 +244,7 @@ func NSMutableCharacterSetCharacterSetWithCharactersInString(aString *NSString) 
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing characters determined by a given bitmap representation.
 func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data *NSData) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithBitmapRepresentation, data.Ptr())
 	if _ret != 0 {
@@ -226,6 +253,7 @@ func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data *NSData) *NS
 	return NSMutableCharacterSetFromID(_ret)
 }
 
+// Returns a character set read from the bitmap representation stored in the file a given path.
 func NSMutableCharacterSetCharacterSetWithContentsOfFile(fName *NSString) *NSMutableCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableCharacterSet), _nSMutableCharacterSetSelCharacterSetWithContentsOfFile, fName.Ptr())
 	if _ret != 0 {

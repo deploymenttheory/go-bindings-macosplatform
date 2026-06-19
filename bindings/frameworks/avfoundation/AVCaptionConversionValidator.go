@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that validates captions for a conversion operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionconversionvalidator
 type AVCaptionConversionValidator struct {
 	foundation.NSObject
@@ -38,25 +40,25 @@ func AVCaptionConversionValidatorFromID(id objc.ID) *AVCaptionConversionValidato
 	return o
 }
 
-// @method        captionConversionValidatorWithCaptions:startTime:conversionSettings: @abstract      Returns an instance of AVCaptionConversionValidator that can validate an array of captions for a specific conversion operation and warn about problems that are encountered. @param         captions The array of captions to be validated. @param         timeRange The timeRange of the media timeline into which the specified captions must be integrated. See the timeRange property for further details. @param         conversionSettings Describes the conversion operation for which the captions are to be validated. @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation. @discussion    This method throws an exception if the conversion setting's AVCaptionMediaTypeKey is not equal to AVMediaTypeClosedCaption, or if its AVCaptionMediaSubTypeKey is not equal to kCMClosedCaptionFormatType_CEA608.
+// A convenience initializer to create an object that validates captions for a conversion operation.
 func AVCaptionConversionValidatorCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCaptionConversionValidator {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionConversionValidator), _aVCaptionConversionValidatorSelCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings, captions.Ptr(), timeRange, conversionSettings)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionConversionValidator), _aVCaptionConversionValidatorSelCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings, captions.Ptr(), timeRange, conversionSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVCaptionConversionValidatorFromID(_ret)
 }
 
-// @method        initWithCaptions:startTime:conversionSettings: @abstract      Returns an instance of AVCaptionConversionValidator that can validate an array of captions for a specific conversion operation and warn about problems that are encountered. @param         captions The array of captions for which the validation is requested. @param         timeRange The timeRange of the media timeline into which the specified captions must be integrated. See the timeRange property for further details. @param         conversionSettings Describes the conversion operation for which the captions are to be validated. @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation.
+// Creates an object that validates captions for a conversion operation.
 func (o *AVCaptionConversionValidator) InitWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVCaptionConversionValidator {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionValidatorSelInitWithCaptionsTimeRangeConversionSettings, captions.Ptr(), timeRange, conversionSettings)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionValidatorSelInitWithCaptionsTimeRangeConversionSettings, captions.Ptr(), timeRange, conversionSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVCaptionConversionValidatorFromID(_ret)
 }
 
-// @method        validateCaptionConversionWithWarningHandler: @abstract      Initiates the specified validation and changes the value of status to AVCaptionConversionValidatorStatusValidating. @param         handler Specifies a block to be executed in order to warn you of a specific problem. @discussion It is an error to invoke this method when the value of status is greater than AVCaptionConversionValidatorStatusUnknown. If you wish to stop a validation operation in progress before it has been completed, send the message stopValidating to the receiver. When the validation is complete and all warnings have been reported, the block will be executed once with a value of nil for its warning parameter. When this occurs, the value of status will have been changed to AVCaptionConversionValidatorStatusCompleted.
+// Validates the object’s captions.
 func (o *AVCaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(handler func(*AVCaptionConversionWarning)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -71,7 +73,7 @@ func (o *AVCaptionConversionValidator) ValidateCaptionConversionWithWarningHandl
 	o.Ptr().Send(_aVCaptionConversionValidatorSelValidateCaptionConversionWithWarningHandler, __block_handler)
 }
 
-// @method        stopValidating @abstract      Stops validation and changes the value of status to AVCaptionConversionValidatorStatusStopped. @discussion You can call this method at any time, even within your warning handler.
+// Stops the active validation operation.
 func (o *AVCaptionConversionValidator) StopValidating() {
 	o.Ptr().Send(_aVCaptionConversionValidatorSelStopValidating)
 }

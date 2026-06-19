@@ -75,7 +75,7 @@ func (o *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExp
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) ScanNetworksWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRNetworkCommissioningClusterScanNetworksResponseParams, unsafe.Pointer)) {
@@ -89,7 +89,7 @@ func (o *MTRClusterNetworkCommissioning) ScanNetworksWithExpectedValuesExpectedV
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelScanNetworksWithExpectedValuesExpectedValueIntervalCompletion, expectedValues, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelScanNetworksWithExpectedValuesExpectedValueIntervalCompletion, expectedValues.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -103,7 +103,7 @@ func (o *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpecte
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -117,7 +117,7 @@ func (o *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpec
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -131,7 +131,7 @@ func (o *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesEx
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRNetworkCommissioningClusterConnectNetworkResponseParams, unsafe.Pointer)) {
@@ -145,7 +145,7 @@ func (o *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesE
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -159,95 +159,143 @@ func (o *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completion)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completion)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeMaxNetworksWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeMaxNetworksWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeMaxNetworksWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeNetworksWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeNetworksWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeNetworksWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeScanMaxTimeSecondsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeScanMaxTimeSecondsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeScanMaxTimeSecondsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSecondsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeConnectMaxTimeSecondsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeConnectMaxTimeSecondsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeInterfaceEnabledWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeInterfaceEnabledWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) WriteAttributeInterfaceEnabledWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterNetworkCommissioning) WriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeLastNetworkingStatusWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeLastNetworkingStatusWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeLastNetworkingStatusWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeLastNetworkIDWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeLastNetworkIDWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeLastNetworkIDWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeLastConnectErrorValueWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeLastConnectErrorValueWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeLastConnectErrorValueWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeSupportedWiFiBandsWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeSupportedWiFiBandsWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeSupportedWiFiBandsWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeSupportedThreadFeaturesWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeSupportedThreadFeaturesWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeSupportedThreadFeaturesWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeThreadVersionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeThreadVersionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeThreadVersionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeGeneratedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeAcceptedCommandListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeAttributeListWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeAttributeListWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeFeatureMapWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeFeatureMapWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeClusterRevisionWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelReadAttributeClusterRevisionWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
@@ -278,7 +326,7 @@ func (o *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExp
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -292,7 +340,7 @@ func (o *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpecte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -306,7 +354,7 @@ func (o *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpec
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -320,7 +368,7 @@ func (o *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesEx
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRNetworkCommissioningClusterConnectNetworkResponseParams, unsafe.Pointer)) {
@@ -334,7 +382,7 @@ func (o *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesE
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(*MTRNetworkCommissioningClusterNetworkConfigResponseParams, unsafe.Pointer)) {
@@ -348,5 +396,5 @@ func (o *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }

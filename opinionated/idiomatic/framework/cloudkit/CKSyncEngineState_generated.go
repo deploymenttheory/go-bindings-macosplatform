@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the sync engine’s state.
+//
 // SyncEngineState wraps [raw.CKSyncEngineState] with a fluent Go API.
 type SyncEngineState struct {
 	inner *raw.CKSyncEngineState
@@ -38,7 +40,7 @@ func NewSyncEngineState() *SyncEngineState {
 	return &SyncEngineState{inner: raw.CKSyncEngineStateFromID(_id)}
 }
 
-// A Boolean value that indicates whether there are pending changes that the sync engine is unaware of. Use this property to inform the sync engine that there are pending changes other than those available in “CKSyncEngineState/pendingRecordZoneChanges“. After you set this property, the sync engine automatically schedules a send operation and, when that operation executes, asks your delegate to provide those changes by invoking the “CKSyncEngineDelegate/syncEngine:nextRecordZoneChangeBatchForContext:“ method. Using this property is optional and is necessary only if you track pending changes manually, outside of the sync engine's state.
+// A Boolean value that indicates whether there are pending changes that the sync engine is unaware of.
 //
 // WithHasPendingUntrackedChanges sets the hasPendingUntrackedChanges property and returns the receiver for chaining.
 func (x *SyncEngineState) WithHasPendingUntrackedChanges(hasPendingUntrackedChanges bool) *SyncEngineState {
@@ -46,21 +48,21 @@ func (x *SyncEngineState) WithHasPendingUntrackedChanges(hasPendingUntrackedChan
 	return x
 }
 
-// Adds the specified record zone changes to the state. - Parameters: - changes: An array of record zone changes. Use this method to enable the sync engine to manage your pending record zone changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. Then, when creating the change batch for the next send operation, retrieve the pending changes from the “CKSyncEngineState/pendingRecordZoneChanges“ property. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type “CKSyncEngineSentRecordZoneChangesEvent“. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue or exceeding the rate limit. - Note: The order in which you apply record zone changes is important. For example: - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord`, the sync engine discards the delete and sends only the save change.
+// Adds the specified record zone changes to the state.
 //
 // AddPendingRecordZoneChanges calls the underlying AddPendingRecordZoneChanges.
 func (x *SyncEngineState) AddPendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange]) {
 	x.inner.AddPendingRecordZoneChanges(changes)
 }
 
-// Removes the specified record zone changes from the state. - Parameters: - changes: An array of record zone changes. Use this method when you no longer want the sync engine to send certain pending changes.
+// Removes the specified record zone changes from the state.
 //
 // RemovePendingRecordZoneChanges calls the underlying RemovePendingRecordZoneChanges.
 func (x *SyncEngineState) RemovePendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange]) {
 	x.inner.RemovePendingRecordZoneChanges(changes)
 }
 
-// Adds the specified database changes to the state. - Parameters: - changes: An array of database changes. Use this method to enable the sync engine to manage your pending database changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type “CKSyncEngineSentDatabaseChangesEvent“. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue, or exceeding the rate limit. - Note: The order in which you apply database changes is important. For example: - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone`, the sync engine discards the delete and sends only the save change.
+// Adds the specified database changes to the state.
 //
 // AddPendingDatabaseChanges calls the underlying AddPendingDatabaseChanges.
 func (x *SyncEngineState) AddPendingDatabaseChanges(changes ...SyncEnginePendingDatabaseChangeProvider) {
@@ -78,7 +80,7 @@ func (x *SyncEngineState) AddPendingDatabaseChanges(changes ...SyncEnginePending
 	x.inner.AddPendingDatabaseChanges(_arg0)
 }
 
-// Removes the specified database changes from the state. - Parameters: - changes: An array of database changes. Use this method when you no longer want the sync engine to send certain pending changes.
+// Removes the specified database changes from the state.
 //
 // RemovePendingDatabaseChanges calls the underlying RemovePendingDatabaseChanges.
 func (x *SyncEngineState) RemovePendingDatabaseChanges(changes ...SyncEnginePendingDatabaseChangeProvider) {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of changes that occurred in an asset or collection object.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phobjectchangedetails
 type PHObjectChangeDetails[ObjectType purego.AnyObject] struct {
 	foundation.NSObject

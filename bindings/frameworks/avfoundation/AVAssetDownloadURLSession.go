@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A URL session that creates and executes asset download tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadurlsession
 type AVAssetDownloadURLSession struct {
 	foundation.NSURLSession
@@ -33,7 +35,7 @@ func AVAssetDownloadURLSessionFromID(id objc.ID) *AVAssetDownloadURLSession {
 	return o
 }
 
-// Creates and initializes an AVAssetDownloadURLSession for use with AVAssetDownloadTasks. - Parameter configuration: The configuration for this URLSession. Must be a background configuration. - Parameter delegate: The delegate object to handle asset download progress updates and other session related events. - Parameter delegateQueue: The queue to receive delegate callbacks on. If nil, a serial queue will be provided.
+// Creates a URL session to download assets.
 func AVAssetDownloadURLSessionSessionWithConfigurationAssetDownloadDelegateDelegateQueue(configuration *foundation.NSURLSessionConfiguration, delegate AVAssetDownloadDelegate, delegateQueue *foundation.NSOperationQueue) *AVAssetDownloadURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetDownloadURLSession), _aVAssetDownloadURLSessionSelSessionWithConfigurationAssetDownloadDelegateDelegateQueue, configuration.Ptr(), delegate, delegateQueue.Ptr())
 	if _ret != 0 {
@@ -42,27 +44,27 @@ func AVAssetDownloadURLSessionSessionWithConfigurationAssetDownloadDelegateDeleg
 	return AVAssetDownloadURLSessionFromID(_ret)
 }
 
-// Creates and initializes an AVAssetDownloadTask to be used with this AVAssetDownloadURLSession. This method may return nil if the URLSession has been invalidated. - Parameter URLAsset: The AVURLAsset to download locally. - Parameter title: A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app. - Parameter artworkData: NSData representing artwork data for this asset. Optional. Will show up in the usage pane of the settings app. Must work with +[UIImage imageWithData:]. - Parameter options: See AVAssetDownloadTask*Key above. Configures non-default behavior for the download task. Using this parameter is required for downloading non-default media selections for HLS assets.
+// Creates a download task to download the asset.
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
 func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *AVURLAsset, title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetDownloadTask {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), title.Ptr(), artworkData.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), title.Ptr(), artworkData.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVAssetDownloadTaskFromID(_ret)
 }
 
-// Creates and initializes an AVAggregateAssetDownloadTask to download multiple AVMediaSelections on an AVURLAsset. This method may return nil if the URLSession has been invalidated. The value of AVAssetDownloadTaskMediaSelectionKey will be ignored. - Parameter URLAsset: The AVURLAsset to download locally. - Parameter mediaSelections: A list of AVMediaSelections. Each AVMediaSelection will correspond to a childAssetDownloadTask. Use -[AVAsset allMediaSelections] to download all AVMediaSelections on this AVAsset. - Parameter title: A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app. - Parameter artworkData: Artwork data for this asset. Optional. Will show up in the usage pane of the settings app. - Parameter options: See AVAssetDownloadTask*Key above. Configures non-default behavior for the download task.
+// Creates a download task to download the asset and media selections.
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
 func (o *AVAssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *AVURLAsset, mediaSelections *foundation.NSArray[*AVMediaSelection], title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAggregateAssetDownloadTask {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), mediaSelections.Ptr(), title.Ptr(), artworkData.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), mediaSelections.Ptr(), title.Ptr(), artworkData.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVAggregateAssetDownloadTaskFromID(_ret)
 }
 
-// Creates and initializes an AVAssetDownloadTask to be used with this AVAssetDownloadURLSession. This method will throw an exception if the URLSession has been invalidated. - Parameter downloadConfiguration: The configuration to be used to create the download task.
+// Creates a download task that uses the specified configuration.
 func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithConfiguration(downloadConfiguration *AVAssetDownloadConfiguration) *AVAssetDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithConfiguration, downloadConfiguration.Ptr())
 	if _ret != 0 {

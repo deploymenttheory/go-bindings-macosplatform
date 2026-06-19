@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midiciresponder
 type MIDICIResponder struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func MIDICIResponderFromID(id objc.ID) *MIDICIResponder {
 	return o
 }
 
+// Creates a new responder.
 func (o *MIDICIResponder) InitWithDeviceInfoProfileDelegateProfileStatesSupportProperties(deviceInfo *MIDICIDeviceInfo, delegate MIDICIProfileResponderDelegate, profileList unsafe.Pointer, propertiesSupported bool) *MIDICIResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIResponderSelInitWithDeviceInfoProfileDelegateProfileStatesSupportProperties, deviceInfo.Ptr(), delegate, profileList, propertiesSupported)
 	if _ret != 0 {
@@ -47,28 +50,35 @@ func (o *MIDICIResponder) InitWithDeviceInfoProfileDelegateProfileStatesSupportP
 	return MIDICIResponderFromID(_ret)
 }
 
+// Enables or disables a profile and notifies all connected initiators.
 func (o *MIDICIResponder) NotifyProfileOnChannelIsEnabled(aProfile *MIDICIProfile, channel uint8, enabledState bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDICIResponderSelNotifyProfileOnChannelIsEnabled, aProfile.Ptr(), channel, enabledState)
 	return _ret
 }
 
+// Sends profile-specific data to all connected initiators.
 func (o *MIDICIResponder) SendProfileOnChannelProfileData(aProfile *MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDICIResponderSelSendProfileOnChannelProfileData, aProfile.Ptr(), channel, profileSpecificData.Ptr())
 	return _ret
 }
 
+// Starts receiving initiator requests.
 func (o *MIDICIResponder) Start() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDICIResponderSelStart)
 	return _ret
 }
 
+// Stops receiving initiator requests and disconnects all connected initiators.
 func (o *MIDICIResponder) Stop() {
 	o.Ptr().Send(_mIDICIResponderSelStop)
 }
 
 func (o *MIDICIResponder) Initiators() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mIDICIResponderSelInitiators)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIResponderSelInitiators)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MIDICIResponder) ProfileDelegate() MIDICIProfileResponderDelegate {

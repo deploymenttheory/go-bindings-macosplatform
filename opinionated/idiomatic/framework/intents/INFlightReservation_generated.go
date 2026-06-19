@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a flight reservation.
+//
 // FlightReservation wraps [raw.INFlightReservation] with a fluent Go API.
 type FlightReservation struct {
 	inner *raw.INFlightReservation
@@ -30,6 +32,8 @@ func FlightReservationFromID(id objc.ID) *FlightReservation {
 	return &FlightReservation{inner: raw.INFlightReservationFromID(id)}
 }
 
+// Creates a flight reservation with the specified contents and attributes.
+//
 // NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight creates a new [FlightReservation].
 func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, flight *raw.INFlight) *FlightReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INFlightReservation")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservatio
 	return &FlightReservation{inner: raw.INFlightReservationFromID(_id)}
 }
 
+// Creates a new flight reservation with the specified contents and attributes.
+//
 // NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight creates a new [FlightReservation].
 func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservedSeat *raw.INSeat, flight *raw.INFlight) *FlightReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INFlightReservation")), objc.RegisterName("alloc"))

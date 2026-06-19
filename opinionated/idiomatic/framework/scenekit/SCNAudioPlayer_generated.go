@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller for playback of a positional audio source in a SceneKit scene.
+//
 // AudioPlayer wraps [raw.SCNAudioPlayer] with a fluent Go API.
 type AudioPlayer struct {
 	inner *raw.SCNAudioPlayer
@@ -31,7 +33,7 @@ func AudioPlayerFromID(id objc.ID) *AudioPlayer {
 	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(id)}
 }
 
-// @property initWithSource: @abstract Init an audio player with a source. Most people should use audioPlayerWithSource as it permits to recycle previous players instead of creating new ones for each instance.
+// Initializes an audio player for playing the specified simple audio source.
 //
 // NewAudioPlayerWithSource creates a new [AudioPlayer].
 func NewAudioPlayerWithSource(source *raw.SCNAudioSource) *AudioPlayer {
@@ -40,7 +42,7 @@ func NewAudioPlayerWithSource(source *raw.SCNAudioSource) *AudioPlayer {
 	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(_id)}
 }
 
-// @property initWithAVAudioNode: @abstract Init an audio player with an AVAudioNode. Most people should use audioPlayerWithAVAudioNode as it permits to recycle previous players instead of creating new ones for each instance.
+// Initializes an audio player for playing the specified AVFoundation audio node.
 //
 // NewAudioPlayerWithAVAudioNode creates a new [AudioPlayer].
 func NewAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *AudioPlayer {
@@ -49,7 +51,7 @@ func NewAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *AudioPlayer
 	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(_id)}
 }
 
-// @property playbackStarted @abstract This block is called when the playback starts in case a valid audio source is present.
+// A block called by SceneKit when playback of the player’s audio source is about to begin.
 //
 // WithWillStartPlayback sets the willStartPlayback property and returns the receiver for chaining.
 func (x *AudioPlayer) WithWillStartPlayback(willStartPlayback func()) *AudioPlayer {
@@ -57,7 +59,7 @@ func (x *AudioPlayer) WithWillStartPlayback(willStartPlayback func()) *AudioPlay
 	return x
 }
 
-// @property playbackFinished @abstract This block is called when the playback stops in case a valid audio source is present.
+// A block called by SceneKit when playback of the player’s audio source has completed.
 //
 // WithDidFinishPlayback sets the didFinishPlayback property and returns the receiver for chaining.
 func (x *AudioPlayer) WithDidFinishPlayback(didFinishPlayback func()) *AudioPlayer {

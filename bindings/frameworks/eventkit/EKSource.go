@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass that represents the account a calendar belongs to.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/eksource
 type EKSource struct {
 	EKObject
@@ -34,7 +36,7 @@ func EKSourceFromID(id objc.ID) *EKSource {
 	return o
 }
 
-// @method      calendarsForEntityType @abstract    Returns the calendars that belong to this source that support a given entity type (reminders, events)
+// Returns the calendars that belong to this source object that support a particular entity type.
 func (o *EKSource) CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*EKCalendar] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKSourceSelCalendarsForEntityType, entityType)
 	if _ret != 0 {

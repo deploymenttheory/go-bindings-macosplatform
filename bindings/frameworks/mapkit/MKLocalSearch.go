@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility object for initiating map-based searches and processing the results.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklocalsearch
 type MKLocalSearch struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func MKLocalSearchFromID(id objc.ID) *MKLocalSearch {
 	return o
 }
 
+// Creates and returns a search object with the specified parameters.
 func (o *MKLocalSearch) InitWithRequest(request *MKLocalSearchRequest) *MKLocalSearch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchSelInitWithRequest, request.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *MKLocalSearch) InitWithRequest(request *MKLocalSearchRequest) *MKLocalS
 	return MKLocalSearchFromID(_ret)
 }
 
+// Creates and returns a search object for fetching points of interest.
 func (o *MKLocalSearch) InitWithPointsOfInterestRequest(request *MKLocalPointsOfInterestRequest) *MKLocalSearch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchSelInitWithPointsOfInterestRequest, request.Ptr())
 	if _ret != 0 {
@@ -52,6 +56,7 @@ func (o *MKLocalSearch) InitWithPointsOfInterestRequest(request *MKLocalPointsOf
 	return MKLocalSearchFromID(_ret)
 }
 
+// Starts the search and delivers the results to the specified completion handler.
 func (o *MKLocalSearch) StartWithCompletionHandler(completionHandler func(*MKLocalSearchResponse, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -66,6 +71,7 @@ func (o *MKLocalSearch) StartWithCompletionHandler(completionHandler func(*MKLoc
 	o.Ptr().Send(_mKLocalSearchSelStartWithCompletionHandler, __block_completionHandler)
 }
 
+// Cancels an in-progress search operation.
 func (o *MKLocalSearch) Cancel() {
 	o.Ptr().Send(_mKLocalSearchSelCancel)
 }

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that creates a new frame processor for the configured video effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtframeprocessor
 type VTFrameProcessor struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func VTFrameProcessorFromID(id objc.ID) *VTFrameProcessor {
 	return o
 }
 
-// Create a new instance of the frame processor.
+// Creates a new frame processor.
 func (o *VTFrameProcessor) Init() *VTFrameProcessor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameProcessorSelInit)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func (o *VTFrameProcessor) Init() *VTFrameProcessor {
 	return VTFrameProcessorFromID(_ret)
 }
 
-// Starts a new session and configures the processor pipeline for an effect. - Parameters: - configuration: The system uses this parameter to create an effect pipeline for processing frames. This object must conform to the “VTFrameProcessorConfiguration“ interface. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
+// Starts a new session and configures the processor pipeline.
 func (o *VTFrameProcessor) StartSessionWithConfigurationError(configuration VTFrameProcessorConfiguration) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vTFrameProcessorSelStartSessionWithConfigurationError, configuration, unsafe.Pointer(&_nsErr))
@@ -58,7 +60,7 @@ func (o *VTFrameProcessor) StartSessionWithConfigurationError(configuration VTFr
 	return _ret, nil
 }
 
-// Synchronously performs the processor effects. Use the respective “VTFrameProcessorParameters“ to pass frame level settings and frame level input/output parameters for the effect that you configured this session for by calling “startSessionWithConfiguration:error“. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
+// Synchronously performs the configured video effect.
 func (o *VTFrameProcessor) ProcessWithParametersError(parameters VTFrameProcessorParameters) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vTFrameProcessorSelProcessWithParametersError, parameters, unsafe.Pointer(&_nsErr))
@@ -68,7 +70,7 @@ func (o *VTFrameProcessor) ProcessWithParametersError(parameters VTFrameProcesso
 	return _ret, nil
 }
 
-// Asynchronously performs the processor effects. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - completionHandler: This completion handler is called when frame processing is completed. The completion handler receives the same parameters object that you provided to the original call, as well as an `NSError` which contains an error code if processing was not successful.
+// Asynchronously performs the video effect specified in the start session.
 func (o *VTFrameProcessor) ProcessWithParametersCompletionHandler(parameters VTFrameProcessorParameters, completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -80,17 +82,17 @@ func (o *VTFrameProcessor) ProcessWithParametersCompletionHandler(parameters VTF
 	o.Ptr().Send(_vTFrameProcessorSelProcessWithParametersCompletionHandler, parameters, __block_completionHandler)
 }
 
-// Asynchronously performs the processor effects and outputs each frame separately. Use with frame processor configurations which allow multiple output frames from a single processing call, such as frame rate conversion processor cases when you need access to output frames as they become available, rather than waiting for all output frames to be complete. This interface is suitable for low-latency scenarios when a call would generate multiple output frames, but waiting for all frames to be generated before beginning to use the frames is not ideal. Because the processor may use the output frames as references for frames still being generated, the output frames are strictly read-only. If you want to modify the frames, you must create a copy first. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - frameOutputHandler: This frame output handler is called once for each destination frame in the provided parameters if no errors are encountered. The output handler receives the same parameters object that you provided to the original call, a flag indicating if this is the final output to be called for this processing request, and the presentation timestamp associated with the `VTFrameProcessorFrame` that it is being called for. The `NSError` parameter contains an error code if processing was not successful.
+// Asynchronously performs the processor effects and outputs each frame separately.
 func (o *VTFrameProcessor) ProcessWithParametersFrameOutputHandler(parameters VTFrameProcessorParameters, frameOutputHandler objc.Block) {
 	o.Ptr().Send(_vTFrameProcessorSelProcessWithParametersFrameOutputHandler, parameters, frameOutputHandler)
 }
 
-// Performs effects in a Metal command buffer. This function allows you to add the effect to an existing Metal command buffer. The clients that have an existing Metal pipeline and want to add this effect to it can use this function. > Note: this function waits until all previously inserted tasks in the command buffer finish before running. Tasks inserted after the `processWithCommandBuffer` returns are run by the system after the effect is applied. Processing does not happen until the commandBuffer is executed. - Parameters: - commandBuffer: An existing Metal command buffer where the frame processing is inserted. - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session.
+// Asynchronously performs the video effect specified in the start session specifically for Metal.
 func (o *VTFrameProcessor) ProcessWithCommandBufferParameters(commandBuffer metal.MTLCommandBuffer, parameters VTFrameProcessorParameters) {
 	o.Ptr().Send(_vTFrameProcessorSelProcessWithCommandBufferParameters, commandBuffer, parameters)
 }
 
-// Performs all necessary tasks to end the session. After this call completes, you can process no new frames unless you call “startSessionWithConfiguration“ again.
+// Performs all necessary tasks to end the session.
 func (o *VTFrameProcessor) EndSession() {
 	o.Ptr().Send(_vTFrameProcessorSelEndSession)
 }

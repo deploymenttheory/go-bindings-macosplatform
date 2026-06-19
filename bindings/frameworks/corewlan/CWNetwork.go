@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwnetwork
 type CWNetwork struct {
 	foundation.NSObject
@@ -42,19 +44,19 @@ func CWNetworkFromID(id objc.ID) *CWNetwork {
 	return o
 }
 
-// @method @param network A CWNetwork object. @result YES if the objects are equal, NO otherwise. @abstract Determine CWNetwork equality. @discussion CWNetwork objects are considered equal if their corresponding <i>ssidData</i> and <i>bssid</i> properties are equal.
+// Method for determining CWNetwork object equality.
 func (o *CWNetwork) IsEqualToNetwork(network *CWNetwork) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWNetworkSelIsEqualToNetwork, network.Ptr())
 	return _ret
 }
 
-// @method @param security A CWSecurity type value. @result <i>YES</i> if the Wi-Fi device supports the specified security type, <i>NO</i> otherwise. @abstract Determine which security types a Wi-Fi device supports.
+// Method for determining which security types a network supports.
 func (o *CWNetwork) SupportsSecurity(security CWSecurity) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWNetworkSelSupportsSecurity, security)
 	return _ret
 }
 
-// @method @param phyMode A CWPHYMode type value. @result YES if the Wi-Fi device supports the specified PHY mode, NO otherwise. @abstract Determine which PHY modes a Wi-Fi device supports.
+// Method for determining which PHY modes a network supports.
 func (o *CWNetwork) SupportsPHYMode(phyMode CWPHYMode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWNetworkSelSupportsPHYMode, phyMode)
 	return _ret

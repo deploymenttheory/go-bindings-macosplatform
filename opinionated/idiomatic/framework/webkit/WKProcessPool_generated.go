@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An opaque token that you use to run multiple web views in a single process.
+//
 // WKProcessPool wraps [raw.WKProcessPool] with a fluent Go API.
 type WKProcessPool struct {
 	inner *raw.WKProcessPool

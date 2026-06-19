@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about the synthesized audio.
+//
 // SpeechSynthesisMarker wraps [raw.AVSpeechSynthesisMarker] with a fluent Go API.
 type SpeechSynthesisMarker struct {
 	inner *raw.AVSpeechSynthesisMarker
@@ -31,6 +33,8 @@ func SpeechSynthesisMarkerFromID(id objc.ID) *SpeechSynthesisMarker {
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(id)}
 }
 
+// Creates a marker with a type and location of the request’s text.
+//
 // NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset creates a new [SpeechSynthesisMarker].
 func NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset(type_ AVSpeechSynthesisMarkerMark, range_ foundation.NSRange, byteSampleOffset uint) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset(type_ 
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
+// Creates a word marker with a range of the word and offset into the audio buffer.
+//
 // NewSpeechSynthesisMarkerWithWordRangeAtByteSampleOffset creates a new [SpeechSynthesisMarker].
 func NewSpeechSynthesisMarkerWithWordRangeAtByteSampleOffset(range_ foundation.NSRange, byteSampleOffset int) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewSpeechSynthesisMarkerWithWordRangeAtByteSampleOffset(range_ foundation.N
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
+// Creates a sentence marker with a range of the sentence and offset into the audio buffer.
+//
 // NewSpeechSynthesisMarkerWithSentenceRangeAtByteSampleOffset creates a new [SpeechSynthesisMarker].
 func NewSpeechSynthesisMarkerWithSentenceRangeAtByteSampleOffset(range_ foundation.NSRange, byteSampleOffset int) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewSpeechSynthesisMarkerWithSentenceRangeAtByteSampleOffset(range_ foundati
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
+// Creates a paragraph marker with a range of the paragraph and offset into the audio buffer.
+//
 // NewSpeechSynthesisMarkerWithParagraphRangeAtByteSampleOffset creates a new [SpeechSynthesisMarker].
 func NewSpeechSynthesisMarkerWithParagraphRangeAtByteSampleOffset(range_ foundation.NSRange, byteSampleOffset int) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
@@ -59,6 +69,8 @@ func NewSpeechSynthesisMarkerWithParagraphRangeAtByteSampleOffset(range_ foundat
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
+// Creates a phoneme marker with a range of the phoneme and offset into the audio buffer.
+//
 // NewSpeechSynthesisMarkerWithPhonemeStringAtByteSampleOffset creates a new [SpeechSynthesisMarker].
 func NewSpeechSynthesisMarkerWithPhonemeStringAtByteSampleOffset(phoneme string, byteSampleOffset int) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
@@ -66,6 +78,8 @@ func NewSpeechSynthesisMarkerWithPhonemeStringAtByteSampleOffset(phoneme string,
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
+// Creates a bookmark marker with a name and offset into the audio buffer.
+//
 // NewSpeechSynthesisMarkerWithBookmarkNameAtByteSampleOffset creates a new [SpeechSynthesisMarker].
 func NewSpeechSynthesisMarkerWithBookmarkNameAtByteSampleOffset(mark string, byteSampleOffset int) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
@@ -73,13 +87,15 @@ func NewSpeechSynthesisMarkerWithBookmarkNameAtByteSampleOffset(mark string, byt
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
+// The type that describes the text.
+//
 // WithMark sets the mark property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithMark(mark AVSpeechSynthesisMarkerMark) *SpeechSynthesisMarker {
 	x.inner.SetMark(raw.AVSpeechSynthesisMarkerMark(mark))
 	return x
 }
 
-// Byte offset into the associated audio buffer
+// The byte offset into the audio buffer.
 //
 // WithByteSampleOffset sets the byteSampleOffset property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithByteSampleOffset(byteSampleOffset uint) *SpeechSynthesisMarker {
@@ -87,7 +103,7 @@ func (x *SpeechSynthesisMarker) WithByteSampleOffset(byteSampleOffset uint) *Spe
 	return x
 }
 
-// The location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
+// The location and length of the request’s text.
 //
 // WithTextRange sets the textRange property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker {
@@ -95,12 +111,16 @@ func (x *SpeechSynthesisMarker) WithTextRange(textRange foundation.NSRange) *Spe
 	return x
 }
 
+// A string that represents the name of a bookmark.
+//
 // WithBookmarkName sets the bookmarkName property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithBookmarkName(bookmarkName string) *SpeechSynthesisMarker {
 	x.inner.SetBookmarkName(foundation.NSStringStringWithUTF8String(bookmarkName))
 	return x
 }
 
+// A string that represents a distinct sound.
+//
 // WithPhoneme sets the phoneme property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMarker {
 	x.inner.SetPhoneme(foundation.NSStringStringWithUTF8String(phoneme))

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a file containing saved game data.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gksavedgame
 type GKSavedGame struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func GKSavedGameFromID(id objc.ID) *GKSavedGame {
 	return o
 }
 
-// Asynchronously load the data for this saved game. The completion handler is called with loaded data or an error.
+// Loads the game data from the file.
 func (o *GKSavedGame) LoadDataWithCompletionHandler(handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

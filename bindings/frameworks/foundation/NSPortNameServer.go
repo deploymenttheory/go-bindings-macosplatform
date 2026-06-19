@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object-oriented interface to the port registration service used by the distributed objects system.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsportnameserver
 // Deprecated: Use NSXPCConnection instead
 type NSPortNameServer struct {
@@ -34,6 +36,7 @@ func NSPortNameServerFromID(id objc.ID) *NSPortNameServer {
 	return o
 }
 
+// Returns the single instance of NSPortNameServer for the application.
 // Deprecated: Use NSXPCConnection instead
 func NSPortNameServerSystemDefaultPortNameServer() *NSPortNameServer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPortNameServer), _nSPortNameServerSelSystemDefaultPortNameServer)
@@ -43,6 +46,7 @@ func NSPortNameServerSystemDefaultPortNameServer() *NSPortNameServer {
 	return NSPortNameServerFromID(_ret)
 }
 
+// Looks up and returns the port registered under the specified name on the local host.
 func (o *NSPortNameServer) PortForName(name *NSString) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortNameServerSelPortForName, name.Ptr())
 	if _ret != 0 {
@@ -51,6 +55,7 @@ func (o *NSPortNameServer) PortForName(name *NSString) *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// Looks up and returns the port registered under the specified name on a specified host.
 func (o *NSPortNameServer) PortForNameHost(name *NSString, host *NSString) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortNameServerSelPortForNameHost, name.Ptr(), host.Ptr())
 	if _ret != 0 {
@@ -59,11 +64,13 @@ func (o *NSPortNameServer) PortForNameHost(name *NSString, host *NSString) *NSPo
 	return NSPortFromID(_ret)
 }
 
+// Makes a given port available on the network under a specified name.
 func (o *NSPortNameServer) RegisterPortName(port *NSPort, name *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortNameServerSelRegisterPortName, port.Ptr(), name.Ptr())
 	return _ret
 }
 
+// Unregisters the port for a given name on the local host.
 func (o *NSPortNameServer) RemovePortForName(name *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortNameServerSelRemovePortForName, name.Ptr())
 	return _ret

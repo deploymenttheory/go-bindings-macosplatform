@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the move, exercise, and stand data for a given day.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkactivitysummary
 type HKActivitySummary struct {
 	foundation.NSObject
@@ -54,7 +56,7 @@ func HKActivitySummaryFromID(id objc.ID) *HKActivitySummary {
 	return o
 }
 
-// @method        dateComponentsForCalendar: @abstract      The date components representing the day for this particular HKActivitySummary. @discussion    These date components will contain era, year, month, and day components in the provided calendar.
+// Date components that uniquely identify the day represented by the summary object.
 func (o *HKActivitySummary) DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelDateComponentsForCalendar, calendar.Ptr())
 	if _ret != 0 {

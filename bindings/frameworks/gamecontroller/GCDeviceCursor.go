@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control element for the cursor used as a directional pad.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcdevicecursor
 type GCDeviceCursor struct {
 	GCControllerDirectionPad

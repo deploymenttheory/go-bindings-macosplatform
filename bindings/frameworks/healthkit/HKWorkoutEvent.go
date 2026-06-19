@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing an important event during a workout.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkworkoutevent
 type HKWorkoutEvent struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func HKWorkoutEventFromID(id objc.ID) *HKWorkoutEvent {
 	return o
 }
 
+// Instantiates and returns a new workout event with the specified type and date.
 func HKWorkoutEventWorkoutEventWithTypeDate(type_ HKWorkoutEventType, date *foundation.NSDate) *HKWorkoutEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDate, type_, date.Ptr())
 	if _ret != 0 {
@@ -44,17 +47,18 @@ func HKWorkoutEventWorkoutEventWithTypeDate(type_ HKWorkoutEventType, date *foun
 	return HKWorkoutEventFromID(_ret)
 }
 
+// Instantiates and returns a new workout event with the specified type, date, and metadata.
 func HKWorkoutEventWorkoutEventWithTypeDateMetadata(type_ HKWorkoutEventType, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkoutEvent {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDateMetadata, type_, date.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDateMetadata, type_, date.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKWorkoutEventFromID(_ret)
 }
 
-// @method        workoutEventWithType:dateInterval:metadata: @discussion    Creates an event with a date interval with or without a duration. @param         type                    The type of event to create @param         dateInterval            The dateInterval over which the event occurs @param         metadata                Dictionary of metadata associated with the event, nullable
+// Instantiates and returns a new workout event with the specified type, date interval, and metadata.
 func HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata(type_ HKWorkoutEventType, dateInterval *foundation.NSDateInterval, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkoutEvent {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDateIntervalMetadata, type_, dateInterval.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkoutEvent), _hKWorkoutEventSelWorkoutEventWithTypeDateIntervalMetadata, type_, dateInterval.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -86,6 +90,9 @@ func (o *HKWorkoutEvent) DateInterval() *foundation.NSDateInterval {
 
 // @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
 func (o *HKWorkoutEvent) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKWorkoutEventSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutEventSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

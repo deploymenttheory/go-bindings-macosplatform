@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A decoder that restores data from an archive referenced by keys.
+//
 // KeyedUnarchiver wraps [raw.NSKeyedUnarchiver] with a fluent Go API.
 type KeyedUnarchiver struct {
 	inner *raw.NSKeyedUnarchiver
@@ -38,7 +40,7 @@ func NewKeyedUnarchiver() *KeyedUnarchiver {
 	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}
 }
 
-// Initializes the receiver for decoding an archive previously encoded by \c NSKeyedUnarchiver. Enables \c requiresSecureCoding by default. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off manually; for improved security, \c requiresSecureCoding should be left enabled whenever possible. Sets the unarchiver's \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid, and sets the \c error out parameter.
+// Initializes an archiver to decode data from the specified location.
 //
 // NewKeyedUnarchiverForReadingFromDataError creates a new [KeyedUnarchiver].
 func NewKeyedUnarchiverForReadingFromDataError(data *raw.NSData) (*KeyedUnarchiver, error) {
@@ -51,6 +53,8 @@ func NewKeyedUnarchiverForReadingFromDataError(data *raw.NSData) (*KeyedUnarchiv
 	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}, nil
 }
 
+// Initializes an archiver to decode data from the specified location.
+//
 // NewKeyedUnarchiverForReadingWithData creates a new [KeyedUnarchiver].
 func NewKeyedUnarchiverForReadingWithData(data *raw.NSData) *KeyedUnarchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
@@ -58,18 +62,24 @@ func NewKeyedUnarchiverForReadingWithData(data *raw.NSData) *KeyedUnarchiver {
 	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *KeyedUnarchiver) WithDelegate(delegate raw.NSKeyedUnarchiverDelegate) *KeyedUnarchiver {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Indicates whether the receiver requires all unarchived classes to conform to NSSecureCoding.
+//
 // WithRequiresSecureCoding sets the requiresSecureCoding property and returns the receiver for chaining.
 func (x *KeyedUnarchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver {
 	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
 	return x
 }
 
+// The action to take when this unarchiver fails to decode an entry.
+//
 // WithDecodingFailurePolicy sets the decodingFailurePolicy property and returns the receiver for chaining.
 func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) *KeyedUnarchiver {
 	x.inner.SetDecodingFailurePolicy(raw.NSDecodingFailurePolicy(decodingFailurePolicy))
@@ -82,16 +92,22 @@ func (x *KeyedUnarchiver) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Tells the receiver that you are finished decoding objects.
+//
 // FinishDecoding calls the underlying FinishDecoding.
 func (x *KeyedUnarchiver) FinishDecoding() {
 	x.inner.FinishDecoding()
 }
 
+// Sets a translation mapping on this unarchiver to decode objects encoded with a given class name as instances of a given class instead.
+//
 // SetClassForClassName calls the underlying SetClassForClassName.
 func (x *KeyedUnarchiver) SetClassForClassName(cls objc.Class, codedName string) {
 	x.inner.SetClassForClassName(cls, foundation.NSStringStringWithUTF8String(codedName))
 }
 
+// Returns the class from which this unarchiver instantiates an encoded object with a given class name.
+//
 // ClassForClassName calls the underlying ClassForClassName.
 func (x *KeyedUnarchiver) ClassForClassName(codedName string) objc.Class {
 	return x.inner.ClassForClassName(foundation.NSStringStringWithUTF8String(codedName))

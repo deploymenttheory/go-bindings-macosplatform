@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable string with associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
+//
 // MutableAttributedString wraps [raw.NSMutableAttributedString] with a fluent Go API.
 type MutableAttributedString struct {
 	inner *raw.NSMutableAttributedString
@@ -42,61 +44,85 @@ func (x *MutableAttributedString) WithScriptingProperties(scriptingProperties *r
 	return x
 }
 
+// Replaces the characters in the given range with the characters of the given string.
+//
 // ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
 func (x *MutableAttributedString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string) {
 	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(str))
 }
 
+// Sets the attributes for the characters in the specified range to the specified attributes.
+//
 // SetAttributesRange calls the underlying SetAttributesRange.
 func (x *MutableAttributedString) SetAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange) {
 	x.inner.SetAttributesRange(attrs, range_)
 }
 
+// Adds an attribute with the given name and value to the characters in the specified range.
+//
 // AddAttributeValueRange calls the underlying AddAttributeValueRange.
 func (x *MutableAttributedString) AddAttributeValueRange(name *raw.NSString, value objc.ID, range_ raw.NSRange) {
 	x.inner.AddAttributeValueRange(name, value, range_)
 }
 
+// Adds the given collection of attributes to the characters in the specified range.
+//
 // AddAttributesRange calls the underlying AddAttributesRange.
 func (x *MutableAttributedString) AddAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange) {
 	x.inner.AddAttributesRange(attrs, range_)
 }
 
+// Removes the named attribute from the characters in the specified range.
+//
 // RemoveAttributeRange calls the underlying RemoveAttributeRange.
 func (x *MutableAttributedString) RemoveAttributeRange(name *raw.NSString, range_ raw.NSRange) {
 	x.inner.RemoveAttributeRange(name, range_)
 }
 
+// Replaces the characters and attributes in a given range with the characters and attributes of the given attributed string.
+//
 // ReplaceCharactersInRangeWithAttributedString calls the underlying ReplaceCharactersInRangeWithAttributedString.
 func (x *MutableAttributedString) ReplaceCharactersInRangeWithAttributedString(range_ raw.NSRange, attrString *raw.NSAttributedString) {
 	x.inner.ReplaceCharactersInRangeWithAttributedString(range_, attrString)
 }
 
+// Inserts the characters and attributes of the given attributed string into the receiver at the given index.
+//
 // InsertAttributedStringAtIndex calls the underlying InsertAttributedStringAtIndex.
 func (x *MutableAttributedString) InsertAttributedStringAtIndex(attrString *raw.NSAttributedString, loc uint) {
 	x.inner.InsertAttributedStringAtIndex(attrString, loc)
 }
 
+// Adds the characters and attributes of a given attributed string to the end of the receiver.
+//
 // AppendAttributedString calls the underlying AppendAttributedString.
 func (x *MutableAttributedString) AppendAttributedString(attrString *raw.NSAttributedString) {
 	x.inner.AppendAttributedString(attrString)
 }
 
+// Deletes the characters in the given range along with their associated attributes.
+//
 // DeleteCharactersInRange calls the underlying DeleteCharactersInRange.
 func (x *MutableAttributedString) DeleteCharactersInRange(range_ raw.NSRange) {
 	x.inner.DeleteCharactersInRange(range_)
 }
 
+// Replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
+//
 // SetAttributedString calls the underlying SetAttributedString.
 func (x *MutableAttributedString) SetAttributedString(attrString *raw.NSAttributedString) {
 	x.inner.SetAttributedString(attrString)
 }
 
+// Begins the buffering of changes to the string’s characters and attributes.
+//
 // BeginEditing calls the underlying BeginEditing.
 func (x *MutableAttributedString) BeginEditing() {
 	x.inner.BeginEditing()
 }
 
+// Ends the buffering of changes to the string’s characters and attributes.
+//
 // EndEditing calls the underlying EndEditing.
 func (x *MutableAttributedString) EndEditing() {
 	x.inner.EndEditing()

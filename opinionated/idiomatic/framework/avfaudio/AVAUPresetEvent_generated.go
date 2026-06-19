@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a preset load and change on the music track’s destination audio unit.
+//
 // AUPresetEvent wraps [raw.AVAUPresetEvent] with a fluent Go API.
 type AUPresetEvent struct {
 	inner *raw.AVAUPresetEvent
@@ -31,7 +33,7 @@ func AUPresetEventFromID(id objc.ID) *AUPresetEvent {
 	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(id)}
 }
 
-// @method initWithScope:element:dictionary @abstract Initialize the event with the scope, element, and dictionary for the preset. @param scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global. @param element The element index within the scope (see AudioUnitElement).  This should usually be set to 0. @param presetDictionary An NSDictionary containing the preset.  The audio unit will expect this to be a dictionary structured as an appropriate audio unit preset. @discussion The dictionary passed to this initializer will be copied and is not editable once the event is created.
+// Creates an event with the scope, element, and dictionary for the preset.
 //
 // NewAUPresetEventWithScopeElementDictionary creates a new [AUPresetEvent].
 func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, presetDictionary purego.IDer) *AUPresetEvent {
@@ -40,7 +42,7 @@ func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, preset
 	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(_id)}
 }
 
-// @property scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global.
+// The audio unit scope.
 //
 // WithScope sets the scope property and returns the receiver for chaining.
 func (x *AUPresetEvent) WithScope(scope uint) *AUPresetEvent {
@@ -48,7 +50,7 @@ func (x *AUPresetEvent) WithScope(scope uint) *AUPresetEvent {
 	return x
 }
 
-// @property element The element index within the scope (see AudioUnitElement).  This should usually be set to 0.
+// The element index in the scope.
 //
 // WithElement sets the element property and returns the receiver for chaining.
 func (x *AUPresetEvent) WithElement(element uint) *AUPresetEvent {

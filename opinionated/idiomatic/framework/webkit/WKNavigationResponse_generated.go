@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.
+//
 // WKNavigationResponse wraps [raw.WKNavigationResponse] with a fluent Go API.
 type WKNavigationResponse struct {
 	inner *raw.WKNavigationResponse

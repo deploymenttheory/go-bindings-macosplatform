@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that represents an onscreen window.
+//
 // Window wraps [raw.SCWindow] with a fluent Go API.
 type Window struct {
 	inner *raw.SCWindow

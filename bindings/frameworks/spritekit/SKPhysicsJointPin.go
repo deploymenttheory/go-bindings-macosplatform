@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A joint that pins together two physics bodies, allowing independent rotation.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsjointpin
 type SKPhysicsJointPin struct {
 	SKPhysicsJoint
@@ -40,6 +42,7 @@ func SKPhysicsJointPinFromID(id objc.ID) *SKPhysicsJointPin {
 	return o
 }
 
+// Creates a new pin joint.
 func SKPhysicsJointPinJointWithBodyABodyBAnchor(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchor corefoundation.CGPoint) *SKPhysicsJointPin {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointPin), _sKPhysicsJointPinSelJointWithBodyABodyBAnchor, bodyA.Ptr(), bodyB.Ptr(), anchor)
 	if _ret != 0 {

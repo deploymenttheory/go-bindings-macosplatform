@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for generating requests to authenticate users with third-party providers.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonprovider
 type ASAuthorizationSingleSignOnProvider struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func ASAuthorizationSingleSignOnProviderFromID(id objc.ID) *ASAuthorizationSingl
 	return o
 }
 
-// @abstract To get the right extension the identity provider main URL has to be provided. The URL is even part of the extension using assosiated domains mechanism or can be configured by MDM profile.
+// Creates a single sign-on (SSO) authorization provider.
 func ASAuthorizationSingleSignOnProviderAuthorizationProviderWithIdentityProviderURL(url *foundation.NSURL) *ASAuthorizationSingleSignOnProvider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationSingleSignOnProvider), _aSAuthorizationSingleSignOnProviderSelAuthorizationProviderWithIdentityProviderURL, url.Ptr())
 	if _ret != 0 {
@@ -42,6 +44,7 @@ func ASAuthorizationSingleSignOnProviderAuthorizationProviderWithIdentityProvide
 	return ASAuthorizationSingleSignOnProviderFromID(_ret)
 }
 
+// Creates a single sign-on (SSO) authorization request.
 func (o *ASAuthorizationSingleSignOnProvider) CreateRequest() *ASAuthorizationSingleSignOnRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnProviderSelCreateRequest)
 	if _ret != 0 {

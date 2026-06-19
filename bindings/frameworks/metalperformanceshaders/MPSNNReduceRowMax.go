@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reduction filter that returns the maximum value for each row in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducerowmax
 type MPSNNReduceRowMax struct {
 	mpsneuralnetwork.MPSNNReduceUnary

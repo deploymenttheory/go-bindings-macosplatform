@@ -1,0 +1,834 @@
+{
+  "schema_version": 1,
+  "framework": "CryptoTokenKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "TKBERTLVRecord": {
+      "doc": "An object that parses BER-encoded data and produces DER-encoded data for TLV records.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tkbertlvrecord"
+    },
+    "TKCompactTLVRecord": {
+      "doc": "An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tkcompacttlvrecord"
+    },
+    "TKSimpleTLVRecord": {
+      "doc": "An object that implements encoding using Simple-TLV encoding according to ISO 7816-4.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksimpletlvrecord"
+    },
+    "TKSmartCard": {
+      "doc": "A representation of a smart card.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard"
+    },
+    "TKSmartCardATR": {
+      "doc": "A parsed ATR (Answer To Reset) message from a Smart Card.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr"
+    },
+    "TKSmartCardATRInterfaceGroup": {
+      "doc": "A single interface-bytes group for a Smart Card ATR (Answer to Reset).",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatrinterfacegroup"
+    },
+    "TKSmartCardPINFormat": {
+      "doc": "The formatting properties for a PIN, such as character encoding and length constraints.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat"
+    },
+    "TKSmartCardSlot": {
+      "doc": "A single smart card reader slot in the system.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot"
+    },
+    "TKSmartCardSlotManager": {
+      "doc": "An interface to all available smart card reader slots.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager"
+    },
+    "TKSmartCardSlotNFCSession": {
+      "doc": "NFC session that’s related to NFC smart card slot which was created.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotnfcsession"
+    },
+    "TKSmartCardToken": {
+      "doc": "A representation of a smart card based cryptographic token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtoken"
+    },
+    "TKSmartCardTokenDriver": {
+      "doc": "The driver that acts as an entry point for smart card app extensions.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokendriver"
+    },
+    "TKSmartCardTokenRegistrationManager": {
+      "doc": "Provides a centralized management system for registering and unregistering smartcards using their token IDs.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokenregistrationmanager"
+    },
+    "TKSmartCardTokenSession": {
+      "doc": "A token session that is based on a smart card token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokensession"
+    },
+    "TKSmartCardUserInteraction": {
+      "doc": "The base class for encapsulating user interaction with a Smart Card reader.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction"
+    },
+    "TKSmartCardUserInteractionForPINOperation": {
+      "doc": "A representation of user interaction for secure PIN operations on a Smart Card reader.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation"
+    },
+    "TKSmartCardUserInteractionForSecurePINChange": {
+      "doc": "A representation of the user interaction for secure PIN change operations on a Smart Card reader.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforsecurepinchange"
+    },
+    "TKSmartCardUserInteractionForSecurePINVerification": {
+      "doc": "A representation of the user interaction for secure PIN change verification on a Smart Card reader.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforsecurepinverification"
+    },
+    "TKTLVRecord": {
+      "doc": "The base class encapsulating a Tag-Length-Value record.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord"
+    },
+    "TKToken": {
+      "doc": "A representation of a hardware-based cryptographic token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken"
+    },
+    "TKTokenAuthOperation": {
+      "doc": "An authentication operation for a cryptographic token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenauthoperation"
+    },
+    "TKTokenConfiguration": {
+      "doc": "A token’s configuration.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenconfiguration"
+    },
+    "TKTokenDriver": {
+      "doc": "A base class for building token drivers.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriver"
+    },
+    "TKTokenDriverConfiguration": {
+      "doc": "A configuration for one class of token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriverconfiguration"
+    },
+    "TKTokenKeyAlgorithm": {
+      "doc": "Cryptographic algorithms used by token keys.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyalgorithm"
+    },
+    "TKTokenKeyExchangeParameters": {
+      "doc": "Parameters used to perform specific key exchange operations.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyexchangeparameters"
+    },
+    "TKTokenKeychainCertificate": {
+      "doc": "A token’s certificate as stored in the keychain.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincertificate"
+    },
+    "TKTokenKeychainContents": {
+      "doc": "A representation of the state of the keychain for a particular token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincontents"
+    },
+    "TKTokenKeychainItem": {
+      "doc": "An abstract base class for managing a token’s contents as keychain items.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainitem"
+    },
+    "TKTokenKeychainKey": {
+      "doc": "A token’s key as stored in the keychain.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey"
+    },
+    "TKTokenPasswordAuthOperation": {
+      "doc": "A password-based authentication operation.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenpasswordauthoperation"
+    },
+    "TKTokenSession": {
+      "doc": "A token session that manages the authentication state of a token.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensession"
+    },
+    "TKTokenSmartCardPINAuthOperation": {
+      "doc": "A Smart Card PIN authentication operation.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation"
+    },
+    "TKTokenWatcher": {
+      "doc": "An object that tracks the tokens available in the system.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher"
+    },
+    "TKTokenWatcherTokenInfo": {
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatchertokeninfo"
+    }
+  },
+  "protocols": {
+    "TKSmartCardTokenDriverDelegate": {
+      "doc": "The interface that a smart card token driver delegate implements to respond to token creation events.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokendriverdelegate"
+    },
+    "TKSmartCardUserInteractionDelegate": {
+      "doc": "The interface implemented by a Smart Card user interaction delegate to handle user interaction events.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractiondelegate"
+    },
+    "TKTokenDelegate": {
+      "doc": "The interface that a token delegate implements to respond to session creation events.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendelegate"
+    },
+    "TKTokenDriverDelegate": {
+      "doc": "The interface that a token driver delegate implements to respond to token creation events.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriverdelegate"
+    },
+    "TKTokenSessionDelegate": {
+      "doc": "The interface that a session instance delegate implements to respond to token session authentication events.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensessiondelegate"
+    }
+  },
+  "enums": {
+    "TKErrorCode": {
+      "doc": "Error codes from CryptoTokenKit.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tkerrorcode"
+    },
+    "TKSmartCardPINCharset": {
+      "doc": "Possible PIN character sets.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpincharset"
+    },
+    "TKSmartCardPINCompletion": {
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpincompletion"
+    },
+    "TKSmartCardPINConfirmation": {
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinconfirmation"
+    },
+    "TKSmartCardPINEncoding": {
+      "doc": "Possible PIN encoding types.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinencoding"
+    },
+    "TKSmartCardPINJustification": {
+      "doc": "Possible PIN justification types",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinjustification"
+    },
+    "TKSmartCardProtocol": {
+      "doc": "Smart Card transmission protocols.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardprotocol"
+    },
+    "TKSmartCardSlotState": {
+      "doc": "All smart card slot states.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotstate"
+    },
+    "TKTokenOperation": {
+      "doc": "Operations that can be performed with a token’s keys and certificates.",
+      "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenoperation"
+    }
+  },
+  "methods": {
+    "TKBERTLVRecord": {
+      "+dataForTag:": {
+        "doc": "Encodes a specified tag using BER-TLV tag encoding rules.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tkbertlvrecord/data(fortag:)"
+      },
+      "-initWithTag:records:": {
+        "doc": "Initializes a BER-TLV record with the specified tag and an array of TLV subrecords.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tkbertlvrecord/init(tag:records:)"
+      },
+      "-initWithTag:value:": {
+        "doc": "Initializes a BER-TLV record with the specified tag and value.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tkbertlvrecord/init(tag:value:)"
+      }
+    },
+    "TKCompactTLVRecord": {
+      "-initWithTag:value:": {
+        "doc": "Initializes a TLV record with the specified tag and value.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tkcompacttlvrecord/init(tag:value:)"
+      }
+    },
+    "TKSimpleTLVRecord": {
+      "-initWithTag:value:": {
+        "doc": "Initializes a TLV record with the specified tag and value.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksimpletlvrecord/init(tag:value:)"
+      }
+    },
+    "TKSmartCard": {
+      "-beginSessionWithReply:": {
+        "doc": "Begins a session with the Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/beginsession(reply:)"
+      },
+      "-endSession": {
+        "doc": "Completes any pending transmissions and ends the session to the Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/endsession()"
+      },
+      "-inSessionWithError:executeBlock:": {
+        "doc": "Synchronously begins a session, executes the given block, and ends the session.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/insessionwitherror:executeblock:"
+      },
+      "-sendIns:p1:p2:data:le:reply:": {
+        "doc": "Asynchronously transmits an APDU command to the card, returning the response in a completion handler.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/sendins:p1:p2:data:le:reply:"
+      },
+      "-sendIns:p1:p2:data:le:sw:error:": {
+        "doc": "Synchronously transmits an APDU command to the card and returns the response.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/sendins:p1:p2:data:le:sw:error:"
+      },
+      "-transmitRequest:reply:": {
+        "doc": "Transmits data in Application Protocol Data Unit (APDU) format to the Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/transmit(_:reply:)"
+      },
+      "-userInteractionForSecurePINChangeWithPINFormat:APDU:currentPINByteOffset:newPINByteOffset:": {
+        "doc": "Creates a new user interaction object for secure PIN change using the smart card reader facilities (typically a HW keypad).",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/userinteractionforsecurepinchange(_:apdu:currentpinbyteoffset:newpinbyteoffset:)"
+      },
+      "-userInteractionForSecurePINVerificationWithPINFormat:APDU:PINByteOffset:": {
+        "doc": "Creates and returns a new user interaction object for secure PIN verification using the Smart Card reader facilities.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/userinteractionforsecurepinverification(_:apdu:pinbyteoffset:)"
+      }
+    },
+    "TKSmartCardATR": {
+      "-initWithBytes:": {
+        "doc": "Initializes a TKSmartCardATR object from a provided data object.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/init(bytes:)"
+      },
+      "-initWithSource:": {
+        "doc": "Initializes a TKSmartCardATR object from a provided data source.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/init(source:)"
+      },
+      "-interfaceGroupAtIndex:": {
+        "doc": "Returns the interface group at the specified index.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/interfacegroup(at:)"
+      },
+      "-interfaceGroupForProtocol:": {
+        "doc": "Returns the interface group with the specified protocol.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/interfacegroup(for:)"
+      }
+    },
+    "TKSmartCardSlot": {
+      "-makeSmartCard": {
+        "doc": "Creates a new TKSmartCard object representing the currently inserted Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/makesmartcard()"
+      }
+    },
+    "TKSmartCardSlotManager": {
+      "-createNFCSlotWithMessage:completion:": {
+        "doc": "Creates an NFC smart card slot using the device’s hardware and presents a system UI.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager/createnfcslot(message:completion:)"
+      },
+      "-getSlotWithName:reply:": {
+        "doc": "Asynchronously calls a block with a Smart Card reader slot for a specified name.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager/getslot(withname:reply:)"
+      },
+      "-isNFCSupported": {
+        "doc": "Determines whether NFC (Near Field Communication) is supported on this device.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager/isnfcsupported()"
+      },
+      "-slotNamed:": {
+        "doc": "Returns the Smart Card slot with a given name.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager/slotnamed(_:)"
+      }
+    },
+    "TKSmartCardSlotNFCSession": {
+      "-endSession": {
+        "doc": "Ends the NFC slot session and dismisses the system-presented NFC UI (if present).",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotnfcsession/end()"
+      },
+      "-updateWithMessage:error:": {
+        "doc": "Updates the message of the system-presented NFC UI.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotnfcsession/update(message:)"
+      }
+    },
+    "TKSmartCardToken": {
+      "-initWithSmartCard:AID:instanceID:tokenDriver:": {
+        "doc": "Initializes a smart card token with the specified smart card, application identifier, and token driver.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtoken/init(smartcard:aid:instanceid:tokendriver:)-38ak2"
+      }
+    },
+    "TKSmartCardTokenRegistrationManager": {
+      "-registerSmartCardWithTokenID:promptMessage:error:": {
+        "doc": "Registers a smartcard with a specific token ID.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokenregistrationmanager/registersmartcard(tokenid:promptmessage:)"
+      },
+      "-unregisterSmartCardWithTokenID:error:": {
+        "doc": "Unregisters a smartcard for the provided token ID.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokenregistrationmanager/unregistersmartcard(tokenid:)"
+      }
+    },
+    "TKSmartCardUserInteraction": {
+      "-cancel": {
+        "doc": "Attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction/cancel()"
+      },
+      "-runWithReply:": {
+        "doc": "Runs the user interaction and asynchronously receives a reply.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction/run(reply:)"
+      }
+    },
+    "TKTLVRecord": {
+      "+recordFromData:": {
+        "doc": "Creates and returns a TLV record from by parsing the specified data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord/init(from:)"
+      },
+      "+sequenceOfRecordsFromData:": {
+        "doc": "Creates and returns an array of TLV records from the specified data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord/sequenceofrecords(from:)"
+      }
+    },
+    "TKToken": {
+      "-initWithTokenDriver:instanceID:": {
+        "doc": "Initializes a token with the driver you specify.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/init(tokendriver:instanceid:)"
+      }
+    },
+    "TKTokenAuthOperation": {
+      "-finishWithError:": {
+        "doc": "Finishes the authentication operation.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenauthoperation/finish()"
+      }
+    },
+    "TKTokenKeyAlgorithm": {
+      "-isAlgorithm:": {
+        "doc": "Returns whether the specified algorithm is the target operation algorithm.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyalgorithm/isalgorithm(_:)"
+      },
+      "-supportsAlgorithm:": {
+        "doc": "Whether the specified algorithm is the target operation algorithm, or one of the other algorithms used.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyalgorithm/supportsalgorithm(_:)"
+      }
+    },
+    "TKTokenKeychainCertificate": {
+      "-initWithCertificate:objectID:": {
+        "doc": "Initializes a token keychain certificate with data from the specified certificate reference and a given object ID.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincertificate/init(certificate:objectid:)"
+      }
+    },
+    "TKTokenKeychainContents": {
+      "-certificateForObjectID:error:": {
+        "doc": "Returns the key for a specified object identifier.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincontents/certificate(forobjectid:)"
+      },
+      "-fillWithItems:": {
+        "doc": "Fills the keychain with the specified items.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincontents/fill(with:)"
+      },
+      "-keyForObjectID:error:": {
+        "doc": "Returns the key for a specified object identifier.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincontents/key(forobjectid:)"
+      }
+    },
+    "TKTokenKeychainItem": {
+      "-initWithObjectID:": {
+        "doc": "Initializes a token keychain item with the specified object ID.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainitem/init(objectid:)"
+      }
+    },
+    "TKTokenKeychainKey": {
+      "-initWithCertificate:objectID:": {
+        "doc": "Initializes a token keychain key with data from the specified certificate reference and a given object ID.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/init(certificate:objectid:)"
+      }
+    },
+    "TKTokenSession": {
+      "-initWithToken:": {
+        "doc": "Initializes a token session with the specified token.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensession/init(token:)"
+      }
+    },
+    "TKTokenWatcher": {
+      "-addRemovalHandler:forTokenID:": {
+        "doc": "Adds a removal handler for the specified token ID.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher/addremovalhandler(_:fortokenid:)"
+      },
+      "-init": {
+        "doc": "Initializes a token watcher.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher/init()"
+      },
+      "-initWithInsertionHandler:": {
+        "doc": "Initializes a token watcher with the specified insertion handler.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher/init(insertionhandler:)"
+      },
+      "-setInsertionHandler:": {
+        "doc": "Sets an insertion handler closure to be called when a new token is inserted into the system.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher/setinsertionhandler(_:)"
+      }
+    }
+  },
+  "properties": {
+    "TKSmartCard": {
+      "allowedProtocols": {
+        "doc": "The protocols allowed for communication with the Smart Card. TKSmartCardProtocolAny by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/allowedprotocols"
+      },
+      "cla": {
+        "doc": "The CLA byte used for APDU transmission. 0x00 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/cla"
+      },
+      "context": {
+        "doc": "User-specified information. This property is automatically set to nil if the Smart Card is removed or another TKSmartCard object begins a session.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/context"
+      },
+      "currentProtocol": {
+        "doc": "The protocol used for communication with the Smart Card. Returns TKSmartCardProtocolNone if no session is currently established.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/currentprotocol"
+      },
+      "send(ins:p1:p2:data:le:)": {
+        "doc": "Synchronously sends an APDU command to the smart card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/send(ins:p1:p2:data:le:)-1kbga"
+      },
+      "send(ins:p1:p2:data:le:reply:)": {
+        "doc": "Asynchronously transmits an APDU command to the card, returning the response in a completion handler.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/send(ins:p1:p2:data:le:reply:)"
+      },
+      "sensitive": {
+        "doc": "Whether sessions established for the Smart Card should be considered sensitive. false by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/issensitive"
+      },
+      "slot": {
+        "doc": "The slot in which the Smart Card is inserted.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/slot"
+      },
+      "useCommandChaining": {
+        "doc": "Whether to use command chaining of APDU with a data field longer than 255 bytes.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/usecommandchaining"
+      },
+      "useExtendedLength": {
+        "doc": "Whether to use extended length APDU.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/useextendedlength"
+      },
+      "valid": {
+        "doc": "Whether the Smart Card is valid and accessible from its slot.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/isvalid"
+      },
+      "withSession(_:)": {
+        "doc": "Synchronously begins a session, executes the given closure, and ends the session.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/withsession(_:)"
+      }
+    },
+    "TKSmartCardATR": {
+      "TKSmartCardATRInterfaceGroup": {
+        "doc": "A single interface-bytes group for a Smart Card ATR (Answer to Reset).",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/interfacegroup"
+      },
+      "bytes": {
+        "doc": "The ATR message data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/bytes"
+      },
+      "historicalBytes": {
+        "doc": "The ATR historical bytes, not including interface bytes or the TCK (check byte).",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/historicalbytes"
+      },
+      "historicalRecords": {
+        "doc": "A list of compact TLV records parsed from historical bytes.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/historicalrecords"
+      },
+      "protocols": {
+        "doc": "An array of protocols indicated in the ATR",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr/protocols"
+      }
+    },
+    "TKSmartCardPINFormat": {
+      "PINBitOffset": {
+        "doc": "The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value. 0 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/pinbitoffset"
+      },
+      "PINBlockByteLength": {
+        "doc": "The total length of the PIN block in bytes. 8 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/pinblockbytelength"
+      },
+      "PINJustification": {
+        "doc": "The justification within the PIN block. TKSmartCardPINJustificationLeft by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/pinjustification"
+      },
+      "PINLengthBitOffset": {
+        "doc": "The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified. 0 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/pinlengthbitoffset"
+      },
+      "PINLengthBitSize": {
+        "doc": "The size, in bits, of the PIN length field. If set to 0, PIN length is not written. 0 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/pinlengthbitsize"
+      },
+      "TKSmartCardPINCharset": {
+        "doc": "Possible PIN character sets.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/charset-swift.enum"
+      },
+      "TKSmartCardPINEncoding": {
+        "doc": "Possible PIN encoding types.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/encoding-swift.enum"
+      },
+      "TKSmartCardPINJustification": {
+        "doc": "Possible PIN justification types",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/justification"
+      },
+      "charset": {
+        "doc": "The format of PIN characters. TKSmartCardPINCharsetNumeric by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/charset-swift.property"
+      },
+      "encoding": {
+        "doc": "The encoding of PIN characters. TKSmartCardPINEncodingASCII by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/encoding-swift.property"
+      },
+      "maxPINLength": {
+        "doc": "The maximum number of characters to form a valid PIN. 8 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/maxpinlength"
+      },
+      "minPINLength": {
+        "doc": "The minimum number of characters to form a valid PIN. 4 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat/minpinlength"
+      }
+    },
+    "TKSmartCardSlot": {
+      "ATR": {
+        "doc": "The ATR (Answer to Reset) of the inserted Smart Card, or nil if no Smart Card is inserted or the inserted Smart Card is mute.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/atr"
+      },
+      "TKSmartCardSlotState": {
+        "doc": "All smart card slot states.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/state-swift.enum"
+      },
+      "maxInputLength": {
+        "doc": "The maximum length of input APDU (Application Protocol Data Unit) that the Smart Card reader slot is able to transfer to the Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/maxinputlength"
+      },
+      "maxOutputLength": {
+        "doc": "The maximum length of output APDU (Application Protocol Data Unit) that the Smart Card reader slot is able to transfer from the Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/maxoutputlength"
+      },
+      "name": {
+        "doc": "The name of the Smart Card reader slot.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/name"
+      },
+      "state": {
+        "doc": "The current state of the Smart Card reader slot.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot/state-swift.property"
+      }
+    },
+    "TKSmartCardSlotManager": {
+      "defaultManager": {
+        "doc": "The shared singleton Smart Card reader slot manager.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager/default"
+      },
+      "slotNames": {
+        "doc": "A list of identifiers for all the Smart Card reader slots available to the system.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotmanager/slotnames"
+      }
+    },
+    "TKSmartCardSlotNFCSession": {
+      "slotName": {
+        "doc": "Smart card slot name of the NFC slot that was created together with this session.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslotnfcsession/slotname"
+      }
+    },
+    "TKSmartCardToken": {
+      "AID": {
+        "doc": "The ISO 7816-4 application identifiers of the Smart Card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtoken/aid"
+      }
+    },
+    "TKSmartCardTokenRegistrationManager": {
+      "defaultManager": {
+        "doc": "Default instance of registration manager",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokenregistrationmanager/default"
+      },
+      "registeredSmartCardTokens": {
+        "doc": "Returns the tokenIDs of all currently registered smart card tokens",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokenregistrationmanager/registeredsmartcardtokens"
+      }
+    },
+    "TKSmartCardTokenSession": {
+      "smartCard": {
+        "doc": "The smart card for the active exclusive session and selected application.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokensession/smartcard"
+      }
+    },
+    "TKSmartCardUserInteraction": {
+      "delegate": {
+        "doc": "The delegate for observing events that occur during the user interaction.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction/delegate"
+      },
+      "initialTimeout": {
+        "doc": "The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction/initialtimeout"
+      },
+      "interactionTimeout": {
+        "doc": "The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteraction/interactiontimeout"
+      }
+    },
+    "TKSmartCardUserInteractionForPINOperation": {
+      "PINCompletion": {
+        "doc": "The conditions under which PIN entry should be considered complete.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation/pincompletion"
+      },
+      "PINMessageIndices": {
+        "doc": "A list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation/pinmessageindices"
+      },
+      "locale": {
+        "doc": "The locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation/locale"
+      },
+      "resultData": {
+        "doc": "The returned data without SW1-SW2 bytes, if any.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation/resultdata"
+      },
+      "resultSW": {
+        "doc": "The SW1-SW2 status bytes.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation/resultsw"
+      }
+    },
+    "TKSmartCardUserInteractionForSecurePINChange": {
+      "PINConfirmation": {
+        "doc": "The way PIN confirmation is requested. TKSmartCardPINConfirmationNone by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforsecurepinchange/pinconfirmation"
+      }
+    },
+    "TKTLVRecord": {
+      "data": {
+        "doc": "The record data, including the tag, length, and value fields.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord/data"
+      },
+      "tag": {
+        "doc": "The tag field of the record.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord/tag"
+      },
+      "value": {
+        "doc": "The value field of the record.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord/value"
+      }
+    },
+    "TKToken": {
+      "TKTokenConfiguration": {
+        "doc": "A token’s configuration.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/configuration-swift.class"
+      },
+      "TKTokenInstanceID": {
+        "doc": "A type that represents the instance identifier of a token.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/instanceid"
+      },
+      "TKTokenObjectID": {
+        "doc": "A unique and persistent identifier of a particular token object.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/objectid"
+      },
+      "configuration": {
+        "doc": "The current configuration for a token.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/configuration-swift.property"
+      },
+      "delegate": {
+        "doc": "The token delegate.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/delegate"
+      },
+      "keychainContents": {
+        "doc": "The contents of the keychain for this token.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/keychaincontents"
+      },
+      "tokenDriver": {
+        "doc": "The token driver.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktoken/tokendriver"
+      }
+    },
+    "TKTokenDriver": {
+      "TKTokenDriverClassID": {
+        "doc": "The type of the class identifier for the token driver.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriver/classid"
+      },
+      "TKTokenDriverConfiguration": {
+        "doc": "A configuration for one class of token.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriver/configuration"
+      },
+      "delegate": {
+        "doc": "The token driver delegate.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokendriver/delegate"
+      }
+    },
+    "TKTokenKeyExchangeParameters": {
+      "requestedSize": {
+        "doc": "Returns the requested output size, in bytes, of key exchange result.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyexchangeparameters/requestedsize"
+      },
+      "sharedInfo": {
+        "doc": "Returns shared information typically used during the key derivation (KDF) step of a key exchange algorithm.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyexchangeparameters/sharedinfo"
+      }
+    },
+    "TKTokenKeychainCertificate": {
+      "data": {
+        "doc": "Returns a DER-encoded representation of an X.509 certificate.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincertificate/data"
+      }
+    },
+    "TKTokenKeychainContents": {
+      "items": {
+        "doc": "Returns all items for token in the keychain.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincontents/items"
+      }
+    },
+    "TKTokenKeychainItem": {
+      "constraints": {
+        "doc": "Access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainitem/constraints"
+      },
+      "label": {
+        "doc": "The user-visible label for the keychain item.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainitem/label"
+      },
+      "objectID": {
+        "doc": "Returns the object ID used for keychain item identification.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainitem/objectid"
+      }
+    },
+    "TKTokenKeychainKey": {
+      "applicationTag": {
+        "doc": "The private tag data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/applicationtag"
+      },
+      "canDecrypt": {
+        "doc": "Whether the key can be used to decrypt data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/candecrypt"
+      },
+      "canPerformKeyExchange": {
+        "doc": "Whether the key can be used to perform Diffie-Hellman style cryptographic key exchange.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/canperformkeyexchange"
+      },
+      "canSign": {
+        "doc": "Whether the key can be used to sign data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/cansign"
+      },
+      "keyType": {
+        "doc": "The type of the key. Currently, only kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom are supported values.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/keytype"
+      },
+      "publicKeyData": {
+        "doc": "The public key data.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/publickeydata"
+      },
+      "publicKeyHash": {
+        "doc": "The SHA1 hash of the raw public key.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/publickeyhash"
+      },
+      "suitableForLogin": {
+        "doc": "Whether the key can be used for system login.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainkey/issuitableforlogin"
+      }
+    },
+    "TKTokenPasswordAuthOperation": {
+      "password": {
+        "doc": "The password to be filled in when the finishWithError: is called.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenpasswordauthoperation/password"
+      }
+    },
+    "TKTokenSession": {
+      "delegate": {
+        "doc": "The token session delegate.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensession/delegate"
+      },
+      "token": {
+        "doc": "The token to which the session is bound.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensession/token"
+      }
+    },
+    "TKTokenSmartCardPINAuthOperation": {
+      "APDUTemplate": {
+        "doc": "The template into which the PIN is filled in. nil by default.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation/apdutemplate"
+      },
+      "PIN": {
+        "doc": "The PIN value resulting from performing the operation.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation/pin"
+      },
+      "PINByteOffset": {
+        "doc": "The offset, in bytes, within the APDU template to mark the location for filling in the PIN.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation/pinbyteoffset"
+      },
+      "PINFormat": {
+        "doc": "The PIN format.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation/pinformat"
+      },
+      "smartCard": {
+        "doc": "A Smart Card to which the formatted APDU is sent in order to authenticate.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation/smartcard"
+      }
+    },
+    "TKTokenWatcher": {
+      "tokenIDs": {
+        "doc": "The token IDs currently available in the system.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher/tokenids"
+      }
+    }
+  }
+}

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that analyzes an image for aesthetically pleasing attributes.
+//
 // CalculateImageAestheticsScoresRequest wraps [raw.VNCalculateImageAestheticsScoresRequest] with a fluent Go API.
 type CalculateImageAestheticsScoresRequest struct {
 	inner *raw.VNCalculateImageAestheticsScoresRequest
@@ -38,7 +40,7 @@ func NewCalculateImageAestheticsScoresRequest() *CalculateImageAestheticsScoresR
 	return &CalculateImageAestheticsScoresRequest{inner: raw.VNCalculateImageAestheticsScoresRequestFromID(_id)}
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *CalculateImageAestheticsScoresRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest {
@@ -46,7 +48,7 @@ func (x *CalculateImageAestheticsScoresRequest) WithRegionOfInterest(regionOfInt
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *CalculateImageAestheticsScoresRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest {
@@ -54,7 +56,7 @@ func (x *CalculateImageAestheticsScoresRequest) WithPreferBackgroundProcessing(p
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *CalculateImageAestheticsScoresRequest) WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest {
@@ -62,7 +64,7 @@ func (x *CalculateImageAestheticsScoresRequest) WithUsesCPUOnly(usesCPUOnly bool
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *CalculateImageAestheticsScoresRequest) WithRevision(revision uint) *CalculateImageAestheticsScoresRequest {

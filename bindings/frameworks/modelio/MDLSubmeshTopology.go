@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of how a submesh’s index buffer data is arranged and how that arrangement should be used to produce the submesh’s intended 3D shape.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlsubmeshtopology
 type MDLSubmeshTopology struct {
 	foundation.NSObject

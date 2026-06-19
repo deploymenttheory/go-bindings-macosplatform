@@ -8,8 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
+// A query to access the location data stored in a workout route.
+//
 // WorkoutRouteQuery wraps [raw.HKWorkoutRouteQuery] with a fluent Go API.
 type WorkoutRouteQuery struct {
 	inner *raw.HKWorkoutRouteQuery
@@ -30,19 +33,19 @@ func WorkoutRouteQueryFromID(id objc.ID) *WorkoutRouteQuery {
 	return &WorkoutRouteQuery{inner: raw.HKWorkoutRouteQueryFromID(id)}
 }
 
-// @method        initWithRoute:dataHandler: @abstract      Returns a query that will retrieve CLLocation objects for the specified workoutRoute. @param workoutRoute    The HKWorkoutRoute for which the location data will be returned. @param dataHandler     The block to invoke with results from the query. It is called repeatedly with an array of CLLocation objects until all data is returned and the done parameter is YES or if HKHealthStore stopQuery: is called. The stopQuery call can be made within the dataHandler block. The number of objects returned in routeData per dataHandler call is unspecified. Once done is YES, or stopQuery called, the query is complete and no more calls to the handler will be made.
+// Creates a new query to access the location data associated with a workout route.
 //
 // NewWorkoutRouteQueryWithRouteDataHandler creates a new [WorkoutRouteQuery].
-func NewWorkoutRouteQueryWithRouteDataHandler(workoutRoute *raw.HKWorkoutRoute, dataHandler objc.Block) *WorkoutRouteQuery {
+func NewWorkoutRouteQueryWithRouteDataHandler(workoutRoute *raw.HKWorkoutRoute, dataHandler func(*raw.HKWorkoutRouteQuery, *foundation.NSArray[objc.ID], bool, unsafe.Pointer)) *WorkoutRouteQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutRouteQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoute:dataHandler:"), workoutRoute.Ptr(), dataHandler)
 	return &WorkoutRouteQuery{inner: raw.HKWorkoutRouteQueryFromID(_id)}
 }
 
-// @method        initWithRoute:dateInterval:dataHandler: @abstract      Returns a query that will retrieve CLLocation objects for the specified workoutRoute and dateInterval. @param workoutRoute    The HKWorkoutRoute for which the location data will be returned. @param dateInterval    The date interval for which the location data will be returned. If the requested interval does not overlap with the specified workout route sample, an empty array of results is returned. If the requested interval partially overlaps with the specified workout route sample, only location data from within that overlapping time period is returned. @param dataHandler     The block to invoke with results from the query. It is called repeatedly with an array of CLLocation objects until all data is returned and the done parameter is YES or if HKHealthStore stopQuery: is called. The stopQuery call can be made within the dataHandler block. The number of objects returned in routeData per dataHandler call is unspecified. Once done is YES, or stopQuery called, the query is complete and no more calls to the handler will be made.
+// Creates a new query to access the location data associated with a workout route during the specified date interval.
 //
 // NewWorkoutRouteQueryWithRouteDateIntervalDataHandler creates a new [WorkoutRouteQuery].
-func NewWorkoutRouteQueryWithRouteDateIntervalDataHandler(workoutRoute *raw.HKWorkoutRoute, dateInterval *foundation.NSDateInterval, dataHandler objc.Block) *WorkoutRouteQuery {
+func NewWorkoutRouteQueryWithRouteDateIntervalDataHandler(workoutRoute *raw.HKWorkoutRoute, dateInterval *foundation.NSDateInterval, dataHandler func(*raw.HKWorkoutRouteQuery, *foundation.NSArray[objc.ID], bool, unsafe.Pointer)) *WorkoutRouteQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutRouteQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoute:dateInterval:dataHandler:"), workoutRoute.Ptr(), dateInterval.Ptr(), dataHandler)
 	return &WorkoutRouteQuery{inner: raw.HKWorkoutRouteQueryFromID(_id)}

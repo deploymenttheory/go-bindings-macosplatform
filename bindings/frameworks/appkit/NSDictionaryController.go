@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bindings-compatible controller that manages the display and editing of a dictionary of key-value pairs.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdictionarycontroller
 type NSDictionaryController struct {
 	NSArrayController
@@ -63,30 +65,39 @@ func (o *NSDictionaryController) SetInitialValue(initialValue objc.ID) {
 }
 
 func (o *NSDictionaryController) IncludedKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSDictionaryControllerSelIncludedKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerSelIncludedKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSDictionaryController) SetIncludedKeys(includedKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSDictionaryControllerSelSetIncludedKeys, includedKeys)
+	o.Ptr().Send(_nSDictionaryControllerSelSetIncludedKeys, includedKeys.Ptr())
 }
 
 func (o *NSDictionaryController) ExcludedKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSDictionaryControllerSelExcludedKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerSelExcludedKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSDictionaryController) SetExcludedKeys(excludedKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSDictionaryControllerSelSetExcludedKeys, excludedKeys)
+	o.Ptr().Send(_nSDictionaryControllerSelSetExcludedKeys, excludedKeys.Ptr())
 }
 
 func (o *NSDictionaryController) LocalizedKeyDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _nSDictionaryControllerSelLocalizedKeyDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDictionaryControllerSelLocalizedKeyDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *NSDictionaryController) SetLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_nSDictionaryControllerSelSetLocalizedKeyDictionary, localizedKeyDictionary)
+	o.Ptr().Send(_nSDictionaryControllerSelSetLocalizedKeyDictionary, localizedKeyDictionary.Ptr())
 }
 
 func (o *NSDictionaryController) LocalizedKeyTable() *foundation.NSString {

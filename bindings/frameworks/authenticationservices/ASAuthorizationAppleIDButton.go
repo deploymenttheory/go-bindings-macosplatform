@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control you add to your interface that enables users to initiate the Sign In with Apple flow.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton
 type ASAuthorizationAppleIDButton struct {
 	appkit.NSControl
@@ -33,6 +35,7 @@ func ASAuthorizationAppleIDButtonFromID(id objc.ID) *ASAuthorizationAppleIDButto
 	return o
 }
 
+// Creates a new Sign In with Apple authorization button with the given type and style.
 func ASAuthorizationAppleIDButtonButtonWithTypeStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *ASAuthorizationAppleIDButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationAppleIDButton), _aSAuthorizationAppleIDButtonSelButtonWithTypeStyle, type_, style)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func ASAuthorizationAppleIDButtonButtonWithTypeStyle(type_ ASAuthorizationAppleI
 	return ASAuthorizationAppleIDButtonFromID(_ret)
 }
 
+// Creates a new Sign In with Apple authorization button with the given type and style.
 func (o *ASAuthorizationAppleIDButton) InitWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *ASAuthorizationAppleIDButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDButtonSelInitWithAuthorizationButtonTypeAuthorizationButtonStyle, type_, style)
 	if _ret != 0 {

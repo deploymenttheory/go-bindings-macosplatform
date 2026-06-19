@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for temperature.
+//
 // UnitTemperature wraps [raw.NSUnitTemperature] with a fluent Go API.
 type UnitTemperature struct {
 	inner *raw.NSUnitTemperature

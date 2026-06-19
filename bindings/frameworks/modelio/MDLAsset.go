@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An indexed container for 3D objects and associated information, such as transform hierarchies, meshes, cameras, and lights.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlasset
 type MDLAsset struct {
 	foundation.NSObject
@@ -69,7 +71,7 @@ func MDLAssetFromID(id objc.ID) *MDLAsset {
 	return o
 }
 
-// @method initWithURL: @abstract Initialize an MDLAsset using the contents of the resource located at the indicated URL @discussion Vertex layout (i.e. vertexDescriptor) will be specified by ModelIO depending on attributes of the resource.  Buffers will be allocated using a default NSData based allocator Submeshes will be converted to triangle topology.
+// Initializes an asset from the file at the specified URL.
 func (o *MDLAsset) InitWithURL(uRL *foundation.NSURL) *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -78,7 +80,7 @@ func (o *MDLAsset) InitWithURL(uRL *foundation.NSURL) *MDLAsset {
 	return MDLAssetFromID(_ret)
 }
 
-// @method initWithURL:vertexDescriptor:bufferAllocator: @abstract Initialize an MDLAsset using the contents of the resource located at URL, ensuring that the asset conforms to the supplied vertexDescriptor, and buffers are allocated in the supplied allocator @discussion The default behavior is to triangulate any discovered meshes and to conform the mesh to the supplied vertexDescriptor. If nil is passed as the vertexDescriptor, then a vertexDescriptor will be created according to the attributes of the resource. If nil is passed as the bufferAllocator, buffers will be allocated using a default NSData based allocator. Submeshes will be converted to triangle topology.
+// Initializes an asset from the file at the specified URL, using the specified vertex descriptor and buffer allocator.
 func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocator(uRL *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator) *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocator, uRL.Ptr(), vertexDescriptor.Ptr(), bufferAllocator)
 	if _ret != 0 {
@@ -87,7 +89,7 @@ func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocator(uRL *foundation.NS
 	return MDLAssetFromID(_ret)
 }
 
-// @method initWithBufferAllocator: @abstract Initialize an empty MDLAsset with a buffer allocator to be used during other operations.
+// Initializes an empty asset, using the specified buffer allocator.
 func (o *MDLAsset) InitWithBufferAllocator(bufferAllocator MDLMeshBufferAllocator) *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithBufferAllocator, bufferAllocator)
 	if _ret != 0 {
@@ -96,7 +98,7 @@ func (o *MDLAsset) InitWithBufferAllocator(bufferAllocator MDLMeshBufferAllocato
 	return MDLAssetFromID(_ret)
 }
 
-// @method initWithURL:vertexDescriptor:bufferAllocator:preserveTopology:error: @abstract Same as initWithURL:vertexDescriptor:bufferAllocator: except that if preserveTopology is YES, a topology buffer might be created on the submeshes. @discussion If all faces in a submesh have the same vertex count, then the submesh will a geometry type corresponding to that vertex count. For example, if all faces have four vertices, then the geometry type will be MDLGeometryTypeQuads. If faces have a varying number of vertices, then the the submesh type will be MDLGeometryTypeVariableTopology, and a faceTopologyBuffer will be created.
+// Initializes an asset from the file at the specified URL, using the specified options for allocating and transforming data during import.
 func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError(uRL *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator, preserveTopology bool) (*MDLAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError, uRL.Ptr(), vertexDescriptor.Ptr(), bufferAllocator, preserveTopology, unsafe.Pointer(&_nsErr))
@@ -109,13 +111,13 @@ func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocatorPreserveTopologyErr
 	return MDLAssetFromID(_ret), nil
 }
 
-// @method exportAssetToURL: @abstract Export an asset to the specified URL. @return YES is returned if exporting proceeded successfully,
+// Writes asset data to a file at the specified URL.
 func (o *MDLAsset) ExportAssetToURL(uRL *foundation.NSURL) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mDLAssetSelExportAssetToURL, uRL.Ptr())
 	return _ret
 }
 
-// @method exportAssetToURL:error: @abstract Export an asset to the specified URL. @return YES is returned if exporting proceeded successfully,
+// Writes asset data to a file at the specified URL and reports errors that occur during export.
 func (o *MDLAsset) ExportAssetToURLError(uRL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mDLAssetSelExportAssetToURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -134,19 +136,19 @@ func (o *MDLAsset) ObjectAtPath(path *foundation.NSString) *MDLObject {
 	return MDLObjectFromID(_ret)
 }
 
-// @method canImportFileExtension: @abstract Indicates whether MDLAsset object can be initialized with resource with the given extension @return YES is returned if MDLAsset is able to load and represent assets with the given extension
+// Returns a Boolean value that indicates whether the MDLAsset class can read asset data from files with the specified extension.
 func MDLAssetCanImportFileExtension(extension *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMDLAsset), _mDLAssetSelCanImportFileExtension, extension.Ptr())
 	return _ret
 }
 
-// @method canImportFileExtension: @abstract Indicates whether MDLAsset object can export asset to resource with the given extension @return YES is returned if MDLAsset is able is able to export assets to resources with the given extension
+// Returns a Boolean value that indicates whether the MDLAsset class can write asset data as a file with the specified format extension.
 func MDLAssetCanExportFileExtension(extension *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMDLAsset), _mDLAssetSelCanExportFileExtension, extension.Ptr())
 	return _ret
 }
 
-// @method childObjectsOfClass: @abstract Inspects an asset's hierarchy for objects of the specified class type @return returns an NSArray of all objects in the asset matching the requested class @discussion This can be used to get references to all MDLMesh objects, MDLLights, etc. if objectClass is not a subclass of MDLObject, an exception will be raised.
+// Returns all objects contained in the asset of the specified class.
 func (o *MDLAsset) ChildObjectsOfClass(objectClass objc.Class) *foundation.NSArray[*MDLObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelChildObjectsOfClass, objectClass)
 	if _ret != 0 {
@@ -160,23 +162,23 @@ func (o *MDLAsset) LoadTextures() {
 	o.Ptr().Send(_mDLAssetSelLoadTextures)
 }
 
-// @method boundingBoxAtTime: @abstract The bounds of the MDLAsset at the specified time
+// Returns the minimum region entirely enclosing the asset’s contents at the specified time sample.
 func (o *MDLAsset) BoundingBoxAtTime(time_ float64) MDLAxisAlignedBoundingBox {
 	_ret := objc.Send[MDLAxisAlignedBoundingBox](o.Ptr(), _mDLAssetSelBoundingBoxAtTime, time_)
 	return _ret
 }
 
-// @method addObject: @abstract Add a top level object to an asset. @discussion If the object was already in the asset, this has no effect.
+// Adds the specified object to the asset’s list of top-level objects.
 func (o *MDLAsset) AddObject(object *MDLObject) {
 	o.Ptr().Send(_mDLAssetSelAddObject, object.Ptr())
 }
 
-// @method removeObject: @abstract Remove a top level object from an asset. @discussion If the object not in the asset, this has no effect.
+// Removes the specified object from the asset’s list of top-level objects.
 func (o *MDLAsset) RemoveObject(object *MDLObject) {
 	o.Ptr().Send(_mDLAssetSelRemoveObject, object.Ptr())
 }
 
-// @method objectAtIndexedSubscript: @abstract return the indexed top level object
+// Returns the top-level object at the specified index in the asset, using subscript syntax.
 func (o *MDLAsset) ObjectAtIndexedSubscript(index uint) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -185,7 +187,7 @@ func (o *MDLAsset) ObjectAtIndexedSubscript(index uint) *MDLObject {
 	return MDLObjectFromID(_ret)
 }
 
-// @method objectAtIndex: @abstract return the indexed top level object
+// Returns the top-level object at the specified index in the asset.
 func (o *MDLAsset) ObjectAtIndex(index uint) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelObjectAtIndex, index)
 	if _ret != 0 {
@@ -312,6 +314,7 @@ func (o *MDLAsset) SetAnimations(animations MDLObjectContainerComponent) {
 	o.Ptr().Send(_mDLAssetSelSetAnimations, animations)
 }
 
+// Automatically creates and places light probes for use in illuminating a scene.
 func MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value float32, type_ MDLProbePlacement, dataSource MDLLightProbeIrradianceDataSource) *foundation.NSArray[*MDLLightProbe] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLAsset), _mDLAssetSelPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource, value, type_, dataSource)
 	if _ret != 0 {

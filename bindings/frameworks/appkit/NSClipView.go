@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that clips a document view to a scroll view’s frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsclipview
 type NSClipView struct {
 	NSView
@@ -51,18 +53,22 @@ func NSClipViewFromID(id objc.ID) *NSClipView {
 	return o
 }
 
+// Handles an NSViewFrameDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new frame.
 func (o *NSClipView) ViewFrameChanged(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSClipViewSelViewFrameChanged, notification.Ptr())
 }
 
+// Handles an NSViewBoundsDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new bounds.
 func (o *NSClipView) ViewBoundsChanged(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSClipViewSelViewBoundsChanged, notification.Ptr())
 }
 
+// Changes the origin of the clip view’s bounds rectangle to newOrigin.
 func (o *NSClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
 	o.Ptr().Send(_nSClipViewSelScrollToPoint, newOrigin)
 }
 
+// Constrains the bounds of the clip view while the user is magnifying and scrolling.
 func (o *NSClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelConstrainBoundsRect, proposedBounds)
 	return _ret
@@ -141,6 +147,7 @@ func (o *NSClipView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsCo
 	o.Ptr().Send(_nSClipViewSelSetAutomaticallyAdjustsContentInsets, automaticallyAdjustsContentInsets)
 }
 
+// Returns a scroll point adjusted from the proposed new origin, if necessary, to guarantee the view will lie within its document view.
 // Deprecated: Use -constrainBoundsRect: instead.
 func (o *NSClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSClipViewSelConstrainScrollPoint, newOrigin)

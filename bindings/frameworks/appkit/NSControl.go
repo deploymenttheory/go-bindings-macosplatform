@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized view, such as a button or text field, that notifies your app of relevant events using the target-action design pattern.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscontrol
 type NSControl struct {
 	NSView
@@ -111,6 +113,7 @@ func NSControlFromID(id objc.ID) *NSControl {
 	return o
 }
 
+// Initializes a control with the specified frame rectangle.
 func (o *NSControl) InitWithFrame(frameRect corefoundation.CGRect) *NSControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithFrame, frameRect)
 	if _ret != 0 {
@@ -119,6 +122,7 @@ func (o *NSControl) InitWithFrame(frameRect corefoundation.CGRect) *NSControl {
 	return NSControlFromID(_ret)
 }
 
+// Initializes a control with data in an unarchiver.
 func (o *NSControl) InitWithCoder(coder *foundation.NSCoder) *NSControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -127,58 +131,71 @@ func (o *NSControl) InitWithCoder(coder *foundation.NSCoder) *NSControl {
 	return NSControlFromID(_ret)
 }
 
+// Asks the control to calculate and return the size that best fits the specified size.
 func (o *NSControl) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSControlSelSizeThatFits, size)
 	return _ret
 }
 
+// Resizes the receiver’s frame so that it’s the minimum size needed to contain its cell.
 func (o *NSControl) SizeToFit() {
 	o.Ptr().Send(_nSControlSelSizeToFit)
 }
 
+// Sets the conditions on which the receiver sends action messages to its target.
 func (o *NSControl) SendActionOn(mask NSEventMask) int {
 	_ret := objc.Send[int](o.Ptr(), _nSControlSelSendActionOn, mask)
 	return _ret
 }
 
+// Causes the specified action to be sent to the target.
 func (o *NSControl) SendActionTo(action objc.SEL, target objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSControlSelSendActionTo, action, target)
 	return _ret
 }
 
+// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
 func (o *NSControl) TakeIntValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelTakeIntValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
 func (o *NSControl) TakeFloatValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelTakeFloatValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
 func (o *NSControl) TakeDoubleValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelTakeDoubleValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to the string value obtained from the specified object.
 func (o *NSControl) TakeStringValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelTakeStringValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to the object value obtained from the specified object.
 func (o *NSControl) TakeObjectValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelTakeObjectValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to an NSInteger value obtained from the specified object.
 func (o *NSControl) TakeIntegerValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelTakeIntegerValueFrom, sender)
 }
 
+// Simulates a single mouse click on the receiver.
 func (o *NSControl) PerformClick(sender objc.ID) {
 	o.Ptr().Send(_nSControlSelPerformClick, sender)
 }
 
+// The frame in which a tool tip can be displayed, if needed.
 func (o *NSControl) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSControlSelExpansionFrameWithFrame, contentFrame)
 	return _ret
 }
 
+// Performs custom expansion tool tip drawing.
 func (o *NSControl) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *NSView) {
 	o.Ptr().Send(_nSControlSelDrawWithExpansionFrameInView, contentFrame, view.Ptr())
 }
@@ -397,6 +414,7 @@ func (o *NSControl) SetAllowsExpansionToolTips(allowsExpansionToolTips bool) {
 	o.Ptr().Send(_nSControlSelSetAllowsExpansionToolTips, allowsExpansionToolTips)
 }
 
+// Returns the current field editor for the control.
 func (o *NSControl) CurrentEditor() *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCurrentEditor)
 	if _ret != 0 {
@@ -405,27 +423,33 @@ func (o *NSControl) CurrentEditor() *NSText {
 	return NSTextFromID(_ret)
 }
 
+// Terminates the current editing operation and discards any edited text.
 func (o *NSControl) AbortEditing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSControlSelAbortEditing)
 	return _ret
 }
 
+// Validates changes to any user-typed text.
 func (o *NSControl) ValidateEditing() {
 	o.Ptr().Send(_nSControlSelValidateEditing)
 }
 
+// Begins editing of the receiver’s text using the specified field editor.
 func (o *NSControl) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *NSText, delegate objc.ID, event *NSEvent) {
 	o.Ptr().Send(_nSControlSelEditWithFrameEditorDelegateEvent, rect, textObj.Ptr(), delegate, event.Ptr())
 }
 
+// Selects the specified text range in the receiver’s field editor.
 func (o *NSControl) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *NSText, delegate objc.ID, selStart int, selLength int) {
 	o.Ptr().Send(_nSControlSelSelectWithFrameEditorDelegateStartLength, rect, textObj.Ptr(), delegate, selStart, selLength)
 }
 
+// Ends the editing of text in the receiver using the specified field editor.
 func (o *NSControl) EndEditing(textObj *NSText) {
 	o.Ptr().Send(_nSControlSelEndEditing, textObj.Ptr())
 }
 
+// Sets the auto-ranging and floating point number format of the receiver’s cell.
 // Deprecated: since macOS 10.0.
 func (o *NSControl) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
 	o.Ptr().Send(_nSControlSelSetFloatingPointFormatLeftRight, autoRange, leftDigits, rightDigits)
@@ -502,6 +526,7 @@ func (o *NSControl) SetCell(cell *NSCell) {
 	o.Ptr().Send(_nSControlSelSetCell, cell.Ptr())
 }
 
+// Notifies the control that the intrinsic content size for its cell is no longer valid.
 func (o *NSControl) InvalidateIntrinsicContentSizeForCell(cell *NSCell) {
 	o.Ptr().Send(_nSControlSelInvalidateIntrinsicContentSizeForCell, cell.Ptr())
 }

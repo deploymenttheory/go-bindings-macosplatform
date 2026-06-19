@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for data protected by a right.
+//
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/larightstore
 type LARightStore struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func LARightStoreFromID(id objc.ID) *LARightStore {
 	return o
 }
 
-// @brief Fetches a right stored under the given identifier. @param identifier Identifier associated with a previously stored right. @param handler Completion handler with the fetched right or an error on failure.
+// Fetches a previously stored right from the shared right store.
 func (o *LARightStore) RightForIdentifierCompletion(identifier *foundation.NSString, handler func(*LAPersistedRight, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -53,7 +55,7 @@ func (o *LARightStore) RightForIdentifierCompletion(identifier *foundation.NSStr
 	o.Ptr().Send(_lARightStoreSelRightForIdentifierCompletion, identifier.Ptr(), __block_handler)
 }
 
-// @brief Persists a right for later usage. @param right @c LARight instance to store. @param identifier Identifier to be associated with the right. Useful for later retrieval. @param handler Completion handler with the persisted right or an error on failure.
+// Saves a right to a persistent right store.
 func (o *LARightStore) SaveRightIdentifierCompletion(right *LARight, identifier *foundation.NSString, handler func(*LAPersistedRight, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -68,7 +70,7 @@ func (o *LARightStore) SaveRightIdentifierCompletion(right *LARight, identifier 
 	o.Ptr().Send(_lARightStoreSelSaveRightIdentifierCompletion, right.Ptr(), identifier.Ptr(), __block_handler)
 }
 
-// @brief Persists a right for later usage. @param right @c LARight instance to store. @param identifier Identifier to be associated with the right. Useful for later retrieval. @param secret Secret data to be associated with the provided right. @param handler Completion handler with the persisted right or an error on failure.
+// Saves a right to a persistent store along with secret data you supply.
 func (o *LARightStore) SaveRightIdentifierSecretCompletion(right *LARight, identifier *foundation.NSString, secret *foundation.NSData, handler func(*LAPersistedRight, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -83,7 +85,7 @@ func (o *LARightStore) SaveRightIdentifierSecretCompletion(right *LARight, ident
 	o.Ptr().Send(_lARightStoreSelSaveRightIdentifierSecretCompletion, right.Ptr(), identifier.Ptr(), secret.Ptr(), __block_handler)
 }
 
-// @brief Removes a right from the persistent storage along with its associated resources. @param right @c LAPersistedRight instance to remove. @param handler Completion handler with an error on failure.
+// Removes a right from the right store given an instance of that right.
 func (o *LARightStore) RemoveRightCompletion(right *LAPersistedRight, handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -95,7 +97,7 @@ func (o *LARightStore) RemoveRightCompletion(right *LAPersistedRight, handler fu
 	o.Ptr().Send(_lARightStoreSelRemoveRightCompletion, right.Ptr(), __block_handler)
 }
 
-// @brief Removes right with provided identifier from persistent storage. @param identifier Identifier of @c LAPersistedRight instance to remove. @param handler Completion handler with an error on failure.
+// Removes a right from the right store given its unique identifier.
 func (o *LARightStore) RemoveRightForIdentifierCompletion(identifier *foundation.NSString, handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -107,7 +109,7 @@ func (o *LARightStore) RemoveRightForIdentifierCompletion(identifier *foundation
 	o.Ptr().Send(_lARightStoreSelRemoveRightForIdentifierCompletion, identifier.Ptr(), __block_handler)
 }
 
-// @brief Removes all rights stored by the client @param handler Completion handler with an error on failure.
+// Removes all rights associated with this client from the right store.
 func (o *LARightStore) RemoveAllRightsWithCompletion(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// A tile group encapsulates a collection of related tile definitions that are designed to be pieced together within a tile map. How those tiles are pieced together is governed by the set of rules. When a tile group is placed in a tile map, the map evaluates the rules to determine which tiles should be placed to achieve the desired outcome.
+// A set of tiles that collectively define one type of terrain.
 //
 // TileGroup wraps [raw.SKTileGroup] with a fluent Go API.
 type TileGroup struct {
@@ -34,7 +34,7 @@ func TileGroupFromID(id objc.ID) *TileGroup {
 	return &TileGroup{inner: raw.SKTileGroupFromID(id)}
 }
 
-// Initilize a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map. @param tileDefinition tile definition we wish to place in a tile map
+// Creates and initializes a simple tile group with a single tile definition.
 //
 // NewTileGroupWithTileDefinition creates a new [TileGroup].
 func NewTileGroupWithTileDefinition(tileDefinition *raw.SKTileDefinition) *TileGroup {
@@ -43,7 +43,7 @@ func NewTileGroupWithTileDefinition(tileDefinition *raw.SKTileDefinition) *TileG
 	return &TileGroup{inner: raw.SKTileGroupFromID(_id)}
 }
 
-// Initilize a tile group with the specified rules. @param rules the rules the group will use to determine tile placement
+// Creates and initializes a tile group with the specified tile group rules.
 //
 // NewTileGroupWithRules creates a new [TileGroup].
 func NewTileGroupWithRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) *TileGroup {
@@ -52,7 +52,7 @@ func NewTileGroupWithRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) *Til
 	return &TileGroup{inner: raw.SKTileGroupFromID(_id)}
 }
 
-// The rules that govern which tiles are placed when this group is used, and where in the map they'll be placed.
+// An array of SKTileGroupRule objects that the tile group uses to determine tile placement.
 //
 // WithRules sets the collection, converting the Go slice to an NSArray.
 func (x *TileGroup) WithRules(items ...*raw.SKTileGroupRule) *TileGroup {
@@ -75,7 +75,7 @@ func (x *TileGroup) WithRules(items ...*raw.SKTileGroupRule) *TileGroup {
 	return x
 }
 
-// Client-assignable name for the tile group. Defaults to nil.
+// The receiver’s name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TileGroup) WithName(name string) *TileGroup {

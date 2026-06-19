@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass that you subclass to create a Core Data atomic store.
+//
 // AtomicStore wraps [raw.NSAtomicStore] with a fluent Go API.
 type AtomicStore struct {
 	inner *raw.NSAtomicStore
@@ -31,6 +33,8 @@ func AtomicStoreFromID(id objc.ID) *AtomicStore {
 	return &AtomicStore{inner: raw.NSAtomicStoreFromID(id)}
 }
 
+// Creates an atomic store at the specified location.
+//
 // NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates a new [AtomicStore].
 func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *raw.NSPersistentStoreCoordinator, configurationName string, url string, options purego.IDer) *AtomicStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAtomicStore")), objc.RegisterName("alloc"))
@@ -38,42 +42,56 @@ func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coo
 	return &AtomicStore{inner: raw.NSAtomicStoreFromID(_id)}
 }
 
+// The URL for the persistent store.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *AtomicStore) WithURL(uRL string) *AtomicStore {
 	x.inner.NSPersistentStore.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The unique identifier for the persistent store.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *AtomicStore) WithIdentifier(identifier string) *AtomicStore {
 	x.inner.NSPersistentStore.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// A Boolean value that indicates whether the persistent store is read-only.
+//
 // WithReadOnly sets the readOnly property and returns the receiver for chaining.
 func (x *AtomicStore) WithReadOnly(readOnly bool) *AtomicStore {
 	x.inner.NSPersistentStore.SetReadOnly(readOnly)
 	return x
 }
 
+// The metadata for the persistent store.
+//
 // WithMetadata sets the metadata property and returns the receiver for chaining.
 func (x *AtomicStore) WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AtomicStore {
 	x.inner.NSPersistentStore.SetMetadata(metadata)
 	return x
 }
 
+// Loads the cache nodes for the receiver.
+//
 // Load returns any validation error.
 func (x *AtomicStore) Load() error {
 	_, err := x.inner.Load()
 	return err
 }
 
+// Saves the cache nodes.
+//
 // Save returns any validation error.
 func (x *AtomicStore) Save() error {
 	_, err := x.inner.Save()
 	return err
 }
 
+// Returns a new cache node for a given managed object.
+//
 // NewCacheNodeForManagedObject calls the underlying NewCacheNodeForManagedObject.
 func (x *AtomicStore) NewCacheNodeForManagedObject(managedObject *raw.NSManagedObject) *AtomicStoreCacheNode {
 	_r := x.inner.NewCacheNodeForManagedObject(managedObject)
@@ -83,26 +101,36 @@ func (x *AtomicStore) NewCacheNodeForManagedObject(managedObject *raw.NSManagedO
 	return &AtomicStoreCacheNode{inner: _r}
 }
 
+// Updates the given cache node using the values in a given managed object.
+//
 // UpdateCacheNodeFromManagedObject calls the underlying UpdateCacheNodeFromManagedObject.
 func (x *AtomicStore) UpdateCacheNodeFromManagedObject(node *raw.NSAtomicStoreCacheNode, managedObject *raw.NSManagedObject) {
 	x.inner.UpdateCacheNodeFromManagedObject(node, managedObject)
 }
 
+// Returns the set of cache nodes registered with the receiver.
+//
 // CacheNodes calls the underlying CacheNodes.
 func (x *AtomicStore) CacheNodes() *foundation.NSSet[*raw.NSAtomicStoreCacheNode] {
 	return x.inner.CacheNodes()
 }
 
+// Registers a set of cache nodes with the receiver.
+//
 // AddCacheNodes calls the underlying AddCacheNodes.
 func (x *AtomicStore) AddCacheNodes(cacheNodes *foundation.NSSet[*raw.NSAtomicStoreCacheNode]) {
 	x.inner.AddCacheNodes(cacheNodes)
 }
 
+// Method invoked before the store removes the given collection of cache nodes.
+//
 // WillRemoveCacheNodes calls the underlying WillRemoveCacheNodes.
 func (x *AtomicStore) WillRemoveCacheNodes(cacheNodes *foundation.NSSet[*raw.NSAtomicStoreCacheNode]) {
 	x.inner.WillRemoveCacheNodes(cacheNodes)
 }
 
+// Returns the cache node for a given managed object ID.
+//
 // CacheNodeForObjectID calls the underlying CacheNodeForObjectID.
 func (x *AtomicStore) CacheNodeForObjectID(objectID *raw.NSManagedObjectID) *AtomicStoreCacheNode {
 	_r := x.inner.CacheNodeForObjectID(objectID)
@@ -112,6 +140,8 @@ func (x *AtomicStore) CacheNodeForObjectID(objectID *raw.NSManagedObjectID) *Ato
 	return &AtomicStoreCacheNode{inner: _r}
 }
 
+// Returns a managed object ID from the reference data for a specified entity.
+//
 // ObjectIDForEntityReferenceObject calls the underlying ObjectIDForEntityReferenceObject.
 func (x *AtomicStore) ObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID {
 	_r := x.inner.ObjectIDForEntityReferenceObject(entity, data)
@@ -121,11 +151,15 @@ func (x *AtomicStore) ObjectIDForEntityReferenceObject(entity *raw.NSEntityDescr
 	return &ManagedObjectID{inner: _r}
 }
 
+// Returns a new reference object for a given managed object.
+//
 // NewReferenceObjectForManagedObject calls the underlying NewReferenceObjectForManagedObject.
 func (x *AtomicStore) NewReferenceObjectForManagedObject(managedObject *raw.NSManagedObject) objc.ID {
 	return x.inner.NewReferenceObjectForManagedObject(managedObject)
 }
 
+// Returns the reference object for a given managed object ID.
+//
 // ReferenceObjectForObjectID calls the underlying ReferenceObjectForObjectID.
 func (x *AtomicStore) ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID {
 	return x.inner.ReferenceObjectForObjectID(objectID)

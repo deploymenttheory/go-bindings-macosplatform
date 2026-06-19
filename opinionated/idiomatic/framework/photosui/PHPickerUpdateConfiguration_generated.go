@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.
+//
 // PickerUpdateConfiguration wraps [raw.PHPickerUpdateConfiguration] with a fluent Go API.
 type PickerUpdateConfiguration struct {
 	inner *raw.PHPickerUpdateConfiguration
@@ -36,7 +38,7 @@ func NewPickerUpdateConfiguration() *PickerUpdateConfiguration {
 	return &PickerUpdateConfiguration{inner: raw.PHPickerUpdateConfigurationFromID(_id)}
 }
 
-// The maximum number of assets that can be selected.
+// The maximum number of selections the user can make.
 //
 // WithSelectionLimit sets the selectionLimit property and returns the receiver for chaining.
 func (x *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration {
@@ -44,7 +46,7 @@ func (x *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *Pick
 	return x
 }
 
-// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
+// The portions of a photo picker’s permiter that are borderless.
 //
 // WithEdgesWithoutContentMargins sets the edgesWithoutContentMargins property and returns the receiver for chaining.
 func (x *PickerUpdateConfiguration) WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerUpdateConfiguration {

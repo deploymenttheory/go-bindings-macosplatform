@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration information for an app that’s available during an assessment.
+//
 // Apple documentation: https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration
 type AEAssessmentParticipantConfiguration struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func AEAssessmentParticipantConfigurationFromID(id objc.ID) *AEAssessmentPartici
 	return o
 }
 
+// Initializes an assessment participant configuration instance.
 func (o *AEAssessmentParticipantConfiguration) Init() *AEAssessmentParticipantConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentParticipantConfigurationSelInit)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func (o *AEAssessmentParticipantConfiguration) Init() *AEAssessmentParticipantCo
 	return AEAssessmentParticipantConfigurationFromID(_ret)
 }
 
+// Creates a new assessment participant configuration instance.
 func AEAssessmentParticipantConfigurationNew() *AEAssessmentParticipantConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAEAssessmentParticipantConfiguration), _aEAssessmentParticipantConfigurationSelNew)
 	return AEAssessmentParticipantConfigurationFromID(_ret)
@@ -69,10 +73,13 @@ func (o *AEAssessmentParticipantConfiguration) SetRequired(required bool) {
 }
 
 func (o *AEAssessmentParticipantConfiguration) ConfigurationInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aEAssessmentParticipantConfigurationSelConfigurationInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentParticipantConfigurationSelConfigurationInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AEAssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aEAssessmentParticipantConfigurationSelSetConfigurationInfo, configurationInfo)
+	o.Ptr().Send(_aEAssessmentParticipantConfigurationSelSetConfigurationInfo, configurationInfo.Ptr())
 }

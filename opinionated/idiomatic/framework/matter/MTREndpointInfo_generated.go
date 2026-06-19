@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Meta-data about an endpoint of a Matter node.
+//
 // MTREndpointInfo wraps [raw.MTREndpointInfo] with a fluent Go API.
 type MTREndpointInfo struct {
 	inner *raw.MTREndpointInfo

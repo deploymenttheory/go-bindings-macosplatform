@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result that Core Data returns when executing a batch-insertion request.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsbatchinsertresult
 type NSBatchInsertResult struct {
 	NSPersistentStoreResult

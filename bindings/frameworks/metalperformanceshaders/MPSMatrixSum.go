@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for performing a pointwise summation of a matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsum
 type MPSMatrixSum struct {
 	mpscore.MPSKernel
@@ -68,7 +70,7 @@ func (o *MPSMatrixSum) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
 
 // @abstract   Encode the operations to the command buffer @param          buffer              The command buffer in which to encode the operation. @param          sourceMatrices      A list of matrices from which the matrix data is read. @param          resultMatrix        The result matrix. @param          scaleVector         A MPSVector of type MPSDataTypeFloat32 containing the list of scale factors, specified in single precision. @param          offsetVector        A MPSVector of type MPSDataTypeUInt32 containing the list of offsets, stored as a packed array of MPSMatrixOffset values. @param          biasVector          A MPSVector containing the bias terms to add to the result prior to applying the neuron function, if any.  May be nil. @param          startIndex          The starting index into the scale and offset vectors.
 func (o *MPSMatrixSum) EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint) {
-	o.Ptr().Send(_mPSMatrixSumSelEncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex, buffer, sourceMatrices, resultMatrix.Ptr(), scaleVector.Ptr(), offsetVector.Ptr(), biasVector.Ptr(), startIndex)
+	o.Ptr().Send(_mPSMatrixSumSelEncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex, buffer, sourceMatrices.Ptr(), resultMatrix.Ptr(), scaleVector.Ptr(), offsetVector.Ptr(), biasVector.Ptr(), startIndex)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixSum kernel. @param      device      The MTLDevice on which to make the MPSMatrixSum object. @return     A new MPSMatrixSum object, or nil if failure.

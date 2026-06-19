@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Dishwasher Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterDishwasherMode wraps [raw.MTRClusterDishwasherMode] with a fluent Go API.
 type MTRClusterDishwasherMode struct {
 	inner *raw.MTRClusterDishwasherMode

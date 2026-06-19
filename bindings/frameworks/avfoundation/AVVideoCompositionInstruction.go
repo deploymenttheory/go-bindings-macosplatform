@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that a compositor performs.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avvideocompositioninstruction
 type AVVideoCompositionInstruction struct {
 	foundation.NSObject
@@ -60,8 +62,11 @@ func (o *AVVideoCompositionInstruction) EnablePostProcessing() bool {
 
 // List of video track IDs required to compose frames for this instruction. The value of this property is computed from the layer instructions.
 func (o *AVVideoCompositionInstruction) RequiredSourceTrackIDs() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVVideoCompositionInstructionSelRequiredSourceTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionInstructionSelRequiredSourceTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // If the video composition result is one of the source frames for the duration of the instruction, this property returns the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source frame will be used instead. The value of this property is computed from the layer instructions
@@ -72,6 +77,9 @@ func (o *AVVideoCompositionInstruction) PassthroughTrackID() int32 {
 
 // List of track IDs for which sample data should be presented to the compositor for this instruction.
 func (o *AVVideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVVideoCompositionInstructionSelRequiredSourceSampleDataTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionInstructionSelRequiredSourceSampleDataTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

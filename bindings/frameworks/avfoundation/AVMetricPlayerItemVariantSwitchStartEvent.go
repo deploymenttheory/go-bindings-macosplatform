@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents when the player attempts a variant switch.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeritemvariantswitchstartevent
 type AVMetricPlayerItemVariantSwitchStartEvent struct {
 	AVMetricEvent
@@ -55,8 +57,11 @@ func (o *AVMetricPlayerItemVariantSwitchStartEvent) ToVariant() *AVAssetVariant 
 
 // This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 func (o *AVMetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelLoadedTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchStartEventSelLoadedTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // @property videoRendition @abstract Contains information corresponding to the currently selected video rendition.

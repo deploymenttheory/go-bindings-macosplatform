@@ -36,12 +36,15 @@ func MTRTargetNavigatorClusterTargetUpdatedEventFromID(id objc.ID) *MTRTargetNav
 }
 
 func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRTargetNavigatorClusterTargetUpdatedEventSelTargetList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterTargetUpdatedEventSelTargetList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRTargetNavigatorClusterTargetUpdatedEventSelSetTargetList, targetList)
+	o.Ptr().Send(_mTRTargetNavigatorClusterTargetUpdatedEventSelSetTargetList, targetList.Ptr())
 }
 
 func (o *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() *foundation.NSNumber {

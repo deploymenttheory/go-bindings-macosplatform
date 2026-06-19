@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores the clamp mask used by gradient arithmetic operators.
+//
 // CNNArithmeticGradientState wraps [raw.MPSCNNArithmeticGradientState] with a fluent Go API.
 type CNNArithmeticGradientState struct {
 	inner *raw.MPSCNNArithmeticGradientState

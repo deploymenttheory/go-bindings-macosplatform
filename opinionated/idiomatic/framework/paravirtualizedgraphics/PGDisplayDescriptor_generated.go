@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A descriptor for a virtual display.
+//
 // PGDisplayDescriptor wraps [raw.PGDisplayDescriptor] with a fluent Go API.
 type PGDisplayDescriptor struct {
 	inner *raw.PGDisplayDescriptor
@@ -38,7 +40,7 @@ func NewPGDisplayDescriptor() *PGDisplayDescriptor {
 	return &PGDisplayDescriptor{inner: raw.PGDisplayDescriptorFromID(_id)}
 }
 
-// @property name @abstract Client supplied name of display, as seen by guest. @discussion Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
+// The display’s name as seen in the guest operating environment.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithName(name string) *PGDisplayDescriptor {
@@ -46,7 +48,7 @@ func (x *PGDisplayDescriptor) WithName(name string) *PGDisplayDescriptor {
 	return x
 }
 
-// @property sizeInMillimeters @abstract Client supplied display size conveyed to guest compositor. @discussion Conveyed size contributes to guest compositor layout, but host-side VM app can scale to UI of its own choosing.
+// The size in millimeters of the virtual display.
 //
 // WithSizeInMillimeters sets the sizeInMillimeters property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithSizeInMillimeters(sizeInMillimeters corefoundation.CGSize) *PGDisplayDescriptor {
@@ -54,7 +56,7 @@ func (x *PGDisplayDescriptor) WithSizeInMillimeters(sizeInMillimeters corefounda
 	return x
 }
 
-// @property queue @abstract Client supplied dispatch_queue on which to invoke client supplied blocks. @discussion Typical client provides serial queue, and redispatches if beneficial to process out of order.
+// The queue that the framework uses when dispatching messages to any of the display’s registered handlers.
 //
 // WithQueue sets the queue property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithQueue(queue *foundation.NSObject) *PGDisplayDescriptor {
@@ -62,7 +64,7 @@ func (x *PGDisplayDescriptor) WithQueue(queue *foundation.NSObject) *PGDisplayDe
 	return x
 }
 
-// @property modeChangeHandler @abstract The block to invoke to handle display mode change. @discussion Handler invocation indicative of display mode change.
+// A handler that the framework calls to change the virtual display’s graphics mode.
 //
 // WithModeChangeHandler sets the modeChangeHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithModeChangeHandler(modeChangeHandler objc.Block) *PGDisplayDescriptor {
@@ -70,7 +72,7 @@ func (x *PGDisplayDescriptor) WithModeChangeHandler(modeChangeHandler objc.Block
 	return x
 }
 
-// @property newFrameEventHandler @abstract The block to invoke to handle notification of the presence of a new Guest compositor frame. @discussion Handler invocation indicates presence of new frame to be processed for display.  Only one of newFrameEventHandler or presentHandler may be non-nil.
+// A handler that the framework calls when the guest environment has a new frame to display.
 //
 // WithNewFrameEventHandler sets the newFrameEventHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithNewFrameEventHandler(newFrameEventHandler func()) *PGDisplayDescriptor {
@@ -78,7 +80,7 @@ func (x *PGDisplayDescriptor) WithNewFrameEventHandler(newFrameEventHandler func
 	return x
 }
 
-// @property cursorGlyphHandler @abstract The block to invoke to handle cursor glyph updates. @discussion Handler invocation indicative of new cursor image for display.  If this block is not set, cursor will be precomposited in presented image.
+// A handler that the framework calls to change the cursor’s appearance.
 //
 // WithCursorGlyphHandler sets the cursorGlyphHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithCursorGlyphHandler(cursorGlyphHandler objc.Block) *PGDisplayDescriptor {
@@ -86,7 +88,7 @@ func (x *PGDisplayDescriptor) WithCursorGlyphHandler(cursorGlyphHandler objc.Blo
 	return x
 }
 
-// @property cursorShowHandler @abstract The block to invoke to handle cursor show/hide updates. @discussion Handler invocation indicative of hide/show of cursor glyph.  If this block is not set, cursor will be precomposited in presented image.
+// A handler that the framework calls to change the cursor’s visibility.
 //
 // WithCursorShowHandler sets the cursorShowHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithCursorShowHandler(cursorShowHandler func(bool)) *PGDisplayDescriptor {

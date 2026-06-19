@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A mapping instance that specifies how to map an entity from a source to a destination managed object model.
+//
 // EntityMapping wraps [raw.NSEntityMapping] with a fluent Go API.
 type EntityMapping struct {
 	inner *raw.NSEntityMapping
@@ -38,42 +40,56 @@ func NewEntityMapping() *EntityMapping {
 	return &EntityMapping{inner: raw.NSEntityMappingFromID(_id)}
 }
 
+// The name of the entity mapping.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EntityMapping) WithName(name string) *EntityMapping {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The mapping type for the entity mapping.
+//
 // WithMappingType sets the mappingType property and returns the receiver for chaining.
 func (x *EntityMapping) WithMappingType(mappingType NSEntityMappingType) *EntityMapping {
 	x.inner.SetMappingType(raw.NSEntityMappingType(mappingType))
 	return x
 }
 
+// The source entity name for the entity mapping.
+//
 // WithSourceEntityName sets the sourceEntityName property and returns the receiver for chaining.
 func (x *EntityMapping) WithSourceEntityName(sourceEntityName string) *EntityMapping {
 	x.inner.SetSourceEntityName(foundation.NSStringStringWithUTF8String(sourceEntityName))
 	return x
 }
 
+// The version hash of the source entity for the entity mapping.
+//
 // WithSourceEntityVersionHash sets the sourceEntityVersionHash property and returns the receiver for chaining.
 func (x *EntityMapping) WithSourceEntityVersionHash(sourceEntityVersionHash *foundation.NSData) *EntityMapping {
 	x.inner.SetSourceEntityVersionHash(sourceEntityVersionHash)
 	return x
 }
 
+// The destination entity name for the entity mapping.
+//
 // WithDestinationEntityName sets the destinationEntityName property and returns the receiver for chaining.
 func (x *EntityMapping) WithDestinationEntityName(destinationEntityName string) *EntityMapping {
 	x.inner.SetDestinationEntityName(foundation.NSStringStringWithUTF8String(destinationEntityName))
 	return x
 }
 
+// The version hash for the destination entity for the entity mapping.
+//
 // WithDestinationEntityVersionHash sets the destinationEntityVersionHash property and returns the receiver for chaining.
 func (x *EntityMapping) WithDestinationEntityVersionHash(destinationEntityVersionHash *foundation.NSData) *EntityMapping {
 	x.inner.SetDestinationEntityVersionHash(destinationEntityVersionHash)
 	return x
 }
 
+// The array of attribute mappings for the entity mapping.
+//
 // WithAttributeMappings sets the collection, converting the Go slice to an NSArray.
 func (x *EntityMapping) WithAttributeMappings(items ...*raw.NSPropertyMapping) *EntityMapping {
 	if len(items) == 0 {
@@ -95,6 +111,8 @@ func (x *EntityMapping) WithAttributeMappings(items ...*raw.NSPropertyMapping) *
 	return x
 }
 
+// The array of relationship mappings for the entity mapping.
+//
 // WithRelationshipMappings sets the collection, converting the Go slice to an NSArray.
 func (x *EntityMapping) WithRelationshipMappings(items ...*raw.NSPropertyMapping) *EntityMapping {
 	if len(items) == 0 {
@@ -116,18 +134,24 @@ func (x *EntityMapping) WithRelationshipMappings(items ...*raw.NSPropertyMapping
 	return x
 }
 
+// The source expression for the entity mapping.
+//
 // WithSourceExpression sets the sourceExpression property and returns the receiver for chaining.
 func (x *EntityMapping) WithSourceExpression(sourceExpression *foundation.NSExpression) *EntityMapping {
 	x.inner.SetSourceExpression(sourceExpression)
 	return x
 }
 
+// The user info dictionary for the entity mapping.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *EntityMapping) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *EntityMapping {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
+// The class name of the migration policy for the entity mapping.
+//
 // WithEntityMigrationPolicyClassName sets the entityMigrationPolicyClassName property and returns the receiver for chaining.
 func (x *EntityMapping) WithEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) *EntityMapping {
 	x.inner.SetEntityMigrationPolicyClassName(foundation.NSStringStringWithUTF8String(entityMigrationPolicyClassName))

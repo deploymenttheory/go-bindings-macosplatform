@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient dilated max pooling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmaxgradient
 type MPSCNNDilatedPoolingMaxGradient struct {
 	mpsneuralnetwork.MPSCNNPoolingGradient

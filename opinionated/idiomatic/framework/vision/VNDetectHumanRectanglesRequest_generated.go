@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request that finds rectangular regions that contain people in an image.
+//
 // DetectHumanRectanglesRequest wraps [raw.VNDetectHumanRectanglesRequest] with a fluent Go API.
 type DetectHumanRectanglesRequest struct {
 	inner *raw.VNDetectHumanRectanglesRequest
@@ -36,7 +38,7 @@ func NewDetectHumanRectanglesRequest() *DetectHumanRectanglesRequest {
 	return &DetectHumanRectanglesRequest{inner: raw.VNDetectHumanRectanglesRequestFromID(_id)}
 }
 
-// @brief Boolean property to specify whether the human upper body or full body needs to be detected. The default is YES, meaning the request is setup to detect upper body only
+// A Boolean value that indicates whether the request requires detecting a full body or upper body only to produce a result.
 //
 // WithUpperBodyOnly sets the upperBodyOnly property and returns the receiver for chaining.
 func (x *DetectHumanRectanglesRequest) WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest {
@@ -44,7 +46,7 @@ func (x *DetectHumanRectanglesRequest) WithUpperBodyOnly(upperBodyOnly bool) *De
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectHumanRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanRectanglesRequest {
@@ -52,7 +54,7 @@ func (x *DetectHumanRectanglesRequest) WithRegionOfInterest(regionOfInterest cor
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectHumanRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanRectanglesRequest {
@@ -60,7 +62,7 @@ func (x *DetectHumanRectanglesRequest) WithPreferBackgroundProcessing(preferBack
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectHumanRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanRectanglesRequest {
@@ -68,7 +70,7 @@ func (x *DetectHumanRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *Detect
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectHumanRectanglesRequest) WithRevision(revision uint) *DetectHumanRectanglesRequest {

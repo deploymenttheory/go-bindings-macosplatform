@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A leaderboard for a game that Game Center stores.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkleaderboard
 type GKLeaderboard struct {
 	foundation.NSObject
@@ -72,7 +74,7 @@ func GKLeaderboardFromID(id objc.ID) *GKLeaderboard {
 	return o
 }
 
-// Loads classic and recurring leaderboards associated with the supplied App Store Connect leaderboard IDs. If leaderboardIDs is nil, this loads all classic and recurring leaderboards for this game.
+// Loads leaderboards for the specified leaderboard IDs that Game Center uses.
 func GKLeaderboardLoadLeaderboardsWithIDsCompletionHandler(leaderboardIDs *foundation.NSArray[*foundation.NSString], completionHandler func(*foundation.NSArray[*GKLeaderboard], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -84,10 +86,10 @@ func GKLeaderboardLoadLeaderboardsWithIDsCompletionHandler(leaderboardIDs *found
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsGKLeaderboard).Send(_gKLeaderboardSelLoadLeaderboardsWithIDsCompletionHandler, leaderboardIDs, __block_completionHandler)
+	objc.ID(_clsGKLeaderboard).Send(_gKLeaderboardSelLoadLeaderboardsWithIDsCompletionHandler, leaderboardIDs.Ptr(), __block_completionHandler)
 }
 
-// Loads the occurrence preceding this occurrence for a recurring leaderboard in which the local player submitted a score. If no previous occurrence is found that the player submitted a score to, then the most recent previous occurrence is returned.
+// Loads the previous recurring leaderboard occurrence that the player submits a score to.
 func (o *GKLeaderboard) LoadPreviousOccurrenceWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -99,7 +101,7 @@ func (o *GKLeaderboard) LoadPreviousOccurrenceWithCompletionHandler(completionHa
 	o.Ptr().Send(_gKLeaderboardSelLoadPreviousOccurrenceWithCompletionHandler, __block_completionHandler)
 }
 
-// Class method to submit a single score to multiple leaderboards score - earned by the player context - developer supplied metadata associated with the player's score player - the player for whom this score is being submitted leaderboardIDs - one or more leaderboard IDs defined in App Store Connect
+// Submits a score to multiple leaderboards.
 func GKLeaderboardSubmitScoreContextPlayerLeaderboardIDsCompletionHandler(score int, context_ uint, player *GKPlayer, leaderboardIDs *foundation.NSArray[*foundation.NSString], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -108,10 +110,10 @@ func GKLeaderboardSubmitScoreContextPlayerLeaderboardIDsCompletionHandler(score 
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsGKLeaderboard).Send(_gKLeaderboardSelSubmitScoreContextPlayerLeaderboardIDsCompletionHandler, score, context_, player.Ptr(), leaderboardIDs, __block_completionHandler)
+	objc.ID(_clsGKLeaderboard).Send(_gKLeaderboardSelSubmitScoreContextPlayerLeaderboardIDsCompletionHandler, score, context_, player.Ptr(), leaderboardIDs.Ptr(), __block_completionHandler)
 }
 
-// Instance method to submit a single score to the leaderboard associated with this instance score - earned by the player context - developer supplied metadata associated with the player's score player - the player for whom this score is being submitted
+// Submits a score to the leaderboard.
 func (o *GKLeaderboard) SubmitScoreContextPlayerCompletionHandler(score int, context_ uint, player *GKPlayer, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -123,7 +125,7 @@ func (o *GKLeaderboard) SubmitScoreContextPlayerCompletionHandler(score int, con
 	o.Ptr().Send(_gKLeaderboardSelSubmitScoreContextPlayerCompletionHandler, score, context_, player.Ptr(), __block_completionHandler)
 }
 
-// Loads leaderboard entries based on the supplied parameters. playerScope - Friends or Global timeScope - Today, Week, All Time (Only applicable to classic leaderboards) range - Range of ranked entries to return (minimum start index 1, maximum length 100) Upon completion, will return: localPlayerEntry - entry for the local player entries - requested entries matching supplied parameters totalPlayerCount - total player count matching specified scope
+// Returns the scores for the local player and other players for the specified type of player, time period, and ranks.
 func (o *GKLeaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*GKLeaderboardEntry], int, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -138,7 +140,7 @@ func (o *GKLeaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler
 	o.Ptr().Send(_gKLeaderboardSelLoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler, playerScope, timeScope, range_, __block_completionHandler)
 }
 
-// Loads leaderboard entries for specific players based on the supplied parameters. players - Array of players to load entries for timeScope - Today, Week, All Time (Only applicable to classic leaderboards) Upon completion, will return: localPlayerEntry - entry for the local player entries - requested entries matching supplied parameters
+// Returns the scores for the local player and other players for the specified time period.
 func (o *GKLeaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*GKPlayer], timeScope GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*GKLeaderboardEntry], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -236,8 +238,11 @@ func (o *GKLeaderboard) ActivityIdentifier() *foundation.NSString {
 
 // The properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.
 func (o *GKLeaderboard) ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _gKLeaderboardSelActivityProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelActivityProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 // A Boolean value that indicates whether the current leaderboard isn't visible in Game Center views. You can still submit scores to a hidden leaderboard.
@@ -248,7 +253,7 @@ func (o *GKLeaderboard) IsHidden() bool {
 
 // Deprecated: since macOS 10.10.
 func (o *GKLeaderboard) InitWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) *GKLeaderboard {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelInitWithPlayerIDs, playerIDs)
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSelInitWithPlayerIDs, playerIDs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -256,8 +261,21 @@ func (o *GKLeaderboard) InitWithPlayerIDs(playerIDs *foundation.NSArray[*foundat
 }
 
 // Deprecated: since macOS 10.9.
-func GKLeaderboardLoadCategoriesWithCompletionHandler(completionHandler objc.Block) {
-	objc.ID(_clsGKLeaderboard).Send(_gKLeaderboardSelLoadCategoriesWithCompletionHandler, completionHandler)
+func GKLeaderboardLoadCategoriesWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0), foundation.NSArrayFromID[*foundation.NSString](blockParam1), blockParam2)
+		})
+		defer __block_completionHandler.Release()
+	}
+	objc.ID(_clsGKLeaderboard).Send(_gKLeaderboardSelLoadCategoriesWithCompletionHandler, __block_completionHandler)
 }
 
 // Deprecated: since macOS 10.10.
@@ -422,7 +440,7 @@ func (o *GKLeaderboard) IsLoading() bool {
 	return _ret
 }
 
-// Asynchronously load the image. Error will be nil on success.
+// Loads the image for the leaderboard.
 func (o *GKLeaderboard) LoadImageWithCompletionHandler(completionHandler func(*appkit.NSImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

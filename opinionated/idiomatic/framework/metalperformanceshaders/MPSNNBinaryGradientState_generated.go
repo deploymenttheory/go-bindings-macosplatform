@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing the state of a gradient binary kernel when it was encoded.
+//
 // NNBinaryGradientState wraps [raw.MPSNNBinaryGradientState] with a fluent Go API.
 type NNBinaryGradientState struct {
 	inner *raw.MPSNNBinaryGradientState

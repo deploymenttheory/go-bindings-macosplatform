@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// PDFPage, a subclass of NSObject, defines methods used to render PDF pages and work with annotations, text, and selections.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfpage
 type PDFPage struct {
 	foundation.NSObject
@@ -74,13 +76,14 @@ func (o *PDFPage) Init() *PDFPage {
 }
 
 func (o *PDFPage) InitWithImageOptions(image *appkit.NSImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PDFPage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelInitWithImageOptions, image.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelInitWithImageOptions, image.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PDFPageFromID(_ret)
 }
 
+// Creates a new PDFPage object and initializes it with the specified NSImage object.
 func (o *PDFPage) InitWithImage(image *appkit.NSImage) *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelInitWithImage, image.Ptr())
 	if _ret != 0 {
@@ -89,23 +92,28 @@ func (o *PDFPage) InitWithImage(image *appkit.NSImage) *PDFPage {
 	return PDFPageFromID(_ret)
 }
 
+// Returns the bounds for the specified PDF display box.
 func (o *PDFPage) BoundsForBox(box PDFDisplayBox) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFPageSelBoundsForBox, box)
 	return _ret
 }
 
+// Sets the bounds for the specified box.
 func (o *PDFPage) SetBoundsForBox(bounds corefoundation.CGRect, box PDFDisplayBox) {
 	o.Ptr().Send(_pDFPageSelSetBoundsForBox, bounds, box)
 }
 
+// Adds the specified annotation object to the page.
 func (o *PDFPage) AddAnnotation(annotation *PDFAnnotation) {
 	o.Ptr().Send(_pDFPageSelAddAnnotation, annotation.Ptr())
 }
 
+// Removes the specified annotation from the page.
 func (o *PDFPage) RemoveAnnotation(annotation *PDFAnnotation) {
 	o.Ptr().Send(_pDFPageSelRemoveAnnotation, annotation.Ptr())
 }
 
+// Returns the annotation, if there is one, at the specified point.
 func (o *PDFPage) AnnotationAtPoint(point corefoundation.CGPoint) *PDFAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelAnnotationAtPoint, point)
 	if _ret != 0 {
@@ -135,16 +143,19 @@ func (o *PDFPage) ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDispl
 	return appkit.NSImageFromID(_ret)
 }
 
+// Returns the bounds, in page space, of the character at the specified index.
 func (o *PDFPage) CharacterBoundsAtIndex(index int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFPageSelCharacterBoundsAtIndex, index)
 	return _ret
 }
 
+// Returns the character index value for the specified point in page space.
 func (o *PDFPage) CharacterIndexAtPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _pDFPageSelCharacterIndexAtPoint, point)
 	return _ret
 }
 
+// Returns the text enclosed within the specified rectangle, expressed in page (user) coordinates.
 func (o *PDFPage) SelectionForRect(rect corefoundation.CGRect) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForRect, rect)
 	if _ret != 0 {
@@ -153,6 +164,7 @@ func (o *PDFPage) SelectionForRect(rect corefoundation.CGRect) *PDFSelection {
 	return PDFSelectionFromID(_ret)
 }
 
+// Returns the whole word that includes the specified point.
 func (o *PDFPage) SelectionForWordAtPoint(point corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForWordAtPoint, point)
 	if _ret != 0 {
@@ -161,6 +173,7 @@ func (o *PDFPage) SelectionForWordAtPoint(point corefoundation.CGPoint) *PDFSele
 	return PDFSelectionFromID(_ret)
 }
 
+// Returns the whole line of text that includes the specified point.
 func (o *PDFPage) SelectionForLineAtPoint(point corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForLineAtPoint, point)
 	if _ret != 0 {
@@ -169,6 +182,7 @@ func (o *PDFPage) SelectionForLineAtPoint(point corefoundation.CGPoint) *PDFSele
 	return PDFSelectionFromID(_ret)
 }
 
+// Returns the text between the two specified points in page space.
 func (o *PDFPage) SelectionFromPointToPoint(startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionFromPointToPoint, startPoint, endPoint)
 	if _ret != 0 {
@@ -177,6 +191,7 @@ func (o *PDFPage) SelectionFromPointToPoint(startPoint corefoundation.CGPoint, e
 	return PDFSelectionFromID(_ret)
 }
 
+// Returns the text contained within the specified range.
 func (o *PDFPage) SelectionForRange(range_ foundation.NSRange) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForRange, range_)
 	if _ret != 0 {
@@ -261,10 +276,12 @@ func (o *PDFPage) DataRepresentation() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Draws the page within the specified box.
 func (o *PDFPage) DrawWithBox(box PDFDisplayBox) {
 	o.Ptr().Send(_pDFPageSelDrawWithBox, box)
 }
 
+// Transforms the current context, given the specified box.
 func (o *PDFPage) TransformContextForBox2(box PDFDisplayBox) {
 	o.Ptr().Send(_pDFPageSelTransformContextForBox, box)
 }

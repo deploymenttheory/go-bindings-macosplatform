@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "framework": "ExternalAccessory",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "EAAccessory": {
+      "doc": "An object that contains information about a single, connected hardware accessory.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory"
+    },
+    "EAAccessoryManager": {
+      "doc": "The object you use to identify connected accessories, and begin delivery of connection and disconnection notifications.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager"
+    },
+    "EASession": {
+      "doc": "The object you use to manage communications between your app and a connected hardware accessory.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/easession"
+    },
+    "EAWiFiUnconfiguredAccessory": {
+      "doc": "An object that provides information about an unconfigured MFi Wireless Accessory Configuration accessory.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory"
+    },
+    "EAWiFiUnconfiguredAccessoryBrowser": {
+      "doc": "An object you use to scan for wireless accessories and configure them for use with the user’s app.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser"
+    }
+  },
+  "protocols": {
+    "EAAccessoryDelegate": {
+      "doc": "A protocol that defines an optional method for receiving notifications when the associated accessory object is disconnected.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorydelegate"
+    },
+    "EAWiFiUnconfiguredAccessoryBrowserDelegate": {
+      "doc": "A protocol you use to manage the search and configuration processes for an unconfigured accessory browser.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserdelegate"
+    }
+  },
+  "enums": {
+    "EABluetoothAccessoryPickerErrorCode": {
+      "doc": "The error codes that may be passed in an error object for the Bluetooth picker completion block.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eabluetoothaccessorypickererrorcode"
+    },
+    "EAWiFiUnconfiguredAccessoryBrowserState": {
+      "doc": "The possible states of an accessory browser.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserstate",
+      "members": {
+        "EAWiFiUnconfiguredAccessoryBrowserStateConfiguring": {
+          "doc": "The browser is actively configuring an accessory.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserstate/configuring"
+        },
+        "EAWiFiUnconfiguredAccessoryBrowserStateSearching": {
+          "doc": "The browser is actively searching for unconfigured accessory.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserstate/searching"
+        },
+        "EAWiFiUnconfiguredAccessoryBrowserStateStopped": {
+          "doc": "The browser is not actively searching for unconfigured accessories.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserstate/stopped"
+        },
+        "EAWiFiUnconfiguredAccessoryBrowserStateWiFiUnavailable": {
+          "doc": "Wi-Fi is unavailable, typically because the user has placed the device in Airplane Mode or explicitly turned off Wi-Fi.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowserstate/wifiunavailable"
+        }
+      }
+    },
+    "EAWiFiUnconfiguredAccessoryConfigurationStatus": {
+      "doc": "Values that represent the state of the configuration process for an EAWiFiUnconfiguredAccessory object.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryconfigurationstatus",
+      "members": {
+        "EAWiFiUnconfiguredAccessoryConfigurationStatusFailed": {
+          "doc": "The configuration failed.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryconfigurationstatus/failed"
+        },
+        "EAWiFiUnconfiguredAccessoryConfigurationStatusSuccess": {
+          "doc": "The configuration of the accessory succeeded.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryconfigurationstatus/success"
+        },
+        "EAWiFiUnconfiguredAccessoryConfigurationStatusUserCancelledConfiguration": {
+          "doc": "The user cancelled the configuration process.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryconfigurationstatus/usercancelledconfiguration"
+        }
+      }
+    },
+    "EAWiFiUnconfiguredAccessoryProperties": {
+      "doc": "Options that can be combined using the C bitwise OR operator to represent the properties of an unconfigured accessory.",
+      "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryproperties",
+      "members": {
+        "EAWiFiUnconfiguredAccessoryPropertySupportsAirPlay": {
+          "doc": "The accessory indicates that it supports AirPlay.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryproperties/propertysupportsairplay"
+        },
+        "EAWiFiUnconfiguredAccessoryPropertySupportsAirPrint": {
+          "doc": "The accessory indicates that it supports AirPrint.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryproperties/propertysupportsairprint"
+        },
+        "EAWiFiUnconfiguredAccessoryPropertySupportsHomeKit": {
+          "doc": "The accessory indicates that it supports HomeKit.",
+          "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessoryproperties/propertysupportshomekit"
+        }
+      }
+    }
+  },
+  "methods": {
+    "EAAccessoryManager": {
+      "+sharedAccessoryManager": {
+        "doc": "Returns the shared accessory manager object for the iOS-based device.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager/shared()"
+      },
+      "-registerForLocalNotifications": {
+        "doc": "Begins the delivery of accessory-related notifications to the current application.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager/registerforlocalnotifications()"
+      },
+      "-showBluetoothAccessoryPickerWithNameFilter:completion:": {
+        "doc": "Displays an alert that allows the user to pair the device with a Bluetooth accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager/showbluetoothaccessorypicker(withnamefilter:completion:)"
+      },
+      "-unregisterForLocalNotifications": {
+        "doc": "Stops the delivery of accessory-related notifications to the current application.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager/unregisterforlocalnotifications()"
+      }
+    },
+    "EASession": {
+      "-initWithAccessory:forProtocol:": {
+        "doc": "Initializes the session for the specified accessory and protocol.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/easession/init(accessory:forprotocol:)"
+      }
+    },
+    "EAWiFiUnconfiguredAccessoryBrowser": {
+      "-configureAccessory:withConfigurationUIOnViewController:": {
+        "doc": "Begins the configuration process for the specified accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser/configureaccessory(_:withconfigurationuion:)"
+      },
+      "-initWithDelegate:queue:": {
+        "doc": "Creates a browser object that scans for unconfigured accessories.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser/init(delegate:queue:)"
+      },
+      "-startSearchingForUnconfiguredAccessoriesMatchingPredicate:": {
+        "doc": "Starts the search for unconfigured accessories that match the specified predicate.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser/startsearchingforunconfiguredaccessories(matching:)"
+      },
+      "-stopSearchingForUnconfiguredAccessories": {
+        "doc": "Stops the search for unconfigured accessories.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser/stopsearchingforunconfiguredaccessories()"
+      }
+    }
+  },
+  "properties": {
+    "EAAccessory": {
+      "connected": {
+        "doc": "A Boolean value indicating whether the accessory is currently connected to the iOS-based device.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/isconnected"
+      },
+      "connectionID": {
+        "doc": "The accessory’s unique ID for connecting to the iOS-based device.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/connectionid"
+      },
+      "delegate": {
+        "doc": "The object that acts as the delegate of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/delegate"
+      },
+      "firmwareRevision": {
+        "doc": "The current firmware version for the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/firmwarerevision"
+      },
+      "hardwareRevision": {
+        "doc": "The hardware version of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/hardwarerevision"
+      },
+      "manufacturer": {
+        "doc": "The name of the accessory’s manufacturer.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/manufacturer"
+      },
+      "modelNumber": {
+        "doc": "The model information for the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/modelnumber"
+      },
+      "name": {
+        "doc": "The display name of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/name"
+      },
+      "protocolStrings": {
+        "doc": "The communication protocols supported by the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/protocolstrings"
+      },
+      "serialNumber": {
+        "doc": "The serial number of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessory/serialnumber"
+      }
+    },
+    "EAAccessoryManager": {
+      "connectedAccessories": {
+        "doc": "The accessory objects corresponding to the list of currently connected accessories.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eaaccessorymanager/connectedaccessories"
+      }
+    },
+    "EASession": {
+      "accessory": {
+        "doc": "The accessory attached to the session.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/easession/accessory"
+      },
+      "inputStream": {
+        "doc": "The stream to use for receiving data from the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/easession/inputstream"
+      },
+      "outputStream": {
+        "doc": "The stream to use for sending data to the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/easession/outputstream"
+      },
+      "protocolString": {
+        "doc": "The protocol being used for communication with the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/easession/protocolstring"
+      }
+    },
+    "EAWiFiUnconfiguredAccessory": {
+      "macAddress": {
+        "doc": "The primary MAC address of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory/macaddress"
+      },
+      "manufacturer": {
+        "doc": "The name of the accessory’s manufacturer.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory/manufacturer"
+      },
+      "model": {
+        "doc": "The model name of accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory/model"
+      },
+      "name": {
+        "doc": "The name of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory/name"
+      },
+      "properties": {
+        "doc": "The properties the accessory supports.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory/properties"
+      },
+      "ssid": {
+        "doc": "The Wi-Fi SSID of the accessory.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessory/ssid"
+      }
+    },
+    "EAWiFiUnconfiguredAccessoryBrowser": {
+      "delegate": {
+        "doc": "The object that acts as the delegate of the browser and receives browser events.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser/delegate"
+      },
+      "unconfiguredAccessories": {
+        "doc": "The set of unconfigured accessories that have been discovered.",
+        "url": "https://developer.apple.com/documentation/externalaccessory/eawifiunconfiguredaccessorybrowser/unconfiguredaccessories"
+      }
+    }
+  }
+}

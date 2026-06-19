@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that displays a color value and lets the user change that color value.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorwell
 type NSColorWell struct {
 	NSControl
@@ -51,6 +53,7 @@ func NSColorWellFromID(id objc.ID) *NSColorWell {
 	return o
 }
 
+// Creates a color well that adopts the specified appearance style.
 func NSColorWellColorWellWithStyle(style NSColorWellStyle) *NSColorWell {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorWell), _nSColorWellSelColorWellWithStyle, style)
 	if _ret != 0 {
@@ -59,18 +62,22 @@ func NSColorWellColorWellWithStyle(style NSColorWellStyle) *NSColorWell {
 	return NSColorWellFromID(_ret)
 }
 
+// Deactivates the color well.
 func (o *NSColorWell) Deactivate() {
 	o.Ptr().Send(_nSColorWellSelDeactivate)
 }
 
+// Activates the color well, displays the color panel, and synchronizes the two UI elements.
 func (o *NSColorWell) Activate(exclusive bool) {
 	o.Ptr().Send(_nSColorWellSelActivate, exclusive)
 }
 
+// Draws the area inside the color well at the specified location without drawing borders.
 func (o *NSColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSColorWellSelDrawWellInside, insideRect)
 }
 
+// Changes the currently selected color to the color of the specified object.
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) TakeColorFrom(sender objc.ID) {
 	o.Ptr().Send(_nSColorWellSelTakeColorFrom, sender)

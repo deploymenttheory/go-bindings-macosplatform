@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Settings for an IKEv2 VPN configuration.
+//
 // NEVPNProtocolIKEv2 wraps [raw.NEVPNProtocolIKEv2] with a fluent Go API.
 type NEVPNProtocolIKEv2 struct {
 	inner *raw.NEVPNProtocolIKEv2
@@ -37,7 +39,7 @@ func NewNEVPNProtocolIKEv2() *NEVPNProtocolIKEv2 {
 	return &NEVPNProtocolIKEv2{inner: raw.NEVPNProtocolIKEv2FromID(_id)}
 }
 
-// @property deadPeerDetectionRate @discussion How frequently the IKEv2 client will run the dead peer detection algorithm.  Default is NEVPNIKEv2DeadPeerDetectionRateMedium.
+// The frequency at which the IKEv2 client will run the dead peer detection algorithm.
 //
 // WithDeadPeerDetectionRate sets the deadPeerDetectionRate property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate) *NEVPNProtocolIKEv2 {
@@ -45,7 +47,7 @@ func (x *NEVPNProtocolIKEv2) WithDeadPeerDetectionRate(deadPeerDetectionRate NEV
 	return x
 }
 
-// @property serverCertificateIssuerCommonName @discussion A string containing the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server's certificate.
+// A string containing the value of the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server’s certificate.
 //
 // WithServerCertificateIssuerCommonName sets the serverCertificateIssuerCommonName property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithServerCertificateIssuerCommonName(serverCertificateIssuerCommonName string) *NEVPNProtocolIKEv2 {
@@ -53,7 +55,7 @@ func (x *NEVPNProtocolIKEv2) WithServerCertificateIssuerCommonName(serverCertifi
 	return x
 }
 
-// @property serverCertificateCommonName @discussion A string containing the value to verify in the IKEv2 server certificate's Subject Common Name field.
+// A string containing the value of the Subject Common Name field of the IKEv2 server’s certificate.
 //
 // WithServerCertificateCommonName sets the serverCertificateCommonName property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithServerCertificateCommonName(serverCertificateCommonName string) *NEVPNProtocolIKEv2 {
@@ -61,7 +63,7 @@ func (x *NEVPNProtocolIKEv2) WithServerCertificateCommonName(serverCertificateCo
 	return x
 }
 
-// @property certificateType @discussion contains the type of certificate if an certificate is configured.  Default is RSA.
+// The type of the certificate in the identity configured in identityReference or identityData.
 //
 // WithCertificateType sets the certificateType property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithCertificateType(certificateType NEVPNIKEv2CertificateType) *NEVPNProtocolIKEv2 {
@@ -69,7 +71,7 @@ func (x *NEVPNProtocolIKEv2) WithCertificateType(certificateType NEVPNIKEv2Certi
 	return x
 }
 
-// @property useConfigurationAttributeInternalIPSubnet @discussion Boolean indicating if client should use INTERNAL_IP4_SUBNET / INTERNAL_IP6_SUBNET attributes.  Default is False.
+// A Boolean indicating whether or not the IKEv2 client should use the INTERNAL_IP4_SUBNET and/or INTERNAL_IP6_SUBNET attributes sent by the IKEv2 server.
 //
 // WithUseConfigurationAttributeInternalIPSubnet sets the useConfigurationAttributeInternalIPSubnet property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithUseConfigurationAttributeInternalIPSubnet(useConfigurationAttributeInternalIPSubnet bool) *NEVPNProtocolIKEv2 {
@@ -77,7 +79,7 @@ func (x *NEVPNProtocolIKEv2) WithUseConfigurationAttributeInternalIPSubnet(useCo
 	return x
 }
 
-// @property disableMOBIKE @discussion Disable MOBIKE negotiation. Default is NO.
+// A Boolean indicating whether or not MOBIKE should be disabled for the IKEv2 sessions.
 //
 // WithDisableMOBIKE sets the disableMOBIKE property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithDisableMOBIKE(disableMOBIKE bool) *NEVPNProtocolIKEv2 {
@@ -85,7 +87,7 @@ func (x *NEVPNProtocolIKEv2) WithDisableMOBIKE(disableMOBIKE bool) *NEVPNProtoco
 	return x
 }
 
-// @property disableRedirect @discussion Disable Server Redirect. Default is NO.
+// A Boolean indicating whether or not IKEv2 server redirects are disabled.
 //
 // WithDisableRedirect sets the disableRedirect property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithDisableRedirect(disableRedirect bool) *NEVPNProtocolIKEv2 {
@@ -93,7 +95,7 @@ func (x *NEVPNProtocolIKEv2) WithDisableRedirect(disableRedirect bool) *NEVPNPro
 	return x
 }
 
-// @property enablePFS @discussion Enable Perfect Forward Secrecy. Default is NO.
+// A Boolean indicating whether or not Perfect Forward Secrecy is enabled.
 //
 // WithEnablePFS sets the enablePFS property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithEnablePFS(enablePFS bool) *NEVPNProtocolIKEv2 {
@@ -101,7 +103,7 @@ func (x *NEVPNProtocolIKEv2) WithEnablePFS(enablePFS bool) *NEVPNProtocolIKEv2 {
 	return x
 }
 
-// @property allowPostQuantumKeyExchangeFallback @discussion Allow servers that do not support post-quantum key exchanges to skip them. This property has no effect if no post-quantum key exchange methods are configured for the IKE SA or Child SA (see NEVPNIKEv2SecurityAssociationParameters.postQuantumKeyExchangeMethods). Default is NO.
+// A Boolean value that indicates whether servers that don’t support post-quantum key exchanges can skip them.
 //
 // WithAllowPostQuantumKeyExchangeFallback sets the allowPostQuantumKeyExchangeFallback property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithAllowPostQuantumKeyExchangeFallback(allowPostQuantumKeyExchangeFallback bool) *NEVPNProtocolIKEv2 {
@@ -109,7 +111,7 @@ func (x *NEVPNProtocolIKEv2) WithAllowPostQuantumKeyExchangeFallback(allowPostQu
 	return x
 }
 
-// @property enableRevocationCheck @discussion Enable certificate revocation check. Default is NO.
+// Enable revocation checking of the IKEv2 server certificate.
 //
 // WithEnableRevocationCheck sets the enableRevocationCheck property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithEnableRevocationCheck(enableRevocationCheck bool) *NEVPNProtocolIKEv2 {
@@ -117,7 +119,7 @@ func (x *NEVPNProtocolIKEv2) WithEnableRevocationCheck(enableRevocationCheck boo
 	return x
 }
 
-// @property strictRevocationCheck @discussion Require positive certificate revocation check response for peer certificate validation to pass. Default is NO.
+// Require a “not revoked” result when checking if the certificate identifying the server is revoked.
 //
 // WithStrictRevocationCheck sets the strictRevocationCheck property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithStrictRevocationCheck(strictRevocationCheck bool) *NEVPNProtocolIKEv2 {
@@ -125,7 +127,7 @@ func (x *NEVPNProtocolIKEv2) WithStrictRevocationCheck(strictRevocationCheck boo
 	return x
 }
 
-// @property minimumTLSVersion @discussion Sets a minimum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
+// The minimum TLS version to allow for EAP-TLS authentication.
 //
 // WithMinimumTLSVersion sets the minimumTLSVersion property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
@@ -133,7 +135,7 @@ func (x *NEVPNProtocolIKEv2) WithMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2T
 	return x
 }
 
-// @property maximumTLSVersion @discussion Sets a maximum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
+// The minimum TLS version to allow for EAP-TLS authentication.
 //
 // WithMaximumTLSVersion sets the maximumTLSVersion property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
@@ -141,7 +143,7 @@ func (x *NEVPNProtocolIKEv2) WithMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2T
 	return x
 }
 
-// @property mtu @discussion Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
+// The Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
 //
 // WithMtu sets the mtu property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithMtu(mtu uint) *NEVPNProtocolIKEv2 {
@@ -149,7 +151,7 @@ func (x *NEVPNProtocolIKEv2) WithMtu(mtu uint) *NEVPNProtocolIKEv2 {
 	return x
 }
 
-// @property ppkConfiguration @discussion Configuration for the use of a Post-quantum Pre-shared Key (PPK).
+// The configuration for a post-quantum pre-shared key (PPK).
 //
 // WithPpkConfiguration sets the ppkConfiguration property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2 {
@@ -157,7 +159,7 @@ func (x *NEVPNProtocolIKEv2) WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PP
 	return x
 }
 
-// @property authenticationMethod @discussion The method used to authenticate with the IPSec server. Note that if this property is set to NEVPNIKEAuthenticationMethodNone, extended authentication will still be negotiated if useExtendedAuthentication is set to YES.
+// The method used to authenticate the device with the IPSec server. For IKE version 2, when using extended authentication, this authentication method only affects how the client validates the authentication payload presented by the server.
 //
 // WithAuthenticationMethod sets the authenticationMethod property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2 {
@@ -165,7 +167,7 @@ func (x *NEVPNProtocolIKEv2) WithAuthenticationMethod(authenticationMethod NEVPN
 	return x
 }
 
-// @property useExtendedAuthentication @discussion A flag indicating if extended authentication will be negotiated. This authentication is in addition to the IKE authentication used to authenticate the endpoints of the IKE session. For IKE version 1, when this flag is set X-Auth authentication will be negotiated as part of the IKE session, using the username and password properties as the credential. For IKE version 2, when this flag is set EAP authentication will be negotiated as part of the IKE session, using the username, password, and/or identity properties as the credential depending on which EAP method the server requires.
+// A flag indicating if extended authentication will be negotiated.
 //
 // WithUseExtendedAuthentication sets the useExtendedAuthentication property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIKEv2 {
@@ -173,7 +175,7 @@ func (x *NEVPNProtocolIKEv2) WithUseExtendedAuthentication(useExtendedAuthentica
 	return x
 }
 
-// @property sharedSecretReference @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the IKE shared secret.
+// A persistent keychain reference to a keychain item containing the IKE shared secret.
 //
 // WithSharedSecretReference sets the sharedSecretReference property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIKEv2 {
@@ -181,7 +183,7 @@ func (x *NEVPNProtocolIKEv2) WithSharedSecretReference(sharedSecretReference *fo
 	return x
 }
 
-// @property localIdentifier @discussion A string identifying the local IPSec endpoint for authentication purposes.
+// A string identifying the iOS or macOS device for authentication purposes
 //
 // WithLocalIdentifier sets the localIdentifier property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIKEv2 {
@@ -189,7 +191,7 @@ func (x *NEVPNProtocolIKEv2) WithLocalIdentifier(localIdentifier string) *NEVPNP
 	return x
 }
 
-// @property remoteIdentifier @discussion A string identifying the remote IPSec endpoint for authentication purposes.
+// A string identifying the IPSec server for authentication purposes
 //
 // WithRemoteIdentifier sets the remoteIdentifier property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithRemoteIdentifier(remoteIdentifier string) *NEVPNProtocolIKEv2 {
@@ -197,7 +199,7 @@ func (x *NEVPNProtocolIKEv2) WithRemoteIdentifier(remoteIdentifier string) *NEVP
 	return x
 }
 
-// @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
+// The address of the VPN server.
 //
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithServerAddress(serverAddress string) *NEVPNProtocolIKEv2 {
@@ -205,7 +207,7 @@ func (x *NEVPNProtocolIKEv2) WithServerAddress(serverAddress string) *NEVPNProto
 	return x
 }
 
-// @property username @discussion The username component of the VPN authentication credential.
+// The user name component of the tunneling protocol authentication credential.
 //
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithUsername(username string) *NEVPNProtocolIKEv2 {
@@ -213,7 +215,7 @@ func (x *NEVPNProtocolIKEv2) WithUsername(username string) *NEVPNProtocolIKEv2 {
 	return x
 }
 
-// @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
+// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
 //
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocolIKEv2 {
@@ -221,7 +223,7 @@ func (x *NEVPNProtocolIKEv2) WithPasswordReference(passwordReference *foundation
 	return x
 }
 
-// @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
+// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
 //
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocolIKEv2 {
@@ -229,7 +231,7 @@ func (x *NEVPNProtocolIKEv2) WithIdentityReference(identityReference *foundation
 	return x
 }
 
-// @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
+// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
 //
 // WithIdentityData sets the identityData property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithIdentityData(identityData *foundation.NSData) *NEVPNProtocolIKEv2 {
@@ -237,7 +239,7 @@ func (x *NEVPNProtocolIKEv2) WithIdentityData(identityData *foundation.NSData) *
 	return x
 }
 
-// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+// The password for the PKCS12 tunneling protocol authentication credentials.
 //
 // WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIKEv2 {
@@ -245,7 +247,7 @@ func (x *NEVPNProtocolIKEv2) WithIdentityDataPassword(identityDataPassword strin
 	return x
 }
 
-// @property disconnectOnSleep @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
+// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
 //
 // WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIKEv2 {
@@ -253,7 +255,7 @@ func (x *NEVPNProtocolIKEv2) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVP
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
+// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIKEv2 {
@@ -261,7 +263,7 @@ func (x *NEVPNProtocolIKEv2) WithProxySettings(proxySettings *NEProxySettings) *
 	return x
 }
 
-// @property includeAllNetworks @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
+// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
 //
 // WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIKEv2 {
@@ -269,7 +271,7 @@ func (x *NEVPNProtocolIKEv2) WithIncludeAllNetworks(includeAllNetworks bool) *NE
 	return x
 }
 
-// @property excludeLocalNetworks @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
+// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 //
 // WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIKEv2 {
@@ -277,7 +279,7 @@ func (x *NEVPNProtocolIKEv2) WithExcludeLocalNetworks(excludeLocalNetworks bool)
 	return x
 }
 
-// @property excludeCellularServices @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 //
 // WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIKEv2 {
@@ -285,7 +287,7 @@ func (x *NEVPNProtocolIKEv2) WithExcludeCellularServices(excludeCellularServices
 	return x
 }
 
-// @property excludeAPNs @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 //
 // WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIKEv2 {
@@ -301,7 +303,7 @@ func (x *NEVPNProtocolIKEv2) WithExcludeDeviceCommunication(excludeDeviceCommuni
 	return x
 }
 
-// @property enforceRoutes @discussion If YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
+// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 //
 // WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
 func (x *NEVPNProtocolIKEv2) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIKEv2 {

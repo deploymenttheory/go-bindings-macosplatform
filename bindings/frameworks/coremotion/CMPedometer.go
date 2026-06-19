@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for fetching the system-generated live walking data.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmpedometer
 type CMPedometer struct {
 	foundation.NSObject
@@ -38,26 +40,31 @@ func CMPedometerFromID(id objc.ID) *CMPedometer {
 	return o
 }
 
+// Returns a Boolean value indicating whether step counting is available on the current device.
 func CMPedometerIsStepCountingAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCMPedometer), _cMPedometerSelIsStepCountingAvailable)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether distance estimation is available on the current device.
 func CMPedometerIsDistanceAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCMPedometer), _cMPedometerSelIsDistanceAvailable)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether floor counting is available on the current device.
 func CMPedometerIsFloorCountingAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCMPedometer), _cMPedometerSelIsFloorCountingAvailable)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether pace information is available on the current device.
 func CMPedometerIsPaceAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCMPedometer), _cMPedometerSelIsPaceAvailable)
 	return _ret
 }
 
+// Retrieves the data between the specified start and end dates.
 func (o *CMPedometer) QueryPedometerDataFromDateToDateWithHandler(start *foundation.NSDate, end *foundation.NSDate, handler func(*CMPedometerData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -72,6 +79,7 @@ func (o *CMPedometer) QueryPedometerDataFromDateToDateWithHandler(start *foundat
 	o.Ptr().Send(_cMPedometerSelQueryPedometerDataFromDateToDateWithHandler, start.Ptr(), end.Ptr(), __block_handler)
 }
 
+// Starts the delivery of recent pedestrian-related data to your app.
 func (o *CMPedometer) StartPedometerUpdatesFromDateWithHandler(start *foundation.NSDate, handler func(*CMPedometerData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -86,6 +94,7 @@ func (o *CMPedometer) StartPedometerUpdatesFromDateWithHandler(start *foundation
 	o.Ptr().Send(_cMPedometerSelStartPedometerUpdatesFromDateWithHandler, start.Ptr(), __block_handler)
 }
 
+// Stops the delivery of recent pedestrian data updates to your app.
 func (o *CMPedometer) StopPedometerUpdates() {
 	o.Ptr().Send(_cMPedometerSelStopPedometerUpdates)
 }

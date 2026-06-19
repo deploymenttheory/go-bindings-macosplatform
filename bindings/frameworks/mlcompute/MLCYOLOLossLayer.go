@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that estimates loss for the YOLO algorithm.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcyololosslayer
 type MLCYOLOLossLayer struct {
 	MLCLossLayer
@@ -30,7 +32,7 @@ func MLCYOLOLossLayerFromID(id objc.ID) *MLCYOLOLossLayer {
 	return o
 }
 
-// @abstract   Create a YOLO loss layer @param      lossDescriptor          The loss descriptor @return     A new YOLO loss layer.
+// Creates a YOLO loss layer with the descriptor you specify.
 func MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor *MLCYOLOLossDescriptor) *MLCYOLOLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCYOLOLossLayer), _mLCYOLOLossLayerSelLayerWithDescriptor, lossDescriptor.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A nearest spatial upsampling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearest
 type MPSCNNUpsamplingNearest struct {
 	mpsneuralnetwork.MPSCNNUpsampling
@@ -31,7 +33,7 @@ func MPSCNNUpsamplingNearestFromID(id objc.ID) *MPSCNNUpsamplingNearest {
 	return o
 }
 
-// @abstract  Initialize the nearest spatial upsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The upsampling factor for the x dimension. @param     integerScaleFactorY      The upsampling factor for the y dimension. @return    A valid MPSCNNUpsamplingNearest object or nil, if failure.
+// Initializes a nearest spatial upsampling filter.
 func (o *MPSCNNUpsamplingNearest) InitWithDeviceIntegerScaleFactorXIntegerScaleFactorY(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingNearest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingNearestSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY, device, integerScaleFactorX, integerScaleFactorY)
 	if _ret != 0 {

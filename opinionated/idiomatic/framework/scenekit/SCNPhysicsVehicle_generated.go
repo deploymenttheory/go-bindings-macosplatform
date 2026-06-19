@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A physics behavior that modifies a physics body to behave like a car, motorcycle, or other wheeled vehicle.
+//
 // PhysicsVehicle wraps [raw.SCNPhysicsVehicle] with a fluent Go API.
 type PhysicsVehicle struct {
 	inner *raw.SCNPhysicsVehicle
@@ -36,16 +38,22 @@ func NewPhysicsVehicle() *PhysicsVehicle {
 	return &PhysicsVehicle{inner: raw.SCNPhysicsVehicleFromID(_id)}
 }
 
+// Applies a force between the specified wheel and the ground under the vehicle.
+//
 // ApplyEngineForceForWheelAtIndex calls the underlying ApplyEngineForceForWheelAtIndex.
 func (x *PhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
 	x.inner.ApplyEngineForceForWheelAtIndex(value, index)
 }
 
+// Pivots the specified wheel around its steering axis.
+//
 // SetSteeringAngleForWheelAtIndex calls the underlying SetSteeringAngleForWheelAtIndex.
 func (x *PhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
 	x.inner.SetSteeringAngleForWheelAtIndex(value, index)
 }
 
+// Applies a force between the specified wheel and the ground under the vehicle.
+//
 // ApplyBrakingForceForWheelAtIndex calls the underlying ApplyBrakingForceForWheelAtIndex.
 func (x *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
 	x.inner.ApplyBrakingForceForWheelAtIndex(value, index)

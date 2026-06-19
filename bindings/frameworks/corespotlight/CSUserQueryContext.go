@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration details to apply to a user query.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/csuserquerycontext
 type CSUserQueryContext struct {
 	CSSearchQueryContext
@@ -40,6 +42,7 @@ func CSUserQueryContextFromID(id objc.ID) *CSUserQueryContext {
 	return o
 }
 
+// Returns the current behavior configuration for the user query.
 func CSUserQueryContextUserQueryContext() *CSUserQueryContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCSUserQueryContext), _cSUserQueryContextSelUserQueryContext)
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func CSUserQueryContextUserQueryContext() *CSUserQueryContext {
 	return CSUserQueryContextFromID(_ret)
 }
 
+// Creates a new query context object with an optional suggested search string.
 func CSUserQueryContextUserQueryContextWithCurrentSuggestion(currentSuggestion *CSSuggestion) *CSUserQueryContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCSUserQueryContext), _cSUserQueryContextSelUserQueryContextWithCurrentSuggestion, currentSuggestion.Ptr())
 	if _ret != 0 {

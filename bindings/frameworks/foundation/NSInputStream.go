@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A stream that provides read-only stream functionality.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsinputstream
 type NSInputStream struct {
 	NSStream
@@ -76,6 +78,7 @@ func (o *NSInputStream) InitWithFileAtPath(path *NSString) *NSInputStream {
 	return NSInputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized NSInputStream object for reading from a given NSData object.
 func NSInputStreamInputStreamWithData(data *NSData) *NSInputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputStream), _nSInputStreamSelInputStreamWithData, data.Ptr())
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func NSInputStreamInputStreamWithData(data *NSData) *NSInputStream {
 	return NSInputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized NSInputStream object that reads data from the file at a given path.
 func NSInputStreamInputStreamWithFileAtPath(path *NSString) *NSInputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputStream), _nSInputStreamSelInputStreamWithFileAtPath, path.Ptr())
 	if _ret != 0 {
@@ -92,6 +96,7 @@ func NSInputStreamInputStreamWithFileAtPath(path *NSString) *NSInputStream {
 	return NSInputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized NSInputStream object that reads data from the file at a given URL.
 func NSInputStreamInputStreamWithURL(url *NSURL) *NSInputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputStream), _nSInputStreamSelInputStreamWithURL, url.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete subclass the Core Image Barcode Descriptor that represents an Data Matrix code symbol.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor
 type CIDataMatrixCodeDescriptor struct {
 	CIBarcodeDescriptor
@@ -35,7 +37,7 @@ func CIDataMatrixCodeDescriptorFromID(id objc.ID) *CIDataMatrixCodeDescriptor {
 	return o
 }
 
-// Initializes a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The “CIDataMatrixCodeECCVersion“ for the Data Matrix code symbol. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes a Data Matrix code descriptor for the given payload and parameters.
 func (o *CIDataMatrixCodeDescriptor) InitWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *CIDataMatrixCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIDataMatrixCodeDescriptorSelInitWithPayloadRowCountColumnCountEccVersion, errorCorrectedPayload.Ptr(), rowCount, columnCount, eccVersion)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *CIDataMatrixCodeDescriptor) InitWithPayloadRowCountColumnCountEccVersio
 	return CIDataMatrixCodeDescriptorFromID(_ret)
 }
 
-// Creates a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The “CIDataMatrixCodeECCVersion“ for the Data Matrix code symbol. - Returns: An autoreleased “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Creates a Data Matrix code descriptor for the given payload and parameters.
 func CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *CIDataMatrixCodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIDataMatrixCodeDescriptor), _cIDataMatrixCodeDescriptorSelDescriptorWithPayloadRowCountColumnCountEccVersion, errorCorrectedPayload.Ptr(), rowCount, columnCount, eccVersion)
 	if _ret != 0 {

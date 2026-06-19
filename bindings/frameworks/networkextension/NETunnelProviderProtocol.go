@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration parameters for a VPN tunnel.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netunnelproviderprotocol
 type NETunnelProviderProtocol struct {
 	NEVPNProtocol
@@ -35,12 +37,15 @@ func NETunnelProviderProtocolFromID(id objc.ID) *NETunnelProviderProtocol {
 
 // @property providerConfiguration @discussion A dictionary containing NETunnelProvider vendor-specific configuration parameters. This dictionary is passed as-is to NETunnelProviders when a tunnel is started.
 func (o *NETunnelProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nETunnelProviderProtocolSelProviderConfiguration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderProtocolSelProviderConfiguration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NETunnelProviderProtocol) SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nETunnelProviderProtocolSelSetProviderConfiguration, providerConfiguration)
+	o.Ptr().Send(_nETunnelProviderProtocolSelSetProviderConfiguration, providerConfiguration.Ptr())
 }
 
 // @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NETunnelProvider to be used by this configuration.

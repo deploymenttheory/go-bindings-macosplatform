@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that tracks the loading progress of a webpage.
+//
 // WKNavigation wraps [raw.WKNavigation] with a fluent Go API.
 type WKNavigation struct {
 	inner *raw.WKNavigation

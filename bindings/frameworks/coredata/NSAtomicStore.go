@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass that you subclass to create a Core Data atomic store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsatomicstore
 type NSAtomicStore struct {
 	NSPersistentStore
@@ -43,14 +45,16 @@ func NSAtomicStoreFromID(id objc.ID) *NSAtomicStore {
 	return o
 }
 
+// Creates an atomic store at the specified location.
 func (o *NSAtomicStore) InitWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *NSPersistentStoreCoordinator, configurationName *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) *NSAtomicStore {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions, coordinator.Ptr(), configurationName.Ptr(), url.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions, coordinator.Ptr(), configurationName.Ptr(), url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSAtomicStoreFromID(_ret)
 }
 
+// Loads the cache nodes for the receiver.
 func (o *NSAtomicStore) Load() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSAtomicStoreSelLoad, unsafe.Pointer(&_nsErr))
@@ -60,6 +64,7 @@ func (o *NSAtomicStore) Load() (bool, error) {
 	return _ret, nil
 }
 
+// Saves the cache nodes.
 func (o *NSAtomicStore) Save() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSAtomicStoreSelSave, unsafe.Pointer(&_nsErr))
@@ -69,15 +74,18 @@ func (o *NSAtomicStore) Save() (bool, error) {
 	return _ret, nil
 }
 
+// Returns a new cache node for a given managed object.
 func (o *NSAtomicStore) NewCacheNodeForManagedObject(managedObject *NSManagedObject) *NSAtomicStoreCacheNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelNewCacheNodeForManagedObject, managedObject.Ptr())
 	return NSAtomicStoreCacheNodeFromID(_ret)
 }
 
+// Updates the given cache node using the values in a given managed object.
 func (o *NSAtomicStore) UpdateCacheNodeFromManagedObject(node *NSAtomicStoreCacheNode, managedObject *NSManagedObject) {
 	o.Ptr().Send(_nSAtomicStoreSelUpdateCacheNodeFromManagedObject, node.Ptr(), managedObject.Ptr())
 }
 
+// Returns the set of cache nodes registered with the receiver.
 func (o *NSAtomicStore) CacheNodes() *foundation.NSSet[*NSAtomicStoreCacheNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelCacheNodes)
 	if _ret != 0 {
@@ -86,14 +94,17 @@ func (o *NSAtomicStore) CacheNodes() *foundation.NSSet[*NSAtomicStoreCacheNode] 
 	return foundation.NSSetFromID[*NSAtomicStoreCacheNode](_ret)
 }
 
+// Registers a set of cache nodes with the receiver.
 func (o *NSAtomicStore) AddCacheNodes(cacheNodes *foundation.NSSet[*NSAtomicStoreCacheNode]) {
 	o.Ptr().Send(_nSAtomicStoreSelAddCacheNodes, cacheNodes.Ptr())
 }
 
+// Method invoked before the store removes the given collection of cache nodes.
 func (o *NSAtomicStore) WillRemoveCacheNodes(cacheNodes *foundation.NSSet[*NSAtomicStoreCacheNode]) {
 	o.Ptr().Send(_nSAtomicStoreSelWillRemoveCacheNodes, cacheNodes.Ptr())
 }
 
+// Returns the cache node for a given managed object ID.
 func (o *NSAtomicStore) CacheNodeForObjectID(objectID *NSManagedObjectID) *NSAtomicStoreCacheNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelCacheNodeForObjectID, objectID.Ptr())
 	if _ret != 0 {
@@ -102,6 +113,7 @@ func (o *NSAtomicStore) CacheNodeForObjectID(objectID *NSManagedObjectID) *NSAto
 	return NSAtomicStoreCacheNodeFromID(_ret)
 }
 
+// Returns a managed object ID from the reference data for a specified entity.
 func (o *NSAtomicStore) ObjectIDForEntityReferenceObject(entity *NSEntityDescription, data objc.ID) *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelObjectIDForEntityReferenceObject, entity.Ptr(), data)
 	if _ret != 0 {
@@ -110,11 +122,13 @@ func (o *NSAtomicStore) ObjectIDForEntityReferenceObject(entity *NSEntityDescrip
 	return NSManagedObjectIDFromID(_ret)
 }
 
+// Returns a new reference object for a given managed object.
 func (o *NSAtomicStore) NewReferenceObjectForManagedObject(managedObject *NSManagedObject) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelNewReferenceObjectForManagedObject, managedObject.Ptr())
 	return _ret
 }
 
+// Returns the reference object for a given managed object ID.
 func (o *NSAtomicStore) ReferenceObjectForObjectID(objectID *NSManagedObjectID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelReferenceObjectForObjectID, objectID.Ptr())
 	return _ret

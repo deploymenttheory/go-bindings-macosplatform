@@ -1,0 +1,785 @@
+{
+  "schema_version": 1,
+  "framework": "CoreBluetooth",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CBATTRequest": {
+      "doc": "A request that uses the Attribute Protocol (ATT).",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbattrequest"
+    },
+    "CBAttribute": {
+      "doc": "A representation of common aspects of services offered by a peripheral.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbattribute"
+    },
+    "CBCentral": {
+      "doc": "A remote device connected to a local app, which is acting as a peripheral.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcentral"
+    },
+    "CBCentralManager": {
+      "doc": "An object that scans for, discovers, connects to, and manages peripherals.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager"
+    },
+    "CBCharacteristic": {
+      "doc": "A characteristic of a remote peripheral’s service.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic"
+    },
+    "CBDescriptor": {
+      "doc": "An object that provides further information about a remote peripheral’s characteristic.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbdescriptor"
+    },
+    "CBL2CAPChannel": {
+      "doc": "A live L2CAP connection to a remote device.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbl2capchannel"
+    },
+    "CBManager": {
+      "doc": "The abstract base class that manages central and peripheral objects.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager"
+    },
+    "CBMutableCharacteristic": {
+      "doc": "A characteristic of a local peripheral’s service.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic"
+    },
+    "CBMutableDescriptor": {
+      "doc": "An object that provides additional information about a local peripheral’s characteristic.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbmutabledescriptor"
+    },
+    "CBMutableService": {
+      "doc": "A service with writeable property values.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbmutableservice"
+    },
+    "CBPeer": {
+      "doc": "An object that represents a remote device.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbpeer"
+    },
+    "CBPeripheral": {
+      "doc": "A remote peripheral device.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral"
+    },
+    "CBPeripheralManager": {
+      "doc": "An object that manages and advertises peripheral services exposed by this app.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager"
+    },
+    "CBService": {
+      "doc": "A collection of data and associated behaviors that accomplish a function or feature of a device.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbservice"
+    },
+    "CBUUID": {
+      "doc": "A universally unique identifier, as defined by Bluetooth standards.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid"
+    }
+  },
+  "protocols": {
+    "CBCentralManagerDelegate": {
+      "doc": "A protocol that provides updates for the discovery and management of peripheral devices.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate"
+    },
+    "CBPeripheralDelegate": {
+      "doc": "A protocol that provides updates on the use of a peripheral’s services.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate"
+    },
+    "CBPeripheralManagerDelegate": {
+      "doc": "A protocol that provides updates for local peripheral state and interactions with remote central devices.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerdelegate"
+    }
+  },
+  "enums": {
+    "CBATTError": {
+      "doc": "An error that Core Bluetooth returns while using Attribute Protocol (ATT).",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbatterror"
+    },
+    "CBAttributePermissions": {
+      "doc": "Values that represent the read, write, and encryption permissions for a characteristic’s value.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions",
+      "members": {
+        "CBAttributePermissionsReadEncryptionRequired": {
+          "doc": "A permission that indicates only trusted devices can read the attribute’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions/readencryptionrequired"
+        },
+        "CBAttributePermissionsReadable": {
+          "doc": "A permission that indicates a peripheral can read the attribute’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions/readable"
+        },
+        "CBAttributePermissionsWriteEncryptionRequired": {
+          "doc": "A permission that indicates only trusted devices can write the attribute’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions/writeencryptionrequired"
+        },
+        "CBAttributePermissionsWriteable": {
+          "doc": "A permission that indicates a peripheral can write the attribute’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions/writeable"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a permissions instance from the provided raw value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbattributepermissions/init(rawvalue:)"
+        }
+      }
+    },
+    "CBCentralManagerFeature": {
+      "doc": "An option set of device-specific features.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerfeature"
+    },
+    "CBCentralManagerState": {
+      "doc": "Values that represent the current state of a central manager object.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate",
+      "members": {
+        "CBCentralManagerStatePoweredOff": {
+          "doc": "A state that indicates Bluetooth is currently powered off.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate/poweredoff"
+        },
+        "CBCentralManagerStatePoweredOn": {
+          "doc": "A state that indicates Bluetooth is currently powered on and available to use.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate/poweredon"
+        },
+        "CBCentralManagerStateResetting": {
+          "doc": "A state that indicates the connection with the system service was momentarily lost.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate/resetting"
+        },
+        "CBCentralManagerStateUnauthorized": {
+          "doc": "A state that indicates the application isn’t authorized to use the Bluetooth low energy role.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate/unauthorized"
+        },
+        "CBCentralManagerStateUnknown": {
+          "doc": "The manager’s state is unknown.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate/unknown"
+        },
+        "CBCentralManagerStateUnsupported": {
+          "doc": "A state that indicates this device doesn’t support the Bluetooth low energy central or client role.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerstate/unsupported"
+        }
+      }
+    },
+    "CBCharacteristicProperties": {
+      "doc": "Values that represent the possible properties of a characteristic.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties",
+      "members": {
+        "CBCharacteristicPropertyAuthenticatedSignedWrites": {
+          "doc": "A property that indicates the perhipheral allows signed writes of the characteristic’s value, without a response to indicate the write succeeded.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/authenticatedsignedwrites"
+        },
+        "CBCharacteristicPropertyBroadcast": {
+          "doc": "A property that indicates the characteristic can broadcast its value using a characteristic configuration descriptor.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/broadcast"
+        },
+        "CBCharacteristicPropertyExtendedProperties": {
+          "doc": "A property that indicates the characteristic defines additional properties in the extended properties descriptor.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/extendedproperties"
+        },
+        "CBCharacteristicPropertyIndicate": {
+          "doc": "A property that indicates the peripheral permits notifications of the characteristic’s value, with a response from the central to indicate receipt of the notification.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/indicate"
+        },
+        "CBCharacteristicPropertyIndicateEncryptionRequired": {
+          "doc": "A property that indicates only trusted devices can enable indications of the characteristic’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/indicateencryptionrequired"
+        },
+        "CBCharacteristicPropertyNotify": {
+          "doc": "A property that indicates the peripheral permits notifications of the characteristic’s value, without a response from the central to indicate receipt of the notification.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/notify"
+        },
+        "CBCharacteristicPropertyNotifyEncryptionRequired": {
+          "doc": "A property that indicates that only trusted devices can enable notifications of the characteristic’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/notifyencryptionrequired"
+        },
+        "CBCharacteristicPropertyRead": {
+          "doc": "A property that indicates a peripheral can read the characteristic’s value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/read"
+        },
+        "CBCharacteristicPropertyWrite": {
+          "doc": "A property that indicates a peripheral can write the characteristic’s value, with a response to indicate that the write succeeded.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/write"
+        },
+        "CBCharacteristicPropertyWriteWithoutResponse": {
+          "doc": "A property that indicates a peripheral can write the characteristic’s value, without a response to indicate that the write succeeded.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/writewithoutresponse"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a characteristic properties instance from the given raw value.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicproperties/init(rawvalue:)"
+        }
+      }
+    },
+    "CBCharacteristicWriteType": {
+      "doc": "Values representing the possible write types to a characteristic’s value.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype",
+      "members": {
+        "CBCharacteristicWriteWithResponse": {
+          "doc": "Write a characteristic value, with a response from the peripheral to indicate whether the write was successful.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse"
+        },
+        "CBCharacteristicWriteWithoutResponse": {
+          "doc": "Write a characteristic value, without any response from the peripheral to indicate whether the write was successful.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withoutresponse"
+        }
+      }
+    },
+    "CBConnectionEvent": {
+      "doc": "A change to the connection state of a peer.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbconnectionevent",
+      "members": {
+        "CBConnectionEventPeerConnected": {
+          "doc": "The peer has connected to the local device.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbconnectionevent/peerconnected"
+        },
+        "CBConnectionEventPeerDisconnected": {
+          "doc": "The peer has disconnected from the local device.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbconnectionevent/peerdisconnected"
+        }
+      }
+    },
+    "CBError": {
+      "doc": "An error that Core Bluetooth returns during Bluetooth transactions.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cberror"
+    },
+    "CBManagerAuthorization": {
+      "doc": "The current authorization state of a Core Bluetooth manager.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerauthorization",
+      "members": {
+        "CBManagerAuthorizationAllowedAlways": {
+          "doc": "A state that indicates the user has authorized Bluetooth at any time.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerauthorization/allowedalways"
+        },
+        "CBManagerAuthorizationDenied": {
+          "doc": "A state that indicates the user explicitly denied Bluetooth access for this app.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerauthorization/denied"
+        },
+        "CBManagerAuthorizationNotDetermined": {
+          "doc": "A state that indicates the user has yet to authorize Bluetooth for this app.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerauthorization/notdetermined"
+        },
+        "CBManagerAuthorizationRestricted": {
+          "doc": "A state that indicates this app isn’t authorized to use Bluetooth.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerauthorization/restricted"
+        }
+      }
+    },
+    "CBManagerState": {
+      "doc": "The possible states of a Core Bluetooth manager.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate",
+      "members": {
+        "CBManagerStatePoweredOff": {
+          "doc": "A state that indicates Bluetooth is currently powered off.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/poweredoff"
+        },
+        "CBManagerStatePoweredOn": {
+          "doc": "A state that indicates Bluetooth is currently powered on and available to use.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/poweredon"
+        },
+        "CBManagerStateResetting": {
+          "doc": "A state that indicates the connection with the system service was momentarily lost.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/resetting"
+        },
+        "CBManagerStateUnauthorized": {
+          "doc": "A state that indicates the application isn’t authorized to use the Bluetooth low energy role.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/unauthorized"
+        },
+        "CBManagerStateUnknown": {
+          "doc": "The manager’s state is unknown.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/unknown"
+        },
+        "CBManagerStateUnsupported": {
+          "doc": "A state that indicates this device doesn’t support the Bluetooth low energy central or client role.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/unsupported"
+        }
+      }
+    },
+    "CBPeripheralManagerAuthorizationStatus": {
+      "doc": "Values representing the current authorization state of the peripheral manager.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerauthorizationstatus",
+      "members": {
+        "CBPeripheralManagerAuthorizationStatusAuthorized": {
+          "doc": "An authorization status that indicates the user authorized this app to share data using Bluetooth while in the background.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerauthorizationstatus/authorized"
+        },
+        "CBPeripheralManagerAuthorizationStatusDenied": {
+          "doc": "An authorization status that indicates the user explicitly denied this app from sharing data using Bluetooth while in the background.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerauthorizationstatus/denied"
+        },
+        "CBPeripheralManagerAuthorizationStatusNotDetermined": {
+          "doc": "An authorization status that indicates the user hasn’t indicated whether this app can share data using Bluetooth while in the background.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerauthorizationstatus/notdetermined"
+        },
+        "CBPeripheralManagerAuthorizationStatusRestricted": {
+          "doc": "An authorization status that indicates this app isn’t authorized to share data using Bluetooth while in the background.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerauthorizationstatus/restricted"
+        }
+      }
+    },
+    "CBPeripheralManagerConnectionLatency": {
+      "doc": "Values representing the connection latency of the peripheral manager.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerconnectionlatency",
+      "members": {
+        "CBPeripheralManagerConnectionLatencyHigh": {
+          "doc": "A latency setting that prioritizes extending battery life over rapid communication.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerconnectionlatency/high"
+        },
+        "CBPeripheralManagerConnectionLatencyLow": {
+          "doc": "A latency setting indicating that prioritizes rapid communication over battery life.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerconnectionlatency/low"
+        },
+        "CBPeripheralManagerConnectionLatencyMedium": {
+          "doc": "A latency setting that balances communication frequency and battery life.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerconnectionlatency/medium"
+        }
+      }
+    },
+    "CBPeripheralManagerState": {
+      "doc": "Values that represent the current state of the peripheral manager.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate",
+      "members": {
+        "CBPeripheralManagerStatePoweredOff": {
+          "doc": "A manager state that indicates Bluetooth is currently powered off.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate/poweredoff"
+        },
+        "CBPeripheralManagerStatePoweredOn": {
+          "doc": "A manager state that indicates Bluetooth is currently powered on and is available to use.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate/poweredon"
+        },
+        "CBPeripheralManagerStateResetting": {
+          "doc": "A manager state that indicates the connection with the system service was momentarily lost.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate/resetting"
+        },
+        "CBPeripheralManagerStateUnauthorized": {
+          "doc": "A manager state that indicates the app isn’t authorized to use the Bluetooth low energy peripheral/server role.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate/unauthorized"
+        },
+        "CBPeripheralManagerStateUnknown": {
+          "doc": "A manager state that indicates the current state of the peripheral manager is unknown.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate/unknown"
+        },
+        "CBPeripheralManagerStateUnsupported": {
+          "doc": "A manager state that indicates the platform doesn’t support the Bluetooth low energy peripheral/server role.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanagerstate/unsupported"
+        }
+      }
+    },
+    "CBPeripheralState": {
+      "doc": "Values representing the connection state of a peripheral.",
+      "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralstate",
+      "members": {
+        "CBPeripheralStateConnected": {
+          "doc": "The peripheral is connected to the central manager.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralstate/connected"
+        },
+        "CBPeripheralStateConnecting": {
+          "doc": "The peripheral is in the process of connecting to the central manager.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralstate/connecting"
+        },
+        "CBPeripheralStateDisconnected": {
+          "doc": "The peripheral isn’t connected to the central manager.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralstate/disconnected"
+        },
+        "CBPeripheralStateDisconnecting": {
+          "doc": "The peripheral is disconnecting from the central manager.",
+          "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralstate/disconnecting"
+        }
+      }
+    }
+  },
+  "methods": {
+    "CBCentralManager": {
+      "+supportsFeatures:": {
+        "doc": "Returns a Boolean that indicates whether the device supports a specific set of features.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/supports(_:)"
+      },
+      "-cancelPeripheralConnection:": {
+        "doc": "Cancels an active or pending local connection to a peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/cancelperipheralconnection(_:)"
+      },
+      "-connectPeripheral:options:": {
+        "doc": "Establishes a local connection to a peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/connect(_:options:)"
+      },
+      "-init": {
+        "doc": "Initializes the central manager without a delegate.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/init()"
+      },
+      "-initWithDelegate:queue:": {
+        "doc": "Initializes the central manager with a specified delegate and dispatch queue.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/init(delegate:queue:)"
+      },
+      "-initWithDelegate:queue:options:": {
+        "doc": "Initializes the central manager with specified delegate, dispatch queue, and initialization options.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/init(delegate:queue:options:)"
+      },
+      "-registerForConnectionEventsWithOptions:": {
+        "doc": "Register for an event notification when the central manager makes a connection matching the given options.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/registerforconnectionevents(options:)"
+      },
+      "-retrieveConnectedPeripheralsWithServices:": {
+        "doc": "Returns a list of the peripherals connected to the system whose services match a given set of criteria.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/retrieveconnectedperipherals(withservices:)"
+      },
+      "-retrievePeripheralsWithIdentifiers:": {
+        "doc": "Returns a list of known peripherals by their identifiers.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/retrieveperipherals(withidentifiers:)"
+      },
+      "-scanForPeripheralsWithServices:options:": {
+        "doc": "Scans for peripherals that are advertising services.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/scanforperipherals(withservices:options:)"
+      },
+      "-stopScan": {
+        "doc": "Asks the central manager to stop scanning for peripherals.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/stopscan()"
+      }
+    },
+    "CBMutableCharacteristic": {
+      "-initWithType:properties:value:permissions:": {
+        "doc": "Creates a mutable characteristic with specified permissions, properties, and value.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic/init(type:properties:value:permissions:)"
+      }
+    },
+    "CBMutableDescriptor": {
+      "-initWithType:value:": {
+        "doc": "Creates a mutable descriptor with a specified value.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutabledescriptor/init(type:value:)"
+      }
+    },
+    "CBMutableService": {
+      "-initWithType:primary:": {
+        "doc": "Creates a newly initialized mutable service specified by UUID and service type.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutableservice/init(type:primary:)"
+      }
+    },
+    "CBPeripheral": {
+      "-discoverCharacteristics:forService:": {
+        "doc": "Discovers the specified characteristics of a service.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/discovercharacteristics(_:for:)"
+      },
+      "-discoverDescriptorsForCharacteristic:": {
+        "doc": "Discovers the descriptors of a characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/discoverdescriptors(for:)"
+      },
+      "-discoverIncludedServices:forService:": {
+        "doc": "Discovers the specified included services of a previously-discovered service.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/discoverincludedservices(_:for:)"
+      },
+      "-discoverServices:": {
+        "doc": "Discovers the specified services of the peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/discoverservices(_:)"
+      },
+      "-maximumWriteValueLengthForType:": {
+        "doc": "The maximum amount of data, in bytes, you can send to a characteristic in a single write type.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/maximumwritevaluelength(for:)"
+      },
+      "-openL2CAPChannel:": {
+        "doc": "Attempts to open an L2CAP channel to the peripheral using the supplied Protocol/Service Multiplexer (PSM).",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/openl2capchannel(_:)"
+      },
+      "-readRSSI": {
+        "doc": "Retrieves the current RSSI value for the peripheral while connected to the central manager.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/readrssi()"
+      },
+      "-readValueForCharacteristic:": {
+        "doc": "Retrieves the value of a specified characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/readvalue(for:)-6u2kr"
+      },
+      "-readValueForDescriptor:": {
+        "doc": "Retrieves the value of a specified characteristic descriptor.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/readvalue(for:)-91hhp"
+      },
+      "-setNotifyValue:forCharacteristic:": {
+        "doc": "Sets notifications or indications for the value of a specified characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/setnotifyvalue(_:for:)"
+      },
+      "-writeValue:forCharacteristic:type:": {
+        "doc": "Writes the value of a characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/writevalue(_:for:type:)"
+      },
+      "-writeValue:forDescriptor:": {
+        "doc": "Writes the value of a characteristic descriptor.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/writevalue(_:for:)"
+      }
+    },
+    "CBPeripheralManager": {
+      "+authorizationStatus": {
+        "doc": "Returns the app’s authorization status for sharing data while in the background.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/authorizationstatus()"
+      },
+      "-addService:": {
+        "doc": "Publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/add(_:)"
+      },
+      "-init": {
+        "doc": "Initializes the peripheral manager without a delegate.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/init()"
+      },
+      "-initWithDelegate:queue:": {
+        "doc": "Initializes the peripheral manager with a specified delegate and dispatch queue.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/init(delegate:queue:)"
+      },
+      "-initWithDelegate:queue:options:": {
+        "doc": "Initializes the peripheral manager with a specified delegate, dispatch queue, and initialization options.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/init(delegate:queue:options:)"
+      },
+      "-publishL2CAPChannelWithEncryption:": {
+        "doc": "Creates a listener for incoming L2CAP channel connections.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/publishl2capchannel(withencryption:)"
+      },
+      "-removeAllServices": {
+        "doc": "Removes all published services from the local GATT database.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/removeallservices()"
+      },
+      "-removeService:": {
+        "doc": "Removes a specified published service from the local GATT database.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/remove(_:)"
+      },
+      "-respondToRequest:withResult:": {
+        "doc": "Responds to a read or write request from a connected central.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/respond(to:withresult:)"
+      },
+      "-setDesiredConnectionLatency:forCentral:": {
+        "doc": "Sets the desired connection latency for an existing connection to a central device.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/setdesiredconnectionlatency(_:for:)"
+      },
+      "-startAdvertising:": {
+        "doc": "Advertises peripheral manager data.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/startadvertising(_:)"
+      },
+      "-stopAdvertising": {
+        "doc": "Stops advertising peripheral manager data.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/stopadvertising()"
+      },
+      "-unpublishL2CAPChannel:": {
+        "doc": "Removes a published service from the local system.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/unpublishl2capchannel(_:)"
+      },
+      "-updateValue:forCharacteristic:onSubscribedCentrals:": {
+        "doc": "Send an updated characteristic value to one or more subscribed centrals, using a notification or indication.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/updatevalue(_:for:onsubscribedcentrals:)"
+      }
+    },
+    "CBUUID": {
+      "+UUIDWithCFUUID:": {
+        "doc": "Creates a Core Bluetooth UUID object from a Core Foundation UUID object.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid/init(cfuuid:)-3h0ry"
+      },
+      "+UUIDWithData:": {
+        "doc": "Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID data container.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid/init(data:)"
+      },
+      "+UUIDWithNSUUID:": {
+        "doc": "Creates a Core Bluetooth UUID object from a Foundation UUID object.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid/init(nsuuid:)-2amob"
+      },
+      "+UUIDWithString:": {
+        "doc": "Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID string.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid/init(string:)"
+      }
+    }
+  },
+  "properties": {
+    "CBATTRequest": {
+      "central": {
+        "doc": "The remote central device that originated the request.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbattrequest/central"
+      },
+      "characteristic": {
+        "doc": "The characteristic to read or write the value of.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbattrequest/characteristic"
+      },
+      "offset": {
+        "doc": "The zero-based index of the first byte for the read or write request.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbattrequest/offset"
+      },
+      "value": {
+        "doc": "The data that the central reads from or writes to the peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbattrequest/value"
+      }
+    },
+    "CBAttribute": {
+      "UUID": {
+        "doc": "The Bluetooth-specific UUID of the attribute.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbattribute/uuid"
+      }
+    },
+    "CBCentral": {
+      "maximumUpdateValueLength": {
+        "doc": "The maximum amount of data, in bytes, that the central can receive in a single notification or indication.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentral/maximumupdatevaluelength"
+      }
+    },
+    "CBCentralManager": {
+      "CBCentralManagerFeature": {
+        "doc": "An option set of device-specific features.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/feature"
+      },
+      "delegate": {
+        "doc": "The delegate object that you want to receive central manager events.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/delegate"
+      },
+      "isScanning": {
+        "doc": "A Boolean value that indicates whether the central is currently scanning.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/isscanning"
+      }
+    },
+    "CBCharacteristic": {
+      "descriptors": {
+        "doc": "A list of the descriptors discovered in this characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/descriptors"
+      },
+      "isBroadcasted": {
+        "doc": "A Boolean value that indicates whether the characteristic the service broadcasts this characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/isbroadcasted"
+      },
+      "isNotifying": {
+        "doc": "A Boolean value that indicates whether the characteristic is currently notifying a subscribed central of its value.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/isnotifying"
+      },
+      "properties": {
+        "doc": "The properties of the characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/properties"
+      },
+      "service": {
+        "doc": "The service to which this characteristic belongs.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/service"
+      },
+      "value": {
+        "doc": "The value of the characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/value"
+      }
+    },
+    "CBDescriptor": {
+      "characteristic": {
+        "doc": "The characteristic to which this descriptor belongs.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbdescriptor/characteristic"
+      },
+      "value": {
+        "doc": "The value of the descriptor.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbdescriptor/value"
+      }
+    },
+    "CBL2CAPChannel": {
+      "PSM": {
+        "doc": "The PSM of the channel.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbl2capchannel/psm"
+      },
+      "inputStream": {
+        "doc": "The stream used for reading data from the remote peer.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbl2capchannel/inputstream"
+      },
+      "outputStream": {
+        "doc": "The stream used for writing data to the peer.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbl2capchannel/outputstream"
+      },
+      "peer": {
+        "doc": "The peer connected to the channel.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbl2capchannel/peer"
+      }
+    },
+    "CBManager": {
+      "authorization": {
+        "doc": "The current authorization status for using Bluetooth.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager/authorization-swift.type.property"
+      },
+      "state": {
+        "doc": "The current state of the manager.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager/state"
+      }
+    },
+    "CBMutableCharacteristic": {
+      "descriptors": {
+        "doc": "An array of the characteristic’s descriptors.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic/descriptors"
+      },
+      "permissions": {
+        "doc": "The permissions of the characteristic value.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic/permissions"
+      },
+      "properties": {
+        "doc": "The properties of the characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic/properties"
+      },
+      "subscribedCentrals": {
+        "doc": "A list of centrals that are currently subscribed to the characteristic’s value.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic/subscribedcentrals"
+      },
+      "value": {
+        "doc": "The value of the characteristic.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutablecharacteristic/value"
+      }
+    },
+    "CBMutableService": {
+      "characteristics": {
+        "doc": "A list of characteristics of a service.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutableservice/characteristics"
+      },
+      "includedServices": {
+        "doc": "A list of included services.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmutableservice/includedservices"
+      }
+    },
+    "CBPeer": {
+      "identifier": {
+        "doc": "The UUID associated with the peer.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbpeer/identifier"
+      }
+    },
+    "CBPeripheral": {
+      "RSSI": {
+        "doc": "The Received Signal Strength Indicator (RSSI), in decibels, of the peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/rssi"
+      },
+      "ancsAuthorized": {
+        "doc": "A Boolean value that indicates if the remote device has authorization to receive data over ANCS protocol.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/ancsauthorized"
+      },
+      "canSendWriteWithoutResponse": {
+        "doc": "A Boolean value that indicates whether the remote device can send a write without a response.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/cansendwritewithoutresponse"
+      },
+      "delegate": {
+        "doc": "The delegate object specified to receive peripheral events.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/delegate"
+      },
+      "name": {
+        "doc": "The name of the peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/name"
+      },
+      "services": {
+        "doc": "A list of a peripheral’s discovered services.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/services"
+      },
+      "state": {
+        "doc": "The connection state of the peripheral.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheral/state"
+      }
+    },
+    "CBPeripheralManager": {
+      "delegate": {
+        "doc": "The delegate object specified to receive peripheral events.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/delegate"
+      },
+      "isAdvertising": {
+        "doc": "A Boolean value that indicates whether the peripheral is advertising data.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/isadvertising"
+      }
+    },
+    "CBService": {
+      "characteristics": {
+        "doc": "A list of characteristics discovered in this service.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbservice/characteristics"
+      },
+      "includedServices": {
+        "doc": "A list of included services discovered in this service.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbservice/includedservices"
+      },
+      "isPrimary": {
+        "doc": "A Boolean value that indicates whether the type of service is primary or secondary.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbservice/isprimary"
+      },
+      "peripheral": {
+        "doc": "The peripheral to which this service belongs.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbservice/peripheral"
+      }
+    },
+    "CBUUID": {
+      "UUIDString": {
+        "doc": "The UUID represented as a string.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid/uuidstring"
+      },
+      "data": {
+        "doc": "The data of the UUID.",
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbuuid/data"
+      }
+    }
+  }
+}

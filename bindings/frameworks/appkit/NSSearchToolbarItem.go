@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A toolbar item that contains a search field optimized for performing text-based searches.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssearchtoolbaritem
 type NSSearchToolbarItem struct {
 	NSToolbarItem
@@ -36,12 +38,12 @@ func NSSearchToolbarItemFromID(id objc.ID) *NSSearchToolbarItem {
 	return o
 }
 
-// Starts a search interaction. If necessary, expands to the preferred width and moves the keyboard focus to the search field.
+// Starts a search interaction and moves the keyboard focus to the search field.
 func (o *NSSearchToolbarItem) BeginSearchInteraction() {
 	o.Ptr().Send(_nSSearchToolbarItemSelBeginSearchInteraction)
 }
 
-// Ends a search interaction. Gives up the first responder by calling `-endEditing:` to the search field. Adjusts to the natural available width for the toolbar item if necessary.
+// Ends a search interaction by giving up the first responder and adjusting the size of the search field to the available width for the toolbar item if necessary.
 func (o *NSSearchToolbarItem) EndSearchInteraction() {
 	o.Ptr().Send(_nSSearchToolbarItemSelEndSearchInteraction)
 }

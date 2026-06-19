@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mapping instance that specifies how to map an entity from a source to a destination managed object model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsentitymapping
 type NSEntityMapping struct {
 	foundation.NSObject
@@ -157,12 +159,15 @@ func (o *NSEntityMapping) SetSourceExpression(sourceExpression *foundation.NSExp
 }
 
 func (o *NSEntityMapping) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSEntityMappingSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityMappingSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSEntityMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSEntityMappingSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSEntityMappingSelSetUserInfo, userInfo.Ptr())
 }
 
 func (o *NSEntityMapping) EntityMigrationPolicyClassName() *foundation.NSString {

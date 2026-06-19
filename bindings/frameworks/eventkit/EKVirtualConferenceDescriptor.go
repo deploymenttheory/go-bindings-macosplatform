@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Details about a virtual conference that uses a custom room type.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekvirtualconferencedescriptor
 type EKVirtualConferenceDescriptor struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func EKVirtualConferenceDescriptorFromID(id objc.ID) *EKVirtualConferenceDescrip
 	return o
 }
 
-// @method     initWithTitle:URLDescriptors:conferenceDetails: @abstract   Initializes an instance of EKVirtualConferenceDescriptor. @param      title               A user-readable title describing this virtual conference. This string may be displayed in the UI. This string is optional and may be left nil. @param      URLDescriptors      An array of EKVirtualConferenceURLDescriptors, representing the various ways to join your virtual conference. Do not pass an empty array. Your array should be ordered such that the most preferred method of joining the virtual conference comes first in the array, with subsequent methods of joining appearing in descending priority. @param      conferenceDetails   A user-readable string containing any other information you wish to communicate to the user about this virtual conference. This string will be displayed in the UI. This argument is optional and may be left nil.
+// Creates an object that describes a virtual conference, including a name and URL to join the conference.
 func (o *EKVirtualConferenceDescriptor) InitWithTitleURLDescriptorsConferenceDetails(title *foundation.NSString, uRLDescriptors *foundation.NSArray[*EKVirtualConferenceURLDescriptor], conferenceDetails *foundation.NSString) *EKVirtualConferenceDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceDescriptorSelInitWithTitleURLDescriptorsConferenceDetails, title.Ptr(), uRLDescriptors.Ptr(), conferenceDetails.Ptr())
 	if _ret != 0 {

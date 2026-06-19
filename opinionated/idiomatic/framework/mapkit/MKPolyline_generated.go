@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An open polygon overlay consisting of one or more connected line segments.
+//
 // Polyline wraps [raw.MKPolyline] with a fluent Go API.
 type Polyline struct {
 	inner *raw.MKPolyline
@@ -36,12 +38,16 @@ func NewPolyline() *Polyline {
 	return &Polyline{inner: raw.MKPolylineFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Polyline) WithTitle(title string) *Polyline {
 	x.inner.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Polyline) WithSubtitle(subtitle string) *Polyline {
 	x.inner.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for computing the top-K values and their corresponding indices in a matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixfindtopk
 type MPSMatrixFindTopK struct {
 	mpsmatrix.MPSMatrixUnaryKernel

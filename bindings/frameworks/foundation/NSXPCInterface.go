@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that may be sent to an exported object or remote object proxy.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxpcinterface
 type NSXPCInterface struct {
 	NSObject
@@ -39,6 +41,7 @@ func NSXPCInterfaceFromID(id objc.ID) *NSXPCInterface {
 	return o
 }
 
+// Returns an NSXPCInterface instance for a given protocol.
 func NSXPCInterfaceInterfaceWithProtocol(protocol unsafe.Pointer) *NSXPCInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCInterface), _nSXPCInterfaceSelInterfaceWithProtocol, protocol)
 	if _ret != 0 {
@@ -47,19 +50,26 @@ func NSXPCInterfaceInterfaceWithProtocol(protocol unsafe.Pointer) *NSXPCInterfac
 	return NSXPCInterfaceFromID(_ret)
 }
 
+// Sets the classes that can appear within the (numerically) specified collection object argument to the specified method.
 func (o *NSXPCInterface) SetClassesForSelectorArgumentIndexOfReply(classes *NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool) {
-	o.Ptr().Send(_nSXPCInterfaceSelSetClassesForSelectorArgumentIndexOfReply, classes, sel, arg, ofReply)
+	o.Ptr().Send(_nSXPCInterfaceSelSetClassesForSelectorArgumentIndexOfReply, classes.Ptr(), sel, arg, ofReply)
 }
 
+// Returns the current list of allowed classes that can appear within the specified collection object argument to the specified method.
 func (o *NSXPCInterface) ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *NSSet[objc.Class] {
-	_ret := objc.Send[*NSSet[objc.Class]](o.Ptr(), _nSXPCInterfaceSelClassesForSelectorArgumentIndexOfReply, sel, arg, ofReply)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCInterfaceSelClassesForSelectorArgumentIndexOfReply, sel, arg, ofReply)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSSetFromID[objc.Class](_ret)
 }
 
+// Configures a specific parameter of a method to be sent as a proxy object instead of copied.
 func (o *NSXPCInterface) SetInterfaceForSelectorArgumentIndexOfReply(ifc *NSXPCInterface, sel objc.SEL, arg uint, ofReply bool) {
 	o.Ptr().Send(_nSXPCInterfaceSelSetInterfaceForSelectorArgumentIndexOfReply, ifc.Ptr(), sel, arg, ofReply)
 }
 
+// Returns the interface previously set for the specified selector and parameter.
 func (o *NSXPCInterface) InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *NSXPCInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCInterfaceSelInterfaceForSelectorArgumentIndexOfReply, sel, arg, ofReply)
 	if _ret != 0 {

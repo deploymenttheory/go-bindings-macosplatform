@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to read and write packets to and from the tunnel’s virtual interface.
+//
 // NEPacketTunnelFlow wraps [raw.NEPacketTunnelFlow] with a fluent Go API.
 type NEPacketTunnelFlow struct {
 	inner *raw.NEPacketTunnelFlow
@@ -37,21 +39,21 @@ func NewNEPacketTunnelFlow() *NEPacketTunnelFlow {
 	return &NEPacketTunnelFlow{inner: raw.NEPacketTunnelFlowFromID(_id)}
 }
 
-// @method readPacketsWithCompletionHandler: @discussion Read available IP packets from the flow. @param completionHandler A block that will be executed to handle the packets. This block takes an array of NSData objects and an array of NSNumber objects. The NSData and NSNumber in corresponding indicies in the array represent one packet. If after handling the packets the caller wants to read more packets then the caller must call this method again.
+// Reads IP packets from the TUN interface.
 //
 // ReadPacketsWithCompletionHandler calls the underlying ReadPacketsWithCompletionHandler.
-func (x *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler objc.Block) {
+func (x *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[*foundation.NSNumber])) {
 	x.inner.ReadPacketsWithCompletionHandler(completionHandler)
 }
 
-// @method writePackets:completionHandler: @discussion Write multiple IP packets to the flow. @param packets An array of NSData objects, each containing packet data to be written. @param protocols An array of NSNumber objects. Each number contains the protocol of the packet in the corresponding index in the packets array.
+// Writes IP packets to the TUN interface.
 //
 // WritePacketsWithProtocols calls the underlying WritePacketsWithProtocols.
 func (x *NEPacketTunnelFlow) WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool {
 	return x.inner.WritePacketsWithProtocols(packets, protocols)
 }
 
-// @method readPacketObjectsWithCompletionHandler: @discussion Read available IP packets from the flow. @param completionHandler A block that will be executed to handle the packets. This block takes an array of NEPacket objects. If after handling the packets the caller wants to read more packets then the caller must call this method again.
+// Read multiple IP packets from the TUN interface.
 //
 // ReadPacketObjects blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error) {
@@ -74,7 +76,7 @@ func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (*foundation
 	}
 }
 
-// @method writePacketObjects: @discussion Write multiple IP packets to the flow. @param packets An array of NEPacket objects, each containing packet data and protocol family to be written.
+// Write multiple IP packets to the TUN interface.
 //
 // WritePacketObjects calls the underlying WritePacketObjects.
 func (x *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool {
@@ -84,7 +86,7 @@ func (x *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*raw
 // NEPacketTunnelFlowable is the interface implemented by [NEPacketTunnelFlow], for mocking and DI.
 type NEPacketTunnelFlowable interface {
 	Unwrap() *raw.NEPacketTunnelFlow
-	ReadPacketsWithCompletionHandler(completionHandler objc.Block)
+	ReadPacketsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[*foundation.NSNumber]))
 	WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool
 	ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error)
 	WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool

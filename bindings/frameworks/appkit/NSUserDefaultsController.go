@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that accesses user preference information for your app from the user’s defaults database.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsuserdefaultscontroller
 type NSUserDefaultsController struct {
 	NSController
@@ -42,8 +44,9 @@ func NSUserDefaultsControllerFromID(id objc.ID) *NSUserDefaultsController {
 	return o
 }
 
+// Returns an initialized NSUserDefaultsController object using the NSUserDefaults instance specified in defaults and the initial default values contained in the initialValues dictionary.
 func (o *NSUserDefaultsController) InitWithDefaultsInitialValues(defaults *foundation.NSUserDefaults, initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSUserDefaultsController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelInitWithDefaultsInitialValues, defaults.Ptr(), initialValues)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelInitWithDefaultsInitialValues, defaults.Ptr(), initialValues.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -58,14 +61,17 @@ func (o *NSUserDefaultsController) InitWithCoder(coder *foundation.NSCoder) *NSU
 	return NSUserDefaultsControllerFromID(_ret)
 }
 
+// Causes the receiver to discard any unsaved changes to bound user default properties, restoring their previous values.
 func (o *NSUserDefaultsController) Revert(sender objc.ID) {
 	o.Ptr().Send(_nSUserDefaultsControllerSelRevert, sender)
 }
 
+// Saves the values of the receiver’s user default properties.
 func (o *NSUserDefaultsController) Save(sender objc.ID) {
 	o.Ptr().Send(_nSUserDefaultsControllerSelSave, sender)
 }
 
+// Causes the receiver to discard all edits and replace the values of all the user default properties with any corresponding values in the initialValues dictionary.
 func (o *NSUserDefaultsController) RevertToInitialValues(sender objc.ID) {
 	o.Ptr().Send(_nSUserDefaultsControllerSelRevertToInitialValues, sender)
 }
@@ -87,12 +93,15 @@ func (o *NSUserDefaultsController) Defaults() *foundation.NSUserDefaults {
 }
 
 func (o *NSUserDefaultsController) InitialValues() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSUserDefaultsControllerSelInitialValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsControllerSelInitialValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSUserDefaultsController) SetInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSUserDefaultsControllerSelSetInitialValues, initialValues)
+	o.Ptr().Send(_nSUserDefaultsControllerSelSetInitialValues, initialValues.Ptr())
 }
 
 func (o *NSUserDefaultsController) AppliesImmediately() bool {

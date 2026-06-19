@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a video processor’s configuration options.
+//
 // VideoProcessorRequestProcessingOptions wraps [raw.VNVideoProcessorRequestProcessingOptions] with a fluent Go API.
 type VideoProcessorRequestProcessingOptions struct {
 	inner *raw.VNVideoProcessorRequestProcessingOptions

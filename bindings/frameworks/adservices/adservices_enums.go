@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// The error code that the parent class issues.
 type AAAttributionErrorCode int64
 
 const (

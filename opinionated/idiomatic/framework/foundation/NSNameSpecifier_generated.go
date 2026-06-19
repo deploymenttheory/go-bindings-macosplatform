@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier for an object in a collection (or container) by name.
+//
 // NameSpecifier wraps [raw.NSNameSpecifier] with a fluent Go API.
 type NameSpecifier struct {
 	inner *raw.NSNameSpecifier
@@ -37,6 +39,8 @@ func NewNameSpecifierWithCoder(inCoder *raw.NSCoder) *NameSpecifier {
 	return &NameSpecifier{inner: raw.NSNameSpecifierFromID(_id)}
 }
 
+// Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and then sets the name instance variable to name.
+//
 // NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName creates a new [NameSpecifier].
 func NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, name string) *NameSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNameSpecifier")), objc.RegisterName("alloc"))
@@ -44,48 +48,64 @@ func NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName(clas
 	return &NameSpecifier{inner: raw.NSNameSpecifierFromID(_id)}
 }
 
+// Sets the name encapsulated with the receiver for the specified object in the container.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *NameSpecifier) WithName(name string) *NameSpecifier {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *NameSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *NameSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *NameSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *NameSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *NameSpecifier) WithKey(key string) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *NameSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *NameSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *NameSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)

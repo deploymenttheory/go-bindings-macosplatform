@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A utility class that you use to create a static image from a LookAround scene.
+//
 // LookAroundSnapshotter wraps [raw.MKLookAroundSnapshotter] with a fluent Go API.
 type LookAroundSnapshotter struct {
 	inner *raw.MKLookAroundSnapshotter
@@ -32,6 +34,8 @@ func LookAroundSnapshotterFromID(id objc.ID) *LookAroundSnapshotter {
 	return &LookAroundSnapshotter{inner: raw.MKLookAroundSnapshotterFromID(id)}
 }
 
+// Create a new snapshotter object with the scene and options you specify.
+//
 // NewLookAroundSnapshotterWithSceneOptions creates a new [LookAroundSnapshotter].
 func NewLookAroundSnapshotterWithSceneOptions(scene *raw.MKLookAroundScene, options *raw.MKLookAroundSnapshotOptions) *LookAroundSnapshotter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSnapshotter")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewLookAroundSnapshotterWithSceneOptions(scene *raw.MKLookAroundScene, opti
 	return &LookAroundSnapshotter{inner: raw.MKLookAroundSnapshotterFromID(_id)}
 }
 
+// Requests a new snapshot and calls the completion handler you provide.
+//
 // GetSnapshot blocks until the operation completes or ctx is cancelled.
 func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (*LookAroundSnapshot, error) {
 	type _result struct {
@@ -65,6 +71,8 @@ func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (*LookAroundSna
 	}
 }
 
+// Cancels an in-progress snapshot request.
+//
 // Cancel calls the underlying Cancel.
 func (x *LookAroundSnapshotter) Cancel() {
 	x.inner.Cancel()

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A generator of texel data that creates a field of random noise.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlnoisetexture
 type MDLNoiseTexture struct {
 	MDLTexture
@@ -34,7 +36,7 @@ func MDLNoiseTextureFromID(id objc.ID) *MDLNoiseTexture {
 	return o
 }
 
-// Create a four channel texture containing directional noise. The RGBA values in this texture can be used as a normal map or as direction possibly with length. XYZ are a three dimensional direction, and A is a magnitude. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth.
+// Initializes a noise texture that creates random directional noise.
 func (o *MDLNoiseTexture) InitVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name *foundation.NSString, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *MDLNoiseTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNoiseTextureSelInitVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding, smoothness, name.Ptr(), textureDimensions, channelEncoding)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *MDLNoiseTexture) InitVectorNoiseWithSmoothnessNameTextureDimensionsChan
 	return MDLNoiseTextureFromID(_ret)
 }
 
-// Create a texture containing colored noise. The noise texture is tileable with itself. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth. @param grayscale if YES, RGB and A will all be the same. If no, RGB and A will all be different. A is not pre-multiplied, because the intent is that if you read a texel in a shader, all four values will be exactly the same value if grayscale, or four different, uncorrelated values if not grayscale.
+// Initializes a noise texture that creates random color noise.
 func (o *MDLNoiseTexture) InitScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name *foundation.NSString, textureDimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, grayscale bool) *MDLNoiseTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNoiseTextureSelInitScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale, smoothness, name.Ptr(), textureDimensions, channelCount, channelEncoding, grayscale)
 	if _ret != 0 {

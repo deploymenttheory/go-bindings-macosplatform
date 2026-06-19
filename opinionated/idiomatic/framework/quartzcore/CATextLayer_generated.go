@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A layer that provides simple text layout and rendering of plain or attributed strings.
+//
 // TextLayer wraps [raw.CATextLayer] with a fluent Go API.
 type TextLayer struct {
 	inner *raw.CATextLayer
@@ -39,102 +41,136 @@ func NewTextLayer() *TextLayer {
 	return &TextLayer{inner: raw.CATextLayerFromID(_id)}
 }
 
+// The text to be rendered by the receiver.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *TextLayer) WithString(string_ objc.ID) *TextLayer {
 	x.inner.SetString(string_)
 	return x
 }
 
+// The font size used to render the receiver’s text. Animatable.
+//
 // WithFontSize sets the fontSize property and returns the receiver for chaining.
 func (x *TextLayer) WithFontSize(fontSize float64) *TextLayer {
 	x.inner.SetFontSize(fontSize)
 	return x
 }
 
+// Determines whether the text is wrapped to fit within the receiver’s bounds.
+//
 // WithWrapped sets the wrapped property and returns the receiver for chaining.
 func (x *TextLayer) WithWrapped(wrapped bool) *TextLayer {
 	x.inner.SetWrapped(wrapped)
 	return x
 }
 
+// Determines how the text is truncated to fit within the receiver’s bounds.
+//
 // WithTruncationMode sets the truncationMode property and returns the receiver for chaining.
 func (x *TextLayer) WithTruncationMode(truncationMode *foundation.NSString) *TextLayer {
 	x.inner.SetTruncationMode(truncationMode)
 	return x
 }
 
+// Determines how individual lines of text are horizontally aligned within the receiver’s bounds.
+//
 // WithAlignmentMode sets the alignmentMode property and returns the receiver for chaining.
 func (x *TextLayer) WithAlignmentMode(alignmentMode *foundation.NSString) *TextLayer {
 	x.inner.SetAlignmentMode(alignmentMode)
 	return x
 }
 
+// Determines whether to allow subpixel quantization for the graphics context used for text rendering.
+//
 // WithAllowsFontSubpixelQuantization sets the allowsFontSubpixelQuantization property and returns the receiver for chaining.
 func (x *TextLayer) WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) *TextLayer {
 	x.inner.SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization)
 	return x
 }
 
+// The layer’s bounds rectangle. Animatable.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TextLayer) WithBounds(bounds corefoundation.CGRect) *TextLayer {
 	x.inner.CALayer.SetBounds(bounds)
 	return x
 }
 
+// The layer’s position in its superlayer’s coordinate space. Animatable.
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *TextLayer) WithPosition(position corefoundation.CGPoint) *TextLayer {
 	x.inner.CALayer.SetPosition(position)
 	return x
 }
 
+// The layer’s position on the z axis. Animatable.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *TextLayer) WithZPosition(zPosition float64) *TextLayer {
 	x.inner.CALayer.SetZPosition(zPosition)
 	return x
 }
 
+// Defines the anchor point of the layer’s bounds rectangle. Animatable.
+//
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *TextLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TextLayer {
 	x.inner.CALayer.SetAnchorPoint(anchorPoint)
 	return x
 }
 
+// The anchor point for the layer’s position along the z axis. Animatable.
+//
 // WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
 func (x *TextLayer) WithAnchorPointZ(anchorPointZ float64) *TextLayer {
 	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
 	return x
 }
 
+// The transform applied to the layer’s contents. Animatable.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *TextLayer) WithTransform(transform raw.CATransform3D) *TextLayer {
 	x.inner.CALayer.SetTransform(transform)
 	return x
 }
 
+// The layer’s frame rectangle.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TextLayer) WithFrame(frame corefoundation.CGRect) *TextLayer {
 	x.inner.CALayer.SetFrame(frame)
 	return x
 }
 
+// A Boolean indicating whether the layer is displayed. Animatable.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *TextLayer) WithHidden(hidden bool) *TextLayer {
 	x.inner.CALayer.SetHidden(hidden)
 	return x
 }
 
+// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+//
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *TextLayer) WithDoubleSided(doubleSided bool) *TextLayer {
 	x.inner.CALayer.SetDoubleSided(doubleSided)
 	return x
 }
 
+// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+//
 // WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
 func (x *TextLayer) WithGeometryFlipped(geometryFlipped bool) *TextLayer {
 	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
 	return x
 }
 
+// An array containing the layer’s sublayers.
+//
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *TextLayer) WithSublayers(items ...LayerProvider) *TextLayer {
 	if len(items) == 0 {
@@ -156,54 +192,72 @@ func (x *TextLayer) WithSublayers(items ...LayerProvider) *TextLayer {
 	return x
 }
 
+// Specifies the transform to apply to sublayers when rendering. Animatable.
+//
 // WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
 func (x *TextLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *TextLayer {
 	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
 	return x
 }
 
+// An optional layer whose alpha channel is used to mask the layer’s content.
+//
 // WithMask sets the mask property and returns the receiver for chaining.
 func (x *TextLayer) WithMask(mask LayerProvider) *TextLayer {
 	x.inner.CALayer.SetMask(mask.asLayer())
 	return x
 }
 
+// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+//
 // WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
 func (x *TextLayer) WithMasksToBounds(masksToBounds bool) *TextLayer {
 	x.inner.CALayer.SetMasksToBounds(masksToBounds)
 	return x
 }
 
+// An object that provides the contents of the layer. Animatable.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *TextLayer) WithContents(contents objc.ID) *TextLayer {
 	x.inner.CALayer.SetContents(contents)
 	return x
 }
 
+// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+//
 // WithContentsRect sets the contentsRect property and returns the receiver for chaining.
 func (x *TextLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TextLayer {
 	x.inner.CALayer.SetContentsRect(contentsRect)
 	return x
 }
 
+// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+//
 // WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
 func (x *TextLayer) WithContentsGravity(contentsGravity *foundation.NSString) *TextLayer {
 	x.inner.CALayer.SetContentsGravity(contentsGravity)
 	return x
 }
 
+// The scale factor applied to the layer.
+//
 // WithContentsScale sets the contentsScale property and returns the receiver for chaining.
 func (x *TextLayer) WithContentsScale(contentsScale float64) *TextLayer {
 	x.inner.CALayer.SetContentsScale(contentsScale)
 	return x
 }
 
+// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+//
 // WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
 func (x *TextLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TextLayer {
 	x.inner.CALayer.SetContentsCenter(contentsCenter)
 	return x
 }
 
+// A hint for the desired storage format of the layer contents.
+//
 // WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
 func (x *TextLayer) WithContentsFormat(contentsFormat *foundation.NSString) *TextLayer {
 	x.inner.CALayer.SetContentsFormat(contentsFormat)
@@ -234,54 +288,72 @@ func (x *TextLayer) WithContentsHeadroom(contentsHeadroom float64) *TextLayer {
 	return x
 }
 
+// The filter used when reducing the size of the content.
+//
 // WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
 func (x *TextLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *TextLayer {
 	x.inner.CALayer.SetMinificationFilter(minificationFilter)
 	return x
 }
 
+// The filter used when increasing the size of the content.
+//
 // WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
 func (x *TextLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *TextLayer {
 	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
 	return x
 }
 
+// The bias factor used by the minification filter to determine the levels of detail.
+//
 // WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
 func (x *TextLayer) WithMinificationFilterBias(minificationFilterBias float32) *TextLayer {
 	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
 	return x
 }
 
+// A Boolean value indicating whether the layer contains completely opaque content.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *TextLayer) WithOpaque(opaque bool) *TextLayer {
 	x.inner.CALayer.SetOpaque(opaque)
 	return x
 }
 
+// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+//
 // WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
 func (x *TextLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TextLayer {
 	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
 	return x
 }
 
+// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+//
 // WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
 func (x *TextLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer {
 	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
 	return x
 }
 
+// A bitmask defining how the edges of the receiver are rasterized.
+//
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
 func (x *TextLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TextLayer {
 	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
+//
 // WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
 func (x *TextLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TextLayer {
 	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
 	return x
 }
 
+// The radius to use when drawing rounded corners for the layer’s background. Animatable.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *TextLayer) WithCornerRadius(cornerRadius float64) *TextLayer {
 	x.inner.CALayer.SetCornerRadius(cornerRadius)
@@ -300,96 +372,128 @@ func (x *TextLayer) WithCornerCurve(cornerCurve *foundation.NSString) *TextLayer
 	return x
 }
 
+// The width of the layer’s border. Animatable.
+//
 // WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
 func (x *TextLayer) WithBorderWidth(borderWidth float64) *TextLayer {
 	x.inner.CALayer.SetBorderWidth(borderWidth)
 	return x
 }
 
+// The opacity of the receiver. Animatable.
+//
 // WithOpacity sets the opacity property and returns the receiver for chaining.
 func (x *TextLayer) WithOpacity(opacity float32) *TextLayer {
 	x.inner.CALayer.SetOpacity(opacity)
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+//
 // WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
 func (x *TextLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TextLayer {
 	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
 	return x
 }
 
+// A CoreImage filter used to composite the layer and the content behind it. Animatable.
+//
 // WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
 func (x *TextLayer) WithCompositingFilter(compositingFilter objc.ID) *TextLayer {
 	x.inner.CALayer.SetCompositingFilter(compositingFilter)
 	return x
 }
 
+// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *TextLayer) WithShouldRasterize(shouldRasterize bool) *TextLayer {
 	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+//
 // WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
 func (x *TextLayer) WithRasterizationScale(rasterizationScale float64) *TextLayer {
 	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
 	return x
 }
 
+// The opacity of the layer’s shadow. Animatable.
+//
 // WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
 func (x *TextLayer) WithShadowOpacity(shadowOpacity float32) *TextLayer {
 	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
 	return x
 }
 
+// The offset (in points) of the layer’s shadow. Animatable.
+//
 // WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
 func (x *TextLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TextLayer {
 	x.inner.CALayer.SetShadowOffset(shadowOffset)
 	return x
 }
 
+// The blur radius (in points) used to render the layer’s shadow. Animatable.
+//
 // WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
 func (x *TextLayer) WithShadowRadius(shadowRadius float64) *TextLayer {
 	x.inner.CALayer.SetShadowRadius(shadowRadius)
 	return x
 }
 
+// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
+//
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
 func (x *TextLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TextLayer {
 	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
+// The object responsible for laying out the layer’s sublayers.
+//
 // WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
 func (x *TextLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *TextLayer {
 	x.inner.CALayer.SetLayoutManager(layoutManager)
 	return x
 }
 
+// A dictionary containing layer actions.
+//
 // WithActions sets the actions property and returns the receiver for chaining.
 func (x *TextLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TextLayer {
 	x.inner.CALayer.SetActions(actions)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TextLayer) WithName(name string) *TextLayer {
 	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The layer’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextLayer) WithDelegate(delegate raw.CALayerDelegate) *TextLayer {
 	x.inner.CALayer.SetDelegate(delegate)
 	return x
 }
 
+// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *TextLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TextLayer {
 	x.inner.CALayer.SetStyle(style)
 	return x
 }
 
+// The constraints used to position current layer’s sublayers.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *TextLayer) WithConstraints(items ...*raw.CAConstraint) *TextLayer {
 	if len(items) == 0 {

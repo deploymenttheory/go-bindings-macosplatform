@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The path made by a network connection, including information about its viability.
+//
 // NWPath wraps [raw.NWPath] with a fluent Go API.
 type NWPath struct {
 	inner *raw.NWPath
@@ -35,7 +37,7 @@ func NewNWPath() *NWPath {
 	return &NWPath{inner: raw.NWPathFromID(_id)}
 }
 
-// @method isEqualToPath: @param path An NWPath object to compare. @return YES if the two path objects have the same content, NO otherwise.
+// Comparison method for NWPath objects.
 //
 // IsEqualToPath calls the underlying IsEqualToPath.
 func (x *NWPath) IsEqualToPath(path *raw.NWPath) bool {

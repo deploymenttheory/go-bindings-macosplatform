@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an individual host on the network.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshost
 // Deprecated: Use Network framework instead, see deprecation notice in <Foundation/NSHost.h>
 type NSHost struct {
@@ -70,17 +72,20 @@ func (o *NSHost) IsEqualToHost(aHost *NSHost) bool {
 	return _ret
 }
 
+// Specifies whether the receiver is to cache instances as it creates them to avoid creating duplicate instances.
 // Deprecated: Caching no longer supported
 func NSHostSetHostCacheEnabled(flag bool) {
 	objc.ID(_clsNSHost).Send(_nSHostSelSetHostCacheEnabled, flag)
 }
 
+// Indicates whether caching is turned on or off.
 // Deprecated: Caching no longer supported
 func NSHostIsHostCacheEnabled() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSHost), _nSHostSelIsHostCacheEnabled)
 	return _ret
 }
 
+// Releases the cache of existing NSHost objects so subsequent requests for NSHost objects create new ones.
 // Deprecated: Caching no longer supported
 func NSHostFlushHostCache() {
 	objc.ID(_clsNSHost).Send(_nSHostSelFlushHostCache)

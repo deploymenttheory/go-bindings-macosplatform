@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type you use to initiate searches from your interface and offer suggested text completions.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/csuserquery
 type CSUserQuery struct {
 	CSSearchQuery
@@ -37,14 +39,17 @@ func CSUserQueryFromID(id objc.ID) *CSUserQuery {
 	return o
 }
 
+// Performs one-time tasks that prepare Spotlight to search for content in all search indexes.
 func CSUserQueryPrepare() {
 	objc.ID(_clsCSUserQuery).Send(_cSUserQuerySelPrepare)
 }
 
+// Performs one-time tasks that prepare Spotlight to search for content in one or more protected search indexes.
 func CSUserQueryPrepareProtectionClasses(protectionClasses *foundation.NSArray[*foundation.NSString]) {
-	objc.ID(_clsCSUserQuery).Send(_cSUserQuerySelPrepareProtectionClasses, protectionClasses)
+	objc.ID(_clsCSUserQuery).Send(_cSUserQuerySelPrepareProtectionClasses, protectionClasses.Ptr())
 }
 
+// Creates a new user query that searches for the specified term.
 func (o *CSUserQuery) InitWithUserQueryStringUserQueryContext(userQueryString *foundation.NSString, userQueryContext *CSUserQueryContext) *CSUserQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSUserQuerySelInitWithUserQueryStringUserQueryContext, userQueryString.Ptr(), userQueryContext.Ptr())
 	if _ret != 0 {

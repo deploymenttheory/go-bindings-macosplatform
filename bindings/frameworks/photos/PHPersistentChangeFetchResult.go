@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a fetch result and allows you to enumerate a very large set of change records.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phpersistentchangefetchresult
 type PHPersistentChangeFetchResult struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func PHPersistentChangeFetchResultFromID(id objc.ID) *PHPersistentChangeFetchRes
 	return o
 }
 
+// Executes the block you specify by using the objects in the fetch result.
 func (o *PHPersistentChangeFetchResult) EnumerateChangesWith(block func(*PHPersistentChange, *bool)) {
 	var __block_block objc.Block
 	if block != nil {

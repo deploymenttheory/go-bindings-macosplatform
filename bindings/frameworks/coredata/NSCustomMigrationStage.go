@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enables you to participate in the migration between two versions of the same model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nscustommigrationstage
 type NSCustomMigrationStage struct {
 	NSMigrationStage
@@ -37,6 +39,7 @@ func NSCustomMigrationStageFromID(id objc.ID) *NSCustomMigrationStage {
 	return o
 }
 
+// Creates a custom migration stage with the specified source and destination model references.
 func (o *NSCustomMigrationStage) InitWithCurrentModelReferenceNextModelReference(currentModel *NSManagedObjectModelReference, nextModel *NSManagedObjectModelReference) *NSCustomMigrationStage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomMigrationStageSelInitWithCurrentModelReferenceNextModelReference, currentModel.Ptr(), nextModel.Ptr())
 	if _ret != 0 {

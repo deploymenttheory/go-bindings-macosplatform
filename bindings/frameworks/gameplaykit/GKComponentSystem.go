@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A component system is a homogeneous collection of components that are intended to be called at the same time. The system is homogeneous, meaning it only allows members of the same class into the system.
+// Manages periodic update messages for all component objects of a specified class.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem
 type GKComponentSystem[ComponentType purego.AnyObject] struct {
@@ -41,13 +41,13 @@ func GKComponentSystemFromID[ComponentType purego.AnyObject](id objc.ID) *GKComp
 	return o
 }
 
-// Supports getting components via a [] subscript.
+// Returns the component at the specified index in the system’s list of components.
 func (o *GKComponentSystem[ComponentType]) ObjectAtIndexedSubscript(idx uint) ComponentType {
 	_ret := objc.Send[ComponentType](o.Ptr(), _gKComponentSystemSelObjectAtIndexedSubscript, idx)
 	return _ret
 }
 
-// Initializes a system for the given component class. The receiver can now only accept components of the given class.
+// Initializes a component system to manage components of the specified class.
 func (o *GKComponentSystem[ComponentType]) InitWithComponentClass(cls objc.Class) *GKComponentSystem[ComponentType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKComponentSystemSelInitWithComponentClass, cls)
 	if _ret != 0 {
@@ -56,27 +56,27 @@ func (o *GKComponentSystem[ComponentType]) InitWithComponentClass(cls objc.Class
 	return GKComponentSystemFromID[ComponentType](_ret)
 }
 
-// Adds a component to the system. The component must be of the same class as the system's componentClass. The component is added to the tail of the collection and will be processed after components that were added before it. @throws NSInvalidArgumentException if the component added is not a kind of the system's componentClass.
+// Adds a component instance to the component system.
 func (o *GKComponentSystem[ComponentType]) AddComponent(component ComponentType) {
 	o.Ptr().Send(_gKComponentSystemSelAddComponent, component)
 }
 
-// Adds the supported component from the entity's component collection. This is conceptually the same as the pseudo-code: for (GKComponent *component in entity.components) if (component.class == system.componentClass) [system addComponent:component] @see GKEntity.components
+// Adds any instances of the component system’s component class in the specified entity to the component system.
 func (o *GKComponentSystem[ComponentType]) AddComponentWithEntity(entity *GKEntity) {
 	o.Ptr().Send(_gKComponentSystemSelAddComponentWithEntity, entity.Ptr())
 }
 
-// Removes the supported component from the entity's component collection This is conceptually the same as the pseudo-code: for (GKComponent *component in entity.components) if (component.class == system.componentClass) [system removeComponent:component]
+// Removes any instances of the component system’s component class in the specified entity from the component system.
 func (o *GKComponentSystem[ComponentType]) RemoveComponentWithEntity(entity *GKEntity) {
 	o.Ptr().Send(_gKComponentSystemSelRemoveComponentWithEntity, entity.Ptr())
 }
 
-// Removes a component from the system Does nothing if the component is not in this system
+// Removes the specified component instance from the component system.
 func (o *GKComponentSystem[ComponentType]) RemoveComponent(component ComponentType) {
 	o.Ptr().Send(_gKComponentSystemSelRemoveComponent, component)
 }
 
-// Updates each component with the given delta time since the last update. Each component thus performs its time based logic with a single message.
+// Tells all component instances managed by the system to perform their custom periodic actions.
 func (o *GKComponentSystem[ComponentType]) UpdateWithDeltaTime(seconds float64) {
 	o.Ptr().Send(_gKComponentSystemSelUpdateWithDeltaTime, seconds)
 }

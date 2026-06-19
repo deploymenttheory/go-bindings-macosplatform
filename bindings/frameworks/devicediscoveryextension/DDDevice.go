@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a discovered device of interest.
+//
 // Apple documentation: https://developer.apple.com/documentation/devicediscoveryextension/dddevice
 type DDDevice struct {
 	foundation.NSObject
@@ -73,7 +75,7 @@ func DDDeviceFromID(id objc.ID) *DDDevice {
 	return o
 }
 
-// Initializes a DD device with display name, category, protocol type, and identifier.
+// Creates an object that describes a discovered device.
 func (o *DDDevice) InitWithDisplayNameCategoryProtocolTypeIdentifier(displayName *foundation.NSString, category DDDeviceCategory, protocolType *uniformtypeidentifiers.UTType, identifier *foundation.NSString) *DDDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelInitWithDisplayNameCategoryProtocolTypeIdentifier, displayName.Ptr(), category, protocolType.Ptr(), identifier.Ptr())
 	if _ret != 0 {

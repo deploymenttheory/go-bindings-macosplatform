@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsformatter
 type NSFormatter struct {
 	NSObject
@@ -43,7 +45,7 @@ func (o *NSFormatter) StringForObjectValue(obj objc.ID) *NSString {
 }
 
 func (o *NSFormatter) AttributedStringForObjectValueWithDefaultAttributes(obj objc.ID, attrs *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelAttributedStringForObjectValueWithDefaultAttributes, obj, attrs)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormatterSelAttributedStringForObjectValueWithDefaultAttributes, obj, attrs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

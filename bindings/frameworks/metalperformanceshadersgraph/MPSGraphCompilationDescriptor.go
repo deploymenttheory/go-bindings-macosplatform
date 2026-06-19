@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that consists of all the levers for compiling graphs.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphcompilationdescriptor
 type MPSGraphCompilationDescriptor struct {
 	MPSGraphObject
@@ -52,7 +54,7 @@ func (o *MPSGraphCompilationDescriptor) DisableTypeInference() {
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelDisableTypeInference)
 }
 
-// Turns on Automatic Layout Conversion (for conv like operations) for GPU.
+// Turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
 func (o *MPSGraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelConvertLayoutToNHWC)
 }

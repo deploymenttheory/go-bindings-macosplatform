@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A joint that fuses two physics bodies together at a reference point.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsjointfixed
 type SKPhysicsJointFixed struct {
 	SKPhysicsJoint
@@ -30,6 +32,7 @@ func SKPhysicsJointFixedFromID(id objc.ID) *SKPhysicsJointFixed {
 	return o
 }
 
+// Creates a new fixed joint.
 func SKPhysicsJointFixedJointWithBodyABodyBAnchor(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchor corefoundation.CGPoint) *SKPhysicsJointFixed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointFixed), _sKPhysicsJointFixedSelJointWithBodyABodyBAnchor, bodyA.Ptr(), bodyB.Ptr(), anchor)
 	if _ret != 0 {

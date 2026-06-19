@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of the attributes used to create an MPSImage.
+//
 // ImageDescriptor wraps [raw.MPSImageDescriptor] with a fluent Go API.
 type ImageDescriptor struct {
 	inner *raw.MPSImageDescriptor
@@ -38,7 +40,7 @@ func NewImageDescriptor() *ImageDescriptor {
 	return &ImageDescriptor{inner: raw.MPSImageDescriptorFromID(_id)}
 }
 
-// @property   width @abstract   The width of the CNN image. @discussion The formal width of the CNN image in pixels.  Default = 1.
+// The width of the image.
 //
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithWidth(width uint) *ImageDescriptor {
@@ -46,7 +48,7 @@ func (x *ImageDescriptor) WithWidth(width uint) *ImageDescriptor {
 	return x
 }
 
-// @property   height @abstract   The height of the CNN image. @discussion The formal height of the CNN image in pixels. Default = 1.
+// The height of the image.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithHeight(height uint) *ImageDescriptor {
@@ -54,7 +56,7 @@ func (x *ImageDescriptor) WithHeight(height uint) *ImageDescriptor {
 	return x
 }
 
-// @property   featureChannels @abstract   The number of feature channels per pixel.  Default = 1.
+// The number of feature channels per pixel.
 //
 // WithFeatureChannels sets the featureChannels property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithFeatureChannels(featureChannels uint) *ImageDescriptor {
@@ -62,7 +64,7 @@ func (x *ImageDescriptor) WithFeatureChannels(featureChannels uint) *ImageDescri
 	return x
 }
 
-// @property   numberOfImages @abstract   The number of images for batch processing.   Default = 1.
+// The number of images for batch processing.
 //
 // WithNumberOfImages sets the numberOfImages property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithNumberOfImages(numberOfImages uint) *ImageDescriptor {
@@ -70,7 +72,7 @@ func (x *ImageDescriptor) WithNumberOfImages(numberOfImages uint) *ImageDescript
 	return x
 }
 
-// @property   channelFormat @abstract   The storage format to use for each channel in the image.
+// The storage format to use for each channel in the image.
 //
 // WithChannelFormat sets the channelFormat property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithChannelFormat(channelFormat mpscore.MPSImageFeatureChannelFormat) *ImageDescriptor {
@@ -78,7 +80,7 @@ func (x *ImageDescriptor) WithChannelFormat(channelFormat mpscore.MPSImageFeatur
 	return x
 }
 
-// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource. Default = MTLCPUCacheModeDefaultCache
+// The CPU cache mode of the underlying texture.
 //
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *ImageDescriptor {
@@ -86,7 +88,7 @@ func (x *ImageDescriptor) WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *
 	return x
 }
 
-// @property storageMode @abstract To specify storage mode of texture resource. @discussion Storage mode options: @code Default =   MTLStorageModeShared on iOS MTLStorageModeManaged on Mac OSX MTLStorageModeShared not supported on Mac OSX. See Metal headers for synchronization requirements when using StorageModeManaged @endcode
+// The storage mode of underlying texture.
 //
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithStorageMode(storageMode metal.MTLStorageMode) *ImageDescriptor {
@@ -94,7 +96,7 @@ func (x *ImageDescriptor) WithStorageMode(storageMode metal.MTLStorageMode) *Ima
 	return x
 }
 
-// @property   usage @abstract   Description of texture usage.  Default = MTLTextureUsageShaderRead/Write
+// Options to specify the intended usage of the underlying texture.
 //
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithUsage(usage metal.MTLTextureUsage) *ImageDescriptor {

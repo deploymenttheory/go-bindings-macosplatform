@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An OpenID authorization request that provides single sign-on (SSO) functionality.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonrequest
 type ASAuthorizationSingleSignOnRequest struct {
 	ASAuthorizationOpenIDRequest
@@ -35,12 +37,15 @@ func ASAuthorizationSingleSignOnRequestFromID(id objc.ID) *ASAuthorizationSingle
 
 // @abstract Parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
 func (o *ASAuthorizationSingleSignOnRequest) AuthorizationOptions() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationSingleSignOnRequestSelAuthorizationOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnRequestSelAuthorizationOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationSingleSignOnRequest) SetAuthorizationOptions(authorizationOptions *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationSingleSignOnRequestSelSetAuthorizationOptions, authorizationOptions)
+	o.Ptr().Send(_aSAuthorizationSingleSignOnRequestSelSetAuthorizationOptions, authorizationOptions.Ptr())
 }
 
 // @abstract Enables or disables the authorization user interface. @discussion The default values is YES. If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface.

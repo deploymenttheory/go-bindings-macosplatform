@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of pipeline buffer descriptors.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlpipelinebufferdescriptorarray
 type MTLPipelineBufferDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLPipelineBufferDescriptorArrayFromID(id objc.ID) *MTLPipelineBufferDescri
 	return o
 }
 
+// Returns the pipeline buffer descriptor at the specified array index.
 func (o *MTLPipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex uint) *MTLPipelineBufferDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPipelineBufferDescriptorArraySelObjectAtIndexedSubscript, bufferIndex)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLPipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex 
 	return MTLPipelineBufferDescriptorFromID(_ret)
 }
 
+// Sets a pipeline buffer descriptor at the specified array index.
 func (o *MTLPipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *MTLPipelineBufferDescriptor, bufferIndex uint) {
 	o.Ptr().Send(_mTLPipelineBufferDescriptorArraySelSetObjectAtIndexedSubscript, buffer.Ptr(), bufferIndex)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a bit rate variant.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariant
 type AVAssetVariant struct {
 	foundation.NSObject

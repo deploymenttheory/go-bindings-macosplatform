@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface for converting between geographic coordinates and place names.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clgeocoder
 // Deprecated: Use MapKit
 type CLGeocoder struct {
@@ -43,6 +45,7 @@ func CLGeocoderFromID(id objc.ID) *CLGeocoder {
 	return o
 }
 
+// Submits a reverse-geocoding request for the specified location.
 // Deprecated: Use MKReverseGeocodingRequest
 func (o *CLGeocoder) ReverseGeocodeLocationCompletionHandler(location unsafe.Pointer, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -58,6 +61,7 @@ func (o *CLGeocoder) ReverseGeocodeLocationCompletionHandler(location unsafe.Poi
 	o.Ptr().Send(_cLGeocoderSelReverseGeocodeLocationCompletionHandler, location, __block_completionHandler)
 }
 
+// Submits a reverse-geocoding request for the specified location and locale.
 // Deprecated: Use MKReverseGeocodingRequest
 func (o *CLGeocoder) ReverseGeocodeLocationPreferredLocaleCompletionHandler(location unsafe.Pointer, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -73,6 +77,7 @@ func (o *CLGeocoder) ReverseGeocodeLocationPreferredLocaleCompletionHandler(loca
 	o.Ptr().Send(_cLGeocoderSelReverseGeocodeLocationPreferredLocaleCompletionHandler, location, locale.Ptr(), __block_completionHandler)
 }
 
+// Submits a forward-geocoding request using the specified address dictionary.
 // Deprecated: Use MKReverseGeocodingRequest
 func (o *CLGeocoder) GeocodeAddressDictionaryCompletionHandler(addressDictionary *foundation.NSDictionary[objc.ID, objc.ID], completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -85,9 +90,10 @@ func (o *CLGeocoder) GeocodeAddressDictionaryCompletionHandler(addressDictionary
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_cLGeocoderSelGeocodeAddressDictionaryCompletionHandler, addressDictionary, __block_completionHandler)
+	o.Ptr().Send(_cLGeocoderSelGeocodeAddressDictionaryCompletionHandler, addressDictionary.Ptr(), __block_completionHandler)
 }
 
+// Submits a forward-geocoding request using the specified string and region information.
 // Deprecated: Use MKReverseGeocodingRequest
 func (o *CLGeocoder) GeocodeAddressStringInRegionCompletionHandler(addressString *foundation.NSString, region *CLRegion, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -103,6 +109,7 @@ func (o *CLGeocoder) GeocodeAddressStringInRegionCompletionHandler(addressString
 	o.Ptr().Send(_cLGeocoderSelGeocodeAddressStringInRegionCompletionHandler, addressString.Ptr(), region.Ptr(), __block_completionHandler)
 }
 
+// Submits a forward-geocoding requesting using the specified address string and locale information.
 // Deprecated: Use MKGeocodingRequest
 func (o *CLGeocoder) GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(addressString *foundation.NSString, region *CLRegion, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -118,6 +125,7 @@ func (o *CLGeocoder) GeocodeAddressStringInRegionPreferredLocaleCompletionHandle
 	o.Ptr().Send(_cLGeocoderSelGeocodeAddressStringInRegionPreferredLocaleCompletionHandler, addressString.Ptr(), region.Ptr(), locale.Ptr(), __block_completionHandler)
 }
 
+// Submits a forward-geocoding request using the specified string.
 // Deprecated: Use MKGeocodingRequest
 func (o *CLGeocoder) GeocodeAddressStringCompletionHandler(addressString *foundation.NSString, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -133,6 +141,7 @@ func (o *CLGeocoder) GeocodeAddressStringCompletionHandler(addressString *founda
 	o.Ptr().Send(_cLGeocoderSelGeocodeAddressStringCompletionHandler, addressString.Ptr(), __block_completionHandler)
 }
 
+// Cancels a pending geocoding request.
 // Deprecated: Use MKGeocodingRequest
 func (o *CLGeocoder) CancelGeocode() {
 	o.Ptr().Send(_cLGeocoderSelCancelGeocode)
@@ -143,6 +152,7 @@ func (o *CLGeocoder) IsGeocoding() bool {
 	return _ret
 }
 
+// Submits a forward-geocoding requesting using the specified Contacts framework information.
 // Deprecated: Use MKReverseGeocodingRequest
 func (o *CLGeocoder) GeocodePostalAddressCompletionHandler(postalAddress *contacts.CNPostalAddress, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -158,6 +168,7 @@ func (o *CLGeocoder) GeocodePostalAddressCompletionHandler(postalAddress *contac
 	o.Ptr().Send(_cLGeocoderSelGeocodePostalAddressCompletionHandler, postalAddress.Ptr(), __block_completionHandler)
 }
 
+// Submits a forward-geocoding requesting using the specified locale and Contacts framework information.
 // Deprecated: Use MKReverseGeocodingRequest
 func (o *CLGeocoder) GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress *contacts.CNPostalAddress, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*CLPlacemark], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block

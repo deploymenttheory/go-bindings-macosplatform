@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A coder that encodes and decodes objects that your app sends over an XPC connection.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxpccoder
 type NSXPCCoder struct {
 	NSCoder
@@ -35,10 +37,12 @@ func NSXPCCoderFromID(id objc.ID) *NSXPCCoder {
 	return o
 }
 
+// Encodes an object to send over an XPC connection.
 func (o *NSXPCCoder) EncodeXPCObjectForKey(xpcObject *NSObject, key *NSString) {
 	o.Ptr().Send(_nSXPCCoderSelEncodeXPCObjectForKey, xpcObject.Ptr(), key.Ptr())
 }
 
+// Decodes an object and validates that its type matches the type a service provides over XPC.
 func (o *NSXPCCoder) DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key *NSString) *NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCCoderSelDecodeXPCObjectOfTypeForKey, type_, key.Ptr())
 	if _ret != 0 {

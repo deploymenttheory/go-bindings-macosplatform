@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that customizes how a store description aligns with a CloudKit database.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions
 type NSPersistentCloudKitContainerOptions struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func NSPersistentCloudKitContainerOptionsFromID(id objc.ID) *NSPersistentCloudKi
 	return o
 }
 
+// Initializes container options using the given CloudKit container identifier.
 func (o *NSPersistentCloudKitContainerOptions) InitWithContainerIdentifier(containerIdentifier *foundation.NSString) *NSPersistentCloudKitContainerOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerOptionsSelInitWithContainerIdentifier, containerIdentifier.Ptr())
 	if _ret != 0 {

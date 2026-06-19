@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that convolves an image with an additive Laplacian pyramid.
+//
 // ImageLaplacianPyramidAdd wraps [raw.MPSImageLaplacianPyramidAdd] with a fluent Go API.
 type ImageLaplacianPyramidAdd struct {
 	inner *raw.MPSImageLaplacianPyramidAdd
@@ -51,7 +53,7 @@ func (x *ImageLaplacianPyramidAdd) WithLaplacianScale(laplacianScale float32) *I
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageLaplacianPyramidAdd) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd {
@@ -59,7 +61,7 @@ func (x *ImageLaplacianPyramidAdd) WithOffset(offset mpscore.MPSOffset) *ImageLa
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageLaplacianPyramidAdd) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd {
@@ -67,7 +69,7 @@ func (x *ImageLaplacianPyramidAdd) WithClipRect(clipRect metal.MTLRegion) *Image
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageLaplacianPyramidAdd) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidAdd {
@@ -75,7 +77,7 @@ func (x *ImageLaplacianPyramidAdd) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMod
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageLaplacianPyramidAdd) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidAdd {
@@ -83,7 +85,7 @@ func (x *ImageLaplacianPyramidAdd) WithOptions(options mpscore.MPSKernelOptions)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageLaplacianPyramidAdd) WithLabel(label string) *ImageLaplacianPyramidAdd {

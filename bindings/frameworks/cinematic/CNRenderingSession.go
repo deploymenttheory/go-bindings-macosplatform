@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing the context in which rendering occurs.
+//
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnrenderingsession
 type CNRenderingSession struct {
 	foundation.NSObject
@@ -94,12 +96,18 @@ func (o *CNRenderingSession) Quality() CNRenderingQuality {
 
 // The pixel format types supported for the input source. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's sourcePixelBufferAttributes dictionary when implementing AVVideoCompositing.
 func CNRenderingSessionSourcePixelFormatTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsCNRenderingSession), _cNRenderingSessionSelSourcePixelFormatTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNRenderingSession), _cNRenderingSessionSelSourcePixelFormatTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The pixel format types supported for the output destination. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's requiredPixelBufferAttributesForRenderContext dictionary when implementing AVVideoCompositing.
 func CNRenderingSessionDestinationPixelFormatTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsCNRenderingSession), _cNRenderingSessionSelDestinationPixelFormatTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNRenderingSession), _cNRenderingSessionSelDestinationPixelFormatTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

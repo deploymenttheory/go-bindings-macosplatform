@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A custom phrase to be resolved by an Intents extension.
+//
 // SpeakableString wraps [raw.INSpeakableString] with a fluent Go API.
 type SpeakableString struct {
 	inner *raw.INSpeakableString
@@ -30,6 +32,8 @@ func SpeakableStringFromID(id objc.ID) *SpeakableString {
 	return &SpeakableString{inner: raw.INSpeakableStringFromID(id)}
 }
 
+// Initializes the string with a phrase from your app’s vocabulary.
+//
 // NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint creates a new [SpeakableString].
 func NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint(vocabularyIdentifier string, spokenPhrase string, pronunciationHint string) *SpeakableString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSpeakableString")), objc.RegisterName("alloc"))

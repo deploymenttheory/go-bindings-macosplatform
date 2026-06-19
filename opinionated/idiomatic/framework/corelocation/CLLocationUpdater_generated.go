@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides device location updates.
+//
 // LocationUpdater wraps [raw.CLLocationUpdater] with a fluent Go API.
 type LocationUpdater struct {
 	inner *raw.CLLocationUpdater
@@ -35,16 +37,22 @@ func NewLocationUpdater() *LocationUpdater {
 	return &LocationUpdater{inner: raw.CLLocationUpdaterFromID(_id)}
 }
 
+// Resumes the updater.
+//
 // Resume calls the underlying Resume.
 func (x *LocationUpdater) Resume() {
 	x.inner.Resume()
 }
 
+// Pauses the updater.
+//
 // Pause calls the underlying Pause.
 func (x *LocationUpdater) Pause() {
 	x.inner.Pause()
 }
 
+// Invalidates the updater.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *LocationUpdater) Invalidate() {
 	x.inner.Invalidate()

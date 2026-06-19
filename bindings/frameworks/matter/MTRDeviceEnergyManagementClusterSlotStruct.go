@@ -222,12 +222,15 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalEnergy(nominalEne
 }
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) Costs() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelCosts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelCosts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceEnergyManagementClusterSlotStructSelSetCosts, costs)
+	o.Ptr().Send(_mTRDeviceEnergyManagementClusterSlotStructSelSetCosts, costs.Ptr())
 }
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() *foundation.NSNumber {

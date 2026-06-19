@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A dynamic unordered collection of unique objects.
+//
 // MutableSet wraps [raw.NSMutableSet] with a fluent Go API.
 type MutableSet struct {
 	inner *raw.NSMutableSet[objc.ID]
@@ -42,6 +44,8 @@ func NewMutableSetWithCoder(coder *raw.NSCoder) *MutableSet {
 	return &MutableSet{inner: raw.NSMutableSetFromID[objc.ID](_id)}
 }
 
+// Returns an initialized mutable set with a given initial capacity.
+//
 // NewMutableSetWithCapacity creates a new [MutableSet].
 func NewMutableSetWithCapacity(numItems uint) *MutableSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableSet")), objc.RegisterName("alloc"))
@@ -55,46 +59,64 @@ func (x *MutableSet) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Adds a given object to the set, if it is not already a member.
+//
 // AddObject calls the underlying AddObject.
 func (x *MutableSet) AddObject(object objc.ID) {
 	x.inner.AddObject(object)
 }
 
+// Removes a given object from the set.
+//
 // RemoveObject calls the underlying RemoveObject.
 func (x *MutableSet) RemoveObject(object objc.ID) {
 	x.inner.RemoveObject(object)
 }
 
+// Adds to the set each object contained in a given array that is not already a member.
+//
 // AddObjectsFromArray calls the underlying AddObjectsFromArray.
 func (x *MutableSet) AddObjectsFromArray(array *raw.NSArray[objc.ID]) {
 	x.inner.AddObjectsFromArray(array)
 }
 
+// Removes from the receiving set each object that isn’t a member of another given set.
+//
 // IntersectSet calls the underlying IntersectSet.
 func (x *MutableSet) IntersectSet(otherSet *raw.NSSet[objc.ID]) {
 	x.inner.IntersectSet(otherSet)
 }
 
+// Removes each object in another given set from the receiving set, if present.
+//
 // MinusSet calls the underlying MinusSet.
 func (x *MutableSet) MinusSet(otherSet *raw.NSSet[objc.ID]) {
 	x.inner.MinusSet(otherSet)
 }
 
+// Empties the set of all of its members.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MutableSet) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()
 }
 
+// Adds each object in another given set to the receiving set, if not present.
+//
 // UnionSet calls the underlying UnionSet.
 func (x *MutableSet) UnionSet(otherSet *raw.NSSet[objc.ID]) {
 	x.inner.UnionSet(otherSet)
 }
 
+// Empties the receiving set, then adds each object contained in another given set.
+//
 // SetSet calls the underlying SetSet.
 func (x *MutableSet) SetSet(otherSet *raw.NSSet[objc.ID]) {
 	x.inner.SetSet(otherSet)
 }
 
+// Evaluates a given predicate against the set’s content and removes from the set those objects for which the predicate returns false.
+//
 // FilterUsingPredicate calls the underlying FilterUsingPredicate.
 func (x *MutableSet) FilterUsingPredicate(predicate *raw.NSPredicate) {
 	x.inner.FilterUsingPredicate(predicate)

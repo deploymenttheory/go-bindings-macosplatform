@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The abstract superclass for analysis requests.
+//
 // Request wraps [raw.VNRequest] with a fluent Go API.
 type Request struct {
 	inner *raw.VNRequest
@@ -39,7 +41,7 @@ func NewRequest() *Request {
 	return &Request{inner: raw.VNRequestFromID(_id)}
 }
 
-// @abstract Creates a new VNRequest with an optional completion handler. @param completionHandler	The block to be invoked after the request has completed its processing. The completion handler gets executed on the same dispatch queue as the request being executed.
+// Creates a new Vision request with an optional completion handler.
 //
 // NewRequestWithCompletionHandler creates a new [Request].
 func NewRequestWithCompletionHandler(completionHandler func(*raw.VNRequest, unsafe.Pointer)) *Request {
@@ -48,7 +50,7 @@ func NewRequestWithCompletionHandler(completionHandler func(*raw.VNRequest, unsa
 	return &Request{inner: raw.VNRequestFromID(_id)}
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *Request) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *Request {
@@ -56,7 +58,7 @@ func (x *Request) WithPreferBackgroundProcessing(preferBackgroundProcessing bool
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *Request) WithUsesCPUOnly(usesCPUOnly bool) *Request {
@@ -64,7 +66,7 @@ func (x *Request) WithUsesCPUOnly(usesCPUOnly bool) *Request {
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *Request) WithRevision(revision uint) *Request {
@@ -72,7 +74,7 @@ func (x *Request) WithRevision(revision uint) *Request {
 	return x
 }
 
-// @discussion Tries to abort the request as soon as possible. Results will be nil. The completionHandler (if present) will be called with an error of VNErrorRequestCancelled.
+// Cancels the request before it can finish executing.
 //
 // Cancel calls the underlying Cancel.
 func (x *Request) Cancel() {
@@ -135,21 +137,21 @@ func (x *Request) SetRevision(revision uint) {
 	x.inner.SetRevision(revision)
 }
 
-// @brief Obtain the collection of compute device per stage that are supported by the request. @discussion This method's result is based on the current state of configuration of the target request at the time of the call. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return A dictionary of per-stage supported compute devices, or `nil` if an error occurs.
+// The collection of compute devices per stage that a request supports.
 //
 // SupportedComputeStageDevicesAndReturnError calls the underlying SupportedComputeStageDevicesAndReturnError.
 func (x *Request) SupportedComputeStageDevicesAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	return x.inner.SupportedComputeStageDevicesAndReturnError()
 }
 
-// @brief Determine what the currently configured compute device is for a specific compute stage. @param computeStage The compute stage to be introspected. @return The currently assigned compute device, or `nil` if there is no explicit assignment.
+// Returns the compute device for a compute stage.
 //
 // ComputeDeviceForComputeStage calls the underlying ComputeDeviceForComputeStage.
 func (x *Request) ComputeDeviceForComputeStage(computeStage *foundation.NSString) coreml.MLComputeDeviceProtocol {
 	return x.inner.ComputeDeviceForComputeStage(computeStage)
 }
 
-// @brief Assign a specific compute device for a compute stage. @discussion It is important to note that any compute device can be configured for a given compute stage.  Only when the request is performed is the validity of the (compute device / compute stage) assignments checked.  Valid compute devices for a request's compute stages can be obtained via `-supportedComputeStageDevicesAndReturnError:`. @param computeDevice The compute device to assign to the compute stage.  Passing nil for this parameter will remove any explicit compute device assignment, allowing Vision to select which device to use. @param computeStage The compute stage being configured.
+// Assigns a compute device for a compute stage.
 //
 // SetComputeDeviceForComputeStage calls the underlying SetComputeDeviceForComputeStage.
 func (x *Request) SetComputeDeviceForComputeStage(computeDevice coreml.MLComputeDeviceProtocol, computeStage *foundation.NSString) {

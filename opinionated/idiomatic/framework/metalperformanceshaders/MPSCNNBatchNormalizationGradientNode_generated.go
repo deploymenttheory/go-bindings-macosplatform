@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient batch normalization kernel.
+//
 // CNNBatchNormalizationGradientNode wraps [raw.MPSCNNBatchNormalizationGradientNode] with a fluent Go API.
 type CNNBatchNormalizationGradientNode struct {
 	inner *raw.MPSCNNBatchNormalizationGradientNode

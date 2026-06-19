@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A node that displays a text label with a given font.
+// A graphical element that draws text.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sklabelnode
 type SKLabelNode struct {
@@ -62,6 +62,7 @@ func SKLabelNodeFromID(id objc.ID) *SKLabelNode {
 	return o
 }
 
+// Initializes a new label object with a text string.
 func SKLabelNodeLabelNodeWithText(text *foundation.NSString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithText, text.Ptr())
 	if _ret != 0 {
@@ -70,6 +71,7 @@ func SKLabelNodeLabelNodeWithText(text *foundation.NSString) *SKLabelNode {
 	return SKLabelNodeFromID(_ret)
 }
 
+// Initializes a new label object with an attributed text string.
 func SKLabelNodeLabelNodeWithAttributedText(attributedText *foundation.NSAttributedString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithAttributedText, attributedText.Ptr())
 	if _ret != 0 {
@@ -78,6 +80,7 @@ func SKLabelNodeLabelNodeWithAttributedText(attributedText *foundation.NSAttribu
 	return SKLabelNodeFromID(_ret)
 }
 
+// Initializes a new label object.
 func SKLabelNodeLabelNodeWithFontNamed(fontName *foundation.NSString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithFontNamed, fontName.Ptr())
 	if _ret != 0 {
@@ -86,6 +89,7 @@ func SKLabelNodeLabelNodeWithFontNamed(fontName *foundation.NSString) *SKLabelNo
 	return SKLabelNodeFromID(_ret)
 }
 
+// Initializes a new label object with a specified font.
 func (o *SKLabelNode) InitWithFontNamed(fontName *foundation.NSString) *SKLabelNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelInitWithFontNamed, fontName.Ptr())
 	if _ret != 0 {

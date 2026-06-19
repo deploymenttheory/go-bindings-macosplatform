@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class NSXMLElement @abstract An XML element @discussion Note: Trying to add a document, namespace, attribute, or node with a parent throws an exception. To add a node with a parent first detach or create a copy of it.
+// The element nodes in an XML tree structure.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmlelement
 type NSXMLElement struct {
@@ -261,5 +261,5 @@ func (o *NSXMLElement) SetNamespaces(namespaces *NSArray[*NSXMLNode]) {
 // @method setAttributesAsDictionary: @abstract Set the attributes base on a name-value dictionary. @discussion This method is deprecated and does not function correctly. Use -setAttributesWithDictionary: instead.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSXMLElement) SetAttributesAsDictionary(attributes *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSXMLElementSelSetAttributesAsDictionary, attributes)
+	o.Ptr().Send(_nSXMLElementSelSetAttributesAsDictionary, attributes.Ptr())
 }

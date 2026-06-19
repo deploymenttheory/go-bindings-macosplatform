@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class that simplifies loading OpenGL or OpenGL ES texture datas from a variety of image file formats.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glktextureloader
 type GLKTextureLoader struct {
 	foundation.NSObject
@@ -49,9 +51,10 @@ func GLKTextureLoaderFromID(id objc.ID) *GLKTextureLoader {
 	return o
 }
 
+// Loads a 2D texture image from a file and creates a new texture from the data.
 func GLKTextureLoaderTextureWithContentsOfFileOptionsError(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfFileOptionsError, path.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfFileOptionsError, path.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -61,9 +64,10 @@ func GLKTextureLoaderTextureWithContentsOfFileOptionsError(path *foundation.NSSt
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Loads a 2D texture image from a URL and creates a new texture from the data.
 func GLKTextureLoaderTextureWithContentsOfURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -75,7 +79,7 @@ func GLKTextureLoaderTextureWithContentsOfURLOptionsError(url *foundation.NSURL,
 
 func GLKTextureLoaderTextureWithNameScaleFactorBundleOptionsError(name *foundation.NSString, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsError, name.Ptr(), scaleFactor, bundle.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -85,9 +89,10 @@ func GLKTextureLoaderTextureWithNameScaleFactorBundleOptionsError(name *foundati
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Loads a 2D texture image from a memory range and creates a new texture from the data.
 func GLKTextureLoaderTextureWithContentsOfDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithContentsOfDataOptionsError, data.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -97,9 +102,10 @@ func GLKTextureLoaderTextureWithContentsOfDataOptionsError(data *foundation.NSDa
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Loads a 2D texture image from a Quartz image and creates a new texture from the data.
 func GLKTextureLoaderTextureWithCGImageOptionsError(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithCGImageOptionsError, cgImage, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelTextureWithCGImageOptionsError, cgImage, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -109,9 +115,10 @@ func GLKTextureLoaderTextureWithCGImageOptionsError(cgImage unsafe.Pointer, opti
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Loads a cube map texture image from a series of files and creates a new texture from the data.
 func GLKTextureLoaderCubeMapWithContentsOfFilesOptionsError(paths *foundation.NSArray[objc.ID], options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsError, paths, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsError, paths.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -121,9 +128,10 @@ func GLKTextureLoaderCubeMapWithContentsOfFilesOptionsError(paths *foundation.NS
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Loads a cube map texture image from a single file and creates a new texture from the data.
 func GLKTextureLoaderCubeMapWithContentsOfFileOptionsError(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsError, path.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsError, path.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -133,9 +141,10 @@ func GLKTextureLoaderCubeMapWithContentsOfFileOptionsError(path *foundation.NSSt
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Loads a cube map texture image from a single URL and creates a new texture from the data.
 func GLKTextureLoaderCubeMapWithContentsOfURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) (*GLKTextureInfo, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKTextureLoader), _gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -145,6 +154,7 @@ func GLKTextureLoaderCubeMapWithContentsOfURLOptionsError(url *foundation.NSURL,
 	return GLKTextureInfoFromID(_ret), nil
 }
 
+// Initializes a new texture loader object.
 func (o *GLKTextureLoader) InitWithShareContext(context_ *appkit.NSOpenGLContext) *GLKTextureLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKTextureLoaderSelInitWithShareContext, context_.Ptr())
 	if _ret != 0 {
@@ -153,6 +163,7 @@ func (o *GLKTextureLoader) InitWithShareContext(context_ *appkit.NSOpenGLContext
 	return GLKTextureLoaderFromID(_ret)
 }
 
+// Asynchronously loads a 2D texture image from a file and creates a new texture from the data.
 func (o *GLKTextureLoader) TextureWithContentsOfFileOptionsQueueCompletionHandler(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -164,9 +175,10 @@ func (o *GLKTextureLoader) TextureWithContentsOfFileOptionsQueueCompletionHandle
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelTextureWithContentsOfFileOptionsQueueCompletionHandler, path.Ptr(), options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelTextureWithContentsOfFileOptionsQueueCompletionHandler, path.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }
 
+// Asynchronously loads a 2D texture image from a URL and creates a new texture from the data.
 func (o *GLKTextureLoader) TextureWithContentsOfURLOptionsQueueCompletionHandler(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -178,7 +190,7 @@ func (o *GLKTextureLoader) TextureWithContentsOfURLOptionsQueueCompletionHandler
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelTextureWithContentsOfURLOptionsQueueCompletionHandler, url.Ptr(), options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelTextureWithContentsOfURLOptionsQueueCompletionHandler, url.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }
 
 func (o *GLKTextureLoader) TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler(name *foundation.NSString, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
@@ -192,9 +204,10 @@ func (o *GLKTextureLoader) TextureWithNameScaleFactorBundleOptionsQueueCompletio
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsQueueCompletionHandler, name.Ptr(), scaleFactor, bundle.Ptr(), options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelTextureWithNameScaleFactorBundleOptionsQueueCompletionHandler, name.Ptr(), scaleFactor, bundle.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }
 
+// Asynchronously loads a 2D texture image from a memory range and creates a new texture from the data.
 func (o *GLKTextureLoader) TextureWithContentsOfDataOptionsQueueCompletionHandler(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -206,9 +219,10 @@ func (o *GLKTextureLoader) TextureWithContentsOfDataOptionsQueueCompletionHandle
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelTextureWithContentsOfDataOptionsQueueCompletionHandler, data.Ptr(), options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelTextureWithContentsOfDataOptionsQueueCompletionHandler, data.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }
 
+// Asynchronously loads a 2D texture image from a Quartz image and creates a new texture from the data.
 func (o *GLKTextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -220,9 +234,10 @@ func (o *GLKTextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgIma
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelTextureWithCGImageOptionsQueueCompletionHandler, cgImage, options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelTextureWithCGImageOptionsQueueCompletionHandler, cgImage, options.Ptr(), queue.Ptr(), __block_block)
 }
 
+// Asynchronously loads a cube map texture image from a series of files and creates a new texture from the data.
 func (o *GLKTextureLoader) CubeMapWithContentsOfFilesOptionsQueueCompletionHandler(paths *foundation.NSArray[objc.ID], options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -234,9 +249,10 @@ func (o *GLKTextureLoader) CubeMapWithContentsOfFilesOptionsQueueCompletionHandl
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsQueueCompletionHandler, paths, options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfFilesOptionsQueueCompletionHandler, paths.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }
 
+// Asynchronously loads a cube map texture image from a single file and creates a new texture from the data.
 func (o *GLKTextureLoader) CubeMapWithContentsOfFileOptionsQueueCompletionHandler(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -248,9 +264,10 @@ func (o *GLKTextureLoader) CubeMapWithContentsOfFileOptionsQueueCompletionHandle
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsQueueCompletionHandler, path.Ptr(), options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfFileOptionsQueueCompletionHandler, path.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }
 
+// Asynchronously loads a cube map texture image from a single URL and creates a new texture from the data.
 func (o *GLKTextureLoader) CubeMapWithContentsOfURLOptionsQueueCompletionHandler(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*GLKTextureInfo, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -262,5 +279,5 @@ func (o *GLKTextureLoader) CubeMapWithContentsOfURLOptionsQueueCompletionHandler
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsQueueCompletionHandler, url.Ptr(), options, queue.Ptr(), __block_block)
+	o.Ptr().Send(_gLKTextureLoaderSelCubeMapWithContentsOfURLOptionsQueueCompletionHandler, url.Ptr(), options.Ptr(), queue.Ptr(), __block_block)
 }

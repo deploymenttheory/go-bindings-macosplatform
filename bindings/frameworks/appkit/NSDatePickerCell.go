@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that controls the behavior of a date picker, or of a single date picker cell in a matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdatepickercell
 type NSDatePickerCell struct {
 	NSActionCell

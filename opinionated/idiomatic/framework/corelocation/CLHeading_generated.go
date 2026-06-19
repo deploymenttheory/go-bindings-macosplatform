@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The orientation of the user’s device, relative to true or magnetic north.
+//
 // Heading wraps [raw.CLHeading] with a fluent Go API.
 type Heading struct {
 	inner *raw.CLHeading

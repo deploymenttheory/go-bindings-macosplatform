@@ -36,7 +36,7 @@ func MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id o
 	return &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{inner: raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id)}
 }
 
-// Initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
 // NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError creates a new [MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams].
 func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {

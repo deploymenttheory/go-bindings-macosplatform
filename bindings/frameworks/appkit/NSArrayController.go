@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bindings-compatible controller that manages a collection of objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsarraycontroller
 type NSArrayController struct {
 	NSObjectController
@@ -71,88 +73,110 @@ func NSArrayControllerFromID(id objc.ID) *NSArrayController {
 	return o
 }
 
+// Triggers filtering of the receiver’s content.
 func (o *NSArrayController) RearrangeObjects() {
 	o.Ptr().Send(_nSArrayControllerSelRearrangeObjects)
 }
 
+// Invoked when any criteria for arranging objects change.
 func (o *NSArrayController) DidChangeArrangementCriteria() {
 	o.Ptr().Send(_nSArrayControllerSelDidChangeArrangementCriteria)
 }
 
+// Returns a given array, appropriately sorted and filtered.
 func (o *NSArrayController) ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSArrayControllerSelArrangeObjects, objects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSArrayControllerSelArrangeObjects, objects.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Sets the receiver’s selection indexes and returns a Boolean value that indicates whether the selection changed.
 func (o *NSArrayController) SetSelectionIndexes(indexes *foundation.NSIndexSet) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelSetSelectionIndexes, indexes.Ptr())
 	return _ret
 }
 
+// Sets the receiver’s selection to the given index, and returns a Boolean value that indicates whether the selection was changed.
 func (o *NSArrayController) SetSelectionIndex(index uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelSetSelectionIndex, index)
 	return _ret
 }
 
+// Adds the objects at the specified indexes in the receiver’s content array to the current selection.
 func (o *NSArrayController) AddSelectionIndexes(indexes *foundation.NSIndexSet) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelAddSelectionIndexes, indexes.Ptr())
 	return _ret
 }
 
+// Removes the object as the specified indexes from the receiver’s current selection.
 func (o *NSArrayController) RemoveSelectionIndexes(indexes *foundation.NSIndexSet) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelRemoveSelectionIndexes, indexes.Ptr())
 	return _ret
 }
 
+// Sets the specified objects as the receiver’s current selection.
 func (o *NSArrayController) SetSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelSetSelectedObjects, objects)
+	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelSetSelectedObjects, objects.Ptr())
 	return _ret
 }
 
+// Adds the specified objects from the receiver’s content array to the current selection.
 func (o *NSArrayController) AddSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelAddSelectedObjects, objects)
+	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelAddSelectedObjects, objects.Ptr())
 	return _ret
 }
 
+// Removes the specified objects from the receiver’s current selection.
 func (o *NSArrayController) RemoveSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelRemoveSelectedObjects, objects)
+	_ret := objc.Send[bool](o.Ptr(), _nSArrayControllerSelRemoveSelectedObjects, objects.Ptr())
 	return _ret
 }
 
+// Creates a new object and inserts it into the receiver’s content array.
 func (o *NSArrayController) Insert(sender objc.ID) {
 	o.Ptr().Send(_nSArrayControllerSelInsert, sender)
 }
 
+// Selects the next object, relative to the current selection, in the receiver’s arranged content.
 func (o *NSArrayController) SelectNext(sender objc.ID) {
 	o.Ptr().Send(_nSArrayControllerSelSelectNext, sender)
 }
 
+// Selects the previous object, relative to the current selection, in the receiver’s arranged content.
 func (o *NSArrayController) SelectPrevious(sender objc.ID) {
 	o.Ptr().Send(_nSArrayControllerSelSelectPrevious, sender)
 }
 
+// Adds objects to the receiver’s content collection.
 func (o *NSArrayController) AddObjects(objects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSArrayControllerSelAddObjects, objects)
+	o.Ptr().Send(_nSArrayControllerSelAddObjects, objects.Ptr())
 }
 
+// Inserts object into the receiver’s arranged objects array at the location specified by index, and adds it to the receiver’s content collection.
 func (o *NSArrayController) InsertObjectAtArrangedObjectIndex(object objc.ID, index uint) {
 	o.Ptr().Send(_nSArrayControllerSelInsertObjectAtArrangedObjectIndex, object, index)
 }
 
+// Inserts objects into the receiver’s arranged objects array at the locations specified in indexes, and adds it to the receiver’s content collection.
 func (o *NSArrayController) InsertObjectsAtArrangedObjectIndexes(objects *foundation.NSArray[objc.ID], indexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSArrayControllerSelInsertObjectsAtArrangedObjectIndexes, objects, indexes.Ptr())
+	o.Ptr().Send(_nSArrayControllerSelInsertObjectsAtArrangedObjectIndexes, objects.Ptr(), indexes.Ptr())
 }
 
+// Removes the object at the specified index in the receiver’s arranged objects from the receiver’s content array.
 func (o *NSArrayController) RemoveObjectAtArrangedObjectIndex(index uint) {
 	o.Ptr().Send(_nSArrayControllerSelRemoveObjectAtArrangedObjectIndex, index)
 }
 
+// Removes the objects at the specified indexes in the receiver’s arranged objects from the content array.
 func (o *NSArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSArrayControllerSelRemoveObjectsAtArrangedObjectIndexes, indexes.Ptr())
 }
 
+// Removes objects from the receiver’s content collection.
 func (o *NSArrayController) RemoveObjects(objects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSArrayControllerSelRemoveObjects, objects)
+	o.Ptr().Send(_nSArrayControllerSelRemoveObjects, objects.Ptr())
 }
 
 func (o *NSArrayController) AutomaticallyRearrangesObjects() bool {
@@ -165,17 +189,23 @@ func (o *NSArrayController) SetAutomaticallyRearrangesObjects(automaticallyRearr
 }
 
 func (o *NSArrayController) AutomaticRearrangementKeyPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSArrayControllerSelAutomaticRearrangementKeyPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSArrayControllerSelAutomaticRearrangementKeyPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSArrayController) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _nSArrayControllerSelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSArrayControllerSelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 func (o *NSArrayController) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_nSArrayControllerSelSetSortDescriptors, sortDescriptors)
+	o.Ptr().Send(_nSArrayControllerSelSetSortDescriptors, sortDescriptors.Ptr())
 }
 
 func (o *NSArrayController) FilterPredicate() *foundation.NSPredicate {

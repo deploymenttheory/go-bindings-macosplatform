@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the use of the CPU.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcpumetric
 type MXCPUMetric struct {
 	MXMetric
@@ -33,12 +35,18 @@ func MXCPUMetricFromID(id objc.ID) *MXCPUMetric {
 
 // @property      cumulativeCPUTime @abstract      CPU time aggregated cumulatively. @discussion    The data here represents the total CPU time an application consumed over the date range of the containing payload. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXCPUMetric) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXCPUMetricSelCumulativeCPUTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXCPUMetricSelCumulativeCPUTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeCPUInstructions @abstract      CPU instructions retired aggregated cumulatively. @discussion    The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. @discussion    Dimensionless.
 func (o *MXCPUMetric) CumulativeCPUInstructions() *foundation.NSMeasurement[*foundation.NSUnit] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXCPUMetricSelCumulativeCPUInstructions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXCPUMetricSelCumulativeCPUInstructions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnit](_ret)
 }

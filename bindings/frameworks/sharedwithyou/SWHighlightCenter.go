@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains a priority-ordered list of universal links to share with the current user.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swhighlightcenter
 type SWHighlightCenter struct {
 	foundation.NSObject
@@ -43,7 +45,7 @@ func SWHighlightCenterFromID(id objc.ID) *SWHighlightCenter {
 	return o
 }
 
-// @abstract A convenience method to get a SWHighlight for a given URL @param URL The URL used to find the SWHighlight @param completionHandler an SWHighlight if it  was fetched. The completion handler will always be invoked on the main queue
+// Returns a highlight for a specified URL.
 func (o *SWHighlightCenter) GetHighlightForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*SWHighlight, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -58,6 +60,7 @@ func (o *SWHighlightCenter) GetHighlightForURLCompletionHandler(uRL *foundation.
 	o.Ptr().Send(_sWHighlightCenterSelGetHighlightForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
 }
 
+// Returns a collaboration highlight for a specified collaboration identifier.
 func (o *SWHighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier *foundation.NSString) (*SWCollaborationHighlight, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightCenterSelCollaborationHighlightForIdentifierError, collaborationIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -70,7 +73,7 @@ func (o *SWHighlightCenter) CollaborationHighlightForIdentifierError(collaborati
 	return SWCollaborationHighlightFromID(_ret), nil
 }
 
-// @abstract A convenience method to get an SWCollaborationHighlight for a given URL @param URL The URL used to find the SWCollaborationHighlight @param completionHandler  an SWCollaborationHighlight if it was fetched. The completion handler will always be invoked on the main queue
+// Returns a collaboration highlight for a specified URL.
 func (o *SWHighlightCenter) GetCollaborationHighlightForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*SWCollaborationHighlight, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -85,17 +88,17 @@ func (o *SWHighlightCenter) GetCollaborationHighlightForURLCompletionHandler(uRL
 	o.Ptr().Send(_sWHighlightCenterSelGetCollaborationHighlightForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
 }
 
-// @abstract Post a given event to the highlight center for display in Messages. @param event The event to add for a specific highlight
+// Posts a specified event to the highlight center for display.
 func (o *SWHighlightCenter) PostNoticeForHighlightEvent(event SWHighlightEvent) {
 	o.Ptr().Send(_sWHighlightCenterSelPostNoticeForHighlightEvent, event)
 }
 
-// @abstract Clear notices for a given collaboration highlight in Messages. @param highlight The highlight to clear notices from.
+// Clears the notices for a specified collaboration highlight.
 func (o *SWHighlightCenter) ClearNoticesForHighlight(highlight *SWCollaborationHighlight) {
 	o.Ptr().Send(_sWHighlightCenterSelClearNoticesForHighlight, highlight.Ptr())
 }
 
-// @abstract Method to sign passed in data with local device's private key @param data NSData that needs to be signed @param collaborationHighlight The corresponding collaboration highlight. @param completionHandler Signed data along with proof of inclusion for merkle if signing succeeded, otherwise an error. The completion handler will always be invoked on main queue
+// Signs passed-in data with the local device’s private key.
 func (o *SWHighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingDataCompletionHandler(collaborationHighlight *SWCollaborationHighlight, data *foundation.NSData, completionHandler func(*sharedwithyoucore.SWSignedPersonIdentityProof, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

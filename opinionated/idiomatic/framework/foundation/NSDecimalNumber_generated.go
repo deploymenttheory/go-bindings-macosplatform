@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for representing and performing arithmetic on base-10 numbers.
+//
 // DecimalNumber wraps [raw.NSDecimalNumber] with a fluent Go API.
 type DecimalNumber struct {
 	inner *raw.NSDecimalNumber
@@ -30,6 +32,8 @@ func DecimalNumberFromID(id objc.ID) *DecimalNumber {
 	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(id)}
 }
 
+// Initializes a decimal number using the given mantissa, exponent, and sign.
+//
 // NewDecimalNumberWithMantissaExponentIsNegative creates a new [DecimalNumber].
 func NewDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent in
 	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
 }
 
+// Initializes a decimal number to represent a given decimal.
+//
 // NewDecimalNumberWithDecimal creates a new [DecimalNumber].
 func NewDecimalNumberWithDecimal(dcm raw.NSDecimal) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewDecimalNumberWithDecimal(dcm raw.NSDecimal) *DecimalNumber {
 	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
 }
 
+// Initializes a decimal number so that its value is equivalent to that in a given numeric string.
+//
 // NewDecimalNumberWithString creates a new [DecimalNumber].
 func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
@@ -51,6 +59,8 @@ func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
 	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
 }
 
+// Initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
+//
 // NewDecimalNumberWithStringLocale creates a new [DecimalNumber].
 func NewDecimalNumberWithStringLocale(numberValue string, locale objc.ID) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
@@ -64,6 +74,8 @@ func (x *DecimalNumber) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Adds this number to another given number.
+//
 // DecimalNumberByAdding calls the underlying DecimalNumberByAdding.
 func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
 	_r := x.inner.DecimalNumberByAdding(decimalNumber)
@@ -73,6 +85,8 @@ func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber
 	return &DecimalNumber{inner: _r}
 }
 
+// Adds this number to another given number using the specified behavior.
+//
 // DecimalNumberByAddingWithBehavior calls the underlying DecimalNumberByAddingWithBehavior.
 func (x *DecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberByAddingWithBehavior(decimalNumber, behavior)
@@ -82,6 +96,8 @@ func (x *DecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSD
 	return &DecimalNumber{inner: _r}
 }
 
+// Subtracts another given number from this one.
+//
 // DecimalNumberBySubtracting calls the underlying DecimalNumberBySubtracting.
 func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
 	_r := x.inner.DecimalNumberBySubtracting(decimalNumber)
@@ -91,6 +107,8 @@ func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalN
 	return &DecimalNumber{inner: _r}
 }
 
+// Subtracts this a given number from this one using the specified behavior.
+//
 // DecimalNumberBySubtractingWithBehavior calls the underlying DecimalNumberBySubtractingWithBehavior.
 func (x *DecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberBySubtractingWithBehavior(decimalNumber, behavior)
@@ -100,6 +118,8 @@ func (x *DecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *ra
 	return &DecimalNumber{inner: _r}
 }
 
+// Multiplies the number by another given number.
+//
 // DecimalNumberByMultiplyingBy calls the underlying DecimalNumberByMultiplyingBy.
 func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
 	_r := x.inner.DecimalNumberByMultiplyingBy(decimalNumber)
@@ -109,6 +129,8 @@ func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *raw.NSDecima
 	return &DecimalNumber{inner: _r}
 }
 
+// Multiplies this number by another given number using the specified behavior.
+//
 // DecimalNumberByMultiplyingByWithBehavior calls the underlying DecimalNumberByMultiplyingByWithBehavior.
 func (x *DecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberByMultiplyingByWithBehavior(decimalNumber, behavior)
@@ -118,6 +140,8 @@ func (x *DecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber *
 	return &DecimalNumber{inner: _r}
 }
 
+// Divides the number by another given number.
+//
 // DecimalNumberByDividingBy calls the underlying DecimalNumberByDividingBy.
 func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
 	_r := x.inner.DecimalNumberByDividingBy(decimalNumber)
@@ -127,6 +151,8 @@ func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *raw.NSDecimalNu
 	return &DecimalNumber{inner: _r}
 }
 
+// Divides this number by another given number using the specified behavior.
+//
 // DecimalNumberByDividingByWithBehavior calls the underlying DecimalNumberByDividingByWithBehavior.
 func (x *DecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberByDividingByWithBehavior(decimalNumber, behavior)
@@ -136,6 +162,8 @@ func (x *DecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *raw
 	return &DecimalNumber{inner: _r}
 }
 
+// Raises the number to a given power.
+//
 // DecimalNumberByRaisingToPower calls the underlying DecimalNumberByRaisingToPower.
 func (x *DecimalNumber) DecimalNumberByRaisingToPower(power uint) *DecimalNumber {
 	_r := x.inner.DecimalNumberByRaisingToPower(power)
@@ -145,6 +173,8 @@ func (x *DecimalNumber) DecimalNumberByRaisingToPower(power uint) *DecimalNumber
 	return &DecimalNumber{inner: _r}
 }
 
+// Raises the number to a given power using the specified behavior.
+//
 // DecimalNumberByRaisingToPowerWithBehavior calls the underlying DecimalNumberByRaisingToPowerWithBehavior.
 func (x *DecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberByRaisingToPowerWithBehavior(power, behavior)
@@ -154,6 +184,8 @@ func (x *DecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, be
 	return &DecimalNumber{inner: _r}
 }
 
+// Multiplies the number by 10 raised to the given power.
+//
 // DecimalNumberByMultiplyingByPowerOf10 calls the underlying DecimalNumberByMultiplyingByPowerOf10.
 func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
 	_r := x.inner.DecimalNumberByMultiplyingByPowerOf10(power)
@@ -163,6 +195,8 @@ func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *Deci
 	return &DecimalNumber{inner: _r}
 }
 
+// Multiplies the number by 10 raised to the given power using the specified behavior.
+//
 // DecimalNumberByMultiplyingByPowerOf10WithBehavior calls the underlying DecimalNumberByMultiplyingByPowerOf10WithBehavior.
 func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberByMultiplyingByPowerOf10WithBehavior(power, behavior)
@@ -172,6 +206,8 @@ func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(power 
 	return &DecimalNumber{inner: _r}
 }
 
+// Returns a rounded version of the decimal number using the specified rounding behavior.
+//
 // DecimalNumberByRoundingAccordingToBehavior calls the underlying DecimalNumberByRoundingAccordingToBehavior.
 func (x *DecimalNumber) DecimalNumberByRoundingAccordingToBehavior(behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
 	_r := x.inner.DecimalNumberByRoundingAccordingToBehavior(behavior)

@@ -62,10 +62,13 @@ func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetServerSidePr
 }
 
 func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) GroupKeySetIDs() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadAllIndicesParamsSelGroupKeySetIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadAllIndicesParamsSelGroupKeySetIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetGroupKeySetIDs(groupKeySetIDs *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGroupKeyManagementClusterKeySetReadAllIndicesParamsSelSetGroupKeySetIDs, groupKeySetIDs)
+	o.Ptr().Send(_mTRGroupKeyManagementClusterKeySetReadAllIndicesParamsSelSetGroupKeySetIDs, groupKeySetIDs.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A custom pronoun behavior for use in a specific langauge.
+//
 // MorphologyCustomPronoun wraps [raw.NSMorphologyCustomPronoun] with a fluent Go API.
 type MorphologyCustomPronoun struct {
 	inner *raw.NSMorphologyCustomPronoun
@@ -36,30 +38,40 @@ func NewMorphologyCustomPronoun() *MorphologyCustomPronoun {
 	return &MorphologyCustomPronoun{inner: raw.NSMorphologyCustomPronounFromID(_id)}
 }
 
+// The subject pronoun form to apply when using this custom pronoun behavior.
+//
 // WithSubjectForm sets the subjectForm property and returns the receiver for chaining.
 func (x *MorphologyCustomPronoun) WithSubjectForm(subjectForm string) *MorphologyCustomPronoun {
 	x.inner.SetSubjectForm(foundation.NSStringStringWithUTF8String(subjectForm))
 	return x
 }
 
+// The object pronoun form to apply when using this custom pronoun behavior.
+//
 // WithObjectForm sets the objectForm property and returns the receiver for chaining.
 func (x *MorphologyCustomPronoun) WithObjectForm(objectForm string) *MorphologyCustomPronoun {
 	x.inner.SetObjectForm(foundation.NSStringStringWithUTF8String(objectForm))
 	return x
 }
 
+// The posessive pronoun form to apply when using this custom pronoun behavior.
+//
 // WithPossessiveForm sets the possessiveForm property and returns the receiver for chaining.
 func (x *MorphologyCustomPronoun) WithPossessiveForm(possessiveForm string) *MorphologyCustomPronoun {
 	x.inner.SetPossessiveForm(foundation.NSStringStringWithUTF8String(possessiveForm))
 	return x
 }
 
+// The posessive adjective pronoun form to apply when using this custom pronoun behavior.
+//
 // WithPossessiveAdjectiveForm sets the possessiveAdjectiveForm property and returns the receiver for chaining.
 func (x *MorphologyCustomPronoun) WithPossessiveAdjectiveForm(possessiveAdjectiveForm string) *MorphologyCustomPronoun {
 	x.inner.SetPossessiveAdjectiveForm(foundation.NSStringStringWithUTF8String(possessiveAdjectiveForm))
 	return x
 }
 
+// The reflexive pronoun form to apply when using this custom pronoun behavior.
+//
 // WithReflexiveForm sets the reflexiveForm property and returns the receiver for chaining.
 func (x *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm string) *MorphologyCustomPronoun {
 	x.inner.SetReflexiveForm(foundation.NSStringStringWithUTF8String(reflexiveForm))

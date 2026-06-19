@@ -3,12 +3,14 @@
 
 package scenekit
 
+// A representation of a three-component vector.
 type SCNVector3 struct {
 	X float64
 	Y float64
 	Z float64
 }
 
+// A representation of a four-component vector.
 type SCNVector4 struct {
 	X float64
 	Y float64

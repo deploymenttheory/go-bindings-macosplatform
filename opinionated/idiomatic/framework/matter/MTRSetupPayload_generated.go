@@ -56,7 +56,7 @@ func NewMTRSetupPayloadWithSetupPasscodeDiscriminator(setupPasscode *foundation.
 	return &MTRSetupPayload{inner: raw.MTRSetupPayloadFromID(_id)}
 }
 
-// The individual constituent payloads, if the receiver represents a concatenated payload. @see concatenated
+// The individual constituent payloads, if the receiver represents a concatenated payload.
 //
 // WithSubPayloads sets the collection, converting the Go slice to an NSArray.
 func (x *MTRSetupPayload) WithSubPayloads(items ...*raw.MTRSetupPayload) *MTRSetupPayload {

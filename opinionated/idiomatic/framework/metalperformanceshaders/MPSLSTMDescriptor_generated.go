@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a long short-term memory block or layer.
+//
 // LSTMDescriptor wraps [raw.MPSLSTMDescriptor] with a fluent Go API.
 type LSTMDescriptor struct {
 	inner *raw.MPSLSTMDescriptor

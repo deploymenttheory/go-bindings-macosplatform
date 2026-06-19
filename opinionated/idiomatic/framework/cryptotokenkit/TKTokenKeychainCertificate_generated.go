@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A token’s certificate as stored in the keychain.
+//
 // TokenKeychainCertificate wraps [raw.TKTokenKeychainCertificate] with a fluent Go API.
 type TokenKeychainCertificate struct {
 	inner *raw.TKTokenKeychainCertificate
@@ -31,7 +33,7 @@ func TokenKeychainCertificateFromID(id objc.ID) *TokenKeychainCertificate {
 	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(id)}
 }
 
-// @discussion initialize TKTokenKeychainCertificate with data from SecCertificateRef.  Use SecCertificateCreateWithData to obtain SecCertificateRef.  @c constraints property is initialized indicating that reading of certificate is always allowed, all other operations are disallowed.
+// Initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
 //
 // NewTokenKeychainCertificateWithCertificateObjectID creates a new [TokenKeychainCertificate].
 func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TokenKeychainCertificate {
@@ -40,7 +42,7 @@ func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Po
 	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(_id)}
 }
 
-// @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
+// The user-visible label for the keychain item.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
@@ -48,7 +50,7 @@ func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertifi
 	return x
 }
 
-// @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
+// Access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 //
 // WithConstraints sets the constraints property and returns the receiver for chaining.
 func (x *TokenKeychainCertificate) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainCertificate {

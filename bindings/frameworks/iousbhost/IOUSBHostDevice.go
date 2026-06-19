@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class       IOUSBHostDevice @brief       The IOUSBHostObject representing a USB device @discussion  This class provides functionality to send control requests to the default control endpoint
+// The class that claims and configures devices, retrieves descriptors, and sends device requests.
 //
 // Apple documentation: https://developer.apple.com/documentation/iousbhost/iousbhostdevice
 type IOUSBHostDevice struct {
@@ -38,13 +38,13 @@ func IOUSBHostDeviceFromID(id objc.ID) *IOUSBHostDevice {
 	return o
 }
 
-// @brief       Creates a matching dictionary for an IOUSBHostDevice to be passed into IOServiceGetMatchingService @param       vendorID NSNumber representation of device vendorID @param       productID NSNumber representation of device productID @param       bcdDevice NSNumber representation of device release number @param       deviceClass NSNumber representation of device class @param       deviceSubclass NSNumber representation of device subclass @param       deviceProtocol NSNumber representation of device protocol @param       speed NSNumber representation of device speed @param       productIDArray NSArray of NSNumbers representing all productIDs interested in. If used do not specify the NSNumber productID field @return      CFMutableDictionaryRef to be used with IOService matching methods. To be released by caller.
+// Creates a matching dictionary to find a USB device.
 func IOUSBHostDeviceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray(vendorID *foundation.NSNumber, productID *foundation.NSNumber, bcdDevice *foundation.NSNumber, deviceClass *foundation.NSNumber, deviceSubclass *foundation.NSNumber, deviceProtocol *foundation.NSNumber, speed *foundation.NSNumber, productIDArray *foundation.NSArray[objc.ID]) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsIOUSBHostDevice), _iOUSBHostDeviceSelCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray, vendorID.Ptr(), productID.Ptr(), bcdDevice.Ptr(), deviceClass.Ptr(), deviceSubclass.Ptr(), deviceProtocol.Ptr(), speed.Ptr(), productIDArray)
+	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsIOUSBHostDevice), _iOUSBHostDeviceSelCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray, vendorID.Ptr(), productID.Ptr(), bcdDevice.Ptr(), deviceClass.Ptr(), deviceSubclass.Ptr(), deviceProtocol.Ptr(), speed.Ptr(), productIDArray.Ptr())
 	return _ret
 }
 
-// @brief       Select a new configuration for the device @discussion  This method will select a new configuration for a device. If the device was previously configured all child interfaces will be terminated prior to setting the new configuration.  This method will send the SET_CONFIGURATION control request (USB 2.0 9.4.7) to the device. The interfaces will be registered for matching by default. After the completion of this call, the interfaces are not guaranteed to be immediately available. @param       value Configuration value to select @param       matchInterfaces If YES, any interfaces within the new configuration will be registered for matching. By default this is set to YES. @return      YES on success, an IOReturn error code will be reported on failure.
+// Selects a new configuration for the device.
 func (o *IOUSBHostDevice) ConfigureWithValueMatchInterfacesError(value uint, matchInterfaces bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostDeviceSelConfigureWithValueMatchInterfacesError, value, matchInterfaces, unsafe.Pointer(&_nsErr))
@@ -54,7 +54,7 @@ func (o *IOUSBHostDevice) ConfigureWithValueMatchInterfacesError(value uint, mat
 	return _ret, nil
 }
 
-// @brief       Select a new configuration for the device @discussion  This method will select a new configuration for a device.  If the device was previously configured all child interfaces will be terminated prior to setting the new configuration.  This method will send the SET_CONFIGURATION control request (USB 2.0 9.4.7) to the device. The interfaces will be registered for matching by default. After the completion of this call, the interfaces are not guaranteed to be immediately available. @param       value Configuration value to select @return      YES on success, an IOReturn error code will be reported on failure.
+// Selects a new configuration for the device and registers the interfaces for matching.
 func (o *IOUSBHostDevice) ConfigureWithValueError(value uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostDeviceSelConfigureWithValueError, value, unsafe.Pointer(&_nsErr))
@@ -64,7 +64,7 @@ func (o *IOUSBHostDevice) ConfigureWithValueError(value uint) (bool, error) {
 	return _ret, nil
 }
 
-// @brief       Terminate the device and attempt to reenumerate it @discussion  This function will reset and attempt to reenumerate the USB device. The current IOUSBHostDevice object and all of its children will be terminated. A new IOUSBHostDevice IOService object will be created and registered if the reset is successful and the previous object has finished terminating. The framework IOUSBHostDevice will no longer have a valid connection with IOService userclient after the call returns successfully. A new framework client will need to be created to use the re-enumerated device. @return      YES on success, an IOReturn error code will be reported on failure.
+// Terminates the device and attempts to re-enumerate it.
 func (o *IOUSBHostDevice) ResetWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostDeviceSelResetWithError, unsafe.Pointer(&_nsErr))

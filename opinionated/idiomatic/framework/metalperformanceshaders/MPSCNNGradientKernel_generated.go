@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The base class for gradient layers.
+//
 // CNNGradientKernel wraps [raw.MPSCNNGradientKernel] with a fluent Go API.
 type CNNGradientKernel struct {
 	inner *raw.MPSCNNGradientKernel
@@ -196,7 +198,7 @@ func (x *CNNGradientKernel) WithDestinationImageAllocator(destinationImageAlloca
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNGradientKernel {
@@ -204,7 +206,7 @@ func (x *CNNGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNGr
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithLabel(label string) *CNNGradientKernel {

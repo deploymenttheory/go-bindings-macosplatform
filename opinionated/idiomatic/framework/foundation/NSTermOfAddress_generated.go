@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The type for representing grammatical gender in localized text.
+//
 // TermOfAddress wraps [raw.NSTermOfAddress] with a fluent Go API.
 type TermOfAddress struct {
 	inner *raw.NSTermOfAddress

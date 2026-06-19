@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for image-analysis requests that track unique features across multiple images or video frames.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrackingrequest
 type VNTrackingRequest struct {
 	VNImageBasedRequest
@@ -37,7 +39,7 @@ func VNTrackingRequestFromID(id objc.ID) *VNTrackingRequest {
 	return o
 }
 
-// @brief This class method returns a maximum number of allowed simultaneously executed trackers for [request revision x tracking level] combination @details The total number of simultaneously running trackes is limited due to performance concerns. There is a limit for each combination of [request revision x tracking level] and this method could be used to query that limit @param revision The revision of a specific tracking request (an object of a subclass of VNTrackingRequest). @param trackingLevel Tracking level of a specific tracking request (an object of a subclass of VNTrackingRequest). @param error The address of a variable that will be populated with an error upon failure. If the caller does not need this information, NULL can be passed. @result Maximum number of trackers for a given combination [request revision x tracking level], or 0 if such combination doesn't exist
+// Returns the maximum number of simultaneous trackers for the request.
 func (o *VNTrackingRequest) SupportedNumberOfTrackersAndReturnError() (uint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[uint](o.Ptr(), _vNTrackingRequestSelSupportedNumberOfTrackersAndReturnError, unsafe.Pointer(&_nsErr))

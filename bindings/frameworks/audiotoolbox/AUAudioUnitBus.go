@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines an input or output connection point on an audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus
 type AUAudioUnitBus struct {
 	foundation.NSObject
@@ -51,7 +53,7 @@ func AUAudioUnitBusFromID(id objc.ID) *AUAudioUnitBus {
 	return o
 }
 
-// @property	setFormat:error: @brief		Sets the bus's audio format. @discussion Audio units can generally be expected to support AVAudioFormat's standard format (deinterleaved 32-bit float), at any sample rate. Channel counts can be more complex; see AUAudioUnit.channelCapabilities.
+// Sets the bus’s audio format.
 func (o *AUAudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitBusSelSetFormatError, format.Ptr(), unsafe.Pointer(&_nsErr))
@@ -126,8 +128,11 @@ func (o *AUAudioUnitBus) OwnerAudioUnit() *AUAudioUnit {
 
 // @property	supportedChannelLayoutTags @discussion This is an array of NSNumbers representing AudioChannelLayoutTag.
 func (o *AUAudioUnitBus) SupportedChannelLayoutTags() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aUAudioUnitBusSelSupportedChannelLayoutTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelSupportedChannelLayoutTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property	contextPresentationLatency @brief		Information about latency in the audio unit's processing context. @discussion This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
@@ -140,7 +145,7 @@ func (o *AUAudioUnitBus) SetContextPresentationLatency(contextPresentationLatenc
 	o.Ptr().Send(_aUAudioUnitBusSelSetContextPresentationLatency, contextPresentationLatency)
 }
 
-// @method		initWithFormat:error: @brief		initialize with a default format. @param format	The initial format for the bus. @param outError	An error if the format is unsupported for the bus.
+// Initializes a bus object with a specific format.
 func (o *AUAudioUnitBus) InitWithFormatError(format *avfaudio.AVAudioFormat) (*AUAudioUnitBus, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelInitWithFormatError, format.Ptr(), unsafe.Pointer(&_nsErr))
@@ -155,12 +160,15 @@ func (o *AUAudioUnitBus) InitWithFormatError(format *avfaudio.AVAudioFormat) (*A
 
 // @property	supportedChannelCounts @brief		An array of numbers giving the supported numbers of channels for this bus. @discussion If supportedChannelCounts is nil, then any number less than or equal to maximumChannelCount is supported. If setting supportedChannelCounts makes the current format unsupported, then format will be set to nil. The default value is nil.
 func (o *AUAudioUnitBus) SupportedChannelCounts() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aUAudioUnitBusSelSupportedChannelCounts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitBusSelSupportedChannelCounts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *AUAudioUnitBus) SetSupportedChannelCounts(supportedChannelCounts *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aUAudioUnitBusSelSetSupportedChannelCounts, supportedChannelCounts)
+	o.Ptr().Send(_aUAudioUnitBusSelSetSupportedChannelCounts, supportedChannelCounts.Ptr())
 }
 
 // @property	maximumChannelCount @brief		The maximum numbers of channels supported for this bus. @discussion If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.

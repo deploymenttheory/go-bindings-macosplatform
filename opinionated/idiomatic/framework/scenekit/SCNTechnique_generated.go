@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification for augmenting or postprocessing SceneKit’s rendering of a scene using additional drawing passes with custom Metal or OpenGL shaders.
+//
 // Technique wraps [raw.SCNTechnique] with a fluent Go API.
 type Technique struct {
 	inner *raw.SCNTechnique
@@ -45,18 +47,22 @@ func (x *Technique) WithLibrary(library metal.MTLLibrary) *Technique {
 	return x
 }
 
-// @method handleBindingOfSymbol:usingBlock: @abstract Sets the block to call at render time to bind the value for the specified symbol of the receiver. @param symbol The name of the symbol to bind a value for. @param block The block to call to bind the specified symbol. @discussion The block will be called at every frame for every pass referencing the specified symbol.
+// Specifies a block to be called before rendering using programs with the specified GLSL uniform variable or attribute name.
 //
 // HandleBindingOfSymbolUsing calls the underlying HandleBindingOfSymbolUsing.
 func (x *Technique) HandleBindingOfSymbolUsing(symbol string, block func(uint, uint, *raw.SCNNode, *raw.SCNRenderer)) {
 	x.inner.HandleBindingOfSymbolUsing(foundation.NSStringStringWithUTF8String(symbol), block)
 }
 
+// Returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Technique) ObjectForKeyedSubscript(key objc.ID) objc.ID {
 	return x.inner.ObjectForKeyedSubscript(key)
 }
 
+// Sets a value for the specified shader variable or attribute name, using subscript syntax.
+//
 // SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
 func (x *Technique) SetObjectForKeyedSubscript(obj objc.ID, key foundation.NSCopying) {
 	x.inner.SetObjectForKeyedSubscript(obj, key)

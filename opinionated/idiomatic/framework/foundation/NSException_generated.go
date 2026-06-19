@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a special condition that interrupts the normal flow of program execution.
+//
 // Exception wraps [raw.NSException] with a fluent Go API.
 type Exception struct {
 	inner *raw.NSException
@@ -31,6 +33,8 @@ func ExceptionFromID(id objc.ID) *Exception {
 	return &Exception{inner: raw.NSExceptionFromID(id)}
 }
 
+// Initializes and returns a newly allocated exception object.
+//
 // NewExceptionWithNameReasonUserInfo creates a new [Exception].
 func NewExceptionWithNameReasonUserInfo(aName *raw.NSString, aReason string, aUserInfo purego.IDer) *Exception {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSException")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func (x *Exception) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Raises the receiver, causing program flow to jump to the local exception handler.
+//
 // Raise calls the underlying Raise.
 func (x *Exception) Raise() {
 	x.inner.Raise()

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient neuron filter.
+//
 // CNNNeuronGradient wraps [raw.MPSCNNNeuronGradient] with a fluent Go API.
 type CNNNeuronGradient struct {
 	inner *raw.MPSCNNNeuronGradient
@@ -195,7 +197,7 @@ func (x *CNNNeuronGradient) WithDestinationImageAllocator(destinationImageAlloca
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronGradient {
@@ -203,7 +205,7 @@ func (x *CNNNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNNe
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNNeuronGradient) WithLabel(label string) *CNNNeuronGradient {

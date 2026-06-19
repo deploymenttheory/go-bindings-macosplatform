@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents the combined metrics for the entire playback session.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeritemplaybacksummaryevent
 type AVMetricPlayerItemPlaybackSummaryEvent struct {
 	AVMetricEvent

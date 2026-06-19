@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that adds physics simulation to a node.
+//
 // PhysicsBody wraps [raw.SKPhysicsBody] with a fluent Go API.
 type PhysicsBody struct {
 	inner *raw.SKPhysicsBody
@@ -37,31 +39,39 @@ func NewPhysicsBody() *PhysicsBody {
 	return &PhysicsBody{inner: raw.SKPhysicsBodyFromID(_id)}
 }
 
+// A Boolean value that indicates whether the physics body is moved by the physics simulation.
+//
 // WithDynamic sets the dynamic property and returns the receiver for chaining.
 func (x *PhysicsBody) WithDynamic(dynamic bool) *PhysicsBody {
 	x.inner.SetDynamic(dynamic)
 	return x
 }
 
+// A Boolean value that determines whether the physics world uses an iterative collision detection algorithm.
+//
 // WithUsesPreciseCollisionDetection sets the usesPreciseCollisionDetection property and returns the receiver for chaining.
 func (x *PhysicsBody) WithUsesPreciseCollisionDetection(usesPreciseCollisionDetection bool) *PhysicsBody {
 	x.inner.SetUsesPreciseCollisionDetection(usesPreciseCollisionDetection)
 	return x
 }
 
+// A Boolean value that indicates whether the physics body is affected by angular forces and impulses applied to it.
+//
 // WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAllowsRotation(allowsRotation bool) *PhysicsBody {
 	x.inner.SetAllowsRotation(allowsRotation)
 	return x
 }
 
+// A Boolean value that indicates whether the physics body’s node is pinned to its parent node.
+//
 // WithPinned sets the pinned property and returns the receiver for chaining.
 func (x *PhysicsBody) WithPinned(pinned bool) *PhysicsBody {
 	x.inner.SetPinned(pinned)
 	return x
 }
 
-// If the physics simulation has determined that this body is at rest it may set the resting property to YES. Resting bodies do not participate in the simulation until some collision with a non-resting  object, or an impulse is applied, that unrests it. If all bodies in the world are resting then the simulation as a whole is "at rest".
+// A Boolean property that indicates whether the object is at rest within the physics simulation.
 //
 // WithResting sets the resting property and returns the receiver for chaining.
 func (x *PhysicsBody) WithResting(resting bool) *PhysicsBody {
@@ -69,7 +79,7 @@ func (x *PhysicsBody) WithResting(resting bool) *PhysicsBody {
 	return x
 }
 
-// Determines the 'roughness' for the surface of the physics body (0.0 - 1.0). Defaults to 0.2
+// The roughness of the surface of the physics body.
 //
 // WithFriction sets the friction property and returns the receiver for chaining.
 func (x *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
@@ -77,7 +87,7 @@ func (x *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
 	return x
 }
 
-// Specifies the charge on the body. Charge determines the degree to which a body is affected by electric and magnetic fields. Note that this is a unitless quantity, it is up to the developer to set charge and field strength appropriately. Defaults to 0.0
+// The electrical charge of the physics body.
 //
 // WithCharge sets the charge property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
@@ -85,7 +95,7 @@ func (x *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
 	return x
 }
 
-// Determines the 'bounciness' of the physics body (0.0 - 1.0). Defaults to 0.2
+// The bounciness of the physics body.
 //
 // WithRestitution sets the restitution property and returns the receiver for chaining.
 func (x *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
@@ -93,7 +103,7 @@ func (x *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
 	return x
 }
 
-// Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Used in conjunction with per frame impulses, an object can be made to move at a constant speed. For example, if an object 64 points in size and default density and a linearDamping of 25 will slide across the screen in a few seconds if an impulse of magnitude 10 is applied every update.
+// A property that reduces the body’s linear velocity.
 //
 // WithLinearDamping sets the linearDamping property and returns the receiver for chaining.
 func (x *PhysicsBody) WithLinearDamping(linearDamping float64) *PhysicsBody {
@@ -101,7 +111,7 @@ func (x *PhysicsBody) WithLinearDamping(linearDamping float64) *PhysicsBody {
 	return x
 }
 
-// Optionally reduce the body's angular velocity each frame to simulate rotational friction. (0.0 - 1.0). Defaults to 0.1
+// A property that reduces the body’s rotational velocity.
 //
 // WithAngularDamping sets the angularDamping property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
@@ -109,7 +119,7 @@ func (x *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
 	return x
 }
 
-// The density of the body. @discussion The unit is arbitrary, as long as the relative densities are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
+// The density of the object, in kilograms per square meter.
 //
 // WithDensity sets the density property and returns the receiver for chaining.
 func (x *PhysicsBody) WithDensity(density float64) *PhysicsBody {
@@ -117,7 +127,7 @@ func (x *PhysicsBody) WithDensity(density float64) *PhysicsBody {
 	return x
 }
 
-// The mass of the body. @discussion The unit is arbitrary, as long as the relative masses are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
+// The mass of the body, in kilograms.
 //
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *PhysicsBody) WithMass(mass float64) *PhysicsBody {
@@ -125,7 +135,7 @@ func (x *PhysicsBody) WithMass(mass float64) *PhysicsBody {
 	return x
 }
 
-// Bodies are affected by field forces such as gravity if this property is set and the field's category mask is set appropriately. The default value is YES. @discussion If this is set a force is applied to the object based on the mass. Set the field force vector in the scene to modify the strength of the force.
+// A Boolean value that indicates whether this physics body is affected by the physics world’s gravity.
 //
 // WithAffectedByGravity sets the affectedByGravity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody {
@@ -133,7 +143,7 @@ func (x *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody
 	return x
 }
 
-// Defines what logical 'categories' of fields this body responds to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
+// A mask that defines which categories of physics fields can exert forces on this physics body.
 //
 // WithFieldBitMask sets the fieldBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithFieldBitMask(fieldBitMask uint32) *PhysicsBody {
@@ -141,7 +151,7 @@ func (x *PhysicsBody) WithFieldBitMask(fieldBitMask uint32) *PhysicsBody {
 	return x
 }
 
-// Defines what logical 'categories' this body belongs to. Defaults to all bits set (all categories).
+// A mask that defines which categories this physics body belongs to.
 //
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask uint32) *PhysicsBody {
@@ -149,7 +159,7 @@ func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask uint32) *PhysicsBody {
 	return x
 }
 
-// Defines what logical 'categories' of bodies this body responds to collisions with. Defaults to all bits set (all categories).
+// A mask that defines which categories of physics bodies can collide with this physics body.
 //
 // WithCollisionBitMask sets the collisionBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask uint32) *PhysicsBody {
@@ -157,7 +167,7 @@ func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask uint32) *PhysicsBody
 	return x
 }
 
-// Defines what logical 'categories' of bodies this body generates intersection notifications with. Defaults to all bits cleared (no categories).
+// A mask that defines which categories of physics bodies cause intersection notifications with this physics body.
 //
 // WithContactTestBitMask sets the contactTestBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask uint32) *PhysicsBody {
@@ -165,48 +175,66 @@ func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask uint32) *Physics
 	return x
 }
 
+// The physics body’s velocity vector, measured in meters per second.
+//
 // WithVelocity sets the velocity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithVelocity(velocity corefoundation.CGVector) *PhysicsBody {
 	x.inner.SetVelocity(velocity)
 	return x
 }
 
+// The physics body’s angular speed.
+//
 // WithAngularVelocity sets the angularVelocity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAngularVelocity(angularVelocity float64) *PhysicsBody {
 	x.inner.SetAngularVelocity(angularVelocity)
 	return x
 }
 
+// Applies a force to the center of gravity of a physics body.
+//
 // ApplyForce calls the underlying ApplyForce.
 func (x *PhysicsBody) ApplyForce(force corefoundation.CGVector) {
 	x.inner.ApplyForce(force)
 }
 
+// Applies a force to a specific point of a physics body.
+//
 // ApplyForceAtPoint calls the underlying ApplyForceAtPoint.
 func (x *PhysicsBody) ApplyForceAtPoint(force corefoundation.CGVector, point corefoundation.CGPoint) {
 	x.inner.ApplyForceAtPoint(force, point)
 }
 
+// Applies torque to an object.
+//
 // ApplyTorque calls the underlying ApplyTorque.
 func (x *PhysicsBody) ApplyTorque(torque float64) {
 	x.inner.ApplyTorque(torque)
 }
 
+// Applies an impulse to the center of gravity of a physics body.
+//
 // ApplyImpulse calls the underlying ApplyImpulse.
 func (x *PhysicsBody) ApplyImpulse(impulse corefoundation.CGVector) {
 	x.inner.ApplyImpulse(impulse)
 }
 
+// Applies an impulse to a specific point of a physics body.
+//
 // ApplyImpulseAtPoint calls the underlying ApplyImpulseAtPoint.
 func (x *PhysicsBody) ApplyImpulseAtPoint(impulse corefoundation.CGVector, point corefoundation.CGPoint) {
 	x.inner.ApplyImpulseAtPoint(impulse, point)
 }
 
+// Applies an impulse that imparts angular momentum to an object.
+//
 // ApplyAngularImpulse calls the underlying ApplyAngularImpulse.
 func (x *PhysicsBody) ApplyAngularImpulse(impulse float64) {
 	x.inner.ApplyAngularImpulse(impulse)
 }
 
+// The physics bodies that this physics body is in contact with.
+//
 // AllContactedBodies returns the collection as a Go slice.
 func (x *PhysicsBody) AllContactedBodies() []*PhysicsBody {
 	arr := x.inner.AllContactedBodies()

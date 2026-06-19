@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that connects to the system’s audio input.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioinputnode
 type AVAudioInputNode struct {
 	AVAudioIONode
@@ -39,7 +41,7 @@ func AVAudioInputNodeFromID(id objc.ID) *AVAudioInputNode {
 	return o
 }
 
-// @method setManualRenderingInputPCMFormat:inputBlock: @abstract Supply the data through the input node to the engine operating in the manual rendering mode. @param format The format of the PCM audio data the block will supply to the engine @param block The block the engine will call on the input node to get the audio to send to the output, when operating in the manual rendering mode. See `AVAudioIONodeInputBlock` for more details @return YES for success @discussion This block must be set if the input node is being used when the engine is operating in manual rendering mode. Switching the engine to render to/from an audio device invalidates any previously set block, and makes this method ineffective.
+// Supplies the data through the input node to the engine while operating in the manual rendering mode.
 func (o *AVAudioInputNode) SetManualRenderingInputPCMFormatInputBlock(format *AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool {
 	var __block_block objc.Block
 	if block != nil {

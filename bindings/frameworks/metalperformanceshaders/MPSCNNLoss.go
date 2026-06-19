@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that computes the loss and loss gradient between specified predictions and labels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnloss
 type MPSCNNLoss struct {
 	mpsneuralnetwork.MPSCNNKernel

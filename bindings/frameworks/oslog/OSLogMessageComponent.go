@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The message arguments for a particular entry.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogmessagecomponent
 type OSLogMessageComponent struct {
 	foundation.NSObject

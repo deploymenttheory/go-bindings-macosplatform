@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view subclass that renders a SpriteKit scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skview
 type SKView struct {
 	appkit.NSView
@@ -70,17 +72,17 @@ func SKViewFromID(id objc.ID) *SKView {
 	return o
 }
 
-// Present an SKScene in the view, replacing the current scene. @param scene the scene to present.
+// Presents a scene.
 func (o *SKView) PresentScene(scene *SKScene) {
 	o.Ptr().Send(_sKViewSelPresentScene, scene.Ptr())
 }
 
-// Present an SKScene in the view, replacing the current scene. If there is currently a scene being presented in the view, the transition is used to swap between them. @param scene the scene to present. @param transition the transition to use when presenting the scene.
+// Transitions from the current scene to a new scene.
 func (o *SKView) PresentSceneTransition(scene *SKScene, transition *SKTransition) {
 	o.Ptr().Send(_sKViewSelPresentSceneTransition, scene.Ptr(), transition.Ptr())
 }
 
-// Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is tightly cropped to the size of the node. @param node the node subtree to render to the texture.
+// Renders the contents of a node tree and returns the rendered image as a texture.
 func (o *SKView) TextureFromNode(node *SKNode) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNode, node.Ptr())
 	if _ret != 0 {
@@ -89,7 +91,7 @@ func (o *SKView) TextureFromNode(node *SKNode) *SKTexture {
 	return SKTextureFromID(_ret)
 }
 
-// Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is cropped to the specified rectangle @param node the node subtree to render to the texture. @param crop the crop
+// Renders a portion of a node’s contents and returns the rendered image as a texture.
 func (o *SKView) TextureFromNodeCrop(node *SKNode, crop corefoundation.CGRect) *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNodeCrop, node.Ptr(), crop)
 	if _ret != 0 {
@@ -98,13 +100,13 @@ func (o *SKView) TextureFromNodeCrop(node *SKNode, crop corefoundation.CGRect) *
 	return SKTextureFromID(_ret)
 }
 
-// Converts a point from view space to scene space. @param point the point to convert. @param scene the scene to convert the point into.
+// Converts a point from view coordinates to scene coordinates.
 func (o *SKView) ConvertPointToScene(point corefoundation.CGPoint, scene *SKScene) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKViewSelConvertPointToScene, point, scene.Ptr())
 	return _ret
 }
 
-// Converts a point from scene space to view space. @param point the point to convert. @param scene the scene to convert the point into.
+// Converts a point from scene coordinates to view coordinates.
 func (o *SKView) ConvertPointFromScene(point corefoundation.CGPoint, scene *SKScene) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKViewSelConvertPointFromScene, point, scene.Ptr())
 	return _ret

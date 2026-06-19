@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A symbol effect that applies the Wiggle animation to symbol images.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect
 type NSSymbolWiggleEffect struct {
 	NSSymbolEffect
@@ -121,7 +123,7 @@ func NSSymbolWiggleEffectWiggleBackwardEffect() *NSSymbolWiggleEffect {
 	return NSSymbolWiggleEffectFromID(_ret)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth along an axis, starting by moving toward a custom angle. The angle is in degrees moving clockwise from the positive x-axis.
+// Convenience initializer for a wiggle effect that moves back and forth along an axis, starting by moving toward a custom angle.
 func NSSymbolWiggleEffectWiggleCustomAngleEffect(angle float64) *NSSymbolWiggleEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolWiggleEffect), _nSSymbolWiggleEffectSelWiggleCustomAngleEffect, angle)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for an energy parameter associated with an intent.
+//
 // EnergyResolutionResult wraps [raw.INEnergyResolutionResult] with a fluent Go API.
 type EnergyResolutionResult struct {
 	inner *raw.INEnergyResolutionResult

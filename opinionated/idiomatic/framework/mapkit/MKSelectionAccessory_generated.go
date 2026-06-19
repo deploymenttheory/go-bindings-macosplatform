@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The type of accessory to display for a selected annotation.
+//
 // SelectionAccessory wraps [raw.MKSelectionAccessory] with a fluent Go API.
 type SelectionAccessory struct {
 	inner *raw.MKSelectionAccessory

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A timer object that allows your app to synchronize its drawing to the refresh rate of the display.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cadisplaylink
 type CADisplayLink struct {
 	foundation.NSObject
@@ -39,14 +41,17 @@ func CADisplayLinkFromID(id objc.ID) *CADisplayLink {
 	return o
 }
 
+// Registers the display link with a run loop.
 func (o *CADisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	o.Ptr().Send(_cADisplayLinkSelAddToRunLoopForMode, runloop.Ptr(), mode.Ptr())
 }
 
+// Removes the display link from the run loop for the given mode.
 func (o *CADisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	o.Ptr().Send(_cADisplayLinkSelRemoveFromRunLoopForMode, runloop.Ptr(), mode.Ptr())
 }
 
+// Removes the display link from all run loop modes.
 func (o *CADisplayLink) Invalidate() {
 	o.Ptr().Send(_cADisplayLinkSelInvalidate)
 }

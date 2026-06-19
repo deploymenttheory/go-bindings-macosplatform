@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that provides localized descriptions of mass and weight values.
+//
 // MassFormatter wraps [raw.NSMassFormatter] with a fluent Go API.
 type MassFormatter struct {
 	inner *raw.NSMassFormatter

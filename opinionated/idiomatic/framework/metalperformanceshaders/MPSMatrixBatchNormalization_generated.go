@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A batch normalization kernel that operates on matrices.
+//
 // MatrixBatchNormalization wraps [raw.MPSMatrixBatchNormalization] with a fluent Go API.
 type MatrixBatchNormalization struct {
 	inner *raw.MPSMatrixBatchNormalization
@@ -115,7 +117,7 @@ func (x *MatrixBatchNormalization) WithBatchSize(batchSize uint) *MatrixBatchNor
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixBatchNormalization) WithOptions(options mpscore.MPSKernelOptions) *MatrixBatchNormalization {
@@ -123,7 +125,7 @@ func (x *MatrixBatchNormalization) WithOptions(options mpscore.MPSKernelOptions)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixBatchNormalization) WithLabel(label string) *MatrixBatchNormalization {

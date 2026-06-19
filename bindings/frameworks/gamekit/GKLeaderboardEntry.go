@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a single score by a player on a leaderboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkleaderboardentry
 type GKLeaderboardEntry struct {
 	foundation.NSObject
@@ -78,8 +80,21 @@ func (o *GKLeaderboardEntry) Date() *foundation.NSDate {
 }
 
 // Deprecated: since macOS 14.0.
-func (o *GKLeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), completionHandler)
+func (o *GKLeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 bool, blockParam2 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(appkit.NSViewControllerFromID(blockParam0), blockParam1, foundation.NSArrayFromID[*foundation.NSString](blockParam2))
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardEntrySelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), __block_completionHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

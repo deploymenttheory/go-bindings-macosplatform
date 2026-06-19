@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that your app uses to interact with a content blocker extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfcontentblockermanager
 type SFContentBlockerManager struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func SFContentBlockerManagerFromID(id objc.ID) *SFContentBlockerManager {
 	return o
 }
 
+// Tells Safari to reload the specified extension’s content-blocking rules.
 func SFContentBlockerManagerReloadContentBlockerWithIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -44,6 +47,7 @@ func SFContentBlockerManagerReloadContentBlockerWithIdentifierCompletionHandler(
 	objc.ID(_clsSFContentBlockerManager).Send(_sFContentBlockerManagerSelReloadContentBlockerWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
+// Determines the state of your content blocker.
 func SFContentBlockerManagerGetStateOfContentBlockerWithIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(*SFContentBlockerState, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

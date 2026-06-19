@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the input parameters for mixing audio tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutableaudiomix
 type AVMutableAudioMix struct {
 	AVAudioMix
@@ -31,6 +33,7 @@ func AVMutableAudioMixFromID(id objc.ID) *AVMutableAudioMix {
 	return o
 }
 
+// Returns a new mutable audio mix.
 func AVMutableAudioMixAudioMix() *AVMutableAudioMix {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableAudioMix), _aVMutableAudioMixSelAudioMix)
 	if _ret != 0 {

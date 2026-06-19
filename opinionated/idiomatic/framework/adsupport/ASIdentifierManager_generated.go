@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object that contains the advertising identifier.
+//
 // IdentifierManager wraps [raw.ASIdentifierManager] with a fluent Go API.
 type IdentifierManager struct {
 	inner *raw.ASIdentifierManager

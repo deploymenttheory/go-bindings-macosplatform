@@ -64,12 +64,16 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// An enumeration that represents the current Crash Detection event authorization state.
 type SAAuthorizationStatus int64
 
 const (
+	// There isn’t a designated app for receiving Crash Detection events.
 	SAAuthorizationStatusNotDetermined SAAuthorizationStatus = 0
-	SAAuthorizationStatusDenied        SAAuthorizationStatus = 1
-	SAAuthorizationStatusAuthorized    SAAuthorizationStatus = 2
+	// The system denies the app from receiving Crash Detection events because another app has authorization.
+	SAAuthorizationStatusDenied SAAuthorizationStatus = 1
+	// This is the designated app for receiving Crash Detection events.
+	SAAuthorizationStatusAuthorized SAAuthorizationStatus = 2
 )
 
 func (e SAAuthorizationStatus) String() string {
@@ -85,6 +89,7 @@ func (e SAAuthorizationStatus) String() string {
 	}
 }
 
+// An enumeration that defines possible emergency responses to a Crash Detection event.
 type SACrashDetectionEventResponse int64
 
 const (
@@ -103,6 +108,7 @@ func (e SACrashDetectionEventResponse) String() string {
 	}
 }
 
+// An enumeration that defines the status of a requested voice call.
 type SAEmergencyResponseManagerVoiceCallStatus int64
 
 const (
@@ -127,6 +133,7 @@ func (e SAEmergencyResponseManagerVoiceCallStatus) String() string {
 	}
 }
 
+// Codes for identifying errors in SafetyKit.
 type SAErrorCode int64
 
 const (

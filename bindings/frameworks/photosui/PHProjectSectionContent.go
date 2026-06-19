@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing section elements and layout information for a single level of curation.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectsectioncontent
 type PHProjectSectionContent struct {
 	foundation.NSObject
@@ -59,8 +61,11 @@ func (o *PHProjectSectionContent) AspectRatio() float64 {
 
 // Convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
 func (o *PHProjectSectionContent) CloudAssetIdentifiers() *foundation.NSArray[*photos.PHCloudIdentifier] {
-	_ret := objc.Send[*foundation.NSArray[*photos.PHCloudIdentifier]](o.Ptr(), _pHProjectSectionContentSelCloudAssetIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectSectionContentSelCloudAssetIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*photos.PHCloudIdentifier](_ret)
 }
 
 // Background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product

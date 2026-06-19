@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -180,22 +181,41 @@ func (x *Pasteboard) StringForType(dataType *foundation.NSString) string {
 
 // Determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app.
 //
-// DetectPatternsForPatternsCompletionHandler calls the underlying DetectPatternsForPatternsCompletionHandler.
-func (x *Pasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
-	x.inner.DetectPatternsForPatternsCompletionHandler(patterns, completionHandler)
+// DetectPatternsForPatterns blocks until the operation completes or ctx is cancelled.
+func (x *Pasteboard) DetectPatternsForPatterns(ctx context.Context, patterns *foundation.NSSet[*foundation.NSString]) (*foundation.NSSet[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSSet[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.DetectPatternsForPatternsCompletionHandler(patterns, func(_p0 *foundation.NSSet[*foundation.NSString], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSSet[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match.
 //
 // DetectValuesForPatternsCompletionHandler calls the underlying DetectValuesForPatternsCompletionHandler.
-func (x *Pasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
+func (x *Pasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) {
 	x.inner.DetectValuesForPatternsCompletionHandler(patterns, completionHandler)
 }
 
 // Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app.
 //
 // DetectMetadataForTypesCompletionHandler calls the underlying DetectMetadataForTypesCompletionHandler.
-func (x *Pasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
+func (x *Pasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) {
 	x.inner.DetectMetadataForTypesCompletionHandler(types, completionHandler)
 }
 
@@ -294,9 +314,9 @@ type Pasteboardable interface {
 	DataForType(dataType *foundation.NSString) *foundation.NSData
 	PropertyListForType(dataType *foundation.NSString) objc.ID
 	StringForType(dataType *foundation.NSString) string
-	DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
-	DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
-	DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
+	DetectPatternsForPatterns(ctx context.Context, patterns *foundation.NSSet[*foundation.NSString]) (*foundation.NSSet[*foundation.NSString], error)
+	DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer))
+	DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer))
 	Name() string
 	ChangeCount() int
 	AccessBehavior() NSPasteboardAccessBehavior

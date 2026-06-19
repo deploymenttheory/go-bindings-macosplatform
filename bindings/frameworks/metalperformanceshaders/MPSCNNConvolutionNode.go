@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a convolution kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutionnode
 type MPSCNNConvolutionNode struct {
 	mpsneuralnetwork.MPSNNFilterNode

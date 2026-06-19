@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that starts and manages headphone motion services.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager
 type CMHeadphoneMotionManager struct {
 	foundation.NSObject
@@ -43,15 +45,18 @@ func CMHeadphoneMotionManagerFromID(id objc.ID) *CMHeadphoneMotionManager {
 	return o
 }
 
+// Returns the authorization status for monitoring headphone motion.
 func CMHeadphoneMotionManagerAuthorizationStatus() CMAuthorizationStatus {
 	_ret := objc.Send[CMAuthorizationStatus](objc.ID(_clsCMHeadphoneMotionManager), _cMHeadphoneMotionManagerSelAuthorizationStatus)
 	return _ret
 }
 
+// Starts device-motion updates.
 func (o *CMHeadphoneMotionManager) StartDeviceMotionUpdates() {
 	o.Ptr().Send(_cMHeadphoneMotionManagerSelStartDeviceMotionUpdates)
 }
 
+// Starts device-motion updates with a handler.
 func (o *CMHeadphoneMotionManager) StartDeviceMotionUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*CMDeviceMotion, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -66,6 +71,7 @@ func (o *CMHeadphoneMotionManager) StartDeviceMotionUpdatesToQueueWithHandler(qu
 	o.Ptr().Send(_cMHeadphoneMotionManagerSelStartDeviceMotionUpdatesToQueueWithHandler, queue.Ptr(), __block_handler)
 }
 
+// Stops device-motion updates.
 func (o *CMHeadphoneMotionManager) StopDeviceMotionUpdates() {
 	o.Ptr().Send(_cMHeadphoneMotionManagerSelStopDeviceMotionUpdates)
 }

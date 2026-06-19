@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The host app context from which an app extension is invoked.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsextensioncontext
 type NSExtensionContext struct {
 	NSObject
@@ -34,6 +36,7 @@ func NSExtensionContextFromID(id objc.ID) *NSExtensionContext {
 	return o
 }
 
+// Tells the host app to complete the app extension request with an array of result items.
 func (o *NSExtensionContext) CompleteRequestReturningItemsCompletionHandler(items *NSArray[objc.ID], completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -42,13 +45,15 @@ func (o *NSExtensionContext) CompleteRequestReturningItemsCompletionHandler(item
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSExtensionContextSelCompleteRequestReturningItemsCompletionHandler, items, __block_completionHandler)
+	o.Ptr().Send(_nSExtensionContextSelCompleteRequestReturningItemsCompletionHandler, items.Ptr(), __block_completionHandler)
 }
 
+// Tells the host app to cancel the app extension request, with a supplied error.
 func (o *NSExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nSExtensionContextSelCancelRequestWithError, error_)
 }
 
+// Asks the system to open a URL on behalf of the currently running app extension.
 func (o *NSExtensionContext) OpenURLCompletionHandler(uRL *NSURL, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -61,6 +66,9 @@ func (o *NSExtensionContext) OpenURLCompletionHandler(uRL *NSURL, completionHand
 }
 
 func (o *NSExtensionContext) InputItems() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSExtensionContextSelInputItems)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionContextSelInputItems)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }

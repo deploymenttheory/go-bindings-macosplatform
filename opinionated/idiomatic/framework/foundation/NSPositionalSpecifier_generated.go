@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier for an insertion point in a container relative to another object in the container.
+//
 // PositionalSpecifier wraps [raw.NSPositionalSpecifier] with a fluent Go API.
 type PositionalSpecifier struct {
 	inner *raw.NSPositionalSpecifier
@@ -29,6 +31,8 @@ func PositionalSpecifierFromID(id objc.ID) *PositionalSpecifier {
 	return &PositionalSpecifier{inner: raw.NSPositionalSpecifierFromID(id)}
 }
 
+// Initializes a positional specifier with a given position relative to another given specifier.
+//
 // NewPositionalSpecifierWithPositionObjectSpecifier creates a new [PositionalSpecifier].
 func NewPositionalSpecifierWithPositionObjectSpecifier(position NSInsertionPosition, specifier *raw.NSScriptObjectSpecifier) *PositionalSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPositionalSpecifier")), objc.RegisterName("alloc"))
@@ -42,11 +46,15 @@ func (x *PositionalSpecifier) WithScriptingProperties(scriptingProperties *raw.N
 	return x
 }
 
+// Sets the class description for the object or objects to be inserted.
+//
 // SetInsertionClassDescription calls the underlying SetInsertionClassDescription.
 func (x *PositionalSpecifier) SetInsertionClassDescription(classDescription *raw.NSScriptClassDescription) {
 	x.inner.SetInsertionClassDescription(classDescription)
 }
 
+// Causes the receiver to evaluate its position.
+//
 // Evaluate calls the underlying Evaluate.
 func (x *PositionalSpecifier) Evaluate() {
 	x.inner.Evaluate()

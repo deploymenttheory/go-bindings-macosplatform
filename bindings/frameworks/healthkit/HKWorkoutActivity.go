@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an activity within a longer workout.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkworkoutactivity
 type HKWorkoutActivity struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func HKWorkoutActivityFromID(id objc.ID) *HKWorkoutActivity {
 	return o
 }
 
-// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout within the date interval of this activity. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+// Returns the activity’s statistics for the provided quantity type.
 func (o *HKWorkoutActivity) StatisticsForType(quantityType *HKQuantityType) *HKStatistics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelStatisticsForType, quantityType.Ptr())
 	if _ret != 0 {
@@ -48,9 +50,9 @@ func (o *HKWorkoutActivity) StatisticsForType(quantityType *HKQuantityType) *HKS
 	return HKStatisticsFromID(_ret)
 }
 
-// @method        initWithWorkoutConfiguration:startDate:endDate:metadata: @abstract      Initialize a new HKWorkoutActivity with the specified values. @param     workoutConfiguration    The configuration object describing the workout activity. @param     startDate               The point in time when the workout activity was started. @param     endDate                 The point in time when the workout activity was ended. @param     metadata                Metadata for the workout activity. (Optional)
+// Creates a workout activity using the provided configuration, start date, end date, and metadata.
 func (o *HKWorkoutActivity) InitWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkoutActivity {
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelInitWithWorkoutConfigurationStartDateEndDateMetadata, workoutConfiguration.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelInitWithWorkoutConfigurationStartDateEndDateMetadata, workoutConfiguration.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -95,8 +97,11 @@ func (o *HKWorkoutActivity) EndDate() *foundation.NSDate {
 
 // @property      metadata @abstract      Extra information describing properties of the workout activity. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
 func (o *HKWorkoutActivity) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKWorkoutActivitySelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property      duration @abstract      The length of time that the workout activity was recording @discussion    The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A challenge from a server requiring authentication from the client.
+//
 // URLAuthenticationChallenge wraps [raw.NSURLAuthenticationChallenge] with a fluent Go API.
 type URLAuthenticationChallenge struct {
 	inner *raw.NSURLAuthenticationChallenge

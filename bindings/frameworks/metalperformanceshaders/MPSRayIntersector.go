@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that performs intersection tests between rays and geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrayintersector
 type MPSRayIntersector struct {
 	mpscore.MPSKernel

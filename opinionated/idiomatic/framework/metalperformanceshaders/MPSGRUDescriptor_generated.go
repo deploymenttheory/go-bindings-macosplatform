@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a gated recurrent unit block or layer.
+//
 // GRUDescriptor wraps [raw.MPSGRUDescriptor] with a fluent Go API.
 type GRUDescriptor struct {
 	inner *raw.MPSGRUDescriptor

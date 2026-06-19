@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the functionality of PDF Kit into a single widget that you can add to your application using Interface Builder.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfview
 type PDFView struct {
 	appkit.NSView
@@ -557,6 +559,7 @@ func (o *PDFView) SetInMarkupMode(inMarkupMode bool) {
 	o.Ptr().Send(_pDFViewSelSetInMarkupMode, inMarkupMode)
 }
 
+// Unlocks with the password from the specified sender.
 func (o *PDFView) TakePasswordFrom(sender objc.ID) {
 	o.Ptr().Send(_pDFViewSelTakePasswordFrom, sender)
 }

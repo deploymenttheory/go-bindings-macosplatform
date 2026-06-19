@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the interface and general characteristics of Automator actions.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/amaction
 type AMAction struct {
 	foundation.NSObject
@@ -59,14 +61,16 @@ func AMActionFromID(id objc.ID) *AMAction {
 	return o
 }
 
+// Initializes the action with the specified definition.
 func (o *AMAction) InitWithDefinitionFromArchive(dict *foundation.NSDictionary[*foundation.NSString, objc.ID], archived bool) *AMAction {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelInitWithDefinitionFromArchive, dict, archived)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelInitWithDefinitionFromArchive, dict.Ptr(), archived)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AMActionFromID(_ret)
 }
 
+// Loads an Automator action from a file URL.
 func (o *AMAction) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMAction, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelInitWithContentsOfURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -79,11 +83,13 @@ func (o *AMAction) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMAct
 	return AMActionFromID(_ret), nil
 }
 
+// Requests the action to perform its task using the specified input from the specified action.
 func (o *AMAction) RunWithInputFromActionError(input objc.ID, anAction *AMAction, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelRunWithInputFromActionError, input, anAction.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelRunWithInputFromActionError, input, anAction.Ptr(), errorInfo.Ptr())
 	return _ret
 }
 
+// Requests the action to perform its task using the specified input.
 func (o *AMAction) RunWithInputError(input objc.ID) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelRunWithInputError, input, unsafe.Pointer(&_nsErr))
@@ -93,54 +99,67 @@ func (o *AMAction) RunWithInputError(input objc.ID) (objc.ID, error) {
 	return _ret, nil
 }
 
+// Causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
 func (o *AMAction) RunAsynchronouslyWithInput(input objc.ID) {
 	o.Ptr().Send(_aMActionSelRunAsynchronouslyWithInput, input)
 }
 
+// Provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
 func (o *AMAction) WillFinishRunning() {
 	o.Ptr().Send(_aMActionSelWillFinishRunning)
 }
 
+// Sent by the action to itself when it has finished running asynchronously.
 func (o *AMAction) DidFinishRunningWithError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aMActionSelDidFinishRunningWithError, errorInfo)
+	o.Ptr().Send(_aMActionSelDidFinishRunningWithError, errorInfo.Ptr())
 }
 
+// Causes the action to stop running and return an error, which, in turn, causes the workflow to stop.
 func (o *AMAction) FinishRunningWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aMActionSelFinishRunningWithError, error_)
 }
 
+// Stops the action from running.
 func (o *AMAction) Stop() {
 	o.Ptr().Send(_aMActionSelStop)
 }
 
+// Resets the action to its initial state.
 func (o *AMAction) Reset() {
 	o.Ptr().Send(_aMActionSelReset)
 }
 
+// Examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
 func (o *AMAction) WriteToDictionary(dictionary *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aMActionSelWriteToDictionary, dictionary)
+	o.Ptr().Send(_aMActionSelWriteToDictionary, dictionary.Ptr())
 }
 
+// Allows the action to initialize its user interface.
 func (o *AMAction) Opened() {
 	o.Ptr().Send(_aMActionSelOpened)
 }
 
+// Allows the action to synchronize its information with settings in another app.
 func (o *AMAction) Activated() {
 	o.Ptr().Send(_aMActionSelActivated)
 }
 
+// Invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
 func (o *AMAction) Closed() {
 	o.Ptr().Send(_aMActionSelClosed)
 }
 
+// Requests the action to update its stored set of parameters from the settings in the action’s user interface.
 func (o *AMAction) UpdateParameters() {
 	o.Ptr().Send(_aMActionSelUpdateParameters)
 }
 
+// Requests the action to update its user interface from its stored parameters, which have changed.
 func (o *AMAction) ParametersUpdated() {
 	o.Ptr().Send(_aMActionSelParametersUpdated)
 }
 
+// Displays a message in Automator’s log area.
 func (o *AMAction) LogMessageWithLevelFormat(level AMLogLevel, format *foundation.NSString) {
 	o.Ptr().Send(_aMActionSelLogMessageWithLevelFormat, level, format.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of material properties that describes a basic shading model for materials, and the superclass for more complex shading models.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlscatteringfunction
 type MDLScatteringFunction struct {
 	foundation.NSObject

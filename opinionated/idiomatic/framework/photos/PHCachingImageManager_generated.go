@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that facilitates retrieving or generating preview thumbnails, optimized for batch preloading large numbers of assets.
+//
 // CachingImageManager wraps [raw.PHCachingImageManager] with a fluent Go API.
 type CachingImageManager struct {
 	inner *raw.PHCachingImageManager
@@ -37,22 +39,30 @@ func NewCachingImageManager() *CachingImageManager {
 	return &CachingImageManager{inner: raw.PHCachingImageManagerFromID(_id)}
 }
 
+// A Boolean value that determines whether the image manager prepares high-quality images.
+//
 // WithAllowsCachingHighQualityImages sets the allowsCachingHighQualityImages property and returns the receiver for chaining.
 func (x *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager {
 	x.inner.SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages)
 	return x
 }
 
+// Prepares image representations of the specified assets for later use.
+//
 // StartCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StartCachingImagesForAssetsTargetSizeContentModeOptions.
 func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions) {
 	x.inner.StartCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, raw.PHImageContentMode(contentMode), options)
 }
 
+// Cancels image preparation for the specified assets and options.
+//
 // StopCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StopCachingImagesForAssetsTargetSizeContentModeOptions.
 func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions) {
 	x.inner.StopCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, raw.PHImageContentMode(contentMode), options)
 }
 
+// Cancels all image preparation that is currently in progress.
+//
 // StopCachingImagesForAllAssets calls the underlying StopCachingImagesForAllAssets.
 func (x *CachingImageManager) StopCachingImagesForAllAssets() {
 	x.inner.StopCachingImagesForAllAssets()

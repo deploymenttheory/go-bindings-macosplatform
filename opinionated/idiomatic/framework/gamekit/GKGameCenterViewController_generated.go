@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The dashboard that allows players to access their Game Center data in your game.
+//
 // GameCenterViewController wraps [raw.GKGameCenterViewController] with a fluent Go API.
 type GameCenterViewController struct {
 	inner *raw.GKGameCenterViewController
@@ -31,6 +33,8 @@ func GameCenterViewControllerFromID(id objc.ID) *GameCenterViewController {
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(id)}
 }
 
+// Creates a view controller that presents the specified Game Center content.
+//
 // NewGameCenterViewControllerWithState creates a new [GameCenterViewController].
 func NewGameCenterViewControllerWithState(state GKGameCenterViewControllerState) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewGameCenterViewControllerWithState(state GKGameCenterViewControllerState)
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
+// Creates a view controller that presents a leaderboard with data from the specified players and time period.
+//
 // NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope creates a new [GameCenterViewController].
 func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboardID string, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboar
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
+// Creates a view controller that presents a leaderboard with data for the specified players.
+//
 // NewGameCenterViewControllerWithLeaderboardPlayerScope creates a new [GameCenterViewController].
 func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *raw.GKLeaderboard, playerScope GKLeaderboardPlayerScope) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *raw.GKLe
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
+// Creates a view controller that presents a leaderboard set.
+//
 // NewGameCenterViewControllerWithLeaderboardSetID creates a new [GameCenterViewController].
 func NewGameCenterViewControllerWithLeaderboardSetID(leaderboardSetID string) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
@@ -59,6 +69,8 @@ func NewGameCenterViewControllerWithLeaderboardSetID(leaderboardSetID string) *G
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
+// Creates a view controller that presents an achievement.
+//
 // NewGameCenterViewControllerWithAchievementID creates a new [GameCenterViewController].
 func NewGameCenterViewControllerWithAchievementID(achievementID string) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
@@ -66,6 +78,8 @@ func NewGameCenterViewControllerWithAchievementID(achievementID string) *GameCen
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
+// Creates a view controller that presents a player’s Game Center profile.
+//
 // NewGameCenterViewControllerWithPlayer creates a new [GameCenterViewController].
 func NewGameCenterViewControllerWithPlayer(player *raw.GKPlayer) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
@@ -73,6 +87,8 @@ func NewGameCenterViewControllerWithPlayer(player *raw.GKPlayer) *GameCenterView
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
+// The view controller’s delegate.
+//
 // WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
 func (x *GameCenterViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *GameCenterViewController {
 	x.inner.SetGameCenterDelegate(gameCenterDelegate)

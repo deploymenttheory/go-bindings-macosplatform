@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A highlight object that represents an active collaboration.
+//
 // CollaborationHighlight wraps [raw.SWCollaborationHighlight] with a fluent Go API.
 type CollaborationHighlight struct {
 	inner *raw.SWCollaborationHighlight

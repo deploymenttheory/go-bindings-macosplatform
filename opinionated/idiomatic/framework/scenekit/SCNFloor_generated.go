@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A plane that can optionally display a reflection of the scene above it.
+//
 // Floor wraps [raw.SCNFloor] with a fluent Go API.
 type Floor struct {
 	inner *raw.SCNFloor
@@ -37,7 +39,7 @@ func NewFloor() *Floor {
 	return &Floor{inner: raw.SCNFloorFromID(_id)}
 }
 
-// @property reflectivity @abstract Specifies the reflectivity of the floor. Animatable. @discussion If the value is greater than zero then the surface will reflect other objects in the scene. The default value is 0.25.
+// The intensity of the scene’s reflection on the floor. Animatable.
 //
 // WithReflectivity sets the reflectivity property and returns the receiver for chaining.
 func (x *Floor) WithReflectivity(reflectivity float64) *Floor {
@@ -45,7 +47,7 @@ func (x *Floor) WithReflectivity(reflectivity float64) *Floor {
 	return x
 }
 
-// @property reflectionFalloffStart @abstract Specifies the distance from the floor where the falloff begins. Animatable. @discussion The default value is 0.
+// The distance from the floor at which scene contents are reflected at full intensity. Animatable.
 //
 // WithReflectionFalloffStart sets the reflectionFalloffStart property and returns the receiver for chaining.
 func (x *Floor) WithReflectionFalloffStart(reflectionFalloffStart float64) *Floor {
@@ -53,7 +55,7 @@ func (x *Floor) WithReflectionFalloffStart(reflectionFalloffStart float64) *Floo
 	return x
 }
 
-// @property reflectionFalloffEnd @abstract Specifies the distance from the floor where the falloff finishes. Animatable. @discussion If the value is 0 then there is no falloff. The default value is 0.
+// The distance from the floor at which scene contents are no longer reflected. Animatable.
 //
 // WithReflectionFalloffEnd sets the reflectionFalloffEnd property and returns the receiver for chaining.
 func (x *Floor) WithReflectionFalloffEnd(reflectionFalloffEnd float64) *Floor {
@@ -61,7 +63,7 @@ func (x *Floor) WithReflectionFalloffEnd(reflectionFalloffEnd float64) *Floor {
 	return x
 }
 
-// @property reflectionCategoryBitMask @abstract Determines the node categories to reflect. Defaults to all bits set.
+// A mask that defines which categories of other objects show reflections on the floor.
 //
 // WithReflectionCategoryBitMask sets the reflectionCategoryBitMask property and returns the receiver for chaining.
 func (x *Floor) WithReflectionCategoryBitMask(reflectionCategoryBitMask uint) *Floor {
@@ -69,7 +71,7 @@ func (x *Floor) WithReflectionCategoryBitMask(reflectionCategoryBitMask uint) *F
 	return x
 }
 
-// @property width @abstract The floor extent along the X axis. Animatable. @discussion If the value is equal to 0, the floor is infinite on the X axis. The default value is 0.
+// The extent of the floor along its x-axis. Animatable.
 //
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Floor) WithWidth(width float64) *Floor {
@@ -77,7 +79,7 @@ func (x *Floor) WithWidth(width float64) *Floor {
 	return x
 }
 
-// @property length @abstract The floor extent along the Z axis. Animatable. @discussion If the value is equal to 0, the floor is infinite on the Z axis. The default value is 0.
+// The extent of the floor along its z-axis. Animatable.
 //
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *Floor) WithLength(length float64) *Floor {
@@ -85,7 +87,7 @@ func (x *Floor) WithLength(length float64) *Floor {
 	return x
 }
 
-// @property reflectionResolutionScaleFactor @abstract Specifies the resolution scale factor of the buffer used to render the reflection. @discussion Defaults to 1.0.
+// The resolution scale factor of the offscreen buffer that SceneKit uses to render reflections.
 //
 // WithReflectionResolutionScaleFactor sets the reflectionResolutionScaleFactor property and returns the receiver for chaining.
 func (x *Floor) WithReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) *Floor {
@@ -93,7 +95,7 @@ func (x *Floor) WithReflectionResolutionScaleFactor(reflectionResolutionScaleFac
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Floor) WithName(name string) *Floor {
@@ -101,7 +103,7 @@ func (x *Floor) WithName(name string) *Floor {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
@@ -124,7 +126,7 @@ func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
@@ -132,7 +134,7 @@ func (x *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Floor) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Floor {
@@ -161,7 +163,7 @@ func (x *Floor) WithTessellator(tessellator *GeometryTessellator) *Floor {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Floor) WithSubdivisionLevel(subdivisionLevel uint) *Floor {
@@ -177,7 +179,7 @@ func (x *Floor) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Flo
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Floor) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Floor {
@@ -185,7 +187,7 @@ func (x *Floor) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Flo
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Floor) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Floor {

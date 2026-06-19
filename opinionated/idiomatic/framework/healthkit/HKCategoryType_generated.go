@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that contain a value from a small set of possible values.
+//
 // CategoryType wraps [raw.HKCategoryType] with a fluent Go API.
 type CategoryType struct {
 	inner *raw.HKCategoryType

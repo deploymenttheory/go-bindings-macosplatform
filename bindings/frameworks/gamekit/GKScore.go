@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing information for a score that was earned by the player.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkscore
 // Deprecated: since macOS 11.0.
 type GKScore struct {
@@ -59,7 +61,7 @@ func GKScoreFromID(id objc.ID) *GKScore {
 	return o
 }
 
-// Initialize the score with the local player and current date.
+// Returns an initialized score object using the local player and the current date.
 // Deprecated: since macOS 11.0.
 func (o *GKScore) InitWithLeaderboardIdentifier(identifier *foundation.NSString) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithLeaderboardIdentifier, identifier.Ptr())
@@ -69,7 +71,7 @@ func (o *GKScore) InitWithLeaderboardIdentifier(identifier *foundation.NSString)
 	return GKScoreFromID(_ret)
 }
 
-// Initialize the achievement for a specific player. Use to submit participant scores when ending a turn-based match.
+// Returns an initialized score object for the specified leaderboard and player.
 // Deprecated: since macOS 11.0.
 func (o *GKScore) InitWithLeaderboardIdentifierPlayer(identifier *foundation.NSString, player *GKPlayer) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithLeaderboardIdentifierPlayer, identifier.Ptr(), player.Ptr())
@@ -79,7 +81,7 @@ func (o *GKScore) InitWithLeaderboardIdentifierPlayer(identifier *foundation.NSS
 	return GKScoreFromID(_ret)
 }
 
-// Report scores to the server. The value must be set, and date may be changed. Possible reasons for error: 1. Value not set 2. Local player not authenticated 3. Communications problem
+// Reports a list of scores to Game Center
 // Deprecated: since macOS 11.0.
 func GKScoreReportScoresWithCompletionHandler(scores *foundation.NSArray[*GKScore], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -178,6 +180,7 @@ func (o *GKScore) SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard boo
 	o.Ptr().Send(_gKScoreSelSetShouldSetDefaultLeaderboard, shouldSetDefaultLeaderboard)
 }
 
+// Reports a score to Game Center.
 // Deprecated: since macOS 10.10.
 func (o *GKScore) ReportScoreWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -190,6 +193,7 @@ func (o *GKScore) ReportScoreWithCompletionHandler(completionHandler func(unsafe
 	o.Ptr().Send(_gKScoreSelReportScoreWithCompletionHandler, __block_completionHandler)
 }
 
+// Returns an initialized score object.
 // Deprecated: since macOS 10.10.
 func (o *GKScore) InitWithCategory(category *foundation.NSString) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithCategory, category.Ptr())
@@ -213,7 +217,7 @@ func (o *GKScore) SetCategory(category *foundation.NSString) {
 	o.Ptr().Send(_gKScoreSelSetCategory, category.Ptr())
 }
 
-// * This method is obsolete. Calling this initialiser does nothing and will return nil **
+// Returns an initialized score object for the specified leaderboard and player.
 // Deprecated: since macOS 10.10.
 func (o *GKScore) InitWithLeaderboardIdentifierForPlayer(identifier *foundation.NSString, playerID *foundation.NSString) *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelInitWithLeaderboardIdentifierForPlayer, identifier.Ptr(), playerID.Ptr())
@@ -232,7 +236,7 @@ func (o *GKScore) PlayerID() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// Use this alternative to reportScores:withCompletionHandler: to allow only certain specific challenges to be completed. Pass nil to avoid completing any challenges.
+// Submits a list of scores and all eligible challenges.
 // Deprecated: since macOS 11.0.
 func GKScoreReportScoresWithEligibleChallengesWithCompletionHandler(scores *foundation.NSArray[*GKScore], challenges *foundation.NSArray[*GKChallenge], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -245,6 +249,7 @@ func GKScoreReportScoresWithEligibleChallengesWithCompletionHandler(scores *foun
 	objc.ID(_clsGKScore).Send(_gKScoreSelReportScoresWithEligibleChallengesWithCompletionHandler, scores.Ptr(), challenges.Ptr(), __block_completionHandler)
 }
 
+// Submits a list of scores and all eligible challenges.
 // Deprecated: since macOS 26.0.
 func GKScoreReportLeaderboardScoresWithEligibleChallengesWithCompletionHandler(scores *foundation.NSArray[*GKLeaderboardScore], challenges *foundation.NSArray[*GKChallenge], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -257,21 +262,36 @@ func GKScoreReportLeaderboardScoresWithEligibleChallengesWithCompletionHandler(s
 	objc.ID(_clsGKScore).Send(_gKScoreSelReportLeaderboardScoresWithEligibleChallengesWithCompletionHandler, scores.Ptr(), challenges.Ptr(), __block_completionHandler)
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Issues a score challenge to a set of players.
 // Deprecated: since macOS 10.10.
 func (o *GKScore) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message *foundation.NSString) {
-	o.Ptr().Send(_gKScoreSelIssueChallengeToPlayersMessage, playerIDs, message.Ptr())
+	o.Ptr().Send(_gKScoreSelIssueChallengeToPlayersMessage, playerIDs.Ptr(), message.Ptr())
 }
 
+// Provides a challenge compose view controller with pre-selected player identifiers and a preformatted, player-editable message.
 // Deprecated: since macOS 14.0.
-func (o *GKScore) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), completionHandler)
+func (o *GKScore) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 bool, blockParam2 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(appkit.NSViewControllerFromID(blockParam0), blockParam1, foundation.NSArrayFromID[*foundation.NSString](blockParam2))
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreSelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), __block_completionHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return appkit.NSViewControllerFromID(_ret)
 }
 
+// Provides a challenge compose view controller with preselected player identifiers and a preformatted, player-editable message.
 // Deprecated: since macOS 26.0.
 func (o *GKScore) ChallengeComposeControllerWithMessagePlayersCompletion(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*GKPlayer])) *appkit.NSViewController {
 	var __block_completionHandler objc.Block

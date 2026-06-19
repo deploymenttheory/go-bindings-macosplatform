@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that returns a list of sources, such as apps and devices, that have saved matching queries to the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hksourcequery
 type HKSourceQuery struct {
 	HKQuery
@@ -32,7 +34,7 @@ func HKSourceQueryFromID(id objc.ID) *HKSourceQuery {
 	return o
 }
 
-// @method        initWithSampleType:samplePredicate:completionHandler: @abstract      Returns a query that will retrieve HKSources that have saved samples of the given type matching the given predicate. @param         sampleType          The type of sample. @param         objectPredicate     The predicate which samples must match. @param         completionHandler   The block to be called when the query has finished executing.
+// Instantiates and returns a source query.
 func (o *HKSourceQuery) InitWithSampleTypeSamplePredicateCompletionHandler(sampleType *HKSampleType, objectPredicate *foundation.NSPredicate, completionHandler func(*HKSourceQuery, *foundation.NSSet[*HKSource], unsafe.Pointer)) *HKSourceQuery {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

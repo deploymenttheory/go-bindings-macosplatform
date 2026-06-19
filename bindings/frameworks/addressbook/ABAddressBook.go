@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The main object you use to access the Address Book database.
+//
 // Apple documentation: https://developer.apple.com/documentation/addressbook/abaddressbook
 type ABAddressBook struct {
 	foundation.NSObject
@@ -50,6 +52,7 @@ func ABAddressBookFromID(id objc.ID) *ABAddressBook {
 	return o
 }
 
+// Returns the unique shared instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
 func ABAddressBookSharedAddressBook() *ABAddressBook {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABAddressBook), _aBAddressBookSelSharedAddressBook)
 	if _ret != 0 {
@@ -58,6 +61,7 @@ func ABAddressBookSharedAddressBook() *ABAddressBook {
 	return ABAddressBookFromID(_ret)
 }
 
+// Returns a new instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
 func ABAddressBookAddressBook() *ABAddressBook {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABAddressBook), _aBAddressBookSelAddressBook)
 	if _ret != 0 {
@@ -66,16 +70,22 @@ func ABAddressBookAddressBook() *ABAddressBook {
 	return ABAddressBookFromID(_ret)
 }
 
+// Returns an array of records that match the given search element, or returns an empty array if no records match the search element.
 func (o *ABAddressBook) RecordsMatchingSearchElement(search *ABSearchElement) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aBAddressBookSelRecordsMatchingSearchElement, search.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelRecordsMatchingSearchElement, search.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Saves all the changes made since the last save.
 func (o *ABAddressBook) Save() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelSave)
 	return _ret
 }
 
+// Saves all the changes made since the last save.
 func (o *ABAddressBook) SaveAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelSaveAndReturnError, unsafe.Pointer(&_nsErr))
@@ -85,11 +95,13 @@ func (o *ABAddressBook) SaveAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Indicates whether an address book has changes that have not been saved to the Address Book database.
 func (o *ABAddressBook) HasUnsavedChanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelHasUnsavedChanges)
 	return _ret
 }
 
+// Returns the ABPerson record that represents the logged-in user.
 func (o *ABAddressBook) Me() *ABPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelMe)
 	if _ret != 0 {
@@ -98,10 +110,12 @@ func (o *ABAddressBook) Me() *ABPerson {
 	return ABPersonFromID(_ret)
 }
 
+// Sets the record that represents the logged-in user.
 func (o *ABAddressBook) SetMe(moi *ABPerson) {
 	o.Ptr().Send(_aBAddressBookSelSetMe, moi.Ptr())
 }
 
+// Returns the person or group record that matches the given unique ID.
 func (o *ABAddressBook) RecordForUniqueId(uniqueId *foundation.NSString) *ABRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelRecordForUniqueId, uniqueId.Ptr())
 	if _ret != 0 {
@@ -110,6 +124,7 @@ func (o *ABAddressBook) RecordForUniqueId(uniqueId *foundation.NSString) *ABReco
 	return ABRecordFromID(_ret)
 }
 
+// Adds an ABPerson or ABGroup record to the Address Book database.
 func (o *ABAddressBook) AddRecordError(record *ABRecord) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelAddRecordError, record.Ptr(), unsafe.Pointer(&_nsErr))
@@ -119,11 +134,13 @@ func (o *ABAddressBook) AddRecordError(record *ABRecord) (bool, error) {
 	return _ret, nil
 }
 
+// Adds an ABPerson or ABGroup record to the Address Book database.
 func (o *ABAddressBook) AddRecord(record *ABRecord) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelAddRecord, record.Ptr())
 	return _ret
 }
 
+// Removes an ABPerson or ABGroup record from the Address Book database.
 func (o *ABAddressBook) RemoveRecordError(record *ABRecord) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelRemoveRecordError, record.Ptr(), unsafe.Pointer(&_nsErr))
@@ -133,21 +150,31 @@ func (o *ABAddressBook) RemoveRecordError(record *ABRecord) (bool, error) {
 	return _ret, nil
 }
 
+// Removes an ABPerson or ABGroup record from the Address Book database.
 func (o *ABAddressBook) RemoveRecord(record *ABRecord) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBAddressBookSelRemoveRecord, record.Ptr())
 	return _ret
 }
 
+// Returns an array of all the people in the Address Book database.
 func (o *ABAddressBook) People() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aBAddressBookSelPeople)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelPeople)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns an array of all the groups in the Address Book database.
 func (o *ABAddressBook) Groups() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aBAddressBookSelGroups)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelGroups)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the class name of the record that matches the given unique ID.
 func (o *ABAddressBook) RecordClassFromUniqueId(uniqueId *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelRecordClassFromUniqueId, uniqueId.Ptr())
 	if _ret != 0 {
@@ -156,14 +183,16 @@ func (o *ABAddressBook) RecordClassFromUniqueId(uniqueId *foundation.NSString) *
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns an attributed string containing the formatted address.
 func (o *ABAddressBook) FormattedAddressFromDictionary(address *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelFormattedAddressFromDictionary, address)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelFormattedAddressFromDictionary, address.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
+// Returns the default country code for records with unspecified country codes.
 func (o *ABAddressBook) DefaultCountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBAddressBookSelDefaultCountryCode)
 	if _ret != 0 {
@@ -172,6 +201,7 @@ func (o *ABAddressBook) DefaultCountryCode() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the default name ordering defined by the user in the Address Book application’s preferences.
 func (o *ABAddressBook) DefaultNameOrdering() int {
 	_ret := objc.Send[int](o.Ptr(), _aBAddressBookSelDefaultNameOrdering)
 	return _ret

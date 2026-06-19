@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The appearance and physical characteristics of an individual wheel associated with an physics vehicle behavior.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsvehiclewheel
 type SCNPhysicsVehicleWheel struct {
 	foundation.NSObject
@@ -53,6 +55,7 @@ func SCNPhysicsVehicleWheelFromID(id objc.ID) *SCNPhysicsVehicleWheel {
 	return o
 }
 
+// Creates a wheel object.
 func SCNPhysicsVehicleWheelWheelWithNode(node *SCNNode) *SCNPhysicsVehicleWheel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsVehicleWheel), _sCNPhysicsVehicleWheelSelWheelWithNode, node.Ptr())
 	if _ret != 0 {

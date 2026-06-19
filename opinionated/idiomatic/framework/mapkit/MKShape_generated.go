@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that defines the basic properties for all shape-based overlay objects.
+//
 // Shape wraps [raw.MKShape] with a fluent Go API.
 type Shape struct {
 	inner *raw.MKShape
@@ -37,12 +39,16 @@ func NewShape() *Shape {
 	return &Shape{inner: raw.MKShapeFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Shape) WithTitle(title string) *Shape {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Shape) WithSubtitle(subtitle string) *Shape {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

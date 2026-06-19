@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of key-value pairs that store your app’s data.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckrecord
 type CKRecord struct {
 	foundation.NSObject
@@ -53,7 +55,7 @@ func CKRecordFromID(id objc.ID) *CKRecord {
 	return o
 }
 
-// Creates a new record of the specified type. - Parameters: - recordType: A string that represents the type of record that you want to create. You can't change the record type after initialization. You define the record types that your app supports and use them to distinguish between records with different types of data. This parameter must not be `nil` or contain an empty string. A record type must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - Returns: An initialized record object. Use this method to initialize a new record object in the default zone of the database. The newly created record contains no data in any of its fields and receives a unique ID. ```objc // Create a new record of type "employee". CKRecord* myRecord = [[CKRecord alloc] initWithRecordType:@"employee"]; ``` New records exist only in memory until you explicitly save them to iCloud. In addition, new records are sparse by default and have no values for the fields you define. Until you set the value of a key explicitly, getting the value of a key in a new record returns `nil`. Even though a record has an associated type, CloudKit ignores the type information until you save the record. Save the record using a “CKModifyRecordsOperation“ object or by using the “CKDatabase/save(_:completionHandler:)-3tatz“ method of “CKDatabase“ to transfer the record's contents to the server.
+// Creates a new record of the specified type.
 func (o *CKRecord) InitWithRecordType(recordType *foundation.NSString) *CKRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordSelInitWithRecordType, recordType.Ptr())
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *CKRecord) InitWithRecordType(recordType *foundation.NSString) *CKRecord
 	return CKRecordFromID(_ret)
 }
 
-// Creates a record using an ID that you provide. - Parameters: - recordType: A string that represents the type of record that you want to create. You can't change the record type after initialization. You define the record types that your app supports and use them to distinguish between records with different types of data. This parameter must not be `nil` or contain an empty string. A record type must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - recordID: The ID to assign to the record. When creating the ID, you can specify the zone where you want to store the record. You should provide a value that is unique across all records and you may not provide `nil`. - Returns: An initialized record object. Use this method to initialize a new record object with the specified ID. The newly created record contains no data. Upon creation, record objects exist only in memory on the local device. Save the record using a “CKModifyRecordsOperation“ object or by using the “CKDatabase/save(_:completionHandler:)-3tatz“ method of “CKDatabase“ to transfer the record's contents to the server.
+// Creates a record using an ID that you provide.
 func (o *CKRecord) InitWithRecordTypeRecordID(recordType *foundation.NSString, recordID *CKRecordID) *CKRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordSelInitWithRecordTypeRecordID, recordType.Ptr(), recordID.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *CKRecord) InitWithRecordTypeRecordID(recordType *foundation.NSString, r
 	return CKRecordFromID(_ret)
 }
 
-// Creates a record in the specified zone. - Parameters: - recordType: A string that represents the type of record that you want to create. You can't change the record type after initialization. You define the record types that your app supports and use them to distinguish between records with different types of data. This parameter must not be `nil` or contain an empty string. A record type must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - zoneID: The ID of the record zone where you want to store the record. - Returns: An initialized record object. Use this method to initialize a new record object in the specified record zone. Upon creation, the new record contains no data and exists only in memory on the local device. Save the record using a “CKModifyRecordsOperation“ object or by using the “CKDatabase/save(_:completionHandler:)-3tatz“ method of “CKDatabase“ to transfer the record's contents to the server.
+// Creates a record in the specified zone.
 func (o *CKRecord) InitWithRecordTypeZoneID(recordType *foundation.NSString, zoneID *CKRecordZoneID) *CKRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordSelInitWithRecordTypeZoneID, recordType.Ptr(), zoneID.Ptr())
 	if _ret != 0 {
@@ -80,57 +82,66 @@ func (o *CKRecord) InitWithRecordTypeZoneID(recordType *foundation.NSString, zon
 	return CKRecordFromID(_ret)
 }
 
-// Returns the object that the record stores for the specified key. - Parameters: - key: The string that identifies a field in the record. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - Returns: The object for the specified key, or `nil` if no such key exists in the record. New records don't contain any keys or values. Values are always one of the data types in <doc:CKRecord#Supported-Data-Types>. You access the fields of a `CKRecord` object the same way you access key-value pairs in a dictionary. The `CKRecord` class defines the “CKRecord/objectForKey:“ and “CKRecord/setObject:forKey:“ methods for getting and setting values. It also supports dictionary index notation. The following example shows how to use both techniques to set a `firstName` field and retrieve a `lastName` field from a record: ```objc // Equivalent ways to get a value. id value = [myRecord objectForKey:@"hiredAt"]; value = myRecord[@"hiredAt"]; ```
+// Returns the object that the record stores for the specified key.
 func (o *CKRecord) ObjectForKey(key *foundation.NSString) CKRecordValue {
 	_ret := objc.Send[CKRecordValue](o.Ptr(), _cKRecordSelObjectForKey, key.Ptr())
 	return _ret
 }
 
-// Stores an object in the record using the specified key. - Parameters: - object: The object to store using the specified key. The value you provide must be an instance of one the data types in <doc:CKRecord#Supported-Data-Types>. You receive an error if you use a data type that CloudKit doesn't support. If you specify `nil`, CloudKit removes any object that the record associates with the key. - key: The key to associate with `object`. Use this key to retrieve the value later. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. Avoid using a key that matches the name of any property of `CKRecord`. If the specified key already exists in the record, CloudKit deletes its previous value and replaces it with the one in the `object` parameter. This change affects only the local copy of the record. You must save the record to the server again before the change becomes available to other clients. If the type of the `object` parameter differs from the type of the object that's on the server, you encounter an error when you attempt to save this record to the server. For example, if the current value is an <doc://com.apple.documentation/documentation/foundation/nsstring> object, you receive an error if you change the value to an <doc://com.apple.documentation/documentation/foundation/nsnumber> object and save the record. You access the fields of a `CKRecord` object the same way you access key-value pairs in a dictionary. The `CKRecord` class defines the “CKRecord/objectForKey:“ and “CKRecord/setObject:forKey:“ methods for getting and setting values. It also supports dictionary index notation. The following example shows how to use both techniques to set a `firstName` field and get a `lastName` field from a record: ```objc // Equivalent ways to set a value. [myRecord setObject:[NSDate date] forKey:@"hiredAt"]; myRecord[@"hiredAt"] = [NSDate date]; ```
+// Stores an object in the record using the specified key.
 func (o *CKRecord) SetObjectForKey(object CKRecordValue, key *foundation.NSString) {
 	o.Ptr().Send(_cKRecordSelSetObjectForKey, object, key.Ptr())
 }
 
-// Returns an array of the record's keys. - Returns: An array of keys, or an empty array if the record doesn't contain any keys. The array contains only those keys with values that aren't `nil`.
+// Returns an array of the record’s keys.
 func (o *CKRecord) AllKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKRecordSelAllKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordSelAllKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Returns an array of strings to use for full-text searches of the field's string-based values. - Returns: An array of strings that contains data from the record's string-based fields. When performing your own full-text searches, you can use this method to get a list of strings for your search. The method acts only on keys with string values. It breaks each value string apart at whitespace boundaries, creates new strings for each word, adds the new strings to an array, and returns the array. This tokenized version of the record's string values makes it easier to do string-based comparisons of individual words.
+// Returns an array of strings to use for full-text searches of the field’s string-based values.
 func (o *CKRecord) AllTokens() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKRecordSelAllTokens)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordSelAllTokens)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Returns the object that the record stores for the specified key. - Parameters: - key: The string that identifies a field in the record. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - Returns: The object for the specified key, or `nil` if no such key exists in the record. ## Discussion - Important: Don't call this method directly. The presence of this method is necessary to support subscripting syntax for record objects.
+// Returns the object that the record stores for the specified key.
 func (o *CKRecord) ObjectForKeyedSubscript(key *foundation.NSString) CKRecordValue {
 	_ret := objc.Send[CKRecordValue](o.Ptr(), _cKRecordSelObjectForKeyedSubscript, key.Ptr())
 	return _ret
 }
 
-// Stores an object in the record using the specified key. - Parameters: - object: The object to store using the specified key. It must be one of the data types in <doc:CKRecord#Supported-Data-Types>. You receive an error if you use a data type that CloudKit doesn't support. If you specify `nil`, CloudKit removes any object that the record associates with the key. - key: The key to associate with `object`. Use this key to retrieve the value later. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. Avoid using a key that matches the name of any property of `CKRecord`. ## Discussion - Important: Don't call this method directly. The presence of this method is necessary to support subscripting syntax for record objects.
+// Stores an object in the record using the specified key.
 func (o *CKRecord) SetObjectForKeyedSubscript(object CKRecordValue, key *foundation.NSString) {
 	o.Ptr().Send(_cKRecordSelSetObjectForKeyedSubscript, object, key.Ptr())
 }
 
-// Returns an array of keys with recent changes to their values. - Returns: An array of keys with changed values since downloading or saving the record. If there aren't any changed keys, this method returns an empty array.
+// Returns an array of keys with recent changes to their values.
 func (o *CKRecord) ChangedKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKRecordSelChangedKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordSelChangedKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Encodes the record's system fields using the specified archiver. - Parameters: - coder: An archiver object. Use this method to encode the record's metadata that CloudKit provides. Every record has keys that the system defines that correspond to record metadata, such as the record ID, record type, creation date, and so on. This method encodes those keys in the specified archiver. This method doesn't include any keys you add to the record. It also doesn't encode the keys that the “CKRecord/changedKeys“ method returns. You might use this method when you want to store only the system metadata because you store the actual record data elsewhere.
+// Encodes the record’s system fields using the specified archiver.
 func (o *CKRecord) EncodeSystemFieldsWithCoder(coder *foundation.NSCoder) {
 	o.Ptr().Send(_cKRecordSelEncodeSystemFieldsWithCoder, coder.Ptr())
 }
 
-// Creates and sets a reference object for a parent from its record. - Parameters: - parentRecord: A record that you want to set as the parent to this record. This method creates and sets a “CKRecord/Reference“ object that points to the record you provide. The resulting `CKReference` has an action of “CKRecord/ReferenceAction/none“.
+// Creates and sets a reference object for a parent from its record.
 func (o *CKRecord) SetParentReferenceFromRecord(parentRecord *CKRecord) {
 	o.Ptr().Send(_cKRecordSelSetParentReferenceFromRecord, parentRecord.Ptr())
 }
 
-// Creates and sets a reference object for a parent from the parent's record ID. - Parameters: - parentRecordID: The “CKRecord/ID“ object for the record that you want to set as this record's parent. This method creates and sets a “CKRecord/Reference“ object that points to the record you provide. The resulting `CKReference` has an action of “CKRecord/ReferenceAction/none“.
+// Creates and sets a reference object for a parent from the parent’s record ID.
 func (o *CKRecord) SetParentReferenceFromRecordID(parentRecordID *CKRecordID) {
 	o.Ptr().Send(_cKRecordSelSetParentReferenceFromRecordID, parentRecordID.Ptr())
 }

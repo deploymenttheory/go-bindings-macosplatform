@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a dynamic byte buffer in memory.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutabledata
 type NSMutableData struct {
 	NSData
@@ -54,34 +56,42 @@ func (o *NSMutableData) SetLength(length uint) {
 	o.Ptr().Send(_nSMutableDataSelSetLength, length)
 }
 
+// Appends to the receiver a given number of bytes from a given buffer.
 func (o *NSMutableData) AppendBytesLength(bytes_ unsafe.Pointer, length uint) {
 	o.Ptr().Send(_nSMutableDataSelAppendBytesLength, bytes_, length)
 }
 
+// Appends the content of another data object to the receiver.
 func (o *NSMutableData) AppendData(other *NSData) {
 	o.Ptr().Send(_nSMutableDataSelAppendData, other.Ptr())
 }
 
+// Increases the length of the receiver by a given number of bytes.
 func (o *NSMutableData) IncreaseLengthBy(extraLength uint) {
 	o.Ptr().Send(_nSMutableDataSelIncreaseLengthBy, extraLength)
 }
 
+// Replaces with a given set of bytes a given range within the contents of the receiver.
 func (o *NSMutableData) ReplaceBytesInRangeWithBytes(range_ NSRange, bytes_ unsafe.Pointer) {
 	o.Ptr().Send(_nSMutableDataSelReplaceBytesInRangeWithBytes, range_, bytes_)
 }
 
+// Replaces with zeroes the contents of the receiver in a given range.
 func (o *NSMutableData) ResetBytesInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableDataSelResetBytesInRange, range_)
 }
 
+// Replaces the entire contents of the receiver with the contents of another data object.
 func (o *NSMutableData) SetData(data *NSData) {
 	o.Ptr().Send(_nSMutableDataSelSetData, data.Ptr())
 }
 
+// Replaces with a given set of bytes a given range within the contents of the receiver.
 func (o *NSMutableData) ReplaceBytesInRangeWithBytesLength(range_ NSRange, replacementBytes unsafe.Pointer, replacementLength uint) {
 	o.Ptr().Send(_nSMutableDataSelReplaceBytesInRangeWithBytesLength, range_, replacementBytes, replacementLength)
 }
 
+// Creates and returns a mutable data object capable of holding the specified number of bytes.
 func NSMutableDataDataWithCapacity(aNumItems uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableData), _nSMutableDataSelDataWithCapacity, aNumItems)
 	if _ret != 0 {
@@ -90,6 +100,7 @@ func NSMutableDataDataWithCapacity(aNumItems uint) *NSMutableData {
 	return NSMutableDataFromID(_ret)
 }
 
+// Creates and returns an mutable data object containing a given number of zeroed bytes.
 func NSMutableDataDataWithLength(length uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableData), _nSMutableDataSelDataWithLength, length)
 	if _ret != 0 {
@@ -98,6 +109,7 @@ func NSMutableDataDataWithLength(length uint) *NSMutableData {
 	return NSMutableDataFromID(_ret)
 }
 
+// Returns an initialized mutable data object capable of holding the specified number of bytes.
 func (o *NSMutableData) InitWithCapacity(capacity uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDataSelInitWithCapacity, capacity)
 	if _ret != 0 {
@@ -106,6 +118,7 @@ func (o *NSMutableData) InitWithCapacity(capacity uint) *NSMutableData {
 	return NSMutableDataFromID(_ret)
 }
 
+// Initializes and returns a mutable data object containing a given number of zeroed bytes.
 func (o *NSMutableData) InitWithLength(length uint) *NSMutableData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDataSelInitWithLength, length)
 	if _ret != 0 {
@@ -114,6 +127,7 @@ func (o *NSMutableData) InitWithLength(length uint) *NSMutableData {
 	return NSMutableDataFromID(_ret)
 }
 
+// Decompresses the data object’s bytes.
 func (o *NSMutableData) DecompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSMutableDataSelDecompressUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
@@ -123,6 +137,7 @@ func (o *NSMutableData) DecompressUsingAlgorithmError(algorithm NSDataCompressio
 	return _ret, nil
 }
 
+// Compresses the data object’s bytes using an algorithm that you specify.
 func (o *NSMutableData) CompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSMutableDataSelCompressUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))

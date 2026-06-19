@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A product promotion controller for customizing the order and visibility of In-App Purchases per device.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller
 // Deprecated: Use Product.PromotionInfo.
 type SKProductStorePromotionController struct {
@@ -37,6 +39,7 @@ func SKProductStorePromotionControllerFromID(id objc.ID) *SKProductStorePromotio
 	return o
 }
 
+// Returns the default product store promotion controller.
 // Deprecated: Use Product.PromotionInfo.
 func SKProductStorePromotionControllerDefaultController() *SKProductStorePromotionController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKProductStorePromotionController), _sKProductStorePromotionControllerSelDefaultController)
@@ -46,6 +49,7 @@ func SKProductStorePromotionControllerDefaultController() *SKProductStorePromoti
 	return SKProductStorePromotionControllerFromID(_ret)
 }
 
+// Reads the visibility setting of a promoted product in the App Store for this device.
 // Deprecated: Get visibility from Product.PromotionInfo.currentOrder.
 func (o *SKProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *SKProduct, completionHandler func(SKProductStorePromotionVisibility, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -58,6 +62,7 @@ func (o *SKProductStorePromotionController) FetchStorePromotionVisibilityForProd
 	o.Ptr().Send(_sKProductStorePromotionControllerSelFetchStorePromotionVisibilityForProductCompletionHandler, product.Ptr(), __block_completionHandler)
 }
 
+// Updates the visibility of the product on the App Store, per device.
 // Deprecated: Use Product.PromotionInfo.updateProductVisibility(_:for:).
 func (o *SKProductStorePromotionController) UpdateStorePromotionVisibilityForProductCompletionHandler(promotionVisibility SKProductStorePromotionVisibility, product *SKProduct, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -70,6 +75,7 @@ func (o *SKProductStorePromotionController) UpdateStorePromotionVisibilityForPro
 	o.Ptr().Send(_sKProductStorePromotionControllerSelUpdateStorePromotionVisibilityForProductCompletionHandler, promotionVisibility, product.Ptr(), __block_completionHandler)
 }
 
+// Reads the product order override that determines the promoted product order on this device.
 // Deprecated: Use Product.PromotionInfo.currentOrder.
 func (o *SKProductStorePromotionController) FetchStorePromotionOrderWithCompletionHandler(completionHandler func(*foundation.NSArray[*SKProduct], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -85,6 +91,7 @@ func (o *SKProductStorePromotionController) FetchStorePromotionOrderWithCompleti
 	o.Ptr().Send(_sKProductStorePromotionControllerSelFetchStorePromotionOrderWithCompletionHandler, __block_completionHandler)
 }
 
+// Overrides the promoted product order on this device.
 // Deprecated: Use Product.PromotionInfo.updateProductOrder(byID:).
 func (o *SKProductStorePromotionController) UpdateStorePromotionOrderCompletionHandler(promotionOrder *foundation.NSArray[*SKProduct], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A login session request that a web browser receives from an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest
 type ASWebAuthenticationSessionRequest struct {
 	foundation.NSObject
@@ -41,10 +43,12 @@ func ASWebAuthenticationSessionRequestFromID(id objc.ID) *ASWebAuthenticationSes
 	return o
 }
 
+// Indicates that the browser canceled the authentication attempt.
 func (o *ASWebAuthenticationSessionRequest) CancelWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aSWebAuthenticationSessionRequestSelCancelWithError, error_)
 }
 
+// Indicates that the browser successfully completed the authentication attempt.
 func (o *ASWebAuthenticationSessionRequest) CompleteWithCallbackURL(url *foundation.NSURL) {
 	o.Ptr().Send(_aSWebAuthenticationSessionRequestSelCompleteWithCallbackURL, url.Ptr())
 }
@@ -92,8 +96,11 @@ func (o *ASWebAuthenticationSessionRequest) SetDelegate(delegate ASWebAuthentica
 
 // Additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
 func (o *ASWebAuthenticationSessionRequest) AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _aSWebAuthenticationSessionRequestSelAdditionalHeaderFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionRequestSelAdditionalHeaderFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 // The callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.

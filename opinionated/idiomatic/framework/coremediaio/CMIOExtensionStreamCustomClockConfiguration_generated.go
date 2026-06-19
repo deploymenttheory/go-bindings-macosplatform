@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the parameters to create a custom clock on the host side.
+//
 // ExtensionStreamCustomClockConfiguration wraps [raw.CMIOExtensionStreamCustomClockConfiguration] with a fluent Go API.
 type ExtensionStreamCustomClockConfiguration struct {
 	inner *raw.CMIOExtensionStreamCustomClockConfiguration
@@ -34,7 +36,7 @@ func ExtensionStreamCustomClockConfigurationFromID(id objc.ID) *ExtensionStreamC
 	return &ExtensionStreamCustomClockConfiguration{inner: raw.CMIOExtensionStreamCustomClockConfigurationFromID(id)}
 }
 
-// @method initWithName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing: @abstract Initialize a custom clock configuration instance. @param clockName The name of the clock being specified. @param sourceIdentifier An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value. @param getTimeCallMinimumInterval If the clock is queried for its current time more often than this interval, an interpolated value will be returned. @param numberOfEventsForRateSmoothing The number of events to use for rate smoothing; must be > 0. @param numberOfAveragesForRateSmoothing The number of averages used for rate smoothing; if 0, the default smoothing algorithm is used. @result A CMIOExtensionStreamCustomClockConfiguration instance.
+// Creates a custom clock configuration.
 //
 // NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing creates a new [ExtensionStreamCustomClockConfiguration].
 func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier *foundation.NSUUID, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {

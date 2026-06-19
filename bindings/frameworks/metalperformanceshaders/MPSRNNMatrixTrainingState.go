@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that holds data from a forward pass to be used in a backward pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnmatrixtrainingstate
 type MPSRNNMatrixTrainingState struct {
 	mpscore.MPSState

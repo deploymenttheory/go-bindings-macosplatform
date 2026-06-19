@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A 3D point that includes an identifier to the point.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedpoint3d
 type VNRecognizedPoint3D struct {
 	VNPoint3D

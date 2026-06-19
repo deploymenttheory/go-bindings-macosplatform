@@ -71,7 +71,7 @@ func (o *MPSCNNGroupNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBe
 
 // @abstract   Return a MPSCNNGroupNormalizationGradientState object for the provided source image, source states, and destination image.
 func (o *MPSCNNGroupNormalization) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -80,7 +80,7 @@ func (o *MPSCNNGroupNormalization) ResultStateForSourceImageSourceStatesDestinat
 
 // @abstract       Return a temporary MPSCNNGroupNormalizationGradientState object which may be used with a MPSCNNGroupNormalization filter.
 func (o *MPSCNNGroupNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

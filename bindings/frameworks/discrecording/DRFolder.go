@@ -93,6 +93,9 @@ func (o *DRFolder) Count() uint {
 
 // @method 		children @abstract		Returns an array containing the children of a virtual folder. @discussion		The order of children in the array is arbitrary -- since the various filesystems being generated may have different sorting requirements, there is no one true way to sort the children.  The ordering will change only when children are added or removed.  You should sort the children according to the needs of your display, and in a consistent manner. This function only applies to virtual folders.  Real folders are considered leaf nodes and should not be passed into this call. @result			An NSArray of @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects.
 func (o *DRFolder) Children() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _dRFolderSelChildren)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRFolderSelChildren)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

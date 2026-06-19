@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An ordered collection of data items displayed in a customizable layout.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionview
 type NSCollectionView struct {
 	NSView
@@ -108,10 +110,12 @@ func NSCollectionViewFromID(id objc.ID) *NSCollectionView {
 	return o
 }
 
+// Reloads all of the data for the collection view.
 func (o *NSCollectionView) ReloadData() {
 	o.Ptr().Send(_nSCollectionViewSelReloadData)
 }
 
+// Returns the layout information for the item at the specified index path.
 func (o *NSCollectionView) LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
 	if _ret != 0 {
@@ -120,6 +124,7 @@ func (o *NSCollectionView) LayoutAttributesForItemAtIndexPath(indexPath *foundat
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
+// Returns the layout information for the supplementary view at the specified index path.
 func (o *NSCollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForSupplementaryElementOfKindAtIndexPath, kind.Ptr(), indexPath.Ptr())
 	if _ret != 0 {
@@ -128,53 +133,65 @@ func (o *NSCollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexP
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
+// Returns the frame of the collection view item at the specified index.
 func (o *NSCollectionView) FrameForItemAtIndex(index uint) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewSelFrameForItemAtIndex, index)
 	return _ret
 }
 
+// Returns the frame of an item based on the number of items in the collection view.
 func (o *NSCollectionView) FrameForItemAtIndexWithNumberOfItems(index uint, numberOfItems uint) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewSelFrameForItemAtIndexWithNumberOfItems, index, numberOfItems)
 	return _ret
 }
 
+// Returns the number of items in the specified section.
 func (o *NSCollectionView) NumberOfItemsInSection(section int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCollectionViewSelNumberOfItemsInSection, section)
 	return _ret
 }
 
+// Adds the specified items to the current selection and optionally scrolls the items into position.
 func (o *NSCollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
-	o.Ptr().Send(_nSCollectionViewSelSelectItemsAtIndexPathsScrollPosition, indexPaths, scrollPosition)
+	o.Ptr().Send(_nSCollectionViewSelSelectItemsAtIndexPathsScrollPosition, indexPaths.Ptr(), scrollPosition)
 }
 
+// Removes the specified items from the current selection.
 func (o *NSCollectionView) DeselectItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelDeselectItemsAtIndexPaths, indexPaths)
+	o.Ptr().Send(_nSCollectionViewSelDeselectItemsAtIndexPaths, indexPaths.Ptr())
 }
 
+// Selects all items in the collection view, if doing so is possible.
 func (o *NSCollectionView) SelectAll(sender objc.ID) {
 	o.Ptr().Send(_nSCollectionViewSelSelectAll, sender)
 }
 
+// Deselects all items in the collection view.
 func (o *NSCollectionView) DeselectAll(sender objc.ID) {
 	o.Ptr().Send(_nSCollectionViewSelDeselectAll, sender)
 }
 
+// Registers a class to use when creating new items in the collection view.
 func (o *NSCollectionView) RegisterClassForItemWithIdentifier(itemClass objc.Class, identifier *foundation.NSString) {
 	o.Ptr().Send(_nSCollectionViewSelRegisterClassForItemWithIdentifier, itemClass, identifier.Ptr())
 }
 
+// Registers a nib file to use when creating items in the collection view.
 func (o *NSCollectionView) RegisterNibForItemWithIdentifier(nib *NSNib, identifier *foundation.NSString) {
 	o.Ptr().Send(_nSCollectionViewSelRegisterNibForItemWithIdentifier, nib.Ptr(), identifier.Ptr())
 }
 
+// Registers a class to use when creating new supplementary views in the collection view.
 func (o *NSCollectionView) RegisterClassForSupplementaryViewOfKindWithIdentifier(viewClass objc.Class, kind *foundation.NSString, identifier *foundation.NSString) {
 	o.Ptr().Send(_nSCollectionViewSelRegisterClassForSupplementaryViewOfKindWithIdentifier, viewClass, kind.Ptr(), identifier.Ptr())
 }
 
+// Registers a nib file to use when creating supplementary views in the collection view.
 func (o *NSCollectionView) RegisterNibForSupplementaryViewOfKindWithIdentifier(nib *NSNib, kind *foundation.NSString, identifier *foundation.NSString) {
 	o.Ptr().Send(_nSCollectionViewSelRegisterNibForSupplementaryViewOfKindWithIdentifier, nib.Ptr(), kind.Ptr(), identifier.Ptr())
 }
 
+// Creates or returns a reusable item object of the specified type.
 func (o *NSCollectionView) MakeItemWithIdentifierForIndexPath(identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeItemWithIdentifierForIndexPath, identifier.Ptr(), indexPath.Ptr())
 	if _ret != 0 {
@@ -183,6 +200,7 @@ func (o *NSCollectionView) MakeItemWithIdentifierForIndexPath(identifier *founda
 	return NSCollectionViewItemFromID(_ret)
 }
 
+// Creates or returns a reusable supplementary view of the specified type.
 func (o *NSCollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind *foundation.NSString, identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeSupplementaryViewOfKindWithIdentifierForIndexPath, elementKind.Ptr(), identifier.Ptr(), indexPath.Ptr())
 	if _ret != 0 {
@@ -191,6 +209,7 @@ func (o *NSCollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath
 	return NSViewFromID(_ret)
 }
 
+// Returns the collection view item for the represented object at the specified index.
 func (o *NSCollectionView) ItemAtIndex(index uint) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndex, index)
 	if _ret != 0 {
@@ -199,6 +218,7 @@ func (o *NSCollectionView) ItemAtIndex(index uint) *NSCollectionViewItem {
 	return NSCollectionViewItemFromID(_ret)
 }
 
+// Returns the item associated with the specified index path.
 func (o *NSCollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndexPath, indexPath.Ptr())
 	if _ret != 0 {
@@ -207,6 +227,7 @@ func (o *NSCollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *N
 	return NSCollectionViewItemFromID(_ret)
 }
 
+// Returns an array of the actively managed items in the collection view.
 func (o *NSCollectionView) VisibleItems() *foundation.NSArray[*NSCollectionViewItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleItems)
 	if _ret != 0 {
@@ -215,11 +236,16 @@ func (o *NSCollectionView) VisibleItems() *foundation.NSArray[*NSCollectionViewI
 	return foundation.NSArrayFromID[*NSCollectionViewItem](_ret)
 }
 
+// Returns the index paths of the currently active items.
 func (o *NSCollectionView) IndexPathsForVisibleItems() *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSIndexPath]](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleItems)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleItems)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
 }
 
+// Returns the index path of the specified item.
 func (o *NSCollectionView) IndexPathForItem(item *NSCollectionViewItem) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItem, item.Ptr())
 	if _ret != 0 {
@@ -228,6 +254,7 @@ func (o *NSCollectionView) IndexPathForItem(item *NSCollectionViewItem) *foundat
 	return foundation.NSIndexPathFromID(_ret)
 }
 
+// Returns the index path of the item at the specified point.
 func (o *NSCollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItemAtPoint, point)
 	if _ret != 0 {
@@ -236,6 +263,7 @@ func (o *NSCollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint)
 	return foundation.NSIndexPathFromID(_ret)
 }
 
+// Returns the supplementary view associated with the specified index path.
 func (o *NSCollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSupplementaryViewForElementKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
 	if _ret != 0 {
@@ -244,6 +272,7 @@ func (o *NSCollectionView) SupplementaryViewForElementKindAtIndexPath(elementKin
 	return NSViewFromID(_ret)
 }
 
+// Returns an array of the actively managed supplementary views in the collection view.
 func (o *NSCollectionView) VisibleSupplementaryViewsOfKind(elementKind *foundation.NSString) *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleSupplementaryViewsOfKind, elementKind.Ptr())
 	if _ret != 0 {
@@ -252,43 +281,56 @@ func (o *NSCollectionView) VisibleSupplementaryViewsOfKind(elementKind *foundati
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
+// Returns the index paths of the currently active supplementary views.
 func (o *NSCollectionView) IndexPathsForVisibleSupplementaryElementsOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSIndexPath]](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleSupplementaryElementsOfKind, elementKind.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleSupplementaryElementsOfKind, elementKind.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
 }
 
+// Inserts new sections at the specified indexes.
 func (o *NSCollectionView) InsertSections(sections *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSCollectionViewSelInsertSections, sections.Ptr())
 }
 
+// Deletes the specified sections and their contained items.
 func (o *NSCollectionView) DeleteSections(sections *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSCollectionViewSelDeleteSections, sections.Ptr())
 }
 
+// Reloads the data in the specified sections of the collection view.
 func (o *NSCollectionView) ReloadSections(sections *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSCollectionViewSelReloadSections, sections.Ptr())
 }
 
+// Moves a section from its current location to a new location.
 func (o *NSCollectionView) MoveSectionToSection(section int, newSection int) {
 	o.Ptr().Send(_nSCollectionViewSelMoveSectionToSection, section, newSection)
 }
 
+// Inserts new items into the collection view at the specified locations.
 func (o *NSCollectionView) InsertItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelInsertItemsAtIndexPaths, indexPaths)
+	o.Ptr().Send(_nSCollectionViewSelInsertItemsAtIndexPaths, indexPaths.Ptr())
 }
 
+// Deletes the items at the specified index paths.
 func (o *NSCollectionView) DeleteItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelDeleteItemsAtIndexPaths, indexPaths)
+	o.Ptr().Send(_nSCollectionViewSelDeleteItemsAtIndexPaths, indexPaths.Ptr())
 }
 
+// Reloads only the specified items.
 func (o *NSCollectionView) ReloadItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelReloadItemsAtIndexPaths, indexPaths)
+	o.Ptr().Send(_nSCollectionViewSelReloadItemsAtIndexPaths, indexPaths.Ptr())
 }
 
+// Moves an item from one location to another in the collection view.
 func (o *NSCollectionView) MoveItemAtIndexPathToIndexPath(indexPath *foundation.NSIndexPath, newIndexPath *foundation.NSIndexPath) {
 	o.Ptr().Send(_nSCollectionViewSelMoveItemAtIndexPathToIndexPath, indexPath.Ptr(), newIndexPath.Ptr())
 }
 
+// Encapsulates multiple insert, delete, reload, and move operations into a single animated operation.
 func (o *NSCollectionView) PerformBatchUpdatesCompletionHandler(updates func(), completionHandler func(bool)) {
 	var __block_updates objc.Block
 	if updates != nil {
@@ -307,26 +349,31 @@ func (o *NSCollectionView) PerformBatchUpdatesCompletionHandler(updates func(), 
 	o.Ptr().Send(_nSCollectionViewSelPerformBatchUpdatesCompletionHandler, __block_updates, __block_completionHandler)
 }
 
+// Collapses the section in which the sender resides into a single horizontally scrollable row.
 func (o *NSCollectionView) ToggleSectionCollapse(sender objc.ID) {
 	o.Ptr().Send(_nSCollectionViewSelToggleSectionCollapse, sender)
 }
 
+// Scrolls the collection view contents until the specified items are visible.
 func (o *NSCollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
-	o.Ptr().Send(_nSCollectionViewSelScrollToItemsAtIndexPathsScrollPosition, indexPaths, scrollPosition)
+	o.Ptr().Send(_nSCollectionViewSelScrollToItemsAtIndexPathsScrollPosition, indexPaths.Ptr(), scrollPosition)
 }
 
+// Configures the drag operation mask.
 func (o *NSCollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMask NSDragOperation, localDestination bool) {
 	o.Ptr().Send(_nSCollectionViewSelSetDraggingSourceOperationMaskForLocal, dragOperationMask, localDestination)
 }
 
+// Returns an image to use for dragging the specified items.
 func (o *NSCollectionView) DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths *foundation.NSSet[*foundation.NSIndexPath], event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset, indexPaths, event.Ptr(), dragImageOffset)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset, indexPaths.Ptr(), event.Ptr(), dragImageOffset)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSImageFromID(_ret)
 }
 
+// This method computes and returns an image to use for dragging.
 func (o *NSCollectionView) DraggingImageForItemsAtIndexesWithEventOffset(indexes *foundation.NSIndexSet, event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexesWithEventOffset, indexes.Ptr(), event.Ptr(), dragImageOffset)
 	if _ret != 0 {
@@ -354,12 +401,15 @@ func (o *NSCollectionView) SetPrefetchDataSource(prefetchDataSource NSCollection
 }
 
 func (o *NSCollectionView) Content() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSCollectionViewSelContent)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelContent)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSCollectionView) SetContent(content *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSCollectionViewSelSetContent, content)
+	o.Ptr().Send(_nSCollectionViewSelSetContent, content.Ptr())
 }
 
 func (o *NSCollectionView) Delegate() NSCollectionViewDelegate {
@@ -466,14 +516,18 @@ func (o *NSCollectionView) SetSelectionIndexes(selectionIndexes *foundation.NSIn
 }
 
 func (o *NSCollectionView) SelectionIndexPaths() *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSIndexPath]](o.Ptr(), _nSCollectionViewSelSelectionIndexPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSelectionIndexPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
 }
 
 func (o *NSCollectionView) SetSelectionIndexPaths(selectionIndexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelSetSelectionIndexPaths, selectionIndexPaths)
+	o.Ptr().Send(_nSCollectionViewSelSetSelectionIndexPaths, selectionIndexPaths.Ptr())
 }
 
+// Returns the collection view item that is used for the specified object.
 // Deprecated: Use -[NSCollectionViewDataSource collectionView:itemForRepresentedObjectAtIndexPath:] instead
 func (o *NSCollectionView) NewItemForRepresentedObject(object objc.ID) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelNewItemForRepresentedObject, object)

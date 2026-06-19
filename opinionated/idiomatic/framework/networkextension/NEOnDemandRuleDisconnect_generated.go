@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A VPN On Demand rule that disconnects the VPN.
+//
 // NEOnDemandRuleDisconnect wraps [raw.NEOnDemandRuleDisconnect] with a fluent Go API.
 type NEOnDemandRuleDisconnect struct {
 	inner *raw.NEOnDemandRuleDisconnect
@@ -37,7 +39,7 @@ func NewNEOnDemandRuleDisconnect() *NEOnDemandRuleDisconnect {
 	return &NEOnDemandRuleDisconnect{inner: raw.NEOnDemandRuleDisconnectFromID(_id)}
 }
 
-// @property DNSSearchDomainMatch @discussion An array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
+// DNS search domains that identify a network.
 //
 // WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleDisconnect) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleDisconnect {
@@ -60,7 +62,7 @@ func (x *NEOnDemandRuleDisconnect) WithDNSSearchDomainMatch(items ...*foundation
 	return x
 }
 
-// @property DNSServerAddressMatch @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
+// DNS server addresses that identify a network.
 //
 // WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleDisconnect) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleDisconnect {
@@ -83,7 +85,7 @@ func (x *NEOnDemandRuleDisconnect) WithDNSServerAddressMatch(items ...*foundatio
 	return x
 }
 
-// @property interfaceTypeMatch @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
+// An interface type to identify a network.
 //
 // WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
 func (x *NEOnDemandRuleDisconnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleDisconnect {
@@ -91,7 +93,7 @@ func (x *NEOnDemandRuleDisconnect) WithInterfaceTypeMatch(interfaceTypeMatch NEO
 	return x
 }
 
-// @property SSIDMatch @discussion An array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
+// SSIDs that identify a network.
 //
 // WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleDisconnect) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleDisconnect {
@@ -114,7 +116,7 @@ func (x *NEOnDemandRuleDisconnect) WithSSIDMatch(items ...*foundation.NSString) 
 	return x
 }
 
-// @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
+// A URL to probe when all other network identifiers match to validate that an expected resource is available.
 //
 // WithProbeURL sets the probeURL property and returns the receiver for chaining.
 func (x *NEOnDemandRuleDisconnect) WithProbeURL(probeURL string) *NEOnDemandRuleDisconnect {

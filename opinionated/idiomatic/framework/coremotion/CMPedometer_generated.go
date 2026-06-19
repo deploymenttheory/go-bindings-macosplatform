@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object for fetching the system-generated live walking data.
+//
 // Pedometer wraps [raw.CMPedometer] with a fluent Go API.
 type Pedometer struct {
 	inner *raw.CMPedometer
@@ -37,16 +39,22 @@ func NewPedometer() *Pedometer {
 	return &Pedometer{inner: raw.CMPedometerFromID(_id)}
 }
 
+// Retrieves the data between the specified start and end dates.
+//
 // QueryPedometerDataFromDateToDateWithHandler calls the underlying QueryPedometerDataFromDateToDateWithHandler.
 func (x *Pedometer) QueryPedometerDataFromDateToDateWithHandler(start *foundation.NSDate, end *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer)) {
 	x.inner.QueryPedometerDataFromDateToDateWithHandler(start, end, handler)
 }
 
+// Starts the delivery of recent pedestrian-related data to your app.
+//
 // StartPedometerUpdatesFromDateWithHandler calls the underlying StartPedometerUpdatesFromDateWithHandler.
 func (x *Pedometer) StartPedometerUpdatesFromDateWithHandler(start *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer)) {
 	x.inner.StartPedometerUpdatesFromDateWithHandler(start, handler)
 }
 
+// Stops the delivery of recent pedestrian data updates to your app.
+//
 // StopPedometerUpdates calls the underlying StopPedometerUpdates.
 func (x *Pedometer) StopPedometerUpdates() {
 	x.inner.StopPedometerUpdates()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the state of a property.
+//
 // ExtensionPropertyState wraps [raw.CMIOExtensionPropertyState] with a fluent Go API.
 type ExtensionPropertyState struct {
 	inner *raw.CMIOExtensionPropertyState[objc.ID]
@@ -29,7 +31,7 @@ func ExtensionPropertyStateFromID(id objc.ID) *ExtensionPropertyState {
 	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](id)}
 }
 
-// @method initWithValue: @abstract Initialize a property state instance. @param value The value associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+// Creates a property state with a value.
 //
 // NewExtensionPropertyStateWithValue creates a new [ExtensionPropertyState].
 func NewExtensionPropertyStateWithValue(value objc.ID) *ExtensionPropertyState {
@@ -38,7 +40,7 @@ func NewExtensionPropertyStateWithValue(value objc.ID) *ExtensionPropertyState {
 	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](_id)}
 }
 
-// @method initWithValue:attributes: @abstract Initialize a property state instance. @param value The value associated with a property state. @param attributes The property attributes associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+// Creates a property state with a value and attributes.
 //
 // NewExtensionPropertyStateWithValueAttributes creates a new [ExtensionPropertyState].
 func NewExtensionPropertyStateWithValueAttributes(value objc.ID, attributes *raw.CMIOExtensionPropertyAttributes[objc.ID]) *ExtensionPropertyState {

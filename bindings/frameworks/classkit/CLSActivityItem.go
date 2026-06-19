@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for gathering information about an activity.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsactivityitem
 type CLSActivityItem struct {
 	CLSObject

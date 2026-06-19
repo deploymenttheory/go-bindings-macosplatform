@@ -64,6 +64,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// The availability of the contextual embedding model assets.
 type NLContextualEmbeddingAssetsResult int64
 
 const (
@@ -88,9 +89,11 @@ func (e NLContextualEmbeddingAssetsResult) String() string {
 	}
 }
 
+// The means of calculating a distance between two locations in a text embedding.
 type NLDistanceType int64
 
 const (
+	// A method of calculating distance by using cosine similarity.
 	NLDistanceTypeCosine NLDistanceType = 0
 )
 
@@ -103,6 +106,7 @@ func (e NLDistanceType) String() string {
 	}
 }
 
+// The different types of a natural language model.
 type NLModelType int64
 
 const (
@@ -121,6 +125,7 @@ func (e NLModelType) String() string {
 	}
 }
 
+// The response to an asset request.
 type NLTaggerAssetsResult int64
 
 const (
@@ -142,6 +147,7 @@ func (e NLTaggerAssetsResult) String() string {
 	}
 }
 
+// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
 type NLTaggerOptions uint64
 
 const (
@@ -179,13 +185,18 @@ func (e NLTaggerOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants representing linguistic units.
 type NLTokenUnit int64
 
 const (
-	NLTokenUnitWord      NLTokenUnit = 0
-	NLTokenUnitSentence  NLTokenUnit = 1
+	// An individual word.
+	NLTokenUnitWord NLTokenUnit = 0
+	// An individual sentence.
+	NLTokenUnitSentence NLTokenUnit = 1
+	// An individual paragraph.
 	NLTokenUnitParagraph NLTokenUnit = 2
-	NLTokenUnitDocument  NLTokenUnit = 3
+	// The document in its entirety.
+	NLTokenUnitDocument NLTokenUnit = 3
 )
 
 func (e NLTokenUnit) String() string {
@@ -203,6 +214,7 @@ func (e NLTokenUnit) String() string {
 	}
 }
 
+// Hints about the contents of the string for the tokenizer.
 type NLTokenizerAttributes uint64
 
 const (

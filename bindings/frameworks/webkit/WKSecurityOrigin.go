@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that identifies the origin of a particular resource.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wksecurityorigin
 type WKSecurityOrigin struct {
 	foundation.NSObject

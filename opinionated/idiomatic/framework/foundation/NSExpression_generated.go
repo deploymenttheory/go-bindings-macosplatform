@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An expression for use in a comparison predicate.
+//
 // Expression wraps [raw.NSExpression] with a fluent Go API.
 type Expression struct {
 	inner *raw.NSExpression
@@ -30,6 +32,8 @@ func ExpressionFromID(id objc.ID) *Expression {
 	return &Expression{inner: raw.NSExpressionFromID(id)}
 }
 
+// Creates the expression with the specified expression type.
+//
 // NewExpressionWithExpressionType creates a new [Expression].
 func NewExpressionWithExpressionType(type_ NSExpressionType) *Expression {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExpression")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewExpressionWithExpressionType(type_ NSExpressionType) *Expression {
 	return &Expression{inner: raw.NSExpressionFromID(_id)}
 }
 
+// Creates an expression by decoding from the coder you specify.
+//
 // NewExpressionWithCoder creates a new [Expression].
 func NewExpressionWithCoder(coder *raw.NSCoder) *Expression {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExpression")), objc.RegisterName("alloc"))
@@ -50,11 +56,15 @@ func (x *Expression) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Evaluates an expression using a specified object and context.
+//
 // ExpressionValueWithObjectContext calls the underlying ExpressionValueWithObjectContext.
 func (x *Expression) ExpressionValueWithObjectContext(object objc.ID, context_ *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID {
 	return x.inner.ExpressionValueWithObjectContext(object, context_)
 }
 
+// Forces a securely decoded expression to allow evaluation.
+//
 // AllowEvaluation calls the underlying AllowEvaluation.
 func (x *Expression) AllowEvaluation() {
 	x.inner.AllowEvaluation()

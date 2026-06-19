@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of changes in the persistent history based on a context save or batch operation.
+//
 // PersistentHistoryTransaction wraps [raw.NSPersistentHistoryTransaction] with a fluent Go API.
 type PersistentHistoryTransaction struct {
 	inner *raw.NSPersistentHistoryTransaction
@@ -37,6 +39,8 @@ func NewPersistentHistoryTransaction() *PersistentHistoryTransaction {
 	return &PersistentHistoryTransaction{inner: raw.NSPersistentHistoryTransactionFromID(_id)}
 }
 
+// Obtains a notification for use in merging the transaction’s changes into a managed object context.
+//
 // ObjectIDNotification calls the underlying ObjectIDNotification.
 func (x *PersistentHistoryTransaction) ObjectIDNotification() *foundation.NSNotification {
 	return x.inner.ObjectIDNotification()

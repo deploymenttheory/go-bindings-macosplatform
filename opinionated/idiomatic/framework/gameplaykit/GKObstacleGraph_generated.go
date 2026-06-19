@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of GKGraphNodes that are governed by a set of extruded GKPolygonObstacles
+// A navigation graph for 2D game worlds that creates a minimal network for precise pathfinding around obstacles.
 //
 // ObstacleGraph wraps [raw.GKObstacleGraph] with a fluent Go API.
 type ObstacleGraph struct {
@@ -33,6 +33,8 @@ func ObstacleGraphFromID(id objc.ID) *ObstacleGraph {
 	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](id)}
 }
 
+// Initializes a graph with the specified list of obstacles.
+//
 // NewObstacleGraphWithObstaclesBufferRadius creates a new [ObstacleGraph].
 func NewObstacleGraphWithObstaclesBufferRadius(obstacles *foundation.NSArray[*raw.GKPolygonObstacle], bufferRadius float32) *ObstacleGraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKObstacleGraph")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewObstacleGraphWithObstaclesBufferRadius(obstacles *foundation.NSArray[*ra
 	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](_id)}
 }
 
+// Initializes a graph with the specified list of obstacles, using the specified node class.
+//
 // NewObstacleGraphWithObstaclesBufferRadiusNodeClass creates a new [ObstacleGraph].
 func NewObstacleGraphWithObstaclesBufferRadiusNodeClass(obstacles *foundation.NSArray[*raw.GKPolygonObstacle], bufferRadius float32, nodeClass objc.Class) *ObstacleGraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKObstacleGraph")), objc.RegisterName("alloc"))
@@ -47,70 +51,70 @@ func NewObstacleGraphWithObstaclesBufferRadiusNodeClass(obstacles *foundation.NS
 	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](_id)}
 }
 
-// Connects the node to this graph by testing edge intersection with existing obstacles. Same behavior as if this node had been present during initWithObstacles. @param node the node to connect
+// Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
 //
 // ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
 func (x *ObstacleGraph) ConnectNodeUsingObstacles(node objc.ID) {
 	x.inner.ConnectNodeUsingObstacles(node)
 }
 
-// Same behavior as connectNodeUsingObstacles: except you can optionally ignore certain obstacles from being tested for intersection.
+// Adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the area occupied by the specified obstacles.
 //
 // ConnectNodeUsingObstaclesIgnoringObstacles calls the underlying ConnectNodeUsingObstaclesIgnoringObstacles.
 func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringObstacles(node objc.ID, obstaclesToIgnore *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.ConnectNodeUsingObstaclesIgnoringObstacles(node, obstaclesToIgnore)
 }
 
-// Same behavior as connectNodeUsingObstacles: except you can optionally ignore the bounding radius of certain obstacles from being tested for intersection
+// Adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the buffer regions around the specified obstacles.
 //
 // ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles calls the underlying ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles.
 func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node objc.ID, obstaclesBufferRadiusToIgnore *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node, obstaclesBufferRadiusToIgnore)
 }
 
-// Adds obstacles to this graph. Obstacle is extruded and graph nodes are generated from its vertices and then connected to this graph Nothing is done if an obstacle is already present in this graph Any existing connections that intersect the new obstacles are destroyed unless they are protected with [GKObstacleGraph lockConnection:] @param obstacles an array of obstacles to be added @see lockConnection
+// Adds new obstacles to the graph.
 //
 // AddObstacles calls the underlying AddObstacles.
 func (x *ObstacleGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.AddObstacles(obstacles)
 }
 
-// Removes obstacles from this graph. All associated graph nodes are removed and their connections are bidirectionally removed. Connections between obstacle nodes that were previously invalidated by any of these obstacles are restored. Nothing is done if an obstacle is already present in this graph @param obstacles an array of obstacles to be removed
+// Removes the specified obstacle from the graph.
 //
 // RemoveObstacles calls the underlying RemoveObstacles.
 func (x *ObstacleGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.RemoveObstacles(obstacles)
 }
 
-// Removes all obstacles from this graph.
+// Removes all obstacles from the graph.
 //
 // RemoveAllObstacles calls the underlying RemoveAllObstacles.
 func (x *ObstacleGraph) RemoveAllObstacles() {
 	x.inner.RemoveAllObstacles()
 }
 
-// Returns an array of the graph nodes associated with a given obstacle @param obstacle the obstacle who's nodes are to be retrieved
+// Returns the group of nodes corresponding to an obstacle in the graph.
 //
 // NodesForObstacle calls the underlying NodesForObstacle.
 func (x *ObstacleGraph) NodesForObstacle(obstacle *raw.GKPolygonObstacle) *foundation.NSArray[objc.ID] {
 	return x.inner.NodesForObstacle(obstacle)
 }
 
-// Marks a connection as "locked", preventing this connection from being destroyed when you add obstacles that would intersect it @param startNode startNode of the connection to lock @param endNode endNode of the connection to lock
+// Prevents the specified nodes from being disconnected due to the addition of obstacles.
 //
 // LockConnectionFromNodeToNode calls the underlying LockConnectionFromNodeToNode.
 func (x *ObstacleGraph) LockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID) {
 	x.inner.LockConnectionFromNodeToNode(startNode, endNode)
 }
 
-// "Unlocks" a connection, removing its protection from being destroyed when you add obstacles that would intersect it @param startNode startNode of the connection to unlock @param endNode endNode of the connection to unlock @see lockConnection
+// Allows the specified nodes to be disconnected due to the addition of obstacles.
 //
 // UnlockConnectionFromNodeToNode calls the underlying UnlockConnectionFromNodeToNode.
 func (x *ObstacleGraph) UnlockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID) {
 	x.inner.UnlockConnectionFromNodeToNode(startNode, endNode)
 }
 
-// Query if a given connection is locked @param startNode startNode of the connection to query @param endNode endNode of the connection to query @see lockConnection @see unlockConnection @return YES if the connection was locked with lockConnection, NO if it was never locked or was unlocked via unlockConnection
+// Returns a Boolean value indicating whether the specified nodes are protected from disconnection due to the addition of obstacles.
 //
 // IsConnectionLockedFromNodeToNode calls the underlying IsConnectionLockedFromNodeToNode.
 func (x *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode objc.ID, endNode objc.ID) bool {

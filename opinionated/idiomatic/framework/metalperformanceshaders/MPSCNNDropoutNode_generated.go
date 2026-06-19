@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a dropout filter.
+//
 // CNNDropoutNode wraps [raw.MPSCNNDropoutNode] with a fluent Go API.
 type CNNDropoutNode struct {
 	inner *raw.MPSCNNDropoutNode

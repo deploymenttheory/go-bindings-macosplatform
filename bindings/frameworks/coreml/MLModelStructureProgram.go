@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing the structure of an ML Program model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureprogram
 type MLModelStructureProgram struct {
 	foundation.NSObject
@@ -31,6 +33,9 @@ func MLModelStructureProgramFromID(id objc.ID) *MLModelStructureProgram {
 }
 
 func (o *MLModelStructureProgram) Functions() *foundation.NSDictionary[*foundation.NSString, *MLModelStructureProgramFunction] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLModelStructureProgramFunction]](o.Ptr(), _mLModelStructureProgramSelFunctions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramSelFunctions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLModelStructureProgramFunction](_ret)
 }

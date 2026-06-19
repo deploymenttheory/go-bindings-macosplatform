@@ -9,6 +9,7 @@ type CAFrameRateRange struct {
 	Preferred float32
 }
 
+// The standard transform matrix used throughout Core Animation.
 type CATransform3D struct {
 	M11 float64
 	M12 float64

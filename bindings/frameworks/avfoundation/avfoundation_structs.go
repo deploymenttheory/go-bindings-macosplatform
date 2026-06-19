@@ -7,25 +7,25 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 )
 
-// @typedef AVCaptionDimension @abstract The length with a unit or coordinate on a 2D geometric axis @field value The value of the coordinate or length. @field units The units of the coordinate (e.g., cells, points)
+// A structure that defines a caption dimension.
 type AVCaptionDimension struct {
 	Value float64
 	Units AVCaptionUnitsType
 }
 
-// @typedef AVCaptionPoint @abstract A two dimensional point made of x and y AVCaptionDimension coordinates @field x An AVCaptionDimension holding the x coordinate of the point @field y An AVCaptionDimension holding the y coordinate of the point
+// A structure that defines the origin point for a caption.
 type AVCaptionPoint struct {
 	X AVCaptionDimension
 	Y AVCaptionDimension
 }
 
-// @typedef AVCaptionSize @abstract A two dimensional size made of width and height AVCaptionDimensions @field width An AVCaptionDimension holding the width @field height An AVCaptionDimension holding the height
+// A structure that defines the height and width of a caption.
 type AVCaptionSize struct {
 	Width  AVCaptionDimension
 	Height AVCaptionDimension
 }
 
-// This structure represents a timecode, adhering to SMPTE standards, which define precise time information and associated timestamps for video or audio synchronization. This structure corresponds to the SMPTE 12M-1 Linear Timecode (LTC) format, widely used for professional video and audio synchronization.
+// This structure represents a timecode, adhering to SMPTE standards, which define precise time information and associated timestamps for video or audio synchronization.
 type AVCaptureTimecode struct {
 	Hours         uint8
 	Minutes       uint8
@@ -36,25 +36,26 @@ type AVCaptureTimecode struct {
 	SourceType    AVCaptureTimecodeSourceType
 }
 
-// @typedef AVCaptureWhiteBalanceChromaticityValues @abstract Structure containing CIE 1931 xy chromaticity values.
+// A structure that defines CIE 1931 xy chromaticity values.
 type AVCaptureWhiteBalanceChromaticityValues struct {
 	X float32
 	Y float32
 }
 
-// @typedef AVCaptureWhiteBalanceGains @abstract Structure containing RGB white balance gain values.
+// A structure that defines RGB white balance gain values.
 type AVCaptureWhiteBalanceGains struct {
 	RedGain   float32
 	GreenGain float32
 	BlueGain  float32
 }
 
-// @typedef AVCaptureWhiteBalanceTemperatureAndTintValues @abstract Structure containing a white balance color correlated temperature in kelvin, plus a tint value in the range of [-150 - +150].
+// A structure that defines temperature and tint values correlated to a white-balance color.
 type AVCaptureWhiteBalanceTemperatureAndTintValues struct {
 	Temperature float32
 	Tint        float32
 }
 
+// A structure that defines edge processing region widths.
 type AVEdgeWidths struct {
 	Left   float64
 	Top    float64
@@ -62,18 +63,19 @@ type AVEdgeWidths struct {
 	Bottom float64
 }
 
+// A structure that defines a pixel aspect ratio for a rendering context.
 type AVPixelAspectRatio struct {
 	HorizontalSpacing int
 	VerticalSpacing   int
 }
 
-// @struct		AVSampleCursorAudioDependencyInfo @abstract   A struct for describing the independent decodability of audio samples @field      audioSampleIsIndependentlyDecodable Indicates whether the sample is independently decodable.  Will be YES for Immediate Playout Frames (IPFs) and Independent Frames (IFs). @field      audioSamplePacketRefreshCount If audioSampleIsIndependentlyDecodable is YES, indicates how many samples, starting at this sample, must be fed to the decoder to achieve full decoder refresh.  Will be zero for Immediate Playout Frames (IPFs).
+// A structure that describes the independent decodability of audio samples.
 type AVSampleCursorAudioDependencyInfo struct {
 	AudioSampleIsIndependentlyDecodable bool
 	AudioSamplePacketRefreshCount       int
 }
 
-// @struct		AVSampleCursorChunkInfo @abstract   Provides information about a chunk of media samples. @field      chunkSampleCount The count of media samples in the chunk. @field      chunkHasUniformSampleSizes YES if all of the samples in the chunk occupy the same number of bytes in storage. @field      currentChunkHasUniformSampleDurations YES if all of the samples in the chunk have the same duration. @field      currentChunkHasUniformFormatDescriptions YES if all of the samples in the chunk have the same format description.
+// A value that provides information about a chunk of media samples.
 type AVSampleCursorChunkInfo struct {
 	ChunkSampleCount                  int64
 	ChunkHasUniformSampleSizes        bool
@@ -81,7 +83,7 @@ type AVSampleCursorChunkInfo struct {
 	ChunkHasUniformFormatDescriptions bool
 }
 
-// @struct		AVSampleCursorDependencyInfo @abstract   A struct for describing dependencies between a media sample and other media samples in the same sample sequence. @field      sampleIndicatesWhetherItHasDependentSamples Indicates whether the presence or absence of other samples that are dependent on the sample is known. @field      sampleHasDependentSamples If sampleIndicatesWhetherItHasDependentSamples is YES, indicates whether the sample has dependent samples. @field      sampleIndicatesWhetherItDependsOnOthers Indicates whether the sample's independency from other samples or dependency on other samples is known. @field      sampleDependsOnOthers If sampleIndicatesWhetherItDependsOnOthers is YES, indicates whether the sample depends on other media samples. @field      sampleIndicatesWhetherItHasRedundantCoding Indicates whether the presence of redundant coding of the sample is known. @field      sampleHasRedundantCoding If sampleIndicatesWhetherItHasRedundantCoding is YES, indicates whether the sample has redundant coding.
+// A value for describing dependencies between a media sample and other media samples in the same sample sequence.
 type AVSampleCursorDependencyInfo struct {
 	SampleIndicatesWhetherItHasDependentSamples bool
 	SampleHasDependentSamples                   bool
@@ -91,13 +93,13 @@ type AVSampleCursorDependencyInfo struct {
 	SampleHasRedundantCoding                    bool
 }
 
-// @struct		AVSampleCursorStorageRange @abstract   A struct for indicating the offset and length of storage occupied by a media sample or its chunk. @field      offset The offset of the first byte of storage occupied by a media sample or its chunk. @field      length The count of bytes of storage occupied by a media sample or its chunk. @discussion Like NSRange, but rangier.
+// A structure that indicates the offset and length of storage for a media sample or its chunk.
 type AVSampleCursorStorageRange struct {
 	Offset int64
 	Length int64
 }
 
-// @struct		AVSampleCursorSyncInfo @abstract   A struct for describing attributes of a media sample for consideration when resynchronizing a decoder. @field      sampleIsFullSync Indicates whether the sample is a full sync sample, also known as an Instantaneous Decoder Refresh sample, and is sufficient in itself to completely resynchronize a decoder. @field      sampleIsPartialSync Indicates whether the sample is a partial sync sample. @field      sampleIsDroppable Indicates whether the sample is droppable.
+// A structure that describes the attributes of media samples to consider when resynchronizing a decoder.
 type AVSampleCursorSyncInfo struct {
 	SampleIsFullSync    bool
 	SampleIsPartialSync bool

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of the clamp mask used by gradient arithmetic operators.
+//
 // NNArithmeticGradientStateNode wraps [raw.MPSNNArithmeticGradientStateNode] with a fluent Go API.
 type NNArithmeticGradientStateNode struct {
 	inner *raw.MPSNNArithmeticGradientStateNode

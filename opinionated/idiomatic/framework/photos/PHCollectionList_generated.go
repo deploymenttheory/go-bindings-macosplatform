@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.
+//
 // CollectionList wraps [raw.PHCollectionList] with a fluent Go API.
 type CollectionList struct {
 	inner *raw.PHCollectionList

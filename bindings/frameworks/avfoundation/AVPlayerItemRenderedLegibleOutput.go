@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A player item output that vends media with a legible characteristic as rendered pixel buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemrenderedlegibleoutput
 type AVPlayerItemRenderedLegibleOutput struct {
 	AVPlayerItemOutput
@@ -38,7 +40,7 @@ func AVPlayerItemRenderedLegibleOutputFromID(id objc.ID) *AVPlayerItemRenderedLe
 	return o
 }
 
-// @method			initWithVideoDisplaySize: @abstract		Creates an instance of AVPlayerItemRenderedLegibleOutput. @param			videoDisplaySize CGSize for the video display area @discussion This is the only available initializer for AVPlayerItemRenderedLegibleOutput. The client can also choose to reset videoDisplaySize after initialization or during playback. Initializing and resetting videoDisplaySize with a zero height or width will result in an exception being thrown.
+// Creates a rendered legible output object.
 func (o *AVPlayerItemRenderedLegibleOutput) InitWithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *AVPlayerItemRenderedLegibleOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemRenderedLegibleOutputSelInitWithVideoDisplaySize, videoDisplaySize)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *AVPlayerItemRenderedLegibleOutput) InitWithVideoDisplaySize(videoDispla
 	return AVPlayerItemRenderedLegibleOutputFromID(_ret)
 }
 
-// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemRenderedLegibleOutputPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called. @discussion The delegate is held using a zeroing-weak reference, so it is safe to deallocate the delegate while the receiver still has a reference to it.
+// Sets the delegate object and the queue on which it’s invoked.
 func (o *AVPlayerItemRenderedLegibleOutput) SetDelegateQueue(delegate AVPlayerItemRenderedLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVPlayerItemRenderedLegibleOutputSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }

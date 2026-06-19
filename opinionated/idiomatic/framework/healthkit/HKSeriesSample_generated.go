@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class that defines samples that contain a series of items.
+//
 // SeriesSample wraps [raw.HKSeriesSample] with a fluent Go API.
 type SeriesSample struct {
 	inner *raw.HKSeriesSample

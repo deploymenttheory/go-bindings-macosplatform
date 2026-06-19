@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object wrapper for primitive scalar numeric values.
+//
 // Number wraps [raw.NSNumber] with a fluent Go API.
 type Number struct {
 	inner *raw.NSNumber
@@ -36,6 +38,8 @@ func NewNumberWithCoder(coder *raw.NSCoder) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed char.
+//
 // NewNumberWithChar creates a new [Number].
 func NewNumberWithChar(value int8) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewNumberWithChar(value int8) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned char.
+//
 // NewNumberWithUnsignedChar creates a new [Number].
 func NewNumberWithUnsignedChar(value uint8) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -50,6 +56,8 @@ func NewNumberWithUnsignedChar(value uint8) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed short.
+//
 // NewNumberWithShort creates a new [Number].
 func NewNumberWithShort(value int16) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -57,6 +65,8 @@ func NewNumberWithShort(value int16) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned short.
+//
 // NewNumberWithUnsignedShort creates a new [Number].
 func NewNumberWithUnsignedShort(value uint16) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -64,6 +74,8 @@ func NewNumberWithUnsignedShort(value uint16) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed int.
+//
 // NewNumberWithInt creates a new [Number].
 func NewNumberWithInt(value int) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -71,6 +83,8 @@ func NewNumberWithInt(value int) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned int.
+//
 // NewNumberWithUnsignedInt creates a new [Number].
 func NewNumberWithUnsignedInt(value uint) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -78,6 +92,8 @@ func NewNumberWithUnsignedInt(value uint) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed long.
+//
 // NewNumberWithLong creates a new [Number].
 func NewNumberWithLong(value int) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -85,6 +101,8 @@ func NewNumberWithLong(value int) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned long.
+//
 // NewNumberWithUnsignedLong creates a new [Number].
 func NewNumberWithUnsignedLong(value uint) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -92,6 +110,8 @@ func NewNumberWithUnsignedLong(value uint) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain value, treated as a signed long long.
+//
 // NewNumberWithLongLong creates a new [Number].
 func NewNumberWithLongLong(value int64) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -99,6 +119,8 @@ func NewNumberWithLongLong(value int64) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned long long.
+//
 // NewNumberWithUnsignedLongLong creates a new [Number].
 func NewNumberWithUnsignedLongLong(value uint64) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -106,6 +128,8 @@ func NewNumberWithUnsignedLongLong(value uint64) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a float.
+//
 // NewNumberWithFloat creates a new [Number].
 func NewNumberWithFloat(value float32) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -113,6 +137,8 @@ func NewNumberWithFloat(value float32) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain value, treated as a double.
+//
 // NewNumberWithDouble creates a new [Number].
 func NewNumberWithDouble(value float64) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -120,6 +146,8 @@ func NewNumberWithDouble(value float64) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a BOOL.
+//
 // NewNumberWithBool creates a new [Number].
 func NewNumberWithBool(value bool) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -127,6 +155,8 @@ func NewNumberWithBool(value bool) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an NSInteger.
+//
 // NewNumberWithInteger creates a new [Number].
 func NewNumberWithInteger(value int) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -134,6 +164,8 @@ func NewNumberWithInteger(value int) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an NSUInteger.
+//
 // NewNumberWithUnsignedInteger creates a new [Number].
 func NewNumberWithUnsignedInteger(value uint) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNumber")), objc.RegisterName("alloc"))
@@ -147,16 +179,22 @@ func (x *Number) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*
 	return x
 }
 
+// Returns an NSComparisonResult value that indicates whether the number object’s value is greater than, equal to, or less than a given number.
+//
 // Compare calls the underlying Compare.
 func (x *Number) Compare(otherNumber *raw.NSNumber) NSComparisonResult {
 	return NSComparisonResult(x.inner.Compare(otherNumber))
 }
 
+// Returns a Boolean value that indicates whether the number object’s value and a given number are equal.
+//
 // IsEqualToNumber calls the underlying IsEqualToNumber.
 func (x *Number) IsEqualToNumber(number *raw.NSNumber) bool {
 	return x.inner.IsEqualToNumber(number)
 }
 
+// Returns a string that represents the contents of the number object for a given locale.
+//
 // DescriptionWithLocale calls the underlying DescriptionWithLocale.
 func (x *Number) DescriptionWithLocale(locale objc.ID) *String {
 	_r := x.inner.DescriptionWithLocale(locale)

@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// GKNoiseMap represents an extracted portion of sampled points from continuous 3D noise.  Extracted values are useful for 2D and 3D games.  Noise values may be queried, set to explicit values or used as input for other uses, including textures and tile maps. @see GKNoiseSource @see GKNoise @see SKTexture @see SKTileMapNode
+// A sample of procedural noise data from which you can read noise values directly or create noise textures.
 //
 // NoiseMap wraps [raw.GKNoiseMap] with a fluent Go API.
 type NoiseMap struct {
@@ -38,7 +38,7 @@ func NewNoiseMap() *NoiseMap {
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
-// Initializes a noise map with specified noise. @param noise The 3D noise from which to sample a 2D plane.
+// Initializes a noise map by sampling from the specified noise object.
 //
 // NewNoiseMapWithNoise creates a new [NoiseMap].
 func NewNoiseMapWithNoise(noise *raw.GKNoise) *NoiseMap {
@@ -47,7 +47,7 @@ func NewNoiseMapWithNoise(noise *raw.GKNoise) *NoiseMap {
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
-// Initializes a noise map with specified noise and parameters. @param noise The 3D noise from which to sample a 2D plane. @param size The size of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param origin The origin of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param sampleCount The number of equally-spaced samples to make across the 2D plane. @param seamless Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
+// Creates a noise map by sampling from the specified noise object.
 //
 // NewNoiseMapWithNoiseSizeOriginSampleCountSeamless creates a new [NoiseMap].
 func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *raw.GKNoise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
@@ -56,21 +56,21 @@ func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *raw.GKNoise, size 
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
-// The noise map value at the specified sample index of the 2D plane. @param position Sample index of the extracted 2D plane at which to query the value.  Valid range is from 0 to sampleCount-1, inclusive. @return The noise map value at the specified sample index.
+// Returns the value at the specified position in the noise map’s discrete sample grid.
 //
 // ValueAtPosition calls the underlying ValueAtPosition.
 func (x *NoiseMap) ValueAtPosition(position unsafe.Pointer) float32 {
 	return x.inner.ValueAtPosition(position)
 }
 
-// The noise map value at the specified sample point of the 2D plane.  Returns an interpolated value for points not aligned on integer boundaries. @param position Sample point of the extracted 2D plane at which to query the value.  Valid range is from 0.0 to sampleCount-1.0, inclusive. @return The noise map value at the specified sample index. Returns an interpolated value for points not aligned on integer boundaries.
+// Returns the value at the specified position in the noise map, interpolating results for positions not on the discrete sample grid.
 //
 // InterpolatedValueAtPosition calls the underlying InterpolatedValueAtPosition.
 func (x *NoiseMap) InterpolatedValueAtPosition(position unsafe.Pointer) float32 {
 	return x.inner.InterpolatedValueAtPosition(position)
 }
 
-// Sets the specified value to the noise map at the specified sample index of the 2D plane. @param value The noise map value to assign to the specified position. @param position Sample index of the extracted 2D plane at which to set the value.  Valid range is from 0 to sampleCount-1, inclusive.
+// Sets the value at the specified position in the noise map.
 //
 // SetValueAtPosition calls the underlying SetValueAtPosition.
 func (x *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {

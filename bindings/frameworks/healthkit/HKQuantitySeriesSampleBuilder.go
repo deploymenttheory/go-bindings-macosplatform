@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A builder object for incrementally building a sample that contains multiple quantities.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquantityseriessamplebuilder
 type HKQuantitySeriesSampleBuilder struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func HKQuantitySeriesSampleBuilderFromID(id objc.ID) *HKQuantitySeriesSampleBuil
 	return o
 }
 
-// @method        initWithHealthStore:quantityType:device: @abstract      The designated initializer to create an HKQuantitySeriesSampleBuilder. @discussion    The HKHealthStore is retained during the life of the object for the saving of the series data and final return of the series sample. @param         healthStore     Specifies the HKHealthStore object to use for building the series. @param         quantityType    Specifies the quantity type for which to build the series. @param         startDate       The date from which the produced sample(s) start. @param         device          The optional device represents the HKDevice from which the data is provided.
+// Creates a new quantity series builder.
 func (o *HKQuantitySeriesSampleBuilder) InitWithHealthStoreQuantityTypeStartDateDevice(healthStore *HKHealthStore, quantityType *HKQuantityType, startDate *foundation.NSDate, device *HKDevice) *HKQuantitySeriesSampleBuilder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleBuilderSelInitWithHealthStoreQuantityTypeStartDateDevice, healthStore.Ptr(), quantityType.Ptr(), startDate.Ptr(), device.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *HKQuantitySeriesSampleBuilder) InitWithHealthStoreQuantityTypeStartDate
 	return HKQuantitySeriesSampleBuilderFromID(_ret)
 }
 
-// @method            insertQuantity:dateInterval:completion: @abstract          Associate a new quantity with the receiver with a specific date interval. @discussion        Use this method to add a quantity to the series. The quantity must have a unit that is compatible with the receiver's quantity type. See -[HKQuantityType isCompatibleWithUnit:]. Note that quantities may be inserted in any order, but will be sorted by dateInterval.startDate when the series is finished. @param             quantity        The quantity to insert. @param             dateInterval    The dateInterval associated with the quantity. If dateInterval.startDate is the same as a previously-provided quantity, the new value will replace the old value. An HKErrorInvalidArgument will be returned if dateInterval.startDate is earlier than the receiver's startDate.
+// Adds a new quantity to the series with the provided date interval.
 func (o *HKQuantitySeriesSampleBuilder) InsertQuantityDateIntervalError(quantity *HKQuantity, dateInterval *foundation.NSDateInterval) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _hKQuantitySeriesSampleBuilderSelInsertQuantityDateIntervalError, quantity.Ptr(), dateInterval.Ptr(), unsafe.Pointer(&_nsErr))
@@ -59,7 +61,7 @@ func (o *HKQuantitySeriesSampleBuilder) InsertQuantityDateIntervalError(quantity
 	return _ret, nil
 }
 
-// @method            insertQuantity:date:completion: @abstract          Associate a new quantity with the receiver at a specific instantaneous date interval. @discussion        This method acts as a convenience for insertQuantity:dateInterval:completion: where dateInterval has a duration of 0. @param             quantity    The quantity to insert. @param             date        The start date associated with the quantity. If this is the same start date as a previously-provided quantity, the new value will replace the old value. An HKErrorInvalidArgument will be returned if date is earlier than the receiver's startDate.
+// Adds a new quantity to the series at the provided date and time.
 func (o *HKQuantitySeriesSampleBuilder) InsertQuantityDateError(quantity *HKQuantity, date *foundation.NSDate) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _hKQuantitySeriesSampleBuilderSelInsertQuantityDateError, quantity.Ptr(), date.Ptr(), unsafe.Pointer(&_nsErr))
@@ -69,7 +71,7 @@ func (o *HKQuantitySeriesSampleBuilder) InsertQuantityDateError(quantity *HKQuan
 	return _ret, nil
 }
 
-// @method            finishSeriesWithMetadata:endDate:completion: @abstract          Finalizes the series and returns the resulting HKQuantitySample(s). @discussion        Call this method when all quantities for the series have been inserted. The completion handler will return the resulting HKQuantitySample(s) Note that it is possible for a single HKQuantitySeriesSampleBuilder to produce multiple samples. If no quantity data was added, then samples will be nil and an error will be returned. After calling this method, the receiver will be considered invalid and calling any other method will result in an error. @param             metadata    Optional metadata may be added to associate with the series. Predefined keys are found in HKMetadata.h, or custom NSString keys used by the client are allowed. Acceptable metadata value types are NSString, NSDate, NSNumber and HKQuantity. @param             endDate     Optional date at which the produced sample(s) end. An HKErrorInvalidArgument will be returned if endDate is earlier than the receiver's startDate, or is earlier than the dateInterval.endDate of any inserted quantity. @param             completion  The completion handler will return the resulting HKQuantitySample(s) for the series. Note that it is possible for a single HKQuantitySeriesSampleBuilder to produce multiple samples. If data could not be inserted because of an authorization failure, samples will be nil and and an error with code HKErrorAuthorizationDenied or HKErrorAuthorizationNotDetermined will be returned. If the resulting sample(s) could not be accessed after they have been created, then samples will be nil and an error with code HKErrorDatabaseInaccessible will be returned. Any other error indicates the resulting samples could not be returned. After calling this method, the receiver will be considered invalid and calling any other method will result in an error.
+// Finalizes the series with the provided end date, and returns the resulting quantity samples.
 func (o *HKQuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], endDate *foundation.NSDate, completion func(*foundation.NSArray[*HKQuantitySample], unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -81,10 +83,10 @@ func (o *HKQuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletio
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataEndDateCompletion, metadata, endDate.Ptr(), __block_completion)
+	o.Ptr().Send(_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataEndDateCompletion, metadata.Ptr(), endDate.Ptr(), __block_completion)
 }
 
-// @method            finishSeriesWithMetadata:completion: @abstract          Finalizes the series and returns the resulting HKQuantitySample(s). @discussion        Call this method when all quantities for the series have been inserted. The completion handler will return the resulting HKQuantitySample(s) Note that it is possible for a single HKQuantitySeriesSampleBuilder to produce multiple samples. If no quantity data was added, then samples will be nil and an error will be returned. This method functions as a convenience for finishSeriesWithMetadata:endDate:completion: when endDate is nil. After calling this method, the receiver will be considered invalid and calling any other method will result in an error. @param             metadata    Optional metadata may be added to associate with the series. Predefined keys are found in HKMetadata.h, or custom NSString keys used by the client are allowed. Acceptable metadata value types are NSString, NSDate, NSNumber and HKQuantity. @param             completion  The completion handler will return the resulting HKQuantitySample(s) for the series. Note that it is possible for a single HKQuantitySeriesSampleBuilder to produce multiple samples. If data could not be inserted because of an authorization failure, samples will be nil and and an error with code HKErrorAuthorizationDenied or HKErrorAuthorizationNotDetermined will be returned. If the resulting sample(s) could not be accessed after they have been created, then samples will be nil and an error with code HKErrorDatabaseInaccessible will be returned. Any other error indicates the resulting samples could not be returned. After calling this method, the receiver will be considered invalid and calling any other method will result in an error.
+// Finalizes the series and returns the resulting quantity samples.
 func (o *HKQuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSArray[*HKQuantitySample], unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -96,10 +98,10 @@ func (o *HKQuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(metad
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataCompletion, metadata, __block_completion)
+	o.Ptr().Send(_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataCompletion, metadata.Ptr(), __block_completion)
 }
 
-// @method            discard @abstract          Discards all previously inserted data and invalidates the series. @discussion        Calling this method will delete all quantities that were previously inserted into the series and invalidate the receiver. Calling other methods on the receiver after calling -discard will result in an exception.
+// Discards all previously collected data and invalidates the builder.
 func (o *HKQuantitySeriesSampleBuilder) Discard() {
 	o.Ptr().Send(_hKQuantitySeriesSampleBuilderSelDiscard)
 }

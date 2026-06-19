@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object the framework uses to control helper executables that live inside an app’s main bundle.
+//
 // Apple documentation: https://developer.apple.com/documentation/servicemanagement/smappservice
 type SMAppService struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func SMAppServiceFromID(id objc.ID) *SMAppService {
 	return o
 }
 
-// @method loginItemServiceWithIdentifier @abstract Initializes a SMAppService for a LoginItem corresponding to the bundle with the specified identifier. @param identifier The bundle identifier of the helper application @discussion The identifier must correspond to the bundle identifier for a LoginItem that lives in the calling app's Contents/Library/LoginItems directory
+// Initializes an app service object for a login item corresponding to the bundle with the identifier you provide.
 func SMAppServiceLoginItemServiceWithIdentifier(identifier *foundation.NSString) *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelLoginItemServiceWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func SMAppServiceLoginItemServiceWithIdentifier(identifier *foundation.NSString)
 	return SMAppServiceFromID(_ret)
 }
 
-// @method agentServiceWithPlistName @abstract Initializes a SMAppService with a LaunchAgent with the specified plist name. @param plistName The name of the plist corresponding to the SMAppService. @discussion The plistName must correspond to a plist in the calling app's Contents/Library/LaunchAgents directory In addition to the standard launchd.plist keys, plists registered with SMAppService may use the BundleProgram launchd plist key to specify an app bundle relative path for the executable. This key allows apps to support a user relocating the app bundle after installation.
+// Initializes an app service object with a launch agent with the property list name you provide.
 func SMAppServiceAgentServiceWithPlistName(plistName *foundation.NSString) *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelAgentServiceWithPlistName, plistName.Ptr())
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func SMAppServiceAgentServiceWithPlistName(plistName *foundation.NSString) *SMAp
 	return SMAppServiceFromID(_ret)
 }
 
-// @method daemonServiceWithPlistName @abstract Initializes a SMAppService with a LaunchDaemon with the specified plist name. @param plistName The name of the plist corresponding to the SMAppService. @discussion The plistName must correspond to a plist in the calling app's Contents/Library/LaunchDaemons directory In addition to the standard launchd.plist keys, plists registered with SMAppService may use the BundleProgram launchd plist key to specify an app bundle relative path for the executable. This key allows apps to support a user relocating the app bundle after installation. For a LaunchDaemon to be bootstrapped during boot, the containing application must be accessible before a user logs in. For applications that intend to register LaunchDaemons, it is recommended that the application bundle live in /Applications
+// Initializes an app service object with a launch daemon with the property list name you provide.
 func SMAppServiceDaemonServiceWithPlistName(plistName *foundation.NSString) *SMAppService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSMAppService), _sMAppServiceSelDaemonServiceWithPlistName, plistName.Ptr())
 	if _ret != 0 {
@@ -68,7 +70,7 @@ func SMAppServiceDaemonServiceWithPlistName(plistName *foundation.NSString) *SMA
 	return SMAppServiceFromID(_ret)
 }
 
-// @method registerAndReturnError @abstract Registers the service such that it may begin launching subject to user consent @param error Upon unsuccessful return, a new NSError object describing the error. Upon successful return, this argument is set to NULL. This argument may be NULL. @result YES if the service was successfully registered, otherwise NO. @discussion If the service corresponds to a LoginItem bundle, the helper will be started immediately and on subsequent logins. If the helper crashes or exits non-zero it will be relaunched. If the service corresponds to the main application, the application will be launched on subsequent logins. If the service corresponds to a LaunchAgent, the LaunchAgent is immediately bootstrapped and may begin running. In addition LaunchAgents registered with this API will be bootstrapped on each subsequent login. If an app desires to register a LaunchAgent for multiple users, the API must be called once per user while the desired user is running the app. LaunchAgents cannot be registered from outside a user context using this API. If the service corresponds to a LaunchDaemon, the LaunchDaemon will not be bootstrapped until an admin approves the LaunchDaemon in System Settings. LaunchDaemons registered with this API and approved by an admin will be bootstrapped on each subsequent boot. If the service is already registered, this API will return error kSMErrorAlreadyRegistered If the service is not approved by the user, this API will return error kSMErrorLaunchDeniedByUser If the app bundle is not properly code signed, this API will return error kSMErrorInvalidSignature @see SMAppService:unregisterAndReturnError
+// Registers the service so it can begin launching subject to user approval.
 func (o *SMAppService) RegisterAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sMAppServiceSelRegisterAndReturnError, unsafe.Pointer(&_nsErr))
@@ -78,7 +80,7 @@ func (o *SMAppService) RegisterAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method unregisterAndReturnError @abstract Unregisters the service such that it will no longer be launched by the system. @param error Upon unsuccessful return, a new NSError object describing the error. Upon successful return, this argument is set to NULL. This argument may be NULL. @result YES if the service was successfully unregistered, otherwise NO. @discussion If the service corresponds to a LoginItem, LaunchAgent, or LaunchDaemon and the service is currently running it will be killed. The unregister call will not wait for the service to be reaped. If the service corresponds to the main application, it will continue running, but will still be unregistered to prevent future launches at login. This is the opposite operation of SMAppService:register If the service is already unregistered, this API will return error kSMErrorJobNotFound @see SMAppService:registerAndReturnError
+// Unregisters the service so the system no longer launches it.
 func (o *SMAppService) UnregisterAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sMAppServiceSelUnregisterAndReturnError, unsafe.Pointer(&_nsErr))
@@ -88,7 +90,7 @@ func (o *SMAppService) UnregisterAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method unregisterWithCompletionHandler @abstract Unregisters the service such that it will no longer be launched by the system. @param handler The completion handler block to be invoked with the result of the unregister operation. This handler will be invoked on libdispatch's default target queue @discussion If the service corresponds to a LoginItem, LaunchAgent, or LaunchDaemon and the service is currently running it will be killed. The unregister call will not wait for the service to be killed and will return promptly. The completion handler will be invoked after the running process has been killed if successful or will be invoked whenever an error occurs. After the completion handler has been invoked it is safe to re-register the service. If the service corresponds to the main application, it will continue running, but will still be unregistered to prevent future launches at login. This is the opposite operation of SMAppService:register This is the asynchronous variant of SMAppService:unregisterAndReturnError If the service is already unregistered, this API will return error kSMErrorJobNotFound @see SMAppService:unregisterAndReturnError
+// Unregisters the service so the system no longer launches it and calls a completion handler you provide with the resulting error value.
 func (o *SMAppService) UnregisterWithCompletionHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -100,12 +102,13 @@ func (o *SMAppService) UnregisterWithCompletionHandler(handler func(unsafe.Point
 	o.Ptr().Send(_sMAppServiceSelUnregisterWithCompletionHandler, __block_handler)
 }
 
+// Check the authorization status of an earlier OS version login item.
 func SMAppServiceStatusForLegacyURL(url *foundation.NSURL) SMAppServiceStatus {
 	_ret := objc.Send[SMAppServiceStatus](objc.ID(_clsSMAppService), _sMAppServiceSelStatusForLegacyURL, url.Ptr())
 	return _ret
 }
 
-// @method openSystemSettingsLoginItems @abstract Opens System Settings to the Login Items panel @discussion This API is intended for apps to call whenever they present a prompt to the user and the user confirms that they want to enable the app's helpers again. The app can call this API to help the user navigate to the appropriate panel in System Settings.
+// Opens System Settings to the Login Items control panel.
 func SMAppServiceOpenSystemSettingsLoginItems() {
 	objc.ID(_clsSMAppService).Send(_sMAppServiceSelOpenSystemSettingsLoginItems)
 }

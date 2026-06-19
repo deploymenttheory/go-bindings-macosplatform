@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects and recognizes regions of text in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedtextobservation
 type VNRecognizedTextObservation struct {
 	VNRectangleObservation
@@ -30,7 +32,7 @@ func VNRecognizedTextObservationFromID(id objc.ID) *VNRecognizedTextObservation 
 	return o
 }
 
-// @brief Returns the top N candidates sorted by decreasing confidence score @discussion This will return no more than N but can be less than N candidates. The maximum number of candidates returned cannot exceed 10 candidates.
+// Requests the n top candidates for a recognized text string.
 func (o *VNRecognizedTextObservation) TopCandidates(maxCandidateCount uint) *foundation.NSArray[*VNRecognizedText] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedTextObservationSelTopCandidates, maxCandidateCount)
 	if _ret != 0 {

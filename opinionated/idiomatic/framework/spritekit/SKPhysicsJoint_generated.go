@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for objects that connect physics bodies.
+//
 // PhysicsJoint wraps [raw.SKPhysicsJoint] with a fluent Go API.
 type PhysicsJoint struct {
 	inner *raw.SKPhysicsJoint
@@ -36,12 +38,16 @@ func NewPhysicsJoint() *PhysicsJoint {
 	return &PhysicsJoint{inner: raw.SKPhysicsJointFromID(_id)}
 }
 
+// The first body connected by the joint.
+//
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
 func (x *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
 	x.inner.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
+// The second body connected by the joint.
+//
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
 func (x *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
 	x.inner.SetBodyB(bodyB.Unwrap())

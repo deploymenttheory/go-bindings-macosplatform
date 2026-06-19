@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The center of activity for the font-conversion system.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsfontmanager
 type NSFontManager struct {
 	foundation.NSObject
@@ -80,22 +82,27 @@ func NSFontManagerFromID(id objc.ID) *NSFontManager {
 	return o
 }
 
+// Sets the class that creates the shared Font panel object.
 func NSFontManagerSetFontPanelFactory(factoryId objc.Class) {
 	objc.ID(_clsNSFontManager).Send(_nSFontManagerSelSetFontPanelFactory, factoryId)
 }
 
+// Sets the class that creates the shared font manager object.
 func NSFontManagerSetFontManagerFactory(factoryId objc.Class) {
 	objc.ID(_clsNSFontManager).Send(_nSFontManagerSelSetFontManagerFactory, factoryId)
 }
 
+// Records the specified font as the currently selected font and updates the Font panel.
 func (o *NSFontManager) SetSelectedFontIsMultiple(fontObj *NSFont, flag bool) {
 	o.Ptr().Send(_nSFontManagerSelSetSelectedFontIsMultiple, fontObj.Ptr(), flag)
 }
 
+// Records the given menu as the application’s Font menu.
 func (o *NSFontManager) SetFontMenu(newMenu *NSMenu) {
 	o.Ptr().Send(_nSFontManagerSelSetFontMenu, newMenu.Ptr())
 }
 
+// Returns the menu that’s connected to the font conversion system, creating it if necessary.
 func (o *NSFontManager) FontMenu(create bool) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontMenu, create)
 	if _ret != 0 {
@@ -104,6 +111,7 @@ func (o *NSFontManager) FontMenu(create bool) *NSMenu {
 	return NSMenuFromID(_ret)
 }
 
+// Returns the application’s shared Font panel object, creating it if necessary.
 func (o *NSFontManager) FontPanel(create bool) *NSFontPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontPanel, create)
 	if _ret != 0 {
@@ -112,6 +120,7 @@ func (o *NSFontManager) FontPanel(create bool) *NSFontPanel {
 	return NSFontPanelFromID(_ret)
 }
 
+// Attempts to load a font with the specified characteristics.
 func (o *NSFontManager) FontWithFamilyTraitsWeightSize(family *foundation.NSString, traits NSFontTraitMask, weight int, size float64) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontWithFamilyTraitsWeightSize, family.Ptr(), traits, weight, size)
 	if _ret != 0 {
@@ -120,21 +129,28 @@ func (o *NSFontManager) FontWithFamilyTraitsWeightSize(family *foundation.NSStri
 	return NSFontFromID(_ret)
 }
 
+// Returns the traits of the given font.
 func (o *NSFontManager) TraitsOfFont(fontObj *NSFont) NSFontTraitMask {
 	_ret := objc.Send[NSFontTraitMask](o.Ptr(), _nSFontManagerSelTraitsOfFont, fontObj.Ptr())
 	return _ret
 }
 
+// Returns an approximation of the specified font’s weight.
 func (o *NSFontManager) WeightOfFont(fontObj *NSFont) int {
 	_ret := objc.Send[int](o.Ptr(), _nSFontManagerSelWeightOfFont, fontObj.Ptr())
 	return _ret
 }
 
+// Returns an array with one entry for each available member of a font family.
 func (o *NSFontManager) AvailableMembersOfFontFamily(fam *foundation.NSString) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSFontManagerSelAvailableMembersOfFontFamily, fam.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelAvailableMembersOfFontFamily, fam.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Converts the given font according to the object that initiated a font change, typically the Font panel or Font menu.
 func (o *NSFontManager) ConvertFont(fontObj *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFont, fontObj.Ptr())
 	if _ret != 0 {
@@ -143,6 +159,7 @@ func (o *NSFontManager) ConvertFont(fontObj *NSFont) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns a font object whose traits are the same as those of the given font, except for the size, which is changed to the given size.
 func (o *NSFontManager) ConvertFontToSize(fontObj *NSFont, size float64) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToSize, fontObj.Ptr(), size)
 	if _ret != 0 {
@@ -151,6 +168,7 @@ func (o *NSFontManager) ConvertFontToSize(fontObj *NSFont, size float64) *NSFont
 	return NSFontFromID(_ret)
 }
 
+// Returns a font whose traits are as similar as possible to those of the given font except for the typeface, which is changed to the given typeface.
 func (o *NSFontManager) ConvertFontToFace(fontObj *NSFont, typeface *foundation.NSString) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToFace, fontObj.Ptr(), typeface.Ptr())
 	if _ret != 0 {
@@ -159,6 +177,7 @@ func (o *NSFontManager) ConvertFontToFace(fontObj *NSFont, typeface *foundation.
 	return NSFontFromID(_ret)
 }
 
+// Returns a font whose traits are as similar as possible to those of the given font except for the font family, which is changed to the given family.
 func (o *NSFontManager) ConvertFontToFamily(fontObj *NSFont, family *foundation.NSString) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToFamily, fontObj.Ptr(), family.Ptr())
 	if _ret != 0 {
@@ -167,6 +186,7 @@ func (o *NSFontManager) ConvertFontToFamily(fontObj *NSFont, family *foundation.
 	return NSFontFromID(_ret)
 }
 
+// Returns a new version of the font object containing a single additional trait.
 func (o *NSFontManager) ConvertFontToHaveTrait(fontObj *NSFont, trait NSFontTraitMask) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToHaveTrait, fontObj.Ptr(), trait)
 	if _ret != 0 {
@@ -175,6 +195,7 @@ func (o *NSFontManager) ConvertFontToHaveTrait(fontObj *NSFont, trait NSFontTrai
 	return NSFontFromID(_ret)
 }
 
+// Returns a new version of a font object without the specified traits.
 func (o *NSFontManager) ConvertFontToNotHaveTrait(fontObj *NSFont, trait NSFontTraitMask) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertFontToNotHaveTrait, fontObj.Ptr(), trait)
 	if _ret != 0 {
@@ -183,6 +204,7 @@ func (o *NSFontManager) ConvertFontToNotHaveTrait(fontObj *NSFont, trait NSFontT
 	return NSFontFromID(_ret)
 }
 
+// Returns a font object whose weight is greater or lesser than that of the given font.
 func (o *NSFontManager) ConvertWeightOfFont(upFlag bool, fontObj *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertWeightOfFont, upFlag, fontObj.Ptr())
 	if _ret != 0 {
@@ -191,12 +213,14 @@ func (o *NSFontManager) ConvertWeightOfFont(upFlag bool, fontObj *NSFont) *NSFon
 	return NSFontFromID(_ret)
 }
 
+// A Boolean value that indicates whether a responder handled the font manager’s action message.
 // Deprecated: NSFontManager doesn't have any delegate method. This property should not be used.
 func (o *NSFontManager) SendAction() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFontManagerSelSendAction)
 	return _ret
 }
 
+// Returns a localized string with the name of the specified font family and face, if one exists.
 func (o *NSFontManager) LocalizedNameForFamilyFace(family *foundation.NSString, faceKey *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelLocalizedNameForFamilyFace, family.Ptr(), faceKey.Ptr())
 	if _ret != 0 {
@@ -205,25 +229,36 @@ func (o *NSFontManager) LocalizedNameForFamilyFace(family *foundation.NSString, 
 	return foundation.NSStringFromID(_ret)
 }
 
+// Informs the Font panel that the specified font attributes changed for the selected text.
 func (o *NSFontManager) SetSelectedAttributesIsMultiple(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], flag bool) {
-	o.Ptr().Send(_nSFontManagerSelSetSelectedAttributesIsMultiple, attributes, flag)
+	o.Ptr().Send(_nSFontManagerSelSetSelectedAttributesIsMultiple, attributes.Ptr(), flag)
 }
 
+// Converts attributes in response to an object initiating an attribute change, typically the Font panel or Font menu.
 func (o *NSFontManager) ConvertAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSFontManagerSelConvertAttributes, attributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelConvertAttributes, attributes.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSFontDescriptor matchingFontDescriptorsWithMandatoryKeys:] instead
 func (o *NSFontManager) AvailableFontNamesMatchingFontDescriptor(descriptor *NSFontDescriptor) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSFontManagerSelAvailableFontNamesMatchingFontDescriptor, descriptor.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelAvailableFontNamesMatchingFontDescriptor, descriptor.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use -[NSFontCollection matchingDescriptors] instead
 func (o *NSFontManager) FontDescriptorsInCollection(collectionNames *foundation.NSString) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSFontManagerSelFontDescriptorsInCollection, collectionNames.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelFontDescriptorsInCollection, collectionNames.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use +[NSFontCollection showFontCollection:withName:visibility:name:] instead
@@ -240,7 +275,7 @@ func (o *NSFontManager) RemoveCollection(collectionName *foundation.NSString) bo
 
 // Deprecated: Use -[NSMutableFontCollection addQueryForDescriptors:] instead
 func (o *NSFontManager) AddFontDescriptorsToCollection(descriptors *foundation.NSArray[objc.ID], collectionName *foundation.NSString) {
-	o.Ptr().Send(_nSFontManagerSelAddFontDescriptorsToCollection, descriptors, collectionName.Ptr())
+	o.Ptr().Send(_nSFontManagerSelAddFontDescriptorsToCollection, descriptors.Ptr(), collectionName.Ptr())
 }
 
 // Deprecated: Use -[NSMutableFontCollection removeQueryForDescriptors:] instead
@@ -248,6 +283,7 @@ func (o *NSFontManager) RemoveFontDescriptorFromCollection(descriptor *NSFontDes
 	o.Ptr().Send(_nSFontManagerSelRemoveFontDescriptorFromCollection, descriptor.Ptr(), collection.Ptr())
 }
 
+// Converts font traits to a new traits mask value.
 func (o *NSFontManager) ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMask {
 	_ret := objc.Send[NSFontTraitMask](o.Ptr(), _nSFontManagerSelConvertFontTraits, traits)
 	return _ret
@@ -275,13 +311,19 @@ func (o *NSFontManager) SelectedFont() *NSFont {
 }
 
 func (o *NSFontManager) AvailableFonts() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFontManagerSelAvailableFonts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelAvailableFonts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFontManager) AvailableFontFamilies() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFontManagerSelAvailableFontFamilies)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelAvailableFontFamilies)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFontManager) IsEnabled() bool {
@@ -315,8 +357,11 @@ func (o *NSFontManager) SetDelegate(delegate objc.ID) {
 
 // Deprecated: Use +[NSFontCollection allFontCollectionNames] instead
 func (o *NSFontManager) CollectionNames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSFontManagerSelCollectionNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelCollectionNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSFontManager) CurrentFontAction() NSFontAction {
@@ -333,36 +378,47 @@ func (o *NSFontManager) SetTarget(target objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelSetTarget, target)
 }
 
+// Indicates whether the given font has all the specified traits.
 func (o *NSFontManager) FontNamedHasTraits(fName *foundation.NSString, someTraits NSFontTraitMask) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFontManagerSelFontNamedHasTraits, fName.Ptr(), someTraits)
 	return _ret
 }
 
+// Returns the names of the fonts available in the system whose traits are described exactly by the given font trait mask (not the NSFont objects themselves).
 func (o *NSFontManager) AvailableFontNamesWithTraits(someTraits NSFontTraitMask) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFontManagerSelAvailableFontNamesWithTraits, someTraits)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontManagerSelAvailableFontNamesWithTraits, someTraits)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Adds a trait to the font.
 func (o *NSFontManager) AddFontTrait(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelAddFontTrait, sender)
 }
 
+// Removes a trait from the font.
 func (o *NSFontManager) RemoveFontTrait(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelRemoveFontTrait, sender)
 }
 
+// Modifies a font trait using input from the Font panel.
 func (o *NSFontManager) ModifyFontViaPanel(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelModifyFontViaPanel, sender)
 }
 
+// Modifies a trait of the font.
 func (o *NSFontManager) ModifyFont(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelModifyFont, sender)
 }
 
+// Opens the Font panel, creating it if necessary, and displays that panel in front of the app’s windows.
 func (o *NSFontManager) OrderFrontFontPanel(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelOrderFrontFontPanel, sender)
 }
 
+// Opens the Font Styles panel.
 func (o *NSFontManager) OrderFrontStylesPanel(sender objc.ID) {
 	o.Ptr().Send(_nSFontManagerSelOrderFrontStylesPanel, sender)
 }

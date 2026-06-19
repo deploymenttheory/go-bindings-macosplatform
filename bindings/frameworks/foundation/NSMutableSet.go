@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dynamic unordered collection of unique objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutableset
 type NSMutableSet[ObjectType purego.AnyObject] struct {
 	NSSet[ObjectType]
@@ -41,10 +43,12 @@ func NSMutableSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSMutableSet[O
 	return o
 }
 
+// Adds a given object to the set, if it is not already a member.
 func (o *NSMutableSet[ObjectType]) AddObject(object ObjectType) {
 	o.Ptr().Send(_nSMutableSetSelAddObject, object)
 }
 
+// Removes a given object from the set.
 func (o *NSMutableSet[ObjectType]) RemoveObject(object ObjectType) {
 	o.Ptr().Send(_nSMutableSetSelRemoveObject, object)
 }
@@ -57,6 +61,7 @@ func (o *NSMutableSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSMutableSet[O
 	return NSMutableSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set.
 func (o *NSMutableSet[ObjectType]) Init() *NSMutableSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableSetSelInit)
 	if _ret != 0 {
@@ -65,6 +70,7 @@ func (o *NSMutableSet[ObjectType]) Init() *NSMutableSet[ObjectType] {
 	return NSMutableSetFromID[ObjectType](_ret)
 }
 
+// Returns an initialized mutable set with a given initial capacity.
 func (o *NSMutableSet[ObjectType]) InitWithCapacity(numItems uint) *NSMutableSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableSetSelInitWithCapacity, numItems)
 	if _ret != 0 {
@@ -73,30 +79,37 @@ func (o *NSMutableSet[ObjectType]) InitWithCapacity(numItems uint) *NSMutableSet
 	return NSMutableSetFromID[ObjectType](_ret)
 }
 
+// Adds to the set each object contained in a given array that is not already a member.
 func (o *NSMutableSet[ObjectType]) AddObjectsFromArray(array *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableSetSelAddObjectsFromArray, array.Ptr())
 }
 
+// Removes from the receiving set each object that isn’t a member of another given set.
 func (o *NSMutableSet[ObjectType]) IntersectSet(otherSet *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableSetSelIntersectSet, otherSet.Ptr())
 }
 
+// Removes each object in another given set from the receiving set, if present.
 func (o *NSMutableSet[ObjectType]) MinusSet(otherSet *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableSetSelMinusSet, otherSet.Ptr())
 }
 
+// Empties the set of all of its members.
 func (o *NSMutableSet[ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSMutableSetSelRemoveAllObjects)
 }
 
+// Adds each object in another given set to the receiving set, if not present.
 func (o *NSMutableSet[ObjectType]) UnionSet(otherSet *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableSetSelUnionSet, otherSet.Ptr())
 }
 
+// Empties the receiving set, then adds each object contained in another given set.
 func (o *NSMutableSet[ObjectType]) SetSet(otherSet *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableSetSelSetSet, otherSet.Ptr())
 }
 
+// Creates and returns a mutable set with a given initial capacity.
 func NSMutableSetSetWithCapacity(numItems uint) *NSMutableSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableSet), _nSMutableSetSelSetWithCapacity, numItems)
 	if _ret != 0 {
@@ -105,6 +118,7 @@ func NSMutableSetSetWithCapacity(numItems uint) *NSMutableSet[objc.ID] {
 	return NSMutableSetFromID[objc.ID](_ret)
 }
 
+// Evaluates a given predicate against the set’s content and removes from the set those objects for which the predicate returns false.
 func (o *NSMutableSet[ObjectType]) FilterUsingPredicate(predicate *NSPredicate) {
 	o.Ptr().Send(_nSMutableSetSelFilterUsingPredicate, predicate.Ptr())
 }

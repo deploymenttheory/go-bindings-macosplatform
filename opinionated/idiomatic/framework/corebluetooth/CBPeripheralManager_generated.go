@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages and advertises peripheral services exposed by this app.
+//
 // PeripheralManager wraps [raw.CBPeripheralManager] with a fluent Go API.
 type PeripheralManager struct {
 	inner *raw.CBPeripheralManager
@@ -37,6 +39,8 @@ func NewPeripheralManager() *PeripheralManager {
 	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
 }
 
+// Initializes the peripheral manager with a specified delegate and dispatch queue.
+//
 // NewPeripheralManagerWithDelegateQueue creates a new [PeripheralManager].
 func NewPeripheralManagerWithDelegateQueue(delegate raw.CBPeripheralManagerDelegate, queue *foundation.NSObject) *PeripheralManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheralManager")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewPeripheralManagerWithDelegateQueue(delegate raw.CBPeripheralManagerDeleg
 	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
 }
 
+// Initializes the peripheral manager with a specified delegate, dispatch queue, and initialization options.
+//
 // NewPeripheralManagerWithDelegateQueueOptions creates a new [PeripheralManager].
 func NewPeripheralManagerWithDelegateQueueOptions(delegate raw.CBPeripheralManagerDelegate, queue *foundation.NSObject, options purego.IDer) *PeripheralManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheralManager")), objc.RegisterName("alloc"))
@@ -51,7 +57,7 @@ func NewPeripheralManagerWithDelegateQueueOptions(delegate raw.CBPeripheralManag
 	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
 }
 
-// @property delegate @discussion The delegate object that will receive peripheral events.
+// The delegate object specified to receive peripheral events.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PeripheralManager) WithDelegate(delegate raw.CBPeripheralManagerDelegate) *PeripheralManager {
@@ -59,70 +65,70 @@ func (x *PeripheralManager) WithDelegate(delegate raw.CBPeripheralManagerDelegat
 	return x
 }
 
-// @method startAdvertising: @param advertisementData    An optional dictionary containing the data to be advertised. @discussion                 Starts advertising. Supported advertising data types are <code>CBAdvertisementDataLocalNameKey</code> and <code>CBAdvertisementDataServiceUUIDsKey</code>. When in the foreground, an application can utilize up to 28 bytes of space in the initial advertisement data for any combination of the supported advertising data types. If this space is used up, there are an additional 10 bytes of space in the scan response that can be used only for the local name. Note that these sizes do not include the 2 bytes of header information that are required for each new data type. Any service UUIDs that do not fit in the allotted space will be added to a special "overflow" area, and can only be discovered by an iOS device that is explicitly scanning for them. While an application is in the background, the local name will not be used and all service UUIDs will be placed in the "overflow" area. However, applications that have not specified the "bluetooth-peripheral" background mode will not be able to advertise anything while in the background. @see                        peripheralManagerDidStartAdvertising:error: @seealso                    CBAdvertisementData.h
+// Advertises peripheral manager data.
 //
 // StartAdvertising calls the underlying StartAdvertising.
 func (x *PeripheralManager) StartAdvertising(advertisementData *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.StartAdvertising(advertisementData)
 }
 
-// @method stopAdvertising @discussion Stops advertising.
+// Stops advertising peripheral manager data.
 //
 // StopAdvertising calls the underlying StopAdvertising.
 func (x *PeripheralManager) StopAdvertising() {
 	x.inner.StopAdvertising()
 }
 
-// @method setDesiredConnectionLatency:forCentral: @param latency  The desired connection latency. @param central  A connected central. @discussion     Sets the desired connection latency for an existing connection to <i>central</i>. Connection latency changes are not guaranteed, so the resultant latency may vary. If a desired latency is not set, the latency chosen by <i>central</i> at the time of connection establishment will be used. Typically, it is not necessary to change the latency. @see            CBPeripheralManagerConnectionLatency
+// Sets the desired connection latency for an existing connection to a central device.
 //
 // SetDesiredConnectionLatencyForCentral calls the underlying SetDesiredConnectionLatencyForCentral.
 func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency CBPeripheralManagerConnectionLatency, central *raw.CBCentral) {
 	x.inner.SetDesiredConnectionLatencyForCentral(raw.CBPeripheralManagerConnectionLatency(latency), central)
 }
 
-// @method addService: @param service  A GATT service. @discussion     Publishes a service and its associated characteristic(s) to the local database. If the service contains included services, they must be published first. @see            peripheralManager:didAddService:error:
+// Publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
 //
 // AddService calls the underlying AddService.
 func (x *PeripheralManager) AddService(service *raw.CBMutableService) {
 	x.inner.AddService(service)
 }
 
-// @method removeService: @param service  A GATT service. @discussion     Removes a published service from the local database. If the service is included by other service(s), they must be removed first.
+// Removes a specified published service from the local GATT database.
 //
 // RemoveService calls the underlying RemoveService.
 func (x *PeripheralManager) RemoveService(service *raw.CBMutableService) {
 	x.inner.RemoveService(service)
 }
 
-// @method removeAllServices @discussion Removes all published services from the local database.
+// Removes all published services from the local GATT database.
 //
 // RemoveAllServices calls the underlying RemoveAllServices.
 func (x *PeripheralManager) RemoveAllServices() {
 	x.inner.RemoveAllServices()
 }
 
-// @method respondToRequest:withResult: @param request  The original request that was received from the central. @param result   The result of attempting to fulfill <i>request</i>. @discussion     Used to respond to request(s) received via the @link peripheralManager:didReceiveReadRequest: @/link or @link peripheralManager:didReceiveWriteRequests: @/link delegate methods. @see            peripheralManager:didReceiveReadRequest: @see            peripheralManager:didReceiveWriteRequests:
+// Responds to a read or write request from a connected central.
 //
 // RespondToRequestWithResult calls the underlying RespondToRequestWithResult.
 func (x *PeripheralManager) RespondToRequestWithResult(request *raw.CBATTRequest, result CBATTError) {
 	x.inner.RespondToRequestWithResult(request, raw.CBATTError(result))
 }
 
-// @method updateValue:forCharacteristic:onSubscribedCentrals: @param value            The value to be sent via a notification/indication. @param characteristic   The characteristic whose value has changed. @param centrals         A list of <code>CBCentral</code> objects to receive the update. Note that centrals which have not subscribed to <i>characteristic</i> will be ignored. If <i>nil</i>, all centrals that are subscribed to <i>characteristic</i> will be updated. @discussion             Sends an updated characteristic value to one or more centrals, via a notification or indication. If <i>value</i> exceeds {@link maximumUpdateValueLength}, it will be truncated to fit. @return                 <i>YES</i> if the update could be sent, or <i>NO</i> if the underlying transmit queue is full. If <i>NO</i> was returned, the delegate method @link peripheralManagerIsReadyToUpdateSubscribers: @/link will be called once space has become available, and the update should be re-sent if so desired. @see                    peripheralManager:central:didSubscribeToCharacteristic: @see                    peripheralManager:central:didUnsubscribeFromCharacteristic: @see                    peripheralManagerIsReadyToUpdateSubscribers: @seealso				maximumUpdateValueLength
+// Send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
 //
 // UpdateValueForCharacteristicOnSubscribedCentrals calls the underlying UpdateValueForCharacteristicOnSubscribedCentrals.
 func (x *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value *foundation.NSData, characteristic *raw.CBMutableCharacteristic, centrals *foundation.NSArray[*raw.CBCentral]) bool {
 	return x.inner.UpdateValueForCharacteristicOnSubscribedCentrals(value, characteristic, centrals)
 }
 
-// @method publishL2CAPChannelWithEncryption: @param encryptionRequired		YES if the service requires the link to be encrypted before a stream can be established.  NO if the service can be used over an unsecured link. @discussion     Create a listener for incoming L2CAP Channel connections.  The system will determine an unused PSM at the time of publishing, which will be returned with @link peripheralManager:didPublishL2CAPChannel:error: @/link.  L2CAP Channels are not discoverable by themselves, so it is the application's responsibility to handle PSM discovery on the client.
+// Creates a listener for incoming L2CAP channel connections.
 //
 // PublishL2CAPChannelWithEncryption calls the underlying PublishL2CAPChannelWithEncryption.
 func (x *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
 	x.inner.PublishL2CAPChannelWithEncryption(encryptionRequired)
 }
 
-// @method unpublishL2CAPChannel: @param PSM		The service PSM to be removed from the system. @discussion     Removes a published service from the local system.  No new connections for this PSM will be accepted, and any existing L2CAP channels using this PSM will be closed.
+// Removes a published service from the local system.
 //
 // UnpublishL2CAPChannel calls the underlying UnpublishL2CAPChannel.
 func (x *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {

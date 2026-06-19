@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A node that’s defined in an archived .sks file.
+//
 // ReferenceNode wraps [raw.SKReferenceNode] with a fluent Go API.
 type ReferenceNode struct {
 	inner *raw.SKReferenceNode
@@ -32,7 +34,7 @@ func ReferenceNodeFromID(id objc.ID) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(id)}
 }
 
-// Create a reference node with a url
+// Initializes a reference node from a URL.
 //
 // NewReferenceNodeWithURL creates a new [ReferenceNode].
 func NewReferenceNodeWithURL(url string) *ReferenceNode {
@@ -41,7 +43,7 @@ func NewReferenceNodeWithURL(url string) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
 }
 
-// Create a reference node with a url
+// Initializes a reference node from a file in the app’s main bundle.
 //
 // NewReferenceNodeWithFileNamed creates a new [ReferenceNode].
 func NewReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
@@ -50,7 +52,7 @@ func NewReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// A method that initializes a reference node from an archive.
 //
 // NewReferenceNodeWithCoder creates a new [ReferenceNode].
 func NewReferenceNodeWithCoder(aDecoder *foundation.NSCoder) *ReferenceNode {
@@ -59,7 +61,7 @@ func NewReferenceNodeWithCoder(aDecoder *foundation.NSCoder) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPosition(position corefoundation.CGPoint) *ReferenceNode {
@@ -67,7 +69,7 @@ func (x *ReferenceNode) WithPosition(position corefoundation.CGPoint) *Reference
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
@@ -75,7 +77,7 @@ func (x *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
@@ -83,7 +85,7 @@ func (x *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
@@ -91,7 +93,7 @@ func (x *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
@@ -99,7 +101,7 @@ func (x *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
@@ -107,7 +109,7 @@ func (x *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
@@ -115,7 +117,7 @@ func (x *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
@@ -123,7 +125,7 @@ func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
@@ -131,7 +133,7 @@ func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode {
@@ -139,7 +141,7 @@ func (x *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) 
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ReferenceNode) WithName(name string) *ReferenceNode {
@@ -147,7 +149,7 @@ func (x *ReferenceNode) WithName(name string) *ReferenceNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
@@ -155,7 +157,7 @@ func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *ReferenceNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ReferenceNode {
@@ -163,7 +165,7 @@ func (x *ReferenceNode) WithUserData(userData *foundation.NSMutableDictionary[ob
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
@@ -171,7 +173,7 @@ func (x *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints)
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *ReferenceNode) WithConstraints(items ...*raw.SKConstraint) *ReferenceNode {
@@ -194,7 +196,7 @@ func (x *ReferenceNode) WithConstraints(items ...*raw.SKConstraint) *ReferenceNo
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ReferenceNode {
@@ -202,68 +204,86 @@ func (x *ReferenceNode) WithAttributeValues(attributeValues *foundation.NSDictio
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityElement(accessibilityElement bool) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityRole(accessibilityRole string) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityParent(accessibilityParent objc.ID) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
-// called each time the url is loaded, after it has been added as a child
+// A method called by SpriteKit after the reference node’s contents are loaded.
 //
 // DidLoadReferenceNode calls the underlying DidLoadReferenceNode.
 func (x *ReferenceNode) DidLoadReferenceNode(node *raw.SKNode) {
 	x.inner.DidLoadReferenceNode(node)
 }
 
-// Force the reference to be reloaded. The resolved node will added as a child of this node. If the resolved node has not yet been loaded, it will be automatically loaded when the resolved node is queryed or the refenece node is rendered.
+// Loads the reference node’s content and adds it as a new child node.
 //
 // ResolveReferenceNode calls the underlying ResolveReferenceNode.
 func (x *ReferenceNode) ResolveReferenceNode() {

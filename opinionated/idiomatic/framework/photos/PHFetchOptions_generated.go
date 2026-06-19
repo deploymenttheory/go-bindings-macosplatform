@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.
+//
 // FetchOptions wraps [raw.PHFetchOptions] with a fluent Go API.
 type FetchOptions struct {
 	inner *raw.PHFetchOptions
@@ -38,12 +40,16 @@ func NewFetchOptions() *FetchOptions {
 	return &FetchOptions{inner: raw.PHFetchOptionsFromID(_id)}
 }
 
+// A predicate that specifies which properties to select results by and that also specifies any constraints on selection.
+//
 // WithPredicate sets the predicate property and returns the receiver for chaining.
 func (x *FetchOptions) WithPredicate(predicate *foundation.NSPredicate) *FetchOptions {
 	x.inner.SetPredicate(predicate)
 	return x
 }
 
+// A list of sort descriptors, specifying an order for the fetched objects.
+//
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *FetchOptions) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchOptions {
 	if len(items) == 0 {
@@ -65,30 +71,40 @@ func (x *FetchOptions) WithSortDescriptors(items ...*foundation.NSSortDescriptor
 	return x
 }
 
+// A Boolean value that determines whether the fetch result includes assets marked as hidden.
+//
 // WithIncludeHiddenAssets sets the includeHiddenAssets property and returns the receiver for chaining.
 func (x *FetchOptions) WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions {
 	x.inner.SetIncludeHiddenAssets(includeHiddenAssets)
 	return x
 }
 
+// A Boolean value that determines whether the fetch result includes all assets from burst photo sequences.
+//
 // WithIncludeAllBurstAssets sets the includeAllBurstAssets property and returns the receiver for chaining.
 func (x *FetchOptions) WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions {
 	x.inner.SetIncludeAllBurstAssets(includeAllBurstAssets)
 	return x
 }
 
+// The set of source types for which to include assets in the fetch result.
+//
 // WithIncludeAssetSourceTypes sets the includeAssetSourceTypes property and returns the receiver for chaining.
 func (x *FetchOptions) WithIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) *FetchOptions {
 	x.inner.SetIncludeAssetSourceTypes(raw.PHAssetSourceType(includeAssetSourceTypes))
 	return x
 }
 
+// The maximum number of objects to include in the fetch result.
+//
 // WithFetchLimit sets the fetchLimit property and returns the receiver for chaining.
 func (x *FetchOptions) WithFetchLimit(fetchLimit uint) *FetchOptions {
 	x.inner.SetFetchLimit(fetchLimit)
 	return x
 }
 
+// A Boolean value that determines whether your app receives detailed change information for the objects in the fetch result.
+//
 // WithWantsIncrementalChangeDetails sets the wantsIncrementalChangeDetails property and returns the receiver for chaining.
 func (x *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions {
 	x.inner.SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails)

@@ -325,7 +325,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-// @typedef interface_event_t @abstract The interface event bitmask. @discussion The type of event provided to the interface event callback. @constant VMNET_INTERFACE_PACKETS_AVAILABLE Packets are available to be read. The event dictionary passed in the event may contain additional keys (vmnet_estimated_packets_available_key).
+// Interface event types.
 type Interface_event_t int64
 
 const (
@@ -658,7 +658,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @typedef operating_modes_t @abstract The list of operating modes for a vmnet interface. @discussion The VM specifies the operating mode by setting the vmnet_operation_mode_key property in the interface_desc dictionary. @constant VMNET_HOST_MODE Allows the vmnet interface to communicate with other vmnet interfaces that are in host mode and also with the native host. @constant VMNET_SHARED_MODE Allows traffic originating from the vmnet interface to reach the Internet through a network address translator (NAT). The vmnet interface can also communicate with the native host. By default, the vmnet interface is able to communicate with other shared mode interfaces. If a subnet range is specified, the vmnet interface can communicate with other shared mode interfaces on the same subnet. @constant VMNET_BRIDGED_MODE Bridges the vmnet interface with a physical network interface. In the call to vmnet_start_interface(), the interface_desc dictionary must contain the vmnet_shared_interface_name_key property specifying the name of the physical interface.
+// The operating modes for an interface.
 type Operating_modes_t int64
 
 const (
@@ -834,7 +834,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-// @typedef vmnet_return_t @abstract The status code returning the result of vmnet operations. @constant VMNET_SUCCESS		Successfully completed. @constant VMNET_FAILURE		General failure. @constant VMNET_MEM_FAILURE 		Memory allocation failure. @constant VMNET_INVALID_ARGUMENT	Invalid argument specified. @constant VMNET_SETUP_INCOMPLETE	Interface setup is not complete. @constant VMNET_INVALID_ACCESS	Permission denied. @constant VMNET_PACKET_TOO_BIG	Packet size larger than MTU. @constant VMNET_BUFFER_EXHAUSTED	Buffers exhausted in kernel. @constant VMNET_TOO_MANY_PACKETS 	Packet count exceeds limit. @constant VMNET_SHARING_SERVICE_BUSY	Vmnet Interface cannot be started as conflicting sharing service is in use. @constant VMNET_NOT_AUTHORIZED	The operation could not be completed due to missing authorization.
+// Values returned by functions in the vmnet Framework.
 type Vmnet_return_t int64
 
 const (

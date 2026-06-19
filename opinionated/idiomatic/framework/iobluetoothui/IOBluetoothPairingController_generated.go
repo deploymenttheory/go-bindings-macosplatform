@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.
+//
 // BluetoothPairingController wraps [raw.IOBluetoothPairingController] with a fluent Go API.
 type BluetoothPairingController struct {
 	inner *raw.IOBluetoothPairingController
@@ -38,56 +40,78 @@ func NewBluetoothPairingController() *BluetoothPairingController {
 	return &BluetoothPairingController{inner: raw.IOBluetoothPairingControllerFromID(_id)}
 }
 
+// Runs the pairing panel in a modal session to allow the user to select a Bluetooth device.
+//
 // RunModal calls the underlying RunModal.
 func (x *BluetoothPairingController) RunModal() int {
 	return x.inner.RunModal()
 }
 
+// Returns an NSArray of the devices that were paired.
+//
 // GetResults calls the underlying GetResults.
 func (x *BluetoothPairingController) GetResults() *foundation.NSArray[objc.ID] {
 	return x.inner.GetResults()
 }
 
+// Sets the option bits that control the panel’s behavior.
+//
 // SetOptions calls the underlying SetOptions.
 func (x *BluetoothPairingController) SetOptions(options uint32) {
 	x.inner.SetOptions(options)
 }
 
+// Returns the option bits that control the panel’s behavior.
+//
 // GetOptions calls the underlying GetOptions.
 func (x *BluetoothPairingController) GetOptions() uint32 {
 	return x.inner.GetOptions()
 }
 
+// Sets the search attributes that control the panel’s search/inquiry behavior.
+//
 // SetSearchAttributes calls the underlying SetSearchAttributes.
 func (x *BluetoothPairingController) SetSearchAttributes(searchAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes) {
 	x.inner.SetSearchAttributes(searchAttributes)
 }
 
+// Returns the search attributes that control the panel’s search/inquiry behavior.
+//
 // GetSearchAttributes calls the underlying GetSearchAttributes.
 func (x *BluetoothPairingController) GetSearchAttributes() *iobluetooth.IOBluetoothDeviceSearchAttributes {
 	return x.inner.GetSearchAttributes()
 }
 
+// Adds a UUID to the list of UUIDs that are used to validate the user’s selection.
+//
 // AddAllowedUUID calls the underlying AddAllowedUUID.
 func (x *BluetoothPairingController) AddAllowedUUID(allowedUUID *iobluetooth.IOBluetoothSDPUUID) {
 	x.inner.AddAllowedUUID(allowedUUID)
 }
 
+// Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
+//
 // AddAllowedUUIDArray calls the underlying AddAllowedUUIDArray.
 func (x *BluetoothPairingController) AddAllowedUUIDArray(allowedUUIDArray *foundation.NSArray[objc.ID]) {
 	x.inner.AddAllowedUUIDArray(allowedUUIDArray)
 }
 
+// Resets the controller back to the default state where it will accept any device the user selects.
+//
 // ClearAllowedUUIDs calls the underlying ClearAllowedUUIDs.
 func (x *BluetoothPairingController) ClearAllowedUUIDs() {
 	x.inner.ClearAllowedUUIDs()
 }
 
+// Sets the title of the panel when not run as a sheet.
+//
 // SetTitle calls the underlying SetTitle.
 func (x *BluetoothPairingController) SetTitle(windowTitle string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(windowTitle))
 }
 
+// Returns the title of the device selector panel.
+//
 // GetTitle calls the underlying GetTitle.
 func (x *BluetoothPairingController) GetTitle() string {
 	_r := x.inner.GetTitle()
@@ -97,11 +121,15 @@ func (x *BluetoothPairingController) GetTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the description text that appears in the device selector panel.
+//
 // SetDescriptionText calls the underlying SetDescriptionText.
 func (x *BluetoothPairingController) SetDescriptionText(descriptionText string) {
 	x.inner.SetDescriptionText(foundation.NSStringStringWithUTF8String(descriptionText))
 }
 
+// Returns the description text that appears in the device selector panel.
+//
 // GetDescriptionText calls the underlying GetDescriptionText.
 func (x *BluetoothPairingController) GetDescriptionText() string {
 	_r := x.inner.GetDescriptionText()
@@ -111,11 +139,15 @@ func (x *BluetoothPairingController) GetDescriptionText() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title of the default/select button in the device selector panel.
+//
 // SetPrompt calls the underlying SetPrompt.
 func (x *BluetoothPairingController) SetPrompt(prompt string) {
 	x.inner.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
 }
 
+// Returns the title of the default/select button in the device selector panel.
+//
 // GetPrompt calls the underlying GetPrompt.
 func (x *BluetoothPairingController) GetPrompt() string {
 	_r := x.inner.GetPrompt()

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The options the snapshotter initializer uses to create a snapshotter to capture map-based imagery.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapsnapshotoptions
 type MKMapSnapshotOptions struct {
 	foundation.NSObject

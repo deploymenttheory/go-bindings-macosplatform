@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that provides the animal body points the analysis recognizes.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation
 type VNAnimalBodyPoseObservation struct {
 	VNRecognizedPointsObservation
@@ -35,7 +37,7 @@ func VNAnimalBodyPoseObservationFromID(id objc.ID) *VNAnimalBodyPoseObservation 
 	return o
 }
 
-// @brief Obtain a specific normalized point for a named animal body joint. @param jointName The name of the animal body joint. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the point could not be obtained.
+// Returns the point for a joint name the observation recognizes.
 func (o *VNAnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*VNRecognizedPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNAnimalBodyPoseObservationSelRecognizedPointForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -48,24 +50,33 @@ func (o *VNAnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName
 	return VNRecognizedPointFromID(_ret), nil
 }
 
-// @brief Obtains the collection of points associated with a named animal body joints group. @discussion The obtained collection is a dictionary that provides the mapping of animal join names to the recognized point. @param jointsGroupName The name of the animal body joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+// Returns the points for a joint group name the observation recognizes.
 func (o *VNAnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint]](o.Ptr(), _vNAnimalBodyPoseObservationSelRecognizedPointsForJointsGroupNameError, jointsGroupName.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNAnimalBodyPoseObservationSelRecognizedPointsForJointsGroupNameError, jointsGroupName.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, *VNRecognizedPoint](_ret), nil
 }
 
 // @brief All animal joint names available in the observation.
 func (o *VNAnimalBodyPoseObservation) AvailableJointNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNAnimalBodyPoseObservationSelAvailableJointNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNAnimalBodyPoseObservationSelAvailableJointNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief All animal joints group names available in the observation.
 func (o *VNAnimalBodyPoseObservation) AvailableJointGroupNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNAnimalBodyPoseObservationSelAvailableJointGroupNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNAnimalBodyPoseObservationSelAvailableJointGroupNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

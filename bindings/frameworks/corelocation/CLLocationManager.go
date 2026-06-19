@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to start and stop the delivery of location-related events to your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager
 type CLLocationManager struct {
 	foundation.NSObject
@@ -89,21 +91,25 @@ func CLLocationManagerFromID(id objc.ID) *CLLocationManager {
 	return o
 }
 
+// Returns a Boolean value indicating whether location services are enabled on the device.
 func CLLocationManagerLocationServicesEnabled() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCLLocationManager), _cLLocationManagerSelLocationServicesEnabled)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the location manager is able to generate heading-related events.
 func CLLocationManagerHeadingAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCLLocationManager), _cLLocationManagerSelHeadingAvailable)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the significant-change location service is available on the device.
 func CLLocationManagerSignificantLocationChangeMonitoringAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCLLocationManager), _cLLocationManagerSelSignificantLocationChangeMonitoringAvailable)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the device supports region monitoring using the specified class.
 func CLLocationManagerIsMonitoringAvailableForClass(regionClass objc.Class) bool {
 	_ret := objc.Send[bool](objc.ID(_clsCLLocationManager), _cLLocationManagerSelIsMonitoringAvailableForClass, regionClass)
 	return _ret
@@ -121,6 +127,7 @@ func CLLocationManagerRegionMonitoringEnabled() bool {
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the device supports ranging of beacons that use the iBeacon protocol.
 func CLLocationManagerIsRangingAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCLLocationManager), _cLLocationManagerSelIsRangingAvailable)
 	return _ret
@@ -132,14 +139,17 @@ func CLLocationManagerAuthorizationStatus() CLAuthorizationStatus {
 	return _ret
 }
 
+// Requests the user’s permission to use location services while the app is in use.
 func (o *CLLocationManager) RequestWhenInUseAuthorization() {
 	o.Ptr().Send(_cLLocationManagerSelRequestWhenInUseAuthorization)
 }
 
+// Requests the user’s permission to use location services regardless of whether the app is in use.
 func (o *CLLocationManager) RequestAlwaysAuthorization() {
 	o.Ptr().Send(_cLLocationManagerSelRequestAlwaysAuthorization)
 }
 
+// Requests permission to temporarily use location services with full accuracy and reports the results to the provided completion handler.
 func (o *CLLocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(purposeKey *foundation.NSString, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -151,34 +161,42 @@ func (o *CLLocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurpose
 	o.Ptr().Send(_cLLocationManagerSelRequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion, purposeKey.Ptr(), __block_completion)
 }
 
+// Requests permission to temporarily use location services with full accuracy.
 func (o *CLLocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKey(purposeKey *foundation.NSString) {
 	o.Ptr().Send(_cLLocationManagerSelRequestTemporaryFullAccuracyAuthorizationWithPurposeKey, purposeKey.Ptr())
 }
 
+// Starts the generation of updates that report the user’s current location.
 func (o *CLLocationManager) StartUpdatingLocation() {
 	o.Ptr().Send(_cLLocationManagerSelStartUpdatingLocation)
 }
 
+// Stops the generation of location updates.
 func (o *CLLocationManager) StopUpdatingLocation() {
 	o.Ptr().Send(_cLLocationManagerSelStopUpdatingLocation)
 }
 
+// Requests the one-time delivery of the user’s current location.
 func (o *CLLocationManager) RequestLocation() {
 	o.Ptr().Send(_cLLocationManagerSelRequestLocation)
 }
 
+// Starts the generation of updates that report the user’s current heading.
 func (o *CLLocationManager) StartUpdatingHeading() {
 	o.Ptr().Send(_cLLocationManagerSelStartUpdatingHeading)
 }
 
+// Dismisses the heading calibration view from the screen immediately.
 func (o *CLLocationManager) DismissHeadingCalibrationDisplay() {
 	o.Ptr().Send(_cLLocationManagerSelDismissHeadingCalibrationDisplay)
 }
 
+// Starts the generation of updates based on significant location changes.
 func (o *CLLocationManager) StartMonitoringSignificantLocationChanges() {
 	o.Ptr().Send(_cLLocationManagerSelStartMonitoringSignificantLocationChanges)
 }
 
+// Stops the delivery of location events based on significant location changes.
 func (o *CLLocationManager) StopMonitoringSignificantLocationChanges() {
 	o.Ptr().Send(_cLLocationManagerSelStopMonitoringSignificantLocationChanges)
 }
@@ -213,10 +231,12 @@ func (o *CLLocationManager) StopRangingBeaconsInRegion(region *CLBeaconRegion) {
 	o.Ptr().Send(_cLLocationManagerSelStopRangingBeaconsInRegion, region.Ptr())
 }
 
+// Starts the delivery of notifications for the specified beacon constraints.
 func (o *CLLocationManager) StartRangingBeaconsSatisfyingConstraint(constraint *CLBeaconIdentityConstraint) {
 	o.Ptr().Send(_cLLocationManagerSelStartRangingBeaconsSatisfyingConstraint, constraint.Ptr())
 }
 
+// Stops the delivery of notifications for the specified beacon constraints.
 func (o *CLLocationManager) StopRangingBeaconsSatisfyingConstraint(constraint *CLBeaconIdentityConstraint) {
 	o.Ptr().Send(_cLLocationManagerSelStopRangingBeaconsSatisfyingConstraint, constraint.Ptr())
 }
@@ -393,10 +413,12 @@ func (o *CLLocationManager) RangedBeaconConstraints() *foundation.NSSet[*CLBeaco
 	return foundation.NSSetFromID[*CLBeaconIdentityConstraint](_ret)
 }
 
+// Starts the delivery of visit-related events.
 func (o *CLLocationManager) StartMonitoringVisits() {
 	o.Ptr().Send(_cLLocationManagerSelStartMonitoringVisits)
 }
 
+// Stops the delivery of visit-related events.
 func (o *CLLocationManager) StopMonitoringVisits() {
 	o.Ptr().Send(_cLLocationManagerSelStopMonitoringVisits)
 }

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient spatial normalization kernel.
+//
 // CNNSpatialNormalizationGradient wraps [raw.MPSCNNSpatialNormalizationGradient] with a fluent Go API.
 type CNNSpatialNormalizationGradient struct {
 	inner *raw.MPSCNNSpatialNormalizationGradient
@@ -221,7 +223,7 @@ func (x *CNNSpatialNormalizationGradient) WithDestinationImageAllocator(destinat
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNSpatialNormalizationGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNSpatialNormalizationGradient {
@@ -229,7 +231,7 @@ func (x *CNNSpatialNormalizationGradient) WithOptions(options mpscore.MPSKernelO
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNSpatialNormalizationGradient) WithLabel(label string) *CNNSpatialNormalizationGradient {

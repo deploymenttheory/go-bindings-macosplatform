@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol effect applies the MagicReplace animation to symbol images.
+//
 // SymbolMagicReplaceContentTransition wraps [raw.NSSymbolMagicReplaceContentTransition] with a fluent Go API.
 type SymbolMagicReplaceContentTransition struct {
 	inner *raw.NSSymbolMagicReplaceContentTransition

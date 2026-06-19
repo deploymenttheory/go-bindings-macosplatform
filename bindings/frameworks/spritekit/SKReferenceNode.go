@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that’s defined in an archived .sks file.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skreferencenode
 type SKReferenceNode struct {
 	SKNode
@@ -36,7 +38,7 @@ func SKReferenceNodeFromID(id objc.ID) *SKReferenceNode {
 	return o
 }
 
-// Create a reference node with a url
+// Initializes a reference node from a URL.
 func (o *SKReferenceNode) InitWithURL(url *foundation.NSURL) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *SKReferenceNode) InitWithURL(url *foundation.NSURL) *SKReferenceNode {
 	return SKReferenceNodeFromID(_ret)
 }
 
-// Create a reference node with a url
+// Initializes a reference node from a file in the app’s main bundle.
 func (o *SKReferenceNode) InitWithFileNamed(fileName *foundation.NSString) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithFileNamed, fileName.Ptr())
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *SKReferenceNode) InitWithFileNamed(fileName *foundation.NSString) *SKRe
 	return SKReferenceNodeFromID(_ret)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// A method that initializes a reference node from an archive.
 func (o *SKReferenceNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -63,7 +65,7 @@ func (o *SKReferenceNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKReferen
 	return SKReferenceNodeFromID(_ret)
 }
 
-// Create a reference node with a url
+// Creates a reference node from a file in the app’s main bundle.
 func SKReferenceNodeReferenceNodeWithFileNamed(fileName *foundation.NSString) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithFileNamed, fileName.Ptr())
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func SKReferenceNodeReferenceNodeWithFileNamed(fileName *foundation.NSString) *S
 	return SKReferenceNodeFromID(_ret)
 }
 
-// Create a reference node with a url
+// Creates a reference node from a URL.
 func SKReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SKReferenceNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithURL, referenceURL.Ptr())
 	if _ret != 0 {
@@ -81,12 +83,12 @@ func SKReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SKRefe
 	return SKReferenceNodeFromID(_ret)
 }
 
-// called each time the url is loaded, after it has been added as a child
+// A method called by SpriteKit after the reference node’s contents are loaded.
 func (o *SKReferenceNode) DidLoadReferenceNode(node *SKNode) {
 	o.Ptr().Send(_sKReferenceNodeSelDidLoadReferenceNode, node.Ptr())
 }
 
-// Force the reference to be reloaded. The resolved node will added as a child of this node. If the resolved node has not yet been loaded, it will be automatically loaded when the resolved node is queryed or the refenece node is rendered.
+// Loads the reference node’s content and adds it as a new child node.
 func (o *SKReferenceNode) ResolveReferenceNode() {
 	o.Ptr().Send(_sKReferenceNodeSelResolveReferenceNode)
 }

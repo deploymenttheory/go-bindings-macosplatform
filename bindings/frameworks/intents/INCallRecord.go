@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The details about a call handled by your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incallrecord
 type INCallRecord struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func INCallRecordFromID(id objc.ID) *INCallRecord {
 	return o
 }
 
+// Creates a call record with the details about the call.
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked(identifier *foundation.NSString, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, participants *foundation.NSArray[*INPerson], numberOfCalls *foundation.NSNumber, isCallerIdBlocked *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked, identifier.Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), participants.Ptr(), numberOfCalls.Ptr(), isCallerIdBlocked.Ptr())
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapability
 	return INCallRecordFromID(_ret)
 }
 
+// Creates a call record with the details about the call.
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen(identifier *foundation.NSString, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen, identifier.Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapability
 	return INCallRecordFromID(_ret)
 }
 
+// Creates a call record with the details about the call.
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier *foundation.NSString, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls, identifier.Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
 	if _ret != 0 {
@@ -134,6 +139,7 @@ func (o *INCallRecord) Participants() *foundation.NSArray[*INPerson] {
 	return foundation.NSArrayFromID[*INPerson](_ret)
 }
 
+// Initializes a call record with the details about the call.
 // Deprecated: Replaced by -initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen(identifier *foundation.NSString, dateCreated *foundation.NSDate, caller *INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen, identifier.Ptr(), dateCreated.Ptr(), caller.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr())
@@ -143,6 +149,7 @@ func (o *INCallRecord) InitWithIdentifierDateCreatedCallerCallRecordTypeCallCapa
 	return INCallRecordFromID(_ret)
 }
 
+// Initializes a call record with the details about the call.
 // Deprecated: Replaced by -initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier *foundation.NSString, dateCreated *foundation.NSDate, caller *INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls, identifier.Ptr(), dateCreated.Ptr(), caller.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())

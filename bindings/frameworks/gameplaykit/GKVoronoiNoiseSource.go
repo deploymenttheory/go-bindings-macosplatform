@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Voronoi noise partitions the space into angular, polygonal "cells", which are reminiscent of stained glass or crystal-like structures.
+// A procedural noise generator whose output (also called Worley noise or cellular noise) divides space into discrete cells surrounding random seed points.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource
 type GKVoronoiNoiseSource struct {
@@ -40,6 +40,7 @@ func GKVoronoiNoiseSourceFromID(id objc.ID) *GKVoronoiNoiseSource {
 	return o
 }
 
+// Creates a Voronoi noise source with the specified parameters.
 func GKVoronoiNoiseSourceVoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed(frequency float64, displacement float64, distanceEnabled bool, seed int32) *GKVoronoiNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKVoronoiNoiseSource), _gKVoronoiNoiseSourceSelVoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed, frequency, displacement, distanceEnabled, seed)
 	if _ret != 0 {
@@ -48,6 +49,7 @@ func GKVoronoiNoiseSourceVoronoiNoiseWithFrequencyDisplacementDistanceEnabledSee
 	return GKVoronoiNoiseSourceFromID(_ret)
 }
 
+// Initializes a Voronoi noise source with the specified parameters.
 func (o *GKVoronoiNoiseSource) InitWithFrequencyDisplacementDistanceEnabledSeed(frequency float64, displacement float64, distanceEnabled bool, seed int32) *GKVoronoiNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKVoronoiNoiseSourceSelInitWithFrequencyDisplacementDistanceEnabledSeed, frequency, displacement, distanceEnabled, seed)
 	if _ret != 0 {

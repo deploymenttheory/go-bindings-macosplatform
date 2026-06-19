@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns elementwise product of left * right
+// A representation of a multiplication operator.
 //
 // NNMultiplicationNode wraps [raw.MPSNNMultiplicationNode] with a fluent Go API.
 type NNMultiplicationNode struct {

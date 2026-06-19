@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the input and output data of a function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlstageinputoutputdescriptor
 type MTLStageInputOutputDescriptor struct {
 	foundation.NSObject
@@ -45,6 +47,7 @@ func MTLStageInputOutputDescriptorStageInputOutputDescriptor() *MTLStageInputOut
 	return MTLStageInputOutputDescriptorFromID(_ret)
 }
 
+// Resets the default state for the descriptor.
 func (o *MTLStageInputOutputDescriptor) Reset() {
 	o.Ptr().Send(_mTLStageInputOutputDescriptorSelReset)
 }

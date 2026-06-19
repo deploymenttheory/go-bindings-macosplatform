@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about the project extension.
+//
 // ProjectInfo wraps [raw.PHProjectInfo] with a fluent Go API.
 type ProjectInfo struct {
 	inner *raw.PHProjectInfo

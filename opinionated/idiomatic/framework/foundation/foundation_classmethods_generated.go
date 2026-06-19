@@ -1540,7 +1540,7 @@ func ExpressionForAnyKey() *Expression {
 }
 
 // ExpressionForBlockArguments calls the underlying NSExpressionExpressionForBlockArguments.
-func ExpressionForBlockArguments(block objc.Block, arguments *raw.NSArray[*raw.NSExpression]) *Expression {
+func ExpressionForBlockArguments(block func(objc.ID, *raw.NSArray[*raw.NSExpression], *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID, arguments *raw.NSArray[*raw.NSExpression]) *Expression {
 	_r := raw.NSExpressionExpressionForBlockArguments(block, arguments)
 	if _r == nil {
 		return nil
@@ -3352,7 +3352,7 @@ func PredicateWithValue(value bool) *Predicate {
 }
 
 // PredicateWith calls the underlying NSPredicatePredicateWith.
-func PredicateWith(block objc.Block) *Predicate {
+func PredicateWith(block func(objc.ID, *raw.NSDictionary[*raw.NSString, objc.ID]) bool) *Predicate {
 	_r := raw.NSPredicatePredicateWith(block)
 	if _r == nil {
 		return nil

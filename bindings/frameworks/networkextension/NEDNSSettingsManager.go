@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to create and manage a DNS settings configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nednssettingsmanager
 type NEDNSSettingsManager struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func NEDNSSettingsManagerFromID(id objc.ID) *NEDNSSettingsManager {
 	return o
 }
 
-// @method sharedManager @return The singleton NEDNSSettingsManager object for the calling process.
+// Access the single instance of a DNS settings manager.
 func NEDNSSettingsManagerSharedManager() *NEDNSSettingsManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEDNSSettingsManager), _nEDNSSettingsManagerSelSharedManager)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func NEDNSSettingsManagerSharedManager() *NEDNSSettingsManager {
 	return NEDNSSettingsManagerFromID(_ret)
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current DNS settings configuration from the caller's DNS settings preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load your DNS settings configuration from the system networking preferences.
 func (o *NEDNSSettingsManager) LoadFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -63,7 +65,7 @@ func (o *NEDNSSettingsManager) LoadFromPreferencesWithCompletionHandler(completi
 	o.Ptr().Send(_nEDNSSettingsManagerSelLoadFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the DNS settings configuration from the caller's DNS settings preferences. If the DNS settings are enabled, the DNS settings becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove your DNS settings configuration from the system networking preferences.
 func (o *NEDNSSettingsManager) RemoveFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -75,7 +77,7 @@ func (o *NEDNSSettingsManager) RemoveFromPreferencesWithCompletionHandler(comple
 	o.Ptr().Send(_nEDNSSettingsManagerSelRemoveFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the DNS settingsconfiguration in the caller's DNS settings preferences. If the DNS settings are enabled, they will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save your DNS settings configuration to the system networking preferences.
 func (o *NEDNSSettingsManager) SaveToPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

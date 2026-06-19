@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Generates and synchronizes timecode data from various sources for precise video and audio synchronization.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturetimecodegenerator
 type AVCaptureTimecodeGenerator struct {
 	foundation.NSObject
@@ -45,17 +47,17 @@ func AVCaptureTimecodeGeneratorFromID(id objc.ID) *AVCaptureTimecodeGenerator {
 	return o
 }
 
-// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks. - Parameter delegate: An object conforming to the “AVCaptureTimecodeGeneratorDelegate“ protocol. - Parameter callbackQueue: The dispatch queue on which the delegate methods are invoked. The `callbackQueue` parameter may not be `nil`, except when setting the “AVCaptureTimecodeGeneratorDelegate“ to `nil`, otherwise “setDelegate:queue:“ throws an `NSInvalidArgumentException`. Use this method to configure a delegate that handles timecode updates. The specified `queue` ensures thread-safe invocation of delegate methods.
+// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks.
 func (o *AVCaptureTimecodeGenerator) SetDelegateQueue(delegate AVCaptureTimecodeGeneratorDelegate, callbackQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVCaptureTimecodeGeneratorSelSetDelegateQueue, delegate, callbackQueue.Ptr())
 }
 
-// Synchronizes the generator with the specified timecode source. - Parameter source: The timecode source for synchronization.
+// Synchronizes the generator with the specified timecode source.
 func (o *AVCaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(source *AVCaptureTimecodeSource) {
 	o.Ptr().Send(_aVCaptureTimecodeGeneratorSelStartSynchronizationWithTimecodeSource, source.Ptr())
 }
 
-// Generates an initial timecode intended to be the first in a sequence. - Returns: A populated “AVCaptureTimecode“ structure.
+// Generates an initial timecode intended to be the first in a sequence.
 func (o *AVCaptureTimecodeGenerator) GenerateInitialTimecode() AVCaptureTimecode {
 	_ret := objc.Send[AVCaptureTimecode](o.Ptr(), _aVCaptureTimecodeGeneratorSelGenerateInitialTimecode)
 	return _ret

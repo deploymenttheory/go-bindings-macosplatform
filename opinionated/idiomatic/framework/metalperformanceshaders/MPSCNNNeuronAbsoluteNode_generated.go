@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronAbsolute kernel @discussion For each pixel, applies the following function: @code f(x) = fabs(x) @endcode
+// A representation of an absolute neuron filter.
 //
 // CNNNeuronAbsoluteNode wraps [raw.MPSCNNNeuronAbsoluteNode] with a fluent Go API.
 type CNNNeuronAbsoluteNode struct {

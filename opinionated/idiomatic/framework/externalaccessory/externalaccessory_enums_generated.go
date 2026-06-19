@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// The error codes that may be passed in an error object for the Bluetooth picker completion block.
 type EABluetoothAccessoryPickerErrorCode int64
 
 const (

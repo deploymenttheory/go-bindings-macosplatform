@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A semiabstract superclass that provides subclasses that you use to draw an image from a particular type of source data.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsimagerep
 type NSImageRep struct {
 	foundation.NSObject
@@ -76,6 +78,7 @@ func NSImageRepFromID(id objc.ID) *NSImageRep {
 	return o
 }
 
+// Creates and returns an image representation object.
 func (o *NSImageRep) Init() *NSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageRepSelInit)
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func (o *NSImageRep) Init() *NSImageRep {
 	return NSImageRepFromID(_ret)
 }
 
+// Creates and returns an image representation object from data in an unarchiver.
 func (o *NSImageRep) InitWithCoder(coder *foundation.NSCoder) *NSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageRepSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -92,90 +96,119 @@ func (o *NSImageRep) InitWithCoder(coder *foundation.NSCoder) *NSImageRep {
 	return NSImageRepFromID(_ret)
 }
 
+// Implemented by subclasses to draw the image in the current coordinate system.
 func (o *NSImageRep) Draw() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSImageRepSelDraw)
 	return _ret
 }
 
+// Draws the image representation’s image data at the specified point in the current coordinate system.
 func (o *NSImageRep) DrawAtPoint(point corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSImageRepSelDrawAtPoint, point)
 	return _ret
 }
 
+// Draws the image, scaling it (as needed) to fit the specified rectangle.
 func (o *NSImageRep) DrawInRect(rect corefoundation.CGRect) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSImageRepSelDrawInRect, rect)
 	return _ret
 }
 
+// Draws all or part of the image in the specified rectangle in the current coordinate system.
 func (o *NSImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSImageRepSelDrawInRectFromRectOperationFractionRespectFlippedHints, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
+	_ret := objc.Send[bool](o.Ptr(), _nSImageRepSelDrawInRectFromRectOperationFractionRespectFlippedHints, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints.Ptr())
 	return _ret
 }
 
+// Adds the specified class to the registry of available image representation subclasses.
 func NSImageRepRegisterImageRepClass(imageRepClass objc.Class) {
 	objc.ID(_clsNSImageRep).Send(_nSImageRepSelRegisterImageRepClass, imageRepClass)
 }
 
+// Removes the specified image representation subclass from the registry of available image representations.
 func NSImageRepUnregisterImageRepClass(imageRepClass objc.Class) {
 	objc.ID(_clsNSImageRep).Send(_nSImageRepSelUnregisterImageRepClass, imageRepClass)
 }
 
+// Returns the image representation subclass that handles data with the specified type.
 // Deprecated: Use +imageRepClassForType: instead
 func NSImageRepImageRepClassForFileType(type_ *foundation.NSString) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepClassForFileType, type_.Ptr())
 	return _ret
 }
 
+// Returns the image representation subclass that handles data with the specified pasteboard type.
 // Deprecated: Use +imageRepClassForType: instead
 func NSImageRepImageRepClassForPasteboardType(type_ *foundation.NSString) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepClassForPasteboardType, type_.Ptr())
 	return _ret
 }
 
+// Returns the image representation subclass that handles image data for the specified UTI.
 func NSImageRepImageRepClassForType(type_ *foundation.NSString) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepClassForType, type_.Ptr())
 	return _ret
 }
 
+// Returns the image representation subclass that handles the specified type of data.
 func NSImageRepImageRepClassForData(data *foundation.NSData) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepClassForData, data.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the image representation can initialize itself from the specified data.
 func NSImageRepCanInitWithData(data *foundation.NSData) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSImageRep), _nSImageRepSelCanInitWithData, data.Ptr())
 	return _ret
 }
 
+// Returns the list of file types supported directly by the image representation.
 // Deprecated: Use +imageUnfilteredTypes instead
 func NSImageRepImageUnfilteredFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImageUnfilteredFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageUnfilteredFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the list of pasteboard types supported directly by the image representation.
 // Deprecated: Use +imageUnfilteredTypes instead
 func NSImageRepImageUnfilteredPasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImageUnfilteredPasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageUnfilteredPasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the file types supported by the image representation class or one of its subclasses.
 // Deprecated: Use +imageTypes instead
 func NSImageRepImageFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImageFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the pasteboard types supported by the image representation class or one of its subclasses.
 // Deprecated: Use +imageTypes instead
 func NSImageRepImagePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImagePasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImagePasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns a Boolean value that indicates whether the receiver can initialize itself from the data on the specified pasteboard.
 func NSImageRepCanInitWithPasteboard(pasteboard *NSPasteboard) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSImageRep), _nSImageRepSelCanInitWithPasteboard, pasteboard.Ptr())
 	return _ret
 }
 
+// Creates and returns an array of image representation objects initialized using the contents of the specified file.
 func NSImageRepImageRepsWithContentsOfFile(filename *foundation.NSString) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepsWithContentsOfFile, filename.Ptr())
 	if _ret != 0 {
@@ -184,6 +217,7 @@ func NSImageRepImageRepsWithContentsOfFile(filename *foundation.NSString) *found
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
+// Creates and returns an image representation object using the contents of the specified file.
 func NSImageRepImageRepWithContentsOfFile(filename *foundation.NSString) *NSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepWithContentsOfFile, filename.Ptr())
 	if _ret != 0 {
@@ -192,6 +226,7 @@ func NSImageRepImageRepWithContentsOfFile(filename *foundation.NSString) *NSImag
 	return NSImageRepFromID(_ret)
 }
 
+// Creates and returns an array of image representation objects initialized using the contents of the specified URL.
 func NSImageRepImageRepsWithContentsOfURL(url *foundation.NSURL) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepsWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -200,6 +235,7 @@ func NSImageRepImageRepsWithContentsOfURL(url *foundation.NSURL) *foundation.NSA
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
+// Creates and returns an image representation object using the data at the specified URL.
 func NSImageRepImageRepWithContentsOfURL(url *foundation.NSURL) *NSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -208,6 +244,7 @@ func NSImageRepImageRepWithContentsOfURL(url *foundation.NSURL) *NSImageRep {
 	return NSImageRepFromID(_ret)
 }
 
+// Creates and returns an array of image representation objects initialized using the contents of the pasteboard.
 func NSImageRepImageRepsWithPasteboard(pasteboard *NSPasteboard) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepsWithPasteboard, pasteboard.Ptr())
 	if _ret != 0 {
@@ -216,6 +253,7 @@ func NSImageRepImageRepsWithPasteboard(pasteboard *NSPasteboard) *foundation.NSA
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
+// Creates and returns an image representation object using the contents of the specified pasteboard.
 func NSImageRepImageRepWithPasteboard(pasteboard *NSPasteboard) *NSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepWithPasteboard, pasteboard.Ptr())
 	if _ret != 0 {
@@ -224,8 +262,9 @@ func NSImageRepImageRepWithPasteboard(pasteboard *NSPasteboard) *NSImageRep {
 	return NSImageRepFromID(_ret)
 }
 
+// Returns a Core Graphics image object that captures the drawing of the image.
 func (o *NSImageRep) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, context_ *NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSImageRepSelCGImageForProposedRectContextHints, proposedDestRect, context_.Ptr(), hints)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSImageRepSelCGImageForProposedRectContextHints, proposedDestRect, context_.Ptr(), hints.Ptr())
 	return _ret
 }
 
@@ -305,16 +344,25 @@ func (o *NSImageRep) SetLayoutDirection(layoutDirection NSImageLayoutDirection) 
 }
 
 func NSImageRepRegisteredImageRepClasses() *foundation.NSArray[objc.Class] {
-	_ret := objc.Send[*foundation.NSArray[objc.Class]](objc.ID(_clsNSImageRep), _nSImageRepSelRegisteredImageRepClasses)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelRegisteredImageRepClasses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.Class](_ret)
 }
 
 func NSImageRepImageUnfilteredTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImageUnfilteredTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageUnfilteredTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func NSImageRepImageTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImageTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

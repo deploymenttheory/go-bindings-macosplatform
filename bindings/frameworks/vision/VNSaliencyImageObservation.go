@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that contains a grayscale heat map of important areas across an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnsaliencyimageobservation
 type VNSaliencyImageObservation struct {
 	VNPixelBufferObservation

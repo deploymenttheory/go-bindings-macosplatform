@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A WebFrame object encapsulates the data displayed in a WebFrameView object. There is one WebFrame object per frame displayed in a WebView. An entire webpage is represented by a hierarchy of WebFrame objects in which the root object is called the main frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webframe
 type WebFrame struct {
 	foundation.NSObject
@@ -54,7 +56,7 @@ func WebFrameFromID(id objc.ID) *WebFrame {
 	return o
 }
 
-// @method initWithName:webFrameView:webView: @abstract The designated initializer of WebFrame. @discussion WebFrames are normally created for you by the WebView.  You should not need to invoke this method directly. @param name The name of the frame. @param view The WebFrameView for the frame. @param webView The WebView that manages the frame. @result Returns an initialized WebFrame.
+// Initializes the receiver with a frame name, web frame view, and controlling web view.
 func (o *WebFrame) InitWithNameWebFrameViewWebView(name *foundation.NSString, view *WebFrameView, webView *WebView) *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelInitWithNameWebFrameViewWebView, name.Ptr(), view.Ptr(), webView.Ptr())
 	if _ret != 0 {
@@ -63,47 +65,47 @@ func (o *WebFrame) InitWithNameWebFrameViewWebView(name *foundation.NSString, vi
 	return WebFrameFromID(_ret)
 }
 
-// @method loadRequest: @param request The web request to load.
+// Connects to a given URL by initiating an asynchronous client request.
 func (o *WebFrame) LoadRequest(request *foundation.NSURLRequest) {
 	o.Ptr().Send(_webFrameSelLoadRequest, request.Ptr())
 }
 
-// @method loadData:MIMEType:textEncodingName:baseURL: @param data The data to use for the main page of the document. @param MIMEType The MIME type of the data. @param encodingName The encoding of the data. @param URL The base URL to apply to relative URLs within the document.
+// Sets the main page contents, MIME type, content encoding, and base URL.
 func (o *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data *foundation.NSData, mIMEType *foundation.NSString, encodingName *foundation.NSString, uRL *foundation.NSURL) {
 	o.Ptr().Send(_webFrameSelLoadDataMIMETypeTextEncodingNameBaseURL, data.Ptr(), mIMEType.Ptr(), encodingName.Ptr(), uRL.Ptr())
 }
 
-// @method loadHTMLString:baseURL: @param string The string to use for the main page of the document. @param URL The base URL to apply to relative URLs within the document.
+// Sets the main page contents and base URL.
 func (o *WebFrame) LoadHTMLStringBaseURL(string_ *foundation.NSString, uRL *foundation.NSURL) {
 	o.Ptr().Send(_webFrameSelLoadHTMLStringBaseURL, string_.Ptr(), uRL.Ptr())
 }
 
-// @method loadAlternateHTMLString:baseURL:forUnreachableURL: @abstract Loads a page to display as a substitute for a URL that could not be reached. @discussion This allows clients to display page-loading errors in the webview itself. This is typically called while processing the WebFrameLoadDelegate method -webView:didFailProvisionalLoadWithError:forFrame: or one of the WebPolicyDelegate methods -webView:decidePolicyForMIMEType:request:frame:decisionListener: or -webView:unableToImplementPolicyWithError:frame:. If it is called from within one of those three delegate methods then the back/forward list will be maintained appropriately. @param string The string to use for the main page of the document. @param baseURL The baseURL to apply to relative URLs within the document. @param unreachableURL The URL for which this page will serve as alternate content.
+// Loads alternate content for a frame whose URL is unreachable.
 func (o *WebFrame) LoadAlternateHTMLStringBaseURLForUnreachableURL(string_ *foundation.NSString, baseURL *foundation.NSURL, unreachableURL *foundation.NSURL) {
 	o.Ptr().Send(_webFrameSelLoadAlternateHTMLStringBaseURLForUnreachableURL, string_.Ptr(), baseURL.Ptr(), unreachableURL.Ptr())
 }
 
-// @method loadArchive: @abstract Causes WebFrame to load a WebArchive. @param archive The archive to be loaded.
+// Loads an archive into the web frame.
 func (o *WebFrame) LoadArchive(archive *WebArchive) {
 	o.Ptr().Send(_webFrameSelLoadArchive, archive.Ptr())
 }
 
-// @method stopLoading @discussion Stop any pending loads on the frame's data source, and its children.
+// Stops any pending loads on the receiver’s data source, and those of its children.
 func (o *WebFrame) StopLoading() {
 	o.Ptr().Send(_webFrameSelStopLoading)
 }
 
-// @method reload @discussion Performs HTTP/1.1 end-to-end revalidation using cache-validating conditionals if possible.
+// Reloads the initial request passed as an argument to loadRequest:.
 func (o *WebFrame) Reload() {
 	o.Ptr().Send(_webFrameSelReload)
 }
 
-// @method reloadFromOrigin @discussion Performs HTTP/1.1 end-to-end reload.
+// Performs an end-to-end revalidation using cache-validating conditionals if possible.
 func (o *WebFrame) ReloadFromOrigin() {
 	o.Ptr().Send(_webFrameSelReloadFromOrigin)
 }
 
-// @method findFrameNamed: @discussion This method returns a frame with the given name. findFrameNamed returns self for _self and _current, the parent frame for _parent and the main frame for _top. findFrameNamed returns self for _parent and _top if the receiver is the mainFrame. findFrameNamed first searches from the current frame to all descending frames then the rest of the frames in the WebView. If still not found, findFrameNamed searches the frames of the other WebViews. @param name The name of the frame to find. @result The frame matching the provided name. nil if the frame is not found.
+// Returns a web frame that matches the given name.
 func (o *WebFrame) FindFrameNamed(name *foundation.NSString) *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelFindFrameNamed, name.Ptr())
 	if _ret != 0 {
@@ -186,8 +188,11 @@ func (o *WebFrame) ParentFrame() *WebFrame {
 
 // @property childFrames @abstract An array of WebFrame. @discussion The frames in the array are associated with a frame set or iframe.
 func (o *WebFrame) ChildFrames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webFrameSelChildFrames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameSelChildFrames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property windowObject @abstract The WebScriptObject representing the frame's JavaScript window object.

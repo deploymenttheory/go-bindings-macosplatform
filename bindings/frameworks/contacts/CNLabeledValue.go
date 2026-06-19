@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that combines a contact property value with a label that describes that property.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnlabeledvalue
 type CNLabeledValue[ValueType purego.AnyObject] struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func CNLabeledValueFromID[ValueType purego.AnyObject](id objc.ID) *CNLabeledValu
 	return o
 }
 
-// Returns a new CNLabeledValue with a new identifier.
+// Returns a new labeled value identifier.
 func CNLabeledValueLabeledValueWithLabelValue(label *foundation.NSString, value objc.ID) *CNLabeledValue[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNLabeledValue), _cNLabeledValueSelLabeledValueWithLabelValue, label.Ptr(), value)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func CNLabeledValueLabeledValueWithLabelValue(label *foundation.NSString, value 
 	return CNLabeledValueFromID[objc.ID](_ret)
 }
 
-// Initializes the CNLabeledValue with a new identifier.
+// Returns a new labeled value identifier.
 func (o *CNLabeledValue[ValueType]) InitWithLabelValue(label *foundation.NSString, value ValueType) *CNLabeledValue[ValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNLabeledValueSelInitWithLabelValue, label.Ptr(), value)
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *CNLabeledValue[ValueType]) InitWithLabelValue(label *foundation.NSStrin
 	return CNLabeledValueFromID[ValueType](_ret)
 }
 
-// Returns a new CNLabeledValue with the existing value and identifier.
+// Returns a labeled value object with an existing value and identifier.
 func (o *CNLabeledValue[ValueType]) LabeledValueBySettingLabel(label *foundation.NSString) *CNLabeledValue[ValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNLabeledValueSelLabeledValueBySettingLabel, label.Ptr())
 	if _ret != 0 {
@@ -65,7 +67,7 @@ func (o *CNLabeledValue[ValueType]) LabeledValueBySettingLabel(label *foundation
 	return CNLabeledValueFromID[ValueType](_ret)
 }
 
-// Returns a new CNLabeledValue with the existing label and identifier.
+// Returns a new value for an existing label and identifier.
 func (o *CNLabeledValue[ValueType]) LabeledValueBySettingValue(value ValueType) *CNLabeledValue[ValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNLabeledValueSelLabeledValueBySettingValue, value)
 	if _ret != 0 {
@@ -74,7 +76,7 @@ func (o *CNLabeledValue[ValueType]) LabeledValueBySettingValue(value ValueType) 
 	return CNLabeledValueFromID[ValueType](_ret)
 }
 
-// Returns a new CNLabeledValue with the existing identifier.
+// Returns a labeled value object with the specified label and value with the existing identifier.
 func (o *CNLabeledValue[ValueType]) LabeledValueBySettingLabelValue(label *foundation.NSString, value ValueType) *CNLabeledValue[ValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNLabeledValueSelLabeledValueBySettingLabelValue, label.Ptr(), value)
 	if _ret != 0 {
@@ -83,7 +85,7 @@ func (o *CNLabeledValue[ValueType]) LabeledValueBySettingLabelValue(label *found
 	return CNLabeledValueFromID[ValueType](_ret)
 }
 
-// @abstract Get a localized label. @discussion Some labels are special keys representing generic labels. Use this to obtain a localized string for a label to display to a user. @param label to localize. @return The localized string if a Contacts framework defined label, otherwise just returns the label.
+// Returns a localized string for the specified label.
 func CNLabeledValueLocalizedStringForLabel(label *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNLabeledValue), _cNLabeledValueSelLocalizedStringForLabel, label.Ptr())
 	if _ret != 0 {

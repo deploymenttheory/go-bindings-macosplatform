@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A constraint that orients a node to always point toward the current camera.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnbillboardconstraint
 type SCNBillboardConstraint struct {
 	SCNConstraint
@@ -31,7 +33,7 @@ func SCNBillboardConstraintFromID(id objc.ID) *SCNBillboardConstraint {
 	return o
 }
 
-// @method billboardConstraint: @abstract Creates and returns a SCNBillboardConstraint constraint. @discussion A billboard constraint forces the receiver to look into the direction of the current point of view.
+// Creates a new billboard constraint.
 func SCNBillboardConstraintBillboardConstraint() *SCNBillboardConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNBillboardConstraint), _sCNBillboardConstraintSelBillboardConstraint)
 	if _ret != 0 {

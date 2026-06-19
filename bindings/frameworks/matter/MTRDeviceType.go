@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Meta-data about a device type defined in the Matter specification.
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrdevicetype
 type MTRDeviceType struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func MTRDeviceTypeFromID(id objc.ID) *MTRDeviceType {
 	return o
 }
 
-// Returns an MTRDeviceType for the given ID, if the ID is known.  Returns nil for unknown IDs.
+// Returns an MTRDeviceType for the given ID, if the ID is known. Returns nil for unknown IDs.
 func MTRDeviceTypeDeviceTypeForID(deviceTypeID *foundation.NSNumber) *MTRDeviceType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceType), _mTRDeviceTypeSelDeviceTypeForID, deviceTypeID.Ptr())
 	if _ret != 0 {

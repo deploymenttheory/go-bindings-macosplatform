@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that manages the storage of cookies.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshttpcookiestorage
 type NSHTTPCookieStorage struct {
 	NSObject

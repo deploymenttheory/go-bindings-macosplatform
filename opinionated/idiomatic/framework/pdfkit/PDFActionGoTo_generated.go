@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// PDFActionGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action.
+//
 // ActionGoTo wraps [raw.PDFActionGoTo] with a fluent Go API.
 type ActionGoTo struct {
 	inner *raw.PDFActionGoTo
@@ -29,6 +31,8 @@ func ActionGoToFromID(id objc.ID) *ActionGoTo {
 	return &ActionGoTo{inner: raw.PDFActionGoToFromID(id)}
 }
 
+// Initializes the go-to action.
+//
 // NewActionGoToWithDestination creates a new [ActionGoTo].
 func NewActionGoToWithDestination(destination *raw.PDFDestination) *ActionGoTo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionGoTo")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewActionGoToWithDestination(destination *raw.PDFDestination) *ActionGoTo {
 	return &ActionGoTo{inner: raw.PDFActionGoToFromID(_id)}
 }
 
+// Returns the destination associated with the action.
+//
 // WithDestination sets the destination property and returns the receiver for chaining.
 func (x *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
 	x.inner.SetDestination(destination.Unwrap())

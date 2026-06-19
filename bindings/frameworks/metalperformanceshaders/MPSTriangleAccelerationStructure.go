@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An acceleration structure built over triangles.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpstriangleaccelerationstructure
 type MPSTriangleAccelerationStructure struct {
 	mpsrayintersector.MPSPolygonAccelerationStructure

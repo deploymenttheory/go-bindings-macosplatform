@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A standard interface for Metal Performance Shaders kernels.
+//
 // Kernel wraps [raw.MPSKernel] with a fluent Go API.
 type Kernel struct {
 	inner *raw.MPSKernel
@@ -34,7 +36,7 @@ func KernelFromID(id objc.ID) *Kernel {
 	return &Kernel{inner: raw.MPSKernelFromID(id)}
 }
 
-// @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+// Initializes a new kernel object.
 //
 // NewKernelWithDevice creates a new [Kernel].
 func NewKernelWithDevice(device metal.MTLDevice) *Kernel {
@@ -61,7 +63,7 @@ func NewKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevi
 	return &Kernel{inner: raw.MPSKernelFromID(_id)}
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *Kernel) WithOptions(options mpscore.MPSKernelOptions) *Kernel {
@@ -69,7 +71,7 @@ func (x *Kernel) WithOptions(options mpscore.MPSKernelOptions) *Kernel {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *Kernel) WithLabel(label string) *Kernel {
@@ -77,7 +79,7 @@ func (x *Kernel) WithLabel(label string) *Kernel {
 	return x
 }
 
-// @abstract   Make a copy of this MPSKernel for a new device @discussion -copyWithZone: will call this API to make a copy of the MPSKernel on the same device.  This interface may also be called directly to make a copy of the MPSKernel on a new device. Typically, the same MPSKernels should not be used to encode kernels on multiple command buffers from multiple threads. Many MPSKernels have mutable properties that might be changed by the other thread while this one is trying to encode. If you need to use a MPSKernel from multiple threads make a copy of it for each additional thread using -copyWithZone: or -copyWithZone:device: @param      zone        The NSZone in which to allocate the object @param      device      The device for the new MPSKernel. If nil, then use self.device. @result     a pointer to a copy of this MPSKernel. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+// Makes a copy of this kernel object for a new device.
 //
 // CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
 func (x *Kernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *Kernel {

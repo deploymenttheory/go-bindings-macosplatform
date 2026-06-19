@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An agent is a point mass whose local coordinate system is aligned to its velocity.  Agents have a variety of steering functions that can be used to simulate vehicles or entities with agency. The units of mass, velocity and radius are dimensionless but related. The visual representation of these values are specific to each game's own situation. @discussion Values close to 1.0 should be canonical and are expected to yield pleasing results. When applied to visuals these values should be scaled and biased into their target coordinate system and a simple filter on top ensures any noise generated from the steering logic doesn't affect the visual represtentation.
+// A component that moves a game entity according to a set of goals and realistic constraints.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkagent
 type GKAgent struct {

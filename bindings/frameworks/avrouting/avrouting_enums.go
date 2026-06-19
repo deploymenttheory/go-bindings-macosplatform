@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Values that indicate the reason for a routing event.
 type AVCustomRoutingEventReason int64
 
 const (

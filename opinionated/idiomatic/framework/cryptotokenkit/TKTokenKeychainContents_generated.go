@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A representation of the state of the keychain for a particular token.
+//
 // TokenKeychainContents wraps [raw.TKTokenKeychainContents] with a fluent Go API.
 type TokenKeychainContents struct {
 	inner *raw.TKTokenKeychainContents
@@ -38,7 +40,7 @@ func NewTokenKeychainContents() *TokenKeychainContents {
 	return &TokenKeychainContents{inner: raw.TKTokenKeychainContentsFromID(_id)}
 }
 
-// @discussion Fills keychain with the set of specified items.  All items belonging to token are first removed from the keychain and then the keychain is populated with new items. @param items New items to be stored into the keychain.
+// Fills the keychain with the specified items.
 //
 // FillWithItems calls the underlying FillWithItems.
 func (x *TokenKeychainContents) FillWithItems(items ...TokenKeychainItemProvider) {
@@ -56,7 +58,7 @@ func (x *TokenKeychainContents) FillWithItems(items ...TokenKeychainItemProvider
 	x.inner.FillWithItems(_arg0)
 }
 
-// @discussion Returns key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
+// Returns the key for a specified object identifier.
 //
 // KeyForObjectIDError calls the underlying KeyForObjectIDError.
 func (x *TokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error) {
@@ -70,7 +72,7 @@ func (x *TokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TokenKey
 	return &TokenKeychainKey{inner: _r}, nil
 }
 
-// @discussion Returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
+// Returns the key for a specified object identifier.
 //
 // CertificateForObjectIDError calls the underlying CertificateForObjectIDError.
 func (x *TokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error) {

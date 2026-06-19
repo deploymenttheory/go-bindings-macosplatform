@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A simple lighting and shading system for use in shader-based OpenGL rendering.
+//
 // BaseEffect wraps [raw.GLKBaseEffect] with a fluent Go API.
 type BaseEffect struct {
 	inner *raw.GLKBaseEffect
@@ -38,30 +40,40 @@ func NewBaseEffect() *BaseEffect {
 	return &BaseEffect{inner: raw.GLKBaseEffectFromID(_id)}
 }
 
+// A Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
+//
 // WithColorMaterialEnabled sets the colorMaterialEnabled property and returns the receiver for chaining.
 func (x *BaseEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *BaseEffect {
 	x.inner.SetColorMaterialEnabled(colorMaterialEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether lighting is calculated for both sides of a primitive.
+//
 // WithLightModelTwoSided sets the lightModelTwoSided property and returns the receiver for chaining.
 func (x *BaseEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *BaseEffect {
 	x.inner.SetLightModelTwoSided(lightModelTwoSided)
 	return x
 }
 
+// A Boolean value that indicates whether or not to use the constant color.
+//
 // WithUseConstantColor sets the useConstantColor property and returns the receiver for chaining.
 func (x *BaseEffect) WithUseConstantColor(useConstantColor uint8) *BaseEffect {
 	x.inner.SetUseConstantColor(useConstantColor)
 	return x
 }
 
+// The strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
+//
 // WithLightingType sets the lightingType property and returns the receiver for chaining.
 func (x *BaseEffect) WithLightingType(lightingType GLKLightingType) *BaseEffect {
 	x.inner.SetLightingType(raw.GLKLightingType(lightingType))
 	return x
 }
 
+// The order in which textures are applied to rendered primitives.
+//
 // WithTextureOrder sets the collection, converting the Go slice to an NSArray.
 func (x *BaseEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *BaseEffect {
 	if len(items) == 0 {
@@ -83,12 +95,16 @@ func (x *BaseEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *B
 	return x
 }
 
+// A string used to name your effect.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *BaseEffect) WithLabel(label string) *BaseEffect {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Prepares an effect for rendering.
+//
 // PrepareToDraw calls the underlying PrepareToDraw.
 func (x *BaseEffect) PrepareToDraw() {
 	x.inner.PrepareToDraw()

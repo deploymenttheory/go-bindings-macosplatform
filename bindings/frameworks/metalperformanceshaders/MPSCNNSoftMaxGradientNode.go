@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Node representing a MPSCNNSoftMaxGradient kernel
+// A representation of a gradient softmax filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmaxgradientnode
 type MPSCNNSoftMaxGradientNode struct {

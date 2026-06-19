@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A physics behavior that connects two bodies and allows them to slide against each other and rotate around their connecting points.
+//
 // PhysicsSliderJoint wraps [raw.SCNPhysicsSliderJoint] with a fluent Go API.
 type PhysicsSliderJoint struct {
 	inner *raw.SCNPhysicsSliderJoint
@@ -35,72 +37,96 @@ func NewPhysicsSliderJoint() *PhysicsSliderJoint {
 	return &PhysicsSliderJoint{inner: raw.SCNPhysicsSliderJointFromID(_id)}
 }
 
+// The axis along which the first body can slide, relative to the node containing it.
+//
 // WithAxisA sets the axisA property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithAxisA(axisA raw.SCNVector3) *PhysicsSliderJoint {
 	x.inner.SetAxisA(axisA)
 	return x
 }
 
+// The point at which the joint connects, relative to the node containing the first body.
+//
 // WithAnchorA sets the anchorA property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithAnchorA(anchorA raw.SCNVector3) *PhysicsSliderJoint {
 	x.inner.SetAnchorA(anchorA)
 	return x
 }
 
+// The axis along which the second body can slide, relative to the node containing it.
+//
 // WithAxisB sets the axisB property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithAxisB(axisB raw.SCNVector3) *PhysicsSliderJoint {
 	x.inner.SetAxisB(axisB)
 	return x
 }
 
+// The point at which the joint connects, relative to the node containing the second body.
+//
 // WithAnchorB sets the anchorB property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsSliderJoint {
 	x.inner.SetAnchorB(anchorB)
 	return x
 }
 
+// The minimum distance between the anchor points of the two bodies, relative to their initial positions.
+//
 // WithMinimumLinearLimit sets the minimumLinearLimit property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMinimumLinearLimit(minimumLinearLimit float64) *PhysicsSliderJoint {
 	x.inner.SetMinimumLinearLimit(minimumLinearLimit)
 	return x
 }
 
+// The maximum distance between the anchor points of the two bodies, relative to their initial positions.
+//
 // WithMaximumLinearLimit sets the maximumLinearLimit property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMaximumLinearLimit(maximumLinearLimit float64) *PhysicsSliderJoint {
 	x.inner.SetMaximumLinearLimit(maximumLinearLimit)
 	return x
 }
 
+// The minimum rotation angle between the two bodies, measured in radians relative to their initial orientations.
+//
 // WithMinimumAngularLimit sets the minimumAngularLimit property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMinimumAngularLimit(minimumAngularLimit float64) *PhysicsSliderJoint {
 	x.inner.SetMinimumAngularLimit(minimumAngularLimit)
 	return x
 }
 
+// The maximum rotation angle between the two bodies, measured in radians relative to their initial orientations.
+//
 // WithMaximumAngularLimit sets the maximumAngularLimit property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMaximumAngularLimit(maximumAngularLimit float64) *PhysicsSliderJoint {
 	x.inner.SetMaximumAngularLimit(maximumAngularLimit)
 	return x
 }
 
+// The velocity at which the joint’s connected bodies should slide.
+//
 // WithMotorTargetLinearVelocity sets the motorTargetLinearVelocity property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMotorTargetLinearVelocity(motorTargetLinearVelocity float64) *PhysicsSliderJoint {
 	x.inner.SetMotorTargetLinearVelocity(motorTargetLinearVelocity)
 	return x
 }
 
+// The maximum linear force that the joint can apply to its connected bodies, in newtons.
+//
 // WithMotorMaximumForce sets the motorMaximumForce property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMotorMaximumForce(motorMaximumForce float64) *PhysicsSliderJoint {
 	x.inner.SetMotorMaximumForce(motorMaximumForce)
 	return x
 }
 
+// The angular velocity at which the joint’s connected bodies should rotate around it.
+//
 // WithMotorTargetAngularVelocity sets the motorTargetAngularVelocity property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMotorTargetAngularVelocity(motorTargetAngularVelocity float64) *PhysicsSliderJoint {
 	x.inner.SetMotorTargetAngularVelocity(motorTargetAngularVelocity)
 	return x
 }
 
+// The maximum torque that the joint can apply to its connected bodies, in newton-meters.
+//
 // WithMotorMaximumTorque sets the motorMaximumTorque property and returns the receiver for chaining.
 func (x *PhysicsSliderJoint) WithMotorMaximumTorque(motorMaximumTorque float64) *PhysicsSliderJoint {
 	x.inner.SetMotorMaximumTorque(motorMaximumTorque)

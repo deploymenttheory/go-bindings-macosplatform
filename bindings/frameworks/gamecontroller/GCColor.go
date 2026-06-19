@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The color of a device light.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccolor
 type GCColor struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func GCColorFromID(id objc.ID) *GCColor {
 	return o
 }
 
+// Creates a color with the specified red, green, and blue values.
 func (o *GCColor) InitWithRedGreenBlue(red float32, green float32, blue float32) *GCColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCColorSelInitWithRedGreenBlue, red, green, blue)
 	if _ret != 0 {

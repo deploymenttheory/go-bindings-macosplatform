@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An annotation view that displays a balloon-shaped marker at the designated location.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmarkerannotationview
 type MKMarkerAnnotationView struct {
 	MKAnnotationView

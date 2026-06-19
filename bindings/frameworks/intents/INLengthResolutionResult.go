@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a length associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inlengthresolutionresult
 type INLengthResolutionResult struct {
 	INIntentResolutionResult
@@ -32,24 +34,27 @@ func INLengthResolutionResultFromID(id objc.ID) *INLengthResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INLengthResolutionResultSuccessWithResolvedLength(resolvedLength *foundation.NSMeasurement[*foundation.NSUnitLength]) *INLengthResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelSuccessWithResolvedLength, resolvedLength)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelSuccessWithResolvedLength, resolvedLength.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INLengthResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INLengthResolutionResultDisambiguationWithLengthsToDisambiguate(lengthsToDisambiguate *foundation.NSArray[objc.ID]) *INLengthResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelDisambiguationWithLengthsToDisambiguate, lengthsToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelDisambiguationWithLengthsToDisambiguate, lengthsToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INLengthResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INLengthResolutionResultConfirmationRequiredWithLengthToConfirm(lengthToConfirm *foundation.NSMeasurement[*foundation.NSUnitLength]) *INLengthResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelConfirmationRequiredWithLengthToConfirm, lengthToConfirm)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelConfirmationRequiredWithLengthToConfirm, lengthToConfirm.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

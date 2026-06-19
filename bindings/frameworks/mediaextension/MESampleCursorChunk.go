@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about the chunk of media at the location of a sample.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk
 type MESampleCursorChunk struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func MESampleCursorChunkFromID(id objc.ID) *MESampleCursorChunk {
 	return o
 }
 
-// @property		initWithByteSource @abstract		The initializer for the MESampleCursorChunk class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			chunkStorageRange The offset location and length of the sample's chunk within the MEByteSource. @param			chunkInfo A completed AVSampleCursorChunkInfo with details about the chunk in the media. @param			sampleIndexWithinChunk The offset of the sample within the chunk, in samples.
+// Creates a new sample cursor chunk with byte source and chunk data that you provide.
 func (o *MESampleCursorChunk) InitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *MEByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *MESampleCursorChunk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleCursorChunkSelInitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk, byteSource.Ptr(), chunkStorageRange, chunkInfo, sampleIndexWithinChunk)
 	if _ret != 0 {

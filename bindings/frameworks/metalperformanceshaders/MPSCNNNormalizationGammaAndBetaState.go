@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores gamma and beta terms used to apply a scale and bias in instance- or batch-normalization operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnnormalizationgammaandbetastate
 type MPSCNNNormalizationGammaAndBetaState struct {
 	mpscore.MPSState

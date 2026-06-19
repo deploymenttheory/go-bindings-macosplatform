@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The sync engine is about to fetch changes from the server.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginewillfetchchangesevent
 type CKSyncEngineWillFetchChangesEvent struct {
 	CKSyncEngineEvent

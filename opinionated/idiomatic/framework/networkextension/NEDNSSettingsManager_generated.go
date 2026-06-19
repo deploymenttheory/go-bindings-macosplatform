@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object you use to create and manage a DNS settings configuration.
+//
 // NEDNSSettingsManager wraps [raw.NEDNSSettingsManager] with a fluent Go API.
 type NEDNSSettingsManager struct {
 	inner *raw.NEDNSSettingsManager
@@ -39,7 +41,7 @@ func NewNEDNSSettingsManager() *NEDNSSettingsManager {
 	return &NEDNSSettingsManager{inner: raw.NEDNSSettingsManagerFromID(_id)}
 }
 
-// @property localizedDescription @discussion A string containing a description of the DNS settings.
+// A string that contains the display name of the DNS settings configuration.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEDNSSettingsManager) WithLocalizedDescription(localizedDescription string) *NEDNSSettingsManager {
@@ -47,7 +49,7 @@ func (x *NEDNSSettingsManager) WithLocalizedDescription(localizedDescription str
 	return x
 }
 
-// @property dnsSettings @discussion An NEDNSSettings object containing the DNS resolver configuration to apply to the system.
+// An object that contains the configuration settings for a DNS server.
 //
 // WithDnsSettings sets the dnsSettings property and returns the receiver for chaining.
 func (x *NEDNSSettingsManager) WithDnsSettings(dnsSettings NEDNSSettingsProvider) *NEDNSSettingsManager {
@@ -55,7 +57,7 @@ func (x *NEDNSSettingsManager) WithDnsSettings(dnsSettings NEDNSSettingsProvider
 	return x
 }
 
-// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated DNS settings will always apply. If non-nil, the array describes the networks on which the DNS configuration should take effect or not.
+// A list of ordered rules that defines the networks on which the DNS settings will apply.
 //
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEDNSSettingsManager {
@@ -78,7 +80,7 @@ func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider
 	return x
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current DNS settings configuration from the caller's DNS settings preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load your DNS settings configuration from the system networking preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
@@ -98,7 +100,7 @@ func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the DNS settings configuration from the caller's DNS settings preferences. If the DNS settings are enabled, the DNS settings becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove your DNS settings configuration from the system networking preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error {
@@ -118,7 +120,7 @@ func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error 
 	}
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the DNS settingsconfiguration in the caller's DNS settings preferences. If the DNS settings are enabled, they will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save your DNS settings configuration to the system networking preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {

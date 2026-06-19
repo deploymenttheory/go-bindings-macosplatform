@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An element that represents a map within project section content.
+//
 // ProjectMapElement wraps [raw.PHProjectMapElement] with a fluent Go API.
 type ProjectMapElement struct {
 	inner *raw.PHProjectMapElement

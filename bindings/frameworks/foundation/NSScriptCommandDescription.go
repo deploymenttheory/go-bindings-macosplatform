@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A script command that a macOS app supports.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptcommanddescription
 type NSScriptCommandDescription struct {
 	NSObject
@@ -45,8 +47,9 @@ func NSScriptCommandDescriptionFromID(id objc.ID) *NSScriptCommandDescription {
 	return o
 }
 
+// Initializes and returns a newly allocated instance of NSScriptCommandDescription.
 func (o *NSScriptCommandDescription) InitWithSuiteNameCommandNameDictionary(suiteName *NSString, commandName *NSString, commandDeclaration *NSDictionary[objc.ID, objc.ID]) *NSScriptCommandDescription {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelInitWithSuiteNameCommandNameDictionary, suiteName.Ptr(), commandName.Ptr(), commandDeclaration)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelInitWithSuiteNameCommandNameDictionary, suiteName.Ptr(), commandName.Ptr(), commandDeclaration.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -61,6 +64,7 @@ func (o *NSScriptCommandDescription) InitWithCoder(inCoder *NSCoder) *NSScriptCo
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
+// Returns the type of the command argument identified by the specified key.
 func (o *NSScriptCommandDescription) TypeForArgumentWithName(argumentName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelTypeForArgumentWithName, argumentName.Ptr())
 	if _ret != 0 {
@@ -69,16 +73,19 @@ func (o *NSScriptCommandDescription) TypeForArgumentWithName(argumentName *NSStr
 	return NSStringFromID(_ret)
 }
 
+// Returns the Apple event code for the specified command argument of the receiver.
 func (o *NSScriptCommandDescription) AppleEventCodeForArgumentWithName(argumentName *NSString) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptCommandDescriptionSelAppleEventCodeForArgumentWithName, argumentName.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the command argument identified by the specified argument key is an optional argument.
 func (o *NSScriptCommandDescription) IsOptionalArgumentWithName(argumentName *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptCommandDescriptionSelIsOptionalArgumentWithName, argumentName.Ptr())
 	return _ret
 }
 
+// Creates and returns an instance of the command object described by the receiver.
 func (o *NSScriptCommandDescription) CreateCommandInstance() *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCreateCommandInstance)
 	if _ret != 0 {
@@ -87,6 +94,7 @@ func (o *NSScriptCommandDescription) CreateCommandInstance() *NSScriptCommand {
 	return NSScriptCommandFromID(_ret)
 }
 
+// Creates and returns an instance of the command object described by the receiver in the specified memory zone.
 func (o *NSScriptCommandDescription) CreateCommandInstanceWithZone(zone unsafe.Pointer) *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCreateCommandInstanceWithZone, zone)
 	if _ret != 0 {

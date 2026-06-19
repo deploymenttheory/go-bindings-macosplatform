@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that filters selected information from a metadata item.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadataitemfilter
 type AVMetadataItemFilter struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func AVMetadataItemFilterFromID(id objc.ID) *AVMetadataItemFilter {
 	return o
 }
 
+// Returns a metadata filter to use for sharing assets.
 func AVMetadataItemFilterMetadataItemFilterForSharing() *AVMetadataItemFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItemFilter), _aVMetadataItemFilterSelMetadataItemFilterForSharing)
 	if _ret != 0 {

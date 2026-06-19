@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that stores an array of sample buffer attachments for a compute pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcomputepasssamplebufferattachmentdescriptorarray
 type MTLComputePassSampleBufferAttachmentDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *MTLC
 	return o
 }
 
+// Returns the descriptor object for the specified sample buffer attachment.
 func (o *MTLComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLComputePassSampleBufferAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSub
 	return MTLComputePassSampleBufferAttachmentDescriptorFromID(_ret)
 }
 
+// Sets the descriptor object for the specified sample buffer attachment.
 func (o *MTLComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLComputePassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }

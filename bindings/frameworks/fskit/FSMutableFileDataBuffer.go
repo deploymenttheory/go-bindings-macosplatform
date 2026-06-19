@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A wrapper object for a data buffer.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsmutablefiledatabuffer
 type FSMutableFileDataBuffer struct {
 	foundation.NSObject

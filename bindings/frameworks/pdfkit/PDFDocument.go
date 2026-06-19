@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents PDF data or a PDF file and defines methods for writing, searching, and selecting PDF data.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfdocument
 type PDFDocument struct {
 	foundation.NSObject
@@ -84,6 +86,7 @@ func PDFDocumentFromID(id objc.ID) *PDFDocument {
 	return o
 }
 
+// Initializes a PDFDocument object.
 func (o *PDFDocument) Init() *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelInit)
 	if _ret != 0 {
@@ -92,6 +95,7 @@ func (o *PDFDocument) Init() *PDFDocument {
 	return PDFDocumentFromID(_ret)
 }
 
+// Initializes a PDFDocument object with the contents at the specified URL (if the URL is invalid, this method returns NULL).
 func (o *PDFDocument) InitWithURL(url *foundation.NSURL) *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -100,6 +104,7 @@ func (o *PDFDocument) InitWithURL(url *foundation.NSURL) *PDFDocument {
 	return PDFDocumentFromID(_ret)
 }
 
+// Initializes a PDFDocument object with the passed-in data.
 func (o *PDFDocument) InitWithData(data *foundation.NSData) *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -108,6 +113,7 @@ func (o *PDFDocument) InitWithData(data *foundation.NSData) *PDFDocument {
 	return PDFDocumentFromID(_ret)
 }
 
+// Attempts to unlock an encrypted document.
 func (o *PDFDocument) UnlockWithPassword(password *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pDFDocumentSelUnlockWithPassword, password.Ptr())
 	return _ret
@@ -122,7 +128,7 @@ func (o *PDFDocument) DataRepresentation() *foundation.NSData {
 }
 
 func (o *PDFDocument) DataRepresentationWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelDataRepresentationWithOptions, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelDataRepresentationWithOptions, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -135,7 +141,7 @@ func (o *PDFDocument) WriteToFile(path *foundation.NSString) bool {
 }
 
 func (o *PDFDocument) WriteToFileWithOptions(path *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFDocumentSelWriteToFileWithOptions, path.Ptr(), options)
+	_ret := objc.Send[bool](o.Ptr(), _pDFDocumentSelWriteToFileWithOptions, path.Ptr(), options.Ptr())
 	return _ret
 }
 
@@ -145,7 +151,7 @@ func (o *PDFDocument) WriteToURL(url *foundation.NSURL) bool {
 }
 
 func (o *PDFDocument) WriteToURLWithOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFDocumentSelWriteToURLWithOptions, url.Ptr(), options)
+	_ret := objc.Send[bool](o.Ptr(), _pDFDocumentSelWriteToURLWithOptions, url.Ptr(), options.Ptr())
 	return _ret
 }
 
@@ -182,6 +188,7 @@ func (o *PDFDocument) ExchangePageAtIndexWithPageAtIndex(indexA uint, indexB uin
 	o.Ptr().Send(_pDFDocumentSelExchangePageAtIndexWithPageAtIndex, indexA, indexB)
 }
 
+// Synchronously finds all instances of the specified string in the document.
 func (o *PDFDocument) FindStringWithOptions(string_ *foundation.NSString, options foundation.NSStringCompareOptions) *foundation.NSArray[*PDFSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelFindStringWithOptions, string_.Ptr(), options)
 	if _ret != 0 {
@@ -190,12 +197,13 @@ func (o *PDFDocument) FindStringWithOptions(string_ *foundation.NSString, option
 	return foundation.NSArrayFromID[*PDFSelection](_ret)
 }
 
+// Asynchronously finds all instances of the specified string in the document.
 func (o *PDFDocument) BeginFindStringWithOptions(string_ *foundation.NSString, options foundation.NSStringCompareOptions) {
 	o.Ptr().Send(_pDFDocumentSelBeginFindStringWithOptions, string_.Ptr(), options)
 }
 
 func (o *PDFDocument) BeginFindStringsWithOptions(strings_ *foundation.NSArray[*foundation.NSString], options foundation.NSStringCompareOptions) {
-	o.Ptr().Send(_pDFDocumentSelBeginFindStringsWithOptions, strings_, options)
+	o.Ptr().Send(_pDFDocumentSelBeginFindStringsWithOptions, strings_.Ptr(), options)
 }
 
 func (o *PDFDocument) FindStringFromSelectionWithOptions(string_ *foundation.NSString, selection *PDFSelection, options foundation.NSStringCompareOptions) *PDFSelection {
@@ -256,12 +264,15 @@ func (o *PDFDocument) DocumentRef() unsafe.Pointer {
 }
 
 func (o *PDFDocument) DocumentAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pDFDocumentSelDocumentAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDocumentSelDocumentAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *PDFDocument) SetDocumentAttributes(documentAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_pDFDocumentSelSetDocumentAttributes, documentAttributes)
+	o.Ptr().Send(_pDFDocumentSelSetDocumentAttributes, documentAttributes.Ptr())
 }
 
 func (o *PDFDocument) MajorVersion() int {

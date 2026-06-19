@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that monitors events and calls its action method when a predefined sequence of events occur.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgesturerecognizer
 type NSGestureRecognizer struct {
 	foundation.NSObject
@@ -89,6 +91,7 @@ func NSGestureRecognizerFromID(id objc.ID) *NSGestureRecognizer {
 	return o
 }
 
+// Initializes the gesture recognizer with the specified target and action information.
 func (o *NSGestureRecognizer) InitWithTargetAction(target objc.ID, action objc.SEL) *NSGestureRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithTargetAction, target, action)
 	if _ret != 0 {
@@ -105,6 +108,7 @@ func (o *NSGestureRecognizer) InitWithCoder(coder *foundation.NSCoder) *NSGestur
 	return NSGestureRecognizerFromID(_ret)
 }
 
+// Returns the point computed as the location of the gesture.
 func (o *NSGestureRecognizer) LocationInView(view *NSView) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSGestureRecognizerSelLocationInView, view.Ptr())
 	return _ret
@@ -251,62 +255,76 @@ func (o *NSGestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes NSTouchType
 	o.Ptr().Send(_nSGestureRecognizerSelSetAllowedTouchTypes, allowedTouchTypes)
 }
 
+// Overridden to reset the internal state of the gesture recognizer when an attempt completes.
 func (o *NSGestureRecognizer) Reset() {
 	o.Ptr().Send(_nSGestureRecognizerSelReset)
 }
 
+// Overridden to indicate that the current object can prevent the specified gesture recognizer from recognizing its gesture.
 func (o *NSGestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *NSGestureRecognizer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelCanPreventGestureRecognizer, preventedGestureRecognizer.Ptr())
 	return _ret
 }
 
+// Overridden to indicate that the specified gesture recognizer can prevent the current object from recognizing a gesture.
 func (o *NSGestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *NSGestureRecognizer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelCanBePreventedByGestureRecognizer, preventingGestureRecognizer.Ptr())
 	return _ret
 }
 
+// Overridden to indicate that the specified gesture recognizer must fail before the current object begins recognizing its gesture.
 func (o *NSGestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *NSGestureRecognizer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelShouldRequireFailureOfGestureRecognizer, otherGestureRecognizer.Ptr())
 	return _ret
 }
 
+// Overridden to indicate that the current object must fail before the specified gesture recognizer begins recognizing its gesture.
 func (o *NSGestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *NSGestureRecognizer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelShouldBeRequiredToFailByGestureRecognizer, otherGestureRecognizer.Ptr())
 	return _ret
 }
 
+// Informs the gesture recognizer that the user pressed the left mouse button.
 func (o *NSGestureRecognizer) MouseDown(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelMouseDown, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user pressed the right mouse button.
 func (o *NSGestureRecognizer) RightMouseDown(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelRightMouseDown, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user pressed a mouse button other than the left or right one.
 func (o *NSGestureRecognizer) OtherMouseDown(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelOtherMouseDown, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user released the left mouse button.
 func (o *NSGestureRecognizer) MouseUp(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelMouseUp, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user released the right mouse button.
 func (o *NSGestureRecognizer) RightMouseUp(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelRightMouseUp, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user released a mouse button other than the left or right one.
 func (o *NSGestureRecognizer) OtherMouseUp(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelOtherMouseUp, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user moved the mouse with the left button pressed.
 func (o *NSGestureRecognizer) MouseDragged(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelMouseDragged, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user moved the mouse with the right button pressed.
 func (o *NSGestureRecognizer) RightMouseDragged(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelRightMouseDragged, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user moved the mouse with a button other than the left or right one pressed.
 func (o *NSGestureRecognizer) OtherMouseDragged(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelOtherMouseDragged, event.Ptr())
 }
@@ -315,46 +333,57 @@ func (o *NSGestureRecognizer) MouseCancelled(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelMouseCancelled, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user has pressed a key.
 func (o *NSGestureRecognizer) KeyDown(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelKeyDown, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user released a key.
 func (o *NSGestureRecognizer) KeyUp(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelKeyUp, event.Ptr())
 }
 
+// Informs the current object that the user pressed or released a modifier key (Shift, Control, and so on).
 func (o *NSGestureRecognizer) FlagsChanged(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelFlagsChanged, event.Ptr())
 }
 
+// Informs the user that a tablet-point event occurred.
 func (o *NSGestureRecognizer) TabletPoint(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelTabletPoint, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user is performing a pinch gesture.
 func (o *NSGestureRecognizer) MagnifyWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelMagnifyWithEvent, event.Ptr())
 }
 
+// Informs the gesture recognizer that the user is performing a rotation gesture.
 func (o *NSGestureRecognizer) RotateWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelRotateWithEvent, event.Ptr())
 }
 
+// Informs the current object that a pressure change occurred on a system that supports pressure sensitivity.
 func (o *NSGestureRecognizer) PressureChangeWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelPressureChangeWithEvent, event.Ptr())
 }
 
+// Called when one or more fingers first make contact with an NSTouchBar instance on the Touch Bar.
 func (o *NSGestureRecognizer) TouchesBeganWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelTouchesBeganWithEvent, event.Ptr())
 }
 
+// Called when one or more fingers, associated with an in-progress event, move within an NSTouchBar instance on the Touch Bar.
 func (o *NSGestureRecognizer) TouchesMovedWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelTouchesMovedWithEvent, event.Ptr())
 }
 
+// Called when one or more fingers are removed from contact with an NSTouchBar instance on the Touch Bar.
 func (o *NSGestureRecognizer) TouchesEndedWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelTouchesEndedWithEvent, event.Ptr())
 }
 
+// Called when a system event, such as a low-memory warning, cancels an in-progress touch event in an NSTouchBar object.
 func (o *NSGestureRecognizer) TouchesCancelledWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSGestureRecognizerSelTouchesCancelledWithEvent, event.Ptr())
 }

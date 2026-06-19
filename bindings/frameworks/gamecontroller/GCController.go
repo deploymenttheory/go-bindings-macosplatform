@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a real game controller, a virtual controller, or a snapshot of a controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontroller
 type GCController struct {
 	foundation.NSObject
@@ -56,7 +58,7 @@ func GCControllerFromID(id objc.ID) *GCController {
 	return o
 }
 
-// Get a list of controllers currently attached to the system. @see GCControllerDidConnectNotification @see GCControllerDidDisconnectNotification
+// Returns the connected controllers for the device.
 func GCControllerControllers() *foundation.NSArray[*GCController] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelControllers)
 	if _ret != 0 {
@@ -65,7 +67,7 @@ func GCControllerControllers() *foundation.NSArray[*GCController] {
 	return foundation.NSArrayFromID[*GCController](_ret)
 }
 
-// Returns YES if the given HID device is supported by the Game Controller framework, and will have an associated GCController instance. @note This is not cheap, be sure to cache the result
+// Returns a Boolean value that indicates whether the framework supports the specified human interface device.
 func GCControllerSupportsHIDDevice(device unsafe.Pointer) bool {
 	_ret := objc.Send[bool](objc.ID(_clsGCController), _gCControllerSelSupportsHIDDevice, device)
 	return _ret
@@ -208,7 +210,7 @@ func (o *GCController) Haptics() *GCDeviceHaptics {
 	return GCDeviceHapticsFromID(_ret)
 }
 
-// Polls the state vector of the controller and saves it to a new and writable instance of GCController. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new controller with the duplicated state vector of the current controller.
+// Returns a snapshot of the controller with its current element values.
 func (o *GCController) Capture() *GCController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelCapture)
 	if _ret != 0 {
@@ -217,7 +219,7 @@ func (o *GCController) Capture() *GCController {
 	return GCControllerFromID(_ret)
 }
 
-// Creates a controller with a micro gamepad profile. This controller will be considered a snapshot, allowing developers to write to any GCControllerElement of its profiles. @see snapshot @return A new controller with a micro gamepad profile
+// Returns a snapshot of a newly created controller with a micro gamepad profile.
 func GCControllerControllerWithMicroGamepad() *GCController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelControllerWithMicroGamepad)
 	if _ret != 0 {
@@ -226,7 +228,7 @@ func GCControllerControllerWithMicroGamepad() *GCController {
 	return GCControllerFromID(_ret)
 }
 
-// Creates a controller with an extended gamepad profile. This controller will be considered a snapshot, allowing developers to write to any GCControllerElement of its profiles. @see snapshot @return A new controller with an extended gamepad profile
+// Returns a snapshot of a newly created controller with an extended gamepad profile.
 func GCControllerControllerWithExtendedGamepad() *GCController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelControllerWithExtendedGamepad)
 	if _ret != 0 {
@@ -241,7 +243,7 @@ func (o *GCController) IsSnapshot() bool {
 	return _ret
 }
 
-// Start discovery of new wireless controllers that are discoverable. This is an asynchronous and the supplied completionHandler will get called once no more devices can be found. If there are already multiple controllers available for use, there may be little reason to automatically start discovery of new wireless controllers. In this situation it may be best to allow the user to start discovery manually via in-game UI. Once discovery has started new controllers will notify themselves as connected via GCControllerDidConnectNotification. As the notification arrives the controller is also available in the controllers array. The completionHandler could be used to update UI and/or game state to indicate that no more controllers will be found and the current set of controllers is what is available for use in the game. If a completionHandler was provided, it will be called once when discovery stops. Either from an explicit call to stopWirelessControllerDiscovery or from timing out or stopping in its natural course of operation. Thus the completionHandler will at most be called once per call to startWirelessControllerDiscoveryWithCompletionHandler:. The completionHandler may also not get called at all, if for example startWirelessControllerDiscoveryWithCompletionHandler: is called multiple times during dicovery. For this case the net effect is that the completionHandler is replaced with each call and only the last one set before discovery stops will be called. @param completionHandler an optional handler that is called when discovery stops. (may be nil, in which case you will not be notified when discovery stops) @see stopWirelessControllerDiscovery @see controllers
+// Starts searching for nearby wireless controllers.
 func GCControllerStartWirelessControllerDiscoveryWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -253,7 +255,7 @@ func GCControllerStartWirelessControllerDiscoveryWithCompletionHandler(completio
 	objc.ID(_clsGCController).Send(_gCControllerSelStartWirelessControllerDiscoveryWithCompletionHandler, __block_completionHandler)
 }
 
-// If no more controllers are needed, depending on game state or number of controllers supported by a game, the discovery process can be stopped. Calling stopWirelessControllerDiscovery when no discovery is currently in progress will return immediately without any effect, thus it is safe to call even if the completionHandler of startWirelessControllerDiscoveryWithCompletionHandler: has been called. @see startWirelessControllerDiscoveryWithCompletionHandler:
+// Stops searching for nearby wireless controllers.
 func GCControllerStopWirelessControllerDiscovery() {
 	objc.ID(_clsGCController).Send(_gCControllerSelStopWirelessControllerDiscovery)
 }

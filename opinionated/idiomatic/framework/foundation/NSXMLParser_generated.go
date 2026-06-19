@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An event driven parser of XML documents (including DTD declarations).
+//
 // XMLParser wraps [raw.NSXMLParser] with a fluent Go API.
 type XMLParser struct {
 	inner *raw.NSXMLParser

@@ -268,7 +268,7 @@
       },
       "timeRanges": {
         "doc": "An array of ranges that indicate the offsets within the reference signature that this media item describes.",
-        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/timeranges-43654"
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/timeranges-8msna"
       },
       "title": {
         "doc": "A title for the media item.",

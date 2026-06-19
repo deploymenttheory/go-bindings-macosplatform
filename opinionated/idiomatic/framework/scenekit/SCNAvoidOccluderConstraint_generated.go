@@ -75,7 +75,7 @@ func (x *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstr
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {

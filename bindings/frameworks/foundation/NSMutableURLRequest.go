@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable URL load request that is independent of protocol or URL scheme.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutableurlrequest
 type NSMutableURLRequest struct {
 	NSURLRequest
@@ -106,12 +108,12 @@ func (o *NSMutableURLRequest) SetCookiePartitionIdentifier(cookiePartitionIdenti
 	o.Ptr().Send(_nSMutableURLRequestSelSetCookiePartitionIdentifier, cookiePartitionIdentifier.Ptr())
 }
 
-// @method setValue:forHTTPHeaderField: @abstract Sets the value of the given HTTP header field. @discussion If a value was previously set for the given header field, that value is replaced with the given value. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param value the header field value. @param field the header field name (case-insensitive).
+// Sets a value for the header field.
 func (o *NSMutableURLRequest) SetValueForHTTPHeaderField(value *NSString, field *NSString) {
 	o.Ptr().Send(_nSMutableURLRequestSelSetValueForHTTPHeaderField, value.Ptr(), field.Ptr())
 }
 
-// @method addValue:forHTTPHeaderField: @abstract Adds an HTTP header field in the current header dictionary. @discussion This method provides a way to add values to header fields incrementally. If a value was previously set for the given header field, the given value is appended to the previously-existing value. The appropriate field delimiter, a comma in the case of HTTP, is added by the implementation, and should not be added to the given value by the caller. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param value the header field value. @param field the header field name (case-insensitive).
+// Adds a value to the header field.
 func (o *NSMutableURLRequest) AddValueForHTTPHeaderField(value *NSString, field *NSString) {
 	o.Ptr().Send(_nSMutableURLRequestSelAddValueForHTTPHeaderField, value.Ptr(), field.Ptr())
 }

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient fully connected convolution layer.
+//
 // CNNFullyConnectedGradient wraps [raw.MPSCNNFullyConnectedGradient] with a fluent Go API.
 type CNNFullyConnectedGradient struct {
 	inner *raw.MPSCNNFullyConnectedGradient
@@ -211,7 +213,7 @@ func (x *CNNFullyConnectedGradient) WithDestinationImageAllocator(destinationIma
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNFullyConnectedGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNFullyConnectedGradient {
@@ -219,7 +221,7 @@ func (x *CNNFullyConnectedGradient) WithOptions(options mpscore.MPSKernelOptions
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNFullyConnectedGradient) WithLabel(label string) *CNNFullyConnectedGradient {

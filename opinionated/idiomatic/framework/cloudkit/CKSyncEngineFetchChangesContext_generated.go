@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The context of an attempt to fetch changes from the server.
+//
 // SyncEngineFetchChangesContext wraps [raw.CKSyncEngineFetchChangesContext] with a fluent Go API.
 type SyncEngineFetchChangesContext struct {
 	inner *raw.CKSyncEngineFetchChangesContext

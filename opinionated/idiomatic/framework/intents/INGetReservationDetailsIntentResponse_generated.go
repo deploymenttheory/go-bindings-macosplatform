@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Your app’s response to a request for reservation details.
+//
 // GetReservationDetailsIntentResponse wraps [raw.INGetReservationDetailsIntentResponse] with a fluent Go API.
 type GetReservationDetailsIntentResponse struct {
 	inner *raw.INGetReservationDetailsIntentResponse
@@ -34,6 +36,8 @@ func GetReservationDetailsIntentResponseFromID(id objc.ID) *GetReservationDetail
 	return &GetReservationDetailsIntentResponse{inner: raw.INGetReservationDetailsIntentResponseFromID(id)}
 }
 
+// Creates the response object with the specified code and user activity object.
+//
 // NewGetReservationDetailsIntentResponseWithCodeUserActivity creates a new [GetReservationDetailsIntentResponse].
 func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code INGetReservationDetailsIntentResponseCode, userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INGetReservationDetailsIntentResponse")), objc.RegisterName("alloc"))
@@ -41,6 +45,8 @@ func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code INGetReserv
 	return &GetReservationDetailsIntentResponse{inner: raw.INGetReservationDetailsIntentResponseFromID(_id)}
 }
 
+// An array containing reservations reqeusted by the user.
+//
 // WithReservations sets the collection, converting the Go slice to an NSArray.
 func (x *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
 	if len(items) == 0 {
@@ -62,6 +68,8 @@ func (x *GetReservationDetailsIntentResponse) WithReservations(items ...Reservat
 	return x
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
 	x.inner.INIntentResponse.SetUserActivity(userActivity)

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that identifies the portions of a flow layout object that need to be updated.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewflowlayoutinvalidationcontext
 type NSCollectionViewFlowLayoutInvalidationContext struct {
 	NSCollectionViewLayoutInvalidationContext

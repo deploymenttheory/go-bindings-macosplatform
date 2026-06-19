@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the host’s network address.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midinetworkhost
 type MIDINetworkHost struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func MIDINetworkHostFromID(id objc.ID) *MIDINetworkHost {
 	return o
 }
 
+// Creates a host with the specified name, adress, and port.
 func MIDINetworkHostHostWithNameAddressPort(name *foundation.NSString, address *foundation.NSString, port uint) *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkHost), _mIDINetworkHostSelHostWithNameAddressPort, name.Ptr(), address.Ptr(), port)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func MIDINetworkHostHostWithNameAddressPort(name *foundation.NSString, address *
 	return MIDINetworkHostFromID(_ret)
 }
 
+// Creates a host with the specified name and net service.
 func MIDINetworkHostHostWithNameNetService(name *foundation.NSString, netService *foundation.NSNetService) *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkHost), _mIDINetworkHostSelHostWithNameNetService, name.Ptr(), netService.Ptr())
 	if _ret != 0 {
@@ -54,6 +58,7 @@ func MIDINetworkHostHostWithNameNetService(name *foundation.NSString, netService
 	return MIDINetworkHostFromID(_ret)
 }
 
+// Creates a host with the specified name, net service name, and domain.
 func MIDINetworkHostHostWithNameNetServiceNameNetServiceDomain(name *foundation.NSString, netServiceName *foundation.NSString, netServiceDomain *foundation.NSString) *MIDINetworkHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkHost), _mIDINetworkHostSelHostWithNameNetServiceNameNetServiceDomain, name.Ptr(), netServiceName.Ptr(), netServiceDomain.Ptr())
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func MIDINetworkHostHostWithNameNetServiceNameNetServiceDomain(name *foundation.
 	return MIDINetworkHostFromID(_ret)
 }
 
+// Compares this host instance with another to see if they share the same address value.
 func (o *MIDINetworkHost) HasSameAddressAs(other *MIDINetworkHost) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDINetworkHostSelHasSameAddressAs, other.Ptr())
 	return _ret

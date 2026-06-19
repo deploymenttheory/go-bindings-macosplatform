@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The width, height, and pixel format constraints of an image feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlimageconstraint
 type MLImageConstraint struct {
 	foundation.NSObject

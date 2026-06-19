@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationText object displays as an icon (such as a “sticky note”) attached to a specified point in the PDF document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationtext
 type PDFAnnotationText struct {
 	PDFAnnotation

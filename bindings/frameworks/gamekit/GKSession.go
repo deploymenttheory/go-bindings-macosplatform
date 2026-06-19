@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A GKSession object provides the ability to discover and connect to nearby iOS devices using Bluetooth or Wi-fi.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gksession
 // Deprecated: since macOS 10.10.
 type GKSession struct {
@@ -54,13 +56,14 @@ func GKSessionFromID(id objc.ID) *GKSession {
 	return o
 }
 
+// Initializes and returns a newly allocated session.
 // Deprecated: No longer available
 func (o *GKSession) InitWithSessionIDDisplayNameSessionMode(sessionID *foundation.NSString, name *foundation.NSString, mode GKSessionMode) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelInitWithSessionIDDisplayNameSessionMode, sessionID.Ptr(), name.Ptr(), mode)
 	return _ret
 }
 
-// Return the application chosen name of a specific peer
+// Returns a user-readable name for a peer.
 func (o *GKSession) DisplayNameForPeer(peerID *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelDisplayNameForPeer, peerID.Ptr())
 	if _ret != 0 {
@@ -69,18 +72,18 @@ func (o *GKSession) DisplayNameForPeer(peerID *foundation.NSString) *foundation.
 	return foundation.NSStringFromID(_ret)
 }
 
-// Asynchronous delivery of data to one or more peers.  Returns YES if delivery started, NO if unable to start sending, and error will be set.  Delivery will be reliable or unreliable as set by mode.
+// Transmits a collection of bytes to a list of connected peers.
 // Deprecated: No longer supported.
 func (o *GKSession) SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode GKSendDataMode) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _gKSessionSelSendDataToPeersWithDataModeError, data.Ptr(), peers, mode, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _gKSessionSelSendDataToPeersWithDataModeError, data.Ptr(), peers.Ptr(), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// Asynchronous delivery to all peers.  Returns YES if delivery started, NO if unable to start sending, and error will be set.  Delivery will be reliable or unreliable as set by mode.
+// Transmits a collection of bytes to all connected peers.
 // Deprecated: No longer supported.
 func (o *GKSession) SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode GKSendDataMode) (bool, error) {
 	var _nsErr uintptr
@@ -91,22 +94,23 @@ func (o *GKSession) SendDataToAllPeersWithDataModeError(data *foundation.NSData,
 	return _ret, nil
 }
 
-// Set the handler to receive data sent from remote peers.
+// Sets the object that handles data received from other peers connected to the session.
 // Deprecated: No longer supported.
 func (o *GKSession) SetDataReceiveHandlerWithContext(handler objc.ID, context_ unsafe.Pointer) {
 	o.Ptr().Send(_gKSessionSelSetDataReceiveHandlerWithContext, handler, context_)
 }
 
-// Attempt connection to a remote peer.  Remote peer gets a callback to -session:didReceiveConnectionRequestFromPeer:. Success results in a call to delegate -session:peer:didChangeState: GKPeerStateConnected Failure results in a call to delegate -session:connectionWithPeerFailed:withError:
+// Creates a connection to another iOS device.
 func (o *GKSession) ConnectToPeerWithTimeout(peerID *foundation.NSString, timeout float64) {
 	o.Ptr().Send(_gKSessionSelConnectToPeerWithTimeout, peerID.Ptr(), timeout)
 }
 
+// Cancels a pending request to connect to another iOS device.
 func (o *GKSession) CancelConnectToPeer(peerID *foundation.NSString) {
 	o.Ptr().Send(_gKSessionSelCancelConnectToPeer, peerID.Ptr())
 }
 
-// Methods to accept or deny a prior connection request from -session:didReceiveConnectionRequestFromPeer:
+// Called by the delegate to accept a connection request received from a remote peer.
 func (o *GKSession) AcceptConnectionFromPeerError(peerID *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKSessionSelAcceptConnectionFromPeerError, peerID.Ptr(), unsafe.Pointer(&_nsErr))
@@ -116,25 +120,29 @@ func (o *GKSession) AcceptConnectionFromPeerError(peerID *foundation.NSString) (
 	return _ret, nil
 }
 
+// Called by the delegate to reject a connection request received from a remote peer.
 func (o *GKSession) DenyConnectionFromPeer(peerID *foundation.NSString) {
 	o.Ptr().Send(_gKSessionSelDenyConnectionFromPeer, peerID.Ptr())
 }
 
-// Disconnect a peer from the session (the peer gets disconnected from all connected peers).
+// Disconnects a connected peer from all peers connected to the session.
 func (o *GKSession) DisconnectPeerFromAllPeers(peerID *foundation.NSString) {
 	o.Ptr().Send(_gKSessionSelDisconnectPeerFromAllPeers, peerID.Ptr())
 }
 
-// Disconnect local peer
+// Disconnects the session from all connected peers.
 func (o *GKSession) DisconnectFromAllPeers() {
 	o.Ptr().Send(_gKSessionSelDisconnectFromAllPeers)
 }
 
-// Returns peers according to connection state
+// Returns a list of peers in the specified connection state.
 // Deprecated: No longer supported.
 func (o *GKSession) PeersWithConnectionState(state GKPeerConnectionState) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _gKSessionSelPeersWithConnectionState, state)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelPeersWithConnectionState, state)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: No longer supported.

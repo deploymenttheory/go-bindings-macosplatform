@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of a render task’s timing, passes, and pixels processed.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cirenderinfo
 type CIRenderInfo struct {
 	foundation.NSObject

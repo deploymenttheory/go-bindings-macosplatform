@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A constraint that orients a node to always point toward the current camera.
+//
 // BillboardConstraint wraps [raw.SCNBillboardConstraint] with a fluent Go API.
 type BillboardConstraint struct {
 	inner *raw.SCNBillboardConstraint
@@ -35,7 +37,7 @@ func NewBillboardConstraint() *BillboardConstraint {
 	return &BillboardConstraint{inner: raw.SCNBillboardConstraintFromID(_id)}
 }
 
-// @property freeAxes @abstract Specifies the axes on which the billboarding orientation operates. Defaults to SCNBillboardAxisAll.
+// An option that specifies which degrees of freedom the constraint affects.
 //
 // WithFreeAxes sets the freeAxes property and returns the receiver for chaining.
 func (x *BillboardConstraint) WithFreeAxes(freeAxes SCNBillboardAxis) *BillboardConstraint {
@@ -51,7 +53,7 @@ func (x *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {

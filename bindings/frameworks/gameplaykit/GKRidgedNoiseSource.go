@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Ridged noise is similar to Perlin noise, with sharply-defined, relatively thin peaks.
+// A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkridgednoisesource
 type GKRidgedNoiseSource struct {
@@ -32,6 +32,7 @@ func GKRidgedNoiseSourceFromID(id objc.ID) *GKRidgedNoiseSource {
 	return o
 }
 
+// Creates a ridged noise source with the specified parameters.
 func GKRidgedNoiseSourceRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *GKRidgedNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRidgedNoiseSource), _gKRidgedNoiseSourceSelRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed, frequency, octaveCount, lacunarity, seed)
 	if _ret != 0 {
@@ -40,6 +41,7 @@ func GKRidgedNoiseSourceRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(
 	return GKRidgedNoiseSourceFromID(_ret)
 }
 
+// Initializes a ridged noise source with the specified parameters.
 func (o *GKRidgedNoiseSource) InitWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *GKRidgedNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRidgedNoiseSourceSelInitWithFrequencyOctaveCountLacunaritySeed, frequency, octaveCount, lacunarity, seed)
 	if _ret != 0 {

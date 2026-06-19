@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that names a specific XPC listener.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxpclistenerendpoint
 type NSXPCListenerEndpoint struct {
 	NSObject

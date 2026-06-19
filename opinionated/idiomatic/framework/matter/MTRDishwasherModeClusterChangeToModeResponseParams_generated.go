@@ -34,7 +34,7 @@ func MTRDishwasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRDi
 	return &MTRDishwasherModeClusterChangeToModeResponseParams{inner: raw.MTRDishwasherModeClusterChangeToModeResponseParamsFromID(id)}
 }
 
-// Initialize an MTRDishwasherModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTRDishwasherModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
 // NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValueError creates a new [MTRDishwasherModeClusterChangeToModeResponseParams].
 func NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRDishwasherModeClusterChangeToModeResponseParams, error) {

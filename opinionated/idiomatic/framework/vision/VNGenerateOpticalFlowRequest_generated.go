@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that generates directional change vectors for each pixel in the targeted image.
+//
 // GenerateOpticalFlowRequest wraps [raw.VNGenerateOpticalFlowRequest] with a fluent Go API.
 type GenerateOpticalFlowRequest struct {
 	inner *raw.VNGenerateOpticalFlowRequest
@@ -36,7 +38,7 @@ func NewGenerateOpticalFlowRequest() *GenerateOpticalFlowRequest {
 	return &GenerateOpticalFlowRequest{inner: raw.VNGenerateOpticalFlowRequestFromID(_id)}
 }
 
-// @brief The level of accuracy used to compute the optical flow. Default is VNGenerateOpticalFlowRequestComputationAccuracyMedium. @discussion The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
+// The accuracy level for computing optical flow.
 //
 // WithComputationAccuracy sets the computationAccuracy property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithComputationAccuracy(computationAccuracy VNGenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest {
@@ -44,7 +46,7 @@ func (x *GenerateOpticalFlowRequest) WithComputationAccuracy(computationAccuracy
 	return x
 }
 
-// @brief Pixel format type of the output buffer. Valid values are kCVPixelFormatType_TwoComponent32Float and kCVPixelFormatType_TwoComponent16Half. Default is kCVPixelFormatType_TwoComponent32Float.
+// The output buffer’s pixel format.
 //
 // WithOutputPixelFormat sets the outputPixelFormat property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat uint) *GenerateOpticalFlowRequest {
@@ -52,7 +54,7 @@ func (x *GenerateOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat uin
 	return x
 }
 
-// @brief Setting this to YES will keep the raw pixel buffer coming from the the ML network. The default is NO. @discussion When set to YES, the outputPixelFormat is ignored. Setting this for revision 1 is a no-op as it is not ML-based.
+// A Boolean value that indicates whether to keep the raw pixel buffer coming from the machine learning network.
 //
 // WithKeepNetworkOutput sets the keepNetworkOutput property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest {
@@ -60,7 +62,7 @@ func (x *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput boo
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest {
@@ -68,7 +70,7 @@ func (x *GenerateOpticalFlowRequest) WithRegionOfInterest(regionOfInterest coref
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest {
@@ -76,7 +78,7 @@ func (x *GenerateOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgr
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest {
@@ -84,7 +86,7 @@ func (x *GenerateOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *Generate
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithRevision(revision uint) *GenerateOpticalFlowRequest {

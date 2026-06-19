@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description that uniquely identifies a particular passkey credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity
 type ASPasskeyCredentialIdentity struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func ASPasskeyCredentialIdentityFromID(id objc.ID) *ASPasskeyCredentialIdentity 
 	return o
 }
 
-// @abstract Initialize an instance of ASPasskeyCredentialIdentity. @param relyingPartyIdentifier relying party for this credential. @param userName user name associated with this credential. @param credentialID credential ID of this passkey credential. @param userHandle user handle data of this passkey credential. @param recordIdentifier identifier used by credential provider extension to identify this credential.
+// Initializes a passkey credential identity.
 func (o *ASPasskeyCredentialIdentity) InitWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier *foundation.NSString, userName *foundation.NSString, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier *foundation.NSString) *ASPasskeyCredentialIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialIdentitySelInitWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier, relyingPartyIdentifier.Ptr(), userName.Ptr(), credentialID.Ptr(), userHandle.Ptr(), recordIdentifier.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *ASPasskeyCredentialIdentity) InitWithRelyingPartyIdentifierUserNameCred
 	return ASPasskeyCredentialIdentityFromID(_ret)
 }
 
-// @abstract Create and initialize an instance of ASPasskeyCredentialIdentity. @param relyingPartyIdentifier relying party for this credential. @param userName user name associated with this credential. @param credentialID credential ID of this passkey credential. @param userHandle user handle data of this passkey credential. @param recordIdentifier identifier used by credential provider extension to identify this credential.
+// Creates and initializes a passkey credential identity.
 func ASPasskeyCredentialIdentityIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier *foundation.NSString, userName *foundation.NSString, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier *foundation.NSString) *ASPasskeyCredentialIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyCredentialIdentity), _aSPasskeyCredentialIdentitySelIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier, relyingPartyIdentifier.Ptr(), userName.Ptr(), credentialID.Ptr(), userHandle.Ptr(), recordIdentifier.Ptr())
 	if _ret != 0 {

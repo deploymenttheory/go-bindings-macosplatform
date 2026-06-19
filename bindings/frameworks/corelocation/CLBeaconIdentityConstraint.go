@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Identity characteristics that can match one or more beacons.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clbeaconidentityconstraint
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 type CLBeaconIdentityConstraint struct {

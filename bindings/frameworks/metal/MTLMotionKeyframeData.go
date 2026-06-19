@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Geometry data for a specific keyframe to use in a moving instance.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlmotionkeyframedata
 type MTLMotionKeyframeData struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func MTLMotionKeyframeDataFromID(id objc.ID) *MTLMotionKeyframeData {
 	return o
 }
 
+// Creates a new keyframe object.
 func MTLMotionKeyframeDataData() *MTLMotionKeyframeData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLMotionKeyframeData), _mTLMotionKeyframeDataSelData)
 	if _ret != 0 {

@@ -38,12 +38,15 @@ func MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsFromID(
 }
 
 func (o *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Constraints() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsSelConstraints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsSelConstraints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetConstraints(constraints *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsSelSetConstraints, constraints)
+	o.Ptr().Send(_mTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsSelSetConstraints, constraints.Ptr())
 }
 
 func (o *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Cause() *foundation.NSNumber {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the local identifiers that change between requests using a change token.
+//
 // PersistentObjectChangeDetails wraps [raw.PHPersistentObjectChangeDetails] with a fluent Go API.
 type PersistentObjectChangeDetails struct {
 	inner *raw.PHPersistentObjectChangeDetails

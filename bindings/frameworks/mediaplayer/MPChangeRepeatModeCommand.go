@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to requests to change the current repeat mode used during playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpchangerepeatmodecommand
 type MPChangeRepeatModeCommand struct {
 	MPRemoteCommand

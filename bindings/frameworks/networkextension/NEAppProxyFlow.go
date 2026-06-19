@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class shared by NEAppProxyTCPFlow and NEAppProxyUDPFlow.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neappproxyflow
 type NEAppProxyFlow struct {
 	foundation.NSObject
@@ -53,7 +55,7 @@ func (o *NEAppProxyFlow) OpenWithLocalFlowEndpointCompletionHandler(localEndpoin
 	o.Ptr().Send(_nEAppProxyFlowSelOpenWithLocalFlowEndpointCompletionHandler, localEndpoint.Ptr(), __block_completionHandler)
 }
 
-// @method openWithLocalEndpoint:completionHandler: @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data. @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specified a local endpoint by binding the socket then this parameter is ignored. @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.
+// Opens the flow, indicating to the system that the caller is ready to start receiving and sending data.
 // Deprecated: since macOS 15.0.
 func (o *NEAppProxyFlow) OpenWithLocalEndpointCompletionHandler(localEndpoint *NWHostEndpoint, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -66,17 +68,17 @@ func (o *NEAppProxyFlow) OpenWithLocalEndpointCompletionHandler(localEndpoint *N
 	o.Ptr().Send(_nEAppProxyFlowSelOpenWithLocalEndpointCompletionHandler, localEndpoint.Ptr(), __block_completionHandler)
 }
 
-// @method closeReadWithError: @discussion This function is used by an NEProvider implementation to indicate that it does not want to receive any more data from the flow. @param error An error in NEAppProxyErrorDomain that should be passed to the flow's source application.
+// Close the flow for further read operations.
 func (o *NEAppProxyFlow) CloseReadWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nEAppProxyFlowSelCloseReadWithError, error_)
 }
 
-// @method closeWriteWithError: @discussion This functions is used by an NEProvider implementation to indicate that it does not have any more data to write to the flow. @param error An error in NEAppProxyErrorDomain that should be passed to the flow's source application.
+// Close the flow for further write operations.
 func (o *NEAppProxyFlow) CloseWriteWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nEAppProxyFlowSelCloseWriteWithError, error_)
 }
 
-// @method setMetadata: @discussion Set the flow's NEFlowMetaData object in an nw_parameters_t object. The nw_parameters_t object can then be used to create a connection that transparently proxies the flow's data, and provides accurate source app information to any subsequent NEAppProxyProvider instances that transparently proxy the flow. @param parameters An nw_parameters_t object.
+// Sets the flow’s metadata for use by proxy providers.
 func (o *NEAppProxyFlow) SetMetadata(parameters *foundation.NSObject) {
 	o.Ptr().Send(_nEAppProxyFlowSelSetMetadata, parameters.Ptr())
 }

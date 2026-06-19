@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An instance for configuring the system content-sharing picker.
+//
 // ContentSharingPickerConfiguration wraps [raw.SCContentSharingPickerConfiguration] with a fluent Go API.
 type ContentSharingPickerConfiguration struct {
 	inner *raw.SCContentSharingPickerConfiguration[objc.ID]

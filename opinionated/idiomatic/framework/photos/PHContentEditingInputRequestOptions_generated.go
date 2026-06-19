@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of options affecting the delivery of image or video data when you request to edit the content of a Photos asset.
+//
 // ContentEditingInputRequestOptions wraps [raw.PHContentEditingInputRequestOptions] with a fluent Go API.
 type ContentEditingInputRequestOptions struct {
 	inner *raw.PHContentEditingInputRequestOptions
@@ -37,18 +39,24 @@ func NewContentEditingInputRequestOptions() *ContentEditingInputRequestOptions {
 	return &ContentEditingInputRequestOptions{inner: raw.PHContentEditingInputRequestOptionsFromID(_id)}
 }
 
+// A block to be called when Photos needs to determine whether your app can continue previous edits made to an asset.
+//
 // WithCanHandleAdjustmentData sets the canHandleAdjustmentData property and returns the receiver for chaining.
 func (x *ContentEditingInputRequestOptions) WithCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool) *ContentEditingInputRequestOptions {
 	x.inner.SetCanHandleAdjustmentData(canHandleAdjustmentData)
 	return x
 }
 
+// A Boolean value that specifies whether Photos can download the asset from iCloud.
+//
 // WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
 func (x *ContentEditingInputRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *ContentEditingInputRequestOptions {
 	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
 	return x
 }
 
+// A block Photos calls periodically while downloading the asset.
+//
 // WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
 func (x *ContentEditingInputRequestOptions) WithProgressHandler(progressHandler func(float64, *bool)) *ContentEditingInputRequestOptions {
 	x.inner.SetProgressHandler(progressHandler)

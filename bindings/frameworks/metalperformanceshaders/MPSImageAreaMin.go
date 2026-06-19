@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that finds the minimum pixel value in a rectangular region centered around each pixel in the source image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamin
 type MPSImageAreaMin struct {
 	mpsimage.MPSImageAreaMax

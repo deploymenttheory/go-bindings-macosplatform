@@ -60,6 +60,8 @@ func (x *AnswerCallIntentResponse) WithCallRecords(items ...*raw.INCallRecord) *
 	return x
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *AnswerCallIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse {
 	x.inner.INIntentResponse.SetUserActivity(userActivity)

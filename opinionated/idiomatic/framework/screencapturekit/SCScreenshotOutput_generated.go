@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains all images requested by the client.
+//
 // ScreenshotOutput wraps [raw.SCScreenshotOutput] with a fluent Go API.
 type ScreenshotOutput struct {
 	inner *raw.SCScreenshotOutput
@@ -37,7 +39,7 @@ func NewScreenshotOutput() *ScreenshotOutput {
 	return &ScreenshotOutput{inner: raw.SCScreenshotOutputFromID(_id)}
 }
 
-// @abstract SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
+// A URL property that specifies the location of the saved image.
 //
 // WithFileURL sets the fileURL property and returns the receiver for chaining.
 func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {

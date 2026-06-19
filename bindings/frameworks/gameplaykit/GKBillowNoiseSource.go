@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Billow noise is similar to Perlin noise, with more rounded shapes and clearly-defined transitions beween values.
+// A procedural noise generator whose output is a type of fractal coherent noise with smooth features.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkbillownoisesource
 type GKBillowNoiseSource struct {
@@ -34,6 +34,7 @@ func GKBillowNoiseSourceFromID(id objc.ID) *GKBillowNoiseSource {
 	return o
 }
 
+// Initializes a billow noise source with the specified parameters.
 func GKBillowNoiseSourceBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKBillowNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBillowNoiseSource), _gKBillowNoiseSourceSelBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
 	if _ret != 0 {
@@ -42,6 +43,7 @@ func GKBillowNoiseSourceBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacu
 	return GKBillowNoiseSourceFromID(_ret)
 }
 
+// Creates a billow noise source with the specified parameters.
 func (o *GKBillowNoiseSource) InitWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKBillowNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBillowNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
 	if _ret != 0 {

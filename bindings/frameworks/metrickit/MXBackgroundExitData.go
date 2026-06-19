@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing counts for the different types of background app exits.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata
 type MXBackgroundExitData struct {
 	foundation.NSObject

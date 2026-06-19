@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that transposes an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagetranspose
 type MPSImageTranspose struct {
 	mpsimage.MPSUnaryImageKernel

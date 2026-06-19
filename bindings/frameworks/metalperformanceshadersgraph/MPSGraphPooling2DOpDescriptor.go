@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that defines the parameters for a 2D pooling operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphpooling2dopdescriptor
 type MPSGraphPooling2DOpDescriptor struct {
 	MPSGraphObject
@@ -64,7 +66,7 @@ func MPSGraphPooling2DOpDescriptorFromID(id objc.ID) *MPSGraphPooling2DOpDescrip
 	return o
 }
 
-// Creates a 2D pooling descriptor with given values. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 2D pooling descriptor with given values.
 func MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphPooling2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling2DOpDescriptor), _mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout)
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInX
 	return MPSGraphPooling2DOpDescriptorFromID(_ret)
 }
 
-// Creates a 2D pooling descriptor with given values. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight“ property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 2D pooling descriptor with given values.
 func MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphPooling2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling2DOpDescriptor), _mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, paddingStyle, dataLayout)
 	if _ret != 0 {
@@ -82,7 +84,7 @@ func MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInX
 	return MPSGraphPooling2DOpDescriptorFromID(_ret)
 }
 
-// Sets the explicit padding values and sets padding style to explicit. - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the explicit padding values and sets padding style to explicit.
 func (o *MPSGraphPooling2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	o.Ptr().Send(_mPSGraphPooling2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom, paddingLeft, paddingRight, paddingTop, paddingBottom)
 }

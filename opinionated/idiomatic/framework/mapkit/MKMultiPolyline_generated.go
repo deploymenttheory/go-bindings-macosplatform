@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A collection of multipolyline shapes, each consisting of one or more connected line segments.
+//
 // MultiPolyline wraps [raw.MKMultiPolyline] with a fluent Go API.
 type MultiPolyline struct {
 	inner *raw.MKMultiPolyline
@@ -32,6 +34,8 @@ func MultiPolylineFromID(id objc.ID) *MultiPolyline {
 	return &MultiPolyline{inner: raw.MKMultiPolylineFromID(id)}
 }
 
+// Creates a multipolyline object using the provided polylines.
+//
 // NewMultiPolylineWithPolylines creates a new [MultiPolyline].
 func NewMultiPolylineWithPolylines(polylines ...PolylineProvider) *MultiPolyline {
 	_ptrs := make([]objc.ID, len(polylines))
@@ -50,12 +54,16 @@ func NewMultiPolylineWithPolylines(polylines ...PolylineProvider) *MultiPolyline
 	return &MultiPolyline{inner: raw.MKMultiPolylineFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *MultiPolyline) WithTitle(title string) *MultiPolyline {
 	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
 	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

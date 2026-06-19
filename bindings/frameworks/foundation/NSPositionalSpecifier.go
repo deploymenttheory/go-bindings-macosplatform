@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier for an insertion point in a container relative to another object in the container.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspositionalspecifier
 type NSPositionalSpecifier struct {
 	NSObject
@@ -36,6 +38,7 @@ func NSPositionalSpecifierFromID(id objc.ID) *NSPositionalSpecifier {
 	return o
 }
 
+// Initializes a positional specifier with a given position relative to another given specifier.
 func (o *NSPositionalSpecifier) InitWithPositionObjectSpecifier(position NSInsertionPosition, specifier *NSScriptObjectSpecifier) *NSPositionalSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPositionalSpecifierSelInitWithPositionObjectSpecifier, position, specifier.Ptr())
 	if _ret != 0 {
@@ -44,10 +47,12 @@ func (o *NSPositionalSpecifier) InitWithPositionObjectSpecifier(position NSInser
 	return NSPositionalSpecifierFromID(_ret)
 }
 
+// Sets the class description for the object or objects to be inserted.
 func (o *NSPositionalSpecifier) SetInsertionClassDescription(classDescription *NSScriptClassDescription) {
 	o.Ptr().Send(_nSPositionalSpecifierSelSetInsertionClassDescription, classDescription.Ptr())
 }
 
+// Causes the receiver to evaluate its position.
 func (o *NSPositionalSpecifier) Evaluate() {
 	o.Ptr().Send(_nSPositionalSpecifierSelEvaluate)
 }

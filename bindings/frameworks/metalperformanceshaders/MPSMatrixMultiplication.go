@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A matrix multiplication kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication
 type MPSMatrixMultiplication struct {
 	mpscore.MPSKernel
@@ -43,7 +45,7 @@ func MPSMatrixMultiplicationFromID(id objc.ID) *MPSMatrixMultiplication {
 	return o
 }
 
-// @abstract   Initialize an MPSMatrixMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transposeLeft   A boolean value which indicates if the left input matrix should be used in transposed form.  If 'YES' then op(A) = A**T, otherwise op(A) = A. @param      transposeRight  A boolean value which indicates if the right input matrix should be used in transposed form.  If 'YES' then op(B) = B**T, otherwise op(B) = B. @param      resultRows      The number of rows in the result matrix, M in BLAS GEMM description. @param      resultColumns   The number of columns in the result matrix, N in BLAS GEMM description. @param      interiorColumns The number of columns of the left input matrix after the appropriate transpose operation has been applied. K in BLAS GEMM description. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of C.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixMultiplication object or nil, if failure.
+// Initializes a matrix multiplication kernel.
 func (o *MPSMatrixMultiplication) InitWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta(device metal.MTLDevice, transposeLeft bool, transposeRight bool, resultRows uint, resultColumns uint, interiorColumns uint, alpha float64, beta float64) *MPSMatrixMultiplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixMultiplicationSelInitWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta, device, transposeLeft, transposeRight, resultRows, resultColumns, interiorColumns, alpha, beta)
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func (o *MPSMatrixMultiplication) InitWithDeviceResultRowsResultColumnsInteriorC
 	return MPSMatrixMultiplicationFromID(_ret)
 }
 
-// @abstract   Encode a MPSMatrixMultiplication object to a command buffer. @param      commandBuffer   A valid MTLCommandBuffer to receive the encoded kernel. @param      leftMatrix      A valid MPSMatrix object which specifies the left input matrix. @param      rightMatrix     A valid MPSMatrix object which specifies the right input matrix. @param      resultMatrix    A valid MPSMatrix object which specifies the addend matrix which will also be overwritten by the result. @discussion Certain constraints apply to the sizes of the matrices depending on the transposition operations and sizes requested at initialization time as well as the origins at the time this routine is called: The left input matrix must be large enough to hold an array of size resultRows x interiorColumns elements beginning at leftMatrixOrigin. The right input matrix must be large enough to hold an array of size interiorColumns x resultColumns elements beginning at rightMatrixOrigin. The result matrix must be large enough to hold an array of size resultRows x resultColumns elements beginning at resultMatrixOrigin. Each matrix within the range specified by batchStart and batchSize, which also specifies a valid set of matrices within leftMatrix, rightMatrix, and resultMatrix, will be processed.
+// Encodes a matrix multiplication kernel to a command buffer.
 func (o *MPSMatrixMultiplication) EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
 	o.Ptr().Send(_mPSMatrixMultiplicationSelEncodeToCommandBufferLeftMatrixRightMatrixResultMatrix, commandBuffer, leftMatrix.Ptr(), rightMatrix.Ptr(), resultMatrix.Ptr())
 }

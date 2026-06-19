@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A node in a directed graph. Edges are directed and can have variable costs.
+// A single node in a navigation graph for use in pathfinding.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgraphnode
 type GKGraphNode struct {
@@ -38,29 +38,29 @@ func GKGraphNodeFromID(id objc.ID) *GKGraphNode {
 	return o
 }
 
-// Add a connection to a group of other nodes indicating those nodes can be reached from this node. A new connection is not created if it already exists. @param nodes The array of nodes that are end points for their respective connections @param bidirectional should a connection also be added connecting the destination node back to this node?
+// Connects this node to all nodes in the specified list.
 func (o *GKGraphNode) AddConnectionsToNodesBidirectional(nodes *foundation.NSArray[*GKGraphNode], bidirectional bool) {
 	o.Ptr().Send(_gKGraphNodeSelAddConnectionsToNodesBidirectional, nodes.Ptr(), bidirectional)
 }
 
-// Removes connections to a group of other nodes indicating those nodes can no longer be reached from this node. Nothing happens if a particular connection does not exist. @param nodes The array of nodes that are end points of the edges to be removed @param bidirectional should the connection also be added the destination node back to this node also be removed if it exists?
+// Removes the connections from this node to the specified nodes.
 func (o *GKGraphNode) RemoveConnectionsToNodesBidirectional(nodes *foundation.NSArray[*GKGraphNode], bidirectional bool) {
 	o.Ptr().Send(_gKGraphNodeSelRemoveConnectionsToNodesBidirectional, nodes.Ptr(), bidirectional)
 }
 
-// Returns the estimated heuristic cost to reach the indicated node from this node @param node The end point of the edge who's cost is to be estimated
+// Returns an underestimate of the cost of travel from this node to the specified node.
 func (o *GKGraphNode) EstimatedCostToNode(node *GKGraphNode) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKGraphNodeSelEstimatedCostToNode, node.Ptr())
 	return _ret
 }
 
-// Returns the actual cost to reach the indicated node from this node
+// Returns the cost to travel from this node to the specified, directly connected, node.
 func (o *GKGraphNode) CostToNode(node *GKGraphNode) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKGraphNodeSelCostToNode, node.Ptr())
 	return _ret
 }
 
-// Attempts to find the optimal path between this node and the indicated goal node. If such a path exists, it is returned in start to end order. If it doesn't exist, the array returned will be empty. @param goalNode the goal node of the pathfinding attempt
+// Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.
 func (o *GKGraphNode) FindPathToNode(goalNode *GKGraphNode) *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNodeSelFindPathToNode, goalNode.Ptr())
 	if _ret != 0 {
@@ -69,7 +69,7 @@ func (o *GKGraphNode) FindPathToNode(goalNode *GKGraphNode) *foundation.NSArray[
 	return foundation.NSArrayFromID[*GKGraphNode](_ret)
 }
 
-// As with findPathToNode: except this node is the goal node and a startNode is specified @param startNode the start node of the pathfinding attempt
+// Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.
 func (o *GKGraphNode) FindPathFromNode(startNode *GKGraphNode) *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNodeSelFindPathFromNode, startNode.Ptr())
 	if _ret != 0 {

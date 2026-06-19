@@ -30,7 +30,7 @@ func MTRCommissioningOperationFromID(id objc.ID) *MTRCommissioningOperation {
 	return &MTRCommissioningOperation{inner: raw.MTRCommissioningOperationFromID(id)}
 }
 
-// Prepare to commission a device with the given parameters and the given setup payload (QR code, manual pairing code, etc).  Returns nil if the payload is not valid. The deviceAttestationDelegate property of MTRCommissioningParameters will be ignored. Device attestation notifications will be delivered to the MTRCommissioningDelegate instead.  The failSafeTimeout property of MTRCommissioningParameters will be respected. The provided delegate will be notified about various things as commissioning proceeds.  The calls into the delegate will happen on the provided queue. Modifying the parameters after this call will have no effect on the behavior of the MTRCommissioningOperation.
+// Prepare to commission a device with the given parameters and the given setup payload (QR code, manual pairing code, etc). Returns nil if the payload is not valid.
 //
 // NewMTRCommissioningOperationWithParametersSetupPayloadDelegateQueue creates a new [MTRCommissioningOperation].
 func NewMTRCommissioningOperationWithParametersSetupPayloadDelegateQueue(parameters *raw.MTRCommissioningParameters, payload string, delegate raw.MTRCommissioningDelegate, queue *foundation.NSObject) *MTRCommissioningOperation {
@@ -39,14 +39,14 @@ func NewMTRCommissioningOperationWithParametersSetupPayloadDelegateQueue(paramet
 	return &MTRCommissioningOperation{inner: raw.MTRCommissioningOperationFromID(_id)}
 }
 
-// Start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into).  The delegate will be notified if there are any failures.
+// Start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
 //
 // StartWithController calls the underlying StartWithController.
 func (x *MTRCommissioningOperation) StartWithController(controller *raw.MTRDeviceController) {
 	x.inner.StartWithController(controller)
 }
 
-// Stop commissioning.  This will typically result in commissioning:failedWithError: callbacks to delegates. Returns YES if this commissioning was still in-progress and has now been stopped; returns NO if this commissioning wasn't in-progress. Note that this can return NO while there are still pending async calls to delegate callbacks for the end of the commissioning.
+// Stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
 //
 // Stop calls the underlying Stop.
 func (x *MTRCommissioningOperation) Stop() bool {

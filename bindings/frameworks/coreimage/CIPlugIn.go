@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The mechanism for loading image units in macOS.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciplugin
 type CIPlugIn struct {
 	foundation.NSObject
@@ -34,31 +36,31 @@ func CIPlugInFromID(id objc.ID) *CIPlugIn {
 	return o
 }
 
-// This call will scan for plugins with the extension .plugin in /Library/Graphics/Image Units ~Library/Graphics/Image Units If called more than once, newly added plug-ins will be loaded but you cannot remove a plug-in and its filters.
+// Scans directories for files that have the .plugin extension and then loads the image units.
 // Deprecated: since macOS 10.15.
 func CIPlugInLoadAllPlugIns() {
 	objc.ID(_clsCIPlugIn).Send(_cIPlugInSelLoadAllPlugIns)
 }
 
-// Same as loadAllPlugIns does not load filters that contain executable code.
+// Scans directories for plugins.
 // Deprecated: since macOS 10.15.
 func CIPlugInLoadNonExecutablePlugIns() {
 	objc.ID(_clsCIPlugIn).Send(_cIPlugInSelLoadNonExecutablePlugIns)
 }
 
-// Loads a plug-in specified by its URL.
+// Loads filters from an image unit that have the appropriate executable status.
 // Deprecated: since macOS 10.7.
 func CIPlugInLoadPlugInAllowNonExecutable(url *foundation.NSURL, allowNonExecutable bool) {
 	objc.ID(_clsCIPlugIn).Send(_cIPlugInSelLoadPlugInAllowNonExecutable, url.Ptr(), allowNonExecutable)
 }
 
-// Loads a plug-in specified by its URL. If allowExecutableCode is NO, filters containing executable code will not be loaded. If YES, any kind of filter will be loaded.
+// Loads filters from an image unit that have the appropriate executable status.
 // Deprecated: since macOS 10.15.
 func CIPlugInLoadPlugInAllowExecutableCode(url *foundation.NSURL, allowExecutableCode bool) {
 	objc.ID(_clsCIPlugIn).Send(_cIPlugInSelLoadPlugInAllowExecutableCode, url.Ptr(), allowExecutableCode)
 }
 
-// Loads a non-executable plug-in specified by its URL. If the filters containing executable code, it will not be loaded.
+// Loads a non-executable plug-in specified by its URL.
 func CIPlugInLoadNonExecutablePlugIn(url *foundation.NSURL) {
 	objc.ID(_clsCIPlugIn).Send(_cIPlugInSelLoadNonExecutablePlugIn, url.Ptr())
 }

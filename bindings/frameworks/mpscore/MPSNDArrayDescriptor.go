@@ -83,8 +83,11 @@ func (o *MPSNDArrayDescriptor) DimensionOrder() unsafe.Pointer {
 
 // @abstract    Returns the shape of the NDArray as MPSShape @discussion  The length of the array is the number of dimensions and the size of the fastest running dimension is the last element in the array.
 func (o *MPSNDArrayDescriptor) GetShape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPSNDArrayDescriptorSelGetShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayDescriptorSelGetShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @abstract   Create an MPSNDArrayDescriptor object for a given size of dimensions. @discussion Sample code: @code // Creates an NDArrayDescriptor of dimensions [32, 6, 5, 3] NSUInteger sizes[] = {3,5,6,32}; [ MPSNDArray descriptorWithDataType: MPSDataTypeFloat32 dimensionCount: 4 dimensionSizes: sizes ];    // array of numberOfDimensions dimensions. Starts with dimension 0 @endcode @param      dataType           MPSDataType of elements in the MPSNDArray @param      numberOfDimensions Number of dimensions in the NDArray. May not exceed 16. @param      dimensionSizes     An array of NSUIntegers where dimension lengths provided by the user goes from fastest moving to slowest moving dimension. The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply @return     A valid MPSNDArrayDescriptor object or nil, if failure.
@@ -98,7 +101,7 @@ func MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes(data
 
 // @abstract   A convenience function to create an MPSNDArrayDescriptor object for a given size of dimensions. @discussion Sample code: @code // Creates an NDArrayDescriptor of dimensions [32, 6, 5, 3] NSArray<NSNumber *> sizes = {@32,@6,@5,@3}; [ MPSNDArray descriptorWithDataType: MPSDataTypeFloat32 shape: &sizes]; @endcode @param      dataType           MPSDataType of elements in the MPSNDArray @param      shape              An array of NSUIntegers where dimension lengths provided by the user goes from slowest moving to fastest moving dimension. This is same order as MLMultiArray in coreML and most frameworks in Python The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply @return     A valid MPSNDArrayDescriptor object or nil, if failure.
 func MPSNDArrayDescriptorDescriptorWithDataTypeShape(dataType MPSDataType, shape *foundation.NSArray[*foundation.NSNumber]) *MPSNDArrayDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNDArrayDescriptor), _mPSNDArrayDescriptorSelDescriptorWithDataTypeShape, dataType, shape)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNDArrayDescriptor), _mPSNDArrayDescriptorSelDescriptorWithDataTypeShape, dataType, shape.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -112,7 +115,7 @@ func (o *MPSNDArrayDescriptor) ReshapeWithDimensionCountDimensionSizes(numberOfD
 
 // @abstract   Changes dimension sizes and number of dimensions on the current descriptor @param      shape              An array of NSUIntegers where dimension lengths provided by the user goes from slowest moving to fastest moving dimension. This is same order as MLMultiArray in coreML and most frameworks in Python The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply
 func (o *MPSNDArrayDescriptor) ReshapeWithShape(shape *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPSNDArrayDescriptorSelReshapeWithShape, shape)
+	o.Ptr().Send(_mPSNDArrayDescriptorSelReshapeWithShape, shape.Ptr())
 }
 
 // @abstract  Data Type of the MPSNDArray elements

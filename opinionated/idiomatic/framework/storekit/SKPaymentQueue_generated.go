@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A queue of payment transactions for the App Store to process.
+//
 // PaymentQueue wraps [raw.SKPaymentQueue] with a fluent Go API.
 type PaymentQueue struct {
 	inner *raw.SKPaymentQueue
@@ -37,57 +39,79 @@ func NewPaymentQueue() *PaymentQueue {
 	return &PaymentQueue{inner: raw.SKPaymentQueueFromID(_id)}
 }
 
+// A delegate that provides information needed to complete transactions.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PaymentQueue) WithDelegate(delegate raw.SKPaymentQueueDelegate) *PaymentQueue {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Adds a payment request to the queue.
+//
 // AddPayment calls the underlying AddPayment.
 func (x *PaymentQueue) AddPayment(payment *raw.SKPayment) {
 	x.inner.AddPayment(payment)
 }
 
+// Asks the payment queue to restore previously completed purchases.
+//
 // RestoreCompletedTransactions calls the underlying RestoreCompletedTransactions.
 func (x *PaymentQueue) RestoreCompletedTransactions() {
 	x.inner.RestoreCompletedTransactions()
 }
 
+// Asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
+//
 // RestoreCompletedTransactionsWithApplicationUsername calls the underlying RestoreCompletedTransactionsWithApplicationUsername.
 func (x *PaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username string) {
 	x.inner.RestoreCompletedTransactionsWithApplicationUsername(foundation.NSStringStringWithUTF8String(username))
 }
 
+// Notifies the App Store that the app finished processing the transaction.
+//
 // FinishTransaction calls the underlying FinishTransaction.
 func (x *PaymentQueue) FinishTransaction(transaction *raw.SKPaymentTransaction) {
 	x.inner.FinishTransaction(transaction)
 }
 
+// Adds a set of downloads to the download list.
+//
 // StartDownloads calls the underlying StartDownloads.
 func (x *PaymentQueue) StartDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
 	x.inner.StartDownloads(downloads)
 }
 
+// Pauses a set of downloads.
+//
 // PauseDownloads calls the underlying PauseDownloads.
 func (x *PaymentQueue) PauseDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
 	x.inner.PauseDownloads(downloads)
 }
 
+// Resumes a set of downloads.
+//
 // ResumeDownloads calls the underlying ResumeDownloads.
 func (x *PaymentQueue) ResumeDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
 	x.inner.ResumeDownloads(downloads)
 }
 
+// Removes a set of downloads from the download list.
+//
 // CancelDownloads calls the underlying CancelDownloads.
 func (x *PaymentQueue) CancelDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
 	x.inner.CancelDownloads(downloads)
 }
 
+// Adds an observer to the payment queue.
+//
 // AddTransactionObserver calls the underlying AddTransactionObserver.
 func (x *PaymentQueue) AddTransactionObserver(observer raw.SKPaymentTransactionObserver) {
 	x.inner.AddTransactionObserver(observer)
 }
 
+// Removes an observer from the payment queue.
+//
 // RemoveTransactionObserver calls the underlying RemoveTransactionObserver.
 func (x *PaymentQueue) RemoveTransactionObserver(observer raw.SKPaymentTransactionObserver) {
 	x.inner.RemoveTransactionObserver(observer)

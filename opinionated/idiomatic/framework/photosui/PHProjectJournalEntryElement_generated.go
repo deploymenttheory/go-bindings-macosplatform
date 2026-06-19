@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An element that represents a journal entry within project section content.
+//
 // ProjectJournalEntryElement wraps [raw.PHProjectJournalEntryElement] with a fluent Go API.
 type ProjectJournalEntryElement struct {
 	inner *raw.PHProjectJournalEntryElement

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the static metadata you define for the challenge.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkchallengedefinition
 type GKChallengeDefinition struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func GKChallengeDefinitionFromID(id objc.ID) *GKChallengeDefinition {
 	return o
 }
 
-// Loads the image set on the challenge definition, which may be `nil` if none was set.
+// Loads the image set on the challenge definition, which may be nil if none was set.
 func (o *GKChallengeDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -92,8 +94,11 @@ func (o *GKChallengeDefinition) Details() *foundation.NSString {
 
 // The duration options for the challenge, like `1 day` or `1 week`. - Note: If set, the amount of weeks is stored in the `weekOfYear` field. - Important: The actual duration of the challenge may be dynamically adjusted in order to accommodate different factors like players' timezones.
 func (o *GKChallengeDefinition) DurationOptions() *foundation.NSArray[*foundation.NSDateComponents] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSDateComponents]](o.Ptr(), _gKChallengeDefinitionSelDurationOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeDefinitionSelDurationOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSDateComponents](_ret)
 }
 
 // Indicates if a challenge can be attempted more than once.
@@ -117,7 +122,7 @@ func (o *GKChallengeDefinition) ReleaseState() GKReleaseState {
 	return _ret
 }
 
-// Loads all the challenge definitions for the current game, returns an empty array if none exist. - Important: Archived challenge definitions are excluded.
+// Loads all the challenge definitions for the current game, returns an empty array if none exist.
 func GKChallengeDefinitionLoadChallengeDefinitionsWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKChallengeDefinition], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

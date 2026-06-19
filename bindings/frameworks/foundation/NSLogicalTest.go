@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The logical combination of one or more specifier tests.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslogicaltest
 type NSLogicalTest struct {
 	NSScriptWhoseTest
@@ -31,6 +33,7 @@ func NSLogicalTestFromID(id objc.ID) *NSLogicalTest {
 	return o
 }
 
+// Returns an NSLogicalTest object initialized to perform an AND operation with the NSSpecifierTest objects in a given array.
 func (o *NSLogicalTest) InitAndTestWithTests(subTests *NSArray[*NSSpecifierTest]) *NSLogicalTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLogicalTestSelInitAndTestWithTests, subTests.Ptr())
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *NSLogicalTest) InitAndTestWithTests(subTests *NSArray[*NSSpecifierTest]
 	return NSLogicalTestFromID(_ret)
 }
 
+// Returns an NSLogicalTest object initialized to perform an OR operation with the NSSpecifierTest objects in a given array.
 func (o *NSLogicalTest) InitOrTestWithTests(subTests *NSArray[*NSSpecifierTest]) *NSLogicalTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLogicalTestSelInitOrTestWithTests, subTests.Ptr())
 	if _ret != 0 {
@@ -47,6 +51,7 @@ func (o *NSLogicalTest) InitOrTestWithTests(subTests *NSArray[*NSSpecifierTest])
 	return NSLogicalTestFromID(_ret)
 }
 
+// Returns an NSLogicalTest object initialized to perform a NOT operation on the given NSScriptWhoseTest object.
 func (o *NSLogicalTest) InitNotTestWithTest(subTest *NSScriptWhoseTest) *NSLogicalTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLogicalTestSelInitNotTestWithTest, subTest.Ptr())
 	if _ret != 0 {

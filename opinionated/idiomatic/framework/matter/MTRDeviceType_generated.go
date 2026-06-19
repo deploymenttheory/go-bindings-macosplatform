@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Meta-data about a device type defined in the Matter specification.
+//
 // MTRDeviceType wraps [raw.MTRDeviceType] with a fluent Go API.
 type MTRDeviceType struct {
 	inner *raw.MTRDeviceType

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reports the status code and errors for a payment authorization request.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentauthorizationresult
 type PKPaymentAuthorizationResult struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func PKPaymentAuthorizationResultFromID(id objc.ID) *PKPaymentAuthorizationResul
 	return o
 }
 
+// Initializes the result with the status code and list of errors.
 func (o *PKPaymentAuthorizationResult) InitWithStatusErrors(status PKPaymentAuthorizationStatus) (*PKPaymentAuthorizationResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationResultSelInitWithStatusErrors, status, unsafe.Pointer(&_nsErr))
@@ -60,8 +63,11 @@ func (o *PKPaymentAuthorizationResult) SetStatus(status PKPaymentAuthorizationSt
 }
 
 func (o *PKPaymentAuthorizationResult) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _pKPaymentAuthorizationResultSelErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationResultSelErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *PKPaymentAuthorizationResult) SetErrors() error {

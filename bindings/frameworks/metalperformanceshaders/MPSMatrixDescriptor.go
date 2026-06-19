@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of attributes used to create an MPS matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor
 type MPSMatrixDescriptor struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func MPSMatrixDescriptorFromID(id objc.ID) *MPSMatrixDescriptor {
 	return o
 }
 
-// @abstract   Create a MPSMatrixDescriptor with the specified dimensions and data type. @param      rows                The number of rows of the matrix. @param      columns             The number of columns of the matrix. @param      rowBytes            The number of bytes between starting elements of consecutive rows.  Must be a multiple of the element size. @param      dataType            The type of the data to be stored in the matrix. @discussion For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class. The number of matrices described is initialized to 1.
+// Creates a matrix descriptor with the specified dimensions and data type.
 func MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType mpscore.MPSDataType) *MPSMatrixDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixDescriptor), _mPSMatrixDescriptorSelMatrixDescriptorWithDimensionsColumnsRowBytesDataType, rows, columns, rowBytes, dataType)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixByt
 	return MPSMatrixDescriptorFromID(_ret)
 }
 
-// @abstract   Return the recommended row stride, in bytes, for a given number of columns. @param      columns         The number of columns in the matrix for which the recommended row stride, in bytes, is to be determined. @param      dataType        The type of matrix data values. @discussion To achieve best performance the optimal stride between rows of a matrix is not necessarily equivalent to the number of columns.  This method returns the row stride, in bytes, which gives best performance for a given number of columns.  Using this row stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full row of data).
+// Determines the recommended matrix row stride, in bytes, for a given number of columns.
 func MPSMatrixDescriptorRowBytesFromColumnsDataType(columns uint, dataType mpscore.MPSDataType) uint {
 	_ret := objc.Send[uint](objc.ID(_clsMPSMatrixDescriptor), _mPSMatrixDescriptorSelRowBytesFromColumnsDataType, columns, dataType)
 	return _ret

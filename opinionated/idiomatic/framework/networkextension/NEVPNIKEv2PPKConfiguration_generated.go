@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that manages parameters of a post-quantum pre-shared key (PPK).
+//
 // NEVPNIKEv2PPKConfiguration wraps [raw.NEVPNIKEv2PPKConfiguration] with a fluent Go API.
 type NEVPNIKEv2PPKConfiguration struct {
 	inner *raw.NEVPNIKEv2PPKConfiguration
@@ -31,7 +33,7 @@ func NEVPNIKEv2PPKConfigurationFromID(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 	return &NEVPNIKEv2PPKConfiguration{inner: raw.NEVPNIKEv2PPKConfigurationFromID(id)}
 }
 
-// @method initWithIdentifier:keychainReference: @discussion Initialize a newly-allocated NEVPNIKEv2PPKConfiguration object. @param identifier The identifier for the PPK. @param keychainReference A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+// Initializes a quantum-secure pre-shared key (PPK) configuration.
 //
 // NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference creates a new [NEVPNIKEv2PPKConfiguration].
 func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier string, keychainReference *foundation.NSData) *NEVPNIKEv2PPKConfiguration {
@@ -40,7 +42,7 @@ func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier str
 	return &NEVPNIKEv2PPKConfiguration{inner: raw.NEVPNIKEv2PPKConfigurationFromID(_id)}
 }
 
-// @property isMandatory @discussion Boolean indicating whether use of the PPK is mandatory or not. Default is YES.
+// A Boolean value that indicates whether it’s mandatory for the VPN server to use this PPK.
 //
 // WithIsMandatory sets the isMandatory property and returns the receiver for chaining.
 func (x *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration {

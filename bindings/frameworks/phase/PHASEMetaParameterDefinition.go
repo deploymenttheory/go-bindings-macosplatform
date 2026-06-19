@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for a named parameter with a constant value.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasemetaparameterdefinition
 type PHASEMetaParameterDefinition struct {
 	PHASEDefinition

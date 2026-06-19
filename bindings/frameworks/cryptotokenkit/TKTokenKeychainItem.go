@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for managing a token’s contents as keychain items.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychainitem
 type TKTokenKeychainItem struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func TKTokenKeychainItemFromID(id objc.ID) *TKTokenKeychainItem {
 	return o
 }
 
-// @brief Initializes item with objectID.
+// Initializes a token keychain item with the specified object ID.
 func (o *TKTokenKeychainItem) InitWithObjectID(objectID objc.ID) *TKTokenKeychainItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainItemSelInitWithObjectID, objectID)
 	if _ret != 0 {
@@ -65,10 +67,13 @@ func (o *TKTokenKeychainItem) SetLabel(label *foundation.NSString) {
 
 // @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
 func (o *TKTokenKeychainItem) Constraints() *foundation.NSDictionary[*foundation.NSNumber, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSNumber, objc.ID]](o.Ptr(), _tKTokenKeychainItemSelConstraints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainItemSelConstraints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSNumber, objc.ID](_ret)
 }
 
 func (o *TKTokenKeychainItem) SetConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) {
-	o.Ptr().Send(_tKTokenKeychainItemSelSetConstraints, constraints)
+	o.Ptr().Send(_tKTokenKeychainItemSelSetConstraints, constraints.Ptr())
 }

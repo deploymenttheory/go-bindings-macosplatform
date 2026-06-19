@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the overall score of aesthetic attributes for an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnimageaestheticsscoresobservation
 type VNImageAestheticsScoresObservation struct {
 	VNObservation

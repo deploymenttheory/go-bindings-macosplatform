@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the static metadata you define for the challenge.
+//
 // ChallengeDefinition wraps [raw.GKChallengeDefinition] with a fluent Go API.
 type ChallengeDefinition struct {
 	inner *raw.GKChallengeDefinition
@@ -38,7 +40,7 @@ func NewChallengeDefinition() *ChallengeDefinition {
 	return &ChallengeDefinition{inner: raw.GKChallengeDefinitionFromID(_id)}
 }
 
-// Loads the image set on the challenge definition, which may be `nil` if none was set.
+// Loads the image set on the challenge definition, which may be nil if none was set.
 //
 // LoadImageWithCompletionHandler calls the underlying LoadImageWithCompletionHandler.
 func (x *ChallengeDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {

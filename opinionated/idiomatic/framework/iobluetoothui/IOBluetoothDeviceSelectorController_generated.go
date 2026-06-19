@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// @class IOBluetoothDeviceSelectorController @abstract A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices. @discussion Implementation of a window controller to return a NSArray of selected bluetooth devices.  This class will handle connecting to the Bluetooth Daemon for the purposes of searches, and displaying the results.  This controller will return a NSArray of IOBluetoothDevice objects to the user.
+// A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.
 //
 // BluetoothDeviceSelectorController wraps [raw.IOBluetoothDeviceSelectorController] with a fluent Go API.
 type BluetoothDeviceSelectorController struct {
@@ -44,61 +44,85 @@ func NewBluetoothDeviceSelectorController() *BluetoothDeviceSelectorController {
 	return &BluetoothDeviceSelectorController{inner: raw.IOBluetoothDeviceSelectorControllerFromID(_id)}
 }
 
+// Runs the device selector panel in a modal session to allow the user to select a Bluetooth device.
+//
 // RunModal calls the underlying RunModal.
 func (x *BluetoothDeviceSelectorController) RunModal() int {
 	return x.inner.RunModal()
 }
 
+// Runs the device selector panel as a sheet on the target window.
+//
 // BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *BluetoothDeviceSelectorController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
 	return x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow, modalDelegate, didEndSelector, contextInfo)
 }
 
+// Returns the result of the user’s selection.
+//
 // GetResults calls the underlying GetResults.
 func (x *BluetoothDeviceSelectorController) GetResults() *foundation.NSArray[objc.ID] {
 	return x.inner.GetResults()
 }
 
+// Sets the option bits that control the panel’s behavior.
+//
 // SetOptions calls the underlying SetOptions.
 func (x *BluetoothDeviceSelectorController) SetOptions(options uint32) {
 	x.inner.SetOptions(options)
 }
 
+// Returns the option bits that control the panel’s behavior.
+//
 // GetOptions calls the underlying GetOptions.
 func (x *BluetoothDeviceSelectorController) GetOptions() uint32 {
 	return x.inner.GetOptions()
 }
 
+// Sets the search attributes that control the panel’s search/inquiry behavior.
+//
 // SetSearchAttributes calls the underlying SetSearchAttributes.
 func (x *BluetoothDeviceSelectorController) SetSearchAttributes(searchAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes) {
 	x.inner.SetSearchAttributes(searchAttributes)
 }
 
+// Returns the search attributes that control the panel’s search/inquiry behavior.
+//
 // GetSearchAttributes calls the underlying GetSearchAttributes.
 func (x *BluetoothDeviceSelectorController) GetSearchAttributes() *iobluetooth.IOBluetoothDeviceSearchAttributes {
 	return x.inner.GetSearchAttributes()
 }
 
+// Adds a UUID to the list of UUIDs that are used to validate the user’s selection.
+//
 // AddAllowedUUID calls the underlying AddAllowedUUID.
 func (x *BluetoothDeviceSelectorController) AddAllowedUUID(allowedUUID *iobluetooth.IOBluetoothSDPUUID) {
 	x.inner.AddAllowedUUID(allowedUUID)
 }
 
+// Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
+//
 // AddAllowedUUIDArray calls the underlying AddAllowedUUIDArray.
 func (x *BluetoothDeviceSelectorController) AddAllowedUUIDArray(allowedUUIDArray *foundation.NSArray[objc.ID]) {
 	x.inner.AddAllowedUUIDArray(allowedUUIDArray)
 }
 
+// Resets the controller back to the default state where it will accept any device the user selects.
+//
 // ClearAllowedUUIDs calls the underlying ClearAllowedUUIDs.
 func (x *BluetoothDeviceSelectorController) ClearAllowedUUIDs() {
 	x.inner.ClearAllowedUUIDs()
 }
 
+// Sets the title of the panel when not run as a sheet.
+//
 // SetTitle calls the underlying SetTitle.
 func (x *BluetoothDeviceSelectorController) SetTitle(windowTitle string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(windowTitle))
 }
 
+// Returns the title of the device selector panel.
+//
 // GetTitle calls the underlying GetTitle.
 func (x *BluetoothDeviceSelectorController) GetTitle() string {
 	_r := x.inner.GetTitle()
@@ -108,11 +132,15 @@ func (x *BluetoothDeviceSelectorController) GetTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the header text that appears in the device selector panel.
+//
 // SetHeader calls the underlying SetHeader.
 func (x *BluetoothDeviceSelectorController) SetHeader(headerText string) {
 	x.inner.SetHeader(foundation.NSStringStringWithUTF8String(headerText))
 }
 
+// Returns the header text that appears in the device selector panel.
+//
 // GetHeader calls the underlying GetHeader.
 func (x *BluetoothDeviceSelectorController) GetHeader() string {
 	_r := x.inner.GetHeader()
@@ -122,11 +150,15 @@ func (x *BluetoothDeviceSelectorController) GetHeader() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the description text that appears in the device selector panel.
+//
 // SetDescriptionText calls the underlying SetDescriptionText.
 func (x *BluetoothDeviceSelectorController) SetDescriptionText(descriptionText string) {
 	x.inner.SetDescriptionText(foundation.NSStringStringWithUTF8String(descriptionText))
 }
 
+// Returns the description text that appears in the device selector panel.
+//
 // GetDescriptionText calls the underlying GetDescriptionText.
 func (x *BluetoothDeviceSelectorController) GetDescriptionText() string {
 	_r := x.inner.GetDescriptionText()
@@ -136,11 +168,15 @@ func (x *BluetoothDeviceSelectorController) GetDescriptionText() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title of the default/select button in the device selector panel.
+//
 // SetPrompt calls the underlying SetPrompt.
 func (x *BluetoothDeviceSelectorController) SetPrompt(prompt string) {
 	x.inner.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
 }
 
+// Returns the title of the default/select button in the device selector panel.
+//
 // GetPrompt calls the underlying GetPrompt.
 func (x *BluetoothDeviceSelectorController) GetPrompt() string {
 	_r := x.inner.GetPrompt()
@@ -150,11 +186,15 @@ func (x *BluetoothDeviceSelectorController) GetPrompt() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title of the default/cancel button in the device selector panel.
+//
 // SetCancel calls the underlying SetCancel.
 func (x *BluetoothDeviceSelectorController) SetCancel(prompt string) {
 	x.inner.SetCancel(foundation.NSStringStringWithUTF8String(prompt))
 }
 
+// Returns the title of the default/cancel button in the device selector panel.
+//
 // GetCancel calls the underlying GetCancel.
 func (x *BluetoothDeviceSelectorController) GetCancel() string {
 	_r := x.inner.GetCancel()

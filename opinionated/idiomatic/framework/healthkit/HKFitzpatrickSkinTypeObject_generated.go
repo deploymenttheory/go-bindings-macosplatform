@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class acts as a wrapper for the HKFitzpatrickSkinType enumeration.
+//
 // FitzpatrickSkinTypeObject wraps [raw.HKFitzpatrickSkinTypeObject] with a fluent Go API.
 type FitzpatrickSkinTypeObject struct {
 	inner *raw.HKFitzpatrickSkinTypeObject

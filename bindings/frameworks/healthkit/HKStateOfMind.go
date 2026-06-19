@@ -38,7 +38,7 @@ func HKStateOfMindFromID(id objc.ID) *HKStateOfMind {
 
 // Creates a new log describing an experienced emotion at a moment in time.
 func HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber]) *HKStateOfMind {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKStateOfMind), _hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociations, date.Ptr(), kind, valence, labels, associations)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKStateOfMind), _hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociations, date.Ptr(), kind, valence, labels.Ptr(), associations.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -47,7 +47,7 @@ func HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations(date *foundat
 
 // Creates a new log describing an experienced emotion at a moment in time.
 func HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKStateOfMind {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKStateOfMind), _hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociationsMetadata, date.Ptr(), kind, valence, labels, associations, metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKStateOfMind), _hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociationsMetadata, date.Ptr(), kind, valence, labels.Ptr(), associations.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -74,12 +74,18 @@ func (o *HKStateOfMind) ValenceClassification() HKStateOfMindValenceClassificati
 
 // Zero or more specific sentiments selected to represent a felt experience.
 func (o *HKStateOfMind) Labels() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _hKStateOfMindSelLabels)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKStateOfMindSelLabels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Zero or more facets of life with which this felt experience is associated.
 func (o *HKStateOfMind) Associations() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _hKStateOfMindSelAssociations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKStateOfMindSelAssociations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

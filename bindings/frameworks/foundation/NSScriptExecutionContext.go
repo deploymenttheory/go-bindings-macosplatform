@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The context in which the current script command is executed.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptexecutioncontext
 type NSScriptExecutionContext struct {
 	NSObject
@@ -35,6 +37,7 @@ func NSScriptExecutionContextFromID(id objc.ID) *NSScriptExecutionContext {
 	return o
 }
 
+// Returns the shared NSScriptExecutionContext instance.
 func NSScriptExecutionContextSharedScriptExecutionContext() *NSScriptExecutionContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptExecutionContext), _nSScriptExecutionContextSelSharedScriptExecutionContext)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A PDFDestination object describes a point on a PDF page.
+//
 // Destination wraps [raw.PDFDestination] with a fluent Go API.
 type Destination struct {
 	inner *raw.PDFDestination
@@ -31,6 +33,8 @@ func DestinationFromID(id objc.ID) *Destination {
 	return &Destination{inner: raw.PDFDestinationFromID(id)}
 }
 
+// Initializes the destination.
+//
 // NewDestinationWithPageAtPoint creates a new [Destination].
 func NewDestinationWithPageAtPoint(page *raw.PDFPage, point corefoundation.CGPoint) *Destination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDestination")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func (x *Destination) WithZoom(zoom float64) *Destination {
 	return x
 }
 
+// Returns a comparison result that indicates the location of the destination in the document, relative to the current position.
+//
 // Compare calls the underlying Compare.
 func (x *Destination) Compare(destination *raw.PDFDestination) foundation.NSComparisonResult {
 	return x.inner.Compare(destination)

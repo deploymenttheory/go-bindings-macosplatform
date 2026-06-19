@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that controls participant access and permission options.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckallowedsharingoptions
 type CKAllowedSharingOptions struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func CKAllowedSharingOptionsFromID(id objc.ID) *CKAllowedSharingOptions {
 	return o
 }
 
-// Creates and initializes an allowed sharing options object. - Parameters: - allowedParticipantPermissionOptions: The “CKSharingParticipantPermissionOption“ setting. - allowedParticipantAccessOptions: The “CKSharingParticipantAccessOption“ setting.
+// Creates and initializes an allowed sharing options object.
 func (o *CKAllowedSharingOptions) InitWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption, allowedParticipantAccessOptions CKSharingParticipantAccessOption) *CKAllowedSharingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAllowedSharingOptionsSelInitWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions, allowedParticipantPermissionOptions, allowedParticipantAccessOptions)
 	if _ret != 0 {

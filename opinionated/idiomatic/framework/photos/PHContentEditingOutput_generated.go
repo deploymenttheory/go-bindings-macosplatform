@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.
+//
 // ContentEditingOutput wraps [raw.PHContentEditingOutput] with a fluent Go API.
 type ContentEditingOutput struct {
 	inner *raw.PHContentEditingOutput
@@ -32,6 +34,8 @@ func ContentEditingOutputFromID(id objc.ID) *ContentEditingOutput {
 	return &ContentEditingOutput{inner: raw.PHContentEditingOutputFromID(id)}
 }
 
+// Creates an editing output from the specified editing input.
+//
 // NewContentEditingOutputWithContentEditingInput creates a new [ContentEditingOutput].
 func NewContentEditingOutputWithContentEditingInput(contentEditingInput *raw.PHContentEditingInput) *ContentEditingOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingOutput")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewContentEditingOutputWithContentEditingInput(contentEditingInput *raw.PHC
 	return &ContentEditingOutput{inner: raw.PHContentEditingOutputFromID(_id)}
 }
 
+// Creates an editing output for use in adding a new asset to the photo library.
+//
 // NewContentEditingOutputWithPlaceholderForCreatedAsset creates a new [ContentEditingOutput].
 func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *raw.PHObjectPlaceholder) *ContentEditingOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingOutput")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreated
 	return &ContentEditingOutput{inner: raw.PHContentEditingOutputFromID(_id)}
 }
 
+// An object describing the changes made to the asset.
+//
 // WithAdjustmentData sets the adjustmentData property and returns the receiver for chaining.
 func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput {
 	x.inner.SetAdjustmentData(adjustmentData.Unwrap())

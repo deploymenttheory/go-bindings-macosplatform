@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// An error that Core Bluetooth returns while using Attribute Protocol (ATT).
 type CBATTError int64
 
 const (
@@ -75,13 +76,18 @@ func (e CBATTError) String() string {
 	}
 }
 
+// Values that represent the read, write, and encryption permissions for a characteristic’s value.
 // Bitmask — values may be combined with |.
 type CBAttributePermissions uint64
 
 const (
-	CBAttributePermissionsReadable                CBAttributePermissions = 1
-	CBAttributePermissionsWriteable               CBAttributePermissions = 2
-	CBAttributePermissionsReadEncryptionRequired  CBAttributePermissions = 4
+	// A permission that indicates a peripheral can read the attribute’s value.
+	CBAttributePermissionsReadable CBAttributePermissions = 1
+	// A permission that indicates a peripheral can write the attribute’s value.
+	CBAttributePermissionsWriteable CBAttributePermissions = 2
+	// A permission that indicates only trusted devices can read the attribute’s value.
+	CBAttributePermissionsReadEncryptionRequired CBAttributePermissions = 4
+	// A permission that indicates only trusted devices can write the attribute’s value.
 	CBAttributePermissionsWriteEncryptionRequired CBAttributePermissions = 8
 )
 
@@ -105,19 +111,30 @@ func (e CBAttributePermissions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values that represent the possible properties of a characteristic.
 // Bitmask — values may be combined with |.
 type CBCharacteristicProperties uint64
 
 const (
-	CBCharacteristicPropertyBroadcast                  CBCharacteristicProperties = 1
-	CBCharacteristicPropertyRead                       CBCharacteristicProperties = 2
-	CBCharacteristicPropertyWriteWithoutResponse       CBCharacteristicProperties = 4
-	CBCharacteristicPropertyWrite                      CBCharacteristicProperties = 8
-	CBCharacteristicPropertyNotify                     CBCharacteristicProperties = 16
-	CBCharacteristicPropertyIndicate                   CBCharacteristicProperties = 32
-	CBCharacteristicPropertyAuthenticatedSignedWrites  CBCharacteristicProperties = 64
-	CBCharacteristicPropertyExtendedProperties         CBCharacteristicProperties = 128
-	CBCharacteristicPropertyNotifyEncryptionRequired   CBCharacteristicProperties = 256
+	// A property that indicates the characteristic can broadcast its value using a characteristic configuration descriptor.
+	CBCharacteristicPropertyBroadcast CBCharacteristicProperties = 1
+	// A property that indicates a peripheral can read the characteristic’s value.
+	CBCharacteristicPropertyRead CBCharacteristicProperties = 2
+	// A property that indicates a peripheral can write the characteristic’s value, without a response to indicate that the write succeeded.
+	CBCharacteristicPropertyWriteWithoutResponse CBCharacteristicProperties = 4
+	// A property that indicates a peripheral can write the characteristic’s value, with a response to indicate that the write succeeded.
+	CBCharacteristicPropertyWrite CBCharacteristicProperties = 8
+	// A property that indicates the peripheral permits notifications of the characteristic’s value, without a response from the central to indicate receipt of the notification.
+	CBCharacteristicPropertyNotify CBCharacteristicProperties = 16
+	// A property that indicates the peripheral permits notifications of the characteristic’s value, with a response from the central to indicate receipt of the notification.
+	CBCharacteristicPropertyIndicate CBCharacteristicProperties = 32
+	// A property that indicates the perhipheral allows signed writes of the characteristic’s value, without a response to indicate the write succeeded.
+	CBCharacteristicPropertyAuthenticatedSignedWrites CBCharacteristicProperties = 64
+	// A property that indicates the characteristic defines additional properties in the extended properties descriptor.
+	CBCharacteristicPropertyExtendedProperties CBCharacteristicProperties = 128
+	// A property that indicates that only trusted devices can enable notifications of the characteristic’s value.
+	CBCharacteristicPropertyNotifyEncryptionRequired CBCharacteristicProperties = 256
+	// A property that indicates only trusted devices can enable indications of the characteristic’s value.
 	CBCharacteristicPropertyIndicateEncryptionRequired CBCharacteristicProperties = 512
 )
 
@@ -159,10 +176,13 @@ func (e CBCharacteristicProperties) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values representing the possible write types to a characteristic’s value.
 type CBCharacteristicWriteType int64
 
 const (
-	CBCharacteristicWriteWithResponse    CBCharacteristicWriteType = 0
+	// Write a characteristic value, with a response from the peripheral to indicate whether the write was successful.
+	CBCharacteristicWriteWithResponse CBCharacteristicWriteType = 0
+	// Write a characteristic value, without any response from the peripheral to indicate whether the write was successful.
 	CBCharacteristicWriteWithoutResponse CBCharacteristicWriteType = 1
 )
 
@@ -177,12 +197,17 @@ func (e CBCharacteristicWriteType) String() string {
 	}
 }
 
+// The current authorization state of a Core Bluetooth manager.
 type CBManagerAuthorization int64
 
 const (
+	// A state that indicates the user has yet to authorize Bluetooth for this app.
 	CBManagerAuthorizationNotDetermined CBManagerAuthorization = 0
-	CBManagerAuthorizationRestricted    CBManagerAuthorization = 1
-	CBManagerAuthorizationDenied        CBManagerAuthorization = 2
+	// A state that indicates this app isn’t authorized to use Bluetooth.
+	CBManagerAuthorizationRestricted CBManagerAuthorization = 1
+	// A state that indicates the user explicitly denied Bluetooth access for this app.
+	CBManagerAuthorizationDenied CBManagerAuthorization = 2
+	// A state that indicates the user has authorized Bluetooth at any time.
 	CBManagerAuthorizationAllowedAlways CBManagerAuthorization = 3
 )
 
@@ -201,15 +226,22 @@ func (e CBManagerAuthorization) String() string {
 	}
 }
 
+// The possible states of a Core Bluetooth manager.
 type CBManagerState int64
 
 const (
-	CBManagerStateUnknown      CBManagerState = 0
-	CBManagerStateResetting    CBManagerState = 1
-	CBManagerStateUnsupported  CBManagerState = 2
+	// The manager’s state is unknown.
+	CBManagerStateUnknown CBManagerState = 0
+	// A state that indicates the connection with the system service was momentarily lost.
+	CBManagerStateResetting CBManagerState = 1
+	// A state that indicates this device doesn’t support the Bluetooth low energy central or client role.
+	CBManagerStateUnsupported CBManagerState = 2
+	// A state that indicates the application isn’t authorized to use the Bluetooth low energy role.
 	CBManagerStateUnauthorized CBManagerState = 3
-	CBManagerStatePoweredOff   CBManagerState = 4
-	CBManagerStatePoweredOn    CBManagerState = 5
+	// A state that indicates Bluetooth is currently powered off.
+	CBManagerStatePoweredOff CBManagerState = 4
+	// A state that indicates Bluetooth is currently powered on and available to use.
+	CBManagerStatePoweredOn CBManagerState = 5
 )
 
 func (e CBManagerState) String() string {
@@ -231,14 +263,20 @@ func (e CBManagerState) String() string {
 	}
 }
 
+// Values representing the current authorization state of the peripheral manager.
+//
 // Deprecated: since macOS 10.15.
 type CBPeripheralManagerAuthorizationStatus int64
 
 const (
+	// An authorization status that indicates the user hasn’t indicated whether this app can share data using Bluetooth while in the background.
 	CBPeripheralManagerAuthorizationStatusNotDetermined CBPeripheralManagerAuthorizationStatus = 0
-	CBPeripheralManagerAuthorizationStatusRestricted    CBPeripheralManagerAuthorizationStatus = 1
-	CBPeripheralManagerAuthorizationStatusDenied        CBPeripheralManagerAuthorizationStatus = 2
-	CBPeripheralManagerAuthorizationStatusAuthorized    CBPeripheralManagerAuthorizationStatus = 3
+	// An authorization status that indicates this app isn’t authorized to share data using Bluetooth while in the background.
+	CBPeripheralManagerAuthorizationStatusRestricted CBPeripheralManagerAuthorizationStatus = 1
+	// An authorization status that indicates the user explicitly denied this app from sharing data using Bluetooth while in the background.
+	CBPeripheralManagerAuthorizationStatusDenied CBPeripheralManagerAuthorizationStatus = 2
+	// An authorization status that indicates the user authorized this app to share data using Bluetooth while in the background.
+	CBPeripheralManagerAuthorizationStatusAuthorized CBPeripheralManagerAuthorizationStatus = 3
 )
 
 func (e CBPeripheralManagerAuthorizationStatus) String() string {
@@ -256,12 +294,16 @@ func (e CBPeripheralManagerAuthorizationStatus) String() string {
 	}
 }
 
+// Values representing the connection latency of the peripheral manager.
 type CBPeripheralManagerConnectionLatency int64
 
 const (
-	CBPeripheralManagerConnectionLatencyLow    CBPeripheralManagerConnectionLatency = 0
+	// A latency setting indicating that prioritizes rapid communication over battery life.
+	CBPeripheralManagerConnectionLatencyLow CBPeripheralManagerConnectionLatency = 0
+	// A latency setting that balances communication frequency and battery life.
 	CBPeripheralManagerConnectionLatencyMedium CBPeripheralManagerConnectionLatency = 1
-	CBPeripheralManagerConnectionLatencyHigh   CBPeripheralManagerConnectionLatency = 2
+	// A latency setting that prioritizes extending battery life over rapid communication.
+	CBPeripheralManagerConnectionLatencyHigh CBPeripheralManagerConnectionLatency = 2
 )
 
 func (e CBPeripheralManagerConnectionLatency) String() string {
@@ -277,12 +319,17 @@ func (e CBPeripheralManagerConnectionLatency) String() string {
 	}
 }
 
+// Values representing the connection state of a peripheral.
 type CBPeripheralState int64
 
 const (
-	CBPeripheralStateDisconnected  CBPeripheralState = 0
-	CBPeripheralStateConnecting    CBPeripheralState = 1
-	CBPeripheralStateConnected     CBPeripheralState = 2
+	// The peripheral isn’t connected to the central manager.
+	CBPeripheralStateDisconnected CBPeripheralState = 0
+	// The peripheral is in the process of connecting to the central manager.
+	CBPeripheralStateConnecting CBPeripheralState = 1
+	// The peripheral is connected to the central manager.
+	CBPeripheralStateConnected CBPeripheralState = 2
+	// The peripheral is disconnecting from the central manager.
 	CBPeripheralStateDisconnecting CBPeripheralState = 3
 )
 

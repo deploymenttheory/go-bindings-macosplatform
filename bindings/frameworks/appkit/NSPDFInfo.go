@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores information associated with the creation of a PDF file, such as its URL, tag names, page orientation, and paper size.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspdfinfo
 type NSPDFInfo struct {
 	foundation.NSObject
@@ -63,12 +65,15 @@ func (o *NSPDFInfo) SetFileExtensionHidden(fileExtensionHidden bool) {
 }
 
 func (o *NSPDFInfo) TagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSPDFInfoSelTagNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFInfoSelTagNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSPDFInfo) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPDFInfoSelSetTagNames, tagNames)
+	o.Ptr().Send(_nSPDFInfoSelSetTagNames, tagNames.Ptr())
 }
 
 func (o *NSPDFInfo) Orientation() NSPaperOrientation {
@@ -90,6 +95,9 @@ func (o *NSPDFInfo) SetPaperSize(paperSize corefoundation.CGSize) {
 }
 
 func (o *NSPDFInfo) Attributes() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPDFInfoSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFInfoSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the volume of optional environmental effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasespatialpipeline
 type PHASESpatialPipeline struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func PHASESpatialPipelineFromID(id objc.ID) *PHASESpatialPipeline {
 	return o
 }
 
-// @method initWithFlags @abstract Initialize a Spatial Pipeline with the provided flags. @discussion It's invalid to pass flags == 0 to this function. Doing so will return nil. @param flags Options for direct path transmission, early reflections, late reverb, etc.
+// Creates a spatial pipeline with the specified flags.
 func (o *PHASESpatialPipeline) InitWithFlags(flags PHASESpatialPipelineFlags) *PHASESpatialPipeline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialPipelineSelInitWithFlags, flags)
 	if _ret != 0 {
@@ -49,6 +51,9 @@ func (o *PHASESpatialPipeline) Flags() PHASESpatialPipelineFlags {
 
 // @property entries @abstract A dictionary of entries in the Spatial Pipeline. @discussion Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
 func (o *PHASESpatialPipeline) Entries() *foundation.NSDictionary[*foundation.NSString, *PHASESpatialPipelineEntry] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASESpatialPipelineEntry]](o.Ptr(), _pHASESpatialPipelineSelEntries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialPipelineSelEntries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASESpatialPipelineEntry](_ret)
 }

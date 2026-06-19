@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents music devices or remote instruments.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitmidiinstrument
 type AVAudioUnitMIDIInstrument struct {
 	AVAudioUnit
@@ -43,7 +45,7 @@ func AVAudioUnitMIDIInstrumentFromID(id objc.ID) *AVAudioUnitMIDIInstrument {
 	return o
 }
 
-// Initialize the node with the component description for an AUv2 Audio Unit. - Parameter description: audio component description structure that describes the audio component of type kAudioUnitType_MusicDevice or kAudioUnitType_RemoteInstrument. - note: To load AUv3 audio units (or any audio unit asynchronously), use the class method “AVAudioUnit/instantiateWithComponentDescription:options:completionHandler:“ instead.
+// Creates a MIDI instrument audio unit with the component description you specify.
 func (o *AVAudioUnitMIDIInstrument) InitWithAudioComponentDescription(description objc.ID) *AVAudioUnitMIDIInstrument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitMIDIInstrumentSelInitWithAudioComponentDescription, description)
 	if _ret != 0 {
@@ -52,62 +54,62 @@ func (o *AVAudioUnitMIDIInstrument) InitWithAudioComponentDescription(descriptio
 	return AVAudioUnitMIDIInstrumentFromID(_ret)
 }
 
-// Sends a MIDI Note On event to the instrument - Parameters: - note: the note number (key) to play. Range: 0 -> 127 - velocity: specifies the volume with which the note is played. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends a MIDI Note On event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelStartNoteWithVelocityOnChannel, note, velocity, channel)
 }
 
-// Sends a MIDI Note Off event to the instrument - Parameters: - note: the note number (key) to stop. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends a MIDI Note Off event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) StopNoteOnChannel(note uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelStopNoteOnChannel, note, channel)
 }
 
-// Sends a MIDI controller event to the instrument. - Parameters: - controller: a standard MIDI controller number. Range: 0 -> 127 - value: value for the controller. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends a MIDI controller event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendControllerWithValueOnChannel, controller, value, channel)
 }
 
-// Sends a MIDI controller event to the instrument. - Parameters: - controller: a standard MIDI controller number. Range: 0 -> 127 - value: value for the controller. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends a MIDI Pitch Bend event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendPitchBendOnChannel(pitchbend uint16, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendPitchBendOnChannel, pitchbend, channel)
 }
 
-// Sends MIDI channel pressure event to the instrument. - Parameters: - pressure: value of the pressure. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends a MIDI channel pressure event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendPressureOnChannel(pressure uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendPressureOnChannel, pressure, channel)
 }
 
-// Sends MIDI Polyphonic key pressure event to the instrument - Parameters: - key: the key (note) number to which the pressure event applies. Range: 0 -> 127 - value: value of the pressure. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15so
+// Sends a MIDI Polyphonic key pressure event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendPressureForKeyWithValueOnChannel, key, value, channel)
 }
 
-// Sends MIDI Program Change event to the instrument The instrument will be loaded from the bank that has been previous set by MIDI Bank Select controller messages (0 and 31). If none has been set, bank 0 will be used. - Parameters: - program: the program number. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends MIDI Program Change and Bank Select events to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendProgramChangeOnChannel(program uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendProgramChangeOnChannel, program, channel)
 }
 
-// Sends a MIDI Program Change and Bank Select events to the instrument - Parameters: - program: specifies the program (preset) number within the bank to load. Range: 0 -> 127 - bankMSB: specifies the most significant byte value for the bank to select. Range: 0 -> 127 - bankLSB: specifies the least significant byte value for the bank to select. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+// Sends MIDI Program Change and Bank Select events to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendProgramChangeBankMSBBankLSBOnChannel, program, bankMSB, bankLSB, channel)
 }
 
-// Sends a MIDI event which contains two data bytes to the instrument. - Parameters: - midiStatus: the STATUS value of the MIDI event - data1: the first data byte of the MIDI event - data2: the second data byte of the MIDI event.
+// Sends a MIDI event which contains two data bytes to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendMIDIEventData1Data2, midiStatus, data1, data2)
 }
 
-// Sends a MIDI event which contains one data byte to the instrument. - Parameters: - midiStatus: the STATUS value of the MIDI event - data1: the first data byte of the MIDI event
+// Sends a MIDI event which contains one data byte to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 uint8) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendMIDIEventData1, midiStatus, data1)
 }
 
-// Sends a MIDI System Exclusive event to the instrument. - Parameters: - midiData: a NSData object containing the complete SysEx data including start(F0) and termination(F7) bytes.
+// Sends a MIDI System Exclusive event to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendMIDISysExEvent(midiData *foundation.NSData) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendMIDISysExEvent, midiData.Ptr())
 }
 
-// Sends a MIDI event list to the instrument. - Parameters: - eventList: the MIDIEventList
+// Sends a MIDI event list to the instrument.
 func (o *AVAudioUnitMIDIInstrument) SendMIDIEventList(eventList *coremidi.MIDIEventList) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendMIDIEventList, eventList)
 }

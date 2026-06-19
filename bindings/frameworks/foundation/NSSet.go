@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static, unordered collection of unique objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsset
 type NSSet[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -62,11 +64,13 @@ func NSSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSSet[ObjectType] {
 	return o
 }
 
+// Determines whether a given object is present in the set, and returns that object if it is.
 func (o *NSSet[ObjectType]) Member(object ObjectType) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSSetSelMember, object)
 	return _ret
 }
 
+// Returns an enumerator object that lets you access each object in the set.
 func (o *NSSet[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelObjectEnumerator)
 	if _ret != 0 {
@@ -75,6 +79,7 @@ func (o *NSSet[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set.
 func (o *NSSet[ObjectType]) Init() *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInit)
 	if _ret != 0 {
@@ -83,6 +88,7 @@ func (o *NSSet[ObjectType]) Init() *NSSet[ObjectType] {
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set with a specified number of objects from a given C array of objects.
 func (o *NSSet[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithObjectsCount, objects, cnt)
 	if _ret != 0 {
@@ -104,16 +110,19 @@ func (o *NSSet[ObjectType]) Count() uint {
 	return _ret
 }
 
+// Returns one of the objects in the set, or nil if the set contains no objects.
 func (o *NSSet[ObjectType]) AnyObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSSetSelAnyObject)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given object is present in the set.
 func (o *NSSet[ObjectType]) ContainsObject(anObject ObjectType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSetSelContainsObject, anObject)
 	return _ret
 }
 
+// Returns a string that represents the contents of the set, formatted as a property list.
 func (o *NSSet[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelDescriptionWithLocale, locale)
 	if _ret != 0 {
@@ -122,29 +131,35 @@ func (o *NSSet[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether at least one object in the receiving set is also present in another given set.
 func (o *NSSet[ObjectType]) IntersectsSet(otherSet *NSSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSetSelIntersectsSet, otherSet.Ptr())
 	return _ret
 }
 
+// Compares the receiving set to another set.
 func (o *NSSet[ObjectType]) IsEqualToSet(otherSet *NSSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSetSelIsEqualToSet, otherSet.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether every object in the receiving set is also present in another given set.
 func (o *NSSet[ObjectType]) IsSubsetOfSet(otherSet *NSSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSetSelIsSubsetOfSet, otherSet.Ptr())
 	return _ret
 }
 
+// Sends a message specified by a given selector to each object in the set.
 func (o *NSSet[ObjectType]) MakeObjectsPerformSelector(aSelector objc.SEL) {
 	o.Ptr().Send(_nSSetSelMakeObjectsPerformSelector, aSelector)
 }
 
+// Sends a message specified by a given selector to each object in the set.
 func (o *NSSet[ObjectType]) MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID) {
 	o.Ptr().Send(_nSSetSelMakeObjectsPerformSelectorWithObject, aSelector, argument)
 }
 
+// Returns a new set formed by adding a given object to the receiving set.
 func (o *NSSet[ObjectType]) SetByAddingObject(anObject ObjectType) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSetByAddingObject, anObject)
 	if _ret != 0 {
@@ -153,6 +168,7 @@ func (o *NSSet[ObjectType]) SetByAddingObject(anObject ObjectType) *NSSet[Object
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Returns a new set formed by adding the objects in a given set to the receiving set.
 func (o *NSSet[ObjectType]) SetByAddingObjectsFromSet(other *NSSet[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSetByAddingObjectsFromSet, other.Ptr())
 	if _ret != 0 {
@@ -161,6 +177,7 @@ func (o *NSSet[ObjectType]) SetByAddingObjectsFromSet(other *NSSet[ObjectType]) 
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Returns a new set formed by adding the objects in a given array to the receiving set.
 func (o *NSSet[ObjectType]) SetByAddingObjectsFromArray(other *NSArray[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSetByAddingObjectsFromArray, other.Ptr())
 	if _ret != 0 {
@@ -169,14 +186,17 @@ func (o *NSSet[ObjectType]) SetByAddingObjectsFromArray(other *NSArray[ObjectTyp
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Executes a given block using each object in the set.
 func (o *NSSet[ObjectType]) EnumerateObjectsUsing(block objc.Block) {
 	o.Ptr().Send(_nSSetSelEnumerateObjectsUsing, block)
 }
 
+// Executes a given block using each object in the set, using the specified enumeration options.
 func (o *NSSet[ObjectType]) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSSetSelEnumerateObjectsWithOptionsUsing, opts, block)
 }
 
+// Returns a set of objects that pass a test in a given block.
 func (o *NSSet[ObjectType]) ObjectsPassingTest(predicate objc.Block) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelObjectsPassingTest, predicate)
 	if _ret != 0 {
@@ -185,6 +205,7 @@ func (o *NSSet[ObjectType]) ObjectsPassingTest(predicate objc.Block) *NSSet[Obje
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Returns a set of objects that pass a test in a given block, using the specified enumeration options.
 func (o *NSSet[ObjectType]) ObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelObjectsWithOptionsPassingTest, opts, predicate)
 	if _ret != 0 {
@@ -201,6 +222,7 @@ func (o *NSSet[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Creates and returns an empty set.
 func NSSetSet() *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSet)
 	if _ret != 0 {
@@ -209,6 +231,7 @@ func NSSetSet() *NSSet[objc.ID] {
 	return NSSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a set that contains a single given object.
 func NSSetSetWithObject(object objc.ID) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithObject, object)
 	if _ret != 0 {
@@ -217,6 +240,7 @@ func NSSetSetWithObject(object objc.ID) *NSSet[objc.ID] {
 	return NSSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a set containing a specified number of objects from a given C array of objects.
 func NSSetSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithObjectsCount, objects, cnt)
 	if _ret != 0 {
@@ -225,6 +249,7 @@ func NSSetSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSSet[objc.ID] 
 	return NSSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a set containing the objects from another set.
 func NSSetSetWithSet(set *NSSet[objc.ID]) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithSet, set.Ptr())
 	if _ret != 0 {
@@ -233,6 +258,7 @@ func NSSetSetWithSet(set *NSSet[objc.ID]) *NSSet[objc.ID] {
 	return NSSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a set containing a uniqued collection of the objects contained in a given array.
 func NSSetSetWithArray(array *NSArray[objc.ID]) *NSSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSet), _nSSetSelSetWithArray, array.Ptr())
 	if _ret != 0 {
@@ -241,6 +267,7 @@ func NSSetSetWithArray(array *NSArray[objc.ID]) *NSSet[objc.ID] {
 	return NSSetFromID[objc.ID](_ret)
 }
 
+// Initializes a newly allocated set and adds to it objects from another given set.
 func (o *NSSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithSet, set.Ptr())
 	if _ret != 0 {
@@ -249,6 +276,7 @@ func (o *NSSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSSet[ObjectTyp
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set and adds to it members of another given set.
 func (o *NSSet[ObjectType]) InitWithSetCopyItems(set *NSSet[ObjectType], flag bool) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithSetCopyItems, set.Ptr(), flag)
 	if _ret != 0 {
@@ -257,6 +285,7 @@ func (o *NSSet[ObjectType]) InitWithSetCopyItems(set *NSSet[ObjectType], flag bo
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set with the objects that are contained in a given array.
 func (o *NSSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelInitWithArray, array.Ptr())
 	if _ret != 0 {
@@ -265,6 +294,7 @@ func (o *NSSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSSet[Obj
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Returns an array of the set’s content sorted as specified by a given array of sort descriptors.
 func (o *NSSet[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelSortedArrayUsingDescriptors, sortDescriptors.Ptr())
 	if _ret != 0 {
@@ -273,6 +303,7 @@ func (o *NSSet[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Evaluates a given predicate against each object in the receiving set and returns a new set containing the objects for which the predicate returns true.
 func (o *NSSet[ObjectType]) FilteredSetUsingPredicate(predicate *NSPredicate) *NSSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetSelFilteredSetUsingPredicate, predicate.Ptr())
 	if _ret != 0 {

@@ -277,13 +277,18 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// The media types that require a user gesture to begin playing.
 type WKAudiovisualMediaTypes uint64
 
 const (
-	WKAudiovisualMediaTypeNone  WKAudiovisualMediaTypes = 0
+	// No media types require a user gesture to begin playing.
+	WKAudiovisualMediaTypeNone WKAudiovisualMediaTypes = 0
+	// Media types that contain audio require a user gesture to begin playing.
 	WKAudiovisualMediaTypeAudio WKAudiovisualMediaTypes = 1
+	// Media types that contain video require a user gesture to begin playing.
 	WKAudiovisualMediaTypeVideo WKAudiovisualMediaTypes = 2
-	WKAudiovisualMediaTypeAll   WKAudiovisualMediaTypes = 18446744073709551615
+	// All media types require a user gesture to begin playing.
+	WKAudiovisualMediaTypeAll WKAudiovisualMediaTypes = 18446744073709551615
 )
 
 func (e WKAudiovisualMediaTypes) String() string {
@@ -303,6 +308,7 @@ func (e WKAudiovisualMediaTypes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate how to render web view content.
 type WKContentMode int64
 
 const (
@@ -324,6 +330,7 @@ func (e WKContentMode) String() string {
 	}
 }
 
+// An enumeration with cases that indicate whether a cookie store allows cookie storage.
 type WKCookiePolicy int64
 
 const (
@@ -342,12 +349,16 @@ func (e WKCookiePolicy) String() string {
 	}
 }
 
+// An enumeration that lists the possible ways a delegate handled displaying a custom Lockdown Mode first use dialog.
 type WKDialogResult int64
 
 const (
+	// A result that indicates the delegate didn’t display a message, so the web view should show the default Lockdown Mode message.
 	WKDialogResultShowDefault WKDialogResult = 1
-	WKDialogResultAskAgain    WKDialogResult = 2
-	WKDialogResultHandled     WKDialogResult = 3
+	// A result that indicates the delegate didn’t display a message, so other web views should check again.
+	WKDialogResultAskAgain WKDialogResult = 2
+	// A result that indicates the delegate displayed the first use message.
+	WKDialogResultHandled WKDialogResult = 3
 )
 
 func (e WKDialogResult) String() string {
@@ -381,6 +392,7 @@ func (e WKDownloadPlaceholderPolicy) String() string {
 	}
 }
 
+// An enumeration with cases that indicate whether to proceed with a redirect.
 type WKDownloadRedirectPolicy int64
 
 const (
@@ -399,6 +411,7 @@ func (e WKDownloadRedirectPolicy) String() string {
 	}
 }
 
+// Possible error values that WebKit APIs can return.
 type WKErrorCode int64
 
 const (
@@ -486,6 +499,7 @@ func (e WKFullscreenState) String() string {
 	}
 }
 
+// An enumeration that lists policies for how a web view that’s not in a window handles tasks.
 type WKInactiveSchedulingPolicy int64
 
 const (
@@ -507,12 +521,16 @@ func (e WKInactiveSchedulingPolicy) String() string {
 	}
 }
 
+// An enumeration that describes whether a media device, like a camera or microphone, is currently capturing audio or video.
 type WKMediaCaptureState int64
 
 const (
-	WKMediaCaptureStateNone   WKMediaCaptureState = 0
+	// The media device is off.
+	WKMediaCaptureStateNone WKMediaCaptureState = 0
+	// The media device is actively capturing audio or video.
 	WKMediaCaptureStateActive WKMediaCaptureState = 1
-	WKMediaCaptureStateMuted  WKMediaCaptureState = 2
+	// The media device is muted, and not actively capturing audio or video.
+	WKMediaCaptureStateMuted WKMediaCaptureState = 2
 )
 
 func (e WKMediaCaptureState) String() string {
@@ -528,11 +546,15 @@ func (e WKMediaCaptureState) String() string {
 	}
 }
 
+// An enumeration listing the types of media devices that can capture audio, video, or both.
 type WKMediaCaptureType int64
 
 const (
-	WKMediaCaptureTypeCamera              WKMediaCaptureType = 0
-	WKMediaCaptureTypeMicrophone          WKMediaCaptureType = 1
+	// A media device that can capture video.
+	WKMediaCaptureTypeCamera WKMediaCaptureType = 0
+	// A media device that can capture audio.
+	WKMediaCaptureTypeMicrophone WKMediaCaptureType = 1
+	// A media device or devices that can capture audio and video.
 	WKMediaCaptureTypeCameraAndMicrophone WKMediaCaptureType = 2
 )
 
@@ -549,12 +571,17 @@ func (e WKMediaCaptureType) String() string {
 	}
 }
 
+// An enumeration that describes whether an audio or video presentation is playing, paused, or suspended.
 type WKMediaPlaybackState int64
 
 const (
-	WKMediaPlaybackStateNone      WKMediaPlaybackState = 0
-	WKMediaPlaybackStatePlaying   WKMediaPlaybackState = 1
-	WKMediaPlaybackStatePaused    WKMediaPlaybackState = 2
+	// There is no media to play back.
+	WKMediaPlaybackStateNone WKMediaPlaybackState = 0
+	// The media is playing.
+	WKMediaPlaybackStatePlaying WKMediaPlaybackState = 1
+	// The media playback is paused.
+	WKMediaPlaybackStatePaused WKMediaPlaybackState = 2
+	// The media is not playing, and cannot be resumed until the user revokes the suspension.
 	WKMediaPlaybackStateSuspended WKMediaPlaybackState = 3
 )
 
@@ -573,11 +600,15 @@ func (e WKMediaPlaybackState) String() string {
 	}
 }
 
+// Constants that indicate whether to allow or cancel navigation to a webpage from an action.
 type WKNavigationActionPolicy int64
 
 const (
-	WKNavigationActionPolicyCancel   WKNavigationActionPolicy = 0
-	WKNavigationActionPolicyAllow    WKNavigationActionPolicy = 1
+	// Cancel the navigation.
+	WKNavigationActionPolicyCancel WKNavigationActionPolicy = 0
+	// Allow the navigation to continue.
+	WKNavigationActionPolicyAllow WKNavigationActionPolicy = 1
+	// Allow the download to proceed.
 	WKNavigationActionPolicyDownload WKNavigationActionPolicy = 2
 )
 
@@ -594,11 +625,15 @@ func (e WKNavigationActionPolicy) String() string {
 	}
 }
 
+// Constants that indicate whether to allow or cancel navigation to a webpage from a response.
 type WKNavigationResponsePolicy int64
 
 const (
-	WKNavigationResponsePolicyCancel   WKNavigationResponsePolicy = 0
-	WKNavigationResponsePolicyAllow    WKNavigationResponsePolicy = 1
+	// Cancel the navigation.
+	WKNavigationResponsePolicyCancel WKNavigationResponsePolicy = 0
+	// Allow the navigation to continue.
+	WKNavigationResponsePolicyAllow WKNavigationResponsePolicy = 1
+	// Allow the download to proceed.
 	WKNavigationResponsePolicyDownload WKNavigationResponsePolicy = 2
 )
 
@@ -615,15 +650,22 @@ func (e WKNavigationResponsePolicy) String() string {
 	}
 }
 
+// The type of action that triggered the navigation.
 type WKNavigationType int64
 
 const (
-	WKNavigationTypeLinkActivated   WKNavigationType = 0
-	WKNavigationTypeFormSubmitted   WKNavigationType = 1
-	WKNavigationTypeBackForward     WKNavigationType = 2
-	WKNavigationTypeReload          WKNavigationType = 3
+	// A link activation.
+	WKNavigationTypeLinkActivated WKNavigationType = 0
+	// A request to submit a form.
+	WKNavigationTypeFormSubmitted WKNavigationType = 1
+	// A request for the frame’s next or previous item.
+	WKNavigationTypeBackForward WKNavigationType = 2
+	// A request to reload the webpage.
+	WKNavigationTypeReload WKNavigationType = 3
+	// A request to resubmit a form.
 	WKNavigationTypeFormResubmitted WKNavigationType = 4
-	WKNavigationTypeOther           WKNavigationType = -1
+	// A navigation request that originates for some other reason.
+	WKNavigationTypeOther WKNavigationType = -1
 )
 
 func (e WKNavigationType) String() string {
@@ -645,12 +687,16 @@ func (e WKNavigationType) String() string {
 	}
 }
 
+// An enumeration of possible permission decisions for device resource access.
 type WKPermissionDecision int64
 
 const (
+	// Prompt the user for permission for the requested resource.
 	WKPermissionDecisionPrompt WKPermissionDecision = 0
-	WKPermissionDecisionGrant  WKPermissionDecision = 1
-	WKPermissionDecisionDeny   WKPermissionDecision = 2
+	// Grant permission for the requested resource.
+	WKPermissionDecisionGrant WKPermissionDecision = 1
+	// Deny permission for the requested resource.
+	WKPermissionDecisionDeny WKPermissionDecision = 2
 )
 
 func (e WKPermissionDecision) String() string {
@@ -687,11 +733,14 @@ func (e WKSecurityRestrictionMode) String() string {
 	}
 }
 
+// The policy that determines the directionality of user interface elements in a web view.
 type WKUserInterfaceDirectionPolicy int64
 
 const (
+	// The directionality follows the CSS/HTML/XHTML specifications.
 	WKUserInterfaceDirectionPolicyContent WKUserInterfaceDirectionPolicy = 0
-	WKUserInterfaceDirectionPolicySystem  WKUserInterfaceDirectionPolicy = 1
+	// The directionality follows the view’s user interface layout direction.
+	WKUserInterfaceDirectionPolicySystem WKUserInterfaceDirectionPolicy = 1
 )
 
 func (e WKUserInterfaceDirectionPolicy) String() string {
@@ -705,11 +754,14 @@ func (e WKUserInterfaceDirectionPolicy) String() string {
 	}
 }
 
+// Constants for the times at which to inject script content into a webpage.
 type WKUserScriptInjectionTime int64
 
 const (
+	// A constant to inject the script after the creation of the webpage’s document element, but before loading any other content.
 	WKUserScriptInjectionTimeAtDocumentStart WKUserScriptInjectionTime = 0
-	WKUserScriptInjectionTimeAtDocumentEnd   WKUserScriptInjectionTime = 1
+	// A constant to inject the script after the document finishes loading, but before loading any other subresources.
+	WKUserScriptInjectionTimeAtDocumentEnd WKUserScriptInjectionTime = 1
 )
 
 func (e WKUserScriptInjectionTime) String() string {
@@ -786,6 +838,7 @@ func (e WKWebExtensionContextPermissionStatus) String() string {
 	}
 }
 
+// Constants that indicate errors in the WKWebExtensionDataRecord domain.
 type WKWebExtensionDataRecordError int64
 
 const (
@@ -849,6 +902,7 @@ func (e WKWebExtensionError) String() string {
 	}
 }
 
+// Constants that indicate errors in the WKWebExtensionMatchPattern domain.
 type WKWebExtensionMatchPatternError int64
 
 const (
@@ -873,9 +927,11 @@ func (e WKWebExtensionMatchPatternError) String() string {
 	}
 }
 
+// Constants used by WKWebExtensionMatchPattern to indicate matching options.
 type WKWebExtensionMatchPatternOptions uint64
 
 const (
+	// Indicates no special matching options.
 	WKWebExtensionMatchPatternOptionsNone                 WKWebExtensionMatchPatternOptions = 0
 	WKWebExtensionMatchPatternOptionsIgnoreSchemes        WKWebExtensionMatchPatternOptions = 1
 	WKWebExtensionMatchPatternOptionsIgnorePaths          WKWebExtensionMatchPatternOptions = 2
@@ -899,6 +955,7 @@ func (e WKWebExtensionMatchPatternOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate errors in the WKWebExtensionMessagePort domain.
 type WKWebExtensionMessagePortError int64
 
 const (
@@ -970,6 +1027,7 @@ func (e WKWebExtensionTabChangedProperties) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants used by WKWebExtensionWindow to indicate possible states of a window.
 type WKWebExtensionWindowState int64
 
 const (
@@ -994,6 +1052,7 @@ func (e WKWebExtensionWindowState) String() string {
 	}
 }
 
+// Constants used by WKWebExtensionWindow to indicate the type of a window.
 type WKWebExtensionWindowType int64
 
 const (
@@ -1053,11 +1112,15 @@ func (e WKWebpagePreferencesUpgradeToHTTPSPolicy) String() string {
 	}
 }
 
+// Specifies the caching model for a web view.
 type WebCacheModel uint64
 
 const (
-	WebCacheModelDocumentViewer    WebCacheModel = 0
-	WebCacheModelDocumentBrowser   WebCacheModel = 1
+	// Releases resources when they are no longer referenced and caches remote resources on disk. This model is appropriate for displaying a static document with no navigation user interface. This is the most memory-efficient model.
+	WebCacheModelDocumentViewer WebCacheModel = 0
+	// Caches a reasonable number of resources and previously viewed documents in memory and on disk. This model is appropriate for displaying and navigating between multiple documents.
+	WebCacheModelDocumentBrowser WebCacheModel = 1
+	// Caches a large number of resources and previously viewed documents in memory and on disk. This model is appropriate for a web view that behaves like a web browser.
 	WebCacheModelPrimaryWebBrowser WebCacheModel = 2
 )
 
@@ -1074,14 +1137,20 @@ func (e WebCacheModel) String() string {
 	}
 }
 
+// Actions that the destination object of a drag operation can perform.
 type WebDragDestinationAction uint64
 
 const (
-	WebDragDestinationActionNone  WebDragDestinationAction = 0
+	// No action.
+	WebDragDestinationActionNone WebDragDestinationAction = 0
+	// Allows DHTML (such as JavaScript) to handle the drag.
 	WebDragDestinationActionDHTML WebDragDestinationAction = 1
-	WebDragDestinationActionEdit  WebDragDestinationAction = 2
-	WebDragDestinationActionLoad  WebDragDestinationAction = 4
-	WebDragDestinationActionAny   WebDragDestinationAction = 4294967295
+	// Allows editable documents to be changed by the drag operation.
+	WebDragDestinationActionEdit WebDragDestinationAction = 2
+	// Allows the drag operation to change the location.
+	WebDragDestinationActionLoad WebDragDestinationAction = 4
+	// Allows any defined action to occur.
+	WebDragDestinationActionAny WebDragDestinationAction = 4294967295
 )
 
 func (e WebDragDestinationAction) String() string {
@@ -1104,15 +1173,22 @@ func (e WebDragDestinationAction) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Actions that the source object of a drag operation can perform.
 type WebDragSourceAction uint64
 
 const (
-	WebDragSourceActionNone      WebDragSourceAction = 0
-	WebDragSourceActionDHTML     WebDragSourceAction = 1
-	WebDragSourceActionImage     WebDragSourceAction = 2
-	WebDragSourceActionLink      WebDragSourceAction = 4
+	// No action.
+	WebDragSourceActionNone WebDragSourceAction = 0
+	// Allows DHTML (such as JavaScript) in the source object to initiate a drag operation.
+	WebDragSourceActionDHTML WebDragSourceAction = 1
+	// Allows the user to drag an image in the source object.
+	WebDragSourceActionImage WebDragSourceAction = 2
+	// Allows the user to drag a link in the source object.
+	WebDragSourceActionLink WebDragSourceAction = 4
+	// Allows the user to drag a selection in the source object.
 	WebDragSourceActionSelection WebDragSourceAction = 8
-	WebDragSourceActionAny       WebDragSourceAction = 4294967295
+	// Allows any defined action to occur.
+	WebDragSourceActionAny WebDragSourceAction = 4294967295
 )
 
 func (e WebDragSourceAction) String() string {
@@ -1138,15 +1214,22 @@ func (e WebDragSourceAction) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Possible values for the WebActionNavigationTypeKey key that appears in an action dictionary.
 type WebNavigationType int64
 
 const (
-	WebNavigationTypeLinkClicked     WebNavigationType = 0
-	WebNavigationTypeFormSubmitted   WebNavigationType = 1
-	WebNavigationTypeBackForward     WebNavigationType = 2
-	WebNavigationTypeReload          WebNavigationType = 3
+	// A link (an href) was clicked.
+	WebNavigationTypeLinkClicked WebNavigationType = 0
+	// A form was submitted.
+	WebNavigationTypeFormSubmitted WebNavigationType = 1
+	// The user clicked back or forward button.
+	WebNavigationTypeBackForward WebNavigationType = 2
+	// The user hit the reload button.
+	WebNavigationTypeReload WebNavigationType = 3
+	// A form was resubmitted (through a back, forward or reload action).
 	WebNavigationTypeFormResubmitted WebNavigationType = 4
-	WebNavigationTypeOther           WebNavigationType = 5
+	// Navigation is taking place for some other reason.
+	WebNavigationTypeOther WebNavigationType = 5
 )
 
 func (e WebNavigationType) String() string {
@@ -1168,11 +1251,15 @@ func (e WebNavigationType) String() string {
 	}
 }
 
+// The type of user action that initiated a delegate message.
 type WebViewInsertAction int64
 
 const (
-	WebViewInsertActionTyped   WebViewInsertAction = 0
-	WebViewInsertActionPasted  WebViewInsertAction = 1
+	// Indicates the user inserted content by typing.
+	WebViewInsertActionTyped WebViewInsertAction = 0
+	// Indicates the user inserted content by pasting.
+	WebViewInsertActionPasted WebViewInsertAction = 1
+	// Indicates the user inserted content by dropping.
 	WebViewInsertActionDropped WebViewInsertAction = 2
 )
 

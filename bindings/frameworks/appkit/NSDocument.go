@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the interface for macOS documents.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdocument
 type NSDocument struct {
 	foundation.NSObject
@@ -208,6 +210,7 @@ func NSDocumentFromID(id objc.ID) *NSDocument {
 	return o
 }
 
+// Initializes and returns an empty document object.
 func (o *NSDocument) Init() *NSDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInit)
 	if _ret != 0 {
@@ -216,6 +219,7 @@ func (o *NSDocument) Init() *NSDocument {
 	return NSDocumentFromID(_ret)
 }
 
+// Initializes a document of a specified type.
 func (o *NSDocument) InitWithTypeError(typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -228,11 +232,13 @@ func (o *NSDocument) InitWithTypeError(typeName *foundation.NSString) (*NSDocume
 	return NSDocumentFromID(_ret), nil
 }
 
+// Returns a Boolean value that indicates whether the receiver reads multiple documents of the given type concurrently.
 func NSDocumentCanConcurrentlyReadDocumentsOfType(typeName *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelCanConcurrentlyReadDocumentsOfType, typeName.Ptr())
 	return _ret
 }
 
+// Initializes a document located by a URL of a specified type.
 func (o *NSDocument) InitWithContentsOfURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -245,6 +251,7 @@ func (o *NSDocument) InitWithContentsOfURLOfTypeError(url *foundation.NSURL, typ
 	return NSDocumentFromID(_ret), nil
 }
 
+// Initializes a document with the specified contents, and places the resulting document’s file at the designated location.
 func (o *NSDocument) InitForURLWithContentsOfURLOfTypeError(urlOrNil *foundation.NSURL, contentsURL *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -257,6 +264,7 @@ func (o *NSDocument) InitForURLWithContentsOfURLOfTypeError(urlOrNil *foundation
 	return NSDocumentFromID(_ret), nil
 }
 
+// Waits for any work scheduled by previous invocations of this method to complete, then invokes the passed-in block.
 func (o *NSDocument) PerformActivityWithSynchronousWaitingUsing(waitSynchronously bool, block func(objc.Block)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -268,6 +276,7 @@ func (o *NSDocument) PerformActivityWithSynchronousWaitingUsing(waitSynchronousl
 	o.Ptr().Send(_nSDocumentSelPerformActivityWithSynchronousWaitingUsing, waitSynchronously, __block_block)
 }
 
+// Continues to perform the task for a user activity object using a different block.
 func (o *NSDocument) ContinueActivityUsing(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -279,6 +288,7 @@ func (o *NSDocument) ContinueActivityUsing(block func()) {
 	o.Ptr().Send(_nSDocumentSelContinueActivityUsing, __block_block)
 }
 
+// Invokes the passed-in block on the main thread.
 func (o *NSDocument) ContinueAsynchronousWorkOnMainThreadUsing(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -290,6 +300,7 @@ func (o *NSDocument) ContinueAsynchronousWorkOnMainThreadUsing(block func()) {
 	o.Ptr().Send(_nSDocumentSelContinueAsynchronousWorkOnMainThreadUsing, __block_block)
 }
 
+// Waits for any scheduled file access to complete, then invokes the passed-in block.
 func (o *NSDocument) PerformSynchronousFileAccessUsing(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -301,6 +312,7 @@ func (o *NSDocument) PerformSynchronousFileAccessUsing(block func()) {
 	o.Ptr().Send(_nSDocumentSelPerformSynchronousFileAccessUsing, __block_block)
 }
 
+// Waits for any scheduled file access to complete but without blocking the main thread, then invokes the passed-in block.
 func (o *NSDocument) PerformAsynchronousFileAccessUsing(block func(objc.Block)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -312,10 +324,12 @@ func (o *NSDocument) PerformAsynchronousFileAccessUsing(block func(objc.Block)) 
 	o.Ptr().Send(_nSDocumentSelPerformAsynchronousFileAccessUsing, __block_block)
 }
 
+// The action of the File menu item Revert in a document-based app.
 func (o *NSDocument) RevertDocumentToSaved(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelRevertDocumentToSaved, sender)
 }
 
+// Discards all unsaved document modifications and replaces the document’s contents by reading a file or file package located by a URL of a specified type.
 func (o *NSDocument) RevertToContentsOfURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -325,6 +339,7 @@ func (o *NSDocument) RevertToContentsOfURLOfTypeError(url *foundation.NSURL, typ
 	return _ret, nil
 }
 
+// Sets the contents of this document by reading from a file or file package, of a specified type, located by a URL.
 func (o *NSDocument) ReadFromURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -334,6 +349,7 @@ func (o *NSDocument) ReadFromURLOfTypeError(url *foundation.NSURL, typeName *fou
 	return _ret, nil
 }
 
+// Sets the contents of this document by reading from a file wrapper of a specified type.
 func (o *NSDocument) ReadFromFileWrapperOfTypeError(fileWrapper *foundation.NSFileWrapper, typeName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromFileWrapperOfTypeError, fileWrapper.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -343,6 +359,7 @@ func (o *NSDocument) ReadFromFileWrapperOfTypeError(fileWrapper *foundation.NSFi
 	return _ret, nil
 }
 
+// Sets the contents of this document by reading from data of a specified type.
 func (o *NSDocument) ReadFromDataOfTypeError(data *foundation.NSData, typeName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromDataOfTypeError, data.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -352,6 +369,7 @@ func (o *NSDocument) ReadFromDataOfTypeError(data *foundation.NSData, typeName *
 	return _ret, nil
 }
 
+// Writes the contents of the document to a file or file package located by a URL, that is formatted to a specified type.
 func (o *NSDocument) WriteToURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -361,6 +379,7 @@ func (o *NSDocument) WriteToURLOfTypeError(url *foundation.NSURL, typeName *foun
 	return _ret, nil
 }
 
+// Creates and returns a file wrapper that contains the contents of the document, formatted to the specified type.
 func (o *NSDocument) FileWrapperOfTypeError(typeName *foundation.NSString) (*foundation.NSFileWrapper, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -373,6 +392,7 @@ func (o *NSDocument) FileWrapperOfTypeError(typeName *foundation.NSString) (*fou
 	return foundation.NSFileWrapperFromID(_ret), nil
 }
 
+// Creates and returns a data object that contains the contents of the document, formatted to a specified type.
 func (o *NSDocument) DataOfTypeError(typeName *foundation.NSString) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -385,10 +405,12 @@ func (o *NSDocument) DataOfTypeError(typeName *foundation.NSString) (*foundation
 	return foundation.NSDataFromID(_ret), nil
 }
 
+// Unblocks the main thread during asynchronous saving.
 func (o *NSDocument) UnblockUserInteraction() {
 	o.Ptr().Send(_nSDocumentSelUnblockUserInteraction)
 }
 
+// Writes the contents of the document to a file or file package located by a URL.
 func (o *NSDocument) WriteSafelyToURLOfTypeForSaveOperationError(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteSafelyToURLOfTypeForSaveOperationError, url.Ptr(), typeName.Ptr(), saveOperation, unsafe.Pointer(&_nsErr))
@@ -398,6 +420,7 @@ func (o *NSDocument) WriteSafelyToURLOfTypeForSaveOperationError(url *foundation
 	return _ret, nil
 }
 
+// Writes the contents of the document to a file or file package located by a URL.
 func (o *NSDocument) WriteToURLOfTypeForSaveOperationOriginalContentsURLError(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType, absoluteOriginalContentsURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToURLOfTypeForSaveOperationOriginalContentsURLError, url.Ptr(), typeName.Ptr(), saveOperation, absoluteOriginalContentsURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -407,44 +430,56 @@ func (o *NSDocument) WriteToURLOfTypeForSaveOperationOriginalContentsURLError(ur
 	return _ret, nil
 }
 
+// Returns the attributes to write to the file or file package at the specified URL, and targeting the specified type of save operation.
 func (o *NSDocument) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType, absoluteOriginalContentsURL *foundation.NSURL) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSDocumentSelFileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError, url.Ptr(), typeName.Ptr(), saveOperation, absoluteOriginalContentsURL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError, url.Ptr(), typeName.Ptr(), saveOperation, absoluteOriginalContentsURL.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Save menu command.
 func (o *NSDocument) SaveDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelSaveDocument, sender)
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Save As menu command.
 func (o *NSDocument) SaveDocumentAs(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelSaveDocumentAs, sender)
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Save To menu command.
 func (o *NSDocument) SaveDocumentTo(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelSaveDocumentTo, sender)
 }
 
+// Saves the document and delivers the results to the provided delegate object.
 func (o *NSDocument) SaveDocumentWithDelegateDidSaveSelectorContextInfo(delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelSaveDocumentWithDelegateDidSaveSelectorContextInfo, delegate, didSaveSelector, contextInfo)
 }
 
+// Presents a modal Save panel to the user, then tries to save the document if the user approves the operation.
 func (o *NSDocument) RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelRunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo, saveOperation, delegate, didSaveSelector, contextInfo)
 }
 
+// Tells the document to customize the specified Save panel.
 func (o *NSDocument) PrepareSavePanel(savePanel *NSSavePanel) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPrepareSavePanel, savePanel.Ptr())
 	return _ret
 }
 
+// Saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation.
 func (o *NSDocument) SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelSaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo, url.Ptr(), typeName.Ptr(), saveOperation, delegate, didSaveSelector, contextInfo)
 }
 
+// Saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation, and invokes the passed-in completion handler.
 func (o *NSDocument) SaveToURLOfTypeForSaveOperationCompletionHandler(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -456,11 +491,13 @@ func (o *NSDocument) SaveToURLOfTypeForSaveOperationCompletionHandler(url *found
 	o.Ptr().Send(_nSDocumentSelSaveToURLOfTypeForSaveOperationCompletionHandler, url.Ptr(), typeName.Ptr(), saveOperation, __block_completionHandler)
 }
 
+// Returns whether the receiver can concurrently write to a file or file package located by a URL, that is formatted for a specific type, for a specific kind of save operation.
 func (o *NSDocument) CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCanAsynchronouslyWriteToURLOfTypeForSaveOperation, url.Ptr(), typeName.Ptr(), saveOperation)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether it is safe to autosave document changes.
 func (o *NSDocument) CheckAutosavingSafetyAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCheckAutosavingSafetyAndReturnError, unsafe.Pointer(&_nsErr))
@@ -470,14 +507,17 @@ func (o *NSDocument) CheckAutosavingSafetyAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Schedules periodic autosaving for the purpose of crash protection.
 func (o *NSDocument) ScheduleAutosaving() {
 	o.Ptr().Send(_nSDocumentSelScheduleAutosaving)
 }
 
+// Autosaves the document’s contents to an appropriate location in the file system.
 func (o *NSDocument) AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo(delegate objc.ID, didAutosaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelAutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo, delegate, didAutosaveSelector, contextInfo)
 }
 
+// Autosaves the document’s contents to an appropriate file-system location, as needed.
 func (o *NSDocument) AutosaveWithImplicitCancellabilityCompletionHandler(autosavingIsImplicitlyCancellable bool, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -489,10 +529,12 @@ func (o *NSDocument) AutosaveWithImplicitCancellabilityCompletionHandler(autosav
 	o.Ptr().Send(_nSDocumentSelAutosaveWithImplicitCancellabilityCompletionHandler, autosavingIsImplicitlyCancellable, __block_completionHandler)
 }
 
+// Opens the Versions browser in the document’s main window.
 func (o *NSDocument) BrowseDocumentVersions(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelBrowseDocumentVersions, sender)
 }
 
+// Dismiss the Versions browser for the current document.
 func (o *NSDocument) StopBrowsingVersionsWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -504,22 +546,27 @@ func (o *NSDocument) StopBrowsingVersionsWithCompletionHandler(completionHandler
 	o.Ptr().Send(_nSDocumentSelStopBrowsingVersionsWithCompletionHandler, __block_completionHandler)
 }
 
+// Determines whether to close the document, prompting the user as needed to choose a course of action.
 func (o *NSDocument) CanCloseDocumentWithDelegateShouldCloseSelectorContextInfo(delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelCanCloseDocumentWithDelegateShouldCloseSelectorContextInfo, delegate, shouldCloseSelector, contextInfo)
 }
 
+// Closes all of the document’s windows and removes the document from its document controller.
 func (o *NSDocument) Close() {
 	o.Ptr().Send(_nSDocumentSelClose)
 }
 
+// Creates a copy of the receiving document in response to the user choosing Duplicate from the File menu.
 func (o *NSDocument) DuplicateDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelDuplicateDocument, sender)
 }
 
+// Creates a new document whose contents are the same as the current document.
 func (o *NSDocument) DuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo(delegate objc.ID, didDuplicateSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelDuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo, delegate, didDuplicateSelector, contextInfo)
 }
 
+// Creates a new document whose contents are the same as the receiver and returns an error object if unsuccessful.
 func (o *NSDocument) DuplicateAndReturnError() (*NSDocument, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDuplicateAndReturnError, unsafe.Pointer(&_nsErr))
@@ -532,18 +579,22 @@ func (o *NSDocument) DuplicateAndReturnError() (*NSDocument, error) {
 	return NSDocumentFromID(_ret), nil
 }
 
+// Renames the current document in response to the user choosing the Rename menu item.
 func (o *NSDocument) RenameDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelRenameDocument, sender)
 }
 
+// Moves the document to the user’s iCloud storage.
 func (o *NSDocument) MoveDocumentToUbiquityContainer(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelMoveDocumentToUbiquityContainer, sender)
 }
 
+// Moves the document to a new location in response to the user choosing the Move To… menu item.
 func (o *NSDocument) MoveDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelMoveDocument, sender)
 }
 
+// Moves the document to a user-selected location.
 func (o *NSDocument) MoveDocumentWithCompletionHandler(completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -555,6 +606,7 @@ func (o *NSDocument) MoveDocumentWithCompletionHandler(completionHandler func(bo
 	o.Ptr().Send(_nSDocumentSelMoveDocumentWithCompletionHandler, __block_completionHandler)
 }
 
+// Moves the document’s file to the given URL.
 func (o *NSDocument) MoveToURLCompletionHandler(url *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -566,14 +618,17 @@ func (o *NSDocument) MoveToURLCompletionHandler(url *foundation.NSURL, completio
 	o.Ptr().Send(_nSDocumentSelMoveToURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
+// Locks the document in response to the user choosing the Lock menu item.
 func (o *NSDocument) LockDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelLockDocument, sender)
 }
 
+// Unlocks the document in response to the user choosing the Unlock menu item.
 func (o *NSDocument) UnlockDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelUnlockDocument, sender)
 }
 
+// Prevents the user from making further changes to the document.
 func (o *NSDocument) LockDocumentWithCompletionHandler(completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -585,6 +640,7 @@ func (o *NSDocument) LockDocumentWithCompletionHandler(completionHandler func(bo
 	o.Ptr().Send(_nSDocumentSelLockDocumentWithCompletionHandler, __block_completionHandler)
 }
 
+// Prevents the user from making changes to the document’s file.
 func (o *NSDocument) LockWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -596,6 +652,7 @@ func (o *NSDocument) LockWithCompletionHandler(completionHandler func(unsafe.Poi
 	o.Ptr().Send(_nSDocumentSelLockWithCompletionHandler, __block_completionHandler)
 }
 
+// Allows the user to make modifications to the document.
 func (o *NSDocument) UnlockDocumentWithCompletionHandler(completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -607,6 +664,7 @@ func (o *NSDocument) UnlockDocumentWithCompletionHandler(completionHandler func(
 	o.Ptr().Send(_nSDocumentSelUnlockDocumentWithCompletionHandler, __block_completionHandler)
 }
 
+// Allows the user to make modifications to the document’s file.
 func (o *NSDocument) UnlockWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -618,35 +676,42 @@ func (o *NSDocument) UnlockWithCompletionHandler(completionHandler func(unsafe.P
 	o.Ptr().Send(_nSDocumentSelUnlockWithCompletionHandler, __block_completionHandler)
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Page Setup menu command.
 func (o *NSDocument) RunPageLayout(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelRunPageLayout, sender)
 }
 
+// Runs the modal page layout panel with the receiver’s printing information object.
 func (o *NSDocument) RunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo(printInfo *NSPrintInfo, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelRunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo, printInfo.Ptr(), delegate, didRunSelector, contextInfo)
 }
 
+// Adds document-specific content to the Page Layout panel.
 func (o *NSDocument) PreparePageLayout(pageLayout *NSPageLayout) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPreparePageLayout, pageLayout.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the document allows changes to the default printing information.
 func (o *NSDocument) ShouldChangePrintInfo(newPrintInfo *NSPrintInfo) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelShouldChangePrintInfo, newPrintInfo.Ptr())
 	return _ret
 }
 
+// Prints the receiver in response to the user choosing the Print menu command.
 func (o *NSDocument) PrintDocument(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelPrintDocument, sender)
 }
 
+// Prints the document’s contents, optionally displaying a print panel to the user.
 func (o *NSDocument) PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], showPrintPanel bool, delegate objc.ID, didPrintSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelPrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo, printSettings, showPrintPanel, delegate, didPrintSelector, contextInfo)
+	o.Ptr().Send(_nSDocumentSelPrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo, printSettings.Ptr(), showPrintPanel, delegate, didPrintSelector, contextInfo)
 }
 
+// Creates and returns a print operation for the document’s contents.
 func (o *NSDocument) PrintOperationWithSettingsError(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSPrintOperation, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintOperationWithSettingsError, printSettings, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintOperationWithSettingsError, printSettings.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -656,14 +721,17 @@ func (o *NSDocument) PrintOperationWithSettingsError(printSettings *foundation.N
 	return NSPrintOperationFromID(_ret), nil
 }
 
+// Runs the specified print operation modally.
 func (o *NSDocument) RunModalPrintOperationDelegateDidRunSelectorContextInfo(printOperation *NSPrintOperation, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelRunModalPrintOperationDelegateDidRunSelectorContextInfo, printOperation.Ptr(), delegate, didRunSelector, contextInfo)
 }
 
+// Exports a PDF representation of the document’s current contents.
 func (o *NSDocument) SaveDocumentToPDF(sender objc.ID) {
 	o.Ptr().Send(_nSDocumentSelSaveDocumentToPDF, sender)
 }
 
+// Share the document’s file using the specified sharing service.
 func (o *NSDocument) ShareDocumentWithSharingServiceCompletionHandler(sharingService *NSSharingService, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -675,69 +743,85 @@ func (o *NSDocument) ShareDocumentWithSharingServiceCompletionHandler(sharingSer
 	o.Ptr().Send(_nSDocumentSelShareDocumentWithSharingServiceCompletionHandler, sharingService.Ptr(), __block_completionHandler)
 }
 
+// Perform any custom setup associated with a sharing service picker.
 func (o *NSDocument) PrepareSharingServicePicker(sharingServicePicker *NSSharingServicePicker) {
 	o.Ptr().Send(_nSDocumentSelPrepareSharingServicePicker, sharingServicePicker.Ptr())
 }
 
+// Updates the receiver’s change count according to the given change type.
 func (o *NSDocument) UpdateChangeCount(change NSDocumentChangeType) {
 	o.Ptr().Send(_nSDocumentSelUpdateChangeCount, change)
 }
 
+// Returns an object that encapsulates the current record of document changes at the beginning of a save operation.
 func (o *NSDocument) ChangeCountTokenForSaveOperation(saveOperation NSSaveOperationType) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelChangeCountTokenForSaveOperation, saveOperation)
 	return _ret
 }
 
+// Updates the document’s change count settings after a successful save operation.
 func (o *NSDocument) UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation NSSaveOperationType) {
 	o.Ptr().Send(_nSDocumentSelUpdateChangeCountWithTokenForSaveOperation, changeCountToken, saveOperation)
 }
 
+// Presents an error alert to the user as a modal panel.
 func (o *NSDocument) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo, error_, window.Ptr(), delegate, didPresentSelector, contextInfo)
 }
 
+// Presents an error alert to the user as a modal panel.
 func (o *NSDocument) PresentError(error_ unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPresentError, error_)
 	return _ret
 }
 
+// Called when the receiver is about to present an error.
 func (o *NSDocument) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSDocumentSelWillPresentError, error_)
 	return _ret
 }
 
+// Confirms that the error object is not to be presented to the user and the error cannot be recovered from, so cleanup can be done.
 func (o *NSDocument) WillNotPresentError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelWillNotPresentError, error_)
 }
 
+// Creates the window controller objects that the document uses to display its content.
 func (o *NSDocument) MakeWindowControllers() {
 	o.Ptr().Send(_nSDocumentSelMakeWindowControllers)
 }
 
+// Called before one of the document’s window controllers loads its nib file.
 func (o *NSDocument) WindowControllerWillLoadNib(windowController *NSWindowController) {
 	o.Ptr().Send(_nSDocumentSelWindowControllerWillLoadNib, windowController.Ptr())
 }
 
+// Called after one of the document’s window controllers loads its nib file.
 func (o *NSDocument) WindowControllerDidLoadNib(windowController *NSWindowController) {
 	o.Ptr().Send(_nSDocumentSelWindowControllerDidLoadNib, windowController.Ptr())
 }
 
+// Sets the window outlet of this document to the specified value.
 func (o *NSDocument) SetWindow(window *NSWindow) {
 	o.Ptr().Send(_nSDocumentSelSetWindow, window.Ptr())
 }
 
+// Adds the specified window controller to the current document.
 func (o *NSDocument) AddWindowController(windowController *NSWindowController) {
 	o.Ptr().Send(_nSDocumentSelAddWindowController, windowController.Ptr())
 }
 
+// Removes the specified window controller from the receiver’s array of window controllers.
 func (o *NSDocument) RemoveWindowController(windowController *NSWindowController) {
 	o.Ptr().Send(_nSDocumentSelRemoveWindowController, windowController.Ptr())
 }
 
+// Displays all of the document’s windows, bringing them to the front and making them main or key as necessary.
 func (o *NSDocument) ShowWindows() {
 	o.Ptr().Send(_nSDocumentSelShowWindows)
 }
 
+// Determines whether the system should close the document and its associated window.
 func (o *NSDocument) ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo(windowController *NSWindowController, delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSDocumentSelShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo, windowController.Ptr(), delegate, shouldCloseSelector, contextInfo)
 }
@@ -746,6 +830,7 @@ func (o *NSDocument) SetDisplayName(displayNameOrNil *foundation.NSString) {
 	o.Ptr().Send(_nSDocumentSelSetDisplayName, displayNameOrNil.Ptr())
 }
 
+// Returns the default draft name for the document subclass.
 func (o *NSDocument) DefaultDraftName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDefaultDraftName)
 	if _ret != 0 {
@@ -754,16 +839,22 @@ func (o *NSDocument) DefaultDraftName() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the document can read and write the data natively.
 func NSDocumentIsNativeType(type_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelIsNativeType, type_.Ptr())
 	return _ret
 }
 
+// Returns the names of the types to which this document can be saved for a specified kind of save operation.
 func (o *NSDocument) WritableTypesForSaveOperation(saveOperation NSSaveOperationType) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSDocumentSelWritableTypesForSaveOperation, saveOperation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWritableTypesForSaveOperation, saveOperation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns a filename extension that can be appended to a base filename, for a specified file type and kind of save operation.
 func (o *NSDocument) FileNameExtensionForTypeSaveOperation(typeName *foundation.NSString, saveOperation NSSaveOperationType) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileNameExtensionForTypeSaveOperation, typeName.Ptr(), saveOperation)
 	if _ret != 0 {
@@ -772,6 +863,7 @@ func (o *NSDocument) FileNameExtensionForTypeSaveOperation(typeName *foundation.
 	return foundation.NSStringFromID(_ret)
 }
 
+// Validates the specified user interface item that the receiver manages.
 func (o *NSDocument) ValidateUserInterfaceItem(item NSValidatedUserInterfaceItem) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelValidateUserInterfaceItem, item)
 	return _ret
@@ -830,7 +922,7 @@ func (o *NSDocument) PresentedItemDidChange() {
 }
 
 func (o *NSDocument) PresentedItemDidChangeUbiquityAttributes(attributes *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_nSDocumentSelPresentedItemDidChangeUbiquityAttributes, attributes)
+	o.Ptr().Send(_nSDocumentSelPresentedItemDidChangeUbiquityAttributes, attributes.Ptr())
 }
 
 func (o *NSDocument) PresentedItemDidGainVersion(version *foundation.NSFileVersion) {
@@ -1082,13 +1174,19 @@ func (o *NSDocument) WindowForSheet() *NSWindow {
 }
 
 func NSDocumentReadableTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSDocument), _nSDocumentSelReadableTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelReadableTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func NSDocumentWritableTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSDocument), _nSDocumentSelWritableTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelWritableTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func NSDocumentUsesUbiquitousStorage() bool {
@@ -1105,10 +1203,14 @@ func (o *NSDocument) PresentedItemURL() *foundation.NSURL {
 }
 
 func (o *NSDocument) ObservedPresentedItemUbiquityAttributes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _nSDocumentSelObservedPresentedItemUbiquityAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelObservedPresentedItemUbiquityAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
+// Saves the contents of the document to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation.
 // Deprecated: Use -saveToURL:ofType:forSaveOperation:completionHandler: instead
 func (o *NSDocument) SaveToURLOfTypeForSaveOperationError(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType) (bool, error) {
 	var _nsErr uintptr
@@ -1130,8 +1232,11 @@ func (o *NSDocument) DataRepresentationOfType(type_ *foundation.NSString) *found
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath *foundation.NSString, documentTypeName *foundation.NSString, saveOperationType NSSaveOperationType) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSDocumentSelFileAttributesToWriteToFileOfTypeSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), saveOperationType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileAttributesToWriteToFileOfTypeSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), saveOperationType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.4.
@@ -1251,6 +1356,7 @@ func (o *NSDocument) ShouldRunSavePanelWithAccessoryView() bool {
 	return _ret
 }
 
+// Updates the state of the given user activity.
 func (o *NSDocument) UpdateUserActivityState(activity *foundation.NSUserActivity) {
 	o.Ptr().Send(_nSDocumentSelUpdateUserActivityState, activity.Ptr())
 }
@@ -1267,16 +1373,19 @@ func (o *NSDocument) SetUserActivity(userActivity *foundation.NSUserActivity) {
 	o.Ptr().Send(_nSDocumentSelSetUserActivity, userActivity.Ptr())
 }
 
+// Handles the Save AppleScript command by attempting to save the document.
 func (o *NSDocument) HandleSaveScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandleSaveScriptCommand, command.Ptr())
 	return _ret
 }
 
+// Handles the Close AppleScript command by attempting to close the document.
 func (o *NSDocument) HandleCloseScriptCommand(command *foundation.NSCloseCommand) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandleCloseScriptCommand, command.Ptr())
 	return _ret
 }
 
+// Handles the Print AppleScript command by attempting to print the document.
 func (o *NSDocument) HandlePrintScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandlePrintScriptCommand, command.Ptr())
 	return _ret
@@ -1294,6 +1403,7 @@ func (o *NSDocument) SetLastComponentOfFileName(lastComponentOfFileName *foundat
 	o.Ptr().Send(_nSDocumentSelSetLastComponentOfFileName, lastComponentOfFileName.Ptr())
 }
 
+// Restores a window that was associated with a document, after that document is reopened.
 func (o *NSDocument) RestoreDocumentWindowWithIdentifierStateCompletionHandler(identifier *foundation.NSString, state *foundation.NSCoder, completionHandler func(*NSWindow, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -1308,28 +1418,39 @@ func (o *NSDocument) RestoreDocumentWindowWithIdentifierStateCompletionHandler(i
 	o.Ptr().Send(_nSDocumentSelRestoreDocumentWindowWithIdentifierStateCompletionHandler, identifier.Ptr(), state.Ptr(), __block_completionHandler)
 }
 
+// Saves the interface-related state of the document.
 func (o *NSDocument) EncodeRestorableStateWithCoder(coder *foundation.NSCoder) {
 	o.Ptr().Send(_nSDocumentSelEncodeRestorableStateWithCoder, coder.Ptr())
 }
 
+// Saves the interface-related state of the document.
 func (o *NSDocument) EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue) {
 	o.Ptr().Send(_nSDocumentSelEncodeRestorableStateWithCoderBackgroundQueue, coder.Ptr(), queue.Ptr())
 }
 
+// Restores the interface-related state of the document.
 func (o *NSDocument) RestoreStateWithCoder(coder *foundation.NSCoder) {
 	o.Ptr().Send(_nSDocumentSelRestoreStateWithCoder, coder.Ptr())
 }
 
+// Marks the document’s interface-related state as dirty.
 func (o *NSDocument) InvalidateRestorableState() {
 	o.Ptr().Send(_nSDocumentSelInvalidateRestorableState)
 }
 
+// Returns the classes that support secure coding.
 func NSDocumentAllowedClassesForRestorableStateKeyPath(keyPath *foundation.NSString) *foundation.NSArray[objc.Class] {
-	_ret := objc.Send[*foundation.NSArray[objc.Class]](objc.ID(_clsNSDocument), _nSDocumentSelAllowedClassesForRestorableStateKeyPath, keyPath.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelAllowedClassesForRestorableStateKeyPath, keyPath.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.Class](_ret)
 }
 
 func NSDocumentRestorableStateKeyPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSDocument), _nSDocumentSelRestorableStateKeyPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelRestorableStateKeyPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

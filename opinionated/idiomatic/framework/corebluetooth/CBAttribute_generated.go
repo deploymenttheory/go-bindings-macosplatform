@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of common aspects of services offered by a peripheral.
+//
 // Attribute wraps [raw.CBAttribute] with a fluent Go API.
 type Attribute struct {
 	inner *raw.CBAttribute

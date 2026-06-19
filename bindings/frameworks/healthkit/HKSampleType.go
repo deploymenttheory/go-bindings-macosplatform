@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for all classes that identify a specific type of sample when working with the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hksampletype
 type HKSampleType struct {
 	HKObjectType

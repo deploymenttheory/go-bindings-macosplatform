@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of a picker presented by the operating system for managing frame-capture streams.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker
 type SCContentSharingPicker struct {
 	foundation.NSObject
@@ -43,37 +45,37 @@ func SCContentSharingPickerFromID(id objc.ID) *SCContentSharingPicker {
 	return o
 }
 
-// @abstract addObserver: @param observer the observer object that adheres to SCContentSharingPickerObserver protocol @discussion Adds an observer object that will receive the results of user interaction with a displayed picker
+// Adds an observer instance to notify of changes in the content-sharing picker.
 func (o *SCContentSharingPicker) AddObserver(observer SCContentSharingPickerObserver) {
 	o.Ptr().Send(_sCContentSharingPickerSelAddObserver, observer)
 }
 
-// @abstract removeObserver: @param observer the observer object that adheres to SCContentSharingPickerObserver protocol @discussion Removes an observer object that will receive the results of user interaction with a displayed picker
+// Removes an observer instance from the content-sharing picker.
 func (o *SCContentSharingPicker) RemoveObserver(observer SCContentSharingPickerObserver) {
 	o.Ptr().Send(_sCContentSharingPickerSelRemoveObserver, observer)
 }
 
-// @abstract setConfiguration:forStream: @param pickerConfig configuration for the picker @param stream stream for optional picking configuration @discussion Sets optional configuration for the picker for a specific stream. If this is not set, the stream will use the defaultConfiguration instead
+// Sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.
 func (o *SCContentSharingPicker) SetConfigurationForStream(pickerConfig *SCContentSharingPickerConfiguration[objc.ID], stream *SCStream) {
-	o.Ptr().Send(_sCContentSharingPickerSelSetConfigurationForStream, pickerConfig, stream.Ptr())
+	o.Ptr().Send(_sCContentSharingPickerSelSetConfigurationForStream, pickerConfig.Ptr(), stream.Ptr())
 }
 
-// @abstract present @discussion show content sharing picker to get content for updating a new stream
+// Displays the picker with no active selection for capture.
 func (o *SCContentSharingPicker) Present() {
 	o.Ptr().Send(_sCContentSharingPickerSelPresent)
 }
 
-// @abstract presentPickerUsingContentStyle: @param contentStyle the mode in which picking should start @discussion Takes a person straight into picking particular windows or displays
+// Displays the picker for a single type of capture selection.
 func (o *SCContentSharingPicker) PresentPickerUsingContentStyle(contentStyle SCShareableContentStyle) {
 	o.Ptr().Send(_sCContentSharingPickerSelPresentPickerUsingContentStyle, contentStyle)
 }
 
-// @abstract presentPickerForStream: @param stream the stream to update @discussion show content sharing picker with an existing stream
+// Displays the picker with an already running capture stream.
 func (o *SCContentSharingPicker) PresentPickerForStream(stream *SCStream) {
 	o.Ptr().Send(_sCContentSharingPickerSelPresentPickerForStream, stream.Ptr())
 }
 
-// @abstract presentPickerForStream:usingContentStyle: @param stream the stream that the picker will display @param contentStyle the mode in which picking should start @discussion Takes a person straight into picking particular windows or displays
+// Displays the picker with an existing capture stream, allowing for a single type of capture selection.
 func (o *SCContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *SCStream, contentStyle SCShareableContentStyle) {
 	o.Ptr().Send(_sCContentSharingPickerSelPresentPickerForStreamUsingContentStyle, stream.Ptr(), contentStyle)
 }
@@ -89,12 +91,15 @@ func SCContentSharingPickerSharedPicker() *SCContentSharingPicker {
 
 // @abstract defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
 func (o *SCContentSharingPicker) DefaultConfiguration() *SCContentSharingPickerConfiguration[objc.ID] {
-	_ret := objc.Send[*SCContentSharingPickerConfiguration[objc.ID]](o.Ptr(), _sCContentSharingPickerSelDefaultConfiguration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentSharingPickerSelDefaultConfiguration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return SCContentSharingPickerConfigurationFromID[objc.ID](_ret)
 }
 
 func (o *SCContentSharingPicker) SetDefaultConfiguration(defaultConfiguration *SCContentSharingPickerConfiguration[objc.ID]) {
-	o.Ptr().Send(_sCContentSharingPickerSelSetDefaultConfiguration, defaultConfiguration)
+	o.Ptr().Send(_sCContentSharingPickerSelSetDefaultConfiguration, defaultConfiguration.Ptr())
 }
 
 // @abstract maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.

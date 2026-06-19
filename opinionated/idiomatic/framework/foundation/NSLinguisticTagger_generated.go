@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Analyze natural language text to tag part of speech and lexical class, identify names, perform lemmatization, and determine the language and script.
+//
 // LinguisticTagger wraps [raw.NSLinguisticTagger] with a fluent Go API.
 type LinguisticTagger struct {
 	inner *raw.NSLinguisticTagger
@@ -32,6 +34,8 @@ func LinguisticTaggerFromID(id objc.ID) *LinguisticTagger {
 	return &LinguisticTagger{inner: raw.NSLinguisticTaggerFromID(id)}
 }
 
+// Creates a linguistic tagger instance using the specified tag schemes and options.
+//
 // NewLinguisticTaggerWithTagSchemesOptions creates a new [LinguisticTagger].
 func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes *raw.NSArray[*raw.NSString], opts uint) *LinguisticTagger {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLinguisticTagger")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes *raw.NSArray[*raw.NSStr
 	return &LinguisticTagger{inner: raw.NSLinguisticTaggerFromID(_id)}
 }
 
+// The string being analyzed by the linguistic tagger.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *LinguisticTagger) WithString(string_ string) *LinguisticTagger {
 	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
@@ -51,11 +57,15 @@ func (x *LinguisticTagger) WithScriptingProperties(scriptingProperties *raw.NSDi
 	return x
 }
 
+// Sets the orthography for the specified range.
+//
 // SetOrthographyRange calls the underlying SetOrthographyRange.
 func (x *LinguisticTagger) SetOrthographyRange(orthography *raw.NSOrthography, range_ raw.NSRange) {
 	x.inner.SetOrthographyRange(orthography, range_)
 }
 
+// Returns the orthography at the index and also returns the effective range.
+//
 // OrthographyAtIndexEffectiveRange calls the underlying OrthographyAtIndexEffectiveRange.
 func (x *LinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *raw.NSRange) *Orthography {
 	_r := x.inner.OrthographyAtIndexEffectiveRange(charIndex, effectiveRange)
@@ -65,26 +75,36 @@ func (x *LinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex uint, effe
 	return &Orthography{inner: _r}
 }
 
+// Notifies the linguistic tagger that the string (if mutable) has changed as specified by the parameters.
+//
 // StringEditedInRangeChangeInLength calls the underlying StringEditedInRangeChangeInLength.
 func (x *LinguisticTagger) StringEditedInRangeChangeInLength(newRange raw.NSRange, delta int) {
 	x.inner.StringEditedInRangeChangeInLength(newRange, delta)
 }
 
+// Returns the range of the linguistic unit containing the specified character index.
+//
 // TokenRangeAtIndexUnit calls the underlying TokenRangeAtIndexUnit.
 func (x *LinguisticTagger) TokenRangeAtIndexUnit(charIndex uint, unit NSLinguisticTaggerUnit) raw.NSRange {
 	return x.inner.TokenRangeAtIndexUnit(charIndex, raw.NSLinguisticTaggerUnit(unit))
 }
 
+// Returns the range of a sentence containing the specified range.
+//
 // SentenceRangeForRange calls the underlying SentenceRangeForRange.
 func (x *LinguisticTagger) SentenceRangeForRange(range_ raw.NSRange) raw.NSRange {
 	return x.inner.SentenceRangeForRange(range_)
 }
 
+// Enumerates over a given range of the string for a particular unit and calls the specified block for each tag.
+//
 // EnumerateTagsInRangeUnitSchemeOptionsUsing calls the underlying EnumerateTagsInRangeUnitSchemeOptionsUsing.
 func (x *LinguisticTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, block objc.Block) {
 	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), block)
 }
 
+// Returns a tag for a single scheme, for a given linguistic unit, at the specified character position.
+//
 // TagAtIndexUnitSchemeTokenRange calls the underlying TagAtIndexUnitSchemeTokenRange.
 func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String {
 	_r := x.inner.TagAtIndexUnitSchemeTokenRange(charIndex, raw.NSLinguisticTaggerUnit(unit), scheme, tokenRange)
@@ -94,6 +114,8 @@ func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit N
 	return &String{inner: _r}
 }
 
+// Returns an array of linguistic tags and token ranges for a given string range and linguistic unit.
+//
 // TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
 func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
 	_ptrs := make([]objc.ID, len(tokenRanges))
@@ -110,11 +132,15 @@ func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NS
 	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), _arg4)
 }
 
+// Enumerates over a given range of the string and calls the specified block for each tag.
+//
 // EnumerateTagsInRangeSchemeOptionsUsing calls the underlying EnumerateTagsInRangeSchemeOptionsUsing.
 func (x *LinguisticTagger) EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts NSLinguisticTaggerOptions, block objc.Block) {
 	x.inner.EnumerateTagsInRangeSchemeOptionsUsing(range_, tagScheme, raw.NSLinguisticTaggerOptions(opts), block)
 }
 
+// Returns a tag for a single scheme at the specified character position.
+//
 // TagAtIndexSchemeTokenRangeSentenceRange calls the underlying TagAtIndexSchemeTokenRangeSentenceRange.
 func (x *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *raw.NSString, tokenRange *raw.NSRange, sentenceRange *raw.NSRange) *String {
 	_r := x.inner.TagAtIndexSchemeTokenRangeSentenceRange(charIndex, scheme, tokenRange, sentenceRange)
@@ -124,6 +150,8 @@ func (x *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uin
 	return &String{inner: _r}
 }
 
+// Returns an array of linguistic tags and token ranges for a given string range.
+//
 // TagsInRangeSchemeOptionsTokenRanges calls the underlying TagsInRangeSchemeOptionsTokenRanges.
 func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
 	_ptrs := make([]objc.ID, len(tokenRanges))
@@ -140,6 +168,8 @@ func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRang
 	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), raw.NSLinguisticTaggerOptions(opts), _arg3)
 }
 
+// Returns an array of possible tags for the given scheme at the specified range, supplying matching scores.
+//
 // PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores calls the underlying PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores.
 func (x *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores ...ValueProvider) *raw.NSArray[*raw.NSString] {
 	_ptrs := make([]objc.ID, len(scores))

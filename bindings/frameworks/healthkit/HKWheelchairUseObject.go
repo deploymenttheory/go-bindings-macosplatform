@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class acts as a wrapper for the wheelchair use enumeration.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkwheelchairuseobject
 type HKWheelchairUseObject struct {
 	foundation.NSObject

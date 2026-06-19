@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Produces 3D spherical noise with an infinite number of spheres-within-spheres of constantly-increasing radius.
+// A procedural noise generator whose output is a 3D field of concentric spherical shells.
 //
 // SpheresNoiseSource wraps [raw.GKSpheresNoiseSource] with a fluent Go API.
 type SpheresNoiseSource struct {
@@ -31,6 +31,8 @@ func SpheresNoiseSourceFromID(id objc.ID) *SpheresNoiseSource {
 	return &SpheresNoiseSource{inner: raw.GKSpheresNoiseSourceFromID(id)}
 }
 
+// Initializes a sphere noise source with the specified frequency.
+//
 // NewSpheresNoiseSourceWithFrequency creates a new [SpheresNoiseSource].
 func NewSpheresNoiseSourceWithFrequency(frequency float64) *SpheresNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSpheresNoiseSource")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSpheresNoiseSourceWithFrequency(frequency float64) *SpheresNoiseSource {
 	return &SpheresNoiseSource{inner: raw.GKSpheresNoiseSourceFromID(_id)}
 }
 
+// A value that determines the size and spacing of concentric spheres.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSource {
 	x.inner.SetFrequency(frequency)

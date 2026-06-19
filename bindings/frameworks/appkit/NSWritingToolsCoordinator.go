@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages interactions between Writing Tools and your custom text view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nswritingtoolscoordinator
 type NSWritingToolsCoordinator struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func NSWritingToolsCoordinatorFromID(id objc.ID) *NSWritingToolsCoordinator {
 	return o
 }
 
-// Creates a writing tools coordinator and assigns the specified delegate object to it. - Parameters: - delegate: An object capable of handling Writing Tools interactions for your view. The delegate must be able to modify your view’s text storage and refresh the view’s layout and appearance. Create the coordinator object during your view’s initialization, and assign the object to your view. Assign the coordinator to the “NSView/writingToolsCoordinator“ property of your view.
+// Creates a writing tools coordinator and assigns the specified delegate object to it.
 func (o *NSWritingToolsCoordinator) InitWithDelegate(delegate NSWritingToolsCoordinatorDelegate) *NSWritingToolsCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWritingToolsCoordinatorSelInitWithDelegate, delegate)
 	if _ret != 0 {
@@ -58,17 +60,17 @@ func (o *NSWritingToolsCoordinator) InitWithDelegate(delegate NSWritingToolsCoor
 	return NSWritingToolsCoordinatorFromID(_ret)
 }
 
-// Stops the current Writing Tools operation and dismisses the system UI. Call this method to abort the current Writing Tools operation. This method dismisses the system’s Writing Tools UI and stops any in-flight interactions with your view. This method does not undo any changes that Writing Tools already made to your view’s content.
+// Stops the current Writing Tools operation and dismisses the system UI.
 func (o *NSWritingToolsCoordinator) StopWritingTools() {
 	o.Ptr().Send(_nSWritingToolsCoordinatorSelStopWritingTools)
 }
 
-// Informs the coordinator about changes your app made to the text in the specified context object. - Parameters: - range: The range of text to replace. This range is relative to the starting location of the specified context object’s text in your view’s text storage. If you initialized the context object with the entire contents of your view’s text storage, specify the range of text you’re replacing in your text storage. However, if you initialized the context object with only a portion of your view’s text, specify a range that is relative to the starting location of the context object’s text. - replacementText: The text that replaces the previous content in `range`. Specify an empty string to delete the text in the specified range. - reason: The reason you updated the text. - contextID: The unique identifier of the context object that contains the text you modified. If you make any changes to the text Writing Tools is evaluating, call this method to report those changes to your view’s coordinator object. You might make changes in response to an undo command or when someone types into the same part of your view’s text. Calling this method keeps the coordinator object informed of any changes, and ensures it delivers accurate information to its delegate. In response, the coordinator refreshes previews and other information related to your view. If the scope of the update is significantly large, the coordinator can optionally cancel the Writing Tools session altogether. Use this method to report changes that precisely intersect your context object’s text. The first time you call this method for a context object, report changes only to the original attributed string in that object. If you call this method more than once, report changes to the newly modified version of that string. Don’t use this method to report changes to text that comes before or after the context object. If you make changes before your context object, report those changes separately using the “updateForReflowedTextInContextWithIdentifier(_:)“ method. > Warning: Failure to call this method for a change can cause Writing Tools to deliver inaccurate information to your delegate and lead to data loss.
+// Informs the coordinator about changes your app made to the text in the specified context object.
 func (o *NSWritingToolsCoordinator) UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID) {
 	o.Ptr().Send(_nSWritingToolsCoordinatorSelUpdateRangeWithTextReasonForContextWithIdentifier, range_, replacementText.Ptr(), reason, contextID.Ptr())
 }
 
-// Informs the coordinator that a change occurred to the view or its text that requires a layout update. - Parameters: - contextID: The unique identifier of the context object affected by the change. Pass the identifier for the context object that comes after the changes. Use this method to inform Writing Tools when the geometry of your view changes, or when the text that precedes one of your context objects changes. Changes to the view’s geometry or text can affect the flow of any remaining text, and require a layout update. Writing Tools uses this method to refresh any layout-dependent information it’s currently tracking. For example, it uses it to refresh the location of proofreading marks it’s displaying in your view. If a text change affects the text inside a context object, call the “updateRange(_:with:reason:forContextWithIdentifier:)“ method to report that change instead.
+// Informs the coordinator that a change occurred to the view or its text that requires a layout update.
 func (o *NSWritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier(contextID *foundation.NSUUID) {
 	o.Ptr().Send(_nSWritingToolsCoordinatorSelUpdateForReflowedTextInContextWithIdentifier, contextID.Ptr())
 }

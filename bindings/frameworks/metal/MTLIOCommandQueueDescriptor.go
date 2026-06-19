@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration template you use to create a new input/output command queue.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtliocommandqueuedescriptor
 type MTLIOCommandQueueDescriptor struct {
 	foundation.NSObject

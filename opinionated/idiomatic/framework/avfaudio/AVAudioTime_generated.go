@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to represent a moment in time.
+//
 // AudioTime wraps [raw.AVAudioTime] with a fluent Go API.
 type AudioTime struct {
 	inner *raw.AVAudioTime
@@ -30,7 +32,7 @@ func AudioTimeFromID(id objc.ID) *AudioTime {
 	return &AudioTime{inner: raw.AVAudioTimeFromID(id)}
 }
 
-// @method initWithAudioTimeStamp:sampleRate:
+// Creates an audio time object with the specified timestamp and sample rate.
 //
 // NewAudioTimeWithAudioTimeStampSampleRate creates a new [AudioTime].
 func NewAudioTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AudioTime {
@@ -39,7 +41,7 @@ func NewAudioTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp,
 	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
 }
 
-// @method initWithHostTime:
+// Creates an audio time object with the specified host time.
 //
 // NewAudioTimeWithHostTime creates a new [AudioTime].
 func NewAudioTimeWithHostTime(hostTime uint64) *AudioTime {
@@ -48,7 +50,7 @@ func NewAudioTimeWithHostTime(hostTime uint64) *AudioTime {
 	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
 }
 
-// @method initWithSampleTime:atRate:
+// Creates an audio time object with the specified timestamp and sample rate.
 //
 // NewAudioTimeWithSampleTimeAtRate creates a new [AudioTime].
 func NewAudioTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AudioTime {
@@ -57,7 +59,7 @@ func NewAudioTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *Aud
 	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
 }
 
-// @method initWithHostTime:sampleTime:atRate:
+// Creates an audio time object with the specified host time, sample time, and sample rate.
 //
 // NewAudioTimeWithHostTimeSampleTimeAtRate creates a new [AudioTime].
 func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AudioTime {
@@ -66,7 +68,7 @@ func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64,
 	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
 }
 
-// @method extrapolateTimeFromAnchor: @abstract Converts between host and sample time. @param anchorTime An AVAudioTime with a more complete AudioTimeStamp than that of the receiver (self). @return the extrapolated time @discussion If anchorTime is an AVAudioTime where both host time and sample time are valid, and self is another timestamp where only one of the two is valid, this method returns a new AVAudioTime copied from self and where any additional valid fields provided by the anchor are also valid. Note that the anchorTime must have both host and sample time valid, and self must have sample rate and at least one of host or sample time valid. Otherwise this method returns nil. <pre> // time0 has a valid audio sample representation, but no host time representation. AVAudioTime *time0 = [AVAudioTime timeWithSampleTime: 0.0 atRate: 44100.0]; // anchor has a valid host time representation and sample time representation. AVAudioTime *anchor = [player playerTimeForNodeTime: player.lastRenderTime]; // fill in valid host time representation AVAudioTime *fullTime0 = [time0 extrapolateTimeFromAnchor: anchor]; </pre>
+// Creates an audio time object by converting between host time and sample time.
 //
 // ExtrapolateTimeFromAnchor calls the underlying ExtrapolateTimeFromAnchor.
 func (x *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *raw.AVAudioTime) *AudioTime {

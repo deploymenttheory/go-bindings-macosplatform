@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable collection you use to temporarily store transient key-value pairs that are subject to eviction when resources are low.
+//
 // Cache wraps [raw.NSCache] with a fluent Go API.
 type Cache struct {
 	inner *raw.NSCache[objc.ID, objc.ID]
@@ -36,30 +38,40 @@ func NewCache() *Cache {
 	return &Cache{inner: raw.NSCacheFromID[objc.ID, objc.ID](_id)}
 }
 
+// The name of the cache.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Cache) WithName(name string) *Cache {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The cache’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Cache) WithDelegate(delegate raw.NSCacheDelegate) *Cache {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The maximum total cost that the cache can hold before it starts evicting objects.
+//
 // WithTotalCostLimit sets the totalCostLimit property and returns the receiver for chaining.
 func (x *Cache) WithTotalCostLimit(totalCostLimit uint) *Cache {
 	x.inner.SetTotalCostLimit(totalCostLimit)
 	return x
 }
 
+// The maximum number of objects the cache should hold.
+//
 // WithCountLimit sets the countLimit property and returns the receiver for chaining.
 func (x *Cache) WithCountLimit(countLimit uint) *Cache {
 	x.inner.SetCountLimit(countLimit)
 	return x
 }
 
+// Whether the cache will automatically evict discardable-content objects whose content has been discarded.
+//
 // WithEvictsObjectsWithDiscardedContent sets the evictsObjectsWithDiscardedContent property and returns the receiver for chaining.
 func (x *Cache) WithEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent bool) *Cache {
 	x.inner.SetEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent)
@@ -72,26 +84,36 @@ func (x *Cache) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*r
 	return x
 }
 
+// Returns the value associated with a given key.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Cache) ObjectForKey(key objc.ID) objc.ID {
 	return x.inner.ObjectForKey(key)
 }
 
+// Sets the value of the specified key in the cache.
+//
 // SetObjectForKey calls the underlying SetObjectForKey.
 func (x *Cache) SetObjectForKey(obj objc.ID, key objc.ID) {
 	x.inner.SetObjectForKey(obj, key)
 }
 
+// Sets the value of the specified key in the cache, and associates the key-value pair with the specified cost.
+//
 // SetObjectForKeyCost calls the underlying SetObjectForKeyCost.
 func (x *Cache) SetObjectForKeyCost(obj objc.ID, key objc.ID, g uint) {
 	x.inner.SetObjectForKeyCost(obj, key, g)
 }
 
+// Removes the value of the specified key in the cache.
+//
 // RemoveObjectForKey calls the underlying RemoveObjectForKey.
 func (x *Cache) RemoveObjectForKey(key objc.ID) {
 	x.inner.RemoveObjectForKey(key)
 }
 
+// Empties the cache.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *Cache) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()

@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A recurrent neural network layer for inference on Metal Performance Shaders images.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnimageinferencelayer
 type MPSRNNImageInferenceLayer struct {
 	mpsneuralnetwork.MPSCNNKernel
@@ -60,7 +62,7 @@ func (o *MPSRNNImageInferenceLayer) InitWithDeviceRnnDescriptor(device metal.MTL
 
 // @abstract   Initializes a kernel that implements a stack of convolutional RNN layers @param      device                          The MTLDevice on which this MPSRNNImageLayer filter will be used @param      rnnDescriptors                  An array of RNN descriptors that defines a stack of RNN layers, starting at index zero. The number of layers in stack is the number of entries in the array. All entries in the array must be valid MPSRNNDescriptors. @return     A valid MPSRNNImageInferenceLayer object or nil, if failure.
 func (o *MPSRNNImageInferenceLayer) InitWithDeviceRnnDescriptors(device metal.MTLDevice, rnnDescriptors *foundation.NSArray[*mpsneuralnetwork.MPSRNNDescriptor]) *MPSRNNImageInferenceLayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptors, device, rnnDescriptors)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptors, device, rnnDescriptors.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -68,11 +70,11 @@ func (o *MPSRNNImageInferenceLayer) InitWithDeviceRnnDescriptors(device metal.MT
 }
 
 func (o *MPSRNNImageInferenceLayer) EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentImageState]) {
-	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceImages, destinationImages, recurrentInputState.Ptr(), recurrentOutputStates)
+	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceImages.Ptr(), destinationImages.Ptr(), recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
 }
 
 func (o *MPSRNNImageInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage]) {
-	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages, commandBuffer, sourceSequence, destinationForwardImages, destinationBackwardImages)
+	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages, commandBuffer, sourceSequence.Ptr(), destinationForwardImages.Ptr(), destinationBackwardImages.Ptr())
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNImageInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNImageInferenceLayer @return     A new MPSRNNImageInferenceLayer object, or nil if failure.

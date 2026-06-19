@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Base interface for describing a Metal 4 shader function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4functiondescriptor
 type MTL4FunctionDescriptor struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A game session you can use to save game data, invite other players, and create turn-based and real-time game apps.
+//
 // GameSession wraps [raw.GKGameSession] with a fluent Go API.
 type GameSession struct {
 	inner *raw.GKGameSession
@@ -39,6 +41,8 @@ func NewGameSession() *GameSession {
 	return &GameSession{inner: raw.GKGameSessionFromID(_id)}
 }
 
+// Retrieves the URL used to share a game session.
+//
 // GetShareURL blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) GetShareURL(ctx context.Context) (*foundation.NSURL, error) {
 	type _result struct {
@@ -63,6 +67,8 @@ func (x *GameSession) GetShareURL(ctx context.Context) (*foundation.NSURL, error
 	}
 }
 
+// Retrieves the game data from the current game session.
+//
 // LoadData blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) LoadData(ctx context.Context) (*foundation.NSData, error) {
 	type _result struct {
@@ -87,6 +93,8 @@ func (x *GameSession) LoadData(ctx context.Context) (*foundation.NSData, error) 
 	}
 }
 
+// Saves the current game session data.
+//
 // SaveData blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SaveData(ctx context.Context, data *foundation.NSData) (*foundation.NSData, error) {
 	type _result struct {
@@ -111,6 +119,8 @@ func (x *GameSession) SaveData(ctx context.Context, data *foundation.NSData) (*f
 	}
 }
 
+// Sets the connection state for the player.
+//
 // SetConnectionState blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SetConnectionState(ctx context.Context, state GKConnectionState) error {
 	_ch := make(chan error, 1)
@@ -129,11 +139,15 @@ func (x *GameSession) SetConnectionState(ctx context.Context, state GKConnection
 	}
 }
 
+// Retrieves a list of players with the specified connection state.
+//
 // PlayersWithConnectionState calls the underlying PlayersWithConnectionState.
 func (x *GameSession) PlayersWithConnectionState(state GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer] {
 	return x.inner.PlayersWithConnectionState(raw.GKConnectionState(state))
 }
 
+// Sends the indicated data to all connected players.
+//
 // SendDataWithTransportType blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport GKTransportType) error {
 	_ch := make(chan error, 1)
@@ -152,6 +166,8 @@ func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *found
 	}
 }
 
+// Sends a message to players in a game session.
+//
 // SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData, players *foundation.NSArray[*raw.GKCloudPlayer], badgePlayers bool) error {
 	_ch := make(chan error, 1)
@@ -170,6 +186,8 @@ func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBad
 	}
 }
 
+// Clears the badge from the designated players.
+//
 // ClearBadgeForPlayers blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) ClearBadgeForPlayers(ctx context.Context, players *foundation.NSArray[*raw.GKCloudPlayer]) error {
 	_ch := make(chan error, 1)

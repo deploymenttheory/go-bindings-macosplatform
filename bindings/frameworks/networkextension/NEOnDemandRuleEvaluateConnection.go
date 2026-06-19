@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A VPN On Demand rule that evaluate the app’s connection to determine whether to run its action.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neondemandruleevaluateconnection
 type NEOnDemandRuleEvaluateConnection struct {
 	NEOnDemandRule

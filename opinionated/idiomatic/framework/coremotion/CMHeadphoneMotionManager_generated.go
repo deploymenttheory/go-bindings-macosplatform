@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that starts and manages headphone motion services.
+//
 // HeadphoneMotionManager wraps [raw.CMHeadphoneMotionManager] with a fluent Go API.
 type HeadphoneMotionManager struct {
 	inner *raw.CMHeadphoneMotionManager
@@ -37,22 +39,30 @@ func NewHeadphoneMotionManager() *HeadphoneMotionManager {
 	return &HeadphoneMotionManager{inner: raw.CMHeadphoneMotionManagerFromID(_id)}
 }
 
+// The object that receives headphone motion manager events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *HeadphoneMotionManager) WithDelegate(delegate raw.CMHeadphoneMotionManagerDelegate) *HeadphoneMotionManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Starts device-motion updates.
+//
 // StartDeviceMotionUpdates calls the underlying StartDeviceMotionUpdates.
 func (x *HeadphoneMotionManager) StartDeviceMotionUpdates() {
 	x.inner.StartDeviceMotionUpdates()
 }
 
+// Starts device-motion updates with a handler.
+//
 // StartDeviceMotionUpdatesToQueueWithHandler calls the underlying StartDeviceMotionUpdatesToQueueWithHandler.
 func (x *HeadphoneMotionManager) StartDeviceMotionUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMDeviceMotion, unsafe.Pointer)) {
 	x.inner.StartDeviceMotionUpdatesToQueueWithHandler(queue, handler)
 }
 
+// Stops device-motion updates.
+//
 // StopDeviceMotionUpdates calls the underlying StopDeviceMotionUpdates.
 func (x *HeadphoneMotionManager) StopDeviceMotionUpdates() {
 	x.inner.StopDeviceMotionUpdates()

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that stores a vision prescription.
+//
 // VisionPrescription wraps [raw.HKVisionPrescription] with a fluent Go API.
 type VisionPrescription struct {
 	inner *raw.HKVisionPrescription

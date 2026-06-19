@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object representing an instant message address for the contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cninstantmessageaddress
 type CNInstantMessageAddress struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func CNInstantMessageAddressFromID(id objc.ID) *CNInstantMessageAddress {
 	return o
 }
 
+// Returns a CNInstantMessageAddress object initialized with the specified user name and service.
 func (o *CNInstantMessageAddress) InitWithUsernameService(username *foundation.NSString, service *foundation.NSString) *CNInstantMessageAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNInstantMessageAddressSelInitWithUsernameService, username.Ptr(), service.Ptr())
 	if _ret != 0 {
@@ -42,7 +45,7 @@ func (o *CNInstantMessageAddress) InitWithUsernameService(username *foundation.N
 	return CNInstantMessageAddressFromID(_ret)
 }
 
-// Returns a user displayable property name.
+// Returns a string containing the localized property name.
 func CNInstantMessageAddressLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNInstantMessageAddress), _cNInstantMessageAddressSelLocalizedStringForKey, key.Ptr())
 	if _ret != 0 {
@@ -51,7 +54,7 @@ func CNInstantMessageAddressLocalizedStringForKey(key *foundation.NSString) *fou
 	return foundation.NSStringFromID(_ret)
 }
 
-// Returns a user displayable service name.
+// Returns a string containing the localized name of the specified service.
 func CNInstantMessageAddressLocalizedStringForService(service *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNInstantMessageAddress), _cNInstantMessageAddressSelLocalizedStringForService, service.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents when the player completes a variant switch.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeritemvariantswitchevent
 type AVMetricPlayerItemVariantSwitchEvent struct {
 	AVMetricEvent
@@ -56,8 +58,11 @@ func (o *AVMetricPlayerItemVariantSwitchEvent) ToVariant() *AVAssetVariant {
 
 // This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 func (o *AVMetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVMetricPlayerItemVariantSwitchEventSelLoadedTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemVariantSwitchEventSelLoadedTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // Represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.

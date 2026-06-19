@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores mean and variance terms used to execute batch normalization.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnnormalizationmeanandvariancestate
 type MPSCNNNormalizationMeanAndVarianceState struct {
 	mpscore.MPSState

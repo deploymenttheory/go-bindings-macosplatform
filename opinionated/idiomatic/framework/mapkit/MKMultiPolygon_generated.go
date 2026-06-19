@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of multiple closed polygon overlays.
+//
 // MultiPolygon wraps [raw.MKMultiPolygon] with a fluent Go API.
 type MultiPolygon struct {
 	inner *raw.MKMultiPolygon
@@ -31,6 +33,8 @@ func MultiPolygonFromID(id objc.ID) *MultiPolygon {
 	return &MultiPolygon{inner: raw.MKMultiPolygonFromID(id)}
 }
 
+// Creates a multipolygon object using the provided polygons.
+//
 // NewMultiPolygonWithPolygons creates a new [MultiPolygon].
 func NewMultiPolygonWithPolygons(polygons *foundation.NSArray[*raw.MKPolygon]) *MultiPolygon {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolygon")), objc.RegisterName("alloc"))
@@ -38,12 +42,16 @@ func NewMultiPolygonWithPolygons(polygons *foundation.NSArray[*raw.MKPolygon]) *
 	return &MultiPolygon{inner: raw.MKMultiPolygonFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *MultiPolygon) WithTitle(title string) *MultiPolygon {
 	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
 	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

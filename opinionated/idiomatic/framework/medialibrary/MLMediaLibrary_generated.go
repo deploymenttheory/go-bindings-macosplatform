@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MLMediaLibrary class provides an interface for accessing a collection of media objects from various sources. It serves as the initial access point of the Media Library framework.
+//
 // MediaLibrary wraps [raw.MLMediaLibrary] with a fluent Go API.
 type MediaLibrary struct {
 	inner *raw.MLMediaLibrary
@@ -31,6 +33,8 @@ func MediaLibraryFromID(id objc.ID) *MediaLibrary {
 	return &MediaLibrary{inner: raw.MLMediaLibraryFromID(id)}
 }
 
+// Initializes the media library based on the specified load options.
+//
 // NewMediaLibraryWithOptions creates a new [MediaLibrary].
 func NewMediaLibraryWithOptions(options purego.IDer) *MediaLibrary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMediaLibrary")), objc.RegisterName("alloc"))

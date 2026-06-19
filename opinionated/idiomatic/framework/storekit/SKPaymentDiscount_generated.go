@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The signed discount to apply to a payment.
+//
 // PaymentDiscount wraps [raw.SKPaymentDiscount] with a fluent Go API.
 type PaymentDiscount struct {
 	inner *raw.SKPaymentDiscount
@@ -31,6 +33,8 @@ func PaymentDiscountFromID(id objc.ID) *PaymentDiscount {
 	return &PaymentDiscount{inner: raw.SKPaymentDiscountFromID(id)}
 }
 
+// Initializes the payment discount with a signature and the parameters used by the signature.
+//
 // NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp creates a new [PaymentDiscount].
 func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identifier string, keyIdentifier string, nonce *foundation.NSUUID, signature string, timestamp *foundation.NSNumber) *PaymentDiscount {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPaymentDiscount")), objc.RegisterName("alloc"))

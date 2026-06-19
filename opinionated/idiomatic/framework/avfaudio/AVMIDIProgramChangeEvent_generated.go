@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a MIDI program or patch change message.
+//
 // MIDIProgramChangeEvent wraps [raw.AVMIDIProgramChangeEvent] with a fluent Go API.
 type MIDIProgramChangeEvent struct {
 	inner *raw.AVMIDIProgramChangeEvent
@@ -29,7 +31,7 @@ func MIDIProgramChangeEventFromID(id objc.ID) *MIDIProgramChangeEvent {
 	return &MIDIProgramChangeEvent{inner: raw.AVMIDIProgramChangeEventFromID(id)}
 }
 
-// @method initWithChannel:programNumber: @abstract Initialize the event with a channel and a program number. @param channel The MIDI channel for the message.  Range: 0-15. @param programNumber The program number to be sent.  Range: 0-127. @discussion Per the General MIDI specification, the actual instrument that is chosen will depend on optional AVMIDIControlChangeMessageTypeBankSelect events sent prior to this program change.
+// Creates a program change event with a channel and program number.
 //
 // NewMIDIProgramChangeEventWithChannelProgramNumber creates a new [MIDIProgramChangeEvent].
 func NewMIDIProgramChangeEventWithChannelProgramNumber(channel uint, programNumber uint) *MIDIProgramChangeEvent {
@@ -38,7 +40,7 @@ func NewMIDIProgramChangeEventWithChannelProgramNumber(channel uint, programNumb
 	return &MIDIProgramChangeEvent{inner: raw.AVMIDIProgramChangeEventFromID(_id)}
 }
 
-// @property programNumber The MIDI program number.  Range: 0-127.
+// The MIDI program number.
 //
 // WithProgramNumber sets the programNumber property and returns the receiver for chaining.
 func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber uint) *MIDIProgramChangeEvent {
@@ -46,7 +48,7 @@ func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber uint) *MIDIProg
 	return x
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIProgramChangeEvent) WithChannel(channel uint) *MIDIProgramChangeEvent {

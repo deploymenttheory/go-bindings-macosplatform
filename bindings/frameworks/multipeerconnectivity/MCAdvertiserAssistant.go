@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.
+//
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant
 type MCAdvertiserAssistant struct {
 	foundation.NSObject
@@ -37,18 +39,21 @@ func MCAdvertiserAssistantFromID(id objc.ID) *MCAdvertiserAssistant {
 	return o
 }
 
+// Initializes an advertiser assistant object.
 func (o *MCAdvertiserAssistant) InitWithServiceTypeDiscoveryInfoSession(serviceType *foundation.NSString, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], session *MCSession) *MCAdvertiserAssistant {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelInitWithServiceTypeDiscoveryInfoSession, serviceType.Ptr(), info, session.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelInitWithServiceTypeDiscoveryInfoSession, serviceType.Ptr(), info.Ptr(), session.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MCAdvertiserAssistantFromID(_ret)
 }
 
+// Begins advertising the service provided by a local peer and starts the assistant.
 func (o *MCAdvertiserAssistant) Start() {
 	o.Ptr().Send(_mCAdvertiserAssistantSelStart)
 }
 
+// Stops advertising the service provided by a local peer and stops the assistant.
 func (o *MCAdvertiserAssistant) Stop() {
 	o.Ptr().Send(_mCAdvertiserAssistantSelStop)
 }
@@ -71,8 +76,11 @@ func (o *MCAdvertiserAssistant) Session() *MCSession {
 }
 
 func (o *MCAdvertiserAssistant) DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _mCAdvertiserAssistantSelDiscoveryInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelDiscoveryInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *MCAdvertiserAssistant) ServiceType() *foundation.NSString {

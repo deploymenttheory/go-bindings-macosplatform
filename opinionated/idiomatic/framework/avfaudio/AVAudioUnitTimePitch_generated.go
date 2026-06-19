@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a good-quality playback rate and pitch shifting independently of each other.
+//
 // AudioUnitTimePitch wraps [raw.AVAudioUnitTimePitch] with a fluent Go API.
 type AudioUnitTimePitch struct {
 	inner *raw.AVAudioUnitTimePitch
@@ -35,7 +37,7 @@ func NewAudioUnitTimePitch() *AudioUnitTimePitch {
 	return &AudioUnitTimePitch{inner: raw.AVAudioUnitTimePitchFromID(_id)}
 }
 
-// @property rate @abstract playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
+// The playback rate of the input signal.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithRate(rate float32) *AudioUnitTimePitch {
@@ -43,7 +45,7 @@ func (x *AudioUnitTimePitch) WithRate(rate float32) *AudioUnitTimePitch {
 	return x
 }
 
-// @property pitch @abstract amount by which the input signal is pitch shifted @discussion 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
+// The amount to use to pitch shift the input signal.
 //
 // WithPitch sets the pitch property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithPitch(pitch float32) *AudioUnitTimePitch {
@@ -51,7 +53,7 @@ func (x *AudioUnitTimePitch) WithPitch(pitch float32) *AudioUnitTimePitch {
 	return x
 }
 
-// @property overlap @abstract amount of overlap between segments of the input audio signal @discussion A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
+// The amount of overlap between segments of the input audio signal.
 //
 // WithOverlap sets the overlap property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
@@ -59,7 +61,7 @@ func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
 	return x
 }
 
-// @property bypass @abstract bypass state of the audio unit
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {

@@ -50,12 +50,15 @@ func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupId(groupId *fou
 }
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGroupKeyManagementClusterGroupInfoMapStructSelEndpoints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupInfoMapStructSelEndpoints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetEndpoints, endpoints)
+	o.Ptr().Send(_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetEndpoints, endpoints.Ptr())
 }
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() *foundation.NSString {

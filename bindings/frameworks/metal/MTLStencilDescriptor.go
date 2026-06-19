@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the front-facing or back-facing stencil operations of a depth and stencil state object.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlstencildescriptor
 type MTLStencilDescriptor struct {
 	foundation.NSObject

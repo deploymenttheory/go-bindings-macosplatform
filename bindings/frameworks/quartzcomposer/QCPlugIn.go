@@ -55,18 +55,27 @@ func QCPlugInFromID(id objc.ID) *QCPlugIn {
 }
 
 func QCPlugInAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func QCPlugInAttributesForPropertyPortWithKey(key *foundation.NSString) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributesForPropertyPortWithKey, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributesForPropertyPortWithKey, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func QCPlugInSortedPropertyPortKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelSortedPropertyPortKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelSortedPropertyPortKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func QCPlugInExecutionModeClass() quartz.QCPlugInExecutionMode {
@@ -80,8 +89,11 @@ func QCPlugInTimeModeClass() quartz.QCPlugInTimeMode {
 }
 
 func QCPlugInPlugInKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelPlugInKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelPlugInKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QCPlugIn) StartExecution(context_ QCPlugInContext) bool {
@@ -94,12 +106,12 @@ func (o *QCPlugIn) EnableExecution(context_ QCPlugInContext) {
 }
 
 func (o *QCPlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ QCPlugInContext, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _qCPlugInSelExecutionTimeForContextAtTimeWithArguments, context_, time_, arguments)
+	_ret := objc.Send[float64](o.Ptr(), _qCPlugInSelExecutionTimeForContextAtTimeWithArguments, context_, time_, arguments.Ptr())
 	return _ret
 }
 
 func (o *QCPlugIn) ExecuteAtTimeWithArguments(context_ QCPlugInContext, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCPlugInSelExecuteAtTimeWithArguments, context_, time_, arguments)
+	_ret := objc.Send[bool](o.Ptr(), _qCPlugInSelExecuteAtTimeWithArguments, context_, time_, arguments.Ptr())
 	return _ret
 }
 
@@ -136,7 +148,7 @@ func (o *QCPlugIn) SetValueForOutputKey(value objc.ID, key *foundation.NSString)
 }
 
 func (o *QCPlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ *foundation.NSString, key *foundation.NSString, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_qCPlugInSelAddInputPortWithTypeForKeyWithAttributes, type_.Ptr(), key.Ptr(), attributes)
+	o.Ptr().Send(_qCPlugInSelAddInputPortWithTypeForKeyWithAttributes, type_.Ptr(), key.Ptr(), attributes.Ptr())
 }
 
 func (o *QCPlugIn) RemoveInputPortForKey(key *foundation.NSString) {
@@ -144,7 +156,7 @@ func (o *QCPlugIn) RemoveInputPortForKey(key *foundation.NSString) {
 }
 
 func (o *QCPlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ *foundation.NSString, key *foundation.NSString, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_qCPlugInSelAddOutputPortWithTypeForKeyWithAttributes, type_.Ptr(), key.Ptr(), attributes)
+	o.Ptr().Send(_qCPlugInSelAddOutputPortWithTypeForKeyWithAttributes, type_.Ptr(), key.Ptr(), attributes.Ptr())
 }
 
 func (o *QCPlugIn) RemoveOutputPortForKey(key *foundation.NSString) {

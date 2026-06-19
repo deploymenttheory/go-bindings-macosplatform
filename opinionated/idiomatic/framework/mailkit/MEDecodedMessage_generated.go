@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the RFC 2822 data for a message, without encryption or digital signatures.
+//
 // DecodedMessage wraps [raw.MEDecodedMessage] with a fluent Go API.
 type DecodedMessage struct {
 	inner *raw.MEDecodedMessage

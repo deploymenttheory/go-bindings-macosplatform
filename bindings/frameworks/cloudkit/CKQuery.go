@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that describes the criteria to apply when searching for records in a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckquery
 type CKQuery struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func CKQueryFromID(id objc.ID) *CKQuery {
 	return o
 }
 
-// Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
+// Creates an operation group from a serialized instance.
 func (o *CKQuery) InitWithCoder(aDecoder *foundation.NSCoder) *CKQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *CKQuery) InitWithCoder(aDecoder *foundation.NSCoder) *CKQuery {
 	return CKQueryFromID(_ret)
 }
 
-// Creates a query with the specified record type and predicate. - Parameters: - recordType: The type of record to search. Specify the name of one of your app's supported record types. The method throws an exception if this parameter is `nil` or contains an empty string. - predicate: The search predicate to apply to the prospective records. Only records that match the predicate criteria appear in the search results. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>. This parameter must not be `nil`. - Returns: An initialized query object. You can't change the record type and predicate of a query after you create it. If you want to search for a different set of records using a different set of search criteria, create a new query. You can add sort descriptors to the query and change them later as necessary. You can't query for user records, and executing a query where the record type is “CKRecordTypeUserRecord-49k30“ results in an error. You must fetch user records directly using their IDs.
+// Creates a query with the specified record type and predicate.
 func (o *CKQuery) InitWithRecordTypePredicate(recordType *foundation.NSString, predicate *foundation.NSPredicate) *CKQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelInitWithRecordTypePredicate, recordType.Ptr(), predicate.Ptr())
 	if _ret != 0 {
@@ -73,10 +75,13 @@ func (o *CKQuery) Predicate() *foundation.NSPredicate {
 
 // The sort descriptors for organizing the query's results. You can add sort descriptors to a query and change them later as necessary. Each sort descriptor contains a field name of the intended record type and information about whether to sort values in that field in ascending or descending order. The default value of this property is `nil`, which means that records return in an indeterminate order. The order of the items in the array defines the order that CloudKit applies the sort descriptors to the results. In other words, CloudKit applies the first sort descriptor in the array, then the second sort descriptor, if necessary, then the third, and so on.
 func (o *CKQuery) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _cKQuerySelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 func (o *CKQuery) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_cKQuerySelSetSortDescriptors, sortDescriptors)
+	o.Ptr().Send(_cKQuerySelSetSortDescriptors, sortDescriptors.Ptr())
 }

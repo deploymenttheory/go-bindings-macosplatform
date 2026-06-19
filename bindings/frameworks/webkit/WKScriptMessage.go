@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates a message sent by JavaScript code from a webpage.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkscriptmessage
 type WKScriptMessage struct {
 	foundation.NSObject

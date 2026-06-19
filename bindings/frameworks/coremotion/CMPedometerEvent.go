@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A change in the user’s pedestrian activity.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmpedometerevent
 type CMPedometerEvent struct {
 	foundation.NSObject

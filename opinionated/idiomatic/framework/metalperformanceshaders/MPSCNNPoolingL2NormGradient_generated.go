@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient L2-norm pooling filter.
+//
 // CNNPoolingL2NormGradient wraps [raw.MPSCNNPoolingL2NormGradient] with a fluent Go API.
 type CNNPoolingL2NormGradient struct {
 	inner *raw.MPSCNNPoolingL2NormGradient
@@ -203,7 +205,7 @@ func (x *CNNPoolingL2NormGradient) WithDestinationImageAllocator(destinationImag
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNPoolingL2NormGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2NormGradient {
@@ -211,7 +213,7 @@ func (x *CNNPoolingL2NormGradient) WithOptions(options mpscore.MPSKernelOptions)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNPoolingL2NormGradient) WithLabel(label string) *CNNPoolingL2NormGradient {

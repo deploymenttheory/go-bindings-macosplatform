@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an unsent record modification.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginependingrecordzonechange
 type CKSyncEnginePendingRecordZoneChange struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func CKSyncEnginePendingRecordZoneChangeFromID(id objc.ID) *CKSyncEnginePendingR
 	return o
 }
 
-// Creates a record zone change of the specified type for the given record. - Parameters: - recordID: The identifier of the record to change. - type: The type of change to make. - Returns: An initialized record zone change.
+// Creates a record zone change of the specified type for the given record.
 func (o *CKSyncEnginePendingRecordZoneChange) InitWithRecordIDType(recordID *CKRecordID, type_ CKSyncEnginePendingRecordZoneChangeType) *CKSyncEnginePendingRecordZoneChange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingRecordZoneChangeSelInitWithRecordIDType, recordID.Ptr(), type_)
 	if _ret != 0 {

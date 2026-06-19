@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a connection to a mixer node from a node that conforms to the audio mixing protocol.
+//
 // AudioMixingDestination wraps [raw.AVAudioMixingDestination] with a fluent Go API.
 type AudioMixingDestination struct {
 	inner *raw.AVAudioMixingDestination

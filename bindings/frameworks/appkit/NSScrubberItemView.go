@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item at a specific index position in the scrubber.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberitemview
 type NSScrubberItemView struct {
 	NSScrubberArrangedView

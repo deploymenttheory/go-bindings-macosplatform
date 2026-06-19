@@ -3,6 +3,7 @@
 
 package appkit
 
+// The inset distances for views, taking the user interface layout direction into account.
 type NSDirectionalEdgeInsets struct {
 	Top      float64
 	Leading  float64

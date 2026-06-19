@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The most general programmatic interface for objects that manage text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstext
 type NSText struct {
 	NSView
@@ -118,18 +120,22 @@ func (o *NSText) InitWithCoder(coder *foundation.NSCoder) *NSText {
 	return NSTextFromID(_ret)
 }
 
+// Replaces the characters in the given range with those in the given string.
 func (o *NSText) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ *foundation.NSString) {
 	o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithString, range_, string_.Ptr())
 }
 
+// Replaces the characters in the given range with RTF text interpreted from the given RTF data.
 func (o *NSText) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData *foundation.NSData) {
 	o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithRTF, range_, rtfData.Ptr())
 }
 
+// Replaces the characters in the given range with RTFD text interpreted from the given RTFD data.
 func (o *NSText) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData *foundation.NSData) {
 	o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithRTFD, range_, rtfdData.Ptr())
 }
 
+// Returns an NSData object that contains an RTF stream corresponding to the characters and attributes within aRange, omitting any attachment characters and attributes.
 func (o *NSText) RTFFromRange(range_ foundation.NSRange) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFFromRange, range_)
 	if _ret != 0 {
@@ -138,6 +144,7 @@ func (o *NSText) RTFFromRange(range_ foundation.NSRange) *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns an NSData object that contains an RTFD stream corresponding to the characters and attributes within aRange.
 func (o *NSText) RTFDFromRange(range_ foundation.NSRange) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFDFromRange, range_)
 	if _ret != 0 {
@@ -146,108 +153,134 @@ func (o *NSText) RTFDFromRange(range_ foundation.NSRange) *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Writes the receiver’s text as RTF with attachments to a file or directory at path.
 func (o *NSText) WriteRTFDToFileAtomically(path *foundation.NSString, flag bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextSelWriteRTFDToFileAtomically, path.Ptr(), flag)
 	return _ret
 }
 
+// Attempts to read the RTFD file at the specified path.
 func (o *NSText) ReadRTFDFromFile(path *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextSelReadRTFDFromFile, path.Ptr())
 	return _ret
 }
 
+// Scrolls the receiver in its enclosing scroll view so the first characters of aRange are visible.
 func (o *NSText) ScrollRangeToVisible(range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextSelScrollRangeToVisible, range_)
 }
 
+// Sets the text color of characters within the specified range to the specified color.
 func (o *NSText) SetTextColorRange(color *NSColor, range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextSelSetTextColorRange, color.Ptr(), range_)
 }
 
+// Sets the font of characters within aRange to aFont.
 func (o *NSText) SetFontRange(font *NSFont, range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextSelSetFontRange, font.Ptr(), range_)
 }
 
+// Resizes the receiver to fit its text.
 func (o *NSText) SizeToFit() {
 	o.Ptr().Send(_nSTextSelSizeToFit)
 }
 
+// This action method copies the selected text onto the general pasteboard, in as many formats as the receiver supports.
 func (o *NSText) Copy(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelCopy, sender)
 }
 
+// This action method copies the font information for the first character of the selection (or for the insertion point) onto the font pasteboard, as NSFontPboardType.
 func (o *NSText) CopyFont(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelCopyFont, sender)
 }
 
+// This action method copies the paragraph style information for first selected paragraph onto the ruler pasteboard, as NSRulerPboardType, and expands the selection to paragraph boundaries.
 func (o *NSText) CopyRuler(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelCopyRuler, sender)
 }
 
+// This action method deletes the selected text and places it onto the general pasteboard, in as many formats as the receiver supports.
 func (o *NSText) Cut(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelCut, sender)
 }
 
+// This action method deletes the selected text.
 func (o *NSText) Delete(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelDelete, sender)
 }
 
+// This action method pastes text from the general pasteboard at the insertion point or over the selection.
 func (o *NSText) Paste(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelPaste, sender)
 }
 
+// This action method pastes font information from the font pasteboard onto the selected text or insertion point of a rich text object, or over all text of a plain text object.
 func (o *NSText) PasteFont(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelPasteFont, sender)
 }
 
+// This action method pastes paragraph style information from the ruler pasteboard onto the selected paragraphs of a rich text object.
 func (o *NSText) PasteRuler(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelPasteRuler, sender)
 }
 
+// This action method selects all of the receiver’s text.
 func (o *NSText) SelectAll(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelSelectAll, sender)
 }
 
+// This action method changes the font of the selection for a rich text object, or of all text for a plain text object.
 func (o *NSText) ChangeFont(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelChangeFont, sender)
 }
 
+// This action method applies left alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (o *NSText) AlignLeft(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelAlignLeft, sender)
 }
 
+// This action method applies right alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (o *NSText) AlignRight(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelAlignRight, sender)
 }
 
+// This action method applies center alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (o *NSText) AlignCenter(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelAlignCenter, sender)
 }
 
+// This action method applies a subscript attribute to selected text (or all text if the receiver is a plain text object), lowering its baseline offset by a predefined amount.
 func (o *NSText) Subscript(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelSubscript, sender)
 }
 
+// This action method applies a superscript attribute to selected text (or all text if the receiver is a plain text object), raising its baseline offset by a predefined amount.
 func (o *NSText) Superscript(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelSuperscript, sender)
 }
 
+// Adds the underline attribute to the selected text attributes if absent; removes the attribute if present.
 func (o *NSText) Underline(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelUnderline, sender)
 }
 
+// This action method removes any superscripting or subscripting from selected text (or all text if the receiver is a plain text object).
 func (o *NSText) Unscript(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelUnscript, sender)
 }
 
+// This action method opens the Spelling panel, allowing the user to make a correction during spell checking.
 func (o *NSText) ShowGuessPanel(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelShowGuessPanel, sender)
 }
 
+// This action method searches for a misspelled word in the receiver’s text.
 func (o *NSText) CheckSpelling(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelCheckSpelling, sender)
 }
 
+// This action method shows or hides the ruler, if the receiver is enclosed in a scroll view.
 func (o *NSText) ToggleRuler(sender objc.ID) {
 	o.Ptr().Send(_nSTextSelToggleRuler, sender)
 }

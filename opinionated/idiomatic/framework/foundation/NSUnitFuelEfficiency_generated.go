@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for fuel efficiency.
+//
 // UnitFuelEfficiency wraps [raw.NSUnitFuelEfficiency] with a fluent Go API.
 type UnitFuelEfficiency struct {
 	inner *raw.NSUnitFuelEfficiency

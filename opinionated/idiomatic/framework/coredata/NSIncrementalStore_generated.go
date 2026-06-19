@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass defining the API through which Core Data communicates with a store.
+//
 // IncrementalStore wraps [raw.NSIncrementalStore] with a fluent Go API.
 type IncrementalStore struct {
 	inner *raw.NSIncrementalStore
@@ -36,35 +38,47 @@ func NewIncrementalStore() *IncrementalStore {
 	return &IncrementalStore{inner: raw.NSIncrementalStoreFromID(_id)}
 }
 
+// The URL for the persistent store.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *IncrementalStore) WithURL(uRL string) *IncrementalStore {
 	x.inner.NSPersistentStore.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The unique identifier for the persistent store.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *IncrementalStore) WithIdentifier(identifier string) *IncrementalStore {
 	x.inner.NSPersistentStore.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// A Boolean value that indicates whether the persistent store is read-only.
+//
 // WithReadOnly sets the readOnly property and returns the receiver for chaining.
 func (x *IncrementalStore) WithReadOnly(readOnly bool) *IncrementalStore {
 	x.inner.NSPersistentStore.SetReadOnly(readOnly)
 	return x
 }
 
+// The metadata for the persistent store.
+//
 // WithMetadata sets the metadata property and returns the receiver for chaining.
 func (x *IncrementalStore) WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *IncrementalStore {
 	x.inner.NSPersistentStore.SetMetadata(metadata)
 	return x
 }
 
+// Returns a value as appropriate for the given request, or nil if the request cannot be completed.
+//
 // ExecuteRequestWithContextError calls the underlying ExecuteRequestWithContextError.
 func (x *IncrementalStore) ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
 	return x.inner.ExecuteRequestWithContextError(request, context_)
 }
 
+// Returns an incremental store node encapsulating the persistent external values of the object with a given object ID.
+//
 // NewValuesForObjectWithIDWithContextError calls the underlying NewValuesForObjectWithIDWithContextError.
 func (x *IncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (*IncrementalStoreNode, error) {
 	_r, _err := x.inner.NewValuesForObjectWithIDWithContextError(objectID, context_)
@@ -77,26 +91,36 @@ func (x *IncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *ra
 	return &IncrementalStoreNode{inner: _r}, nil
 }
 
+// Returns the relationship for the given relationship of the object with a given object ID.
+//
 // NewValueForRelationshipForObjectWithIDWithContextError calls the underlying NewValueForRelationshipForObjectWithIDWithContextError.
 func (x *IncrementalStore) NewValueForRelationshipForObjectWithIDWithContextError(relationship *raw.NSRelationshipDescription, objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
 	return x.inner.NewValueForRelationshipForObjectWithIDWithContextError(relationship, objectID, context_)
 }
 
+// Returns an array containing the object IDs for a given array of newly-inserted objects.
+//
 // ObtainPermanentIDsForObjectsError calls the underlying ObtainPermanentIDsForObjectsError.
 func (x *IncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*raw.NSManagedObject]) (*foundation.NSArray[*raw.NSManagedObjectID], error) {
 	return x.inner.ObtainPermanentIDsForObjectsError(array)
 }
 
+// Indicates that objects identified by a given array of object IDs are in use in a managed object context.
+//
 // ManagedObjectContextDidRegisterObjectsWithIDs calls the underlying ManagedObjectContextDidRegisterObjectsWithIDs.
 func (x *IncrementalStore) ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID]) {
 	x.inner.ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs)
 }
 
+// Indicates that objects identified by a given array of object IDs are no longer being used by a managed object context.
+//
 // ManagedObjectContextDidUnregisterObjectsWithIDs calls the underlying ManagedObjectContextDidUnregisterObjectsWithIDs.
 func (x *IncrementalStore) ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID]) {
 	x.inner.ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs)
 }
 
+// Returns a new object ID that uses given data as the key.
+//
 // NewObjectIDForEntityReferenceObject calls the underlying NewObjectIDForEntityReferenceObject.
 func (x *IncrementalStore) NewObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID {
 	_r := x.inner.NewObjectIDForEntityReferenceObject(entity, data)
@@ -106,6 +130,8 @@ func (x *IncrementalStore) NewObjectIDForEntityReferenceObject(entity *raw.NSEnt
 	return &ManagedObjectID{inner: _r}
 }
 
+// Returns the reference data used to construct a given object ID.
+//
 // ReferenceObjectForObjectID calls the underlying ReferenceObjectForObjectID.
 func (x *IncrementalStore) ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID {
 	return x.inner.ReferenceObjectForObjectID(objectID)

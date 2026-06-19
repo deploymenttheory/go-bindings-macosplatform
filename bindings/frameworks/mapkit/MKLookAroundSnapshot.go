@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains a snapshot image.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklookaroundsnapshot
 type MKLookAroundSnapshot struct {
 	foundation.NSObject

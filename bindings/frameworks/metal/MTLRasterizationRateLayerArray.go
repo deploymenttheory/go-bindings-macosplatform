@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Descriptions for the rasterization rates to apply to the set of layers in a rate map.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrasterizationratelayerarray
 type MTLRasterizationRateLayerArray struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func MTLRasterizationRateLayerArrayFromID(id objc.ID) *MTLRasterizationRateLayer
 	return o
 }
 
-// @method objectAtIndexedSubscript: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setObject:atIndexedSubscript: to set the layer
+// Retrieves the sample value at the specified index.
 func (o *MTLRasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uint) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerArraySelObjectAtIndexedSubscript, layerIndex)
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func (o *MTLRasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uin
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
-// @method setObject:atIndexedSubscript: @abstract Sets the MTLRasterizationRateLayerDescriptor instance for the given layerIndex. @discussion The previous instance at this index will be overwritten.
+// Stores a sample value at the specified index.
 func (o *MTLRasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *MTLRasterizationRateLayerDescriptor, layerIndex uint) {
 	o.Ptr().Send(_mTLRasterizationRateLayerArraySelSetObjectAtIndexedSubscript, layer.Ptr(), layerIndex)
 }

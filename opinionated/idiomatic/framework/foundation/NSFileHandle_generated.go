@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object-oriented wrapper for a file descriptor.
+//
 // FileHandle wraps [raw.NSFileHandle] with a fluent Go API.
 type FileHandle struct {
 	inner *raw.NSFileHandle
@@ -70,6 +72,8 @@ func (x *FileHandle) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Reads the available data synchronously up to the end of file or maximum number of bytes.
+//
 // ReadDataToEndOfFileAndReturnError calls the underlying ReadDataToEndOfFileAndReturnError.
 func (x *FileHandle) ReadDataToEndOfFileAndReturnError() (*Data, error) {
 	_r, _err := x.inner.ReadDataToEndOfFileAndReturnError()
@@ -82,6 +86,8 @@ func (x *FileHandle) ReadDataToEndOfFileAndReturnError() (*Data, error) {
 	return &Data{inner: _r}, nil
 }
 
+// Reads data synchronously up to the specified number of bytes.
+//
 // ReadDataUpToLengthError calls the underlying ReadDataUpToLengthError.
 func (x *FileHandle) ReadDataUpToLengthError(length uint) (*Data, error) {
 	_r, _err := x.inner.ReadDataUpToLengthError(length)
@@ -94,16 +100,22 @@ func (x *FileHandle) ReadDataUpToLengthError(length uint) (*Data, error) {
 	return &Data{inner: _r}, nil
 }
 
+// Writes the specified data synchronously to the file handle.
+//
 // WriteDataError calls the underlying WriteDataError.
 func (x *FileHandle) WriteDataError(data *raw.NSData) (bool, error) {
 	return x.inner.WriteDataError(data)
 }
 
+// Get the current position of the file pointer within the file.
+//
 // GetOffsetError calls the underlying GetOffsetError.
 func (x *FileHandle) GetOffsetError(offsetInFile *uint64) (bool, error) {
 	return x.inner.GetOffsetError(offsetInFile)
 }
 
+// Places the file pointer at the end of the file referenced by the file handle and returns the new file offset.
+//
 // SeekToEndReturningOffsetError calls the underlying SeekToEndReturningOffsetError.
 func (x *FileHandle) SeekToEndReturningOffsetError(offsetInFile *uint64) (bool, error) {
 	return x.inner.SeekToEndReturningOffsetError(offsetInFile)

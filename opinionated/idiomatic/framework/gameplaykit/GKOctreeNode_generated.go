@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The individual node(s) that make up a GKOctree. Used as a hint for faster removal via [GKOctree removeData:WithNode:]
+// A helper class for managing the objects you organize in an octree.
 //
 // OctreeNode wraps [raw.GKOctreeNode] with a fluent Go API.
 type OctreeNode struct {

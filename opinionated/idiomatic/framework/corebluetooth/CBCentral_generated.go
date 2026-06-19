@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A remote device connected to a local app, which is acting as a peripheral.
+//
 // Central wraps [raw.CBCentral] with a fluent Go API.
 type Central struct {
 	inner *raw.CBCentral

@@ -1,0 +1,972 @@
+{
+  "schema_version": 1,
+  "framework": "CoreLocation",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CLBackgroundActivitySession": {
+      "doc": "An object that manages a visual indicator that keeps your app in use in the background, allowing it to receive updates or events.",
+      "url": "https://developer.apple.com/documentation/corelocation/clbackgroundactivitysession"
+    },
+    "CLBackgroundActivitySessionDiagnostic": {
+      "url": "https://developer.apple.com/documentation/corelocation/clbackgroundactivitysessiondiagnostic"
+    },
+    "CLBeacon": {
+      "doc": "Information about an observed iBeacon device and its relative distance to a person’s device.",
+      "url": "https://developer.apple.com/documentation/corelocation/clbeacon"
+    },
+    "CLBeaconIdentityCondition": {
+      "doc": "A condition that describes the identity characteristics of a beacon.",
+      "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition"
+    },
+    "CLBeaconIdentityConstraint": {
+      "doc": "Identity characteristics that can match one or more beacons.",
+      "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentityconstraint"
+    },
+    "CLBeaconRegion": {
+      "doc": "A region for detecting the presence of iBeacon devices.",
+      "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion"
+    },
+    "CLCircularGeographicCondition": {
+      "doc": "A circular geographic condition that a center point and radius define.",
+      "url": "https://developer.apple.com/documentation/corelocation/clcirculargeographiccondition"
+    },
+    "CLCircularRegion": {
+      "doc": "A circular geographic region that a center point and radius deine.",
+      "url": "https://developer.apple.com/documentation/corelocation/clcircularregion"
+    },
+    "CLCondition": {
+      "doc": "The abstract base class for all other monitor conditions.",
+      "url": "https://developer.apple.com/documentation/corelocation/clcondition"
+    },
+    "CLGeocoder": {
+      "doc": "An interface for converting between geographic coordinates and place names.",
+      "url": "https://developer.apple.com/documentation/corelocation/clgeocoder"
+    },
+    "CLHeading": {
+      "doc": "The orientation of the user’s device, relative to true or magnetic north.",
+      "url": "https://developer.apple.com/documentation/corelocation/clheading"
+    },
+    "CLLocationManager": {
+      "doc": "The object you use to start and stop the delivery of location-related events to your app.",
+      "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager"
+    },
+    "CLLocationUpdater": {
+      "doc": "An object that provides device location updates.",
+      "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater"
+    },
+    "CLMonitor": {
+      "doc": "An object that monitors the conditions you add to it.",
+      "url": "https://developer.apple.com/documentation/corelocation/clmonitor"
+    },
+    "CLMonitorConfiguration": {
+      "doc": "An object for configuring a location monitor instance.",
+      "url": "https://developer.apple.com/documentation/corelocation/clmonitorconfiguration"
+    },
+    "CLMonitoringEvent": {
+      "doc": "The object that the framework passes to the monitor’s callback handler upon receiving an event.",
+      "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent"
+    },
+    "CLMonitoringRecord": {
+      "doc": "An object that represents a condition and its associated information that a location monitor is monitoring.",
+      "url": "https://developer.apple.com/documentation/corelocation/clmonitoringrecord"
+    },
+    "CLPlacemark": {
+      "doc": "A user-friendly description of a geographic coordinate, often containing the name of the place, its address, and other relevant information.",
+      "url": "https://developer.apple.com/documentation/corelocation/clplacemark"
+    },
+    "CLRegion": {
+      "doc": "A base class representing an area that can be monitored.",
+      "url": "https://developer.apple.com/documentation/corelocation/clregion"
+    },
+    "CLServiceSessionDiagnostic": {
+      "url": "https://developer.apple.com/documentation/corelocation/clservicesessiondiagnostic"
+    },
+    "CLUpdate": {
+      "doc": "An object that represents a location update.",
+      "url": "https://developer.apple.com/documentation/corelocation/clupdate"
+    },
+    "CLVisit": {
+      "doc": "Information about the user’s location during a specific period of time.",
+      "url": "https://developer.apple.com/documentation/corelocation/clvisit"
+    }
+  },
+  "protocols": {
+    "CLLocationManagerDelegate": {
+      "doc": "The methods you use to receive events from an associated location-manager object.",
+      "url": "https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate"
+    },
+    "CLLocationPushServiceExtension": {
+      "doc": "The interface you adopt in the type that acts as the main entry point for a Location Push Service Extension.",
+      "url": "https://developer.apple.com/documentation/corelocation/cllocationpushserviceextension"
+    }
+  },
+  "enums": {
+    "CLAccuracyAuthorization": {
+      "doc": "Constants that indicate the level of location accuracy the app has authorization to use.",
+      "url": "https://developer.apple.com/documentation/corelocation/claccuracyauthorization",
+      "members": {
+        "CLAccuracyAuthorizationFullAccuracy": {
+          "doc": "The user authorized the app to access location data with full accuracy.",
+          "url": "https://developer.apple.com/documentation/corelocation/claccuracyauthorization/fullaccuracy"
+        },
+        "CLAccuracyAuthorizationReducedAccuracy": {
+          "doc": "The user authorized the app to access location data with reduced accuracy.",
+          "url": "https://developer.apple.com/documentation/corelocation/claccuracyauthorization/reducedaccuracy"
+        }
+      }
+    },
+    "CLActivityType": {
+      "doc": "Constants that indicate the type of activity associated with location updates.",
+      "url": "https://developer.apple.com/documentation/corelocation/clactivitytype",
+      "members": {
+        "CLActivityTypeAirborne": {
+          "doc": "The value that indicates activities in the air.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/airborne"
+        },
+        "CLActivityTypeAutomotiveNavigation": {
+          "doc": "The value that indicates positioning in an automobile following a road network.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/automotivenavigation"
+        },
+        "CLActivityTypeFitness": {
+          "doc": "The value that indicates positioning during dedicated fitness sessions, such as walking workouts, running workouts, cycling workouts, and so on.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/fitness"
+        },
+        "CLActivityTypeOther": {
+          "doc": "The value that indicates the app is using location manager for an unspecified activity.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/other"
+        },
+        "CLActivityTypeOtherNavigation": {
+          "doc": "The value that indicates positioning for activities that don’t or may not adhere to roads such as cycling, scooters, trains, boats and off-road vehicles.",
+          "url": "https://developer.apple.com/documentation/corelocation/clactivitytype/othernavigation"
+        }
+      }
+    },
+    "CLAuthorizationStatus": {
+      "doc": "Constants that indicate the app’s authorization to use location services.",
+      "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus",
+      "members": {
+        "kCLAuthorizationStatusAuthorized": {
+          "doc": "The user authorized the app to use location services.",
+          "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus/authorized"
+        },
+        "kCLAuthorizationStatusAuthorizedAlways": {
+          "doc": "The user authorized the app to start location services at any time.",
+          "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus/authorizedalways"
+        },
+        "kCLAuthorizationStatusAuthorizedWhenInUse": {
+          "doc": "The user authorized the app to start location services while it is in use.",
+          "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus/authorizedwheninuse"
+        },
+        "kCLAuthorizationStatusDenied": {
+          "doc": "The user denied the use of location services for the app or they are disabled globally in Settings.",
+          "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus/denied"
+        },
+        "kCLAuthorizationStatusNotDetermined": {
+          "doc": "The user has not chosen whether the app can use location services.",
+          "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus/notdetermined"
+        },
+        "kCLAuthorizationStatusRestricted": {
+          "doc": "The app is not authorized to use location services.",
+          "url": "https://developer.apple.com/documentation/corelocation/clauthorizationstatus/restricted"
+        }
+      }
+    },
+    "CLDeviceOrientation": {
+      "doc": "Constants indicating the physical orientation of the device.",
+      "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation",
+      "members": {
+        "CLDeviceOrientationFaceDown": {
+          "doc": "The device is held parallel to the ground with the screen facing downwards.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/facedown"
+        },
+        "CLDeviceOrientationFaceUp": {
+          "doc": "The device is held parallel to the ground with the screen facing upwards.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/faceup"
+        },
+        "CLDeviceOrientationLandscapeLeft": {
+          "doc": "The device is in landscape mode, with the device held upright and the home button on the right side.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/landscapeleft"
+        },
+        "CLDeviceOrientationLandscapeRight": {
+          "doc": "The device is in landscape mode, with the device held upright and the home button on the left side.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/landscaperight"
+        },
+        "CLDeviceOrientationPortrait": {
+          "doc": "The device is in portrait mode, with the device held upright and the home button at the bottom.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/portrait"
+        },
+        "CLDeviceOrientationPortraitUpsideDown": {
+          "doc": "The device is in portrait mode but upside down, with the device held upright and the home button at the top.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/portraitupsidedown"
+        },
+        "CLDeviceOrientationUnknown": {
+          "doc": "The orientation is currently not known.",
+          "url": "https://developer.apple.com/documentation/corelocation/cldeviceorientation/unknown"
+        }
+      }
+    },
+    "CLError": {
+      "doc": "A Core Location error.",
+      "url": "https://developer.apple.com/documentation/corelocation/clerror"
+    },
+    "CLLiveUpdateConfiguration": {
+      "doc": "Specifies the types of locations that a location updater generates.",
+      "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration",
+      "members": {
+        "CLLiveUpdateConfigurationAirborne": {
+          "doc": "A configuration for airborne use cases.",
+          "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration/clliveupdateconfigurationairborne"
+        },
+        "CLLiveUpdateConfigurationAutomotiveNavigation": {
+          "doc": "A configuration for automotive navigation use cases.",
+          "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration/clliveupdateconfigurationautomotivenavigation"
+        },
+        "CLLiveUpdateConfigurationDefault": {
+          "doc": "The default configuration.",
+          "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration/clliveupdateconfigurationdefault"
+        },
+        "CLLiveUpdateConfigurationFitness": {
+          "doc": "A configuration for fitness use cases.",
+          "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration/clliveupdateconfigurationfitness"
+        },
+        "CLLiveUpdateConfigurationOtherNavigation": {
+          "doc": "A configuration for other navigation use cases.",
+          "url": "https://developer.apple.com/documentation/corelocation/clliveupdateconfiguration/clliveupdateconfigurationothernavigation"
+        }
+      }
+    },
+    "CLLocationPushServiceError": {
+      "doc": "Error codes the location manager returns if starting to monitor for location push notifications fails.",
+      "url": "https://developer.apple.com/documentation/corelocation/cllocationpushserviceerror"
+    },
+    "CLMonitoringState": {
+      "doc": "Values that represent the current state of a monitoring condition.",
+      "url": "https://developer.apple.com/documentation/corelocation/clmonitoringstate",
+      "members": {
+        "CLMonitoringStateSatisfied": {
+          "doc": "The condition is in a satisfied state.",
+          "url": "https://developer.apple.com/documentation/corelocation/clmonitoringstate/clmonitoringstatesatisfied"
+        },
+        "CLMonitoringStateUnknown": {
+          "doc": "The condition is in an unknown state.",
+          "url": "https://developer.apple.com/documentation/corelocation/clmonitoringstate/clmonitoringstateunknown"
+        },
+        "CLMonitoringStateUnmonitored": {
+          "doc": "The condition is in an unmonitored state.",
+          "url": "https://developer.apple.com/documentation/corelocation/clmonitoringstate/clmonitoringstateunmonitored"
+        },
+        "CLMonitoringStateUnsatisfied": {
+          "doc": "The condition is in an unsatisfied state.",
+          "url": "https://developer.apple.com/documentation/corelocation/clmonitoringstate/clmonitoringstateunsatisfied"
+        }
+      }
+    },
+    "CLProximity": {
+      "doc": "Constants that reflect the relative distance to a beacon.",
+      "url": "https://developer.apple.com/documentation/corelocation/clproximity",
+      "members": {
+        "CLProximityFar": {
+          "doc": "The beacon is far away.",
+          "url": "https://developer.apple.com/documentation/corelocation/clproximity/far"
+        },
+        "CLProximityImmediate": {
+          "doc": "The beacon is in the user’s immediate vicinity.",
+          "url": "https://developer.apple.com/documentation/corelocation/clproximity/immediate"
+        },
+        "CLProximityNear": {
+          "doc": "The beacon is relatively close to the user.",
+          "url": "https://developer.apple.com/documentation/corelocation/clproximity/near"
+        },
+        "CLProximityUnknown": {
+          "doc": "The proximity of the beacon could not be determined.",
+          "url": "https://developer.apple.com/documentation/corelocation/clproximity/unknown"
+        }
+      }
+    },
+    "CLRegionState": {
+      "doc": "Constants that reflect the relationship of the current location to the region boundaries.",
+      "url": "https://developer.apple.com/documentation/corelocation/clregionstate",
+      "members": {
+        "CLRegionStateInside": {
+          "doc": "The location is inside of the given region.",
+          "url": "https://developer.apple.com/documentation/corelocation/clregionstate/inside"
+        },
+        "CLRegionStateOutside": {
+          "doc": "The location is outside of the given region.",
+          "url": "https://developer.apple.com/documentation/corelocation/clregionstate/outside"
+        },
+        "CLRegionStateUnknown": {
+          "doc": "It is unknown whether the location is inside or outside of the region.",
+          "url": "https://developer.apple.com/documentation/corelocation/clregionstate/unknown"
+        }
+      }
+    },
+    "CLServiceSessionAuthorizationRequirement": {
+      "url": "https://developer.apple.com/documentation/corelocation/clservicesessionauthorizationrequirement"
+    }
+  },
+  "structs": {
+    "CLLocationCoordinate2D": {
+      "doc": "The latitude and longitude associated with a location, specified using the WGS 84 reference frame.",
+      "url": "https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d"
+    }
+  },
+  "methods": {
+    "CLBeaconIdentityCondition": {
+      "-initWithUUID:": {
+        "doc": "Creates a new beacon identity condition with the identifier you specify.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition/initwithuuid:"
+      },
+      "-initWithUUID:major:": {
+        "doc": "Creates a new beacon identity condition with the identifier and major value you specify.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition/initwithuuid:major:"
+      },
+      "-initWithUUID:major:minor:": {
+        "doc": "Creates a new beacon identity condition with the identifier, and major and minor values you specify.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition/initwithuuid:major:minor:"
+      }
+    },
+    "CLBeaconRegion": {
+      "-initWithBeaconIdentityConstraint:identifier:": {
+        "doc": "Creates and returns a region object that targets beacons that satisfy the specified beacon identity constraints.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(beaconidentityconstraint:identifier:)"
+      },
+      "-initWithProximityUUID:identifier:": {
+        "doc": "Creates and returns a region object that targets a beacon with the specified UUID.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(proximityuuid:identifier:)"
+      },
+      "-initWithProximityUUID:major:identifier:": {
+        "doc": "Creates and returns a region object that targets a beacon with the specified proximity ID and major value.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(proximityuuid:major:identifier:)"
+      },
+      "-initWithProximityUUID:major:minor:identifier:": {
+        "doc": "Creates and returns a region object that targets a beacon with the specified proximity ID, major value, and minor value.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(proximityuuid:major:minor:identifier:)"
+      },
+      "-initWithUUID:identifier:": {
+        "doc": "Creates and returns a region object that targets beacons with the specified UUID.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(uuid:identifier:)-6hg8v"
+      },
+      "-initWithUUID:major:identifier:": {
+        "doc": "Creates and returns a region object that targets beacons with the specified UUID and major value.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(uuid:major:identifier:)-8ur0j"
+      },
+      "-initWithUUID:major:minor:identifier:": {
+        "doc": "Creates and returns a region object that targets beacons with the specified UUID, and major and minor values.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/init(uuid:major:minor:identifier:)-24h7w"
+      },
+      "-peripheralDataWithMeasuredPower:": {
+        "doc": "Retrieves data that you can use to advertise the current device as a beacon.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/peripheraldata(withmeasuredpower:)"
+      }
+    },
+    "CLCircularGeographicCondition": {
+      "-initWithCenter:radius:": {
+        "doc": "Creates a new circular geographic condition with the center point and radius you provide.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcirculargeographiccondition/initwithcenter:radius:"
+      }
+    },
+    "CLCircularRegion": {
+      "-containsCoordinate:": {
+        "doc": "Returns a Boolean value indicating whether the geographic area contains the specified coordinate.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcircularregion/contains(_:)"
+      },
+      "-initWithCenter:radius:identifier:": {
+        "doc": "Creates and returns a region object defining a circular geographic area.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcircularregion/init(center:radius:identifier:)"
+      }
+    },
+    "CLGeocoder": {
+      "-cancelGeocode": {
+        "doc": "Cancels a pending geocoding request.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/cancelgeocode()"
+      },
+      "-geocodeAddressDictionary:completionHandler:": {
+        "doc": "Submits a forward-geocoding request using the specified address dictionary.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/geocodeaddressdictionary(_:completionhandler:)"
+      },
+      "-geocodeAddressString:completionHandler:": {
+        "doc": "Submits a forward-geocoding request using the specified string.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/geocodeaddressstring(_:completionhandler:)"
+      },
+      "-geocodeAddressString:inRegion:completionHandler:": {
+        "doc": "Submits a forward-geocoding request using the specified string and region information.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/geocodeaddressstring(_:in:completionhandler:)"
+      },
+      "-geocodeAddressString:inRegion:preferredLocale:completionHandler:": {
+        "doc": "Submits a forward-geocoding requesting using the specified address string and locale information.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/geocodeaddressstring(_:in:preferredlocale:completionhandler:)"
+      },
+      "-geocodePostalAddress:completionHandler:": {
+        "doc": "Submits a forward-geocoding requesting using the specified Contacts framework information.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/geocodepostaladdress(_:completionhandler:)"
+      },
+      "-geocodePostalAddress:preferredLocale:completionHandler:": {
+        "doc": "Submits a forward-geocoding requesting using the specified locale and Contacts framework information.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/geocodepostaladdress(_:preferredlocale:completionhandler:)"
+      },
+      "-reverseGeocodeLocation:completionHandler:": {
+        "doc": "Submits a reverse-geocoding request for the specified location.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/reversegeocodelocation(_:completionhandler:)"
+      },
+      "-reverseGeocodeLocation:preferredLocale:completionHandler:": {
+        "doc": "Submits a reverse-geocoding request for the specified location and locale.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/reversegeocodelocation(_:preferredlocale:completionhandler:)"
+      }
+    },
+    "CLLocationManager": {
+      "+headingAvailable": {
+        "doc": "Returns a Boolean value indicating whether the location manager is able to generate heading-related events.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/headingavailable()"
+      },
+      "+isMonitoringAvailableForClass:": {
+        "doc": "Returns a Boolean value indicating whether the device supports region monitoring using the specified class.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/ismonitoringavailable(for:)"
+      },
+      "+isRangingAvailable": {
+        "doc": "Returns a Boolean value indicating whether the device supports ranging of beacons that use the iBeacon protocol.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/israngingavailable()"
+      },
+      "+locationServicesEnabled": {
+        "doc": "Returns a Boolean value indicating whether location services are enabled on the device.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/locationservicesenabled()"
+      },
+      "+significantLocationChangeMonitoringAvailable": {
+        "doc": "Returns a Boolean value indicating whether the significant-change location service is available on the device.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/significantlocationchangemonitoringavailable()"
+      },
+      "-dismissHeadingCalibrationDisplay": {
+        "doc": "Dismisses the heading calibration view from the screen immediately.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/dismissheadingcalibrationdisplay()"
+      },
+      "-requestAlwaysAuthorization": {
+        "doc": "Requests the user’s permission to use location services regardless of whether the app is in use.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/requestalwaysauthorization()"
+      },
+      "-requestLocation": {
+        "doc": "Requests the one-time delivery of the user’s current location.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/requestlocation()"
+      },
+      "-requestTemporaryFullAccuracyAuthorizationWithPurposeKey:": {
+        "doc": "Requests permission to temporarily use location services with full accuracy.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/requesttemporaryfullaccuracyauthorization(withpurposekey:)"
+      },
+      "-requestTemporaryFullAccuracyAuthorizationWithPurposeKey:completion:": {
+        "doc": "Requests permission to temporarily use location services with full accuracy and reports the results to the provided completion handler.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/requesttemporaryfullaccuracyauthorization(withpurposekey:completion:)"
+      },
+      "-requestWhenInUseAuthorization": {
+        "doc": "Requests the user’s permission to use location services while the app is in use.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/requestwheninuseauthorization()"
+      },
+      "-startMonitoringLocationPushesWithCompletion:": {
+        "doc": "Starts monitoring for the delivery of Apple Push Notification service (APNs) location pushes, and provides a device-specific token for sending pushes.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/startmonitoringlocationpushes(completion:)"
+      },
+      "-startMonitoringSignificantLocationChanges": {
+        "doc": "Starts the generation of updates based on significant location changes.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/startmonitoringsignificantlocationchanges()"
+      },
+      "-startMonitoringVisits": {
+        "doc": "Starts the delivery of visit-related events.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/startmonitoringvisits()"
+      },
+      "-startRangingBeaconsSatisfyingConstraint:": {
+        "doc": "Starts the delivery of notifications for the specified beacon constraints.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/startrangingbeacons(satisfying:)"
+      },
+      "-startUpdatingHeading": {
+        "doc": "Starts the generation of updates that report the user’s current heading.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/startupdatingheading()"
+      },
+      "-startUpdatingLocation": {
+        "doc": "Starts the generation of updates that report the user’s current location.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/startupdatinglocation()"
+      },
+      "-stopMonitoringLocationPushes": {
+        "doc": "Stops monitoring for Apple Push Notification service (APNs) location pushes.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/stopmonitoringlocationpushes()"
+      },
+      "-stopMonitoringSignificantLocationChanges": {
+        "doc": "Stops the delivery of location events based on significant location changes.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/stopmonitoringsignificantlocationchanges()"
+      },
+      "-stopMonitoringVisits": {
+        "doc": "Stops the delivery of visit-related events.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/stopmonitoringvisits()"
+      },
+      "-stopRangingBeaconsSatisfyingConstraint:": {
+        "doc": "Stops the delivery of notifications for the specified beacon constraints.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/stoprangingbeacons(satisfying:)"
+      },
+      "-stopUpdatingHeading": {
+        "doc": "Stops the generation of heading updates.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/stopupdatingheading()"
+      },
+      "-stopUpdatingLocation": {
+        "doc": "Stops the generation of location updates.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/stopupdatinglocation()"
+      }
+    },
+    "CLLocationUpdater": {
+      "+liveUpdaterWithConfiguration:queue:handler:": {
+        "doc": "Creates a location updater with the configuration and queue that you specify.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater/liveupdaterwithconfiguration:queue:handler:"
+      },
+      "+liveUpdaterWithQueue:handler:": {
+        "doc": "Creates a location updater on the queue you specify.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater/liveupdaterwithqueue:handler:"
+      },
+      "-invalidate": {
+        "doc": "Invalidates the updater.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater/invalidate"
+      },
+      "-pause": {
+        "doc": "Pauses the updater.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater/pause"
+      },
+      "-resume": {
+        "doc": "Resumes the updater.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationupdater/resume"
+      }
+    },
+    "CLMonitorConfiguration": {
+      "+configWithMonitorName:queue:eventHandler:": {
+        "doc": "Creates a location monitor instance with the name, dispatch queue, and event handler you specify.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitorconfiguration/configwithmonitorname:queue:eventhandler:"
+      }
+    },
+    "CLPlacemark": {
+      "-initWithPlacemark:": {
+        "doc": "Initializes and returns a placemark object from another placemark object.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/init(placemark:)"
+      }
+    },
+    "CLRegion": {
+      "-containsCoordinate:": {
+        "doc": "Returns a Boolean value indicating whether the region contains the specified coordinate.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/contains(_:)"
+      },
+      "-initCircularRegionWithCenter:radius:identifier:": {
+        "doc": "Initializes and returns a region object defining a circular area.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/init(circularregionwithcenter:radius:identifier:)"
+      }
+    }
+  },
+  "properties": {
+    "CLBeacon": {
+      "UUID": {
+        "doc": "The UUID that the observed beacon transmitted.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/uuid"
+      },
+      "accuracy": {
+        "doc": "The accuracy of the proximity value, measured in meters from the beacon.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/accuracy"
+      },
+      "major": {
+        "doc": "The major value that the observed beacon transmitted.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/major"
+      },
+      "minor": {
+        "doc": "The minor value that the observed beacon transmitted.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/minor"
+      },
+      "proximity": {
+        "doc": "The relative distance to the beacon.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/proximity"
+      },
+      "proximityUUID": {
+        "doc": "The proximity ID of the beacon.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/proximityuuid"
+      },
+      "rssi": {
+        "doc": "The received signal strength of the beacon, measured in decibels.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/rssi"
+      },
+      "timestamp": {
+        "doc": "A timestamp representing when the beacon was observed.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeacon/timestamp"
+      }
+    },
+    "CLBeaconIdentityCondition": {
+      "UUID": {
+        "doc": "A universally unique identifier that represent the beacon’s identifier.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition/uuid"
+      },
+      "major": {
+        "doc": "The most significant value associated with the beacon.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition/major"
+      },
+      "minor": {
+        "doc": "The least significant value associated with the beacon.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition/minor"
+      }
+    },
+    "CLBeaconIdentityConstraint": {
+      "major": {
+        "doc": "The constraint’s value for the major identity characteristic.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentityconstraint/major"
+      },
+      "minor": {
+        "doc": "The constraint’s value for the minor identity characteristic.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconidentityconstraint/minor"
+      }
+    },
+    "CLBeaconRegion": {
+      "UUID": {
+        "doc": "The UUID value from the beacon identity constraint that defines the beacon region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/uuid"
+      },
+      "beaconIdentityConstraint": {
+        "doc": "The beacon identity constraint that defines the beacon region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/beaconidentityconstraint"
+      },
+      "major": {
+        "doc": "The major value from the beacon identity constraint that defines the beacon region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/major"
+      },
+      "minor": {
+        "doc": "The minor value from the beacon identity constraint that defines the beacon region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/minor"
+      },
+      "notifyEntryStateOnDisplay": {
+        "doc": "A Boolean value that indicates whether Core Location sends beacon notifications when the device’s display is on.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/notifyentrystateondisplay"
+      },
+      "proximityUUID": {
+        "doc": "The unique ID of the beacons you’re targeting.",
+        "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion/proximityuuid"
+      }
+    },
+    "CLCircularGeographicCondition": {
+      "center": {
+        "doc": "The center of the circular geographic condition.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcirculargeographiccondition/center"
+      },
+      "radius": {
+        "doc": "The radius of the circular geographic condition.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcirculargeographiccondition/radius"
+      }
+    },
+    "CLCircularRegion": {
+      "center": {
+        "doc": "The center point of the geographic area.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcircularregion/center"
+      },
+      "radius": {
+        "doc": "The radius (measured in meters) that defines the geographic area’s outer boundary.",
+        "url": "https://developer.apple.com/documentation/corelocation/clcircularregion/radius"
+      }
+    },
+    "CLGeocoder": {
+      "geocoding": {
+        "doc": "A Boolean value indicating whether the receiver is in the middle of geocoding its value.",
+        "url": "https://developer.apple.com/documentation/corelocation/clgeocoder/isgeocoding"
+      }
+    },
+    "CLHeading": {
+      "headingAccuracy": {
+        "doc": "The maximum deviation (measured in degrees) between the reported heading and the true geomagnetic heading.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/headingaccuracy"
+      },
+      "magneticHeading": {
+        "doc": "The heading (measured in degrees) relative to magnetic north.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/magneticheading"
+      },
+      "timestamp": {
+        "doc": "The time at which this heading was determined.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/timestamp"
+      },
+      "trueHeading": {
+        "doc": "The heading (measured in degrees) relative to true north.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/trueheading"
+      },
+      "x": {
+        "doc": "The geomagnetic data (measured in microteslas) for the x-axis.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/x"
+      },
+      "y": {
+        "doc": "The geomagnetic data (measured in microteslas) for the y-axis.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/y"
+      },
+      "z": {
+        "doc": "The geomagnetic data (measured in microteslas) for the z-axis.",
+        "url": "https://developer.apple.com/documentation/corelocation/clheading/z"
+      }
+    },
+    "CLLocationManager": {
+      "accuracyAuthorization": {
+        "doc": "A value that indicates the level of location accuracy the app has permission to use.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/accuracyauthorization"
+      },
+      "activityType": {
+        "doc": "The type of activity the app expects the user to typically perform while in the app’s location session.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/activitytype"
+      },
+      "allowsBackgroundLocationUpdates": {
+        "doc": "A Boolean value that indicates whether the app receives location updates when running in the background.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/allowsbackgroundlocationupdates"
+      },
+      "authorizationStatus": {
+        "doc": "The current authorization status for the app.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/authorizationstatus-swift.property"
+      },
+      "authorizedForWidgetUpdates": {
+        "doc": "A Boolean value that indicates whether a widget is eligible to receive location updates.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/isauthorizedforwidgetupdates"
+      },
+      "delegate": {
+        "doc": "The delegate object to receive update events.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/delegate"
+      },
+      "desiredAccuracy": {
+        "doc": "The accuracy of the location data that your app wants to receive.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/desiredaccuracy"
+      },
+      "distanceFilter": {
+        "doc": "The minimum distance in meters the device must move horizontally before an update event is generated.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/distancefilter"
+      },
+      "heading": {
+        "doc": "The most recently reported heading.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/heading"
+      },
+      "headingFilter": {
+        "doc": "The minimum angular change in degrees required to generate new heading events.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/headingfilter"
+      },
+      "headingOrientation": {
+        "doc": "The device orientation to use when computing heading values.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/headingorientation"
+      },
+      "location": {
+        "doc": "The most recently retrieved user location.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/location"
+      },
+      "maximumRegionMonitoringDistance": {
+        "doc": "The largest boundary distance that can be assigned to a region.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/maximumregionmonitoringdistance"
+      },
+      "monitoredRegions": {
+        "doc": "The set of shared regions monitored by all location-manager objects.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/monitoredregions"
+      },
+      "pausesLocationUpdatesAutomatically": {
+        "doc": "A Boolean value that indicates whether the location-manager object may pause location updates.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/pauseslocationupdatesautomatically"
+      },
+      "rangedBeaconConstraints": {
+        "doc": "The set of beacon constraints currently being tracked using ranging.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/rangedbeaconconstraints"
+      },
+      "showsBackgroundLocationIndicator": {
+        "doc": "A Boolean value that indicates whether the status bar changes its appearance when an app uses location services in the background.",
+        "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager/showsbackgroundlocationindicator"
+      }
+    },
+    "CLMonitorConfiguration": {
+      "eventHandler": {
+        "doc": "The block the framework calls as the event handler for the location monitor instance.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitorconfiguration/eventhandler"
+      },
+      "name": {
+        "doc": "The name of the monitor instance.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitorconfiguration/name"
+      },
+      "queue": {
+        "doc": "The dispatch queue to bind the instance of a location monitor to.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitorconfiguration/queue"
+      }
+    },
+    "CLMonitoringEvent": {
+      "accuracyLimited": {
+        "doc": "A Boolean value that indicates whether the app receives accuracy-limited location updates.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/accuracylimited"
+      },
+      "authorizationDenied": {
+        "doc": "A Boolean value that indicates whether the app has local authorization.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/authorizationdenied"
+      },
+      "authorizationDeniedGlobally": {
+        "doc": "A Boolean value that indicates whether the app has system-wide authorization.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/authorizationdeniedglobally"
+      },
+      "authorizationRestricted": {
+        "doc": "A Boolean value that indicates whether the app can make authorization changes.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/authorizationrestricted"
+      },
+      "conditionLimitExceeded": {
+        "doc": "A Boolean value that indicates whether the app receives location updates based on other monitoring conditions.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/conditionlimitexceeded"
+      },
+      "conditionUnsupported": {
+        "doc": "A Boolean value that indicates whether the app receives location updates based on the supported condition.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/conditionunsupported"
+      },
+      "date": {
+        "doc": "The date the event occurs.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/date"
+      },
+      "identifier": {
+        "doc": "A string that represents the identifier of a monitored condition.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/identifier"
+      },
+      "insufficientlyInUse": {
+        "doc": "A Boolean value that indicates whether the app receives location updates because it’s insufficiently in use.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/insufficientlyinuse"
+      },
+      "persistenceUnavailable": {
+        "doc": "A Boolean value that indicates whether it receives location updates based on successful persistence.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/persistenceunavailable"
+      },
+      "refinement": {
+        "doc": "An optional instance of a condition that represents the most specific condition to that this event can apply to.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/refinement"
+      },
+      "state": {
+        "doc": "The state of the condition at the time of the event.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringevent/state"
+      }
+    },
+    "CLMonitoringRecord": {
+      "condition": {
+        "doc": "The condition that the framework is monitoring events for.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringrecord/condition"
+      },
+      "lastEvent": {
+        "doc": "An object that contains the specifics of the most recent event.",
+        "url": "https://developer.apple.com/documentation/corelocation/clmonitoringrecord/lastevent"
+      }
+    },
+    "CLPlacemark": {
+      "ISOcountryCode": {
+        "doc": "The abbreviated country or region name.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/isocountrycode"
+      },
+      "addressDictionary": {
+        "doc": "A dictionary containing the Address Book keys and values for the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/addressdictionary"
+      },
+      "administrativeArea": {
+        "doc": "The state or province associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/administrativearea"
+      },
+      "areasOfInterest": {
+        "doc": "The relevant areas of interest associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/areasofinterest"
+      },
+      "country": {
+        "doc": "The name of the country or region associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/country"
+      },
+      "inlandWater": {
+        "doc": "The name of the inland water body associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/inlandwater"
+      },
+      "locality": {
+        "doc": "The city associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/locality"
+      },
+      "location": {
+        "doc": "The location object containing latitude and longitude information.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/location"
+      },
+      "name": {
+        "doc": "The name of the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/name"
+      },
+      "ocean": {
+        "doc": "The name of the ocean associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/ocean"
+      },
+      "postalAddress": {
+        "doc": "The postal address associated with the location, formatted for use with the Contacts framework.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/postaladdress"
+      },
+      "postalCode": {
+        "doc": "The postal code associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/postalcode"
+      },
+      "region": {
+        "doc": "The geographic region associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/region"
+      },
+      "subAdministrativeArea": {
+        "doc": "Additional administrative area information for the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/subadministrativearea"
+      },
+      "subLocality": {
+        "doc": "Additional city-level information for the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/sublocality"
+      },
+      "subThoroughfare": {
+        "doc": "Additional street-level information for the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/subthoroughfare"
+      },
+      "thoroughfare": {
+        "doc": "The street address associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/thoroughfare"
+      },
+      "timeZone": {
+        "doc": "The time zone associated with the placemark.",
+        "url": "https://developer.apple.com/documentation/corelocation/clplacemark/timezone"
+      }
+    },
+    "CLRegion": {
+      "center": {
+        "doc": "The center point of the region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/center"
+      },
+      "identifier": {
+        "doc": "The identifier for the region object.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/identifier"
+      },
+      "notifyOnEntry": {
+        "doc": "A Boolean indicating that notifications are generated upon entry into the region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/notifyonentry"
+      },
+      "notifyOnExit": {
+        "doc": "A Boolean indicating that notifications are generated upon exit from the region.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/notifyonexit"
+      },
+      "radius": {
+        "doc": "The radius (measured in meters) that defines the region’s outer boundary.",
+        "url": "https://developer.apple.com/documentation/corelocation/clregion/radius"
+      }
+    },
+    "CLServiceSessionDiagnostic": {
+      "alwaysAuthorizationDenied": {
+        "doc": "A Boolean value that indicates someone has not granted the always authorization to your app.",
+        "url": "https://developer.apple.com/documentation/corelocation/clservicesessiondiagnostic/alwaysauthorizationdenied"
+      }
+    },
+    "CLUpdate": {
+      "isStationary": {
+        "doc": "A Boolean value that indicates whether the device is stationary.",
+        "url": "https://developer.apple.com/documentation/corelocation/clupdate/isstationary"
+      },
+      "location": {
+        "doc": "A person’s location, if available.",
+        "url": "https://developer.apple.com/documentation/corelocation/clupdate/location"
+      }
+    },
+    "CLVisit": {
+      "arrivalDate": {
+        "doc": "The approximate time at which the user arrived at the specified location.",
+        "url": "https://developer.apple.com/documentation/corelocation/clvisit/arrivaldate"
+      },
+      "coordinate": {
+        "doc": "The geographical coordinate information.",
+        "url": "https://developer.apple.com/documentation/corelocation/clvisit/coordinate"
+      },
+      "departureDate": {
+        "doc": "The approximate time at which the user left the specified location.",
+        "url": "https://developer.apple.com/documentation/corelocation/clvisit/departuredate"
+      },
+      "horizontalAccuracy": {
+        "doc": "The horizontal accuracy (in meters) of the specified coordinate.",
+        "url": "https://developer.apple.com/documentation/corelocation/clvisit/horizontalaccuracy"
+      }
+    }
+  }
+}

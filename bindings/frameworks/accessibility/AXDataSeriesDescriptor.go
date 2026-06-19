@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a series of data points.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor
 type AXDataSeriesDescriptor struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func AXDataSeriesDescriptorFromID(id objc.ID) *AXDataSeriesDescriptor {
 	return o
 }
 
+// Creates a data series with the specified name, a Boolean value that indicates whether the series is continuous, and data points.
 func (o *AXDataSeriesDescriptor) InitWithNameIsContinuousDataPoints(name *foundation.NSString, isContinuous bool, dataPoints *foundation.NSArray[*AXDataPoint]) *AXDataSeriesDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelInitWithNameIsContinuousDataPoints, name.Ptr(), isContinuous, dataPoints.Ptr())
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *AXDataSeriesDescriptor) InitWithNameIsContinuousDataPoints(name *founda
 	return AXDataSeriesDescriptorFromID(_ret)
 }
 
+// Creates a data series with the specified attributed name, a Boolean value that indicates whether the series is continuous, and data points.
 func (o *AXDataSeriesDescriptor) InitWithAttributedNameIsContinuousDataPoints(attributedName *foundation.NSAttributedString, isContinuous bool, dataPoints *foundation.NSArray[*AXDataPoint]) *AXDataSeriesDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataSeriesDescriptorSelInitWithAttributedNameIsContinuousDataPoints, attributedName.Ptr(), isContinuous, dataPoints.Ptr())
 	if _ret != 0 {

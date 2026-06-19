@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the context in which custom compositors render pixel buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avvideocompositionrendercontext
 type AVVideoCompositionRenderContext struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func AVVideoCompositionRenderContextFromID(id objc.ID) *AVVideoCompositionRender
 	return o
 }
 
-// Vends a CVPixelBuffer to use for rendering The buffer will have its kCVImageBufferCleanApertureKey and kCVImageBufferPixelAspectRatioKey attachments set to match the current composition processor properties.
+// Returns a pixel buffer to use for rendering.
 func (o *AVVideoCompositionRenderContext) NewPixelBuffer() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVVideoCompositionRenderContextSelNewPixelBuffer)
 	return _ret

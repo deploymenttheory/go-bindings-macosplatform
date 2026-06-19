@@ -7,12 +7,13 @@ import (
 	"unsafe"
 )
 
+// The minimal volume containing an object, used by the boundingBoxAtTime: method.
 type MDLAxisAlignedBoundingBox struct {
 	MaxBounds unsafe.Pointer
 	MinBounds unsafe.Pointer
 }
 
-// MDLVoxelIndexExtent is the index space bounds of the voxel grid.
+// The corner voxel indices defining a solid rectangular volume of voxels. Used by the voxelIndexExtent property and voxelsWithinExtent: method.
 type MDLVoxelIndexExtent struct {
 	MinimumExtent unsafe.Pointer
 	MaximumExtent unsafe.Pointer

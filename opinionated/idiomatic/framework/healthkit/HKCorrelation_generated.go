@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that groups multiple related samples into a single entry.
+//
 // Correlation wraps [raw.HKCorrelation] with a fluent Go API.
 type Correlation struct {
 	inner *raw.HKCorrelation
@@ -36,7 +38,7 @@ func NewCorrelation() *Correlation {
 	return &Correlation{inner: raw.HKCorrelationFromID(_id)}
 }
 
-// @method    objectsForType: @abstract  Returns the set of correlated objects with the specified type.
+// Returns a set containing all the objects of the specified type in the correlation.
 //
 // ObjectsForType calls the underlying ObjectsForType.
 func (x *Correlation) ObjectsForType(objectType *raw.HKObjectType) *foundation.NSSet[*raw.HKSample] {

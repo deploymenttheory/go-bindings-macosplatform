@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that controls the process of requesting App Store ratings and reviews from customers.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skstorereviewcontroller
 // Deprecated: Use AppStore.requestReview(in:).
 type SKStoreReviewController struct {
@@ -31,7 +33,7 @@ func SKStoreReviewControllerFromID(id objc.ID) *SKStoreReviewController {
 	return o
 }
 
-// Request StoreKit to ask the user for an app review. Uses the keyWindow's UIWindowScene which may or may not be the scene a user is interacting with. This may or may not show any UI. Given this may not successfully present an alert to the user, it is not appropriate for use from a button or any other user action. For presenting a write review form, a deep link is available to the App Store by appending the query params "action=write-review" to a product URL.
+// Tells StoreKit to ask the customer to rate or review your app, if appropriate.
 // Deprecated: Use AppStore.requestReview(in:).
 func SKStoreReviewControllerRequestReview() {
 	objc.ID(_clsSKStoreReviewController).Send(_sKStoreReviewControllerSelRequestReview)

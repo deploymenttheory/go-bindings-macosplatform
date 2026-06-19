@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result of an authorization request.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult
 type ASAuthorizationProviderExtensionAuthorizationResult struct {
 	foundation.NSObject
@@ -39,16 +41,16 @@ func ASAuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *ASAu
 	return o
 }
 
-// @abstract Authorization succeeded with an authorization tokens stored in HTTP headers.
+// Initializes an authorization with tokens stored in HTTP headers.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) InitWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *ASAuthorizationProviderExtensionAuthorizationResult {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPAuthorizationHeaders, httpAuthorizationHeaders)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPAuthorizationHeaders, httpAuthorizationHeaders.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return ASAuthorizationProviderExtensionAuthorizationResultFromID(_ret)
 }
 
-// @abstract Authorization succeeded with a HTTP response.
+// Initializes an authorization with a HTTP response and body.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) InitWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) *ASAuthorizationProviderExtensionAuthorizationResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPResponseHttpBody, httpResponse.Ptr(), httpBody.Ptr())
 	if _ret != 0 {
@@ -59,12 +61,15 @@ func (o *ASAuthorizationProviderExtensionAuthorizationResult) InitWithHTTPRespon
 
 // @abstract HTTP extra headers for addition with credentials.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) HttpAuthorizationHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelHttpAuthorizationHeaders)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelHttpAuthorizationHeaders)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) SetHttpAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpAuthorizationHeaders, httpAuthorizationHeaders)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpAuthorizationHeaders, httpAuthorizationHeaders.Ptr())
 }
 
 // @abstract HTTP response for OAUth and SAML based authentications.
@@ -95,10 +100,13 @@ func (o *ASAuthorizationProviderExtensionAuthorizationResult) SetHttpBody(httpBo
 
 // @abstract Private SecKeys.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) PrivateKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelPrivateKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelPrivateKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) SetPrivateKeys(privateKeys *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationResultSelSetPrivateKeys, privateKeys)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationResultSelSetPrivateKeys, privateKeys.Ptr())
 }

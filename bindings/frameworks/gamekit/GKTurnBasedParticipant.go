@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A participant in a turn-based match.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant
 type GKTurnBasedParticipant struct {
 	foundation.NSObject

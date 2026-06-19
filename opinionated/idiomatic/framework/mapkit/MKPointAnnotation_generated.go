@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A string-based piece of location-specific data that you apply to a specific point on a map.
+//
 // PointAnnotation wraps [raw.MKPointAnnotation] with a fluent Go API.
 type PointAnnotation struct {
 	inner *raw.MKPointAnnotation
@@ -37,6 +39,8 @@ func NewPointAnnotation() *PointAnnotation {
 	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
 }
 
+// Creates a point annotation at the specified coordinate on the map.
+//
 // NewPointAnnotationWithCoordinate creates a new [PointAnnotation].
 func NewPointAnnotationWithCoordinate(coordinate unsafe.Pointer) *PointAnnotation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointAnnotation")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewPointAnnotationWithCoordinate(coordinate unsafe.Pointer) *PointAnnotatio
 	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
 }
 
+// Creates a point annotation displaying a title and subtitle string at the specified coordinate on the map.
+//
 // NewPointAnnotationWithCoordinateTitleSubtitle creates a new [PointAnnotation].
 func NewPointAnnotationWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, title string, subtitle string) *PointAnnotation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointAnnotation")), objc.RegisterName("alloc"))
@@ -51,12 +57,16 @@ func NewPointAnnotationWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, ti
 	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *PointAnnotation) WithTitle(title string) *PointAnnotation {
 	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
 	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that conveys ongoing progress to the user for a specified task.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsprogress
 type NSProgress struct {
 	NSObject
@@ -117,7 +119,7 @@ func NSProgressProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64,
 }
 
 func (o *NSProgress) InitWithParentUserInfo(parentProgressOrNil *NSProgress, userInfoOrNil *NSDictionary[*NSString, objc.ID]) *NSProgress {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelInitWithParentUserInfo, parentProgressOrNil.Ptr(), userInfoOrNil)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelInitWithParentUserInfo, parentProgressOrNil.Ptr(), userInfoOrNil.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -128,6 +130,7 @@ func (o *NSProgress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
 	o.Ptr().Send(_nSProgressSelBecomeCurrentWithPendingUnitCount, unitCount)
 }
 
+// Retrieves the current thread’s progress object, executes the specified block, and increments the progress object by the specified units of work.
 func (o *NSProgress) PerformAsCurrentWithPendingUnitCountUsing(unitCount int64, work func()) {
 	var __block_work objc.Block
 	if work != nil {
@@ -314,8 +317,11 @@ func (o *NSProgress) IsFinished() bool {
 }
 
 func (o *NSProgress) UserInfo() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSProgressSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSProgress) Kind() *NSString {

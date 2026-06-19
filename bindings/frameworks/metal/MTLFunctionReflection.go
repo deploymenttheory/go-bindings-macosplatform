@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents a reflection object containing information about a function in a Metal library.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctionreflection
 type MTLFunctionReflection struct {
 	foundation.NSObject

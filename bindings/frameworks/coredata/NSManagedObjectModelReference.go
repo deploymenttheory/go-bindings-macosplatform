@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a specific version of an object model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference
 type NSManagedObjectModelReference struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func NSManagedObjectModelReferenceFromID(id objc.ID) *NSManagedObjectModelRefere
 	return o
 }
 
+// Creates an object model reference for the specified model.
 func (o *NSManagedObjectModelReference) InitWithModelVersionChecksum(model *NSManagedObjectModel, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithModelVersionChecksum, model.Ptr(), versionChecksum.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *NSManagedObjectModelReference) InitWithModelVersionChecksum(model *NSMa
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
+// Creates an object model reference for the model at the specified file URL.
 func (o *NSManagedObjectModelReference) InitWithFileURLVersionChecksum(fileURL *foundation.NSURL, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithFileURLVersionChecksum, fileURL.Ptr(), versionChecksum.Ptr())
 	if _ret != 0 {
@@ -51,14 +55,16 @@ func (o *NSManagedObjectModelReference) InitWithFileURLVersionChecksum(fileURL *
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
+// Creates an object model reference with the entities corresponding to the specified entity version hashes.
 func (o *NSManagedObjectModelReference) InitWithEntityVersionHashesInBundleVersionChecksum(versionHash *foundation.NSDictionary[objc.ID, objc.ID], bundle *foundation.NSBundle, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithEntityVersionHashesInBundleVersionChecksum, versionHash, bundle.Ptr(), versionChecksum.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithEntityVersionHashesInBundleVersionChecksum, versionHash.Ptr(), bundle.Ptr(), versionChecksum.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSManagedObjectModelReferenceFromID(_ret)
 }
 
+// Creates an object model reference for the named model in the specified bundle.
 func (o *NSManagedObjectModelReference) InitWithNameInBundleVersionChecksum(modelName *foundation.NSString, bundle *foundation.NSBundle, versionChecksum *foundation.NSString) *NSManagedObjectModelReference {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelReferenceSelInitWithNameInBundleVersionChecksum, modelName.Ptr(), bundle.Ptr(), versionChecksum.Ptr())
 	if _ret != 0 {

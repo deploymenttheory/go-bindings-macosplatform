@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A custom model trained to classify or tag natural language text.
+//
 // Model wraps [raw.NLModel] with a fluent Go API.
 type Model struct {
 	inner *raw.NLModel
@@ -37,6 +39,8 @@ func NewModel() *Model {
 	return &Model{inner: raw.NLModelFromID(_id)}
 }
 
+// Predicts a label for the given input string.
+//
 // PredictedLabelForString calls the underlying PredictedLabelForString.
 func (x *Model) PredictedLabelForString(string_ string) string {
 	_r := x.inner.PredictedLabelForString(foundation.NSStringStringWithUTF8String(string_))
@@ -46,16 +50,22 @@ func (x *Model) PredictedLabelForString(string_ string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Predicts a label for each string in the given array.
+//
 // PredictedLabelsForTokens calls the underlying PredictedLabelsForTokens.
 func (x *Model) PredictedLabelsForTokens(tokens *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.PredictedLabelsForTokens(tokens)
 }
 
+// Predicts multiple possible labels for the given input string.
+//
 // PredictedLabelHypothesesForStringMaximumCount calls the underlying PredictedLabelHypothesesForStringMaximumCount.
 func (x *Model) PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
 	return x.inner.PredictedLabelHypothesesForStringMaximumCount(foundation.NSStringStringWithUTF8String(string_), maximumCount)
 }
 
+// Predicts multiple possible labels for each string in the given array.
+//
 // PredictedLabelHypothesesForTokensMaximumCount calls the underlying PredictedLabelHypothesesForTokensMaximumCount.
 func (x *Model) PredictedLabelHypothesesForTokensMaximumCount(tokens *foundation.NSArray[*foundation.NSString], maximumCount uint) *foundation.NSArray[objc.ID] {
 	return x.inner.PredictedLabelHypothesesForTokensMaximumCount(tokens, maximumCount)

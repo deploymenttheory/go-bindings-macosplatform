@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A subclass of the audio node class that, processes audio either in real time or nonreal time, depending on the type of the audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounit
 type AVAudioUnit struct {
 	AVAudioNode
@@ -38,7 +40,7 @@ func AVAudioUnitFromID(id objc.ID) *AVAudioUnit {
 	return o
 }
 
-// @method	instantiateWithComponentDescription:options:completionHandler: @abstract Asynchronously create an instance of an audio unit component, wrapped in an AVAudioUnit. @param audioComponentDescription The component to instantiate. @param options Instantiation options. @param completionHandler Called in an arbitrary thread/queue context when instantiation is complete. The client should retain the provided AVAudioUnit. @discussion Components whose flags include kAudioComponentFlag_RequiresAsyncInstantiation must be instantiated asynchronously, via this method if they are to be used with AVAudioEngine. See the discussion of this flag in AudioToolbox/AudioComponent.h. The returned AVAudioUnit instance normally will be of a subclass (AVAudioUnitEffect, AVAudioUnitGenerator, AVAudioUnitMIDIInstrument, or AVAudioUnitTimeEffect), selected according to the component's type.
+// Creates an instance of an audio unit component asynchronously and wraps it in an audio unit class.
 func AVAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(audioComponentDescription objc.ID, options objc.ID, completionHandler func(*AVAudioUnit, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +55,7 @@ func AVAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(audi
 	objc.ID(_clsAVAudioUnit).Send(_aVAudioUnitSelInstantiateWithComponentDescriptionOptionsCompletionHandler, audioComponentDescription, options, __block_completionHandler)
 }
 
-// @method loadAudioUnitPresetAtURL:error: @abstract Load an audio unit preset. @param url NSURL of the .aupreset file. @param outError A pointer to a NSError object @discussion If the .aupreset file cannot be successfully loaded, an error is returned.
+// Loads an audio unit using a specified preset.
 func (o *AVAudioUnit) LoadAudioUnitPresetAtURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioUnitSelLoadAudioUnitPresetAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))

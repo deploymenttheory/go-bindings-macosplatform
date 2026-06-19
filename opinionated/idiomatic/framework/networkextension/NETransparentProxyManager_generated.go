@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that configures and controls transparent proxies.
+//
 // NETransparentProxyManager wraps [raw.NETransparentProxyManager] with a fluent Go API.
 type NETransparentProxyManager struct {
 	inner *raw.NETransparentProxyManager
@@ -37,7 +39,7 @@ func NewNETransparentProxyManager() *NETransparentProxyManager {
 	return &NETransparentProxyManager{inner: raw.NETransparentProxyManagerFromID(_id)}
 }
 
-// @property onDemandRules @discussion An array of NEOnDemandRule objects.
+// An ordered list of Connect On Demand rules.
 //
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager {
@@ -60,7 +62,7 @@ func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRulePro
 	return x
 }
 
-// @property onDemandEnabled @discussion Toggles VPN On Demand.
+// A Boolean used to toggle the Connect On Demand capability.
 //
 // WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
 func (x *NETransparentProxyManager) WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager {
@@ -68,7 +70,7 @@ func (x *NETransparentProxyManager) WithOnDemandEnabled(onDemandEnabled bool) *N
 	return x
 }
 
-// @property localizedDescription @discussion A string containing a description of the VPN.
+// A string containing the display name of the VPN configuration.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NETransparentProxyManager) WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager {
@@ -76,7 +78,7 @@ func (x *NETransparentProxyManager) WithLocalizedDescription(localizedDescriptio
 	return x
 }
 
-// @property protocol @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 //
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *NETransparentProxyManager) WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager {
@@ -84,7 +86,7 @@ func (x *NETransparentProxyManager) WithProtocol(protocol NEVPNProtocolProvider)
 	return x
 }
 
-// @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 //
 // WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
 func (x *NETransparentProxyManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager {
@@ -92,7 +94,7 @@ func (x *NETransparentProxyManager) WithProtocolConfiguration(protocolConfigurat
 	return x
 }
 
-// @property enabled @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+// A Boolean used to toggle the enabled state of the VPN configuration.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NETransparentProxyManager) WithEnabled(enabled bool) *NETransparentProxyManager {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of vertex attribute descriptor instances.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvertexattributedescriptorarray
 type MTLVertexAttributeDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLVertexAttributeDescriptorArrayFromID(id objc.ID) *MTLVertexAttributeDesc
 	return o
 }
 
+// Returns the state of the specified vertex attribute.
 func (o *MTLVertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLVertexAttributeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexAttributeDescriptorArraySelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLVertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint)
 	return MTLVertexAttributeDescriptorFromID(_ret)
 }
 
+// Sets state for the specified vertex attribute.
 func (o *MTLVertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *MTLVertexAttributeDescriptor, index uint) {
 	o.Ptr().Send(_mTLVertexAttributeDescriptorArraySelSetObjectAtIndexedSubscript, attributeDesc.Ptr(), index)
 }

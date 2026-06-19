@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that modifies the content of a remote notification before it’s delivered to the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension
 type UNNotificationServiceExtension struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func UNNotificationServiceExtensionFromID(id objc.ID) *UNNotificationServiceExte
 	return o
 }
 
+// Asks you to make any needed changes to the notification and notify the system when you’re done.
 func (o *UNNotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(request *UNNotificationRequest, contentHandler func(*UNNotificationContent)) {
 	var __block_contentHandler objc.Block
 	if contentHandler != nil {
@@ -45,6 +48,7 @@ func (o *UNNotificationServiceExtension) DidReceiveNotificationRequestWithConten
 	o.Ptr().Send(_uNNotificationServiceExtensionSelDidReceiveNotificationRequestWithContentHandler, request.Ptr(), __block_contentHandler)
 }
 
+// Tells you that the system is terminating your extension.
 func (o *UNNotificationServiceExtension) ServiceExtensionTimeWillExpire() {
 	o.Ptr().Send(_uNNotificationServiceExtensionSelServiceExtensionTimeWillExpire)
 }

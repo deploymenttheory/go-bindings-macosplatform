@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of user interaction with a context.
+//
 // Activity wraps [raw.CLSActivity] with a fluent Go API.
 type Activity struct {
 	inner *raw.CLSActivity
@@ -36,7 +38,7 @@ func NewActivity() *Activity {
 	return &Activity{inner: raw.CLSActivityFromID(_id)}
 }
 
-// @abstract      Current progress as a decimal representation of a percentage. @discussion    Should be [0.0, 1.0].
+// A measure of progress through the task, given as a fraction in the range [0, 1].
 //
 // WithProgress sets the progress property and returns the receiver for chaining.
 func (x *Activity) WithProgress(progress float64) *Activity {
@@ -44,7 +46,7 @@ func (x *Activity) WithProgress(progress float64) *Activity {
 	return x
 }
 
-// @abstract      The primary activityItem to be reported on. @discussion    This can be nil indicating @c progress property is the primary data instead of any activityItems.
+// Adds an activity item to an activity and sets it as the primary activity item.
 //
 // WithPrimaryActivityItem sets the primaryActivityItem property and returns the receiver for chaining.
 func (x *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity {
@@ -52,14 +54,14 @@ func (x *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvi
 	return x
 }
 
-// @abstract      Adds progress to this activity. @discussion    The progress should be a decimal representation of the start and ending percentage [0.0, 1.0]. @param         start      Starting percentage. @param         end        Ending percentage.
+// Adds a progress range to a given activity.
 //
 // AddProgressRangeFromStartToEnd calls the underlying AddProgressRangeFromStartToEnd.
 func (x *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
 	x.inner.AddProgressRangeFromStartToEnd(start, end)
 }
 
-// @abstract      Add an activity item to this CLSActivity.
+// Adds an activity item to an activity.
 //
 // AddAdditionalActivityItem calls the underlying AddAdditionalActivityItem.
 func (x *Activity) AddAdditionalActivityItem(activityItem *raw.CLSActivityItem) {
@@ -114,21 +116,21 @@ func (x *Activity) AdditionalActivityItems() []*ActivityItem {
 	})
 }
 
-// @abstract      Start Activity. @discussion    Starts the activity (or resumes if previously stopped).
+// Tells an activity to start recording duration and progress for a task.
 //
 // Start calls the underlying Start.
 func (x *Activity) Start() {
 	x.inner.Start()
 }
 
-// @abstract      Stop Activity. @discussion    Stops or pauses the activity and ends the time being tracked on it.
+// Tells an activity to stop or pause recording duration and progress for a task.
 //
 // Stop calls the underlying Stop.
 func (x *Activity) Stop() {
 	x.inner.Stop()
 }
 
-// @abstract Deletes all activity items. @discussion Convenience method to delete all activity items associated with the current activity.
+// Deletes all activity items associated with the current activity.
 //
 // RemoveAllActivityItems calls the underlying RemoveAllActivityItems.
 func (x *Activity) RemoveAllActivityItems() {

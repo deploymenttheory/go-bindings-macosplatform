@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides the track-level interface to inspect a fragmented asset’s media tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avfragmentedassettrack
 type AVFragmentedAssetTrack struct {
 	AVAssetTrack

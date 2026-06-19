@@ -9,12 +9,17 @@ import (
 	"strings"
 )
 
+// The modes that an action can use to adjust the apparent timing of the action.
 type SKActionTimingMode int64
 
 const (
-	SKActionTimingLinear        SKActionTimingMode = 0
-	SKActionTimingEaseIn        SKActionTimingMode = 1
-	SKActionTimingEaseOut       SKActionTimingMode = 2
+	// Specifies linear pacing. Linear pacing causes an animation to occur evenly over its duration.
+	SKActionTimingLinear SKActionTimingMode = 0
+	// Specifies ease-in pacing. Ease-in pacing causes the animation to begin slowly and then speed up as it progresses.
+	SKActionTimingEaseIn SKActionTimingMode = 1
+	// Specifies ease-out pacing. Ease-out pacing causes the animation to begin quickly and then slow as it completes.
+	SKActionTimingEaseOut SKActionTimingMode = 2
+	// Specifies ease-in ease-out pacing. An ease-in ease-out animation begins slowly, accelerates through the middle of its duration, and then slows again before completing.
 	SKActionTimingEaseInEaseOut SKActionTimingMode = 3
 )
 
@@ -33,6 +38,7 @@ func (e SKActionTimingMode) String() string {
 	}
 }
 
+// Options that specify an attribute’s data type.
 type SKAttributeType int64
 
 const (
@@ -72,15 +78,23 @@ func (e SKAttributeType) String() string {
 	}
 }
 
+// The modes that describe how the source and destination pixel colors are used to calculate the new destination color.
 type SKBlendMode int64
 
 const (
-	SKBlendModeAlpha         SKBlendMode = 0
-	SKBlendModeAdd           SKBlendMode = 1
-	SKBlendModeSubtract      SKBlendMode = 2
-	SKBlendModeMultiply      SKBlendMode = 3
-	SKBlendModeMultiplyX2    SKBlendMode = 4
-	SKBlendModeScreen        SKBlendMode = 5
+	// The source and destination colors are blended by multiplying the source alpha value.
+	SKBlendModeAlpha SKBlendMode = 0
+	// The source and destination colors are added together.
+	SKBlendModeAdd SKBlendMode = 1
+	// The source color is subtracted from the destination color.
+	SKBlendModeSubtract SKBlendMode = 2
+	// The source color is multiplied by the destination color.
+	SKBlendModeMultiply SKBlendMode = 3
+	// The source color is multiplied by the destination color and then doubled.
+	SKBlendModeMultiplyX2 SKBlendMode = 4
+	// The source color is added to the destination color times the inverted source color.
+	SKBlendModeScreen SKBlendMode = 5
+	// The source color replaces the destination color.
 	SKBlendModeReplace       SKBlendMode = 6
 	SKBlendModeMultiplyAlpha SKBlendMode = 7
 )
@@ -108,12 +122,16 @@ func (e SKBlendMode) String() string {
 	}
 }
 
+// The modes used to interpolate between keyframes in the sequence.
 type SKInterpolationMode int64
 
 const (
+	// Values between two keyframes are interpolated linearly.
 	SKInterpolationModeLinear SKInterpolationMode = 1
+	// Values between two keyframes using a spline curve.
 	SKInterpolationModeSpline SKInterpolationMode = 2
-	SKInterpolationModeStep   SKInterpolationMode = 3
+	// Values between two keyframes are not interpolated. Instead, the value is that of the most recent keyframe.
+	SKInterpolationModeStep SKInterpolationMode = 3
 )
 
 func (e SKInterpolationMode) String() string {
@@ -129,12 +147,16 @@ func (e SKInterpolationMode) String() string {
 	}
 }
 
+// Options for aligning text horizontally.
 type SKLabelHorizontalAlignmentMode int64
 
 const (
+	// Centers the text horizontally on the node’s origin.
 	SKLabelHorizontalAlignmentModeCenter SKLabelHorizontalAlignmentMode = 0
-	SKLabelHorizontalAlignmentModeLeft   SKLabelHorizontalAlignmentMode = 1
-	SKLabelHorizontalAlignmentModeRight  SKLabelHorizontalAlignmentMode = 2
+	// Positions the text so that the left side of the text is on the node’s origin.
+	SKLabelHorizontalAlignmentModeLeft SKLabelHorizontalAlignmentMode = 1
+	// Positions the text so that the right side of the text is on the node’s origin.
+	SKLabelHorizontalAlignmentModeRight SKLabelHorizontalAlignmentMode = 2
 )
 
 func (e SKLabelHorizontalAlignmentMode) String() string {
@@ -150,13 +172,18 @@ func (e SKLabelHorizontalAlignmentMode) String() string {
 	}
 }
 
+// Options for aligning text vertically.
 type SKLabelVerticalAlignmentMode int64
 
 const (
+	// Positions the text so that the font’s baseline lies on the node’s origin.
 	SKLabelVerticalAlignmentModeBaseline SKLabelVerticalAlignmentMode = 0
-	SKLabelVerticalAlignmentModeCenter   SKLabelVerticalAlignmentMode = 1
-	SKLabelVerticalAlignmentModeTop      SKLabelVerticalAlignmentMode = 2
-	SKLabelVerticalAlignmentModeBottom   SKLabelVerticalAlignmentMode = 3
+	// Centers the text vertically on the node’s origin.
+	SKLabelVerticalAlignmentModeCenter SKLabelVerticalAlignmentMode = 1
+	// Positions the text so that the top of the text is on the node’s origin.
+	SKLabelVerticalAlignmentModeTop SKLabelVerticalAlignmentMode = 2
+	// Positions the text so that the bottom of the text is on the node’s origin.
+	SKLabelVerticalAlignmentModeBottom SKLabelVerticalAlignmentMode = 3
 )
 
 func (e SKLabelVerticalAlignmentMode) String() string {
@@ -174,12 +201,16 @@ func (e SKLabelVerticalAlignmentMode) String() string {
 	}
 }
 
+// The order to use when the emitter’s particles are rendered.
 type SKParticleRenderOrder uint64
 
 const (
-	SKParticleRenderOrderOldestLast  SKParticleRenderOrder = 0
+	// The particles are rendered from newest to oldest. This is the default value.
+	SKParticleRenderOrderOldestLast SKParticleRenderOrder = 0
+	// The particles are rendered from oldest to newest.
 	SKParticleRenderOrderOldestFirst SKParticleRenderOrder = 1
-	SKParticleRenderOrderDontCare    SKParticleRenderOrder = 2
+	// The particles can be rendered in any order. SpriteKit may choose to reorder the particles to improve rendering performance.
+	SKParticleRenderOrderDontCare SKParticleRenderOrder = 2
 )
 
 func (e SKParticleRenderOrder) String() string {
@@ -195,11 +226,14 @@ func (e SKParticleRenderOrder) String() string {
 	}
 }
 
+// The modes used to determine how the sequence repeats.
 type SKRepeatMode int64
 
 const (
+	// When a sample is calculated, the time value is clamped to the range of time values found in the sequence. For example, if the last keyframe’s time value is 0.5, a sample at any time value from 0.5 to 1.0 returns the last keyframe’s value.
 	SKRepeatModeClamp SKRepeatMode = 1
-	SKRepeatModeLoop  SKRepeatMode = 2
+	// When a sample is calculated, the sequence loops back to the beginning of the sequence. For example, if the last keyframe’s time value is 0.5, then a sample at any time value from 0.5 to 1.0 returns the same value as the sequence did from 0.0 to 0.5.
+	SKRepeatModeLoop SKRepeatMode = 2
 )
 
 func (e SKRepeatMode) String() string {
@@ -213,12 +247,17 @@ func (e SKRepeatMode) String() string {
 	}
 }
 
+// The modes that determine how the scene’s area is mapped to the view that presents it.
 type SKSceneScaleMode int64
 
 const (
-	SKSceneScaleModeFill       SKSceneScaleMode = 0
+	// Each axis of the scene is scaled independently so that each axis in the scene exactly maps to the length of that axis in the view.
+	SKSceneScaleModeFill SKSceneScaleMode = 0
+	// The scaling factor of each dimension is calculated and the larger of the two is chosen. Each axis of the scene is scaled by the same scaling factor. This guarantees that the entire area of the view is filled but may cause parts of the scene to be cropped.
 	SKSceneScaleModeAspectFill SKSceneScaleMode = 1
-	SKSceneScaleModeAspectFit  SKSceneScaleMode = 2
+	// The scaling factor of each dimension is calculated and the smaller of the two is chosen. Each axis of the scene is scaled by the same scaling factor. This guarantees that the entire scene is visible but may require letterboxing in the view.
+	SKSceneScaleModeAspectFit SKSceneScaleMode = 2
+	// The scene is not scaled to match the view. Instead, the scene is automatically resized so that its dimensions always match those of the view.
 	SKSceneScaleModeResizeFill SKSceneScaleMode = 3
 )
 
@@ -237,11 +276,14 @@ func (e SKSceneScaleMode) String() string {
 	}
 }
 
+// Texture filtering modes to use when the texture is drawn in a size other than its native size.
 type SKTextureFilteringMode int64
 
 const (
+	// Each pixel is drawn using the nearest point in the texture. This mode is faster, but the results are often pixelated.
 	SKTextureFilteringNearest SKTextureFilteringMode = 0
-	SKTextureFilteringLinear  SKTextureFilteringMode = 1
+	// Each pixel is drawn by using a linear filter of multiple texels in the texture. This mode produces higher quality results but may be slower.
+	SKTextureFilteringLinear SKTextureFilteringMode = 1
 )
 
 func (e SKTextureFilteringMode) String() string {
@@ -255,6 +297,7 @@ func (e SKTextureFilteringMode) String() string {
 	}
 }
 
+// An enumeration defining how neighboring tiles are automatically placed next to each other.
 // Bitmask — values may be combined with |.
 type SKTileAdjacencyMask uint64
 
@@ -409,6 +452,7 @@ func (e SKTileAdjacencyMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The allowed rotations for a given tile.
 type SKTileDefinitionRotation uint64
 
 const (
@@ -433,6 +477,7 @@ func (e SKTileDefinitionRotation) String() string {
 	}
 }
 
+// An enumeration defining how tiles are arranged.
 type SKTileSetType uint64
 
 const (
@@ -457,13 +502,18 @@ func (e SKTileSetType) String() string {
 	}
 }
 
+// For some transitions, the direction in which the transition is performed.
 type SKTransitionDirection int64
 
 const (
-	SKTransitionDirectionUp    SKTransitionDirection = 0
-	SKTransitionDirectionDown  SKTransitionDirection = 1
+	// The transition goes up.
+	SKTransitionDirectionUp SKTransitionDirection = 0
+	// The transition goes down.
+	SKTransitionDirectionDown SKTransitionDirection = 1
+	// The transition goes right.
 	SKTransitionDirectionRight SKTransitionDirection = 2
-	SKTransitionDirectionLeft  SKTransitionDirection = 3
+	// The transition goes left.
+	SKTransitionDirectionLeft SKTransitionDirection = 3
 )
 
 func (e SKTransitionDirection) String() string {
@@ -481,18 +531,28 @@ func (e SKTransitionDirection) String() string {
 	}
 }
 
+// An enumerated type to identify the type of a uniform object.
 type SKUniformType int64
 
 const (
-	SKUniformTypeNone         SKUniformType = 0
-	SKUniformTypeFloat        SKUniformType = 1
+	// Indicates that the uniform variable does not currently hold any data. A uniform object has this type until the first time its value is set.
+	SKUniformTypeNone SKUniformType = 0
+	// Indicates that the uniform variable holds a 32-bit floating-point value.
+	SKUniformTypeFloat SKUniformType = 1
+	// Indicates that the uniform variable holds a vector of two 32-bit floating-point values.
 	SKUniformTypeFloatVector2 SKUniformType = 2
+	// Indicates that the uniform variable holds a vector of three 32-bit floating-point values.
 	SKUniformTypeFloatVector3 SKUniformType = 3
+	// Indicates that the uniform variable holds a vector of four 32-bit floating-point values.
 	SKUniformTypeFloatVector4 SKUniformType = 4
+	// Indicates that the uniform variable holds a 2 x 2 matrix of four 32-bit floating-point values.
 	SKUniformTypeFloatMatrix2 SKUniformType = 5
+	// Indicates that the uniform variable holds a 3 x 3 matrix of four 32-bit floating-point values.
 	SKUniformTypeFloatMatrix3 SKUniformType = 6
+	// Indicates that the uniform variable holds a 3 x 3 matrix of four 32-bit floating-point values.
 	SKUniformTypeFloatMatrix4 SKUniformType = 7
-	SKUniformTypeTexture      SKUniformType = 8
+	// Indicates that the uniform variable holds a reference to a SpriteKit texture.
+	SKUniformTypeTexture SKUniformType = 8
 )
 
 func (e SKUniformType) String() string {

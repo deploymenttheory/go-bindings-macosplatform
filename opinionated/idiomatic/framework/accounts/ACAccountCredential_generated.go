@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A credential object that encapsulates the information needed to authenticate a user.
+//
 // AccountCredential wraps [raw.ACAccountCredential] with a fluent Go API.
 type AccountCredential struct {
 	inner *raw.ACAccountCredential
@@ -31,6 +33,8 @@ func AccountCredentialFromID(id objc.ID) *AccountCredential {
 	return &AccountCredential{inner: raw.ACAccountCredentialFromID(id)}
 }
 
+// Initializes an account credential using OAuth.
+//
 // NewAccountCredentialWithOAuthTokenTokenSecret creates a new [AccountCredential].
 func NewAccountCredentialWithOAuthTokenTokenSecret(token string, secret string) *AccountCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccountCredential")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewAccountCredentialWithOAuthTokenTokenSecret(token string, secret string) 
 	return &AccountCredential{inner: raw.ACAccountCredentialFromID(_id)}
 }
 
+// Initializes an account credential using OAuth 2.
+//
 // NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate creates a new [AccountCredential].
 func NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate(token string, refreshToken string, expiryDate *foundation.NSDate) *AccountCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccountCredential")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate(token string, ref
 	return &AccountCredential{inner: raw.ACAccountCredentialFromID(_id)}
 }
 
+// The token used for the credential.
+//
 // WithOauthToken sets the oauthToken property and returns the receiver for chaining.
 func (x *AccountCredential) WithOauthToken(oauthToken string) *AccountCredential {
 	x.inner.SetOauthToken(foundation.NSStringStringWithUTF8String(oauthToken))

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient average pooling filter.
+//
 // CNNPoolingAverageGradient wraps [raw.MPSCNNPoolingAverageGradient] with a fluent Go API.
 type CNNPoolingAverageGradient struct {
 	inner *raw.MPSCNNPoolingAverageGradient
@@ -219,7 +221,7 @@ func (x *CNNPoolingAverageGradient) WithDestinationImageAllocator(destinationIma
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNPoolingAverageGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingAverageGradient {
@@ -227,7 +229,7 @@ func (x *CNNPoolingAverageGradient) WithOptions(options mpscore.MPSKernelOptions
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNPoolingAverageGradient) WithLabel(label string) *CNNPoolingAverageGradient {

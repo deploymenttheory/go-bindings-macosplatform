@@ -52,7 +52,7 @@ func IKSlideshowSharedSlideshow() *IKSlideshow {
 
 // @method runSlideshowWithDataSource:inMode:options: @abstract start the slideshow (slideshowOptions can be NULL).
 func (o *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource IKSlideshowDataSource, slideshowMode *foundation.NSString, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iKSlideshowSelRunSlideshowWithDataSourceInModeOptions, dataSource, slideshowMode.Ptr(), slideshowOptions)
+	o.Ptr().Send(_iKSlideshowSelRunSlideshowWithDataSourceInModeOptions, dataSource, slideshowMode.Ptr(), slideshowOptions.Ptr())
 }
 
 // @method stopSlideshow: @abstract stop the slideshow.

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The results from a map-based search.
+//
 // LocalSearchResponse wraps [raw.MKLocalSearchResponse] with a fluent Go API.
 type LocalSearchResponse struct {
 	inner *raw.MKLocalSearchResponse

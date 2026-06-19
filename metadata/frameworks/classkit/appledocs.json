@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "framework": "ClassKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CLSActivity": {
+      "doc": "A representation of user interaction with a context.",
+      "url": "https://developer.apple.com/documentation/classkit/clsactivity"
+    },
+    "CLSActivityItem": {
+      "doc": "An abstract base class for gathering information about an activity.",
+      "url": "https://developer.apple.com/documentation/classkit/clsactivityitem"
+    },
+    "CLSBinaryItem": {
+      "doc": "Activity information that is true or false, pass or fail, yes or no.",
+      "url": "https://developer.apple.com/documentation/classkit/clsbinaryitem"
+    },
+    "CLSContext": {
+      "doc": "An area of your app that represents an assignable task, like a quiz or a chapter.",
+      "url": "https://developer.apple.com/documentation/classkit/clscontext"
+    },
+    "CLSDataStore": {
+      "doc": "A container for all the ClassKit data in your app.",
+      "url": "https://developer.apple.com/documentation/classkit/clsdatastore"
+    },
+    "CLSObject": {
+      "doc": "The abstract base class for objects managed by ClassKit.",
+      "url": "https://developer.apple.com/documentation/classkit/clsobject"
+    },
+    "CLSProgressReportingCapability": {
+      "doc": "A progress reporting capability supported by a context.",
+      "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapability"
+    },
+    "CLSQuantityItem": {
+      "doc": "Activity information that signifies a quantity.",
+      "url": "https://developer.apple.com/documentation/classkit/clsquantityitem"
+    },
+    "CLSScoreItem": {
+      "doc": "Activity information that signifies a score out of a possible maximum.",
+      "url": "https://developer.apple.com/documentation/classkit/clsscoreitem"
+    }
+  },
+  "protocols": {
+    "CLSContextProvider": {
+      "doc": "An interface used to tell your ClassKit context provider app extension to update contexts.",
+      "url": "https://developer.apple.com/documentation/classkit/clscontextprovider"
+    },
+    "CLSDataStoreDelegate": {
+      "doc": "An interface the data store uses to request new contexts.",
+      "url": "https://developer.apple.com/documentation/classkit/clsdatastoredelegate"
+    }
+  },
+  "enums": {
+    "CLSBinaryValueType": {
+      "doc": "The kinds of outcomes that a binary activity item can represent.",
+      "url": "https://developer.apple.com/documentation/classkit/clsbinaryvaluetype",
+      "members": {
+        "CLSBinaryValueTypeCorrectIncorrect": {
+          "doc": "Correct or incorrect.",
+          "url": "https://developer.apple.com/documentation/classkit/clsbinaryvaluetype/correctincorrect"
+        },
+        "CLSBinaryValueTypePassFail": {
+          "doc": "Pass or fail.",
+          "url": "https://developer.apple.com/documentation/classkit/clsbinaryvaluetype/passfail"
+        },
+        "CLSBinaryValueTypeTrueFalse": {
+          "doc": "True or false.",
+          "url": "https://developer.apple.com/documentation/classkit/clsbinaryvaluetype/truefalse"
+        },
+        "CLSBinaryValueTypeYesNo": {
+          "doc": "Yes or no.",
+          "url": "https://developer.apple.com/documentation/classkit/clsbinaryvaluetype/yesno"
+        }
+      }
+    },
+    "CLSContextType": {
+      "doc": "The kinds of assignable content a context can contain.",
+      "url": "https://developer.apple.com/documentation/classkit/clscontexttype",
+      "members": {
+        "CLSContextTypeApp": {
+          "doc": "An app context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/app"
+        },
+        "CLSContextTypeAudio": {
+          "doc": "An audio context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/audio"
+        },
+        "CLSContextTypeBook": {
+          "doc": "A book context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/book"
+        },
+        "CLSContextTypeChallenge": {
+          "doc": "A challenge context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/challenge"
+        },
+        "CLSContextTypeChapter": {
+          "doc": "A chapter context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/chapter"
+        },
+        "CLSContextTypeCourse": {
+          "doc": "A context that represents an entire course.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/course"
+        },
+        "CLSContextTypeCustom": {
+          "doc": "A context for assignable content that isn’t represented by one of the built-in context types.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/custom"
+        },
+        "CLSContextTypeDocument": {
+          "doc": "A document context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/document"
+        },
+        "CLSContextTypeExercise": {
+          "doc": "An exercise context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/exercise"
+        },
+        "CLSContextTypeGame": {
+          "doc": "A game context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/game"
+        },
+        "CLSContextTypeLesson": {
+          "doc": "A lesson context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/lesson"
+        },
+        "CLSContextTypeLevel": {
+          "doc": "A level context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/level"
+        },
+        "CLSContextTypeNone": {
+          "doc": "No type is assigned.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/none"
+        },
+        "CLSContextTypePage": {
+          "doc": "A page context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/page"
+        },
+        "CLSContextTypeQuiz": {
+          "doc": "A quiz context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/quiz"
+        },
+        "CLSContextTypeSection": {
+          "doc": "A section context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/section"
+        },
+        "CLSContextTypeTask": {
+          "doc": "A task context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/task"
+        },
+        "CLSContextTypeVideo": {
+          "doc": "A video context.",
+          "url": "https://developer.apple.com/documentation/classkit/clscontexttype/video"
+        }
+      }
+    },
+    "CLSErrorCode": {
+      "doc": "Error codes that ClassKit issues.",
+      "url": "https://developer.apple.com/documentation/classkit/clserrorcode"
+    },
+    "CLSProgressReportingCapabilityKind": {
+      "doc": "The available kinds of progress reporting that a context can perform.",
+      "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapabilitykind"
+    }
+  },
+  "methods": {
+    "CLSActivity": {
+      "-addAdditionalActivityItem:": {
+        "doc": "Adds an activity item to an activity.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/addadditionalactivityitem(_:)"
+      },
+      "-addProgressRangeFromStart:toEnd:": {
+        "doc": "Adds a progress range to a given activity.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/addprogressrange(fromstart:toend:)"
+      },
+      "-removeAllActivityItems": {
+        "doc": "Deletes all activity items associated with the current activity.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/removeallactivityitems()"
+      },
+      "-start": {
+        "doc": "Tells an activity to start recording duration and progress for a task.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/start()"
+      },
+      "-stop": {
+        "doc": "Tells an activity to stop or pause recording duration and progress for a task.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/stop()"
+      }
+    },
+    "CLSBinaryItem": {
+      "-initWithIdentifier:title:type:": {
+        "doc": "Initializes a new binary activity item of the given type.",
+        "url": "https://developer.apple.com/documentation/classkit/clsbinaryitem/init(identifier:title:type:)"
+      }
+    },
+    "CLSContext": {
+      "-addChildContext:": {
+        "doc": "Adds the specifed context as a child of the context receiving the method call.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/addchildcontext(_:)"
+      },
+      "-addNavigationChildContext:": {
+        "doc": "Adds a child context that users can navigate to from this context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/addnavigationchildcontext(_:)"
+      },
+      "-addProgressReportingCapabilities:": {
+        "doc": "Adds a progress reporting capability to the set of capabilities for the context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/addprogressreportingcapabilities(_:)"
+      },
+      "-becomeActive": {
+        "doc": "Tells a context to become the active context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/becomeactive()"
+      },
+      "-createNewActivity": {
+        "doc": "Creates and returns a new activity instance for the context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/createnewactivity()"
+      },
+      "-descendantMatchingIdentifierPath:completion:": {
+        "doc": "Finds the context with the given identifier path relative to this context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/descendant(matchingidentifierpath:completion:)"
+      },
+      "-initWithType:identifier:title:": {
+        "doc": "Initializes a new context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/init(type:identifier:title:)"
+      },
+      "-removeFromParent": {
+        "doc": "Removes the context from its parent.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/removefromparent()"
+      },
+      "-removeNavigationChildContext:": {
+        "doc": "Removes the specified context as a presentable child of this context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/removenavigationchildcontext(_:)"
+      },
+      "-resetProgressReportingCapabilities": {
+        "doc": "Resets the set of capabilities for the context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/resetprogressreportingcapabilities()"
+      },
+      "-resignActive": {
+        "doc": "Tells a context to stop being the active context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/resignactive()"
+      },
+      "-setType:": {
+        "doc": "Updates the kind of content that a context represents.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/settype(_:)"
+      }
+    },
+    "CLSDataStore": {
+      "-completeAllAssignedActivitiesMatching:": {
+        "doc": "Marks all of the assigned and active activities for the given context path as complete.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/completeallassignedactivities(matching:)"
+      },
+      "-contextsMatchingIdentifierPath:completion:": {
+        "doc": "Fetches all the contexts along a given identifier path.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/contexts(matchingidentifierpath:completion:)"
+      },
+      "-contextsMatchingPredicate:completion:": {
+        "doc": "Fetches all the contexts matching a predicate.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/contexts(matching:completion:)"
+      },
+      "-fetchActivityForURL:completion:": {
+        "doc": "Fetches an activity for a given document so you can record progress on the associated task.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/fetchactivity(for:completion:)"
+      },
+      "-removeContext:": {
+        "doc": "Marks a context for removal.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/remove(_:)"
+      },
+      "-saveWithCompletion:": {
+        "doc": "Saves any changes you’ve made in the data store.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/save(completion:)"
+      }
+    },
+    "CLSProgressReportingCapability": {
+      "-initWithKind:details:": {
+        "doc": "Creates a new progress reporting capability of the given type with a descriptive string.",
+        "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapability/init(kind:details:)"
+      }
+    },
+    "CLSQuantityItem": {
+      "-initWithIdentifier:title:": {
+        "doc": "Initializes an activity item that records a discrete quantity.",
+        "url": "https://developer.apple.com/documentation/classkit/clsquantityitem/init(identifier:title:)"
+      }
+    },
+    "CLSScoreItem": {
+      "-initWithIdentifier:title:score:maxScore:": {
+        "doc": "Initializes an activity item that holds a score value.",
+        "url": "https://developer.apple.com/documentation/classkit/clsscoreitem/init(identifier:title:score:maxscore:)"
+      }
+    }
+  },
+  "properties": {
+    "CLSActivity": {
+      "additionalActivityItems": {
+        "doc": "The list of activity items associated with an activity.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/additionalactivityitems"
+      },
+      "duration": {
+        "doc": "The cumulative time in seconds that an activity has been active.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/duration"
+      },
+      "primaryActivityItem": {
+        "doc": "Adds an activity item to an activity and sets it as the primary activity item.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/primaryactivityitem"
+      },
+      "progress": {
+        "doc": "A measure of progress through the task, given as a fraction in the range [0, 1].",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/progress"
+      },
+      "started": {
+        "doc": "A Boolean that indicates whether an activity is running.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivity/isstarted"
+      }
+    },
+    "CLSActivityItem": {
+      "identifier": {
+        "doc": "An identifier for the activity item.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivityitem/identifier"
+      },
+      "title": {
+        "doc": "A human readable name for the activity item.",
+        "url": "https://developer.apple.com/documentation/classkit/clsactivityitem/title"
+      }
+    },
+    "CLSBinaryItem": {
+      "value": {
+        "doc": "The value that the binary activity item takes.",
+        "url": "https://developer.apple.com/documentation/classkit/clsbinaryitem/value"
+      },
+      "valueType": {
+        "doc": "The kind of outcome that the binary activity item represents.",
+        "url": "https://developer.apple.com/documentation/classkit/clsbinaryitem/valuetype"
+      }
+    },
+    "CLSContext": {
+      "active": {
+        "doc": "A Boolean indicating whether the context is active.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/isactive"
+      },
+      "assignable": {
+        "doc": "A Boolean that indicates whether teachers can assign the context as a task.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/isassignable"
+      },
+      "currentActivity": {
+        "doc": "The activity available for recording progress.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/currentactivity"
+      },
+      "customTypeName": {
+        "doc": "An optional name that the system presents to the user if you choose the custom context type.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/customtypename"
+      },
+      "displayOrder": {
+        "doc": "The position of a context relative to its siblings.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/displayorder"
+      },
+      "identifier": {
+        "doc": "A string that uniquely identifies a context among its siblings.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/identifier"
+      },
+      "identifierPath": {
+        "doc": "The identifier path that locates the context within the data store’s context hierarchy.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/identifierpath"
+      },
+      "navigationChildContexts": {
+        "doc": "The child contexts that a user can navigate to from this context in the Schoolwork app.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/navigationchildcontexts"
+      },
+      "parent": {
+        "doc": "The direct ancestor of this context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/parent"
+      },
+      "progressReportingCapabilities": {
+        "doc": "The kinds of progress reporting that the context can perform.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/progressreportingcapabilities"
+      },
+      "suggestedAge": {
+        "doc": "The range of ages, measured in years, for which you deem a context’s content suitable.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/suggestedage"
+      },
+      "suggestedCompletionTime": {
+        "doc": "A suggested time range to complete a task, measured in minutes.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/suggestedcompletiontime"
+      },
+      "summary": {
+        "doc": "An optional, user-visible description of the context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/summary"
+      },
+      "thumbnail": {
+        "doc": "An optional thumbnail image associated with the context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/thumbnail"
+      },
+      "title": {
+        "doc": "The name of the context as it appears to users.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/title"
+      },
+      "topic": {
+        "doc": "The area of study to which a context relates.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/topic"
+      },
+      "type": {
+        "doc": "The kind of content a context represents.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/type"
+      },
+      "universalLinkURL": {
+        "doc": "A URL that leads to the content in your app associated with the current context.",
+        "url": "https://developer.apple.com/documentation/classkit/clscontext/universallinkurl"
+      }
+    },
+    "CLSDataStore": {
+      "activeContext": {
+        "doc": "The currently active context.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/activecontext"
+      },
+      "delegate": {
+        "doc": "The data store delegate instance.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/delegate"
+      },
+      "mainAppContext": {
+        "doc": "The app’s top-level context.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/mainappcontext"
+      },
+      "runningActivity": {
+        "doc": "The currently running activity within the currently active context.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/runningactivity"
+      },
+      "shared": {
+        "doc": "The shared data store object.",
+        "url": "https://developer.apple.com/documentation/classkit/clsdatastore/shared"
+      }
+    },
+    "CLSObject": {
+      "dateCreated": {
+        "doc": "The date on which the object was created.",
+        "url": "https://developer.apple.com/documentation/classkit/clsobject/datecreated"
+      },
+      "dateLastModified": {
+        "doc": "The date on which the object was last modified.",
+        "url": "https://developer.apple.com/documentation/classkit/clsobject/datelastmodified"
+      }
+    },
+    "CLSProgressReportingCapability": {
+      "CLSProgressReportingCapabilityKind": {
+        "doc": "The available kinds of progress reporting that a context can perform.",
+        "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapability/kind-swift.enum"
+      },
+      "details": {
+        "doc": "A description of the capability presented to teachers.",
+        "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapability/details"
+      },
+      "kind": {
+        "doc": "The kind of progress reporting capability.",
+        "url": "https://developer.apple.com/documentation/classkit/clsprogressreportingcapability/kind-swift.property"
+      }
+    },
+    "CLSQuantityItem": {
+      "quantity": {
+        "doc": "A quantity associated with the task.",
+        "url": "https://developer.apple.com/documentation/classkit/clsquantityitem/quantity"
+      }
+    },
+    "CLSScoreItem": {
+      "maxScore": {
+        "doc": "The maximum possible score that the user can earn on a given task.",
+        "url": "https://developer.apple.com/documentation/classkit/clsscoreitem/maxscore"
+      },
+      "score": {
+        "doc": "The score earned by a user in completing the task.",
+        "url": "https://developer.apple.com/documentation/classkit/clsscoreitem/score"
+      }
+    }
+  }
+}

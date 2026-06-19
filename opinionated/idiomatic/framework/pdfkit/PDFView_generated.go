@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that encapsulates the functionality of PDF Kit into a single widget that you can add to your application using Interface Builder.
+//
 // View wraps [raw.PDFView] with a fluent Go API.
 type View struct {
 	inner *raw.PDFView
@@ -39,6 +41,8 @@ func NewView() *View {
 	return &View{inner: raw.PDFViewFromID(_id)}
 }
 
+// Returns the document associated with a PDFView object.
+//
 // WithDocument sets the document property and returns the receiver for chaining.
 func (x *View) WithDocument(document *Document) *View {
 	x.inner.SetDocument(document.Unwrap())
@@ -105,6 +109,8 @@ func (x *View) WithPageShadowsEnabled(pageShadowsEnabled bool) *View {
 	return x
 }
 
+// Returns the view’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *View) WithDelegate(delegate raw.PDFViewDelegate) *View {
 	x.inner.SetDelegate(delegate)
@@ -647,6 +653,8 @@ func (x *View) SetInMarkupMode(inMarkupMode bool) {
 	x.inner.SetInMarkupMode(inMarkupMode)
 }
 
+// Unlocks with the password from the specified sender.
+//
 // TakePasswordFrom calls the underlying TakePasswordFrom.
 func (x *View) TakePasswordFrom(sender objc.ID) {
 	x.inner.TakePasswordFrom(sender)

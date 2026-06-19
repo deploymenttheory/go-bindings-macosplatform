@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes whether a specific capability is supported and if that capability is currently enabled
+//
 // AudioSessionCapability wraps [raw.AVAudioSessionCapability] with a fluent Go API.
 type AudioSessionCapability struct {
 	inner *raw.AVAudioSessionCapability

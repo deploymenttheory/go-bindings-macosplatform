@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that copies image data to a matrix.
+//
 // ImageCopyToMatrix wraps [raw.MPSImageCopyToMatrix] with a fluent Go API.
 type ImageCopyToMatrix struct {
 	inner *raw.MPSImageCopyToMatrix
@@ -67,7 +69,7 @@ func (x *ImageCopyToMatrix) WithDestinationMatrixBatchIndex(destinationMatrixBat
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageCopyToMatrix) WithOptions(options mpscore.MPSKernelOptions) *ImageCopyToMatrix {
@@ -75,7 +77,7 @@ func (x *ImageCopyToMatrix) WithOptions(options mpscore.MPSKernelOptions) *Image
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageCopyToMatrix) WithLabel(label string) *ImageCopyToMatrix {

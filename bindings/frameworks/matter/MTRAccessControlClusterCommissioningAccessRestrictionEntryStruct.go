@@ -60,10 +60,13 @@ func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetCl
 }
 
 func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelRestrictions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelRestrictions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetRestrictions, restrictions)
+	o.Ptr().Send(_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetRestrictions, restrictions.Ptr())
 }

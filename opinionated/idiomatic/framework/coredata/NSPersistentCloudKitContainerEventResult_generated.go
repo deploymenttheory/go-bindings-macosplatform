@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result of a request to fetch persistent CloudKit container events.
+//
 // PersistentCloudKitContainerEventResult wraps [raw.NSPersistentCloudKitContainerEventResult] with a fluent Go API.
 type PersistentCloudKitContainerEventResult struct {
 	inner *raw.NSPersistentCloudKitContainerEventResult

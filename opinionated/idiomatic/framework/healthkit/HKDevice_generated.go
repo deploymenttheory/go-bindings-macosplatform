@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A device that generates data for HealthKit.
+//
 // Device wraps [raw.HKDevice] with a fluent Go API.
 type Device struct {
 	inner *raw.HKDevice
@@ -31,7 +33,7 @@ func DeviceFromID(id objc.ID) *Device {
 	return &Device{inner: raw.HKDeviceFromID(id)}
 }
 
-// @method        initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier: @abstract      Initialize a new HKDevice with the specified values. @discussion    This allows initialization of an HKDevice object based on the information provided.
+// Initializes a new device object.
 //
 // NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier creates a new [Device].
 func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name string, manufacturer string, model string, hardwareVersion string, firmwareVersion string, softwareVersion string, localIdentifier string, uDIDeviceIdentifier string) *Device {

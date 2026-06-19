@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for nodes that provide audio data to generate sound.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasegeneratornodedefinition
 type PHASEGeneratorNodeDefinition struct {
 	PHASESoundEventNodeDefinition
@@ -40,7 +42,7 @@ func PHASEGeneratorNodeDefinitionFromID(id objc.ID) *PHASEGeneratorNodeDefinitio
 	return o
 }
 
-// @method setCalibrationMode:level @abstract Set the generator's calibration mode and level. @param calibrationMode The calibration mode. @param level The level. @note The level, including its underlying unit and range, are dependent on the calibration mode.
+// Selects a loudness correction strategy and reference level.
 func (o *PHASEGeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode PHASECalibrationMode, level float64) {
 	o.Ptr().Send(_pHASEGeneratorNodeDefinitionSelSetCalibrationModeLevel, calibrationMode, level)
 }

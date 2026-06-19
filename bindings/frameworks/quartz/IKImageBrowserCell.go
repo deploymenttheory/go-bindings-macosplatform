@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class used to display a cell.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikimagebrowsercell
 type IKImageBrowserCell struct {
 	foundation.NSObject
@@ -46,85 +48,85 @@ func IKImageBrowserCellFromID(id objc.ID) *IKImageBrowserCell {
 	return o
 }
 
-// @method imageBrowserView @abstract Returns the view the receiver uses to display its represented object. @discussion Subclasses should not override this method.
+// Returns the view the receiver uses to display the cell.
 func (o *IKImageBrowserCell) ImageBrowserView() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserCellSelImageBrowserView)
 	return _ret
 }
 
-// @method representedItem @abstract Returns the receiver�s represented object. @discussion Subclasses should not override this method.
+// Returns the receiver’s represented object.
 func (o *IKImageBrowserCell) RepresentedItem() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserCellSelRepresentedItem)
 	return _ret
 }
 
-// @method indexOfRepresentedItem @abstract Returns the index of the receiver�s represented object in the datasource. @discussion Subclasses should not override this method.
+// Returns the index of the receiver’s represented object in the datasource.
 func (o *IKImageBrowserCell) IndexOfRepresentedItem() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iKImageBrowserCellSelIndexOfRepresentedItem)
 	return _ret
 }
 
-// @method frame @abstract Returns the receiver�s frame rectangle, which defines its position in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses should not override this method.
+// Returns the receiver’s frame rectangle, which defines its position in its IKImageBrowserView.
 func (o *IKImageBrowserCell) Frame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageBrowserCellSelFrame)
 	return _ret
 }
 
-// @method imageContainerFrame @abstract Returns the receiver�s image container frame rectangle, which defines the position of the container of the thumbnail in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail container. The image frame is computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
+// Returns the receiver’s image container frame rectangle, which defines the position of the container of the thumbnail.
 func (o *IKImageBrowserCell) ImageContainerFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageBrowserCellSelImageContainerFrame)
 	return _ret
 }
 
-// @method imageFrame @abstract Returns the receiver�s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail.
+// Returns the receiver’s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView.
 func (o *IKImageBrowserCell) ImageFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageBrowserCellSelImageFrame)
 	return _ret
 }
 
-// @method selectionFrame @abstract Returns the receiver�s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the selection frame.
+// Returns the receiver’s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView.
 func (o *IKImageBrowserCell) SelectionFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageBrowserCellSelSelectionFrame)
 	return _ret
 }
 
-// @method titleFrame @abstract Returns the receiver�s title frame rectangle, which defines the position of the title in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the title.
+// Returns the receiver’s title frame rectangle.
 func (o *IKImageBrowserCell) TitleFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageBrowserCellSelTitleFrame)
 	return _ret
 }
 
-// @method subtitleFrame @abstract Returns the receiver�s subtitle frame rectangle, which defines the position of the subtitle in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the subtitle.
+// Returns the receiver’s subtitle frame rectangle.
 func (o *IKImageBrowserCell) SubtitleFrame() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iKImageBrowserCellSelSubtitleFrame)
 	return _ret
 }
 
-// @method imageAlignment @abstract Returns the position of the cell�s image in the frame. The default is NSImageAlignCenter. @discussion Subclasses can override this method to customize the image alignment. For the list of possible alignments, see [NSImageView setImageAlignment:]. The image frame will be computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
+// Returns the position of the cell’s image in the frame.
 func (o *IKImageBrowserCell) ImageAlignment() appkit.NSImageAlignment {
 	_ret := objc.Send[appkit.NSImageAlignment](o.Ptr(), _iKImageBrowserCellSelImageAlignment)
 	return _ret
 }
 
-// @method isSelected @abstract Returns the selection state of the receiver. @discussion Returns YES if the receiver is selected, otherwise NO. Subclasses should not override this method.
+// Returns whether the cell is selected.
 func (o *IKImageBrowserCell) IsSelected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iKImageBrowserCellSelIsSelected)
 	return _ret
 }
 
-// @method cellState @abstract Returns the current cell state of the receiver. @discussion Returns IKImageStateReady if the receiver�s represented object has been set and the cell is ready to display. The IKImageBrowserView creates thumbnails asynchronously; This method returns IKImageStateNoImage until a thumbnail has been created from the represented object.
+// Returns the current cell state of the receiver.
 func (o *IKImageBrowserCell) CellState() IKImageBrowserCellState {
 	_ret := objc.Send[IKImageBrowserCellState](o.Ptr(), _iKImageBrowserCellSelCellState)
 	return _ret
 }
 
-// @method opacity @abstract Determines the opacity of the receiver. @discussion Possible values are between 0.0 (transparent) and 1.0 (opaque). Subclasses can override this method to customize the opacity of the cell.
+// Returns the opacity of the receiver.
 func (o *IKImageBrowserCell) Opacity() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _iKImageBrowserCellSelOpacity)
 	return _ret
 }
 
-// @method layerForType: @abstract Provides the receiver�s layer for the given type. The default is nil. @discussion Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
+// Returns a layer for the specified position.
 func (o *IKImageBrowserCell) LayerForType(type_ *foundation.NSString) *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserCellSelLayerForType, type_.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that determines how the system shares a document in a collaboration.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption
 type SWCollaborationOption struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func SWCollaborationOptionFromID(id objc.ID) *SWCollaborationOption {
 	return o
 }
 
-// @abstract Initializes a collaboration option object with a title and unique identifier @param title A localized title string to be used when displaying the option @param identifier The unique identifier for the option
+// Creates and initializes a collaboration option object.
 func (o *SWCollaborationOption) InitWithTitleIdentifier(title *foundation.NSString, identifier *foundation.NSString) *SWCollaborationOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionSelInitWithTitleIdentifier, title.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *SWCollaborationOption) InitWithTitleIdentifier(title *foundation.NSStri
 	return SWCollaborationOptionFromID(_ret)
 }
 
-// @abstract Initializes a collaboration option with a title and unique identifier @param title A localized title string to be used when displaying the option @param identifier The unique identifier for the option
+// Creates and initializes a collaboration option object with a provided title and identifier.
 func SWCollaborationOptionOptionWithTitleIdentifier(title *foundation.NSString, identifier *foundation.NSString) *SWCollaborationOption {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationOption), _sWCollaborationOptionSelOptionWithTitleIdentifier, title.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -105,10 +107,13 @@ func (o *SWCollaborationOption) SetSelected(selected bool) {
 
 // @abstract An array of option identifiers that must already be selected in order to be interacted with
 func (o *SWCollaborationOption) RequiredOptionsIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sWCollaborationOptionSelRequiredOptionsIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionSelRequiredOptionsIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *SWCollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_sWCollaborationOptionSelSetRequiredOptionsIdentifiers, requiredOptionsIdentifiers)
+	o.Ptr().Send(_sWCollaborationOptionSelSetRequiredOptionsIdentifiers, requiredOptionsIdentifiers.Ptr())
 }

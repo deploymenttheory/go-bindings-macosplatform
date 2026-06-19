@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for subscriptions.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksubscription
 type CKSubscription struct {
 	foundation.NSObject

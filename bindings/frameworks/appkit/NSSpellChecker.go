@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface to the Cocoa spell-checking service.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsspellchecker
 type NSSpellChecker struct {
 	foundation.NSObject
@@ -86,89 +88,141 @@ func NSSpellCheckerFromID(id objc.ID) *NSSpellChecker {
 	return o
 }
 
+// Returns a guaranteed unique tag to use as the spell-document tag for a document.
 func NSSpellCheckerUniqueSpellDocumentTag() int {
 	_ret := objc.Send[int](objc.ID(_clsNSSpellChecker), _nSSpellCheckerSelUniqueSpellDocumentTag)
 	return _ret
 }
 
+// Starts the search for a misspelled word in a string starting at specified offset within the string.
 func (o *NSSpellChecker) CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount(stringToCheck *foundation.NSString, startingOffset int, language *foundation.NSString, wrapFlag bool, tag int, wordCount *int64) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSSpellCheckerSelCheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount, stringToCheck.Ptr(), startingOffset, language.Ptr(), wrapFlag, tag, wordCount)
 	return _ret
 }
 
+// Starts the search for a misspelled word in stringToCheck starting at startingOffset within the string object.
 func (o *NSSpellChecker) CheckSpellingOfStringStartingAt(stringToCheck *foundation.NSString, startingOffset int) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSSpellCheckerSelCheckSpellingOfStringStartingAt, stringToCheck.Ptr(), startingOffset)
 	return _ret
 }
 
+// Returns the number of words in the specified string.
 func (o *NSSpellChecker) CountWordsInStringLanguage(stringToCount *foundation.NSString, language *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSSpellCheckerSelCountWordsInStringLanguage, stringToCount.Ptr(), language.Ptr())
 	return _ret
 }
 
+// Initiates a grammatical analysis of a given string.
 func (o *NSSpellChecker) CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails(stringToCheck *foundation.NSString, startingOffset int, language *foundation.NSString, wrapFlag bool, tag int, details *foundation.NSArray[objc.ID]) foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSSpellCheckerSelCheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails, stringToCheck.Ptr(), startingOffset, language.Ptr(), wrapFlag, tag, details)
+	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSSpellCheckerSelCheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails, stringToCheck.Ptr(), startingOffset, language.Ptr(), wrapFlag, tag, details.Ptr())
 	return _ret
 }
 
+// Requests unified text checking for the given range of the given string.
 func (o *NSSpellChecker) CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount(stringToCheck *foundation.NSString, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, orthography *foundation.NSOrthography, wordCount *int64) *foundation.NSArray[*foundation.NSTextCheckingResult] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSTextCheckingResult]](o.Ptr(), _nSSpellCheckerSelCheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount, stringToCheck.Ptr(), range_, checkingTypes, options, tag, orthography.Ptr(), wordCount)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelCheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount, stringToCheck.Ptr(), range_, checkingTypes, options.Ptr(), tag, orthography.Ptr(), wordCount)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSTextCheckingResult](_ret)
+}
+
+// Requests that the string be checked in the background.
+func (o *NSSpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck *foundation.NSString, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler func(int, *foundation.NSArray[*foundation.NSTextCheckingResult], *foundation.NSOrthography, int)) int {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 objc.ID, blockParam2 objc.ID, blockParam3 int) {
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(blockParam0, foundation.NSArrayFromID[*foundation.NSTextCheckingResult](blockParam1), foundation.NSOrthographyFromID(blockParam2), blockParam3)
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[int](o.Ptr(), _nSSpellCheckerSelRequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler, stringToCheck.Ptr(), range_, checkingTypes, options.Ptr(), tag, __block_completionHandler)
 	return _ret
 }
 
-func (o *NSSpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck *foundation.NSString, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSpellCheckerSelRequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler, stringToCheck.Ptr(), range_, checkingTypes, options, tag, completionHandler)
+func (o *NSSpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck *foundation.NSString, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler func(int, *foundation.NSArray[*foundation.NSTextCheckingResult])) int {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 objc.ID) {
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(blockParam0, foundation.NSArrayFromID[*foundation.NSTextCheckingResult](blockParam1))
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[int](o.Ptr(), _nSSpellCheckerSelRequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler, selectedRange, stringToCheck.Ptr(), checkingTypes, options.Ptr(), tag, __block_completionHandler)
 	return _ret
 }
 
-func (o *NSSpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck *foundation.NSString, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSpellCheckerSelRequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler, selectedRange, stringToCheck.Ptr(), checkingTypes, options, tag, completionHandler)
-	return _ret
-}
-
+// Provides a menu containing contextual menu items suitable for certain kinds of detected results.
 func (o *NSSpellChecker) MenuForResultStringOptionsAtLocationInView(result *foundation.NSTextCheckingResult, checkedString *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID], location corefoundation.CGPoint, view *NSView) *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelMenuForResultStringOptionsAtLocationInView, result.Ptr(), checkedString.Ptr(), options, location, view.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelMenuForResultStringOptionsAtLocationInView, result.Ptr(), checkedString.Ptr(), options.Ptr(), location, view.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSMenuFromID(_ret)
 }
 
+// Returns the default values for quote replacement.
 func (o *NSSpellChecker) UserQuotesArrayForLanguage(language *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpellCheckerSelUserQuotesArrayForLanguage, language.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelUserQuotesArrayForLanguage, language.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Causes the spell checker to update the Spelling panel’s misspelled-word field to reflect word.
 func (o *NSSpellChecker) UpdateSpellingPanelWithMisspelledWord(word *foundation.NSString) {
 	o.Ptr().Send(_nSSpellCheckerSelUpdateSpellingPanelWithMisspelledWord, word.Ptr())
 }
 
+// Specifies a grammar-analysis detail to highlight in the Spelling panel.
 func (o *NSSpellChecker) UpdateSpellingPanelWithGrammarStringDetail(string_ *foundation.NSString, detail *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSSpellCheckerSelUpdateSpellingPanelWithGrammarStringDetail, string_.Ptr(), detail)
+	o.Ptr().Send(_nSSpellCheckerSelUpdateSpellingPanelWithGrammarStringDetail, string_.Ptr(), detail.Ptr())
 }
 
+// Updates the available panels to account for user changes.
 func (o *NSSpellChecker) UpdatePanels() {
 	o.Ptr().Send(_nSSpellCheckerSelUpdatePanels)
 }
 
+// Instructs the spell checker to ignore all future occurrences of wordToIgnore in the document identified by tag.
 func (o *NSSpellChecker) IgnoreWordInSpellDocumentWithTag(wordToIgnore *foundation.NSString, tag int) {
 	o.Ptr().Send(_nSSpellCheckerSelIgnoreWordInSpellDocumentWithTag, wordToIgnore.Ptr(), tag)
 }
 
+// Returns the array of ignored words for a document identified by tag.
 func (o *NSSpellChecker) IgnoredWordsInSpellDocumentWithTag(tag int) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpellCheckerSelIgnoredWordsInSpellDocumentWithTag, tag)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelIgnoredWordsInSpellDocumentWithTag, tag)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Initializes the ignored-words document (a dictionary identified by tag with someWords), an array of words to ignore.
 func (o *NSSpellChecker) SetIgnoredWordsInSpellDocumentWithTag(words *foundation.NSArray[*foundation.NSString], tag int) {
-	o.Ptr().Send(_nSSpellCheckerSelSetIgnoredWordsInSpellDocumentWithTag, words, tag)
+	o.Ptr().Send(_nSSpellCheckerSelSetIgnoredWordsInSpellDocumentWithTag, words.Ptr(), tag)
 }
 
+// Returns an array of possible substitutions for the specified string.
 func (o *NSSpellChecker) GuessesForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ *foundation.NSString, language *foundation.NSString, tag int) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpellCheckerSelGuessesForWordRangeInStringLanguageInSpellDocumentWithTag, range_, string_.Ptr(), language.Ptr(), tag)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelGuessesForWordRangeInStringLanguageInSpellDocumentWithTag, range_, string_.Ptr(), language.Ptr(), tag)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns a single proposed correction if a word is mis-spelled.
 func (o *NSSpellChecker) CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ *foundation.NSString, language *foundation.NSString, tag int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelCorrectionForWordRangeInStringLanguageInSpellDocumentWithTag, range_, string_.Ptr(), language.Ptr(), tag)
 	if _ret != 0 {
@@ -177,9 +231,13 @@ func (o *NSSpellChecker) CorrectionForWordRangeInStringLanguageInSpellDocumentWi
 	return foundation.NSStringFromID(_ret)
 }
 
+// Provides a list of complete words that the user might be trying to type based on a partial word in a given string.
 func (o *NSSpellChecker) CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ *foundation.NSString, language *foundation.NSString, tag int) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpellCheckerSelCompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag, range_, string_.Ptr(), language.Ptr(), tag)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelCompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag, range_, string_.Ptr(), language.Ptr(), tag)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSpellChecker) LanguageForWordRangeInStringOrthography(range_ foundation.NSRange, string_ *foundation.NSString, orthography *foundation.NSOrthography) *foundation.NSString {
@@ -190,14 +248,17 @@ func (o *NSSpellChecker) LanguageForWordRangeInStringOrthography(range_ foundati
 	return foundation.NSStringFromID(_ret)
 }
 
+// Notifies the receiver that the user has finished with the tagged document.
 func (o *NSSpellChecker) CloseSpellDocumentWithTag(tag int) {
 	o.Ptr().Send(_nSSpellCheckerSelCloseSpellDocumentWithTag, tag)
 }
 
+// Records the user response to the correction indicator being displayed.
 func (o *NSSpellChecker) RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response NSCorrectionResponse, correction *foundation.NSString, word *foundation.NSString, language *foundation.NSString, tag int) {
 	o.Ptr().Send(_nSSpellCheckerSelRecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag, response, correction.Ptr(), word.Ptr(), language.Ptr(), tag)
 }
 
+// Display a suitable user interface to indicate a correction may need to be made.
 func (o *NSSpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectViewCompletionHandler(type_ NSCorrectionIndicatorType, primaryString *foundation.NSString, alternativeStrings *foundation.NSArray[*foundation.NSString], rectOfTypedString corefoundation.CGRect, view *NSView, completionBlock func(*foundation.NSString)) {
 	var __block_completionBlock objc.Block
 	if completionBlock != nil {
@@ -209,15 +270,16 @@ func (o *NSSpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeSt
 		})
 		defer __block_completionBlock.Release()
 	}
-	o.Ptr().Send(_nSSpellCheckerSelShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectViewCompletionHandler, type_, primaryString.Ptr(), alternativeStrings, rectOfTypedString, view.Ptr(), __block_completionBlock)
+	o.Ptr().Send(_nSSpellCheckerSelShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectViewCompletionHandler, type_, primaryString.Ptr(), alternativeStrings.Ptr(), rectOfTypedString, view.Ptr(), __block_completionBlock)
 }
 
+// Dismisses the correction indicator for the specified view.
 func (o *NSSpellChecker) DismissCorrectionIndicatorForView(view *NSView) {
 	o.Ptr().Send(_nSSpellCheckerSelDismissCorrectionIndicatorForView, view.Ptr())
 }
 
 func (o *NSSpellChecker) ShowInlinePredictionForCandidatesClient(candidates *foundation.NSArray[*foundation.NSTextCheckingResult], client NSTextInputClient) {
-	o.Ptr().Send(_nSSpellCheckerSelShowInlinePredictionForCandidatesClient, candidates, client)
+	o.Ptr().Send(_nSSpellCheckerSelShowInlinePredictionForCandidatesClient, candidates.Ptr(), client)
 }
 
 func (o *NSSpellChecker) PreventsAutocorrectionBeforeStringLanguage(string_ *foundation.NSString, language *foundation.NSString) bool {
@@ -230,23 +292,28 @@ func (o *NSSpellChecker) DeletesAutospaceBetweenStringAndStringLanguage(precedin
 	return _ret
 }
 
+// Sets the string that appears in the misspelled word field, using the string object aString.
 func (o *NSSpellChecker) SetWordFieldStringValue(string_ *foundation.NSString) {
 	o.Ptr().Send(_nSSpellCheckerSelSetWordFieldStringValue, string_.Ptr())
 }
 
+// Adds the word to the spell checker dictionary.
 func (o *NSSpellChecker) LearnWord(word *foundation.NSString) {
 	o.Ptr().Send(_nSSpellCheckerSelLearnWord, word.Ptr())
 }
 
+// Indicates whether the spell checker has learned a given word.
 func (o *NSSpellChecker) HasLearnedWord(word *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSpellCheckerSelHasLearnedWord, word.Ptr())
 	return _ret
 }
 
+// Tells the spell checker to unlearn a given word.
 func (o *NSSpellChecker) UnlearnWord(word *foundation.NSString) {
 	o.Ptr().Send(_nSSpellCheckerSelUnlearnWord, word.Ptr())
 }
 
+// Returns the current language used in spell checking.
 func (o *NSSpellChecker) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelLanguage)
 	if _ret != 0 {
@@ -255,6 +322,7 @@ func (o *NSSpellChecker) Language() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns whether the specified language is in the Spelling pop-up list.
 func (o *NSSpellChecker) SetLanguage(language *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSpellCheckerSelSetLanguage, language.Ptr())
 	return _ret
@@ -274,8 +342,11 @@ func NSSpellCheckerSharedSpellCheckerExists() bool {
 }
 
 func (o *NSSpellChecker) UserReplacementsDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _nSSpellCheckerSelUserReplacementsDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelUserReplacementsDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *NSSpellChecker) SpellingPanel() *NSPanel {
@@ -319,13 +390,19 @@ func (o *NSSpellChecker) SetSubstitutionsPanelAccessoryViewController(substituti
 }
 
 func (o *NSSpellChecker) AvailableLanguages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpellCheckerSelAvailableLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelAvailableLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSpellChecker) UserPreferredLanguages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpellCheckerSelUserPreferredLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelUserPreferredLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSpellChecker) AutomaticallyIdentifiesLanguages() bool {
@@ -377,12 +454,17 @@ func NSSpellCheckerIsAutomaticInlinePredictionEnabled() bool {
 	return _ret
 }
 
+// Returns an array of suggested spellings for the misspelled word.
 // Deprecated: Use -guessesForWordRange:inString:language:inSpellDocumentWithTag instead
 func (o *NSSpellChecker) GuessesForWord(word *foundation.NSString) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSSpellCheckerSelGuessesForWord, word.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpellCheckerSelGuessesForWord, word.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Remove this word from the spelling dictionary.
 // Deprecated: since macOS 10.5.
 func (o *NSSpellChecker) ForgetWord(word *foundation.NSString) {
 	o.Ptr().Send(_nSSpellCheckerSelForgetWord, word.Ptr())

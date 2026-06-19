@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the list of previously loaded webpages, which the web view uses for forward and backward navigation.
+//
 // WKBackForwardList wraps [raw.WKBackForwardList] with a fluent Go API.
 type WKBackForwardList struct {
 	inner *raw.WKBackForwardList
@@ -36,7 +38,7 @@ func NewWKBackForwardList() *WKBackForwardList {
 	return &WKBackForwardList{inner: raw.WKBackForwardListFromID(_id)}
 }
 
-// @abstract Returns the item at a specified distance from the current item. @param index Index of the desired list item relative to the current item: 0 for the current item, -1 for the immediately preceding item, 1 for the immediately following item, and so on. @result The item at the specified distance from the current item, or nil if the index parameter exceeds the limits of the list.
+// Returns the item at the relative offset from the current item.
 //
 // ItemAtIndex calls the underlying ItemAtIndex.
 func (x *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {

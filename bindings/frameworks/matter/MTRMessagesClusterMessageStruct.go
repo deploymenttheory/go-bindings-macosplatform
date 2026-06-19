@@ -116,10 +116,13 @@ func (o *MTRMessagesClusterMessageStruct) SetMessageText(messageText *foundation
 }
 
 func (o *MTRMessagesClusterMessageStruct) Responses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRMessagesClusterMessageStructSelResponses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelResponses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRMessagesClusterMessageStruct) SetResponses(responses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRMessagesClusterMessageStructSelSetResponses, responses)
+	o.Ptr().Send(_mTRMessagesClusterMessageStructSelSetResponses, responses.Ptr())
 }

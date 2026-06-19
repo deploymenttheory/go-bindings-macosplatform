@@ -1,0 +1,554 @@
+{
+  "schema_version": 1,
+  "framework": "CoreMediaIO",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CMIOExtensionClient": {
+      "doc": "An object that represents a client of the extension.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionclient"
+    },
+    "CMIOExtensionDevice": {
+      "doc": "An object that represents a physical or virtual device.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice"
+    },
+    "CMIOExtensionDeviceProperties": {
+      "doc": "An object that defines the properties of a device.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties"
+    },
+    "CMIOExtensionPropertyAttributes": {
+      "doc": "An object that describes the attributes of a property.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes"
+    },
+    "CMIOExtensionPropertyState": {
+      "doc": "An object that describes the state of a property.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate"
+    },
+    "CMIOExtensionProvider": {
+      "doc": "An object that manages device connections for a provider.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider"
+    },
+    "CMIOExtensionProviderProperties": {
+      "doc": "An object that manages the properties of an extension provider.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties"
+    },
+    "CMIOExtensionScheduledOutput": {
+      "doc": "An object that represents scheduled output.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionscheduledoutput"
+    },
+    "CMIOExtensionStream": {
+      "doc": "An object that represents a stream of media data.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream"
+    },
+    "CMIOExtensionStreamCustomClockConfiguration": {
+      "doc": "An object that describes the parameters to create a custom clock on the host side.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration"
+    },
+    "CMIOExtensionStreamFormat": {
+      "doc": "An object that describes the format of a media stream.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat"
+    },
+    "CMIOExtensionStreamProperties": {
+      "doc": "An object that describes the properties of an extension stream.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties"
+    }
+  },
+  "protocols": {
+    "CMIOExtensionDeviceSource": {
+      "doc": "A protocol for objects that act as device sources.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevicesource"
+    },
+    "CMIOExtensionProviderSource": {
+      "doc": "A protocol for objects that act as provider sources.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovidersource"
+    },
+    "CMIOExtensionStreamSource": {
+      "doc": "A protocol for objects that act as stream sources.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamsource"
+    }
+  },
+  "enums": {
+    "CMIOExtensionStreamClockType": {
+      "doc": "Constants that indicate the clock type of a stream.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamclocktype"
+    },
+    "CMIOExtensionStreamDirection": {
+      "doc": "Constants that define the data-flow direction of the stream.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamdirection"
+    },
+    "CMIOExtensionStreamDiscontinuityFlags": {
+      "doc": "Constants that specify the types of discontinuities that can occur in a media stream.",
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamdiscontinuityflags",
+      "members": {
+        "CMIOExtensionStreamDiscontinuityFlagNone": {
+          "doc": "A flag that indicates there’s no discontinuity in the stream.",
+          "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamdiscontinuityflags/cmioextensionstreamdiscontinuityflagnone"
+        }
+      }
+    }
+  },
+  "structs": {
+    "CMIODeviceAVCCommand": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmiodeviceavccommand"
+    },
+    "CMIODeviceRS422Command": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmiodevicers422command"
+    },
+    "CMIODeviceSMPTETimeCallback": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmiodevicesmptetimecallback"
+    },
+    "CMIODeviceStreamConfiguration": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmiodevicestreamconfiguration"
+    },
+    "CMIOObjectPropertyAddress": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmioobjectpropertyaddress"
+    },
+    "CMIOStreamDeck": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmiostreamdeck"
+    },
+    "CMIOStreamScheduledOutputNotificationProcAndRefCon": {
+      "url": "https://developer.apple.com/documentation/coremediaio/cmiostreamscheduledoutputnotificationprocandrefcon"
+    }
+  },
+  "methods": {
+    "CMIOExtensionDevice": {
+      "+deviceWithLocalizedName:deviceID:legacyDeviceID:source:": {
+        "doc": "Returns a new extension device with an optional legacy device identifier.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/devicewithlocalizedname:deviceid:legacydeviceid:source:"
+      },
+      "+deviceWithLocalizedName:deviceID:source:": {
+        "doc": "Returns a new extension device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/devicewithlocalizedname:deviceid:source:"
+      },
+      "-addStream:error:": {
+        "doc": "Adds a stream to a device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/addstream(_:)"
+      },
+      "-initWithLocalizedName:deviceID:legacyDeviceID:source:": {
+        "doc": "Creates an extension device with an optional legacy device identifier.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/init(localizedname:deviceid:legacydeviceid:source:)"
+      },
+      "-initWithLocalizedName:deviceID:source:": {
+        "doc": "Creates an extension device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/init(localizedname:deviceid:source:)"
+      },
+      "-notifyPropertiesChanged:": {
+        "doc": "Notifies clients of property changes.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/notifypropertieschanged(_:)"
+      },
+      "-removeStream:error:": {
+        "doc": "Removes a stream from the device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/removestream(_:)"
+      }
+    },
+    "CMIOExtensionDeviceProperties": {
+      "+devicePropertiesWithDictionary:": {
+        "doc": "Returns a new properties object with a dictionary of property states.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/devicepropertieswithdictionary:"
+      },
+      "-initWithDictionary:": {
+        "doc": "Creates a properties object with a dictionary of property states.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/init(dictionary:)"
+      },
+      "-setPropertyState:forProperty:": {
+        "doc": "Sets the value of a device property.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/setpropertystate(_:forproperty:)"
+      }
+    },
+    "CMIOExtensionPropertyAttributes": {
+      "+propertyAttributesWithMinValue:maxValue:validValues:readOnly:": {
+        "doc": "Returns a new property attributes object with the specified configuration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/propertyattributeswithminvalue:maxvalue:validvalues:readonly:"
+      },
+      "-initWithMinValue:maxValue:validValues:readOnly:": {
+        "doc": "Creates a property attributes object with the specified configuration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/init(minvalue:maxvalue:validvalues:readonly:)"
+      }
+    },
+    "CMIOExtensionPropertyState": {
+      "+propertyStateWithValue:": {
+        "doc": "Returns a new property state with a value.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate/propertystatewithvalue:"
+      },
+      "+propertyStateWithValue:attributes:": {
+        "doc": "Returns a new property state with a value and attributes.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate/propertystatewithvalue:attributes:"
+      },
+      "-initWithValue:": {
+        "doc": "Creates a property state with a value.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate/init(value:)"
+      },
+      "-initWithValue:attributes:": {
+        "doc": "Creates a property state with a value and attributes.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate/init(value:attributes:)"
+      }
+    },
+    "CMIOExtensionProvider": {
+      "+providerWithSource:clientQueue:": {
+        "doc": "Returns a new extension provider with the specified source and dispatch queue.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/providerwithsource:clientqueue:"
+      },
+      "+startServiceWithProvider:": {
+        "doc": "Starts the system extension.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/startservice(provider:)"
+      },
+      "-addDevice:error:": {
+        "doc": "Adds a device to a provider.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/adddevice(_:)"
+      },
+      "-initWithSource:clientQueue:": {
+        "doc": "Creates an extension provider with the specified source and dispatch queue.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/init(source:clientqueue:)"
+      },
+      "-notifyPropertiesChanged:": {
+        "doc": "Notifies connected clients of device property changes.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/notifypropertieschanged(_:)"
+      },
+      "-removeDevice:error:": {
+        "doc": "Removes a device from a provider.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/removedevice(_:)"
+      }
+    },
+    "CMIOExtensionProviderProperties": {
+      "+providerPropertiesWithDictionary:": {
+        "doc": "Returns a new provider properties object with the specified properties.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties/providerpropertieswithdictionary:"
+      },
+      "-initWithDictionary:": {
+        "doc": "Creates a provider properties object with the specified properties.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties/init(dictionary:)"
+      },
+      "-setPropertyState:forProperty:": {
+        "doc": "Sets a state value for the specified property.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties/setpropertystate(_:forproperty:)"
+      }
+    },
+    "CMIOExtensionScheduledOutput": {
+      "+scheduledOutputWithSequenceNumber:hostTimeInNanoseconds:": {
+        "doc": "Returns a new scheduled output object.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionscheduledoutput/scheduledoutputwithsequencenumber:hosttimeinnanoseconds:"
+      },
+      "-initWithSequenceNumber:hostTimeInNanoseconds:": {
+        "doc": "Creates a scheduled output object.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionscheduledoutput/init(sequencenumber:hosttimeinnanoseconds:)"
+      }
+    },
+    "CMIOExtensionStream": {
+      "+streamWithLocalizedName:streamID:direction:clockType:source:": {
+        "doc": "Returns a new stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/streamwithlocalizedname:streamid:direction:clocktype:source:"
+      },
+      "+streamWithLocalizedName:streamID:direction:customClockConfiguration:source:": {
+        "doc": "Returns a new stream that uses a custom clock configuration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/streamwithlocalizedname:streamid:direction:customclockconfiguration:source:"
+      },
+      "-consumeSampleBufferFromClient:completionHandler:": {
+        "doc": "Consumes a sample buffer from a client.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/consumesamplebuffer(from:completionhandler:)"
+      },
+      "-initWithLocalizedName:streamID:direction:clockType:source:": {
+        "doc": "Creates a stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/init(localizedname:streamid:direction:clocktype:source:)"
+      },
+      "-initWithLocalizedName:streamID:direction:customClockConfiguration:source:": {
+        "doc": "Creates a stream that uses a custom clock configuration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/init(localizedname:streamid:direction:customclockconfiguration:source:)"
+      },
+      "-notifyPropertiesChanged:": {
+        "doc": "Notifies clients about stream property changes.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/notifypropertieschanged(_:)"
+      },
+      "-notifyScheduledOutputChanged:": {
+        "doc": "Notifies clients when a particular buffer is output.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/notifyscheduledoutputchanged(_:)"
+      },
+      "-sendSampleBuffer:discontinuity:hostTimeInNanoseconds:": {
+        "doc": "Sends a media sample to stream client.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/send(_:discontinuity:hosttimeinnanoseconds:)"
+      }
+    },
+    "CMIOExtensionStreamCustomClockConfiguration": {
+      "+customClockConfigurationWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:": {
+        "doc": "Returns a new a custom clock configuration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/customclockconfigurationwithclockname:sourceidentifier:gettimecallminimuminterval:numberofeventsforratesmoothing:numberofaveragesforratesmoothing:"
+      },
+      "-initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:": {
+        "doc": "Creates a custom clock configuration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/init(clockname:sourceidentifier:gettimecallminimuminterval:numberofeventsforratesmoothing:numberofaveragesforratesmoothing:)"
+      }
+    },
+    "CMIOExtensionStreamFormat": {
+      "+streamFormatWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:": {
+        "doc": "Returns a new stream format with a format description and frame durations.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/streamformatwithformatdescription:maxframeduration:minframeduration:validframedurations:"
+      },
+      "-initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:": {
+        "doc": "Creates a stream format with a format description and frame durations.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/initwithformatdescription:maxframeduration:minframeduration:validframedurations:"
+      }
+    },
+    "CMIOExtensionStreamProperties": {
+      "+streamPropertiesWithDictionary:": {
+        "doc": "Returns a new properties object that provides the specified properties and default states.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/streampropertieswithdictionary:"
+      },
+      "-initWithDictionary:": {
+        "doc": "Creates a properties object that provides the specified properties and default states.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/init(dictionary:)"
+      },
+      "-setPropertyState:forProperty:": {
+        "doc": "Sets the state of the specified property.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/setpropertystate(_:forproperty:)"
+      }
+    }
+  },
+  "properties": {
+    "CMIOExtensionClient": {
+      "clientID": {
+        "doc": "A unique client identifier.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionclient/clientid"
+      },
+      "pid": {
+        "doc": "The process identifier of the client.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionclient/pid"
+      }
+    },
+    "CMIOExtensionDevice": {
+      "deviceID": {
+        "doc": "A universally unique device identifier value.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/deviceid"
+      },
+      "legacyDeviceID": {
+        "doc": "A legacy device identifier.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/legacydeviceid"
+      },
+      "localizedName": {
+        "doc": "A localized name for a device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/localizedname"
+      },
+      "source": {
+        "doc": "A source object for a device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/source"
+      },
+      "streams": {
+        "doc": "An array of media streams attached to this device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondevice/streams"
+      }
+    },
+    "CMIOExtensionDeviceProperties": {
+      "linkedCoreAudioDeviceUID": {
+        "doc": "A universal identifier of the audio device linked to this device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/linkedcoreaudiodeviceuid"
+      },
+      "model": {
+        "doc": "A device model string.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/model"
+      },
+      "propertiesDictionary": {
+        "doc": "A dictionary of properties for a device.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/propertiesdictionary"
+      },
+      "suspended": {
+        "doc": "A Boolean value that indicates whether the device is in a suspended state.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/suspended-2ja7h"
+      },
+      "transportType": {
+        "doc": "The transport type of the device, such as USB or HDMI.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/transporttype-96gm"
+      }
+    },
+    "CMIOExtensionPropertyAttributes": {
+      "maxValue": {
+        "doc": "The maximum value a property supports.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/maxvalue"
+      },
+      "minValue": {
+        "doc": "The minimum value a property supports.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/minvalue"
+      },
+      "readOnly": {
+        "doc": "A Boolean value that indicates whether a property is read-only.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/isreadonly"
+      },
+      "readOnlyPropertyAttribute": {
+        "doc": "A class property for a read-only property attribute.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/readonlypropertyattribute"
+      },
+      "validValues": {
+        "doc": "An array of discrete values that this property supports.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes/validvalues"
+      }
+    },
+    "CMIOExtensionPropertyState": {
+      "attributes": {
+        "doc": "The attributes for a property state.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate/attributes"
+      },
+      "value": {
+        "doc": "The value for a property state.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate/value"
+      }
+    },
+    "CMIOExtensionProvider": {
+      "clientQueue": {
+        "doc": "The dispatch queue on which the system performs client operations.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/clientqueue"
+      },
+      "connectedClients": {
+        "doc": "An array of connected clients.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/connectedclients"
+      },
+      "devices": {
+        "doc": "An array of connected devices.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/devices"
+      },
+      "source": {
+        "doc": "The source for the provider.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionprovider/source"
+      }
+    },
+    "CMIOExtensionProviderProperties": {
+      "manufacturer": {
+        "doc": "The provider manufacturer.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties/manufacturer"
+      },
+      "name": {
+        "doc": "The provider name.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties/name"
+      },
+      "propertiesDictionary": {
+        "doc": "A dictionary of properties for a provider.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties/propertiesdictionary"
+      }
+    },
+    "CMIOExtensionScheduledOutput": {
+      "hostTimeInNanoseconds": {
+        "doc": "The host time in nanoseconds when the buffer was output.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionscheduledoutput/hosttimeinnanoseconds"
+      },
+      "sequenceNumber": {
+        "doc": "The buffer sequence number that was output.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionscheduledoutput/sequencenumber"
+      }
+    },
+    "CMIOExtensionStream": {
+      "CMIOExtensionStreamClockType": {
+        "doc": "Constants that indicate the clock type of a stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/clocktype-swift.enum"
+      },
+      "CMIOExtensionStreamDirection": {
+        "doc": "Constants that define the data-flow direction of the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/direction-swift.enum"
+      },
+      "CMIOExtensionStreamDiscontinuityFlags": {
+        "doc": "Constants that specify the types of discontinuities that can occur in a media stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/discontinuityflags"
+      },
+      "clockType": {
+        "doc": "A clock type for the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/clocktype-swift.property"
+      },
+      "customClockConfiguration": {
+        "doc": "An optional custom clock configuration for a stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/customclockconfiguration"
+      },
+      "direction": {
+        "doc": "The data-flow direction of the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/direction-swift.property"
+      },
+      "localizedName": {
+        "doc": "A localized name for the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/localizedname"
+      },
+      "source": {
+        "doc": "The source object for the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/source"
+      },
+      "streamID": {
+        "doc": "A universally unique identifier for the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/streamid"
+      },
+      "streamingClients": {
+        "doc": "An array of clients of the stream.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstream/streamingclients"
+      }
+    },
+    "CMIOExtensionStreamCustomClockConfiguration": {
+      "clockName": {
+        "doc": "The name of the clock.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/clockname"
+      },
+      "getTimeCallMinimumInterval": {
+        "doc": "A minimum call time interval for the clock.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/gettimecallminimuminterval"
+      },
+      "numberOfAveragesForRateSmoothing": {
+        "doc": "The number of averages to use for rate smoothing.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/numberofaveragesforratesmoothing"
+      },
+      "numberOfEventsForRateSmoothing": {
+        "doc": "The number of events to use for rate smoothing.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/numberofeventsforratesmoothing"
+      },
+      "sourceIdentifier": {
+        "doc": "A universally unique identifier for the clock.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamcustomclockconfiguration/sourceidentifier"
+      }
+    },
+    "CMIOExtensionStreamFormat": {
+      "formatDescription": {
+        "doc": "A description of the format of the stream’s media samples.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/formatdescription"
+      },
+      "init(formatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:)": {
+        "doc": "Creates a stream format with a format description and frame durations.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/init(formatdescription:maxframeduration:minframeduration:validframedurations:)"
+      },
+      "maxFrameDuration": {
+        "doc": "The maximum duration a stream supports.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/maxframeduration"
+      },
+      "minFrameDuration": {
+        "doc": "The minimum frame duration a stream supports.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/minframeduration"
+      },
+      "validFrameDurations": {
+        "doc": "An array of frame durations the stream supports.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamformat/validframedurations-707st"
+      }
+    },
+    "CMIOExtensionStreamProperties": {
+      "activeFormatIndex": {
+        "doc": "The index of the active format.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/activeformatindex-8czm7"
+      },
+      "frameDuration": {
+        "doc": "The duration of the frame.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/frameduration-4rnl9"
+      },
+      "maxFrameDuration": {
+        "doc": "The maximum duration of a frame.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/maxframeduration-8fo5t"
+      },
+      "propertiesDictionary": {
+        "doc": "A dictionary representation of the property state.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/propertiesdictionary"
+      },
+      "sinkBufferQueueSize": {
+        "doc": "The buffer queue size.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-9b80c"
+      },
+      "sinkBufferUnderrunCount": {
+        "doc": "The buffer underrun count.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferunderruncount-1qmbb"
+      },
+      "sinkBuffersRequiredForStartup": {
+        "doc": "The number of buffers the stream requires for startup.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-1bgyq"
+      },
+      "sinkEndOfData": {
+        "doc": "A value that indicates whether the stream has reached its end.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkendofdata-8fswu"
+      }
+    }
+  }
+}

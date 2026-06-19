@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcontenteditingoutput
 type PHContentEditingOutput struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func PHContentEditingOutputFromID(id objc.ID) *PHContentEditingOutput {
 	return o
 }
 
+// Creates an editing output from the specified editing input.
 func (o *PHContentEditingOutput) InitWithContentEditingInput(contentEditingInput *PHContentEditingInput) *PHContentEditingOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelInitWithContentEditingInput, contentEditingInput.Ptr())
 	if _ret != 0 {
@@ -93,10 +96,14 @@ func (o *PHContentEditingOutput) DefaultRenderedContentType() *uniformtypeidenti
 
 // Returns the supported types for the rendered content output
 func (o *PHContentEditingOutput) SupportedRenderedContentTypes() *foundation.NSArray[*uniformtypeidentifiers.UTType] {
-	_ret := objc.Send[*foundation.NSArray[*uniformtypeidentifiers.UTType]](o.Ptr(), _pHContentEditingOutputSelSupportedRenderedContentTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelSupportedRenderedContentTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](_ret)
 }
 
+// Creates an editing output for use in adding a new asset to the photo library.
 func (o *PHContentEditingOutput) InitWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *PHObjectPlaceholder) *PHContentEditingOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelInitWithPlaceholderForCreatedAsset, placeholderForCreatedAsset.Ptr())
 	if _ret != 0 {

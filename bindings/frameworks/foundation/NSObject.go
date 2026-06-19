@@ -397,7 +397,7 @@ func (o *NSObject) URLResourceDidFailLoadingWithReason(sender *NSURL, reason *NS
 
 // Deprecated:  Handler API no longer supported
 func (o *NSObject) FileManagerShouldProceedAfterError(fm *NSFileManager, errorInfo *NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSObjectSelFileManagerShouldProceedAfterError, fm.Ptr(), errorInfo)
+	_ret := objc.Send[bool](o.Ptr(), _nSObjectSelFileManagerShouldProceedAfterError, fm.Ptr(), errorInfo.Ptr())
 	return _ret
 }
 
@@ -425,18 +425,27 @@ func (o *NSObject) ValidateValueForKeyError(ioValue **ObjcObject, inKey *NSStrin
 }
 
 func (o *NSObject) MutableArrayValueForKey(key *NSString) *NSMutableArray[objc.ID] {
-	_ret := objc.Send[*NSMutableArray[objc.ID]](o.Ptr(), _nSObjectSelMutableArrayValueForKey, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMutableArrayValueForKey, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSObject) MutableOrderedSetValueForKey(key *NSString) *NSMutableOrderedSet[objc.ID] {
-	_ret := objc.Send[*NSMutableOrderedSet[objc.ID]](o.Ptr(), _nSObjectSelMutableOrderedSetValueForKey, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMutableOrderedSetValueForKey, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableOrderedSetFromID[objc.ID](_ret)
 }
 
 func (o *NSObject) MutableSetValueForKey(key *NSString) *NSMutableSet[objc.ID] {
-	_ret := objc.Send[*NSMutableSet[objc.ID]](o.Ptr(), _nSObjectSelMutableSetValueForKey, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMutableSetValueForKey, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableSetFromID[objc.ID](_ret)
 }
 
 func (o *NSObject) ValueForKeyPath(keyPath *NSString) objc.ID {
@@ -458,18 +467,27 @@ func (o *NSObject) ValidateValueForKeyPathError(ioValue **ObjcObject, inKeyPath 
 }
 
 func (o *NSObject) MutableArrayValueForKeyPath(keyPath *NSString) *NSMutableArray[objc.ID] {
-	_ret := objc.Send[*NSMutableArray[objc.ID]](o.Ptr(), _nSObjectSelMutableArrayValueForKeyPath, keyPath.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMutableArrayValueForKeyPath, keyPath.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSObject) MutableOrderedSetValueForKeyPath(keyPath *NSString) *NSMutableOrderedSet[objc.ID] {
-	_ret := objc.Send[*NSMutableOrderedSet[objc.ID]](o.Ptr(), _nSObjectSelMutableOrderedSetValueForKeyPath, keyPath.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMutableOrderedSetValueForKeyPath, keyPath.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableOrderedSetFromID[objc.ID](_ret)
 }
 
 func (o *NSObject) MutableSetValueForKeyPath(keyPath *NSString) *NSMutableSet[objc.ID] {
-	_ret := objc.Send[*NSMutableSet[objc.ID]](o.Ptr(), _nSObjectSelMutableSetValueForKeyPath, keyPath.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMutableSetValueForKeyPath, keyPath.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMutableSetFromID[objc.ID](_ret)
 }
 
 func (o *NSObject) ValueForUndefinedKey(key *NSString) objc.ID {
@@ -486,12 +504,15 @@ func (o *NSObject) SetNilValueForKey(key *NSString) {
 }
 
 func (o *NSObject) DictionaryWithValuesForKeys(keys *NSArray[*NSString]) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSObjectSelDictionaryWithValuesForKeys, keys.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelDictionaryWithValuesForKeys, keys.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSObject) SetValuesForKeysWithDictionary(keyedValues *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSObjectSelSetValuesForKeysWithDictionary, keyedValues)
+	o.Ptr().Send(_nSObjectSelSetValuesForKeysWithDictionary, keyedValues.Ptr())
 }
 
 func NSObjectAccessInstanceVariablesDirectly() bool {
@@ -544,17 +565,20 @@ func (o *NSObject) UnableToSetNilForKey(key *NSString) {
 
 // Deprecated: Legacy KVC API
 func (o *NSObject) ValuesForKeys(keys *NSArray[objc.ID]) *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSObjectSelValuesForKeys, keys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelValuesForKeys, keys.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: Legacy KVC API
 func (o *NSObject) TakeValuesFromDictionary(properties *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSObjectSelTakeValuesFromDictionary, properties)
+	o.Ptr().Send(_nSObjectSelTakeValuesFromDictionary, properties.Ptr())
 }
 
 func (o *NSObject) ObserveValueForKeyPathOfObjectChangeContext(keyPath *NSString, object objc.ID, change *NSDictionary[*NSString, objc.ID], context_ unsafe.Pointer) {
-	o.Ptr().Send(_nSObjectSelObserveValueForKeyPathOfObjectChangeContext, keyPath.Ptr(), object, change, context_)
+	o.Ptr().Send(_nSObjectSelObserveValueForKeyPathOfObjectChangeContext, keyPath.Ptr(), object, change.Ptr(), context_)
 }
 
 func (o *NSObject) AddObserverForKeyPathOptionsContext(observer *NSObject, keyPath *NSString, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
@@ -586,11 +610,11 @@ func (o *NSObject) DidChangeValuesAtIndexesForKey(changeKind NSKeyValueChange, i
 }
 
 func (o *NSObject) WillChangeValueForKeyWithSetMutationUsingObjects(key *NSString, mutationKind NSKeyValueSetMutationKind, objects *NSSet[objc.ID]) {
-	o.Ptr().Send(_nSObjectSelWillChangeValueForKeyWithSetMutationUsingObjects, key.Ptr(), mutationKind, objects)
+	o.Ptr().Send(_nSObjectSelWillChangeValueForKeyWithSetMutationUsingObjects, key.Ptr(), mutationKind, objects.Ptr())
 }
 
 func (o *NSObject) DidChangeValueForKeyWithSetMutationUsingObjects(key *NSString, mutationKind NSKeyValueSetMutationKind, objects *NSSet[objc.ID]) {
-	o.Ptr().Send(_nSObjectSelDidChangeValueForKeyWithSetMutationUsingObjects, key.Ptr(), mutationKind, objects)
+	o.Ptr().Send(_nSObjectSelDidChangeValueForKeyWithSetMutationUsingObjects, key.Ptr(), mutationKind, objects.Ptr())
 }
 
 func NSObjectKeyPathsForValuesAffectingValueForKey(key *NSString) *NSSet[*NSString] {
@@ -617,7 +641,7 @@ func (o *NSObject) SetObservationInfo(observationInfo unsafe.Pointer) {
 
 // Deprecated: Use +keyPathsForValuesAffectingValueForKey instead
 func NSObjectSetKeysTriggerChangeNotificationsForDependentKey(keys *NSArray[objc.ID], dependentKey *NSString) {
-	objc.ID(_clsNSObject).Send(_nSObjectSelSetKeysTriggerChangeNotificationsForDependentKey, keys, dependentKey.Ptr())
+	objc.ID(_clsNSObject).Send(_nSObjectSelSetKeysTriggerChangeNotificationsForDependentKey, keys.Ptr(), dependentKey.Ptr())
 }
 
 // Register shared observations. A shared observation collection might be shared between multiple observables to minimise registration work. Shared observers remain registered throughout the object's lifetime and do not need to be removed using `removeObserver:`. An observable may only have one set of shared observations. Subsequent calls to this method will replace existing shared observations. - Parameter sharedObservers: shared observer collection that was initialized with the class of this object - Invariant: `sharedObserers` was initialized with the class of this object - Throws: Exception if the class of the receiving observable object does not match the class with which `sharedObserers` was initialized.
@@ -738,22 +762,25 @@ func (o *NSObject) ScriptingValueForSpecifier(objectSpecifier *NSScriptObjectSpe
 }
 
 func (o *NSObject) CopyScriptingValueForKeyWithProperties(value objc.ID, key *NSString, properties *NSDictionary[*NSString, objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelCopyScriptingValueForKeyWithProperties, value, key.Ptr(), properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelCopyScriptingValueForKeyWithProperties, value, key.Ptr(), properties.Ptr())
 	return _ret
 }
 
 func (o *NSObject) NewScriptingObjectOfClassForValueForKeyWithContentsValueProperties(objectClass objc.Class, key *NSString, contentsValue objc.ID, properties *NSDictionary[*NSString, objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelNewScriptingObjectOfClassForValueForKeyWithContentsValueProperties, objectClass, key.Ptr(), contentsValue, properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelNewScriptingObjectOfClassForValueForKeyWithContentsValueProperties, objectClass, key.Ptr(), contentsValue, properties.Ptr())
 	return _ret
 }
 
 func (o *NSObject) ScriptingProperties() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSObjectSelScriptingProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelScriptingProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSObject) SetScriptingProperties(scriptingProperties *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSObjectSelSetScriptingProperties, scriptingProperties)
+	o.Ptr().Send(_nSObjectSelSetScriptingProperties, scriptingProperties.Ptr())
 }
 
 func (o *NSObject) ClassCode() uint {

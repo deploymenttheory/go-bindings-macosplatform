@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A URL session task that communicates over the WebSockets protocol standard.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionwebsockettask
 type NSURLSessionWebSocketTask struct {
 	NSURLSessionTask
@@ -38,6 +40,7 @@ func NSURLSessionWebSocketTaskFromID(id objc.ID) *NSURLSessionWebSocketTask {
 	return o
 }
 
+// Sends a WebSocket message, receiving the result in a completion handler.
 func (o *NSURLSessionWebSocketTask) SendMessageCompletionHandler(message *NSURLSessionWebSocketMessage, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -49,6 +52,7 @@ func (o *NSURLSessionWebSocketTask) SendMessageCompletionHandler(message *NSURLS
 	o.Ptr().Send(_nSURLSessionWebSocketTaskSelSendMessageCompletionHandler, message.Ptr(), __block_completionHandler)
 }
 
+// Reads a WebSocket message once all the frames of the message are available.
 func (o *NSURLSessionWebSocketTask) ReceiveMessageWithCompletionHandler(completionHandler func(*NSURLSessionWebSocketMessage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

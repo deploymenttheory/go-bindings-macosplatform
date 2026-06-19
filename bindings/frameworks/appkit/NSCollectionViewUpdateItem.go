@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a single change to make to an item in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewupdateitem
 type NSCollectionViewUpdateItem struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A service with writeable property values.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbmutableservice
 type CBMutableService struct {
 	CBService
@@ -32,7 +34,7 @@ func CBMutableServiceFromID(id objc.ID) *CBMutableService {
 	return o
 }
 
-// @method initWithType:primary: @param UUID			The Bluetooth UUID of the service. @param isPrimary	The type of the service (primary or secondary). @discussion			Returns a service, initialized with a service type and UUID.
+// Creates a newly initialized mutable service specified by UUID and service type.
 func (o *CBMutableService) InitWithTypePrimary(uUID *CBUUID, isPrimary bool) *CBMutableService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableServiceSelInitWithTypePrimary, uUID.Ptr(), isPrimary)
 	if _ret != 0 {

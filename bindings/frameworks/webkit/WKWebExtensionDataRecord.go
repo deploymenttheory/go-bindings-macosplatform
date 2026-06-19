@@ -37,7 +37,7 @@ func WKWebExtensionDataRecordFromID(id objc.ID) *WKWebExtensionDataRecord {
 
 // @abstract Retrieves the size in bytes of the specific data types in this data record. @param dataTypes The set of data types to measure the size for. @return The total size of the specified data types. @seealso totalSizeInBytes
 func (o *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes *foundation.NSSet[*foundation.NSString]) uint {
-	_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelSizeInBytesOfTypes, dataTypes)
+	_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelSizeInBytesOfTypes, dataTypes.Ptr())
 	return _ret
 }
 
@@ -61,14 +61,20 @@ func (o *WKWebExtensionDataRecord) UniqueIdentifier() *foundation.NSString {
 
 // @abstract The set of data types contained in this data record.
 func (o *WKWebExtensionDataRecord) ContainedDataTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _wKWebExtensionDataRecordSelContainedDataTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelContainedDataTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 // @abstract An array of errors that may have occurred when either calculating or deleting storage.
 func (o *WKWebExtensionDataRecord) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _wKWebExtensionDataRecordSelErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @abstract The total size in bytes of all data types contained in this data record. @seealso sizeInBytesOfTypes:

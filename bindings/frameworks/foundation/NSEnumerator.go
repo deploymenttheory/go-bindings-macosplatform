@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class whose subclasses enumerate collections of objects, such as arrays and dictionaries.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsenumerator
 type NSEnumerator[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -30,6 +32,7 @@ func NSEnumeratorFromID[ObjectType purego.AnyObject](id objc.ID) *NSEnumerator[O
 	return o
 }
 
+// Returns the next object from the collection being enumerated.
 func (o *NSEnumerator[ObjectType]) NextObject() ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSEnumeratorSelNextObject)
 	return _ret

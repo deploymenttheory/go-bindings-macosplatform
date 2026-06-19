@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that analyzes media for sensitive content.
+//
 // SensitivityAnalyzer wraps [raw.SCSensitivityAnalyzer] with a fluent Go API.
 type SensitivityAnalyzer struct {
 	inner *raw.SCSensitivityAnalyzer
@@ -39,7 +41,7 @@ func NewSensitivityAnalyzer() *SensitivityAnalyzer {
 	return &SensitivityAnalyzer{inner: raw.SCSensitivityAnalyzerFromID(_id)}
 }
 
-// Analyze sensitivity of Image File on disk (only local fileURL) @param fileURL  Image file location on disk @param completionHandler  Block to be called on completion (callback is called on unspecified queue)
+// Analyzes an image file on disk at a URL and runs code on completion.
 //
 // AnalyzeImageFile blocks until the operation completes or ctx is cancelled.
 func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (*SensitivityAnalysis, error) {
@@ -67,7 +69,7 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 	}
 }
 
-// Analyze sensitivity of CGImage in memory @param image  CGImage reference @param completionHandler  Block to be called on completion (callback is called on unspecified queue)
+// Analyzes an image for sensitive content and runs code on completion.
 //
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
 func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image unsafe.Pointer) (*SensitivityAnalysis, error) {
@@ -95,7 +97,7 @@ func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image unsafe.P
 	}
 }
 
-// Analyze sensitivity of Video File on disk. @param fileURL  Video file location on disk @param completionHandler  Block to be called on completion (callback is called on unspecified queue) @return An NSProgress instance for tracking video file analysis progress
+// Analyzes a video file on disk at the given URL and runs the given code on completion.
 //
 // AnalyzeVideoFileCompletionHandler calls the underlying AnalyzeVideoFileCompletionHandler.
 func (x *SensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL string, completionHandler func(*raw.SCSensitivityAnalysis, unsafe.Pointer)) *foundation.NSProgress {

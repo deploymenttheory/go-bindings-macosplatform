@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties to create a render pipeline state object.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4renderpipelinedescriptor
 type MTL4RenderPipelineDescriptor struct {
 	MTL4PipelineDescriptor

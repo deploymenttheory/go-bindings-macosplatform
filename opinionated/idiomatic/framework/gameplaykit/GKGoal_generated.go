@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Defines a spatial directive. The various goals cause force to be applied to agents to try to achieve said goal.
+// An influence that motivates the movement of one or more agents.
 //
 // Goal wraps [raw.GKGoal] with a fluent Go API.
 type Goal struct {

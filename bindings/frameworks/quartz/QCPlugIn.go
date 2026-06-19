@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class to subclass for writing custom patches.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qcplugin
 type QCPlugIn struct {
 	foundation.NSObject
@@ -43,68 +45,93 @@ func QCPlugInFromID(id objc.ID) *QCPlugIn {
 	return o
 }
 
+// Returns a dictionary that contains strings for the user interface that describe the custom patch.
 func QCPlugInAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a dictionary that contains strings for the user interface that describe the optional attributes for ports created from properties.
 func QCPlugInAttributesForPropertyPortWithKey(key *foundation.NSString) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributesForPropertyPortWithKey, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelAttributesForPropertyPortWithKey, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns and array of property port keys in the order you want them to appear in the user interface.
 func QCPlugInSortedPropertyPortKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelSortedPropertyPortKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelSortedPropertyPortKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the execution mode of the custom patch.
 func QCPlugInExecutionModeClass() QCPlugInExecutionMode {
 	_ret := objc.Send[QCPlugInExecutionMode](objc.ID(_clsQCPlugIn), _qCPlugInSelExecutionMode)
 	return _ret
 }
 
+// Returns the time mode for the custom patch.
 func QCPlugInTimeModeClass() QCPlugInTimeMode {
 	_ret := objc.Send[QCPlugInTimeMode](objc.ID(_clsQCPlugIn), _qCPlugInSelTimeMode)
 	return _ret
 }
 
+// Returns the keys for the internal settings of a custom patch.
 func QCPlugInPlugInKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsQCPlugIn), _qCPlugInSelPlugInKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsQCPlugIn), _qCPlugInSelPlugInKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Allows you to perform custom setup tasks before the Quartz Composer engine starts rendering.
 func (o *QCPlugIn) StartExecution(context_ objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCPlugInSelStartExecution, context_)
 	return _ret
 }
 
+// Allows you to perform custom tasks when the execution of the QCPlugIn object is resumed.
 func (o *QCPlugIn) EnableExecution(context_ objc.ID) {
 	o.Ptr().Send(_qCPlugInSelEnableExecution, context_)
 }
 
 func (o *QCPlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _qCPlugInSelExecutionTimeForContextAtTimeWithArguments, context_, time_, arguments)
+	_ret := objc.Send[float64](o.Ptr(), _qCPlugInSelExecutionTimeForContextAtTimeWithArguments, context_, time_, arguments.Ptr())
 	return _ret
 }
 
+// Performs the processing or rendering tasks appropriate for the custom patch.
 func (o *QCPlugIn) ExecuteAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCPlugInSelExecuteAtTimeWithArguments, context_, time_, arguments)
+	_ret := objc.Send[bool](o.Ptr(), _qCPlugInSelExecuteAtTimeWithArguments, context_, time_, arguments.Ptr())
 	return _ret
 }
 
+// Allows you to perform custom tasks when the execution of the QCPlugIn object is paused.
 func (o *QCPlugIn) DisableExecution(context_ objc.ID) {
 	o.Ptr().Send(_qCPlugInSelDisableExecution, context_)
 }
 
+// Allows you to perform custom tasks when the QCPlugIn object stops executing.
 func (o *QCPlugIn) StopExecution(context_ objc.ID) {
 	o.Ptr().Send(_qCPlugInSelStopExecution, context_)
 }
 
+// A method implemented to override serialization.
 func (o *QCPlugIn) SerializedValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInSelSerializedValueForKey, key.Ptr())
 	return _ret
 }
 
+// Provides custom deserialization for patch internal settings that were previously serialized using the method serializedValueForKey:.
 func (o *QCPlugIn) SetSerializedValueForKey(serializedValue objc.ID, key *foundation.NSString) {
 	o.Ptr().Send(_qCPlugInSelSetSerializedValueForKey, serializedValue, key.Ptr())
 }

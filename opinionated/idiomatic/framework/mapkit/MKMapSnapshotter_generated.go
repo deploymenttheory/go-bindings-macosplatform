@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A utility class for capturing a map and its content into an image.
+//
 // MapSnapshotter wraps [raw.MKMapSnapshotter] with a fluent Go API.
 type MapSnapshotter struct {
 	inner *raw.MKMapSnapshotter
@@ -31,6 +33,8 @@ func MapSnapshotterFromID(id objc.ID) *MapSnapshotter {
 	return &MapSnapshotter{inner: raw.MKMapSnapshotterFromID(id)}
 }
 
+// Creates and returns a snapshotter object based on the specified options.
+//
 // NewMapSnapshotterWithOptions creates a new [MapSnapshotter].
 func NewMapSnapshotterWithOptions(options *raw.MKMapSnapshotOptions) *MapSnapshotter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapSnapshotter")), objc.RegisterName("alloc"))
@@ -38,16 +42,22 @@ func NewMapSnapshotterWithOptions(options *raw.MKMapSnapshotOptions) *MapSnapsho
 	return &MapSnapshotter{inner: raw.MKMapSnapshotterFromID(_id)}
 }
 
+// Submits the request to create a snapshot and delivers the results to the specified block.
+//
 // StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
 func (x *MapSnapshotter) StartWithCompletionHandler(completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer)) {
 	x.inner.StartWithCompletionHandler(completionHandler)
 }
 
+// Submits the request to create a snapshot and executes the resulting block on the specified queue.
+//
 // StartWithQueueCompletionHandler calls the underlying StartWithQueueCompletionHandler.
 func (x *MapSnapshotter) StartWithQueueCompletionHandler(queue *foundation.NSObject, completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer)) {
 	x.inner.StartWithQueueCompletionHandler(queue, completionHandler)
 }
 
+// Cancels the request to create a snapshot.
+//
 // Cancel calls the underlying Cancel.
 func (x *MapSnapshotter) Cancel() {
 	x.inner.Cancel()

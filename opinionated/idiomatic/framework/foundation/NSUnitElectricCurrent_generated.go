@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for electric current.
+//
 // UnitElectricCurrent wraps [raw.NSUnitElectricCurrent] with a fluent Go API.
 type UnitElectricCurrent struct {
 	inner *raw.NSUnitElectricCurrent

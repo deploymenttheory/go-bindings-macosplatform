@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "framework": "LocalAuthenticationEmbeddedUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "LAAuthenticationView": {
+      "doc": "A graphical representation of the state of biometric authentication.",
+      "url": "https://developer.apple.com/documentation/localauthenticationembeddedui/laauthenticationview"
+    }
+  },
+  "methods": {
+    "LAAuthenticationView": {
+      "-initWithContext:": {
+        "doc": "Creates a new authentication icon that reflects the current authentication state.",
+        "url": "https://developer.apple.com/documentation/localauthenticationembeddedui/laauthenticationview/init(context:)"
+      },
+      "-initWithContext:controlSize:": {
+        "doc": "Creates a new authentication icon that reflects the current authentication state, using a specified size.",
+        "url": "https://developer.apple.com/documentation/localauthenticationembeddedui/laauthenticationview/init(context:controlsize:)"
+      }
+    }
+  },
+  "properties": {
+    "LAAuthenticationView": {
+      "context": {
+        "doc": "The local authentication context associated with the authentication view.",
+        "url": "https://developer.apple.com/documentation/localauthenticationembeddedui/laauthenticationview/context"
+      },
+      "controlSize": {
+        "doc": "The size of the local authentication view user interface element.",
+        "url": "https://developer.apple.com/documentation/localauthenticationembeddedui/laauthenticationview/controlsize"
+      }
+    }
+  }
+}

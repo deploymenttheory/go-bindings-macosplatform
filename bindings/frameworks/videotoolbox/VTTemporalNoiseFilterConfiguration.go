@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object to initiate a frame processor and use temporal noise-filter processor.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration
 type VTTemporalNoiseFilterConfiguration struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func VTTemporalNoiseFilterConfigurationFromID(id objc.ID) *VTTemporalNoiseFilter
 	return o
 }
 
-// Creates a new temporal noise-processor configuration. Returns nil if frameWidth, frameHeight, or sourcePixelFormat is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels.
+// Creates a new temporal noise-processor configuration.
 func (o *VTTemporalNoiseFilterConfiguration) InitWithFrameWidthFrameHeightSourcePixelFormat(frameWidth int, frameHeight int, sourcePixelFormat uint) *VTTemporalNoiseFilterConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelInitWithFrameWidthFrameHeightSourcePixelFormat, frameWidth, frameHeight, sourcePixelFormat)
 	if _ret != 0 {
@@ -65,20 +67,29 @@ func (o *VTTemporalNoiseFilterConfiguration) FrameHeight() int {
 
 // Supported pixel formats for source frames for current configuration.
 func (o *VTTemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelFrameSupportedPixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelFrameSupportedPixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTTemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelSourcePixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelSourcePixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTTemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelDestinationPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterConfigurationSelDestinationPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Maximum number of future reference frames that the processor can use to process a source frame.
@@ -95,8 +106,11 @@ func (o *VTTemporalNoiseFilterConfiguration) PreviousFrameCount() int {
 
 // List of all supported pixel formats for source frames.
 func VTTemporalNoiseFilterConfigurationSupportedSourcePixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelSupportedSourcePixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsVTTemporalNoiseFilterConfiguration), _vTTemporalNoiseFilterConfigurationSelSupportedSourcePixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The maximum dimensions of a source frame that the processor supports.

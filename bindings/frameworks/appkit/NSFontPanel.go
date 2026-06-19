@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The Font panel—a user interface object that displays a list of available fonts, letting the user preview them and change the font used to display text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsfontpanel
 // Deprecated: This is now an optional method of the NSFontChanging protocol.
 type NSFontPanel struct {
@@ -38,10 +40,12 @@ func NSFontPanelFromID(id objc.ID) *NSFontPanel {
 	return o
 }
 
+// Sets the selected font in the receiver to the specified font.
 func (o *NSFontPanel) SetPanelFontIsMultiple(fontObj *NSFont, flag bool) {
 	o.Ptr().Send(_nSFontPanelSelSetPanelFontIsMultiple, fontObj.Ptr(), flag)
 }
 
+// Converts the specified font using the settings in the receiver, with the aid of the shared NSFontManager if necessary.
 func (o *NSFontPanel) PanelConvertFont(fontObj *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelPanelConvertFont, fontObj.Ptr())
 	if _ret != 0 {
@@ -50,6 +54,7 @@ func (o *NSFontPanel) PanelConvertFont(fontObj *NSFont) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Triggers a reload to the default state, so that the delegate is called.
 func (o *NSFontPanel) ReloadDefaultFontFamilies() {
 	o.Ptr().Send(_nSFontPanelSelReloadDefaultFontFamilies)
 }

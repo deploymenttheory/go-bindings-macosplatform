@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interaction between the user and your app involving an intent object.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/ininteraction
 type INInteraction struct {
 	foundation.NSObject
@@ -47,6 +49,7 @@ func INInteractionFromID(id objc.ID) *INInteraction {
 	return o
 }
 
+// Initializes and returns an interaction object with an intent object and your app’s response.
 func (o *INInteraction) InitWithIntentResponse(intent *INIntent, response *INIntentResponse) *INInteraction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNInteractionSelInitWithIntentResponse, intent.Ptr(), response.Ptr())
 	if _ret != 0 {
@@ -55,6 +58,7 @@ func (o *INInteraction) InitWithIntentResponse(intent *INIntent, response *INInt
 	return INInteractionFromID(_ret)
 }
 
+// Donates this interaction object to the system.
 func (o *INInteraction) DonateInteractionWithCompletion(completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -66,6 +70,7 @@ func (o *INInteraction) DonateInteractionWithCompletion(completion func(unsafe.P
 	o.Ptr().Send(_iNInteractionSelDonateInteractionWithCompletion, __block_completion)
 }
 
+// Deletes all interactions that you donated previously.
 func INInteractionDeleteAllInteractionsWithCompletion(completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -77,6 +82,7 @@ func INInteractionDeleteAllInteractionsWithCompletion(completion func(unsafe.Poi
 	objc.ID(_clsINInteraction).Send(_iNInteractionSelDeleteAllInteractionsWithCompletion, __block_completion)
 }
 
+// Deletes the specified interactions that were donated by the calling app.
 func INInteractionDeleteInteractionsWithIdentifiersCompletion(identifiers *foundation.NSArray[*foundation.NSString], completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -85,9 +91,10 @@ func INInteractionDeleteInteractionsWithIdentifiersCompletion(identifiers *found
 		})
 		defer __block_completion.Release()
 	}
-	objc.ID(_clsINInteraction).Send(_iNInteractionSelDeleteInteractionsWithIdentifiersCompletion, identifiers, __block_completion)
+	objc.ID(_clsINInteraction).Send(_iNInteractionSelDeleteInteractionsWithIdentifiersCompletion, identifiers.Ptr(), __block_completion)
 }
 
+// Deletes the interactions with the specified group identifier.
 func INInteractionDeleteInteractionsWithGroupIdentifierCompletion(groupIdentifier *foundation.NSString, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

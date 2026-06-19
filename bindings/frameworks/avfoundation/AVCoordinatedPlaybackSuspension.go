@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a temporary suspension of coordinated playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcoordinatedplaybacksuspension
 type AVCoordinatedPlaybackSuspension struct {
 	foundation.NSObject
@@ -34,12 +36,12 @@ func AVCoordinatedPlaybackSuspensionFromID(id objc.ID) *AVCoordinatedPlaybackSus
 	return o
 }
 
-// Ends the suspension. If this is the last suspension, the coordinator will adjust timing of its playback object to match the group. Also see endProposingNewTime: for a way to end a suspension and simultaneously proposing a new time to the group.
+// Ends a suspension.
 func (o *AVCoordinatedPlaybackSuspension) End() {
 	o.Ptr().Send(_aVCoordinatedPlaybackSuspensionSelEnd)
 }
 
-// Ends the suspension and proposes a new time that everyone should seek to. If this is the last suspension, the coordinator will propose the new time to the group without changing the groups playback rate. If this is not the last suspension, the time will be ignored. If the time is not numeric, this will behave like a call to [suspension end].
+// Ends a suspension and proposes a new playback time to the group.
 func (o *AVCoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {
 	o.Ptr().Send(_aVCoordinatedPlaybackSuspensionSelEndProposingNewTime, time_)
 }

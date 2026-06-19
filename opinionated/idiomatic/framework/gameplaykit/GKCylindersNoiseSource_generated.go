@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Produces 3D cylindrical noise with an infinite number of cylinders-within-cyliners of constantly-increasing radius.
+// A procedural noise generator whose output is a 3D field of concentric cylindrical shells.
 //
 // CylindersNoiseSource wraps [raw.GKCylindersNoiseSource] with a fluent Go API.
 type CylindersNoiseSource struct {
@@ -31,6 +31,8 @@ func CylindersNoiseSourceFromID(id objc.ID) *CylindersNoiseSource {
 	return &CylindersNoiseSource{inner: raw.GKCylindersNoiseSourceFromID(id)}
 }
 
+// Initializes a cylinder noise source with the specified frequency.
+//
 // NewCylindersNoiseSourceWithFrequency creates a new [CylindersNoiseSource].
 func NewCylindersNoiseSourceWithFrequency(frequency float64) *CylindersNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCylindersNoiseSource")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewCylindersNoiseSourceWithFrequency(frequency float64) *CylindersNoiseSour
 	return &CylindersNoiseSource{inner: raw.GKCylindersNoiseSourceFromID(_id)}
 }
 
+// A value that determines the size and spacing of concentric cylinders.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNoiseSource {
 	x.inner.SetFrequency(frequency)

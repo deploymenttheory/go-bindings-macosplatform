@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that describes the properties of a 2D-convolution operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphconvolution2dopdescriptor
 type MPSGraphConvolution2DOpDescriptor struct {
 	MPSGraphObject
@@ -55,7 +57,7 @@ func MPSGraphConvolution2DOpDescriptorFromID(id objc.ID) *MPSGraphConvolution2DO
 	return o
 }
 
-// Creates a convolution descriptor with given values for parameters. - Parameters: - strideInX: See “strideInX“ property. - strideInY: See “strideInY“ property. - dilationRateInX: See “dilationRateInX“ property. - dilationRateInY: See “dilationRateInY“ property. - groups: See “groups“ property. - paddingLeft: See “paddingLeft“ property. - paddingRight: See “paddingRight“ property. - paddingTop: See “paddingTop“ property. - paddingBottom: See “paddingBottom“ property. - paddingStyle: See “paddingStyle“ property. - dataLayout: See “dataLayout“ property. - weightsLayout: See “weightsLayout“ property. - Returns: The `MPSGraphConvolution2DOpDescriptor` on autoreleasepool.
+// Creates a convolution descriptor with given values for parameters.
 func MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, groups uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphConvolution2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphConvolution2DOpDescriptor), _mPSGraphConvolution2DOpDescriptorSelDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout, strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRa
 	return MPSGraphConvolution2DOpDescriptorFromID(_ret)
 }
 
-// Creates a convolution descriptor with given values for parameters. - Parameters: - strideInX: See “strideInX“ property. - strideInY: See “strideInY“ property. - dilationRateInX: See “dilationRateInX“ property. - dilationRateInY: See “dilationRateInY“ property. - groups: See “groups“ property. - paddingStyle: See “paddingStyle“ property. - dataLayout: See “dataLayout“ property. - weightsLayout: See “weightsLayout“ property. - Returns: The `MPSGraphConvolution2DOpDescriptor` on autoreleasepool.
+// Creates a convolution descriptor with given values for parameters.
 func MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, groups uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphConvolution2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphConvolution2DOpDescriptor), _mPSGraphConvolution2DOpDescriptorSelDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout, strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingStyle, dataLayout, weightsLayout)
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRa
 	return MPSGraphConvolution2DOpDescriptorFromID(_ret)
 }
 
-// Sets the left, right, top, and bottom padding values. - Parameters: - paddingLeft: See “paddingLeft“ property. - paddingRight: See “paddingRight“ property. - paddingTop: See “paddingTop“ property. - paddingBottom: See “paddingBottom“ property.
+// Sets the left, right, top, and bottom padding values.
 func (o *MPSGraphConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	o.Ptr().Send(_mPSGraphConvolution2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom, paddingLeft, paddingRight, paddingTop, paddingBottom)
 }

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that writes media data to a container file.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetwriter
 type AVAssetWriter struct {
 	foundation.NSObject
@@ -81,7 +83,7 @@ func AVAssetWriterFromID(id objc.ID) *AVAssetWriter {
 	return o
 }
 
-// @method assetWriterWithURL:fileType:error: @abstract Returns an instance of AVAssetWriter configured to write to a file in a specified container format. @param URL The location of the file to be written. The URL must be a file URL. @param fileType A UTI indicating the format of the file to be written. @param outError On return, if initialization of the AVAssetWriter fails, points to an NSError describing the nature of the failure. @result An instance of AVAssetWriter. @discussion Writing will fail if a file already exists at the specified URL. UTIs for container formats that can be written are declared in AVMediaFormat.h.
+// Returns a new object that writes media data to a container file at the output URL.
 func AVAssetWriterAssetWriterWithURLFileTypeError(outputURL *foundation.NSURL, outputFileType *foundation.NSString) (*AVAssetWriter, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriter), _aVAssetWriterSelAssetWriterWithURLFileTypeError, outputURL.Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
@@ -94,7 +96,7 @@ func AVAssetWriterAssetWriterWithURLFileTypeError(outputURL *foundation.NSURL, o
 	return AVAssetWriterFromID(_ret), nil
 }
 
-// @method initWithURL:fileType:error: @abstract Creates an instance of AVAssetWriter configured to write to a file in a specified container format. @param URL The location of the file to be written. The URL must be a file URL. @param fileType A UTI indicating the format of the file to be written. @param outError On return, if initialization of the AVAssetWriter fails, points to an NSError describing the nature of the failure. @result An instance of AVAssetWriter. @discussion Writing will fail if a file already exists at the specified URL. This method throws an exception if the output file type is not declared in AVMediaFormat.h.
+// Creates an object that writes media data to a container file at the output URL.
 func (o *AVAssetWriter) InitWithURLFileTypeError(outputURL *foundation.NSURL, outputFileType *foundation.NSString) (*AVAssetWriter, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInitWithURLFileTypeError, outputURL.Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
@@ -107,7 +109,7 @@ func (o *AVAssetWriter) InitWithURLFileTypeError(outputURL *foundation.NSURL, ou
 	return AVAssetWriterFromID(_ret), nil
 }
 
-// @method initWithContentType: @abstract Creates an instance of AVAssetWriter configured to output segment data in a specified container format. @param outputContentType A UTType indicating the format of the segment data to be output. @result An instance of AVAssetWriter. @discussion Clients that want to receive segment data through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should use this initializer instead of -initWithURL:fileType:error:. Clients may use +typeWithIdentifier: with a UTI to create an instance of UTType. See <UniformTypeIdentifiers/UTType.h>. This method throws an exception if the output content type UTI for container format is not declared in AVMediaFormat.h.
+// Creates an object that outputs segment data in a specified container format.
 func (o *AVAssetWriter) InitWithContentType(outputContentType *uniformtypeidentifiers.UTType) *AVAssetWriter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInitWithContentType, outputContentType.Ptr())
 	if _ret != 0 {
@@ -116,52 +118,52 @@ func (o *AVAssetWriter) InitWithContentType(outputContentType *uniformtypeidenti
 	return AVAssetWriterFromID(_ret)
 }
 
-// @method canApplyOutputSettings:forMediaType: @abstract Tests whether output settings for a specific media type are supported by the receiver's file format. @param outputSettings The output settings that are to be tested. @param mediaType The media type for which the output settings are to be tested. Media types are defined in AVMediaFormat.h. @result A BOOL indicating whether the given output settings can be used for the given media type. @discussion This method determines whether the output settings for the specified media type can be used with the receiver's file format. For example, video compression settings that specify H.264 compression are not compatible with file formats that cannot contain H.264-compressed video. Attempting to add an input with output settings and a media type for which this method returns NO will cause an exception to be thrown.
+// Determines whether the output file format supports the output settings for a specific media type.
 func (o *AVAssetWriter) CanApplyOutputSettingsForMediaType(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], mediaType *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelCanApplyOutputSettingsForMediaType, outputSettings, mediaType.Ptr())
+	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelCanApplyOutputSettingsForMediaType, outputSettings.Ptr(), mediaType.Ptr())
 	return _ret
 }
 
-// @method canAddInput: @abstract Tests whether an input can be added to the receiver. @param input The AVAssetWriterInput object to be tested. @result A BOOL indicating whether the input can be added to the receiver. @discussion An input that accepts media data of a type that is not compatible with the receiver, or with output settings that are not compatible with the receiver, cannot be added.
+// Determines whether the asset writer supports adding the input.
 func (o *AVAssetWriter) CanAddInput(input *AVAssetWriterInput) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelCanAddInput, input.Ptr())
 	return _ret
 }
 
-// @method addInput: @abstract Adds an input to the receiver. @param input The AVAssetWriterInput object to be added. @discussion Inputs are created with a media type and output settings. These both must be compatible with the receiver. Inputs cannot be added after writing has started. This method throws an exception if any of the following conditions are satisfied: - the input's media type is not allowed for this asset writer - writing uncompressed video in a specific format - passthrough* to files (other than AVFileTypeQuickTimeMovie) is missing a format hint in the AVAssetWriterInput initializer - passthrough* is not supported for this media/file type combination (for example, AVFileTypeWAVE only supports AVMediaTypeAudio) Passthrough is indicated when the input's output settings are nil.
+// Adds an input to an asset writer.
 func (o *AVAssetWriter) AddInput(input *AVAssetWriterInput) {
 	o.Ptr().Send(_aVAssetWriterSelAddInput, input.Ptr())
 }
 
-// @method startWriting @abstract Prepares the receiver for accepting input and for writing its output to its output file. @result A BOOL indicating whether writing successfully started. @discussion This method must be called after all inputs have been added and other configuration properties have been set in order to tell the receiver to prepare for writing. After this method is called, clients can start writing sessions using startSessionAtSourceTime: and can write media samples using the methods provided by each of the receiver's inputs. If writing cannot be started, this method returns NO. Clients can check the values of the status and error properties for more information on why writing could not be started. On iOS, if the status of an AVAssetWriter is AVAssetWriterStatusWriting when the client app goes into the background, its status will change to AVAssetWriterStatusFailed and appending to any of its inputs will fail.  You may want to use -[UIApplication beginBackgroundTaskWithExpirationHandler:] to avoid being interrupted in the middle of a writing session and to finish writing the data that has already been appended.  For more information about executing code in the background, see the iOS Application Programming Guide.
+// Tells the writer to start writing its output.
 func (o *AVAssetWriter) StartWriting() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelStartWriting)
 	return _ret
 }
 
-// @method startSessionAtSourceTime: @abstract Initiates a sample-writing session for the receiver. @param startTime The starting asset time for the sample-writing session, in the timeline of the source samples. @discussion Sequences of sample data appended to the asset writer inputs are considered to fall within "sample-writing sessions", initiated with this method. Accordingly, this method must be called after writing has started (using -startWriting) but before any sample data is appended to the receiver's inputs. Each writing session has a start time which, where allowed by the file format being written, defines the mapping from the timeline of source samples to the timeline of the written file. In the case of the QuickTime movie file format, the first session begins at movie time 0, so a sample appended with timestamp T will be played at movie time (T-startTime).  Samples with timestamps earlier than startTime will still be added to the output file but will be edited out (i.e. not presented during playback). If the earliest appended sample for an input has a timestamp later than than startTime, an empty edit will be inserted to preserve synchronization between tracks of the output asset. To end the session started by use of this method, use -endSessionAtSourceTime: or -finishWritingWithCompletionHandler:.  It is an error to invoke -startSessionAtSourceTime: twice in a row without invoking -endSessionAtSourceTime: in between. NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:.
+// Starts an asset-writing session.
 func (o *AVAssetWriter) StartSessionAtSourceTime(startTime coremedia.CMTime) {
 	o.Ptr().Send(_aVAssetWriterSelStartSessionAtSourceTime, startTime)
 }
 
-// @method endSessionAtSourceTime: @abstract Concludes a sample-writing session. @param endTime The ending asset time for the sample-writing session, in the timeline of the source samples. @discussion Call this method to complete a session started with -startSessionAtSourceTime:. The endTime defines the moment on the timeline of source samples at which the session ends. In the case of the QuickTime movie file format, each sample-writing session's startTime...endTime pair corresponds to a period of movie time into which the session's samples are inserted. Samples with timestamps that are later than the session end time will still be added to the written file but will be edited out (i.e. not presented during playback). So if the first session has duration D1 = endTime - startTime, it will be inserted into the written file at time 0 through D1; the second session would be inserted into the written file at time D1 through D1+D2, etc. It is legal to have a session with no samples; this will cause creation of an empty edit of the prescribed duration. It is not mandatory to call -endSessionAtSourceTime:; if -finishWritingWithCompletionHandler: is called without first invoking -endSessionAtSourceTime:, the session's effective end time will be the latest end timestamp of the session's appended samples (i.e. no samples will be edited out at the end). It is an error to append samples outside of a sample-writing session.  To append more samples after invoking -endSessionAtSourceTime:, you must first start a new session using -startSessionAtSourceTime:. NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:. This method throws an exception if the session is ended without first starting it.
+// Finishes an asset-writing session.
 func (o *AVAssetWriter) EndSessionAtSourceTime(endTime coremedia.CMTime) {
 	o.Ptr().Send(_aVAssetWriterSelEndSessionAtSourceTime, endTime)
 }
 
-// @method cancelWriting @abstract Cancels the creation of the output file. @discussion If the status of the receiver is "failed" or "completed," -cancelWriting is a no-op.  Otherwise, this method will block until writing is canceled. If an output file was created by the receiver during the writing process, -cancelWriting will delete the file. This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
+// Cancels the creation of the output file.
 func (o *AVAssetWriter) CancelWriting() {
 	o.Ptr().Send(_aVAssetWriterSelCancelWriting)
 }
 
-// @method finishWriting @abstract Completes the writing of the output file. @result A BOOL indicating whether writing successfully finished. @discussion This method is deprecated.  Use finishWritingWithCompletionHandler: instead. This method will block until writing is finished. When this method returns successfully, the file being written by the receiver is complete and ready to use. Because this method is blocking and can take a long time to execute (especially with shouldOptimizeForNetworkUse set to YES), it should not be called from the main thread.  Doing so can cause the finishWriting operation to fail. If writing cannot be finished, this method returns NO. Clients can check the values of the status and error properties for more information on why writing could not be finished. This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
+// Completes the writing of the output file.
 // Deprecated: since macOS 10.9.
 func (o *AVAssetWriter) FinishWriting() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelFinishWriting)
 	return _ret
 }
 
-// @method finishWritingWithCompletionHandler: @abstract Marks all unfinished inputs as finished and completes the writing of the output file. @discussion This method returns immediately and causes its work to be performed asynchronously. When the writing of the output file is finished, or if a failure or a cancellation occurs in the meantime, the specified handler will be invoked to indicate completion of the operation. To determine whether the operation succeeded, your handler can check the value of AVAssetWriter.status. If the status is AVAssetWriterStatusFailed, AVAsset.error will contain an instance of NSError that describes the failure. To guarantee that all sample buffers are successfully written, ensure all calls to -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:] have returned before invoking this method.
+// Marks all unfinished inputs as finished and completes the writing of the output file.
 func (o *AVAssetWriter) FinishWritingWithCompletionHandler(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -193,8 +195,11 @@ func (o *AVAssetWriter) OutputFileType() *foundation.NSString {
 
 // @property availableMediaTypes @abstract The media types for which inputs can be added to the receiver. @discussion Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
 func (o *AVAssetWriter) AvailableMediaTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetWriterSelAvailableMediaTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelAvailableMediaTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property status @abstract The status of writing samples to the receiver's output file. @discussion The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this property after appending samples fails to determine why no more samples could be written. This property is thread safe.
@@ -314,12 +319,13 @@ func (o *AVAssetWriter) SetMovieTimeScale(movieTimeScale int32) {
 	o.Ptr().Send(_aVAssetWriterSelSetMovieTimeScale, movieTimeScale)
 }
 
-// @method canAddInputGroup: @abstract Tests whether an input group can be added to the receiver. @param inputGroup The AVAssetWriterInputGroup object to be tested. @result A BOOL indicating whether the input group can be added to the receiver. @discussion If outputFileType specifies a container format that does not support mutually exclusive relationships among tracks, or if the specified instance of AVAssetWriterInputGroup contains inputs with media types that cannot be related, the group cannot be added to the AVAssetWriter. This method throws an exception if any of the following conditions are satisfied: - this writer's output file type does not support mutually exclusive relationships among tracks (allowed types are AVFileTypeQuickTimeMovie, AVFileTypeAppleM4A, AVFileTypeAppleM4V, AVFileType3GPP, AVFileTypeMPEG4) - any AVAssetWriterInput in the input group is also present in an input group already added
+// Determines whether the asset writer supports adding the input group.
 func (o *AVAssetWriter) CanAddInputGroup(inputGroup *AVAssetWriterInputGroup) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetWriterSelCanAddInputGroup, inputGroup.Ptr())
 	return _ret
 }
 
+// Adds an input group to an asset writer.
 func (o *AVAssetWriter) AddInputGroup(inputGroup *AVAssetWriterInputGroup) {
 	o.Ptr().Send(_aVAssetWriterSelAddInputGroup, inputGroup.Ptr())
 }
@@ -332,7 +338,7 @@ func (o *AVAssetWriter) InputGroups() *foundation.NSArray[*AVAssetWriterInputGro
 	return foundation.NSArrayFromID[*AVAssetWriterInputGroup](_ret)
 }
 
-// @method flushSegment @abstract Closes the current segment and outputs it to the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method. @discussion This method throws an exception if the delegate method to output segment data is not implemented, or if the value of the preferredOutputSegmentInterval property is not kCMTimeIndefinite.
+// Closes the current segment and outputs it to a delegate method.
 func (o *AVAssetWriter) FlushSegment() {
 	o.Ptr().Send(_aVAssetWriterSelFlushSegment)
 }

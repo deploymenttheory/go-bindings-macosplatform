@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A hard sigmoid neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronhardsigmoid
 type MPSCNNNeuronHardSigmoid struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronHardSigmoidFromID(id objc.ID) *MPSCNNNeuronHardSigmoid {
 	return o
 }
 
-// @abstract  Initialize a neuron filter @param     device           The device the filter will run on @param     a                Filter property "a". See class discussion. @param     b                Filter property "b". See class discussion. @return    A valid MPSCNNNeuronHardSigmoid object or nil, if failure.
+// Initializes a hard sigmoid neuron filter.
 func (o *MPSCNNNeuronHardSigmoid) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronHardSigmoid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronHardSigmoidSelInitWithDeviceAB, device, a, b)
 	if _ret != 0 {

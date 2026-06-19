@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The FHIR version.
+//
 // FHIRVersion wraps [raw.HKFHIRVersion] with a fluent Go API.
 type FHIRVersion struct {
 	inner *raw.HKFHIRVersion

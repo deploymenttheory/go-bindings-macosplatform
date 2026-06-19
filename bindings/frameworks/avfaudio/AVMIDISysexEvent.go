@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI system exclusive message.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidisysexevent
 type AVMIDISysexEvent struct {
 	AVMusicEvent
@@ -31,7 +33,7 @@ func AVMIDISysexEventFromID(id objc.ID) *AVMIDISysexEvent {
 	return o
 }
 
-// @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the raw contents of the system exclusive event.
+// Creates a system event with the data you specify.
 func (o *AVMIDISysexEvent) InitWithData(data *foundation.NSData) *AVMIDISysexEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDISysexEventSelInitWithData, data.Ptr())
 	if _ret != 0 {

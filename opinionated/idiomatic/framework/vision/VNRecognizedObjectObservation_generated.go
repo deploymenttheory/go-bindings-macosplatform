@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A detected object observation with an array of classification labels that classify the recognized object.
+//
 // RecognizedObjectObservation wraps [raw.VNRecognizedObjectObservation] with a fluent Go API.
 type RecognizedObjectObservation struct {
 	inner *raw.VNRecognizedObjectObservation

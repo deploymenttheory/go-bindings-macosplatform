@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronReLU kernel @discussion For each pixel, applies the following function: @code f(x) = x            if x >= 0 = a * x        if x < 0 @endcode
+// A representation a ReLU neuron filter.
 //
 // CNNNeuronReLUNode wraps [raw.MPSCNNNeuronReLUNode] with a fluent Go API.
 type CNNNeuronReLUNode struct {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of changes that occurred in the set of asset or collection objects listed in a fetch result.
+//
 // FetchResultChangeDetails wraps [raw.PHFetchResultChangeDetails] with a fluent Go API.
 type FetchResultChangeDetails struct {
 	inner *raw.PHFetchResultChangeDetails[objc.ID]
@@ -36,6 +38,8 @@ func NewFetchResultChangeDetails() *FetchResultChangeDetails {
 	return &FetchResultChangeDetails{inner: raw.PHFetchResultChangeDetailsFromID[objc.ID](_id)}
 }
 
+// Runs the specified block for each case where an object has moved from one index to another in the fetch result.
+//
 // EnumerateMovesWith calls the underlying EnumerateMovesWith.
 func (x *FetchResultChangeDetails) EnumerateMovesWith(handler func(uint, uint)) {
 	x.inner.EnumerateMovesWith(handler)

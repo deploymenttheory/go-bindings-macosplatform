@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A subclass of the audio node class that, processes audio either in real time or nonreal time, depending on the type of the audio unit.
+//
 // AudioUnit wraps [raw.AVAudioUnit] with a fluent Go API.
 type AudioUnit struct {
 	inner *raw.AVAudioUnit
@@ -38,7 +40,7 @@ func NewAudioUnit() *AudioUnit {
 	return &AudioUnit{inner: raw.AVAudioUnitFromID(_id)}
 }
 
-// @method loadAudioUnitPresetAtURL:error: @abstract Load an audio unit preset. @param url NSURL of the .aupreset file. @param outError A pointer to a NSError object @discussion If the .aupreset file cannot be successfully loaded, an error is returned.
+// Loads an audio unit using a specified preset.
 //
 // LoadAudioUnitPresetAtURLError calls the underlying LoadAudioUnitPresetAtURLError.
 func (x *AudioUnit) LoadAudioUnitPresetAtURLError(url string) (bool, error) {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to recognize speech in a recorded audio file.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechurlrecognitionrequest
 type SFSpeechURLRecognitionRequest struct {
 	SFSpeechRecognitionRequest
@@ -31,7 +33,7 @@ func SFSpeechURLRecognitionRequestFromID(id objc.ID) *SFSpeechURLRecognitionRequ
 	return o
 }
 
-// Creates a speech recognition request, initialized with the specified URL. Use this method to create a request to recognize speech in a recorded audio file that resides at the specified URL. Pass the request to the recognizer's “SFSpeechRecognizer/recognitionTask(with:delegate:)“ method to start recognition.
+// Creates a speech recognition request, initialized with the specified URL.
 func (o *SFSpeechURLRecognitionRequest) InitWithURL(uRL *foundation.NSURL) *SFSpeechURLRecognitionRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechURLRecognitionRequestSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {

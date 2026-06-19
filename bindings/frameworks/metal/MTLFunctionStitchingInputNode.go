@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A call graph node that describes an input to the call graph.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctionstitchinginputnode
 type MTLFunctionStitchingInputNode struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func MTLFunctionStitchingInputNodeFromID(id objc.ID) *MTLFunctionStitchingInputN
 	return o
 }
 
+// Creates a new input node.
 func (o *MTLFunctionStitchingInputNode) InitWithArgumentIndex(argument uint) *MTLFunctionStitchingInputNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingInputNodeSelInitWithArgumentIndex, argument)
 	if _ret != 0 {

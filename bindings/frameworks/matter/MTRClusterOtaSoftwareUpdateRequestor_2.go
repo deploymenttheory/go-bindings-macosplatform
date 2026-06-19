@@ -52,18 +52,21 @@ func (o *MTRClusterOtaSoftwareUpdateRequestor) AnnounceOtaProviderWithParamsExpe
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelAnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelAnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries.Ptr(), expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
 
 func (o *MTRClusterOtaSoftwareUpdateRequestor) ReadAttributeDefaultOtaProvidersWithParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOtaSoftwareUpdateRequestorSelReadAttributeDefaultOtaProvidersWithParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval, dataValueDictionary, expectedValueIntervalMs.Ptr())
+	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr())
 }
 
 func (o *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
-	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
+	o.Ptr().Send(_mTRClusterOtaSoftwareUpdateRequestorSelWriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams, dataValueDictionary.Ptr(), expectedValueIntervalMs.Ptr(), params.Ptr())
 }

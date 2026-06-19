@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A neuron activation kernel that operates on matrices.
+//
 // MatrixNeuron wraps [raw.MPSMatrixNeuron] with a fluent Go API.
 type MatrixNeuron struct {
 	inner *raw.MPSMatrixNeuron
@@ -107,7 +109,7 @@ func (x *MatrixNeuron) WithBatchSize(batchSize uint) *MatrixNeuron {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixNeuron) WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuron {
@@ -115,7 +117,7 @@ func (x *MatrixNeuron) WithOptions(options mpscore.MPSKernelOptions) *MatrixNeur
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixNeuron) WithLabel(label string) *MatrixNeuron {

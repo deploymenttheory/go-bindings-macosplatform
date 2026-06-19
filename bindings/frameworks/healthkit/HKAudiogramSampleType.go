@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that contain audiogram data.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkaudiogramsampletype
 type HKAudiogramSampleType struct {
 	HKSampleType

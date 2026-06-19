@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to manage communications between your app and a connected hardware accessory.
+//
 // Apple documentation: https://developer.apple.com/documentation/externalaccessory/easession
 type EASession struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func EASessionFromID(id objc.ID) *EASession {
 	return o
 }
 
+// Initializes the session for the specified accessory and protocol.
 func (o *EASession) InitWithAccessoryForProtocol(accessory *EAAccessory, protocolString *foundation.NSString) *EASession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eASessionSelInitWithAccessoryForProtocol, accessory.Ptr(), protocolString.Ptr())
 	if _ret != 0 {

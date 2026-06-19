@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An audio layer with an adjustable volume for a spatial mixer’s output.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasespatialpipelineentry
 type PHASESpatialPipelineEntry struct {
 	foundation.NSObject

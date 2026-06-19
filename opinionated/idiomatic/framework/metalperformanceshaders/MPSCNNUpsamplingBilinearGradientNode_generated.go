@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNUpsamplingBilinear kernel
+// A representation of a gradient bilinear spatial upsampling filter.
 //
 // CNNUpsamplingBilinearGradientNode wraps [raw.MPSCNNUpsamplingBilinearGradientNode] with a fluent Go API.
 type CNNUpsamplingBilinearGradientNode struct {

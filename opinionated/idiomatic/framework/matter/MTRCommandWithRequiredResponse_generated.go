@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a single command to be invoked and the response required for the invoke to be considered successful.
+//
 // MTRCommandWithRequiredResponse wraps [raw.MTRCommandWithRequiredResponse] with a fluent Go API.
 type MTRCommandWithRequiredResponse struct {
 	inner *raw.MTRCommandWithRequiredResponse
@@ -46,7 +48,7 @@ func (x *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRComm
 	return x
 }
 
-// The command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
+// The command fields to pass for the command invoke. nil if this command does not have any fields. If not nil, this should be a data-value dictionary of MTRStructureValueType.
 //
 // WithCommandFields sets the commandFields property and returns the receiver for chaining.
 func (x *MTRCommandWithRequiredResponse) WithCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRCommandWithRequiredResponse {
@@ -54,7 +56,7 @@ func (x *MTRCommandWithRequiredResponse) WithCommandFields(commandFields *founda
 	return x
 }
 
-// The response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
+// The response that represents this command succeeding.
 //
 // WithRequiredResponse sets the requiredResponse property and returns the receiver for chaining.
 func (x *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse {

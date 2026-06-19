@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the common behavior that open and closed polygon overlays share.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmultipoint
 type MKMultiPoint struct {
 	MKShape
@@ -36,23 +38,30 @@ func MKMultiPointFromID(id objc.ID) *MKMultiPoint {
 	return o
 }
 
+// Returns an array of map points associated with the shape.
 func (o *MKMultiPoint) Points() *MKMapPoint {
 	_ret := objc.Send[*MKMapPoint](o.Ptr(), _mKMultiPointSelPoints)
 	return _ret
 }
 
+// Retrieves one or more points associated with the shape and converts them to coordinate values.
 func (o *MKMultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
 	o.Ptr().Send(_mKMultiPointSelGetCoordinatesRange, coords, range_)
 }
 
+// Translates a point index into a unit distance along the shape.
 func (o *MKMultiPoint) LocationAtPointIndex(index uint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mKMultiPointSelLocationAtPointIndex, index)
 	return _ret
 }
 
+// Returns a set of unit distance values that correspond to the point indexes along the shape.
 func (o *MKMultiPoint) LocationsAtPointIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mKMultiPointSelLocationsAtPointIndexes, indexes.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPointSelLocationsAtPointIndexes, indexes.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MKMultiPoint) PointCount() uint {

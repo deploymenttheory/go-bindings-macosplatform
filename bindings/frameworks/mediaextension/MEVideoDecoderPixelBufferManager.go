@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes pixel buffer requirements and creates new pixel buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mevideodecoderpixelbuffermanager
 type MEVideoDecoderPixelBufferManager struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func MEVideoDecoderPixelBufferManagerFromID(id objc.ID) *MEVideoDecoderPixelBuff
 	return o
 }
 
-// @method			createPixelBufferAndReturnError: @abstract		Generates a pixel buffer using the session's pixel buffer pool. @discussion		If implemented in Objective-C, the caller is responsible for releasing the returned CVPixelBuffer. @param			error If provided, returns error information in the event that the method fails. @result A pixel buffer compatible with the extension's most recently set pixelBufferAttributes
+// Generates a pixel buffer using the session’s pixel buffer pool.
 func (o *MEVideoDecoderPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mEVideoDecoderPixelBufferManagerSelCreatePixelBufferAndReturnError, unsafe.Pointer(&_nsErr))
@@ -47,15 +49,18 @@ func (o *MEVideoDecoderPixelBufferManager) CreatePixelBufferAndReturnError() (un
 
 // @method			registerCustomPixelFormat @abstract		VideoToolbox will register the described pixelFormat in both the Extension process and the client process. @discussion		This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(). @param			customPixelFormat This dictionary contains a set of keys and values as described in CoreVideo/CVPixelFormatDescription.h suitable for providing as the 'description' parameter to CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType.  This must contain the custom pixel format fourCC as the value for the kCVPixelFormatCodecType key.
 func (o *MEVideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_mEVideoDecoderPixelBufferManagerSelRegisterCustomPixelFormat, customPixelFormat)
+	o.Ptr().Send(_mEVideoDecoderPixelBufferManagerSelRegisterCustomPixelFormat, customPixelFormat.Ptr())
 }
 
 // @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a PixelBuffer for the decoder. @discussion		This can be updated by the decoder before requesting a new pixelBuffer.
 func (o *MEVideoDecoderPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mEVideoDecoderPixelBufferManagerSelPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mEVideoDecoderPixelBufferManagerSelPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MEVideoDecoderPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_mEVideoDecoderPixelBufferManagerSelSetPixelBufferAttributes, pixelBufferAttributes)
+	o.Ptr().Send(_mEVideoDecoderPixelBufferManagerSelSetPixelBufferAttributes, pixelBufferAttributes.Ptr())
 }

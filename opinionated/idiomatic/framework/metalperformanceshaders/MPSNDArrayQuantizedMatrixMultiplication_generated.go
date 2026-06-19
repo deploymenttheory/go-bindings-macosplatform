@@ -68,7 +68,7 @@ func (x *NDArrayQuantizedMatrixMultiplication) WithDestinationArrayAllocator(des
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayQuantizedMatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *NDArrayQuantizedMatrixMultiplication {
@@ -76,7 +76,7 @@ func (x *NDArrayQuantizedMatrixMultiplication) WithOptions(options mpscore.MPSKe
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQuantizedMatrixMultiplication {

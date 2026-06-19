@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about the estimated sample location with the media.
+//
 // EstimatedSampleLocation wraps [raw.MEEstimatedSampleLocation] with a fluent Go API.
 type EstimatedSampleLocation struct {
 	inner *raw.MEEstimatedSampleLocation
@@ -30,7 +32,7 @@ func EstimatedSampleLocationFromID(id objc.ID) *EstimatedSampleLocation {
 	return &EstimatedSampleLocation{inner: raw.MEEstimatedSampleLocationFromID(id)}
 }
 
-// @property		initWithByteSource @abstract		The initializer for the MEEstimatedSampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			estimatedSampleLocation The estimated starting file offset and size in bytes of the sample. @param			refinementDataLocation The starting file offset and size in bytes of the the data necessary to provide an accurate sample location.
+// Creates an estimated sample location object with the byte source, sample location, and data location that you specify.
 //
 // NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation creates a new [EstimatedSampleLocation].
 func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *raw.MEByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *EstimatedSampleLocation {

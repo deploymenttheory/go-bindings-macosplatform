@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class to extend when creating a custom user interface for an audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/auviewcontroller
 type AUViewController struct {
 	appkit.NSViewController

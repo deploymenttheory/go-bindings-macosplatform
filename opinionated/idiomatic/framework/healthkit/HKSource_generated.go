@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object indicating the app or device that created a HealthKit sample
+//
 // Source wraps [raw.HKSource] with a fluent Go API.
 type Source struct {
 	inner *raw.HKSource

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectextensioncontext
 type PHProjectExtensionContext struct {
 	foundation.NSExtensionContext
@@ -34,12 +36,12 @@ func PHProjectExtensionContextFromID(id objc.ID) *PHProjectExtensionContext {
 	return o
 }
 
-// Invokes the Photos Editor for the given asset. @param asset The asset to edit. @note The extension should observe library changes to get notified when assets are changed/edited. @see PHPhotoLibraryChangeObserver
+// Invokes the built-in photo editor for the given asset.
 func (o *PHProjectExtensionContext) ShowEditorForAsset(asset *photos.PHAsset) {
 	o.Ptr().Send(_pHProjectExtensionContextSelShowEditorForAsset, asset.Ptr())
 }
 
-// Creates an updated PHProjectInfo from the given projectInfo and the current assets in the PHProject. If the existingProjectInfo is not nil the extension sections will be update to reflect any deletions from the photo library and a new section is appended for any assets in the project which weren't referenced in existingProjectInfo. @param existingProjectInfo PHProjectInfo to update. If existingProjectInfo is nil a new PHProjectInfo will be created from all assets in the PHProject. @param completion          Completion block that is called with the update result. updatedProjectInfo is the updated project info, if the update was cancelled it might be nil. @return NSProgress which can be observed, if it's canceled the original project info is returned.
+// Creates an updated PHProjectInfo instance from existing project information and current assets.
 func (o *PHProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *PHProjectInfo, completion func(*PHProjectInfo)) *foundation.NSProgress {
 	var __block_completion objc.Block
 	if completion != nil {

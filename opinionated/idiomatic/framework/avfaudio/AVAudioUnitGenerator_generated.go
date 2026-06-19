@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that generates audio output.
+//
 // AudioUnitGenerator wraps [raw.AVAudioUnitGenerator] with a fluent Go API.
 type AudioUnitGenerator struct {
 	inner *raw.AVAudioUnitGenerator
@@ -29,7 +31,7 @@ func AudioUnitGeneratorFromID(id objc.ID) *AudioUnitGenerator {
 	return &AudioUnitGenerator{inner: raw.AVAudioUnitGeneratorFromID(id)}
 }
 
-// @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitGenerator object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be kAudioUnitType_Generator or kAudioUnitType_RemoteGenerator
+// Creates a generator audio unit with the specified description.
 //
 // NewAudioUnitGeneratorWithAudioComponentDescription creates a new [AudioUnitGenerator].
 func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescription objc.ID) *AudioUnitGenerator {
@@ -38,7 +40,7 @@ func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescriptio
 	return &AudioUnitGenerator{inner: raw.AVAudioUnitGeneratorFromID(_id)}
 }
 
-// @property bypass @abstract Bypass state of the audio unit.
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {

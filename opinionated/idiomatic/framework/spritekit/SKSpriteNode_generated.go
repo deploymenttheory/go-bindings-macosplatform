@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// A Sprite is a textured 2D node. It can be placed, rotated, scaled and animated like any other node except it draws a textured rectangle specified by the bounds and anchor point. Sprites are used to define quad primitives with color and/or textures applied to them. See <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)">wiki</a> for a definition of a Sprite.
+// An image or solid color.
 //
 // SpriteNode wraps [raw.SKSpriteNode] with a fluent Go API.
 type SpriteNode struct {
@@ -35,7 +35,7 @@ func SpriteNodeFromID(id objc.ID) *SpriteNode {
 	return &SpriteNode{inner: raw.SKSpriteNodeFromID(id)}
 }
 
-// Designated Initializer Initialize a sprite with a color and the specified bounds. @param texture the texture to use (can be nil for colored sprite) @param color the color to use for tinting the sprite. @param size the size of the sprite in points
+// Initializes a textured sprite in color using an existing texture object.
 //
 // NewSpriteNodeWithTextureColorSize creates a new [SpriteNode].
 func NewSpriteNodeWithTextureColorSize(texture *raw.SKTexture, color *appkit.NSColor, size corefoundation.CGSize) *SpriteNode {
@@ -44,7 +44,7 @@ func NewSpriteNodeWithTextureColorSize(texture *raw.SKTexture, color *appkit.NSC
 	return &SpriteNode{inner: raw.SKSpriteNodeFromID(_id)}
 }
 
-// Initialize a sprite with an SKTexture and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
+// Initializes a textured sprite using an existing texture object.
 //
 // NewSpriteNodeWithTexture creates a new [SpriteNode].
 func NewSpriteNodeWithTexture(texture *raw.SKTexture) *SpriteNode {
@@ -53,7 +53,7 @@ func NewSpriteNodeWithTexture(texture *raw.SKTexture) *SpriteNode {
 	return &SpriteNode{inner: raw.SKSpriteNodeFromID(_id)}
 }
 
-// Initialize a sprite with an image from your app bundle (An SKTexture is created for the image and set on the sprite. Its size is set to the SKTexture's pixel width/height) The position of the sprite is (0, 0) and the texture anchored at (0.5, 0.5), so that it is offset by half the width and half the height. Thus the sprite has the texture centered about the position. If you wish to have the texture anchored at a different offset set the anchorPoint to another pair of values in the interval from 0.0 up to and including 1.0. @param name the name or path of the image to load.
+// Initializes a textured sprite using an image file.
 //
 // NewSpriteNodeWithImageNamed creates a new [SpriteNode].
 func NewSpriteNodeWithImageNamed(name string) *SpriteNode {
@@ -62,7 +62,7 @@ func NewSpriteNodeWithImageNamed(name string) *SpriteNode {
 	return &SpriteNode{inner: raw.SKSpriteNodeFromID(_id)}
 }
 
-// Initialize a sprite with a color and the specified bounds. @param color the color to use for tinting the sprite. @param size the size of the sprite in points
+// Initializes a single-color sprite node.
 //
 // NewSpriteNodeWithColorSize creates a new [SpriteNode].
 func NewSpriteNodeWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SpriteNode {
@@ -71,7 +71,7 @@ func NewSpriteNodeWithColorSize(color *appkit.NSColor, size corefoundation.CGSiz
 	return &SpriteNode{inner: raw.SKSpriteNodeFromID(_id)}
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Tells you when to initialize a sprite from an archive.
 //
 // NewSpriteNodeWithCoder creates a new [SpriteNode].
 func NewSpriteNodeWithCoder(aDecoder *foundation.NSCoder) *SpriteNode {
@@ -80,7 +80,7 @@ func NewSpriteNodeWithCoder(aDecoder *foundation.NSCoder) *SpriteNode {
 	return &SpriteNode{inner: raw.SKSpriteNodeFromID(_id)}
 }
 
-// Texture to be drawn (is stretched to fill the sprite)
+// The texture used to draw the sprite.
 //
 // WithTexture sets the texture property and returns the receiver for chaining.
 func (x *SpriteNode) WithTexture(texture TextureProvider) *SpriteNode {
@@ -88,7 +88,7 @@ func (x *SpriteNode) WithTexture(texture TextureProvider) *SpriteNode {
 	return x
 }
 
-// Texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light. @see SKLightNode @see lightingBitMask
+// A texture that specifies the normal map for the sprite.
 //
 // WithNormalTexture sets the normalTexture property and returns the receiver for chaining.
 func (x *SpriteNode) WithNormalTexture(normalTexture TextureProvider) *SpriteNode {
@@ -96,7 +96,7 @@ func (x *SpriteNode) WithNormalTexture(normalTexture TextureProvider) *SpriteNod
 	return x
 }
 
-// Bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
+// A mask that defines how this sprite is lit by light nodes in the scene.
 //
 // WithLightingBitMask sets the lightingBitMask property and returns the receiver for chaining.
 func (x *SpriteNode) WithLightingBitMask(lightingBitMask uint32) *SpriteNode {
@@ -104,19 +104,23 @@ func (x *SpriteNode) WithLightingBitMask(lightingBitMask uint32) *SpriteNode {
 	return x
 }
 
+// A mask that defines which lights are occluded by this sprite.
+//
 // WithShadowCastBitMask sets the shadowCastBitMask property and returns the receiver for chaining.
 func (x *SpriteNode) WithShadowCastBitMask(shadowCastBitMask uint32) *SpriteNode {
 	x.inner.SetShadowCastBitMask(shadowCastBitMask)
 	return x
 }
 
+// A mask that defines which lights add shadows to the sprite.
+//
 // WithShadowedBitMask sets the shadowedBitMask property and returns the receiver for chaining.
 func (x *SpriteNode) WithShadowedBitMask(shadowedBitMask uint32) *SpriteNode {
 	x.inner.SetShadowedBitMask(shadowedBitMask)
 	return x
 }
 
-// Controls how the texture is stretched to fill the SKSpriteNode. Stretching is performed via a 9-part algorithm where the upper & lower middle parts are scaled horizontally, the left and right middle parts are scaled vertically, the center is scaled in both directions, and the corners are preserved. The centerRect defines the center region in a (0.0 - 1.0) coordinate space. Defaults to {(0,0) (1,1)} (the entire texture is stretched).
+// Enable nine-part stretching of the sprite’s texture.
 //
 // WithCenterRect sets the centerRect property and returns the receiver for chaining.
 func (x *SpriteNode) WithCenterRect(centerRect corefoundation.CGRect) *SpriteNode {
@@ -124,7 +128,7 @@ func (x *SpriteNode) WithCenterRect(centerRect corefoundation.CGRect) *SpriteNod
 	return x
 }
 
-// Controls the blending between the texture and the sprite's color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+// A floating-point value that describes how the color is blended with the sprite’s texture.
 //
 // WithColorBlendFactor sets the colorBlendFactor property and returns the receiver for chaining.
 func (x *SpriteNode) WithColorBlendFactor(colorBlendFactor float64) *SpriteNode {
@@ -132,7 +136,7 @@ func (x *SpriteNode) WithColorBlendFactor(colorBlendFactor float64) *SpriteNode 
 	return x
 }
 
-// Base color for the sprite (If no texture is present, the color still is drawn)
+// The sprite’s color.
 //
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *SpriteNode) WithColor(color *appkit.NSColor) *SpriteNode {
@@ -140,7 +144,7 @@ func (x *SpriteNode) WithColor(color *appkit.NSColor) *SpriteNode {
 	return x
 }
 
-// Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
+// The blend mode used to draw the sprite into the parent’s framebuffer.
 //
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *SpriteNode) WithBlendMode(blendMode SKBlendMode) *SpriteNode {
@@ -148,7 +152,7 @@ func (x *SpriteNode) WithBlendMode(blendMode SKBlendMode) *SpriteNode {
 	return x
 }
 
-// Used to choose the location in the sprite that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
+// Defines the point in the sprite that corresponds to the node’s position.
 //
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *SpriteNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode {
@@ -156,7 +160,7 @@ func (x *SpriteNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Sprite
 	return x
 }
 
-// Set the size of the sprite (in parent's coordinate space)
+// The dimensions of the sprite, in points.
 //
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
@@ -164,13 +168,15 @@ func (x *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
 	return x
 }
 
+// A text file that defines code that does custom per-pixel drawing or colorization.
+//
 // WithShader sets the shader property and returns the receiver for chaining.
 func (x *SpriteNode) WithShader(shader *Shader) *SpriteNode {
 	x.inner.SetShader(shader.Unwrap())
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *SpriteNode) WithPosition(position corefoundation.CGPoint) *SpriteNode {
@@ -178,7 +184,7 @@ func (x *SpriteNode) WithPosition(position corefoundation.CGPoint) *SpriteNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *SpriteNode) WithZPosition(zPosition float64) *SpriteNode {
@@ -186,7 +192,7 @@ func (x *SpriteNode) WithZPosition(zPosition float64) *SpriteNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *SpriteNode) WithZRotation(zRotation float64) *SpriteNode {
@@ -194,7 +200,7 @@ func (x *SpriteNode) WithZRotation(zRotation float64) *SpriteNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *SpriteNode) WithXScale(xScale float64) *SpriteNode {
@@ -202,7 +208,7 @@ func (x *SpriteNode) WithXScale(xScale float64) *SpriteNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *SpriteNode) WithYScale(yScale float64) *SpriteNode {
@@ -210,7 +216,7 @@ func (x *SpriteNode) WithYScale(yScale float64) *SpriteNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *SpriteNode) WithSpeed(speed float64) *SpriteNode {
@@ -218,7 +224,7 @@ func (x *SpriteNode) WithSpeed(speed float64) *SpriteNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *SpriteNode) WithAlpha(alpha float64) *SpriteNode {
@@ -226,7 +232,7 @@ func (x *SpriteNode) WithAlpha(alpha float64) *SpriteNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *SpriteNode) WithPaused(paused bool) *SpriteNode {
@@ -234,7 +240,7 @@ func (x *SpriteNode) WithPaused(paused bool) *SpriteNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *SpriteNode) WithHidden(hidden bool) *SpriteNode {
@@ -242,7 +248,7 @@ func (x *SpriteNode) WithHidden(hidden bool) *SpriteNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *SpriteNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SpriteNode {
@@ -250,7 +256,7 @@ func (x *SpriteNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Sp
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *SpriteNode) WithName(name string) *SpriteNode {
@@ -258,7 +264,7 @@ func (x *SpriteNode) WithName(name string) *SpriteNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
@@ -266,7 +272,7 @@ func (x *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *SpriteNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SpriteNode {
@@ -274,7 +280,7 @@ func (x *SpriteNode) WithUserData(userData *foundation.NSMutableDictionary[objc.
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *SpriteNode) WithReachConstraints(reachConstraints *ReachConstraints) *SpriteNode {
@@ -282,7 +288,7 @@ func (x *SpriteNode) WithReachConstraints(reachConstraints *ReachConstraints) *S
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *SpriteNode) WithConstraints(items ...*raw.SKConstraint) *SpriteNode {
@@ -305,7 +311,7 @@ func (x *SpriteNode) WithConstraints(items ...*raw.SKConstraint) *SpriteNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *SpriteNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SpriteNode {
@@ -313,61 +319,79 @@ func (x *SpriteNode) WithAttributeValues(attributeValues *foundation.NSDictionar
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityElement(accessibilityElement bool) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityRole(accessibilityRole string) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilitySubrole(accessibilitySubrole string) *SpriteNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityParent(accessibilityParent objc.ID) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityHelp(accessibilityHelp string) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityLabel(accessibilityLabel string) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *SpriteNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SpriteNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
-// Adjust the sprite's xScale & yScale to achieve the desired size (in parent's coordinate space)
+// Scales the sprite node to a specified size.
 //
 // ScaleToSize calls the underlying ScaleToSize.
 func (x *SpriteNode) ScaleToSize(size corefoundation.CGSize) {

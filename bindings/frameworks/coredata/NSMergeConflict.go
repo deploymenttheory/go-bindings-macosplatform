@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of conflicts that occur during an attempt to save changes in a managed object context.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmergeconflict
 type NSMergeConflict struct {
 	foundation.NSObject
@@ -36,8 +38,9 @@ func NSMergeConflictFromID(id objc.ID) *NSMergeConflict {
 	return o
 }
 
+// Initializes a merge conflict.
 func (o *NSMergeConflict) InitWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *NSManagedObject, newvers uint, oldvers uint, cachesnap *foundation.NSDictionary[*foundation.NSString, objc.ID], persnap *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSMergeConflict {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelInitWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot, srcObject.Ptr(), newvers, oldvers, cachesnap, persnap)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelInitWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot, srcObject.Ptr(), newvers, oldvers, cachesnap.Ptr(), persnap.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -53,18 +56,27 @@ func (o *NSMergeConflict) SourceObject() *NSManagedObject {
 }
 
 func (o *NSMergeConflict) ObjectSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSMergeConflictSelObjectSnapshot)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelObjectSnapshot)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSMergeConflict) CachedSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSMergeConflictSelCachedSnapshot)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelCachedSnapshot)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSMergeConflict) PersistedSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSMergeConflictSelPersistedSnapshot)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMergeConflictSelPersistedSnapshot)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSMergeConflict) NewVersionNumber() uint {

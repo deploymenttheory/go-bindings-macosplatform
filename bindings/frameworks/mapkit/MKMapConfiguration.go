@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents the shared elements of map configurations.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapconfiguration
 type MKMapConfiguration struct {
 	foundation.NSObject

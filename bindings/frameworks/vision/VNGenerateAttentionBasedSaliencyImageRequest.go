@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that produces a heat map that identifies the parts of an image most likely to draw attention.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vngenerateattentionbasedsaliencyimagerequest
 type VNGenerateAttentionBasedSaliencyImageRequest struct {
 	VNImageBasedRequest

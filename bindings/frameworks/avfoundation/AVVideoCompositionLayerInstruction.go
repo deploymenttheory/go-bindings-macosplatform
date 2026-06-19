@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avvideocompositionlayerinstruction
 type AVVideoCompositionLayerInstruction struct {
 	foundation.NSObject
@@ -34,19 +36,19 @@ func AVVideoCompositionLayerInstructionFromID(id objc.ID) *AVVideoCompositionLay
 	return o
 }
 
-// Obtains the transform ramp that includes the specified time. - Parameter time: If a ramp with a timeRange that contains the specified time has been set, information about the effective ramp for that time is supplied. Otherwise, information about the first ramp that starts after the specified time is supplied. - Parameter startTransform: A pointer to a float to receive the starting transform value for the transform ramp. May be NULL. - Parameter endTransform: A pointer to a float to receive the ending transform value for the transform ramp. May be NULL. - Parameter timeRange: A pointer to a CMTimeRange to receive the timeRange of the transform ramp. May be NULL. - Returns: An indication of success. NO will be returned if the specified time is beyond the duration of the last transform ramp that has been set.
+// Obtains the transform ramp that includes a specified time.
 func (o *AVVideoCompositionLayerInstruction) GetTransformRampForTimeStartTransformEndTransformTimeRange(time_ coremedia.CMTime, startTransform *corefoundation.CGAffineTransform, endTransform *corefoundation.CGAffineTransform, timeRange *coremedia.CMTimeRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVVideoCompositionLayerInstructionSelGetTransformRampForTimeStartTransformEndTransformTimeRange, time_, startTransform, endTransform, timeRange)
 	return _ret
 }
 
-// Obtains the opacity ramp that includes the specified time. - Parameter time: If a ramp with a timeRange that contains the specified time has been set, information about the effective ramp for that time is supplied. Otherwise, information about the first ramp that starts after the specified time is supplied. - Parameter startOpacity: A pointer to a float to receive the starting opacity value for the opacity ramp. May be NULL. - Parameter endOpacity: A pointer to a float to receive the ending opacity value for the opacity ramp. May be NULL. - Parameter timeRange: A pointer to a CMTimeRange to receive the timeRange of the opacity ramp. May be NULL. - Returns: An indication of success. NO will be returned if the specified time is beyond the duration of the last opacity ramp that has been set.
+// Obtains the opacity ramp that includes a specified time.
 func (o *AVVideoCompositionLayerInstruction) GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_ coremedia.CMTime, startOpacity *float32, endOpacity *float32, timeRange *coremedia.CMTimeRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVVideoCompositionLayerInstructionSelGetOpacityRampForTimeStartOpacityEndOpacityTimeRange, time_, startOpacity, endOpacity, timeRange)
 	return _ret
 }
 
-// Obtains the crop rectangle ramp that includes the specified time. - Parameter time: If a ramp with a timeRange that contains the specified time has been set, information about the effective ramp for that time is supplied. Otherwise, information about the first ramp that starts after the specified time is supplied. - Parameter startCropRectangle: A pointer to a CGRect to receive the starting crop rectangle value for the crop rectangle ramp. May be NULL. - Parameter endCropRecrangle: A pointer to a CGRect to receive the ending crop rectangle value for the crop rectangle ramp. May be NULL. - Parameter timeRange: A pointer to a CMTimeRange to receive the timeRange of the crop rectangle ramp. May be NULL. - Returns: An indication of success. NO will be returned if the specified time is beyond the duration of the last crop rectangle ramp that has been set.
+// Obtains the crop rectangle ramp that includes the specified time.
 func (o *AVVideoCompositionLayerInstruction) GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_ coremedia.CMTime, startCropRectangle *corefoundation.CGRect, endCropRectangle *corefoundation.CGRect, timeRange *coremedia.CMTimeRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVVideoCompositionLayerInstructionSelGetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange, time_, startCropRectangle, endCropRectangle, timeRange)
 	return _ret

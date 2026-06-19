@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to insert a batch of data in a persistent store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsbatchinsertrequest
 type NSBatchInsertRequest struct {
 	NSPersistentStoreRequest
@@ -49,22 +51,35 @@ func NSBatchInsertRequestFromID(id objc.ID) *NSBatchInsertRequest {
 	return o
 }
 
+// Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
 func NSBatchInsertRequestBatchInsertRequestWithEntityNameObjects(entityName *foundation.NSString, dictionaries *foundation.NSArray[objc.ID]) *NSBatchInsertRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameObjects, entityName.Ptr(), dictionaries)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameObjects, entityName.Ptr(), dictionaries.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
-func NSBatchInsertRequestBatchInsertRequestWithEntityNameDictionaryHandler(entityName *foundation.NSString, handler objc.Block) *NSBatchInsertRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameDictionaryHandler, entityName.Ptr(), handler)
+// Creates a batch-insertion request for a named managed entity, and specifies a closure that provides data dictionaries for insertion.
+func NSBatchInsertRequestBatchInsertRequestWithEntityNameDictionaryHandler(entityName *foundation.NSString, handler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *NSBatchInsertRequest {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			return handler(foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](blockParam0))
+		})
+		defer __block_handler.Release()
+	}
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameDictionaryHandler, entityName.Ptr(), __block_handler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
+// Creates a batch-insertion request for a named managed entity, and specifies a closure that inserts data into the entity.
 func NSBatchInsertRequestBatchInsertRequestWithEntityNameManagedObjectHandler(entityName *foundation.NSString, handler func(*NSManagedObject) bool) *NSBatchInsertRequest {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -83,6 +98,7 @@ func NSBatchInsertRequestBatchInsertRequestWithEntityNameManagedObjectHandler(en
 	return NSBatchInsertRequestFromID(_ret)
 }
 
+// Creates a Core Data batch-insertion request.
 // Deprecated: since macOS 11.0.
 func (o *NSBatchInsertRequest) Init() *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInit)
@@ -92,32 +108,46 @@ func (o *NSBatchInsertRequest) Init() *NSBatchInsertRequest {
 	return NSBatchInsertRequestFromID(_ret)
 }
 
+// Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
 // Deprecated: since macOS 11.0.
 func (o *NSBatchInsertRequest) InitWithEntityNameObjects(entityName *foundation.NSString, dictionaries *foundation.NSArray[objc.ID]) *NSBatchInsertRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameObjects, entityName.Ptr(), dictionaries)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameObjects, entityName.Ptr(), dictionaries.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
+// Creates a batch-insertion request for a managed entity, and provides an array of data dictionaries for insertion.
 // Deprecated: since macOS 11.0.
 func (o *NSBatchInsertRequest) InitWithEntityObjects(entity *NSEntityDescription, dictionaries *foundation.NSArray[objc.ID]) *NSBatchInsertRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityObjects, entity.Ptr(), dictionaries)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityObjects, entity.Ptr(), dictionaries.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
-func (o *NSBatchInsertRequest) InitWithEntityDictionaryHandler(entity *NSEntityDescription, handler objc.Block) *NSBatchInsertRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityDictionaryHandler, entity.Ptr(), handler)
+// Creates a batch-insertion request for a managed entity, and specifies a closure that provides data dictionaries for insertion.
+func (o *NSBatchInsertRequest) InitWithEntityDictionaryHandler(entity *NSEntityDescription, handler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *NSBatchInsertRequest {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			return handler(foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](blockParam0))
+		})
+		defer __block_handler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityDictionaryHandler, entity.Ptr(), __block_handler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
+// Creates a batch-insertion request for a managed entity, and specifies a closure that inserts data into the entity.
 func (o *NSBatchInsertRequest) InitWithEntityManagedObjectHandler(entity *NSEntityDescription, handler func(*NSManagedObject) bool) *NSBatchInsertRequest {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -136,8 +166,18 @@ func (o *NSBatchInsertRequest) InitWithEntityManagedObjectHandler(entity *NSEnti
 	return NSBatchInsertRequestFromID(_ret)
 }
 
-func (o *NSBatchInsertRequest) InitWithEntityNameDictionaryHandler(entityName *foundation.NSString, handler objc.Block) *NSBatchInsertRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameDictionaryHandler, entityName.Ptr(), handler)
+func (o *NSBatchInsertRequest) InitWithEntityNameDictionaryHandler(entityName *foundation.NSString, handler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *NSBatchInsertRequest {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			return handler(foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](blockParam0))
+		})
+		defer __block_handler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameDictionaryHandler, entityName.Ptr(), __block_handler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -179,12 +219,15 @@ func (o *NSBatchInsertRequest) Entity() *NSEntityDescription {
 }
 
 func (o *NSBatchInsertRequest) ObjectsToInsert() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSBatchInsertRequestSelObjectsToInsert)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelObjectsToInsert)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSBatchInsertRequest) SetObjectsToInsert(objectsToInsert *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSBatchInsertRequestSelSetObjectsToInsert, objectsToInsert)
+	o.Ptr().Send(_nSBatchInsertRequestSelSetObjectsToInsert, objectsToInsert.Ptr())
 }
 
 func (o *NSBatchInsertRequest) DictionaryHandler() objc.Block {
@@ -192,8 +235,18 @@ func (o *NSBatchInsertRequest) DictionaryHandler() objc.Block {
 	return _ret
 }
 
-func (o *NSBatchInsertRequest) SetDictionaryHandler(dictionaryHandler objc.Block) {
-	o.Ptr().Send(_nSBatchInsertRequestSelSetDictionaryHandler, dictionaryHandler)
+func (o *NSBatchInsertRequest) SetDictionaryHandler(dictionaryHandler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) {
+	var __block_dictionaryHandler objc.Block
+	if dictionaryHandler != nil {
+		__block_dictionaryHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			return dictionaryHandler(foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](blockParam0))
+		})
+		defer __block_dictionaryHandler.Release()
+	}
+	o.Ptr().Send(_nSBatchInsertRequestSelSetDictionaryHandler, __block_dictionaryHandler)
 }
 
 func (o *NSBatchInsertRequest) ManagedObjectHandler() objc.Block {

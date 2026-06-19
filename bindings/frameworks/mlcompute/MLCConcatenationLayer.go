@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that combines tensors into a single tensor.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcconcatenationlayer
 type MLCConcatenationLayer struct {
 	MLCLayer
@@ -31,7 +33,7 @@ func MLCConcatenationLayerFromID(id objc.ID) *MLCConcatenationLayer {
 	return o
 }
 
-// @abstract   Create a concatenation layer @return     A new concatenation layer
+// Creates a concatenation layer with a dimension value of 1, which typically represents feature channels.
 func MLCConcatenationLayerLayer() *MLCConcatenationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConcatenationLayer), _mLCConcatenationLayerSelLayer)
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func MLCConcatenationLayerLayer() *MLCConcatenationLayer {
 	return MLCConcatenationLayerFromID(_ret)
 }
 
-// @abstract   Create a concatenation layer @param      dimension  The concatenation dimension @return     A new concatenation layer
+// Creates a concatenation layer with the dimension you specify.
 func MLCConcatenationLayerLayerWithDimension(dimension uint) *MLCConcatenationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConcatenationLayer), _mLCConcatenationLayerSelLayerWithDimension, dimension)
 	if _ret != 0 {

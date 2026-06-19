@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A capture input for recording from a screen in macOS.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturescreeninput
 type AVCaptureScreenInput struct {
 	AVCaptureInput
@@ -45,7 +47,7 @@ func AVCaptureScreenInputFromID(id objc.ID) *AVCaptureScreenInput {
 	return o
 }
 
-// @method init @abstract Creates an AVCaptureScreenInput instance that provides media data from the main display. @discussion This method creates an instance of AVCaptureScreenInput using the main display whose id is returned from CGMainDisplayID().
+// Initializes a capture screen input that provides media data from the main screen.
 func (o *AVCaptureScreenInput) Init() *AVCaptureScreenInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureScreenInputSelInit)
 	if _ret != 0 {
@@ -54,12 +56,13 @@ func (o *AVCaptureScreenInput) Init() *AVCaptureScreenInput {
 	return AVCaptureScreenInputFromID(_ret)
 }
 
+// Creates a capture screen input that provides media data from the main screen.
 func AVCaptureScreenInputNew() *AVCaptureScreenInput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureScreenInput), _aVCaptureScreenInputSelNew)
 	return AVCaptureScreenInputFromID(_ret)
 }
 
-// @method initWithDisplayID: @abstract Creates an AVCaptureScreenInput instance that provides media data from the given display. @param displayID The id of the display from which to capture video. CGDirectDisplayID is defined in <CoreGraphics/CGDirectDisplay.h> @result An AVCaptureScreenInput instance that provides data from the given screen, or nil, if the screen could not be used for capture. @discussion This method creates an instance of AVCaptureScreenInput that can be used to capture data from a display in an AVCaptureSession. This method validates the displayID. If the display cannot be used because it is not available on the system, for example, this method returns nil.
+// Initializes a capture screen input that provides media data from the specified display.
 func (o *AVCaptureScreenInput) InitWithDisplayID(displayID uint32) *AVCaptureScreenInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureScreenInputSelInitWithDisplayID, displayID)
 	if _ret != 0 {

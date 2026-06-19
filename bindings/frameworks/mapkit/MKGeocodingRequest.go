@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that looks up a geographic coordinate using the provided string.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkgeocodingrequest
 type MKGeocodingRequest struct {
 	foundation.NSObject
@@ -41,6 +43,7 @@ func MKGeocodingRequestFromID(id objc.ID) *MKGeocodingRequest {
 	return o
 }
 
+// Initializes a new geocoder request object with the provided address string.
 func (o *MKGeocodingRequest) InitWithAddressString(addressString *foundation.NSString) *MKGeocodingRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeocodingRequestSelInitWithAddressString, addressString.Ptr())
 	if _ret != 0 {
@@ -49,6 +52,7 @@ func (o *MKGeocodingRequest) InitWithAddressString(addressString *foundation.NSS
 	return MKGeocodingRequestFromID(_ret)
 }
 
+// Returns the map items relevant to the geocoded location.
 func (o *MKGeocodingRequest) GetMapItemsWithCompletionHandler(completionHandler func(*foundation.NSArray[*MKMapItem], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -63,6 +67,7 @@ func (o *MKGeocodingRequest) GetMapItemsWithCompletionHandler(completionHandler 
 	o.Ptr().Send(_mKGeocodingRequestSelGetMapItemsWithCompletionHandler, __block_completionHandler)
 }
 
+// A function you call to cancel a geocoding request that’s in progress.
 func (o *MKGeocodingRequest) Cancel() {
 	o.Ptr().Send(_mKGeocodingRequestSelCancel)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A symbol effect that applies the Breathe animation to symbol images.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect
 type NSSymbolBreatheEffect struct {
 	NSSymbolEffect

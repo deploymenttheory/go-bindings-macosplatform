@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to activate or deactivate a system extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/systemextensions/ossystemextensionrequest
 type OSSystemExtensionRequest struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func OSSystemExtensionRequestFromID(id objc.ID) *OSSystemExtensionRequest {
 	return o
 }
 
-// @brief Creates a request to activate a System Extension. @discussion This method creates a new request to activate a System Extension. Extensions are bundles discovered from the `Contents/Library/SystemExtensions` directory of the main application bundle. @param identifier The bundle identifier of the target extension. @param queue The dispatch queue to use when calling delegate methods. @return A new extension request. @note It is expected that an application create and submit an activation request whenever an extension should be active. Upon submitting an activation request for an inactive extension, user approval may be required and the request will not succeed until approval is given. If the extension is already active then the request will succeed in short order without significant delay or user interaction. Activating an new version of an already active extension will prompt the delegate to resolve the conflict before proceeding. An activation request can be successful but also indicate that a reboot is required in order for the extension to become active. This can occur when replacing an existing extension that required a reboot in order to deactivate. The most recently activated extension will then become active when the system is next rebooted.
+// Creates a request to activate a System Extension.
 func OSSystemExtensionRequestActivationRequestForExtensionQueue(identifier *foundation.NSString, queue *foundation.NSObject) *OSSystemExtensionRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSSystemExtensionRequest), _oSSystemExtensionRequestSelActivationRequestForExtensionQueue, identifier.Ptr(), queue.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func OSSystemExtensionRequestActivationRequestForExtensionQueue(identifier *foun
 	return OSSystemExtensionRequestFromID(_ret)
 }
 
-// @brief Creates a request to deactivate a System Extension. @discussion This method creates a new request to deactivate a System Extension. Extensions are discovered from the `Contents/Library/SystemExtensions` directory of the main application bundle. @param identifier The bundle identifier of the target extension. @param queue The dispatch queue to use when calling delegate methods. @note It is possible for an extension to require a reboot before it is fully deactivated. If a request succeeds and indicates a reboot is required, the extension may still appear to be operational until that time.
+// Creates a request to deactivate a System Extension.
 func OSSystemExtensionRequestDeactivationRequestForExtensionQueue(identifier *foundation.NSString, queue *foundation.NSObject) *OSSystemExtensionRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSSystemExtensionRequest), _oSSystemExtensionRequestSelDeactivationRequestForExtensionQueue, identifier.Ptr(), queue.Ptr())
 	if _ret != 0 {

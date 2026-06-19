@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Options to configure a command buffer before encoding work into it.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4commandbufferoptions
 type MTL4CommandBufferOptions struct {
 	foundation.NSObject

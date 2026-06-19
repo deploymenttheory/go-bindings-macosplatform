@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for dynamic shader data associated with a node.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skattributevalue
 type SKAttributeValue struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func SKAttributeValueFromID(id objc.ID) *SKAttributeValue {
 	return o
 }
 
+// Creates and initializes a new attribute value object that holds a floating point number.
 func SKAttributeValueValueWithFloat(value float32) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithFloat, value)
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func SKAttributeValueValueWithFloat(value float32) *SKAttributeValue {
 	return SKAttributeValueFromID(_ret)
 }
 
+// Creates and initializes a new attribute value object that holds a vector of two floating point numbers.
 func SKAttributeValueValueWithVectorFloat2(value unsafe.Pointer) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithVectorFloat2, value)
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func SKAttributeValueValueWithVectorFloat2(value unsafe.Pointer) *SKAttributeVal
 	return SKAttributeValueFromID(_ret)
 }
 
+// Creates and initializes a new attribute value object that holds a vector of three floating point numbers.
 func SKAttributeValueValueWithVectorFloat3(value unsafe.Pointer) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithVectorFloat3, value)
 	if _ret != 0 {
@@ -68,6 +73,7 @@ func SKAttributeValueValueWithVectorFloat3(value unsafe.Pointer) *SKAttributeVal
 	return SKAttributeValueFromID(_ret)
 }
 
+// Creates and initializes a new attribute value object that holds a vector of four floating point numbers.
 func SKAttributeValueValueWithVectorFloat4(value unsafe.Pointer) *SKAttributeValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAttributeValue), _sKAttributeValueSelValueWithVectorFloat4, value)
 	if _ret != 0 {
@@ -76,6 +82,7 @@ func SKAttributeValueValueWithVectorFloat4(value unsafe.Pointer) *SKAttributeVal
 	return SKAttributeValueFromID(_ret)
 }
 
+// Creates and initializes a new attribute value object
 func (o *SKAttributeValue) Init() *SKAttributeValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAttributeValueSelInit)
 	if _ret != 0 {

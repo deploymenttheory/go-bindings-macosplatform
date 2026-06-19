@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that plays audio from a 3D location and orientation in a scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasesource
 type PHASESource struct {
 	PHASEObject
@@ -34,7 +36,7 @@ func PHASESourceFromID(id objc.ID) *PHASESource {
 	return o
 }
 
-// @method initWithEngine: @abstract Initialize a new point source.
+// Creates a single point in the environment from which sound emanates.
 func (o *PHASESource) InitWithEngine(engine *PHASEEngine) *PHASESource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESourceSelInitWithEngine, engine.Ptr())
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *PHASESource) InitWithEngine(engine *PHASEEngine) *PHASESource {
 	return PHASESourceFromID(_ret)
 }
 
-// @method initWithEngine:shapes: @abstract Initialize a new volumetric source with shapes. @param shapes The shape(s) of the source within the world @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple sources from multiple threads, if required.
+// Creates a voluminous area in the environment from which sound emanates.
 func (o *PHASESource) InitWithEngineShapes(engine *PHASEEngine, shapes *foundation.NSArray[*PHASEShape]) *PHASESource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESourceSelInitWithEngineShapes, engine.Ptr(), shapes.Ptr())
 	if _ret != 0 {

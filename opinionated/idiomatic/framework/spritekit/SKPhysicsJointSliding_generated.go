@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A joint that allows two physics bodies to slide along an axis.
+//
 // PhysicsJointSliding wraps [raw.SKPhysicsJointSliding] with a fluent Go API.
 type PhysicsJointSliding struct {
 	inner *raw.SKPhysicsJointSliding
@@ -35,30 +37,40 @@ func NewPhysicsJointSliding() *PhysicsJointSliding {
 	return &PhysicsJointSliding{inner: raw.SKPhysicsJointSlidingFromID(_id)}
 }
 
+// A Boolean value that indicates whether the sliding joint is restricted so that the objects may only slide a finite distance from the initial anchor point.
+//
 // WithShouldEnableLimits sets the shouldEnableLimits property and returns the receiver for chaining.
 func (x *PhysicsJointSliding) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding {
 	x.inner.SetShouldEnableLimits(shouldEnableLimits)
 	return x
 }
 
+// The smallest distance allowed for the sliding joint.
+//
 // WithLowerDistanceLimit sets the lowerDistanceLimit property and returns the receiver for chaining.
 func (x *PhysicsJointSliding) WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding {
 	x.inner.SetLowerDistanceLimit(lowerDistanceLimit)
 	return x
 }
 
+// The largest distance allowed for the sliding joint.
+//
 // WithUpperDistanceLimit sets the upperDistanceLimit property and returns the receiver for chaining.
 func (x *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding {
 	x.inner.SetUpperDistanceLimit(upperDistanceLimit)
 	return x
 }
 
+// The first body connected by the joint.
+//
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
 func (x *PhysicsJointSliding) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSliding {
 	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
+// The second body connected by the joint.
+//
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
 func (x *PhysicsJointSliding) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSliding {
 	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())

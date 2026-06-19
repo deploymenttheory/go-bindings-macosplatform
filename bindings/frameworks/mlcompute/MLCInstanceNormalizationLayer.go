@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that normalizes all features of one channel.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer
 type MLCInstanceNormalizationLayer struct {
 	MLCLayer
@@ -40,7 +42,7 @@ func MLCInstanceNormalizationLayerFromID(id objc.ID) *MLCInstanceNormalizationLa
 	return o
 }
 
-// @abstract   Create an instance normalization layer @param featureChannelCount The number of feature channels @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @return A new instance normalization layer.
+// Creates an instance normalization layer with the number of feature channels, beta and gamma tensors, and variance epsilon you specify.
 func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceEpsilon(featureChannelCount uint, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCInstanceNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCInstanceNormalizationLayer), _mLCInstanceNormalizationLayerSelLayerWithFeatureChannelCountBetaGammaVarianceEpsilon, featureChannelCount, beta.Ptr(), gamma.Ptr(), varianceEpsilon)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceE
 	return MLCInstanceNormalizationLayerFromID(_ret)
 }
 
-// @abstract   Create an instance normalization layer @param featureChannelCount The number of feature channels @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @param momentum The  momentum value for the running mean and variance computation @return A new instance normalization layer.
+// Creates an instance normalization layer with the number of feature channels, beta and gamma tensors, variance epsilon, and momentum you specify.
 func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32, momentum float32) *MLCInstanceNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCInstanceNormalizationLayer), _mLCInstanceNormalizationLayerSelLayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum, featureChannelCount, beta.Ptr(), gamma.Ptr(), varianceEpsilon, momentum)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceE
 	return MLCInstanceNormalizationLayerFromID(_ret)
 }
 
-// @abstract   Create an instance normalization layer @param featureChannelCount The number of feature channels @param mean The running mean tensor @param variance The running variance tensor @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @param momentum The  momentum value for the running mean and variance computation @return A new instance normalization layer.
+// Creates an instance normalization layer with the number of feature channels, mean, variance, beta and gamma tensors, variance epsilon, and momentum you specify.
 func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, mean *MLCTensor, variance *MLCTensor, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32, momentum float32) *MLCInstanceNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCInstanceNormalizationLayer), _mLCInstanceNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum, featureChannelCount, mean.Ptr(), variance.Ptr(), beta.Ptr(), gamma.Ptr(), varianceEpsilon, momentum)
 	if _ret != 0 {

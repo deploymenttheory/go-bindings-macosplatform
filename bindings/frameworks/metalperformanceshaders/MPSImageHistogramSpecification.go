@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that performs a histogram specification operation on an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramspecification
 type MPSImageHistogramSpecification struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,6 +37,7 @@ func MPSImageHistogramSpecificationFromID(id objc.ID) *MPSImageHistogramSpecific
 	return o
 }
 
+// Initializes a histogram with specific information.
 func (o *MPSImageHistogramSpecification) InitWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *mpsimage.MPSImageHistogramInfo) *MPSImageHistogramSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageHistogramSpecificationSelInitWithDeviceHistogramInfo, device, histogramInfo)
 	if _ret != 0 {
@@ -52,7 +55,7 @@ func (o *MPSImageHistogramSpecification) InitWithCoderDevice(aDecoder *foundatio
 	return MPSImageHistogramSpecificationFromID(_ret)
 }
 
-// @abstract Encode the transform function to a command buffer using a MTLComputeCommandEncoder. The transform function computes the specification lookup table. @discussion The transform function will not begin to execute until after the command buffer has been enqueued and committed. This step will need to be repeated with the new MPSKernel if -copyWithZone:device or -copyWithZone: is called. @param  commandBuffer   A valid MTLCommandBuffer. @param  source          A valid MTLTexture containing the source image for the filter. @param  sourceHistogram A valid MTLBuffer containing the histogram results for the source image.  This filter will use these histogram results to generate the cumulative histogram for equalizing the image.  The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. @param  sourceHistogramOffset   A byte offset into the sourceHistogram MTLBuffer where the histogram starts. Must conform to alignment requirements for [MTLComputeCommandEncoder setBuffer:offset:atIndex:] offset parameter. @param  desiredHistogram    A valid MTLBuffer containing the desired histogram results for the source image. The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. @param  desiredHistogramOffset  A byte offset into the desiredHistogram MTLBuffer where the histogram starts. Must conform to alignment requirements for [MTLComputeCommandEncoder setBuffer:offset:atIndex:] offset parameter.
+// Encodes the transform function to a command buffer using a compute command encoder. The transform function computes the equalization lookup table.
 func (o *MPSImageHistogramSpecification) EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint) {
 	o.Ptr().Send(_mPSImageHistogramSpecificationSelEncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset, commandBuffer, source, sourceHistogram, sourceHistogramOffset, desiredHistogram, desiredHistogramOffset)
 }

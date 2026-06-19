@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages device connections for a provider.
+//
 // ExtensionProvider wraps [raw.CMIOExtensionProvider] with a fluent Go API.
 type ExtensionProvider struct {
 	inner *raw.CMIOExtensionProvider
@@ -31,7 +33,7 @@ func ExtensionProviderFromID(id objc.ID) *ExtensionProvider {
 	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(id)}
 }
 
-// @method initWithSource:clientQueue: @abstract Initialize a provider instance. @param source The provider source. @param clientQueue The client dispatch queue, or nil for the default dispatch queue. @result A CMIOExtensionProvider instance.
+// Creates an extension provider with the specified source and dispatch queue.
 //
 // NewExtensionProviderWithSourceClientQueue creates a new [ExtensionProvider].
 func NewExtensionProviderWithSourceClientQueue(source raw.CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *ExtensionProvider {
@@ -40,21 +42,21 @@ func NewExtensionProviderWithSourceClientQueue(source raw.CMIOExtensionProviderS
 	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(_id)}
 }
 
-// @method addDevice:error: @abstract Add a device to the provider devices array. @param device The device to be added to the provider devices array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Adds a device to a provider.
 //
 // AddDeviceError calls the underlying AddDeviceError.
 func (x *ExtensionProvider) AddDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
 	return x.inner.AddDeviceError(device)
 }
 
-// @method removeDevice:error: @abstract Remove a device from the provider devices array. @param device The device to be removed from the provider devices array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Removes a device from a provider.
 //
 // RemoveDeviceError calls the underlying RemoveDeviceError.
 func (x *ExtensionProvider) RemoveDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
 	return x.inner.RemoveDeviceError(device)
 }
 
-// @method notifyPropertiesChanged: @abstract Notify client(s) of device properties changes. @param propertyStates The dictionary of properties having changed.
+// Notifies connected clients of device property changes.
 //
 // NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
 func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {

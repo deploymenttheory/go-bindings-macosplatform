@@ -50,8 +50,11 @@ func AVBInterfaceMacAddressForInterfaceNamed(anInterfaceName *foundation.NSStrin
 
 // @method		supportedInterfaces @abstract	This method returns an array of BSD interface names of interfaces supporting AVB. An interface is included in this list if it claims it supports AVB. @result		An NSArray of NSStrings, with each string being the BSD name of an interface. This may return nil.
 func AVBInterfaceSupportedInterfaces() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVBInterface), _aVBInterfaceSelSupportedInterfaces)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVBInterface), _aVBInterfaceSelSupportedInterfaces)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @method		isAVBEnabledOnInterfaceNamed: @abstract	This method determines if AVB has been enabled on an interface. @param		anInterfaceName	The BSD name of the interface. @result		YES if AVB is enabled, NO otherwise.

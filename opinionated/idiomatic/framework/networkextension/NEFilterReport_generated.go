@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The report of the data provider’s action on a flow.
+//
 // NEFilterReport wraps [raw.NEFilterReport] with a fluent Go API.
 type NEFilterReport struct {
 	inner *raw.NEFilterReport

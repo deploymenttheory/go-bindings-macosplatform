@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that identifies an asset or collection that syncs through iCloud Photos.
+//
 // CloudIdentifier wraps [raw.PHCloudIdentifier] with a fluent Go API.
 type CloudIdentifier struct {
 	inner *raw.PHCloudIdentifier
@@ -31,7 +33,7 @@ func CloudIdentifierFromID(id objc.ID) *CloudIdentifier {
 	return &CloudIdentifier{inner: raw.PHCloudIdentifierFromID(id)}
 }
 
-// Deserialization
+// Deserializes a cloud identifier from its string value.
 //
 // NewCloudIdentifierWithStringValue creates a new [CloudIdentifier].
 func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {

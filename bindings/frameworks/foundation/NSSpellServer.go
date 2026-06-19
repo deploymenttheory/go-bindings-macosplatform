@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A server that your app uses to provide a spell checker service to other apps running in the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsspellserver
 type NSSpellServer struct {
 	NSObject
@@ -33,16 +35,19 @@ func NSSpellServerFromID(id objc.ID) *NSSpellServer {
 	return o
 }
 
+// Notifies the receiver of a language your spelling checker can check.
 func (o *NSSpellServer) RegisterLanguageByVendor(language *NSString, vendor *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSpellServerSelRegisterLanguageByVendor, language.Ptr(), vendor.Ptr())
 	return _ret
 }
 
+// Indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
 func (o *NSSpellServer) IsWordInUserDictionariesCaseSensitive(word *NSString, flag bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSpellServerSelIsWordInUserDictionariesCaseSensitive, word.Ptr(), flag)
 	return _ret
 }
 
+// Causes the receiver to start listening for spell-checking requests.
 func (o *NSSpellServer) Run() {
 	o.Ptr().Send(_nSSpellServerSelRun)
 }

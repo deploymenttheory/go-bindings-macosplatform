@@ -1,0 +1,1299 @@
+{
+  "schema_version": 1,
+  "framework": "EventKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "EKAlarm": {
+      "doc": "A class that represents an alarm.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekalarm"
+    },
+    "EKCalendar": {
+      "doc": "A class that represents a calendar in EventKit.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekcalendar"
+    },
+    "EKCalendarItem": {
+      "doc": "An abstract superclass for calendar events and reminders.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem"
+    },
+    "EKEvent": {
+      "doc": "A class that represents an event in a calendar.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekevent"
+    },
+    "EKEventStore": {
+      "doc": "An object that accesses a person’s calendar events and reminders and supports the scheduling of new events.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekeventstore"
+    },
+    "EKObject": {
+      "doc": "An abstract superclass for all EventKit classes that have persistent instances.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekobject"
+    },
+    "EKParticipant": {
+      "doc": "A class that represents person, group, or room invited to a calendar event.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekparticipant"
+    },
+    "EKRecurrenceDayOfWeek": {
+      "doc": "A class that represents the day of the week.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek"
+    },
+    "EKRecurrenceEnd": {
+      "doc": "A class that defines the end of a recurrence rule.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekrecurrenceend"
+    },
+    "EKRecurrenceRule": {
+      "doc": "A class that describes the pattern for a recurring event.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule"
+    },
+    "EKReminder": {
+      "doc": "A class that represents a reminder in a calendar.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekreminder"
+    },
+    "EKSource": {
+      "doc": "An abstract superclass that represents the account a calendar belongs to.",
+      "url": "https://developer.apple.com/documentation/eventkit/eksource"
+    },
+    "EKStructuredLocation": {
+      "doc": "A class that specifies a geofence to activate the alarm of a calendar item.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekstructuredlocation"
+    },
+    "EKVirtualConferenceDescriptor": {
+      "doc": "Details about a virtual conference that uses a custom room type.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferencedescriptor"
+    },
+    "EKVirtualConferenceProvider": {
+      "doc": "An object that associates virtual conferencing details with an event object in a user’s calendar.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceprovider"
+    },
+    "EKVirtualConferenceRoomTypeDescriptor": {
+      "doc": "Details about a room where virtual conferences take place.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceroomtypedescriptor"
+    },
+    "EKVirtualConferenceURLDescriptor": {
+      "doc": "Details about how users join a virtual conference, including a title and URL.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceurldescriptor"
+    }
+  },
+  "enums": {
+    "EKAlarmProximity": {
+      "doc": "A value indicating whether an alarm is triggered by entering or exiting a region.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekalarmproximity",
+      "members": {
+        "EKAlarmProximityEnter": {
+          "doc": "The alarm is set to fire when entering a region.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmproximity/enter"
+        },
+        "EKAlarmProximityLeave": {
+          "doc": "The alarm is set to fire when leaving a region.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmproximity/leave"
+        },
+        "EKAlarmProximityNone": {
+          "doc": "The alarm has no proximity trigger.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmproximity/none"
+        }
+      }
+    },
+    "EKAlarmType": {
+      "doc": "A value that specifies what type of action occurs when the alarm triggers.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekalarmtype",
+      "members": {
+        "EKAlarmTypeAudio": {
+          "doc": "The alarm plays a sound.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmtype/audio"
+        },
+        "EKAlarmTypeDisplay": {
+          "doc": "The alarm displays a message.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmtype/display"
+        },
+        "EKAlarmTypeEmail": {
+          "doc": "The alarm sends an email.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmtype/email"
+        },
+        "EKAlarmTypeProcedure": {
+          "doc": "The alarm opens a URL.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekalarmtype/procedure"
+        }
+      }
+    },
+    "EKAuthorizationStatus": {
+      "doc": "The current authorization status for a specific entity type.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus",
+      "members": {
+        "EKAuthorizationStatusAuthorized": {
+          "doc": "The app can access the service.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus/authorized"
+        },
+        "EKAuthorizationStatusDenied": {
+          "doc": "The person explicitly denied access to the service for the app.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus/denied"
+        },
+        "EKAuthorizationStatusFullAccess": {
+          "doc": "The app has both read and write access to the requested entity type.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus/fullaccess"
+        },
+        "EKAuthorizationStatusNotDetermined": {
+          "doc": "The person hasn’t chosen whether the app may access the service.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus/notdetermined"
+        },
+        "EKAuthorizationStatusRestricted": {
+          "doc": "The app isn’t authorized to access the service.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus/restricted"
+        },
+        "EKAuthorizationStatusWriteOnly": {
+          "doc": "The app has write-only access to the requested entity type.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekauthorizationstatus/writeonly"
+        }
+      }
+    },
+    "EKCalendarEventAvailabilityMask": {
+      "doc": "A bitmask indicating the event availability settings that the calendar can support.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask",
+      "members": {
+        "EKCalendarEventAvailabilityBusy": {
+          "doc": "The calendar supports the busy event availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask/busy"
+        },
+        "EKCalendarEventAvailabilityFree": {
+          "doc": "The calendar supports the free event availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask/free"
+        },
+        "EKCalendarEventAvailabilityNone": {
+          "doc": "The calendar does not support event availability settings.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask/ekcalendareventavailabilitynone"
+        },
+        "EKCalendarEventAvailabilityTentative": {
+          "doc": "The calendar supports the tentative event availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask/tentative"
+        },
+        "EKCalendarEventAvailabilityUnavailable": {
+          "doc": "The calendar supports the unavailable event availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask/unavailable"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a calendar event availability mask with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendareventavailabilitymask/init(rawvalue:)"
+        }
+      }
+    },
+    "EKCalendarType": {
+      "doc": "Possible calendar types.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekcalendartype",
+      "members": {
+        "EKCalendarTypeBirthday": {
+          "doc": "A birthday calendar.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendartype/birthday"
+        },
+        "EKCalendarTypeCalDAV": {
+          "doc": "A CalDAV or iCloud calendar.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendartype/caldav"
+        },
+        "EKCalendarTypeExchange": {
+          "doc": "An Exchange calendar.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendartype/exchange"
+        },
+        "EKCalendarTypeLocal": {
+          "doc": "A local calendar.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendartype/local"
+        },
+        "EKCalendarTypeSubscription": {
+          "doc": "A locally subscribed calendar.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekcalendartype/subscription"
+        }
+      }
+    },
+    "EKEntityMask": {
+      "doc": "A bitmask of EKEntityType for specifying multiple entities at once.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekentitymask",
+      "members": {
+        "EKEntityMaskEvent": {
+          "doc": "Represents an event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekentitymask/event"
+        },
+        "EKEntityMaskReminder": {
+          "doc": "Represents a reminder.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekentitymask/reminder"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an entity mask with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekentitymask/init(rawvalue:)"
+        }
+      }
+    },
+    "EKEntityType": {
+      "doc": "The type of entities allowed for a source.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekentitytype",
+      "members": {
+        "EKEntityTypeEvent": {
+          "doc": "Represents an event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekentitytype/event"
+        },
+        "EKEntityTypeReminder": {
+          "doc": "Represents a reminder.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekentitytype/reminder"
+        }
+      }
+    },
+    "EKErrorCode": {
+      "doc": "Error codes for EventKit errors.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekerrorcode"
+    },
+    "EKEventAvailability": {
+      "doc": "The event’s availability setting for scheduling purposes.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability",
+      "members": {
+        "EKEventAvailabilityBusy": {
+          "doc": "The event has a busy availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability/busy"
+        },
+        "EKEventAvailabilityFree": {
+          "doc": "The event has a free availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability/free"
+        },
+        "EKEventAvailabilityNotSupported": {
+          "doc": "Availability settings are not supported by the event’s calendar.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability/notsupported"
+        },
+        "EKEventAvailabilityTentative": {
+          "doc": "The event has a tentative availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability/tentative"
+        },
+        "EKEventAvailabilityUnavailable": {
+          "doc": "The event has an unavailable availability setting.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventavailability/unavailable"
+        }
+      }
+    },
+    "EKEventStatus": {
+      "doc": "The event’s status.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekeventstatus",
+      "members": {
+        "EKEventStatusCanceled": {
+          "doc": "The event is canceled.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventstatus/canceled"
+        },
+        "EKEventStatusConfirmed": {
+          "doc": "The event is confirmed.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventstatus/confirmed"
+        },
+        "EKEventStatusNone": {
+          "doc": "The event has no status.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventstatus/none"
+        },
+        "EKEventStatusTentative": {
+          "doc": "The event is tentative.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventstatus/tentative"
+        }
+      }
+    },
+    "EKParticipantRole": {
+      "doc": "The participant’s role for an event.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekparticipantrole",
+      "members": {
+        "EKParticipantRoleChair": {
+          "doc": "The participant is the chair of the event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantrole/chair"
+        },
+        "EKParticipantRoleNonParticipant": {
+          "doc": "The participant does not have an active role in the event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantrole/nonparticipant"
+        },
+        "EKParticipantRoleOptional": {
+          "doc": "The participant’s attendance is optional.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantrole/optional"
+        },
+        "EKParticipantRoleRequired": {
+          "doc": "The participant’s attendance is required.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantrole/required"
+        },
+        "EKParticipantRoleUnknown": {
+          "doc": "The participant’s role is unknown.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantrole/unknown"
+        }
+      }
+    },
+    "EKParticipantScheduleStatus": {
+      "doc": "The participant’s scheduled status.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus",
+      "members": {
+        "EKParticipantScheduleStatusCannotDeliver": {
+          "doc": "The invitation wasn’t delivered because the system is unsure of how to deliver it.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/cannotdeliver"
+        },
+        "EKParticipantScheduleStatusDelivered": {
+          "doc": "The invitation has been sent and successfully delivered.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/delivered"
+        },
+        "EKParticipantScheduleStatusDeliveryFailed": {
+          "doc": "The invitation wasn’t delivered due to a temporary failure.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/deliveryfailed"
+        },
+        "EKParticipantScheduleStatusNoPrivileges": {
+          "doc": "The invitation wasn’t delivered because of insufficient privileges.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/noprivileges"
+        },
+        "EKParticipantScheduleStatusNone": {
+          "doc": "The invitation hasn’t been sent yet.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/none"
+        },
+        "EKParticipantScheduleStatusPending": {
+          "doc": "The invitation is in the process of being sent.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/pending"
+        },
+        "EKParticipantScheduleStatusRecipientNotAllowed": {
+          "doc": "The invitation wasn’t delivered because scheduling with the participant isn’t allowed.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/recipientnotallowed"
+        },
+        "EKParticipantScheduleStatusRecipientNotRecognized": {
+          "doc": "The invitation wasn’t delivered because the source doesn’t recognize the recipient.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/recipientnotrecognized"
+        },
+        "EKParticipantScheduleStatusSent": {
+          "doc": "The invitation has been sent, but it’s unclear if it was successfully delivered.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantschedulestatus/sent"
+        }
+      }
+    },
+    "EKParticipantStatus": {
+      "doc": "The participant’s attendance status for an event.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus",
+      "members": {
+        "EKParticipantStatusAccepted": {
+          "doc": "The participant has accepted the event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/accepted"
+        },
+        "EKParticipantStatusCompleted": {
+          "doc": "The participant’s event has completed.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/completed"
+        },
+        "EKParticipantStatusDeclined": {
+          "doc": "The participant has declined the event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/declined"
+        },
+        "EKParticipantStatusDelegated": {
+          "doc": "The participant has delegated attendance to another participant.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/delegated"
+        },
+        "EKParticipantStatusInProcess": {
+          "doc": "The participant’s event is currently in process.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/inprocess"
+        },
+        "EKParticipantStatusPending": {
+          "doc": "The participant has yet to respond to the event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/pending"
+        },
+        "EKParticipantStatusTentative": {
+          "doc": "The participant’s attendance status is tentative.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/tentative"
+        },
+        "EKParticipantStatusUnknown": {
+          "doc": "The participant’s attendance status is unknown.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipantstatus/unknown"
+        }
+      }
+    },
+    "EKParticipantType": {
+      "doc": "The type of participant.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekparticipanttype",
+      "members": {
+        "EKParticipantTypeGroup": {
+          "doc": "The participant is a group.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipanttype/group"
+        },
+        "EKParticipantTypePerson": {
+          "doc": "The participant is a person.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipanttype/person"
+        },
+        "EKParticipantTypeResource": {
+          "doc": "The participant is a resource.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipanttype/resource"
+        },
+        "EKParticipantTypeRoom": {
+          "doc": "The participant is a room.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipanttype/room"
+        },
+        "EKParticipantTypeUnknown": {
+          "doc": "The participant’s type is unknown.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekparticipanttype/unknown"
+        }
+      }
+    },
+    "EKRecurrenceFrequency": {
+      "doc": "The frequency for recurrence rules.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencefrequency",
+      "members": {
+        "EKRecurrenceFrequencyDaily": {
+          "doc": "Indicates a daily recurrence rule.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencefrequency/daily"
+        },
+        "EKRecurrenceFrequencyMonthly": {
+          "doc": "Indicates a monthly recurrence rule.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencefrequency/monthly"
+        },
+        "EKRecurrenceFrequencyWeekly": {
+          "doc": "Indicates a weekly recurrence rule.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencefrequency/weekly"
+        },
+        "EKRecurrenceFrequencyYearly": {
+          "doc": "Indicates a yearly recurrence rule.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencefrequency/yearly"
+        }
+      }
+    },
+    "EKReminderPriority": {
+      "doc": "The priority of the reminder.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekreminderpriority",
+      "members": {
+        "EKReminderPriorityHigh": {
+          "doc": "The reminder is high priority.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekreminderpriority/high"
+        },
+        "EKReminderPriorityLow": {
+          "doc": "The reminder is low priority.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekreminderpriority/low"
+        },
+        "EKReminderPriorityMedium": {
+          "doc": "The reminder is medium priority.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekreminderpriority/medium"
+        },
+        "EKReminderPriorityNone": {
+          "doc": "The reminder has no priority set.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekreminderpriority/none"
+        }
+      }
+    },
+    "EKSourceType": {
+      "doc": "The type of source object.",
+      "url": "https://developer.apple.com/documentation/eventkit/eksourcetype",
+      "members": {
+        "EKSourceTypeBirthdays": {
+          "doc": "Represents a birthday source.",
+          "url": "https://developer.apple.com/documentation/eventkit/eksourcetype/birthdays"
+        },
+        "EKSourceTypeCalDAV": {
+          "doc": "Represents a CalDAV or iCloud source.",
+          "url": "https://developer.apple.com/documentation/eventkit/eksourcetype/caldav"
+        },
+        "EKSourceTypeExchange": {
+          "doc": "Represents an Exchange source.",
+          "url": "https://developer.apple.com/documentation/eventkit/eksourcetype/exchange"
+        },
+        "EKSourceTypeLocal": {
+          "doc": "Represents a local source.",
+          "url": "https://developer.apple.com/documentation/eventkit/eksourcetype/local"
+        },
+        "EKSourceTypeMobileMe": {
+          "doc": "Represents a MobileMe source.",
+          "url": "https://developer.apple.com/documentation/eventkit/eksourcetype/mobileme"
+        },
+        "EKSourceTypeSubscribed": {
+          "doc": "Represents a subscribed source.",
+          "url": "https://developer.apple.com/documentation/eventkit/eksourcetype/subscribed"
+        }
+      }
+    },
+    "EKSpan": {
+      "doc": "An object that indicates whether modifications should apply to a single event or all future events of a recurring event.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekspan",
+      "members": {
+        "EKSpanFutureEvents": {
+          "doc": "Modifications to this event instance should also affect future instances of this event.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekspan/futureevents"
+        },
+        "EKSpanThisEvent": {
+          "doc": "Modifications to this event instance should affect only this instance.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekspan/thisevent"
+        }
+      }
+    },
+    "EKWeekday": {
+      "doc": "The day of the week.",
+      "url": "https://developer.apple.com/documentation/eventkit/ekweekday",
+      "members": {
+        "EKFriday": {
+          "doc": "The value for Friday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/ekfriday"
+        },
+        "EKMonday": {
+          "doc": "The value for Monday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/ekmonday"
+        },
+        "EKSaturday": {
+          "doc": "The value for Saturday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/eksaturday"
+        },
+        "EKSunday": {
+          "doc": "The value for Sunday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/eksunday"
+        },
+        "EKThursday": {
+          "doc": "The value for Thursday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/ekthursday"
+        },
+        "EKTuesday": {
+          "doc": "The value for Tuesday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/ektuesday"
+        },
+        "EKWednesday": {
+          "doc": "The value for Wednesday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/ekwednesday"
+        },
+        "EKWeekdayFriday": {
+          "doc": "The value for Friday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/friday"
+        },
+        "EKWeekdayMonday": {
+          "doc": "The value for Monday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/monday"
+        },
+        "EKWeekdaySaturday": {
+          "doc": "The value for Saturday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/saturday"
+        },
+        "EKWeekdaySunday": {
+          "doc": "The value for Sunday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/sunday"
+        },
+        "EKWeekdayThursday": {
+          "doc": "The value for Thursday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/thursday"
+        },
+        "EKWeekdayTuesday": {
+          "doc": "The value for Tuesday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/tuesday"
+        },
+        "EKWeekdayWednesday": {
+          "doc": "The value for Wednesday.",
+          "url": "https://developer.apple.com/documentation/eventkit/ekweekday/wednesday"
+        }
+      }
+    }
+  },
+  "methods": {
+    "EKAlarm": {
+      "+alarmWithAbsoluteDate:": {
+        "doc": "Creates and returns an alarm with an absolute date.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/init(absolutedate:)"
+      },
+      "+alarmWithRelativeOffset:": {
+        "doc": "Creates and returns an alarm with a relative offset.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/init(relativeoffset:)"
+      }
+    },
+    "EKCalendar": {
+      "+calendarForEntityType:eventStore:": {
+        "doc": "Creates a new calendar that can contain the given entity type.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/init(for:eventstore:)"
+      },
+      "+calendarWithEventStore:": {
+        "doc": "Creates and returns a calendar belonging to a specified event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/init(eventstore:)"
+      }
+    },
+    "EKCalendarItem": {
+      "-addAlarm:": {
+        "doc": "Adds an alarm to the receiver.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/addalarm(_:)"
+      },
+      "-addRecurrenceRule:": {
+        "doc": "Adds a recurrence rule to the recurrence rule array.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/addrecurrencerule(_:)"
+      },
+      "-removeAlarm:": {
+        "doc": "Removes an alarm from the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/removealarm(_:)"
+      },
+      "-removeRecurrenceRule:": {
+        "doc": "Removes a recurrence rule from the recurrence rule array.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/removerecurrencerule(_:)"
+      }
+    },
+    "EKEvent": {
+      "+eventWithEventStore:": {
+        "doc": "Creates and returns a new event belonging to a specified event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/init(eventstore:)"
+      },
+      "-compareStartDateWithEvent:": {
+        "doc": "Compares the start date of the receiving event with the start date of another event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/comparestartdate(with:)"
+      },
+      "-refresh": {
+        "doc": "Updates the event’s data with the current information in the Calendar database.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/refresh()"
+      }
+    },
+    "EKEventStore": {
+      "+authorizationStatusForEntityType:": {
+        "doc": "Determines the authorization status for the given entity type.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/authorizationstatus(for:)"
+      },
+      "-calendarItemWithIdentifier:": {
+        "doc": "Locates a reminder or the first occurrence of an event with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/calendaritem(withidentifier:)"
+      },
+      "-calendarItemsWithExternalIdentifier:": {
+        "doc": "Locates all reminders or the first occurrences of all events with the specified external identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/calendaritems(withexternalidentifier:)"
+      },
+      "-calendarWithIdentifier:": {
+        "doc": "Locates a calendar with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/calendar(withidentifier:)"
+      },
+      "-calendarsForEntityType:": {
+        "doc": "Identifies the calendars that support a given entity type, such as reminders or events.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/calendars(for:)"
+      },
+      "-cancelFetchRequest:": {
+        "doc": "Cancels the request to fetch reminders.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/cancelfetchrequest(_:)"
+      },
+      "-commit:": {
+        "doc": "Commits all unsaved changes to the event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/commit()"
+      },
+      "-defaultCalendarForNewReminders": {
+        "doc": "Identifies the default calendar for adding reminders to, as specified by user settings.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/defaultcalendarfornewreminders()"
+      },
+      "-enumerateEventsMatchingPredicate:usingBlock:": {
+        "doc": "Finds all events that match a given predicate and calls a given callback for each event found.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/enumerateevents(matching:using:)"
+      },
+      "-eventWithIdentifier:": {
+        "doc": "Locates the first occurrence of an event with a given identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/event(withidentifier:)"
+      },
+      "-eventsMatchingPredicate:": {
+        "doc": "Finds all events that match a given predicate.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/events(matching:)"
+      },
+      "-fetchRemindersMatchingPredicate:completion:": {
+        "doc": "Fetches reminders that match a given predicate.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/fetchreminders(matching:completion:)"
+      },
+      "-init": {
+        "doc": "Creates a new event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/init()"
+      },
+      "-initWithAccessToEntityTypes:": {
+        "doc": "Initializes access to the event store with support for the given entity type.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/initwithaccesstoentitytypes:"
+      },
+      "-initWithSources:": {
+        "doc": "Creates an event store that contains data for the specified sources.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/init(sources:)"
+      },
+      "-predicateForCompletedRemindersWithCompletionDateStarting:ending:calendars:": {
+        "doc": "Creates a predicate to identify all completed reminders that occur within a given date range.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/predicateforcompletedreminders(withcompletiondatestarting:ending:calendars:)"
+      },
+      "-predicateForEventsWithStartDate:endDate:calendars:": {
+        "doc": "Creates a predicate to identify events that occur within a given date range.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/predicateforevents(withstart:end:calendars:)"
+      },
+      "-predicateForIncompleteRemindersWithDueDateStarting:ending:calendars:": {
+        "doc": "Creates a predicate to identify all incomplete reminders that occur within a given date range.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/predicateforincompletereminders(withduedatestarting:ending:calendars:)"
+      },
+      "-predicateForRemindersInCalendars:": {
+        "doc": "Creates a predicate to identify all reminders in a collection of calendars.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/predicateforreminders(in:)"
+      },
+      "-refreshSourcesIfNecessary": {
+        "doc": "Pulls new data from remote sources, if necessary.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/refreshsourcesifnecessary()"
+      },
+      "-removeCalendar:commit:error:": {
+        "doc": "Removes a calendar from the event store by either committing or batching the changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/removecalendar(_:commit:)"
+      },
+      "-removeEvent:span:commit:error:": {
+        "doc": "Removes an event or recurring events from the event store by either committing or batching the changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/remove(_:span:commit:)"
+      },
+      "-removeEvent:span:error:": {
+        "doc": "Removes an event from the event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/remove(_:span:)"
+      },
+      "-removeReminder:commit:error:": {
+        "doc": "Removes a reminder from the event store by either committing or batching the changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/remove(_:commit:)"
+      },
+      "-requestAccessToEntityType:completion:": {
+        "doc": "Prompts the person using your app to grant or deny access to event or reminder data.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/requestaccess(to:completion:)"
+      },
+      "-requestFullAccessToEventsWithCompletion:": {
+        "doc": "Prompts people to grant or deny read and write access to event data.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/requestfullaccesstoevents(completion:)"
+      },
+      "-requestFullAccessToRemindersWithCompletion:": {
+        "doc": "Prompts people to grant or deny read and write access to reminders.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/requestfullaccesstoreminders(completion:)"
+      },
+      "-requestWriteOnlyAccessToEventsWithCompletion:": {
+        "doc": "Prompts the person using your app to grant or deny write access to event data.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/requestwriteonlyaccesstoevents(completion:)"
+      },
+      "-reset": {
+        "doc": "Reverts the event store to its saved state.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/reset()"
+      },
+      "-saveCalendar:commit:error:": {
+        "doc": "Saves a calendar to the event store by either committing or batching the changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/savecalendar(_:commit:)"
+      },
+      "-saveEvent:span:commit:error:": {
+        "doc": "Saves an event or recurring events to the event store by either committing or batching the changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/save(_:span:commit:)"
+      },
+      "-saveEvent:span:error:": {
+        "doc": "Saves changes to an event permanently.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/save(_:span:)"
+      },
+      "-saveReminder:commit:error:": {
+        "doc": "Saves changes to a reminder by either committing or batching the changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/save(_:commit:)"
+      },
+      "-sourceWithIdentifier:": {
+        "doc": "Locates an event source with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/source(withidentifier:)"
+      }
+    },
+    "EKObject": {
+      "-refresh": {
+        "doc": "Merges changes to this object with the latest saved values.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekobject/refresh()"
+      },
+      "-reset": {
+        "doc": "Returns this object to its saved state.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekobject/reset()"
+      },
+      "-rollback": {
+        "doc": "Rolls back the property values of this object to its original state when it was first fetched.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekobject/rollback()"
+      }
+    },
+    "EKParticipant": {
+      "-ABPersonInAddressBook:": {
+        "doc": "Returns the address book record that represents the participant.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/abperson(in:)"
+      },
+      "-ABRecordWithAddressBook:": {
+        "doc": "Returns the address book record that represents the participant.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/abrecord(with:)"
+      }
+    },
+    "EKRecurrenceDayOfWeek": {
+      "+dayOfWeek:": {
+        "doc": "Creates and returns a day of the week with a given day.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek/init(_:)"
+      },
+      "+dayOfWeek:weekNumber:": {
+        "doc": "Creates and returns an autoreleased day of the week with a given day and week number.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek/init(_:weeknumber:)"
+      },
+      "-initWithDayOfTheWeek:weekNumber:": {
+        "doc": "Initializes and returns a day of the week with a given day and week number.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek/init(dayoftheweek:weeknumber:)"
+      }
+    },
+    "EKRecurrenceEnd": {
+      "+recurrenceEndWithEndDate:": {
+        "doc": "Initializes and returns a date-based recurrence end with a given end date.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrenceend/init(end:)"
+      },
+      "+recurrenceEndWithOccurrenceCount:": {
+        "doc": "Initializes and returns a count-based recurrence end with a given maximum occurrence count.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrenceend/init(occurrencecount:)"
+      }
+    },
+    "EKRecurrenceRule": {
+      "-initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:": {
+        "doc": "Initializes and returns a recurrence rule with a given frequency and additional scheduling information.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/init(recurrencewith:interval:daysoftheweek:daysofthemonth:monthsoftheyear:weeksoftheyear:daysoftheyear:setpositions:end:)"
+      },
+      "-initRecurrenceWithFrequency:interval:end:": {
+        "doc": "Initializes and returns a simple recurrence rule with a given frequency, interval, and end.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/init(recurrencewith:interval:end:)"
+      }
+    },
+    "EKReminder": {
+      "+reminderWithEventStore:": {
+        "doc": "Creates and returns a new reminder in the given event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekreminder/init(eventstore:)"
+      }
+    },
+    "EKSource": {
+      "-calendarsForEntityType:": {
+        "doc": "Returns the calendars that belong to this source object that support a particular entity type.",
+        "url": "https://developer.apple.com/documentation/eventkit/eksource/calendars(for:)"
+      }
+    },
+    "EKStructuredLocation": {
+      "+locationWithMapItem:": {
+        "doc": "Creates a new structured location with the specified map item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekstructuredlocation/init(mapitem:)"
+      },
+      "+locationWithTitle:": {
+        "doc": "Creates a new structured location with the specified title.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekstructuredlocation/init(title:)"
+      }
+    },
+    "EKVirtualConferenceDescriptor": {
+      "-initWithTitle:URLDescriptors:conferenceDetails:": {
+        "doc": "Creates an object that describes a virtual conference, including a name and URL to join the conference.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferencedescriptor/init(title:urldescriptors:conferencedetails:)-4yf7"
+      }
+    },
+    "EKVirtualConferenceProvider": {
+      "-fetchAvailableRoomTypesWithCompletionHandler:": {
+        "doc": "Provides an array of room types where events take place.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceprovider/fetchavailableroomtypes(completionhandler:)"
+      },
+      "-fetchVirtualConferenceForIdentifier:completionHandler:": {
+        "doc": "Provides details about a virtual conference that takes place in a room the user selects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceprovider/fetchvirtualconference(identifier:completionhandler:)"
+      }
+    },
+    "EKVirtualConferenceRoomTypeDescriptor": {
+      "-initWithTitle:identifier:": {
+        "doc": "Creates an object that describes a location where a virtual conference takes place.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceroomtypedescriptor/init(title:identifier:)"
+      }
+    },
+    "EKVirtualConferenceURLDescriptor": {
+      "-initWithTitle:URL:": {
+        "doc": "Creates a URL descriptor with the given title and URL.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceurldescriptor/init(title:url:)-8l9d9"
+      }
+    }
+  },
+  "properties": {
+    "EKAlarm": {
+      "absoluteDate": {
+        "doc": "The absolute date for the alarm.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/absolutedate"
+      },
+      "emailAddress": {
+        "doc": "The recipient of an email to send when the alarm triggers.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/emailaddress"
+      },
+      "proximity": {
+        "doc": "A value indicating how a location-based alarm is triggered.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/proximity"
+      },
+      "relativeOffset": {
+        "doc": "The offset from the start of an event, at which the alarm fires.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/relativeoffset"
+      },
+      "soundName": {
+        "doc": "The name of the sound to play when the alarm triggers.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/soundname"
+      },
+      "structuredLocation": {
+        "doc": "The location to trigger an alarm.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/structuredlocation"
+      },
+      "type": {
+        "doc": "The type of action to trigger when the alarm fires.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/type"
+      },
+      "url": {
+        "doc": "The URL to open when the alarm triggers.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekalarm/url"
+      }
+    },
+    "EKCalendar": {
+      "CGColor": {
+        "doc": "The calendar’s color.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/cgcolor"
+      },
+      "allowedEntityTypes": {
+        "doc": "The entity types this calendar can contain.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/allowedentitytypes"
+      },
+      "allowsContentModifications": {
+        "doc": "A Boolean value that indicates whether you can add, edit, and delete items in the calendar.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/allowscontentmodifications"
+      },
+      "calendarIdentifier": {
+        "doc": "A unique identifier for the calendar.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/calendaridentifier"
+      },
+      "color": {
+        "doc": "The calendar’s color.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/color"
+      },
+      "immutable": {
+        "doc": "A Boolean value indicating whether the calendar’s properties can be edited or deleted.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/isimmutable"
+      },
+      "source": {
+        "doc": "The source object representing the account to which this calendar belongs.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/source"
+      },
+      "subscribed": {
+        "doc": "A Boolean value indicating whether the calendar is a subscribed calendar.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/issubscribed"
+      },
+      "supportedEventAvailabilities": {
+        "doc": "The event availability settings supported by this calendar, as indicated by a bitmask.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/supportedeventavailabilities"
+      },
+      "title": {
+        "doc": "The calendar’s title.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/title"
+      },
+      "type": {
+        "doc": "The calendar’s type.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendar/type"
+      }
+    },
+    "EKCalendarItem": {
+      "URL": {
+        "doc": "The URL for the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/url"
+      },
+      "UUID": {
+        "doc": "The calendar item’s unique identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/uuid"
+      },
+      "alarms": {
+        "doc": "The alarms associated with the calendar item, as an array of EKAlarm objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/alarms"
+      },
+      "attendees": {
+        "doc": "The attendees associated with the calendar item, as an array of EKParticipant objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/attendees"
+      },
+      "calendar": {
+        "doc": "The calendar for the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/calendar"
+      },
+      "calendarItemExternalIdentifier": {
+        "doc": "The calendar item’s external identifier as provided by the calendar server.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/calendaritemexternalidentifier"
+      },
+      "calendarItemIdentifier": {
+        "doc": "The calendar item’s unique identifier.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/calendaritemidentifier"
+      },
+      "creationDate": {
+        "doc": "The date that this calendar item was created.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/creationdate"
+      },
+      "hasAlarms": {
+        "doc": "A Boolean value that indicates whether the calendar item has alarms.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/hasalarms"
+      },
+      "hasAttendees": {
+        "doc": "A Boolean value that indicates whether the calendar item has attendees.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/hasattendees"
+      },
+      "hasNotes": {
+        "doc": "A Boolean value that indicates whether the calendar item has notes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/hasnotes"
+      },
+      "hasRecurrenceRules": {
+        "doc": "A Boolean value that indicates whether the calendar item has recurrence rules.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/hasrecurrencerules"
+      },
+      "lastModifiedDate": {
+        "doc": "The date that the calendar item was last modified.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/lastmodifieddate"
+      },
+      "location": {
+        "doc": "The location associated with the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/location"
+      },
+      "notes": {
+        "doc": "The notes associated with the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/notes"
+      },
+      "recurrenceRules": {
+        "doc": "The recurrence rules for the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/recurrencerules"
+      },
+      "timeZone": {
+        "doc": "The time zone for the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/timezone"
+      },
+      "title": {
+        "doc": "The title for the calendar item.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekcalendaritem/title"
+      }
+    },
+    "EKEvent": {
+      "allDay": {
+        "doc": "A Boolean value that indicates whether the event is an all-day event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/isallday"
+      },
+      "availability": {
+        "doc": "The availability setting for the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/availability"
+      },
+      "birthdayContactIdentifier": {
+        "doc": "The contact identifier of the person for this birthday event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/birthdaycontactidentifier"
+      },
+      "birthdayPersonID": {
+        "doc": "The Address Book framework record identifier of the person for this birthday event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/birthdaypersonid"
+      },
+      "birthdayPersonUniqueID": {
+        "doc": "The Address Book framework record identifier of the person for this birthday event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/birthdaypersonuniqueid"
+      },
+      "endDate": {
+        "doc": "The end date for the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/enddate"
+      },
+      "eventIdentifier": {
+        "doc": "A unique identifier for the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/eventidentifier"
+      },
+      "isDetached": {
+        "doc": "A Boolean value that indicates whether an event is a detached instance of a repeating event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/isdetached"
+      },
+      "occurrenceDate": {
+        "doc": "The original occurrence date of an event if it is part of a recurring series.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/occurrencedate"
+      },
+      "organizer": {
+        "doc": "The organizer associated with the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/organizer"
+      },
+      "startDate": {
+        "doc": "The start date of the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/startdate"
+      },
+      "status": {
+        "doc": "The status of the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/status"
+      },
+      "structuredLocation": {
+        "doc": "The event’s location with a potential geocoordinate.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekevent/structuredlocation"
+      }
+    },
+    "EKEventStore": {
+      "EKEventStore.EventStoreChanged": {
+        "doc": "A notification posted when changes are made to the Calendar or Reminders database.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/eventstorechanged"
+      },
+      "calendars": {
+        "doc": "The calendars associated with the event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/calendars"
+      },
+      "defaultCalendarForNewEvents": {
+        "doc": "The calendar that events are added to by default, as specified by user settings.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/defaultcalendarfornewevents"
+      },
+      "delegateSources": {
+        "doc": "The event sources delegated to the person using your app.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/delegatesources"
+      },
+      "eventStoreIdentifier": {
+        "doc": "The unique identifier for the event store.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/eventstoreidentifier"
+      },
+      "sources": {
+        "doc": "An unordered array of objects that represent accounts that contain calendars.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekeventstore/sources"
+      }
+    },
+    "EKObject": {
+      "hasChanges": {
+        "doc": "Returns whether this object or any of the objects it contains has uncommitted changes.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekobject/haschanges"
+      },
+      "new": {
+        "doc": "A Boolean value that indicates whether this object has ever been saved.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekobject/isnew"
+      }
+    },
+    "EKParticipant": {
+      "URL": {
+        "doc": "The URL representing this participant.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/url"
+      },
+      "contactPredicate": {
+        "doc": "A predicate to use with the Contacts framework to retrieve the corresponding contact instance.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/contactpredicate"
+      },
+      "currentUser": {
+        "doc": "A Boolean value indicating whether this participant represents the owner of this account.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/iscurrentuser"
+      },
+      "name": {
+        "doc": "The participant’s name.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/name"
+      },
+      "participantRole": {
+        "doc": "The participant’s role in the event.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/participantrole"
+      },
+      "participantStatus": {
+        "doc": "The participant’s attendance status.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/participantstatus"
+      },
+      "participantType": {
+        "doc": "The participant’s type.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekparticipant/participanttype"
+      }
+    },
+    "EKRecurrenceDayOfWeek": {
+      "dayOfTheWeek": {
+        "doc": "The day of the week.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek/dayoftheweek"
+      },
+      "weekNumber": {
+        "doc": "The week number of the day of the week.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek/weeknumber"
+      }
+    },
+    "EKRecurrenceEnd": {
+      "endDate": {
+        "doc": "The end date of the recurrence end, or nil if the recurrence end is count-based.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrenceend/enddate"
+      },
+      "occurrenceCount": {
+        "doc": "The occurrence count of the recurrence end, or 0 if the recurrence end is date-based.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrenceend/occurrencecount"
+      }
+    },
+    "EKRecurrenceRule": {
+      "calendarIdentifier": {
+        "doc": "The identifier for the recurrence rule’s calendar.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/calendaridentifier"
+      },
+      "daysOfTheMonth": {
+        "doc": "The days of the month associated with the recurrence rule, as an array of NSNumber objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/daysofthemonth"
+      },
+      "daysOfTheWeek": {
+        "doc": "The days of the week associated with the recurrence rule, as an array of EKRecurrenceDayOfWeek objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/daysoftheweek"
+      },
+      "daysOfTheYear": {
+        "doc": "The days of the year associated with the recurrence rule, as an array of NSNumber objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/daysoftheyear"
+      },
+      "firstDayOfTheWeek": {
+        "doc": "Indicates which day of the week the recurrence rule treats as the first day of the week.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/firstdayoftheweek"
+      },
+      "frequency": {
+        "doc": "The frequency of the recurrence rule.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/frequency"
+      },
+      "interval": {
+        "doc": "Specifies how often the recurrence rule repeats over the unit of time indicated by its frequency.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/interval"
+      },
+      "monthsOfTheYear": {
+        "doc": "The months of the year associated with the recurrence rule, as an array of NSNumber objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/monthsoftheyear"
+      },
+      "recurrenceEnd": {
+        "doc": "Indicates when the recurrence rule ends.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/recurrenceend"
+      },
+      "setPositions": {
+        "doc": "An array of ordinal numbers that filters which recurrences to include in the recurrence rule’s frequency.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/setpositions"
+      },
+      "weeksOfTheYear": {
+        "doc": "The weeks of the year associated with the recurrence rule, as an array of NSNumber objects.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekrecurrencerule/weeksoftheyear"
+      }
+    },
+    "EKReminder": {
+      "completed": {
+        "doc": "A Boolean value determining whether or not the reminder is marked completed.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekreminder/iscompleted"
+      },
+      "completionDate": {
+        "doc": "The date on which the reminder was completed.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekreminder/completiondate"
+      },
+      "dueDateComponents": {
+        "doc": "The date by which the reminder should be completed.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekreminder/duedatecomponents"
+      },
+      "priority": {
+        "doc": "The reminder’s priority.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekreminder/priority"
+      },
+      "startDateComponents": {
+        "doc": "The start date of the task.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekreminder/startdatecomponents"
+      }
+    },
+    "EKSource": {
+      "calendars": {
+        "doc": "The calendars that belong to this source object.",
+        "url": "https://developer.apple.com/documentation/eventkit/eksource/calendars"
+      },
+      "sourceIdentifier": {
+        "doc": "A unique identifier for the source object.",
+        "url": "https://developer.apple.com/documentation/eventkit/eksource/sourceidentifier"
+      },
+      "sourceType": {
+        "doc": "The type of this source object.",
+        "url": "https://developer.apple.com/documentation/eventkit/eksource/sourcetype"
+      },
+      "title": {
+        "doc": "The name of this source object.",
+        "url": "https://developer.apple.com/documentation/eventkit/eksource/title"
+      }
+    },
+    "EKStructuredLocation": {
+      "geoLocation": {
+        "doc": "The core location.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekstructuredlocation/geolocation"
+      },
+      "radius": {
+        "doc": "A minimum distance from the core location that would trigger the alarm or reminder.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekstructuredlocation/radius"
+      },
+      "title": {
+        "doc": "The title of the location.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekstructuredlocation/title"
+      }
+    },
+    "EKVirtualConferenceDescriptor": {
+      "URLDescriptors": {
+        "doc": "An array that contains objects with details about where to join the virtual conference.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferencedescriptor/urldescriptors"
+      },
+      "conferenceDetails": {
+        "doc": "Additional information about the conference that users may find helpful.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferencedescriptor/conferencedetails"
+      },
+      "title": {
+        "doc": "The user-visible name of the virtual conference.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferencedescriptor/title"
+      }
+    },
+    "EKVirtualConferenceRoomTypeDescriptor": {
+      "identifier": {
+        "doc": "A unique string you choose that identifies the room.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceroomtypedescriptor/identifier"
+      },
+      "title": {
+        "doc": "The user-visible name of a room where virtual conferences take place, such as Personal Room or Team Room.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceroomtypedescriptor/title"
+      }
+    },
+    "EKVirtualConferenceURLDescriptor": {
+      "URL": {
+        "doc": "The URL that users open to join a virtual conference.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceurldescriptor/url"
+      },
+      "title": {
+        "doc": "The user-visible name of a room where virtual conferences take place, such as Personal Room or Team Room.",
+        "url": "https://developer.apple.com/documentation/eventkit/ekvirtualconferenceurldescriptor/title"
+      }
+    }
+  }
+}

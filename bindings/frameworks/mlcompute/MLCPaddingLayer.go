@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that pads a tensor with the padding sizes you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer
 type MLCPaddingLayer struct {
 	MLCLayer
@@ -39,36 +41,36 @@ func MLCPaddingLayerFromID(id objc.ID) *MLCPaddingLayer {
 	return o
 }
 
-// @abstract   Create a padding layer with reflection padding @param      padding  The padding sizes. @return     A new padding layer
+// Creates a padding layer with the reflection padding sizes you specify.
 func MLCPaddingLayerLayerWithReflectionPadding(padding *foundation.NSArray[*foundation.NSNumber]) *MLCPaddingLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithReflectionPadding, padding)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithReflectionPadding, padding.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
-// @abstract   Create a padding layer with symmetric padding @param      padding  The padding sizes. @return     A new padding layer
+// Creates a padding layer with the symmetric padding sizes you specify.
 func MLCPaddingLayerLayerWithSymmetricPadding(padding *foundation.NSArray[*foundation.NSNumber]) *MLCPaddingLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithSymmetricPadding, padding)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithSymmetricPadding, padding.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
-// @abstract   Create a padding layer with zero padding @param      padding  The padding sizes. @return     A new padding layer
+// Creates a padding layer with the zero padding sizes you specify.
 func MLCPaddingLayerLayerWithZeroPadding(padding *foundation.NSArray[*foundation.NSNumber]) *MLCPaddingLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithZeroPadding, padding)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithZeroPadding, padding.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
-// @abstract   Create a padding layer with constant padding @param      padding                 The padding sizes. @param      constantValue   The constant value to pad the source tensor. @return     A new padding layer
+// Creates a padding layer with the constant padding sizes and constant valu you specify.
 func MLCPaddingLayerLayerWithConstantPaddingConstantValue(padding *foundation.NSArray[*foundation.NSNumber], constantValue float32) *MLCPaddingLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithConstantPaddingConstantValue, padding, constantValue)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithConstantPaddingConstantValue, padding.Ptr(), constantValue)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A definition for a deformation of nodes that conform to SKWarpable.
+//
 // WarpGeometry wraps [raw.SKWarpGeometry] with a fluent Go API.
 type WarpGeometry struct {
 	inner *raw.SKWarpGeometry

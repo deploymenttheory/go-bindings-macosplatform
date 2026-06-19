@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of options to use with a send operation.
+//
 // SyncEngineSendChangesOptions wraps [raw.CKSyncEngineSendChangesOptions] with a fluent Go API.
 type SyncEngineSendChangesOptions struct {
 	inner *raw.CKSyncEngineSendChangesOptions
@@ -29,7 +31,7 @@ func SyncEngineSendChangesOptionsFromID(id objc.ID) *SyncEngineSendChangesOption
 	return &SyncEngineSendChangesOptions{inner: raw.CKSyncEngineSendChangesOptionsFromID(id)}
 }
 
-// Initializes a set of options with the specific scope. If no scope is provided, the default scope will include everything.
+// Initializes a set of options with the specific scope.
 //
 // NewSyncEngineSendChangesOptionsWithScope creates a new [SyncEngineSendChangesOptions].
 func NewSyncEngineSendChangesOptionsWithScope(scope *raw.CKSyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
@@ -46,7 +48,7 @@ func (x *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesSco
 	return x
 }
 
-// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
+// The operation group to use for the underlying CloudKit operations.
 //
 // WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
 func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {

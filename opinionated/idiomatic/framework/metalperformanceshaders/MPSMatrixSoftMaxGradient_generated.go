@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A gradient softmax kernel that operates on matrices.
+//
 // MatrixSoftMaxGradient wraps [raw.MPSMatrixSoftMaxGradient] with a fluent Go API.
 type MatrixSoftMaxGradient struct {
 	inner *raw.MPSMatrixSoftMaxGradient
@@ -108,7 +110,7 @@ func (x *MatrixSoftMaxGradient) WithBatchSize(batchSize uint) *MatrixSoftMaxGrad
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixSoftMaxGradient {
@@ -116,7 +118,7 @@ func (x *MatrixSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *M
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithLabel(label string) *MatrixSoftMaxGradient {

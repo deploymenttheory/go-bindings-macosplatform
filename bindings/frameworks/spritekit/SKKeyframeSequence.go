@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that performs interpolation between values specified at different times (keyframes).
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skkeyframesequence
 type SKKeyframeSequence struct {
 	foundation.NSObject
@@ -46,14 +48,16 @@ func SKKeyframeSequenceFromID(id objc.ID) *SKKeyframeSequence {
 	return o
 }
 
+// Initializes a keyframe sequence with an initial set of values and times.
 func (o *SKKeyframeSequence) InitWithKeyframeValuesTimes(values *foundation.NSArray[objc.ID], times *foundation.NSArray[*foundation.NSNumber]) *SKKeyframeSequence {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelInitWithKeyframeValuesTimes, values, times)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelInitWithKeyframeValuesTimes, values.Ptr(), times.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
+// Initializes a new keyframe sequence.
 func (o *SKKeyframeSequence) InitWithCapacity(numItems uint) *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelInitWithCapacity, numItems)
 	if _ret != 0 {
@@ -71,45 +75,55 @@ func (o *SKKeyframeSequence) InitWithCoder(aDecoder *foundation.NSCoder) *SKKeyf
 	return SKKeyframeSequenceFromID(_ret)
 }
 
+// The number of keyframes in the sequence.
 func (o *SKKeyframeSequence) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _sKKeyframeSequenceSelCount)
 	return _ret
 }
 
+// Adds a keyframe to the sequence.
 func (o *SKKeyframeSequence) AddKeyframeValueTime(value objc.ID, time_ float64) {
 	o.Ptr().Send(_sKKeyframeSequenceSelAddKeyframeValueTime, value, time_)
 }
 
+// Removes the last value in the sequence.
 func (o *SKKeyframeSequence) RemoveLastKeyframe() {
 	o.Ptr().Send(_sKKeyframeSequenceSelRemoveLastKeyframe)
 }
 
+// Removes a keyframe from the sequence.
 func (o *SKKeyframeSequence) RemoveKeyframeAtIndex(index uint) {
 	o.Ptr().Send(_sKKeyframeSequenceSelRemoveKeyframeAtIndex, index)
 }
 
+// Changes the value for a specific keyframe.
 func (o *SKKeyframeSequence) SetKeyframeValueForIndex(value objc.ID, index uint) {
 	o.Ptr().Send(_sKKeyframeSequenceSelSetKeyframeValueForIndex, value, index)
 }
 
+// Changes the time for a specific keyframe.
 func (o *SKKeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index uint) {
 	o.Ptr().Send(_sKKeyframeSequenceSelSetKeyframeTimeForIndex, time_, index)
 }
 
+// Replaces a keyframe in the sequence with a new keyframe.
 func (o *SKKeyframeSequence) SetKeyframeValueTimeForIndex(value objc.ID, time_ float64, index uint) {
 	o.Ptr().Send(_sKKeyframeSequenceSelSetKeyframeValueTimeForIndex, value, time_, index)
 }
 
+// Gets the value for a keyframe in the sequence.
 func (o *SKKeyframeSequence) GetKeyframeValueForIndex(index uint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelGetKeyframeValueForIndex, index)
 	return _ret
 }
 
+// Gets the time for a keyframe in the sequence.
 func (o *SKKeyframeSequence) GetKeyframeTimeForIndex(index uint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sKKeyframeSequenceSelGetKeyframeTimeForIndex, index)
 	return _ret
 }
 
+// Calculates the sample at a particular time.
 func (o *SKKeyframeSequence) SampleAtTime(time_ float64) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelSampleAtTime, time_)
 	return _ret

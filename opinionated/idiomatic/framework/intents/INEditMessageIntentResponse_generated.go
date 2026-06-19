@@ -37,6 +37,8 @@ func NewEditMessageIntentResponseWithCodeUserActivity(code INEditMessageIntentRe
 	return &EditMessageIntentResponse{inner: raw.INEditMessageIntentResponseFromID(_id)}
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *EditMessageIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *EditMessageIntentResponse {
 	x.inner.INIntentResponse.SetUserActivity(userActivity)

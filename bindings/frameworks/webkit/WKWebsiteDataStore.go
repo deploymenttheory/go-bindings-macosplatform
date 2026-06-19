@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages cookies, disk and memory caches, and other types of data for a web view.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebsitedatastore
 type WKWebsiteDataStore struct {
 	foundation.NSObject
@@ -47,6 +49,7 @@ func WKWebsiteDataStoreFromID(id objc.ID) *WKWebsiteDataStore {
 	return o
 }
 
+// Returns the default data store, which stores data persistently to disk.
 func WKWebsiteDataStoreDefaultDataStore() *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDefaultDataStore)
 	if _ret != 0 {
@@ -55,7 +58,7 @@ func WKWebsiteDataStoreDefaultDataStore() *WKWebsiteDataStore {
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
-// @abstract Returns a new non-persistent data store. @discussion If a WKWebView is associated with a non-persistent data store, no data will be written to the file system. This is useful for implementing "private browsing" in a web view.
+// Creates a new data store object that stores website data in memory, and doesn’t write that data to disk.
 func WKWebsiteDataStoreNonPersistentDataStore() *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelNonPersistentDataStore)
 	if _ret != 0 {
@@ -64,13 +67,16 @@ func WKWebsiteDataStoreNonPersistentDataStore() *WKWebsiteDataStore {
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
-// @abstract Returns a set of all available website data types.
+// Returns the set of all the available data types.
 func WKWebsiteDataStoreAllWebsiteDataTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelAllWebsiteDataTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelAllWebsiteDataTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
-// @abstract Fetches data records containing the given website data types. @param dataTypes The website data types to fetch records for. @param completionHandler A block to invoke when the data records have been fetched.
+// Fetches the specified types of records from the data store.
 func (o *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSArray[*WKWebsiteDataRecord])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -82,10 +88,10 @@ func (o *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes 
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataRecordsOfTypesCompletionHandler, dataTypes, __block_completionHandler)
+	o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataRecordsOfTypesCompletionHandler, dataTypes.Ptr(), __block_completionHandler)
 }
 
-// @abstract Removes website data of the given types for the given data records. @param dataTypes The website data types that should be removed. @param dataRecords The website data records to delete website data for. @param completionHandler A block to invoke when the website data for the records has been removed.
+// Removes the specified types of website data from one or more data records.
 func (o *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], dataRecords *foundation.NSArray[*WKWebsiteDataRecord], completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -94,10 +100,10 @@ func (o *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(da
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesForDataRecordsCompletionHandler, dataTypes, dataRecords.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesForDataRecordsCompletionHandler, dataTypes.Ptr(), dataRecords.Ptr(), __block_completionHandler)
 }
 
-// @abstract Removes all website data of the given types that has been modified since the given date. @param dataTypes The website data types that should be removed. @param date A date. All website data modified after this date will be removed. @param completionHandler A block to invoke when the website data has been removed.
+// Removes website data that changed after the specified date.
 func (o *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], date *foundation.NSDate, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -106,7 +112,7 @@ func (o *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dat
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesModifiedSinceCompletionHandler, dataTypes, date.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesModifiedSinceCompletionHandler, dataTypes.Ptr(), date.Ptr(), __block_completionHandler)
 }
 
 func (o *WKWebsiteDataStore) FetchDataOfTypesCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSData, unsafe.Pointer)) {
@@ -120,7 +126,7 @@ func (o *WKWebsiteDataStore) FetchDataOfTypesCompletionHandler(dataTypes *founda
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataOfTypesCompletionHandler, dataTypes, __block_completionHandler)
+	o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataOfTypesCompletionHandler, dataTypes.Ptr(), __block_completionHandler)
 }
 
 func (o *WKWebsiteDataStore) RestoreDataCompletionHandler(data *foundation.NSData, completionHandler func(unsafe.Pointer)) {
@@ -134,7 +140,7 @@ func (o *WKWebsiteDataStore) RestoreDataCompletionHandler(data *foundation.NSDat
 	o.Ptr().Send(_wKWebsiteDataStoreSelRestoreDataCompletionHandler, data.Ptr(), __block_completionHandler)
 }
 
-// @abstract Get a persistent data store. @param identifier An identifier that is used to uniquely identify the data store. @discussion If a data store with this identifier does not exist yet, it will be created. Throws exception if identifier is 0.
+// Returns the persistent data store with the unique identifier you provide.
 func WKWebsiteDataStoreDataStoreForIdentifier(identifier *foundation.NSUUID) *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDataStoreForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -143,7 +149,7 @@ func WKWebsiteDataStoreDataStoreForIdentifier(identifier *foundation.NSUUID) *WK
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
-// @abstract Delete a persistent data store. @param identifier An identifier that is used to uniquely identify the data store. @param completionHandler A block to invoke with optional error when the operation completes. @discussion This should be called when the data store is not used any more. Returns error if removal fails to complete. WKWebView using the data store must be released before removal.
+// Removes the data store that matches the identifier you provide.
 func WKWebsiteDataStoreRemoveDataStoreForIdentifierCompletionHandler(identifier *foundation.NSUUID, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -155,9 +161,19 @@ func WKWebsiteDataStoreRemoveDataStoreForIdentifierCompletionHandler(identifier 
 	objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelRemoveDataStoreForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
-// @abstract Fetch all data stores identifiers. @param completionHandler A block to invoke with an array of identifiers when the operation completes. @discussion Default or non-persistent data store do not have an identifier.
-func WKWebsiteDataStoreFetchAllDataStoreIdentifiers(completionHandler objc.Block) {
-	objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelFetchAllDataStoreIdentifiers, completionHandler)
+// Fetches an array of identifiers from existing data stores that have identifiers.
+func WKWebsiteDataStoreFetchAllDataStoreIdentifiers(completionHandler func(*foundation.NSArray[*foundation.NSUUID])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSUUID](blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelFetchAllDataStoreIdentifiers, __block_completionHandler)
 }
 
 // @abstract Whether the data store is persistent or not.
@@ -185,10 +201,13 @@ func (o *WKWebsiteDataStore) Identifier() *foundation.NSUUID {
 }
 
 func (o *WKWebsiteDataStore) ProxyConfigurations() *foundation.NSArray[*foundation.NSObject] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSObject]](o.Ptr(), _wKWebsiteDataStoreSelProxyConfigurations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelProxyConfigurations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSObject](_ret)
 }
 
 func (o *WKWebsiteDataStore) SetProxyConfigurations(proxyConfigurations *foundation.NSArray[*foundation.NSObject]) {
-	o.Ptr().Send(_wKWebsiteDataStoreSelSetProxyConfigurations, proxyConfigurations)
+	o.Ptr().Send(_wKWebsiteDataStoreSelSetProxyConfigurations, proxyConfigurations.Ptr())
 }

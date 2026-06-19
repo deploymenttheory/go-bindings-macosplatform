@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single dragged item within a dragging session.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdraggingitem
 type NSDraggingItem struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSDraggingItemFromID(id objc.ID) *NSDraggingItem {
 	return o
 }
 
+// Creates and returns a dragging item using the specified content.
 func (o *NSDraggingItem) InitWithPasteboardWriter(pasteboardWriter NSPasteboardWriting) *NSDraggingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingItemSelInitWithPasteboardWriter, pasteboardWriter)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *NSDraggingItem) InitWithPasteboardWriter(pasteboardWriter NSPasteboardW
 	return NSDraggingItemFromID(_ret)
 }
 
+// Sets the item’s dragging frame and contents.
 func (o *NSDraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, contents objc.ID) {
 	o.Ptr().Send(_nSDraggingItemSelSetDraggingFrameContents, frame, contents)
 }

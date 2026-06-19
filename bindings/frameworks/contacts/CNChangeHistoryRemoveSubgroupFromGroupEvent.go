@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a user removing a subgroup from a group.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistoryremovesubgroupfromgroupevent
 type CNChangeHistoryRemoveSubgroupFromGroupEvent struct {
 	CNChangeHistoryEvent

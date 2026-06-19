@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The programmatic interface to objects that manage input sources.
+//
 // RunLoop wraps [raw.NSRunLoop] with a fluent Go API.
 type RunLoop struct {
 	inner *raw.NSRunLoop
@@ -101,6 +103,8 @@ func (x *RunLoop) RunModeBeforeDate(mode *raw.NSString, limitDate *raw.NSDate) b
 	return x.inner.RunModeBeforeDate(mode, limitDate)
 }
 
+// Deprecated. Does nothing.
+//
 // ConfigureAsServer calls the underlying ConfigureAsServer.
 func (x *RunLoop) ConfigureAsServer() {
 	x.inner.ConfigureAsServer()

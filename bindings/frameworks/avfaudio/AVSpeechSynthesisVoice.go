@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A distinct voice for use in speech synthesis.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avspeechsynthesisvoice
 type AVSpeechSynthesisVoice struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func AVSpeechSynthesisVoiceFromID(id objc.ID) *AVSpeechSynthesisVoice {
 	return o
 }
 
+// Retrieves all available voices on the device.
 func AVSpeechSynthesisVoiceSpeechVoices() *foundation.NSArray[*AVSpeechSynthesisVoice] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelSpeechVoices)
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func AVSpeechSynthesisVoiceSpeechVoices() *foundation.NSArray[*AVSpeechSynthesis
 	return foundation.NSArrayFromID[*AVSpeechSynthesisVoice](_ret)
 }
 
+// Returns the language and locale code for the user’s current locale.
 func AVSpeechSynthesisVoiceCurrentLanguageCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelCurrentLanguageCode)
 	if _ret != 0 {
@@ -56,7 +60,7 @@ func AVSpeechSynthesisVoiceCurrentLanguageCode() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method        voiceWithLanguage: @abstract      Use a BCP-47 language tag to specify the desired language and region. @param			languageCode Specifies the BCP-47 language tag that represents the voice. @discussion The default is the system's region and language. Passing in nil will return the default voice. Passing in an invalid languageCode will return nil. Will return enhanced quality voice if available, default quality otherwise. Examples: en-US (U.S. English), fr-CA (French Canadian)
+// Retrieves a voice for the BCP 47 code language code you specify.
 func AVSpeechSynthesisVoiceVoiceWithLanguage(languageCode *foundation.NSString) *AVSpeechSynthesisVoice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelVoiceWithLanguage, languageCode.Ptr())
 	if _ret != 0 {
@@ -65,7 +69,7 @@ func AVSpeechSynthesisVoiceVoiceWithLanguage(languageCode *foundation.NSString) 
 	return AVSpeechSynthesisVoiceFromID(_ret)
 }
 
-// @method        voiceWithIdentifier: @abstract      Retrieve a voice by its identifier. @param			identifier A unique identifier for a voice. @discussion Passing in an invalid identifier will return nil. Returns nil if the identifier is valid, but the voice is not available on device (i.e. not yet downloaded by the user).
+// Retrieves a voice for the identifier you specify.
 func AVSpeechSynthesisVoiceVoiceWithIdentifier(identifier *foundation.NSString) *AVSpeechSynthesisVoice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelVoiceWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -109,8 +113,11 @@ func (o *AVSpeechSynthesisVoice) Gender() AVSpeechSynthesisVoiceGender {
 }
 
 func (o *AVSpeechSynthesisVoice) AudioFileSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVSpeechSynthesisVoiceSelAudioFileSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisVoiceSelAudioFileSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AVSpeechSynthesisVoice) VoiceTraits() AVSpeechSynthesisVoiceTraits {

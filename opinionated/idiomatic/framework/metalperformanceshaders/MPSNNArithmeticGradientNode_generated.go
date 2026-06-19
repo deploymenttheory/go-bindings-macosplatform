@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of the base class for gradient arithmetic operators.
+//
 // NNArithmeticGradientNode wraps [raw.MPSNNArithmeticGradientNode] with a fluent Go API.
 type NNArithmeticGradientNode struct {
 	inner *raw.MPSNNArithmeticGradientNode

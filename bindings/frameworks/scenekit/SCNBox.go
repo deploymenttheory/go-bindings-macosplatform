@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A six-sided polyhedron geometry whose faces are all rectangles, optionally with rounded edges and corners.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnbox
 type SCNBox struct {
 	SCNGeometry
@@ -45,7 +47,7 @@ func SCNBoxFromID(id objc.ID) *SCNBox {
 	return o
 }
 
-// @method boxWithWidth:height:length:chamferRadius: @abstract Creates and returns a box with given width, height, length and chamfer radius. @param width The width of the box. @param height The height of the box. @param length The length of the box. @param chamferRadius The chamfer radius of the box.
+// Creates a box geometry with the specified width, height, length, and chamfer radius.
 func SCNBoxBoxWithWidthHeightLengthChamferRadius(width float64, height float64, length float64, chamferRadius float64) *SCNBox {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNBox), _sCNBoxSelBoxWithWidthHeightLengthChamferRadius, width, height, length, chamferRadius)
 	if _ret != 0 {

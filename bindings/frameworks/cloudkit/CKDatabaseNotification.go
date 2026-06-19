@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A notification that triggers when the contents of a database change.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckdatabasenotification
 type CKDatabaseNotification struct {
 	CKNotification

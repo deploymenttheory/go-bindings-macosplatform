@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller that you present from your share app extension, allowing the user to compose social media posts.
+//
 // ComposeServiceViewController wraps [raw.SLComposeServiceViewController] with a fluent Go API.
 type ComposeServiceViewController struct {
 	inner *raw.SLComposeServiceViewController
@@ -38,43 +40,59 @@ func NewComposeServiceViewController() *ComposeServiceViewController {
 	return &ComposeServiceViewController{inner: raw.SLComposeServiceViewControllerFromID(_id)}
 }
 
+// A string that’s displayed in the compose view’s text view when the text view is empty.
+//
 // WithPlaceholder sets the placeholder property and returns the receiver for chaining.
 func (x *ComposeServiceViewController) WithPlaceholder(placeholder string) *ComposeServiceViewController {
 	x.inner.SetPlaceholder(foundation.NSStringStringWithUTF8String(placeholder))
 	return x
 }
 
+// The number of characters remaining in a custom character limit.
+//
 // WithCharactersRemaining sets the charactersRemaining property and returns the receiver for chaining.
 func (x *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining *foundation.NSNumber) *ComposeServiceViewController {
 	x.inner.SetCharactersRemaining(charactersRemaining)
 	return x
 }
 
+// Tells the compose view controller that the presentation animation is finished.
+//
 // PresentationAnimationDidFinish calls the underlying PresentationAnimationDidFinish.
 func (x *ComposeServiceViewController) PresentationAnimationDidFinish() {
 	x.inner.PresentationAnimationDidFinish()
 }
 
+// Sent to the compose view after the post animation finishes.
+//
 // DidSelectPost calls the underlying DidSelectPost.
 func (x *ComposeServiceViewController) DidSelectPost() {
 	x.inner.DidSelectPost()
 }
 
+// Sent to the compose view after the cancel animation finishes.
+//
 // DidSelectCancel calls the underlying DidSelectCancel.
 func (x *ComposeServiceViewController) DidSelectCancel() {
 	x.inner.DidSelectCancel()
 }
 
+// Starts the animated dismissal of the compose view.
+//
 // Cancel calls the underlying Cancel.
 func (x *ComposeServiceViewController) Cancel() {
 	x.inner.Cancel()
 }
 
+// A Boolean value that indicates whether the current content and attachments are valid.
+//
 // IsContentValid calls the underlying IsContentValid.
 func (x *ComposeServiceViewController) IsContentValid() bool {
 	return x.inner.IsContentValid()
 }
 
+// Performs validation of the current content and updates the state of the Post button, if appropriate.
+//
 // ValidateContent calls the underlying ValidateContent.
 func (x *ComposeServiceViewController) ValidateContent() {
 	x.inner.ValidateContent()

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The details of a coordinated-read or coordinated-write operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfileaccessintent
 type NSFileAccessIntent struct {
 	NSObject
@@ -31,6 +33,7 @@ func NSFileAccessIntentFromID(id objc.ID) *NSFileAccessIntent {
 	return o
 }
 
+// Returns a file access intent object for reading the given URL with the provided options.
 func NSFileAccessIntentReadingIntentWithURLOptions(url *NSURL, options NSFileCoordinatorReadingOptions) *NSFileAccessIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileAccessIntent), _nSFileAccessIntentSelReadingIntentWithURLOptions, url.Ptr(), options)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func NSFileAccessIntentReadingIntentWithURLOptions(url *NSURL, options NSFileCoo
 	return NSFileAccessIntentFromID(_ret)
 }
 
+// Returns a file access intent object for writing to the given URL with the provided options.
 func NSFileAccessIntentWritingIntentWithURLOptions(url *NSURL, options NSFileCoordinatorWritingOptions) *NSFileAccessIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileAccessIntent), _nSFileAccessIntentSelWritingIntentWithURLOptions, url.Ptr(), options)
 	if _ret != 0 {

@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Voronoi noise partitions the space into angular, polygonal "cells", which are reminiscent of stained glass or crystal-like structures.
+// A procedural noise generator whose output (also called Worley noise or cellular noise) divides space into discrete cells surrounding random seed points.
 //
 // VoronoiNoiseSource wraps [raw.GKVoronoiNoiseSource] with a fluent Go API.
 type VoronoiNoiseSource struct {
@@ -31,6 +31,8 @@ func VoronoiNoiseSourceFromID(id objc.ID) *VoronoiNoiseSource {
 	return &VoronoiNoiseSource{inner: raw.GKVoronoiNoiseSourceFromID(id)}
 }
 
+// Initializes a Voronoi noise source with the specified parameters.
+//
 // NewVoronoiNoiseSourceWithFrequencyDisplacementDistanceEnabledSeed creates a new [VoronoiNoiseSource].
 func NewVoronoiNoiseSourceWithFrequencyDisplacementDistanceEnabledSeed(frequency float64, displacement float64, distanceEnabled bool, seed int32) *VoronoiNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKVoronoiNoiseSource")), objc.RegisterName("alloc"))
@@ -38,24 +40,32 @@ func NewVoronoiNoiseSourceWithFrequencyDisplacementDistanceEnabledSeed(frequency
 	return &VoronoiNoiseSource{inner: raw.GKVoronoiNoiseSourceFromID(_id)}
 }
 
+// A value that determines the number and size of cells in generated noise.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *VoronoiNoiseSource) WithFrequency(frequency float64) *VoronoiNoiseSource {
 	x.inner.SetFrequency(frequency)
 	return x
 }
 
+// The range of random values to assign to each cell in generated noise.
+//
 // WithDisplacement sets the displacement property and returns the receiver for chaining.
 func (x *VoronoiNoiseSource) WithDisplacement(displacement float64) *VoronoiNoiseSource {
 	x.inner.SetDisplacement(displacement)
 	return x
 }
 
+// A Boolean value that specifies whether generated noise values incorporate the distance from each point to the nearest seed point.
+//
 // WithDistanceEnabled sets the distanceEnabled property and returns the receiver for chaining.
 func (x *VoronoiNoiseSource) WithDistanceEnabled(distanceEnabled bool) *VoronoiNoiseSource {
 	x.inner.SetDistanceEnabled(distanceEnabled)
 	return x
 }
 
+// The value that determines the specific configuration of noise produced by the noise source.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *VoronoiNoiseSource) WithSeed(seed int32) *VoronoiNoiseSource {
 	x.inner.SetSeed(seed)

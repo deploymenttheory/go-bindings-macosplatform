@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that executes scripts.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuserscripttask
 type NSUserScriptTask struct {
 	NSObject
@@ -33,6 +35,7 @@ func NSUserScriptTaskFromID(id objc.ID) *NSUserScriptTask {
 	return o
 }
 
+// Return a user script task instance given a URL for a script file.
 func (o *NSUserScriptTask) InitWithURLError(url *NSURL) (*NSUserScriptTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserScriptTaskSelInitWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -45,6 +48,7 @@ func (o *NSUserScriptTask) InitWithURLError(url *NSURL) (*NSUserScriptTask, erro
 	return NSUserScriptTaskFromID(_ret), nil
 }
 
+// Executes the script with no input and ignoring any result.
 func (o *NSUserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

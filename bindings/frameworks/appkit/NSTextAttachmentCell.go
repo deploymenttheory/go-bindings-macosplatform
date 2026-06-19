@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements the functionality of the text attachment cell protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextattachmentcell
 type NSTextAttachmentCell struct {
 	NSCell

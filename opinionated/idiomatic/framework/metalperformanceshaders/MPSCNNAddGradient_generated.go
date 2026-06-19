@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient addition operator.
+//
 // CNNAddGradient wraps [raw.MPSCNNAddGradient] with a fluent Go API.
 type CNNAddGradient struct {
 	inner *raw.MPSCNNAddGradient
@@ -228,7 +230,7 @@ func (x *CNNAddGradient) WithDestinationImageAllocator(destinationImageAllocator
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNAddGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNAddGradient {
@@ -236,7 +238,7 @@ func (x *CNNAddGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNAddGr
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNAddGradient) WithLabel(label string) *CNNAddGradient {

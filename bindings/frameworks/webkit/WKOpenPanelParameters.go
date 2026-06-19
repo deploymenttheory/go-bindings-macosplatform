@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration details of a file upload control in your web content.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkopenpanelparameters
 type WKOpenPanelParameters struct {
 	foundation.NSObject

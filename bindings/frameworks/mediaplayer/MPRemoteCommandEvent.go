@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a command sent by an external media player.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpremotecommandevent
 type MPRemoteCommandEvent struct {
 	foundation.NSObject

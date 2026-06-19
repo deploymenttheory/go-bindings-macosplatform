@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance for the capture of single frames from a stream.
+//
 // ScreenshotManager wraps [raw.SCScreenshotManager] with a fluent Go API.
 type ScreenshotManager struct {
 	inner *raw.SCScreenshotManager

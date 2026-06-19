@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that uses the provided criteria to search for discoverable iCloud users.
+//
 // DiscoverUserIdentitiesOperation wraps [raw.CKDiscoverUserIdentitiesOperation] with a fluent Go API.
 type DiscoverUserIdentitiesOperation struct {
 	inner *raw.CKDiscoverUserIdentitiesOperation
@@ -41,7 +43,7 @@ func NewDiscoverUserIdentitiesOperation() *DiscoverUserIdentitiesOperation {
 	return &DiscoverUserIdentitiesOperation{inner: raw.CKDiscoverUserIdentitiesOperationFromID(_id)}
 }
 
-// Creates an operation for discovering the user identities of the specified lookup infos. - Parameters: - userIdentityLookupInfos: An array that contains instances of “CKUserIdentity/LookupInfo“. CloudKit uses this parameter as the default value for the “CKDiscoverUserIdentitiesOperation/userIdentityLookupInfos“ property. If you specify `nil`, you must assign a value to that property before you execute the operation. After you create the operation, assign a handler to “CKDiscoverUserIdentitiesOperation/discoverUserIdentitiesCompletionBlock“ so that you can process the search results.
+// Creates an operation for discovering the user identities of the specified lookup infos.
 //
 // NewDiscoverUserIdentitiesOperationWithUserIdentityLookupInfos creates a new [DiscoverUserIdentitiesOperation].
 func NewDiscoverUserIdentitiesOperationWithUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo]) *DiscoverUserIdentitiesOperation {
@@ -50,7 +52,7 @@ func NewDiscoverUserIdentitiesOperationWithUserIdentityLookupInfos(userIdentityL
 	return &DiscoverUserIdentitiesOperation{inner: raw.CKDiscoverUserIdentitiesOperationFromID(_id)}
 }
 
-// The lookup info for discovering user identities. Use this property to view or change the lookup info that CloudKit uses to discover user identities. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue.
+// The lookup info for discovering user identities.
 //
 // WithUserIdentityLookupInfos sets the collection, converting the Go slice to an NSArray.
 func (x *DiscoverUserIdentitiesOperation) WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *DiscoverUserIdentitiesOperation {
@@ -73,7 +75,7 @@ func (x *DiscoverUserIdentitiesOperation) WithUserIdentityLookupInfos(items ...*
 	return x
 }
 
-// The closure to execute for each user identity. The closure doesn't return a value and takes the following parameters: - The user identity. - The lookup info that corresponds to the user identity. The operation executes this closure one or more times for each user identity it discovers. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+// The closure to execute for each user identity.
 //
 // WithUserIdentityDiscoveredBlock sets the userIdentityDiscoveredBlock property and returns the receiver for chaining.
 func (x *DiscoverUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo)) *DiscoverUserIdentitiesOperation {
@@ -81,7 +83,7 @@ func (x *DiscoverUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userId
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure doesn't return a value and takes the following parameter: - An error if a problem occurs, or `nil` if CloudKit successfully fetches the user identities. This closure executes only once, after all of the individual discovery closures finish. The closure executes serially with respect to the operation's other closures. If you intend to use this closure to process results, update the property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes.
 //
 // WithDiscoverUserIdentitiesCompletionBlock sets the discoverUserIdentitiesCompletionBlock property and returns the receiver for chaining.
 func (x *DiscoverUserIdentitiesOperation) WithDiscoverUserIdentitiesCompletionBlock(discoverUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverUserIdentitiesOperation {
@@ -89,7 +91,7 @@ func (x *DiscoverUserIdentitiesOperation) WithDiscoverUserIdentitiesCompletionBl
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation {
@@ -97,7 +99,7 @@ func (x *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *Opera
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *DiscoverUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation {
@@ -105,7 +107,7 @@ func (x *DiscoverUserIdentitiesOperation) WithGroup(group *OperationGroup) *Disc
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *DiscoverUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation {
@@ -129,7 +131,7 @@ func (x *DiscoverUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellula
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *DiscoverUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation {

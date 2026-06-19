@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An NSWindowController subclass that supports the creation of an IOBluetoothObjectPushUIController object.
+//
 // BluetoothObjectPushUIController wraps [raw.IOBluetoothObjectPushUIController] with a fluent Go API.
 type BluetoothObjectPushUIController struct {
 	inner *raw.IOBluetoothObjectPushUIController
@@ -36,7 +38,7 @@ func BluetoothObjectPushUIControllerFromID(id objc.ID) *BluetoothObjectPushUICon
 	return &BluetoothObjectPushUIController{inner: raw.IOBluetoothObjectPushUIControllerFromID(id)}
 }
 
-// @method		initObjectPushWithBluetoothDevice: withFiles: delegate: @abstract	Creates and returns a new IOBluetoothObjectPush object @discussion	The event delegate should implement a single delegate method: - (void) objectPushComplete: (IOBluetoothObjectPushUIController*) inPusher The method will be called when the transaction is complete and should be used to release the push object by the delegate. If no delegate is set the object will release itself when the transfer is finished. @param		inDevice	The remote device to send the files to @param		inFiles		An array of file paths to send @param		inDelegate  A delegate object that implements the single method above.  If no delegate is specified this object will release itself when the transaction is complete. @result		An IOBluetoothObjectPushUIController object on success, nil on fail.
+// Creates and returns a new IOBluetoothObjectPush object
 //
 // NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate creates a new [BluetoothObjectPushUIController].
 func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice *iobluetooth.IOBluetoothDevice, inFiles *foundation.NSArray[objc.ID], inDelegate objc.ID) *BluetoothObjectPushUIController {
@@ -45,40 +47,42 @@ func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDel
 	return &BluetoothObjectPushUIController{inner: raw.IOBluetoothObjectPushUIControllerFromID(_id)}
 }
 
-// @method		runModal @abstract	Runs the transfer UI panel in a modal session @discussion	Returns when the modal session has ended. This object will call back over the delegate method (above) when the transfer is complete.  Users should release the object then. If no delegate is set the object will release itself. @result		The call will stall in this method until the modal session is complete.
+// Runs the transfer UI panel in a modal session
 //
 // RunModal calls the underlying RunModal.
 func (x *BluetoothObjectPushUIController) RunModal() {
 	x.inner.RunModal()
 }
 
-// @method		runPanel @abstract	Runs the transfer UI as a panel with no modal session @discussion	Returns immediately.  The object will callback over the delegate method (above) when the transfer is completed.  If no delegate is set the object will release itself. @result		The method will return immediately.
+// Runs the transfer UI as a panel with no modal session
 //
 // RunPanel calls the underlying RunPanel.
 func (x *BluetoothObjectPushUIController) RunPanel() {
 	x.inner.RunPanel()
 }
 
+// Runs the transfer UI as a sheet on the target window.
+//
 // BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *BluetoothObjectPushUIController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
 	return x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow, modalDelegate, didEndSelector, contextInfo)
 }
 
-// @method		stop @abstract	Stops the transfer UI @discussion	Returns immediately. The object will callback over the delegate method (above) when the transfer is completed, or will release itself if no delegate is set. @result		The method will return immediately.
+// Stops the transfer UI
 //
 // Stop calls the underlying Stop.
 func (x *BluetoothObjectPushUIController) Stop() {
 	x.inner.Stop()
 }
 
-// @method		setTitle: @abstract	Sets the title of the panel when not run as a sheet. @discussion	The panel title should be localized for best user experience. @param		windowTitle Title of the device selector panel.
+// Sets the title of the panel when not run as a sheet.
 //
 // SetTitle calls the underlying SetTitle.
 func (x *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(windowTitle))
 }
 
-// @method		getTitle @abstract	Returns the title of the transfer panel (i.e. what was set in -setTitle:). @discussion @result		Returns the title of the transfer panel.
+// Returns the title of the transfer panel.
 //
 // GetTitle calls the underlying GetTitle.
 func (x *BluetoothObjectPushUIController) GetTitle() string {
@@ -89,21 +93,21 @@ func (x *BluetoothObjectPushUIController) GetTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method		setIconImage: @abstract	Manually sets the icon used in the panel. @discussion	The panel icon should be set to the icon of the calling application.  If not set, the panel will try to load up the correct icon for the target device, and will default to the icon of the running application on fail. @param		image Image to use as the icon.
+// Manually sets the icon used in the panel.
 //
 // SetIconImage calls the underlying SetIconImage.
 func (x *BluetoothObjectPushUIController) SetIconImage(image *appkit.NSImage) {
 	x.inner.SetIconImage(image)
 }
 
-// @method		getDevice: @abstract	Gets the object representing the remote target device in the transfer. @discussion @result		The remote device of the transfer.
+// Gets the object representing the remote target device in the transfer.
 //
 // GetDevice calls the underlying GetDevice.
 func (x *BluetoothObjectPushUIController) GetDevice() *iobluetooth.IOBluetoothDevice {
 	return x.inner.GetDevice()
 }
 
-// @method		isTransferInProgress: @abstract	Gets state of the transfer @discussion @result		The state of the transfer
+// Gets state of the transfer
 //
 // IsTransferInProgress calls the underlying IsTransferInProgress.
 func (x *BluetoothObjectPushUIController) IsTransferInProgress() bool {

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that provides the output configuration for a stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scstreamconfiguration
 type SCStreamConfiguration struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a request to supply a passkey credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest
 type ASPasskeyCredentialRequest struct {
 	foundation.NSObject
@@ -40,36 +42,36 @@ func ASPasskeyCredentialRequestFromID(id objc.ID) *ASPasskeyCredentialRequest {
 	return o
 }
 
-// @abstract Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request.
+// Initializes a passkey credential request.
 func (o *ASPasskeyCredentialRequest) InitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber]) *ASPasskeyCredentialRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelInitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelInitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return ASPasskeyCredentialRequestFromID(_ret)
 }
 
-// Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request. @param supportedAlgorithms the set of support algorithms for the credential's key. @param assertionExtensionInput input for any requested passkey extensions.
+// Initializes a passkey credential request, providing additional passkey registration data.
 func (o *ASPasskeyCredentialRequest) InitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput(credentialIdentity *ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], assertionExtensionInput *ASPasskeyAssertionCredentialExtensionInput) *ASPasskeyCredentialRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelInitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms, assertionExtensionInput.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelInitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr(), assertionExtensionInput.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return ASPasskeyCredentialRequestFromID(_ret)
 }
 
-// Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request. @param supportedAlgorithms the set of support algorithms for the credential's key. @param registrationExtensionInput input for any requested passkey extensions.
+// Initializes a passkey credential request, providing additional passkey registration data.
 func (o *ASPasskeyCredentialRequest) InitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput(credentialIdentity *ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], registrationExtensionInput *ASPasskeyRegistrationCredentialExtensionInput) *ASPasskeyCredentialRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelInitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms, registrationExtensionInput.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelInitWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr(), registrationExtensionInput.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return ASPasskeyCredentialRequestFromID(_ret)
 }
 
-// @abstract Creates and initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request.
+// Initializes a passkey credential request, identifying supported algorithms by number.
 func ASPasskeyCredentialRequestRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber]) *ASPasskeyCredentialRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyCredentialRequest), _aSPasskeyCredentialRequestSelRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms)
+	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyCredentialRequest), _aSPasskeyCredentialRequestSelRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms, credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -100,8 +102,11 @@ func (o *ASPasskeyCredentialRequest) SetUserVerificationPreference(userVerificat
 
 // @abstract A list of signing algorithms supported by the relying party. Will be empty for assertion requests.
 func (o *ASPasskeyCredentialRequest) SupportedAlgorithms() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aSPasskeyCredentialRequestSelSupportedAlgorithms)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestSelSupportedAlgorithms)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *ASPasskeyCredentialRequest) ExcludedCredentials() *foundation.NSArray[*ASAuthorizationPlatformPublicKeyCredentialDescriptor] {

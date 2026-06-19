@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents person, group, or room invited to a calendar event.
+//
 // Participant wraps [raw.EKParticipant] with a fluent Go API.
 type Participant struct {
 	inner *raw.EKParticipant
@@ -38,7 +40,7 @@ func NewParticipant() *Participant {
 	return &Participant{inner: raw.EKParticipantFromID(_id)}
 }
 
-// @method     ABPersonInAddressBook @abstract   Returns the ABPerson that represents this participant. @discussion This method returns the ABPerson that represents this participant, if a match can be found based on email address in the address book passed. If we cannot find the participant, nil is returned.
+// Returns the address book record that represents the participant.
 //
 // ABPersonInAddressBook calls the underlying ABPersonInAddressBook.
 func (x *Participant) ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson {

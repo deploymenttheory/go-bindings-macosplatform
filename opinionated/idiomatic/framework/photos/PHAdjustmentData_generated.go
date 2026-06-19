@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the edits made to an asset’s photo, video, or Live Photo content, which allows your app to reconstruct or revert the effects of prior editing sessions.
+//
 // AdjustmentData wraps [raw.PHAdjustmentData] with a fluent Go API.
 type AdjustmentData struct {
 	inner *raw.PHAdjustmentData
@@ -31,6 +33,8 @@ func AdjustmentDataFromID(id objc.ID) *AdjustmentData {
 	return &AdjustmentData{inner: raw.PHAdjustmentDataFromID(id)}
 }
 
+// Initializes an adjustment object with the specified format and data.
+//
 // NewAdjustmentDataWithFormatIdentifierFormatVersionData creates a new [AdjustmentData].
 func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier string, formatVersion string, data *foundation.NSData) *AdjustmentData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAdjustmentData")), objc.RegisterName("alloc"))

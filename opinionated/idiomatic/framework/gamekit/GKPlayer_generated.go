@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A remote player who the local player running your game can invite and communicate with through Game Center.
+//
 // Player wraps [raw.GKPlayer] with a fluent Go API.
 type Player struct {
 	inner *raw.GKPlayer
@@ -39,7 +41,7 @@ func NewPlayer() *Player {
 	return &Player{inner: raw.GKPlayerFromID(_id)}
 }
 
-// This convenience method checks if the gamePlayerID and the teamPlayerID (scopedIDs) are persistent or unique for the instantiation of this app.
+// Returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
 //
 // ScopedIDsArePersistent calls the underlying ScopedIDsArePersistent.
 func (x *Player) ScopedIDsArePersistent() bool {
@@ -93,7 +95,7 @@ func (x *Player) IsInvitable() bool {
 	return x.inner.IsInvitable()
 }
 
-// Asynchronously load the player's photo. Error will be nil on success. Possible reasons for error: 1. Communications failure
+// Loads a photo of the player from Game Center.
 //
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
 func (x *Player) LoadPhotoForSize(ctx context.Context, size GKPhotoSize) (*appkit.NSImage, error) {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Cluster Laundry Washer Controls This cluster supports remotely monitoring and controlling the different types of functionality available to a washing device, such as a washing machine.
+//
 // MTRClusterLaundryWasherControls wraps [raw.MTRClusterLaundryWasherControls] with a fluent Go API.
 type MTRClusterLaundryWasherControls struct {
 	inner *raw.MTRClusterLaundryWasherControls

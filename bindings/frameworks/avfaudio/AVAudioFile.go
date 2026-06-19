@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an audio file that the system can open for reading or writing.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiofile
 type AVAudioFile struct {
 	foundation.NSObject
@@ -56,7 +58,7 @@ func (o *AVAudioFile) Init() *AVAudioFile {
 	return AVAudioFileFromID(_ret)
 }
 
-// @method initForReading:error: @abstract Open a file for reading. @param fileURL the file to open @param outError on exit, if an error occurs, a description of the error @discussion This opens the file for reading using the standard format (deinterleaved floating point).
+// Opens a file for reading using the standard, deinterleaved floating point format.
 func (o *AVAudioFile) InitForReadingError(fileURL *foundation.NSURL) (*AVAudioFile, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForReadingError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -69,7 +71,7 @@ func (o *AVAudioFile) InitForReadingError(fileURL *foundation.NSURL) (*AVAudioFi
 	return AVAudioFileFromID(_ret), nil
 }
 
-// @method initForReading:commonFormat:interleaved:error: @abstract Open a file for reading, using a specified processing format. @param fileURL the file to open @param format the processing format to use when reading from the file @param interleaved whether to use an interleaved processing format @param outError on exit, if an error occurs, a description of the error
+// Opens a file for reading using the specified processing format.
 func (o *AVAudioFile) InitForReadingCommonFormatInterleavedError(fileURL *foundation.NSURL, format AVAudioCommonFormat, interleaved bool) (*AVAudioFile, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForReadingCommonFormatInterleavedError, fileURL.Ptr(), format, interleaved, unsafe.Pointer(&_nsErr))
@@ -82,10 +84,10 @@ func (o *AVAudioFile) InitForReadingCommonFormatInterleavedError(fileURL *founda
 	return AVAudioFileFromID(_ret), nil
 }
 
-// @method initForWriting:settings:error: @abstract Open a file for writing. @param fileURL the path at which to create the file @param settings the format of the file to create (See `AVAudioRecorder`.)  For linear PCM, only interleaved formats are supported for the saved file, non interleaved setting will be ignored and a warning is shown. @param outError on exit, if an error occurs, a description of the error @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified URL if a file exists. This opens the file for writing using the standard format (deinterleaved floating point).
+// Opens a file for writing using the specified settings.
 func (o *AVAudioFile) InitForWritingSettingsError(fileURL *foundation.NSURL, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVAudioFile, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsError, fileURL.Ptr(), settings, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsError, fileURL.Ptr(), settings.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -95,10 +97,10 @@ func (o *AVAudioFile) InitForWritingSettingsError(fileURL *foundation.NSURL, set
 	return AVAudioFileFromID(_ret), nil
 }
 
-// @method initForWriting:settings:commonFormat:interleaved:error: @abstract Open a file for writing. @param fileURL the path at which to create the file @param settings the format of the file to create (See `AVAudioRecorder`.) For linear PCM, only interleaved formats are supported for the saved file, non interleaved setting will be ignored and a warning is shown. @param format the processing format to use when writing to the file. @param interleaved whether to use an interleaved processing format @param outError on exit, if an error occurs, a description of the error @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified URL if a file exists.
+// Opens a file for writing using a specified processing format and settings.
 func (o *AVAudioFile) InitForWritingSettingsCommonFormatInterleavedError(fileURL *foundation.NSURL, settings *foundation.NSDictionary[*foundation.NSString, objc.ID], format AVAudioCommonFormat, interleaved bool) (*AVAudioFile, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsCommonFormatInterleavedError, fileURL.Ptr(), settings, format, interleaved, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsCommonFormatInterleavedError, fileURL.Ptr(), settings.Ptr(), format, interleaved, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -108,12 +110,12 @@ func (o *AVAudioFile) InitForWritingSettingsCommonFormatInterleavedError(fileURL
 	return AVAudioFileFromID(_ret), nil
 }
 
-// @method close @abstract Close the audio file. @discussion The underlying file will be closed if open. - It is normally unnecessary to close a file opened for reading (it will be automatically closed when the object is released) - It is only necessary to close a file opened for writing in order to achieve specific control over when the file's header is updated. Note: Once closed, further file read or write operations will fail with kAudio_FileNotFoundError.
+// Closes the audio file.
 func (o *AVAudioFile) Close() {
 	o.Ptr().Send(_aVAudioFileSelClose)
 }
 
-// @method readIntoBuffer:error: @abstract Read an entire buffer. @param buffer The buffer into which to read from the file. Its format must match the file's processing format. @param outError on exit, if an error occurs, a description of the error @return YES for success. @discussion Reading sequentially from framePosition, attempts to fill the buffer to its capacity. On return, the buffer's length indicates the number of sample frames successfully read.
+// Reads an entire audio buffer.
 func (o *AVAudioFile) ReadIntoBufferError(buffer *AVAudioPCMBuffer) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioFileSelReadIntoBufferError, buffer.Ptr(), unsafe.Pointer(&_nsErr))
@@ -123,7 +125,7 @@ func (o *AVAudioFile) ReadIntoBufferError(buffer *AVAudioPCMBuffer) (bool, error
 	return _ret, nil
 }
 
-// @method readIntoBuffer:frameCount:error: @abstract Read a portion of a buffer. @param frames The number of frames to read. @param buffer The buffer into which to read from the file. Its format must match the file's processing format. @param outError on exit, if an error occurs, a description of the error @return YES for success. @discussion Like `readIntoBuffer:error:`, but can be used to read fewer frames than buffer.frameCapacity.
+// Reads a portion of an audio buffer using the number of frames you specify.
 func (o *AVAudioFile) ReadIntoBufferFrameCountError(buffer *AVAudioPCMBuffer, frames uint32) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioFileSelReadIntoBufferFrameCountError, buffer.Ptr(), frames, unsafe.Pointer(&_nsErr))

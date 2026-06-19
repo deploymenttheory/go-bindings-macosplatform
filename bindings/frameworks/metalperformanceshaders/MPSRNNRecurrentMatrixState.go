@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class holds all the data that’s passed from one sequence iteration of the matrix-based recurrent neural network layer to the next.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnrecurrentmatrixstate
 type MPSRNNRecurrentMatrixState struct {
 	mpscore.MPSState

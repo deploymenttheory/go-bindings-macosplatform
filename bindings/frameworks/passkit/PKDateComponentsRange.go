@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the start and end dates for a range of time.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkdatecomponentsrange
 type PKDateComponentsRange struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func PKDateComponentsRangeFromID(id objc.ID) *PKDateComponentsRange {
 	return o
 }
 
+// Creates a new time range with the start and end dates and times that you specify.
 func (o *PKDateComponentsRange) InitWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *PKDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents, startDateComponents.Ptr(), endDateComponents.Ptr())
 	if _ret != 0 {

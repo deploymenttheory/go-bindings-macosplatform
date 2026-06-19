@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing a function in the Program.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureprogramfunction
 type MLModelStructureProgramFunction struct {
 	foundation.NSObject

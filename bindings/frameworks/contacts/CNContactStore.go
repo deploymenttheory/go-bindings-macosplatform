@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object that fetches and saves contacts, groups, and containers from the user’s Contacts database.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactstore
 type CNContactStore struct {
 	foundation.NSObject
@@ -44,13 +46,13 @@ func CNContactStoreFromID(id objc.ID) *CNContactStore {
 	return o
 }
 
-// @abstract Indicates the current authorization status to access contact data. @discussion Based upon the access, the application could display or hide its UI elements that would access any Contacts API. This method is thread safe. @return Returns the authorization status for the given entityType.
+// Returns the current authorization status to access the contact data.
 func CNContactStoreAuthorizationStatusForEntityType(entityType CNEntityType) CNAuthorizationStatus {
 	_ret := objc.Send[CNAuthorizationStatus](objc.ID(_clsCNContactStore), _cNContactStoreSelAuthorizationStatusForEntityType, entityType)
 	return _ret
 }
 
-// @abstract Request access to the user's contacts. @discussion Users are able to grant or deny access to contact data on a per-application basis. To request access to contact data, call requestAccessForEntityType:completionHandler:. This will not block the application while the user is being asked to grant or deny access. The user will only be prompted the first time access is requested; any subsequent CNContactStore calls will use the existing permissions. The completion handler is called on an arbitrary queue. @note Recommended to use CNContactStore instance methods in this completion handler instead of the UI main thread. This method is optional when CNContactStore is used on a background thread. If it is not used in that case, CNContactStore will block if the user is asked to grant or deny access. @param entityType Set to CNEntityTypeContacts. @param completionHandler This block is called upon completion. If the user grants access then granted is YES and error is nil. Otherwise granted is NO with an error.
+// Requests access to the user’s contacts.
 func (o *CNContactStore) RequestAccessForEntityTypeCompletionHandler(entityType CNEntityType, completionHandler func(bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -62,7 +64,7 @@ func (o *CNContactStore) RequestAccessForEntityTypeCompletionHandler(entityType 
 	o.Ptr().Send(_cNContactStoreSelRequestAccessForEntityTypeCompletionHandler, entityType, __block_completionHandler)
 }
 
-// @abstract Fetch all unified contacts matching a given predicate. @discussion Use only predicates from CNContact+Predicates.h. Compound predicates are not supported. Due to unification the returned contacts may have a different identifier. @note To fetch all contacts use enumerateContactsWithFetchRequest:error:usingBlock:. @param predicate The predicate to match against. @param keys The properties to fetch into the returned CNContact objects. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors. @param error If an error occurs, contains error information. @return An array of CNContact objects matching the predicate. If no matches are found, an empty array is returned. If an error occurs, nil is returned.
+// Fetches all unified contacts matching the specified predicate.
 func (o *CNContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys *foundation.NSArray[CNKeyDescriptor]) (*foundation.NSArray[*CNContact], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedContactsMatchingPredicateKeysToFetchError, predicate.Ptr(), keys.Ptr(), unsafe.Pointer(&_nsErr))
@@ -75,7 +77,7 @@ func (o *CNContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predic
 	return foundation.NSArrayFromID[*CNContact](_ret), nil
 }
 
-// @abstract Fetch a unified contact with a given identifier. @discussion Due to unification the returned contact may have a different identifier. To fetch a batch of contacts by identifiers use [CNContact predicateForContactsWithIdentifiers:]. @param identifier The identifier of the contact to fetch. @param keys The properties to fetch into the returned CNContact object. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors. @param error If an error occurs, contains error information. @return The unified contact matching or linked to the identifier. If no contact with the given identifier is found, nil is returned and error is set to CNErrorCodeRecordDoesNotExist.
+// Fetches a unified contact for the specified contact identifier.
 func (o *CNContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier *foundation.NSString, keys *foundation.NSArray[CNKeyDescriptor]) (*CNContact, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedContactWithIdentifierKeysToFetchError, identifier.Ptr(), keys.Ptr(), unsafe.Pointer(&_nsErr))
@@ -88,7 +90,7 @@ func (o *CNContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier
 	return CNContactFromID(_ret), nil
 }
 
-// @abstract Fetch the unified contact that is the "me" card. @discussion Fetches the contact that is represented in the user interface as "My Card". @param keys The properties to fetch into the returned CNContact object. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors. @param error If an error occurs, contains error information. @return The unified contact that is the "me" card. If no "me" card is set, nil is returned.
+// Fetches the unified contact that’s the me card.
 func (o *CNContactStore) UnifiedMeContactWithKeysToFetchError(keys *foundation.NSArray[CNKeyDescriptor]) (*CNContact, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedMeContactWithKeysToFetchError, keys.Ptr(), unsafe.Pointer(&_nsErr))
@@ -101,27 +103,33 @@ func (o *CNContactStore) UnifiedMeContactWithKeysToFetchError(keys *foundation.N
 	return CNContactFromID(_ret), nil
 }
 
-// @abstract    Enumerate a contact fetch request. @discussion  Executes the given fetch request and returns an enumerator for the results. This may prevent all records from being loaded into memory at once. An exception may be thrown if an error occurs during enumeration. @param       request A description of the records to fetch. @param       error If the fetch fails, contains an @c NSError object with more information. @return      An enumerator of the records matching the result, or @c nil if there was an error.
+// Enumerates a contact fetch request.
 func (o *CNContactStore) EnumeratorForContactFetchRequestError(request *CNContactFetchRequest) (*CNFetchResult[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*CNFetchResult[objc.ID]](o.Ptr(), _cNContactStoreSelEnumeratorForContactFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelEnumeratorForContactFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return CNFetchResultFromID[objc.ID](_ret), nil
 }
 
-// @abstract    Enumerate a change history fetch request. @discussion  Executes the given fetch request and returns an enumerator for the results. This may prevent all events from being loaded into memory at once. An exception may be thrown if an error occurs during enumeration. @param       request A description of the events to fetch. @param       error If the fetch fails, contains an @c NSError object with more information. @return      An enumerator of the events matching the result, or @c nil if there was an error.
+// Enumerates a change history fetch request.
 func (o *CNContactStore) EnumeratorForChangeHistoryFetchRequestError(request *CNChangeHistoryFetchRequest) (*CNFetchResult[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*CNFetchResult[objc.ID]](o.Ptr(), _cNContactStoreSelEnumeratorForChangeHistoryFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelEnumeratorForChangeHistoryFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return CNFetchResultFromID[objc.ID](_ret), nil
 }
 
-// @abstract Enumerates all contacts matching a contact fetch request. @discussion This method will wait until the enumeration is finished. If there are no results, the block is not called and YES is returned. @param fetchRequest The contact fetch request that specifies the search criteria. @param error If an error occurs, contains error information. @param block Called for each matching contact. Set *stop to YES to stop the enumeration. @return YES if successful, otherwise NO.
+// Returns a Boolean value that indicates whether the enumeration of all contacts matching a contact fetch request executes successfully.
 func (o *CNContactStore) EnumerateContactsWithFetchRequestErrorUsing(fetchRequest *CNContactFetchRequest, error_ unsafe.Pointer, block func(*CNContact, *bool)) bool {
 	var __block_block objc.Block
 	if block != nil {
@@ -137,7 +145,7 @@ func (o *CNContactStore) EnumerateContactsWithFetchRequestErrorUsing(fetchReques
 	return _ret
 }
 
-// @abstract Fetch all groups matching a given predicate. @discussion Use only predicates from CNGroup+Predicates.h. Compound predicates are not supported. @param predicate The predicate to match against. Set to nil to match all groups. @param error If an error occurs, contains error information. @return An array of CNGroup objects matching the predicate. If no matches are found, an empty array is returned. If an error occurs, nil is returned.
+// Fetches all groups matching the specified predicate.
 func (o *CNContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*CNGroup], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelGroupsMatchingPredicateError, predicate.Ptr(), unsafe.Pointer(&_nsErr))
@@ -150,7 +158,7 @@ func (o *CNContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPr
 	return foundation.NSArrayFromID[*CNGroup](_ret), nil
 }
 
-// @abstract Fetch all containers matching a given predicate. @discussion Use only predicates from CNContainer+Predicates.h. Compound predicates are not supported. @param predicate The predicate to match against. Set to nil to match all containers. @param error If an error occurs, contains error information. @return An array of CNContainer objects matching the predicate. If no matches are found, an empty array is returned. If an error occurs, nil is returned.
+// Fetches all containers matching the specified predicate.
 func (o *CNContactStore) ContainersMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*CNContainer], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelContainersMatchingPredicateError, predicate.Ptr(), unsafe.Pointer(&_nsErr))
@@ -163,7 +171,7 @@ func (o *CNContactStore) ContainersMatchingPredicateError(predicate *foundation.
 	return foundation.NSArrayFromID[*CNContainer](_ret), nil
 }
 
-// @abstract Executes a save request. @discussion Do not access objects when save request is executing. A save request with contacts may modify the contacts while executing. A save request only applies the changes to the objects. If there are overlapping changes with multiple, concurrent CNSaveRequests then the last saved change wins. @param saveRequest Save request to execute. @param error If an error occurs, contains error information. @return YES if successful, otherwise NO.
+// Executes a save request and returns success or failure.
 func (o *CNContactStore) ExecuteSaveRequestError(saveRequest *CNSaveRequest) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cNContactStoreSelExecuteSaveRequestError, saveRequest.Ptr(), unsafe.Pointer(&_nsErr))
@@ -173,7 +181,7 @@ func (o *CNContactStore) ExecuteSaveRequestError(saveRequest *CNSaveRequest) (bo
 	return _ret, nil
 }
 
-// @abstract The identifier of the default container. @discussion This identifier can be used to fetch the default container. @return The identifier of the default container. If the caller lacks Contacts authorization or an error occurs, nil is returned.
+// Returns the identifier of the default container.
 func (o *CNContactStore) DefaultContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelDefaultContainerIdentifier)
 	if _ret != 0 {

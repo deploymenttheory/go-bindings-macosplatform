@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A notification that can be scheduled for display in the notification center.
+//
 // UserNotification wraps [raw.NSUserNotification] with a fluent Go API.
 type UserNotification struct {
 	inner *raw.NSUserNotification
@@ -38,96 +40,128 @@ func NewUserNotification() *UserNotification {
 	return &UserNotification{inner: raw.NSUserNotificationFromID(_id)}
 }
 
+// Specifies the title of the notification.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *UserNotification) WithTitle(title string) *UserNotification {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// Specifies the subtitle of the notification.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *UserNotification) WithSubtitle(subtitle string) *UserNotification {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// The body text of the notification.
+//
 // WithInformativeText sets the informativeText property and returns the receiver for chaining.
 func (x *UserNotification) WithInformativeText(informativeText string) *UserNotification {
 	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
 	return x
 }
 
+// Specifies the title of the action button displayed in the notification.
+//
 // WithActionButtonTitle sets the actionButtonTitle property and returns the receiver for chaining.
 func (x *UserNotification) WithActionButtonTitle(actionButtonTitle string) *UserNotification {
 	x.inner.SetActionButtonTitle(foundation.NSStringStringWithUTF8String(actionButtonTitle))
 	return x
 }
 
+// Application-specific user info that can be attached to the notification.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *UserNotification) WithUserInfo(userInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotification {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
+// Specifies when the notification should be delivered.
+//
 // WithDeliveryDate sets the deliveryDate property and returns the receiver for chaining.
 func (x *UserNotification) WithDeliveryDate(deliveryDate DateProvider) *UserNotification {
 	x.inner.SetDeliveryDate(deliveryDate.asDate())
 	return x
 }
 
+// Specify the time zone to interpret the delivery date in.
+//
 // WithDeliveryTimeZone sets the deliveryTimeZone property and returns the receiver for chaining.
 func (x *UserNotification) WithDeliveryTimeZone(deliveryTimeZone *TimeZone) *UserNotification {
 	x.inner.SetDeliveryTimeZone(deliveryTimeZone.Unwrap())
 	return x
 }
 
+// Specifies the date components that control how often a user notification is repeated.
+//
 // WithDeliveryRepeatInterval sets the deliveryRepeatInterval property and returns the receiver for chaining.
 func (x *UserNotification) WithDeliveryRepeatInterval(deliveryRepeatInterval *DateComponents) *UserNotification {
 	x.inner.SetDeliveryRepeatInterval(deliveryRepeatInterval.Unwrap())
 	return x
 }
 
+// Specifies the name of the sound to play when the notification is delivered.
+//
 // WithSoundName sets the soundName property and returns the receiver for chaining.
 func (x *UserNotification) WithSoundName(soundName string) *UserNotification {
 	x.inner.SetSoundName(foundation.NSStringStringWithUTF8String(soundName))
 	return x
 }
 
+// A Boolean value that specifies whether the notification displays an action button.
+//
 // WithHasActionButton sets the hasActionButton property and returns the receiver for chaining.
 func (x *UserNotification) WithHasActionButton(hasActionButton bool) *UserNotification {
 	x.inner.SetHasActionButton(hasActionButton)
 	return x
 }
 
+// Specifies a custom title for the close button in an alert-style notification.
+//
 // WithOtherButtonTitle sets the otherButtonTitle property and returns the receiver for chaining.
 func (x *UserNotification) WithOtherButtonTitle(otherButtonTitle string) *UserNotification {
 	x.inner.SetOtherButtonTitle(foundation.NSStringStringWithUTF8String(otherButtonTitle))
 	return x
 }
 
+// A string that uniquely identifies a notification.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *UserNotification) WithIdentifier(identifier string) *UserNotification {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// Image shown in the content of the notification.
+//
 // WithContentImage sets the contentImage property and returns the receiver for chaining.
 func (x *UserNotification) WithContentImage(contentImage objc.ID) *UserNotification {
 	x.inner.SetContentImage(contentImage)
 	return x
 }
 
+// A Boolean value that specifies whether the notification displays a reply button.
+//
 // WithHasReplyButton sets the hasReplyButton property and returns the receiver for chaining.
 func (x *UserNotification) WithHasReplyButton(hasReplyButton bool) *UserNotification {
 	x.inner.SetHasReplyButton(hasReplyButton)
 	return x
 }
 
+// Optional placeholder string for inline reply field.
+//
 // WithResponsePlaceholder sets the responsePlaceholder property and returns the receiver for chaining.
 func (x *UserNotification) WithResponsePlaceholder(responsePlaceholder string) *UserNotification {
 	x.inner.SetResponsePlaceholder(foundation.NSStringStringWithUTF8String(responsePlaceholder))
 	return x
 }
 
+// The actions that can be taken on a notification in addition to the default action.
+//
 // WithAdditionalActions sets the collection, converting the Go slice to an NSArray.
 func (x *UserNotification) WithAdditionalActions(items ...*raw.NSUserNotificationAction) *UserNotification {
 	if len(items) == 0 {

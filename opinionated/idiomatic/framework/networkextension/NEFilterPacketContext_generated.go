@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The context object provided to the filter packet handler.
+//
 // NEFilterPacketContext wraps [raw.NEFilterPacketContext] with a fluent Go API.
 type NEFilterPacketContext struct {
 	inner *raw.NEFilterPacketContext

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a collection of key-value information that a Core ML image-analysis request produces.
+//
 // CoreMLFeatureValueObservation wraps [raw.VNCoreMLFeatureValueObservation] with a fluent Go API.
 type CoreMLFeatureValueObservation struct {
 	inner *raw.VNCoreMLFeatureValueObservation

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays a Live Photo—a picture that also includes motion and sound from the moments just before and after its capture.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phlivephotoview
 type PHLivePhotoView struct {
 	appkit.NSView
@@ -47,16 +49,17 @@ func PHLivePhotoViewFromID(id objc.ID) *PHLivePhotoView {
 	return o
 }
 
-// The following methods allow the client to manually trigger playback. If the live photo is changed during playback, it will be immediately interrupted.
+// Begins playback of Live Photo content in the view.
 func (o *PHLivePhotoView) StartPlaybackWithStyle(playbackStyle PHLivePhotoViewPlaybackStyle) {
 	o.Ptr().Send(_pHLivePhotoViewSelStartPlaybackWithStyle, playbackStyle)
 }
 
+// Stops playback of a Live Photo.
 func (o *PHLivePhotoView) StopPlayback() {
 	o.Ptr().Send(_pHLivePhotoViewSelStopPlayback)
 }
 
-// Stops live photo playback. If animated is NO, the photo is immediately displayed.
+// Stops playback of a Live Photo in an animated manner.
 func (o *PHLivePhotoView) StopPlaybackAnimated(animated bool) {
 	o.Ptr().Send(_pHLivePhotoViewSelStopPlaybackAnimated, animated)
 }

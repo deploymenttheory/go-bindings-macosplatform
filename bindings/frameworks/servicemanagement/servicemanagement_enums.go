@@ -64,6 +64,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Constants that describe the registration or authorization status of a helper executable.
 type SMAppServiceStatus int64
 
 const (

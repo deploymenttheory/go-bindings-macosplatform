@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that defines behavior and policies for a URL session.
+//
 // URLSessionConfiguration wraps [raw.NSURLSessionConfiguration] with a fluent Go API.
 type URLSessionConfiguration struct {
 	inner *raw.NSURLSessionConfiguration

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that describes the layout of items within a scrubber control.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberlayout
 type NSScrubberLayout struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func NSScrubberLayoutFromID(id objc.ID) *NSScrubberLayout {
 	return o
 }
 
+// Initializes and returns a newly allocated scrubber layout object from code.
 func (o *NSScrubberLayout) Init() *NSScrubberLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInit)
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func (o *NSScrubberLayout) Init() *NSScrubberLayout {
 	return NSScrubberLayoutFromID(_ret)
 }
 
+// Initializes and returns a newly allocated scrubber layout object from a storyboard or nib file.
 func (o *NSScrubberLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -60,17 +64,17 @@ func (o *NSScrubberLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberL
 	return NSScrubberLayoutFromID(_ret)
 }
 
-// Signals that layout has been invalidated and the NSScrubber should run a fresh layout pass. Subclasses may define more granular invalidation methods suitable for their own data structures, but those methods should always call up to -invalidateLayout.
+// Signals that the layout has been invalidated, and that the scrubber control should perform a new layout pass.
 func (o *NSScrubberLayout) InvalidateLayout() {
 	o.Ptr().Send(_nSScrubberLayoutSelInvalidateLayout)
 }
 
-// Following any invalidation in layout, @c NSScrubber will call @c prepareLayout on its layout object prior to requesting any other layout information. Subclasses should use this method to perform upfront calculations and caching. The base implementation of this method does nothing.
+// Gives you an opportunity to perform layout calculations when the scrubber’s layout is invalidated.
 func (o *NSScrubberLayout) PrepareLayout() {
 	o.Ptr().Send(_nSScrubberLayoutSelPrepareLayout)
 }
 
-// Returns the layout attributes for a single item within the scrubber. The base implementation returns @c nil.
+// The layout attributes for the item with the specified index.
 func (o *NSScrubberLayout) LayoutAttributesForItemAtIndex(index int) *NSScrubberLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemAtIndex, index)
 	if _ret != 0 {
@@ -79,7 +83,7 @@ func (o *NSScrubberLayout) LayoutAttributesForItemAtIndex(index int) *NSScrubber
 	return NSScrubberLayoutAttributesFromID(_ret)
 }
 
-// Returns the set of layout attributes for all items within the provided rectangle. The base implementation returns an empty set.
+// The set of layout attributes for all items within the provided rectangle.
 func (o *NSScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*NSScrubberLayoutAttributes] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemsInRect, rect)
 	if _ret != 0 {
@@ -88,7 +92,7 @@ func (o *NSScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CG
 	return foundation.NSSetFromID[*NSScrubberLayoutAttributes](_ret)
 }
 
-// If @c YES, the scrubber will invalidate its layout in response to a change in the visible region. The default value is @c NO. Subclasses which rely on the size or origin of the visible region should return @c YES.
+// Determines whether the scrubber should refresh its layout in response to a change of its visible region.
 func (o *NSScrubberLayout) ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect, fromVisibleRect, toVisibleRect)
 	return _ret

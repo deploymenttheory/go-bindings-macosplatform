@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that represents the paths, boundaries, and other properties of a stroke drawn on a canvas.
+//
 // Stroke wraps [raw.PKStroke] with a fluent Go API.
 type Stroke struct {
 	inner *raw.PKStroke

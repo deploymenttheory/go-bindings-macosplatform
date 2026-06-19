@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for joints, vehicle simulations, and other high-level behaviors that incorporate multiple physics bodies.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsbehavior
 type SCNPhysicsBehavior struct {
 	foundation.NSObject

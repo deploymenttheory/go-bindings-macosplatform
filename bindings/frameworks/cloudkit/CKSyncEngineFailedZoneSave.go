@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an unsuccessful attempt to modify a single record zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefailedzonesave
 type CKSyncEngineFailedZoneSave struct {
 	foundation.NSObject

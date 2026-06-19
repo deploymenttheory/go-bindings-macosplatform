@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a model, primarily the input and output format for each feature the model expects, and optional metadata.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodeldescription
 type MLModelDescription struct {
 	foundation.NSObject
@@ -41,20 +43,29 @@ func MLModelDescriptionFromID(id objc.ID) *MLModelDescription {
 
 // Description of the inputs to the model
 func (o *MLModelDescription) InputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription]](o.Ptr(), _mLModelDescriptionSelInputDescriptionsByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelInputDescriptionsByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLFeatureDescription](_ret)
 }
 
 // Description of the outputs from the model
 func (o *MLModelDescription) OutputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription]](o.Ptr(), _mLModelDescriptionSelOutputDescriptionsByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelOutputDescriptionsByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLFeatureDescription](_ret)
 }
 
 // Description of the state features.
 func (o *MLModelDescription) StateDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription]](o.Ptr(), _mLModelDescriptionSelStateDescriptionsByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelStateDescriptionsByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLFeatureDescription](_ret)
 }
 
 // Name of the primary target / predicted output feature in the output descriptions
@@ -77,14 +88,20 @@ func (o *MLModelDescription) PredictedProbabilitiesName() *foundation.NSString {
 
 // Optional metadata describing the model
 func (o *MLModelDescription) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mLModelDescriptionSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Array to map a class index to the corresponding label, which is either Number or String. The property is populated from the classLabels entry specified in the model's protobuf message. When the model is a pipeline, which contains one or more sub models, the property value is calculated as follows. 1. If the pipeline model's proto message specifies predictedFeatureName parameter, use classLabels property value of the sub model with the output feature with the name. 2. Otherwise, if the pipeline model has only one sub model with non-nil classLabels property, use the property value. 3. Otherwise, the property is nil.
 func (o *MLModelDescription) ClassLabels() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mLModelDescriptionSelClassLabels)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelClassLabels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MLModelDescription) IsUpdatable() bool {
@@ -93,8 +110,11 @@ func (o *MLModelDescription) IsUpdatable() bool {
 }
 
 func (o *MLModelDescription) TrainingInputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLFeatureDescription]](o.Ptr(), _mLModelDescriptionSelTrainingInputDescriptionsByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelTrainingInputDescriptionsByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLFeatureDescription](_ret)
 }
 
 func (o *MLModelDescription) ParameterDescriptionsByKey() *foundation.NSDictionary[*MLParameterKey, *MLParameterDescription] {

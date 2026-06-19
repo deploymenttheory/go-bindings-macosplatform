@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that pairs a sound classifier’s prediction with its confidence in that prediction.
+//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snclassification
 type SNClassification struct {
 	foundation.NSObject

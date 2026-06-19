@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Your app’s response to an intent that shares the user’s focus status.
+//
 // ShareFocusStatusIntentResponse wraps [raw.INShareFocusStatusIntentResponse] with a fluent Go API.
 type ShareFocusStatusIntentResponse struct {
 	inner *raw.INShareFocusStatusIntentResponse
@@ -32,6 +34,8 @@ func ShareFocusStatusIntentResponseFromID(id objc.ID) *ShareFocusStatusIntentRes
 	return &ShareFocusStatusIntentResponse{inner: raw.INShareFocusStatusIntentResponseFromID(id)}
 }
 
+// Creates a response with the specified response code and user activity.
+//
 // NewShareFocusStatusIntentResponseWithCodeUserActivity creates a new [ShareFocusStatusIntentResponse].
 func NewShareFocusStatusIntentResponseWithCodeUserActivity(code INShareFocusStatusIntentResponseCode, userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShareFocusStatusIntentResponse")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewShareFocusStatusIntentResponseWithCodeUserActivity(code INShareFocusStat
 	return &ShareFocusStatusIntentResponse{inner: raw.INShareFocusStatusIntentResponseFromID(_id)}
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ShareFocusStatusIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse {
 	x.inner.INIntentResponse.SetUserActivity(userActivity)

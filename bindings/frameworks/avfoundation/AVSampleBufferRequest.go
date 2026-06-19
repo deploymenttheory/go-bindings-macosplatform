@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a sample buffer creation request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebufferrequest
 type AVSampleBufferRequest struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func AVSampleBufferRequestFromID(id objc.ID) *AVSampleBufferRequest {
 	return o
 }
 
+// Creates a newly allocated sample buffer request with the specified sample cursor.
 func (o *AVSampleBufferRequest) InitWithStartCursor(startCursor *AVSampleCursor) *AVSampleBufferRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferRequestSelInitWithStartCursor, startCursor.Ptr())
 	if _ret != 0 {

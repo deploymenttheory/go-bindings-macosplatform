@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A camera zoom range that limits the distances to which the user can zoom.
+//
 // MapCameraZoomRange wraps [raw.MKMapCameraZoomRange] with a fluent Go API.
 type MapCameraZoomRange struct {
 	inner *raw.MKMapCameraZoomRange

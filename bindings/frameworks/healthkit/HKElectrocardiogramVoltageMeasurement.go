@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The voltage for all leads at a single point in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkelectrocardiogramvoltagemeasurement
 type HKElectrocardiogramVoltageMeasurement struct {
 	foundation.NSObject

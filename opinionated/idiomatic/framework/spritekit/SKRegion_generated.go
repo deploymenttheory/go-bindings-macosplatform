@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The definition of an arbitrary area.
+//
 // Region wraps [raw.SKRegion] with a fluent Go API.
 type Region struct {
 	inner *raw.SKRegion
@@ -31,7 +33,7 @@ func RegionFromID(id objc.ID) *Region {
 	return &Region{inner: raw.SKRegionFromID(id)}
 }
 
-// Create a circular region with radius
+// Initializes a new region with a circular area.
 //
 // NewRegionWithRadius creates a new [Region].
 func NewRegionWithRadius(radius float32) *Region {
@@ -40,7 +42,7 @@ func NewRegionWithRadius(radius float32) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
-// Create a rectangular region of size
+// Initializes a new region with a rectangular area.
 //
 // NewRegionWithSize creates a new [Region].
 func NewRegionWithSize(size corefoundation.CGSize) *Region {
@@ -49,7 +51,7 @@ func NewRegionWithSize(size corefoundation.CGSize) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
-// Create a region bounded by a CGPath. Note that this option can be costly to evaluate.
+// Initializes a new region using a Core Graphics path.
 //
 // NewRegionWithPath creates a new [Region].
 func NewRegionWithPath(path unsafe.Pointer) *Region {
@@ -58,7 +60,7 @@ func NewRegionWithPath(path unsafe.Pointer) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
-// Create a new region that is the inverse of the current region. The inverse of the infiniteRegion is an empty region. Subclasses of SKRegion need to provide an implementation of inverseRegion.
+// Returns a new region that is the mathematical inverse of an existing region.
 //
 // InverseRegion calls the underlying InverseRegion.
 func (x *Region) InverseRegion() *Region {
@@ -69,7 +71,7 @@ func (x *Region) InverseRegion() *Region {
 	return &Region{inner: _r}
 }
 
-// Create a new region that is the original region plus the supplied region
+// Returns a new region created by combining the contents of this region with another region.
 //
 // RegionByUnionWithRegion calls the underlying RegionByUnionWithRegion.
 func (x *Region) RegionByUnionWithRegion(region *raw.SKRegion) *Region {
@@ -80,7 +82,7 @@ func (x *Region) RegionByUnionWithRegion(region *raw.SKRegion) *Region {
 	return &Region{inner: _r}
 }
 
-// Create a new region that is the original region minus the supplied region
+// Returns a new region created by subtracting the contents of another region from this region.
 //
 // RegionByDifferenceFromRegion calls the underlying RegionByDifferenceFromRegion.
 func (x *Region) RegionByDifferenceFromRegion(region *raw.SKRegion) *Region {
@@ -91,7 +93,7 @@ func (x *Region) RegionByDifferenceFromRegion(region *raw.SKRegion) *Region {
 	return &Region{inner: _r}
 }
 
-// Create a new region that is the region covered by the original region and the supplied region
+// Returns a new region created by intersecting the contents of this region with another region.
 //
 // RegionByIntersectionWithRegion calls the underlying RegionByIntersectionWithRegion.
 func (x *Region) RegionByIntersectionWithRegion(region *raw.SKRegion) *Region {
@@ -102,7 +104,7 @@ func (x *Region) RegionByIntersectionWithRegion(region *raw.SKRegion) *Region {
 	return &Region{inner: _r}
 }
 
-// Test for containment
+// Returns a Boolean value that indicates whether a particular point is contained in the region.
 //
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *Region) ContainsPoint(point corefoundation.CGPoint) bool {

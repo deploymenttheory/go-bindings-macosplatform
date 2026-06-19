@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A lock that may be acquired multiple times by the same thread without causing a deadlock.
+//
 // RecursiveLock wraps [raw.NSRecursiveLock] with a fluent Go API.
 type RecursiveLock struct {
 	inner *raw.NSRecursiveLock
@@ -36,6 +38,8 @@ func NewRecursiveLock() *RecursiveLock {
 	return &RecursiveLock{inner: raw.NSRecursiveLockFromID(_id)}
 }
 
+// The name associated with the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *RecursiveLock) WithName(name string) *RecursiveLock {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
@@ -48,11 +52,15 @@ func (x *RecursiveLock) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
+//
 // TryLock calls the underlying TryLock.
 func (x *RecursiveLock) TryLock() bool {
 	return x.inner.TryLock()
 }
 
+// Attempts to acquire a lock before a given date.
+//
 // LockBeforeDate calls the underlying LockBeforeDate.
 func (x *RecursiveLock) LockBeforeDate(limit *raw.NSDate) bool {
 	return x.inner.LockBeforeDate(limit)

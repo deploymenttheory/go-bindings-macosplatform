@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient upsampling filter that samples the pixel nearest to the source when upsampling to the destination pixel.
+//
 // CNNUpsamplingNearestGradient wraps [raw.MPSCNNUpsamplingNearestGradient] with a fluent Go API.
 type CNNUpsamplingNearestGradient struct {
 	inner *raw.MPSCNNUpsamplingNearestGradient
@@ -186,7 +188,7 @@ func (x *CNNUpsamplingNearestGradient) WithDestinationImageAllocator(destination
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNUpsamplingNearestGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingNearestGradient {
@@ -194,7 +196,7 @@ func (x *CNNUpsamplingNearestGradient) WithOptions(options mpscore.MPSKernelOpti
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNUpsamplingNearestGradient) WithLabel(label string) *CNNUpsamplingNearestGradient {

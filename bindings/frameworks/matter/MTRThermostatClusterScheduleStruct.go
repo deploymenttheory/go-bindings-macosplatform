@@ -90,12 +90,15 @@ func (o *MTRThermostatClusterScheduleStruct) SetPresetHandle(presetHandle *found
 }
 
 func (o *MTRThermostatClusterScheduleStruct) Transitions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRThermostatClusterScheduleStructSelTransitions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleStructSelTransitions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRThermostatClusterScheduleStruct) SetTransitions(transitions *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRThermostatClusterScheduleStructSelSetTransitions, transitions)
+	o.Ptr().Send(_mTRThermostatClusterScheduleStructSelSetTransitions, transitions.Ptr())
 }
 
 func (o *MTRThermostatClusterScheduleStruct) BuiltIn() *foundation.NSNumber {

@@ -45,7 +45,7 @@ func (o *MPSNDArrayMultiaryGradientKernel) InitWithDeviceSourceCountSourceGradie
 }
 
 func (o *MPSNDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientState, cmdBuf, sources, gradient.Ptr(), state.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientState, cmdBuf, sources.Ptr(), gradient.Ptr(), state.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -53,5 +53,5 @@ func (o *MPSNDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSour
 }
 
 func (o *MPSNDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	o.Ptr().Send(_mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray, cmdBuf, sources, gradient.Ptr(), state.Ptr(), destination.Ptr())
+	o.Ptr().Send(_mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray, cmdBuf, sources.Ptr(), gradient.Ptr(), state.Ptr(), destination.Ptr())
 }

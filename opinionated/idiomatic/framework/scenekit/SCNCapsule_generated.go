@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A right circular cylinder geometry whose ends are capped with hemispheres.
+//
 // Capsule wraps [raw.SCNCapsule] with a fluent Go API.
 type Capsule struct {
 	inner *raw.SCNCapsule
@@ -37,7 +39,7 @@ func NewCapsule() *Capsule {
 	return &Capsule{inner: raw.SCNCapsuleFromID(_id)}
 }
 
-// @property capRadius @abstract The cap radius of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+// The radius both of the capsule’s circular center cross section and of its hemispherical ends. Animatable.
 //
 // WithCapRadius sets the capRadius property and returns the receiver for chaining.
 func (x *Capsule) WithCapRadius(capRadius float64) *Capsule {
@@ -45,7 +47,7 @@ func (x *Capsule) WithCapRadius(capRadius float64) *Capsule {
 	return x
 }
 
-// @property height @abstract The height of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 2.
+// The extent of the capsule along its y-axis. Animatable.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Capsule) WithHeight(height float64) *Capsule {
@@ -53,7 +55,7 @@ func (x *Capsule) WithHeight(height float64) *Capsule {
 	return x
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+// The number of subdivisions around the lateral circumference of the capsule. Animatable.
 //
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithRadialSegmentCount(radialSegmentCount int) *Capsule {
@@ -61,7 +63,7 @@ func (x *Capsule) WithRadialSegmentCount(radialSegmentCount int) *Capsule {
 	return x
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in the sides of the capsule along its y-axis. Animatable.
 //
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
@@ -69,7 +71,7 @@ func (x *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
 	return x
 }
 
-// @property capSegmentCount @abstract The number of subdivisions in the cap. Animatable. @discussion If the value is less than 2, the behavior is undefined. The default value is 24.
+// The number of subdivisions in the height of each hemispherical end of the capsule. Animatable.
 //
 // WithCapSegmentCount sets the capSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
@@ -77,7 +79,7 @@ func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Capsule) WithName(name string) *Capsule {
@@ -85,7 +87,7 @@ func (x *Capsule) WithName(name string) *Capsule {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
@@ -108,7 +110,7 @@ func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
@@ -116,7 +118,7 @@ func (x *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Capsule) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule {
@@ -145,7 +147,7 @@ func (x *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Capsule) WithSubdivisionLevel(subdivisionLevel uint) *Capsule {
@@ -161,7 +163,7 @@ func (x *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *C
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
@@ -169,7 +171,7 @@ func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *C
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {

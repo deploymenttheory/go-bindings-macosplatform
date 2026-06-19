@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An extensible enumerator for PHProjectType that’s presented to users in the project picker.
+//
 // ProjectTypeDescription wraps [raw.PHProjectTypeDescription] with a fluent Go API.
 type ProjectTypeDescription struct {
 	inner *raw.PHProjectTypeDescription
@@ -32,7 +34,7 @@ func ProjectTypeDescriptionFromID(id objc.ID) *ProjectTypeDescription {
 	return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(id)}
 }
 
-// Designated initalizer for instances with the full subtype hierarchy upfront.
+// A designated initializer for project type descriptions with the full subtype hierarchy specified up front and a standard string for description text.
 //
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescriptions creates a new [ProjectTypeDescription].
 func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescriptions(projectType *foundation.NSString, localizedTitle string, localizedDescription string, image *appkit.NSImage, subtypeDescriptions *foundation.NSArray[*raw.PHProjectTypeDescription]) *ProjectTypeDescription {
@@ -41,7 +43,7 @@ func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescrip
 	return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(_id)}
 }
 
-// Designated initalizer for instances with the full subtype hierarchy upfront and an attributed string for the description text.
+// A designated initializer for project type descriptions with the full subtype hierarchy specified up front and an attributed string for description text.
 //
 // NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageSubtypeDescriptions creates a new [ProjectTypeDescription].
 func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageSubtypeDescriptions(projectType *foundation.NSString, localizedTitle string, localizedAttributedDescription *foundation.NSAttributedString, image *appkit.NSImage, subtypeDescriptions *foundation.NSArray[*raw.PHProjectTypeDescription]) *ProjectTypeDescription {
@@ -50,7 +52,7 @@ func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageSubt
 	return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(_id)}
 }
 
-// Convenience initializer without subtype descriptions.
+// A convenience initializer without subtype descriptions.
 //
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImage creates a new [ProjectTypeDescription].
 func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImage(projectType *foundation.NSString, localizedTitle string, localizedDescription string, image *appkit.NSImage) *ProjectTypeDescription {
@@ -59,7 +61,7 @@ func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImage(projectType *
 	return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(_id)}
 }
 
-// Designated initalizer for instances with lazily fetched subtypes.
+// A designated initializer for project type descriptions with lazily fetched subtypes and a standard description string.
 //
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageCanProvideSubtypes creates a new [ProjectTypeDescription].
 func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageCanProvideSubtypes(projectType *foundation.NSString, localizedTitle string, localizedDescription string, image *appkit.NSImage, canProvideSubtypes bool) *ProjectTypeDescription {
@@ -68,7 +70,7 @@ func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageCanProvideSubt
 	return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(_id)}
 }
 
-// Designated initalizer for instances with lazily fetched subtypes and an attributed string for the description text.
+// A designated initializer for project type descriptions with lazily fetched subtypes and an attributed description string.
 //
 // NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageCanProvideSubtypes creates a new [ProjectTypeDescription].
 func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageCanProvideSubtypes(projectType *foundation.NSString, localizedTitle string, localizedAttributedDescription *foundation.NSAttributedString, image *appkit.NSImage, canProvideSubtypes bool) *ProjectTypeDescription {

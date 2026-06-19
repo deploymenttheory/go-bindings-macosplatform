@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An obstacle with an impassible radius
+// A circular impassable area to be avoided by agents.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcircleobstacle
 type GKCircleObstacle struct {
@@ -38,6 +38,7 @@ func GKCircleObstacleFromID(id objc.ID) *GKCircleObstacle {
 	return o
 }
 
+// Creates a circular obstacle with the specified radius.
 func GKCircleObstacleObstacleWithRadius(radius float32) *GKCircleObstacle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCircleObstacle), _gKCircleObstacleSelObstacleWithRadius, radius)
 	if _ret != 0 {
@@ -46,6 +47,7 @@ func GKCircleObstacleObstacleWithRadius(radius float32) *GKCircleObstacle {
 	return GKCircleObstacleFromID(_ret)
 }
 
+// Initializes a circular obstacle with the specified radius.
 func (o *GKCircleObstacle) InitWithRadius(radius float32) *GKCircleObstacle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKCircleObstacleSelInitWithRadius, radius)
 	if _ret != 0 {

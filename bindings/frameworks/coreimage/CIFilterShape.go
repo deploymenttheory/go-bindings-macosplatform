@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the bounding shape of a filter and the domain of definition for a filter operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cifiltershape
 type CIFilterShape struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func CIFilterShapeFromID(id objc.ID) *CIFilterShape {
 	return o
 }
 
+// Creates a filter shape object and initializes it with a rectangle.
 func CIFilterShapeShapeWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilterShape), _cIFilterShapeSelShapeWithRect, r)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func CIFilterShapeShapeWithRect(r corefoundation.CGRect) *CIFilterShape {
 	return CIFilterShapeFromID(_ret)
 }
 
+// Initializes a filter shape object with a rectangle.
 func (o *CIFilterShape) InitWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelInitWithRect, r)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func (o *CIFilterShape) InitWithRect(r corefoundation.CGRect) *CIFilterShape {
 	return CIFilterShapeFromID(_ret)
 }
 
+// Creates a filter shape that results from applying a transform to the current filter shape.
 func (o *CIFilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelTransformByInterior, m, flag)
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func (o *CIFilterShape) TransformByInterior(m corefoundation.CGAffineTransform, 
 	return CIFilterShapeFromID(_ret)
 }
 
+// Modifies a filter shape object so that it is inset by the specified x and y values.
 func (o *CIFilterShape) InsetByXY(dx int, dy int) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelInsetByXY, dx, dy)
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func (o *CIFilterShape) InsetByXY(dx int, dy int) *CIFilterShape {
 	return CIFilterShapeFromID(_ret)
 }
 
+// Creates a filter shape that results from the union of the current filter shape and another filter shape object.
 func (o *CIFilterShape) UnionWith(s2 *CIFilterShape) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelUnionWith, s2.Ptr())
 	if _ret != 0 {
@@ -79,6 +86,7 @@ func (o *CIFilterShape) UnionWith(s2 *CIFilterShape) *CIFilterShape {
 	return CIFilterShapeFromID(_ret)
 }
 
+// Creates a filter shape that results from the union of the current filter shape and a rectangle.
 func (o *CIFilterShape) UnionWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelUnionWithRect, r)
 	if _ret != 0 {
@@ -87,6 +95,7 @@ func (o *CIFilterShape) UnionWithRect(r corefoundation.CGRect) *CIFilterShape {
 	return CIFilterShapeFromID(_ret)
 }
 
+// Creates a filter shape object that represents the intersection of the current filter shape and the specified filter shape object.
 func (o *CIFilterShape) IntersectWith(s2 *CIFilterShape) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelIntersectWith, s2.Ptr())
 	if _ret != 0 {
@@ -95,6 +104,7 @@ func (o *CIFilterShape) IntersectWith(s2 *CIFilterShape) *CIFilterShape {
 	return CIFilterShapeFromID(_ret)
 }
 
+// Creates a filter shape that represents the intersection of the current filter shape and a rectangle.
 func (o *CIFilterShape) IntersectWithRect(r corefoundation.CGRect) *CIFilterShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterShapeSelIntersectWithRect, r)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A track segment that maps a time from the source media track to the composition track.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcompositiontracksegment
 type AVCompositionTrackSegment struct {
 	AVAssetTrackSegment
@@ -36,7 +38,7 @@ func AVCompositionTrackSegmentFromID(id objc.ID) *AVCompositionTrackSegment {
 	return o
 }
 
-// @method			compositionTrackSegmentWithURL:trackID:sourceTimeRange:targetTimeRange: @abstract		Returns an instance of AVCompositionTrackSegment that presents a portion of a file referenced by URL. @param			URL An instance of NSURL that references the container file to be presented by the AVCompositionTrackSegment. @param			trackID The track identifier that specifies the track of the container file to be presented by the AVCompositionTrackSegment. @param			sourceTimeRange The timeRange of the track of the container file to be presented by the AVCompositionTrackSegment. @param			targetTimeRange The timeRange of the composition track during which the AVCompositionTrackSegment is to be presented. @result			An instance of AVCompositionTrackSegment. @discussion		To specify that the segment be played at the asset's normal rate, set source.duration == target.duration in the timeMapping. Otherwise, the segment will be played at a rate equal to the ratio source.duration / target.duration.
+// Returns a new an object that presents a segment of a media file that the specified URL references.
 func AVCompositionTrackSegmentCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL *foundation.NSURL, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCompositionTrackSegment), _aVCompositionTrackSegmentSelCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange, uRL.Ptr(), trackID, sourceTimeRange, targetTimeRange)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func AVCompositionTrackSegmentCompositionTrackSegmentWithURLTrackIDSourceTimeRan
 	return AVCompositionTrackSegmentFromID(_ret)
 }
 
-// @method			compositionTrackSegmentWithTimeRange: @abstract		Returns an instance of AVCompositionTrackSegment that presents an empty track segment. @param			timeRange The timeRange of the empty AVCompositionTrackSegment. @result			An instance of AVCompositionTrackSegment.
+// Returns a new object that presents an empty composition track segment.
 func AVCompositionTrackSegmentCompositionTrackSegmentWithTimeRange(timeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCompositionTrackSegment), _aVCompositionTrackSegmentSelCompositionTrackSegmentWithTimeRange, timeRange)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func AVCompositionTrackSegmentCompositionTrackSegmentWithTimeRange(timeRange cor
 	return AVCompositionTrackSegmentFromID(_ret)
 }
 
-// @method			initWithURL:trackID:sourceTimeRange:targetTimeRange: @abstract		Initializes an instance of AVCompositionTrackSegment that presents a portion of a file referenced by URL. @param			URL An instance of NSURL that references the container file to be presented by the AVCompositionTrackSegment. @param			trackID The track identifier that specifies the track of the container file to be presented by the AVCompositionTrackSegment. @param			sourceTimeRange The timeRange of the track of the container file to be presented by the AVCompositionTrackSegment. @param			targetTimeRange The timeRange of the composition track during which the AVCompositionTrackSegment is to be presented. @result			An instance of AVCompositionTrackSegment. @discussion		To specify that the segment be played at the asset's normal rate, set source.duration == target.duration in the timeMapping. Otherwise, the segment will be played at a rate equal to the ratio source.duration / target.duration.
+// Creates an object that presents a segment of a media file that the specified URL references.
 func (o *AVCompositionTrackSegment) InitWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL *foundation.NSURL, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCompositionTrackSegmentSelInitWithURLTrackIDSourceTimeRangeTargetTimeRange, uRL.Ptr(), trackID, sourceTimeRange, targetTimeRange)
 	if _ret != 0 {
@@ -63,7 +65,7 @@ func (o *AVCompositionTrackSegment) InitWithURLTrackIDSourceTimeRangeTargetTimeR
 	return AVCompositionTrackSegmentFromID(_ret)
 }
 
-// @method			initWithTimeRange: @abstract		Initializes an instance of AVCompositionTrackSegment that presents an empty track segment. @param			timeRange The timeRange of the empty AVCompositionTrackSegment. @result			An instance of AVCompositionTrackSegment.
+// Creates an object that presents an empty composition track segment.
 func (o *AVCompositionTrackSegment) InitWithTimeRange(timeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCompositionTrackSegmentSelInitWithTimeRange, timeRange)
 	if _ret != 0 {

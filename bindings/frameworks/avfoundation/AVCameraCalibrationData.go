@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the camera characteristics used to capture images and depth data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcameracalibrationdata
 type AVCameraCalibrationData struct {
 	foundation.NSObject

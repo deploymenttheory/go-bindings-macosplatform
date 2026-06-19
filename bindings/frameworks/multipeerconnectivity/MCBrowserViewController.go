@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
+//
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller
 type MCBrowserViewController struct {
 	appkit.NSViewController
@@ -40,6 +42,7 @@ func MCBrowserViewControllerFromID(id objc.ID) *MCBrowserViewController {
 	return o
 }
 
+// Initializes a browser view controller using the provided service type and session.
 func (o *MCBrowserViewController) InitWithServiceTypeSession(serviceType *foundation.NSString, session *MCSession) *MCBrowserViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithServiceTypeSession, serviceType.Ptr(), session.Ptr())
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func (o *MCBrowserViewController) InitWithServiceTypeSession(serviceType *founda
 	return MCBrowserViewControllerFromID(_ret)
 }
 
+// Initializes a browser view controller with the provided browser and session.
 func (o *MCBrowserViewController) InitWithBrowserSession(browser *MCNearbyServiceBrowser, session *MCSession) *MCBrowserViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithBrowserSession, browser.Ptr(), session.Ptr())
 	if _ret != 0 {

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A texture that may have more than four channels for use in convolutional neural networks.
+//
 // Image wraps [raw.MPSImage] with a fluent Go API.
 type Image struct {
 	inner *raw.MPSImage
@@ -34,7 +36,7 @@ func ImageFromID(id objc.ID) *Image {
 	return &Image{inner: raw.MPSImageFromID(id)}
 }
 
-// @abstract   Initialize an empty image object @param      device              The device that the image will be used. May not be NULL. @param      imageDescriptor     The MPSImageDescriptor. May not be NULL. @return     A valid MPSImage object or nil, if failure. @discussion Storage to store data needed is allocated lazily on first use of MPSImage or when application calls MPSImage.texture
+// Initializes an empty image.
 //
 // NewImageWithDeviceImageDescriptor creates a new [Image].
 func NewImageWithDeviceImageDescriptor(device metal.MTLDevice, imageDescriptor *mpscore.MPSImageDescriptor) *Image {
@@ -52,7 +54,7 @@ func NewImageWithParentImageSliceRangeFeatureChannels(parent *mpscore.MPSImage, 
 	return &Image{inner: raw.MPSImageFromID(_id)}
 }
 
-// @abstract   Initialize an MPSImage object using Metal texture. Metal texture has been created by user for specific number of feature channels and number of images. @param      texture          The MTLTexture allocated by the user to be used as backing for MPSImage. @param      featureChannels  Number of feature channels this texture contains. @return     A valid MPSImage object or nil, if failure. @discussion Application can let MPS framework allocate texture with properties specified in imageDescriptor using initWithDevice:MPSImageDescriptor API above. However in memory intensive application, you can save memory (and allocation/deallocation time) by using MPSTemporaryImage where MPS framework aggressively reuse memory underlying textures on same command buffer. See MPSTemporaryImage class for details below. However, in certain cases, application developer may want more control on allocation, placement, reusing/recycling of memory backing textures used in application using Metal Heaps API. In this case, application can create MPSImage from pre-allocated texture using initWithTexture:featureChannels. MTLTextureType of texture can be MTLTextureType2D ONLY if featureChannels <= 4 in which case MPSImage.numberOfImages is set to 1. Else it should be MTLTextureType2DArray with arrayLength == numberOfImage * ((featureChannels + 3)/4). MPSImage.numberOfImages is set to texture.arrayLength / ((featureChannels + 3)/4). For MTLTextures containing typical image data which application may obtain from MetalKit or other libraries such as that drawn from a JPEG or PNG, featureChannels should be set to number of valid color channel e.g. for RGB data, even thought MTLPixelFormat will be MTLPixelFormatRGBA, featureChannels should be set to 3.
+// Initializes an image from a texture. The user-allocated texture has been created for a specific number of feature channels and number of images.
 //
 // NewImageWithTextureFeatureChannels creates a new [Image].
 func NewImageWithTextureFeatureChannels(texture metal.MTLTexture, featureChannels uint) *Image {
@@ -61,7 +63,7 @@ func NewImageWithTextureFeatureChannels(texture metal.MTLTexture, featureChannel
 	return &Image{inner: raw.MPSImageFromID(_id)}
 }
 
-// @property label @abstract A string to help identify this object.
+// A string to help identify this object.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *Image) WithLabel(label string) *Image {
@@ -95,7 +97,7 @@ func (x *Image) ResourceSize() uint {
 	return x.inner.ResourceSize()
 }
 
-// @abstract       Set (or query) the purgeability state of a MPSImage @discussion     Usage is per [MTLResource setPurgeableState:], except that the MTLTexture might be MPSPurgeableStateAllocationDeferred, which means there is no texture to mark volatile / nonvolatile. Attempts to set purgeability on MTLTextures that have not been allocated will be ignored.
+// Set (or query) the purgeable state of the image’s underlying texture.
 //
 // SetPurgeableState calls the underlying SetPurgeableState.
 func (x *Image) SetPurgeableState(state mpscore.MPSPurgeableState) mpscore.MPSPurgeableState {

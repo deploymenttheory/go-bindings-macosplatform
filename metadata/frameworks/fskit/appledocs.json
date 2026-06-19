@@ -503,8 +503,8 @@
         "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/physicalblocksize"
       },
       "read(into:startingAt:length:)": {
-        "doc": "Synchronously reads data from the resource into a buffer.",
-        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/read(into:startingat:length:)-4ax6s"
+        "doc": "Asychronously reads data from the resource into a buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/read(into:startingat:length:)-5yozi"
       },
       "read(into:startingAt:length:completionHandler:)": {
         "doc": "Reads data from the resource into a buffer and executes a closure afterwards.",

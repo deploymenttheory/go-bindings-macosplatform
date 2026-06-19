@@ -205,7 +205,7 @@ func (x *TextLayoutManager) EnumerateTextLayoutFragmentsFromLocationOptionsUsing
 // Enumerates the rendering attributes from a location you specify.
 //
 // EnumerateRenderingAttributesFromLocationReverseUsing calls the underlying EnumerateRenderingAttributesFromLocationReverseUsing.
-func (x *TextLayoutManager) EnumerateRenderingAttributesFromLocationReverseUsing(location raw.NSTextLocation, reverse bool, block objc.Block) {
+func (x *TextLayoutManager) EnumerateRenderingAttributesFromLocationReverseUsing(location raw.NSTextLocation, reverse bool, block func(*raw.NSTextLayoutManager, *foundation.NSDictionary[*foundation.NSString, objc.ID], *raw.NSTextRange) bool) {
 	x.inner.EnumerateRenderingAttributesFromLocationReverseUsing(location, reverse, block)
 }
 
@@ -435,7 +435,7 @@ type TextLayoutManagerable interface {
 	TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment
 	TextLayoutFragmentForLocation(location raw.NSTextLocation) *TextLayoutFragment
 	EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location raw.NSTextLocation, options NSTextLayoutFragmentEnumerationOptions, block func(*raw.NSTextLayoutFragment) bool) raw.NSTextLocation
-	EnumerateRenderingAttributesFromLocationReverseUsing(location raw.NSTextLocation, reverse bool, block objc.Block)
+	EnumerateRenderingAttributesFromLocationReverseUsing(location raw.NSTextLocation, reverse bool, block func(*raw.NSTextLayoutManager, *foundation.NSDictionary[*foundation.NSString, objc.ID], *raw.NSTextRange) bool)
 	SetRenderingAttributesForTextRange(renderingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textRange *raw.NSTextRange)
 	AddRenderingAttributeValueForTextRange(renderingAttribute *foundation.NSString, value objc.ID, textRange *raw.NSTextRange)
 	RemoveRenderingAttributeForTextRange(renderingAttribute *foundation.NSString, textRange *raw.NSTextRange)

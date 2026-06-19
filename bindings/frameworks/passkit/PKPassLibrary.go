@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Provides an interface to the user’s library of passes.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpasslibrary
 type PKPassLibrary struct {
 	foundation.NSObject
@@ -62,11 +64,13 @@ func PKPassLibraryFromID(id objc.ID) *PKPassLibrary {
 	return o
 }
 
+// Returns a Boolean value that indicates whether the pass library is available.
 func PKPassLibraryIsPassLibraryAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsPKPassLibrary), _pKPassLibrarySelIsPassLibraryAvailable)
 	return _ret
 }
 
+// Prevents the device from automatically displaying the Apple Pay interface.
 func PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler(responseHandler func(PKAutomaticPassPresentationSuppressionResult)) uint {
 	var __block_responseHandler objc.Block
 	if responseHandler != nil {
@@ -79,10 +83,12 @@ func PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler
 	return _ret
 }
 
+// Reenables the automatic display of the Apple Pay interface.
 func PKPassLibraryEndAutomaticPassPresentationSuppressionWithRequestToken(requestToken uint) {
 	objc.ID(_clsPKPassLibrary).Send(_pKPassLibrarySelEndAutomaticPassPresentationSuppressionWithRequestToken, requestToken)
 }
 
+// Returns a Boolean value that indicates whether the system suppresses the automatic presentation of Apple Pay passes.
 func PKPassLibraryIsSuppressingAutomaticPassPresentation() bool {
 	_ret := objc.Send[bool](objc.ID(_clsPKPassLibrary), _pKPassLibrarySelIsSuppressingAutomaticPassPresentation)
 	return _ret
@@ -98,6 +104,7 @@ func (o *PKPassLibrary) IsPaymentPassActivationAvailable() bool {
 	return _ret
 }
 
+// Returns the passes in the user’s pass library that the app can access.
 func (o *PKPassLibrary) Passes() *foundation.NSArray[*PKPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPasses)
 	if _ret != 0 {
@@ -106,6 +113,7 @@ func (o *PKPassLibrary) Passes() *foundation.NSArray[*PKPass] {
 	return foundation.NSArrayFromID[*PKPass](_ret)
 }
 
+// Returns the pass with the specified pass type identifier and serial number.
 func (o *PKPassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier *foundation.NSString, serialNumber *foundation.NSString) *PKPass {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPassWithPassTypeIdentifierSerialNumber, identifier.Ptr(), serialNumber.Ptr())
 	if _ret != 0 {
@@ -122,6 +130,7 @@ func (o *PKPassLibrary) PassesWithReaderIdentifier(readerIdentifier *foundation.
 	return foundation.NSSetFromID[*PKSecureElementPass](_ret)
 }
 
+// Returns the passes of the specified pass type.
 func (o *PKPassLibrary) PassesOfType(passType PKPassType) *foundation.NSArray[*PKPass] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassLibrarySelPassesOfType, passType)
 	if _ret != 0 {
@@ -138,20 +147,24 @@ func (o *PKPassLibrary) RemotePaymentPasses() *foundation.NSArray[*PKPaymentPass
 	return foundation.NSArrayFromID[*PKPaymentPass](_ret)
 }
 
+// Removes the pass from the user’s pass library.
 func (o *PKPassLibrary) RemovePass(pass *PKPass) {
 	o.Ptr().Send(_pKPassLibrarySelRemovePass, pass.Ptr())
 }
 
+// Returns a Boolean value that indicates whether the user’s pass library contains the specified pass.
 func (o *PKPassLibrary) ContainsPass(pass *PKPass) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKPassLibrarySelContainsPass, pass.Ptr())
 	return _ret
 }
 
+// Replaces a pass in the user’s pass library with the specified pass.
 func (o *PKPassLibrary) ReplacePassWithPass(pass *PKPass) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKPassLibrarySelReplacePassWithPass, pass.Ptr())
 	return _ret
 }
 
+// Presents a user interface for adding multiple passes at once.
 func (o *PKPassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArray[*PKPass], completion func(PKPassLibraryAddPassesStatus)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -163,6 +176,7 @@ func (o *PKPassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArra
 	o.Ptr().Send(_pKPassLibrarySelAddPassesWithCompletionHandler, passes.Ptr(), __block_completion)
 }
 
+// Opens the user interface to set up credit cards for Apple Pay.
 func (o *PKPassLibrary) OpenPaymentSetup() {
 	o.Ptr().Send(_pKPassLibrarySelOpenPaymentSetup)
 }
@@ -175,6 +189,7 @@ func (o *PKPassLibrary) PresentPaymentPass(pass *PKPaymentPass) {
 	o.Ptr().Send(_pKPassLibrarySelPresentPaymentPass, pass.Ptr())
 }
 
+// Presents a Secure Element pass.
 func (o *PKPassLibrary) PresentSecureElementPass(pass *PKSecureElementPass) {
 	o.Ptr().Send(_pKPassLibrarySelPresentSecureElementPass, pass.Ptr())
 }
@@ -184,11 +199,13 @@ func (o *PKPassLibrary) CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAcc
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether PassKit can add a Secure Element pass for the specified account.
 func (o *PKPassLibrary) CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKPassLibrarySelCanAddSecureElementPassWithPrimaryAccountIdentifier, primaryAccountIdentifier.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the library can add FeliCa™ passes.
 func (o *PKPassLibrary) CanAddFelicaPass() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKPassLibrarySelCanAddFelicaPass)
 	return _ret
@@ -216,6 +233,7 @@ func (o *PKPassLibrary) ActivatePaymentPassWithActivationCodeCompletion(paymentP
 	o.Ptr().Send(_pKPassLibrarySelActivatePaymentPassWithActivationCodeCompletion, paymentPass.Ptr(), activationCode.Ptr(), __block_completion)
 }
 
+// Activates a Secure Element pass using the specified data.
 func (o *PKPassLibrary) ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -227,6 +245,7 @@ func (o *PKPassLibrary) ActivateSecureElementPassWithActivationDataCompletion(se
 	o.Ptr().Send(_pKPassLibrarySelActivateSecureElementPassWithActivationDataCompletion, secureElementPass.Ptr(), activationData.Ptr(), __block_completion)
 }
 
+// Signs an opaque value using a cryptographic signature.
 func (o *PKPassLibrary) SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -244,10 +263,21 @@ func (o *PKPassLibrary) SignDataWithSecureElementPassCompletion(signData *founda
 	o.Ptr().Send(_pKPassLibrarySelSignDataWithSecureElementPassCompletion, signData.Ptr(), secureElementPass.Ptr(), __block_completion)
 }
 
-func (o *PKPassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *PKSecureElementPass, completion objc.Block) {
-	o.Ptr().Send(_pKPassLibrarySelEncryptedServiceProviderDataForSecureElementPassCompletion, secureElementPass.Ptr(), completion)
+func (o *PKPassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *PKSecureElementPass, completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_pKPassLibrarySelEncryptedServiceProviderDataForSecureElementPassCompletion, secureElementPass.Ptr(), __block_completion)
 }
 
+// Calls a completion handler that returns the custom data for a Secure Element pass.
 func (o *PKPassLibrary) ServiceProviderDataForSecureElementPassCompletion(secureElementPass *PKSecureElementPass, completion func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that stores a clinical record.
+//
 // ClinicalRecord wraps [raw.HKClinicalRecord] with a fluent Go API.
 type ClinicalRecord struct {
 	inner *raw.HKClinicalRecord

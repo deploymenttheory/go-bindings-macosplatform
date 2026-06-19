@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that holds a time range and an associated state which indicates when the renderer draws output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionrendererscene
 type AVCaptionRendererScene struct {
 	foundation.NSObject

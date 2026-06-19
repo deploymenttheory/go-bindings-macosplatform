@@ -1564,11 +1564,11 @@
     "PKIdentityDocumentMetadata": {
       "documentType": {
         "doc": "Identifies the type of the identity document.",
-        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/documentType"
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/documenttype"
       },
       "issuingCountryCode": {
         "doc": "Identifies the issuing country of the identity document.",
-        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/issuingCountryCode"
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/issuingcountrycode"
       },
       "serverEnvironmentIdentifier": {
         "doc": "An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.",
@@ -2347,8 +2347,8 @@
         "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/balancetype-swift.struct"
       },
       "amount": {
-        "doc": "The current balance of a stored-value pass in money or points.",
-        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2nwf5"
+        "doc": "The current balance in money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2vfd3"
       },
       "balanceType": {
         "doc": "The type of value that the balance represents, such as money or points.",

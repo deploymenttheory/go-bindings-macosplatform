@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a snapshot image.
+//
 // LookAroundSnapshot wraps [raw.MKLookAroundSnapshot] with a fluent Go API.
 type LookAroundSnapshot struct {
 	inner *raw.MKLookAroundSnapshot

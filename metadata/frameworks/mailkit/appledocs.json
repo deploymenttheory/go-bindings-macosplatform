@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "framework": "MailKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MEAddressAnnotation": {
+      "doc": "An object that indicates the validity of an email address.",
+      "url": "https://developer.apple.com/documentation/mailkit/meaddressannotation"
+    },
+    "MEComposeContext": {
+      "url": "https://developer.apple.com/documentation/mailkit/mecomposecontext"
+    },
+    "MEComposeSession": {
+      "doc": "An object that represents a single mail compose window.",
+      "url": "https://developer.apple.com/documentation/mailkit/mecomposesession"
+    },
+    "MEDecodedMessage": {
+      "doc": "An object that contains the RFC 2822 data for a message, without encryption or digital signatures.",
+      "url": "https://developer.apple.com/documentation/mailkit/medecodedmessage"
+    },
+    "MEDecodedMessageBanner": {
+      "url": "https://developer.apple.com/documentation/mailkit/medecodedmessagebanner"
+    },
+    "MEEmailAddress": {
+      "url": "https://developer.apple.com/documentation/mailkit/meemailaddress"
+    },
+    "MEEncodedOutgoingMessage": {
+      "doc": "An object that contains the signed or encrypted representation of a message’s RFC 2822 data.",
+      "url": "https://developer.apple.com/documentation/mailkit/meencodedoutgoingmessage"
+    },
+    "MEExtensionManager": {
+      "url": "https://developer.apple.com/documentation/mailkit/meextensionmanager"
+    },
+    "MEExtensionViewController": {
+      "doc": "An object that manages a view for compose session and message security handlers.",
+      "url": "https://developer.apple.com/documentation/mailkit/meextensionviewcontroller"
+    },
+    "MEMessage": {
+      "doc": "An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessage"
+    },
+    "MEMessageAction": {
+      "doc": "An action the system performs on a message, such as setting a color or archiving it.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessageaction"
+    },
+    "MEMessageActionDecision": {
+      "doc": "The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessageactiondecision"
+    },
+    "MEMessageEncodingResult": {
+      "doc": "An object that contains a signed or encrypted message, or errors that indicate failure to encode the message.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessageencodingresult"
+    },
+    "MEMessageSecurityInformation": {
+      "doc": "An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityinformation"
+    },
+    "MEMessageSigner": {
+      "doc": "An object that contains details about the person who signed a message.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessagesigner"
+    },
+    "MEOutgoingMessageEncodingStatus": {
+      "doc": "An object that contains information about security measures the user can apply when composing a message.",
+      "url": "https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus"
+    }
+  },
+  "protocols": {
+    "MEComposeSessionHandler": {
+      "doc": "An object that participates in the composition of mail messages, and annotates recipient tokens.",
+      "url": "https://developer.apple.com/documentation/mailkit/mecomposesessionhandler"
+    },
+    "MEContentBlocker": {
+      "doc": "An object that provides a set of rules to block content when displaying a message.",
+      "url": "https://developer.apple.com/documentation/mailkit/mecontentblocker"
+    },
+    "MEExtension": {
+      "doc": "A type that provides objects for manipulating email messages, such as performing actions on messages or blocking content when users view messages.",
+      "url": "https://developer.apple.com/documentation/mailkit/meextension"
+    },
+    "MEMessageActionHandler": {
+      "doc": "An object that performs actions on messages as the system downloads them.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessageactionhandler"
+    },
+    "MEMessageDecoder": {
+      "doc": "An object that decrypts messages and provides details about digital signatures.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessagedecoder"
+    },
+    "MEMessageEncoder": {
+      "doc": "An object that encrypts or digitally signs outgoing messages.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessageencoder"
+    },
+    "MEMessageSecurityHandler": {
+      "doc": "An object that digitally signs or encrypts messages the user sends and receives.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityhandler"
+    }
+  },
+  "enums": {
+    "MEComposeUserAction": {
+      "url": "https://developer.apple.com/documentation/mailkit/mecomposeuseraction"
+    },
+    "MEMessageActionFlag": {
+      "url": "https://developer.apple.com/documentation/mailkit/memessageactionflag"
+    },
+    "MEMessageActionMessageColor": {
+      "doc": "A color that the system uses to display a message in the message list.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessageactionmessagecolor"
+    },
+    "MEMessageEncryptionState": {
+      "url": "https://developer.apple.com/documentation/mailkit/memessageencryptionstate"
+    },
+    "MEMessageSecurityErrorCode": {
+      "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityerrorcode"
+    },
+    "MEMessageState": {
+      "doc": "The state of a message: sent, unsent, or received.",
+      "url": "https://developer.apple.com/documentation/mailkit/memessagestate",
+      "members": {
+        "MEMessageStateDraft": {
+          "doc": "A state that indicates the user is composing the message, and hasn’t sent it yet.",
+          "url": "https://developer.apple.com/documentation/mailkit/memessagestate/draft"
+        },
+        "MEMessageStateReceived": {
+          "doc": "A state that indicates the system has received and stored the message.",
+          "url": "https://developer.apple.com/documentation/mailkit/memessagestate/received"
+        },
+        "MEMessageStateSending": {
+          "doc": "A state that indicates the system is in the process of sending the message.",
+          "url": "https://developer.apple.com/documentation/mailkit/memessagestate/sending"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MEAddressAnnotation": {
+      "+errorWithLocalizedDescription:": {
+        "doc": "Indicates an address is invalid and may result in failure to deliver a message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meaddressannotation/error(withlocalizeddescription:)"
+      },
+      "+successWithLocalizedDescription:": {
+        "doc": "Indicates an address is valid and correct.",
+        "url": "https://developer.apple.com/documentation/mailkit/meaddressannotation/success(withlocalizeddescription:)"
+      },
+      "+warningWithLocalizedDescription:": {
+        "doc": "Indicates an address may be invalid or needs attention.",
+        "url": "https://developer.apple.com/documentation/mailkit/meaddressannotation/warning(withlocalizeddescription:)"
+      }
+    },
+    "MEComposeSession": {
+      "-reloadSession": {
+        "doc": "Refreshes the compose session with the extension’s new information.",
+        "url": "https://developer.apple.com/documentation/mailkit/mecomposesession/reload()"
+      }
+    },
+    "MEEncodedOutgoingMessage": {
+      "-initWithRawData:isSigned:isEncrypted:": {
+        "doc": "Creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meencodedoutgoingmessage/init(rawdata:issigned:isencrypted:)"
+      }
+    },
+    "MEMessageEncodingResult": {
+      "-initWithEncodedMessage:signingError:encryptionError:": {
+        "doc": "Creates an encoding result object with a signed or encrypted message, or errors if the message encoder fails to encode the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageencodingresult/init(encodedmessage:signingerror:encryptionerror:)"
+      }
+    },
+    "MEMessageSecurityInformation": {
+      "-initWithSigners:isEncrypted:signingError:encryptionError:": {
+        "doc": "Creates a message security information object that indicates if a message is encrypted, who signed it, or if an error occurred when decoding the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityinformation/init(signers:isencrypted:signingerror:encryptionerror:)"
+      }
+    },
+    "MEMessageSigner": {
+      "-initWithEmailAddresses:signatureLabel:context:": {
+        "doc": "Creates a new message signer object that contains the email addresses of the signers, a label, and context data.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesigner/init(emailaddresses:signaturelabel:context:)"
+      }
+    },
+    "MEOutgoingMessageEncodingStatus": {
+      "-initWithCanSign:canEncrypt:securityError:addressesFailingEncryption:": {
+        "doc": "Creates an object that describes whether the message security handler can encrypt or sign an outgoing message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus/init(cansign:canencrypt:securityerror:addressesfailingencryption:)"
+      }
+    }
+  },
+  "properties": {
+    "MEComposeSession": {
+      "mailMessage": {
+        "doc": "The properties of the mail message, such as the subject and recipients.",
+        "url": "https://developer.apple.com/documentation/mailkit/mecomposesession/mailmessage"
+      },
+      "sessionID": {
+        "doc": "A unique identifier for the session.",
+        "url": "https://developer.apple.com/documentation/mailkit/mecomposesession/sessionid"
+      }
+    },
+    "MEDecodedMessage": {
+      "rawData": {
+        "doc": "The decoded MIME data for a message.",
+        "url": "https://developer.apple.com/documentation/mailkit/medecodedmessage/rawdata"
+      },
+      "securityInformation": {
+        "doc": "An object that contains encryption and digital signature information about the message content.",
+        "url": "https://developer.apple.com/documentation/mailkit/medecodedmessage/securityinformation"
+      }
+    },
+    "MEEncodedOutgoingMessage": {
+      "isEncrypted": {
+        "doc": "A Boolean value that indicates if the message encoder encrypted the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meencodedoutgoingmessage/isencrypted"
+      },
+      "isSigned": {
+        "doc": "A Boolean value that indicates if the message encoder signed the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meencodedoutgoingmessage/issigned"
+      },
+      "rawData": {
+        "doc": "The encrypted, signed, or both encrypted and signed data for the outgoing message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meencodedoutgoingmessage/rawdata"
+      }
+    },
+    "MEMessage": {
+      "allRecipientAddresses": {
+        "doc": "An array of email addresses for all recipients of the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/allrecipientaddresses"
+      },
+      "bccAddresses": {
+        "doc": "An array of email addresses for the concealed tertiary recipients of the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/bccaddresses"
+      },
+      "ccAddresses": {
+        "doc": "An array of email addresses for the secondary recipients of the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/ccaddresses"
+      },
+      "dateReceived": {
+        "doc": "The date that the recipient received the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/datereceived"
+      },
+      "dateSent": {
+        "doc": "The date the sender sent the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/datesent"
+      },
+      "fromAddress": {
+        "doc": "The sender’s email address.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/fromaddress"
+      },
+      "headers": {
+        "doc": "A dictionary that contains the message’s header values.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/headers"
+      },
+      "rawData": {
+        "doc": "The raw RFC 2822 header and body content of the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/rawdata"
+      },
+      "replyToAddresses": {
+        "doc": "An array of email addresses to use when replying to the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/replytoaddresses"
+      },
+      "state": {
+        "doc": "The state of the mail message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/state"
+      },
+      "subject": {
+        "doc": "The subject of the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/subject"
+      },
+      "toAddresses": {
+        "doc": "An array of email addresses for the primary recipients of the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessage/toaddresses"
+      }
+    },
+    "MEMessageAction": {
+      "MEMessageActionMessageColor": {
+        "doc": "A color that the system uses to display a message in the message list.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageaction/messagecolor"
+      },
+      "markAsReadAction": {
+        "doc": "An object that marks the message as read.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageaction/markasread"
+      },
+      "markAsUnreadAction": {
+        "doc": "An object that marks the message as unread.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageaction/markasunread"
+      },
+      "moveToArchiveAction": {
+        "doc": "An object that moves the message to the account’s Archive mailbox.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageaction/movetoarchive"
+      },
+      "moveToJunkAction": {
+        "doc": "An object that moves the message to the account’s Junk mailbox.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageaction/movetojunk"
+      },
+      "moveToTrashAction": {
+        "doc": "An object that moves the message to the account’s Trash mailbox.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageaction/movetotrash"
+      }
+    },
+    "MEMessageActionDecision": {
+      "invokeAgainWithBody": {
+        "doc": "An object that indicates the handler needs the message content before it can decide what action to take on a message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageactiondecision/invokeagainwithbody"
+      }
+    },
+    "MEMessageEncodingResult": {
+      "encodedMessage": {
+        "doc": "A signed or encrypted message, if the message security handler needs to encode the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageencodingresult/encodedmessage"
+      },
+      "encryptionError": {
+        "doc": "An error that occurred while the message encoder encrypted the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageencodingresult/encryptionerror"
+      },
+      "signingError": {
+        "doc": "An error that occurred while the message encoder signed the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessageencodingresult/signingerror"
+      }
+    },
+    "MEMessageSecurityInformation": {
+      "encryptionError": {
+        "doc": "An error that indicates the security handler couldn’t decrypt the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityinformation/encryptionerror"
+      },
+      "isEncrypted": {
+        "doc": "A Boolean value that indicates if the sender encrypted the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityinformation/isencrypted"
+      },
+      "signers": {
+        "doc": "An array of objects that contain information about who signed the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityinformation/signers"
+      },
+      "signingError": {
+        "doc": "An error that indicates the security handler couldn’t decode the message’s digital signatures.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesecurityinformation/signingerror"
+      }
+    },
+    "MEMessageSigner": {
+      "context": {
+        "doc": "Data related to the message signature, such as the signing certificate.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesigner/context"
+      },
+      "emailAddresses": {
+        "doc": "An array of email addresses associated with the signature.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesigner/emailaddresses"
+      },
+      "label": {
+        "doc": "A string that the message’s headers use to display the message signer.",
+        "url": "https://developer.apple.com/documentation/mailkit/memessagesigner/label"
+      }
+    },
+    "MEOutgoingMessageEncodingStatus": {
+      "addressesFailingEncryption": {
+        "doc": "An array of email addresses that prevent the message security handler from signing the message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus/addressesfailingencryption"
+      },
+      "canEncrypt": {
+        "doc": "A Boolean value that indicates the message security handler can encrypt the outgoing message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus/canencrypt"
+      },
+      "canSign": {
+        "doc": "A Boolean value that indicates the message security handler can digitally sign the outgoing message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus/cansign"
+      },
+      "securityError": {
+        "doc": "An error that the message encoder encountered while determining the encoding status for the outgoing message.",
+        "url": "https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus/securityerror"
+      }
+    }
+  }
+}

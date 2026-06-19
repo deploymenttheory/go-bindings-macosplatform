@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @brief Builds authentication requirements that can be used as fallbacks for  biometric authentication
+// A set of requirements to fall back on if biometrics aren’t present.
 //
 // BiometryFallbackRequirement wraps [raw.LABiometryFallbackRequirement] with a fluent Go API.
 type BiometryFallbackRequirement struct {

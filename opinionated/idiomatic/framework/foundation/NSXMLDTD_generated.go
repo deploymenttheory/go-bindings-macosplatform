@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// @class NSXMLDTD @abstract Defines the order, repetition, and allowable values for a document
+// A representation of a Document Type Definition.
 //
 // XMLDTD wraps [raw.NSXMLDTD] with a fluent Go API.
 type XMLDTD struct {

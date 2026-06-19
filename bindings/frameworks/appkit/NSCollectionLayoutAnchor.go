@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines how to attach a supplementary item to an item in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutanchor
 type NSCollectionLayoutAnchor struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSCollectionLayoutAnchorFromID(id objc.ID) *NSCollectionLayoutAnchor {
 	return o
 }
 
+// Creates an anchor with the specified edges to attach to.
 func NSCollectionLayoutAnchorLayoutAnchorWithEdges(edges NSDirectionalRectEdge) *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdges, edges)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func NSCollectionLayoutAnchorLayoutAnchorWithEdges(edges NSDirectionalRectEdge) 
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
 
+// Creates an anchor with the specified edges to attach to, offset by the provided absolute value.
 func NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset(edges NSDirectionalRectEdge, absoluteOffset corefoundation.CGPoint) *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesAbsoluteOffset, edges, absoluteOffset)
 	if _ret != 0 {
@@ -53,6 +57,7 @@ func NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset(edges NSDirecti
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
 
+// Creates an anchor with the specified edges to attach to, offset by the provided fractional value.
 func NSCollectionLayoutAnchorLayoutAnchorWithEdgesFractionalOffset(edges NSDirectionalRectEdge, fractionalOffset corefoundation.CGPoint) *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesFractionalOffset, edges, fractionalOffset)
 	if _ret != 0 {

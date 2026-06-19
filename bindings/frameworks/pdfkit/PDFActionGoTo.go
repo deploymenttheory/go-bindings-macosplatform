@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// PDFActionGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfactiongoto
 type PDFActionGoTo struct {
 	PDFAction
@@ -31,6 +33,7 @@ func PDFActionGoToFromID(id objc.ID) *PDFActionGoTo {
 	return o
 }
 
+// Initializes the go-to action.
 func (o *PDFActionGoTo) InitWithDestination(destination *PDFDestination) *PDFActionGoTo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionGoToSelInitWithDestination, destination.Ptr())
 	if _ret != 0 {

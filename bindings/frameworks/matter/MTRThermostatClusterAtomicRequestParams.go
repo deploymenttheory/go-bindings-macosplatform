@@ -52,12 +52,15 @@ func (o *MTRThermostatClusterAtomicRequestParams) SetRequestType(requestType *fo
 }
 
 func (o *MTRThermostatClusterAtomicRequestParams) AttributeRequests() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRThermostatClusterAtomicRequestParamsSelAttributeRequests)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicRequestParamsSelAttributeRequests)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attributeRequests *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRThermostatClusterAtomicRequestParamsSelSetAttributeRequests, attributeRequests)
+	o.Ptr().Send(_mTRThermostatClusterAtomicRequestParamsSelSetAttributeRequests, attributeRequests.Ptr())
 }
 
 func (o *MTRThermostatClusterAtomicRequestParams) Timeout() *foundation.NSNumber {

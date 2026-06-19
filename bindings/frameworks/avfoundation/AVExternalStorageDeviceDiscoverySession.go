@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Informs your app when the external storage devices connect to and disconnect from the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avexternalstoragedevicediscoverysession
 type AVExternalStorageDeviceDiscoverySession struct {
 	foundation.NSObject

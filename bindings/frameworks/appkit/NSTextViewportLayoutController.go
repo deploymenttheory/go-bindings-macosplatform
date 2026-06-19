@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Manages the layout process inside the viewport interacting with its delegate.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextviewportlayoutcontroller
 type NSTextViewportLayoutController struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSTextViewportLayoutControllerFromID(id objc.ID) *NSTextViewportLayoutContr
 	return o
 }
 
+// Creates a new instance with the text layout manager you provide.
 func (o *NSTextViewportLayoutController) InitWithTextLayoutManager(textLayoutManager *NSTextLayoutManager) *NSTextViewportLayoutController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewportLayoutControllerSelInitWithTextLayoutManager, textLayoutManager.Ptr())
 	if _ret != 0 {
@@ -47,15 +50,18 @@ func (o *NSTextViewportLayoutController) InitWithTextLayoutManager(textLayoutMan
 	return NSTextViewportLayoutControllerFromID(_ret)
 }
 
+// Performs layout in the viewport.
 func (o *NSTextViewportLayoutController) LayoutViewport() {
 	o.Ptr().Send(_nSTextViewportLayoutControllerSelLayoutViewport)
 }
 
+// Relocates the viewport to the location you specify.
 func (o *NSTextViewportLayoutController) RelocateViewportToTextLocation(textLocation NSTextLocation) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextViewportLayoutControllerSelRelocateViewportToTextLocation, textLocation)
 	return _ret
 }
 
+// Adjusts the viewport rect by the specified offset if needed.
 func (o *NSTextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
 	o.Ptr().Send(_nSTextViewportLayoutControllerSelAdjustViewportByVerticalOffset, verticalOffset)
 }

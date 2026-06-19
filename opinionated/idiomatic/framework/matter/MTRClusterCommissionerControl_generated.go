@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Commissioner Control Supports the ability for clients to request the commissioning of themselves or other nodes onto a fabric which the cluster server can commission onto.
+//
 // MTRClusterCommissionerControl wraps [raw.MTRClusterCommissionerControl] with a fluent Go API.
 type MTRClusterCommissionerControl struct {
 	inner *raw.MTRClusterCommissionerControl

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An opaque data container for large storage in MPS CNN filters.
+//
 // State wraps [raw.MPSState] with a fluent Go API.
 type State struct {
 	inner *raw.MPSState

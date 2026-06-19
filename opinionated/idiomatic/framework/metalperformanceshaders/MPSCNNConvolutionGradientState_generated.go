@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that exposes a gradient convolution kernel’s gradient with respect to weights and biases.
+//
 // CNNConvolutionGradientState wraps [raw.MPSCNNConvolutionGradientState] with a fluent Go API.
 type CNNConvolutionGradientState struct {
 	inner *raw.MPSCNNConvolutionGradientState

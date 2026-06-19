@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A collection of GKGoals or GKBehaviors with weights that can be applied to a GKAgent The sub-goals or sub-behaviors are summed to produce a total force to be applied to an agent
+// A set of goals that together influence the movement of an agent.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkbehavior
 type GKBehavior struct {
@@ -43,7 +43,7 @@ func GKBehaviorFromID(id objc.ID) *GKBehavior {
 	return o
 }
 
-// Creates a behavior with a single goal and weight
+// Creates a behavior with a single goal.
 func GKBehaviorBehaviorWithGoalWeight(goal *GKGoal, weight float32) *GKBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoalWeight, goal.Ptr(), weight)
 	if _ret != 0 {
@@ -52,7 +52,7 @@ func GKBehaviorBehaviorWithGoalWeight(goal *GKGoal, weight float32) *GKBehavior 
 	return GKBehaviorFromID(_ret)
 }
 
-// Creates a behavior with an array of goals.  All weights are set to 1.0f
+// Creates a behavior with the specified goals.
 func GKBehaviorBehaviorWithGoals(goals *foundation.NSArray[*GKGoal]) *GKBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoals, goals.Ptr())
 	if _ret != 0 {
@@ -61,46 +61,46 @@ func GKBehaviorBehaviorWithGoals(goals *foundation.NSArray[*GKGoal]) *GKBehavior
 	return GKBehaviorFromID(_ret)
 }
 
-// Creates a behavior with two associated arrays of goals and weights
+// Creates a behavior with the specified goals and weights.
 func GKBehaviorBehaviorWithGoalsAndWeights(goals *foundation.NSArray[*GKGoal], weights *foundation.NSArray[*foundation.NSNumber]) *GKBehavior {
-	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoalsAndWeights, goals.Ptr(), weights)
+	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoalsAndWeights, goals.Ptr(), weights.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return GKBehaviorFromID(_ret)
 }
 
-// Creates a behavior with a dictionary of goal/weight pairs
+// Creates a behavior with the specified mapping of goals to their weights.
 func GKBehaviorBehaviorWithWeightedGoals(weightedGoals *foundation.NSDictionary[*GKGoal, *foundation.NSNumber]) *GKBehavior {
-	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithWeightedGoals, weightedGoals)
+	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithWeightedGoals, weightedGoals.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return GKBehaviorFromID(_ret)
 }
 
-// Adds a new goal or changes the weight of the existing goal in this behavior. If the goal does not exist in this behavior, it is added. @param weight the weight for this goal @param goal the goal who's weight to change
+// Sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
 func (o *GKBehavior) SetWeightForGoal(weight float32, goal *GKGoal) {
 	o.Ptr().Send(_gKBehaviorSelSetWeightForGoal, weight, goal.Ptr())
 }
 
-// Gets the current weight for a given goal. @return the weight of the goal, or 0 if there is no such goal on this behavior
+// Returns the weight for the specified goal’s influence on agents.
 func (o *GKBehavior) WeightForGoal(goal *GKGoal) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKBehaviorSelWeightForGoal, goal.Ptr())
 	return _ret
 }
 
-// Remove the indicated goal from this behavior. @param goal the goal to be removed
+// Removes the specified goal from the behavior.
 func (o *GKBehavior) RemoveGoal(goal *GKGoal) {
 	o.Ptr().Send(_gKBehaviorSelRemoveGoal, goal.Ptr())
 }
 
-// Removes all the goals on the behavior.
+// Removes all goals from the behavior.
 func (o *GKBehavior) RemoveAllGoals() {
 	o.Ptr().Send(_gKBehaviorSelRemoveAllGoals)
 }
 
-// Supports getting goals via a [int] subscript.
+// Returns the goal at the specified index in the behavior’s list of goals.
 func (o *GKBehavior) ObjectAtIndexedSubscript(idx uint) *GKGoal {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBehaviorSelObjectAtIndexedSubscript, idx)
 	if _ret != 0 {
@@ -109,12 +109,12 @@ func (o *GKBehavior) ObjectAtIndexedSubscript(idx uint) *GKGoal {
 	return GKGoalFromID(_ret)
 }
 
-// Supports setting a weight via a [goal] subscript.
+// Sets the weight for the goal specified by subscript syntax.
 func (o *GKBehavior) SetObjectForKeyedSubscript(weight *foundation.NSNumber, goal *GKGoal) {
 	o.Ptr().Send(_gKBehaviorSelSetObjectForKeyedSubscript, weight.Ptr(), goal.Ptr())
 }
 
-// Supports getting a weight via a [goal] subscript.
+// Returns the weight associated with the goal specified by subscript syntax.
 func (o *GKBehavior) ObjectForKeyedSubscript(goal *GKGoal) *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBehaviorSelObjectForKeyedSubscript, goal.Ptr())
 	if _ret != 0 {

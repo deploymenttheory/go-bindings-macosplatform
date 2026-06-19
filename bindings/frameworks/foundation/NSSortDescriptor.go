@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable description of how to order a collection of objects according to a property common to all the objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nssortdescriptor
 type NSSortDescriptor struct {
 	NSObject
@@ -42,6 +44,7 @@ func NSSortDescriptorFromID(id objc.ID) *NSSortDescriptor {
 	return o
 }
 
+// Creates and returns a sort descriptor with the specified key path and ordering.
 func NSSortDescriptorSortDescriptorWithKeyAscending(key *NSString, ascending bool) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSortDescriptor), _nSSortDescriptorSelSortDescriptorWithKeyAscending, key.Ptr(), ascending)
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func NSSortDescriptorSortDescriptorWithKeyAscending(key *NSString, ascending boo
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Creates a sort descriptor with the specified key path, ordering, and comparison selector.
 func NSSortDescriptorSortDescriptorWithKeyAscendingSelector(key *NSString, ascending bool, selector objc.SEL) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSortDescriptor), _nSSortDescriptorSelSortDescriptorWithKeyAscendingSelector, key.Ptr(), ascending, selector)
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func NSSortDescriptorSortDescriptorWithKeyAscendingSelector(key *NSString, ascen
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Creates a sort descriptor with a specified string key path and sort order.
 func (o *NSSortDescriptor) InitWithKeyAscending(key *NSString, ascending bool) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithKeyAscending, key.Ptr(), ascending)
 	if _ret != 0 {
@@ -66,6 +71,7 @@ func (o *NSSortDescriptor) InitWithKeyAscending(key *NSString, ascending bool) *
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Creates a sort descriptor with a specified string key path, ordering, and comparison selector.
 func (o *NSSortDescriptor) InitWithKeyAscendingSelector(key *NSString, ascending bool, selector objc.SEL) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithKeyAscendingSelector, key.Ptr(), ascending, selector)
 	if _ret != 0 {
@@ -74,6 +80,7 @@ func (o *NSSortDescriptor) InitWithKeyAscendingSelector(key *NSString, ascending
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Creates a sort descriptor by decoding from the coder you specify.
 func (o *NSSortDescriptor) InitWithCoder(coder *NSCoder) *NSSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSortDescriptorSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -82,10 +89,12 @@ func (o *NSSortDescriptor) InitWithCoder(coder *NSCoder) *NSSortDescriptor {
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Forces a securely decoded sort descriptor to allow evaluation.
 func (o *NSSortDescriptor) AllowEvaluation() {
 	o.Ptr().Send(_nSSortDescriptorSelAllowEvaluation)
 }
 
+// Creates and returns a sort descriptor initialized with the specified key path and ordering, and a comparator block.
 func NSSortDescriptorSortDescriptorWithKeyAscendingComparator(key *NSString, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSSortDescriptor {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -101,6 +110,7 @@ func NSSortDescriptorSortDescriptorWithKeyAscendingComparator(key *NSString, asc
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Creates a sort descriptor with a specified string key path and ordering, and a comparator block.
 func (o *NSSortDescriptor) InitWithKeyAscendingComparator(key *NSString, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSSortDescriptor {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -116,6 +126,7 @@ func (o *NSSortDescriptor) InitWithKeyAscendingComparator(key *NSString, ascendi
 	return NSSortDescriptorFromID(_ret)
 }
 
+// Returns a comparison result value that indicates the sort order of two objects.
 func (o *NSSortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.ID) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSSortDescriptorSelCompareObjectToObject, object1, object2)
 	return _ret

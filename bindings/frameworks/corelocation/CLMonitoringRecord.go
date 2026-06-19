@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a condition and its associated information that a location monitor is monitoring.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clmonitoringrecord
 type CLMonitoringRecord struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for computing the LU factorization of a matrix using partial pivoting with row interchanges.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdecompositionlu
 type MPSMatrixDecompositionLU struct {
 	mpsmatrix.MPSMatrixUnaryKernel

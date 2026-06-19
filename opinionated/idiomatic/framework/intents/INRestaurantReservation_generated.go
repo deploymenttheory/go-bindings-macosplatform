@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a restaurant reservation.
+//
 // RestaurantReservation wraps [raw.INRestaurantReservation] with a fluent Go API.
 type RestaurantReservation struct {
 	inner *raw.INRestaurantReservation
@@ -31,6 +33,8 @@ func RestaurantReservationFromID(id objc.ID) *RestaurantReservation {
 	return &RestaurantReservation{inner: raw.INRestaurantReservationFromID(id)}
 }
 
+// Creates a restaurant reservation with the provided information.
+//
 // NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation creates a new [RestaurantReservation].
 func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservationDuration *raw.INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *RestaurantReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRestaurantReservation")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReserv
 	return &RestaurantReservation{inner: raw.INRestaurantReservationFromID(_id)}
 }
 
+// Creates a new restaurant reservation with the provided information.
+//
 // NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation creates a new [RestaurantReservation].
 func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservationDuration *raw.INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *RestaurantReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRestaurantReservation")), objc.RegisterName("alloc"))

@@ -4,6 +4,8 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -31,6 +33,16 @@ func MTRClusterStateCacheContainerFromID(id objc.ID) *MTRClusterStateCacheContai
 }
 
 // Reads the given attributes from the cluster state cache inside this cache container. @param endpointID  endpoint ID of the attributes. Nil means wildcard. @param clusterID  cluster ID of the attributes. Nil means wildcard. @param attributeID  attribute ID of the attributes. Nil means wildcard. @param queue  client queue to dispatch the completion handler through @param completion  block to receive the result. "values" received by the block will have the same format of object as the one received by the completion block of the MTRBaseDevice readAttributesWithEndpointID:clusterID:attributeID:queue:completion method. @note: not all combinations of wildcards might be supported.
-func (o *MTRClusterStateCacheContainer) ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	o.Ptr().Send(_mTRClusterStateCacheContainerSelReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr(), queue.Ptr(), completion)
+func (o *MTRClusterStateCacheContainer) ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRClusterStateCacheContainerSelReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr(), queue.Ptr(), __block_completion)
 }

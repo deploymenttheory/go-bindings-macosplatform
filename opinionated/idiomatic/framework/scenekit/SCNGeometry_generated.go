@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A three-dimensional shape (also called a model or mesh) that can be displayed in a scene, with attached materials that define its appearance.
+//
 // Geometry wraps [raw.SCNGeometry] with a fluent Go API.
 type Geometry struct {
 	inner *raw.SCNGeometry
@@ -38,7 +40,7 @@ func NewGeometry() *Geometry {
 	return &Geometry{inner: raw.SCNGeometryFromID(_id)}
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Geometry) WithName(name string) *Geometry {
@@ -46,7 +48,7 @@ func (x *Geometry) WithName(name string) *Geometry {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Geometry) WithMaterials(items ...*raw.SCNMaterial) *Geometry {
@@ -69,7 +71,7 @@ func (x *Geometry) WithMaterials(items ...*raw.SCNMaterial) *Geometry {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
@@ -77,7 +79,7 @@ func (x *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Geometry) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Geometry {
@@ -106,7 +108,7 @@ func (x *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Geometry) WithSubdivisionLevel(subdivisionLevel uint) *Geometry {
@@ -122,7 +124,7 @@ func (x *Geometry) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry {
@@ -130,7 +132,7 @@ func (x *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry {
@@ -138,28 +140,28 @@ func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geo
 	return x
 }
 
-// @method insertMaterial:atIndex: @abstract Insert a material in the materials array at the specified index. @param material The material to insert. @param index Index in the materials array to insert the new material.
+// Attaches a material to the geometry at the specified index.
 //
 // InsertMaterialAtIndex calls the underlying InsertMaterialAtIndex.
 func (x *Geometry) InsertMaterialAtIndex(material *raw.SCNMaterial, index uint) {
 	x.inner.InsertMaterialAtIndex(material, index)
 }
 
-// @method removeMaterialAtIndex: @abstract Remove the material at the specified index from the materials array. @param index The index of the material to remove from the 'materials' array.
+// Removes a material attached to the geometry.
 //
 // RemoveMaterialAtIndex calls the underlying RemoveMaterialAtIndex.
 func (x *Geometry) RemoveMaterialAtIndex(index uint) {
 	x.inner.RemoveMaterialAtIndex(index)
 }
 
-// @method replaceMaterialAtIndex:withMaterial: @abstract Remove the material at the index 'index' from the materials array of the receiver and insert 'material' in its position. @param index The index of the material to replace in the materials array. @param material The new material that will replace the previous one.
+// Replaces a material attached to the geometry with another.
 //
 // ReplaceMaterialAtIndexWithMaterial calls the underlying ReplaceMaterialAtIndexWithMaterial.
 func (x *Geometry) ReplaceMaterialAtIndexWithMaterial(index uint, material *raw.SCNMaterial) {
 	x.inner.ReplaceMaterialAtIndexWithMaterial(index, material)
 }
 
-// @method materialWithName: @abstract Return the first material from the materials array of the receiver with the specified name. @param name The name of the material to retrieve.
+// Returns the first material attached to the geometry with the specified name.
 //
 // MaterialWithName calls the underlying MaterialWithName.
 func (x *Geometry) MaterialWithName(name string) *Material {
@@ -170,14 +172,14 @@ func (x *Geometry) MaterialWithName(name string) *Material {
 	return &Material{inner: _r}
 }
 
-// @method geometrySourcesForSemantic: @abstract Returns the geometry sources for a given semantic. @param semantic The semantic of the geometry sources that should be retrieved. @discussion Returns nil if no geometry source is found for the given semantic. May return more than one source, typically for multiple texture coordinate sources.
+// Returns the geometry sources for a specified semantic.
 //
 // GeometrySourcesForSemantic calls the underlying GeometrySourcesForSemantic.
 func (x *Geometry) GeometrySourcesForSemantic(semantic *foundation.NSString) *foundation.NSArray[*raw.SCNGeometrySource] {
 	return x.inner.GeometrySourcesForSemantic(semantic)
 }
 
-// @method geometryElementAtIndex: @abstract Returns the geometry element at a given index. @param elementIndex The index of the geometry element.
+// Returns the geometry element at a specified index.
 //
 // GeometryElementAtIndex calls the underlying GeometryElementAtIndex.
 func (x *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {

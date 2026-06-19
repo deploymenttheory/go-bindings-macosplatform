@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.
+//
 // CompactTLVRecord wraps [raw.TKCompactTLVRecord] with a fluent Go API.
 type CompactTLVRecord struct {
 	inner *raw.TKCompactTLVRecord
@@ -30,7 +32,7 @@ func CompactTLVRecordFromID(id objc.ID) *CompactTLVRecord {
 	return &CompactTLVRecord{inner: raw.TKCompactTLVRecordFromID(id)}
 }
 
-// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+// Initializes a TLV record with the specified tag and value.
 //
 // NewCompactTLVRecordWithTagValue creates a new [CompactTLVRecord].
 func NewCompactTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *CompactTLVRecord {

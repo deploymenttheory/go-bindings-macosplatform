@@ -38,6 +38,8 @@ func NewUnsendMessagesIntentWithMessageIdentifiers(messageIdentifiers *foundatio
 	return &UnsendMessagesIntent{inner: raw.INUnsendMessagesIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

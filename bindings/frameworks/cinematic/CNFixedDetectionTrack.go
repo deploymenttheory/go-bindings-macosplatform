@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A continuous detection track representing focus at a fixed disparity.
+// An object representing the fixed detection track.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnfixeddetectiontrack
 type CNFixedDetectionTrack struct {

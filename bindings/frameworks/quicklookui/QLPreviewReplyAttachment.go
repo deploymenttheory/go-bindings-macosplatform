@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookui/qlpreviewreplyattachment
 type QLPreviewReplyAttachment struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func QLPreviewReplyAttachmentFromID(id objc.ID) *QLPreviewReplyAttachment {
 	return o
 }
 
-// @abstract Create an attachment for html previews by providing the data and mime type of the attachment. @param data The data content of an html preview @param contentType The UTType of the attachment for an html preview
+// Creates a preview reply attachment with the specified type.
 func (o *QLPreviewReplyAttachment) InitWithDataContentType(data *foundation.NSData, contentType *uniformtypeidentifiers.UTType) *QLPreviewReplyAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplyAttachmentSelInitWithDataContentType, data.Ptr(), contentType.Ptr())
 	if _ret != 0 {

@@ -1,0 +1,1870 @@
+{
+  "schema_version": 1,
+  "framework": "GameplayKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "GKARC4RandomSource": {
+      "doc": "A basic random number generator implementing the ARC4 algorithm, which is suitable for most gameplay mechanics.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkarc4randomsource"
+    },
+    "GKAgent": {
+      "doc": "A component that moves a game entity according to a set of goals and realistic constraints.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkagent"
+    },
+    "GKAgent2D": {
+      "doc": "An agent that operates in a two-dimensional space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkagent2d"
+    },
+    "GKAgent3D": {
+      "doc": "An agent that operates in a three-dimensional space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkagent3d"
+    },
+    "GKBehavior": {
+      "doc": "A set of goals that together influence the movement of an agent.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior"
+    },
+    "GKBillowNoiseSource": {
+      "doc": "A procedural noise generator whose output is a type of fractal coherent noise with smooth features.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkbillownoisesource"
+    },
+    "GKCheckerboardNoiseSource": {
+      "doc": "A procedural noise generator whose output is an alternating square pattern.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcheckerboardnoisesource"
+    },
+    "GKCircleObstacle": {
+      "doc": "A circular impassable area to be avoided by agents.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcircleobstacle"
+    },
+    "GKCoherentNoiseSource": {
+      "doc": "The abstract superclass for procedural noise generators that create coherent noise.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcoherentnoisesource"
+    },
+    "GKComponent": {
+      "doc": "The abstract superclass for creating objects that add specific gameplay functionality to an entity.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponent"
+    },
+    "GKComponentSystem": {
+      "doc": "Manages periodic update messages for all component objects of a specified class.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem"
+    },
+    "GKCompositeBehavior": {
+      "doc": "A set of behaviors, each of which is a set of goals, that together influence the movement of an agent.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior"
+    },
+    "GKConstantNoiseSource": {
+      "doc": "A procedural noise generator that outputs a field of a single constant value.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkconstantnoisesource"
+    },
+    "GKCylindersNoiseSource": {
+      "doc": "A procedural noise generator whose output is a 3D field of concentric cylindrical shells.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkcylindersnoisesource"
+    },
+    "GKDecisionNode": {
+      "doc": "A node for use in manually creating decision trees, representing a specific question and possible answers, or an action that follows from answering other questions.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisionnode"
+    },
+    "GKDecisionTree": {
+      "doc": "A data structure that models a set of specific questions, their possible answers, and the actions that follow from a series of answers.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisiontree"
+    },
+    "GKEntity": {
+      "doc": "An object relevant to gameplay, with functionality entirely provided by a collection of component objects.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkentity"
+    },
+    "GKGaussianDistribution": {
+      "doc": "A generator for random numbers that follow a Gaussian distribution (also known as a normal distribution) across multiple samplings.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgaussiandistribution"
+    },
+    "GKGoal": {
+      "doc": "An influence that motivates the movement of one or more agents.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal"
+    },
+    "GKGraph": {
+      "doc": "A collection of nodes that describes the navigability of a game world and provides pathfinding methods to search for routes through that space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph"
+    },
+    "GKGraphNode": {
+      "doc": "A single node in a navigation graph for use in pathfinding.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode"
+    },
+    "GKGraphNode2D": {
+      "doc": "A node in a navigation graph, associated with a point in continuous 2D space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode2d"
+    },
+    "GKGraphNode3D": {
+      "doc": "A node in a navigation graph, associated with a point in continuous 3D space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode3d"
+    },
+    "GKGridGraph": {
+      "doc": "A navigation graph for 2D game worlds where movement is constrained to an integer grid.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph"
+    },
+    "GKGridGraphNode": {
+      "doc": "A node in a navigation graph, associated with a position on a discrete two-dimensional grid.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraphnode"
+    },
+    "GKLinearCongruentialRandomSource": {
+      "doc": "A basic random number generator implementing the linear congruential generator algorithm, which is faster but less random than the default random source.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gklinearcongruentialrandomsource"
+    },
+    "GKMersenneTwisterRandomSource": {
+      "doc": "A basic random number generator implementing the Mersenne Twister algorithm, which is more random, but slower than the default random source.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkmersennetwisterrandomsource"
+    },
+    "GKMeshGraph": {
+      "doc": "A navigation graph for 2D game worlds that creates a space-filling network for smooth pathfinding around obstacles.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph"
+    },
+    "GKMinmaxStrategist": {
+      "doc": "An AI that chooses moves in turn-based games using a deterministic strategy.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkminmaxstrategist"
+    },
+    "GKMonteCarloStrategist": {
+      "doc": "An AI that chooses moves in turn-based games using a probabilistic strategy.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkmontecarlostrategist"
+    },
+    "GKNSPredicateRule": {
+      "doc": "A rule for use in a rule system that uses a Foundation NSPredicate object to evaluate itself.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gknspredicaterule"
+    },
+    "GKNoise": {
+      "doc": "A representation of procedural noise, generated by a noise source, that you can use to process, transform, or combine noise.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gknoise"
+    },
+    "GKNoiseMap": {
+      "doc": "A sample of procedural noise data from which you can read noise values directly or create noise textures.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap"
+    },
+    "GKNoiseSource": {
+      "doc": "The abstract superclass for procedural noise generators.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gknoisesource"
+    },
+    "GKObstacle": {
+      "doc": "The abstract base class for objects representing impassable areas in a game world.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkobstacle"
+    },
+    "GKObstacleGraph": {
+      "doc": "A navigation graph for 2D game worlds that creates a minimal network for precise pathfinding around obstacles.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph"
+    },
+    "GKOctree": {
+      "doc": "A data structure for organizing objects based on their locations in a three-dimensional space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree"
+    },
+    "GKOctreeNode": {
+      "doc": "A helper class for managing the objects you organize in an octree.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkoctreenode"
+    },
+    "GKPath": {
+      "doc": "A polygonal path that can be followed by an agent.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkpath"
+    },
+    "GKPerlinNoiseSource": {
+      "doc": "A procedural noise generator whose output is a type of fractal coherent noise resembling natural phenomena such as clouds and terrain.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkperlinnoisesource"
+    },
+    "GKPolygonObstacle": {
+      "doc": "A polygon-shaped impassable area in a 2D game world.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkpolygonobstacle"
+    },
+    "GKQuadtree": {
+      "doc": "A data structure for organizing objects based on their locations in a two-dimensional space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree"
+    },
+    "GKQuadtreeNode": {
+      "doc": "A helper class for managing the objects you organize in a quadtree.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtreenode"
+    },
+    "GKRTree": {
+      "doc": "A data structure that adaptively organizes objects based on their locations in a two-dimensional space.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree"
+    },
+    "GKRandomDistribution": {
+      "doc": "A generator for random numbers that fall within a specific range and that exhibit a specific distribution over multiple samplings.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution"
+    },
+    "GKRandomSource": {
+      "doc": "The superclass for all basic randomization classes in GameplayKit.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomsource"
+    },
+    "GKRidgedNoiseSource": {
+      "doc": "A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkridgednoisesource"
+    },
+    "GKRule": {
+      "doc": "A rule to be used in the context of a rule system, with a predicate to be tested and an action to be executed when the test succeeds.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrule"
+    },
+    "GKRuleSystem": {
+      "doc": "A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem"
+    },
+    "GKSCNNodeComponent": {
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkscnnodecomponent"
+    },
+    "GKSKNodeComponent": {
+      "doc": "A component that manages a SpriteKit node.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gksknodecomponent"
+    },
+    "GKScene": {
+      "doc": "A container for associating GameplayKit objects with a SpriteKit scene.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkscene"
+    },
+    "GKShuffledDistribution": {
+      "doc": "A generator for random numbers that are uniformly distributed across many samplings, but where short sequences of similar values are unlikely.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkshuffleddistribution"
+    },
+    "GKSphereObstacle": {
+      "doc": "A spherical impassable volume to be avoided by agents.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gksphereobstacle"
+    },
+    "GKSpheresNoiseSource": {
+      "doc": "A procedural noise generator whose output is a 3D field of concentric spherical shells.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkspheresnoisesource"
+    },
+    "GKState": {
+      "doc": "The abstract superclass for defining state-specific logic as part of a state machine.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkstate"
+    },
+    "GKStateMachine": {
+      "doc": "A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine"
+    },
+    "GKVoronoiNoiseSource": {
+      "doc": "A procedural noise generator whose output (also called Worley noise or cellular noise) divides space into discrete cells surrounding random seed points.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource"
+    }
+  },
+  "protocols": {
+    "GKAgentDelegate": {
+      "doc": "Implement this protocol to synchronize the state of an agent with its visual representation in your game.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkagentdelegate"
+    },
+    "GKGameModel": {
+      "doc": "Implement this protocol to describe your gameplay model so that a strategist object can plan game moves.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgamemodel"
+    },
+    "GKGameModelPlayer": {
+      "doc": "Implement this protocol to describe a player in your turn-based game so that a strategist object can plan game moves.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgamemodelplayer"
+    },
+    "GKGameModelUpdate": {
+      "doc": "Implement this protocol to describe a move in your turn-based game so that a strategist object can plan game moves.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkgamemodelupdate"
+    },
+    "GKRandom": {
+      "doc": "The common interface for all randomization classes in (or usable with) GameplayKit.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrandom"
+    },
+    "GKSceneRootNodeType": {
+      "doc": "Identifies scene classes from other frameworks that support embedded GameplayKit information.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkscenerootnodetype"
+    },
+    "GKStrategist": {
+      "doc": "A general interface for objects that provide artificial intelligence for use in turn-based (and similar) games.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkstrategist"
+    }
+  },
+  "enums": {
+    "GKMeshGraphTriangulationMode": {
+      "doc": "Options for how to place graph nodes when generating the graph, used by the triangulationMode property.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraphtriangulationmode",
+      "members": {
+        "GKMeshGraphTriangulationModeCenters": {
+          "doc": "An option to place graph nodes at the center of each polygon in the generated mesh.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraphtriangulationmode/centers"
+        },
+        "GKMeshGraphTriangulationModeEdgeMidpoints": {
+          "doc": "An option to place graph nodes at the midpoint of each in the generated mesh.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraphtriangulationmode/edgemidpoints"
+        },
+        "GKMeshGraphTriangulationModeVertices": {
+          "doc": "An option to place graph nodes at each vertex in the generated mesh.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraphtriangulationmode/vertices"
+        }
+      }
+    },
+    "GKRTreeSplitStrategy": {
+      "doc": "Options that control how a tree balances its internal structure when adding elements, used with the addElement:boundingRectMin:boundingRectMax:splitStrategy: method.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkrtreesplitstrategy",
+      "members": {
+        "GKRTreeSplitStrategyHalve": {
+          "doc": "An option to split groups of elements in half based on the order they were added to the tree in.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkrtreesplitstrategy/halve"
+        },
+        "GKRTreeSplitStrategyLinear": {
+          "doc": "An option to split groups of elements by finding a line that divides space so that half of the elements are on either side.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkrtreesplitstrategy/linear"
+        },
+        "GKRTreeSplitStrategyQuadratic": {
+          "doc": "An option to split groups of elements by finding the subgroups that occupy the least area.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkrtreesplitstrategy/quadratic"
+        },
+        "GKRTreeSplitStrategyReduceOverlap": {
+          "doc": "An option to split groups of elements by finding the subgroups whose areas overlap the least.",
+          "url": "https://developer.apple.com/documentation/gameplaykit/gkrtreesplitstrategy/reduceoverlap"
+        }
+      }
+    }
+  },
+  "structs": {
+    "GKBox": {
+      "doc": "The definition of an axis-aligned rectangular bounding volume addressed by the tree.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkbox"
+    },
+    "GKQuad": {
+      "doc": "The definition of an axis-aligned rectangle addressed by the tree.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gkquad"
+    },
+    "GKTriangle": {
+      "doc": "The definition of a triangle in the mesh, available with the triangleAtIndex: method.",
+      "url": "https://developer.apple.com/documentation/gameplaykit/gktriangle"
+    }
+  },
+  "methods": {
+    "GKARC4RandomSource": {
+      "-dropValuesWithCount:": {
+        "doc": "Skips the specified number of values in the random sequence.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkarc4randomsource/dropvalues(_:)"
+      },
+      "-init": {
+        "doc": "Initializes a random source from a nondeterministic seed.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkarc4randomsource/init()"
+      },
+      "-initWithSeed:": {
+        "doc": "Initializes a random source with the specified seed data.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkarc4randomsource/init(seed:)"
+      }
+    },
+    "GKAgent2D": {
+      "-updateWithDeltaTime:": {
+        "doc": "Causes the agent to evaluate its goals and update its position, rotation, and velocity accordingly.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent2d/update(deltatime:)"
+      }
+    },
+    "GKAgent3D": {
+      "-updateWithDeltaTime:": {
+        "doc": "Causes the agent to evaluate its goals and update its position, rotation, and velocity accordingly.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent3d/update(deltatime:)"
+      }
+    },
+    "GKBehavior": {
+      "+behaviorWithGoal:weight:": {
+        "doc": "Creates a behavior with a single goal.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/init(goal:weight:)"
+      },
+      "+behaviorWithGoals:": {
+        "doc": "Creates a behavior with the specified goals.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/init(goals:)"
+      },
+      "+behaviorWithGoals:andWeights:": {
+        "doc": "Creates a behavior with the specified goals and weights.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/init(goals:andweights:)"
+      },
+      "+behaviorWithWeightedGoals:": {
+        "doc": "Creates a behavior with the specified mapping of goals to their weights.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/init(weightedgoals:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the goal at the specified index in the behavior’s list of goals.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/subscript(_:)-997a9"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Returns the weight associated with the goal specified by subscript syntax.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/subscript(_:)-2yvko"
+      },
+      "-removeAllGoals": {
+        "doc": "Removes all goals from the behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/removeallgoals()"
+      },
+      "-removeGoal:": {
+        "doc": "Removes the specified goal from the behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/remove(_:)"
+      },
+      "-setObject:forKeyedSubscript:": {
+        "doc": "Sets the weight for the goal specified by subscript syntax.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/setobject:forkeyedsubscript:"
+      },
+      "-setWeight:forGoal:": {
+        "doc": "Sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/setweight(_:for:)"
+      },
+      "-weightForGoal:": {
+        "doc": "Returns the weight for the specified goal’s influence on agents.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/weight(for:)"
+      }
+    },
+    "GKBillowNoiseSource": {
+      "+billowNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:": {
+        "doc": "Initializes a billow noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbillownoisesource/billownoisesourcewithfrequency:octavecount:persistence:lacunarity:seed:"
+      },
+      "-initWithFrequency:octaveCount:persistence:lacunarity:seed:": {
+        "doc": "Creates a billow noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbillownoisesource/init(frequency:octavecount:persistence:lacunarity:seed:)"
+      }
+    },
+    "GKCheckerboardNoiseSource": {
+      "+checkerboardNoiseWithSquareSize:": {
+        "doc": "Creates a checkerboard noise source with the specified square size.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcheckerboardnoisesource/checkerboardnoise(withsquaresize:)"
+      },
+      "-initWithSquareSize:": {
+        "doc": "Initializes a checkerboard noise source with the specified square size.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcheckerboardnoisesource/init(squaresize:)"
+      }
+    },
+    "GKCircleObstacle": {
+      "+obstacleWithRadius:": {
+        "doc": "Creates a circular obstacle with the specified radius.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcircleobstacle/obstaclewithradius:"
+      },
+      "-initWithRadius:": {
+        "doc": "Initializes a circular obstacle with the specified radius.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcircleobstacle/init(radius:)"
+      }
+    },
+    "GKComponent": {
+      "-didAddToEntity": {
+        "doc": "Notifies the component that it has been assigned to an entity.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponent/didaddtoentity()"
+      },
+      "-updateWithDeltaTime:": {
+        "doc": "Performs any custom periodic actions defined by the component subclass.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponent/update(deltatime:)"
+      },
+      "-willRemoveFromEntity": {
+        "doc": "Notifies the component that it has been removed from an entity.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponent/willremovefromentity()"
+      }
+    },
+    "GKComponentSystem": {
+      "-addComponent:": {
+        "doc": "Adds a component instance to the component system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/addcomponent(_:)"
+      },
+      "-addComponentWithEntity:": {
+        "doc": "Adds any instances of the component system’s component class in the specified entity to the component system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/addcomponent(foundin:)"
+      },
+      "-initWithComponentClass:": {
+        "doc": "Initializes a component system to manage components of the specified class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/init(componentclass:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the component at the specified index in the system’s list of components.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/subscript(_:)"
+      },
+      "-removeComponent:": {
+        "doc": "Removes the specified component instance from the component system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/removecomponent(_:)"
+      },
+      "-removeComponentWithEntity:": {
+        "doc": "Removes any instances of the component system’s component class in the specified entity from the component system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/removecomponent(foundin:)"
+      },
+      "-updateWithDeltaTime:": {
+        "doc": "Tells all component instances managed by the system to perform their custom periodic actions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/update(deltatime:)"
+      }
+    },
+    "GKCompositeBehavior": {
+      "+behaviorWithBehaviors:": {
+        "doc": "Creates a composite behavior from the specified individual behaviors.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/init(behaviors:)"
+      },
+      "+behaviorWithBehaviors:andWeights:": {
+        "doc": "Creates a behavior with the specified behaviors and weights.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/init(behaviors:andweights:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the individual behavior at the specified index in the composite behavior’s list of behaviors.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/subscript(_:)-6krdg"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Returns the weight associated with the behavior specified by subscript syntax.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/subscript(_:)-6jng9"
+      },
+      "-removeAllBehaviors": {
+        "doc": "Removes all individual behaviors from the composite behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/removeallbehaviors()"
+      },
+      "-removeBehavior:": {
+        "doc": "Removes the specified individual behavior from the composite behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/remove(_:)"
+      },
+      "-setObject:forKeyedSubscript:": {
+        "doc": "Sets the weight for the behavior specified by subscript syntax.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/setobject:forkeyedsubscript:"
+      },
+      "-setWeight:forBehavior:": {
+        "doc": "Sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/setweight(_:for:)"
+      },
+      "-weightForBehavior:": {
+        "doc": "Returns the weight for the specified individual behavior’s influence on agents.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/weight(for:)"
+      }
+    },
+    "GKConstantNoiseSource": {
+      "+constantNoiseWithValue:": {
+        "doc": "Creates a noise source with the specified constant value.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkconstantnoisesource/constantnoise(withvalue:)"
+      },
+      "-initWithValue:": {
+        "doc": "Initializes a noise source with the specified constant value.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkconstantnoisesource/init(value:)"
+      }
+    },
+    "GKCylindersNoiseSource": {
+      "+cylindersNoiseWithFrequency:": {
+        "doc": "Creates a cylinder noise source with the specified frequency.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcylindersnoisesource/cylindersnoise(withfrequency:)"
+      },
+      "-initWithFrequency:": {
+        "doc": "Initializes a cylinder noise source with the specified frequency.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcylindersnoisesource/init(frequency:)"
+      }
+    },
+    "GKDecisionNode": {
+      "-createBranchWithPredicate:attribute:": {
+        "doc": "Creates a child node that the decision tree should use when the current node’s attribute satisfies the specified predicate.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisionnode/createbranch(predicate:attribute:)"
+      },
+      "-createBranchWithValue:attribute:": {
+        "doc": "Creates a child node that the decision tree should use when the current node’s attribute has the specified value.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisionnode/createbranch(value:attribute:)"
+      },
+      "-createBranchWithWeight:attribute:": {
+        "doc": "Creates a child node that the decision tree should use as the result of a random choice, biased by the specified weight.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisionnode/createbranch(weight:attribute:)"
+      }
+    },
+    "GKDecisionTree": {
+      "-findActionForAnswers:": {
+        "doc": "Searches the decision tree, following the branches corresponding to each of the specified answers, and returns the resulting action object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisiontree/findaction(foranswers:)"
+      },
+      "-initWithAttribute:": {
+        "doc": "Creates a decision tree starting with the specified initial attribute to test.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisiontree/init(attribute:)"
+      },
+      "-initWithExamples:actions:attributes:": {
+        "doc": "Creates an automatically learned decision tree using the specified attributes, example items, and actions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisiontree/init(examples:actions:attributes:)"
+      }
+    },
+    "GKEntity": {
+      "+entity": {
+        "doc": "Creates a new entity object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/entity"
+      },
+      "-addComponent:": {
+        "doc": "Adds a component to the entity.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/addcomponent(_:)"
+      },
+      "-componentForClass:": {
+        "doc": "Returns the entity’s component for the specified component class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/componentforclass:"
+      },
+      "-init": {
+        "doc": "Initializes a new entity object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/init()"
+      },
+      "-removeComponentForClass:": {
+        "doc": "Removes the component of the specified class from the entity.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/removecomponentforclass:"
+      },
+      "-updateWithDeltaTime:": {
+        "doc": "Performs periodic updates for each of the entity’s components.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/update(deltatime:)"
+      }
+    },
+    "GKGaussianDistribution": {
+      "-initWithRandomSource:lowestValue:highestValue:": {
+        "doc": "Initializes a Gaussian random distribution with the specified lower and upper bounds, using the specified source randomizer.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgaussiandistribution/init(randomsource:lowestvalue:highestvalue:)"
+      },
+      "-initWithRandomSource:mean:deviation:": {
+        "doc": "Initializes a Gaussian random distribution with the specified mean and deviation, using the specified source randomizer.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgaussiandistribution/init(randomsource:mean:deviation:)"
+      }
+    },
+    "GKGoal": {
+      "+goalToAlignWithAgents:maxDistance:maxAngle:": {
+        "doc": "Creates a goal whose effect is to make an agent align its orientation with that of other agents in a specified group.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(toalignwith:maxdistance:maxangle:)"
+      },
+      "+goalToAvoidAgents:maxPredictionTime:": {
+        "doc": "Creates a goal whose effect is to make an agent avoid colliding with the specified other agents, taking into account the other agents’ movement.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(toavoid:maxpredictiontime:)-96a0i"
+      },
+      "+goalToAvoidObstacles:maxPredictionTime:": {
+        "doc": "Creates a goal whose effect is to make an agent avoid colliding with the specified static obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(toavoid:maxpredictiontime:)-7oslq"
+      },
+      "+goalToCohereWithAgents:maxDistance:maxAngle:": {
+        "doc": "Creates a goal whose effect is to make an agent stay near the other agents in a specified group.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(tocoherewith:maxdistance:maxangle:)"
+      },
+      "+goalToFleeAgent:": {
+        "doc": "Creates a goal whose effect is to move an agent away from the current position of the specified other agent.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(tofleeagent:)"
+      },
+      "+goalToFollowPath:maxPredictionTime:forward:": {
+        "doc": "Creates a goal whose effect is to both maintain position on and traverse the specified path.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(tofollow:maxpredictiontime:forward:)"
+      },
+      "+goalToInterceptAgent:maxPredictionTime:": {
+        "doc": "Creates a goal whose effect is to make an agent pursue the specified other agent, taking into account the target’s movement.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(tointerceptagent:maxpredictiontime:)"
+      },
+      "+goalToReachTargetSpeed:": {
+        "doc": "Creates a goal whose effect is to accelerate or decelerate an agent until it reaches the specified speed.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(toreachtargetspeed:)"
+      },
+      "+goalToSeekAgent:": {
+        "doc": "Creates a goal whose effect is to move an agent toward the current position of the specified other agent.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(toseekagent:)"
+      },
+      "+goalToSeparateFromAgents:maxDistance:maxAngle:": {
+        "doc": "Creates a goal whose effect is to make an agent maintain the specified distance from other agents in a specified group.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(toseparatefrom:maxdistance:maxangle:)"
+      },
+      "+goalToStayOnPath:maxPredictionTime:": {
+        "doc": "Creates a goal whose effect is to maintain an agent’s position within the specified path.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(tostayon:maxpredictiontime:)"
+      },
+      "+goalToWander:": {
+        "doc": "Creates a goal whose effect is to make an agent wander aimlessly, moving forward and turning at random.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgoal/init(towander:)"
+      }
+    },
+    "GKGraph": {
+      "+graphWithNodes:": {
+        "doc": "Creates a graph with the specified list of nodes.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/graphwithnodes:"
+      },
+      "-addNodes:": {
+        "doc": "Adds the specified nodes to the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/add(_:)"
+      },
+      "-connectNodeToLowestCostNode:bidirectional:": {
+        "doc": "Adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/connecttolowestcostnode(node:bidirectional:)"
+      },
+      "-findPathFromNode:toNode:": {
+        "doc": "Computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/findpath(from:to:)"
+      },
+      "-initWithNodes:": {
+        "doc": "Initializes a graph with the specified list of nodes.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/init(_:)"
+      },
+      "-removeNodes:": {
+        "doc": "Removes the specified nodes from the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/remove(_:)"
+      }
+    },
+    "GKGraphNode": {
+      "-addConnectionsToNodes:bidirectional:": {
+        "doc": "Connects this node to all nodes in the specified list.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/addconnections(to:bidirectional:)"
+      },
+      "-costToNode:": {
+        "doc": "Returns the cost to travel from this node to the specified, directly connected, node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/cost(to:)"
+      },
+      "-estimatedCostToNode:": {
+        "doc": "Returns an underestimate of the cost of travel from this node to the specified node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/estimatedcost(to:)"
+      },
+      "-findPathFromNode:": {
+        "doc": "Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/findpath(from:)"
+      },
+      "-findPathToNode:": {
+        "doc": "Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/findpath(to:)"
+      },
+      "-removeConnectionsToNodes:bidirectional:": {
+        "doc": "Removes the connections from this node to the specified nodes.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/removeconnections(to:bidirectional:)"
+      }
+    },
+    "GKGraphNode2D": {
+      "+nodeWithPoint:": {
+        "doc": "Creates a graph node with the specified point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode2d/node(withpoint:)"
+      },
+      "-initWithPoint:": {
+        "doc": "Initializes a graph node with the specified point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode2d/init(point:)"
+      }
+    },
+    "GKGraphNode3D": {
+      "+nodeWithPoint:": {
+        "doc": "Creates a graph node with the specified point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode3d/node(withpoint:)"
+      },
+      "-initWithPoint:": {
+        "doc": "Initializes a graph node with the specified point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode3d/init(point:)"
+      }
+    },
+    "GKGridGraph": {
+      "+graphFromGridStartingAt:width:height:diagonalsAllowed:": {
+        "doc": "Creates a graph that describes an integer grid with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/graphfromgridstartingat:width:height:diagonalsallowed:"
+      },
+      "+graphFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:": {
+        "doc": "Creates a graph that describes an integer grid with the specified dimensions, using the specified node class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/graphfromgridstartingat:width:height:diagonalsallowed:nodeclass:"
+      },
+      "-connectNodeToAdjacentNodes:": {
+        "doc": "Adds the specified node to the graph, connecting it to its nearest neighbors in the grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/connecttoadjacentnodes(node:)"
+      },
+      "-initFromGridStartingAt:width:height:diagonalsAllowed:": {
+        "doc": "Initializes a graph that describes an integer grid with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/init(fromgridstartingat:width:height:diagonalsallowed:)"
+      },
+      "-initFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:": {
+        "doc": "Initializes a graph that describes an integer grid with the specified dimensions, using the specified node class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/init(fromgridstartingat:width:height:diagonalsallowed:nodeclass:)"
+      },
+      "-nodeAtGridPosition:": {
+        "doc": "Returns the node in the graph at the specified grid coordinates.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/node(atgridposition:)"
+      }
+    },
+    "GKGridGraphNode": {
+      "+nodeWithGridPosition:": {
+        "doc": "Creates a graph node with the specified position on a grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraphnode/nodewithgridposition:"
+      },
+      "-initWithGridPosition:": {
+        "doc": "Initializes a graph node with the specified position on a grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraphnode/init(gridposition:)"
+      }
+    },
+    "GKLinearCongruentialRandomSource": {
+      "-init": {
+        "doc": "Initializes a random source from a nondeterministic seed.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gklinearcongruentialrandomsource/init()"
+      },
+      "-initWithSeed:": {
+        "doc": "Initializes a random source with the specified seed value.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gklinearcongruentialrandomsource/init(seed:)"
+      }
+    },
+    "GKMersenneTwisterRandomSource": {
+      "-init": {
+        "doc": "Initializes a random source from a nondeterministic seed.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmersennetwisterrandomsource/init()"
+      },
+      "-initWithSeed:": {
+        "doc": "Initializes a random source with the specified seed value.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmersennetwisterrandomsource/init(seed:)"
+      }
+    },
+    "GKMeshGraph": {
+      "+graphWithBufferRadius:minCoordinate:maxCoordinate:": {
+        "doc": "Creates a graph to cover the specified area.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/graphwithbufferradius:mincoordinate:maxcoordinate:"
+      },
+      "+graphWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:": {
+        "doc": "Creates a graph to cover the specified area, using the specified node class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/graphwithbufferradius:mincoordinate:maxcoordinate:nodeclass:"
+      },
+      "-addObstacles:": {
+        "doc": "Adds new obstacles to the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/addobstacles(_:)"
+      },
+      "-connectNodeUsingObstacles:": {
+        "doc": "Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/connectusingobstacles(node:)"
+      },
+      "-initWithBufferRadius:minCoordinate:maxCoordinate:": {
+        "doc": "Initializes a graph to cover the specified area.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/init(bufferradius:mincoordinate:maxcoordinate:)"
+      },
+      "-initWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:": {
+        "doc": "Initializes a graph to cover the specified area, using the specified node class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/init(bufferradius:mincoordinate:maxcoordinate:nodeclass:)"
+      },
+      "-removeObstacles:": {
+        "doc": "Removes the specified obstacle from the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/removeobstacles(_:)"
+      },
+      "-triangleAtIndex:": {
+        "doc": "The triangle definition at the specified index.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/triangle(at:)"
+      },
+      "-triangulate": {
+        "doc": "Creates or updates the graph with a network of nodes that describes the open space around its obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/triangulate()"
+      }
+    },
+    "GKMinmaxStrategist": {
+      "-bestMoveForPlayer:": {
+        "doc": "Computes and returns the best possible move for the specified player.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkminmaxstrategist/bestmove(for:)"
+      },
+      "-randomMoveForPlayer:fromNumberOfBestMoves:": {
+        "doc": "Computes several of the best possible moves for the specified player, and returns a move randomly selected from among them.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkminmaxstrategist/randommove(for:fromnumberofbestmoves:)"
+      }
+    },
+    "GKNSPredicateRule": {
+      "-evaluatePredicateWithSystem:": {
+        "doc": "Returns a Boolean value indicating whether the rule’s predicate has been satisfied in the context of the specified rule system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknspredicaterule/evaluatepredicate(in:)"
+      },
+      "-initWithPredicate:": {
+        "doc": "Initializes a rule with the specified predicate.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknspredicaterule/init(predicate:)"
+      }
+    },
+    "GKNoise": {
+      "+noiseWithComponentNoises:selectionNoise:": {
+        "doc": "Creates a noise object by combining the specified noise objects, using another noise object to select which regions of the output correspond to which input noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/init(componentnoises:selectionnoise:)"
+      },
+      "+noiseWithComponentNoises:selectionNoise:componentBoundaries:boundaryBlendDistances:": {
+        "doc": "Creates a noise object by combining the specified noise objects, using another noise object and the specified boundaries to select which regions of the output correspond to which input noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/init(componentnoises:selectionnoise:componentboundaries:boundaryblenddistances:)"
+      },
+      "+noiseWithNoiseSource:": {
+        "doc": "Creates a noise object with the specified noise source.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/noisewithnoisesource:"
+      },
+      "+noiseWithNoiseSource:gradientColors:": {
+        "doc": "Creates a noise object with the specified noise source, with colors for later use in generating noise textures.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/noisewithnoisesource:gradientcolors:"
+      },
+      "-addWithNoise:": {
+        "doc": "Replaces values in the noise field by adding them to values from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/add(_:)"
+      },
+      "-applyAbsoluteValue": {
+        "doc": "Replaces all negative values in the noise field with their positive absolute values.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/applyabsolutevalue()"
+      },
+      "-applyTurbulenceWithFrequency:power:roughness:seed:": {
+        "doc": "Replaces values in the noise field by applying a randomized distortion effect.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/applyturbulence(frequency:power:roughness:seed:)"
+      },
+      "-clampWithLowerBound:upperBound:": {
+        "doc": "Replaces values in the noise field outside the specified range with the values at the endpoints of that range.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/clamp(lowerbound:upperbound:)"
+      },
+      "-displaceXWithNoise:yWithNoise:zWithNoise:": {
+        "doc": "Replaces values in the noise field by shifting each value along a vector whose x-, y-, and z-components are based on the specified noise objects.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/displacewithnoises(x:y:z:)"
+      },
+      "-initWithNoiseSource:": {
+        "doc": "Initializes a noise object with the specified noise source.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/init(_:)"
+      },
+      "-initWithNoiseSource:gradientColors:": {
+        "doc": "Initializes a noise object with the specified noise source, with colors for later use in generating noise textures.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/init(_:gradientcolors:)"
+      },
+      "-invert": {
+        "doc": "Replaces all values in the noise field with their opposite, reversing the range of noise values.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/invert()"
+      },
+      "-maximumWithNoise:": {
+        "doc": "Replaces values in the noise field by choosing the lesser of each value and a corresponding value in the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/maximum(_:)"
+      },
+      "-minimumWithNoise:": {
+        "doc": "Replaces values in the noise field by choosing the lesser of each value and a corresponding value in the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/minimum(_:)"
+      },
+      "-moveBy:": {
+        "doc": "Translates the entire noise field by the specified x, y, and z offsets.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/move(by:)"
+      },
+      "-multiplyWithNoise:": {
+        "doc": "Replaces values in the noise field by multiplying them with values from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/multiply(_:)"
+      },
+      "-raiseToPower:": {
+        "doc": "Replaces all values in the noise field by raising each value to the specified power.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/raisetopower(_:)-14715"
+      },
+      "-raiseToPowerWithNoise:": {
+        "doc": "Replaces values in the noise field by exponentiating them with values from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/raisetopower(_:)-zm5g"
+      },
+      "-remapValuesToCurveWithControlPoints:": {
+        "doc": "Replaces values in the noise field by mapping them to a curve that passes through the specified control points.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/remapvalues(tocurvewithcontrolpoints:)"
+      },
+      "-remapValuesToTerracesWithPeaks:terracesInverted:": {
+        "doc": "Replaces values in the noise field by mapping them to a terrace-like curve that passes through the specified control points.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/remapvalues(toterraceswithpeaks:terracesinverted:)"
+      },
+      "-rotateBy:": {
+        "doc": "Rotates the entire noise field by the specified x, y, and z angles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/rotate(by:)"
+      },
+      "-scaleBy:": {
+        "doc": "Scales the entire noise field by the specified x, y, and z factors.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/scale(by:)"
+      }
+    },
+    "GKNoiseMap": {
+      "+noiseMapWithNoise:": {
+        "doc": "Creates a noise map by sampling from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/noisemapwithnoise:"
+      },
+      "+noiseMapWithNoise:size:origin:sampleCount:seamless:": {
+        "doc": "Creates a noise map by sampling from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/noisemapwithnoise:size:origin:samplecount:seamless:"
+      },
+      "-init": {
+        "doc": "Initializes a noise map with a constant noise value of zero throughout.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/init()"
+      },
+      "-initWithNoise:": {
+        "doc": "Initializes a noise map by sampling from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/init(_:)"
+      },
+      "-initWithNoise:size:origin:sampleCount:seamless:": {
+        "doc": "Creates a noise map by sampling from the specified noise object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/init(_:size:origin:samplecount:seamless:)"
+      },
+      "-interpolatedValueAtPosition:": {
+        "doc": "Returns the value at the specified position in the noise map, interpolating results for positions not on the discrete sample grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/interpolatedvalue(at:)"
+      },
+      "-setValue:atPosition:": {
+        "doc": "Sets the value at the specified position in the noise map.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/setvalue(_:at:)"
+      },
+      "-valueAtPosition:": {
+        "doc": "Returns the value at the specified position in the noise map’s discrete sample grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/value(at:)"
+      }
+    },
+    "GKObstacleGraph": {
+      "+graphWithObstacles:bufferRadius:": {
+        "doc": "Creates a graph with the specified list of obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/graphwithobstacles:bufferradius:"
+      },
+      "+graphWithObstacles:bufferRadius:nodeClass:": {
+        "doc": "Creates a graph with the specified list of obstacles, using the specified node class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/graphwithobstacles:bufferradius:nodeclass:"
+      },
+      "-addObstacles:": {
+        "doc": "Adds new obstacles to the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/addobstacles(_:)"
+      },
+      "-connectNodeUsingObstacles:": {
+        "doc": "Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/connectusingobstacles(node:)"
+      },
+      "-connectNodeUsingObstacles:ignoringBufferRadiusOfObstacles:": {
+        "doc": "Adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the buffer regions around the specified obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/connectusingobstacles(node:ignoringbufferradiusof:)"
+      },
+      "-connectNodeUsingObstacles:ignoringObstacles:": {
+        "doc": "Adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the area occupied by the specified obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/connectusingobstacles(node:ignoring:)"
+      },
+      "-initWithObstacles:bufferRadius:": {
+        "doc": "Initializes a graph with the specified list of obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/init(obstacles:bufferradius:)"
+      },
+      "-initWithObstacles:bufferRadius:nodeClass:": {
+        "doc": "Initializes a graph with the specified list of obstacles, using the specified node class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/init(obstacles:bufferradius:nodeclass:)"
+      },
+      "-isConnectionLockedFromNode:toNode:": {
+        "doc": "Returns a Boolean value indicating whether the specified nodes are protected from disconnection due to the addition of obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/isconnectionlocked(from:to:)"
+      },
+      "-lockConnectionFromNode:toNode:": {
+        "doc": "Prevents the specified nodes from being disconnected due to the addition of obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/lockconnection(from:to:)"
+      },
+      "-nodesForObstacle:": {
+        "doc": "Returns the group of nodes corresponding to an obstacle in the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/nodes(for:)"
+      },
+      "-removeAllObstacles": {
+        "doc": "Removes all obstacles from the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/removeallobstacles()"
+      },
+      "-removeObstacles:": {
+        "doc": "Removes the specified obstacle from the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/removeobstacles(_:)"
+      },
+      "-unlockConnectionFromNode:toNode:": {
+        "doc": "Allows the specified nodes to be disconnected due to the addition of obstacles.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/unlockconnection(from:to:)"
+      }
+    },
+    "GKOctree": {
+      "+octreeWithBoundingBox:minimumCellSize:": {
+        "doc": "Creates an octree with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/octreewithboundingbox:minimumcellsize:"
+      },
+      "-addElement:withBox:": {
+        "doc": "Adds an object to the tree corresponding to the specified volume of 3D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/add(_:in:)"
+      },
+      "-addElement:withPoint:": {
+        "doc": "Adds an object to the tree corresponding to the specified point in 3D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/add(_:at:)"
+      },
+      "-elementsAtPoint:": {
+        "doc": "Returns all objects whose corresponding locations overlap the specified point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/elements(at:)"
+      },
+      "-elementsInBox:": {
+        "doc": "Returns all objects whose corresponding locations overlap the specified volume.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/elements(in:)"
+      },
+      "-initWithBoundingBox:minimumCellSize:": {
+        "doc": "Initializes an octree with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/init(boundingbox:minimumcellsize:)"
+      },
+      "-removeElement:": {
+        "doc": "Searches for the specified object and removes it from the tree.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/remove(_:)"
+      },
+      "-removeElement:withNode:": {
+        "doc": "Removes the specified object from the tree, using a reference to its containing node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctree/remove(_:using:)"
+      }
+    },
+    "GKPath": {
+      "+pathWithFloat3Points:count:radius:cyclical:": {
+        "doc": "Creates a path with the specified array of 3D points.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/pathwithfloat3points:count:radius:cyclical:"
+      },
+      "+pathWithGraphNodes:radius:": {
+        "doc": "Creates a path using the positions of the specified graph nodes.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/pathwithgraphnodes:radius:"
+      },
+      "+pathWithPoints:count:radius:cyclical:": {
+        "doc": "Creates a path with the specified array of 2D points.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/pathwithpoints:count:radius:cyclical:"
+      },
+      "-float2AtIndex:": {
+        "doc": "Returns the 2D point at the specified index in the path’s list of vertices.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/float2(at:)"
+      },
+      "-float3AtIndex:": {
+        "doc": "Returns the 3D point at the specified index in the path’s list of vertices.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/float3(at:)"
+      },
+      "-initWithFloat3Points:count:radius:cyclical:": {
+        "doc": "Initializes a path with the specified array of 3D points.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/initwithfloat3points:count:radius:cyclical:"
+      },
+      "-initWithGraphNodes:radius:": {
+        "doc": "Initializes a path using the positions of the specified graph nodes.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/init(graphnodes:radius:)"
+      },
+      "-initWithPoints:count:radius:cyclical:": {
+        "doc": "Initializes a path with the specified array of 2D points.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/initwithpoints:count:radius:cyclical:"
+      },
+      "-pointAtIndex:": {
+        "doc": "Returns the 2D point at the specified index in the path’s list of vertices.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/point(at:)"
+      }
+    },
+    "GKPerlinNoiseSource": {
+      "+perlinNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:": {
+        "doc": "Creates a Perlin noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkperlinnoisesource/perlinnoisesourcewithfrequency:octavecount:persistence:lacunarity:seed:"
+      },
+      "-initWithFrequency:octaveCount:persistence:lacunarity:seed:": {
+        "doc": "Initializes a Perlin noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkperlinnoisesource/init(frequency:octavecount:persistence:lacunarity:seed:)"
+      }
+    },
+    "GKPolygonObstacle": {
+      "+obstacleWithPoints:count:": {
+        "doc": "Creates a polygon obstacle with the specified list of vertices.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpolygonobstacle/obstaclewithpoints:count:"
+      },
+      "-initWithPoints:count:": {
+        "doc": "Initializes a polygon obstacle with the specified list of vertices.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpolygonobstacle/initwithpoints:count:"
+      },
+      "-vertexAtIndex:": {
+        "doc": "Returns the point coordinates of the specified vertex.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpolygonobstacle/vertex(at:)"
+      }
+    },
+    "GKQuadtree": {
+      "+quadtreeWithBoundingQuad:minimumCellSize:": {
+        "doc": "Creates a quadtree with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/quadtreewithboundingquad:minimumcellsize:"
+      },
+      "-addElement:withPoint:": {
+        "doc": "Adds an object to the tree corresponding to the specified point in 2D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/add(_:at:)"
+      },
+      "-addElement:withQuad:": {
+        "doc": "Adds an object to the tree corresponding to the specified region of 2D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/add(_:in:)"
+      },
+      "-elementsAtPoint:": {
+        "doc": "Returns all objects whose corresponding locations overlap the specified point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/elements(at:)"
+      },
+      "-elementsInQuad:": {
+        "doc": "Returns all objects whose corresponding locations overlap the specified region.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/elements(in:)"
+      },
+      "-initWithBoundingQuad:minimumCellSize:": {
+        "doc": "Initializes a quadtree with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/init(boundingquad:minimumcellsize:)"
+      },
+      "-removeElement:": {
+        "doc": "Searches for the specified object and removes it from the tree.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/remove(_:)"
+      },
+      "-removeElement:withNode:": {
+        "doc": "Removes the specified object from the tree, using a reference to its containing node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtree/remove(_:using:)"
+      }
+    },
+    "GKRTree": {
+      "+treeWithMaxNumberOfChildren:": {
+        "doc": "Creates a new R-tree object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree/treewithmaxnumberofchildren:"
+      },
+      "-addElement:boundingRectMin:boundingRectMax:splitStrategy:": {
+        "doc": "Adds the specified object to the tree.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree/addelement(_:boundingrectmin:boundingrectmax:splitstrategy:)"
+      },
+      "-elementsInBoundingRectMin:rectMax:": {
+        "doc": "Searches the tree and returns all elements found within the specified bounding region.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree/elements(inboundingrectmin:rectmax:)"
+      },
+      "-initWithMaxNumberOfChildren:": {
+        "doc": "Initializes a new R-tree object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree/init(maxnumberofchildren:)"
+      },
+      "-removeElement:boundingRectMin:boundingRectMax:": {
+        "doc": "Removes the specified object from the tree.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree/removeelement(_:boundingrectmin:boundingrectmax:)"
+      }
+    },
+    "GKRandomDistribution": {
+      "+d20": {
+        "doc": "Creates a random distribution equivalent to a twenty-sided die.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/d20()"
+      },
+      "+d6": {
+        "doc": "Creates a random distribution equivalent to a six-sided die.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/d6()"
+      },
+      "+distributionForDieWithSideCount:": {
+        "doc": "Creates a random distribution equivalent to a die with the specified number of sides.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/init(fordiewithsidecount:)"
+      },
+      "+distributionWithLowestValue:highestValue:": {
+        "doc": "Creates a random distribution with the specified lower and upper bounds, using the Arc4 randomizer.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/init(lowestvalue:highestvalue:)"
+      },
+      "-initWithRandomSource:lowestValue:highestValue:": {
+        "doc": "Initializes a uniform random distribution with the specified lower and upper bounds, using the specified source randomizer.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/init(randomsource:lowestvalue:highestvalue:)"
+      },
+      "-nextBool": {
+        "doc": "Generates and returns a new random Boolean value within the characteristics of the distribution.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/nextbool()"
+      },
+      "-nextInt": {
+        "doc": "Generates and returns a new random integer within the bounds of the distribution.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/nextint()"
+      },
+      "-nextIntWithUpperBound:": {
+        "doc": "Generates and returns a new random integer within the bounds of the distribution and less than the specified limit.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/nextint(upperbound:)"
+      },
+      "-nextUniform": {
+        "doc": "Generates and returns a new random floating-point value within the characteristics of the distribution.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/nextuniform()"
+      }
+    },
+    "GKRandomSource": {
+      "+sharedRandom": {
+        "doc": "Returns a shared instance that shares a system-wide random source.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomsource/sharedrandom()"
+      },
+      "-arrayByShufflingObjectsInArray:": {
+        "doc": "Returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomsource/arraybyshufflingobjects(in:)"
+      },
+      "-init": {
+        "doc": "Initializes a new random source object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomsource/init()"
+      }
+    },
+    "GKRidgedNoiseSource": {
+      "+ridgedNoiseSourceWithFrequency:octaveCount:lacunarity:seed:": {
+        "doc": "Creates a ridged noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkridgednoisesource/ridgednoisesourcewithfrequency:octavecount:lacunarity:seed:"
+      },
+      "-initWithFrequency:octaveCount:lacunarity:seed:": {
+        "doc": "Initializes a ridged noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkridgednoisesource/init(frequency:octavecount:lacunarity:seed:)"
+      }
+    },
+    "GKRule": {
+      "+ruleWithBlockPredicate:action:": {
+        "doc": "Creates a rule whose predicate is evaluated and action is executed through the specified blocks.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrule/init(blockpredicate:action:)"
+      },
+      "+ruleWithPredicate:assertingFact:grade:": {
+        "doc": "Creates a data-driven rule with the specified predicate, whose action asserts a fact in the rule system evaluating the rule.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrule/init(predicate:assertingfact:grade:)"
+      },
+      "+ruleWithPredicate:retractingFact:grade:": {
+        "doc": "Creates a data-driven rule with the specified predicate, whose action retracts a fact in the rule system evaluating the rule.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrule/init(predicate:retractingfact:grade:)"
+      },
+      "-evaluatePredicateWithSystem:": {
+        "doc": "Returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrule/evaluatepredicate(in:)"
+      },
+      "-performActionWithSystem:": {
+        "doc": "Performs actions that should result when the rule is satisfied in the context of the specified rule system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrule/performaction(in:)"
+      }
+    },
+    "GKRuleSystem": {
+      "-addRule:": {
+        "doc": "Adds the specified rule to the system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/add(_:)-76jb5"
+      },
+      "-addRulesFromArray:": {
+        "doc": "Adds the specified list of rules to the system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/add(_:)-7u5zw"
+      },
+      "-assertFact:": {
+        "doc": "Adds the specified fact to the fact set with a membership grade of 1.0, and reevaluates the rules in the system’s agenda.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/assertfact(_:)"
+      },
+      "-assertFact:grade:": {
+        "doc": "Increases the membership grade of the specified fact by the specified amount, adding it to the fact set if necessary, and reevaluates the rules in the system’s agenda.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/assertfact(_:grade:)"
+      },
+      "-evaluate": {
+        "doc": "Evaluates the rule system, executing the list of rules in its agenda.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/evaluate()"
+      },
+      "-gradeForFact:": {
+        "doc": "Returns the membership grade of the specified fact.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/grade(forfact:)"
+      },
+      "-init": {
+        "doc": "Initializes a new, empty rule system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/init()"
+      },
+      "-maximumGradeForFacts:": {
+        "doc": "Returns the highest membership grade among the specified facts.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/maximumgrade(forfacts:)"
+      },
+      "-minimumGradeForFacts:": {
+        "doc": "Returns the lowest membership grade among the specified facts.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/minimumgrade(forfacts:)"
+      },
+      "-removeAllRules": {
+        "doc": "Removes all rules from the system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/removeallrules()"
+      },
+      "-reset": {
+        "doc": "Returns the rule system to its original agenda and clears all facts.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/reset()"
+      },
+      "-retractFact:": {
+        "doc": "Removes the specified fact from the fact set, and reevaluates the rules in the system’s agenda.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/retractfact(_:)"
+      },
+      "-retractFact:grade:": {
+        "doc": "Reduces the membership grade of the specified fact by the specified amount, removing it from the fact set if necessary, and reevaluates the rules in the system’s agenda.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/retractfact(_:grade:)"
+      }
+    },
+    "GKSKNodeComponent": {
+      "+componentWithNode:": {
+        "doc": "Creates a component to manage the specified SpriteKit node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksknodecomponent/componentwithnode:"
+      },
+      "-initWithNode:": {
+        "doc": "Initializes a component to manage the specified SpriteKit node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksknodecomponent/init(node:)"
+      }
+    },
+    "GKScene": {
+      "+sceneWithFileNamed:": {
+        "doc": "Loads the specified SpriteKit scene file, creating a GKScene object containing the SpriteKit scene and associated GameplayKit objects.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/init(filenamed:)"
+      },
+      "-addEntity:": {
+        "doc": "Adds a GameplayKit entity to the list of entities managed by the scene.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/addentity(_:)"
+      },
+      "-removeEntity:": {
+        "doc": "Removes a GameplayKit entity from the list of entities managed by the scene.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/removeentity(_:)"
+      },
+      "-removeGraph:": {
+        "doc": "Removes a pathfinding graph from the list of graphs managed by the scene.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/removegraph(_:)"
+      }
+    },
+    "GKSphereObstacle": {
+      "+obstacleWithRadius:": {
+        "doc": "Creates a spherical obstacle with the specified radius.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksphereobstacle/obstaclewithradius:"
+      },
+      "-initWithRadius:": {
+        "doc": "Initializes a spherical obstacle with the specified radius.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksphereobstacle/init(radius:)"
+      }
+    },
+    "GKSpheresNoiseSource": {
+      "+spheresNoiseWithFrequency:": {
+        "doc": "Creates a sphere noise source with the specified frequency.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkspheresnoisesource/spheresnoise(withfrequency:)"
+      },
+      "-initWithFrequency:": {
+        "doc": "Initializes a sphere noise source with the specified frequency.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkspheresnoisesource/init(frequency:)"
+      }
+    },
+    "GKState": {
+      "+state": {
+        "doc": "Creates a state object with the specified list of valid next states.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/state"
+      },
+      "-didEnterWithPreviousState:": {
+        "doc": "Performs custom actions when a state machine transitions into this state.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/didenter(from:)"
+      },
+      "-init": {
+        "doc": "Initializes a state object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/init()"
+      },
+      "-isValidNextState:": {
+        "doc": "Returns a Boolean value indicating whether a state machine currently in this state is allowed to transition into the specified state.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/isvalidnextstate(_:)"
+      },
+      "-updateWithDeltaTime:": {
+        "doc": "Performs custom actions when a state machine updates while in this state.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/update(deltatime:)"
+      },
+      "-willExitWithNextState:": {
+        "doc": "Performs custom actions when a state machine transitions out of this state.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/willexit(to:)"
+      }
+    },
+    "GKStateMachine": {
+      "+stateMachineWithStates:": {
+        "doc": "Creates a state machine with the specified states.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/statemachinewithstates:"
+      },
+      "-canEnterState:": {
+        "doc": "Returns a Boolean value indicating whether it is valid for the state machine to transition from its current state to a state of the specified class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/canenterstate(_:)"
+      },
+      "-enterState:": {
+        "doc": "Attempts to transition the state machine from its current state to a state of the specified class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/enter(_:)"
+      },
+      "-initWithStates:": {
+        "doc": "Initializes a state machine with the specified states.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/init(states:)"
+      },
+      "-stateForClass:": {
+        "doc": "Returns the state object in the state machine corresponding to the specified class.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/stateforclass:"
+      },
+      "-updateWithDeltaTime:": {
+        "doc": "Tells the current state object to perform per-frame updates.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/update(deltatime:)"
+      }
+    },
+    "GKVoronoiNoiseSource": {
+      "+voronoiNoiseWithFrequency:displacement:distanceEnabled:seed:": {
+        "doc": "Creates a Voronoi noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource/voronoinoise(withfrequency:displacement:distanceenabled:seed:)"
+      },
+      "-initWithFrequency:displacement:distanceEnabled:seed:": {
+        "doc": "Initializes a Voronoi noise source with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource/init(frequency:displacement:distanceenabled:seed:)"
+      }
+    }
+  },
+  "properties": {
+    "GKARC4RandomSource": {
+      "seed": {
+        "doc": "The seed data that determines the random source’s behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkarc4randomsource/seed"
+      }
+    },
+    "GKAgent": {
+      "behavior": {
+        "doc": "A weighted collection of goals that influence the agent’s movement.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/behavior"
+      },
+      "delegate": {
+        "doc": "An object that prepares for or responds to updates in the agent simulation.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/delegate"
+      },
+      "mass": {
+        "doc": "The resistance of the agent to changes in speed or direction.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/mass"
+      },
+      "maxAcceleration": {
+        "doc": "The upper limit to changes in the agent’s speed or direction.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/maxacceleration"
+      },
+      "maxSpeed": {
+        "doc": "The agent’s maximum forward speed, in units per second.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/maxspeed"
+      },
+      "radius": {
+        "doc": "The agent’s radius.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/radius"
+      },
+      "speed": {
+        "doc": "The agent’s current forward speed, in units per second.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent/speed"
+      }
+    },
+    "GKAgent2D": {
+      "position": {
+        "doc": "The current position of the agent in 2D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent2d/position"
+      },
+      "rotation": {
+        "doc": "The rotation of the agent around the z-axis.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent2d/rotation"
+      },
+      "velocity": {
+        "doc": "The current velocity of the agent in 2D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent2d/velocity"
+      }
+    },
+    "GKAgent3D": {
+      "position": {
+        "doc": "The current position of the agent in 3D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent3d/position"
+      },
+      "rotation": {
+        "doc": "The orientation of the agent in 3D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent3d/rotation"
+      },
+      "velocity": {
+        "doc": "The current velocity of the agent in 3D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkagent3d/velocity"
+      }
+    },
+    "GKBehavior": {
+      "goalCount": {
+        "doc": "The number of goals in the behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbehavior/goalcount"
+      }
+    },
+    "GKBillowNoiseSource": {
+      "persistence": {
+        "doc": "The rate at which successive octaves of the noise function decrease in amplitude.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkbillownoisesource/persistence"
+      }
+    },
+    "GKCheckerboardNoiseSource": {
+      "squareSize": {
+        "doc": "The size (both width and height) of squares in the generated checkerboard pattern.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcheckerboardnoisesource/squaresize"
+      }
+    },
+    "GKCircleObstacle": {
+      "position": {
+        "doc": "The position of the obstacle.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcircleobstacle/position"
+      },
+      "radius": {
+        "doc": "The radius of the obstacle.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcircleobstacle/radius"
+      }
+    },
+    "GKCoherentNoiseSource": {
+      "frequency": {
+        "doc": "A value that determines the size and spacing of features in generated noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcoherentnoisesource/frequency"
+      },
+      "lacunarity": {
+        "doc": "The rate at which successive octaves of the noise function increase in frequency.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcoherentnoisesource/lacunarity"
+      },
+      "octaveCount": {
+        "doc": "The number of octaves of the underlying noise function to use for generating noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcoherentnoisesource/octavecount"
+      },
+      "seed": {
+        "doc": "The value that determines the specific configuration of noise produced by the noise source.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcoherentnoisesource/seed"
+      }
+    },
+    "GKComponent": {
+      "entity": {
+        "doc": "The entity that owns this component.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponent/entity"
+      }
+    },
+    "GKComponentSystem": {
+      "componentClass": {
+        "doc": "The class of components managed by the component system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/componentclass"
+      },
+      "components": {
+        "doc": "The component system’s list of components.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcomponentsystem/components"
+      }
+    },
+    "GKCompositeBehavior": {
+      "behaviorCount": {
+        "doc": "The number of individual behaviors in the composite behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior/behaviorcount"
+      }
+    },
+    "GKConstantNoiseSource": {
+      "value": {
+        "doc": "The constant value for the generated noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkconstantnoisesource/value"
+      }
+    },
+    "GKCylindersNoiseSource": {
+      "frequency": {
+        "doc": "A value that determines the size and spacing of concentric cylinders.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkcylindersnoisesource/frequency"
+      }
+    },
+    "GKDecisionTree": {
+      "randomSource": {
+        "doc": "The randomizer to be used when evaluating parts of the tree that branch randomly.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisiontree/randomsource"
+      },
+      "rootNode": {
+        "doc": "The decision node at the root of the decision tree, representing the first attribute to test.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkdecisiontree/rootnode"
+      }
+    },
+    "GKEntity": {
+      "components": {
+        "doc": "The entity’s list of components.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkentity/components"
+      }
+    },
+    "GKGaussianDistribution": {
+      "deviation": {
+        "doc": "The standard deviation of the distribution (also called sigma).",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgaussiandistribution/deviation"
+      },
+      "mean": {
+        "doc": "The mean value of the distribution (also called the expected value or median).",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgaussiandistribution/mean"
+      }
+    },
+    "GKGraph": {
+      "nodes": {
+        "doc": "The list of nodes in the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraph/nodes"
+      }
+    },
+    "GKGraphNode": {
+      "connectedNodes": {
+        "doc": "The list of other nodes connected to this node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode/connectednodes"
+      }
+    },
+    "GKGraphNode2D": {
+      "position": {
+        "doc": "The position of the node in continuous 2D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode2d/position"
+      }
+    },
+    "GKGraphNode3D": {
+      "position": {
+        "doc": "The position of the node in continuous 2D space.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgraphnode3d/position"
+      }
+    },
+    "GKGridGraph": {
+      "diagonalsAllowed": {
+        "doc": "A Boolean value that indicates whether nodes in the grid are connected to their diagonal neighbors.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/diagonalsallowed"
+      },
+      "gridHeight": {
+        "doc": "The number of possible y-coordinates in the grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/gridheight"
+      },
+      "gridOrigin": {
+        "doc": "The lowest x- and y-coordinates that appear in the grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/gridorigin"
+      },
+      "gridWidth": {
+        "doc": "The number of possible x-coordinates in the grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraph/gridwidth"
+      }
+    },
+    "GKGridGraphNode": {
+      "gridPosition": {
+        "doc": "The position of the node on a discrete integer grid.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkgridgraphnode/gridposition"
+      }
+    },
+    "GKLinearCongruentialRandomSource": {
+      "seed": {
+        "doc": "The seed value that determines the random source’s behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gklinearcongruentialrandomsource/seed"
+      }
+    },
+    "GKMersenneTwisterRandomSource": {
+      "seed": {
+        "doc": "The seed value that determines the random source’s behavior.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmersennetwisterrandomsource/seed"
+      }
+    },
+    "GKMeshGraph": {
+      "bufferRadius": {
+        "doc": "The distance from obstacle edges that should also be considered impassable.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/bufferradius"
+      },
+      "obstacles": {
+        "doc": "The list of obstacle objects in the graph, each of which describes a polygon-shaped impassable area.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/obstacles"
+      },
+      "triangleCount": {
+        "doc": "The number of triangles in the mesh.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/trianglecount"
+      },
+      "triangulationMode": {
+        "doc": "A set of options for how to place graph nodes when triangulating the graph.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmeshgraph/triangulationmode"
+      }
+    },
+    "GKMinmaxStrategist": {
+      "maxLookAheadDepth": {
+        "doc": "The number of future turns for the strategist to consider when planning moves.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkminmaxstrategist/maxlookaheaddepth"
+      }
+    },
+    "GKMonteCarloStrategist": {
+      "budget": {
+        "doc": "The maximum number of game model states the strategist will examine when searching for a move.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmontecarlostrategist/budget"
+      },
+      "explorationParameter": {
+        "doc": "A value that influences whether the strategist searches more broadly or more deeply for winning game model states.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkmontecarlostrategist/explorationparameter"
+      }
+    },
+    "GKNSPredicateRule": {
+      "predicate": {
+        "doc": "A predicate to be tested when evaluating the rule.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknspredicaterule/predicate"
+      }
+    },
+    "GKNoise": {
+      "gradientColors": {
+        "doc": "A dictionary mapping noise values to colors for use in colorizing generated noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoise/gradientcolors"
+      }
+    },
+    "GKNoiseMap": {
+      "origin": {
+        "doc": "The position of the “slice” of noise samples contained in the noise map relative to the unit coordinate space of the noise object it was created from.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/origin"
+      },
+      "sampleCount": {
+        "doc": "The width and height of integer grid for which the noise map contains sampled noise values.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/samplecount"
+      },
+      "seamless": {
+        "doc": "A Boolean value indicating whether the noise map’s output can repeat seamlessly in all directions.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/isseamless"
+      },
+      "size": {
+        "doc": "The size of the “slice” of noise samples contained in the noise map relative to the unit coordinate space of the noise object it was created from.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gknoisemap/size"
+      }
+    },
+    "GKObstacleGraph": {
+      "bufferRadius": {
+        "doc": "The distance from obstacle edges that should also be considered impassable.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/bufferradius"
+      },
+      "obstacles": {
+        "doc": "The list of obstacle objects in the graph, each of which describes a polygon-shaped impassable area.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkobstaclegraph/obstacles"
+      }
+    },
+    "GKOctreeNode": {
+      "box": {
+        "doc": "The axis-aligned bounding box represented by the node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkoctreenode/box"
+      }
+    },
+    "GKPath": {
+      "cyclical": {
+        "doc": "A Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/iscyclical"
+      },
+      "numPoints": {
+        "doc": "The number of vertices in the path.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/numpoints"
+      },
+      "radius": {
+        "doc": "The radius of the path.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpath/radius"
+      }
+    },
+    "GKPerlinNoiseSource": {
+      "persistence": {
+        "doc": "The rate at which successive octaves of the noise function decrease in amplitude.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkperlinnoisesource/persistence"
+      }
+    },
+    "GKPolygonObstacle": {
+      "vertexCount": {
+        "doc": "The number of vertices that define the polygon-shaped area of the obstacle.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkpolygonobstacle/vertexcount"
+      }
+    },
+    "GKQuadtreeNode": {
+      "quad": {
+        "doc": "The axis-aligned bounding rectangle represented by the node.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkquadtreenode/quad"
+      }
+    },
+    "GKRTree": {
+      "queryReserve": {
+        "doc": "The number of elements to reserve space for when searching.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrtree/queryreserve"
+      }
+    },
+    "GKRandomDistribution": {
+      "highestValue": {
+        "doc": "The highest value to be produced by the distribution.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/highestvalue"
+      },
+      "lowestValue": {
+        "doc": "The lowest value to be produced by the distribution.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/lowestvalue"
+      },
+      "numberOfPossibleOutcomes": {
+        "doc": "The number of unique values the distribution can generate.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution/numberofpossibleoutcomes"
+      }
+    },
+    "GKRule": {
+      "salience": {
+        "doc": "The importance of the rule relative to others in a rule system’s agenda.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrule/salience"
+      }
+    },
+    "GKRuleSystem": {
+      "agenda": {
+        "doc": "The list of rules to be considered when evaluating the system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/agenda"
+      },
+      "executed": {
+        "doc": "The list of rules whose actions have been performed during evaluation of the system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/executed"
+      },
+      "facts": {
+        "doc": "The list of facts claimed by the rule system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/facts"
+      },
+      "rules": {
+        "doc": "The list of rules to be executed when evaluating the system.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/rules"
+      },
+      "state": {
+        "doc": "A dictionary of state information to be evaluated by the system’s rules.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkrulesystem/state"
+      }
+    },
+    "GKSKNodeComponent": {
+      "node": {
+        "doc": "The SpriteKit node managed by the component.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksknodecomponent/node"
+      }
+    },
+    "GKScene": {
+      "entities": {
+        "doc": "The list of GameplayKit entities managed by the scene.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/entities"
+      },
+      "graphs": {
+        "doc": "The list of pathfinding graph objects managed by the scene.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/graphs"
+      },
+      "rootNode": {
+        "doc": "The SpriteKit scene managed by this GKScene object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkscene/rootnode"
+      }
+    },
+    "GKSphereObstacle": {
+      "position": {
+        "doc": "The position of the obstacle.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksphereobstacle/position"
+      },
+      "radius": {
+        "doc": "The radius of the obstacle.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gksphereobstacle/radius"
+      }
+    },
+    "GKSpheresNoiseSource": {
+      "frequency": {
+        "doc": "A value that determines the size and spacing of concentric spheres.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkspheresnoisesource/frequency"
+      }
+    },
+    "GKState": {
+      "stateMachine": {
+        "doc": "The state machine that owns this state object.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstate/statemachine"
+      }
+    },
+    "GKStateMachine": {
+      "currentState": {
+        "doc": "The state machine’s current state.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkstatemachine/currentstate"
+      }
+    },
+    "GKVoronoiNoiseSource": {
+      "displacement": {
+        "doc": "The range of random values to assign to each cell in generated noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource/displacement"
+      },
+      "distanceEnabled": {
+        "doc": "A Boolean value that specifies whether generated noise values incorporate the distance from each point to the nearest seed point.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource/isdistanceenabled"
+      },
+      "frequency": {
+        "doc": "A value that determines the number and size of cells in generated noise.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource/frequency"
+      },
+      "seed": {
+        "doc": "The value that determines the specific configuration of noise produced by the noise source.",
+        "url": "https://developer.apple.com/documentation/gameplaykit/gkvoronoinoisesource/seed"
+      }
+    }
+  }
+}

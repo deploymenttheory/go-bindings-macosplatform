@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A half-open interval from a lower bound up to, but not including, an upper bound.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shrange
 type SHRange struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func SHRangeFromID(id objc.ID) *SHRange {
 	return o
 }
 
-// Creates a range with the bounds you specify. - Parameters: - lowerBound: The lower bound of the range. - upperBound: The upper bound of the range.
+// Creates a range with the bounds you specify.
 func SHRangeRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *SHRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHRange), _sHRangeSelRangeWithLowerBoundUpperBound, lowerBound, upperBound)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func SHRangeRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64
 	return SHRangeFromID(_ret)
 }
 
-// Creates a range with the bounds you specify. - Parameters: - lowerBound: The lower bound of the range. - upperBound: The upper bound of the range.
+// Creates a range with the bounds you specify.
 func (o *SHRange) InitWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *SHRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHRangeSelInitWithLowerBoundUpperBound, lowerBound, upperBound)
 	if _ret != 0 {

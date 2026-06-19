@@ -95,7 +95,7 @@ func (o *DRSetupPanel) DeviceSelectionChanged(device *discrecording.DRDevice) {
 
 // @method		mediaStateChanged: @abstract	Invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc. @param		status		The new device status dictionary. @result		<i>YES</i> if the inserted media is valid for use, <i>NO</i> otherwise.
 func (o *DRSetupPanel) MediaStateChanged(status *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _dRSetupPanelSelMediaStateChanged, status)
+	_ret := objc.Send[bool](o.Ptr(), _dRSetupPanelSelMediaStateChanged, status.Ptr())
 	return _ret
 }
 

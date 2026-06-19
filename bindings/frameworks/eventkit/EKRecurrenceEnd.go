@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines the end of a recurrence rule.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekrecurrenceend
 type EKRecurrenceEnd struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func EKRecurrenceEndFromID(id objc.ID) *EKRecurrenceEnd {
 	return o
 }
 
-// @method     recurrenceEndWithEndDate: @abstract   Creates an autoreleased recurrence end with a specific end date.
+// Initializes and returns a date-based recurrence end with a given end date.
 func EKRecurrenceEndRecurrenceEndWithEndDate(endDate *foundation.NSDate) *EKRecurrenceEnd {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceEnd), _eKRecurrenceEndSelRecurrenceEndWithEndDate, endDate.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func EKRecurrenceEndRecurrenceEndWithEndDate(endDate *foundation.NSDate) *EKRecu
 	return EKRecurrenceEndFromID(_ret)
 }
 
-// @method     recurrenceEndWithOccurrenceCount: @abstract   Creates an autoreleased recurrence end with a maximum occurrence count.
+// Initializes and returns a count-based recurrence end with a given maximum occurrence count.
 func EKRecurrenceEndRecurrenceEndWithOccurrenceCount(occurrenceCount uint) *EKRecurrenceEnd {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceEnd), _eKRecurrenceEndSelRecurrenceEndWithOccurrenceCount, occurrenceCount)
 	if _ret != 0 {

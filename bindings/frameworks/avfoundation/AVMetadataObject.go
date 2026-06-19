@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for objects provided by a metadata capture output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadataobject
 type AVMetadataObject struct {
 	foundation.NSObject

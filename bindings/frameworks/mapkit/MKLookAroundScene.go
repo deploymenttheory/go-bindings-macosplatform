@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class that encapsulates information the framework requires to retrieve and display a specific Look Around location’s imagery.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklookaroundscene
 type MKLookAroundScene struct {
 	foundation.NSObject

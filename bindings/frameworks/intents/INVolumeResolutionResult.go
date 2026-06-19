@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a volume associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/involumeresolutionresult
 type INVolumeResolutionResult struct {
 	INIntentResolutionResult
@@ -32,24 +34,27 @@ func INVolumeResolutionResultFromID(id objc.ID) *INVolumeResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INVolumeResolutionResultSuccessWithResolvedVolume(resolvedVolume *foundation.NSMeasurement[*foundation.NSUnitVolume]) *INVolumeResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelSuccessWithResolvedVolume, resolvedVolume)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelSuccessWithResolvedVolume, resolvedVolume.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INVolumeResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INVolumeResolutionResultDisambiguationWithVolumeToDisambiguate(volumeToDisambiguate *foundation.NSArray[objc.ID]) *INVolumeResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelDisambiguationWithVolumeToDisambiguate, volumeToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelDisambiguationWithVolumeToDisambiguate, volumeToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INVolumeResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INVolumeResolutionResultConfirmationRequiredWithVolumeToConfirm(volumeToConfirm *foundation.NSMeasurement[*foundation.NSUnitVolume]) *INVolumeResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelConfirmationRequiredWithVolumeToConfirm, volumeToConfirm)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINVolumeResolutionResult), _iNVolumeResolutionResultSelConfirmationRequiredWithVolumeToConfirm, volumeToConfirm.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

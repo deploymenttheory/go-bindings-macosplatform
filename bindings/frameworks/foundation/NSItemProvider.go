@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item provider for conveying data or a file between processes during drag-and-drop or copy-and-paste activities, or from a host app to an app extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsitemprovider
 type NSItemProvider struct {
 	NSObject
@@ -54,6 +56,7 @@ func NSItemProviderFromID(id objc.ID) *NSItemProvider {
 	return o
 }
 
+// Creates an empty item provider to which you can later register a data or file representation.
 func (o *NSItemProvider) Init() *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInit)
 	if _ret != 0 {
@@ -62,14 +65,17 @@ func (o *NSItemProvider) Init() *NSItemProvider {
 	return NSItemProviderFromID(_ret)
 }
 
+// Registers a data-backed representation for an item, specifiying item visibility and a load handler.
 func (o *NSItemProvider) RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier *NSString, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	o.Ptr().Send(_nSItemProviderSelRegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler, typeIdentifier.Ptr(), visibility, loadHandler)
 }
 
+// Registers a file-backed representation for an item, specifying file options, item visibility, and a load handler.
 func (o *NSItemProvider) RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier *NSString, fileOptions NSItemProviderFileOptions, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	o.Ptr().Send(_nSItemProviderSelRegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler, typeIdentifier.Ptr(), fileOptions, visibility, loadHandler)
 }
 
+// Returns an array with a subset of type identifiers for the item provider, according to the specified file options, in the same order they were registered.
 func (o *NSItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions NSItemProviderFileOptions) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelRegisteredTypeIdentifiersWithFileOptions, fileOptions)
 	if _ret != 0 {
@@ -78,16 +84,19 @@ func (o *NSItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions NS
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier file options parameter with a value of zero.
 func (o *NSItemProvider) HasItemConformingToTypeIdentifier(typeIdentifier *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSItemProviderSelHasItemConformingToTypeIdentifier, typeIdentifier.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
 func (o *NSItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier *NSString, fileOptions NSItemProviderFileOptions) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSItemProviderSelHasRepresentationConformingToTypeIdentifierFileOptions, typeIdentifier.Ptr(), fileOptions)
 	return _ret
 }
 
+// Asynchronously copies the provided, typed data into a generic data object, returning a progress object.
 func (o *NSItemProvider) LoadDataRepresentationForTypeIdentifierCompletionHandler(typeIdentifier *NSString, completionHandler func(*NSData, unsafe.Pointer)) *NSProgress {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -106,6 +115,7 @@ func (o *NSItemProvider) LoadDataRepresentationForTypeIdentifierCompletionHandle
 	return NSProgressFromID(_ret)
 }
 
+// Asynchronously writes a copy of the provided, typed data to a temporary file, returning a progress object.
 func (o *NSItemProvider) LoadFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier *NSString, completionHandler func(*NSURL, unsafe.Pointer)) *NSProgress {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -124,6 +134,7 @@ func (o *NSItemProvider) LoadFileRepresentationForTypeIdentifierCompletionHandle
 	return NSProgressFromID(_ret)
 }
 
+// Asynchronously opens a file in place, if possible, returning a progress object.
 func (o *NSItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier *NSString, completionHandler func(*NSURL, bool, unsafe.Pointer)) *NSProgress {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -142,6 +153,7 @@ func (o *NSItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletio
 	return NSProgressFromID(_ret)
 }
 
+// Creates a new item provider, employing a specified object’s type identifiers to specify the data representations eligible for the provider to load.
 func (o *NSItemProvider) InitWithObject(object NSItemProviderWriting) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithObject, object)
 	if _ret != 0 {
@@ -150,19 +162,23 @@ func (o *NSItemProvider) InitWithObject(object NSItemProviderWriting) *NSItemPro
 	return NSItemProviderFromID(_ret)
 }
 
+// Adds representations of a specified object to an item provider, based on the object’s implementation of the item provider writing protocol, and adhering to a visibility specification.
 func (o *NSItemProvider) RegisterObjectVisibility(object NSItemProviderWriting, visibility NSItemProviderRepresentationVisibility) {
 	o.Ptr().Send(_nSItemProviderSelRegisterObjectVisibility, object, visibility)
 }
 
+// Lazily adds representations of a specified object class to an item provider, based on the object’s implementation of the item provider writing protocol, and adhering to a visibility specification.
 func (o *NSItemProvider) RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	o.Ptr().Send(_nSItemProviderSelRegisterObjectOfClassVisibilityLoadHandler, aClass, visibility, loadHandler)
 }
 
+// Returns a Boolean value indicating whether an item provider can load objects of a specified class.
 func (o *NSItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSItemProviderSelCanLoadObjectOfClass, aClass)
 	return _ret
 }
 
+// Asynchronously loads an object of a specified class to an item provider, returning a progress object.
 func (o *NSItemProvider) LoadObjectOfClassCompletionHandler(aClass unsafe.Pointer, completionHandler func(objc.ID, unsafe.Pointer)) *NSProgress {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -178,6 +194,7 @@ func (o *NSItemProvider) LoadObjectOfClassCompletionHandler(aClass unsafe.Pointe
 	return NSProgressFromID(_ret)
 }
 
+// Creates an item provider with an object, according to the item provider type coercion policy.
 func (o *NSItemProvider) InitWithItemTypeIdentifier(item NSSecureCoding, typeIdentifier *NSString) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithItemTypeIdentifier, item, typeIdentifier.Ptr())
 	if _ret != 0 {
@@ -186,6 +203,7 @@ func (o *NSItemProvider) InitWithItemTypeIdentifier(item NSSecureCoding, typeIde
 	return NSItemProviderFromID(_ret)
 }
 
+// Provides data-backed content from an existing file.
 func (o *NSItemProvider) InitWithContentsOfURL(fileURL *NSURL) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithContentsOfURL, fileURL.Ptr())
 	if _ret != 0 {
@@ -194,10 +212,22 @@ func (o *NSItemProvider) InitWithContentsOfURL(fileURL *NSURL) *NSItemProvider {
 	return NSItemProviderFromID(_ret)
 }
 
-func (o *NSItemProvider) RegisterItemForTypeIdentifierLoadHandler(typeIdentifier *NSString, loadHandler objc.Block) {
-	o.Ptr().Send(_nSItemProviderSelRegisterItemForTypeIdentifierLoadHandler, typeIdentifier.Ptr(), loadHandler)
+// Lazily registers an item, according to the item provider type coercion policy.
+func (o *NSItemProvider) RegisterItemForTypeIdentifierLoadHandler(typeIdentifier *NSString, loadHandler func(objc.Block, objc.Class, *NSDictionary[objc.ID, objc.ID])) {
+	var __block_loadHandler objc.Block
+	if loadHandler != nil {
+		__block_loadHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.Block, blockParam1 objc.Class, blockParam2 objc.ID) {
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			loadHandler(blockParam0, blockParam1, NSDictionaryFromID[objc.ID, objc.ID](blockParam2))
+		})
+		defer __block_loadHandler.Release()
+	}
+	o.Ptr().Send(_nSItemProviderSelRegisterItemForTypeIdentifierLoadHandler, typeIdentifier.Ptr(), __block_loadHandler)
 }
 
+// Loads the item’s data and coerces it to the specified type.
 func (o *NSItemProvider) LoadItemForTypeIdentifierOptionsCompletionHandler(typeIdentifier *NSString, options *NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -206,7 +236,7 @@ func (o *NSItemProvider) LoadItemForTypeIdentifierOptionsCompletionHandler(typeI
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSItemProviderSelLoadItemForTypeIdentifierOptionsCompletionHandler, typeIdentifier.Ptr(), options, __block_completionHandler)
+	o.Ptr().Send(_nSItemProviderSelLoadItemForTypeIdentifierOptionsCompletionHandler, typeIdentifier.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
 func (o *NSItemProvider) RegisteredTypeIdentifiers() *NSArray[*NSString] {
@@ -229,6 +259,7 @@ func (o *NSItemProvider) SetSuggestedName(suggestedName *NSString) {
 	o.Ptr().Send(_nSItemProviderSelSetSuggestedName, suggestedName.Ptr())
 }
 
+// Loads the preview image for the item that the item provider represents.
 func (o *NSItemProvider) LoadPreviewImageWithOptionsCompletionHandler(options *NSDictionary[objc.ID, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -237,7 +268,7 @@ func (o *NSItemProvider) LoadPreviewImageWithOptionsCompletionHandler(options *N
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSItemProviderSelLoadPreviewImageWithOptionsCompletionHandler, options, __block_completionHandler)
+	o.Ptr().Send(_nSItemProviderSelLoadPreviewImageWithOptionsCompletionHandler, options.Ptr(), __block_completionHandler)
 }
 
 func (o *NSItemProvider) PreviewImageHandler() objc.Block {
@@ -245,6 +276,16 @@ func (o *NSItemProvider) PreviewImageHandler() objc.Block {
 	return _ret
 }
 
-func (o *NSItemProvider) SetPreviewImageHandler(previewImageHandler objc.Block) {
-	o.Ptr().Send(_nSItemProviderSelSetPreviewImageHandler, previewImageHandler)
+func (o *NSItemProvider) SetPreviewImageHandler(previewImageHandler func(objc.Block, objc.Class, *NSDictionary[objc.ID, objc.ID])) {
+	var __block_previewImageHandler objc.Block
+	if previewImageHandler != nil {
+		__block_previewImageHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.Block, blockParam1 objc.Class, blockParam2 objc.ID) {
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			previewImageHandler(blockParam0, blockParam1, NSDictionaryFromID[objc.ID, objc.ID](blockParam2))
+		})
+		defer __block_previewImageHandler.Release()
+	}
+	o.Ptr().Send(_nSItemProviderSelSetPreviewImageHandler, __block_previewImageHandler)
 }

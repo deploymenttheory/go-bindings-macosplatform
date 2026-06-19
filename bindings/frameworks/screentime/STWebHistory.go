@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to delete web-usage data.
+//
 // Apple documentation: https://developer.apple.com/documentation/screentime/stwebhistory
 type STWebHistory struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func STWebHistoryFromID(id objc.ID) *STWebHistory {
 	return o
 }
 
-// Creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify. The default value for `bundleIdentifier` is `Bundle.main.bundleIdentifier`. This is the recommended identifier to use, except for example, if a helper process is presenting web UI and you want to group that web-usage under the main app’s bundle identifier. The default value for `profileIdentifier` is `nil`. This identifier can be used to delete browsing history for a specific profile. Using `nil` will only delete web history reported without a profile identifier. - Parameters: - bundleIdentifier: The bundle identifier. - profileIdentifier: The identifier of the current browsing profile. - error: Any error that occurred while changing the bundle identifier.
+// Creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
 func (o *STWebHistory) InitWithBundleIdentifierProfileIdentifierError(bundleIdentifier *foundation.NSString, profileIdentifier *foundation.NSString) (*STWebHistory, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithBundleIdentifierProfileIdentifierError, bundleIdentifier.Ptr(), profileIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -52,7 +54,7 @@ func (o *STWebHistory) InitWithBundleIdentifierProfileIdentifierError(bundleIden
 	return STWebHistoryFromID(_ret), nil
 }
 
-// Creates a web history instance to delete web-usage data associated to the profile identifier you specify. The default value for `profileIdentifier` is `nil`. This identifier can be used to delete browsing history for a specific profile. Using `nil` will only delete web history reported without a profile identifier. - Parameters: - profileIdentifier: The identifier of the current browsing profile.
+// Creates a web history instance to delete web-usage data associated to the profile identifier you specify.
 func (o *STWebHistory) InitWithProfileIdentifier(profileIdentifier *foundation.NSString) *STWebHistory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithProfileIdentifier, profileIdentifier.Ptr())
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func (o *STWebHistory) InitWithProfileIdentifier(profileIdentifier *foundation.N
 	return STWebHistoryFromID(_ret)
 }
 
-// Creates a web history instance to delete web-usage data associated to the bundle identifier you specify. The default value for `bundleIdentifier` is `Bundle.main.bundleIdentifier`. This is the recommended identifier to use, except for example, if a helper process is presenting web UI and you want to group that web-usage under the main app’s bundle identifier. - Parameters: - bundleIdentifier: The bundle identifier. - error: Any error that occurred while changing the bundle identifier.
+// Creates a web history instance to delete web-usage data associated to the bundle identifier you specify.
 func (o *STWebHistory) InitWithBundleIdentifierError(bundleIdentifier *foundation.NSString) (*STWebHistory, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -74,22 +76,42 @@ func (o *STWebHistory) InitWithBundleIdentifierError(bundleIdentifier *foundatio
 	return STWebHistoryFromID(_ret), nil
 }
 
-// Fetches web history that occurred during the date interval you specify. - Parameters: - interval: The date interval of web history you want to fetch.
-func (o *STWebHistory) FetchHistoryDuringIntervalCompletionHandler(interval *foundation.NSDateInterval, completionHandler objc.Block) {
-	o.Ptr().Send(_sTWebHistorySelFetchHistoryDuringIntervalCompletionHandler, interval.Ptr(), completionHandler)
+// Fetches web history that occurred during the date interval you specify.
+func (o *STWebHistory) FetchHistoryDuringIntervalCompletionHandler(interval *foundation.NSDateInterval, completionHandler func(*foundation.NSSet[*foundation.NSURL], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSSetFromID[*foundation.NSURL](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_sTWebHistorySelFetchHistoryDuringIntervalCompletionHandler, interval.Ptr(), __block_completionHandler)
 }
 
 // Fetches all web history associated with the bundle identifier and profile identifier you specified during initialization.
-func (o *STWebHistory) FetchAllHistoryWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_sTWebHistorySelFetchAllHistoryWithCompletionHandler, completionHandler)
+func (o *STWebHistory) FetchAllHistoryWithCompletionHandler(completionHandler func(*foundation.NSSet[*foundation.NSURL], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSSetFromID[*foundation.NSURL](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_sTWebHistorySelFetchAllHistoryWithCompletionHandler, __block_completionHandler)
 }
 
-// Deletes all the web history for the URL you specify. The framework references the entire URL to determine which web-usage data to delete. - Parameters: - url: The URL associated with the web history to delete.
+// Deletes all the web history for the URL you specify.
 func (o *STWebHistory) DeleteHistoryForURL(url *foundation.NSURL) {
 	o.Ptr().Send(_sTWebHistorySelDeleteHistoryForURL, url.Ptr())
 }
 
-// Deletes web history that occurred during the date interval you specify. - Parameters: - interval: The date interval of web history you want to delete.
+// Deletes web history that occurred during the date interval you specify.
 func (o *STWebHistory) DeleteHistoryDuringInterval(interval *foundation.NSDateInterval) {
 	o.Ptr().Send(_sTWebHistorySelDeleteHistoryDuringInterval, interval.Ptr())
 }

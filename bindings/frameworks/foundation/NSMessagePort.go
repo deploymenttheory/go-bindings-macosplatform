@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A port that can be used as an endpoint for distributed object connections (or raw messaging).
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmessageport
 type NSMessagePort struct {
 	NSPort

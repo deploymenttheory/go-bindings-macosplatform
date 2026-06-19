@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An MCPeerID object represents a peer in a multipeer session.
+//
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcpeerid
 type MCPeerID struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MCPeerIDFromID(id objc.ID) *MCPeerID {
 	return o
 }
 
+// Initializes a peer.
 func (o *MCPeerID) InitWithDisplayName(myDisplayName *foundation.NSString) *MCPeerID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCPeerIDSelInitWithDisplayName, myDisplayName.Ptr())
 	if _ret != 0 {

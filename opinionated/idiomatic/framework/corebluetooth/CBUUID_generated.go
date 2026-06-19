@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A universally unique identifier, as defined by Bluetooth standards.
+//
 // UUID wraps [raw.CBUUID] with a fluent Go API.
 type UUID struct {
 	inner *raw.CBUUID

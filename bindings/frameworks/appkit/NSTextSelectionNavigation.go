@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface you use to expose methods for obtaining results from actions performed on text selections.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextselectionnavigation
 type NSTextSelectionNavigation struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func NSTextSelectionNavigationFromID(id objc.ID) *NSTextSelectionNavigation {
 	return o
 }
 
+// Creates a new object using the text selection data source you provide.
 func (o *NSTextSelectionNavigation) InitWithDataSource(dataSource NSTextSelectionDataSource) *NSTextSelectionNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelInitWithDataSource, dataSource)
 	if _ret != 0 {
@@ -51,10 +54,12 @@ func (o *NSTextSelectionNavigation) InitWithDataSource(dataSource NSTextSelectio
 	return NSTextSelectionNavigationFromID(_ret)
 }
 
+// Flushes cached layout information.
 func (o *NSTextSelectionNavigation) FlushLayoutCache() {
 	o.Ptr().Send(_nSTextSelectionNavigationSelFlushLayoutCache)
 }
 
+// Returns a new selection that results from applying the navigation operations you specify to the text selection you provide.
 func (o *NSTextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, extending bool, confined bool) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelDestinationSelectionForTextSelectionDirectionDestinationExtendingConfined, textSelection.Ptr(), direction, destination, extending, confined)
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func (o *NSTextSelectionNavigation) DestinationSelectionForTextSelectionDirectio
 	return NSTextSelectionFromID(_ret)
 }
 
+// Returns an array of text selections produced by a tap or click at the point you specify.
 func (o *NSTextSelectionNavigation) TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation NSTextLocation, anchors *foundation.NSArray[*NSTextSelection], modifiers NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*NSTextSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds, point, containerLocation, anchors.Ptr(), modifiers, selecting, bounds)
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func (o *NSTextSelectionNavigation) TextSelectionsInteractingAtPointInContainerA
 	return foundation.NSArrayFromID[*NSTextSelection](_ret)
 }
 
+// Returns a text selection expanded to the nearest boundaries for the selection granularity and enclosing text selection text ranges you specify.
 func (o *NSTextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity NSTextSelectionGranularity, textSelection *NSTextSelection) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingTextSelection, selectionGranularity, textSelection.Ptr())
 	if _ret != 0 {
@@ -79,6 +86,7 @@ func (o *NSTextSelectionNavigation) TextSelectionForSelectionGranularityEnclosin
 	return NSTextSelectionFromID(_ret)
 }
 
+// Returns a text selection that expands to the nearest boundaries for selection granularity and an enclosing point you specify.
 func (o *NSTextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity NSTextSelectionGranularity, point corefoundation.CGPoint, location NSTextLocation) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelTextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation, selectionGranularity, point, location)
 	if _ret != 0 {
@@ -87,11 +95,13 @@ func (o *NSTextSelectionNavigation) TextSelectionForSelectionGranularityEnclosin
 	return NSTextSelectionFromID(_ret)
 }
 
+// Returns the location for inserting the next input depending on the state of the current and secondary selections.
 func (o *NSTextSelectionNavigation) ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection *NSTextSelection, writingDirection NSTextSelectionNavigationWritingDirection) NSTextLocation {
 	_ret := objc.Send[NSTextLocation](o.Ptr(), _nSTextSelectionNavigationSelResolvedInsertionLocationForTextSelectionWritingDirection, textSelection.Ptr(), writingDirection)
 	return _ret
 }
 
+// Returns the ranges for deleting the text based on the current selection and movement arguments.
 func (o *NSTextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*NSTextRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionNavigationSelDeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition, textSelection.Ptr(), direction, destination, allowsDecomposition)
 	if _ret != 0 {

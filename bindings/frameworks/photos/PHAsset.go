@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an image, video, or Live Photo in the Photos library.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phasset
 type PHAsset struct {
 	PHObject
@@ -61,11 +63,13 @@ func PHAssetFromID(id objc.ID) *PHAsset {
 	return o
 }
 
+// Returns whether the asset supports the specified editing operation.
 func (o *PHAsset) CanPerformEditOperation(editOperation PHAssetEditOperation) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHAssetSelCanPerformEditOperation, editOperation)
 	return _ret
 }
 
+// Retrieves assets from the specified asset collection.
 func PHAssetFetchAssetsInAssetCollectionOptions(assetCollection *PHAssetCollection, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsInAssetCollectionOptions, assetCollection.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -74,14 +78,16 @@ func PHAssetFetchAssetsInAssetCollectionOptions(assetCollection *PHAssetCollecti
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
+// Retrieves assets with the specified local-device-specific unique identifiers.
 func PHAssetFetchAssetsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *PHFetchOptions) *PHFetchResult[*PHAsset] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithLocalIdentifiersOptions, identifiers, options.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithLocalIdentifiersOptions, identifiers.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
+// Retrieves assets marked as key assets in the specified asset collection.
 func PHAssetFetchKeyAssetsInAssetCollectionOptions(assetCollection *PHAssetCollection, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchKeyAssetsInAssetCollectionOptions, assetCollection.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -90,6 +96,7 @@ func PHAssetFetchKeyAssetsInAssetCollectionOptions(assetCollection *PHAssetColle
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
+// Retrieves assets with the specified burst photo sequence identifier.
 func PHAssetFetchAssetsWithBurstIdentifierOptions(burstIdentifier *foundation.NSString, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithBurstIdentifierOptions, burstIdentifier.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -98,6 +105,7 @@ func PHAssetFetchAssetsWithBurstIdentifierOptions(burstIdentifier *foundation.NS
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
+// Retrieves all assets matching the specified options.
 func PHAssetFetchAssetsWithOptions(options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithOptions, options.Ptr())
 	if _ret != 0 {
@@ -106,6 +114,7 @@ func PHAssetFetchAssetsWithOptions(options *PHFetchOptions) *PHFetchResult[*PHAs
 	return PHFetchResultFromID[*PHAsset](_ret)
 }
 
+// Retrieves assets with the specified media type.
 func PHAssetFetchAssetsWithMediaTypeOptions(mediaType PHAssetMediaType, options *PHFetchOptions) *PHFetchResult[*PHAsset] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAsset), _pHAssetSelFetchAssetsWithMediaTypeOptions, mediaType, options.Ptr())
 	if _ret != 0 {
@@ -237,11 +246,26 @@ func (o *PHAsset) AdjustmentFormatIdentifier() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *PHAsset) RequestContentEditingInputWithOptionsCompletionHandler(options *PHContentEditingInputRequestOptions, completionHandler objc.Block) uint {
-	_ret := objc.Send[uint](o.Ptr(), _pHAssetSelRequestContentEditingInputWithOptionsCompletionHandler, options.Ptr(), completionHandler)
+// Requests asset information for beginning a content editing session.
+func (o *PHAsset) RequestContentEditingInputWithOptionsCompletionHandler(options *PHContentEditingInputRequestOptions, completionHandler func(*PHContentEditingInput, *foundation.NSDictionary[objc.ID, objc.ID])) uint {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(PHContentEditingInputFromID(blockParam0), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam1))
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[uint](o.Ptr(), _pHAssetSelRequestContentEditingInputWithOptionsCompletionHandler, options.Ptr(), __block_completionHandler)
 	return _ret
 }
 
+// Cancels a request for editing the asset’s content.
 func (o *PHAsset) CancelContentEditingInputRequest(requestID uint) {
 	o.Ptr().Send(_pHAssetSelCancelContentEditingInputRequest, requestID)
 }

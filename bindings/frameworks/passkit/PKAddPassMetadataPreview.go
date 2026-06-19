@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A preview object that contains information representing the pass you add to Wallet.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddpassmetadatapreview
 type PKAddPassMetadataPreview struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func PKAddPassMetadataPreviewFromID(id objc.ID) *PKAddPassMetadataPreview {
 	return o
 }
 
-// Initializer preview object to represent the pass being added to Wallet.which requires a CGImage of the pass's card art and a localized description. - Properties: - passThumbnail: CGImage representing the card artwork of the pass to be presented during provisioning. - localizedDescription: Localized description of the pass.
+// Provides a preview of an image object that represents the pass you add to Wallet.
 func (o *PKAddPassMetadataPreview) InitWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description *foundation.NSString) *PKAddPassMetadataPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPassMetadataPreviewSelInitWithPassThumbnailLocalizedDescription, passThumbnail, description.Ptr())
 	if _ret != 0 {
@@ -44,6 +46,7 @@ func (o *PKAddPassMetadataPreview) InitWithPassThumbnailLocalizedDescription(pas
 	return PKAddPassMetadataPreviewFromID(_ret)
 }
 
+// Initializes properties you need to preview an object that represents the pass you add to Wallet.
 func PKAddPassMetadataPreviewPreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description *foundation.NSString) *PKAddPassMetadataPreview {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKAddPassMetadataPreview), _pKAddPassMetadataPreviewSelPreviewWithPassThumbnailLocalizedDescription, passThumbnail, description.Ptr())
 	if _ret != 0 {

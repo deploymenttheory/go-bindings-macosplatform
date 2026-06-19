@@ -8,18 +8,19 @@ import (
 	"fmt"
 )
 
+// Constants that represent versions of PencilKit for backward compatibility.
 type PKContentVersion int64
 
 const (
-	// Version for inks introduced in iOS 14.0. Inks included are Pen, Pencil, and Marker.
+	// The PencilKit version that supports inks from iPadOS 14 and earlier, including marker, pen, and pencil.
 	PKContentVersion1 PKContentVersion = 1
-	// Version for inks introduced in iOS 17.0. Inks included are Pen, Pencil, Marker, Monoline, Fountain Pen, Watercolor, and Crayon.
+	// The PencilKit version that supports inks from iPadOS 17 and earlier, including marker, pen, pencil, monoline, fountain pen, watercolor, and crayon.
 	PKContentVersion2 PKContentVersion = 2
-	// New Fountain Pen
+	// The PencilKit version that supports barrel-roll angle data in inks.
 	PKContentVersion3 PKContentVersion = 3
-	// New Reed Pen
+	// The version that adds the Reed Pen ink.
 	PKContentVersion4 PKContentVersion = 4
-	// The latest version including all features.
+	// A property that returns latest version of PencilKit, which supports all currently available inks.
 	PKContentVersionLatest PKContentVersion = 4
 )
 
@@ -38,10 +39,13 @@ func (e PKContentVersion) String() string {
 	}
 }
 
+// Constants that indicate the behavior of the eraser.
 type PKEraserType int64
 
 const (
-	PKEraserTypeVector           PKEraserType = 0
+	// An eraser that removes an entire drawn line.
+	PKEraserTypeVector PKEraserType = 0
+	// An eraser that removes only those portions of the drawing it touches.
 	PKEraserTypeBitmap           PKEraserType = 1
 	PKEraserTypeFixedWidthBitmap PKEraserType = 2
 )

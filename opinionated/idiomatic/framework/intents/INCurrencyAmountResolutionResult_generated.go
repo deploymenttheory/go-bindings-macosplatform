@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a currency amount associated with an intent.
+//
 // CurrencyAmountResolutionResult wraps [raw.INCurrencyAmountResolutionResult] with a fluent Go API.
 type CurrencyAmountResolutionResult struct {
 	inner *raw.INCurrencyAmountResolutionResult

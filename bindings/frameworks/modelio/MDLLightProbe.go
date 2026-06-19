@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A light source described in terms of the variations in color and intensity of its illumination in all directions.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdllightprobe
 type MDLLightProbe struct {
 	MDLLight
@@ -36,6 +38,7 @@ func MDLLightProbeFromID(id objc.ID) *MDLLightProbe {
 	return o
 }
 
+// Initializes a light probe with the specified cube map textures.
 func (o *MDLLightProbe) InitWithReflectiveTextureIrradianceTexture(reflectiveTexture *MDLTexture, irradianceTexture *MDLTexture) *MDLLightProbe {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLLightProbeSelInitWithReflectiveTextureIrradianceTexture, reflectiveTexture.Ptr(), irradianceTexture.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *MDLLightProbe) InitWithReflectiveTextureIrradianceTexture(reflectiveTex
 	return MDLLightProbeFromID(_ret)
 }
 
+// Generates spherical harmonics information based on the light probe’s irradiance texture.
 func (o *MDLLightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel uint) {
 	o.Ptr().Send(_mDLLightProbeSelGenerateSphericalHarmonicsFromIrradiance, sphericalHarmonicsLevel)
 }
@@ -77,6 +81,7 @@ func (o *MDLLightProbe) SphericalHarmonicsCoefficients() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Creates a light probe representing the shading environment at a specific point in a scene.
 func MDLLightProbeLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize int, transform *MDLTransform, lightsToConsider *foundation.NSArray[*MDLLight], objectsToConsider *foundation.NSArray[*MDLObject], reflectiveCubemap *MDLTexture, irradianceCubemap *MDLTexture) *MDLLightProbe {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLLightProbe), _mDLLightProbeSelLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap, textureSize, transform.Ptr(), lightsToConsider.Ptr(), objectsToConsider.Ptr(), reflectiveCubemap.Ptr(), irradianceCubemap.Ptr())
 	if _ret != 0 {

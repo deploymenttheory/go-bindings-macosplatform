@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that describes a detected trajectory.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrajectoryobservation
 type VNTrajectoryObservation struct {
 	VNObservation

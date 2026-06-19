@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The subject associated with a signed clinical record.
+//
 // VerifiableClinicalRecordSubject wraps [raw.HKVerifiableClinicalRecordSubject] with a fluent Go API.
 type VerifiableClinicalRecordSubject struct {
 	inner *raw.HKVerifiableClinicalRecordSubject

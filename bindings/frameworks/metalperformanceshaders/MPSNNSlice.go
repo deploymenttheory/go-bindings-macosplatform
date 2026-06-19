@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that extracts a slice from an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnslice
 type MPSNNSlice struct {
 	mpsneuralnetwork.MPSCNNKernel

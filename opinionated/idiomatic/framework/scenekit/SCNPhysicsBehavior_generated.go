@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for joints, vehicle simulations, and other high-level behaviors that incorporate multiple physics bodies.
+//
 // PhysicsBehavior wraps [raw.SCNPhysicsBehavior] with a fluent Go API.
 type PhysicsBehavior struct {
 	inner *raw.SCNPhysicsBehavior

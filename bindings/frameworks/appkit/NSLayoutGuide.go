@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A rectangular area that can interact with Auto Layout.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutguide
 type NSLayoutGuide struct {
 	foundation.NSObject

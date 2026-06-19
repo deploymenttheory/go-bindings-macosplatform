@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event requesting a change in the playback rate.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackratecommandevent
 type MPChangePlaybackRateCommandEvent struct {
 	MPRemoteCommandEvent

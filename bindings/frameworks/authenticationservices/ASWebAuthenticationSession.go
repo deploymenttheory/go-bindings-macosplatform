@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A session that an app uses to authenticate a user through a web service.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession
 type ASWebAuthenticationSession struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func ASWebAuthenticationSessionFromID(id objc.ID) *ASWebAuthenticationSession {
 	return o
 }
 
-// @abstract Returns an ASWebAuthenticationSession object. @param URL the initial URL pointing to the authentication webpage. Only supports URLs with http:// or https:// schemes. @param callbackURLScheme the custom URL scheme that the app expects in the callback URL. @param completionHandler the completion handler which is called when the session is completed successfully or canceled by user.
+// Creates a web authentication session instance.
 // Deprecated: Use initWithURL:callback:completionHandler: instead
 func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandler(uRL *foundation.NSURL, callbackURLScheme *foundation.NSString, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *ASWebAuthenticationSession {
 	var __block_completionHandler objc.Block
@@ -62,6 +64,7 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandl
 	return ASWebAuthenticationSessionFromID(_ret)
 }
 
+// Creates a web authentication session instance that uses a callback to evaluate a redirection URL.
 func (o *ASWebAuthenticationSession) InitWithURLCallbackCompletionHandler(uRL *foundation.NSURL, callback *ASWebAuthenticationSessionCallback, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *ASWebAuthenticationSession {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -80,13 +83,13 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackCompletionHandler(uRL *f
 	return ASWebAuthenticationSessionFromID(_ret)
 }
 
-// @abstract Starts the ASWebAuthenticationSession instance after it is instantiated. @discussion start can only be called once for an ASWebAuthenticationSession instance. This also means calling start on a canceled session will fail. @result Returns YES if the session starts successfully.
+// Starts a web authentication session.
 func (o *ASWebAuthenticationSession) Start() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aSWebAuthenticationSessionSelStart)
 	return _ret
 }
 
-// @abstract Cancel an ASWebAuthenticationSession. If the view controller is already presented to load the webpage for authentication, it will be dismissed. Calling cancel on an already canceled session will have no effect.
+// Cancels a web authentication session.
 func (o *ASWebAuthenticationSession) Cancel() {
 	o.Ptr().Send(_aSWebAuthenticationSessionSelCancel)
 }
@@ -113,12 +116,15 @@ func (o *ASWebAuthenticationSession) SetPrefersEphemeralWebBrowserSession(prefer
 
 // Any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
 func (o *ASWebAuthenticationSession) AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _aSWebAuthenticationSessionSelAdditionalHeaderFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelAdditionalHeaderFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *ASWebAuthenticationSession) SetAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_aSWebAuthenticationSessionSelSetAdditionalHeaderFields, additionalHeaderFields)
+	o.Ptr().Send(_aSWebAuthenticationSessionSelSetAdditionalHeaderFields, additionalHeaderFields.Ptr())
 }
 
 // @abstract Returns whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.

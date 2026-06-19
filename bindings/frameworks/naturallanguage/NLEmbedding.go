@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A map of strings to vectors, which locates neighboring, similar strings.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlembedding
 type NLEmbedding struct {
 	foundation.NSObject
@@ -57,6 +59,7 @@ func NLEmbeddingFromID(id objc.ID) *NLEmbedding {
 	return o
 }
 
+// Retrieves a word embedding for a given language.
 func NLEmbeddingWordEmbeddingForLanguage(language *foundation.NSString) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelWordEmbeddingForLanguage, language.Ptr())
 	if _ret != 0 {
@@ -65,6 +68,7 @@ func NLEmbeddingWordEmbeddingForLanguage(language *foundation.NSString) *NLEmbed
 	return NLEmbeddingFromID(_ret)
 }
 
+// Retrieves a word embedding for a given language and revision.
 func NLEmbeddingWordEmbeddingForLanguageRevision(language *foundation.NSString, revision uint) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelWordEmbeddingForLanguageRevision, language.Ptr(), revision)
 	if _ret != 0 {
@@ -73,6 +77,7 @@ func NLEmbeddingWordEmbeddingForLanguageRevision(language *foundation.NSString, 
 	return NLEmbeddingFromID(_ret)
 }
 
+// Retrieves a sentence embedding for a given language.
 func NLEmbeddingSentenceEmbeddingForLanguage(language *foundation.NSString) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSentenceEmbeddingForLanguage, language.Ptr())
 	if _ret != 0 {
@@ -81,6 +86,7 @@ func NLEmbeddingSentenceEmbeddingForLanguage(language *foundation.NSString) *NLE
 	return NLEmbeddingFromID(_ret)
 }
 
+// Retrieves a sentence embedding for a given language and revision.
 func NLEmbeddingSentenceEmbeddingForLanguageRevision(language *foundation.NSString, revision uint) *NLEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSentenceEmbeddingForLanguageRevision, language.Ptr(), revision)
 	if _ret != 0 {
@@ -89,6 +95,7 @@ func NLEmbeddingSentenceEmbeddingForLanguageRevision(language *foundation.NSStri
 	return NLEmbeddingFromID(_ret)
 }
 
+// Creates a word embedding from a model file.
 func NLEmbeddingEmbeddingWithContentsOfURLError(url *foundation.NSURL) (*NLEmbedding, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelEmbeddingWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -101,16 +108,19 @@ func NLEmbeddingEmbeddingWithContentsOfURLError(url *foundation.NSURL) (*NLEmbed
 	return NLEmbeddingFromID(_ret), nil
 }
 
+// Requests a Boolean value that indicates whether the term is in the vocabulary.
 func (o *NLEmbedding) ContainsString(string_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nLEmbeddingSelContainsString, string_.Ptr())
 	return _ret
 }
 
+// Calculates the distance between two strings in the vocabulary space.
 func (o *NLEmbedding) DistanceBetweenStringAndStringDistanceType(firstString *foundation.NSString, secondString *foundation.NSString, distanceType NLDistanceType) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nLEmbeddingSelDistanceBetweenStringAndStringDistanceType, firstString.Ptr(), secondString.Ptr(), distanceType)
 	return _ret
 }
 
+// Passes the nearest strings of a string in the vocabulary to a block.
 func (o *NLEmbedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ *foundation.NSString, maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -125,6 +135,7 @@ func (o *NLEmbedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(s
 	o.Ptr().Send(_nLEmbeddingSelEnumerateNeighborsForStringMaximumCountDistanceTypeUsing, string_.Ptr(), maxCount, distanceType, __block_block)
 }
 
+// Passes the nearest strings, within a radius of a string in the vocabulary, to a block.
 func (o *NLEmbedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ *foundation.NSString, maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -139,26 +150,40 @@ func (o *NLEmbedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDist
 	o.Ptr().Send(_nLEmbeddingSelEnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing, string_.Ptr(), maxCount, maxDistance, distanceType, __block_block)
 }
 
+// Retrieves a limited number of strings near a string in the vocabulary.
 func (o *NLEmbedding) NeighborsForStringMaximumCountDistanceType(string_ *foundation.NSString, maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLEmbeddingSelNeighborsForStringMaximumCountDistanceType, string_.Ptr(), maxCount, distanceType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLEmbeddingSelNeighborsForStringMaximumCountDistanceType, string_.Ptr(), maxCount, distanceType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Retrieves a limited number of strings, within a radius of a string, in the vocabulary.
 func (o *NLEmbedding) NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ *foundation.NSString, maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLEmbeddingSelNeighborsForStringMaximumCountMaximumDistanceDistanceType, string_.Ptr(), maxCount, maxDistance, distanceType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLEmbeddingSelNeighborsForStringMaximumCountMaximumDistanceDistanceType, string_.Ptr(), maxCount, maxDistance, distanceType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Requests the vector for the given term.
 func (o *NLEmbedding) VectorForString(string_ *foundation.NSString) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nLEmbeddingSelVectorForString, string_.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLEmbeddingSelVectorForString, string_.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
+// Copies a vector into the given a pointer to a float array.
 func (o *NLEmbedding) GetVectorForString(vector *float32, string_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nLEmbeddingSelGetVectorForString, vector, string_.Ptr())
 	return _ret
 }
 
+// Passes the nearest strings of a location in the vocabulary space to a closure.
 func (o *NLEmbedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -170,9 +195,10 @@ func (o *NLEmbedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(v
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountDistanceTypeUsing, vector, maxCount, distanceType, __block_block)
+	o.Ptr().Send(_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountDistanceTypeUsing, vector.Ptr(), maxCount, distanceType, __block_block)
 }
 
+// Passes the nearest strings, within a radius of a location in the vocabulary space, to a block.
 func (o *NLEmbedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -184,19 +210,28 @@ func (o *NLEmbedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDist
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing, vector, maxCount, maxDistance, distanceType, __block_block)
+	o.Ptr().Send(_nLEmbeddingSelEnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing, vector.Ptr(), maxCount, maxDistance, distanceType, __block_block)
 }
 
+// Retrieves a limited number of strings near a location in the vocabulary space.
 func (o *NLEmbedding) NeighborsForVectorMaximumCountDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLEmbeddingSelNeighborsForVectorMaximumCountDistanceType, vector, maxCount, distanceType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLEmbeddingSelNeighborsForVectorMaximumCountDistanceType, vector.Ptr(), maxCount, distanceType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Retrieves a limited number of strings within a radius of a location in the vocabulary space.
 func (o *NLEmbedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLEmbeddingSelNeighborsForVectorMaximumCountMaximumDistanceDistanceType, vector, maxCount, maxDistance, distanceType)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLEmbeddingSelNeighborsForVectorMaximumCountMaximumDistanceDistanceType, vector.Ptr(), maxCount, maxDistance, distanceType)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Retrieves all version numbers of a word embedding for the given language.
 func NLEmbeddingSupportedRevisionsForLanguage(language *foundation.NSString) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSupportedRevisionsForLanguage, language.Ptr())
 	if _ret != 0 {
@@ -205,11 +240,13 @@ func NLEmbeddingSupportedRevisionsForLanguage(language *foundation.NSString) *fo
 	return foundation.NSIndexSetFromID(_ret)
 }
 
+// Retrieves the current version of a word embedding for the given language.
 func NLEmbeddingCurrentRevisionForLanguage(language *foundation.NSString) uint {
 	_ret := objc.Send[uint](objc.ID(_clsNLEmbedding), _nLEmbeddingSelCurrentRevisionForLanguage, language.Ptr())
 	return _ret
 }
 
+// Retrieves all version numbers of a sentence embedding for the given language.
 func NLEmbeddingSupportedSentenceEmbeddingRevisionsForLanguage(language *foundation.NSString) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLEmbedding), _nLEmbeddingSelSupportedSentenceEmbeddingRevisionsForLanguage, language.Ptr())
 	if _ret != 0 {
@@ -218,14 +255,16 @@ func NLEmbeddingSupportedSentenceEmbeddingRevisionsForLanguage(language *foundat
 	return foundation.NSIndexSetFromID(_ret)
 }
 
+// Retrieves the current version of a sentence embedding for the given language.
 func NLEmbeddingCurrentSentenceEmbeddingRevisionForLanguage(language *foundation.NSString) uint {
 	_ret := objc.Send[uint](objc.ID(_clsNLEmbedding), _nLEmbeddingSelCurrentSentenceEmbeddingRevisionForLanguage, language.Ptr())
 	return _ret
 }
 
+// Exports the word embedding contained within a Core ML model file at the given URL.
 func NLEmbeddingWriteEmbeddingForDictionaryLanguageRevisionToURLError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString, revision uint, url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsNLEmbedding), _nLEmbeddingSelWriteEmbeddingForDictionaryLanguageRevisionToURLError, dictionary, language.Ptr(), revision, url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsNLEmbedding), _nLEmbeddingSelWriteEmbeddingForDictionaryLanguageRevisionToURLError, dictionary.Ptr(), language.Ptr(), revision, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

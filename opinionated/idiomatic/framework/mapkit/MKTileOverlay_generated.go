@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An overlay that covers an area of the map with tiles of bitmap images.
+//
 // TileOverlay wraps [raw.MKTileOverlay] with a fluent Go API.
 type TileOverlay struct {
 	inner *raw.MKTileOverlay
@@ -34,6 +36,8 @@ func TileOverlayFromID(id objc.ID) *TileOverlay {
 	return &TileOverlay{inner: raw.MKTileOverlayFromID(id)}
 }
 
+// Creates and returns a tile overlay object using the specified tile-access template.
+//
 // NewTileOverlayWithURLTemplate creates a new [TileOverlay].
 func NewTileOverlayWithURLTemplate(uRLTemplate string) *TileOverlay {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKTileOverlay")), objc.RegisterName("alloc"))
@@ -41,30 +45,40 @@ func NewTileOverlayWithURLTemplate(uRLTemplate string) *TileOverlay {
 	return &TileOverlay{inner: raw.MKTileOverlayFromID(_id)}
 }
 
+// The size (in pixels) of your tile images.
+//
 // WithTileSize sets the tileSize property and returns the receiver for chaining.
 func (x *TileOverlay) WithTileSize(tileSize corefoundation.CGSize) *TileOverlay {
 	x.inner.SetTileSize(tileSize)
 	return x
 }
 
+// A Boolean value that indicates the orientation of tile indexes along the y-axis.
+//
 // WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
 func (x *TileOverlay) WithGeometryFlipped(geometryFlipped bool) *TileOverlay {
 	x.inner.SetGeometryFlipped(geometryFlipped)
 	return x
 }
 
+// The minimum zoom level that the tiles of this overlay object support.
+//
 // WithMinimumZ sets the minimumZ property and returns the receiver for chaining.
 func (x *TileOverlay) WithMinimumZ(minimumZ int) *TileOverlay {
 	x.inner.SetMinimumZ(minimumZ)
 	return x
 }
 
+// The maximum zoom level that the tiles of this overlay object support.
+//
 // WithMaximumZ sets the maximumZ property and returns the receiver for chaining.
 func (x *TileOverlay) WithMaximumZ(maximumZ int) *TileOverlay {
 	x.inner.SetMaximumZ(maximumZ)
 	return x
 }
 
+// A Boolean value that indicates whether the tile content is fully opaque.
+//
 // WithCanReplaceMapContent sets the canReplaceMapContent property and returns the receiver for chaining.
 func (x *TileOverlay) WithCanReplaceMapContent(canReplaceMapContent bool) *TileOverlay {
 	x.inner.SetCanReplaceMapContent(canReplaceMapContent)
@@ -130,11 +144,15 @@ func (x *TileOverlay) SetCanReplaceMapContent(canReplaceMapContent bool) {
 	x.inner.SetCanReplaceMapContent(canReplaceMapContent)
 }
 
+// Returns the URL to use to access the specified tile.
+//
 // URLForTilePath calls the underlying URLForTilePath.
 func (x *TileOverlay) URLForTilePath(path raw.MKTileOverlayPath) *foundation.NSURL {
 	return x.inner.URLForTilePath(path)
 }
 
+// Loads the specified tile asynchronously.
+//
 // LoadTileAtPathResult blocks until the operation completes or ctx is cancelled.
 func (x *TileOverlay) LoadTileAtPathResult(ctx context.Context, path raw.MKTileOverlayPath) (*foundation.NSData, error) {
 	type _result struct {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A region of a view that generates mouse-tracking and cursor-update events when the pointer is over that region.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstrackingarea
 type NSTrackingArea struct {
 	foundation.NSObject
@@ -35,8 +37,9 @@ func NSTrackingAreaFromID(id objc.ID) *NSTrackingArea {
 	return o
 }
 
+// Initializes and returns an object defining a region of a view to receive mouse-tracking events, mouse-moved events, cursor-update events, or possibly all these events.
 func (o *NSTrackingArea) InitWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options NSTrackingAreaOptions, owner objc.ID, userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *NSTrackingArea {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingAreaSelInitWithRectOptionsOwnerUserInfo, rect, options, owner, userInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingAreaSelInitWithRectOptionsOwnerUserInfo, rect, options, owner, userInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -59,6 +62,9 @@ func (o *NSTrackingArea) Owner() objc.ID {
 }
 
 func (o *NSTrackingArea) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSTrackingAreaSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingAreaSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

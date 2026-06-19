@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The criteria to use when searching for discoverable iCloud users.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckuseridentitylookupinfo
 type CKUserIdentityLookupInfo struct {
 	foundation.NSObject
@@ -67,7 +69,7 @@ func (o *CKUserIdentityLookupInfo) InitWithUserRecordID(userRecordID *CKRecordID
 
 // Returns an array of lookup infos for the specified email addresses. - Parameters: - emails: The email addresses for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
 func CKUserIdentityLookupInfoLookupInfosWithEmails(emails *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*CKUserIdentityLookupInfo] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithEmails, emails)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithEmails, emails.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -76,7 +78,7 @@ func CKUserIdentityLookupInfoLookupInfosWithEmails(emails *foundation.NSArray[*f
 
 // Returns an array of lookup infos for the specified phone numbers. - Parameters: - phoneNumbers: The phone numbers for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
 func CKUserIdentityLookupInfoLookupInfosWithPhoneNumbers(phoneNumbers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*CKUserIdentityLookupInfo] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithPhoneNumbers, phoneNumbers)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithPhoneNumbers, phoneNumbers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

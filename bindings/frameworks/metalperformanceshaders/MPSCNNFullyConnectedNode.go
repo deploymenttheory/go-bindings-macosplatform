@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNFullyConnected kernel
+// A representation of a fully connected convolution layer, also known as an inner product layer.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnectednode
 type MPSCNNFullyConnectedNode struct {

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object containing information for a score that was earned by the player.
+//
 // Score wraps [raw.GKScore] with a fluent Go API.
 type Score struct {
 	inner *raw.GKScore
@@ -34,7 +36,7 @@ func ScoreFromID(id objc.ID) *Score {
 	return &Score{inner: raw.GKScoreFromID(id)}
 }
 
-// Initialize the score with the local player and current date.
+// Returns an initialized score object using the local player and the current date.
 //
 // NewScoreWithLeaderboardIdentifier creates a new [Score].
 func NewScoreWithLeaderboardIdentifier(identifier string) *Score {
@@ -43,7 +45,7 @@ func NewScoreWithLeaderboardIdentifier(identifier string) *Score {
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
-// Initialize the achievement for a specific player. Use to submit participant scores when ending a turn-based match.
+// Returns an initialized score object for the specified leaderboard and player.
 //
 // NewScoreWithLeaderboardIdentifierPlayer creates a new [Score].
 func NewScoreWithLeaderboardIdentifierPlayer(identifier string, player *raw.GKPlayer) *Score {
@@ -52,6 +54,8 @@ func NewScoreWithLeaderboardIdentifierPlayer(identifier string, player *raw.GKPl
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
+// Returns an initialized score object.
+//
 // NewScoreWithCategory creates a new [Score].
 func NewScoreWithCategory(category string) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKScore")), objc.RegisterName("alloc"))
@@ -59,7 +63,7 @@ func NewScoreWithCategory(category string) *Score {
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
-// * This method is obsolete. Calling this initialiser does nothing and will return nil **
+// Returns an initialized score object for the specified leaderboard and player.
 //
 // NewScoreWithLeaderboardIdentifierForPlayer creates a new [Score].
 func NewScoreWithLeaderboardIdentifierForPlayer(identifier string, playerID string) *Score {
@@ -68,7 +72,7 @@ func NewScoreWithLeaderboardIdentifierForPlayer(identifier string, playerID stri
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
-// The score value as a 64bit integer.
+// The score earned by the player.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *Score) WithValue(value int64) *Score {
@@ -76,7 +80,7 @@ func (x *Score) WithValue(value int64) *Score {
 	return x
 }
 
-// leaderboard identifier (required)
+// The identifier for the leaderboard.
 //
 // WithLeaderboardIdentifier sets the leaderboardIdentifier property and returns the receiver for chaining.
 func (x *Score) WithLeaderboardIdentifier(leaderboardIdentifier string) *Score {
@@ -84,7 +88,7 @@ func (x *Score) WithLeaderboardIdentifier(leaderboardIdentifier string) *Score {
 	return x
 }
 
-// optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
+// An integer value used by your game.
 //
 // WithContext sets the context_ property and returns the receiver for chaining.
 func (x *Score) WithContext(context_ uint64) *Score {
@@ -92,7 +96,7 @@ func (x *Score) WithContext(context_ uint64) *Score {
 	return x
 }
 
-// Convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
+// A Boolean value that indicates whether this score should also update the default leaderboard.
 //
 // WithShouldSetDefaultLeaderboard sets the shouldSetDefaultLeaderboard property and returns the receiver for chaining.
 func (x *Score) WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score {
@@ -100,6 +104,8 @@ func (x *Score) WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool
 	return x
 }
 
+// The leaderboard that this score belongs to.
+//
 // WithCategory sets the category property and returns the receiver for chaining.
 func (x *Score) WithCategory(category string) *Score {
 	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
@@ -194,6 +200,8 @@ func (x *Score) SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool)
 	x.inner.SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard)
 }
 
+// Reports a score to Game Center.
+//
 // ReportScore blocks until the operation completes or ctx is cancelled.
 func (x *Score) ReportScore(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -235,18 +243,22 @@ func (x *Score) PlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Issues a score challenge to a set of players.
 //
 // IssueChallengeToPlayersMessage calls the underlying IssueChallengeToPlayersMessage.
 func (x *Score) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string) {
 	x.inner.IssueChallengeToPlayersMessage(playerIDs, foundation.NSStringStringWithUTF8String(message))
 }
 
+// Provides a challenge compose view controller with pre-selected player identifiers and a preformatted, player-editable message.
+//
 // ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
-func (x *Score) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
+func (x *Score) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
 	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
 }
 
+// Provides a challenge compose view controller with preselected player identifiers and a preformatted, player-editable message.
+//
 // ChallengeComposeControllerWithMessagePlayersCompletion calls the underlying ChallengeComposeControllerWithMessagePlayersCompletion.
 func (x *Score) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController {
 	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletion(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
@@ -277,7 +289,7 @@ type Scoreable interface {
 	SetCategory(category string)
 	PlayerID() string
 	IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string)
-	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController
+	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController
 	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
 }
 

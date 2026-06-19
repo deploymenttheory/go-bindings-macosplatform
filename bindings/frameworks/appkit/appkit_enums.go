@@ -112,6 +112,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Constants that specify the position where the annotation applies.
 type NSAccessibilityAnnotationPosition int64
 
 const (
@@ -133,7 +134,7 @@ func (e NSAccessibilityAnnotationPosition) String() string {
 	}
 }
 
-// @brief Direction to search for an NSAccessibilityCustomRotorItemResult.
+// Constants that describe the direction to search for an item result.
 type NSAccessibilityCustomRotorSearchDirection int64
 
 const (
@@ -152,7 +153,7 @@ func (e NSAccessibilityCustomRotorSearchDirection) String() string {
 	}
 }
 
-// @brief Use NSAccessibilityCustomRotorType when providing results for the following types. This allows assistive technologies to assign keyboard commands and gestures for these common search types.
+// Constants that indicate the type of content that the rotor represents.
 type NSAccessibilityCustomRotorType int64
 
 const (
@@ -231,11 +232,15 @@ func (e NSAccessibilityCustomRotorType) String() string {
 	}
 }
 
+// Values that indicate the orientation of accessibility elements, such as scroll bars and split views.
 type NSAccessibilityOrientation int64
 
 const (
-	NSAccessibilityOrientationUnknown    NSAccessibilityOrientation = 0
-	NSAccessibilityOrientationVertical   NSAccessibilityOrientation = 1
+	// The element has unknown orientation.
+	NSAccessibilityOrientationUnknown NSAccessibilityOrientation = 0
+	// The element is oriented vertically.
+	NSAccessibilityOrientationVertical NSAccessibilityOrientation = 1
+	// The element is oriented horizontally.
 	NSAccessibilityOrientationHorizontal NSAccessibilityOrientation = 2
 )
 
@@ -252,12 +257,16 @@ func (e NSAccessibilityOrientation) String() string {
 	}
 }
 
+// A data type for notification priority levels.
 type NSAccessibilityPriorityLevel int64
 
 const (
-	NSAccessibilityPriorityLow    NSAccessibilityPriorityLevel = 10
+	// The notification is a low priority.
+	NSAccessibilityPriorityLow NSAccessibilityPriorityLevel = 10
+	// The notification is a medium priority.
 	NSAccessibilityPriorityMedium NSAccessibilityPriorityLevel = 50
-	NSAccessibilityPriorityHigh   NSAccessibilityPriorityLevel = 90
+	// The notification is a high priority.
+	NSAccessibilityPriorityHigh NSAccessibilityPriorityLevel = 90
 )
 
 func (e NSAccessibilityPriorityLevel) String() string {
@@ -273,16 +282,25 @@ func (e NSAccessibilityPriorityLevel) String() string {
 	}
 }
 
+// Values that indicate the marker type of an accessibility element.
 type NSAccessibilityRulerMarkerType int64
 
 const (
-	NSAccessibilityRulerMarkerTypeUnknown         NSAccessibilityRulerMarkerType = 0
-	NSAccessibilityRulerMarkerTypeTabStopLeft     NSAccessibilityRulerMarkerType = 1
-	NSAccessibilityRulerMarkerTypeTabStopRight    NSAccessibilityRulerMarkerType = 2
-	NSAccessibilityRulerMarkerTypeTabStopCenter   NSAccessibilityRulerMarkerType = 3
-	NSAccessibilityRulerMarkerTypeTabStopDecimal  NSAccessibilityRulerMarkerType = 4
-	NSAccessibilityRulerMarkerTypeIndentHead      NSAccessibilityRulerMarkerType = 5
-	NSAccessibilityRulerMarkerTypeIndentTail      NSAccessibilityRulerMarkerType = 6
+	// Unknown marker type.
+	NSAccessibilityRulerMarkerTypeUnknown NSAccessibilityRulerMarkerType = 0
+	// Left tab stop.
+	NSAccessibilityRulerMarkerTypeTabStopLeft NSAccessibilityRulerMarkerType = 1
+	// Right tab stop.
+	NSAccessibilityRulerMarkerTypeTabStopRight NSAccessibilityRulerMarkerType = 2
+	// Center tab stop.
+	NSAccessibilityRulerMarkerTypeTabStopCenter NSAccessibilityRulerMarkerType = 3
+	// Decimal tab stop.
+	NSAccessibilityRulerMarkerTypeTabStopDecimal NSAccessibilityRulerMarkerType = 4
+	// Head indent marker.
+	NSAccessibilityRulerMarkerTypeIndentHead NSAccessibilityRulerMarkerType = 5
+	// Tail indent marker.
+	NSAccessibilityRulerMarkerTypeIndentTail NSAccessibilityRulerMarkerType = 6
+	// First line indent marker.
 	NSAccessibilityRulerMarkerTypeIndentFirstLine NSAccessibilityRulerMarkerType = 7
 )
 
@@ -309,11 +327,15 @@ func (e NSAccessibilityRulerMarkerType) String() string {
 	}
 }
 
+// Values that indicate the sort direction of a column.
 type NSAccessibilitySortDirection int64
 
 const (
-	NSAccessibilitySortDirectionUnknown    NSAccessibilitySortDirection = 0
-	NSAccessibilitySortDirectionAscending  NSAccessibilitySortDirection = 1
+	// The sort direction is unknown.
+	NSAccessibilitySortDirectionUnknown NSAccessibilitySortDirection = 0
+	// The column is sorted in ascending values.
+	NSAccessibilitySortDirectionAscending NSAccessibilitySortDirection = 1
+	// The column is sorted in descending values.
 	NSAccessibilitySortDirectionDescending NSAccessibilitySortDirection = 2
 )
 
@@ -330,14 +352,20 @@ func (e NSAccessibilitySortDirection) String() string {
 	}
 }
 
+// Values that indicate the unit values of a ruler or layout area.
 type NSAccessibilityUnits int64
 
 const (
-	NSAccessibilityUnitsUnknown     NSAccessibilityUnits = 0
-	NSAccessibilityUnitsInches      NSAccessibilityUnits = 1
+	// The units are unknown.
+	NSAccessibilityUnitsUnknown NSAccessibilityUnits = 0
+	// The units are inches.
+	NSAccessibilityUnitsInches NSAccessibilityUnits = 1
+	// The units are centimeters.
 	NSAccessibilityUnitsCentimeters NSAccessibilityUnits = 2
-	NSAccessibilityUnitsPoints      NSAccessibilityUnits = 3
-	NSAccessibilityUnitsPicas       NSAccessibilityUnits = 4
+	// The units are points.
+	NSAccessibilityUnitsPoints NSAccessibilityUnits = 3
+	// The units are picas.
+	NSAccessibilityUnitsPicas NSAccessibilityUnits = 4
 )
 
 func (e NSAccessibilityUnits) String() string {
@@ -357,7 +385,7 @@ func (e NSAccessibilityUnits) String() string {
 	}
 }
 
-// The alert styles used by the `alertStyle` property on instances of `NSAlert`.
+// The set of alert styles to style alerts in your app.
 type NSAlertStyle uint64
 
 const (
@@ -382,6 +410,7 @@ func (e NSAlertStyle) String() string {
 	}
 }
 
+// These constants indicate the blocking mode of an NSAnimation object when it is running.
 type NSAnimationBlockingMode uint64
 
 const (
@@ -403,6 +432,7 @@ func (e NSAnimationBlockingMode) String() string {
 	}
 }
 
+// These constants describe the curve of an animation—that is, the relative speed of an animation from start to finish.
 type NSAnimationCurve uint64
 
 const (
@@ -427,12 +457,15 @@ func (e NSAnimationCurve) String() string {
 	}
 }
 
+// The type for standard system animation effects, which include both display and sound.
 // Deprecated: Use +[NSCursor disappearingItemCursor] instead
 type NSAnimationEffect uint64
 
 const (
+	// The default effect.
 	NSAnimationEffectDisappearingItemDefault NSAnimationEffect = 0
-	NSAnimationEffectPoof                    NSAnimationEffect = 10
+	// An effect showing a puff of smoke.
+	NSAnimationEffectPoof NSAnimationEffect = 10
 )
 
 func (e NSAnimationEffect) String() string {
@@ -492,6 +525,7 @@ func (e NSApplicationActivationPolicy) String() string {
 	}
 }
 
+// Constants that indicate whether a copy or print operation was successful, was canceled, or failed.
 type NSApplicationDelegateReply uint64
 
 const (
@@ -513,6 +547,7 @@ func (e NSApplicationDelegateReply) String() string {
 	}
 }
 
+// This constant indicates whether at least part of any window owned by this app is visible.
 type NSApplicationOcclusionState uint64
 
 const (
@@ -531,10 +566,11 @@ func (e NSApplicationOcclusionState) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Flags that comprise an application's @c presentationOptions.
+// Constants that control the presentation of the app, typically for fullscreen apps such as games or kiosks.
 type NSApplicationPresentationOptions uint64
 
 const (
+	// This is the default presentation mode.
 	NSApplicationPresentationDefault NSApplicationPresentationOptions = 0
 	// Dock appears when moused to.
 	NSApplicationPresentationAutoHideDock NSApplicationPresentationOptions = 1
@@ -611,7 +647,7 @@ func (e NSApplicationPresentationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Return values for `-application:printFiles:withSettings:showPrintPanels:`.
+// Constants that indicate the outcome of a print request.
 type NSApplicationPrintReply uint64
 
 const (
@@ -636,7 +672,7 @@ func (e NSApplicationPrintReply) String() string {
 	}
 }
 
-// Return values for `-applicationShouldTerminate:`.
+// Constants that determine whether an app should terminate.
 type NSApplicationTerminateReply uint64
 
 const (
@@ -658,6 +694,7 @@ func (e NSApplicationTerminateReply) String() string {
 	}
 }
 
+// Constants that specify the autoresizing behaviors for views.
 type NSAutoresizingMaskOptions uint64
 
 const (
@@ -696,6 +733,7 @@ func (e NSAutoresizingMaskOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Background styles to apply to a view’s cell.
 type NSBackgroundStyle int64
 
 const (
@@ -720,6 +758,7 @@ func (e NSBackgroundStyle) String() string {
 	}
 }
 
+// Constants that specify how the window device buffers the drawing done in a window.
 type NSBackingStoreType uint64
 
 const (
@@ -741,6 +780,7 @@ func (e NSBackingStoreType) String() string {
 	}
 }
 
+// The set of bezel styles to style buttons in your app.
 type NSBezelStyle uint64
 
 const (
@@ -818,6 +858,7 @@ func (e NSBezelStyle) String() string {
 	}
 }
 
+// Constants that specify basic path element commands.
 type NSBezierPathElement uint64
 
 const (
@@ -846,6 +887,7 @@ func (e NSBezierPathElement) String() string {
 	}
 }
 
+// Constants that represent bitmap component formats.
 type NSBitmapFormat uint64
 
 const (
@@ -887,6 +929,7 @@ func (e NSBitmapFormat) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify bitmap file types.
 type NSBitmapImageFileType uint64
 
 const (
@@ -917,12 +960,17 @@ func (e NSBitmapImageFileType) String() string {
 	}
 }
 
+// These constants specify the type of a view’s border.
 type NSBorderType uint64
 
 const (
-	NSNoBorder     NSBorderType = 0
-	NSLineBorder   NSBorderType = 1
-	NSBezelBorder  NSBorderType = 2
+	// No border.
+	NSNoBorder NSBorderType = 0
+	// A black line border around the view.
+	NSLineBorder NSBorderType = 1
+	// A concave border that makes the view look sunken.
+	NSBezelBorder NSBorderType = 2
+	// A thin border that looks etched around the image.
 	NSGrooveBorder NSBorderType = 3
 )
 
@@ -941,6 +989,7 @@ func (e NSBorderType) String() string {
 	}
 }
 
+// These constants and data type identifies box types, which, in conjunction with a box’s border type, define the appearance of the box.
 type NSBoxType uint64
 
 const (
@@ -962,6 +1011,7 @@ func (e NSBoxType) String() string {
 	}
 }
 
+// Types of browser column resizing.
 type NSBrowserColumnResizingType uint64
 
 const (
@@ -1132,6 +1182,7 @@ func (e NSCellHitResult) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A constant for specifying the position of a button’s image relative to its title.
 type NSCellImagePosition uint64
 
 const (
@@ -1222,15 +1273,22 @@ func (e NSCellType) String() string {
 	}
 }
 
+// Values that map character identifiers to glyphs.
 type NSCharacterCollection uint64
 
 const (
+	// Indicates that the character identifier is equal to the glyph index.
 	NSIdentityMappingCharacterCollection NSCharacterCollection = 0
-	NSAdobeCNS1CharacterCollection       NSCharacterCollection = 1
-	NSAdobeGB1CharacterCollection        NSCharacterCollection = 2
-	NSAdobeJapan1CharacterCollection     NSCharacterCollection = 3
-	NSAdobeJapan2CharacterCollection     NSCharacterCollection = 4
-	NSAdobeKorea1CharacterCollection     NSCharacterCollection = 5
+	// Indicates the Adobe-CNS1 mapping.
+	NSAdobeCNS1CharacterCollection NSCharacterCollection = 1
+	// Indicates the Adobe-GB1 mapping.
+	NSAdobeGB1CharacterCollection NSCharacterCollection = 2
+	// Indicates the Adobe-Japan1 mapping.
+	NSAdobeJapan1CharacterCollection NSCharacterCollection = 3
+	// Indicates the Adobe-Japan2 mapping.
+	NSAdobeJapan2CharacterCollection NSCharacterCollection = 4
+	// Indicates the Adobe-Korea1 mapping.
+	NSAdobeKorea1CharacterCollection NSCharacterCollection = 5
 )
 
 func (e NSCharacterCollection) String() string {
@@ -1252,6 +1310,7 @@ func (e NSCharacterCollection) String() string {
 	}
 }
 
+// Constants that describe how a participant can configure a CloudKit share.
 type NSCloudKitSharingServiceOptions uint64
 
 const (
@@ -1287,13 +1346,18 @@ func (e NSCloudKitSharingServiceOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants specifying the type of element in the collection view.
 type NSCollectionElementCategory int64
 
 const (
-	NSCollectionElementCategoryItem              NSCollectionElementCategory = 0
+	// The element is an item. Items represent the main content of your collection view.
+	NSCollectionElementCategoryItem NSCollectionElementCategory = 0
+	// The element is a supplementary view. Use supplementary views for single views that contain some data but are associated with an entire section. For example, use them to specify header or footer views for a section.
 	NSCollectionElementCategorySupplementaryView NSCollectionElementCategory = 1
-	NSCollectionElementCategoryDecorationView    NSCollectionElementCategory = 2
-	NSCollectionElementCategoryInterItemGap      NSCollectionElementCategory = 3
+	// The element is a decoration view. Decoration views represent visual adornments that do not contain any data of their own.
+	NSCollectionElementCategoryDecorationView NSCollectionElementCategory = 2
+	// The element is an inter-item gap. An inter-item gap element is a custom visual indicator that is displayed between items when dropping items into the collection view.
+	NSCollectionElementCategoryInterItemGap NSCollectionElementCategory = 3
 )
 
 func (e NSCollectionElementCategory) String() string {
@@ -1311,15 +1375,22 @@ func (e NSCollectionElementCategory) String() string {
 	}
 }
 
+// The scrolling behavior of the layout’s sections in relation to the main layout axis.
 type NSCollectionLayoutSectionOrthogonalScrollingBehavior int64
 
 const (
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone                           NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous                     NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
+	// The section does not allow users to scroll its content orthogonally.
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
+	// The section allows users to scroll its content orthogonally with continuous scrolling.
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
+	// The section allows users to scroll its content orthogonally, coming to a natural stop at the leading boundary of the visible group.
 	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary NSCollectionLayoutSectionOrthogonalScrollingBehavior = 2
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging                         NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging                    NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered            NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
+	// The section allows users to page its content orthogonally.
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
+	// The section allows users to page its content orthogonally one group at a time.
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
+	// The section allows users to page its content orthogonally one group at a time, centering each group.
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
 )
 
 func (e NSCollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
@@ -1341,6 +1412,7 @@ func (e NSCollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
 	}
 }
 
+// Constants indicating the type of action being performed on an item.
 type NSCollectionUpdateAction int64
 
 const (
@@ -1386,6 +1458,7 @@ func (e NSCollectionViewDropOperation) String() string {
 	}
 }
 
+// Constants indicating the type of highlight applied to an item.
 type NSCollectionViewItemHighlightState int64
 
 const (
@@ -1410,6 +1483,7 @@ func (e NSCollectionViewItemHighlightState) String() string {
 	}
 }
 
+// Constants indicating the scrolling direction for the layout.
 type NSCollectionViewScrollDirection int64
 
 const (
@@ -1428,9 +1502,11 @@ func (e NSCollectionViewScrollDirection) String() string {
 	}
 }
 
+// Constants indicating the options for scrolling the collection view’s content.
 type NSCollectionViewScrollPosition uint64
 
 const (
+	// Do not scroll.
 	NSCollectionViewScrollPositionNone                  NSCollectionViewScrollPosition = 0
 	NSCollectionViewScrollPositionTop                   NSCollectionViewScrollPosition = 1
 	NSCollectionViewScrollPositionCenteredVertically    NSCollectionViewScrollPosition = 2
@@ -1482,6 +1558,7 @@ func (e NSCollectionViewScrollPosition) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A type defined for the enum constants specifying color panel modes.
 type NSColorPanelMode int64
 
 const (
@@ -1521,6 +1598,7 @@ func (e NSColorPanelMode) String() string {
 	}
 }
 
+// The color modes that are enabled for a color panel.
 type NSColorPanelOptions uint64
 
 const (
@@ -1570,14 +1648,20 @@ func (e NSColorPanelOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify how Cocoa should handle colors that are not located within the destination color space of a graphics context.
 type NSColorRenderingIntent int64
 
 const (
-	NSColorRenderingIntentDefault              NSColorRenderingIntent = 0
+	// Use the default rendering intent for the graphics context.
+	NSColorRenderingIntentDefault NSColorRenderingIntent = 0
+	// Map colors outside of the gamut of the output device to the closest possible match inside the gamut of the output device.
 	NSColorRenderingIntentAbsoluteColorimetric NSColorRenderingIntent = 1
+	// Map colors outside of the gamut of the output device to the closest possible match inside the gamut of the output device.
 	NSColorRenderingIntentRelativeColorimetric NSColorRenderingIntent = 2
-	NSColorRenderingIntentPerceptual           NSColorRenderingIntent = 3
-	NSColorRenderingIntentSaturation           NSColorRenderingIntent = 4
+	// Preserve the visual relationship between colors by compressing the gamut of the graphics context to fit inside the gamut of the output device.
+	NSColorRenderingIntentPerceptual NSColorRenderingIntent = 3
+	// Preserve the relative saturation value of the colors when converting into the gamut of the output device.
+	NSColorRenderingIntentSaturation NSColorRenderingIntent = 4
 )
 
 func (e NSColorRenderingIntent) String() string {
@@ -1597,6 +1681,7 @@ func (e NSColorRenderingIntent) String() string {
 	}
 }
 
+// Constants that describe the abstract model on which color space objects are based.
 type NSColorSpaceModel int64
 
 const (
@@ -1633,6 +1718,7 @@ func (e NSColorSpaceModel) String() string {
 	}
 }
 
+// Constants for user interactions that change the appearance of a view or control.
 type NSColorSystemEffect int64
 
 const (
@@ -1660,6 +1746,7 @@ func (e NSColorSystemEffect) String() string {
 	}
 }
 
+// Constants that indicate the color’s type, and which methods may be called on the color object.
 type NSColorType int64
 
 const (
@@ -1681,6 +1768,7 @@ func (e NSColorType) String() string {
 	}
 }
 
+// Constants that specify the appearance and interaction modes for a color well.
 type NSColorWellStyle int64
 
 const (
@@ -1702,6 +1790,7 @@ func (e NSColorWellStyle) String() string {
 	}
 }
 
+// Constants that indicate how a combo button presents its menu.
 type NSComboButtonStyle int64
 
 const (
@@ -1722,38 +1811,68 @@ func (e NSComboButtonStyle) String() string {
 	}
 }
 
+// Constants that describe compositing operators in terms of source and destination images, each having an opaque and transparent region.
 type NSCompositingOperation uint64
 
 const (
-	NSCompositingOperationClear           NSCompositingOperation = 0
-	NSCompositingOperationCopy            NSCompositingOperation = 1
-	NSCompositingOperationSourceOver      NSCompositingOperation = 2
-	NSCompositingOperationSourceIn        NSCompositingOperation = 3
-	NSCompositingOperationSourceOut       NSCompositingOperation = 4
-	NSCompositingOperationSourceAtop      NSCompositingOperation = 5
+	// Transparency everywhere.
+	NSCompositingOperationClear NSCompositingOperation = 0
+	// The source image.
+	NSCompositingOperationCopy NSCompositingOperation = 1
+	// The source image wherever it is opaque, and the destination image elsewhere.
+	NSCompositingOperationSourceOver NSCompositingOperation = 2
+	// The source image wherever both images are opaque, and transparent elsewhere.
+	NSCompositingOperationSourceIn NSCompositingOperation = 3
+	// The source image wherever it is opaque and the destination image is transparent, and transparent elsewhere.
+	NSCompositingOperationSourceOut NSCompositingOperation = 4
+	// The source image wherever both images are opaque, the destination image wherever it is opaque but the source image is transparent, and transparent elsewhere
+	NSCompositingOperationSourceAtop NSCompositingOperation = 5
+	// The destination image wherever it is opaque, and the source image elsewhere.
 	NSCompositingOperationDestinationOver NSCompositingOperation = 6
-	NSCompositingOperationDestinationIn   NSCompositingOperation = 7
-	NSCompositingOperationDestinationOut  NSCompositingOperation = 8
+	// The destination image wherever both images are opaque, and transparent elsewhere.
+	NSCompositingOperationDestinationIn NSCompositingOperation = 7
+	// The destination image wherever it is opaque and the source image is transparent, and transparent elsewhere.
+	NSCompositingOperationDestinationOut NSCompositingOperation = 8
+	// The destination image wherever both images are opaque, the source image wherever it is opaque and the destination image is transparent, and transparent elsehwere.
 	NSCompositingOperationDestinationAtop NSCompositingOperation = 9
-	NSCompositingOperationXOR             NSCompositingOperation = 10
-	NSCompositingOperationPlusDarker      NSCompositingOperation = 11
-	NSCompositingOperationHighlight       NSCompositingOperation = 12
-	NSCompositingOperationPlusLighter     NSCompositingOperation = 13
-	NSCompositingOperationMultiply        NSCompositingOperation = 14
-	NSCompositingOperationScreen          NSCompositingOperation = 15
-	NSCompositingOperationOverlay         NSCompositingOperation = 16
-	NSCompositingOperationDarken          NSCompositingOperation = 17
-	NSCompositingOperationLighten         NSCompositingOperation = 18
-	NSCompositingOperationColorDodge      NSCompositingOperation = 19
-	NSCompositingOperationColorBurn       NSCompositingOperation = 20
-	NSCompositingOperationSoftLight       NSCompositingOperation = 21
-	NSCompositingOperationHardLight       NSCompositingOperation = 22
-	NSCompositingOperationDifference      NSCompositingOperation = 23
-	NSCompositingOperationExclusion       NSCompositingOperation = 24
-	NSCompositingOperationHue             NSCompositingOperation = 25
-	NSCompositingOperationSaturation      NSCompositingOperation = 26
-	NSCompositingOperationColor           NSCompositingOperation = 27
-	NSCompositingOperationLuminosity      NSCompositingOperation = 28
+	// Exclusive OR of the source and destination images.
+	NSCompositingOperationXOR NSCompositingOperation = 10
+	// The sum of the source and destination images, with color values approach 0 as a limit.
+	NSCompositingOperationPlusDarker NSCompositingOperation = 11
+	// The source image wherever it is opaque, and the destination image elsewhere.
+	NSCompositingOperationHighlight NSCompositingOperation = 12
+	// The sum of the source and destination images, with color values approach 1 as a limit.
+	NSCompositingOperationPlusLighter NSCompositingOperation = 13
+	// The source color is multiplied by the destination color.
+	NSCompositingOperationMultiply NSCompositingOperation = 14
+	// Multiplies the complement of the destination and source color values, and then complements the result.
+	NSCompositingOperationScreen NSCompositingOperation = 15
+	// Source colors overlay the destination.
+	NSCompositingOperationOverlay NSCompositingOperation = 16
+	// Use the darker of the source and destination colors.
+	NSCompositingOperationDarken NSCompositingOperation = 17
+	// Use the lighter of the source and destination colors.
+	NSCompositingOperationLighten NSCompositingOperation = 18
+	// Brightens the destination to reflect the source.
+	NSCompositingOperationColorDodge NSCompositingOperation = 19
+	// Darkens the destination color to reflect the source.
+	NSCompositingOperationColorBurn NSCompositingOperation = 20
+	// Darkens or lightens colors, with the effect of shining a diffused spotlight on the destination.
+	NSCompositingOperationSoftLight NSCompositingOperation = 21
+	// Multiplies or screens colors, with the effect of shining a spotlight on the destination.
+	NSCompositingOperationHardLight NSCompositingOperation = 22
+	// Subtracts the darker value from the lighter value.
+	NSCompositingOperationDifference NSCompositingOperation = 23
+	// Subtracts the darker value from the lighter value, except lower in contrast.
+	NSCompositingOperationExclusion NSCompositingOperation = 24
+	// Uses the hue of the source and the saturation and luminosity of the destination.
+	NSCompositingOperationHue NSCompositingOperation = 25
+	// Uses the saturation value of the source and the hue and luminosity of the destination.
+	NSCompositingOperationSaturation NSCompositingOperation = 26
+	// Uses the hue and saturation of the source and the luminosity of the destination.
+	NSCompositingOperationColor NSCompositingOperation = 27
+	// Uses the luminosity of the source and the hue and saturation of the destination.
+	NSCompositingOperationLuminosity NSCompositingOperation = 28
 )
 
 func (e NSCompositingOperation) String() string {
@@ -1846,6 +1965,7 @@ func (e NSControlBorderShape) String() string {
 	}
 }
 
+// Constants that describe actions for control characters.
 type NSControlCharacterAction int64
 
 const (
@@ -1883,6 +2003,7 @@ func (e NSControlCharacterAction) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A constant for specifying a cell’s size.
 type NSControlSize uint64
 
 const (
@@ -1910,13 +2031,18 @@ func (e NSControlSize) String() string {
 	}
 }
 
+// Constants for specifying a cell’s tint color.
 type NSControlTint uint64
 
 const (
-	NSDefaultControlTint  NSControlTint = 0
-	NSBlueControlTint     NSControlTint = 1
+	// The current default tint setting.
+	NSDefaultControlTint NSControlTint = 0
+	// Aqua control tint.
+	NSBlueControlTint NSControlTint = 1
+	// Graphite control tint.
 	NSGraphiteControlTint NSControlTint = 6
-	NSClearControlTint    NSControlTint = 7
+	// Clear control tint.
+	NSClearControlTint NSControlTint = 7
 )
 
 func (e NSControlTint) String() string {
@@ -1934,6 +2060,7 @@ func (e NSControlTint) String() string {
 	}
 }
 
+// Constants that allow an app to specify the correction indicator type displayed.
 type NSCorrectionIndicatorType int64
 
 const (
@@ -1985,6 +2112,7 @@ func (e NSCorrectionResponse) String() string {
 	}
 }
 
+// The directions in which a rectangular frame can be resized.
 type NSCursorFrameResizeDirections uint64
 
 const (
@@ -2013,6 +2141,7 @@ func (e NSCursorFrameResizeDirections) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The position along the perimeter of a rectangular frame (its edges and corners) from which it’s resized.
 type NSCursorFrameResizePosition uint64
 
 const (
@@ -2057,6 +2186,7 @@ func (e NSCursorFrameResizePosition) String() string {
 	}
 }
 
+// Constants that specify the date and time elements displayed by the picker.
 type NSDatePickerElementFlags uint64
 
 const (
@@ -2094,6 +2224,7 @@ func (e NSDatePickerElementFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that define whether the picker provides a single date, or a range of dates.
 type NSDatePickerMode uint64
 
 const (
@@ -2112,6 +2243,7 @@ func (e NSDatePickerMode) String() string {
 	}
 }
 
+// Constants that define the visual appearance of the date picker cell.
 type NSDatePickerStyle uint64
 
 const (
@@ -2185,6 +2317,7 @@ func (e NSDisplayGamut) String() string {
 	}
 }
 
+// Values that indicate a document’s edit status.
 type NSDocumentChangeType uint64
 
 const (
@@ -2218,19 +2351,30 @@ func (e NSDocumentChangeType) String() string {
 	}
 }
 
+// A group of constants that represent which operations the dragging source can perform on dragging items.
 type NSDragOperation uint64
 
 const (
-	NSDragOperationNone         NSDragOperation = 0
-	NSDragOperationCopy         NSDragOperation = 1
-	NSDragOperationLink         NSDragOperation = 2
-	NSDragOperationGeneric      NSDragOperation = 4
-	NSDragOperationPrivate      NSDragOperation = 8
-	NSDragOperationMove         NSDragOperation = 16
-	NSDragOperationDelete       NSDragOperation = 32
-	NSDragOperationEvery        NSDragOperation = 18446744073709551615
+	// A constant that indicates that the drag cannot perform any operations.
+	NSDragOperationNone NSDragOperation = 0
+	// A constant that indicates the drag can copy the data that the image represents.
+	NSDragOperationCopy NSDragOperation = 1
+	// A constant that indicates the drag can share the data.
+	NSDragOperationLink NSDragOperation = 2
+	// A constant that indicates the destination can define the drag operation.
+	NSDragOperationGeneric NSDragOperation = 4
+	// A constant that indicates the source and destination negotiate the drag operation privately.
+	NSDragOperationPrivate NSDragOperation = 8
+	// A constant that indicates the drag can move the data.
+	NSDragOperationMove NSDragOperation = 16
+	// A constant that indicates the drag can delete the data.
+	NSDragOperationDelete NSDragOperation = 32
+	// A constant that indicates that drag can perform all of the drag operations.
+	NSDragOperationEvery NSDragOperation = 18446744073709551615
+	// The NSDragOperationAll constant is deprecated. Use NSDragOperationEvery instead.
 	NSDragOperationAll_Obsolete NSDragOperation = 15
-	NSDragOperationAll          NSDragOperation = 15
+	// Use NSDragOperationEvery instead.
+	NSDragOperationAll NSDragOperation = 15
 )
 
 func (e NSDragOperation) String() string {
@@ -2268,11 +2412,14 @@ func (e NSDragOperation) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify whether a drag terminates within or outside the application.
 type NSDraggingContext int64
 
 const (
+	// A constant that indicates dragging terminates outside the application.
 	NSDraggingContextOutsideApplication NSDraggingContext = 0
-	NSDraggingContextWithinApplication  NSDraggingContext = 1
+	// A constant that indicates dragging terminates within the application.
+	NSDraggingContextWithinApplication NSDraggingContext = 1
 )
 
 func (e NSDraggingContext) String() string {
@@ -2286,14 +2433,20 @@ func (e NSDraggingContext) String() string {
 	}
 }
 
+// Constants that control the visual format of multiple dragging items.
 type NSDraggingFormation int64
 
 const (
+	// A constant that represents the system determined formation.
 	NSDraggingFormationDefault NSDraggingFormation = 0
-	NSDraggingFormationNone    NSDraggingFormation = 1
-	NSDraggingFormationPile    NSDraggingFormation = 2
-	NSDraggingFormationList    NSDraggingFormation = 3
-	NSDraggingFormationStack   NSDraggingFormation = 4
+	// A constant that represents no custom formation, so drag images maintain their set positions relative to each other.
+	NSDraggingFormationNone NSDraggingFormation = 1
+	// A constant that represents a pile formation, so drag images display on top of each other with random rotations.
+	NSDraggingFormationPile NSDraggingFormation = 2
+	// A constant that represents a list formation, so drag images display vertically, non-overlapping with the left edges aligned.
+	NSDraggingFormationList NSDraggingFormation = 3
+	// A constant that represents a stack formation, so drag images display overlapping diagonally.
+	NSDraggingFormationStack NSDraggingFormation = 4
 )
 
 func (e NSDraggingFormation) String() string {
@@ -2313,10 +2466,13 @@ func (e NSDraggingFormation) String() string {
 	}
 }
 
+// A group of constants that specify options to use when enumerating dragging items.
 type NSDraggingItemEnumerationOptions uint64
 
 const (
-	NSDraggingItemEnumerationConcurrent               NSDraggingItemEnumerationOptions = 1
+	// A constant that indicates the enumeration processes dragging items concurrently.
+	NSDraggingItemEnumerationConcurrent NSDraggingItemEnumerationOptions = 1
+	// A constant that indicates the enumeration clears the image components provider for all dragging items that don’t meet the classes and search options criteria.
 	NSDraggingItemEnumerationClearNonenumeratedImages NSDraggingItemEnumerationOptions = 65536
 )
 
@@ -2334,6 +2490,7 @@ func (e NSDraggingItemEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify the possible states of a drawer.
 type NSDrawerState uint64
 
 const (
@@ -2358,6 +2515,7 @@ func (e NSDrawerState) String() string {
 	}
 }
 
+// Constants you use to identify the activated tablet buttons in an event.
 // Deprecated: since macOS 10.12.
 type NSEventButtonMask uint64
 
@@ -2384,6 +2542,7 @@ func (e NSEventButtonMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the direction of travel for a gesture.
 type NSEventGestureAxis int64
 
 const (
@@ -2405,6 +2564,7 @@ func (e NSEventGestureAxis) String() string {
 	}
 }
 
+// Constants that you use to filter out specific event types from the stream of incoming events.
 // Deprecated: since macOS 10.12.
 type NSEventMask uint64
 
@@ -2559,6 +2719,7 @@ func (e NSEventMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags that represent key states in an event object.
 type NSEventModifierFlags uint64
 
 const (
@@ -2608,9 +2769,11 @@ func (e NSEventModifierFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that represent the possible phases during an event phase.
 type NSEventPhase uint64
 
 const (
+	// The event is not associated with a phase.
 	NSEventPhaseNone       NSEventPhase = 0
 	NSEventPhaseBegan      NSEventPhase = 1
 	NSEventPhaseStationary NSEventPhase = 2
@@ -2646,6 +2809,7 @@ func (e NSEventPhase) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Subtypes for various types of events.
 type NSEventSubtype int16
 
 const (
@@ -2680,6 +2844,7 @@ func (e NSEventSubtype) String() string {
 	}
 }
 
+// Constants that specify swipe-tracking options.
 type NSEventSwipeTrackingOptions uint64
 
 const (
@@ -2701,6 +2866,7 @@ func (e NSEventSwipeTrackingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants for the types of events that responder objects can handle.
 type NSEventType uint64
 
 const (
@@ -2818,19 +2984,30 @@ func (e NSEventType) String() string {
 	}
 }
 
+// These constants define the tags for performFindPanelAction:.
 type NSFindPanelAction uint64
 
 const (
-	NSFindPanelActionShowFindPanel         NSFindPanelAction = 1
-	NSFindPanelActionNext                  NSFindPanelAction = 2
-	NSFindPanelActionPrevious              NSFindPanelAction = 3
-	NSFindPanelActionReplaceAll            NSFindPanelAction = 4
-	NSFindPanelActionReplace               NSFindPanelAction = 5
-	NSFindPanelActionReplaceAndFind        NSFindPanelAction = 6
-	NSFindPanelActionSetFindString         NSFindPanelAction = 7
+	// Displays the find panel.
+	NSFindPanelActionShowFindPanel NSFindPanelAction = 1
+	// Finds the next instance of the queried text.
+	NSFindPanelActionNext NSFindPanelAction = 2
+	// Finds the previous instance of the queried text.
+	NSFindPanelActionPrevious NSFindPanelAction = 3
+	// Replaces all query instances within the text view.
+	NSFindPanelActionReplaceAll NSFindPanelAction = 4
+	// Replaces a single query instance within the text view.
+	NSFindPanelActionReplace NSFindPanelAction = 5
+	// Replaces a single query instance and finds the next.
+	NSFindPanelActionReplaceAndFind NSFindPanelAction = 6
+	// Sets the query string to the current selection.
+	NSFindPanelActionSetFindString NSFindPanelAction = 7
+	// Replaces all query instances within the selection.
 	NSFindPanelActionReplaceAllInSelection NSFindPanelAction = 8
-	NSFindPanelActionSelectAll             NSFindPanelAction = 9
-	NSFindPanelActionSelectAllInSelection  NSFindPanelAction = 10
+	// Selects all query instances in the text view.
+	NSFindPanelActionSelectAll NSFindPanelAction = 9
+	// Selects all query instances within the selection.
+	NSFindPanelActionSelectAllInSelection NSFindPanelAction = 10
 )
 
 func (e NSFindPanelAction) String() string {
@@ -2860,6 +3037,7 @@ func (e NSFindPanelAction) String() string {
 	}
 }
 
+// The type of substring matching used by the Find panel.
 type NSFindPanelSubstringMatchType uint64
 
 const (
@@ -2884,11 +3062,15 @@ func (e NSFindPanelSubstringMatchType) String() string {
 	}
 }
 
+// Constants that indicate how the system draws the focus ring.
 type NSFocusRingPlacement uint64
 
 const (
-	NSFocusRingOnly  NSFocusRingPlacement = 0
+	// Draw the focus ring if you don’t have an image or text.
+	NSFocusRingOnly NSFocusRingPlacement = 0
+	// Draw the focus ring under text.
 	NSFocusRingBelow NSFocusRingPlacement = 1
+	// Draw the focus ring over an image.
 	NSFocusRingAbove NSFocusRingPlacement = 2
 )
 
@@ -2905,11 +3087,15 @@ func (e NSFocusRingPlacement) String() string {
 	}
 }
 
+// Constants that describe the style of the focus ring.
 type NSFocusRingType uint64
 
 const (
-	NSFocusRingTypeDefault  NSFocusRingType = 0
-	NSFocusRingTypeNone     NSFocusRingType = 1
+	// The default focus ring type for a view or cell.
+	NSFocusRingTypeDefault NSFocusRingType = 0
+	// No focus ring.
+	NSFocusRingTypeNone NSFocusRingType = 1
+	// The standard Aqua focus ring.
 	NSFocusRingTypeExterior NSFocusRingType = 2
 )
 
@@ -2926,16 +3112,25 @@ func (e NSFocusRingType) String() string {
 	}
 }
 
+// Actions that modify a font.
 type NSFontAction uint64
 
 const (
-	NSNoFontChangeAction    NSFontAction = 0
-	NSViaPanelFontAction    NSFontAction = 1
-	NSAddTraitFontAction    NSFontAction = 2
-	NSSizeUpFontAction      NSFontAction = 3
-	NSSizeDownFontAction    NSFontAction = 4
-	NSHeavierFontAction     NSFontAction = 5
-	NSLighterFontAction     NSFontAction = 6
+	// No action; the font is returned unchanged.
+	NSNoFontChangeAction NSFontAction = 0
+	// Converts the font according to the NSFontPanel method panelConvertFont:.
+	NSViaPanelFontAction NSFontAction = 1
+	// Converts the font to have an additional trait using convertFont:toHaveTrait:.
+	NSAddTraitFontAction NSFontAction = 2
+	// Converts the font to a larger size using convertFont:toSize:.
+	NSSizeUpFontAction NSFontAction = 3
+	// Converts the font to a smaller size using convertFont:toSize:.
+	NSSizeDownFontAction NSFontAction = 4
+	// Converts the font to a heavier weight using convertWeight:ofFont:.
+	NSHeavierFontAction NSFontAction = 5
+	// Converts the font to a lighter weight using convertWeight:ofFont:.
+	NSLighterFontAction NSFontAction = 6
+	// Converts the font to remove a trait using convertFont:toNotHaveTrait:.
 	NSRemoveTraitFontAction NSFontAction = 7
 )
 
@@ -2979,9 +3174,11 @@ func (e NSFontAssetRequestOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that support font collection management.
 type NSFontCollectionOptions uint64
 
 const (
+	// Makes the collection available only to the application.
 	NSFontCollectionApplicationOnlyMask NSFontCollectionOptions = 1
 )
 
@@ -2996,6 +3193,7 @@ func (e NSFontCollectionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the visibility of font collections.
 type NSFontCollectionVisibility uint64
 
 const (
@@ -3021,6 +3219,7 @@ func (e NSFontCollectionVisibility) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A symbolic description of the stylistic aspects of a font.
 type NSFontDescriptorSymbolicTraits int64
 
 const (
@@ -3167,13 +3366,17 @@ func (e NSFontPanelModeMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// ******* Screen Font Rendering Mode ********
+// The font rendering mode.
 type NSFontRenderingMode uint64
 
 const (
-	NSFontDefaultRenderingMode                        NSFontRenderingMode = 0
-	NSFontAntialiasedRenderingMode                    NSFontRenderingMode = 1
-	NSFontIntegerAdvancementsRenderingMode            NSFontRenderingMode = 2
+	// Determines the actual mode based on the user preference settings.
+	NSFontDefaultRenderingMode NSFontRenderingMode = 0
+	// Specifies antialiased, floating-point advancements rendering mode (synonymous with printerFont).
+	NSFontAntialiasedRenderingMode NSFontRenderingMode = 1
+	// Specifies integer advancements rendering mode.
+	NSFontIntegerAdvancementsRenderingMode NSFontRenderingMode = 2
+	// Specifies antialiased, integer advancements rendering mode.
 	NSFontAntialiasedIntegerAdvancementsRenderingMode NSFontRenderingMode = 3
 )
 
@@ -3192,21 +3395,34 @@ func (e NSFontRenderingMode) String() string {
 	}
 }
 
+// Constants for isolating specific traits of a font.
 type NSFontTraitMask uint64
 
 const (
-	NSItalicFontMask                  NSFontTraitMask = 1
-	NSBoldFontMask                    NSFontTraitMask = 2
-	NSUnboldFontMask                  NSFontTraitMask = 4
+	// A mask that specifies an italic font.
+	NSItalicFontMask NSFontTraitMask = 1
+	// A mask that specifies a bold font.
+	NSBoldFontMask NSFontTraitMask = 2
+	// A mask that specifies a font that is not bold.
+	NSUnboldFontMask NSFontTraitMask = 4
+	// A mask that specifies a font containing a non-standard character set.
 	NSNonStandardCharacterSetFontMask NSFontTraitMask = 8
-	NSNarrowFontMask                  NSFontTraitMask = 16
-	NSExpandedFontMask                NSFontTraitMask = 32
-	NSCondensedFontMask               NSFontTraitMask = 64
-	NSSmallCapsFontMask               NSFontTraitMask = 128
-	NSPosterFontMask                  NSFontTraitMask = 256
-	NSCompressedFontMask              NSFontTraitMask = 512
-	NSFixedPitchFontMask              NSFontTraitMask = 1024
-	NSUnitalicFontMask                NSFontTraitMask = 16777216
+	// A mask that specifies a narrow font.
+	NSNarrowFontMask NSFontTraitMask = 16
+	// A mask that specifies an expanded font.
+	NSExpandedFontMask NSFontTraitMask = 32
+	// A mask that specifies a condensed font.
+	NSCondensedFontMask NSFontTraitMask = 64
+	// A mask that specifies a small-caps font.
+	NSSmallCapsFontMask NSFontTraitMask = 128
+	// A mask that specifies a poster-style font.
+	NSPosterFontMask NSFontTraitMask = 256
+	// A mask that specifies a compressed font.
+	NSCompressedFontMask NSFontTraitMask = 512
+	// A mask that specifies a fixed pitch font.
+	NSFixedPitchFontMask NSFontTraitMask = 1024
+	// A mask that specifies a font that is not italic.
+	NSUnitalicFontMask NSFontTraitMask = 16777216
 )
 
 func (e NSFontTraitMask) String() string {
@@ -3253,6 +3469,7 @@ func (e NSFontTraitMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The current state of the gesture recognizer.
 type NSGestureRecognizerState int64
 
 const (
@@ -3304,15 +3521,21 @@ func (e NSGlassEffectViewStyle) String() string {
 	}
 }
 
+// Constants that specify how a glyph is laid out relative to the previous glyph.
 // Deprecated: Use NSGlyphProperty instead
 type NSGlyphInscription uint64
 
 const (
-	NSGlyphInscribeBase       NSGlyphInscription = 0
-	NSGlyphInscribeBelow      NSGlyphInscription = 1
-	NSGlyphInscribeAbove      NSGlyphInscription = 2
+	// A base glyph; a character that the font can represent with a single glyph.
+	NSGlyphInscribeBase NSGlyphInscription = 0
+	// A glyph is rendered below the previous glyph.
+	NSGlyphInscribeBelow NSGlyphInscription = 1
+	// A glyph is rendered above the previous glyph.
+	NSGlyphInscribeAbove NSGlyphInscription = 2
+	// A glyph is rendered on top of the previous glyph.
 	NSGlyphInscribeOverstrike NSGlyphInscription = 3
-	NSGlyphInscribeOverBelow  NSGlyphInscription = 4
+	// A glyph is rendered on top and below the previous glyph.
+	NSGlyphInscribeOverBelow NSGlyphInscription = 4
 )
 
 func (e NSGlyphInscription) String() string {
@@ -3332,6 +3555,7 @@ func (e NSGlyphInscription) String() string {
 	}
 }
 
+// Glyph properties.
 type NSGlyphProperty int64
 
 const (
@@ -3361,6 +3585,7 @@ func (e NSGlyphProperty) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify gradient drawing options.
 type NSGradientDrawingOptions uint64
 
 const (
@@ -3466,6 +3691,7 @@ func (e NSGridRowAlignment) String() string {
 	}
 }
 
+// A pattern of haptic feedback to be provided to the user.
 type NSHapticFeedbackPattern int64
 
 const (
@@ -3487,6 +3713,7 @@ func (e NSHapticFeedbackPattern) String() string {
 	}
 }
 
+// A time at which to provide haptic feedback to the user.
 type NSHapticFeedbackPerformanceTime uint64
 
 const (
@@ -3508,6 +3735,7 @@ func (e NSHapticFeedbackPerformanceTime) String() string {
 	}
 }
 
+// The absolute directions on the horizontal axis.
 type NSHorizontalDirections uint64
 
 const (
@@ -3536,6 +3764,7 @@ func (e NSHorizontalDirections) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants used by imageAlignment that allow you to specify the location of the image in the frame.
 type NSImageAlignment uint64
 
 const (
@@ -3575,6 +3804,7 @@ func (e NSImageAlignment) String() string {
 	}
 }
 
+// Constants that specify the caching policy on a per-image basis.
 type NSImageCacheMode uint64
 
 const (
@@ -3599,7 +3829,7 @@ func (e NSImageCacheMode) String() string {
 	}
 }
 
-// Values that can be used to enable or constrain display of High Dynamic Range (HDR) content in NSImageViews. Displaying HDR content in an NSImageView requires that the assigned NSImage has HDR content in the ITU-R 2100 color space and also that the output device has Extended Dynamic Range (EDR) capabilities.
+// Describes how High Dynamic Range (HDR) image content displays.
 type NSImageDynamicRange int64
 
 const (
@@ -3627,6 +3857,7 @@ func (e NSImageDynamicRange) String() string {
 	}
 }
 
+// Constants that allow you to specify the kind of frame bordering the image.
 type NSImageFrameStyle uint64
 
 const (
@@ -3654,14 +3885,20 @@ func (e NSImageFrameStyle) String() string {
 	}
 }
 
+// Constants that specify the interpolation, or image smoothing, behavior used by the image interpolation property.
 type NSImageInterpolation uint64
 
 const (
+	// Use the context’s default interpolation.
 	NSImageInterpolationDefault NSImageInterpolation = 0
-	NSImageInterpolationNone    NSImageInterpolation = 1
-	NSImageInterpolationLow     NSImageInterpolation = 2
-	NSImageInterpolationMedium  NSImageInterpolation = 4
-	NSImageInterpolationHigh    NSImageInterpolation = 3
+	// No interpolation.
+	NSImageInterpolationNone NSImageInterpolation = 1
+	// Fast, low-quality interpolation.
+	NSImageInterpolationLow NSImageInterpolation = 2
+	// Medium quality, slower than the low interpolation option.
+	NSImageInterpolationMedium NSImageInterpolation = 4
+	// Highest quality, slower than the medium interpolation option.
+	NSImageInterpolationHigh NSImageInterpolation = 3
 )
 
 func (e NSImageInterpolation) String() string {
@@ -3681,6 +3918,7 @@ func (e NSImageInterpolation) String() string {
 	}
 }
 
+// Constants that describe the layout direction for the image.
 type NSImageLayoutDirection int64
 
 const (
@@ -3702,6 +3940,7 @@ func (e NSImageLayoutDirection) String() string {
 	}
 }
 
+// Status values for incremental image loading.
 type NSImageLoadStatus uint64
 
 const (
@@ -3729,6 +3968,7 @@ func (e NSImageLoadStatus) String() string {
 	}
 }
 
+// Constants that identify the loading status of the image.
 type NSImageRepLoadStatus int64
 
 const (
@@ -3759,6 +3999,7 @@ func (e NSImageRepLoadStatus) String() string {
 	}
 }
 
+// Constants that describe the resizing mode for the image.
 type NSImageResizingMode int64
 
 const (
@@ -3777,12 +4018,17 @@ func (e NSImageResizingMode) String() string {
 	}
 }
 
+// Constants that specify a cell’s image scaling behavior.
 type NSImageScaling uint64
 
 const (
-	NSImageScaleProportionallyDown     NSImageScaling = 0
-	NSImageScaleAxesIndependently      NSImageScaling = 1
-	NSImageScaleNone                   NSImageScaling = 2
+	// If it is too large for the destination, scale the image down while preserving the aspect ratio.
+	NSImageScaleProportionallyDown NSImageScaling = 0
+	// Scale each dimension to exactly fit destination.
+	NSImageScaleAxesIndependently NSImageScaling = 1
+	// Do not scale the image.
+	NSImageScaleNone NSImageScaling = 2
+	// Scale the image to its maximum possible dimensions while both staying within the destination area and preserving its aspect ratio.
 	NSImageScaleProportionallyUpOrDown NSImageScaling = 3
 	NSScaleProportionally              NSImageScaling = 0
 	NSScaleToFit                       NSImageScaling = 1
@@ -3828,6 +4074,7 @@ func (e NSImageSymbolColorRenderingMode) String() string {
 	}
 }
 
+// Constants that specify which scale variant of a symbol image to use.
 type NSImageSymbolScale int64
 
 const (
@@ -3873,6 +4120,7 @@ func (e NSImageSymbolVariableValueMode) String() string {
 	}
 }
 
+// The part of the object’s visual representation that should be used to get the value for the constraint.
 type NSLayoutAttribute int64
 
 const (
@@ -3925,6 +4173,7 @@ func (e NSLayoutAttribute) String() string {
 	}
 }
 
+// The layout constraint orientation, either horizontal or vertical, that the constraint uses to enforce layout between objects.
 type NSLayoutConstraintOrientation int64
 
 const (
@@ -3943,6 +4192,7 @@ func (e NSLayoutConstraintOrientation) String() string {
 	}
 }
 
+// A bit mask that specifies both a part of an interface element to align and a direction for the alignment between two interface elements.
 type NSLayoutFormatOptions uint64
 
 const (
@@ -4017,6 +4267,7 @@ func (e NSLayoutFormatOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The relation between the first attribute and the modified second attribute in a constraint.
 type NSLayoutRelation int64
 
 const (
@@ -4059,6 +4310,7 @@ func (e NSLevelIndicatorPlaceholderVisibility) String() string {
 	}
 }
 
+// Constants that specify a level indicator’s appearance.
 type NSLevelIndicatorStyle uint64
 
 const (
@@ -4083,14 +4335,21 @@ func (e NSLevelIndicatorStyle) String() string {
 	}
 }
 
+// Constants that specify what happens when a line is too long for a container.
 type NSLineBreakMode uint64
 
 const (
-	NSLineBreakByWordWrapping     NSLineBreakMode = 0
-	NSLineBreakByCharWrapping     NSLineBreakMode = 1
-	NSLineBreakByClipping         NSLineBreakMode = 2
-	NSLineBreakByTruncatingHead   NSLineBreakMode = 3
-	NSLineBreakByTruncatingTail   NSLineBreakMode = 4
+	// The value that indicates wrapping occurs at word boundaries, unless the word doesn’t fit on a single line.
+	NSLineBreakByWordWrapping NSLineBreakMode = 0
+	// The value that indicates wrapping occurs before the first character that doesn’t fit.
+	NSLineBreakByCharWrapping NSLineBreakMode = 1
+	// The value that indicates lines don’t extend past the edge of the text container.
+	NSLineBreakByClipping NSLineBreakMode = 2
+	// The value that indicates that a line displays so that the end fits in the container and an ellipsis glyph indicates the missing text at the beginning of the line.
+	NSLineBreakByTruncatingHead NSLineBreakMode = 3
+	// The value that indicates a line displays so that the beginning fits in the container and an ellipsis glyph indicates the missing text at the end of the line.
+	NSLineBreakByTruncatingTail NSLineBreakMode = 4
+	// The value that indicates that a line displays so that the beginning and end fit in the container and an ellipsis glyph indicates the missing text in the middle.
 	NSLineBreakByTruncatingMiddle NSLineBreakMode = 5
 )
 
@@ -4113,9 +4372,11 @@ func (e NSLineBreakMode) String() string {
 	}
 }
 
+// Constants that specify how the text system breaks lines while laying out paragraphs.
 type NSLineBreakStrategy uint64
 
 const (
+	// The text system doesn’t use any line-break strategies.
 	NSLineBreakStrategyNone               NSLineBreakStrategy = 0
 	NSLineBreakStrategyPushOut            NSLineBreakStrategy = 1
 	NSLineBreakStrategyHangulWordPriority NSLineBreakStrategy = 2
@@ -4139,6 +4400,7 @@ func (e NSLineBreakStrategy) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the shape of endpoints for an open path when it is stroked.
 type NSLineCapStyle uint64
 
 const (
@@ -4160,6 +4422,7 @@ func (e NSLineCapStyle) String() string {
 	}
 }
 
+// Constants that specify the shape of the joins between connected segments of a stroked path.
 type NSLineJoinStyle uint64
 
 const (
@@ -4181,14 +4444,20 @@ func (e NSLineJoinStyle) String() string {
 	}
 }
 
+// The direction in which a line moves.
 type NSLineMovementDirection uint64
 
 const (
+	// Line has no movement.
 	NSLineDoesntMove NSLineMovementDirection = 0
-	NSLineMovesLeft  NSLineMovementDirection = 1
+	// Lines move from right to left.
+	NSLineMovesLeft NSLineMovementDirection = 1
+	// Lines move from left to right.
 	NSLineMovesRight NSLineMovementDirection = 2
-	NSLineMovesDown  NSLineMovementDirection = 3
-	NSLineMovesUp    NSLineMovementDirection = 4
+	// Lines move from top to bottom.
+	NSLineMovesDown NSLineMovementDirection = 3
+	// Lines move from bottom to top.
+	NSLineMovesUp NSLineMovementDirection = 4
 )
 
 func (e NSLineMovementDirection) String() string {
@@ -4208,13 +4477,18 @@ func (e NSLineMovementDirection) String() string {
 	}
 }
 
+// Values that describe the progression of text on a page.
 type NSLineSweepDirection uint64
 
 const (
-	NSLineSweepLeft  NSLineSweepDirection = 0
+	// Characters move from right to left.
+	NSLineSweepLeft NSLineSweepDirection = 0
+	// Characters move from left to right.
 	NSLineSweepRight NSLineSweepDirection = 1
-	NSLineSweepDown  NSLineSweepDirection = 2
-	NSLineSweepUp    NSLineSweepDirection = 3
+	// Characters move from top to bottom.
+	NSLineSweepDown NSLineSweepDirection = 2
+	// Characters move from bottom to top.
+	NSLineSweepUp NSLineSweepDirection = 3
 )
 
 func (e NSLineSweepDirection) String() string {
@@ -4232,6 +4506,7 @@ func (e NSLineSweepDirection) String() string {
 	}
 }
 
+// These constants determine how NSCell objects behave when an NSMatrix object is tracking the mouse.
 type NSMatrixMode uint64
 
 const (
@@ -4256,7 +4531,7 @@ func (e NSMatrixMode) String() string {
 	}
 }
 
-// @abstract This type is used to configure a media browser for individual media types. @warning Though this type is declared as a set of mixable options -- and was originally intended to become that eventually -- you should treat it as an enum. @warning In other words, this type should be declared with NS_ENUM rather than NS_OPTIONS, but the latter has historical inertia not worth struggling against.
+// These constants are masks used to configure a Media Library Browser to display specific types of media. Combined masks are not yet supported. In other words, only one nonzero mask value is supported at a time. If masks are combined, the lowest mask value is used.
 type NSMediaLibrary uint64
 
 const (
@@ -4282,7 +4557,7 @@ func (e NSMediaLibrary) String() string {
 	return strings.Join(parts, "|")
 }
 
-// The badge type is used to specify one of the pre-defined or custom string portions of a menu item badge, ensuring appropriate localization and pluralization behaviors automatically when using a pre-defined type.
+// Constants that define types of badges for display.
 type NSMenuItemBadgeType int64
 
 const (
@@ -4311,7 +4586,7 @@ func (e NSMenuItemBadgeType) String() string {
 	}
 }
 
-// When set as a value on `NSMenu.presentationStyle`, determines how the given menu is presented.
+// Specifies the style of a menu.
 type NSMenuPresentationStyle int64
 
 const (
@@ -4332,6 +4607,7 @@ func (e NSMenuPresentationStyle) String() string {
 	}
 }
 
+// These constants are used as a bitmask for specifying a set of menu or menu item properties, and are contained by the propertiesToUpdate property.
 type NSMenuProperties uint64
 
 const (
@@ -4369,7 +4645,7 @@ func (e NSMenuProperties) String() string {
 	return strings.Join(parts, "|")
 }
 
-// When set as a value on `NSMenu.selectionMode`, determines how the menu manages selection states of the menu items that belong to the same selection group. This does not apply to menu items that have distinct target/action values.
+// Describes how the menu manages selection states of the menu items that belong to the same selection group.
 type NSMenuSelectionMode int64
 
 const (
@@ -4394,10 +4670,12 @@ func (e NSMenuSelectionMode) String() string {
 	}
 }
 
+// A constant for glyph packing.
 // Deprecated: since macOS 10.13.
 type NSMultibyteGlyphPacking uint64
 
 const (
+	// The native format for macOS.
 	NSNativeShortGlyphPacking NSMultibyteGlyphPacking = 5
 )
 
@@ -4410,6 +4688,7 @@ func (e NSMultibyteGlyphPacking) String() string {
 	}
 }
 
+// Constants that specify context parameters.
 // Deprecated: since macOS 10.14.
 type NSOpenGLContextParameter int64
 
@@ -4468,15 +4747,21 @@ func (e NSOpenGLContextParameter) String() string {
 	}
 }
 
+// Constants that specify OpenGL options.
 // Deprecated: since macOS 10.4.
 type NSOpenGLGlobalOption int64
 
 const (
-	NSOpenGLGOFormatCacheSize  NSOpenGLGlobalOption = 501
+	// Sets the size of the pixel format cache.
+	NSOpenGLGOFormatCacheSize NSOpenGLGlobalOption = 501
+	// Resets the pixel format cache if true.
 	NSOpenGLGOClearFormatCache NSOpenGLGlobalOption = 502
-	NSOpenGLGORetainRenderers  NSOpenGLGlobalOption = 503
-	NSOpenGLGOUseBuildCache    NSOpenGLGlobalOption = 506
-	NSOpenGLGOResetLibrary     NSOpenGLGlobalOption = 504
+	// Whether to retain loaded renderers in memory.
+	NSOpenGLGORetainRenderers NSOpenGLGlobalOption = 503
+	// Whether to enable the function compilation block cache. This is off by default. It must be enabled at startup.
+	NSOpenGLGOUseBuildCache NSOpenGLGlobalOption = 506
+	// Does a soft reset of the CGL library if true.
+	NSOpenGLGOResetLibrary NSOpenGLGlobalOption = 504
 )
 
 func (e NSOpenGLGlobalOption) String() string {
@@ -4496,6 +4781,7 @@ func (e NSOpenGLGlobalOption) String() string {
 	}
 }
 
+// Constants used to configure the contents of a PDF panel.
 type NSPDFPanelOptions int64
 
 const (
@@ -4521,6 +4807,7 @@ func (e NSPDFPanelOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants control the transition style of the page controller.
 type NSPageControllerTransitionStyle int64
 
 const (
@@ -4560,6 +4847,7 @@ func (e NSPageLayoutResult) String() string {
 	}
 }
 
+// Constants that describe the orientation of printing on a page.
 type NSPaperOrientation int64
 
 const (
@@ -4607,6 +4895,7 @@ func (e NSPasteboardAccessBehavior) String() string {
 	}
 }
 
+// Options for preparing the pasteboard.
 type NSPasteboardContentsOptions uint64
 
 const (
@@ -4624,6 +4913,7 @@ func (e NSPasteboardContentsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options that specify how to interpret data on the pasteboard when initializing pasteboard data.
 type NSPasteboardReadingOptions uint64
 
 const (
@@ -4650,6 +4940,7 @@ func (e NSPasteboardReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Type to specify options for writing to a pasteboard.
 type NSPasteboardWritingOptions uint64
 
 const (
@@ -4667,6 +4958,7 @@ func (e NSPasteboardWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// NSPathStyle constants represent the different visual and behavioral styles an NSPathControl or NSPathCell object can have.
 type NSPathStyle int64
 
 const (
@@ -4688,6 +4980,7 @@ func (e NSPathStyle) String() string {
 	}
 }
 
+// Constants that specify display styles for picker bar items.
 type NSPickerTouchBarItemControlRepresentation int64
 
 const (
@@ -4709,6 +5002,7 @@ func (e NSPickerTouchBarItemControlRepresentation) String() string {
 	}
 }
 
+// Constants that specify selection modes for picker bar items.
 type NSPickerTouchBarItemSelectionMode int64
 
 const (
@@ -4730,6 +5024,7 @@ func (e NSPickerTouchBarItemSelectionMode) String() string {
 	}
 }
 
+// The pointing-device types for tablet-proximity events or mouse events with a proximity event subtype.
 // Deprecated: since macOS 10.12.
 type NSPointingDeviceType uint64
 
@@ -4755,6 +5050,7 @@ func (e NSPointingDeviceType) String() string {
 	}
 }
 
+// These constants are defined for use with the arrowPosition property.
 type NSPopUpArrowPosition uint64
 
 const (
@@ -4776,6 +5072,7 @@ func (e NSPopUpArrowPosition) String() string {
 	}
 }
 
+// The set of predefined appearances for a popover.
 // Deprecated: since macOS 10.10.
 type NSPopoverAppearance int64
 
@@ -4797,6 +5094,7 @@ func (e NSPopoverAppearance) String() string {
 	}
 }
 
+// The appearance and disappearance behavior of a popover.
 // Deprecated: since macOS 10.10.
 type NSPopoverBehavior int64
 
@@ -4819,6 +5117,7 @@ func (e NSPopoverBehavior) String() string {
 	}
 }
 
+// These constants describe the behavior and progression of a pressure gesture.
 type NSPressureBehavior int64
 
 const (
@@ -4852,6 +5151,7 @@ func (e NSPressureBehavior) String() string {
 	}
 }
 
+// Constants that specify options for configuring the contents of the main Print panel.
 type NSPrintPanelOptions uint64
 
 const (
@@ -4915,6 +5215,7 @@ func (e NSPrintPanelResult) String() string {
 	}
 }
 
+// Constants that specify the print quality in use.
 type NSPrintRenderingQuality int64
 
 const (
@@ -4933,6 +5234,7 @@ func (e NSPrintRenderingQuality) String() string {
 	}
 }
 
+// Constants that describe the state of a printer information table stored by a printer object.
 type NSPrinterTableStatus uint64
 
 const (
@@ -4954,6 +5256,7 @@ func (e NSPrinterTableStatus) String() string {
 	}
 }
 
+// Constants that specify page orientations.
 // Deprecated: since macOS 10.14.
 type NSPrintingOrientation uint64
 
@@ -4973,6 +5276,7 @@ func (e NSPrintingOrientation) String() string {
 	}
 }
 
+// Constants that specify the page order.
 type NSPrintingPageOrder int64
 
 const (
@@ -4997,6 +5301,7 @@ func (e NSPrintingPageOrder) String() string {
 	}
 }
 
+// Constants that specify the different ways in which an image is divided into pages.
 type NSPrintingPaginationMode uint64
 
 const (
@@ -5018,6 +5323,7 @@ func (e NSPrintingPaginationMode) String() string {
 	}
 }
 
+// Constants that specify the progress indicator’s style.
 type NSProgressIndicatorStyle uint64
 
 const (
@@ -5036,6 +5342,7 @@ func (e NSProgressIndicatorStyle) String() string {
 	}
 }
 
+// Specify the height of a progress indicator.
 // Deprecated: These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
 type NSProgressIndicatorThickness uint64
 
@@ -5061,18 +5368,28 @@ func (e NSProgressIndicatorThickness) String() string {
 	}
 }
 
+// Constants that specify alignment to an edge or a set of edges depending on the user interface layout direction.
 type NSRectAlignment int64
 
 const (
-	NSRectAlignmentNone           NSRectAlignment = 0
-	NSRectAlignmentTop            NSRectAlignment = 1
-	NSRectAlignmentTopLeading     NSRectAlignment = 2
-	NSRectAlignmentLeading        NSRectAlignment = 3
-	NSRectAlignmentBottomLeading  NSRectAlignment = 4
-	NSRectAlignmentBottom         NSRectAlignment = 5
+	// Has no specified alignment.
+	NSRectAlignmentNone NSRectAlignment = 0
+	// Aligns to the top edge.
+	NSRectAlignmentTop NSRectAlignment = 1
+	// Aligns to the top and leading edges.
+	NSRectAlignmentTopLeading NSRectAlignment = 2
+	// Aligns to the leading edge.
+	NSRectAlignmentLeading NSRectAlignment = 3
+	// Aligns to the bottom and leading edges.
+	NSRectAlignmentBottomLeading NSRectAlignment = 4
+	// Aligns to the bottom edge.
+	NSRectAlignmentBottom NSRectAlignment = 5
+	// Aligns to the bottom and trailing edges.
 	NSRectAlignmentBottomTrailing NSRectAlignment = 6
-	NSRectAlignmentTrailing       NSRectAlignment = 7
-	NSRectAlignmentTopTrailing    NSRectAlignment = 8
+	// Aligns to the trailing edge.
+	NSRectAlignmentTrailing NSRectAlignment = 7
+	// Aligns to the top and trailing edges.
+	NSRectAlignmentTopTrailing NSRectAlignment = 8
 )
 
 func (e NSRectAlignment) String() string {
@@ -5100,10 +5417,11 @@ func (e NSRectAlignment) String() string {
 	}
 }
 
-// Soft deprecated. Please use `NSApplication`'s `-registerForRemoteNotifications` along with `-requestAuthorizationWithOptions:` from the `UserNotifications.framework` to specify allowable notification types.
+// These constants determine whether apps launched by remote notifications display a badge.
 type NSRemoteNotificationType uint64
 
 const (
+	// The app shouldn’t display a badge.
 	NSRemoteNotificationTypeNone  NSRemoteNotificationType = 0
 	NSRemoteNotificationTypeBadge NSRemoteNotificationType = 1
 	NSRemoteNotificationTypeSound NSRemoteNotificationType = 2
@@ -5145,6 +5463,7 @@ func (e NSRequestUserAttentionType) String() string {
 	}
 }
 
+// Specifies a type for nesting modes.
 type NSRuleEditorNestingMode uint64
 
 const (
@@ -5169,6 +5488,7 @@ func (e NSRuleEditorNestingMode) String() string {
 	}
 }
 
+// Specifies a type for row types.
 type NSRuleEditorRowType uint64
 
 const (
@@ -5205,6 +5525,7 @@ func (e NSRulerOrientation) String() string {
 	}
 }
 
+// Constants for specifying the type of document-save operation to perform.
 type NSSaveOperationType uint64
 
 const (
@@ -5214,7 +5535,8 @@ const (
 	NSAutosaveInPlaceOperation   NSSaveOperationType = 4
 	NSAutosaveElsewhereOperation NSSaveOperationType = 3
 	NSAutosaveAsOperation        NSSaveOperationType = 5
-	NSAutosaveOperation          NSSaveOperationType = 3
+	// Old name for the NSAutosaveElsewhereOperation operation type.
+	NSAutosaveOperation NSSaveOperationType = 3
 )
 
 func (e NSSaveOperationType) String() string {
@@ -5259,6 +5581,7 @@ func (e NSScrollArrowPosition) String() string {
 	}
 }
 
+// These constants determine the elasticity behavior for an axis of the scrollview.
 type NSScrollElasticity int64
 
 const (
@@ -5280,6 +5603,7 @@ func (e NSScrollElasticity) String() string {
 	}
 }
 
+// These constants define the position of the find bar in relation to the scroll view.
 type NSScrollViewFindBarPosition int64
 
 const (
@@ -5320,6 +5644,7 @@ func (e NSScrollerArrow) String() string {
 	}
 }
 
+// Specify different knob styles.
 type NSScrollerKnobStyle int64
 
 const (
@@ -5341,6 +5666,7 @@ func (e NSScrollerKnobStyle) String() string {
 	}
 }
 
+// These constants specify the different parts of the scroller:
 // Deprecated: Scroller arrows are not used anymore.
 type NSScrollerPart uint64
 
@@ -5375,6 +5701,7 @@ func (e NSScrollerPart) String() string {
 	}
 }
 
+// Constants to specify the scroller style.
 type NSScrollerStyle int64
 
 const (
@@ -5393,7 +5720,7 @@ func (e NSScrollerStyle) String() string {
 	}
 }
 
-// @typedef NSScrubberAlignment @discussion NSScrubberAlignment specifies the preferred alignment of elements within the control. @const NSScrubberAlignmentNone      Specifies no preference for item alignment. @const NSScrubberAlignmentLeading   Specifies that an item will be leading-aligned within the control. @const NSScrubberAlignmentTrailing  Specifies that an item will be trailing-aligned within the control. @const NSScrubberAlignmentCenter    Specifies that an item will be center-aligned within the control.
+// The specified preferred alignment of items within the scrubber, when they come to rest following a user’s scrolling or paging interaction.
 type NSScrubberAlignment int64
 
 const (
@@ -5418,7 +5745,7 @@ func (e NSScrubberAlignment) String() string {
 	}
 }
 
-// @typedef NSScrubberMode @discussion Determines the interaction mode for a NSScrubber control. @const NSScrubberModeFixed Panning over the control does not scroll, but instead highlights the element under the user’s finger. The highlighted element is selected the end of the gesture. If the gesture begins on top of the selected element, or if the @c continuous property is set to @c YES, the selection is changed immediately as the user pans. @const NSScrubberModeFree  Panning over the control freely scrolls the scrubber content. Items are selected by tapping or pressing them without panning. If the @c continuous property is set to @c YES, the control automatically selects items as they scroll under the axis specified by the @c itemAlignment property; if @c itemAlignment is @c NSScrubberAlignmentNone, it is interpreted as @c NSScrubberAlignmentCenter for this purpose.
+// The scrolling behavior for a scrubber.
 type NSScrubberMode int64
 
 const (
@@ -5525,10 +5852,13 @@ func (e NSSegmentSwitchTracking) String() string {
 	}
 }
 
+// These constants specify the preferred direction of selection. They’re used by selectionAffinity and setSelectedRange:affinity:stillSelecting:.
 type NSSelectionAffinity uint64
 
 const (
-	NSSelectionAffinityUpstream   NSSelectionAffinity = 0
+	// The selection is moving toward the top of the document.
+	NSSelectionAffinityUpstream NSSelectionAffinity = 0
+	// The selection is moving toward the bottom of the document.
 	NSSelectionAffinityDownstream NSSelectionAffinity = 1
 )
 
@@ -5543,6 +5873,7 @@ func (e NSSelectionAffinity) String() string {
 	}
 }
 
+// Constants that specify the direction a window is currently using to change the key view.
 type NSSelectionDirection uint64
 
 const (
@@ -5564,11 +5895,15 @@ func (e NSSelectionDirection) String() string {
 	}
 }
 
+// These constants specify how much the text view extends the selection when the user drags the mouse. They’re used by selectionGranularity, and selectionRangeForProposedRange:granularity::
 type NSSelectionGranularity uint64
 
 const (
+	// Extends the selection character by character.
 	NSSelectByCharacter NSSelectionGranularity = 0
-	NSSelectByWord      NSSelectionGranularity = 1
+	// Extends the selection word by word.
+	NSSelectByWord NSSelectionGranularity = 1
+	// Extends the selection paragraph by paragraph.
 	NSSelectByParagraph NSSelectionGranularity = 2
 )
 
@@ -5585,6 +5920,7 @@ func (e NSSelectionGranularity) String() string {
 	}
 }
 
+// Represents the types of sharing (collaborating on an item vs. sending a copy of the item) The share picker supports up to two modes, each of which corresponds to one of these types
 type NSSharingCollaborationMode int64
 
 const (
@@ -5603,7 +5939,7 @@ func (e NSSharingCollaborationMode) String() string {
 	}
 }
 
-// Use the sharing scope to specify the nature of the things you are sharing. The sharing scope can be modified from the default value of NSSharingContentScopeItem by setting a different value in the out parameter in sharingService:sourceWindowForShareItems:sharingContentScope:.
+// The sharing scope constants specify the nature of the things you are sharing.
 type NSSharingContentScope int64
 
 const (
@@ -5628,6 +5964,7 @@ func (e NSSharingContentScope) String() string {
 	}
 }
 
+// The types of sliders, used by sliderType.
 type NSSliderType uint64
 
 const (
@@ -5667,11 +6004,14 @@ func (e NSSpeechBoundary) String() string {
 	}
 }
 
+// Constants for the spelling state attribute key.
 type NSSpellingState int64
 
 const (
+	// Flag for spelling issues.
 	NSSpellingStateSpellingFlag NSSpellingState = 1
-	NSSpellingStateGrammarFlag  NSSpellingState = 2
+	// Flag for grammar issues.
+	NSSpellingStateGrammarFlag NSSpellingState = 2
 )
 
 func (e NSSpellingState) String() string {
@@ -5685,6 +6025,7 @@ func (e NSSpellingState) String() string {
 	}
 }
 
+// Constants that specify the style of the split view’s dividers.
 type NSSplitViewDividerStyle int64
 
 const (
@@ -5706,6 +6047,7 @@ func (e NSSplitViewDividerStyle) String() string {
 	}
 }
 
+// Constants that describe the behavior of the split view item.
 type NSSplitViewItemBehavior int64
 
 const (
@@ -5730,6 +6072,7 @@ func (e NSSplitViewItemBehavior) String() string {
 	}
 }
 
+// Constants that describe the split view item’s collapsing behavior.
 type NSSplitViewItemCollapseBehavior int64
 
 const (
@@ -5758,11 +6101,15 @@ func (e NSSplitViewItemCollapseBehavior) String() string {
 	}
 }
 
+// A group of constants that indicate a highlighting style for your app’s user interface to display during a spring-loading operation.
 type NSSpringLoadingHighlight int64
 
 const (
-	NSSpringLoadingHighlightNone       NSSpringLoadingHighlight = 0
-	NSSpringLoadingHighlightStandard   NSSpringLoadingHighlight = 1
+	// A constant that indicates no highlighting.
+	NSSpringLoadingHighlightNone NSSpringLoadingHighlight = 0
+	// A constant that indicates standard highlighting to show the destination supports spring-loading.
+	NSSpringLoadingHighlightStandard NSSpringLoadingHighlight = 1
+	// A constant that indicates emphasized highlighting to show active spring-loading on the destination.
 	NSSpringLoadingHighlightEmphasized NSSpringLoadingHighlight = 2
 )
 
@@ -5779,13 +6126,18 @@ func (e NSSpringLoadingHighlight) String() string {
 	}
 }
 
+// These constants denote the type of spring-loading behavior configured for the destination object.
 type NSSpringLoadingOptions uint64
 
 const (
-	NSSpringLoadingDisabled             NSSpringLoadingOptions = 0
-	NSSpringLoadingEnabled              NSSpringLoadingOptions = 1
+	// Spring-loading on the destination object is disabled. No spring-loading operations can occur.
+	NSSpringLoadingDisabled NSSpringLoadingOptions = 0
+	// Spring-loading on the destination object is enabled. The user can drag an object over a destination object and hover or force click to initiate spring-loading and activate the destination object. When initiated by a force click, spring-loading is invoked once the force click is released.
+	NSSpringLoadingEnabled NSSpringLoadingOptions = 1
+	// Spring-loading on the destination object is enabled. The user can drag an object over a destination object and hover or force click to initiate spring-loading and activate the destination object. When initiated by a force click, spring-loading is invoked once the force click begins and deactivated when the force click is released. When initiated by hovering, spring-loading is invoked at the hover timeout and deactivated when the drag exits the destination object. Use this constant sparingly.
 	NSSpringLoadingContinuousActivation NSSpringLoadingOptions = 2
-	NSSpringLoadingNoHover              NSSpringLoadingOptions = 8
+	// Spring-loading on the destination object is enabled, but cannot be invoked by hovering. The user can drag an object over a destination object and force click to initiate spring-loading and activate the destination object. This option may be useful in situations where a long hover, such as dragging across a large destination object, initiates undesired spring-loading. Use this constant sparingly.
+	NSSpringLoadingNoHover NSSpringLoadingOptions = 8
 )
 
 func (e NSSpringLoadingOptions) String() string {
@@ -5841,6 +6193,7 @@ func (e NSStackViewDistribution) String() string {
 	}
 }
 
+// The gravity areas available in a stack view.
 type NSStackViewGravity int64
 
 const (
@@ -5864,6 +6217,7 @@ func (e NSStackViewGravity) String() string {
 	}
 }
 
+// A set of optional status item behaviors.
 type NSStatusItemBehavior uint64
 
 const (
@@ -5885,17 +6239,24 @@ func (e NSStatusItemBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the rendering options for drawing a string.
 type NSStringDrawingOptions int64
 
 const (
-	NSStringDrawingUsesLineFragmentOrigin   NSStringDrawingOptions = 1
-	NSStringDrawingUsesFontLeading          NSStringDrawingOptions = 2
-	NSStringDrawingUsesDeviceMetrics        NSStringDrawingOptions = 8
+	// Uses the line fragment origin instead of the baseline origin.
+	NSStringDrawingUsesLineFragmentOrigin NSStringDrawingOptions = 1
+	// Uses the font leading for calculating line heights.
+	NSStringDrawingUsesFontLeading NSStringDrawingOptions = 2
+	// Uses image glyph bounds instead of typographic bounds.
+	NSStringDrawingUsesDeviceMetrics NSStringDrawingOptions = 8
+	// Truncates and adds the ellipsis character to the last visible line if the text doesn’t fit into the specified bounds.
 	NSStringDrawingTruncatesLastVisibleLine NSStringDrawingOptions = 32
-	// Specifies the behavior for resolving ``NSTextAlignment.natural`` to the visual alignment. When set, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language.
+	// Specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 	NSStringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection NSStringDrawingOptions = 512
-	NSStringDrawingDisableScreenFontSubstitution                           NSStringDrawingOptions = 4
-	NSStringDrawingOneShot                                                 NSStringDrawingOptions = 16
+	// An option that disables screen font substitution.
+	NSStringDrawingDisableScreenFontSubstitution NSStringDrawingOptions = 4
+	// Suppresses caching layout information.
+	NSStringDrawingOneShot NSStringDrawingOptions = 16
 )
 
 func (e NSStringDrawingOptions) String() string {
@@ -5927,6 +6288,7 @@ func (e NSStringDrawingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that represent the supported TIFF data-compression schemes.
 type NSTIFFCompression uint64
 
 const (
@@ -5990,6 +6352,7 @@ func (e NSTabPosition) String() string {
 	}
 }
 
+// These constants describe the current display state of a tab:
 type NSTabState uint64
 
 const (
@@ -6032,6 +6395,7 @@ func (e NSTabViewBorderType) String() string {
 	}
 }
 
+// Tab control style options for a tab view controller.
 type NSTabViewControllerTabStyle int64
 
 const (
@@ -6096,6 +6460,7 @@ func (e NSTabViewType) String() string {
 type NSTableColumnResizingOptions uint64
 
 const (
+	// Prevents the table column from resizing.
 	NSTableColumnNoResizing       NSTableColumnResizingOptions = 0
 	NSTableColumnAutoresizingMask NSTableColumnResizingOptions = 1
 	NSTableColumnUserResizingMask NSTableColumnResizingOptions = 2
@@ -6115,6 +6480,7 @@ func (e NSTableColumnResizingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants define table row edges on which row actions are attached. They are used by the tableView:rowActionsForRow:edge: delegate method.
 type NSTableRowActionEdge int64
 
 const (
@@ -6133,9 +6499,11 @@ func (e NSTableRowActionEdge) String() string {
 	}
 }
 
+// Specifies the animation effects to apply when inserting or removing rows.
 type NSTableViewAnimationOptions uint64
 
 const (
+	// Use no animation effects.
 	NSTableViewAnimationEffectNone NSTableViewAnimationOptions = 0
 	NSTableViewAnimationEffectFade NSTableViewAnimationOptions = 1
 	NSTableViewAnimationEffectGap  NSTableViewAnimationOptions = 2
@@ -6225,6 +6593,7 @@ func (e NSTableViewDraggingDestinationFeedbackStyle) String() string {
 	}
 }
 
+// NSTableView defines these constants to specify drop operations.
 type NSTableViewDropOperation uint64
 
 const (
@@ -6269,6 +6638,7 @@ func (e NSTableViewGridLineStyle) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that help define the appearance and behavior of action buttons.
 type NSTableViewRowActionStyle int64
 
 const (
@@ -6335,6 +6705,7 @@ func (e NSTableViewSelectionHighlightStyle) String() string {
 	}
 }
 
+// Contains the possible style values for a table view.
 type NSTableViewStyle int64
 
 const (
@@ -6362,14 +6733,19 @@ func (e NSTableViewStyle) String() string {
 	}
 }
 
+// Constants that specify text alignment.
 type NSTextAlignment int64
 
 const (
-	NSTextAlignmentLeft      NSTextAlignment = 0
-	NSTextAlignmentCenter    NSTextAlignment = 1
-	NSTextAlignmentRight     NSTextAlignment = 2
+	// Text is left-aligned.
+	NSTextAlignmentLeft NSTextAlignment = 0
+	// Text is center-aligned.
+	NSTextAlignmentCenter NSTextAlignment = 1
+	// Text is right-aligned.
+	NSTextAlignmentRight NSTextAlignment = 2
+	// Text is justified.
 	NSTextAlignmentJustified NSTextAlignment = 3
-	// Resolved to either ``left`` or ``right`` based on the natural alignment resolution type active in the associated component. There are two types of natural alignment resolution behavior. The natural alignment is resolved based on either the UI language or the base writing direction. The behavior is selected by the ``resolvesNaturalAlignmentWithBaseWritingDirection`` property for ``NSTextLayoutManager``. ``NSStringDrawingOptions.resolvesNaturalAlignmentWithBaseWritingDirection`` specifies the base writing direction based resolution for ``NSStringDrawing``.
+	// Text uses the default alignment for the current localization of the app.
 	NSTextAlignmentNatural NSTextAlignment = 4
 )
 
@@ -6483,6 +6859,7 @@ func (e NSTextBlockVerticalAlignment) String() string {
 	}
 }
 
+// Values that control the order in which the framework enumerates text elements.
 type NSTextContentManagerEnumerationOptions uint64
 
 const (
@@ -6540,6 +6917,7 @@ func (e NSTextCursorAccessoryPlacement) String() string {
 	}
 }
 
+// The style of bezel the text field displays.
 type NSTextFieldBezelStyle uint64
 
 const (
@@ -6609,6 +6987,7 @@ func (e NSTextFinderAction) String() string {
 	}
 }
 
+// The following constants indicate the type of search anchor an action should perform.
 type NSTextFinderMatchingType int64
 
 const (
@@ -6654,6 +7033,7 @@ func (e NSTextInputTraitType) String() string {
 	}
 }
 
+// Options that affect the automatic display mode.
 type NSTextInsertionIndicatorAutomaticModeOptions int64
 
 const (
@@ -6675,6 +7055,7 @@ func (e NSTextInsertionIndicatorAutomaticModeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that determine how to display the system text cursor in a custom text UI.
 type NSTextInsertionIndicatorDisplayMode int64
 
 const (
@@ -6696,6 +7077,7 @@ func (e NSTextInsertionIndicatorDisplayMode) String() string {
 	}
 }
 
+// Values that describe options for enumerating text layout fragments.
 type NSTextLayoutFragmentEnumerationOptions uint64
 
 const (
@@ -6726,6 +7108,7 @@ func (e NSTextLayoutFragmentEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values that describe the possible layout states.
 type NSTextLayoutFragmentState uint64
 
 const (
@@ -6750,6 +7133,7 @@ func (e NSTextLayoutFragmentState) String() string {
 	}
 }
 
+// Values that describe where and how the framework extends segments of a selection.
 type NSTextLayoutManagerSegmentOptions uint64
 
 const (
@@ -6784,6 +7168,7 @@ func (e NSTextLayoutManagerSegmentOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values that describe the rendering of selection boundaries.
 type NSTextLayoutManagerSegmentType int64
 
 const (
@@ -6805,6 +7190,7 @@ func (e NSTextLayoutManagerSegmentType) String() string {
 	}
 }
 
+// Constants that describe the text layout orientation.
 type NSTextLayoutOrientation int64
 
 const (
@@ -6823,6 +7209,7 @@ func (e NSTextLayoutOrientation) String() string {
 	}
 }
 
+// Values that available options for text list items.
 type NSTextListOptions uint64
 
 const (
@@ -6879,11 +7266,14 @@ func (e NSTextMovement) String() string {
 	}
 }
 
+// Constants that specify the text scaling.
 type NSTextScalingType int64
 
 const (
+	// Font sizes throughout the document appear visually similar to how they would render in macOS and non-Apple platforms.
 	NSTextScalingStandard NSTextScalingType = 0
-	NSTextScalingiOS      NSTextScalingType = 1
+	// Font sizes throughout the document appear visually similar to how they would render in iOS.
+	NSTextScalingiOS NSTextScalingType = 1
 )
 
 func (e NSTextScalingType) String() string {
@@ -6897,6 +7287,7 @@ func (e NSTextScalingType) String() string {
 	}
 }
 
+// Values that describe the visual location of the text cursor, or the direction of the non-anchored edge of the selection.
 type NSTextSelectionAffinity int64
 
 const (
@@ -6915,6 +7306,7 @@ func (e NSTextSelectionAffinity) String() string {
 	}
 }
 
+// Values that describe the different granularities available to make a selection.
 type NSTextSelectionGranularity int64
 
 const (
@@ -6942,6 +7334,7 @@ func (e NSTextSelectionGranularity) String() string {
 	}
 }
 
+// Values that affect how the framework handles navigation across different textual boundaries during a selection.
 type NSTextSelectionNavigationDestination int64
 
 const (
@@ -6975,6 +7368,7 @@ func (e NSTextSelectionNavigationDestination) String() string {
 	}
 }
 
+// Values that describe the direction of a selection.
 type NSTextSelectionNavigationDirection int64
 
 const (
@@ -7005,6 +7399,7 @@ func (e NSTextSelectionNavigationDirection) String() string {
 	}
 }
 
+// Values that describe the possible layout orientations.
 type NSTextSelectionNavigationLayoutOrientation int64
 
 const (
@@ -7023,6 +7418,7 @@ func (e NSTextSelectionNavigationLayoutOrientation) String() string {
 	}
 }
 
+// Values that describe how the framework handles different kinds of selection modifiers.
 type NSTextSelectionNavigationModifier uint64
 
 const (
@@ -7048,6 +7444,7 @@ func (e NSTextSelectionNavigationModifier) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values that describe the writing direction inside a text selection.
 type NSTextSelectionNavigationWritingDirection int64
 
 const (
@@ -7066,10 +7463,13 @@ func (e NSTextSelectionNavigationWritingDirection) String() string {
 	}
 }
 
+// Constants that indicate the types of changes.
 type NSTextStorageEditActions uint64
 
 const (
+	// Attributes were added, removed, or changed.
 	NSTextStorageEditedAttributes NSTextStorageEditActions = 1
+	// Characters were added, removed, or replaced.
 	NSTextStorageEditedCharacters NSTextStorageEditActions = 2
 )
 
@@ -7087,6 +7487,7 @@ func (e NSTextStorageEditActions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the type of tab stop.
 type NSTextTabType uint64
 
 const (
@@ -7111,6 +7512,7 @@ func (e NSTextTabType) String() string {
 	}
 }
 
+// These constants, specifying the type of text table layout algorithm, are used with layoutAlgorithm.
 type NSTextTableLayoutAlgorithm uint64
 
 const (
@@ -7129,6 +7531,7 @@ func (e NSTextTableLayoutAlgorithm) String() string {
 	}
 }
 
+// The position where a linear slider’s tick marks appear (above, below, leading, or trailing).
 type NSTickMarkPosition uint64
 
 const (
@@ -7149,7 +7552,7 @@ func (e NSTickMarkPosition) String() string {
 	}
 }
 
-// Controls how strongly the tint color applies in a view. A tint prominence of `primary` will use the app's tint color with full saturation and brightness, while `secondary` will apply it more subtly. Using `none` gives an untinted appearance.
+// Controls how strongly the tint color applies in a view.
 type NSTintProminence int64
 
 const (
@@ -7174,6 +7577,7 @@ func (e NSTintProminence) String() string {
 	}
 }
 
+// Specify the location of a box’s title with respect to its border.
 type NSTitlePosition uint64
 
 const (
@@ -7207,13 +7611,18 @@ func (e NSTitlePosition) String() string {
 	}
 }
 
+// Styles that determine the type of separator displayed between the title bar and content of a window.
 type NSTitlebarSeparatorStyle int64
 
 const (
+	// A style indicating that the system determines the type of separator.
 	NSTitlebarSeparatorStyleAutomatic NSTitlebarSeparatorStyle = 0
-	NSTitlebarSeparatorStyleNone      NSTitlebarSeparatorStyle = 1
-	NSTitlebarSeparatorStyleLine      NSTitlebarSeparatorStyle = 2
-	NSTitlebarSeparatorStyleShadow    NSTitlebarSeparatorStyle = 3
+	// A style indicating that there’s no title bar separator.
+	NSTitlebarSeparatorStyleNone NSTitlebarSeparatorStyle = 1
+	// A style indicating that the title bar separator is a line.
+	NSTitlebarSeparatorStyleLine NSTitlebarSeparatorStyle = 2
+	// A style indicating that the title bar separator is a shadow.
+	NSTitlebarSeparatorStyleShadow NSTitlebarSeparatorStyle = 3
 )
 
 func (e NSTitlebarSeparatorStyle) String() string {
@@ -7231,6 +7640,7 @@ func (e NSTitlebarSeparatorStyle) String() string {
 	}
 }
 
+// The NSTokenStyle constants define how tokens are displayed and editable in the NSTokenFieldCell. These values are used by tokenStyle and the delegate method tokenFieldCell:styleForRepresentedObject:.
 type NSTokenStyle uint64
 
 const (
@@ -7258,6 +7668,7 @@ func (e NSTokenStyle) String() string {
 	}
 }
 
+// Constants that indicate whether the toolbar displays items using a name, icon, or combination of elements.
 type NSToolbarDisplayMode uint64
 
 const (
@@ -7303,6 +7714,7 @@ func (e NSToolbarItemGroupControlRepresentation) String() string {
 	}
 }
 
+// A value that indicates how a grouped toolbar item selects its subitems.
 type NSToolbarItemGroupSelectionMode int64
 
 const (
@@ -7342,6 +7754,7 @@ func (e NSToolbarItemStyle) String() string {
 	}
 }
 
+// Constants that specify toolbar display modes.
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
 type NSToolbarSizeMode uint64
 
@@ -7364,6 +7777,7 @@ func (e NSToolbarSizeMode) String() string {
 	}
 }
 
+// The possible phases of a touch.
 type NSTouchPhase uint64
 
 const (
@@ -7405,6 +7819,7 @@ func (e NSTouchPhase) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A bit mask identifying a direct or indirect touch type.
 type NSTouchType int64
 
 const (
@@ -7423,6 +7838,7 @@ func (e NSTouchType) String() string {
 	}
 }
 
+// A bit mask identifying a direct or indirect touch type.
 type NSTouchTypeMask uint64
 
 const (
@@ -7444,6 +7860,7 @@ func (e NSTouchTypeMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The data type defined for the constants specified in the options parameter of init(rect:options:owner:userInfo:). These constants are described below; you can specify multiple constants by performing a bitwise-OR operation with them. In particular, you must supply one or more of the tracking-type constants (that is, NSTrackingMouseEnteredAndExited, NSTrackingMouseMoved, and NSTrackingCursorUpdate) and one of the active constants (that is, NSTrackingActiveWhenFirstResponder, NSTrackingActiveInKeyWindow, NSTrackingActiveInActiveApp, and NSTrackingActiveAlways). In addition, you may specify any of the behavior constants (that is, NSTrackingAssumeInside, NSTrackingInVisibleRect, and NSTrackingEnabledDuringMouseDrag).
 type NSTrackingAreaOptions uint64
 
 const (
@@ -7497,6 +7914,7 @@ func (e NSTrackingAreaOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that determine the layout manager’s behavior during layout.
 type NSTypesetterBehavior int64
 
 const (
@@ -7527,15 +7945,22 @@ func (e NSTypesetterBehavior) String() string {
 	}
 }
 
+// The following constants are possible values returned by the actionForControlCharacterAtIndex: method to determine the action associated with a control character.
 type NSTypesetterControlCharacterAction uint64
 
 const (
+	// Glyphs with this action are filtered out from layout (notShownAttribute == YES).
 	NSTypesetterZeroAdvancementAction NSTypesetterControlCharacterAction = 1
-	NSTypesetterWhitespaceAction      NSTypesetterControlCharacterAction = 2
-	NSTypesetterHorizontalTabAction   NSTypesetterControlCharacterAction = 4
-	NSTypesetterLineBreakAction       NSTypesetterControlCharacterAction = 8
-	NSTypesetterParagraphBreakAction  NSTypesetterControlCharacterAction = 16
-	NSTypesetterContainerBreakAction  NSTypesetterControlCharacterAction = 32
+	// The width for glyphs with this action are determined by boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex:, if the method is implemented; otherwise, same as NSTypesetterZeroAdvancementAction.
+	NSTypesetterWhitespaceAction NSTypesetterControlCharacterAction = 2
+	// Treated as tab character.
+	NSTypesetterHorizontalTabAction NSTypesetterControlCharacterAction = 4
+	// Causes line break.
+	NSTypesetterLineBreakAction NSTypesetterControlCharacterAction = 8
+	// Causes paragraph break; the value returned by firstLineHeadIndent is the advancement used for the following glyph.
+	NSTypesetterParagraphBreakAction NSTypesetterControlCharacterAction = 16
+	// Causes container break.
+	NSTypesetterContainerBreakAction NSTypesetterControlCharacterAction = 32
 )
 
 func (e NSTypesetterControlCharacterAction) String() string {
@@ -7564,19 +7989,30 @@ func (e NSTypesetterControlCharacterAction) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants for the underline style and strikethrough style attribute keys.
 type NSUnderlineStyle int64
 
 const (
-	NSUnderlineStyleNone              NSUnderlineStyle = 0
-	NSUnderlineStyleSingle            NSUnderlineStyle = 1
-	NSUnderlineStyleThick             NSUnderlineStyle = 2
-	NSUnderlineStyleDouble            NSUnderlineStyle = 9
-	NSUnderlineStylePatternSolid      NSUnderlineStyle = 0
-	NSUnderlineStylePatternDot        NSUnderlineStyle = 256
-	NSUnderlineStylePatternDash       NSUnderlineStyle = 512
-	NSUnderlineStylePatternDashDot    NSUnderlineStyle = 768
+	// Don’t draw a line.
+	NSUnderlineStyleNone NSUnderlineStyle = 0
+	// Draw a single line.
+	NSUnderlineStyleSingle NSUnderlineStyle = 1
+	// Draw a thick line.
+	NSUnderlineStyleThick NSUnderlineStyle = 2
+	// Draw a double line.
+	NSUnderlineStyleDouble NSUnderlineStyle = 9
+	// Draw a solid line.
+	NSUnderlineStylePatternSolid NSUnderlineStyle = 0
+	// Draw a line of dots.
+	NSUnderlineStylePatternDot NSUnderlineStyle = 256
+	// Draw a line of dashes.
+	NSUnderlineStylePatternDash NSUnderlineStyle = 512
+	// Draw a line of alternating dashes and dots.
+	NSUnderlineStylePatternDashDot NSUnderlineStyle = 768
+	// Draw a line of alternating dashes and two dots.
 	NSUnderlineStylePatternDashDotDot NSUnderlineStyle = 1024
-	NSUnderlineStyleByWord            NSUnderlineStyle = 32768
+	// Draw the line only beneath or through words, not whitespace.
+	NSUnderlineStyleByWord NSUnderlineStyle = 32768
 )
 
 func (e NSUnderlineStyle) String() string {
@@ -7611,6 +8047,7 @@ func (e NSUnderlineStyle) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify which parts of the scroller are visible.
 type NSUsableScrollerParts uint64
 
 const (
@@ -7632,10 +8069,13 @@ func (e NSUsableScrollerParts) String() string {
 	}
 }
 
+// Specifies the directional flow of the user interface.
 type NSUserInterfaceLayoutDirection int64
 
 const (
+	// Layout direction is left to right.
 	NSUserInterfaceLayoutDirectionLeftToRight NSUserInterfaceLayoutDirection = 0
+	// Layout direction is right to left.
 	NSUserInterfaceLayoutDirectionRightToLeft NSUserInterfaceLayoutDirection = 1
 )
 
@@ -7650,11 +8090,14 @@ func (e NSUserInterfaceLayoutDirection) String() string {
 	}
 }
 
+// The stack view layout directions, and user interface axes for hugging priority and clipping resistance.
 type NSUserInterfaceLayoutOrientation int64
 
 const (
+	// The horizontal orientation.
 	NSUserInterfaceLayoutOrientationHorizontal NSUserInterfaceLayoutOrientation = 0
-	NSUserInterfaceLayoutOrientationVertical   NSUserInterfaceLayoutOrientation = 1
+	// The vertical orientation.
+	NSUserInterfaceLayoutOrientationVertical NSUserInterfaceLayoutOrientation = 1
 )
 
 func (e NSUserInterfaceLayoutOrientation) String() string {
@@ -7668,6 +8111,7 @@ func (e NSUserInterfaceLayoutOrientation) String() string {
 	}
 }
 
+// The directions on the vertical axis.
 type NSVerticalDirections uint64
 
 const (
@@ -7696,9 +8140,11 @@ func (e NSVerticalDirections) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Animation options for view transitions in a view controller.
 type NSViewControllerTransitionOptions uint64
 
 const (
+	// A transition with no animation (the default). Specifying another animation option from this enumeration overrides this option.
 	NSViewControllerTransitionNone                 NSViewControllerTransitionOptions = 0
 	NSViewControllerTransitionCrossfade            NSViewControllerTransitionOptions = 1
 	NSViewControllerTransitionSlideUp              NSViewControllerTransitionOptions = 16
@@ -7838,6 +8284,7 @@ func (e NSViewLayoutRegionAdaptivityAxis) String() string {
 	}
 }
 
+// Constants that specify whether the visual effect view blends with what’s either behind or within the window.
 type NSVisualEffectBlendingMode int64
 
 const (
@@ -7858,7 +8305,7 @@ func (e NSVisualEffectBlendingMode) String() string {
 	}
 }
 
-// The main material that this view displays.  Materials are dynamic, and their exact look depends on the view's effectiveAppearance, blendingMode, state, emphasized, and possibly other factors.
+// Constants to specify the material shown by the visual effect view.
 type NSVisualEffectMaterial int64
 
 const (
@@ -7943,6 +8390,7 @@ func (e NSVisualEffectMaterial) String() string {
 	}
 }
 
+// Constants to specify how the material appearance should reflect window activity state.
 type NSVisualEffectState int64
 
 const (
@@ -7967,6 +8415,7 @@ func (e NSVisualEffectState) String() string {
 	}
 }
 
+// Constants that specify the winding rule a Bézier path uses.
 type NSWindingRule uint64
 
 const (
@@ -7985,7 +8434,7 @@ func (e NSWindingRule) String() string {
 	}
 }
 
-// @typedef NSWindowAnimationBehavior @const NSWindowAnimationBehaviorDefault  Let AppKit infer animation behavior for this window. @const NSWindowAnimationBehaviorNone     Suppress inferred animations (don't animate). @const NSWindowAnimationBehaviorDocumentWindow @const NSWindowAnimationBehaviorUtilityWindow @const NSWindowAnimationBehaviorAlertPanel
+// Constants that control the automatic window animation behavior windows use when ordering to the front or out of view.
 type NSWindowAnimationBehavior int64
 
 const (
@@ -8013,6 +8462,7 @@ func (e NSWindowAnimationBehavior) String() string {
 	}
 }
 
+// The following constants and the related data type represent a window’s possible backing locations.
 // Deprecated: since macOS 10.14.
 type NSWindowBackingLocation uint64
 
@@ -8035,7 +8485,7 @@ func (e NSWindowBackingLocation) String() string {
 	}
 }
 
-// @typedef NSWindowButton Standard window buttons.
+// Constants that provide a way to access standard title bar buttons.
 type NSWindowButton uint64
 
 const (
@@ -8066,10 +8516,11 @@ func (e NSWindowButton) String() string {
 	}
 }
 
-// @typedef NSWindowCollectionBehavior @discussion You may specify at most one of @c NSWindowCollectionBehaviorPrimary, @c NSWindowCollectionBehaviorAuxiliary, or @c NSWindowCollectionBehaviorCanJoinAllApplications. If unspecified, the window gets the default treatment determined by its other collection behaviors. @const NSWindowCollectionBehaviorPrimary Marks a window as primary. This collection behavior should commonly be used for document or viewer windows. @const NSWindowCollectionBehaviorAuxiliary Marks a window as auxiliary. This collection behavior should commonly be used for About or Settings windows, as well as utility panes. @const NSWindowCollectionBehaviorCanJoinAllApplications Marks a window as able to join all applications, allowing it to join other apps' sets and full screen spaces when eligible. This collection behavior should commonly be used for floating windows and system overlays. @const NSWindowCollectionBehaviorDefault @const NSWindowCollectionBehaviorCanJoinAllSpaces @const NSWindowCollectionBehaviorMoveToActiveSpace @discussion You may specify at most one of \c NSWindowCollectionBehaviorManaged, \c NSWindowCollectionBehaviorTransient, or \c NSWindowCollectionBehaviorStationary.  If neither is specified, the window gets the default behavior determined by its window level. @const NSWindowCollectionBehaviorManaged Participates in spaces, exposé.  Default behavior if `windowLevel == NSNormalWindowLevel`. @const NSWindowCollectionBehaviorTransient Floats in spaces, hidden by exposé.  Default behavior if `windowLevel != NSNormalWindowLevel`. @const NSWindowCollectionBehaviorStationary Unaffected by exposé.  Stays visible and stationary, like desktop window. @discussion You may specify at most one of \c NSWindowCollectionBehaviorParticipatesInCycle or \c NSWindowCollectionBehaviorIgnoresCycle.  If unspecified, the window gets the default behavior determined by its window level. @const NSWindowCollectionBehaviorParticipatesInCycle Default behavior if `windowLevel == NSNormalWindowLevel`. @const NSWindowCollectionBehaviorIgnoresCycle Default behavior if `windowLevel != NSNormalWindowLevel`. @discussion You may specify at most one of \c NSWindowCollectionBehaviorFullScreenPrimary, \c NSWindowCollectionBehaviorFullScreenAuxiliary, or \c NSWindowCollectionBehaviorFullScreenNone. @const NSWindowCollectionBehaviorFullScreenPrimary The frontmost window with this collection behavior will be the fullscreen window. @const NSWindowCollectionBehaviorFullScreenAuxiliary Windows with this collection behavior can be shown with the fullscreen window. @const NSWindowCollectionBehaviorFullScreenNone The window can not be made fullscreen when this bit is set. @discussion You may specify at most one of \c NSWindowCollectionBehaviorFullScreenAllowsTiling or \c NSWindowCollectionBehaviorFullScreenDisallowsTiling, or an assertion will be raised. The default behavior is to allow any window to participate in full screen tiling, as long as it meets certain requirements, such as being resizable and not a panel or sheet. Windows which are not full screen capable can still become a secondary tile in full screen. A window can explicitly allow itself to be placed into a full screen tile by including \c NSWindowCollectionBehaviorFullScreenAllowsTiling. Even if a window allows itself to be placed in a tile, it still may not be put in the tile if its \c minFullScreenContentSize is too large to fit. A window can explicitly disallow itself from being placed in a full screen tile by including \c NSWindowCollectionBehaviorFullScreenDisallowsTiling. This is useful for non-full screen capable windows to explicitly prevent themselves from being tiled. It can also be used by a full screen window to prevent any other windows from being placed in its full screen tile. @const NSWindowCollectionBehaviorFullScreenAllowsTiling This window can be a full screen tile window. It does not have to have \c NSWindowCollectionBehaviorFullScreenPrimary set. @const NSWindowCollectionBehaviorFullScreenDisallowsTiling This window can NOT be made a full screen tile window; it still may be allowed to be a regular \c NSWindowCollectionBehaviorFullScreenPrimary window.
+// Window collection behaviors related to Mission Control, Spaces, and Stage Manager.
 type NSWindowCollectionBehavior uint64
 
 const (
+	// The window appears in only one space at a time.
 	NSWindowCollectionBehaviorDefault                   NSWindowCollectionBehavior = 0
 	NSWindowCollectionBehaviorCanJoinAllSpaces          NSWindowCollectionBehavior = 1
 	NSWindowCollectionBehaviorMoveToActiveSpace         NSWindowCollectionBehavior = 2
@@ -8141,6 +8592,7 @@ func (e NSWindowCollectionBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A type that represents the depth, or amount of memory, for a single pixel in a window or screen.
 type NSWindowDepth int64
 
 const (
@@ -8162,6 +8614,7 @@ func (e NSWindowDepth) String() string {
 	}
 }
 
+// This constant indicates a window ordering.
 type NSWindowListOptions int64
 
 const (
@@ -8180,7 +8633,7 @@ func (e NSWindowListOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @typedef NSWindowNumberListOptions Options used in `+windowNumbersWithOptions:`.  If no options are specified, the returned list contains window numbers for visible windows on the active space belonging to the calling application. @const NSWindowNumberListAllApplications @const NSWindowNumberListAllSpaces
+// Options to use when retrieving window numbers from the system.
 type NSWindowNumberListOptions uint64
 
 const (
@@ -8202,7 +8655,7 @@ func (e NSWindowNumberListOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @typedef NSWindowOcclusionState @const NSWindowOcclusionStateVisible If set, at least part of the window is visible. If not set, the entire window is occluded. Windows with non-rectangular shapes may be completely occluded on screen but still count as visible, if their bounding box falls into a visible region. Windows that are completely transparent may also still count as visible.
+// Specifies whether the window is occluded.
 type NSWindowOcclusionState uint64
 
 const (
@@ -8220,6 +8673,7 @@ func (e NSWindowOcclusionState) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that let you specify how a window is ordered relative to another window.
 type NSWindowOrderingMode int64
 
 const (
@@ -8241,7 +8695,7 @@ func (e NSWindowOrderingMode) String() string {
 	}
 }
 
-// @typedef NSWindowSharingType @const NSWindowSharingNone          Window contents may not be read by another process. @const NSWindowSharingReadOnly   Window contents may be read by another process.
+// Constants that represent the access levels other processes can have to a window’s content.
 type NSWindowSharingType uint64
 
 const (
@@ -8260,7 +8714,7 @@ func (e NSWindowSharingType) String() string {
 	}
 }
 
-// @typedef NSWindowStyleMask @const NSWindowStyleMaskBorderless @const NSWindowStyleMaskTitled @const NSWindowStyleMaskClosable @const NSWindowStyleMaskMiniaturizable @const NSWindowStyleMaskResizable @const NSWindowStyleMaskTexturedBackground  Textured window style is deprecated and should no longer be used. Specifies a window with textured background. Textured windows generally don't draw a top border line under the titlebar/toolbar. To get that line, use the \c NSUnifiedTitleAndToolbarWindowMask mask. @const NSWindowStyleMaskUnifiedTitleAndToolbar  Specifies a window whose titlebar and toolbar have a unified look - that is, a continuous background. Under the titlebar and toolbar a horizontal separator line will appear. @const NSWindowStyleMaskFullScreen  When present, the window will appear full screen. This mask is automatically toggled when \c -toggleFullScreen: is called. @const NSWindowStyleMaskFullSizeContentView If set, the \c contentView will consume the full size of the window; it can be combined with other window style masks, but is only respected for windows with a titlebar. Utilizing this mask opts-in to layer-backing. Utilize the \c contentLayoutRect or auto-layout \c contentLayoutGuide to layout views underneath the titlebar/toolbar area. @const NSWindowStyleMaskUtilityWindow Only applicable for \c NSPanel (or a subclass thereof). @const NSWindowStyleMaskDocModalWindow Only applicable for \c NSPanel (or a subclass thereof). @const NSWindowStyleMaskNonactivatingPanel  Specifies that a panel that does not activate the owning application. Only applicable for \c NSPanel (or a subclass thereof). @const NSWindowStyleMaskHUDWindow Specifies a heads up display panel.  Only applicable for \c NSPanel (or a subclass thereof).
+// Constants that specify the style of a window, and that you can combine with the C bitwise OR operator.
 type NSWindowStyleMask uint64
 
 const (
@@ -8323,7 +8777,7 @@ func (e NSWindowStyleMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @typedef NSWindowTabbingMode @const NSWindowTabbingModeAutomatic The system automatically prefers to tab this window when appropriate. @const NSWindowTabbingModePreferred The window explicitly should prefer to tab when shown. @const NSWindowTabbingModeDisallowed The window explicitly should not prefer to tab when shown.
+// The preferred tabbing behavior of a window.
 type NSWindowTabbingMode int64
 
 const (
@@ -8345,7 +8799,7 @@ func (e NSWindowTabbingMode) String() string {
 	}
 }
 
-// @typedef NSWindowTitleVisibility @const NSWindowTitleVisible  The default mode has a normal window title and titlebar buttons. @const NSWindowTitleHidden The always hidden mode hides the title and moves the toolbar up into the area previously occupied by the title.
+// Specifies the appearance of the window’s title bar area.
 type NSWindowTitleVisibility int64
 
 const (
@@ -8364,7 +8818,7 @@ func (e NSWindowTitleVisibility) String() string {
 	}
 }
 
-// @typedef NSWindowToolbarStyle @const NSWindowToolbarStyleAutomatic The default value. The style will be determined by the window's given configuration. @const NSWindowToolbarStyleExpanded The toolbar will appear below the window title. @const NSWindowToolbarStylePreference For Settings windows only. The toolbar will appear below the window title and the items in the toolbar will attempt to have equal widths when possible. @const NSWindowToolbarStyleUnified The window title will appear inline with the toolbar when visible. @const NSWindowToolbarStyleUnifiedCompact Same as \c NSWindowToolbarStyleUnified, but with reduced margins in the toolbar allowing more focus to be on the contents of the window.
+// Styles that determine the appearance and location of the toolbar in relation to the title bar.
 type NSWindowToolbarStyle int64
 
 const (
@@ -8392,6 +8846,7 @@ func (e NSWindowToolbarStyle) String() string {
 	}
 }
 
+// A value that indicates the user’s preference for window tabbing.
 type NSWindowUserTabbingPreference int64
 
 const (
@@ -8413,6 +8868,7 @@ func (e NSWindowUserTabbingPreference) String() string {
 	}
 }
 
+// The types of privileged file operations that can be authorized by the user.
 type NSWorkspaceAuthorizationType int64
 
 const (
@@ -8434,6 +8890,7 @@ func (e NSWorkspaceAuthorizationType) String() string {
 	}
 }
 
+// Constants that describe options for creating icons.
 type NSWorkspaceIconCreationOptions uint64
 
 const (
@@ -8455,6 +8912,7 @@ func (e NSWorkspaceIconCreationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants specifying how you want to launch an app
 // Deprecated: since macOS 10.11.
 type NSWorkspaceLaunchOptions uint64
 
@@ -8517,11 +8975,15 @@ func (e NSWorkspaceLaunchOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the writing direction.
 type NSWritingDirection int64
 
 const (
-	NSWritingDirectionNatural     NSWritingDirection = -1
+	// The writing direction of the current script that the system determines using the Unicode Bidi Algorithm rules P2 and P3.
+	NSWritingDirectionNatural NSWritingDirection = -1
+	// The writing direction is left to right.
 	NSWritingDirectionLeftToRight NSWritingDirection = 0
+	// The writing direction is right to left.
 	NSWritingDirectionRightToLeft NSWritingDirection = 1
 )
 
@@ -8538,11 +9000,14 @@ func (e NSWritingDirection) String() string {
 	}
 }
 
+// Constants for the writing direction attribute key.
 type NSWritingDirectionFormatType int64
 
 const (
+	// Text is embedded in text with another writing direction. For example, an English quotation in the middle of an Arabic sentence could be marked as being embedded left-to-right text.
 	NSWritingDirectionEmbedding NSWritingDirectionFormatType = 0
-	NSWritingDirectionOverride  NSWritingDirectionFormatType = 2
+	// Enables character types with inherent directionality to be overridden when required for special cases, such as for part numbers made of mixed English, digits, and Hebrew letters to be written from right to left.
+	NSWritingDirectionOverride NSWritingDirectionFormatType = 2
 )
 
 func (e NSWritingDirectionFormatType) String() string {
@@ -8556,13 +9021,18 @@ func (e NSWritingDirectionFormatType) String() string {
 	}
 }
 
+// Constants that specify the Writing Tools experience for the underlying view.
 type NSWritingToolsBehavior int64
 
 const (
-	NSWritingToolsBehaviorNone     NSWritingToolsBehavior = -1
-	NSWritingToolsBehaviorDefault  NSWritingToolsBehavior = 0
+	// An option to prevent Writing Tools from modifying the text in the view.
+	NSWritingToolsBehaviorNone NSWritingToolsBehavior = -1
+	// An option to let the system determine the best way to enable Writing Tools for the view.
+	NSWritingToolsBehaviorDefault NSWritingToolsBehavior = 0
+	// An option to provide the complete Writing Tools experience for the text view.
 	NSWritingToolsBehaviorComplete NSWritingToolsBehavior = 1
-	NSWritingToolsBehaviorLimited  NSWritingToolsBehavior = 2
+	// An option to provide a limited, overlay-panel experience for the text view.
+	NSWritingToolsBehaviorLimited NSWritingToolsBehavior = 2
 )
 
 func (e NSWritingToolsBehavior) String() string {
@@ -8709,13 +9179,18 @@ func (e NSWritingToolsCoordinatorTextUpdateReason) String() string {
 	}
 }
 
+// Constants to specify what type of content to allow in Writing Tools suggestions or rewrites.
 type NSWritingToolsResultOptions uint64
 
 const (
-	NSWritingToolsResultDefault            NSWritingToolsResultOptions = 0
-	NSWritingToolsResultPlainText          NSWritingToolsResultOptions = 1
-	NSWritingToolsResultRichText           NSWritingToolsResultOptions = 2
-	NSWritingToolsResultList               NSWritingToolsResultOptions = 4
+	NSWritingToolsResultDefault NSWritingToolsResultOptions = 0
+	// An option to allow only plain text without any attributes in the returned text.
+	NSWritingToolsResultPlainText NSWritingToolsResultOptions = 1
+	// An option to include style attributes consistent with the RTF format in the returned text.
+	NSWritingToolsResultRichText NSWritingToolsResultOptions = 2
+	// An option to allow list-style formatting in the returned text.
+	NSWritingToolsResultList NSWritingToolsResultOptions = 4
+	// An option to allow tabular layout attributes in the returned text.
 	NSWritingToolsResultTable              NSWritingToolsResultOptions = 8
 	NSWritingToolsResultPresentationIntent NSWritingToolsResultOptions = 16
 )

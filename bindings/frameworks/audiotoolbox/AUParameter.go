@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a single audio unit parameter.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auparameter
 type AUParameter struct {
 	AUParameterNode
@@ -46,12 +48,12 @@ func AUParameterFromID(id objc.ID) *AUParameter {
 	return o
 }
 
-// @brief	Set the parameter's value, avoiding redundant notifications to the originator. @discussion Bridged to the v2 function AudioUnitSetParameter.
+// Sets the parameter’s value, avoiding redundant notifications to the originator.
 func (o *AUParameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
 	o.Ptr().Send(_aUParameterSelSetValueOriginator, value, originator)
 }
 
-// @brief	Convenience for setValue:originator:atHostTime:eventType: @discussion Bridged to the v2 function AudioUnitSetParameter.
+// Sets the parameter’s value, preserving the host time of the gesture that initiated the change.
 func (o *AUParameter) SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64) {
 	o.Ptr().Send(_aUParameterSelSetValueOriginatorAtHostTime, value, originator, hostTime)
 }
@@ -61,7 +63,7 @@ func (o *AUParameter) SetValueOriginatorAtHostTimeEventType(value float32, origi
 	o.Ptr().Send(_aUParameterSelSetValueOriginatorAtHostTimeEventType, value, originator, hostTime, eventType)
 }
 
-// @brief Get a textual representation of a value for the parameter. Use value==nil to use the current value. Bridged to the v2 property kAudioUnitProperty_ParameterStringFromValue. @discussion This is currently only supported for parameters whose flags include kAudioUnitParameterFlag_ValuesHaveStrings.
+// Gets the string representation of a parameter value.
 func (o *AUParameter) StringFromValue(value *float32) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterSelStringFromValue, value)
 	if _ret != 0 {
@@ -70,7 +72,7 @@ func (o *AUParameter) StringFromValue(value *float32) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @brief Convert a textual representation of a value to a numeric one. @discussion This is currently only supported for parameters whose flags include kAudioUnitParameterFlag_ValuesHaveStrings.
+// Converts a string into a parameter value.
 func (o *AUParameter) ValueFromString(string_ *foundation.NSString) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aUParameterSelValueFromString, string_.Ptr())
 	return _ret
@@ -117,14 +119,20 @@ func (o *AUParameter) Address() uint64 {
 
 // For parameters with kAudioUnitParameterUnit_Indexed, localized strings corresponding to the values.
 func (o *AUParameter) ValueStrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aUParameterSelValueStrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterSelValueStrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief		Parameters whose values may change as a side effect of this parameter's value changing. @discussion Each array value is an NSNumber representing AUParameterAddress.
 func (o *AUParameter) DependentParameters() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aUParameterSelDependentParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterSelDependentParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The parameter's current value.

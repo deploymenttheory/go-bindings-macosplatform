@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes an arrival or departure gate for a flight.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inairportgate
 type INAirportGate struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func INAirportGateFromID(id objc.ID) *INAirportGate {
 	return o
 }
 
+// Creates a new gate object for a flight.
 func (o *INAirportGate) InitWithAirportTerminalGate(airport *INAirport, terminal *foundation.NSString, gate *foundation.NSString) *INAirportGate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportGateSelInitWithAirportTerminalGate, airport.Ptr(), terminal.Ptr(), gate.Ptr())
 	if _ret != 0 {

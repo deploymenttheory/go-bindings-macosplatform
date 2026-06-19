@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents a detected contour in an image.
+//
 // Contour wraps [raw.VNContour] with a fluent Go API.
 type Contour struct {
 	inner *raw.VNContour
@@ -38,7 +40,7 @@ func NewContour() *Contour {
 	return &Contour{inner: raw.VNContourFromID(_id)}
 }
 
-// @brief Returns a VNContour object that is a child of this VNContour at the specified index. @param childContourIndex The index into the childContours array. @param error The error returned if the child contour cannot be provided. @return The VNContour object at the specified index path, or nil of a failure occurs.
+// Retrieves the child contour object at the specified index.
 //
 // ChildContourAtIndexError calls the underlying ChildContourAtIndexError.
 func (x *Contour) ChildContourAtIndexError(childContourIndex uint) (*Contour, error) {
@@ -52,7 +54,7 @@ func (x *Contour) ChildContourAtIndexError(childContourIndex uint) (*Contour, er
 	return &Contour{inner: _r}, nil
 }
 
-// @brief Simplifies the contour's collection of points into a polygon using the Ramer Douglas Peucker Algorithm. @discussion See <https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm> @param epsilon Points that have a perpendicular distance to the line segment they are on which are greater than epsilon are kept, others are eliminated. @param error The error returned if a simplified contour cannot be created. @return A new VNContour object with a simplified polygon consisting of a subset of the points that defined the original VNContour.
+// Simplifies the contour to a polygon using a Ramer-Douglas-Peucker algorithm.
 //
 // PolygonApproximationWithEpsilonError calls the underlying PolygonApproximationWithEpsilonError.
 func (x *Contour) PolygonApproximationWithEpsilonError(epsilon float32) (*Contour, error) {

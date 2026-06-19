@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that represents a group of contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cngroup
 type CNGroup struct {
 	foundation.NSObject
@@ -51,14 +53,16 @@ func (o *CNGroup) Name() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns a predicate to find groups with the specified identifiers.
 func CNGroupPredicateForGroupsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForGroupsWithIdentifiers, identifiers)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForGroupsWithIdentifiers, identifiers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns a predicate to find subgroups in the specified parent group.
 func CNGroupPredicateForSubgroupsInGroupWithIdentifier(parentGroupIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForSubgroupsInGroupWithIdentifier, parentGroupIdentifier.Ptr())
 	if _ret != 0 {
@@ -67,6 +71,7 @@ func CNGroupPredicateForSubgroupsInGroupWithIdentifier(parentGroupIdentifier *fo
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns a predicate to find groups in the specified container.
 func CNGroupPredicateForGroupsInContainerWithIdentifier(containerIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNGroup), _cNGroupSelPredicateForGroupsInContainerWithIdentifier, containerIdentifier.Ptr())
 	if _ret != 0 {

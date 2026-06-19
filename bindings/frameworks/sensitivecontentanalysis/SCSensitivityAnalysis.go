@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that indicates whether sensitive content is present and includes intervention guidance.
+//
 // Apple documentation: https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis
 type SCSensitivityAnalysis struct {
 	foundation.NSObject

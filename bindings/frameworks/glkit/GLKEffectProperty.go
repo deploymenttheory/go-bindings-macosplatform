@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for configuration information used in GLKit rendering effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkeffectproperty
 type GLKEffectProperty struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A hearing sensitivity reading associated with a hearing test.
+//
 // AudiogramSensitivityPoint wraps [raw.HKAudiogramSensitivityPoint] with a fluent Go API.
 type AudiogramSensitivityPoint struct {
 	inner *raw.HKAudiogramSensitivityPoint

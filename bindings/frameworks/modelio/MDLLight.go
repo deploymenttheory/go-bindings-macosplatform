@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for objects that describe light sources in a scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdllight
 type MDLLight struct {
 	MDLObject
@@ -37,12 +39,13 @@ func MDLLightFromID(id objc.ID) *MDLLight {
 	return o
 }
 
-// A utility function that returns the irradiance from the light at a given point. @discussion point is world space @property colorSpace name, as defined in CGColorSpace.h. Default is kCGColorSpaceSRGB
+// Returns the radiance of the light as received at a specific point in the same scene.
 func (o *MDLLight) IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLLightSelIrradianceAtPoint, point)
 	return _ret
 }
 
+// Returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
 func (o *MDLLight) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLLightSelIrradianceAtPointColorSpace, point, colorSpace)
 	return _ret

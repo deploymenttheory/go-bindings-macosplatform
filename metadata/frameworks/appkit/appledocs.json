@@ -19038,8 +19038,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsevent/magnification"
       },
       "modifierFlags": {
-        "doc": "An integer bit field that indicates the pressed modifier keys.",
-        "url": "https://developer.apple.com/documentation/appkit/nsevent/modifierflags-swift.property"
+        "doc": "The currently pressed modifier keys.",
+        "url": "https://developer.apple.com/documentation/appkit/nsevent/modifierflags-swift.type.property"
       },
       "momentumPhase": {
         "doc": "The momentum phase for a scroll or flick gesture.",
@@ -19964,8 +19964,8 @@
     },
     "NSImageView": {
       "addSymbolEffect(_:options:animated:)": {
-        "doc": "Adds an indefinite symbol effect to the image view with the specified options and animation.",
-        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-4kete"
+        "doc": "Adds a discrete symbol effect to the image view with the specified options and animation.",
+        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-4p7p7"
       },
       "allowsCutCopyPaste": {
         "doc": "A Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.",

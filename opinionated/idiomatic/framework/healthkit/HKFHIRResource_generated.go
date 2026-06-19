@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object containing Fast Healthcare Interoperability Resources (FHIR) data.
+//
 // FHIRResource wraps [raw.HKFHIRResource] with a fluent Go API.
 type FHIRResource struct {
 	inner *raw.HKFHIRResource

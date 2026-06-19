@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A cloud-synced directory for game-save data. To get an instance of the directory, call “openDirectoryForContainerIdentifier:“, which returns the directory for the iCloud container associated with the specified identifier. Calling this method starts syncing the directory in the background on the specified container. When the game needs to access the contents of the directory, show a UI while the directory fully syncs using the “finishSyncing:completionHandler:“ method. If you're showing your own UI, call the “finishSyncingWithCompletionHandler:“ method to wait for the directory to finish syncing. After the directory is ready to use, syncing pauses until you close the directory object or the object is deallocated. To resume syncing during the game, close and re-open the directory by calling “close“ and then “openDirectoryForContainerIdentifier:“.
+// A cloud-synced directory for game-save data.
 //
 // SyncedDirectory wraps [raw.GSSyncedDirectory] with a fluent Go API.
 type SyncedDirectory struct {
@@ -45,21 +45,21 @@ func (x *SyncedDirectory) Close() {
 	x.inner.Close()
 }
 
-// Triggers an upload of the directory for any changes that were pending. Calls the completion block with `YES` if there were pending uploads; otherwise with `NO`.
+// Triggers an upload of the directory for any changes that were pending.
 //
 // TriggerPendingUploadWithCompletionHandler calls the underlying TriggerPendingUploadWithCompletionHandler.
 func (x *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
 	x.inner.TriggerPendingUploadWithCompletionHandler(completion)
 }
 
-// Indicates that you resolved a conflict. - Parameter version: The version to use. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call this method, passing that version. Call this method only when the directory is in the “GSSyncState/GSSyncStateConflicted“ state.
+// Indicates that you resolved a conflict.
 //
 // ResolveConflictsWithVersion calls the underlying ResolveConflictsWithVersion.
 func (x *SyncedDirectory) ResolveConflictsWithVersion(version *raw.GSSyncedDirectoryVersion) {
 	x.inner.ResolveConflictsWithVersion(version)
 }
 
-// Waits for the directory sync to complete, without showing any user interface. Use this method to wait if your app displays its own syncing UI.
+// Waits for the directory sync to complete, without showing any user interface.
 //
 // FinishSyncing blocks until the operation completes or ctx is cancelled.
 func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {

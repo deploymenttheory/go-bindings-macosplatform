@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that makes the layers of a symbol-based image disappear separately or as a whole.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymboldisappeareffect
 type NSSymbolDisappearEffect struct {
 	NSSymbolEffect
@@ -33,7 +35,7 @@ func NSSymbolDisappearEffectFromID(id objc.ID) *NSSymbolDisappearEffect {
 	return o
 }
 
-// The default disappear effect, determined by the system.
+// An animation that makes the layers of a symbol-based image disappear separately or as a whole.
 func NSSymbolDisappearEffectEffect() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDisappearEffect), _nSSymbolDisappearEffectSelEffect)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func NSSymbolDisappearEffectEffect() *NSSymbolDisappearEffect {
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
-// Convenience initializer for a disappear effect that disappears scaling up.
+// An effect that scales the symbol up as it disappears.
 func NSSymbolDisappearEffectDisappearUpEffect() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDisappearEffect), _nSSymbolDisappearEffectSelDisappearUpEffect)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func NSSymbolDisappearEffectDisappearUpEffect() *NSSymbolDisappearEffect {
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
-// Convenience initializer for a disappear effect that disappears scaling down.
+// An effect that scales the symbol down as it disappears.
 func NSSymbolDisappearEffectDisappearDownEffect() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDisappearEffect), _nSSymbolDisappearEffectSelDisappearDownEffect)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func NSSymbolDisappearEffectDisappearDownEffect() *NSSymbolDisappearEffect {
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that makes each layer disappear separately.
 func (o *NSSymbolDisappearEffect) EffectWithByLayer() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDisappearEffectSelEffectWithByLayer)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *NSSymbolDisappearEffect) EffectWithByLayer() *NSSymbolDisappearEffect {
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that makes all layers disappear simultaneously.
 func (o *NSSymbolDisappearEffect) EffectWithWholeSymbol() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDisappearEffectSelEffectWithWholeSymbol)
 	if _ret != 0 {

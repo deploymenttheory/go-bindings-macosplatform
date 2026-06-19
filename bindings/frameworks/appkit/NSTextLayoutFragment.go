@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents the layout fragment typically corresponding to a rendering surface, such as a layer or view subclass.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextlayoutfragment
 type NSTextLayoutFragment struct {
 	foundation.NSObject
@@ -53,6 +55,7 @@ func NSTextLayoutFragmentFromID(id objc.ID) *NSTextLayoutFragment {
 	return o
 }
 
+// Create a new layout fragment using the provided text element and range.
 func (o *NSTextLayoutFragment) InitWithTextElementRange(textElement *NSTextElement, rangeInElement *NSTextRange) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelInitWithTextElementRange, textElement.Ptr(), rangeInElement.Ptr())
 	if _ret != 0 {
@@ -61,6 +64,7 @@ func (o *NSTextLayoutFragment) InitWithTextElementRange(textElement *NSTextEleme
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
+// Creates a new layout fragment with the coder you provide.
 func (o *NSTextLayoutFragment) InitWithCoder(coder *foundation.NSCoder) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -69,6 +73,7 @@ func (o *NSTextLayoutFragment) InitWithCoder(coder *foundation.NSCoder) *NSTextL
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
+// Returns the text line fragment for the vertical offset you provide, or the closest text line fragment beyond the vertical offset.
 func (o *NSTextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLineFragmentForVerticalOffsetRequiresExactMatch, verticalOffset, requiresExactMatch)
 	if _ret != 0 {
@@ -77,6 +82,7 @@ func (o *NSTextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMat
 	return NSTextLineFragmentFromID(_ret)
 }
 
+// Returns a text line fragment from a specific text location in the document.
 func (o *NSTextLayoutFragment) TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation NSTextLocation, isUpstreamAffinity bool) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLineFragmentForTextLocationIsUpstreamAffinity, textLocation, isUpstreamAffinity)
 	if _ret != 0 {
@@ -85,14 +91,17 @@ func (o *NSTextLayoutFragment) TextLineFragmentForTextLocationIsUpstreamAffinity
 	return NSTextLineFragmentFromID(_ret)
 }
 
+// Invalidates any layout information associated with the text layout fragment.
 func (o *NSTextLayoutFragment) InvalidateLayout() {
 	o.Ptr().Send(_nSTextLayoutFragmentSelInvalidateLayout)
 }
 
+// Renders the visual representation of this element in the specified graphics context.
 func (o *NSTextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSTextLayoutFragmentSelDrawAtPointInContext, point, context_)
 }
 
+// Returns the frame in the text layout fragment coordinate system for the attachment at the location you specify.
 func (o *NSTextLayoutFragment) FrameForTextAttachmentAtLocation(location NSTextLocation) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextLayoutFragmentSelFrameForTextAttachmentAtLocation, location)
 	return _ret

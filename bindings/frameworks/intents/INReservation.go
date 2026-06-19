@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inreservation
 type INReservation struct {
 	foundation.NSObject

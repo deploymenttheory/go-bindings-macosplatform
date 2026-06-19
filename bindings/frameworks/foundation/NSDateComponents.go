@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies a date or time in terms of units (such as year, month, day, hour, and minute) to be evaluated in a calendar system and time zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdatecomponents
 // Deprecated: since macOS 10.10.
 type NSDateComponents struct {
@@ -74,26 +76,31 @@ func NSDateComponentsFromID(id objc.ID) *NSDateComponents {
 	return o
 }
 
+// Returns the number of weeks.
 // Deprecated: Use -weekOfMonth or -weekOfYear, depending on which you mean
 func (o *NSDateComponents) Week() int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelWeek)
 	return _ret
 }
 
+// Sets the number of weeks.
 // Deprecated: Use -setWeekOfMonth: or -setWeekOfYear:, depending on which you mean
 func (o *NSDateComponents) SetWeek(v int) {
 	o.Ptr().Send(_nSDateComponentsSelSetWeek, v)
 }
 
+// Sets a value for a given calendar unit.
 func (o *NSDateComponents) SetValueForComponent(value int, unit NSCalendarUnit) {
 	o.Ptr().Send(_nSDateComponentsSelSetValueForComponent, value, unit)
 }
 
+// Returns the value for a given calendar unit.
 func (o *NSDateComponents) ValueForComponent(unit NSCalendarUnit) int {
 	_ret := objc.Send[int](o.Ptr(), _nSDateComponentsSelValueForComponent, unit)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the current combination of properties represents a date which exists in the specified calendar.
 func (o *NSDateComponents) IsValidDateInCalendar(calendar *NSCalendar) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsSelIsValidDateInCalendar, calendar.Ptr())
 	return _ret

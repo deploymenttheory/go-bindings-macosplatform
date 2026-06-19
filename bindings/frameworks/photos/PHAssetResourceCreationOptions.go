@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options affecting the creation of a new Photos asset from underlying resources.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetresourcecreationoptions
 type PHAssetResourceCreationOptions struct {
 	foundation.NSObject

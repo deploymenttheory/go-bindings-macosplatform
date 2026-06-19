@@ -35,7 +35,7 @@ func NSSliderAccessoryBehaviorFromID(id objc.ID) *NSSliderAccessoryBehavior {
 	return o
 }
 
-// The action is sent to the target on interaction. @param target An optional `NSSliderAccessory`.
+// The action is sent to the target on interaction.
 func NSSliderAccessoryBehaviorBehaviorWithTargetAction(target objc.ID, action objc.SEL) *NSSliderAccessoryBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessoryBehavior), _nSSliderAccessoryBehaviorSelBehaviorWithTargetAction, target, action)
 	if _ret != 0 {
@@ -44,7 +44,7 @@ func NSSliderAccessoryBehaviorBehaviorWithTargetAction(target objc.ID, action ob
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
 
-// The handler block is invoked on interaction. This variant is not codable and will assert in `-encodeWithCoder:`.
+// The handler block is invoked on interaction.
 func NSSliderAccessoryBehaviorBehaviorWithHandler(handler func(*NSSliderAccessory)) *NSSliderAccessoryBehavior {
 	var __block_handler objc.Block
 	if handler != nil {

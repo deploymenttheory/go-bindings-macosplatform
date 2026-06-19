@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that implements the Quick Look preview panel to display a preview of a list of items.
+//
 // PreviewPanel wraps [raw.QLPreviewPanel] with a fluent Go API.
 type PreviewPanel struct {
 	inner *raw.QLPreviewPanel
@@ -45,7 +47,7 @@ func (x *PreviewPanel) WithDataSource(dataSource raw.QLPreviewPanelDataSource) *
 	return x
 }
 
-// The index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
+// The index of the current preview item.
 //
 // WithCurrentPreviewItemIndex sets the currentPreviewItemIndex property and returns the receiver for chaining.
 func (x *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel {
@@ -53,7 +55,7 @@ func (x *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int) 
 	return x
 }
 
-// The preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
+// The preview panel’s display state.
 //
 // WithDisplayState sets the displayState property and returns the receiver for chaining.
 func (x *PreviewPanel) WithDisplayState(displayState objc.ID) *PreviewPanel {
@@ -61,14 +63,14 @@ func (x *PreviewPanel) WithDisplayState(displayState objc.ID) *PreviewPanel {
 	return x
 }
 
-// Asks the preview panel to update its current controller. The preview panel automatically updates its controller (by searching the responder chain) whenever the main or key window changes. You should only invoke this method if the responder chain changes without explicit notice.
+// Asks the preview panel to update its current controller.
 //
 // UpdateController calls the underlying UpdateController.
 func (x *PreviewPanel) UpdateController() {
 	x.inner.UpdateController()
 }
 
-// Asks the preview panel to reload its data from its data source. This method doesn’t refresh the visible item if it hasn’t changed.
+// Asks the preview panel to reload its data from its data source.
 //
 // ReloadData calls the underlying ReloadData.
 func (x *PreviewPanel) ReloadData() {
@@ -82,14 +84,14 @@ func (x *PreviewPanel) RefreshCurrentPreviewItem() {
 	x.inner.RefreshCurrentPreviewItem()
 }
 
-// Instructs the panel to enter full screen mode. If the panel isn’t onscreen, the panel goes directly to full screen mode. The panel chooses the appropriate screen depending on where the panel is or, if entering fullscreen directly, where the panel zooms from. - Parameters: - screen: This parameter isn’t currently used—pass `nil`. - options: This parameter isn’t currently used—pass `nil`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the panel was able to enter full screen mode; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>.
+// Instructs the panel to enter full screen mode.
 //
 // EnterFullScreenModeWithOptions calls the underlying EnterFullScreenModeWithOptions.
 func (x *PreviewPanel) EnterFullScreenModeWithOptions(screen *appkit.NSScreen, options *foundation.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.EnterFullScreenModeWithOptions(screen, options)
 }
 
-// Instructs the panel to exit full screen mode. - Parameters: - options: This parameter isn’t used — pass `nil`.
+// Instructs the panel to exit full screen mode.
 //
 // ExitFullScreenModeWithOptions calls the underlying ExitFullScreenModeWithOptions.
 func (x *PreviewPanel) ExitFullScreenModeWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) {

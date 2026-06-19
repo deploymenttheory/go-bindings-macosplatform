@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes an airport.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inairport
 type INAirport struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func INAirportFromID(id objc.ID) *INAirport {
 	return o
 }
 
+// Creates a new airport object with the specified contents and attributes.
 func (o *INAirport) InitWithNameIataCodeIcaoCode(name *foundation.NSString, iataCode *foundation.NSString, icaoCode *foundation.NSString) *INAirport {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportSelInitWithNameIataCodeIcaoCode, name.Ptr(), iataCode.Ptr(), icaoCode.Ptr())
 	if _ret != 0 {

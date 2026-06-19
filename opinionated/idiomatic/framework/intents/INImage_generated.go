@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Image data inside an Intents extension or Intents UI extension.
+//
 // Image wraps [raw.INImage] with a fluent Go API.
 type Image struct {
 	inner *raw.INImage

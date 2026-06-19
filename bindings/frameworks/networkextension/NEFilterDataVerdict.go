@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result from a filter data provder for subsequent chunks of data on a flow.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterdataverdict
 type NEFilterDataVerdict struct {
 	NEFilterVerdict
@@ -34,7 +36,7 @@ func NEFilterDataVerdictFromID(id objc.ID) *NEFilterDataVerdict {
 	return o
 }
 
-// @method allowVerdict @discussion This class method returns a verdict indicating that the flow should be allowed. @return The NEFilterDataVerdict object.
+// Creates a verdict that tells the system to pass the current chunk of network data and all subsequent data for the current flow to its final destination.
 func NEFilterDataVerdictAllowVerdict() *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelAllowVerdict)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func NEFilterDataVerdictAllowVerdict() *NEFilterDataVerdict {
 	return NEFilterDataVerdictFromID(_ret)
 }
 
-// @method dropVerdict @discussion This class method returns a verdict indicating that the flow should be dropped. @return The NEFilterDataVerdict object.
+// Creates a verdict that tells the system to drop the current chunk of network data and all subsequent data for the current flow.
 func NEFilterDataVerdictDropVerdict() *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelDropVerdict)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func NEFilterDataVerdictDropVerdict() *NEFilterDataVerdict {
 	return NEFilterDataVerdictFromID(_ret)
 }
 
-// @method dataVerdictWithPassBytes:peekBytes: @discussion This class method returns a data verdict indicating that the filter is passing a given number of bytes through the filter and needs to see a given number of bytes after the bytes that are passed. @param passBytes The number of bytes to pass through the filter. @param peekBytes The number of bytes after the end of the bytes passed that the filter wants to see in the next call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:] or -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:]. @return The data flow verdict.
+// Creates a verdict that tells the system to pass a chunk of network data to its final destination, and specifies the next chunk of data to provide.
 func NEFilterDataVerdictDataVerdictWithPassBytesPeekBytes(passBytes uint, peekBytes uint) *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelDataVerdictWithPassBytesPeekBytes, passBytes, peekBytes)
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func NEFilterDataVerdictDataVerdictWithPassBytesPeekBytes(passBytes uint, peekBy
 	return NEFilterDataVerdictFromID(_ret)
 }
 
-// @method pauseVerdict @discussion This class method returns a verdict indicating that none of the data provider's handler callbacks shall be called for the flow until after the flow is resumed by a call to -[NEFilterDataProvider resumeFlow:withVerdict:]. TCP flows may be paused indefinitely. UDP flows will be dropped if not resumed within 10 seconds of being paused. It is invalid to pause a flow that is already paused. @return The NEFilterDataVerdict object.
+// Creates a verdict that tells the system to pause the flow.
 func NEFilterDataVerdictPauseVerdict() *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelPauseVerdict)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the state of the keychain for a particular token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincontents
 type TKTokenKeychainContents struct {
 	foundation.NSObject
@@ -35,12 +37,12 @@ func TKTokenKeychainContentsFromID(id objc.ID) *TKTokenKeychainContents {
 	return o
 }
 
-// @discussion Fills keychain with the set of specified items.  All items belonging to token are first removed from the keychain and then the keychain is populated with new items. @param items New items to be stored into the keychain.
+// Fills the keychain with the specified items.
 func (o *TKTokenKeychainContents) FillWithItems(items *foundation.NSArray[*TKTokenKeychainItem]) {
 	o.Ptr().Send(_tKTokenKeychainContentsSelFillWithItems, items.Ptr())
 }
 
-// @discussion Returns key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
+// Returns the key for a specified object identifier.
 func (o *TKTokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TKTokenKeychainKey, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainContentsSelKeyForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
@@ -53,7 +55,7 @@ func (o *TKTokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TKToke
 	return TKTokenKeychainKeyFromID(_ret), nil
 }
 
-// @discussion Returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
+// Returns the key for a specified object identifier.
 func (o *TKTokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*TKTokenKeychainCertificate, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainContentsSelCertificateForObjectIDError, objectID, unsafe.Pointer(&_nsErr))

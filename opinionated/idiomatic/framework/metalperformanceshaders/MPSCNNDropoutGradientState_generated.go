@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that stores the mask used by dropout and gradient dropout filters.
+//
 // CNNDropoutGradientState wraps [raw.MPSCNNDropoutGradientState] with a fluent Go API.
 type CNNDropoutGradientState struct {
 	inner *raw.MPSCNNDropoutGradientState

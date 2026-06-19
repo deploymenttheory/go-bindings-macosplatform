@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "framework": "SensitiveContentAnalysis",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SCSensitivityAnalysis": {
+      "doc": "An object that indicates whether sensitive content is present and includes intervention guidance.",
+      "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis"
+    },
+    "SCSensitivityAnalyzer": {
+      "doc": "An object that analyzes media for sensitive content.",
+      "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer"
+    },
+    "SCVideoStreamAnalyzer": {
+      "doc": "An object that monitors a stream of video by analyzing frames for sensitive content.",
+      "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer"
+    }
+  },
+  "enums": {
+    "SCSensitivityAnalysisPolicy": {
+      "doc": "Configurations that represent the way the framework checks for sensitive content and how the app responds.",
+      "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysispolicy",
+      "members": {
+        "SCSensitivityAnalysisPolicyDescriptiveInterventions": {
+          "doc": "An indicator that the person requests overt detection of sensitive content.",
+          "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysispolicy/descriptiveinterventions"
+        },
+        "SCSensitivityAnalysisPolicyDisabled": {
+          "doc": "An indicator that the app lacks access to use the framework.",
+          "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysispolicy/disabled"
+        },
+        "SCSensitivityAnalysisPolicySimpleInterventions": {
+          "doc": "An indicator that user preference requests discrete detection of sensitive content.",
+          "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysispolicy/simpleinterventions"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an analysis policy value from the enumeration’s underlying type.",
+          "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysispolicy/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SCSensitivityAnalyzer": {
+      "-analyzeCGImage:completionHandler:": {
+        "doc": "Analyzes an image for sensitive content and runs code on completion.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/analyzeimage(_:completionhandler:)"
+      },
+      "-analyzeImageFile:completionHandler:": {
+        "doc": "Analyzes an image file on disk at a URL and runs code on completion.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/analyzeimage(at:completionhandler:)"
+      },
+      "-analyzeVideoFile:completionHandler:": {
+        "doc": "Analyzes a video file on disk at the given URL and runs the given code on completion.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/analyzevideofile:completionhandler:"
+      },
+      "-init": {
+        "doc": "Creates a sensitivity analyzer.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/init()"
+      }
+    },
+    "SCVideoStreamAnalyzer": {
+      "-analyzePixelBuffer:": {
+        "doc": "Analyzes individual video-stream frames for sensitive content.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/analyze(_:)"
+      },
+      "-beginAnalysisOfCaptureDeviceInput:error:": {
+        "doc": "Analyzes video frames for the given capture device input.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/beginanalysis(of:)-78qm"
+      },
+      "-beginAnalysisOfDecompressionSession:error:": {
+        "doc": "Analyzes video frames for the given decompression session.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/beginanalysis(of:)-9ehkx"
+      },
+      "-continueStream": {
+        "doc": "Indicates that your app is ready to resume video stream analysis.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/continuestream()"
+      },
+      "-endAnalysis": {
+        "doc": "Stops stream analysis.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/endanalysis()"
+      },
+      "-initWithParticipantUUID:streamDirection:error:": {
+        "doc": "Creates a video stream analyzer for the given call participant and stream option.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/init(participantuuid:streamdirection:)"
+      }
+    }
+  },
+  "properties": {
+    "SCSensitivityAnalysis": {
+      "SCSensitiveContentType": {
+        "doc": "A type that identifies a category of sensitive content.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis/contenttype"
+      },
+      "detectedTypes": {
+        "doc": "A property that contains the categories of sensitive content that analysis detects.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis/detectedtypes"
+      },
+      "sensitive": {
+        "doc": "A Boolean value that indicates whether the checked content contains sensitive material.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis/issensitive"
+      },
+      "shouldIndicateSensitivity": {
+        "doc": "Intervention guidance that suggests the app indicate the presence of sensitive content.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis/shouldindicatesensitivity"
+      },
+      "shouldInterruptVideo": {
+        "doc": "Intervention guidance that suggests the app interrupt the video stream.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis/shouldinterruptvideo"
+      },
+      "shouldMuteAudio": {
+        "doc": "Intervention guidance that suggests the app mute the audio of the current video stream.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalysis/shouldmuteaudio"
+      }
+    },
+    "SCSensitivityAnalyzer": {
+      "SCSensitivityAnalyzer.VideoAnalysisHandler": {
+        "doc": "An object that checks if a video contains sensitive content and provides status updates.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/videoanalysishandler"
+      },
+      "analysisPolicy": {
+        "doc": "A property that determines if the app detects nudity and how the app responds.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/analysispolicy"
+      },
+      "videoAnalysis(forFileAt:)": {
+        "doc": "Analyzes a video file on disk at a URL for sensitive content.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scsensitivityanalyzer/videoanalysis(forfileat:)"
+      }
+    },
+    "SCVideoStreamAnalyzer": {
+      "SCVideoStreamAnalyzerStreamDirection": {
+        "doc": "Options for the different types of analyzed video streams.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/streamdirection"
+      },
+      "analysis": {
+        "doc": "The results of the first detected sensitive video frame.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/analysis"
+      },
+      "analysisChangedHandler": {
+        "doc": "A handler that your app provides to react to sensitive content detection.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/analysischangedhandler"
+      },
+      "analysisChanges": {
+        "doc": "A stream your app uses to receive video-stream analysis results.",
+        "url": "https://developer.apple.com/documentation/sensitivecontentanalysis/scvideostreamanalyzer/analysischanges"
+      }
+    }
+  }
+}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that finds capture devices that match specific search criteria.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevicediscoverysession
 type AVCaptureDeviceDiscoverySession struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func AVCaptureDeviceDiscoverySessionFromID(id objc.ID) *AVCaptureDeviceDiscovery
 
 // @method discoverySessionWithDeviceTypes: @abstract Returns an AVCaptureDeviceDiscoverySession instance for the given device types, media type, and position. @param deviceTypes An array specifying the device types to include in the list of discovered devices. @param mediaType The media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed, to include in the list of discovered devices. Pass nil to search for devices with any media type. @param position The position to include in the list of discovered devices. Pass AVCaptureDevicePositionUnspecified to search for devices with any position. @result The AVCaptureDeviceDiscoverySession from which the list of devices can be obtained. @discussion The list of device types is mandatory. This is used to make sure that clients only get access to devices of types they expect. This prevents new device types from automatically being included in the list of devices.
 func AVCaptureDeviceDiscoverySessionDiscoverySessionWithDeviceTypesMediaTypePosition(deviceTypes *foundation.NSArray[*foundation.NSString], mediaType *foundation.NSString, position AVCaptureDevicePosition) *AVCaptureDeviceDiscoverySession {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDeviceDiscoverySession), _aVCaptureDeviceDiscoverySessionSelDiscoverySessionWithDeviceTypesMediaTypePosition, deviceTypes, mediaType.Ptr(), position)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDeviceDiscoverySession), _aVCaptureDeviceDiscoverySessionSelDiscoverySessionWithDeviceTypesMediaTypePosition, deviceTypes.Ptr(), mediaType.Ptr(), position)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

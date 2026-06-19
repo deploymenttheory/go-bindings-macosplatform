@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a time-based cadence for processing a video stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnvideoprocessortimeintervalcadence
 type VNVideoProcessorTimeIntervalCadence struct {
 	VNVideoProcessorCadence

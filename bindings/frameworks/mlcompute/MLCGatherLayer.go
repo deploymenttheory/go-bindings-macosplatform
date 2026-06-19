@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that fetches data at the locations you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcgatherlayer
 type MLCGatherLayer struct {
 	MLCLayer
@@ -30,7 +32,7 @@ func MLCGatherLayerFromID(id objc.ID) *MLCGatherLayer {
 	return o
 }
 
-// @abstract   Create a gather layer @param      dimension  The dimension along which to index @return     A new gather layer
+// Creates a gather layer with the dimension you specify.
 func MLCGatherLayerLayerWithDimension(dimension uint) *MLCGatherLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGatherLayer), _mLCGatherLayerSelLayerWithDimension, dimension)
 	if _ret != 0 {

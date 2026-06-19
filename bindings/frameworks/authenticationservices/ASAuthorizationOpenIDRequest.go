@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An OpenID authorization request.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationopenidrequest
 type ASAuthorizationOpenIDRequest struct {
 	ASAuthorizationRequest
@@ -39,12 +41,15 @@ func ASAuthorizationOpenIDRequestFromID(id objc.ID) *ASAuthorizationOpenIDReques
 
 // @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
 func (o *ASAuthorizationOpenIDRequest) RequestedScopes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aSAuthorizationOpenIDRequestSelRequestedScopes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationOpenIDRequestSelRequestedScopes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *ASAuthorizationOpenIDRequest) SetRequestedScopes(requestedScopes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_aSAuthorizationOpenIDRequestSelSetRequestedScopes, requestedScopes)
+	o.Ptr().Send(_aSAuthorizationOpenIDRequestSelSetRequestedScopes, requestedScopes.Ptr())
 }
 
 // @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.

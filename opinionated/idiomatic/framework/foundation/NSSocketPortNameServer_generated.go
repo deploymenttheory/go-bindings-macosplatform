@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A port name server that takes and returns socket ports.
+//
 // SocketPortNameServer wraps [raw.NSSocketPortNameServer] with a fluent Go API.
 type SocketPortNameServer struct {
 	inner *raw.NSSocketPortNameServer
@@ -36,6 +38,8 @@ func NewSocketPortNameServer() *SocketPortNameServer {
 	return &SocketPortNameServer{inner: raw.NSSocketPortNameServerFromID(_id)}
 }
 
+// Returns the port number used to contact the name server.
+//
 // WithDefaultNameServerPortNumber sets the defaultNameServerPortNumber property and returns the receiver for chaining.
 func (x *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer {
 	x.inner.SetDefaultNameServerPortNumber(defaultNameServerPortNumber)
@@ -48,6 +52,8 @@ func (x *SocketPortNameServer) WithScriptingProperties(scriptingProperties *raw.
 	return x
 }
 
+// Looks up and returns the port registered under the specified name on a specified host.
+//
 // PortForNameHostNameServerPortNumber calls the underlying PortForNameHostNameServerPortNumber.
 func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
 	_r := x.inner.PortForNameHostNameServerPortNumber(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host), portNumber)
@@ -57,6 +63,8 @@ func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, 
 	return &Port{inner: _r}
 }
 
+// Registers a given port as a network service with the specified name in the local domain.
+//
 // RegisterPortNameNameServerPortNumber calls the underlying RegisterPortNameNameServerPortNumber.
 func (x *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *raw.NSPort, name string, portNumber uint16) bool {
 	return x.inner.RegisterPortNameNameServerPortNumber(port, foundation.NSStringStringWithUTF8String(name), portNumber)

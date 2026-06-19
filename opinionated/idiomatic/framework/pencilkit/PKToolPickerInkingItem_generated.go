@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An item that represents an inking tool in the tool picker.
+//
 // ToolPickerInkingItem wraps [raw.PKToolPickerInkingItem] with a fluent Go API.
 type ToolPickerInkingItem struct {
 	inner *raw.PKToolPickerInkingItem
@@ -31,7 +33,7 @@ func ToolPickerInkingItemFromID(id objc.ID) *ToolPickerInkingItem {
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(id)}
 }
 
-// Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool.
+// Create a new tool picker item with a PKInkType.
 //
 // NewToolPickerInkingItemWithInkType creates a new [ToolPickerInkingItem].
 func NewToolPickerInkingItemWithInkType(inkType *foundation.NSString) *ToolPickerInkingItem {
@@ -47,7 +49,7 @@ func NewToolPickerInkingItemWithInkTypeColor(inkType *foundation.NSString, color
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(_id)}
 }
 
-// Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool. @param width The width for the tool.
+// Create a new tool picker item with a PKInkType.
 //
 // NewToolPickerInkingItemWithInkTypeWidth creates a new [ToolPickerInkingItem].
 func NewToolPickerInkingItemWithInkTypeWidth(inkType *foundation.NSString, width float64) *ToolPickerInkingItem {
@@ -56,6 +58,8 @@ func NewToolPickerInkingItemWithInkTypeWidth(inkType *foundation.NSString, width
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(_id)}
 }
 
+// Creates a new inking item with the specified ink type, color, and width.
+//
 // NewToolPickerInkingItemWithInkTypeColorWidth creates a new [ToolPickerInkingItem].
 func NewToolPickerInkingItemWithInkTypeColorWidth(inkType *foundation.NSString, color *appkit.NSColor, width float64) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
@@ -63,6 +67,8 @@ func NewToolPickerInkingItemWithInkTypeColorWidth(inkType *foundation.NSString, 
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(_id)}
 }
 
+// Creates a new inking item with the specified ink type, color, width, and identifier.
+//
 // NewToolPickerInkingItemWithInkTypeColorWidthIdentifier creates a new [ToolPickerInkingItem].
 func NewToolPickerInkingItemWithInkTypeColorWidthIdentifier(inkType *foundation.NSString, color *appkit.NSColor, width float64, identifier string) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerInkingItem")), objc.RegisterName("alloc"))

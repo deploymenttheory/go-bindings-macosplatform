@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A structure representing the drawing information captured by a canvas view.
+//
 // Drawing wraps [raw.PKDrawing] with a fluent Go API.
 type Drawing struct {
 	inner *raw.PKDrawing

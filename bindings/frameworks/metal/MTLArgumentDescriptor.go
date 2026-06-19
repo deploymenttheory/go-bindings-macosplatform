@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an argument within an argument buffer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlargumentdescriptor
 type MTLArgumentDescriptor struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func MTLArgumentDescriptorFromID(id objc.ID) *MTLArgumentDescriptor {
 	return o
 }
 
-// @method argumentDescriptor @abstract Create an autoreleased default argument descriptor
+// Creates an empty argument descriptor.
 func MTLArgumentDescriptorArgumentDescriptor() *MTLArgumentDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLArgumentDescriptor), _mTLArgumentDescriptorSelArgumentDescriptor)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection similar to a set, but with broader range of available memory semantics.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshashtable
 type NSHashTable[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -50,6 +52,7 @@ func NSHashTableFromID[ObjectType purego.AnyObject](id objc.ID) *NSHashTable[Obj
 	return o
 }
 
+// Returns a hash table initialized with the given attributes.
 func (o *NSHashTable[ObjectType]) InitWithOptionsCapacity(options NSPointerFunctionsOptions, initialCapacity uint) *NSHashTable[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelInitWithOptionsCapacity, options, initialCapacity)
 	if _ret != 0 {
@@ -58,6 +61,7 @@ func (o *NSHashTable[ObjectType]) InitWithOptionsCapacity(options NSPointerFunct
 	return NSHashTableFromID[ObjectType](_ret)
 }
 
+// Returns a hash table initialized with the given functions and capacity.
 func (o *NSHashTable[ObjectType]) InitWithPointerFunctionsCapacity(functions *NSPointerFunctions, initialCapacity uint) *NSHashTable[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelInitWithPointerFunctionsCapacity, functions.Ptr(), initialCapacity)
 	if _ret != 0 {
@@ -66,6 +70,7 @@ func (o *NSHashTable[ObjectType]) InitWithPointerFunctionsCapacity(functions *NS
 	return NSHashTableFromID[ObjectType](_ret)
 }
 
+// Returns a hash table with given pointer functions options.
 func NSHashTableHashTableWithOptions(options NSPointerFunctionsOptions) *NSHashTable[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHashTable), _nSHashTableSelHashTableWithOptions, options)
 	if _ret != 0 {
@@ -74,12 +79,14 @@ func NSHashTableHashTableWithOptions(options NSPointerFunctionsOptions) *NSHashT
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
+// Returns a new hash table for storing weak references to its contents.
 // Deprecated: GC no longer supported
 func NSHashTableHashTableWithWeakObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHashTable), _nSHashTableSelHashTableWithWeakObjects)
 	return _ret
 }
 
+// Returns a new hash table for storing weak references to its contents.
 func NSHashTableWeakObjectsHashTable() *NSHashTable[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHashTable), _nSHashTableSelWeakObjectsHashTable)
 	if _ret != 0 {
@@ -88,11 +95,13 @@ func NSHashTableWeakObjectsHashTable() *NSHashTable[objc.ID] {
 	return NSHashTableFromID[objc.ID](_ret)
 }
 
+// Determines whether the hash table contains a given object, and returns that object if it is present
 func (o *NSHashTable[ObjectType]) Member(object ObjectType) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSHashTableSelMember, object)
 	return _ret
 }
 
+// Returns an enumerator object that lets you access each object in the hash table.
 func (o *NSHashTable[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHashTableSelObjectEnumerator)
 	if _ret != 0 {
@@ -101,46 +110,56 @@ func (o *NSHashTable[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Adds a given object to the hash table.
 func (o *NSHashTable[ObjectType]) AddObject(object ObjectType) {
 	o.Ptr().Send(_nSHashTableSelAddObject, object)
 }
 
+// Removes a given object from the hash table.
 func (o *NSHashTable[ObjectType]) RemoveObject(object ObjectType) {
 	o.Ptr().Send(_nSHashTableSelRemoveObject, object)
 }
 
+// Removes all objects from the hash table.
 func (o *NSHashTable[ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSHashTableSelRemoveAllObjects)
 }
 
+// Returns a Boolean value that indicates whether the hash table contains a given object.
 func (o *NSHashTable[ObjectType]) ContainsObject(anObject ObjectType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHashTableSelContainsObject, anObject)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given hash table intersects with the receiving hash table.
 func (o *NSHashTable[ObjectType]) IntersectsHashTable(other *NSHashTable[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHashTableSelIntersectsHashTable, other.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given hash table is equal to the receiving hash table.
 func (o *NSHashTable[ObjectType]) IsEqualToHashTable(other *NSHashTable[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHashTableSelIsEqualToHashTable, other.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether every element in the receiving hash table is also present in another given hash table.
 func (o *NSHashTable[ObjectType]) IsSubsetOfHashTable(other *NSHashTable[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHashTableSelIsSubsetOfHashTable, other.Ptr())
 	return _ret
 }
 
+// Removes from the receiving hash table each element that isn’t a member of another given hash table.
 func (o *NSHashTable[ObjectType]) IntersectHashTable(other *NSHashTable[ObjectType]) {
 	o.Ptr().Send(_nSHashTableSelIntersectHashTable, other.Ptr())
 }
 
+// Adds each element in another given hash table to the receiving hash table, if not present.
 func (o *NSHashTable[ObjectType]) UnionHashTable(other *NSHashTable[ObjectType]) {
 	o.Ptr().Send(_nSHashTableSelUnionHashTable, other.Ptr())
 }
 
+// Removes each element in another given hash table from the receiving hash table, if present.
 func (o *NSHashTable[ObjectType]) MinusHashTable(other *NSHashTable[ObjectType]) {
 	o.Ptr().Send(_nSHashTableSelMinusHashTable, other.Ptr())
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract  A node representing a MPSCNNPoolingMax kernel @discussion The default edge mode is MPSImageEdgeModeClamp
+// A representation of a max pooling filter.
 //
 // CNNPoolingMaxNode wraps [raw.MPSCNNPoolingMaxNode] with a fluent Go API.
 type CNNPoolingMaxNode struct {

@@ -9,10 +9,13 @@ import (
 	"strings"
 )
 
+// The app’s level of access to the user’s photo library.
 type PHAccessLevel int64
 
 const (
-	PHAccessLevelAddOnly   PHAccessLevel = 1
+	// A value that indicates the app may only add to the user’s photo library.
+	PHAccessLevelAddOnly PHAccessLevel = 1
+	// A value that indicates the app can read from and write to the user’s photo library.
 	PHAccessLevelReadWrite PHAccessLevel = 2
 )
 
@@ -27,12 +30,16 @@ func (e PHAccessLevel) String() string {
 	}
 }
 
+// Bit mask values indicating whether and how an asset is marked as a favorite member of a burst photo sequence. Used by the burstSelectionTypes property.
 // Bitmask — values may be combined with |.
 type PHAssetBurstSelectionType uint64
 
 const (
-	PHAssetBurstSelectionTypeNone     PHAssetBurstSelectionType = 0
+	// The asset is not marked as a favorite member of its burst sequence or is not a member of a burst sequence.
+	PHAssetBurstSelectionTypeNone PHAssetBurstSelectionType = 0
+	// Photos has automatically identified the asset as a potential user favorite.
 	PHAssetBurstSelectionTypeAutoPick PHAssetBurstSelectionType = 1
+	// The user has marked the asset as a favorite member of its burst sequence.
 	PHAssetBurstSelectionTypeUserPick PHAssetBurstSelectionType = 2
 )
 
@@ -50,10 +57,13 @@ func (e PHAssetBurstSelectionType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Major distinctions between kinds of asset collections, used by the assetCollectionType property and the fetchAssetCollectionsContainingAsset:withType:options: and fetchAssetCollectionsWithType:subtype:options: methods.
 type PHAssetCollectionType int64
 
 const (
-	PHAssetCollectionTypeAlbum      PHAssetCollectionType = 1
+	// An album in the Photos app.
+	PHAssetCollectionTypeAlbum PHAssetCollectionType = 1
+	// A smart album whose contents update dynamically.
 	PHAssetCollectionTypeSmartAlbum PHAssetCollectionType = 2
 )
 
@@ -68,11 +78,15 @@ func (e PHAssetCollectionType) String() string {
 	}
 }
 
+// Values identifying possible actions an asset can support, used by the canPerformEditOperation: method.
 type PHAssetEditOperation int64
 
 const (
-	PHAssetEditOperationDelete     PHAssetEditOperation = 1
-	PHAssetEditOperationContent    PHAssetEditOperation = 2
+	// The asset can be deleted from the photo library.
+	PHAssetEditOperationDelete PHAssetEditOperation = 1
+	// The asset’s photo or video content can be edited.
+	PHAssetEditOperationContent PHAssetEditOperation = 2
+	// The asset’s metadata properties can be edited.
 	PHAssetEditOperationProperties PHAssetEditOperation = 3
 )
 
@@ -89,22 +103,34 @@ func (e PHAssetEditOperation) String() string {
 	}
 }
 
+// Constants identifying specific variations of asset media, such as panorama or screenshot photos, and time-lapse or high-frame-rate video.
 // Bitmask — values may be combined with |.
 type PHAssetMediaSubtype uint64
 
 const (
-	PHAssetMediaSubtypeNone                 PHAssetMediaSubtype = 0
-	PHAssetMediaSubtypePhotoPanorama        PHAssetMediaSubtype = 1
-	PHAssetMediaSubtypePhotoHDR             PHAssetMediaSubtype = 2
-	PHAssetMediaSubtypePhotoScreenshot      PHAssetMediaSubtype = 4
-	PHAssetMediaSubtypePhotoLive            PHAssetMediaSubtype = 8
-	PHAssetMediaSubtypePhotoDepthEffect     PHAssetMediaSubtype = 16
-	PHAssetMediaSubtypeSpatialMedia         PHAssetMediaSubtype = 1024
-	PHAssetMediaSubtypeVideoStreamed        PHAssetMediaSubtype = 65536
-	PHAssetMediaSubtypeVideoHighFrameRate   PHAssetMediaSubtype = 131072
-	PHAssetMediaSubtypeVideoTimelapse       PHAssetMediaSubtype = 262144
+	// The asset has no subtype.
+	PHAssetMediaSubtypeNone PHAssetMediaSubtype = 0
+	// The asset is a large-format panorama photo.
+	PHAssetMediaSubtypePhotoPanorama PHAssetMediaSubtype = 1
+	// The asset is a high-dynamic range photo.
+	PHAssetMediaSubtypePhotoHDR PHAssetMediaSubtype = 2
+	// The asset is an image captured with the device’s screenshot feature.
+	PHAssetMediaSubtypePhotoScreenshot PHAssetMediaSubtype = 4
+	// The asset is a Live Photo that includes movement and sounds from the moments just before and after its capture.
+	PHAssetMediaSubtypePhotoLive PHAssetMediaSubtype = 8
+	// The asset is a photo captured with the Camera app’s Portrait mode depth effect.
+	PHAssetMediaSubtypePhotoDepthEffect PHAssetMediaSubtype = 16
+	PHAssetMediaSubtypeSpatialMedia     PHAssetMediaSubtype = 1024
+	// The asset is a video with contents that always stream over a network connection.
+	PHAssetMediaSubtypeVideoStreamed PHAssetMediaSubtype = 65536
+	// The asset is a high-frame-rate video.
+	PHAssetMediaSubtypeVideoHighFrameRate PHAssetMediaSubtype = 131072
+	// The asset is a time-lapse video.
+	PHAssetMediaSubtypeVideoTimelapse PHAssetMediaSubtype = 262144
+	// The media subtype is a photo animation such as a GIF, animated PNGs, etc.
 	PHAssetMediaSubtypeVideoScreenRecording PHAssetMediaSubtype = 524288
-	PHAssetMediaSubtypeVideoCinematic       PHAssetMediaSubtype = 2097152
+	// The asset is a cinematic video.
+	PHAssetMediaSubtypeVideoCinematic PHAssetMediaSubtype = 2097152
 )
 
 func (e PHAssetMediaSubtype) String() string {
@@ -148,13 +174,18 @@ func (e PHAssetMediaSubtype) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Identifies the general type of an asset, such as image or video.
 type PHAssetMediaType int64
 
 const (
+	// The asset’s type is unknown.
 	PHAssetMediaTypeUnknown PHAssetMediaType = 0
-	PHAssetMediaTypeImage   PHAssetMediaType = 1
-	PHAssetMediaTypeVideo   PHAssetMediaType = 2
-	PHAssetMediaTypeAudio   PHAssetMediaType = 3
+	// The asset is a photo or other static image.
+	PHAssetMediaTypeImage PHAssetMediaType = 1
+	// The asset is a video file.
+	PHAssetMediaTypeVideo PHAssetMediaType = 2
+	// The asset is an audio file.
+	PHAssetMediaTypeAudio PHAssetMediaType = 3
 )
 
 func (e PHAssetMediaType) String() string {
@@ -172,6 +203,7 @@ func (e PHAssetMediaType) String() string {
 	}
 }
 
+// An enumeration of asset playback styles that dictate how to present an asset to the user.
 type PHAssetPlaybackStyle int64
 
 const (
@@ -202,22 +234,35 @@ func (e PHAssetPlaybackStyle) String() string {
 	}
 }
 
+// Describes the relationship of an asset resource to its owning asset.
 type PHAssetResourceType int64
 
 const (
-	PHAssetResourceTypePhoto                     PHAssetResourceType = 1
-	PHAssetResourceTypeVideo                     PHAssetResourceType = 2
-	PHAssetResourceTypeAudio                     PHAssetResourceType = 3
-	PHAssetResourceTypeAlternatePhoto            PHAssetResourceType = 4
-	PHAssetResourceTypeFullSizePhoto             PHAssetResourceType = 5
-	PHAssetResourceTypeFullSizeVideo             PHAssetResourceType = 6
-	PHAssetResourceTypeAdjustmentData            PHAssetResourceType = 7
-	PHAssetResourceTypeAdjustmentBasePhoto       PHAssetResourceType = 8
-	PHAssetResourceTypePairedVideo               PHAssetResourceType = 9
-	PHAssetResourceTypeFullSizePairedVideo       PHAssetResourceType = 10
+	// Provides the original photo data for its asset.
+	PHAssetResourceTypePhoto PHAssetResourceType = 1
+	// Provides the original video data for its asset.
+	PHAssetResourceTypeVideo PHAssetResourceType = 2
+	// Provides the original audio data for its asset.
+	PHAssetResourceTypeAudio PHAssetResourceType = 3
+	// Provides photo data that isn’t the primary form of its asset.
+	PHAssetResourceTypeAlternatePhoto PHAssetResourceType = 4
+	// Provides a modified version of the original photo asset.
+	PHAssetResourceTypeFullSizePhoto PHAssetResourceType = 5
+	// Provides a modified version of the original video asset.
+	PHAssetResourceTypeFullSizeVideo PHAssetResourceType = 6
+	// Provides data for use in reconstructing recent edits to its asset.
+	PHAssetResourceTypeAdjustmentData PHAssetResourceType = 7
+	// Provides an unaltered version of its photo asset for use in for use in reconstructing recent edits.
+	PHAssetResourceTypeAdjustmentBasePhoto PHAssetResourceType = 8
+	// Provides the original video data component of a Live Photo asset.
+	PHAssetResourceTypePairedVideo PHAssetResourceType = 9
+	// Provides the current video data component of a Live Photo asset.
+	PHAssetResourceTypeFullSizePairedVideo PHAssetResourceType = 10
+	// Provides an unaltered version of the video data for a Live Photo asset for use in reconstructing recent edits.
 	PHAssetResourceTypeAdjustmentBasePairedVideo PHAssetResourceType = 11
-	PHAssetResourceTypeAdjustmentBaseVideo       PHAssetResourceType = 12
-	PHAssetResourceTypePhotoProxy                PHAssetResourceType = 19
+	// Provides an unaltered version of its video asset.
+	PHAssetResourceTypeAdjustmentBaseVideo PHAssetResourceType = 12
+	PHAssetResourceTypePhotoProxy          PHAssetResourceType = 19
 )
 
 func (e PHAssetResourceType) String() string {
@@ -253,13 +298,18 @@ func (e PHAssetResourceType) String() string {
 	}
 }
 
+// The means by which an asset enters the Photos library.
 // Bitmask — values may be combined with |.
 type PHAssetSourceType uint64
 
 const (
-	PHAssetSourceTypeNone         PHAssetSourceType = 0
-	PHAssetSourceTypeUserLibrary  PHAssetSourceType = 1
-	PHAssetSourceTypeCloudShared  PHAssetSourceType = 2
+	// Source information is not available for the asset.
+	PHAssetSourceTypeNone PHAssetSourceType = 0
+	// The asset is part of the user’s main Photos library.
+	PHAssetSourceTypeUserLibrary PHAssetSourceType = 1
+	// The asset originates from an iCloud Shared Album.
+	PHAssetSourceTypeCloudShared PHAssetSourceType = 2
+	// The asset originates from a Mac or PC and is present on the device through iTunes sync.
 	PHAssetSourceTypeiTunesSynced PHAssetSourceType = 4
 )
 
@@ -280,14 +330,20 @@ func (e PHAssetSourceType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Information about your app’s authorization to access the user’s photo library.
 type PHAuthorizationStatus int64
 
 const (
+	// The user hasn’t set the app’s authorization status.
 	PHAuthorizationStatusNotDetermined PHAuthorizationStatus = 0
-	PHAuthorizationStatusRestricted    PHAuthorizationStatus = 1
-	PHAuthorizationStatusDenied        PHAuthorizationStatus = 2
-	PHAuthorizationStatusAuthorized    PHAuthorizationStatus = 3
-	PHAuthorizationStatusLimited       PHAuthorizationStatus = 4
+	// The app isn’t authorized to access the photo library, and the user can’t grant such permission.
+	PHAuthorizationStatusRestricted PHAuthorizationStatus = 1
+	// The user explicitly denied this app access to the photo library.
+	PHAuthorizationStatusDenied PHAuthorizationStatus = 2
+	// The user explicitly granted this app access to the photo library.
+	PHAuthorizationStatusAuthorized PHAuthorizationStatus = 3
+	// The user authorized this app for limited photo library access.
+	PHAuthorizationStatusLimited PHAuthorizationStatus = 4
 )
 
 func (e PHAuthorizationStatus) String() string {
@@ -307,16 +363,24 @@ func (e PHAuthorizationStatus) String() string {
 	}
 }
 
+// Values identifying possible actions that a collection can support, used by the canPerformEditOperation: method.
 type PHCollectionEditOperation int64
 
 const (
-	PHCollectionEditOperationDeleteContent    PHCollectionEditOperation = 1
-	PHCollectionEditOperationRemoveContent    PHCollectionEditOperation = 2
-	PHCollectionEditOperationAddContent       PHCollectionEditOperation = 3
-	PHCollectionEditOperationCreateContent    PHCollectionEditOperation = 4
+	// The collection supports deleting the items it contains.
+	PHCollectionEditOperationDeleteContent PHCollectionEditOperation = 1
+	// The collection supports removing the items it contains.
+	PHCollectionEditOperationRemoveContent PHCollectionEditOperation = 2
+	// The collection supports adding items that already exist elsewhere in the photo library.
+	PHCollectionEditOperationAddContent PHCollectionEditOperation = 3
+	// The collection supports creating new items.
+	PHCollectionEditOperationCreateContent PHCollectionEditOperation = 4
+	// The collection supports reordering the arrangement of items it contains.
 	PHCollectionEditOperationRearrangeContent PHCollectionEditOperation = 5
-	PHCollectionEditOperationDelete           PHCollectionEditOperation = 6
-	PHCollectionEditOperationRename           PHCollectionEditOperation = 7
+	// The collection itself can be deleted.
+	PHCollectionEditOperationDelete PHCollectionEditOperation = 6
+	// The collection itself can be renamed.
+	PHCollectionEditOperationRename PHCollectionEditOperation = 7
 )
 
 func (e PHCollectionEditOperation) String() string {
@@ -340,12 +404,16 @@ func (e PHCollectionEditOperation) String() string {
 	}
 }
 
+// Major distinctions between kinds of collection list, used by the collectionListSubtype property and fetchCollectionListsWithType:subtype:options:, fetchMomentListsWithSubtype:containingMoment:options:, and fetchMomentListsWithSubtype:options: methods.
 type PHCollectionListSubtype uint64
 
 const (
+	// The collection list is a smart folder containing one or more Events synced from iPhoto.
 	PHCollectionListSubtypeSmartFolderEvents PHCollectionListSubtype = 200
-	PHCollectionListSubtypeSmartFolderFaces  PHCollectionListSubtype = 201
-	PHCollectionListSubtypeAny               PHCollectionListSubtype = 9223372036854775807
+	// The collection list is a smart folder containing one or more Faces synced from iPhoto.
+	PHCollectionListSubtypeSmartFolderFaces PHCollectionListSubtype = 201
+	// Use this value to fetch collection lists of all possible subtypes.
+	PHCollectionListSubtypeAny PHCollectionListSubtype = 9223372036854775807
 )
 
 func (e PHCollectionListSubtype) String() string {
@@ -361,12 +429,16 @@ func (e PHCollectionListSubtype) String() string {
 	}
 }
 
+// Options for fitting an image’s aspect ratio to a requested size, used by the requestImageForAsset:targetSize:contentMode:options:resultHandler: method.
 type PHImageContentMode int64
 
 const (
-	PHImageContentModeAspectFit  PHImageContentMode = 0
+	// Scales the image so that its larger dimension fits the target size.
+	PHImageContentModeAspectFit PHImageContentMode = 0
+	// Scales the image so that it completely fills the target size.
 	PHImageContentModeAspectFill PHImageContentMode = 1
-	PHImageContentModeDefault    PHImageContentMode = 0
+	// Fits the image to the requested size using the default option, PHImageContentModeAspectFit.
+	PHImageContentModeDefault PHImageContentMode = 0
 )
 
 func (e PHImageContentMode) String() string {
@@ -380,12 +452,16 @@ func (e PHImageContentMode) String() string {
 	}
 }
 
+// Options for delivering requested image data, used by the deliveryMode property.
 type PHImageRequestOptionsDeliveryMode int64
 
 const (
-	PHImageRequestOptionsDeliveryModeOpportunistic     PHImageRequestOptionsDeliveryMode = 0
+	// Photos automatically provides one or more results in order to balance image quality and responsiveness.
+	PHImageRequestOptionsDeliveryModeOpportunistic PHImageRequestOptionsDeliveryMode = 0
+	// Photos provides only the highest-quality image available, regardless of how much time it takes to load.
 	PHImageRequestOptionsDeliveryModeHighQualityFormat PHImageRequestOptionsDeliveryMode = 1
-	PHImageRequestOptionsDeliveryModeFastFormat        PHImageRequestOptionsDeliveryMode = 2
+	// Photos provides only a fast-loading image, possibly sacrificing image quality.
+	PHImageRequestOptionsDeliveryModeFastFormat PHImageRequestOptionsDeliveryMode = 2
 )
 
 func (e PHImageRequestOptionsDeliveryMode) String() string {
@@ -401,11 +477,15 @@ func (e PHImageRequestOptionsDeliveryMode) String() string {
 	}
 }
 
+// Options for how to resize the requested image to fit a target size, used by the resizeMode property.
 type PHImageRequestOptionsResizeMode int64
 
 const (
-	PHImageRequestOptionsResizeModeNone  PHImageRequestOptionsResizeMode = 0
-	PHImageRequestOptionsResizeModeFast  PHImageRequestOptionsResizeMode = 1
+	// Photos does not resize the image asset.
+	PHImageRequestOptionsResizeModeNone PHImageRequestOptionsResizeMode = 0
+	// Photos efficiently resizes the image to a size similar to, or slightly larger than, the target size.
+	PHImageRequestOptionsResizeModeFast PHImageRequestOptionsResizeMode = 1
+	// Photos resizes the image to match the target size exactly.
 	PHImageRequestOptionsResizeModeExact PHImageRequestOptionsResizeMode = 2
 )
 
@@ -422,14 +502,18 @@ func (e PHImageRequestOptionsResizeMode) String() string {
 	}
 }
 
-// Error code for Live Photo Editing errors (Deprecated)
+// Error codes for Live Photo editing errors.
 //
 // Deprecated: since macOS 10.15.
 type PHLivePhotoEditingErrorCode int64
 
 const (
+	// No further information is available about the cause of the error.
+	//
 	// Deprecated: since macOS 10.15.
 	PHLivePhotoEditingErrorCodeUnknown PHLivePhotoEditingErrorCode = 0
+	// Live Photo processing was canceled by the Processing an Editing Context’s Live Photo method.
+	//
 	// Deprecated: since macOS 10.15.
 	PHLivePhotoEditingErrorCodeAborted PHLivePhotoEditingErrorCode = 1
 )
@@ -445,12 +529,16 @@ func (e PHLivePhotoEditingErrorCode) String() string {
 	}
 }
 
+// Identifies the type of objects in a change request.
 type PHObjectType int64
 
 const (
-	PHObjectTypeAsset           PHObjectType = 1
+	// A type that represents an asset.
+	PHObjectTypeAsset PHObjectType = 1
+	// A type that represents a collection of assets.
 	PHObjectTypeAssetCollection PHObjectType = 2
-	PHObjectTypeCollectionList  PHObjectType = 3
+	// A type that represents a collection list.
+	PHObjectTypeCollectionList PHObjectType = 3
 )
 
 func (e PHObjectType) String() string {
@@ -466,13 +554,18 @@ func (e PHObjectType) String() string {
 	}
 }
 
+// Options for delivering requested video data, used by the deliveryMode property.
 type PHVideoRequestOptionsDeliveryMode int64
 
 const (
-	PHVideoRequestOptionsDeliveryModeAutomatic           PHVideoRequestOptionsDeliveryMode = 0
-	PHVideoRequestOptionsDeliveryModeHighQualityFormat   PHVideoRequestOptionsDeliveryMode = 1
+	// Photos automatically determines which quality of video data to provide based on the request and current conditions.
+	PHVideoRequestOptionsDeliveryModeAutomatic PHVideoRequestOptionsDeliveryMode = 0
+	// Photos provides only the highest quality video available.
+	PHVideoRequestOptionsDeliveryModeHighQualityFormat PHVideoRequestOptionsDeliveryMode = 1
+	// Photos provides a video of moderate quality unless a higher quality version is locally cached.
 	PHVideoRequestOptionsDeliveryModeMediumQualityFormat PHVideoRequestOptionsDeliveryMode = 2
-	PHVideoRequestOptionsDeliveryModeFastFormat          PHVideoRequestOptionsDeliveryMode = 3
+	// Photos provides whatever quality of video can be most quickly loaded.
+	PHVideoRequestOptionsDeliveryModeFastFormat PHVideoRequestOptionsDeliveryMode = 3
 )
 
 func (e PHVideoRequestOptionsDeliveryMode) String() string {

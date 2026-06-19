@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that creates string representations of quantities of time.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdatecomponentsformatter
 type NSDateComponentsFormatter struct {
 	NSFormatter

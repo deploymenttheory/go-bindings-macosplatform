@@ -64,11 +64,15 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Specifies the source type associated with a particular media source. Source type reflects the primary type of media within the source. These constants are used to specify values for MLMediaLoadSourceTypesKey in the initWithOptions: method of MLMediaLibrary.
 type MLMediaSourceType uint64
 
 const (
+	// Audio source type. Includes iTunes, GarageBand, and Logic.
 	MLMediaSourceTypeAudio MLMediaSourceType = 1
+	// Image source type. Includes iPhoto, Aperture, and Photo Booth.
 	MLMediaSourceTypeImage MLMediaSourceType = 2
+	// Movie source type. Includes iMovie and Final Cut Pro.
 	MLMediaSourceTypeMovie MLMediaSourceType = 4
 )
 
@@ -89,11 +93,15 @@ func (e MLMediaSourceType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Specifies the media type associated with a particular media object. These constants are used to specify a media object’s mediaType attribute.
 type MLMediaType uint64
 
 const (
+	// Audio media type.
 	MLMediaTypeAudio MLMediaType = 1
+	// Image media type.
 	MLMediaTypeImage MLMediaType = 2
+	// Video media type.
 	MLMediaTypeMovie MLMediaType = 4
 )
 

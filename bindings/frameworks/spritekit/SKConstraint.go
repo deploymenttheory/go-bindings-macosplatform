@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for constraining a node’s position or rotation.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skconstraint
 type SKConstraint struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func SKConstraintFromID(id objc.ID) *SKConstraint {
 	return o
 }
 
-// Constrain the node's position to a range
+// Creates a constraint that restricts the x-coordinate of a node’s position.
 func SKConstraintPositionX(range_ *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelPositionX, range_.Ptr())
 	if _ret != 0 {
@@ -53,6 +55,7 @@ func SKConstraintPositionX(range_ *SKRange) *SKConstraint {
 	return SKConstraintFromID(_ret)
 }
 
+// Creates a constraint that restricts the y-coordinate of a node’s position.
 func SKConstraintPositionY(range_ *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelPositionY, range_.Ptr())
 	if _ret != 0 {
@@ -61,6 +64,7 @@ func SKConstraintPositionY(range_ *SKRange) *SKConstraint {
 	return SKConstraintFromID(_ret)
 }
 
+// Creates a constraint that restricts both coordinates of a node’s position.
 func SKConstraintPositionXY(xRange *SKRange, yRange *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelPositionXY, xRange.Ptr(), yRange.Ptr())
 	if _ret != 0 {
@@ -69,7 +73,7 @@ func SKConstraintPositionXY(xRange *SKRange, yRange *SKRange) *SKConstraint {
 	return SKConstraintFromID(_ret)
 }
 
-// Constrain the node's position to be within a distance of a point or node
+// Creates a constraint that keeps a node within a certain distance of another node.
 func SKConstraintDistanceToNode(range_ *SKRange, node *SKNode) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelDistanceToNode, range_.Ptr(), node.Ptr())
 	if _ret != 0 {
@@ -78,6 +82,7 @@ func SKConstraintDistanceToNode(range_ *SKRange, node *SKNode) *SKConstraint {
 	return SKConstraintFromID(_ret)
 }
 
+// Creates a constraint that keeps a node within a certain distance of a point.
 func SKConstraintDistanceToPoint(range_ *SKRange, point corefoundation.CGPoint) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelDistanceToPoint, range_.Ptr(), point)
 	if _ret != 0 {
@@ -86,6 +91,7 @@ func SKConstraintDistanceToPoint(range_ *SKRange, point corefoundation.CGPoint) 
 	return SKConstraintFromID(_ret)
 }
 
+// Creates a constraint that keeps a node within a certain distance of a point in another node’s coordinate system.
 func SKConstraintDistanceToPointInNode(range_ *SKRange, point corefoundation.CGPoint, node *SKNode) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelDistanceToPointInNode, range_.Ptr(), point, node.Ptr())
 	if _ret != 0 {
@@ -94,7 +100,7 @@ func SKConstraintDistanceToPointInNode(range_ *SKRange, point corefoundation.CGP
 	return SKConstraintFromID(_ret)
 }
 
-// Constrain the node's rotation to a range
+// Creates a constraint that limits the orientation of a node.
 func SKConstraintZRotation(zRange *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelZRotation, zRange.Ptr())
 	if _ret != 0 {
@@ -103,7 +109,7 @@ func SKConstraintZRotation(zRange *SKRange) *SKConstraint {
 	return SKConstraintFromID(_ret)
 }
 
-// Constrain the node's rotation to orient to a point or node
+// Creates a constraint that forces a node to rotate to face another node.
 func SKConstraintOrientToNodeOffset(node *SKNode, radians *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelOrientToNodeOffset, node.Ptr(), radians.Ptr())
 	if _ret != 0 {
@@ -112,6 +118,7 @@ func SKConstraintOrientToNodeOffset(node *SKNode, radians *SKRange) *SKConstrain
 	return SKConstraintFromID(_ret)
 }
 
+// Creates a constraint that forces a node to rotate to face a fixed point.
 func SKConstraintOrientToPointOffset(point corefoundation.CGPoint, radians *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelOrientToPointOffset, point, radians.Ptr())
 	if _ret != 0 {
@@ -120,6 +127,7 @@ func SKConstraintOrientToPointOffset(point corefoundation.CGPoint, radians *SKRa
 	return SKConstraintFromID(_ret)
 }
 
+// Creates a constraint that forces a node to rotate to face a point in another node’s coordinate system.
 func SKConstraintOrientToPointInNodeOffset(point corefoundation.CGPoint, node *SKNode, radians *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelOrientToPointInNodeOffset, point, node.Ptr(), radians.Ptr())
 	if _ret != 0 {

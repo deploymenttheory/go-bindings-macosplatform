@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The manager of a shared credentials cache.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlcredentialstorage
 type NSURLCredentialStorage struct {
 	NSObject
@@ -62,7 +64,7 @@ func (o *NSURLCredentialStorage) RemoveCredentialForProtectionSpace(credential *
 
 // @method removeCredential:forProtectionSpace:options @abstract Remove the credential from the set for the specified protection space based on options. @param credential The credential to remove. @param space The protection space for which a credential should be removed @param options A dictionary containing options to consider when removing the credential.  This should be used when trying to delete a credential that has the NSURLCredentialPersistenceSynchronizable policy. Please note that when NSURLCredential objects that have a NSURLCredentialPersistenceSynchronizable policy are removed, the credential will be removed on all devices that contain this credential. @discussion The credential is removed from both persistent and temporary storage.
 func (o *NSURLCredentialStorage) RemoveCredentialForProtectionSpaceOptions(credential *NSURLCredential, space *NSURLProtectionSpace, options *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptions, credential.Ptr(), space.Ptr(), options)
+	o.Ptr().Send(_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptions, credential.Ptr(), space.Ptr(), options.Ptr())
 }
 
 // @method defaultCredentialForProtectionSpace: @abstract Get the default credential for the specified protection space. @param space The protection space for which to get the default credential.
@@ -90,8 +92,11 @@ func NSURLCredentialStorageSharedCredentialStorage() *NSURLCredentialStorage {
 
 // @abstract Get a dictionary mapping NSURLProtectionSpaces to dictionaries which map usernames to NSURLCredentials @result an NSDictionary where the keys are NSURLProtectionSpaces and the values are dictionaries, in which the keys are usernames and the values are NSURLCredentials
 func (o *NSURLCredentialStorage) AllCredentials() *NSDictionary[*NSURLProtectionSpace, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSURLProtectionSpace, objc.ID]](o.Ptr(), _nSURLCredentialStorageSelAllCredentials)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialStorageSelAllCredentials)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSURLProtectionSpace, objc.ID](_ret)
 }
 
 func (o *NSURLCredentialStorage) GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace *NSURLProtectionSpace, task *NSURLSessionTask, completionHandler func(*NSDictionary[*NSString, *NSURLCredential])) {
@@ -113,7 +118,7 @@ func (o *NSURLCredentialStorage) SetCredentialForProtectionSpaceTask(credential 
 }
 
 func (o *NSURLCredentialStorage) RemoveCredentialForProtectionSpaceOptionsTask(credential *NSURLCredential, protectionSpace *NSURLProtectionSpace, options *NSDictionary[*NSString, objc.ID], task *NSURLSessionTask) {
-	o.Ptr().Send(_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptionsTask, credential.Ptr(), protectionSpace.Ptr(), options, task.Ptr())
+	o.Ptr().Send(_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptionsTask, credential.Ptr(), protectionSpace.Ptr(), options.Ptr(), task.Ptr())
 }
 
 func (o *NSURLCredentialStorage) GetDefaultCredentialForProtectionSpaceTaskCompletionHandler(space *NSURLProtectionSpace, task *NSURLSessionTask, completionHandler func(*NSURLCredential)) {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a summary item in a payment request, taxes, discounts, shipping, a grand total, and the like.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem
 type PKPaymentSummaryItem struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func PKPaymentSummaryItemFromID(id objc.ID) *PKPaymentSummaryItem {
 	return o
 }
 
+// Initializes and returns a summary item with the given label and amount.
 func PKPaymentSummaryItemSummaryItemWithLabelAmount(label *foundation.NSString, amount *foundation.NSDecimalNumber) *PKPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentSummaryItem), _pKPaymentSummaryItemSelSummaryItemWithLabelAmount, label.Ptr(), amount.Ptr())
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func PKPaymentSummaryItemSummaryItemWithLabelAmount(label *foundation.NSString, 
 	return PKPaymentSummaryItemFromID(_ret)
 }
 
+// Initializes and returns a summary item with the given label, amount, and type.
 func PKPaymentSummaryItemSummaryItemWithLabelAmountType(label *foundation.NSString, amount *foundation.NSDecimalNumber, type_ PKPaymentSummaryItemType) *PKPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentSummaryItem), _pKPaymentSummaryItemSelSummaryItemWithLabelAmountType, label.Ptr(), amount.Ptr(), type_)
 	if _ret != 0 {

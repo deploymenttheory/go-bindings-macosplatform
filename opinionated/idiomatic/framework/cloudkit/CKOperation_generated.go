@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for all operations that execute in a database.
+//
 // Operation wraps [raw.CKOperation] with a fluent Go API.
 type Operation struct {
 	inner *raw.CKOperation
@@ -37,7 +39,7 @@ func NewOperation() *Operation {
 	return &Operation{inner: raw.CKOperationFromID(_id)}
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
@@ -45,7 +47,7 @@ func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Op
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *Operation) WithGroup(group *OperationGroup) *Operation {
@@ -53,7 +55,7 @@ func (x *Operation) WithGroup(group *OperationGroup) *Operation {
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation {
@@ -77,7 +79,7 @@ func (x *Operation) WithAllowsCellularAccess(allowsCellularAccess bool) *Operati
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *Operation) WithLongLived(longLived bool) *Operation {

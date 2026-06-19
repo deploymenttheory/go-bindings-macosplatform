@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays interactive web content, such as for an in-app browser.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebview
 type WKWebView struct {
 	appkit.NSView
@@ -121,7 +123,7 @@ func WKWebViewFromID(id objc.ID) *WKWebView {
 	return o
 }
 
-// @abstract Returns a web view initialized with a specified frame and configuration. @param frame The frame for the new web view. @param configuration The configuration for the new web view. @result An initialized web view, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use @link -initWithFrame: @/link to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web view.
+// Creates a web view and initializes it with the specified frame and configuration data.
 func (o *WKWebView) InitWithFrameConfiguration(frame corefoundation.CGRect, configuration *WKWebViewConfiguration) *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelInitWithFrameConfiguration, frame, configuration.Ptr())
 	if _ret != 0 {
@@ -130,6 +132,7 @@ func (o *WKWebView) InitWithFrameConfiguration(frame corefoundation.CGRect, conf
 	return WKWebViewFromID(_ret)
 }
 
+// Returns an object initialized from data in the specified coder object.
 func (o *WKWebView) InitWithCoder(coder *foundation.NSCoder) *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -147,7 +150,7 @@ func (o *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation 
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Navigates to the requested file URL on the filesystem. @param URL The file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
+// Loads the web content from the specified file and navigates to it.
 func (o *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL *foundation.NSURL, readAccessURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadFileURLAllowingReadAccessToURL, uRL.Ptr(), readAccessURL.Ptr())
 	if _ret != 0 {
@@ -156,7 +159,7 @@ func (o *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL *foundation.NSURL, re
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Sets the webpage contents and base URL. @param string The string to use as the contents of the webpage. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
+// Loads the contents of the specified HTML string and navigates to it.
 func (o *WKWebView) LoadHTMLStringBaseURL(string_ *foundation.NSString, baseURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadHTMLStringBaseURL, string_.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -165,7 +168,7 @@ func (o *WKWebView) LoadHTMLStringBaseURL(string_ *foundation.NSString, baseURL 
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Sets the webpage contents and base URL. @param data The data to use as the contents of the webpage. @param MIMEType The MIME type of the data. @param characterEncodingName The data's character encoding name. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
+// Loads the content of the specified data object and navigates to it.
 func (o *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundation.NSData, mIMEType *foundation.NSString, characterEncodingName *foundation.NSString, baseURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL, data.Ptr(), mIMEType.Ptr(), characterEncodingName.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -174,7 +177,7 @@ func (o *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundatio
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Navigates to an item from the back-forward list and sets it as the current item. @param item The item to which to navigate. Must be one of the items in the web view's back-forward list. @result A new navigation to the requested item, or nil if it is already the current item or is not part of the web view's back-forward list. @seealso backForwardList
+// Navigates to an item from the back-forward list and sets it as the current item.
 func (o *WKWebView) GoToBackForwardListItem(item *WKBackForwardListItem) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelGoToBackForwardListItem, item.Ptr())
 	if _ret != 0 {
@@ -183,7 +186,7 @@ func (o *WKWebView) GoToBackForwardListItem(item *WKBackForwardListItem) *WKNavi
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Navigates to the back item in the back-forward list. @result A new navigation to the requested item, or nil if there is no back item in the back-forward list.
+// Navigates to the back item in the back-forward list.
 func (o *WKWebView) GoBack() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelGoBack)
 	if _ret != 0 {
@@ -192,7 +195,7 @@ func (o *WKWebView) GoBack() *WKNavigation {
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Navigates to the forward item in the back-forward list. @result A new navigation to the requested item, or nil if there is no forward item in the back-forward list.
+// Navigates to the forward item in the back-forward list.
 func (o *WKWebView) GoForward() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelGoForward)
 	if _ret != 0 {
@@ -201,7 +204,7 @@ func (o *WKWebView) GoForward() *WKNavigation {
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Reloads the current page. @result A new navigation representing the reload.
+// Reloads the current webpage.
 func (o *WKWebView) Reload() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelReload)
 	if _ret != 0 {
@@ -210,7 +213,7 @@ func (o *WKWebView) Reload() *WKNavigation {
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @result A new navigation representing the reload.
+// Reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.
 func (o *WKWebView) ReloadFromOrigin() *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelReloadFromOrigin)
 	if _ret != 0 {
@@ -219,11 +222,12 @@ func (o *WKWebView) ReloadFromOrigin() *WKNavigation {
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Stops loading all resources on the current page.
+// Stops loading all resources on the current page.
 func (o *WKWebView) StopLoading() {
 	o.Ptr().Send(_wKWebViewSelStopLoading)
 }
 
+// Evaluates the specified JavaScript string.
 func (o *WKWebView) EvaluateJavaScriptCompletionHandler(javaScriptString *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -235,6 +239,7 @@ func (o *WKWebView) EvaluateJavaScriptCompletionHandler(javaScriptString *founda
 	o.Ptr().Send(_wKWebViewSelEvaluateJavaScriptCompletionHandler, javaScriptString.Ptr(), __block_completionHandler)
 }
 
+// Evaluates the specified JavaScript string in the specified frame and content world.
 func (o *WKWebView) EvaluateJavaScriptInFrameInContentWorldCompletionHandler(javaScriptString *foundation.NSString, frame *WKFrameInfo, contentWorld *WKContentWorld, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -246,6 +251,7 @@ func (o *WKWebView) EvaluateJavaScriptInFrameInContentWorldCompletionHandler(jav
 	o.Ptr().Send(_wKWebViewSelEvaluateJavaScriptInFrameInContentWorldCompletionHandler, javaScriptString.Ptr(), frame.Ptr(), contentWorld.Ptr(), __block_completionHandler)
 }
 
+// Executes the specified string as an asynchronous JavaScript function.
 func (o *WKWebView) CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler(functionBody *foundation.NSString, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], frame *WKFrameInfo, contentWorld *WKContentWorld, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -254,10 +260,10 @@ func (o *WKWebView) CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionH
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebViewSelCallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler, functionBody.Ptr(), arguments, frame.Ptr(), contentWorld.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_wKWebViewSelCallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler, functionBody.Ptr(), arguments.Ptr(), frame.Ptr(), contentWorld.Ptr(), __block_completionHandler)
 }
 
-// @abstract Closes all out-of-window media presentations in a WKWebView. @discussion Includes picture-in-picture and fullscreen.
+// Closes all media the web view is presenting, including picture-in-picture video and fullscreen video.
 func (o *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -274,7 +280,7 @@ func (o *WKWebView) CloseAllMediaPresentations() {
 	o.Ptr().Send(_wKWebViewSelCloseAllMediaPresentations)
 }
 
-// @abstract Pauses media playback in WKWebView. @discussion Pauses media playback. Media in the page can be restarted by calling play() on a media element or resume() on an AudioContext in JavaScript. A user can also use media controls to play media content after it has been paused.
+// Pauses playback of all media in the web view.
 func (o *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -286,6 +292,7 @@ func (o *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler
 	o.Ptr().Send(_wKWebViewSelPauseAllMediaPlaybackWithCompletionHandler, __block_completionHandler)
 }
 
+// Pauses playback of all media in the web view.
 // Deprecated: since macOS 12.0.
 func (o *WKWebView) PauseAllMediaPlayback(completionHandler func()) {
 	var __block_completionHandler objc.Block
@@ -298,7 +305,7 @@ func (o *WKWebView) PauseAllMediaPlayback(completionHandler func()) {
 	o.Ptr().Send(_wKWebViewSelPauseAllMediaPlayback, __block_completionHandler)
 }
 
-// @abstract Suspends or resumes all media playback in WKWebView. @param suspended Whether media playback should be suspended or resumed. @discussion If suspended is true, this pauses media playback and blocks all attempts by the page or the user to resume until setAllMediaPlaybackSuspended is called again with suspended set to false. Media playback should always be suspended and resumed in pairs.
+// Changes whether the webpage is suspending playback of all media in the page.
 func (o *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -310,6 +317,7 @@ func (o *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool
 	o.Ptr().Send(_wKWebViewSelSetAllMediaPlaybackSuspendedCompletionHandler, suspended, __block_completionHandler)
 }
 
+// Resumes playback of all media in a web view.
 // Deprecated: since macOS 12.0.
 func (o *WKWebView) ResumeAllMediaPlayback(completionHandler func()) {
 	var __block_completionHandler objc.Block
@@ -322,6 +330,7 @@ func (o *WKWebView) ResumeAllMediaPlayback(completionHandler func()) {
 	o.Ptr().Send(_wKWebViewSelResumeAllMediaPlayback, __block_completionHandler)
 }
 
+// Changes whether the webpage is suspending playback of all media in the page.
 // Deprecated: since macOS 12.0.
 func (o *WKWebView) SuspendAllMediaPlayback(completionHandler func()) {
 	var __block_completionHandler objc.Block
@@ -334,7 +343,7 @@ func (o *WKWebView) SuspendAllMediaPlayback(completionHandler func()) {
 	o.Ptr().Send(_wKWebViewSelSuspendAllMediaPlayback, __block_completionHandler)
 }
 
-// @abstract Get the current media playback state of a WKWebView. @param completionHandler A block to invoke with the return value of the function call. @discussion If media playback exists, WKMediaPlaybackState will be one of three values: WKMediaPlaybackPaused, WKMediaPlaybackSuspended, or WKMediaPlaybackPlaying. If no media playback exists in the current WKWebView, WKMediaPlaybackState will equal WKMediaPlaybackStateNone.
+// Requests the playback status of media in the web view.
 func (o *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(WKMediaPlaybackState)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -346,6 +355,7 @@ func (o *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHan
 	o.Ptr().Send(_wKWebViewSelRequestMediaPlaybackStateWithCompletionHandler, __block_completionHandler)
 }
 
+// Requests the playback status of media in the web view.
 // Deprecated: since macOS 12.0.
 func (o *WKWebView) RequestMediaPlaybackState(completionHandler func(WKMediaPlaybackState)) {
 	var __block_completionHandler objc.Block
@@ -358,7 +368,7 @@ func (o *WKWebView) RequestMediaPlaybackState(completionHandler func(WKMediaPlay
 	o.Ptr().Send(_wKWebViewSelRequestMediaPlaybackState, __block_completionHandler)
 }
 
-// @abstract Set camera capture state of a WKWebView. @param state State to apply for capture. @param completionHandler A block to invoke after the camera state has been changed. @discussion If value is WKMediaCaptureStateNone, this will stop any camera capture. If value is WKMediaCaptureStateMuted, any active camera capture will become muted. If value is WKMediaCaptureStateActive, any muted camera capture will become active.
+// Changes whether the webpage is using the camera to capture images or video.
 func (o *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -370,7 +380,7 @@ func (o *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureS
 	o.Ptr().Send(_wKWebViewSelSetCameraCaptureStateCompletionHandler, state, __block_completionHandler)
 }
 
-// @abstract Set microphone capture state of a WKWebView. @param state state to apply for capture. @param completionHandler A block to invoke after the microphone state has been changed. @discussion If value is WKMediaCaptureStateNone, this will stop any microphone capture. If value is WKMediaCaptureStateMuted, any active microphone capture will become muted. If value is WKMediaCaptureStateActive, any muted microphone capture will become active.
+// Changes whether the webpage is using the microphone to capture audio.
 func (o *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -382,6 +392,7 @@ func (o *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCapt
 	o.Ptr().Send(_wKWebViewSelSetMicrophoneCaptureStateCompletionHandler, state, __block_completionHandler)
 }
 
+// Generates a platform-native image from the web view’s contents asynchronously.
 func (o *WKWebView) TakeSnapshotWithConfigurationCompletionHandler(snapshotConfiguration *WKSnapshotConfiguration, completionHandler func(*appkit.NSImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -396,7 +407,7 @@ func (o *WKWebView) TakeSnapshotWithConfigurationCompletionHandler(snapshotConfi
 	o.Ptr().Send(_wKWebViewSelTakeSnapshotWithConfigurationCompletionHandler, snapshotConfiguration.Ptr(), __block_completionHandler)
 }
 
-// @abstract Create a PDF document representation from the web page currently displayed in the WKWebView @param pdfConfiguration An object that specifies how the PDF capture is configured. @param completionHandler A block to invoke when the pdf document data is ready. @discussion If the WKPDFConfiguration is nil, the method will create a PDF document representing the bounds of the currently displayed web page. The completionHandler is passed the resulting PDF document data or an error. The data can be used to create a PDFDocument object. If the data is written to a file the resulting file is a valid PDF document.
+// Generates PDF data from the web view’s contents asynchronously.
 func (o *WKWebView) CreatePDFWithConfigurationCompletionHandler(pdfConfiguration *WKPDFConfiguration, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -411,6 +422,7 @@ func (o *WKWebView) CreatePDFWithConfigurationCompletionHandler(pdfConfiguration
 	o.Ptr().Send(_wKWebViewSelCreatePDFWithConfigurationCompletionHandler, pdfConfiguration.Ptr(), __block_completionHandler)
 }
 
+// Creates a web archive of the web view’s contents asynchronously.
 func (o *WKWebView) CreateWebArchiveDataWithCompletionHandler(completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -425,10 +437,12 @@ func (o *WKWebView) CreateWebArchiveDataWithCompletionHandler(completionHandler 
 	o.Ptr().Send(_wKWebViewSelCreateWebArchiveDataWithCompletionHandler, __block_completionHandler)
 }
 
+// Scales the page content and centers the result on the specified point.
 func (o *WKWebView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
 	o.Ptr().Send(_wKWebViewSelSetMagnificationCenteredAtPoint, magnification, point)
 }
 
+// Searches for the specified string in the web view’s content.
 func (o *WKWebView) FindStringWithConfigurationCompletionHandler(string_ *foundation.NSString, configuration *WKFindConfiguration, completionHandler func(*WKFindResult)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -443,11 +457,13 @@ func (o *WKWebView) FindStringWithConfigurationCompletionHandler(string_ *founda
 	o.Ptr().Send(_wKWebViewSelFindStringWithConfigurationCompletionHandler, string_.Ptr(), configuration.Ptr(), __block_completionHandler)
 }
 
+// Returns a Boolean value that indicates whether WebKit natively supports resources with the specified URL scheme.
 func WKWebViewHandlesURLScheme(urlScheme *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsWKWebView), _wKWebViewSelHandlesURLScheme, urlScheme.Ptr())
 	return _ret
 }
 
+// Starts to download the resource at the URL in the request.
 func (o *WKWebView) StartDownloadUsingRequestCompletionHandler(request *foundation.NSURLRequest, completionHandler func(*WKDownload)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -462,6 +478,7 @@ func (o *WKWebView) StartDownloadUsingRequestCompletionHandler(request *foundati
 	o.Ptr().Send(_wKWebViewSelStartDownloadUsingRequestCompletionHandler, request.Ptr(), __block_completionHandler)
 }
 
+// Resumes a failed or canceled download.
 func (o *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData *foundation.NSData, completionHandler func(*WKDownload)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -476,7 +493,7 @@ func (o *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData *fo
 	o.Ptr().Send(_wKWebViewSelResumeDownloadFromResumeDataCompletionHandler, resumeData.Ptr(), __block_completionHandler)
 }
 
-// @abstract Sets the webpage contents from the passed data as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the NSData object would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param response A response that is used to interpret the supplied data object. @param data The data to use as the contents of the webpage. @result A new navigation.
+// Loads the web content from the data you provide as if the data were the response to the request.
 func (o *WKWebView) LoadSimulatedRequestResponseResponseData(request *foundation.NSURLRequest, response *foundation.NSURLResponse, data *foundation.NSData) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadSimulatedRequestResponseResponseData, request.Ptr(), response.Ptr(), data.Ptr())
 	if _ret != 0 {
@@ -494,7 +511,7 @@ func (o *WKWebView) LoadSimulatedRequestWithResponseResponseData(request *founda
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Navigates to the requested file URL on the filesystem. @param request The request specifying the file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
+// Loads the web content from the file the URL request object specifies and navigates to that content.
 func (o *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.NSURLRequest, readAccessURL *foundation.NSURL) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadFileRequestAllowingReadAccessToURL, request.Ptr(), readAccessURL.Ptr())
 	if _ret != 0 {
@@ -503,7 +520,7 @@ func (o *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.N
 	return WKNavigationFromID(_ret)
 }
 
-// @abstract Sets the webpage contents from the passed HTML string as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the HTML string would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param string The data to use as the contents of the webpage. @result A new navigation.
+// Loads the web content from the HTML you provide as if the HTML were the response to the request.
 func (o *WKWebView) LoadSimulatedRequestResponseHTMLString(request *foundation.NSURLRequest, string_ *foundation.NSString) *WKNavigation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadSimulatedRequestResponseHTMLString, request.Ptr(), string_.Ptr())
 	if _ret != 0 {
@@ -521,6 +538,7 @@ func (o *WKWebView) LoadSimulatedRequestWithResponseHTMLString(request *foundati
 	return WKNavigationFromID(_ret)
 }
 
+// Returns the print operation object to use when printing the contents of the web view.
 func (o *WKWebView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelPrintOperationWithPrintInfo, printInfo.Ptr())
 	if _ret != 0 {
@@ -810,33 +828,36 @@ func (o *WKWebView) SetObscuredContentInsets(obscuredContentInsets foundation.NS
 	o.Ptr().Send(_wKWebViewSelSetObscuredContentInsets, obscuredContentInsets)
 }
 
-// @abstract Action method that navigates to the back item in the back-forward list. @param sender The object that sent this message.
+// Navigates to the back item in the back-forward list.
 func (o *WKWebView) GoBack2(sender objc.ID) {
 	o.Ptr().Send(_wKWebViewSelGoBack, sender)
 }
 
-// @abstract Action method that navigates to the forward item in the back-forward list. @param sender The object that sent this message.
+// Navigates to the forward item in the back-forward list.
 func (o *WKWebView) GoForward2(sender objc.ID) {
 	o.Ptr().Send(_wKWebViewSelGoForward, sender)
 }
 
-// @abstract Action method that reloads the current page. @param sender The object that sent this message.
+// Reloads the current webpage.
 func (o *WKWebView) Reload2(sender objc.ID) {
 	o.Ptr().Send(_wKWebViewSelReload, sender)
 }
 
-// @abstract Action method that reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @param sender The object that sent this message.
+// Reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.
 func (o *WKWebView) ReloadFromOrigin2(sender objc.ID) {
 	o.Ptr().Send(_wKWebViewSelReloadFromOrigin, sender)
 }
 
-// @abstract Action method that stops loading all resources on the current page. @param sender The object that sent this message.
+// Stops loading all resources on the current page.
 func (o *WKWebView) StopLoading2(sender objc.ID) {
 	o.Ptr().Send(_wKWebViewSelStopLoading, sender)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *WKWebView) CertificateChain() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _wKWebViewSelCertificateChain)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelCertificateChain)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optimizer that represents the root mean square propagation algorithm.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer
 // Deprecated: Use Metal Performance Shaders Graph or BNNS instead.
 type MLCRMSPropOptimizer struct {
@@ -35,7 +37,7 @@ func MLCRMSPropOptimizerFromID(id objc.ID) *MLCRMSPropOptimizer {
 	return o
 }
 
-// @abstract   Create a MLCRMSPropOptimizer object with defaults @return     A new MLCRMSPropOptimizer object.
+// Creates an RMSProp optimizer with the descriptor you specify.
 func MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCRMSPropOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCRMSPropOptimizer), _mLCRMSPropOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimize
 	return MLCRMSPropOptimizerFromID(_ret)
 }
 
-// @abstract   Create a MLCRMSPropOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      momentumScale                 The momentum scale @param      alpha                                   The smoothing constant value @param      epsilon                              The epsilon value to use to improve numerical stability @param      isCentered                            A boolean to specify whether to compute the centered RMSProp or not @return     A new MLCRMSPropOptimizer object.
+// Creates an RMSProp optimizer with the descriptor, momentum scale, smoothing, epsilon, and option to compute the centered RMSProp that you specify.
 func MLCRMSPropOptimizerOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescriptor *MLCOptimizerDescriptor, momentumScale float32, alpha float32, epsilon float32, isCentered bool) *MLCRMSPropOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCRMSPropOptimizer), _mLCRMSPropOptimizerSelOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered, optimizerDescriptor.Ptr(), momentumScale, alpha, epsilon, isCentered)
 	if _ret != 0 {

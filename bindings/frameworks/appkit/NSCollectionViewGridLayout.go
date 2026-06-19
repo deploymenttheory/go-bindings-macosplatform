@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layout that displays a single section of items in a row and column grid.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewgridlayout
 type NSCollectionViewGridLayout struct {
 	NSCollectionViewLayout

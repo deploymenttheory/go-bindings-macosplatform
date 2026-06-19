@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The settings for an IPv4 route.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neipv4route
 type NEIPv4Route struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
 	return o
 }
 
-// @method initWithDestinationAddress:subnetMask: @discussion Initialize a newly-allocated NEIPv4Route. @param address The IPv4 address of the destination network. @param subnetMask The subnet mask of the destination network. @return The initialized NEIPv4Route.
+// Initialize the NEIPv4Route object.
 func (o *NEIPv4Route) InitWithDestinationAddressSubnetMask(address *foundation.NSString, subnetMask *foundation.NSString) *NEIPv4Route {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4RouteSelInitWithDestinationAddressSubnetMask, address.Ptr(), subnetMask.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *NEIPv4Route) InitWithDestinationAddressSubnetMask(address *foundation.N
 	return NEIPv4RouteFromID(_ret)
 }
 
-// @method defaultRoute @return A route object that represents the IPv4 default route.
+// A convenience method for creating the default IPv4 route.
 func NEIPv4RouteDefaultRoute() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNEIPv4Route), _nEIPv4RouteSelDefaultRoute)
 	return _ret

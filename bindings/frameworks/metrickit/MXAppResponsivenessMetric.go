@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the responsiveness of the app to user interaction.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxappresponsivenessmetric
 type MXAppResponsivenessMetric struct {
 	MXMetric
@@ -31,6 +33,9 @@ func MXAppResponsivenessMetricFromID(id objc.ID) *MXAppResponsivenessMetric {
 }
 
 func (o *MXAppResponsivenessMetric) HistogrammedApplicationHangTime() *MXHistogram[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppResponsivenessMetricSelHistogrammedApplicationHangTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppResponsivenessMetricSelHistogrammedApplicationHangTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXHistogramFromID[*foundation.NSUnitDuration](_ret)
 }

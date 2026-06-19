@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages policies to automatically purge downloaded assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadstoragemanager
 type AVAssetDownloadStorageManager struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func AVAssetDownloadStorageManagerFromID(id objc.ID) *AVAssetDownloadStorageMana
 	return o
 }
 
-// returns singleton instance.
+// Returns the shared storage manager instance.
 func AVAssetDownloadStorageManagerSharedDownloadStorageManager() *AVAssetDownloadStorageManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetDownloadStorageManager), _aVAssetDownloadStorageManagerSelSharedDownloadStorageManager)
 	if _ret != 0 {
@@ -41,12 +43,12 @@ func AVAssetDownloadStorageManagerSharedDownloadStorageManager() *AVAssetDownloa
 	return AVAssetDownloadStorageManagerFromID(_ret)
 }
 
-// Sets the policy for asset with disk backing at downloadStorageURL. - Parameter downloadStorageURL: The location of downloaded asset.
+// Sets a storage policy for the downloaded asset.
 func (o *AVAssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *AVAssetDownloadStorageManagementPolicy, downloadStorageURL *foundation.NSURL) {
 	o.Ptr().Send(_aVAssetDownloadStorageManagerSelSetStorageManagementPolicyForURL, storageManagementPolicy.Ptr(), downloadStorageURL.Ptr())
 }
 
-// Returns the storage management policy for asset downloaded at downloadStorageURL. This may be nil if a storageManagementPolicy was never set on the downloaded asset. - Parameter downloadStorageURL: The location of downloaded asset.
+// Returns the storage management policy for a downloaded asset.
 func (o *AVAssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL *foundation.NSURL) *AVAssetDownloadStorageManagementPolicy {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadStorageManagerSelStorageManagementPolicyForURL, downloadStorageURL.Ptr())
 	if _ret != 0 {

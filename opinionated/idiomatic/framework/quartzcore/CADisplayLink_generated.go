@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A timer object that allows your app to synchronize its drawing to the refresh rate of the display.
+//
 // DisplayLink wraps [raw.CADisplayLink] with a fluent Go API.
 type DisplayLink struct {
 	inner *raw.CADisplayLink
@@ -36,28 +38,38 @@ func NewDisplayLink() *DisplayLink {
 	return &DisplayLink{inner: raw.CADisplayLinkFromID(_id)}
 }
 
+// A Boolean value that indicates whether the system suspends the display link’s notifications to the target.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *DisplayLink) WithPaused(paused bool) *DisplayLink {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// A range of frequencies your app allows for frame updates, affecting how often the system invokes your delegate’s callback.
+//
 // WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
 func (x *DisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *DisplayLink {
 	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
 	return x
 }
 
+// Registers the display link with a run loop.
+//
 // AddToRunLoopForMode calls the underlying AddToRunLoopForMode.
 func (x *DisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	x.inner.AddToRunLoopForMode(runloop, mode)
 }
 
+// Removes the display link from the run loop for the given mode.
+//
 // RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
 func (x *DisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	x.inner.RemoveFromRunLoopForMode(runloop, mode)
 }
 
+// Removes the display link from all run loop modes.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *DisplayLink) Invalidate() {
 	x.inner.Invalidate()

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a webpage that the web view previously visited.
+//
 // WKBackForwardListItem wraps [raw.WKBackForwardListItem] with a fluent Go API.
 type WKBackForwardListItem struct {
 	inner *raw.WKBackForwardListItem

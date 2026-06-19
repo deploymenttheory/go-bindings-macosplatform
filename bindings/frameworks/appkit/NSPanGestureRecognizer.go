@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A continuous gesture recognizer for panning gestures.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspangesturerecognizer
 type NSPanGestureRecognizer struct {
 	NSGestureRecognizer
@@ -36,15 +38,18 @@ func NSPanGestureRecognizerFromID(id objc.ID) *NSPanGestureRecognizer {
 	return o
 }
 
+// The distance traveled by the mouse during the gesture.
 func (o *NSPanGestureRecognizer) TranslationInView(view *NSView) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSPanGestureRecognizerSelTranslationInView, view.Ptr())
 	return _ret
 }
 
+// Changes the current translation value of the gesture recognizer.
 func (o *NSPanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *NSView) {
 	o.Ptr().Send(_nSPanGestureRecognizerSelSetTranslationInView, translation, view.Ptr())
 }
 
+// The velocity of the pan, measured in points per second.
 func (o *NSPanGestureRecognizer) VelocityInView(view *NSView) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSPanGestureRecognizerSelVelocityInView, view.Ptr())
 	return _ret

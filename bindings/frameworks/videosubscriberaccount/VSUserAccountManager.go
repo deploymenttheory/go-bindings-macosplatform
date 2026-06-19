@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object that coordinates your app’s user account actions.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager
 type VSUserAccountManager struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func VSUserAccountManagerFromID(id objc.ID) *VSUserAccountManager {
 	return o
 }
 
+// Registers a new user account.
 func (o *VSUserAccountManager) UpdateUserAccountCompletion(account *VSUserAccount, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -47,6 +50,7 @@ func (o *VSUserAccountManager) UpdateUserAccountCompletion(account *VSUserAccoun
 	o.Ptr().Send(_vSUserAccountManagerSelUpdateUserAccountCompletion, account.Ptr(), __block_completion)
 }
 
+// Returns a list of registered user accounts for your app.
 func (o *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(options VSUserAccountQueryOptions, completion func(*foundation.NSArray[*VSUserAccount], unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -61,7 +65,7 @@ func (o *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(options VS
 	o.Ptr().Send(_vSUserAccountManagerSelQueryUserAccountsWithOptionsCompletion, options, __block_completion)
 }
 
-// Query the auto sign in token and authorization state.
+// Retrieves the current Automatic Sign-In token.
 func (o *VSUserAccountManager) QueryAutoSignInTokenWithCompletionHandler(completion func(*VSAutoSignInToken, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -76,7 +80,7 @@ func (o *VSUserAccountManager) QueryAutoSignInTokenWithCompletionHandler(complet
 	o.Ptr().Send(_vSUserAccountManagerSelQueryAutoSignInTokenWithCompletionHandler, __block_completion)
 }
 
-// Deletes the auto sign in token.
+// Deletes the value of the current Automatic Sign-In token.
 func (o *VSUserAccountManager) DeleteAutoSignInTokenWithCompletionHandler(completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

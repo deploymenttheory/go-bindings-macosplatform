@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that indicates to pause playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorpausecommand
 type AVDelegatingPlaybackCoordinatorPauseCommand struct {
 	AVDelegatingPlaybackCoordinatorPlaybackControlCommand

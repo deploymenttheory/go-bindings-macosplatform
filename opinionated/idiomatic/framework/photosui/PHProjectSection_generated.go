@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of content representing curated asset and text elements.
+//
 // ProjectSection wraps [raw.PHProjectSection] with a fluent Go API.
 type ProjectSection struct {
 	inner *raw.PHProjectSection

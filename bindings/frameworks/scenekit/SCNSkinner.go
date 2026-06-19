@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the relationship between skeletal animations and the nodes and geometries they animate.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnskinner
 type SCNSkinner struct {
 	foundation.NSObject
@@ -41,9 +43,9 @@ func SCNSkinnerFromID(id objc.ID) *SCNSkinner {
 	return o
 }
 
-// @method skinnerWithBaseGeometry:bones:boneInverseBindTransforms:boneWeights:boneIndices: @abstract Creates and initialize a skinner instance with the specified parameters. @param baseGeometry Specifies the base geometry used by the skinner @param bones Specifies the array of bones. @param boneInverseBindTransforms The inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone. @param boneWeights A buffer of weights. This contains the weights of every influence of every vertex. The number of influence per vertex is controlled by the number of component in the geometry source. @param boneIndices A buffer of bone indexes. This buffer contains the corresponding index in the bones array for every weight in the weights buffer.
+// Creates a skinner object with the specified visible geometry and skeleton information.
 func SCNSkinnerSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices(baseGeometry *SCNGeometry, bones *foundation.NSArray[*SCNNode], boneInverseBindTransforms *foundation.NSArray[*foundation.NSValue], boneWeights *SCNGeometrySource, boneIndices *SCNGeometrySource) *SCNSkinner {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSkinner), _sCNSkinnerSelSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices, baseGeometry.Ptr(), bones.Ptr(), boneInverseBindTransforms, boneWeights.Ptr(), boneIndices.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSkinner), _sCNSkinnerSelSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices, baseGeometry.Ptr(), bones.Ptr(), boneInverseBindTransforms.Ptr(), boneWeights.Ptr(), boneIndices.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -88,8 +90,11 @@ func (o *SCNSkinner) SetBaseGeometryBindTransform(baseGeometryBindTransform quar
 
 // @property boneInverseBindTransforms @abstract The inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone. @discussion boneInverseBindTransforms is an array of SCNMatrix4 wrapped into instances of NSValue.
 func (o *SCNSkinner) BoneInverseBindTransforms() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _sCNSkinnerSelBoneInverseBindTransforms)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSkinnerSelBoneInverseBindTransforms)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // @property bones @abstract The bones of the skinner.

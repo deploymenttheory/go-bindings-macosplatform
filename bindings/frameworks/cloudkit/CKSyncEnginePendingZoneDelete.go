@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an unsent record zone deletion.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginependingzonedelete
 type CKSyncEnginePendingZoneDelete struct {
 	CKSyncEnginePendingDatabaseChange
@@ -29,7 +31,7 @@ func CKSyncEnginePendingZoneDeleteFromID(id objc.ID) *CKSyncEnginePendingZoneDel
 	return o
 }
 
-// Creates a pending zone delete for the specified record zone identifier. - Parameters: - zoneID: The unique identifier of the record zone to delete. - Returns: An initialized pending zone delete.
+// Creates a pending zone delete for the specified record zone identifier.
 func (o *CKSyncEnginePendingZoneDelete) InitWithZoneID(zoneID *CKRecordZoneID) *CKSyncEnginePendingZoneDelete {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingZoneDeleteSelInitWithZoneID, zoneID.Ptr())
 	if _ret != 0 {

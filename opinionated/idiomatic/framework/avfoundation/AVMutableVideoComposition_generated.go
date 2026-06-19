@@ -82,7 +82,7 @@ func (x *MutableVideoComposition) WithAnimationTool(animationTool *VideoComposit
 	return x
 }
 
-// The identifiers of source sample data tracks in the composition that the compositor requires to compose frames.
+// The identifiers of source sample data tracks in the composition that the object requires to compose frames.
 //
 // WithSourceSampleDataTrackIDs sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoComposition {

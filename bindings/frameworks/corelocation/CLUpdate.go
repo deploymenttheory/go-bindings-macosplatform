@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a location update.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clupdate
 type CLUpdate struct {
 	foundation.NSObject

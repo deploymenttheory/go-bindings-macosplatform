@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A script command that a macOS app supports.
+//
 // ScriptCommandDescription wraps [raw.NSScriptCommandDescription] with a fluent Go API.
 type ScriptCommandDescription struct {
 	inner *raw.NSScriptCommandDescription
@@ -32,6 +34,8 @@ func ScriptCommandDescriptionFromID(id objc.ID) *ScriptCommandDescription {
 	return &ScriptCommandDescription{inner: raw.NSScriptCommandDescriptionFromID(id)}
 }
 
+// Initializes and returns a newly allocated instance of NSScriptCommandDescription.
+//
 // NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary creates a new [ScriptCommandDescription].
 func NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary(suiteName string, commandName string, commandDeclaration purego.IDer) *ScriptCommandDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptCommandDescription")), objc.RegisterName("alloc"))
@@ -52,6 +56,8 @@ func (x *ScriptCommandDescription) WithScriptingProperties(scriptingProperties *
 	return x
 }
 
+// Returns the type of the command argument identified by the specified key.
+//
 // TypeForArgumentWithName calls the underlying TypeForArgumentWithName.
 func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) *String {
 	_r := x.inner.TypeForArgumentWithName(foundation.NSStringStringWithUTF8String(argumentName))
@@ -61,16 +67,22 @@ func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) 
 	return &String{inner: _r}
 }
 
+// Returns the Apple event code for the specified command argument of the receiver.
+//
 // AppleEventCodeForArgumentWithName calls the underlying AppleEventCodeForArgumentWithName.
 func (x *ScriptCommandDescription) AppleEventCodeForArgumentWithName(argumentName string) uint {
 	return x.inner.AppleEventCodeForArgumentWithName(foundation.NSStringStringWithUTF8String(argumentName))
 }
 
+// Returns a Boolean value that indicates whether the command argument identified by the specified argument key is an optional argument.
+//
 // IsOptionalArgumentWithName calls the underlying IsOptionalArgumentWithName.
 func (x *ScriptCommandDescription) IsOptionalArgumentWithName(argumentName string) bool {
 	return x.inner.IsOptionalArgumentWithName(foundation.NSStringStringWithUTF8String(argumentName))
 }
 
+// Creates and returns an instance of the command object described by the receiver.
+//
 // CreateCommandInstance calls the underlying CreateCommandInstance.
 func (x *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
 	_r := x.inner.CreateCommandInstance()
@@ -80,6 +92,8 @@ func (x *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
 	return &ScriptCommand{inner: _r}
 }
 
+// Creates and returns an instance of the command object described by the receiver in the specified memory zone.
+//
 // CreateCommandInstanceWithZone calls the underlying CreateCommandInstanceWithZone.
 func (x *ScriptCommandDescription) CreateCommandInstanceWithZone(zone unsafe.Pointer) *ScriptCommand {
 	_r := x.inner.CreateCommandInstanceWithZone(zone)

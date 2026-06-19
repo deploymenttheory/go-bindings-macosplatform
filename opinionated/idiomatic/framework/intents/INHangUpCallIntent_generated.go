@@ -38,6 +38,8 @@ func NewHangUpCallIntentWithCallIdentifier(callIdentifier string) *HangUpCallInt
 	return &HangUpCallIntent{inner: raw.INHangUpCallIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *HangUpCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *HangUpCallIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

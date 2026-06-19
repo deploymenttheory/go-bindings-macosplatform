@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A grouped set of language options where only a single language option can be active at a time.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiongroup
 type MPNowPlayingInfoLanguageOptionGroup struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func MPNowPlayingInfoLanguageOptionGroupFromID(id objc.ID) *MPNowPlayingInfoLang
 	return o
 }
 
+// Creates a new language option group with the supplied language options.
 func (o *MPNowPlayingInfoLanguageOptionGroup) InitWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions *foundation.NSArray[*MPNowPlayingInfoLanguageOption], defaultLanguageOption *MPNowPlayingInfoLanguageOption, allowEmptySelection bool) *MPNowPlayingInfoLanguageOptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionGroupSelInitWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection, languageOptions.Ptr(), defaultLanguageOption.Ptr(), allowEmptySelection)
 	if _ret != 0 {

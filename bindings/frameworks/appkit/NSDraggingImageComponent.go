@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single object in a dragging item.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdraggingimagecomponent
 type NSDraggingImageComponent struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSDraggingImageComponentFromID(id objc.ID) *NSDraggingImageComponent {
 	return o
 }
 
+// Creates and returns a dragging image component with the specified key.
 func NSDraggingImageComponentDraggingImageComponentWithKey(key *foundation.NSString) *NSDraggingImageComponent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDraggingImageComponent), _nSDraggingImageComponentSelDraggingImageComponentWithKey, key.Ptr())
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func NSDraggingImageComponentDraggingImageComponentWithKey(key *foundation.NSStr
 	return NSDraggingImageComponentFromID(_ret)
 }
 
+// Initializes and returns a dragging image component with the specified key.
 func (o *NSDraggingImageComponent) InitWithKey(key *foundation.NSString) *NSDraggingImageComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingImageComponentSelInitWithKey, key.Ptr())
 	if _ret != 0 {

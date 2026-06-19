@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that contains a phone number that the data detection system matches. The DataDetection framework returns a phone number match in a `DDMatchPhoneNumber` object, which contains a phone number, and optionally a label that categorizes the phone number.
+// An object that contains a phone number that the data detection system matches.
 //
 // Apple documentation: https://developer.apple.com/documentation/datadetection/ddmatchphonenumber
 type DDMatchPhoneNumber struct {

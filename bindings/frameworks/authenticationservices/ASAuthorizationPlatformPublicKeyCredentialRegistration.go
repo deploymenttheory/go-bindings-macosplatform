@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A newly created platform credential that results from a credential registration request.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration
 type ASAuthorizationPlatformPublicKeyCredentialRegistration struct {
 	foundation.NSObject

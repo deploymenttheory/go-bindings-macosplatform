@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that occurs during a sync operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncengineevent
 type CKSyncEngineEvent struct {
 	foundation.NSObject

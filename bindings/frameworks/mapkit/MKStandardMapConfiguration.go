@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that represents the default map presentation, which is a street map that shows the position of all roads and some road names.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration
 type MKStandardMapConfiguration struct {
 	MKMapConfiguration
@@ -38,6 +40,7 @@ func MKStandardMapConfigurationFromID(id objc.ID) *MKStandardMapConfiguration {
 	return o
 }
 
+// Creates a new standard map configuration.
 func (o *MKStandardMapConfiguration) Init() *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInit)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *MKStandardMapConfiguration) Init() *MKStandardMapConfiguration {
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
+// Creates a new standard map configuration with the specified elevation style.
 func (o *MKStandardMapConfiguration) InitWithElevationStyle(elevationStyle MKMapElevationStyle) *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInitWithElevationStyle, elevationStyle)
 	if _ret != 0 {
@@ -54,6 +58,7 @@ func (o *MKStandardMapConfiguration) InitWithElevationStyle(elevationStyle MKMap
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
+// Creates a standard map configuration with the specified elevation and emphasis styles.
 func (o *MKStandardMapConfiguration) InitWithElevationStyleEmphasisStyle(elevationStyle MKMapElevationStyle, emphasisStyle MKStandardMapEmphasisStyle) *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInitWithElevationStyleEmphasisStyle, elevationStyle, emphasisStyle)
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func (o *MKStandardMapConfiguration) InitWithElevationStyleEmphasisStyle(elevati
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
+// Creates a standard map configuration with the specified emphasis style.
 func (o *MKStandardMapConfiguration) InitWithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInitWithEmphasisStyle, emphasisStyle)
 	if _ret != 0 {

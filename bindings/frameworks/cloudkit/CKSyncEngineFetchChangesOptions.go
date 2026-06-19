@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options to use with a fetch operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetchchangesoptions
 type CKSyncEngineFetchChangesOptions struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func CKSyncEngineFetchChangesOptionsFromID(id objc.ID) *CKSyncEngineFetchChanges
 	return o
 }
 
-// Initializes a set of options with the specific scope. If you provide a `nil` scope, the default scope is used. The default scope includes everything.
+// Initializes a set of options with the specific scope.
 func (o *CKSyncEngineFetchChangesOptions) InitWithScope(scope *CKSyncEngineFetchChangesScope) *CKSyncEngineFetchChangesOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesOptionsSelInitWithScope, scope.Ptr())
 	if _ret != 0 {

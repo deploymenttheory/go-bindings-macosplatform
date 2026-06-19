@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that converts a byte count value into a localized description that is formatted with the appropriate byte modifier (KB, MB, GB and so on).
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsbytecountformatter
 type NSByteCountFormatter struct {
 	NSFormatter

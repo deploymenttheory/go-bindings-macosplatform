@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of related records, displayed in rows that represent individual records and columns that represent the attributes of those records.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstableview
 type NSTableView struct {
 	NSControl
@@ -202,27 +204,33 @@ func (o *NSTableView) InitWithCoder(coder *foundation.NSCoder) *NSTableView {
 	return NSTableViewFromID(_ret)
 }
 
+// Informs the table view that the rows specified in indexSet have changed height.
 func (o *NSTableView) NoteHeightOfRowsWithIndexesChanged(indexSet *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSTableViewSelNoteHeightOfRowsWithIndexesChanged, indexSet.Ptr())
 }
 
+// Adds the specified column as the last column of the table view.
 func (o *NSTableView) AddTableColumn(tableColumn *NSTableColumn) {
 	o.Ptr().Send(_nSTableViewSelAddTableColumn, tableColumn.Ptr())
 }
 
+// Removes the specified column from the table view.
 func (o *NSTableView) RemoveTableColumn(tableColumn *NSTableColumn) {
 	o.Ptr().Send(_nSTableViewSelRemoveTableColumn, tableColumn.Ptr())
 }
 
+// Moves the column and heading at the specified index to the new specified index.
 func (o *NSTableView) MoveColumnToColumn(oldIndex int, newIndex int) {
 	o.Ptr().Send(_nSTableViewSelMoveColumnToColumn, oldIndex, newIndex)
 }
 
+// Returns the index of the first column in the table view whose identifier is equal to the specified identifier.
 func (o *NSTableView) ColumnWithIdentifier(identifier *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnWithIdentifier, identifier.Ptr())
 	return _ret
 }
 
+// Returns the NSTableColumn object for the first column whose identifier is equal to the specified object.
 func (o *NSTableView) TableColumnWithIdentifier(identifier *foundation.NSString) *NSTableColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumnWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -231,38 +239,47 @@ func (o *NSTableView) TableColumnWithIdentifier(identifier *foundation.NSString)
 	return NSTableColumnFromID(_ret)
 }
 
+// Properly sizes the table view and its header view and marks it as needing display.
 func (o *NSTableView) Tile() {
 	o.Ptr().Send(_nSTableViewSelTile)
 }
 
+// Resizes the last column so the table view fits exactly within its enclosing clip view.
 func (o *NSTableView) SizeLastColumnToFit() {
 	o.Ptr().Send(_nSTableViewSelSizeLastColumnToFit)
 }
 
+// Scrolls the view so the specified row is visible.
 func (o *NSTableView) ScrollRowToVisible(row int) {
 	o.Ptr().Send(_nSTableViewSelScrollRowToVisible, row)
 }
 
+// Scrolls the view so the specified column is visible.
 func (o *NSTableView) ScrollColumnToVisible(column int) {
 	o.Ptr().Send(_nSTableViewSelScrollColumnToVisible, column)
 }
 
+// Marks the table view as needing redisplay, so it will reload the data for visible cells and draw the new values.
 func (o *NSTableView) ReloadData() {
 	o.Ptr().Send(_nSTableViewSelReloadData)
 }
 
+// Informs the table view that the number of records in its data source has changed.
 func (o *NSTableView) NoteNumberOfRowsChanged() {
 	o.Ptr().Send(_nSTableViewSelNoteNumberOfRowsChanged)
 }
 
+// Reloads the data for only the specified rows and columns.
 func (o *NSTableView) ReloadDataForRowIndexesColumnIndexes(rowIndexes *foundation.NSIndexSet, columnIndexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSTableViewSelReloadDataForRowIndexesColumnIndexes, rowIndexes.Ptr(), columnIndexes.Ptr())
 }
 
+// Sets the indicator image of the specified column.
 func (o *NSTableView) SetIndicatorImageInTableColumn(image *NSImage, tableColumn *NSTableColumn) {
 	o.Ptr().Send(_nSTableViewSelSetIndicatorImageInTableColumn, image.Ptr(), tableColumn.Ptr())
 }
 
+// Returns the indicator image of the specified table column.
 func (o *NSTableView) IndicatorImageInTableColumn(tableColumn *NSTableColumn) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelIndicatorImageInTableColumn, tableColumn.Ptr())
 	if _ret != 0 {
@@ -271,11 +288,13 @@ func (o *NSTableView) IndicatorImageInTableColumn(tableColumn *NSTableColumn) *N
 	return NSImageFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether the table view allows dragging the rows with the drag initiated at the specified point.
 func (o *NSTableView) CanDragRowsWithIndexesAtPoint(rowIndexes *foundation.NSIndexSet, mouseDownPoint corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelCanDragRowsWithIndexesAtPoint, rowIndexes.Ptr(), mouseDownPoint)
 	return _ret
 }
 
+// Computes and returns an image to use for dragging.
 func (o *NSTableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows *foundation.NSIndexSet, tableColumns *foundation.NSArray[*NSTableColumn], dragEvent *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsWithIndexesTableColumnsEventOffset, dragRows.Ptr(), tableColumns.Ptr(), dragEvent.Ptr(), dragImageOffset)
 	if _ret != 0 {
@@ -284,58 +303,71 @@ func (o *NSTableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRow
 	return NSImageFromID(_ret)
 }
 
+// Sets the default operation mask returned by draggingSourceOperationMaskForLocal: to mask.
 func (o *NSTableView) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
 	o.Ptr().Send(_nSTableViewSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
 }
 
+// Retargets the proposed drop operation.
 func (o *NSTableView) SetDropRowDropOperation(row int, dropOperation NSTableViewDropOperation) {
 	o.Ptr().Send(_nSTableViewSelSetDropRowDropOperation, row, dropOperation)
 }
 
+// Selects all rows or all columns, according to whether rows or columns were most recently selected.
 func (o *NSTableView) SelectAll(sender objc.ID) {
 	o.Ptr().Send(_nSTableViewSelSelectAll, sender)
 }
 
+// Deselects all selected rows or columns if empty selection is allowed; otherwise does nothing.
 func (o *NSTableView) DeselectAll(sender objc.ID) {
 	o.Ptr().Send(_nSTableViewSelDeselectAll, sender)
 }
 
+// Sets the column selection using indexes possibly extending the selection.
 func (o *NSTableView) SelectColumnIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	o.Ptr().Send(_nSTableViewSelSelectColumnIndexesByExtendingSelection, indexes.Ptr(), extend)
 }
 
+// Sets the row selection using indexes extending the selection if specified.
 func (o *NSTableView) SelectRowIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	o.Ptr().Send(_nSTableViewSelSelectRowIndexesByExtendingSelection, indexes.Ptr(), extend)
 }
 
+// Deselects the column at the specified index if it’s selected.
 func (o *NSTableView) DeselectColumn(column int) {
 	o.Ptr().Send(_nSTableViewSelDeselectColumn, column)
 }
 
+// Deselects the row at the specified index if it’s selected.
 func (o *NSTableView) DeselectRow(row int) {
 	o.Ptr().Send(_nSTableViewSelDeselectRow, row)
 }
 
+// Returns a Boolean value that indicates whether the column at the specified index is selected.
 func (o *NSTableView) IsColumnSelected(column int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelIsColumnSelected, column)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the row at the specified index is selected.
 func (o *NSTableView) IsRowSelected(row int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelIsRowSelected, row)
 	return _ret
 }
 
+// Returns the rectangle containing the column at the specified index.
 func (o *NSTableView) RectOfColumn(column int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelRectOfColumn, column)
 	return _ret
 }
 
+// Returns the rectangle containing the row at the specified index.
 func (o *NSTableView) RectOfRow(row int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelRectOfRow, row)
 	return _ret
 }
 
+// Returns the indexes of the table view’s columns that intersect the specified rectangle.
 func (o *NSTableView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelColumnIndexesInRect, rect)
 	if _ret != 0 {
@@ -344,46 +376,56 @@ func (o *NSTableView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundatio
 	return foundation.NSIndexSetFromID(_ret)
 }
 
+// Returns a range of indexes for the rows that lie wholly or partially within the vertical boundaries of the specified rectangle.
 func (o *NSTableView) RowsInRect(rect corefoundation.CGRect) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTableViewSelRowsInRect, rect)
 	return _ret
 }
 
+// Returns the index of the column the specified point lies in.
 func (o *NSTableView) ColumnAtPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnAtPoint, point)
 	return _ret
 }
 
+// Returns the index of the row the specified point lies in.
 func (o *NSTableView) RowAtPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelRowAtPoint, point)
 	return _ret
 }
 
+// Returns a rectangle locating the cell that lies at the intersection of the specified column and row.
 func (o *NSTableView) FrameOfCellAtColumnRow(column int, row int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelFrameOfCellAtColumnRow, column, row)
 	return _ret
 }
 
+// Edits the cell at the specified column and row using the specified event and selection behavior.
 func (o *NSTableView) EditColumnRowWithEventSelect(column int, row int, event *NSEvent, select_ bool) {
 	o.Ptr().Send(_nSTableViewSelEditColumnRowWithEventSelect, column, row, event.Ptr(), select_)
 }
 
+// Draws the cells for the row at rowIndex in the columns that intersect clipRect.
 func (o *NSTableView) DrawRowClipRect(row int, clipRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableViewSelDrawRowClipRect, row, clipRect)
 }
 
+// Highlights the region of the table view in the specified rectangle.
 func (o *NSTableView) HighlightSelectionInClipRect(clipRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableViewSelHighlightSelectionInClipRect, clipRect)
 }
 
+// Draws the grid lines within the supplied rectangle.
 func (o *NSTableView) DrawGridInClipRect(clipRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableViewSelDrawGridInClipRect, clipRect)
 }
 
+// Draws the background of the table view in the clip rect specified by the rectangle.
 func (o *NSTableView) DrawBackgroundInClipRect(clipRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableViewSelDrawBackgroundInClipRect, clipRect)
 }
 
+// Returns a view at the specified row and column indexes, creating one if necessary.
 func (o *NSTableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfNecessary bool) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelViewAtColumnRowMakeIfNecessary, column, row, makeIfNecessary)
 	if _ret != 0 {
@@ -392,6 +434,7 @@ func (o *NSTableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIf
 	return NSViewFromID(_ret)
 }
 
+// Returns a row view at the specified index, creating one if necessary.
 func (o *NSTableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) *NSTableRowView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRowViewAtRowMakeIfNecessary, row, makeIfNecessary)
 	if _ret != 0 {
@@ -400,16 +443,19 @@ func (o *NSTableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool)
 	return NSTableRowViewFromID(_ret)
 }
 
+// Returns the index of the row for the specified view.
 func (o *NSTableView) RowForView(view *NSView) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelRowForView, view.Ptr())
 	return _ret
 }
 
+// Returns the column index for the specified view.
 func (o *NSTableView) ColumnForView(view *NSView) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnForView, view.Ptr())
 	return _ret
 }
 
+// Returns a new or existing view with the specified identifier.
 func (o *NSTableView) MakeViewWithIdentifierOwner(identifier *foundation.NSString, owner objc.ID) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelMakeViewWithIdentifierOwner, identifier.Ptr(), owner)
 	if _ret != 0 {
@@ -418,6 +464,7 @@ func (o *NSTableView) MakeViewWithIdentifierOwner(identifier *foundation.NSStrin
 	return NSViewFromID(_ret)
 }
 
+// Allows the enumeration of all the table rows that are known to the table view.
 func (o *NSTableView) EnumerateAvailableRowViewsUsing(handler func(*NSTableRowView, int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -432,42 +479,52 @@ func (o *NSTableView) EnumerateAvailableRowViewsUsing(handler func(*NSTableRowVi
 	o.Ptr().Send(_nSTableViewSelEnumerateAvailableRowViewsUsing, __block_handler)
 }
 
+// Begins a group of updates for the table view.
 func (o *NSTableView) BeginUpdates() {
 	o.Ptr().Send(_nSTableViewSelBeginUpdates)
 }
 
+// Ends the group of updates for the table view.
 func (o *NSTableView) EndUpdates() {
 	o.Ptr().Send(_nSTableViewSelEndUpdates)
 }
 
+// Inserts the rows using the specified animation.
 func (o *NSTableView) InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSTableViewSelInsertRowsAtIndexesWithAnimation, indexes.Ptr(), animationOptions)
 }
 
+// Removes the rows using the specified animation.
 func (o *NSTableView) RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSTableViewSelRemoveRowsAtIndexesWithAnimation, indexes.Ptr(), animationOptions)
 }
 
+// Moves the specified row to the new row location using animation.
 func (o *NSTableView) MoveRowAtIndexToIndex(oldIndex int, newIndex int) {
 	o.Ptr().Send(_nSTableViewSelMoveRowAtIndexToIndex, oldIndex, newIndex)
 }
 
+// Hides the specified table rows.
 func (o *NSTableView) HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSTableViewSelHideRowsAtIndexesWithAnimation, indexes.Ptr(), rowAnimation)
 }
 
+// Unhides the specified table rows.
 func (o *NSTableView) UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSTableViewSelUnhideRowsAtIndexesWithAnimation, indexes.Ptr(), rowAnimation)
 }
 
+// Registers a NIB for the specified identifier, so that view-based table views can use it to instantiate views.
 func (o *NSTableView) RegisterNibForIdentifier(nib *NSNib, identifier *foundation.NSString) {
 	o.Ptr().Send(_nSTableViewSelRegisterNibForIdentifier, nib.Ptr(), identifier.Ptr())
 }
 
+// Invoked when a row view is added to the table.
 func (o *NSTableView) DidAddRowViewForRow(rowView *NSTableRowView, row int) {
 	o.Ptr().Send(_nSTableViewSelDidAddRowViewForRow, rowView.Ptr(), row)
 }
 
+// Invoked when a row view is removed from the table.
 func (o *NSTableView) DidRemoveRowViewForRow(rowView *NSTableRowView, row int) {
 	o.Ptr().Send(_nSTableViewSelDidRemoveRowViewForRow, rowView.Ptr(), row)
 }
@@ -663,12 +720,15 @@ func (o *NSTableView) SetDoubleAction(doubleAction objc.SEL) {
 }
 
 func (o *NSTableView) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _nSTableViewSelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 func (o *NSTableView) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_nSTableViewSelSetSortDescriptors, sortDescriptors)
+	o.Ptr().Send(_nSTableViewSelSetSortDescriptors, sortDescriptors.Ptr())
 }
 
 func (o *NSTableView) HighlightedTableColumn() *NSTableColumn {
@@ -844,8 +904,11 @@ func (o *NSTableView) HiddenRowIndexes() *foundation.NSIndexSet {
 }
 
 func (o *NSTableView) RegisteredNibsByIdentifier() *foundation.NSDictionary[*foundation.NSString, *NSNib] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSNib]](o.Ptr(), _nSTableViewSelRegisteredNibsByIdentifier)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRegisteredNibsByIdentifier)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSNib](_ret)
 }
 
 func (o *NSTableView) UsesStaticContents() bool {
@@ -866,65 +929,82 @@ func (o *NSTableView) SetUsesAutomaticRowHeights(usesAutomaticRowHeights bool) {
 	o.Ptr().Send(_nSTableViewSelSetUsesAutomaticRowHeights, usesAutomaticRowHeights)
 }
 
+// Sets whether the table view draws a grid.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SetDrawsGrid(flag bool) {
 	o.Ptr().Send(_nSTableViewSelSetDrawsGrid, flag)
 }
 
+// Returns a Boolean value that indicates whether the table view draws a grid.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) DrawsGrid() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelDrawsGrid)
 	return _ret
 }
 
+// Selects the column at the specified index, optionally extending any existing selection.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectColumnByExtendingSelection(column int, extend bool) {
 	o.Ptr().Send(_nSTableViewSelSelectColumnByExtendingSelection, column, extend)
 }
 
+// Selects a row at the specified index, optionally extending any existing selection.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectRowByExtendingSelection(row int, extend bool) {
 	o.Ptr().Send(_nSTableViewSelSelectRowByExtendingSelection, row, extend)
 }
 
+// This method has been deprecated.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectedColumnEnumerator() *foundation.NSEnumerator[objc.ID] {
-	_ret := objc.Send[*foundation.NSEnumerator[objc.ID]](o.Ptr(), _nSTableViewSelSelectedColumnEnumerator)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedColumnEnumerator)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSEnumeratorFromID[objc.ID](_ret)
 }
 
+// This method has been deprecated.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectedRowEnumerator() *foundation.NSEnumerator[objc.ID] {
-	_ret := objc.Send[*foundation.NSEnumerator[objc.ID]](o.Ptr(), _nSTableViewSelSelectedRowEnumerator)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedRowEnumerator)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSEnumeratorFromID[objc.ID](_ret)
 }
 
+// Computes and returns an image to use for dragging.
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) DragImageForRowsEventDragImageOffset(dragRows *foundation.NSArray[objc.ID], dragEvent *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsEventDragImageOffset, dragRows, dragEvent.Ptr(), dragImageOffset)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsEventDragImageOffset, dragRows.Ptr(), dragEvent.Ptr(), dragImageOffset)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSImageFromID(_ret)
 }
 
+// Controls whether the table view proportionally resizes its columns to fit when its superview’s frame changes.
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) SetAutoresizesAllColumnsToFit(flag bool) {
 	o.Ptr().Send(_nSTableViewSelSetAutoresizesAllColumnsToFit, flag)
 }
 
+// Returns a Boolean value that indicates if the table view proportionally resizes its columns to fit when its superview’s frame changes.
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) AutoresizesAllColumnsToFit() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAutoresizesAllColumnsToFit)
 	return _ret
 }
 
+// Returns a range of indexes for the table view’s columns that lie wholly or partially within the horizontal boundaries of the specified rectangle.
 // Deprecated: since macOS 10.5.
 func (o *NSTableView) ColumnsInRect(rect corefoundation.CGRect) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTableViewSelColumnsInRect, rect)
 	return _ret
 }
 
+// Returns the fully prepared cell that the table view will use for drawing or processing of the specified row and column.
 // Deprecated: Use View Based TableView and -viewAtColumn:row:
 func (o *NSTableView) PreparedCellAtColumnRow(column int, row int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelPreparedCellAtColumnRow, column, row)
@@ -934,50 +1014,59 @@ func (o *NSTableView) PreparedCellAtColumnRow(column int, row int) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Queries the delegate to determine if the text should begin editing.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextShouldBeginEditing(textObject *NSText) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelTextShouldBeginEditing, textObject.Ptr())
 	return _ret
 }
 
+// Validates the text object for the cell being edited by querying the delegate.queries the delegate using control:textShouldEndEditing:, returning the delegate’s response if it responds to that method.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextShouldEndEditing(textObject *NSText) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelTextShouldEndEditing, textObject.Ptr())
 	return _ret
 }
 
+// Posts an NSControlTextDidBeginEditingNotification to the default notification center.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextDidBeginEditing(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSTableViewSelTextDidBeginEditing, notification.Ptr())
 }
 
+// Updates the data source based on the newly edited value and selects another cell for editing if possible according to the character that ended editing (Return, Tab, Backtab).
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextDidEndEditing(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSTableViewSelTextDidEndEditing, notification.Ptr())
 }
 
+// Sends textDidChange: to the edited cell and posts an NSControlTextDidChangeNotification to the default notification center.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextDidChange(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSTableViewSelTextDidChange, notification.Ptr())
 }
 
+// Returns whether the fully prepared cell at the specified row and column can be made the focused cell.
 // Deprecated: Use a View Based TableView; observe the window’s firstResponder for focus change notifications
 func (o *NSTableView) ShouldFocusCellAtColumnRow(cell *NSCell, column int, row int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelShouldFocusCellAtColumnRow, cell.Ptr(), column, row)
 	return _ret
 }
 
+// Returns the currently focused column.
 // Deprecated: Use a View Based TableView and observe the window.firstResponder
 func (o *NSTableView) FocusedColumn() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelFocusedColumn)
 	return _ret
 }
 
+// Sets the currently focused column to the specified index.
 // Deprecated: Use a View Based TableView; make a particular view the first responder with [window makeFirstResponder:view] to focus it.
 func (o *NSTableView) SetFocusedColumn(focusedColumn int) {
 	o.Ptr().Send(_nSTableViewSelSetFocusedColumn, focusedColumn)
 }
 
+// Performs a click action on the cell at the specified row and column.
 // Deprecated: Use a View Based TableView; directly interact with a particular view as required and call -performClick: on it, if necessary
 func (o *NSTableView) PerformClickOnCellAtColumnRow(column int, row int) {
 	o.Ptr().Send(_nSTableViewSelPerformClickOnCellAtColumnRow, column, row)

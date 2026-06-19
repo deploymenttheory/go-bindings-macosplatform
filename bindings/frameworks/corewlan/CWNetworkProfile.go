@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates an immutable network profile entry.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwnetworkprofile
 type CWNetworkProfile struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func CWNetworkProfileFromID(id objc.ID) *CWNetworkProfile {
 	return o
 }
 
-// @method @abstract Convenience method for getting a CWNetworkProfile object.
+// Convenience method for getting a CWNetworkProfile object.
 func CWNetworkProfileNetworkProfile() *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWNetworkProfile), _cWNetworkProfileSelNetworkProfile)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func CWNetworkProfileNetworkProfile() *CWNetworkProfile {
 	return CWNetworkProfileFromID(_ret)
 }
 
-// @method @abstract Initializes a CWNetworkProfile object.
+// Creates and returns a CWNetworkProfile object.
 func (o *CWNetworkProfile) Init() *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkProfileSelInit)
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func (o *CWNetworkProfile) Init() *CWNetworkProfile {
 	return CWNetworkProfileFromID(_ret)
 }
 
-// @method @param networkProfile A CWNetworkProfile object. @result A CWNetworkProfile object. @abstract Initializes a CWNetworkProfile object with the properties of an existing CWNetworkProfile object.
+// Creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 func (o *CWNetworkProfile) InitWithNetworkProfile(networkProfile *CWNetworkProfile) *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkProfileSelInitWithNetworkProfile, networkProfile.Ptr())
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func (o *CWNetworkProfile) InitWithNetworkProfile(networkProfile *CWNetworkProfi
 	return CWNetworkProfileFromID(_ret)
 }
 
-// @method @param networkProfile A CWNetworkProfile object. @result A CWNetworkProfile object. @abstract Convenience method for getting a CWNetworkProfile object initialized with the properties of an existing CWNetworkProfile object.
+// Convenience method for getting a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 func CWNetworkProfileNetworkProfileWithNetworkProfile(networkProfile *CWNetworkProfile) *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWNetworkProfile), _cWNetworkProfileSelNetworkProfileWithNetworkProfile, networkProfile.Ptr())
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func CWNetworkProfileNetworkProfileWithNetworkProfile(networkProfile *CWNetworkP
 	return CWNetworkProfileFromID(_ret)
 }
 
-// @method @param network A CWNetworkProfile object. @result YES if the objects are equal, NO otherwise. @abstract Determine CWNetworkProfile equality. @discussion CWNetworkProfile objects are considered equal if their corresponding <i>ssidData</i> and <i>security</i> properties are equal.
+// Determine CWNetworkProfile object equality.
 func (o *CWNetworkProfile) IsEqualToNetworkProfile(networkProfile *CWNetworkProfile) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWNetworkProfileSelIsEqualToNetworkProfile, networkProfile.Ptr())
 	return _ret

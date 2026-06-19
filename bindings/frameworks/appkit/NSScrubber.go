@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A customizable item picker control for the Touch Bar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubber
 type NSScrubber struct {
 	NSView
@@ -73,6 +75,7 @@ func NSScrubberFromID(id objc.ID) *NSScrubber {
 	return o
 }
 
+// Initializes and returns a newly allocated scrubber object with the specified frame rectangle.
 func (o *NSScrubber) InitWithFrame(frameRect corefoundation.CGRect) *NSScrubber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithFrame, frameRect)
 	if _ret != 0 {
@@ -81,6 +84,7 @@ func (o *NSScrubber) InitWithFrame(frameRect corefoundation.CGRect) *NSScrubber 
 	return NSScrubberFromID(_ret)
 }
 
+// Initializes and returns a newly allocated scrubber object from a storyboard or nib file.
 func (o *NSScrubber) InitWithCoder(coder *foundation.NSCoder) *NSScrubber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -89,12 +93,12 @@ func (o *NSScrubber) InitWithCoder(coder *foundation.NSCoder) *NSScrubber {
 	return NSScrubberFromID(_ret)
 }
 
-// Invalidate all data within the scrubber control, triggering a reload of all content, and clearing the current selection.
+// Reloads the content of the entire scrubber, and deselects the currently selected item.
 func (o *NSScrubber) ReloadData() {
 	o.Ptr().Send(_nSScrubberSelReloadData)
 }
 
-// Updates inside the @c performSequentialBatchUpdates block are processed and displayed all at once, including insertion, removal, moving, reloading items, and changing the selected index. Changes are performed iteratively using the same semantics as @c NSMutableArray. NSScrubber expects its dataSource to reflect the changes made inside @c -performSequentialBatchUpdates: immediately after the @c updateBlock finishes executing.
+// Combines multiple scrubber content updates into a single action.
 func (o *NSScrubber) PerformSequentialBatchUpdates(updateBlock func()) {
 	var __block_updateBlock objc.Block
 	if updateBlock != nil {
@@ -106,32 +110,32 @@ func (o *NSScrubber) PerformSequentialBatchUpdates(updateBlock func()) {
 	o.Ptr().Send(_nSScrubberSelPerformSequentialBatchUpdates, __block_updateBlock)
 }
 
-// Inserts new items at the specified indexes. NSScrubber will request views for each new index from the @c dataSource. This method uses the same semantics as @c NSMutableArray; each index in the set specifies the destination index after all previous insertions have occurred. Therefore, an NSIndexSet of [1,2,3] will result in three new contiguous items.
+// Inserts new items at the specified indexes into the scrubber.
 func (o *NSScrubber) InsertItemsAtIndexes(indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSScrubberSelInsertItemsAtIndexes, indexes.Ptr())
 }
 
-// Removes the items at the specified indexes. This method uses the same semantics as @c NSMutableArray.
+// Removes the items at the specified indexes from the scrubber.
 func (o *NSScrubber) RemoveItemsAtIndexes(indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSScrubberSelRemoveItemsAtIndexes, indexes.Ptr())
 }
 
-// Reloads the items at the specified indexes. NSScrubber will request new views for each item and smoothly crossfade between them before discarding the original views.
+// Reloads the items at the specified indexes.
 func (o *NSScrubber) ReloadItemsAtIndexes(indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSScrubberSelReloadItemsAtIndexes, indexes.Ptr())
 }
 
-// Moves an item from one index to another. @c oldIndex refers to the item's index prior to the movement, whereas @c newIndex refers to the item's final location.
+// Moves an item from one index to another in the scrubber.
 func (o *NSScrubber) MoveItemAtIndexToIndex(oldIndex int, newIndex int) {
 	o.Ptr().Send(_nSScrubberSelMoveItemAtIndexToIndex, oldIndex, newIndex)
 }
 
-// Scrolls an item to a given alignment within the control. If @c NSScrubberAlignmentNone is provided, then the control scrolls the minimum amount necessary to make the item visible. Scrolling is animated if called on the animator proxy.
+// Scrolls an item to a specified alignment within the scrubber.
 func (o *NSScrubber) ScrollItemAtIndexToAlignment(index int, alignment NSScrubberAlignment) {
 	o.Ptr().Send(_nSScrubberSelScrollItemAtIndexToAlignment, index, alignment)
 }
 
-// Returns the @c NSScrubberItemView for the given index, if one currently exists; returns @c nil otherwise.
+// Returns the view for the item at the specified index.
 func (o *NSScrubber) ItemViewForItemAtIndex(index int) *NSScrubberItemView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelItemViewForItemAtIndex, index)
 	if _ret != 0 {
@@ -140,17 +144,17 @@ func (o *NSScrubber) ItemViewForItemAtIndex(index int) *NSScrubberItemView {
 	return NSScrubberItemViewFromID(_ret)
 }
 
-// Registers a @c NSScrubberItemView class to be instantiated for the given @c itemIdentifier. Raises an exception if @c itemViewClass is not a subclass of @c NSScrubberItemView. Passing @c nil for @c itemViewClass removes a previous registration. Registrations made through this method do not persist through NSCoding.
+// Registers a class for the scrubber to use when it creates new items.
 func (o *NSScrubber) RegisterClassForItemIdentifier(itemViewClass objc.Class, itemIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nSScrubberSelRegisterClassForItemIdentifier, itemViewClass, itemIdentifier.Ptr())
 }
 
-// Register a nib to be instantiated for the given @c itemIdentifier. The nib must contain a top-level object which is a subclass of NSScrubberItemView; otherwise, @c -makeItemWithIdentifier: may return @c nil for this identifier. Passing @c nil for @c nib removes a previous registration.
+// Registers a nib file for the scrubber to use when it creates new items in the scrubber.
 func (o *NSScrubber) RegisterNibForItemIdentifier(nib *NSNib, itemIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nSScrubberSelRegisterNibForItemIdentifier, nib.Ptr(), itemIdentifier.Ptr())
 }
 
-// Creates or reuses a @c NSScrubberItemView corresponding to the provided @c itemIdentifier. @c NSScrubber searches, in order: the reuse queue, the list of registered classes, and then the list of registered nibs. If the reuse queue is empty, and there is no Class or Interface Builder archive registered for the @c itemIdentifier, this method returns @c nil.
+// Creates or returns a reusable item object with the specified identifier.
 func (o *NSScrubber) MakeItemWithIdentifierOwner(itemIdentifier *foundation.NSString, owner objc.ID) *NSScrubberItemView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelMakeItemWithIdentifierOwner, itemIdentifier.Ptr(), owner)
 	if _ret != 0 {

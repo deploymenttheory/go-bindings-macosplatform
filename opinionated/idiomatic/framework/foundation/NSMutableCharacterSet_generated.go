@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a mutable set of Unicode character values for use in search operations.
+//
 // MutableCharacterSet wraps [raw.NSMutableCharacterSet] with a fluent Go API.
 type MutableCharacterSet struct {
 	inner *raw.NSMutableCharacterSet
@@ -42,36 +44,50 @@ func (x *MutableCharacterSet) WithScriptingProperties(scriptingProperties *raw.N
 	return x
 }
 
+// Adds to the receiver the characters whose Unicode values are in a given range.
+//
 // AddCharactersInRange calls the underlying AddCharactersInRange.
 func (x *MutableCharacterSet) AddCharactersInRange(aRange raw.NSRange) {
 	x.inner.AddCharactersInRange(aRange)
 }
 
+// Removes from the receiver the characters whose Unicode values are in a given range.
+//
 // RemoveCharactersInRange calls the underlying RemoveCharactersInRange.
 func (x *MutableCharacterSet) RemoveCharactersInRange(aRange raw.NSRange) {
 	x.inner.RemoveCharactersInRange(aRange)
 }
 
+// Adds to the receiver the characters in a given string.
+//
 // AddCharactersInString calls the underlying AddCharactersInString.
 func (x *MutableCharacterSet) AddCharactersInString(aString string) {
 	x.inner.AddCharactersInString(foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Removes from the receiver the characters in a given string.
+//
 // RemoveCharactersInString calls the underlying RemoveCharactersInString.
 func (x *MutableCharacterSet) RemoveCharactersInString(aString string) {
 	x.inner.RemoveCharactersInString(foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Modifies the receiver so it contains all characters that exist in either the receiver or another set.
+//
 // FormUnionWithCharacterSet calls the underlying FormUnionWithCharacterSet.
 func (x *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *raw.NSCharacterSet) {
 	x.inner.FormUnionWithCharacterSet(otherSet)
 }
 
+// Modifies the receiver so it contains only characters that exist in both the receiver and another set.
+//
 // FormIntersectionWithCharacterSet calls the underlying FormIntersectionWithCharacterSet.
 func (x *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *raw.NSCharacterSet) {
 	x.inner.FormIntersectionWithCharacterSet(otherSet)
 }
 
+// Replaces all the characters in the receiver with all the characters it didn’t previously contain.
+//
 // Invert calls the underlying Invert.
 func (x *MutableCharacterSet) Invert() {
 	x.inner.Invert()

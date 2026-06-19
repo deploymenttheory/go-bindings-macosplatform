@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Activity information that signifies a score out of a possible maximum.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsscoreitem
 type CLSScoreItem struct {
 	CLSActivityItem
@@ -34,7 +36,7 @@ func CLSScoreItemFromID(id objc.ID) *CLSScoreItem {
 	return o
 }
 
-// @abstract      Create a score item with identifiers, title, score and maximum score. @param         identifier      An identifier that is unique within activity. @param         title           Title of score. Ex @em Biology- Cellular Division Quiz @param         score           The score the user received. @param         maxScore        The maximum score possible.
+// Initializes an activity item that holds a score value.
 func (o *CLSScoreItem) InitWithIdentifierTitleScoreMaxScore(identifier *foundation.NSString, title *foundation.NSString, score float64, maxScore float64) *CLSScoreItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSScoreItemSelInitWithIdentifierTitleScoreMaxScore, identifier.Ptr(), title.Ptr(), score, maxScore)
 	if _ret != 0 {

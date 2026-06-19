@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that monitors average and peak power levels for an audio channel in a capture connection.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureaudiochannel
 type AVCaptureAudioChannel struct {
 	foundation.NSObject

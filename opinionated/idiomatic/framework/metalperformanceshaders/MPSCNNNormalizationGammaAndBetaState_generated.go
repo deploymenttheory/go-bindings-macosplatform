@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores gamma and beta terms used to apply a scale and bias in instance- or batch-normalization operations.
+//
 // CNNNormalizationGammaAndBetaState wraps [raw.MPSCNNNormalizationGammaAndBetaState] with a fluent Go API.
 type CNNNormalizationGammaAndBetaState struct {
 	inner *raw.MPSCNNNormalizationGammaAndBetaState

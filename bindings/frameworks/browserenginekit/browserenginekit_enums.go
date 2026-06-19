@@ -8,21 +8,35 @@ import (
 	"strings"
 )
 
+// Types of containers for an element.
 type BEAccessibilityContainerType uint64
 
 const (
-	BEAccessibilityContainerTypeNone            BEAccessibilityContainerType = 0
-	BEAccessibilityContainerTypeLandmark        BEAccessibilityContainerType = 1
-	BEAccessibilityContainerTypeTable           BEAccessibilityContainerType = 2
-	BEAccessibilityContainerTypeList            BEAccessibilityContainerType = 4
-	BEAccessibilityContainerTypeFieldset        BEAccessibilityContainerType = 8
-	BEAccessibilityContainerTypeDialog          BEAccessibilityContainerType = 16
-	BEAccessibilityContainerTypeTree            BEAccessibilityContainerType = 32
-	BEAccessibilityContainerTypeFrame           BEAccessibilityContainerType = 64
-	BEAccessibilityContainerTypeArticle         BEAccessibilityContainerType = 128
-	BEAccessibilityContainerTypeSemanticGroup   BEAccessibilityContainerType = 256
-	BEAccessibilityContainerTypeScrollArea      BEAccessibilityContainerType = 512
-	BEAccessibilityContainerTypeAlert           BEAccessibilityContainerType = 1024
+	// An option that indicates the element has no container.
+	BEAccessibilityContainerTypeNone BEAccessibilityContainerType = 0
+	// A website accessibility landmark that contains the element.
+	BEAccessibilityContainerTypeLandmark BEAccessibilityContainerType = 1
+	// A table that contains the element.
+	BEAccessibilityContainerTypeTable BEAccessibilityContainerType = 2
+	// A list contains the element.
+	BEAccessibilityContainerTypeList BEAccessibilityContainerType = 4
+	// An HTML fieldset element that contains the element.
+	BEAccessibilityContainerTypeFieldset BEAccessibilityContainerType = 8
+	// A dialog that contains the element.
+	BEAccessibilityContainerTypeDialog BEAccessibilityContainerType = 16
+	// A tree that contains the element.
+	BEAccessibilityContainerTypeTree BEAccessibilityContainerType = 32
+	// A frame that contains the element.
+	BEAccessibilityContainerTypeFrame BEAccessibilityContainerType = 64
+	// An HTML article element that contains the alert.
+	BEAccessibilityContainerTypeArticle BEAccessibilityContainerType = 128
+	// A semantic group that contains the element.
+	BEAccessibilityContainerTypeSemanticGroup BEAccessibilityContainerType = 256
+	// A scroll area that contains the element.
+	BEAccessibilityContainerTypeScrollArea BEAccessibilityContainerType = 512
+	// An alert that contains the element.
+	BEAccessibilityContainerTypeAlert BEAccessibilityContainerType = 1024
+	// A description list that contains the element.
 	BEAccessibilityContainerTypeDescriptionList BEAccessibilityContainerType = 2048
 )
 
@@ -70,13 +84,18 @@ func (e BEAccessibilityContainerType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// An enumeration that indicates whether an element is pressed.
 type BEAccessibilityPressedState int64
 
 const (
+	// An option that indicates an undefined pressed state.
 	BEAccessibilityPressedStateUndefined BEAccessibilityPressedState = 0
-	BEAccessibilityPressedStateFalse     BEAccessibilityPressedState = 1
-	BEAccessibilityPressedStateTrue      BEAccessibilityPressedState = 2
-	BEAccessibilityPressedStateMixed     BEAccessibilityPressedState = 3
+	// A state that indicates the element isn’t pressed.
+	BEAccessibilityPressedStateFalse BEAccessibilityPressedState = 1
+	// A state that indicates the element is pressed.
+	BEAccessibilityPressedStateTrue BEAccessibilityPressedState = 2
+	// A state that indicates the element is in a mixed state.
+	BEAccessibilityPressedStateMixed BEAccessibilityPressedState = 3
 )
 
 func (e BEAccessibilityPressedState) String() string {
@@ -94,19 +113,30 @@ func (e BEAccessibilityPressedState) String() string {
 	}
 }
 
+// The types of touch gestures that operate on input text.
 type BEGestureType int64
 
 const (
-	BEGestureTypeLoupe                        BEGestureType = 0
-	BEGestureTypeOneFingerTap                 BEGestureType = 1
-	BEGestureTypeDoubleTapAndHold             BEGestureType = 2
-	BEGestureTypeDoubleTap                    BEGestureType = 3
-	BEGestureTypeOneFingerDoubleTap           BEGestureType = 8
-	BEGestureTypeOneFingerTripleTap           BEGestureType = 9
-	BEGestureTypeTwoFingerSingleTap           BEGestureType = 10
+	// A gesture for touch interactions with the magnifying glass tool.
+	BEGestureTypeLoupe BEGestureType = 0
+	// A gesture for a single tap performed with one finger.
+	BEGestureTypeOneFingerTap BEGestureType = 1
+	// A gesture for a double tap followed by holding the second tap.
+	BEGestureTypeDoubleTapAndHold BEGestureType = 2
+	// A gesture for two rapid consecutive taps.
+	BEGestureTypeDoubleTap BEGestureType = 3
+	// A gesture for a double tap with a single finger.
+	BEGestureTypeOneFingerDoubleTap BEGestureType = 8
+	// A gesture for three rapid consecutive taps with one finger.
+	BEGestureTypeOneFingerTripleTap BEGestureType = 9
+	// A gesture for a single simultaneous tap with two fingers.
+	BEGestureTypeTwoFingerSingleTap BEGestureType = 10
+	// A gesture to select a range of text with two fingers.
 	BEGestureTypeTwoFingerRangedSelectGesture BEGestureType = 11
-	BEGestureTypeIMPhraseBoundaryDrag         BEGestureType = 14
-	BEGestureTypeForceTouch                   BEGestureType = 15
+	// A gesture for dragging to adjust input method phrase boundaries.
+	BEGestureTypeIMPhraseBoundaryDrag BEGestureType = 14
+	// A gesture that represents a deep press using 3D Touch or Force Touch.
+	BEGestureTypeForceTouch BEGestureType = 15
 )
 
 func (e BEGestureType) String() string {
@@ -136,12 +166,17 @@ func (e BEGestureType) String() string {
 	}
 }
 
+// Flags that indicate different states or characteristics of a text selection.
 type BESelectionFlags uint64
 
 const (
-	BESelectionFlagsNone    BESelectionFlags = 0
-	BEWordIsNearTap         BESelectionFlags = 1
-	BESelectionFlipped      BESelectionFlags = 2
+	// An option that indicates no active flags.
+	BESelectionFlagsNone BESelectionFlags = 0
+	// A flag that indicates whether a word resides near the person’s tap gesture.
+	BEWordIsNearTap BESelectionFlags = 1
+	// A flag that indicates whether a text selection is reversed or flipped in direction from its original direction.
+	BESelectionFlipped BESelectionFlags = 2
+	// A flag that indicates whether a text selection crosses or modifies phrase boundaries in an active selection.
 	BEPhraseBoundaryChanged BESelectionFlags = 4
 )
 
@@ -162,15 +197,22 @@ func (e BESelectionFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The different phases of touch interaction during text selection operations.
 type BESelectionTouchPhase int64
 
 const (
-	BESelectionTouchPhaseStarted             BESelectionTouchPhase = 0
-	BESelectionTouchPhaseMoved               BESelectionTouchPhase = 1
-	BESelectionTouchPhaseEnded               BESelectionTouchPhase = 2
-	BESelectionTouchPhaseEndedMovingForward  BESelectionTouchPhase = 3
+	// A phase that indicates when a new touch interaction for text selection begins.
+	BESelectionTouchPhaseStarted BESelectionTouchPhase = 0
+	// A phase that indicates that a touch actively adjusts the text selection boundaries.
+	BESelectionTouchPhaseMoved BESelectionTouchPhase = 1
+	// A phase that indicates when the touch interaction for text selection completes without specifying movement direction.
+	BESelectionTouchPhaseEnded BESelectionTouchPhase = 2
+	// A phase that indicates when the touch interaction ends after moving in a forward direction.
+	BESelectionTouchPhaseEndedMovingForward BESelectionTouchPhase = 3
+	// A phase that indicates when the touch interaction ends after moving in a backward direction.
 	BESelectionTouchPhaseEndedMovingBackward BESelectionTouchPhase = 4
-	BESelectionTouchPhaseEndedNotMoving      BESelectionTouchPhase = 5
+	// A phase that indicates when the touch interaction ends without any movement of the selection boundaries.
+	BESelectionTouchPhaseEndedNotMoving BESelectionTouchPhase = 5
 )
 
 func (e BESelectionTouchPhase) String() string {

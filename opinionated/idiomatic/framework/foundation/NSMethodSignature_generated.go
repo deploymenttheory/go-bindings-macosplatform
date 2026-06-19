@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A record of the type information for the return value and parameters of a method.
+//
 // MethodSignature wraps [raw.NSMethodSignature] with a fluent Go API.
 type MethodSignature struct {
 	inner *raw.NSMethodSignature
@@ -42,11 +44,15 @@ func (x *MethodSignature) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Returns the type encoding for the argument at a given index.
+//
 // GetArgumentTypeAtIndex calls the underlying GetArgumentTypeAtIndex.
 func (x *MethodSignature) GetArgumentTypeAtIndex(idx uint) string {
 	return x.inner.GetArgumentTypeAtIndex(idx)
 }
 
+// Whether the receiver is asynchronous when invoked through distributed objects.
+//
 // IsOneway calls the underlying IsOneway.
 func (x *MethodSignature) IsOneway() bool {
 	return x.inner.IsOneway()

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Your app’s response to a request for reservation details.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/ingetreservationdetailsintentresponse
 type INGetReservationDetailsIntentResponse struct {
 	INIntentResponse
@@ -33,6 +35,7 @@ func INGetReservationDetailsIntentResponseFromID(id objc.ID) *INGetReservationDe
 	return o
 }
 
+// Creates the response object with the specified code and user activity object.
 func (o *INGetReservationDetailsIntentResponse) InitWithCodeUserActivity(code INGetReservationDetailsIntentResponseCode, userActivity *foundation.NSUserActivity) *INGetReservationDetailsIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
 	if _ret != 0 {

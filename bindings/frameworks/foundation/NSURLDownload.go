@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that downloads a resource asynchronously and saves the data to a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurldownload
 type NSURLDownload struct {
 	NSObject
@@ -37,13 +39,13 @@ func NSURLDownloadFromID(id objc.ID) *NSURLDownload {
 	return o
 }
 
-// @method canResumeDownloadDecodedWithEncodingMIMEType: @abstract Returns whether or not NSURLDownload can resume a download that was decoded with a given encoding MIME type. @param MIMEType The encoding MIME type. @description canResumeDownloadDecodedWithEncodingMIMEType: returns whether or not NSURLDownload can resume a download that was decoded with a given encoding MIME type.  NSURLDownload cannot resume a download that was partially decoded in the gzip format for example. In order to ensure that a download can be later resumed, canResumeDownloadDecodedWithEncodingMIMEType: should be used when download:shouldDecodeSourceDataOfMIMEType: is called.
+// Returns whether a URL download object can resume a download that was decoded with the specified MIME type.
 func NSURLDownloadCanResumeDownloadDecodedWithEncodingMIMEType(mIMEType *NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLDownload), _nSURLDownloadSelCanResumeDownloadDecodedWithEncodingMIMEType, mIMEType.Ptr())
 	return _ret
 }
 
-// @method initWithRequest:delegate: @abstract Initializes a NSURLDownload object and starts the download. @param request The request to download. Must not be nil. @param delegate The delegate of the download. @result An initialized NSURLDownload object.
+// Returns an initialized URL download for a URL request and begins to download the data for the request.
 // Deprecated: Use NSURLSession downloadTask (see NSURLSession.h)
 func (o *NSURLDownload) InitWithRequestDelegate(request *NSURLRequest, delegate NSURLDownloadDelegate) *NSURLDownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelInitWithRequestDelegate, request.Ptr(), delegate)
@@ -53,7 +55,7 @@ func (o *NSURLDownload) InitWithRequestDelegate(request *NSURLRequest, delegate 
 	return NSURLDownloadFromID(_ret)
 }
 
-// @method initWithResumeData:delegate:path: @abstract Initializes a NSURLDownload object for resuming a previous download. @param resumeData The resume data from the previous download. @param delegate The delegate of the download. @param path The path of the incomplete downloaded file. @result An initialized NSURLDownload object.
+// Returns an initialized NSURLDownload object that will resume downloading the specified data to the specified file and begins the download.
 // Deprecated: Use NSURLSession downloadTask (see NSURLSession.h)
 func (o *NSURLDownload) InitWithResumeDataDelegatePath(resumeData *NSData, delegate NSURLDownloadDelegate, path *NSString) *NSURLDownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelInitWithResumeDataDelegatePath, resumeData.Ptr(), delegate, path.Ptr())
@@ -63,12 +65,12 @@ func (o *NSURLDownload) InitWithResumeDataDelegatePath(resumeData *NSData, deleg
 	return NSURLDownloadFromID(_ret)
 }
 
-// @method cancel @abstract Cancels the download and deletes the downloaded file.
+// Cancels the receiver’s download and deletes the downloaded file.
 func (o *NSURLDownload) Cancel() {
 	o.Ptr().Send(_nSURLDownloadSelCancel)
 }
 
-// @method setDestination:allowOverwrite: @abstract Sets the destination path of the downloaded file. @param path The destination path of the downloaded file. @param allowOverwrite Allows a file of the same path to be overwritten. @discussion This method can be called after the download is created or in response to the decideDestinationWithSuggestedFilename: delegate method. It should only be called once. If NO is passed for allowOverwrite and a file of the same path exists, a number will be appended to the filename to prevent the overwrite. Because of this, use the path passed with didCreateDestination: to determine the actual path of the downloaded file.
+// Sets the destination path of the downloaded file.
 func (o *NSURLDownload) SetDestinationAllowOverwrite(path *NSString, allowOverwrite bool) {
 	o.Ptr().Send(_nSURLDownloadSelSetDestinationAllowOverwrite, path.Ptr(), allowOverwrite)
 }

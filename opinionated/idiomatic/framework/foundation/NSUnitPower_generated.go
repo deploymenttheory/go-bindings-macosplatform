@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for power.
+//
 // UnitPower wraps [raw.NSUnitPower] with a fluent Go API.
 type UnitPower struct {
 	inner *raw.NSUnitPower

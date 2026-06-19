@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class that defines samples that contain a series of items.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkseriessample
 type HKSeriesSample struct {
 	HKSample

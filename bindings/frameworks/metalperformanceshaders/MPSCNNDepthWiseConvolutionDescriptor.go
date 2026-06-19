@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a convolution object that does depthwise convolution.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndepthwiseconvolutiondescriptor
 type MPSCNNDepthWiseConvolutionDescriptor struct {
 	mpsneuralnetwork.MPSCNNConvolutionDescriptor

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents PDF data or a PDF file and defines methods for writing, searching, and selecting PDF data.
+//
 // Document wraps [raw.PDFDocument] with a fluent Go API.
 type Document struct {
 	inner *raw.PDFDocument
@@ -40,6 +42,8 @@ func NewDocument() *Document {
 	return &Document{inner: raw.PDFDocumentFromID(_id)}
 }
 
+// Initializes a PDFDocument object with the contents at the specified URL (if the URL is invalid, this method returns NULL).
+//
 // NewDocumentWithURL creates a new [Document].
 func NewDocumentWithURL(url string) *Document {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDocument")), objc.RegisterName("alloc"))
@@ -47,6 +51,8 @@ func NewDocumentWithURL(url string) *Document {
 	return &Document{inner: raw.PDFDocumentFromID(_id)}
 }
 
+// Initializes a PDFDocument object with the passed-in data.
+//
 // NewDocumentWithData creates a new [Document].
 func NewDocumentWithData(data *foundation.NSData) *Document {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDocument")), objc.RegisterName("alloc"))
@@ -60,12 +66,16 @@ func (x *Document) WithDocumentAttributes(documentAttributes *foundation.NSDicti
 	return x
 }
 
+// The object acting as the delegate for the PDFDocument object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Document) WithDelegate(delegate raw.PDFDocumentDelegate) *Document {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Attempts to unlock an encrypted document.
+//
 // UnlockWithPassword calls the underlying UnlockWithPassword.
 func (x *Document) UnlockWithPassword(password string) bool {
 	return x.inner.UnlockWithPassword(foundation.NSStringStringWithUTF8String(password))
@@ -139,11 +149,15 @@ func (x *Document) ExchangePageAtIndexWithPageAtIndex(indexA uint, indexB uint) 
 	x.inner.ExchangePageAtIndexWithPageAtIndex(indexA, indexB)
 }
 
+// Synchronously finds all instances of the specified string in the document.
+//
 // FindStringWithOptions calls the underlying FindStringWithOptions.
 func (x *Document) FindStringWithOptions(string_ string, options foundation.NSStringCompareOptions) *foundation.NSArray[*raw.PDFSelection] {
 	return x.inner.FindStringWithOptions(foundation.NSStringStringWithUTF8String(string_), options)
 }
 
+// Asynchronously finds all instances of the specified string in the document.
+//
 // BeginFindStringWithOptions calls the underlying BeginFindStringWithOptions.
 func (x *Document) BeginFindStringWithOptions(string_ string, options foundation.NSStringCompareOptions) {
 	x.inner.BeginFindStringWithOptions(foundation.NSStringStringWithUTF8String(string_), options)

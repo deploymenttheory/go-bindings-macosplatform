@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container object that associates a text attachment at a particular document location with a view object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextattachmentviewprovider
 type NSTextAttachmentViewProvider struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func NSTextAttachmentViewProviderFromID(id objc.ID) *NSTextAttachmentViewProvide
 	return o
 }
 
+// Creates a new text attachment view whose content starts at the location you provide.
 func (o *NSTextAttachmentViewProvider) InitWithTextAttachmentParentViewTextLayoutManagerLocation(textAttachment *NSTextAttachment, parentView *NSView, textLayoutManager *NSTextLayoutManager, location NSTextLocation) *NSTextAttachmentViewProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelInitWithTextAttachmentParentViewTextLayoutManagerLocation, textAttachment.Ptr(), parentView.Ptr(), textLayoutManager.Ptr(), location)
 	if _ret != 0 {
@@ -48,12 +51,14 @@ func (o *NSTextAttachmentViewProvider) InitWithTextAttachmentParentViewTextLayou
 	return NSTextAttachmentViewProviderFromID(_ret)
 }
 
+// Draws the custom view hierarchy that text attachment view subclasses implement.
 func (o *NSTextAttachmentViewProvider) LoadView() {
 	o.Ptr().Send(_nSTextAttachmentViewProviderSelLoadView)
 }
 
+// Returns the layout bounds for an attachment at a specific text location that contains the text attributes you specify.
 func (o *NSTextAttachmentViewProvider) AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], location NSTextLocation, textContainer *NSTextContainer, proposedLineFragment corefoundation.CGRect, position corefoundation.CGPoint) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextAttachmentViewProviderSelAttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition, attributes, location, textContainer.Ptr(), proposedLineFragment, position)
+	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextAttachmentViewProviderSelAttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition, attributes.Ptr(), location, textContainer.Ptr(), proposedLineFragment, position)
 	return _ret
 }
 

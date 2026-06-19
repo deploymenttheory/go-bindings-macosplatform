@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that vends collections of metadata items that a player item’s tracks carry.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemmetadataoutput
 type AVPlayerItemMetadataOutput struct {
 	AVPlayerItemOutput
@@ -35,16 +37,16 @@ func AVPlayerItemMetadataOutputFromID(id objc.ID) *AVPlayerItemMetadataOutput {
 	return o
 }
 
-// @method			initWithIdentifiers: @abstract		Creates an instance of AVPlayerItemMetadataOutput. @param			identifiers A array of metadata identifiers indicating the metadata items that the output should provide. @discussion See AVMetadataIdentifiers.h for publicly defined metadata identifiers. Pass nil to receive all of the timed metadata from all enabled AVPlayerItemTracks that carry timed metadata.
+// Creates an instance of AVPlayerItemMetadataOutput.
 func (o *AVPlayerItemMetadataOutput) InitWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *AVPlayerItemMetadataOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemMetadataOutputSelInitWithIdentifiers, identifiers)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemMetadataOutputSelInitWithIdentifiers, identifiers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerItemMetadataOutputFromID(_ret)
 }
 
-// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemMetadataOutputPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called.
+// Sets the delegate and a dispatch queue on which the delegate is called.
 func (o *AVPlayerItemMetadataOutput) SetDelegateQueue(delegate AVPlayerItemMetadataOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVPlayerItemMetadataOutputSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }

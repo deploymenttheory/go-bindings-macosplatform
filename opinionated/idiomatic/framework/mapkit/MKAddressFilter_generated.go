@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that filters which address options to include or exclude in search results.
+//
 // AddressFilter wraps [raw.MKAddressFilter] with a fluent Go API.
 type AddressFilter struct {
 	inner *raw.MKAddressFilter
@@ -29,6 +31,8 @@ func AddressFilterFromID(id objc.ID) *AddressFilter {
 	return &AddressFilter{inner: raw.MKAddressFilterFromID(id)}
 }
 
+// Creates an address filter with options for including results in a search.
+//
 // NewAddressFilterIncludingOptions creates a new [AddressFilter].
 func NewAddressFilterIncludingOptions(options MKAddressFilterOption) *AddressFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressFilter")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewAddressFilterIncludingOptions(options MKAddressFilterOption) *AddressFil
 	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
 }
 
+// Creates an address filter with options for excluding results in a search.
+//
 // NewAddressFilterExcludingOptions creates a new [AddressFilter].
 func NewAddressFilterExcludingOptions(options MKAddressFilterOption) *AddressFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressFilter")), objc.RegisterName("alloc"))
@@ -43,11 +49,15 @@ func NewAddressFilterExcludingOptions(options MKAddressFilterOption) *AddressFil
 	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
 }
 
+// Indicates whether options are included for filtering.
+//
 // IncludesOptions calls the underlying IncludesOptions.
 func (x *AddressFilter) IncludesOptions(options MKAddressFilterOption) bool {
 	return x.inner.IncludesOptions(raw.MKAddressFilterOption(options))
 }
 
+// Indicates whether options are excluded from filtering.
+//
 // ExcludesOptions calls the underlying ExcludesOptions.
 func (x *AddressFilter) ExcludesOptions(options MKAddressFilterOption) bool {
 	return x.inner.ExcludesOptions(raw.MKAddressFilterOption(options))

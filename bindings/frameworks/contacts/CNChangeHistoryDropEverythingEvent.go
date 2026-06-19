@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that indicates the delegate should drop all contacts and groups before handling change events.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistorydropeverythingevent
 type CNChangeHistoryDropEverythingEvent struct {
 	CNChangeHistoryEvent

@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Models a finite state machine that has a single current state.
+// A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.
 //
 // StateMachine wraps [raw.GKStateMachine] with a fluent Go API.
 type StateMachine struct {
@@ -32,6 +32,8 @@ func StateMachineFromID(id objc.ID) *StateMachine {
 	return &StateMachine{inner: raw.GKStateMachineFromID(id)}
 }
 
+// Initializes a state machine with the specified states.
+//
 // NewStateMachineWithStates creates a new [StateMachine].
 func NewStateMachineWithStates(states *foundation.NSArray[*raw.GKState]) *StateMachine {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKStateMachine")), objc.RegisterName("alloc"))
@@ -39,14 +41,14 @@ func NewStateMachineWithStates(states *foundation.NSArray[*raw.GKState]) *StateM
 	return &StateMachine{inner: raw.GKStateMachineFromID(_id)}
 }
 
-// Updates the current state machine. @param sec the time, in seconds, since the last frame
+// Tells the current state object to perform per-frame updates.
 //
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *StateMachine) UpdateWithDeltaTime(sec float64) {
 	x.inner.UpdateWithDeltaTime(sec)
 }
 
-// Gets the instance of the indicated state class from this state machine. Returns nil if the state does not exist @param stateClass the class of the state to be retrieved
+// Returns the state object in the state machine corresponding to the specified class.
 //
 // StateForClass calls the underlying StateForClass.
 func (x *StateMachine) StateForClass(stateClass objc.Class) *State {
@@ -57,14 +59,14 @@ func (x *StateMachine) StateForClass(stateClass objc.Class) *State {
 	return &State{inner: _r}
 }
 
-// Returns YES if the indicated class is a a valid next state or if currentState is nil @param stateClass the class of the state to be tested
+// Returns a Boolean value indicating whether it is valid for the state machine to transition from its current state to a state of the specified class.
 //
 // CanEnterState calls the underlying CanEnterState.
 func (x *StateMachine) CanEnterState(stateClass objc.Class) bool {
 	return x.inner.CanEnterState(stateClass)
 }
 
-// Calls canEnterState to check if we can enter the given state and then enters that state if so. [GKState willExitWithNextState:] is called on the old current state. [GKState didEnterWithPreviousState:] is called on the new state. @param stateClass the class of the state to switch to @return YES if state was entered.  NO otherwise.
+// Attempts to transition the state machine from its current state to a state of the specified class.
 //
 // EnterState calls the underlying EnterState.
 func (x *StateMachine) EnterState(stateClass objc.Class) bool {

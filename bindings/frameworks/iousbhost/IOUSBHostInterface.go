@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class       IOUSBHostInterface @brief       The IOUSBHostObject representing a USB interface @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostPipe objects to transfer data.
+// The class for accessing USB-related services.
 //
 // Apple documentation: https://developer.apple.com/documentation/iousbhost/iousbhostinterface
 type IOUSBHostInterface struct {
@@ -41,9 +41,9 @@ func IOUSBHostInterfaceFromID(id objc.ID) *IOUSBHostInterface {
 	return o
 }
 
-// @brief       Creates a matching dictionary for an IOUSBHostInterface to be passed into IOServiceGetMatchingService @param       vendorID NSNumber representation of device vendorID @param       productID NSNumber representation of device productID @param       bcdDevice NSNumber representation of device release number @param       interfaceNumber NSNumber representation of interface number @param       configurationValue NSNumber representation of the device's configurationValue @param       interfaceClass NSNumber representation of interface class @param       interfaceSubclass NSNumber representation of interface subclass @param       interfaceProtocol NSNumber representation of interface protocol @param       speed NSNumber representation of device speed @param       productIDArray NSArray of NSNumbers representing all productIDs interested in. If used do not specify the NSNumber productID field @return      CFMutableDictionaryRef to be used with IOService matching methods. To be released by caller.
+// Creates a matching dictionary to find a USB interface.
 func IOUSBHostInterfaceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID *foundation.NSNumber, productID *foundation.NSNumber, bcdDevice *foundation.NSNumber, interfaceNumber *foundation.NSNumber, configurationValue *foundation.NSNumber, interfaceClass *foundation.NSNumber, interfaceSubclass *foundation.NSNumber, interfaceProtocol *foundation.NSNumber, speed *foundation.NSNumber, productIDArray *foundation.NSArray[objc.ID]) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsIOUSBHostInterface), _iOUSBHostInterfaceSelCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray, vendorID.Ptr(), productID.Ptr(), bcdDevice.Ptr(), interfaceNumber.Ptr(), configurationValue.Ptr(), interfaceClass.Ptr(), interfaceSubclass.Ptr(), interfaceProtocol.Ptr(), speed.Ptr(), productIDArray)
+	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsIOUSBHostInterface), _iOUSBHostInterfaceSelCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray, vendorID.Ptr(), productID.Ptr(), bcdDevice.Ptr(), interfaceNumber.Ptr(), configurationValue.Ptr(), interfaceClass.Ptr(), interfaceSubclass.Ptr(), interfaceProtocol.Ptr(), speed.Ptr(), productIDArray.Ptr())
 	return _ret
 }
 
@@ -66,7 +66,7 @@ func (o *IOUSBHostInterface) InitWithIOServiceOptionsQueueErrorInterestHandler(i
 	return IOUSBHostInterfaceFromID(_ret)
 }
 
-// @brief       Sets the desired idle suspend timeout for the interface @discussion  Once the interface is considered idle, it will defer electrical suspend of the device for the specified duration. @param       idleTimeout The amount of time after all pipes are idle to wait before suspending the device. @return      YES on success. An IOReturn error code will be reported on failure.
+// Sets the desired idle suspend timeout for the interface.
 func (o *IOUSBHostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostInterfaceSelSetIdleTimeoutError, idleTimeout, unsafe.Pointer(&_nsErr))
@@ -76,7 +76,7 @@ func (o *IOUSBHostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, err
 	return _ret, nil
 }
 
-// @brief       Select an alternate setting for this interface @discussion  This method is used to select an alternate setting for the interface. All pending IO on the interface's pipes will be aborted, and the open pipes will be closed. The IOUSBHostPipe objects already created will no longer be valid. The new alternate setting will be selected via SET_INTERFACE control request (USB 2.0 9.4.10). @param       alternateSetting Alternate interface number to activate @return      YES on success, an IOReturn error code will be reported on failure.
+// Selects an alternative setting for the interface.
 func (o *IOUSBHostInterface) SelectAlternateSettingError(alternateSetting uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostInterfaceSelSelectAlternateSettingError, alternateSetting, unsafe.Pointer(&_nsErr))
@@ -86,7 +86,7 @@ func (o *IOUSBHostInterface) SelectAlternateSettingError(alternateSetting uint) 
 	return _ret, nil
 }
 
-// @brief       Return the pipe whose <code>bEndpointAddress</code> matches <code>address</code> @discussion  This method will return the pipe whose <code>bEndpointAddress</code> matches <code>address</code>. If the pipe is returned successfully, it will maintain a reference to the IOUSBHostInterface. @param       address Endpoint address of the pipe @return      Pointer to an IOUSBHostPipe object or nil. The IOUSBHostPipe is to be released by the caller. An IOReturn error code will be reported on failure.
+// Copies a pipe for a specific endpoint address.
 func (o *IOUSBHostInterface) CopyPipeWithAddressError(address uint) (*IOUSBHostPipe, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostInterfaceSelCopyPipeWithAddressError, address, unsafe.Pointer(&_nsErr))

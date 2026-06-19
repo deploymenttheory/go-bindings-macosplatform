@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that reduces tensor values across a specific dimension to a scalar value.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcreductionlayer
 type MLCReductionLayer struct {
 	MLCLayer
@@ -34,7 +36,7 @@ func MLCReductionLayerFromID(id objc.ID) *MLCReductionLayer {
 	return o
 }
 
-// @abstract Create a reduction layer. @param    reductionType        The reduction type. @param    dimension          The reduction dimension. @return   A new reduction layer.
+// Creates a reduction layer using the reduction type and dimension you specify.
 func MLCReductionLayerLayerWithReductionTypeDimension(reductionType MLCReductionType, dimension uint) *MLCReductionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReductionLayer), _mLCReductionLayerSelLayerWithReductionTypeDimension, reductionType, dimension)
 	if _ret != 0 {
@@ -43,9 +45,9 @@ func MLCReductionLayerLayerWithReductionTypeDimension(reductionType MLCReduction
 	return MLCReductionLayerFromID(_ret)
 }
 
-// @abstract Create a reduction layer. @param    reductionType        The reduction type. @param    dimensions               The list of dimensions to reduce over @return   A new reduction layer.
+// Creates a reduction layer using the reduction type and dimensions you specify.
 func MLCReductionLayerLayerWithReductionTypeDimensions(reductionType MLCReductionType, dimensions *foundation.NSArray[*foundation.NSNumber]) *MLCReductionLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReductionLayer), _mLCReductionLayerSelLayerWithReductionTypeDimensions, reductionType, dimensions)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReductionLayer), _mLCReductionLayerSelLayerWithReductionTypeDimensions, reductionType, dimensions.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,6 +68,9 @@ func (o *MLCReductionLayer) Dimension() uint {
 
 // @property   dimensions @abstract   The dimensions over which to perform the reduction operation
 func (o *MLCReductionLayer) Dimensions() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCReductionLayerSelDimensions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCReductionLayerSelDimensions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

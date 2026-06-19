@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the properties of a pass that contains a balance used for specific transactions, such as a transit pass or loyalty card.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties
 type PKStoredValuePassProperties struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func PKStoredValuePassPropertiesFromID(id objc.ID) *PKStoredValuePassProperties 
 	return o
 }
 
+// Creates a stored-value pass properties object for the specified pass.
 func PKStoredValuePassPropertiesPassPropertiesForPass(pass *PKPass) *PKStoredValuePassProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKStoredValuePassProperties), _pKStoredValuePassPropertiesSelPassPropertiesForPass, pass.Ptr())
 	if _ret != 0 {

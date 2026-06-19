@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the text styling rules to apply to a media item’s textual content.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avtextstylerule
 type AVTextStyleRule struct {
 	foundation.NSObject
@@ -37,13 +39,13 @@ func AVTextStyleRuleFromID(id objc.ID) *AVTextStyleRule {
 	return o
 }
 
-// @method		propertyListForTextStyleRules: @abstract		Converts an NSArray of AVTextStyleRules into a serializable property list that can be used for persistent storage. @param			textStyleRules An array of AVTextStyleRules. @result		A serializable property list. @discussion	For serialization utilities, see NSPropertyList.h.
+// Converts one or more text style rules into a serializable property list object.
 func AVTextStyleRulePropertyListForTextStyleRules(textStyleRules *foundation.NSArray[*AVTextStyleRule]) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelPropertyListForTextStyleRules, textStyleRules.Ptr())
 	return _ret
 }
 
-// @method		textStyleRulesFromPropertyList: @abstract		Converts a property list into an NSArray of AVTextStyleRules. @param			plist A property list, normally obtained previously via an invocation of +propertyListForTextStyleRules:. @result		An NSArray of AVTextStyleRules
+// Creates an array of text style rule objects from the specified property-list object.
 func AVTextStyleRuleTextStyleRulesFromPropertyList(plist objc.ID) *foundation.NSArray[*AVTextStyleRule] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRulesFromPropertyList, plist)
 	if _ret != 0 {
@@ -52,36 +54,36 @@ func AVTextStyleRuleTextStyleRulesFromPropertyList(plist objc.ID) *foundation.NS
 	return foundation.NSArrayFromID[*AVTextStyleRule](_ret)
 }
 
-// @method		textStyleRuleWithTextMarkupAttributes: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @result		An instance of AVTextStyleRule @discussion	Equivalent to invoking +textStyleRuleWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
+// Creates a new text style rule object using the style attributes in the specified dictionary.
 func AVTextStyleRuleTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVTextStyleRule {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributes, textMarkupAttributes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributes, textMarkupAttributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
-// @method		textStyleRuleWithTextMarkupAttributes:textSelector: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes and an identifier for the range or ranges of text to which the attributes should be applied. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @param			textSelector An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @result		An instance of AVTextStyleRule
+// Creates a new text style rule object using the specified style attributes and text range information.
 func AVTextStyleRuleTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textSelector *foundation.NSString) *AVTextStyleRule {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributesTextSelector, textMarkupAttributes, textSelector.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVTextStyleRule), _aVTextStyleRuleSelTextStyleRuleWithTextMarkupAttributesTextSelector, textMarkupAttributes.Ptr(), textSelector.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
-// @method		initWithTextMarkupAttributes: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @result		An instance of AVTextStyleRule @discussion	Equivalent to invoking -initWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
+// Creates a text style rule object with the specified style attributes.
 func (o *AVTextStyleRule) InitWithTextMarkupAttributes(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVTextStyleRule {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelInitWithTextMarkupAttributes, textMarkupAttributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelInitWithTextMarkupAttributes, textMarkupAttributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVTextStyleRuleFromID(_ret)
 }
 
-// @method		initWithTextMarkupAttributes:textSelector: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes and an identifier for the range or ranges of text to which the attributes should be applied. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @param			textSelector An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @result		An instance of AVTextStyleRule
+// Creates a text style rule object with the specified style attributes and text range information.
 func (o *AVTextStyleRule) InitWithTextMarkupAttributesTextSelector(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textSelector *foundation.NSString) *AVTextStyleRule {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelInitWithTextMarkupAttributesTextSelector, textMarkupAttributes, textSelector.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelInitWithTextMarkupAttributesTextSelector, textMarkupAttributes.Ptr(), textSelector.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -90,8 +92,11 @@ func (o *AVTextStyleRule) InitWithTextMarkupAttributesTextSelector(textMarkupAtt
 
 // @property		textMarkupAttributes @abstract		An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
 func (o *AVTextStyleRule) TextMarkupAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVTextStyleRuleSelTextMarkupAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVTextStyleRuleSelTextMarkupAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property		textSelector @abstract		A string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @dicussion		The syntax of text selectors is determined by the format of the legible media. Eligible selectors may be determined by the content of the legible media (e.g. CSS selectors that are valid for a specific WebVTT document).

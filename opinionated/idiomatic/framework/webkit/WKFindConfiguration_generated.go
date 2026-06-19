@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration parameters to use when searching the contents of the web view.
+//
 // WKFindConfiguration wraps [raw.WKFindConfiguration] with a fluent Go API.
 type WKFindConfiguration struct {
 	inner *raw.WKFindConfiguration
@@ -35,18 +37,24 @@ func NewWKFindConfiguration() *WKFindConfiguration {
 	return &WKFindConfiguration{inner: raw.WKFindConfigurationFromID(_id)}
 }
 
+// A Boolean value that indicates the search direction, relative to the current selection.
+//
 // WithBackwards sets the backwards property and returns the receiver for chaining.
 func (x *WKFindConfiguration) WithBackwards(backwards bool) *WKFindConfiguration {
 	x.inner.SetBackwards(backwards)
 	return x
 }
 
+// A Boolean value that indicates whether to consider case when matching the search string.
+//
 // WithCaseSensitive sets the caseSensitive property and returns the receiver for chaining.
 func (x *WKFindConfiguration) WithCaseSensitive(caseSensitive bool) *WKFindConfiguration {
 	x.inner.SetCaseSensitive(caseSensitive)
 	return x
 }
 
+// A Boolean value that indicates whether the search wraps around to the other side of the page.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
 	x.inner.SetWraps(wraps)

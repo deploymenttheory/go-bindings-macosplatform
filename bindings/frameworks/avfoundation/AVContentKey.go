@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the content key decryptor.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcontentkey
 type AVContentKey struct {
 	foundation.NSObject

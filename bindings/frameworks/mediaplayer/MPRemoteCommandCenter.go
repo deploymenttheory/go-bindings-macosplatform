@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to remote control events sent by external accessories and system controls.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter
 type MPRemoteCommandCenter struct {
 	foundation.NSObject
@@ -50,6 +52,7 @@ func MPRemoteCommandCenterFromID(id objc.ID) *MPRemoteCommandCenter {
 	return o
 }
 
+// Returns the shared object you use to access the system’s remote command objects.
 func MPRemoteCommandCenterSharedCommandCenter() *MPRemoteCommandCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPRemoteCommandCenter), _mPRemoteCommandCenterSelSharedCommandCenter)
 	if _ret != 0 {

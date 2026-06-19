@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for results returned from a persistent store coordinator.
+//
 // PersistentStoreResult wraps [raw.NSPersistentStoreResult] with a fluent Go API.
 type PersistentStoreResult struct {
 	inner *raw.NSPersistentStoreResult

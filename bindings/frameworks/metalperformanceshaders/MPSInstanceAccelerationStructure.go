@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An acceleration structure built over instances of other acceleration structures.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsinstanceaccelerationstructure
 type MPSInstanceAccelerationStructure struct {
 	mpsrayintersector.MPSAccelerationStructure
@@ -51,12 +53,15 @@ func MPSInstanceAccelerationStructureFromID(id objc.ID) *MPSInstanceAcceleration
 
 // @brief Acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
 func (o *MPSInstanceAccelerationStructure) AccelerationStructures() *foundation.NSArray[*mpsrayintersector.MPSPolygonAccelerationStructure] {
-	_ret := objc.Send[*foundation.NSArray[*mpsrayintersector.MPSPolygonAccelerationStructure]](o.Ptr(), _mPSInstanceAccelerationStructureSelAccelerationStructures)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSInstanceAccelerationStructureSelAccelerationStructures)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*mpsrayintersector.MPSPolygonAccelerationStructure](_ret)
 }
 
 func (o *MPSInstanceAccelerationStructure) SetAccelerationStructures(accelerationStructures *foundation.NSArray[*mpsrayintersector.MPSPolygonAccelerationStructure]) {
-	o.Ptr().Send(_mPSInstanceAccelerationStructureSelSetAccelerationStructures, accelerationStructures)
+	o.Ptr().Send(_mPSInstanceAccelerationStructureSelSetAccelerationStructures, accelerationStructures.Ptr())
 }
 
 // @brief Buffer containing the 32 bit unsigned integer index into the acceleration structure array for each instance

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient fully connected convolution layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnectedgradient
 type MPSCNNFullyConnectedGradient struct {
 	mpsneuralnetwork.MPSCNNConvolutionGradient

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the attributes of a computer’s monitor or screen.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscreen
 type NSScreen struct {
 	foundation.NSObject
@@ -63,21 +65,25 @@ func NSScreenFromID(id objc.ID) *NSScreen {
 	return o
 }
 
+// A Boolean value indicating whether the color space of the screen is capable of representing the specified display gamut.
 func (o *NSScreen) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScreenSelCanRepresentDisplayGamut, displayGamut)
 	return _ret
 }
 
+// Converts the rectangle to the device pixel aligned coordinates system of a screen.
 func (o *NSScreen) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScreenSelConvertRectToBacking, rect)
 	return _ret
 }
 
+// Converts the rectangle from the device pixel aligned coordinates system of a screen.
 func (o *NSScreen) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScreenSelConvertRectFromBacking, rect)
 	return _ret
 }
 
+// Converts a rectangle in global screen coordinates to a pixel aligned rectangle.
 func (o *NSScreen) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScreenSelBackingAlignedRectOptions, rect, options)
 	return _ret
@@ -128,8 +134,11 @@ func (o *NSScreen) VisibleFrame() corefoundation.CGRect {
 }
 
 func (o *NSScreen) DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSScreenSelDeviceDescription)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSScreenSelDeviceDescription)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSScreen) ColorSpace() *NSColorSpace {
@@ -224,7 +233,7 @@ func (o *NSScreen) LastDisplayUpdateTimestamp() float64 {
 	return _ret
 }
 
-// Returns a new display link whose callback will be invoked in-sync with the display the screen is on. Note that views and windows can move between screens and you may want to get a display link directly from `NSView` or `NSWindow` which will track those changes automatically.
+// Returns a new display link whose callback will be invoked in-sync with the display the screen is on.
 func (o *NSScreen) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScreenSelDisplayLinkWithTargetSelector, target, selector)
 	if _ret != 0 {
@@ -233,6 +242,7 @@ func (o *NSScreen) DisplayLinkWithTargetSelector(target objc.ID, selector objc.S
 	return quartzcore.CADisplayLinkFromID(_ret)
 }
 
+// Returns the scaling factor from user space to device space on the screen.
 // Deprecated: Use -convertRectToBacking: or -backingScaleFactor instead
 func (o *NSScreen) UserSpaceScaleFactor() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSScreenSelUserSpaceScaleFactor)

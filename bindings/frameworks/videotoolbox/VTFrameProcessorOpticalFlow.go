@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class to wrap bidirectional optical flow to send to the processor.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtframeprocessoropticalflow
 type VTFrameProcessorOpticalFlow struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func VTFrameProcessorOpticalFlowFromID(id objc.ID) *VTFrameProcessorOpticalFlow 
 	return o
 }
 
-// Creates a new instance of forward and backward optical flow with pixel buffers. Create a new instance with forward and backward optical flow “CVPixelBuffer“s. Instances retain the pixel buffers you provide to this method. Returns `nil` if either `CVPixelBuffer` is NULL or the `CVPixelBuffer`s are not `IOSurface` backed. - Parameters: - forwardFlow: `CVPixelBuffer` that contains forward optical flow; it must not be `nil` and must be `IOSurface` backed. - backwardFlow: `CVPixelBuffer` that contains backward optical flow; it must not be `nil` and must be `IOSurface` backed.
+// Creates an object with forward and backward optical flow pixel buffers.
 func (o *VTFrameProcessorOpticalFlow) InitWithForwardFlowBackwardFlow(forwardFlow unsafe.Pointer, backwardFlow unsafe.Pointer) *VTFrameProcessorOpticalFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameProcessorOpticalFlowSelInitWithForwardFlowBackwardFlow, forwardFlow, backwardFlow)
 	if _ret != 0 {

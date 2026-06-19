@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a hardware-based cryptographic token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktoken
 type TKToken struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func TKTokenFromID(id objc.ID) *TKToken {
 	return o
 }
 
-// @discussion Initializes token instance @param tokenDriver Creating token driver. @param instanceID Unique, persistent identifier of this token.
+// Initializes a token with the driver you specify.
 func (o *TKToken) InitWithTokenDriverInstanceID(tokenDriver *TKTokenDriver, instanceID *foundation.NSString) *TKToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSelInitWithTokenDriverInstanceID, tokenDriver.Ptr(), instanceID.Ptr())
 	if _ret != 0 {

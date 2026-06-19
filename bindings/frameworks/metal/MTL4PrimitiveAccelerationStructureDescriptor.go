@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Descriptor for a primitive acceleration structure that directly references geometric shapes, such as triangles and bounding boxes.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4primitiveaccelerationstructuredescriptor
 type MTL4PrimitiveAccelerationStructureDescriptor struct {
 	MTL4AccelerationStructureDescriptor

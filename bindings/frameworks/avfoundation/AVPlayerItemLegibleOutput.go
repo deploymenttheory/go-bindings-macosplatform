@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that vends attributed strings for media with a legible characteristic.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemlegibleoutput
 type AVPlayerItemLegibleOutput struct {
 	AVPlayerItemOutput
@@ -37,7 +39,7 @@ func AVPlayerItemLegibleOutputFromID(id objc.ID) *AVPlayerItemLegibleOutput {
 	return o
 }
 
-// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemLegibleOutputPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called. @discussion The delegate is held using a zeroing-weak reference, so it is safe to deallocate the delegate while the receiver still has a reference to it.
+// Sets the receiver’s delegate and a dispatch queue on which the delegate is called.
 func (o *AVPlayerItemLegibleOutput) SetDelegateQueue(delegate AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVPlayerItemLegibleOutputSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }
@@ -67,9 +69,9 @@ func (o *AVPlayerItemLegibleOutput) SetAdvanceIntervalForDelegateInvocation(adva
 	o.Ptr().Send(_aVPlayerItemLegibleOutputSelSetAdvanceIntervalForDelegateInvocation, advanceIntervalForDelegateInvocation)
 }
 
-// @method			initWithMediaSubtypesForNativeRepresentation: @abstract		Returns an instance of AVPlayerItemLegibleOutput with filtering enabled for AVPlayerItemLegibleOutputPushDelegate's legibleOutput:didOutputAttributedStrings:nativeSampleBuffers:forItemTime:. @param			subtypes NSArray of NSNumber FourCC codes, e.g. @[ [NSNumber numberWithUnsignedInt:'tx3g'] ] @result			An instance of AVPlayerItemLegibleOutput. @discussion Add media subtype FourCC number objects to the subtypes array to elect to receive that type as a CMSampleBuffer instead of an NSAttributedString.  Initializing an AVPlayerItemLegibleOutput using the -init method is equivalent to calling -initWithMediaSubtypesForNativeRepresentation: with an empty array, which means that all legible data, regardless of media subtype, will be delivered using NSAttributedString in a common format. If a media subtype for which there is no legible data in the current player item is included in the media subtypes array, no error will occur.  AVPlayerItemLegibleOutput will not vend closed caption data as CMSampleBuffers, so it is an error to include 'c608' in the media subtypes array. This method throws an exception if any media subtype is kCMClosedCaptionFormatType_CEA608 (native representation is not available for media subtype).
+// Creates an initialized legible-output object.
 func (o *AVPlayerItemLegibleOutput) InitWithMediaSubtypesForNativeRepresentation(subtypes *foundation.NSArray[*foundation.NSNumber]) *AVPlayerItemLegibleOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemLegibleOutputSelInitWithMediaSubtypesForNativeRepresentation, subtypes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemLegibleOutputSelInitWithMediaSubtypesForNativeRepresentation, subtypes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

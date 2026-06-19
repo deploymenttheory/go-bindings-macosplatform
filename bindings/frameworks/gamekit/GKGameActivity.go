@@ -68,7 +68,7 @@ func GKGameActivityFromID(id objc.ID) *GKGameActivity {
 	return o
 }
 
-// Creates and starts a new game activity with a custom party code. The framework converts the party code to uppercase.
+// Creates and starts a new game activity with a custom party code.
 func GKGameActivityStartWithDefinitionPartyCodeError(activityDefinition *GKGameActivityDefinition, partyCode *foundation.NSString) (*GKGameActivity, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGameActivity), _gKGameActivitySelStartWithDefinitionPartyCodeError, activityDefinition.Ptr(), partyCode.Ptr(), unsafe.Pointer(&_nsErr))
@@ -94,7 +94,7 @@ func GKGameActivityStartWithDefinitionError(activityDefinition *GKGameActivityDe
 	return GKGameActivityFromID(_ret), nil
 }
 
-// Checks whether a party code is in valid format. Party code should be two parts of strings with the same length (2-6) connected with a dash, and the code can be either pure digits (0-9), or both parts are uppercased characters from “GKGameActivity/validPartyCodeAlphabet“.
+// Checks whether a party code is in valid format.
 func GKGameActivityIsValidPartyCode(partyCode *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsGKGameActivity), _gKGameActivitySelIsValidPartyCode, partyCode.Ptr())
 	return _ret
@@ -109,12 +109,12 @@ func (o *GKGameActivity) InitWithDefinition(activityDefinition *GKGameActivityDe
 	return GKGameActivityFromID(_ret)
 }
 
-// Starts the game activity if it's not already started.
+// Starts the game activity if it’s not already started.
 func (o *GKGameActivity) Start() {
 	o.Ptr().Send(_gKGameActivitySelStart)
 }
 
-// Pauses the game activity if it's not already paused.
+// Pauses the game activity if it’s not already paused.
 func (o *GKGameActivity) Pause() {
 	o.Ptr().Send(_gKGameActivitySelPause)
 }
@@ -124,17 +124,17 @@ func (o *GKGameActivity) Resume() {
 	o.Ptr().Send(_gKGameActivitySelResume)
 }
 
-// Ends the game activity if it's not already ended. This reports all associated achievements and submit scores to leaderboards.
+// Ends the game activity if it’s not already ended.
 func (o *GKGameActivity) End() {
 	o.Ptr().Send(_gKGameActivitySelEnd)
 }
 
-// Set a score of a leaderboard with a context for a player. The framewwork submits the score to the leaderboard when the activity ends.
+// Set a score of a leaderboard with a context for a player.
 func (o *GKGameActivity) SetScoreOnLeaderboardToScoreContext(leaderboard *GKLeaderboard, score int, context_ uint) {
 	o.Ptr().Send(_gKGameActivitySelSetScoreOnLeaderboardToScoreContext, leaderboard.Ptr(), score, context_)
 }
 
-// Set a score of a leaderboard for a player. The framewowrk submits the score to the leaderboard when the activity ends.
+// Set a score of a leaderboard for a player.
 func (o *GKGameActivity) SetScoreOnLeaderboardToScore(leaderboard *GKLeaderboard, score int) {
 	o.Ptr().Send(_gKGameActivitySelSetScoreOnLeaderboardToScore, leaderboard.Ptr(), score)
 }
@@ -153,17 +153,17 @@ func (o *GKGameActivity) RemoveScoresFromLeaderboards(leaderboards *foundation.N
 	o.Ptr().Send(_gKGameActivitySelRemoveScoresFromLeaderboards, leaderboards.Ptr())
 }
 
-// Set a progress for an achievement for a player. The framework reports achievement progress when the activity ends.
+// Set a progress for an achievement for a player.
 func (o *GKGameActivity) SetProgressOnAchievementToPercentComplete(achievement *GKAchievement, percentComplete float64) {
 	o.Ptr().Send(_gKGameActivitySelSetProgressOnAchievementToPercentComplete, achievement.Ptr(), percentComplete)
 }
 
-// Set progress to 100% for an achievement for a player. The system reports achievement completion when the activity ends.
+// Set progress to 100% for an achievement for a player.
 func (o *GKGameActivity) SetAchievementCompleted(achievement *GKAchievement) {
 	o.Ptr().Send(_gKGameActivitySelSetAchievementCompleted, achievement.Ptr())
 }
 
-// Get the achievement progress from a specific achievement of the local player if previously set. Returns `0` if the achievement hasn't been set in the current activity.
+// Get the achievement progress from a specific achievement of the local player if previously set.
 func (o *GKGameActivity) GetProgressOnAchievement(achievement *GKAchievement) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _gKGameActivitySelGetProgressOnAchievement, achievement.Ptr())
 	return _ret
@@ -194,12 +194,15 @@ func (o *GKGameActivity) ActivityDefinition() *GKGameActivityDefinition {
 
 // Properties that contain additional information about the activity. This takes precedence over “GKGameActivityDefinition/defaultProperties“ on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
 func (o *GKGameActivity) Properties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _gKGameActivitySelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *GKGameActivity) SetProperties(properties *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_gKGameActivitySelSetProperties, properties)
+	o.Ptr().Send(_gKGameActivitySelSetProperties, properties.Ptr())
 }
 
 // The state of the game activity.
@@ -288,8 +291,11 @@ func (o *GKGameActivity) LeaderboardScores() *foundation.NSSet[*GKLeaderboardSco
 
 // Allowed characters for the party code to be used to share this activity.
 func GKGameActivityValidPartyCodeAlphabet() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsGKGameActivity), _gKGameActivitySelValidPartyCodeAlphabet)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsGKGameActivity), _gKGameActivitySelValidPartyCodeAlphabet)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Makes a match request object with information from the activity, which you can use to find matches for the local player.
@@ -301,7 +307,7 @@ func (o *GKGameActivity) MakeMatchRequest() *GKMatchRequest {
 	return GKMatchRequestFromID(_ret)
 }
 
-// Use information from the activity to find matches for the local player. GameKit creates a classic match making request with the activity's party code and other information, and returns the match object in the completion handler or any error that occurred. An error occurs if this activity doesn't support party code, or has an unsupported range of players, which is used to be configured as match request's `minPlayers` and `maxPlayers`.
+// Use information from the activity to find matches for the local player.
 func (o *GKGameActivity) FindMatchWithCompletionHandler(completionHandler func(*GKMatch, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -316,7 +322,7 @@ func (o *GKGameActivity) FindMatchWithCompletionHandler(completionHandler func(*
 	o.Ptr().Send(_gKGameActivitySelFindMatchWithCompletionHandler, __block_completionHandler)
 }
 
-// Use information from the activity to find server hosted players for the local player. GameKit creates a classic server hosted match making request with the activity's party code and other information, and returns the players in the completion handler or any error that occurred. An error occurs if this activity doesn't support party code, or has unsupported range of players, which is used to be configured as match request's `minPlayers` and `maxPlayers`.
+// Use information from the activity to find server hosted players for the local player.
 func (o *GKGameActivity) FindPlayersForHostedMatchWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -331,7 +337,7 @@ func (o *GKGameActivity) FindPlayersForHostedMatchWithCompletionHandler(completi
 	o.Ptr().Send(_gKGameActivitySelFindPlayersForHostedMatchWithCompletionHandler, __block_completionHandler)
 }
 
-// Checks whether there is a pending activity to handle for the current game. You can call this method before you initialize Game Center to avoid activating the system banner or welcome experience.
+// Checks whether there is a pending activity to handle for the current game.
 func GKGameActivityCheckPendingGameActivityExistenceWithCompletionHandler(completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

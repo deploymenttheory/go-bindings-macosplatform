@@ -64,11 +64,11 @@ func (o *MPSRNNImageInferenceLayer) InitWithDeviceRnnDescriptors(device metal.MT
 }
 
 func (o *MPSRNNImageInferenceLayer) EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*MPSRNNRecurrentImageState]) {
-	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceImages, destinationImages, recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
+	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates, commandBuffer, sourceImages.Ptr(), destinationImages.Ptr(), recurrentInputState.Ptr(), recurrentOutputStates.Ptr())
 }
 
 func (o *MPSRNNImageInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage]) {
-	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages, commandBuffer, sourceSequence, destinationForwardImages, destinationBackwardImages)
+	o.Ptr().Send(_mPSRNNImageInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages, commandBuffer, sourceSequence.Ptr(), destinationForwardImages.Ptr(), destinationBackwardImages.Ptr())
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNImageInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNImageInferenceLayer @return     A new MPSRNNImageInferenceLayer object, or nil if failure.

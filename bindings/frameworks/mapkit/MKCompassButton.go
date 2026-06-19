@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized view that displays the compass heading for its associated map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkcompassbutton
 type MKCompassButton struct {
 	appkit.NSView
@@ -34,6 +36,7 @@ func MKCompassButtonFromID(id objc.ID) *MKCompassButton {
 	return o
 }
 
+// Creates a compass button and associates it with the specified map view.
 func MKCompassButtonCompassButtonWithMapView(mapView *MKMapView) *MKCompassButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKCompassButton), _mKCompassButtonSelCompassButtonWithMapView, mapView.Ptr())
 	if _ret != 0 {

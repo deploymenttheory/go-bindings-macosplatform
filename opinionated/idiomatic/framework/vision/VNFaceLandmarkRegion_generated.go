@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for information about a specific face landmark.
+//
 // FaceLandmarkRegion wraps [raw.VNFaceLandmarkRegion] with a fluent Go API.
 type FaceLandmarkRegion struct {
 	inner *raw.VNFaceLandmarkRegion

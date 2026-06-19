@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that computes the uncentered cross-correlation values between the spacial planes of each feature channel of a tensor.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcgrammatrixlayer
 type MLCGramMatrixLayer struct {
 	MLCLayer
@@ -30,7 +32,7 @@ func MLCGramMatrixLayerFromID(id objc.ID) *MLCGramMatrixLayer {
 	return o
 }
 
-// @abstract   Create a GramMatrix layer @param      scale  The scaling factor for the output. @return     A new GramMatrix layer
+// Creates a gram matrix layer with the scaling factor you specify.
 func MLCGramMatrixLayerLayerWithScale(scale float32) *MLCGramMatrixLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGramMatrixLayer), _mLCGramMatrixLayerSelLayerWithScale, scale)
 	if _ret != 0 {

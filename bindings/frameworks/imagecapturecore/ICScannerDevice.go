@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a scanner.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerdevice
 type ICScannerDevice struct {
 	ICDevice
@@ -50,27 +52,27 @@ func ICScannerDeviceFromID(id objc.ID) *ICScannerDevice {
 	return o
 }
 
-// @method requestOpenSessionWithCredentials: @abstract This message requests to open a session on the protected device with the authorized username and passcode.  If the device reports back a failure of credentials, they can be provided here for the launch. A client MUST open a session on a device in order to use the device. @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. No more messages will be sent to the delegate if this request fails.
+// Opens a session on the protected device with the authorized username and passcode.
 func (o *ICScannerDevice) RequestOpenSessionWithCredentialsPassword(username *foundation.NSString, password *foundation.NSString) {
 	o.Ptr().Send(_iCScannerDeviceSelRequestOpenSessionWithCredentialsPassword, username.Ptr(), password.Ptr())
 }
 
-// @method requestSelectFunctionalUnit:delegate:selector:contextInfo: @abstract Requests the scanner device to select a functional unit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didSelectFunctionalUnit:error:' message.
+// Requests to select a functional unit on the scanner.
 func (o *ICScannerDevice) RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType) {
 	o.Ptr().Send(_iCScannerDeviceSelRequestSelectFunctionalUnit, type_)
 }
 
-// @method requestOverviewScan @abstract Starts an overview scan on selectedFunctionalUnit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didCompleteOverviewScanWithError:' message. The content of error returned should be examined to determine if the request completed successfully.
+// Starts an overview scan on the selected functional unit.
 func (o *ICScannerDevice) RequestOverviewScan() {
 	o.Ptr().Send(_iCScannerDeviceSelRequestOverviewScan)
 }
 
-// @method requestScan @abstract Starts a scan on selectedFunctionalUnit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didCompleteScanWithError:' message. The content of error returned should be examined to determine if the request completed successfully.
+// Starts a scan on the selected functional unit.
 func (o *ICScannerDevice) RequestScan() {
 	o.Ptr().Send(_iCScannerDeviceSelRequestScan)
 }
 
-// @method cancelScan @abstract Cancels the current scan operation started by sending a 'requestOverviewScan' or 'requestScan'.
+// Cancels the current scan.
 func (o *ICScannerDevice) CancelScan() {
 	o.Ptr().Send(_iCScannerDeviceSelCancelScan)
 }

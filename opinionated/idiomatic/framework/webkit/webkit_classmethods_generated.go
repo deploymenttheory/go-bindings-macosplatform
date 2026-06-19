@@ -236,7 +236,7 @@ func RemoveDataStoreForIdentifierCompletionHandler(identifier *foundation.NSUUID
 }
 
 // FetchAllDataStoreIdentifiers calls the underlying WKWebsiteDataStoreFetchAllDataStoreIdentifiers.
-func FetchAllDataStoreIdentifiers(completionHandler objc.Block) {
+func FetchAllDataStoreIdentifiers(completionHandler func(*foundation.NSArray[*foundation.NSUUID])) {
 	raw.WKWebsiteDataStoreFetchAllDataStoreIdentifiers(completionHandler)
 }
 

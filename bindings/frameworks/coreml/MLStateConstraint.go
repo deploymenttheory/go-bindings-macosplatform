@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Constraint of a state feature value.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlstateconstraint
 type MLStateConstraint struct {
 	foundation.NSObject
@@ -33,8 +35,11 @@ func MLStateConstraintFromID(id objc.ID) *MLStateConstraint {
 
 // The shape of the state buffer.
 func (o *MLStateConstraint) BufferShape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLStateConstraintSelBufferShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLStateConstraintSelBufferShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The data type of scalars in the state buffer.

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of an attribute that derives its value by composing other attributes.
+//
 // CompositeAttributeDescription wraps [raw.NSCompositeAttributeDescription] with a fluent Go API.
 type CompositeAttributeDescription struct {
 	inner *raw.NSCompositeAttributeDescription
@@ -38,6 +40,8 @@ func NewCompositeAttributeDescription() *CompositeAttributeDescription {
 	return &CompositeAttributeDescription{inner: raw.NSCompositeAttributeDescriptionFromID(_id)}
 }
 
+// The composed attribute descriptions.
+//
 // WithElements sets the collection, converting the Go slice to an NSArray.
 func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription {
 	if len(items) == 0 {
@@ -59,96 +63,128 @@ func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescripti
 	return x
 }
 
+// The attribute’s type.
+//
 // WithAttributeType sets the attributeType property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithAttributeType(attributeType NSAttributeType) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetAttributeType(raw.NSAttributeType(attributeType))
 	return x
 }
 
+// The class name that represents the attribute’s value.
+//
 // WithAttributeValueClassName sets the attributeValueClassName property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetAttributeValueClassName(foundation.NSStringStringWithUTF8String(attributeValueClassName))
 	return x
 }
 
+// The default value of the attribute.
+//
 // WithDefaultValue sets the defaultValue property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithDefaultValue(defaultValue objc.ID) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetDefaultValue(defaultValue)
 	return x
 }
 
+// The name of the transformer to use for the attribute value.
+//
 // WithValueTransformerName sets the valueTransformerName property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetValueTransformerName(foundation.NSStringStringWithUTF8String(valueTransformerName))
 	return x
 }
 
+// A Boolean value that indicates whether the attribute allows external binary storage.
+//
 // WithAllowsExternalBinaryDataStorage sets the allowsExternalBinaryDataStorage property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage)
 	return x
 }
 
+// A Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
+//
 // WithPreservesValueInHistoryOnDeletion sets the preservesValueInHistoryOnDeletion property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion)
 	return x
 }
 
+// A Boolean value that determines whether to encrypt the attribute’s value.
+//
 // WithAllowsCloudEncryption sets the allowsCloudEncryption property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.SetAllowsCloudEncryption(allowsCloudEncryption)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithName(name string) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is optional.
+//
 // WithOptional sets the optional property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithOptional(optional bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetOptional(optional)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transient.
+//
 // WithTransient sets the transient property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithTransient(transient bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetTransient(transient)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetUserInfo(userInfo)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver should be indexed for searching.
+//
 // WithIndexed sets the indexed property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithIndexed(indexed bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexed(indexed)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+//
 // WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
 	return x
 }
 
+// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+//
 // WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription {
 	x.inner.NSAttributeDescription.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))

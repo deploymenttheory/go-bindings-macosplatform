@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Microwave Oven Control Attributes and commands for configuring the microwave oven control, and reporting cooking stats.
+//
 // MTRClusterMicrowaveOvenControl wraps [raw.MTRClusterMicrowaveOvenControl] with a fluent Go API.
 type MTRClusterMicrowaveOvenControl struct {
 	inner *raw.MTRClusterMicrowaveOvenControl

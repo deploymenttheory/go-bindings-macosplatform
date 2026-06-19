@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A SpriteKit scene graph audio node that provides a way to link audio graphs to a SpriteKit scene. The currently presented scene is responsible for mixing the audio from nodes in the scene. Positional sounds will use their relative location and velocity to the scene's listener to apply distance attenuation, doppler shift and pan. @see AVAudio3DMixing @see SKScene.listener
+// A node that plays audio.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skaudionode
 type SKAudioNode struct {
@@ -42,7 +42,7 @@ func SKAudioNodeFromID(id objc.ID) *SKAudioNode {
 	return o
 }
 
-// Creates a SpriteKit scene graph audio node from the given AVAudioNode. @see AVAudioNode
+// Initializes an audio node from an AVFoundation audio node.
 func (o *SKAudioNode) InitWithAVAudioNode(node *avfaudio.AVAudioNode) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithAVAudioNode, node.Ptr())
 	if _ret != 0 {
@@ -51,6 +51,7 @@ func (o *SKAudioNode) InitWithAVAudioNode(node *avfaudio.AVAudioNode) *SKAudioNo
 	return SKAudioNodeFromID(_ret)
 }
 
+// Tells you when to initialize an audio node that has been unarchived.
 func (o *SKAudioNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -59,7 +60,7 @@ func (o *SKAudioNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKAudioNode {
 	return SKAudioNodeFromID(_ret)
 }
 
-// Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle. @see initWithAVAudioNode
+// Initializes an audio node from an audio asset with the specified filename.
 func (o *SKAudioNode) InitWithFileNamed(name *foundation.NSString) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithFileNamed, name.Ptr())
 	if _ret != 0 {
@@ -68,7 +69,7 @@ func (o *SKAudioNode) InitWithFileNamed(name *foundation.NSString) *SKAudioNode 
 	return SKAudioNodeFromID(_ret)
 }
 
-// Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset. @see initWithAVAudioNode
+// Initializes an audio node from an audio asset with the specified URL.
 func (o *SKAudioNode) InitWithURL(url *foundation.NSURL) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithURL, url.Ptr())
 	if _ret != 0 {

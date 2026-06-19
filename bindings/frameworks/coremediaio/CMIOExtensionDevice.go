@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a physical or virtual device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensiondevice
 type CMIOExtensionDevice struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func CMIOExtensionDeviceFromID(id objc.ID) *CMIOExtensionDevice {
 	return o
 }
 
-// @method deviceWithLocalizedName:deviceID:legacyDeviceID:source: @abstract Returns a device instance. @param localizedName The localized name of the device. @param deviceID The device id (as a UUID). @param legacyDeviceID The device identifier as a string (for backward compatibility with existing CMIO DAL clients, it may differ from deviceID.UUIDString). May be nil if your device has no compatibility requirements. @param source The device source, a client instantiated object for the device that conforms to the CMIOExtensionDeviceSource protocol. @result A CMIOExtensionDevice instance.
+// Returns a new extension device with an optional legacy device identifier.
 func CMIOExtensionDeviceDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName *foundation.NSString, deviceID *foundation.NSUUID, legacyDeviceID *foundation.NSString, source CMIOExtensionDeviceSource) *CMIOExtensionDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionDevice), _cMIOExtensionDeviceSelDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource, localizedName.Ptr(), deviceID.Ptr(), legacyDeviceID.Ptr(), source)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func CMIOExtensionDeviceDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(loca
 	return CMIOExtensionDeviceFromID(_ret)
 }
 
-// @method initWithLocalizedName:deviceID:legacyDeviceID:source: @abstract Initialize a device instance. @param localizedName The localized name of the device. @param deviceID The device id (as a UUID). @param legacyDeviceID The device identifier as a string (for backward compatibility with existing CMIO DAL clients, it may differ from deviceID.UUIDString). May be nil if your device has no compatibility requirements. @param source The device source, a client instantiated object for the device that conforms to the CMIOExtensionDeviceSource protocol. @result A CMIOExtensionDevice instance.
+// Creates an extension device with an optional legacy device identifier.
 func (o *CMIOExtensionDevice) InitWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName *foundation.NSString, deviceID *foundation.NSUUID, legacyDeviceID *foundation.NSString, source CMIOExtensionDeviceSource) *CMIOExtensionDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDeviceSelInitWithLocalizedNameDeviceIDLegacyDeviceIDSource, localizedName.Ptr(), deviceID.Ptr(), legacyDeviceID.Ptr(), source)
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func (o *CMIOExtensionDevice) InitWithLocalizedNameDeviceIDLegacyDeviceIDSource(
 	return CMIOExtensionDeviceFromID(_ret)
 }
 
-// @method addStream:error: @abstract Add a stream to the device streams array. @param stream The stream to be added to the device streams array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Adds a stream to a device.
 func (o *CMIOExtensionDevice) AddStreamError(stream *CMIOExtensionStream) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cMIOExtensionDeviceSelAddStreamError, stream.Ptr(), unsafe.Pointer(&_nsErr))
@@ -69,7 +71,7 @@ func (o *CMIOExtensionDevice) AddStreamError(stream *CMIOExtensionStream) (bool,
 	return _ret, nil
 }
 
-// @method removeStream:error: @abstract Remove a stream from the device streams array. @param stream The stream to be removed from the device streams array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Removes a stream from the device.
 func (o *CMIOExtensionDevice) RemoveStreamError(stream *CMIOExtensionStream) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cMIOExtensionDeviceSelRemoveStreamError, stream.Ptr(), unsafe.Pointer(&_nsErr))
@@ -79,9 +81,9 @@ func (o *CMIOExtensionDevice) RemoveStreamError(stream *CMIOExtensionStream) (bo
 	return _ret, nil
 }
 
-// @method notifyPropertiesChanged: @abstract Notify client(s) of device properties changes. @param propertyStates The dictionary of properties having changed.
+// Notifies clients of property changes.
 func (o *CMIOExtensionDevice) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionDeviceSelNotifyPropertiesChanged, propertyStates)
+	o.Ptr().Send(_cMIOExtensionDeviceSelNotifyPropertiesChanged, propertyStates.Ptr())
 }
 
 // @property localizedName @abstract The localized name of the device.

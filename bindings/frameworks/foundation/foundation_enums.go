@@ -121,6 +121,7 @@ func (e NSActivityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values representing alignment operations.
 type NSAlignmentOptions uint64
 
 const (
@@ -279,6 +280,7 @@ func (e NSAppleEventSendOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for enumerating attributes.
 type NSAttributedStringEnumerationOptions uint64
 
 const (
@@ -300,11 +302,14 @@ func (e NSAttributedStringEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options to use when creating an attributed string from a format string and variable list of arguments.
 type NSAttributedStringFormattingOptions uint64
 
 const (
+	// An option to replace the attributes in a substituted string with those of the provided attributed string.
 	NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging NSAttributedStringFormattingOptions = 1
-	NSAttributedStringFormattingApplyReplacementIndexAttribute         NSAttributedStringFormattingOptions = 2
+	// An option to apply to the replaced portions of text in a format string.
+	NSAttributedStringFormattingApplyReplacementIndexAttribute NSAttributedStringFormattingOptions = 2
 )
 
 func (e NSAttributedStringFormattingOptions) String() string {
@@ -321,11 +326,15 @@ func (e NSAttributedStringFormattingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A type that represents the syntax for intepreting a Markdown string.
 type NSAttributedStringMarkdownInterpretedSyntax int64
 
 const (
-	NSAttributedStringMarkdownInterpretedSyntaxFull                           NSAttributedStringMarkdownInterpretedSyntax = 0
-	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly                     NSAttributedStringMarkdownInterpretedSyntax = 1
+	// A syntax value that interprets the full Markdown syntax and produces all relevant attributes.
+	NSAttributedStringMarkdownInterpretedSyntaxFull NSAttributedStringMarkdownInterpretedSyntax = 0
+	// A syntax value that parses all Markdown text, but interprets only attributes that apply to inline spans.
+	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly NSAttributedStringMarkdownInterpretedSyntax = 1
+	// A syntax value that parses all Markdown text, but interprets only attributes that apply to inline spans, perserving white space.
 	NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace NSAttributedStringMarkdownInterpretedSyntax = 2
 )
 
@@ -342,10 +351,13 @@ func (e NSAttributedStringMarkdownInterpretedSyntax) String() string {
 	}
 }
 
+// A type that represents policies for handling parsing failures.
 type NSAttributedStringMarkdownParsingFailurePolicy int64
 
 const (
-	NSAttributedStringMarkdownParsingFailureReturnError                     NSAttributedStringMarkdownParsingFailurePolicy = 0
+	// A policy to return an error from the initializer if parsing fails.
+	NSAttributedStringMarkdownParsingFailureReturnError NSAttributedStringMarkdownParsingFailurePolicy = 0
+	// A policy to return a partially parsed string, if possible.
 	NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible NSAttributedStringMarkdownParsingFailurePolicy = 1
 )
 
@@ -360,6 +372,7 @@ func (e NSAttributedStringMarkdownParsingFailurePolicy) String() string {
 	}
 }
 
+// These constants indicate whether background activity has been completed successfully or whether additional processing should be deferred until a more optimal time.
 type NSBackgroundActivityResult int64
 
 const (
@@ -378,11 +391,15 @@ func (e NSBackgroundActivityResult) String() string {
 	}
 }
 
+// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
 type NSBinarySearchingOptions uint64
 
 const (
-	NSBinarySearchingFirstEqual     NSBinarySearchingOptions = 256
-	NSBinarySearchingLastEqual      NSBinarySearchingOptions = 512
+	// Specifies that the search should return the first object in the range that is equal to the given object.
+	NSBinarySearchingFirstEqual NSBinarySearchingOptions = 256
+	// Specifies that the search should return the last object in the range that is equal to the given object.
+	NSBinarySearchingLastEqual NSBinarySearchingOptions = 512
+	// Returns the index at which you should insert the object in order to maintain a sorted array.
 	NSBinarySearchingInsertionIndex NSBinarySearchingOptions = 1024
 )
 
@@ -403,6 +420,7 @@ func (e NSBinarySearchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Specifies display of file or storage byte counts. The display style is platform specific.
 type NSByteCountFormatterCountStyle int64
 
 const (
@@ -427,9 +445,11 @@ func (e NSByteCountFormatterCountStyle) String() string {
 	}
 }
 
+// Specifies the units appropriate for the formatter to display. Specifying any units explicitly causes just those units to be used in showing the number.
 type NSByteCountFormatterUnits uint64
 
 const (
+	// This causes default units appropriate for the platform to be used. This is the default.
 	NSByteCountFormatterUseDefault    NSByteCountFormatterUnits = 0
 	NSByteCountFormatterUseBytes      NSByteCountFormatterUnits = 1
 	NSByteCountFormatterUseKB         NSByteCountFormatterUnits = 2
@@ -508,6 +528,7 @@ func (e NSCalculationError) String() string {
 	}
 }
 
+// The options for arithmetic operations involving calendars.
 type NSCalendarOptions uint64
 
 const (
@@ -553,6 +574,7 @@ func (e NSCalendarOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Calendrical units such as year, month, day and hour.
 type NSCalendarUnit uint64
 
 const (
@@ -706,10 +728,13 @@ func (e NSCalendarUnit) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The type of change represented in computing the difference of an ordered collection.
 type NSCollectionChangeType int64
 
 const (
+	// A change type that represents the insertion of an object into an ordered collection.
 	NSCollectionChangeInsert NSCollectionChangeType = 0
+	// A change type that represents the removal of an object from an ordered collection.
 	NSCollectionChangeRemove NSCollectionChangeType = 1
 )
 
@@ -724,6 +749,7 @@ func (e NSCollectionChangeType) String() string {
 	}
 }
 
+// Constants that describe the possible types of modifier for a comparison predicate.
 type NSComparisonPredicateModifier uint64
 
 const (
@@ -745,6 +771,7 @@ func (e NSComparisonPredicateModifier) String() string {
 	}
 }
 
+// Constants that describe the possible types of string comparison for comparison predicates.
 type NSComparisonPredicateOptions uint64
 
 const (
@@ -770,6 +797,7 @@ func (e NSComparisonPredicateOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate sort order.
 type NSComparisonResult int64
 
 const (
@@ -791,6 +819,7 @@ func (e NSComparisonResult) String() string {
 	}
 }
 
+// Constants that describe the possible types of a compound predicate.
 type NSCompoundPredicateType uint64
 
 const (
@@ -812,6 +841,7 @@ func (e NSCompoundPredicateType) String() string {
 	}
 }
 
+// Options to modify the decoding algorithm used to decode Base64 encoded data.
 type NSDataBase64DecodingOptions uint64
 
 const (
@@ -829,6 +859,7 @@ func (e NSDataBase64DecodingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for methods used to Base64 encode data.
 type NSDataBase64EncodingOptions uint64
 
 const (
@@ -858,6 +889,7 @@ func (e NSDataBase64EncodingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// An algorithm that indicates how to compress or decompress data.
 type NSDataCompressionAlgorithm int64
 
 const (
@@ -882,6 +914,7 @@ func (e NSDataCompressionAlgorithm) String() string {
 	}
 }
 
+// Options for methods used to read data objects.
 type NSDataReadingOptions uint64
 
 const (
@@ -919,6 +952,7 @@ func (e NSDataReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for method used to search data objects.
 type NSDataSearchOptions uint64
 
 const (
@@ -940,6 +974,7 @@ func (e NSDataSearchOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for methods used to write data objects.
 type NSDataWritingOptions uint64
 
 const (
@@ -985,6 +1020,7 @@ func (e NSDataWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants for specifying how to represent quantities of time.
 type NSDateComponentsFormatterUnitsStyle int64
 
 const (
@@ -1015,9 +1051,11 @@ func (e NSDateComponentsFormatterUnitsStyle) String() string {
 	}
 }
 
+// Formatting constants for when values contain zeroes.
 type NSDateComponentsFormatterZeroFormattingBehavior uint64
 
 const (
+	// No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is “1h 0m 10s”.
 	NSDateComponentsFormatterZeroFormattingBehaviorNone         NSDateComponentsFormatterZeroFormattingBehavior = 0
 	NSDateComponentsFormatterZeroFormattingBehaviorDefault      NSDateComponentsFormatterZeroFormattingBehavior = 1
 	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading  NSDateComponentsFormatterZeroFormattingBehavior = 2
@@ -1053,6 +1091,7 @@ func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the behavior NSDateFormatter should exhibit.
 type NSDateFormatterBehavior uint64
 
 const (
@@ -1074,6 +1113,7 @@ func (e NSDateFormatterBehavior) String() string {
 	}
 }
 
+// The following constants specify predefined format styles for dates and times.
 type NSDateFormatterStyle uint64
 
 const (
@@ -1101,6 +1141,7 @@ func (e NSDateFormatterStyle) String() string {
 	}
 }
 
+// Formatting styles for individual date and time values.
 type NSDateIntervalFormatterStyle uint64
 
 const (
@@ -1128,6 +1169,7 @@ func (e NSDateIntervalFormatterStyle) String() string {
 	}
 }
 
+// Policies describing the action the coder should take when encountering decode failures.
 type NSDecodingFailurePolicy int64
 
 const (
@@ -1146,6 +1188,7 @@ func (e NSDecodingFailurePolicy) String() string {
 	}
 }
 
+// Options for enumerating the contents of directories.
 type NSDirectoryEnumerationOptions uint64
 
 const (
@@ -1200,6 +1243,7 @@ func (e NSDistributedNotificationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The units supported by the NSEnergyFormatter class.
 type NSEnergyFormatterUnit int64
 
 const (
@@ -1224,11 +1268,14 @@ func (e NSEnergyFormatterUnit) String() string {
 	}
 }
 
+// Options for block enumeration operations.
 type NSEnumerationOptions uint64
 
 const (
+	// Specifies that the Block enumeration should be concurrent.
 	NSEnumerationConcurrent NSEnumerationOptions = 1
-	NSEnumerationReverse    NSEnumerationOptions = 2
+	// Specifies that the enumeration should be performed in reverse.
+	NSEnumerationReverse NSEnumerationOptions = 2
 )
 
 func (e NSEnumerationOptions) String() string {
@@ -1245,6 +1292,7 @@ func (e NSEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Defines the possible types of an expression.
 type NSExpressionType uint64
 
 const (
@@ -1296,6 +1344,7 @@ func (e NSExpressionType) String() string {
 	}
 }
 
+// Options to use when reading the contents or attributes of a file or directory.
 type NSFileCoordinatorReadingOptions uint64
 
 const (
@@ -1325,6 +1374,7 @@ func (e NSFileCoordinatorReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options to use when changing the contents or attributes of a file or directory.
 type NSFileCoordinatorWritingOptions uint64
 
 const (
@@ -1358,6 +1408,7 @@ func (e NSFileCoordinatorWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for specifying the behavior of file replacement operations.
 type NSFileManagerItemReplacementOptions uint64
 
 const (
@@ -1379,14 +1430,15 @@ func (e NSFileManagerItemReplacementOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The behaviors the file manager can apply to resolve conflicts when resuming a sync.
 type NSFileManagerResumeSyncBehavior int64
 
 const (
-	// Resumes synchronizing by uploading the local version of the file. If the server has a newer version, the server may create a conflict copy of the file, or may automatically pick the winner of the conflict. Apps can choose to implement conflict handling themselves by passing `NSFileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict`.
+	// Resumes synchronizing by uploading the local version of the file.
 	NSFileManagerResumeSyncBehaviorPreserveLocalChanges NSFileManagerResumeSyncBehavior = 0
-	// Resumes sync by first uploading the local version of the file, failing if the provider detects a conflict. If the upload succeeds, the sync resumes with the ``preserveLocalChanges`` behavior. If the provider detects a conflict, the upload fails with an  ``NSFileWriteUnknownError-enum.case``, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/localVersionConflictingWithServer>. In this case, the app needs to call ``FileManager/fetchLatestRemoteVersionOfItem(at:completionHandler:)``, rebase local changes on top of the newly fetched version to resolve the conflict, and try again to resume sync. This scenario is only available on paused items for which the file provider supports the fail-on-conflict behavior. To check that the file provider supports the behavior, get the ``NSURLUbiquitousItemSupportedSyncControlsKey`` URL resource and verify that ``NSFileManagerSupportedSyncControls/failUploadOnConflict`` is `true`.
+	// Resumes sync by first uploading the local version of the file, failing if the provider detects a conflict.
 	NSFileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict NSFileManagerResumeSyncBehavior = 1
-	// Resumes synchronizing by overwriting any local changes with the remote version of the file. If a conflict occurs, the file manager stores the local changes as an alternate version. Only use this behavior if you provide a separate means of resolving and merging conflicts.
+	// Resumes synchronizing by overwriting any local changes with the remote version of the file.
 	NSFileManagerResumeSyncBehaviorDropLocalChanges NSFileManagerResumeSyncBehavior = 2
 )
 
@@ -1403,6 +1455,7 @@ func (e NSFileManagerResumeSyncBehavior) String() string {
 	}
 }
 
+// An option set of the sync controls available for an item.
 type NSFileManagerSupportedSyncControls uint64
 
 const (
@@ -1447,12 +1500,13 @@ func (e NSFileManagerUnmountOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The policies the file manager can apply to resolve conflicts when uploading a local version of a file.
 type NSFileManagerUploadLocalVersionConflictPolicy int64
 
 const (
 	// Resolves the conflict using the policy defined by the file provider.
 	NSFileManagerUploadConflictPolicyDefault NSFileManagerUploadLocalVersionConflictPolicy = 0
-	// Resolves the conflict by causing the upload to fail. This policy causes an upload to fail if the local version of a file, with any local changes applied, doesn't match the server version. In this scenario, call ``FileManager/fetchLatestRemoteVersionOfItem(at:completionHandler:)``, rebase local changes on top of the newly fetched version, and retry the upload. This policy is only available on paused items for which the file provider supports the fail-on-conflict behavior. To check that the file provider supports the behavior, get the ``NSURLUbiquitousItemSupportedSyncControlsKey`` URL resource and verify that ``NSFileManagerSupportedSyncControls/failUploadOnConflict`` is `true`.
+	// Resolves the conflict by causing the upload to fail.
 	NSFileManagerUploadConflictPolicyFailOnConflict NSFileManagerUploadLocalVersionConflictPolicy = 1
 )
 
@@ -1467,6 +1521,7 @@ func (e NSFileManagerUploadLocalVersionConflictPolicy) String() string {
 	}
 }
 
+// Options for adding a new file version.
 type NSFileVersionAddingOptions uint64
 
 const (
@@ -1484,6 +1539,7 @@ func (e NSFileVersionAddingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for replacing a file version.
 type NSFileVersionReplacingOptions uint64
 
 const (
@@ -1501,6 +1557,7 @@ func (e NSFileVersionReplacingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Reading options that can be set by the initWithURL:options:error: and readFromURL:options:error: methods.
 type NSFileWrapperReadingOptions uint64
 
 const (
@@ -1522,6 +1579,7 @@ func (e NSFileWrapperReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Writing options that can be set by the writeToURL:options:originalContentsURL:error: method.
 type NSFileWrapperWritingOptions uint64
 
 const (
@@ -1543,6 +1601,7 @@ func (e NSFileWrapperWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The formatting context for a formatter.
 type NSFormattingContext int64
 
 const (
@@ -1573,6 +1632,7 @@ func (e NSFormattingContext) String() string {
 	}
 }
 
+// Specifies the width of the unit, determining the textual representation.
 type NSFormattingUnitStyle int64
 
 const (
@@ -1693,13 +1753,18 @@ func (e NSGrammaticalDetermination) String() string {
 	}
 }
 
+// A representation of grammatical gender, used for inflecting strings.
 type NSGrammaticalGender int64
 
 const (
-	NSGrammaticalGenderNotSet    NSGrammaticalGender = 0
-	NSGrammaticalGenderFeminine  NSGrammaticalGender = 1
+	// A value that indicates the gender is unset.
+	NSGrammaticalGenderNotSet NSGrammaticalGender = 0
+	// The feminine grammatical gender.
+	NSGrammaticalGenderFeminine NSGrammaticalGender = 1
+	// The masculine grammatical gender.
 	NSGrammaticalGenderMasculine NSGrammaticalGender = 2
-	NSGrammaticalGenderNeuter    NSGrammaticalGender = 3
+	// A value to not specify gender when inflecting a string.
+	NSGrammaticalGenderNeuter NSGrammaticalGender = 3
 )
 
 func (e NSGrammaticalGender) String() string {
@@ -1717,15 +1782,23 @@ func (e NSGrammaticalGender) String() string {
 	}
 }
 
+// A representation of grammatical number, used for inflecting strings.
 type NSGrammaticalNumber int64
 
 const (
-	NSGrammaticalNumberNotSet     NSGrammaticalNumber = 0
-	NSGrammaticalNumberSingular   NSGrammaticalNumber = 1
-	NSGrammaticalNumberZero       NSGrammaticalNumber = 2
-	NSGrammaticalNumberPlural     NSGrammaticalNumber = 3
-	NSGrammaticalNumberPluralTwo  NSGrammaticalNumber = 4
-	NSGrammaticalNumberPluralFew  NSGrammaticalNumber = 5
+	// A value that indicates the number is unset.
+	NSGrammaticalNumberNotSet NSGrammaticalNumber = 0
+	// A single person or thing, as used for a grammatical number.
+	NSGrammaticalNumberSingular NSGrammaticalNumber = 1
+	// Zero persons or things, as used for a grammatical number.
+	NSGrammaticalNumberZero NSGrammaticalNumber = 2
+	// Multiple persons or things, as used for a grammatical number.
+	NSGrammaticalNumberPlural NSGrammaticalNumber = 3
+	// Two persons or things, as used for a grammatical number.
+	NSGrammaticalNumberPluralTwo NSGrammaticalNumber = 4
+	// A small number of persons or things, as used for a grammatical number.
+	NSGrammaticalNumberPluralFew NSGrammaticalNumber = 5
+	// A large number of persons or things, as used for a grammatical number.
 	NSGrammaticalNumberPluralMany NSGrammaticalNumber = 6
 )
 
@@ -1750,23 +1823,39 @@ func (e NSGrammaticalNumber) String() string {
 	}
 }
 
+// A representation of grammatical parts of speech, used for inflecting strings.
 type NSGrammaticalPartOfSpeech int64
 
 const (
-	NSGrammaticalPartOfSpeechNotSet       NSGrammaticalPartOfSpeech = 0
-	NSGrammaticalPartOfSpeechDeterminer   NSGrammaticalPartOfSpeech = 1
-	NSGrammaticalPartOfSpeechPronoun      NSGrammaticalPartOfSpeech = 2
-	NSGrammaticalPartOfSpeechLetter       NSGrammaticalPartOfSpeech = 3
-	NSGrammaticalPartOfSpeechAdverb       NSGrammaticalPartOfSpeech = 4
-	NSGrammaticalPartOfSpeechParticle     NSGrammaticalPartOfSpeech = 5
-	NSGrammaticalPartOfSpeechAdjective    NSGrammaticalPartOfSpeech = 6
-	NSGrammaticalPartOfSpeechAdposition   NSGrammaticalPartOfSpeech = 7
-	NSGrammaticalPartOfSpeechVerb         NSGrammaticalPartOfSpeech = 8
-	NSGrammaticalPartOfSpeechNoun         NSGrammaticalPartOfSpeech = 9
-	NSGrammaticalPartOfSpeechConjunction  NSGrammaticalPartOfSpeech = 10
-	NSGrammaticalPartOfSpeechNumeral      NSGrammaticalPartOfSpeech = 11
+	// A value that indicates the part of speech is unset.
+	NSGrammaticalPartOfSpeechNotSet NSGrammaticalPartOfSpeech = 0
+	// A determiner, as used as a part of speech.
+	NSGrammaticalPartOfSpeechDeterminer NSGrammaticalPartOfSpeech = 1
+	// A pronoun, as used as a part of speech.
+	NSGrammaticalPartOfSpeechPronoun NSGrammaticalPartOfSpeech = 2
+	// A letter, as used as a part of speech.
+	NSGrammaticalPartOfSpeechLetter NSGrammaticalPartOfSpeech = 3
+	// An adverb, as used as a part of speech.
+	NSGrammaticalPartOfSpeechAdverb NSGrammaticalPartOfSpeech = 4
+	// A particle, as used as a part of speech.
+	NSGrammaticalPartOfSpeechParticle NSGrammaticalPartOfSpeech = 5
+	// An adjective, as used as a part of speech.
+	NSGrammaticalPartOfSpeechAdjective NSGrammaticalPartOfSpeech = 6
+	// An adposition, as used as a part of speech.
+	NSGrammaticalPartOfSpeechAdposition NSGrammaticalPartOfSpeech = 7
+	// A verb, as used as a part of speech.
+	NSGrammaticalPartOfSpeechVerb NSGrammaticalPartOfSpeech = 8
+	// A noun, as used as a part of speech.
+	NSGrammaticalPartOfSpeechNoun NSGrammaticalPartOfSpeech = 9
+	// A conjunction, as used as a part of speech.
+	NSGrammaticalPartOfSpeechConjunction NSGrammaticalPartOfSpeech = 10
+	// A numeral, as used as a part of speech.
+	NSGrammaticalPartOfSpeechNumeral NSGrammaticalPartOfSpeech = 11
+	// An interjection, as used as a part of speech.
 	NSGrammaticalPartOfSpeechInterjection NSGrammaticalPartOfSpeech = 12
-	NSGrammaticalPartOfSpeechPreposition  NSGrammaticalPartOfSpeech = 13
+	// A preposition, as used as a part of speech.
+	NSGrammaticalPartOfSpeechPreposition NSGrammaticalPartOfSpeech = 13
+	// An abbreviation, as used as a part of speech.
 	NSGrammaticalPartOfSpeechAbbreviation NSGrammaticalPartOfSpeech = 14
 )
 
@@ -1855,6 +1944,7 @@ func (e NSGrammaticalPronounType) String() string {
 	}
 }
 
+// Cookie acceptance policies implemented by the NSHTTPCookieStorage class.
 type NSHTTPCookieAcceptPolicy uint64
 
 const (
@@ -1876,6 +1966,7 @@ func (e NSHTTPCookieAcceptPolicy) String() string {
 	}
 }
 
+// Options used to generate and parse ISO 8601 date representations.
 type NSISO8601DateFormatOptions uint64
 
 const (
@@ -1945,6 +2036,7 @@ func (e NSISO8601DateFormatOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A type that defines presentation intent for runs of characters for traits like emphasis, strikethrough, and code voice.
 type NSInlinePresentationIntent uint64
 
 const (
@@ -1990,6 +2082,7 @@ func (e NSInlinePresentationIntent) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The following constants are defined by NSPositionalSpecifier to specify an insertion position.
 type NSInsertionPosition uint64
 
 const (
@@ -2017,6 +2110,7 @@ func (e NSInsertionPosition) String() string {
 	}
 }
 
+// The error codes that describe problems with consuming data from an item provider.
 type NSItemProviderErrorCode int64
 
 const (
@@ -2041,9 +2135,11 @@ func (e NSItemProviderErrorCode) String() string {
 	}
 }
 
+// Data-access specifications that declare how to handle items.
 type NSItemProviderFileOptions int64
 
 const (
+	// A data-access specification declaring that items should open in place, rather than being copied.
 	NSItemProviderFileOptionOpenInPlace NSItemProviderFileOptions = 1
 )
 
@@ -2058,11 +2154,15 @@ func (e NSItemProviderFileOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Specifications that control which categories of processes can see an item.
 type NSItemProviderRepresentationVisibility int64
 
 const (
-	NSItemProviderRepresentationVisibilityAll        NSItemProviderRepresentationVisibility = 0
-	NSItemProviderRepresentationVisibilityGroup      NSItemProviderRepresentationVisibility = 2
+	// A representation visibility specification conferring item visibility to all processes.
+	NSItemProviderRepresentationVisibilityAll NSItemProviderRepresentationVisibility = 0
+	// A representation visibility specification confining item visibility to the app’s app group.
+	NSItemProviderRepresentationVisibilityGroup NSItemProviderRepresentationVisibility = 2
+	// A representation visibility specification confining item visibility to the app that is the source of the item.
 	NSItemProviderRepresentationVisibilityOwnProcess NSItemProviderRepresentationVisibility = 3
 )
 
@@ -2079,6 +2179,7 @@ func (e NSItemProviderRepresentationVisibility) String() string {
 	}
 }
 
+// Options used when creating Foundation objects from JSON data.
 type NSJSONReadingOptions uint64
 
 const (
@@ -2116,6 +2217,7 @@ func (e NSJSONReadingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for writing JSON data.
 type NSJSONWritingOptions uint64
 
 const (
@@ -2145,12 +2247,17 @@ func (e NSJSONWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The kinds of changes that can be observed.
 type NSKeyValueChange uint64
 
 const (
-	NSKeyValueChangeSetting     NSKeyValueChange = 1
-	NSKeyValueChangeInsertion   NSKeyValueChange = 2
-	NSKeyValueChangeRemoval     NSKeyValueChange = 3
+	// Indicates that the value of the observed key path was set to a new value. This change can occur when observing an attribute of an object, as well as properties that specify to-one and to-many relationships.
+	NSKeyValueChangeSetting NSKeyValueChange = 1
+	// Indicates that an object has been inserted into the to-many relationship that is being observed.
+	NSKeyValueChangeInsertion NSKeyValueChange = 2
+	// Indicates that an object has been removed from the to-many relationship that is being observed.
+	NSKeyValueChangeRemoval NSKeyValueChange = 3
+	// Indicates that an object has been replaced in the to-many relationship that is being observed.
 	NSKeyValueChangeReplacement NSKeyValueChange = 4
 )
 
@@ -2169,13 +2276,18 @@ func (e NSKeyValueChange) String() string {
 	}
 }
 
+// The values that can be returned in a change dictionary.
 type NSKeyValueObservingOptions uint64
 
 const (
-	NSKeyValueObservingOptionNew     NSKeyValueObservingOptions = 1
-	NSKeyValueObservingOptionOld     NSKeyValueObservingOptions = 2
+	// Indicates that the change dictionary should provide the new attribute value, if applicable.
+	NSKeyValueObservingOptionNew NSKeyValueObservingOptions = 1
+	// Indicates that the change dictionary should contain the old attribute value, if applicable.
+	NSKeyValueObservingOptionOld NSKeyValueObservingOptions = 2
+	// If specified, a notification should be sent to the observer immediately, before the observer registration method even returns.
 	NSKeyValueObservingOptionInitial NSKeyValueObservingOptions = 4
-	NSKeyValueObservingOptionPrior   NSKeyValueObservingOptions = 8
+	// Whether separate notifications should be sent to the observer before and after each change, instead of a single notification after the change.
+	NSKeyValueObservingOptionPrior NSKeyValueObservingOptions = 8
 )
 
 func (e NSKeyValueObservingOptions) String() string {
@@ -2222,6 +2334,7 @@ func (e NSKeyValueSetMutationKind) String() string {
 	}
 }
 
+// The units supported by the NSLengthFormatter class.
 type NSLengthFormatterUnit int64
 
 const (
@@ -2258,6 +2371,7 @@ func (e NSLengthFormatterUnit) String() string {
 	}
 }
 
+// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
 type NSLinguisticTaggerOptions uint64
 
 const (
@@ -2291,13 +2405,18 @@ func (e NSLinguisticTaggerOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants representing linguistic units.
 type NSLinguisticTaggerUnit int64
 
 const (
-	NSLinguisticTaggerUnitWord      NSLinguisticTaggerUnit = 0
-	NSLinguisticTaggerUnitSentence  NSLinguisticTaggerUnit = 1
+	// An individual word.
+	NSLinguisticTaggerUnitWord NSLinguisticTaggerUnit = 0
+	// An individual sentence.
+	NSLinguisticTaggerUnitSentence NSLinguisticTaggerUnit = 1
+	// An individual paragraph.
 	NSLinguisticTaggerUnitParagraph NSLinguisticTaggerUnit = 2
-	NSLinguisticTaggerUnitDocument  NSLinguisticTaggerUnit = 3
+	// The document in its entirety.
+	NSLinguisticTaggerUnitDocument NSLinguisticTaggerUnit = 3
 )
 
 func (e NSLinguisticTaggerUnit) String() string {
@@ -2315,6 +2434,7 @@ func (e NSLinguisticTaggerUnit) String() string {
 	}
 }
 
+// The directions that a language may take across a page of text.
 type NSLocaleLanguageDirection uint64
 
 const (
@@ -2342,9 +2462,11 @@ func (e NSLocaleLanguageDirection) String() string {
 	}
 }
 
+// Used to remove access rights to a mach port when the NSMachPort object is invalidated or destroyed.
 type NSMachPortOptions uint64
 
 const (
+	// Do not remove any send or receive rights.
 	NSMachPortDeallocateNone         NSMachPortOptions = 0
 	NSMachPortDeallocateSendRight    NSMachPortOptions = 1
 	NSMachPortDeallocateReceiveRight NSMachPortOptions = 2
@@ -2364,6 +2486,7 @@ func (e NSMachPortOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The units supported by the NSMassFormatter class.
 type NSMassFormatterUnit int64
 
 const (
@@ -2424,6 +2547,7 @@ func (e NSMatchingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The matching options constants specify the reporting, completion and matching rules to the expression matching methods. These constants are used by all methods that search for, or replace values, using a regular expression.
 type NSMatchingOptions uint64
 
 const (
@@ -2457,6 +2581,7 @@ func (e NSMatchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Measurement formatter options.
 type NSMeasurementFormatterUnitOptions uint64
 
 const (
@@ -2482,6 +2607,7 @@ func (e NSMeasurementFormatterUnitOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify options for a network service.
 type NSNetServiceOptions uint64
 
 const (
@@ -2503,6 +2629,7 @@ func (e NSNetServiceOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants identify errors that can occur when accessing net services.
 type NSNetServicesError int64
 
 const (
@@ -2542,6 +2669,7 @@ func (e NSNetServicesError) String() string {
 	}
 }
 
+// The constants that specify how notifications are coalesced.
 type NSNotificationCoalescing uint64
 
 const (
@@ -2564,6 +2692,7 @@ func (e NSNotificationCoalescing) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify the types of notification delivery suspension behaviors.
 type NSNotificationSuspensionBehavior uint64
 
 const (
@@ -2588,6 +2717,7 @@ func (e NSNotificationSuspensionBehavior) String() string {
 	}
 }
 
+// These constants specify the behavior of a number formatter. These constants are returned by the defaultFormatterBehavior class method and the formatterBehavior property.
 type NSNumberFormatterBehavior uint64
 
 const (
@@ -2609,6 +2739,7 @@ func (e NSNumberFormatterBehavior) String() string {
 	}
 }
 
+// These constants are used to specify how numbers should be padded. These constants are used by the paddingPosition property.
 type NSNumberFormatterPadPosition uint64
 
 const (
@@ -2633,6 +2764,7 @@ func (e NSNumberFormatterPadPosition) String() string {
 	}
 }
 
+// These constants are used to specify how numbers should be rounded. These constants are used by the roundingMode property.
 type NSNumberFormatterRoundingMode uint64
 
 const (
@@ -2666,6 +2798,7 @@ func (e NSNumberFormatterRoundingMode) String() string {
 	}
 }
 
+// The predefined number format styles used by the numberStyle property.
 type NSNumberFormatterStyle uint64
 
 const (
@@ -2708,6 +2841,7 @@ func (e NSNumberFormatterStyle) String() string {
 	}
 }
 
+// These constants let you prioritize the order in which operations execute.
 type NSOperationQueuePriority int64
 
 const (
@@ -2735,14 +2869,15 @@ func (e NSOperationQueuePriority) String() string {
 	}
 }
 
+// Constants that specify the options to use when creating an ordered collection difference.
 type NSOrderedCollectionDifferenceCalculationOptions uint64
 
 const (
-	// Insertion changes do not store a reference to the inserted object.
+	// An option that indicates that the difference should omit references to the insertions.
 	NSOrderedCollectionDifferenceCalculationOmitInsertedObjects NSOrderedCollectionDifferenceCalculationOptions = 1
-	// Insertion changes do not store a reference to the removed object.
+	// An option that indicates that the difference should omit references to the removals.
 	NSOrderedCollectionDifferenceCalculationOmitRemovedObjects NSOrderedCollectionDifferenceCalculationOptions = 2
-	// Assume objects that were uniquely removed and inserted were moved. This is useful when diffing based on identity instead of equality.
+	// An option that identifies insertions or removals as moves.
 	NSOrderedCollectionDifferenceCalculationInferMoves NSOrderedCollectionDifferenceCalculationOptions = 4
 )
 
@@ -2763,6 +2898,7 @@ func (e NSOrderedCollectionDifferenceCalculationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for formatting person name components.
 type NSPersonNameComponentsFormatterOptions uint64
 
 const (
@@ -2780,6 +2916,7 @@ func (e NSPersonNameComponentsFormatterOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The formatting styles for person name components.
 type NSPersonNameComponentsFormatterStyle int64
 
 const (
@@ -2807,10 +2944,12 @@ func (e NSPersonNameComponentsFormatterStyle) String() string {
 	}
 }
 
+// Defines the memory and personality options for an NSPointerFunctions object.
 type NSPointerFunctionsOptions uint64
 
 const (
-	NSPointerFunctionsStrongMemory             NSPointerFunctionsOptions = 0
+	NSPointerFunctionsStrongMemory NSPointerFunctionsOptions = 0
+	// Use weak read and write barriers; use garbage-collected memory on copyIn.
 	NSPointerFunctionsZeroingWeakMemory        NSPointerFunctionsOptions = 1
 	NSPointerFunctionsOpaqueMemory             NSPointerFunctionsOptions = 2
 	NSPointerFunctionsMallocMemory             NSPointerFunctionsOptions = 3
@@ -2866,6 +3005,7 @@ func (e NSPointerFunctionsOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The constants that specify when notifications are posted.
 type NSPostingStyle uint64
 
 const (
@@ -2887,6 +3027,7 @@ func (e NSPostingStyle) String() string {
 	}
 }
 
+// Defines the type of comparison for a comparison predicate.
 type NSPredicateOperatorType uint64
 
 const (
@@ -2941,21 +3082,34 @@ func (e NSPredicateOperatorType) String() string {
 	}
 }
 
+// An enumeration of intended display styles for blocks of text like paragraphs, lists, and code blocks.
 type NSPresentationIntentKind int64
 
 const (
-	NSPresentationIntentKindParagraph      NSPresentationIntentKind = 0
-	NSPresentationIntentKindHeader         NSPresentationIntentKind = 1
-	NSPresentationIntentKindOrderedList    NSPresentationIntentKind = 2
-	NSPresentationIntentKindUnorderedList  NSPresentationIntentKind = 3
-	NSPresentationIntentKindListItem       NSPresentationIntentKind = 4
-	NSPresentationIntentKindCodeBlock      NSPresentationIntentKind = 5
-	NSPresentationIntentKindBlockQuote     NSPresentationIntentKind = 6
-	NSPresentationIntentKindThematicBreak  NSPresentationIntentKind = 7
-	NSPresentationIntentKindTable          NSPresentationIntentKind = 8
+	// A presentation style for a paragraph of text.
+	NSPresentationIntentKindParagraph NSPresentationIntentKind = 0
+	// A presentation style for a section header.
+	NSPresentationIntentKindHeader NSPresentationIntentKind = 1
+	// A presentation style for an ordered list of items.
+	NSPresentationIntentKindOrderedList NSPresentationIntentKind = 2
+	// A presentation style for an unordered list of items.
+	NSPresentationIntentKindUnorderedList NSPresentationIntentKind = 3
+	// A presentation style for a list of items.
+	NSPresentationIntentKindListItem NSPresentationIntentKind = 4
+	// A presentation style for a block of code.
+	NSPresentationIntentKindCodeBlock NSPresentationIntentKind = 5
+	// A presentation style for a block quote.
+	NSPresentationIntentKindBlockQuote NSPresentationIntentKind = 6
+	// A presentation style for a horizontal rule.
+	NSPresentationIntentKindThematicBreak NSPresentationIntentKind = 7
+	// A presentation style for a table.
+	NSPresentationIntentKindTable NSPresentationIntentKind = 8
+	// A presentation style for the header row of a table.
 	NSPresentationIntentKindTableHeaderRow NSPresentationIntentKind = 9
-	NSPresentationIntentKindTableRow       NSPresentationIntentKind = 10
-	NSPresentationIntentKindTableCell      NSPresentationIntentKind = 11
+	// A presentation style for a row of a table.
+	NSPresentationIntentKindTableRow NSPresentationIntentKind = 10
+	// A presentation style for a single cell of a table.
+	NSPresentationIntentKindTableCell NSPresentationIntentKind = 11
 )
 
 func (e NSPresentationIntentKind) String() string {
@@ -2989,12 +3143,16 @@ func (e NSPresentationIntentKind) String() string {
 	}
 }
 
+// An enumeration of values for aligning the contents of table columns.
 type NSPresentationIntentTableColumnAlignment int64
 
 const (
-	NSPresentationIntentTableColumnAlignmentLeft   NSPresentationIntentTableColumnAlignment = 0
+	// A presentation style for columns with left-aligned text.
+	NSPresentationIntentTableColumnAlignmentLeft NSPresentationIntentTableColumnAlignment = 0
+	// A presentation style for columns with center-aligned text.
 	NSPresentationIntentTableColumnAlignmentCenter NSPresentationIntentTableColumnAlignment = 1
-	NSPresentationIntentTableColumnAlignmentRight  NSPresentationIntentTableColumnAlignment = 2
+	// A presentation style for columns with right-aligned text.
+	NSPresentationIntentTableColumnAlignmentRight NSPresentationIntentTableColumnAlignment = 2
 )
 
 func (e NSPresentationIntentTableColumnAlignment) String() string {
@@ -3010,6 +3168,7 @@ func (e NSPresentationIntentTableColumnAlignment) String() string {
 	}
 }
 
+// Values used to indicate the system’s thermal state.
 type NSProcessInfoThermalState int64
 
 const (
@@ -3034,6 +3193,7 @@ func (e NSProcessInfoThermalState) String() string {
 	}
 }
 
+// These constants are used to specify a property list serialization format.
 type NSPropertyListFormat uint64
 
 const (
@@ -3055,9 +3215,11 @@ func (e NSPropertyListFormat) String() string {
 	}
 }
 
+// These constants specify mutability options in property lists.
 type NSPropertyListMutabilityOptions uint64
 
 const (
+	// Causes the returned property list to contain immutable objects.
 	NSPropertyListImmutable                  NSPropertyListMutabilityOptions = 0
 	NSPropertyListMutableContainers          NSPropertyListMutabilityOptions = 1
 	NSPropertyListMutableContainersAndLeaves NSPropertyListMutabilityOptions = 2
@@ -3077,6 +3239,7 @@ func (e NSPropertyListMutabilityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate the nature and importance of work to the system.
 type NSQualityOfService int64
 
 const (
@@ -3107,14 +3270,22 @@ func (e NSQualityOfService) String() string {
 type NSRectEdge uint64
 
 const (
+	// The minimum X edge.
 	NSRectEdgeMinX NSRectEdge = 0
+	// The minimum Y edge.
 	NSRectEdgeMinY NSRectEdge = 1
+	// The maximum X edge.
 	NSRectEdgeMaxX NSRectEdge = 2
+	// The maximum Y edge.
 	NSRectEdgeMaxY NSRectEdge = 3
-	NSMinXEdge     NSRectEdge = 0
-	NSMinYEdge     NSRectEdge = 1
-	NSMaxXEdge     NSRectEdge = 2
-	NSMaxYEdge     NSRectEdge = 3
+	// The minimum X edge.
+	NSMinXEdge NSRectEdge = 0
+	// The minimum Y edge.
+	NSMinYEdge NSRectEdge = 1
+	// The maximum X edge.
+	NSMaxXEdge NSRectEdge = 2
+	// The maximum Y edge.
+	NSMaxYEdge NSRectEdge = 3
 )
 
 func (e NSRectEdge) String() string {
@@ -3173,6 +3344,7 @@ func (e NSRegularExpressionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A type that represents the style to use when formatting relative dates, such as “1 week ago” or “last week”.
 type NSRelativeDateTimeFormatterStyle int64
 
 const (
@@ -3191,6 +3363,7 @@ func (e NSRelativeDateTimeFormatterStyle) String() string {
 	}
 }
 
+// A type that represents the style to use when formatting the units of relative dates.
 type NSRelativeDateTimeFormatterUnitsStyle int64
 
 const (
@@ -3215,6 +3388,7 @@ func (e NSRelativeDateTimeFormatterUnitsStyle) String() string {
 	}
 }
 
+// These constants are used by relativePosition and relativePosition.
 type NSRelativePosition uint64
 
 const (
@@ -3233,6 +3407,7 @@ func (e NSRelativePosition) String() string {
 	}
 }
 
+// These constants specify rounding behaviors.
 type NSRoundingMode uint64
 
 const (
@@ -3257,11 +3432,15 @@ func (e NSRoundingMode) String() string {
 	}
 }
 
+// The saveOptions method returns one of the following constants to indicate how to deal with saving any modified documents:
 type NSSaveOptions uint64
 
 const (
+	// Indicates a modified document should be saved on closing without asking the user.
 	NSSaveOptionsYes NSSaveOptions = 0
-	NSSaveOptionsNo  NSSaveOptions = 1
+	// Indicates a modified document should not be saved on closing.
+	NSSaveOptionsNo NSSaveOptions = 1
+	// Indicates the user should be asked before saving any modified documents on closing. When no option is specified, this is the default.
 	NSSaveOptionsAsk NSSaveOptions = 2
 )
 
@@ -3278,6 +3457,7 @@ func (e NSSaveOptions) String() string {
 	}
 }
 
+// The location of significant directories.
 type NSSearchPathDirectory uint64
 
 const (
@@ -3371,6 +3551,7 @@ func (e NSSearchPathDirectory) String() string {
 	}
 }
 
+// Domain constants specifying base locations to use when you search for significant directories.
 type NSSearchPathDomainMask uint64
 
 const (
@@ -3404,11 +3585,14 @@ func (e NSSearchPathDomainMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for block sorting operations.
 type NSSortOptions uint64
 
 const (
+	// Specifies that the Block sort operation should be concurrent.
 	NSSortConcurrent NSSortOptions = 1
-	NSSortStable     NSSortOptions = 16
+	// Specifies that the sorted results should return compared items having equal value in the order they occurred originally.
+	NSSortStable NSSortOptions = 16
 )
 
 func (e NSSortOptions) String() string {
@@ -3459,6 +3643,7 @@ func (e NSStreamEvent) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The type declared for the constants listed in doc:stream/stream_status_constants.
 type NSStreamStatus uint64
 
 const (
@@ -3495,6 +3680,7 @@ func (e NSStreamStatus) String() string {
 	}
 }
 
+// These values represent the options available to many of the string classes’ search and comparison methods.
 type NSStringCompareOptions uint64
 
 const (
@@ -3544,6 +3730,7 @@ func (e NSStringCompareOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for converting string encodings.
 type NSStringEncodingConversionOptions uint64
 
 const (
@@ -3565,6 +3752,7 @@ func (e NSStringEncodingConversionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants to specify kinds of substrings and styles of enumeration.
 type NSStringEnumerationOptions uint64
 
 const (
@@ -3615,6 +3803,7 @@ func (e NSStringEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the termination reason values that the system returns.
 type NSTaskTerminationReason int64
 
 const (
@@ -3633,6 +3822,7 @@ func (e NSTaskTerminationReason) String() string {
 	}
 }
 
+// These are passed to initWithObjectSpecifier:comparisonOperator:testObject: to specify the comparison operator.
 type NSTestComparisonOperation uint64
 
 const (
@@ -3734,6 +3924,7 @@ func (e NSTextCheckingType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants you use to specify a style when presenting time zone names.
 type NSTimeZoneNameStyle int64
 
 const (
@@ -3764,6 +3955,7 @@ func (e NSTimeZoneNameStyle) String() string {
 	}
 }
 
+// Options used when creating bookmark data.
 type NSURLBookmarkCreationOptions uint64
 
 const (
@@ -3801,6 +3993,7 @@ func (e NSURLBookmarkCreationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options used when resolving bookmark data.
 type NSURLBookmarkResolutionOptions uint64
 
 const (
@@ -3830,6 +4023,7 @@ func (e NSURLBookmarkResolutionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants specify the caching strategy used by an NSCachedURLResponse object.
 type NSURLCacheStoragePolicy uint64
 
 const (
@@ -3851,6 +4045,7 @@ func (e NSURLCacheStoragePolicy) String() string {
 	}
 }
 
+// Constants that specify how long the credential will be kept.
 type NSURLCredentialPersistence uint64
 
 const (
@@ -3875,12 +4070,17 @@ func (e NSURLCredentialPersistence) String() string {
 	}
 }
 
+// An enumeration of reasons why a task couldn’t satisfy networking constraints.
 type NSURLErrorNetworkUnavailableReason int64
 
 const (
-	NSURLErrorNetworkUnavailableReasonCellular         NSURLErrorNetworkUnavailableReason = 0
-	NSURLErrorNetworkUnavailableReasonExpensive        NSURLErrorNetworkUnavailableReason = 1
-	NSURLErrorNetworkUnavailableReasonConstrained      NSURLErrorNetworkUnavailableReason = 2
+	// A reason that indicates network is unavailable because the interface is cellular and cellular network is disabled.
+	NSURLErrorNetworkUnavailableReasonCellular NSURLErrorNetworkUnavailableReason = 0
+	// A reason that indicates network is unavailable because the system marked the interface as expensive.
+	NSURLErrorNetworkUnavailableReasonExpensive NSURLErrorNetworkUnavailableReason = 1
+	// A reason that indicates network is unavailable because the user enabled “Low Data Mode” in the Settings app.
+	NSURLErrorNetworkUnavailableReasonConstrained NSURLErrorNetworkUnavailableReason = 2
+	// The network is unavailable because the ultra-constrained interface is not available.
 	NSURLErrorNetworkUnavailableReasonUltraConstrained NSURLErrorNetworkUnavailableReason = 3
 )
 
@@ -3899,6 +4099,7 @@ func (e NSURLErrorNetworkUnavailableReason) String() string {
 	}
 }
 
+// These following constants are defined by NSURLHandle and are returned by status.
 type NSURLHandleStatus uint64
 
 const (
@@ -3923,6 +4124,7 @@ func (e NSURLHandleStatus) String() string {
 	}
 }
 
+// Constants indicating the relationship between a directory and an item.
 type NSURLRelationship int64
 
 const (
@@ -3944,6 +4146,7 @@ func (e NSURLRelationship) String() string {
 	}
 }
 
+// The entities that can make a network request.
 type NSURLRequestAttribution uint64
 
 const (
@@ -3962,6 +4165,7 @@ func (e NSURLRequestAttribution) String() string {
 	}
 }
 
+// The constants used to specify interaction with the cached responses.
 type NSURLRequestCachePolicy uint64
 
 const (
@@ -3993,6 +4197,7 @@ func (e NSURLRequestCachePolicy) String() string {
 	}
 }
 
+// Constants that specify how a request uses network resources.
 type NSURLRequestNetworkServiceType uint64
 
 const (
@@ -4032,6 +4237,7 @@ func (e NSURLRequestNetworkServiceType) String() string {
 	}
 }
 
+// Constants passed by session or task delegates to the provided continuation block in response to an authentication challenge.
 type NSURLSessionAuthChallengeDisposition int64
 
 const (
@@ -4056,6 +4262,7 @@ func (e NSURLSessionAuthChallengeDisposition) String() string {
 	}
 }
 
+// The action to take on a delayed URL session task.
 type NSURLSessionDelayedRequestDisposition int64
 
 const (
@@ -4077,6 +4284,7 @@ func (e NSURLSessionDelayedRequestDisposition) String() string {
 	}
 }
 
+// Constants indicating how a data or upload session should proceed after receiving the initial headers.
 type NSURLSessionResponseDisposition int64
 
 const (
@@ -4128,6 +4336,7 @@ func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
 	}
 }
 
+// The manner in which a resource is fetched.
 type NSURLSessionTaskMetricsResourceFetchType int64
 
 const (
@@ -4152,6 +4361,7 @@ func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
 	}
 }
 
+// Constants for determining the current state of a task.
 type NSURLSessionTaskState int64
 
 const (
@@ -4176,6 +4386,7 @@ func (e NSURLSessionTaskState) String() string {
 	}
 }
 
+// A code that indicates why a WebSocket connection closed.
 type NSURLSessionWebSocketCloseCode int64
 
 const (
@@ -4227,6 +4438,7 @@ func (e NSURLSessionWebSocketCloseCode) String() string {
 	}
 }
 
+// An enumeration of the types of messages sent and received.
 type NSURLSessionWebSocketMessageType int64
 
 const (
@@ -4245,6 +4457,7 @@ func (e NSURLSessionWebSocketMessageType) String() string {
 	}
 }
 
+// These constants describe how the user notification was activated.
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 type NSUserNotificationActivationType int64
 
@@ -4294,6 +4507,7 @@ func (e NSVolumeEnumerationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// NSWhoseSpecifier uses these constants to specify sub-elements within the collection of objects being tested that pass the specifier’s test.
 type NSWhoseSubelementIdentifier uint64
 
 const (
@@ -4321,6 +4535,7 @@ func (e NSWhoseSubelementIdentifier) String() string {
 	}
 }
 
+// The type defined for the constants that specify the kind and subkind of DTD declaration represented by an NSXMLDTDNode object. You set the DTD-node kind using the doc:nsxmldtdnode/1806486-setdtdkind method.
 type NSXMLDTDNodeKind uint64
 
 const (
@@ -4393,6 +4608,7 @@ func (e NSXMLDTDNodeKind) String() string {
 	}
 }
 
+// Type used to define the kind of document content.
 type NSXMLDocumentContentKind uint64
 
 const (
@@ -4417,6 +4633,7 @@ func (e NSXMLDocumentContentKind) String() string {
 	}
 }
 
+// NSXMLNode declares the following constants of type NSXMLNodeKind for specifying a node’s kind in the initializer methods initWithKind: and initWithKind:options::
 type NSXMLNodeKind uint64
 
 const (
@@ -4468,9 +4685,11 @@ func (e NSXMLNodeKind) String() string {
 	}
 }
 
+// These constants are input and output options for all NSXMLNode objects (unless otherwise indicated), including NSXMLDocument objects. You can specify these options in the NSXMLNode methods initWithKind:options: and XMLStringWithOptions:.
 type NSXMLNodeOptions uint64
 
 const (
+	// No options are requested for this input or output action.
 	NSXMLNodeOptionsNone                        NSXMLNodeOptions = 0
 	NSXMLNodeIsCDATA                            NSXMLNodeOptions = 1
 	NSXMLNodeExpandEmptyElement                 NSXMLNodeOptions = 2
@@ -4590,6 +4809,7 @@ func (e NSXMLNodeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The following error codes are defined by NSXMLParser. For error codes not listed here, see the <libxml/xmlerror.h> header file.
 type NSXMLParserError int64
 
 const (
@@ -4881,6 +5101,7 @@ func (e NSXMLParserError) String() string {
 	}
 }
 
+// Defines the external entity resolving policy used by an NSXMLParser instance.
 type NSXMLParserExternalEntityResolvingPolicy uint64
 
 const (
@@ -4905,6 +5126,7 @@ func (e NSXMLParserExternalEntityResolvingPolicy) String() string {
 	}
 }
 
+// Options that you can pass to a connection.
 type NSXPCConnectionOptions uint64
 
 const (

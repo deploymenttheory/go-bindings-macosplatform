@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A progress reporting capability supported by a context.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsprogressreportingcapability
 type CLSProgressReportingCapability struct {
 	CLSObject
@@ -32,7 +34,7 @@ func CLSProgressReportingCapabilityFromID(id objc.ID) *CLSProgressReportingCapab
 	return o
 }
 
-// @abstract       Initialize and configure the type of progress reporting capability @param         kind        The kind of progress reporting capability @param         details     An optional localized string describing the capability. For example: "Reports percentage of progress", "Reports overall score". Schoolwork will use an appropriate default string if one is not provided.
+// Creates a new progress reporting capability of the given type with a descriptive string.
 func (o *CLSProgressReportingCapability) InitWithKindDetails(kind CLSProgressReportingCapabilityKind, details *foundation.NSString) *CLSProgressReportingCapability {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSProgressReportingCapabilitySelInitWithKindDetails, kind, details.Ptr())
 	if _ret != 0 {

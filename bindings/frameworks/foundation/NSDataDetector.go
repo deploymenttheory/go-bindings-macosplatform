@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized regular expression object that matches natural language text for predefined data patterns.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdatadetector
 type NSDataDetector struct {
 	NSRegularExpression
@@ -33,6 +35,7 @@ func NSDataDetectorFromID(id objc.ID) *NSDataDetector {
 	return o
 }
 
+// Creates and returns a new data detector instance.
 func NSDataDetectorDataDetectorWithTypesError(checkingTypes uint64) (*NSDataDetector, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDataDetector), _nSDataDetectorSelDataDetectorWithTypesError, checkingTypes, unsafe.Pointer(&_nsErr))
@@ -45,6 +48,7 @@ func NSDataDetectorDataDetectorWithTypesError(checkingTypes uint64) (*NSDataDete
 	return NSDataDetectorFromID(_ret), nil
 }
 
+// Initializes and returns a data detector instance.
 func (o *NSDataDetector) InitWithTypesError(checkingTypes uint64) (*NSDataDetector, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataDetectorSelInitWithTypesError, checkingTypes, unsafe.Pointer(&_nsErr))

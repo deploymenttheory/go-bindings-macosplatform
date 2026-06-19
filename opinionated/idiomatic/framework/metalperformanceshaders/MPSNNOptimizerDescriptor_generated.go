@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies properties used by an optimizer kernel.
+//
 // NNOptimizerDescriptor wraps [raw.MPSNNOptimizerDescriptor] with a fluent Go API.
 type NNOptimizerDescriptor struct {
 	inner *raw.MPSNNOptimizerDescriptor

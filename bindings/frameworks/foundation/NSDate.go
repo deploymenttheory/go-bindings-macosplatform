@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a specific point in time, independent of any calendar or time zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdate
 type NSDate struct {
 	NSObject
@@ -59,6 +61,7 @@ func NSDateFromID(id objc.ID) *NSDate {
 	return o
 }
 
+// Returns a date object initialized to the current date and time.
 func (o *NSDate) Init() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInit)
 	if _ret != 0 {
@@ -67,6 +70,7 @@ func (o *NSDate) Init() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns a date object initialized relative to 00:00:00 UTC on 1 January 2001 by a given number of seconds.
 func (o *NSDate) InitWithTimeIntervalSinceReferenceDate(ti float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSinceReferenceDate, ti)
 	if _ret != 0 {
@@ -75,6 +79,7 @@ func (o *NSDate) InitWithTimeIntervalSinceReferenceDate(ti float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns a date object initialized from data in the given unarchiver.
 func (o *NSDate) InitWithCoder(coder *NSCoder) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -88,17 +93,20 @@ func (o *NSDate) TimeIntervalSinceReferenceDate() float64 {
 	return _ret
 }
 
+// Returns the interval between the receiver and another given date.
 func (o *NSDate) TimeIntervalSinceDate(anotherDate *NSDate) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSDateSelTimeIntervalSinceDate, anotherDate.Ptr())
 	return _ret
 }
 
+// Returns a new date object that is set to a given number of seconds relative to the receiver.
 // Deprecated: Use dateByAddingTimeInterval instead
 func (o *NSDate) AddTimeInterval(seconds float64) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelAddTimeInterval, seconds)
 	return _ret
 }
 
+// Returns a new date object that is set to a given number of seconds relative to the receiver.
 func (o *NSDate) DateByAddingTimeInterval(ti float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDateByAddingTimeInterval, ti)
 	if _ret != 0 {
@@ -107,6 +115,7 @@ func (o *NSDate) DateByAddingTimeInterval(ti float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns the earlier of the receiver and another given date.
 func (o *NSDate) EarlierDate(anotherDate *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelEarlierDate, anotherDate.Ptr())
 	if _ret != 0 {
@@ -115,6 +124,7 @@ func (o *NSDate) EarlierDate(anotherDate *NSDate) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns the later of the receiver and another given date.
 func (o *NSDate) LaterDate(anotherDate *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelLaterDate, anotherDate.Ptr())
 	if _ret != 0 {
@@ -123,16 +133,19 @@ func (o *NSDate) LaterDate(anotherDate *NSDate) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Indicates the temporal ordering of the receiver and another given date.
 func (o *NSDate) Compare(other *NSDate) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSDateSelCompare, other.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given object is a date that is exactly equal the receiver.
 func (o *NSDate) IsEqualToDate(otherDate *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateSelIsEqualToDate, otherDate.Ptr())
 	return _ret
 }
 
+// Returns a string representation of the date using the given locale.
 func (o *NSDate) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDescriptionWithLocale, locale)
 	if _ret != 0 {
@@ -156,6 +169,7 @@ func NSDateTimeIntervalSinceReferenceDate() float64 {
 	return _ret
 }
 
+// Creates and returns a new date object set to the current date and time.
 func NSDateDate() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDate)
 	if _ret != 0 {
@@ -164,6 +178,7 @@ func NSDateDate() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Creates and returns a date object set to a given number of seconds from the current date and time.
 func NSDateDateWithTimeIntervalSinceNow(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSinceNow, secs)
 	if _ret != 0 {
@@ -172,6 +187,7 @@ func NSDateDateWithTimeIntervalSinceNow(secs float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Creates and returns a date object set to a given number of seconds from 00:00:00 UTC on 1 January 2001.
 func NSDateDateWithTimeIntervalSinceReferenceDate(ti float64) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSinceReferenceDate, ti)
 	if _ret != 0 {
@@ -180,6 +196,7 @@ func NSDateDateWithTimeIntervalSinceReferenceDate(ti float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Creates and returns a date object set to the given number of seconds from 00:00:00 UTC on 1 January 1970.
 func NSDateDateWithTimeIntervalSince1970(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSince1970, secs)
 	if _ret != 0 {
@@ -188,6 +205,7 @@ func NSDateDateWithTimeIntervalSince1970(secs float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Creates and returns a date object set to a given number of seconds from the specified date.
 func NSDateDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSinceDate, secsToBeAdded, date.Ptr())
 	if _ret != 0 {
@@ -196,6 +214,7 @@ func NSDateDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *NSDate) *N
 	return NSDateFromID(_ret)
 }
 
+// Returns a date object initialized relative to the current date and time by a given number of seconds.
 func (o *NSDate) InitWithTimeIntervalSinceNow(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSinceNow, secs)
 	if _ret != 0 {
@@ -204,6 +223,7 @@ func (o *NSDate) InitWithTimeIntervalSinceNow(secs float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns a date object initialized relative to 00:00:00 UTC on 1 January 1970 by a given number of seconds.
 func (o *NSDate) InitWithTimeIntervalSince1970(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSince1970, secs)
 	if _ret != 0 {
@@ -212,6 +232,7 @@ func (o *NSDate) InitWithTimeIntervalSince1970(secs float64) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns a date object initialized relative to another given date by a given number of seconds.
 func (o *NSDate) InitWithTimeIntervalSinceDate(secsToBeAdded float64, date *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSinceDate, secsToBeAdded, date.Ptr())
 	if _ret != 0 {
@@ -244,24 +265,28 @@ func NSDateNow() *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Creates and returns a date object set to the date and time specified by a given string.
 // Deprecated: Create an NSDateFormatter with `init` and set the dateFormat property instead.
 func NSDateDateWithNaturalLanguageStringLocale(string_ *NSString, locale objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithNaturalLanguageStringLocale, string_.Ptr(), locale)
 	return _ret
 }
 
+// Creates and returns a date object set to the date and time specified by a given string.
 // Deprecated: Create an NSDateFormatter with `init` and set the dateFormat property instead.
 func NSDateDateWithNaturalLanguageString(string_ *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithNaturalLanguageString, string_.Ptr())
 	return _ret
 }
 
+// Creates and returns a date object with a date and time value specified by a given string in the international string representation format (YYYY-MM-DD HH:MM:SS ±HHMM).
 // Deprecated: Use NSDateFormatter instead
 func NSDateDateWithString(aString *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithString, aString.Ptr())
 	return _ret
 }
 
+// Converts the receiver to a calendar date with a given format string and time zone.
 // Deprecated: since macOS 10.10.
 func (o *NSDate) DateWithCalendarFormatTimeZone(format *NSString, aTimeZone *NSTimeZone) *NSCalendarDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDateWithCalendarFormatTimeZone, format.Ptr(), aTimeZone.Ptr())
@@ -271,6 +296,7 @@ func (o *NSDate) DateWithCalendarFormatTimeZone(format *NSString, aTimeZone *NST
 	return NSCalendarDateFromID(_ret)
 }
 
+// Returns a string representation of the date formatted as specified by given conversion specifiers.
 // Deprecated: since macOS 10.10.
 func (o *NSDate) DescriptionWithCalendarFormatTimeZoneLocale(format *NSString, aTimeZone *NSTimeZone, locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDescriptionWithCalendarFormatTimeZoneLocale, format.Ptr(), aTimeZone.Ptr(), locale)
@@ -280,6 +306,7 @@ func (o *NSDate) DescriptionWithCalendarFormatTimeZoneLocale(format *NSString, a
 	return NSStringFromID(_ret)
 }
 
+// Returns a date object initialized with a date and time value specified by a given string in the international string representation format.
 // Deprecated: Use NSDateFormatter instead
 func (o *NSDate) InitWithString(description *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithString, description.Ptr())

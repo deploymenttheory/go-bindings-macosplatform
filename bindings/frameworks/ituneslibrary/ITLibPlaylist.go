@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class describes a playlist in the iTunes library.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibplaylist
 type ITLibPlaylist struct {
 	ITLibMediaEntity

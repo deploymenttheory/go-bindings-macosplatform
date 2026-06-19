@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that provides formatted address strings.
+//
 // AddressRepresentations wraps [raw.MKAddressRepresentations] with a fluent Go API.
 type AddressRepresentations struct {
 	inner *raw.MKAddressRepresentations
@@ -36,6 +38,8 @@ func NewAddressRepresentations() *AddressRepresentations {
 	return &AddressRepresentations{inner: raw.MKAddressRepresentationsFromID(_id)}
 }
 
+// Returns the the location’s full address, optionally including the country or on a single link without line breaks.
+//
 // FullAddressIncludingRegionSingleLine calls the underlying FullAddressIncludingRegionSingleLine.
 func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string {
 	_r := x.inner.FullAddressIncludingRegionSingleLine(includingRegion, singleLine)
@@ -45,6 +49,8 @@ func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingR
 	return purego.GoString(_r.Ptr())
 }
 
+// The city name and, optionally and if applicable, state and region to provide additional disambiguating context.
+//
 // CityWithContextUsingStyle calls the underlying CityWithContextUsingStyle.
 func (x *AddressRepresentations) CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) string {
 	_r := x.inner.CityWithContextUsingStyle(raw.MKAddressRepresentationsContextStyle(style))

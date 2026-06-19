@@ -46,39 +46,51 @@ func MTRUnitTestingClusterTestStructArrayArgumentRequestParamsFromID(id objc.ID)
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg1() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg1)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg1)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg1, arg1)
+	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg1, arg1.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg2() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg2)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg2)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg2(arg2 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg2, arg2)
+	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg2, arg2.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg3() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg3)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg3)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg3(arg3 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg3, arg3)
+	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg3, arg3.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg4() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg4)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg4)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg4(arg4 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg4, arg4)
+	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg4, arg4.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg5() *foundation.NSNumber {

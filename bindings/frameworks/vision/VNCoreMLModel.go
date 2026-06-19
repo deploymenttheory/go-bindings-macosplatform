@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for the model to use with Vision requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncoremlmodel
 type VNCoreMLModel struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func VNCoreMLModelFromID(id objc.ID) *VNCoreMLModel {
 	return o
 }
 
+// Creates a model container to use with a Core ML request.
 func VNCoreMLModelModelForMLModelError(model *coreml.MLModel) (*VNCoreMLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNCoreMLModel), _vNCoreMLModelSelModelForMLModelError, model.Ptr(), unsafe.Pointer(&_nsErr))

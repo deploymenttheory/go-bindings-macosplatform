@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that configures the attributes and behavior of a sync engine.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncengineconfiguration
 type CKSyncEngineConfiguration struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func CKSyncEngineConfigurationFromID(id objc.ID) *CKSyncEngineConfiguration {
 	return o
 }
 
-// Creates a configuration for the specified database and serialized state. - Parameters: - database: The database to sync — either a person's private database or their shared database. - stateSerialization: If this is the first initialization of the associated sync engine, specify `nil`; otherwise, specify the state from the most recent “CKSyncEngineStateUpdateEvent“ that your delegate handled. - delegate: The object that provides the records to sync and handles any related events. - Returns: An initialized configuration instance.
+// Creates a configuration for the specified database and serialized state.
 func (o *CKSyncEngineConfiguration) InitWithDatabaseStateSerializationDelegate(database *CKDatabase, stateSerialization *CKSyncEngineStateSerialization, delegate CKSyncEngineDelegate) *CKSyncEngineConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineConfigurationSelInitWithDatabaseStateSerializationDelegate, database.Ptr(), stateSerialization.Ptr(), delegate)
 	if _ret != 0 {

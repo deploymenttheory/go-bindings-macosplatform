@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that records audio data to a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiorecorder
 type AVAudioRecorder struct {
 	foundation.NSObject
@@ -54,10 +56,10 @@ func AVAudioRecorderFromID(id objc.ID) *AVAudioRecorder {
 	return o
 }
 
-// @method initWithURL:settings:error: @abstract Init the AudioRecorder with a specified url and settings. @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
+// Creates an audio recorder with settings.
 func (o *AVAudioRecorder) InitWithURLSettingsError(url *foundation.NSURL, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVAudioRecorder, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLSettingsError, url.Ptr(), settings, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLSettingsError, url.Ptr(), settings.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -67,7 +69,7 @@ func (o *AVAudioRecorder) InitWithURLSettingsError(url *foundation.NSURL, settin
 	return AVAudioRecorderFromID(_ret), nil
 }
 
-// @method initWithURL:format:error: @abstract Init the AudioRecorder with a specified url and format. @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
+// Creates an audio recorder with an audio format.
 func (o *AVAudioRecorder) InitWithURLFormatError(url *foundation.NSURL, format *AVAudioFormat) (*AVAudioRecorder, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelInitWithURLFormatError, url.Ptr(), format.Ptr(), unsafe.Pointer(&_nsErr))
@@ -80,64 +82,64 @@ func (o *AVAudioRecorder) InitWithURLFormatError(url *foundation.NSURL, format *
 	return AVAudioRecorderFromID(_ret), nil
 }
 
-// @method prepareToRecord @abstract Creates the output file and gets ready to record. @discussion This method is called automatically on record. Returns YES on success and NO on failure.
+// Creates an audio file and prepares the system for recording.
 func (o *AVAudioRecorder) PrepareToRecord() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioRecorderSelPrepareToRecord)
 	return _ret
 }
 
-// @method record @abstract Start or resume recording to file. @discussion Returns YES on success and NO on failure.
+// Starts or resumes audio recording.
 func (o *AVAudioRecorder) Record() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioRecorderSelRecord)
 	return _ret
 }
 
-// @method recordAtTime: @abstract Start recording at specified time in the future. @discussion Time is an absolute time based on and greater than deviceCurrentTime. Returns YES on success and NO on failure.
+// Records audio starting at a specific time.
 func (o *AVAudioRecorder) RecordAtTime(time_ float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioRecorderSelRecordAtTime, time_)
 	return _ret
 }
 
-// @method recordForDuration: @abstract Record for a specified duration. @discussion The recorder will stop when it has recorded this length of audio. Returns YES on success and NO on failure.
+// Records audio for the indicated duration of time.
 func (o *AVAudioRecorder) RecordForDuration(duration float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioRecorderSelRecordForDuration, duration)
 	return _ret
 }
 
-// @method recordAtTime:forDuration: @abstract Record for a specified duration at a specified time in the future. @discussion Time is an absolute time based on and greater than deviceCurrentTime. Returns YES on success and NO on failure.
+// Records audio starting at a specific time for the indicated duration.
 func (o *AVAudioRecorder) RecordAtTimeForDuration(time_ float64, duration float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioRecorderSelRecordAtTimeForDuration, time_, duration)
 	return _ret
 }
 
-// @method pause @abstract Pause recording.
+// Pauses an audio recording.
 func (o *AVAudioRecorder) Pause() {
 	o.Ptr().Send(_aVAudioRecorderSelPause)
 }
 
-// @method stop @abstract Stop recording. @discussion This method also closes the output file.
+// Stops recording and closes the audio file.
 func (o *AVAudioRecorder) Stop() {
 	o.Ptr().Send(_aVAudioRecorderSelStop)
 }
 
-// @method deleteRecording @abstract Delete the recorded file. @discussion AudioRecorder must be stopped. Returns YES on success and NO on failure.
+// Deletes a recorded audio file.
 func (o *AVAudioRecorder) DeleteRecording() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioRecorderSelDeleteRecording)
 	return _ret
 }
 
-// @method updateMeters @abstract Call this method to refresh meter values.
+// Refreshes the average and peak power values for all channels of an audio recorder.
 func (o *AVAudioRecorder) UpdateMeters() {
 	o.Ptr().Send(_aVAudioRecorderSelUpdateMeters)
 }
 
-// @method peakPowerForChannel: @abstract Returns peak power in decibels for a given channel.
+// Returns the peak power, in decibels full-scale (dBFS), for an audio channel.
 func (o *AVAudioRecorder) PeakPowerForChannel(channelNumber uint) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVAudioRecorderSelPeakPowerForChannel, channelNumber)
 	return _ret
 }
 
-// @method averagePowerForChannel: @abstract Returns average power in decibels for a given channel.
+// Returns the average power, in decibels full-scale (dBFS), for an audio channel.
 func (o *AVAudioRecorder) AveragePowerForChannel(channelNumber uint) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVAudioRecorderSelAveragePowerForChannel, channelNumber)
 	return _ret
@@ -160,8 +162,11 @@ func (o *AVAudioRecorder) Url() *foundation.NSURL {
 
 // @property settings @abstract A dictionary of settings for the AudioRecorder. @discussion These settings are fully valid only when prepareToRecord has been called. For supported key-value pairs, see https://developer.apple.com/documentation/avfaudio/avaudiorecorder/1388386-initwithurl?language=objc
 func (o *AVAudioRecorder) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAudioRecorderSelSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioRecorderSelSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property format @abstract The audio format of the AudioRecorder. @discussion This property is fully valid only when prepareToRecord has been called.

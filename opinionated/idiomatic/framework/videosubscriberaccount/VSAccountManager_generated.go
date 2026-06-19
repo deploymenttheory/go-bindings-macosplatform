@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object that coordinates your app’s authentication requests with a TV provider’s authentication service.
+//
 // VSAccountManager wraps [raw.VSAccountManager] with a fluent Go API.
 type VSAccountManager struct {
 	inner *raw.VSAccountManager
@@ -35,7 +37,7 @@ func NewVSAccountManager() *VSAccountManager {
 	return &VSAccountManager{inner: raw.VSAccountManagerFromID(_id)}
 }
 
-// An object that can help the account manager by presenting and dismissing view controllers when needed, and deciding whether to allow authentication with the selected provider. Some requests may fail if a delegate is not provided.  For example, an account metadata request may require a delegate if it allows interruption.
+// The delegate of the account manager object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *VSAccountManager) WithDelegate(delegate raw.VSAccountManagerDelegate) *VSAccountManager {

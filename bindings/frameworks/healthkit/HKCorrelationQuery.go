@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that performs complex searches based on the correlation’s contents, and returns a snapshot of all matching samples.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcorrelationquery
 type HKCorrelationQuery struct {
 	HKQuery
@@ -34,7 +36,7 @@ func HKCorrelationQueryFromID(id objc.ID) *HKCorrelationQuery {
 	return o
 }
 
-// @method    initWithTypes:predicate:samplePredicate:completion: @abstract  The designated initializer for HKCorrelationQuery. @param     correlationType     The type of correlation that is being queried for @param     predicate           The predicate for scoping which HKCorrelations are returned @param     samplePredicates    A dictionary mapping HKSampleTypes to NSPredicates. If no predicate for a particular type is provided, it is assumed to be a nil predicate and objects of that type will not be filtered.
+// Instantiates and returns a correlation query.
 func (o *HKCorrelationQuery) InitWithTypePredicateSamplePredicatesCompletion(correlationType *HKCorrelationType, predicate *foundation.NSPredicate, samplePredicates *foundation.NSDictionary[*HKSampleType, *foundation.NSPredicate], completion func(*HKCorrelationQuery, *foundation.NSArray[*HKCorrelation], unsafe.Pointer)) *HKCorrelationQuery {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -49,7 +51,7 @@ func (o *HKCorrelationQuery) InitWithTypePredicateSamplePredicatesCompletion(cor
 		})
 		defer __block_completion.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKCorrelationQuerySelInitWithTypePredicateSamplePredicatesCompletion, correlationType.Ptr(), predicate.Ptr(), samplePredicates, __block_completion)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKCorrelationQuerySelInitWithTypePredicateSamplePredicatesCompletion, correlationType.Ptr(), predicate.Ptr(), samplePredicates.Ptr(), __block_completion)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,6 +68,9 @@ func (o *HKCorrelationQuery) CorrelationType() *HKCorrelationType {
 
 // @property      samplePredicates @abstract      A dictionary of predicates for the HKCorrelation's objects @discussion    samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
 func (o *HKCorrelationQuery) SamplePredicates() *foundation.NSDictionary[*HKSampleType, *foundation.NSPredicate] {
-	_ret := objc.Send[*foundation.NSDictionary[*HKSampleType, *foundation.NSPredicate]](o.Ptr(), _hKCorrelationQuerySelSamplePredicates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKCorrelationQuerySelSamplePredicates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*HKSampleType, *foundation.NSPredicate](_ret)
 }

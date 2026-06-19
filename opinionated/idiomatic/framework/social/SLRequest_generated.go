@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that you use to assemble an HTTP request for communicating with a social media service.
+//
 // Request wraps [raw.SLRequest] with a fluent Go API.
 type Request struct {
 	inner *raw.SLRequest
@@ -38,27 +40,37 @@ func NewRequest() *Request {
 	return &Request{inner: raw.SLRequestFromID(_id)}
 }
 
+// Account information used to authenticate the request.
+//
 // WithAccount sets the account property and returns the receiver for chaining.
 func (x *Request) WithAccount(account *accounts.ACAccount) *Request {
 	x.inner.SetAccount(account)
 	return x
 }
 
+// Specifies a named multipart POST body for this request.
+//
 // AddMultipartDataWithNameTypeFilename calls the underlying AddMultipartDataWithNameTypeFilename.
 func (x *Request) AddMultipartDataWithNameTypeFilename(data *foundation.NSData, name string, type_ string, filename string) {
 	x.inner.AddMultipartDataWithNameTypeFilename(data, foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(filename))
 }
 
+// Specifies a named multipart POST body for this request.
+//
 // AddMultipartDataWithNameType calls the underlying AddMultipartDataWithNameType.
 func (x *Request) AddMultipartDataWithNameType(data *foundation.NSData, name string, type_ string) {
 	x.inner.AddMultipartDataWithNameType(data, foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_))
 }
 
+// Returns an authorized URL request that can be sent using an NSURLConnection object.
+//
 // PreparedURLRequest calls the underlying PreparedURLRequest.
 func (x *Request) PreparedURLRequest() *foundation.NSURLRequest {
 	return x.inner.PreparedURLRequest()
 }
 
+// Performs an asynchronous request and calls the specified handler when done.
+//
 // PerformRequestWithHandler calls the underlying PerformRequestWithHandler.
 func (x *Request) PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer)) {
 	x.inner.PerformRequestWithHandler(handler)

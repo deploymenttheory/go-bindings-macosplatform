@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data object that contains a single rotation-rate measurement at a specific time.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmrecordedrotationratedata
 type CMRecordedRotationRateData struct {
 	CMRotationRateData

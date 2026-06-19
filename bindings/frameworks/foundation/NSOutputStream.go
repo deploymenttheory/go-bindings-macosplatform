@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A stream that provides write-only stream functionality.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsoutputstream
 type NSOutputStream struct {
 	NSStream
@@ -88,6 +90,7 @@ func NSOutputStreamOutputStreamToMemory() *NSOutputStream {
 	return NSOutputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized output stream that can write to a provided buffer.
 func NSOutputStreamOutputStreamToBufferCapacity(buffer *uint8, capacity uint) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToBufferCapacity, buffer, capacity)
 	if _ret != 0 {
@@ -96,6 +99,7 @@ func NSOutputStreamOutputStreamToBufferCapacity(buffer *uint8, capacity uint) *N
 	return NSOutputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized output stream for writing to a specified file.
 func NSOutputStreamOutputStreamToFileAtPathAppend(path *NSString, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToFileAtPathAppend, path.Ptr(), shouldAppend)
 	if _ret != 0 {
@@ -104,6 +108,7 @@ func NSOutputStreamOutputStreamToFileAtPathAppend(path *NSString, shouldAppend b
 	return NSOutputStreamFromID(_ret)
 }
 
+// Creates and returns an initialized output stream for writing to a specified URL.
 func NSOutputStreamOutputStreamWithURLAppend(url *NSURL, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamWithURLAppend, url.Ptr(), shouldAppend)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Core Animation layer that derives its timing from a player item so that you can synchronize layer animations with media playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsynchronizedlayer
 type AVSynchronizedLayer struct {
 	quartzcore.CALayer
@@ -32,7 +34,7 @@ func AVSynchronizedLayerFromID(id objc.ID) *AVSynchronizedLayer {
 	return o
 }
 
-// @method			synchronizedLayerWithPlayerItem: @abstract		Returns an instance of AVSynchronizedLayer with timing synchronized with the specified AVPlayerItem. @result			An instance of AVSynchronizedLayer.
+// Creates a new synchronized layer with timing synchronized with a given player item.
 func AVSynchronizedLayerSynchronizedLayerWithPlayerItem(playerItem *AVPlayerItem) *AVSynchronizedLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSynchronizedLayer), _aVSynchronizedLayerSelSynchronizedLayerWithPlayerItem, playerItem.Ptr())
 	if _ret != 0 {

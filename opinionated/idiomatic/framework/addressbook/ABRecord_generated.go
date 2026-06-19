@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that defines the common properties for all Address Book records.
+//
 // Record wraps [raw.ABRecord] with a fluent Go API.
 type Record struct {
 	inner *raw.ABRecord
@@ -37,6 +39,8 @@ func NewRecord() *Record {
 	return &Record{inner: raw.ABRecordFromID(_id)}
 }
 
+// Initializes a record using the given address book.
+//
 // NewRecordWithAddressBook creates a new [Record].
 func NewRecordWithAddressBook(addressBook *raw.ABAddressBook) *Record {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ABRecord")), objc.RegisterName("alloc"))
@@ -44,26 +48,36 @@ func NewRecordWithAddressBook(addressBook *raw.ABAddressBook) *Record {
 	return &Record{inner: raw.ABRecordFromID(_id)}
 }
 
+// Returns the value of a given property for a record.
+//
 // ValueForProperty calls the underlying ValueForProperty.
 func (x *Record) ValueForProperty(property string) objc.ID {
 	return x.inner.ValueForProperty(foundation.NSStringStringWithUTF8String(property))
 }
 
+// Sets the value of a given property for a record, returning error information.
+//
 // SetValueForPropertyError calls the underlying SetValueForPropertyError.
 func (x *Record) SetValueForPropertyError(value objc.ID, property string) (bool, error) {
 	return x.inner.SetValueForPropertyError(value, foundation.NSStringStringWithUTF8String(property))
 }
 
+// Sets the value of a given property for a record.
+//
 // SetValueForProperty calls the underlying SetValueForProperty.
 func (x *Record) SetValueForProperty(value objc.ID, property string) bool {
 	return x.inner.SetValueForProperty(value, foundation.NSStringStringWithUTF8String(property))
 }
 
+// Removes the value for a given property.
+//
 // RemoveValueForProperty calls the underlying RemoveValueForProperty.
 func (x *Record) RemoveValueForProperty(property string) bool {
 	return x.inner.RemoveValueForProperty(foundation.NSStringStringWithUTF8String(property))
 }
 
+// Returns whether a record is read-only.
+//
 // IsReadOnly calls the underlying IsReadOnly.
 func (x *Record) IsReadOnly() bool {
 	return x.inner.IsReadOnly()

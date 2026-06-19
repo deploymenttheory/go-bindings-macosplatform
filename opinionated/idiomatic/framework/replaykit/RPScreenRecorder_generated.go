@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// @class RPScreenRecorder @abstract Singleton class used to control app recording.
+// The shared recorder object that provides the ability to record audio and video of your app.
 //
 // ScreenRecorder wraps [raw.RPScreenRecorder] with a fluent Go API.
 type ScreenRecorder struct {
@@ -42,31 +42,39 @@ func NewScreenRecorder() *ScreenRecorder {
 	return &ScreenRecorder{inner: raw.RPScreenRecorderFromID(_id)}
 }
 
+// The delegate for the screen recorder.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ScreenRecorder) WithDelegate(delegate raw.RPScreenRecorderDelegate) *ScreenRecorder {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value that indicates whether the microphone is currently enabled.
+//
 // WithMicrophoneEnabled sets the microphoneEnabled property and returns the receiver for chaining.
 func (x *ScreenRecorder) WithMicrophoneEnabled(microphoneEnabled bool) *ScreenRecorder {
 	x.inner.SetMicrophoneEnabled(microphoneEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether the camera is currently enabled.
+//
 // WithCameraEnabled sets the cameraEnabled property and returns the receiver for chaining.
 func (x *ScreenRecorder) WithCameraEnabled(cameraEnabled bool) *ScreenRecorder {
 	x.inner.SetCameraEnabled(cameraEnabled)
 	return x
 }
 
+// The camera position to use.
+//
 // WithCameraPosition sets the cameraPosition property and returns the receiver for chaining.
 func (x *ScreenRecorder) WithCameraPosition(cameraPosition RPCameraPosition) *ScreenRecorder {
 	x.inner.SetCameraPosition(raw.RPCameraPosition(cameraPosition))
 	return x
 }
 
-// @abstract Starts app recording with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called after user interactions are complete. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting the recording.
+// Starts recording the app display.
 //
 // StartRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
@@ -86,7 +94,7 @@ func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	}
 }
 
-// @abstract Stops app recording with a completion handler. @discussion handler Called when the movie is ready. Will return an instance of RPPreviewViewController on success which should be presented using [UIViewController presentViewController:animated:completion:]. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the recording.
+// Stops the current recording.
 //
 // StopRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*PreviewViewController, error) {
@@ -114,7 +122,7 @@ func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*Preview
 	}
 }
 
-// @abstract Stops app recording with output URL and completion handler. @param url Output URL for app recording movie. @discussion handler Called when  movie is written to specified output URL. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the recording and writing the output URL.
+// Stops the current recording and writes the movie to the specified output URL.
 //
 // StopRecordingWithOutputURL blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url string) error {
@@ -134,7 +142,7 @@ func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url str
 	}
 }
 
-// @abstract Discards the current recording. This can only be called after the handler block in stopRecordingWithHandler: is executed.
+// Discards the current recording.
 //
 // DiscardRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error {
@@ -150,7 +158,7 @@ func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error 
 	}
 }
 
-// @abstract Starts screen and audio capture and continually calls the supplied handler with the current sampleBuffer and bufferType and passed it back to the application. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called continually with sampleBuffers and the bufferType. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting the capture.
+// Starts screen and audio capture.
 //
 // StartCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer)) error {
@@ -172,7 +180,7 @@ func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHan
 	}
 }
 
-// @abstract Stops screen capture with a completion handler @discussion handler Called after the screen capture has stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the capture
+// Stops screen capture
 //
 // StopCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
@@ -192,7 +200,7 @@ func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	}
 }
 
-// @abstract Start clip recording buffering with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called after clip recording is started. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting clip record buffering.
+// Starts buffering a clip recording.
 //
 // StartClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
@@ -212,7 +220,7 @@ func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	}
 }
 
-// @abstract Stop clip recording buffering with a completion handler. @discussion handler Called after clip recording session is stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping clip record buffering.
+// Stops buffering a clip recording.
 //
 // StopClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
@@ -232,7 +240,7 @@ func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	}
 }
 
-// @abstract Exports clip recording @param url URL containing absolute path for where to save the clip @param duration Length of time in seconds for clip recording, capped at either the elapsed time, or a maximum of 15 seconds, depending on which is the shorter amount of time @discussion Must be called after startClipBufferingWithCompletionHandler:, otherwise this will return an error. Exports clip recording from newest samples in buffer for duration. handler Will be called after asset is finished writing to output path. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue generating the clip recording.
+// Exports a clip recording to a file.
 //
 // ExportClipToURLDuration blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string, duration float64) error {

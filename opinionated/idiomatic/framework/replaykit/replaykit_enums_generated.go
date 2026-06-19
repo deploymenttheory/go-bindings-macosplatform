@@ -8,11 +8,14 @@ import (
 	"fmt"
 )
 
+// The position of the camera being accessed.
 type RPCameraPosition int64
 
 const (
+	// The front camera is used.
 	RPCameraPositionFront RPCameraPosition = 1
-	RPCameraPositionBack  RPCameraPosition = 2
+	// The back camera is used.
+	RPCameraPositionBack RPCameraPosition = 2
 )
 
 func (e RPCameraPosition) String() string {
@@ -26,47 +29,85 @@ func (e RPCameraPosition) String() string {
 	}
 }
 
+// The ReplayKit error domain codes.
 type RPRecordingErrorCode int64
 
 const (
-	RPRecordingErrorUnknown                                RPRecordingErrorCode = -5800
-	RPRecordingErrorUserDeclined                           RPRecordingErrorCode = -5801
-	RPRecordingErrorDisabled                               RPRecordingErrorCode = -5802
-	RPRecordingErrorFailedToStart                          RPRecordingErrorCode = -5803
-	RPRecordingErrorFailed                                 RPRecordingErrorCode = -5804
-	RPRecordingErrorInsufficientStorage                    RPRecordingErrorCode = -5805
-	RPRecordingErrorInterrupted                            RPRecordingErrorCode = -5806
-	RPRecordingErrorContentResize                          RPRecordingErrorCode = -5807
-	RPRecordingErrorBroadcastInvalidSession                RPRecordingErrorCode = -5808
-	RPRecordingErrorSystemDormancy                         RPRecordingErrorCode = -5809
-	RPRecordingErrorEntitlements                           RPRecordingErrorCode = -5810
-	RPRecordingErrorActivePhoneCall                        RPRecordingErrorCode = -5811
-	RPRecordingErrorFailedToSave                           RPRecordingErrorCode = -5812
-	RPRecordingErrorCarPlay                                RPRecordingErrorCode = -5813
-	RPRecordingErrorFailedApplicationConnectionInvalid     RPRecordingErrorCode = -5814
+	// Error cause unknown.
+	RPRecordingErrorUnknown RPRecordingErrorCode = -5800
+	// User declined recording request.
+	RPRecordingErrorUserDeclined RPRecordingErrorCode = -5801
+	// Recording disabled via parental controls.
+	RPRecordingErrorDisabled RPRecordingErrorCode = -5802
+	// Recording failed to start.
+	RPRecordingErrorFailedToStart RPRecordingErrorCode = -5803
+	// Recording error occurred.
+	RPRecordingErrorFailed RPRecordingErrorCode = -5804
+	// Not enough storage available on the device.
+	RPRecordingErrorInsufficientStorage RPRecordingErrorCode = -5805
+	// Recording interrupted by another app.
+	RPRecordingErrorInterrupted RPRecordingErrorCode = -5806
+	// Recording interrupted by multitasking and content resizing.
+	RPRecordingErrorContentResize RPRecordingErrorCode = -5807
+	// Attempted to start a broadcast without a prior session.
+	RPRecordingErrorBroadcastInvalidSession RPRecordingErrorCode = -5808
+	// Recording forced to end by the user pressing the power button.
+	RPRecordingErrorSystemDormancy RPRecordingErrorCode = -5809
+	// Recording failed due to missing entitlements.
+	RPRecordingErrorEntitlements RPRecordingErrorCode = -5810
+	// Unable to record due to an active phone call.
+	RPRecordingErrorActivePhoneCall RPRecordingErrorCode = -5811
+	// The recording failed to save.
+	RPRecordingErrorFailedToSave RPRecordingErrorCode = -5812
+	// Failed to start recording because CarPlay is active.
+	RPRecordingErrorCarPlay RPRecordingErrorCode = -5813
+	// The recording failed because the app’s connection is invalid.
+	RPRecordingErrorFailedApplicationConnectionInvalid RPRecordingErrorCode = -5814
+	// The recording failed because the app’s connection was interrupted.
 	RPRecordingErrorFailedApplicationConnectionInterrupted RPRecordingErrorCode = -5815
-	RPRecordingErrorFailedNoMatchingApplicationContext     RPRecordingErrorCode = -5816
-	RPRecordingErrorFailedMediaServicesFailure             RPRecordingErrorCode = -5817
-	RPRecordingErrorVideoMixingFailure                     RPRecordingErrorCode = -5818
-	RPRecordingErrorBroadcastSetupFailed                   RPRecordingErrorCode = -5819
-	RPRecordingErrorFailedToObtainURL                      RPRecordingErrorCode = -5820
-	RPRecordingErrorFailedIncorrectTimeStamps              RPRecordingErrorCode = -5821
-	RPRecordingErrorFailedToProcessFirstSample             RPRecordingErrorCode = -5822
-	RPRecordingErrorFailedAssetWriterFailedToSave          RPRecordingErrorCode = -5823
-	RPRecordingErrorFailedNoAssetWriter                    RPRecordingErrorCode = -5824
-	RPRecordingErrorFailedAssetWriterInWrongState          RPRecordingErrorCode = -5825
-	RPRecordingErrorFailedAssetWriterExportFailed          RPRecordingErrorCode = -5826
-	RPRecordingErrorFailedToRemoveFile                     RPRecordingErrorCode = -5827
-	RPRecordingErrorFailedAssetWriterExportCanceled        RPRecordingErrorCode = -5828
-	RPRecordingErrorAttemptToStopNonRecording              RPRecordingErrorCode = -5829
-	RPRecordingErrorAttemptToStartInRecordingState         RPRecordingErrorCode = -5830
-	RPRecordingErrorPhotoFailure                           RPRecordingErrorCode = -5831
-	RPRecordingErrorRecordingInvalidSession                RPRecordingErrorCode = -5832
-	RPRecordingErrorFailedToStartCaptureStack              RPRecordingErrorCode = -5833
-	RPRecordingErrorInvalidParameter                       RPRecordingErrorCode = -5834
-	RPRecordingErrorFilePermissions                        RPRecordingErrorCode = -5835
-	RPRecordingErrorExportClipToURLInProgress              RPRecordingErrorCode = -5836
-	RPRecordingErrorCodeSuccessful                         RPRecordingErrorCode = 0
+	// The context identifier doesn’t match the app identifier.
+	RPRecordingErrorFailedNoMatchingApplicationContext RPRecordingErrorCode = -5816
+	// The recording failed due to a mediaservices daemon failure.
+	RPRecordingErrorFailedMediaServicesFailure RPRecordingErrorCode = -5817
+	// The recording failed due to an A/V mixing failure.
+	RPRecordingErrorVideoMixingFailure RPRecordingErrorCode = -5818
+	// The broadcast set up failed.
+	RPRecordingErrorBroadcastSetupFailed RPRecordingErrorCode = -5819
+	// The recording failed due to a failure to obtain the URL.
+	RPRecordingErrorFailedToObtainURL RPRecordingErrorCode = -5820
+	// The recording failed due to malformed start and end time intervals.
+	RPRecordingErrorFailedIncorrectTimeStamps RPRecordingErrorCode = -5821
+	// The recording failed because the asset writer failed to process the first media sample.
+	RPRecordingErrorFailedToProcessFirstSample RPRecordingErrorCode = -5822
+	// The recording failed due to an asset writer failure.
+	RPRecordingErrorFailedAssetWriterFailedToSave RPRecordingErrorCode = -5823
+	// The recording failed because there is no asset writer available.
+	RPRecordingErrorFailedNoAssetWriter RPRecordingErrorCode = -5824
+	// The recording failed because the asset writer is in an invalid state.
+	RPRecordingErrorFailedAssetWriterInWrongState RPRecordingErrorCode = -5825
+	// The recording failed due to an error exporting the movie.
+	RPRecordingErrorFailedAssetWriterExportFailed RPRecordingErrorCode = -5826
+	// The recording failed because the temporary file wasn’t removed.
+	RPRecordingErrorFailedToRemoveFile RPRecordingErrorCode = -5827
+	// The recording failed because the user canceled the export.
+	RPRecordingErrorFailedAssetWriterExportCanceled RPRecordingErrorCode = -5828
+	// Attempted to stop a recording that’s not in a recording state.
+	RPRecordingErrorAttemptToStopNonRecording RPRecordingErrorCode = -5829
+	// Attempted to start a recording that’s already in a recording state.
+	RPRecordingErrorAttemptToStartInRecordingState RPRecordingErrorCode = -5830
+	// Failed saving the video the Camera Roll.
+	RPRecordingErrorPhotoFailure RPRecordingErrorCode = -5831
+	// Attempted to start an invalid recording session.
+	RPRecordingErrorRecordingInvalidSession RPRecordingErrorCode = -5832
+	// The system failed to configure the app for A/V recording.
+	RPRecordingErrorFailedToStartCaptureStack RPRecordingErrorCode = -5833
+	// The recording failed because of an invalid parameter.
+	RPRecordingErrorInvalidParameter RPRecordingErrorCode = -5834
+	// The recording failed due to a file permission error.
+	RPRecordingErrorFilePermissions           RPRecordingErrorCode = -5835
+	RPRecordingErrorExportClipToURLInProgress RPRecordingErrorCode = -5836
+	// Successfully saved the recording to the Camera Roll.
+	RPRecordingErrorCodeSuccessful RPRecordingErrorCode = 0
 )
 
 func (e RPRecordingErrorCode) String() string {
@@ -152,11 +193,15 @@ func (e RPRecordingErrorCode) String() string {
 	}
 }
 
+// The type of media clip sample being buffered.
 type RPSampleBufferType int64
 
 const (
-	RPSampleBufferTypeVideo    RPSampleBufferType = 1
+	// The sample that contains a video clip.
+	RPSampleBufferTypeVideo RPSampleBufferType = 1
+	// The sample audio that originates from the app.
 	RPSampleBufferTypeAudioApp RPSampleBufferType = 2
+	// The sample audio that originates from the microphone.
 	RPSampleBufferTypeAudioMic RPSampleBufferType = 3
 )
 

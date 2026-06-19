@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A token session that is based on a smart card token.
+//
 // SmartCardTokenSession wraps [raw.TKSmartCardTokenSession] with a fluent Go API.
 type SmartCardTokenSession struct {
 	inner *raw.TKSmartCardTokenSession
@@ -35,6 +37,8 @@ func NewSmartCardTokenSession() *SmartCardTokenSession {
 	return &SmartCardTokenSession{inner: raw.TKSmartCardTokenSessionFromID(_id)}
 }
 
+// The token session delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardTokenSession) WithDelegate(delegate raw.TKTokenSessionDelegate) *SmartCardTokenSession {
 	x.inner.TKTokenSession.SetDelegate(delegate)

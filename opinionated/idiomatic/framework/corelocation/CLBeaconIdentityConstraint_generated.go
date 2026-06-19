@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Identity characteristics that can match one or more beacons.
+//
 // BeaconIdentityConstraint wraps [raw.CLBeaconIdentityConstraint] with a fluent Go API.
 type BeaconIdentityConstraint struct {
 	inner *raw.CLBeaconIdentityConstraint

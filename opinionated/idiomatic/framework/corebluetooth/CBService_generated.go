@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of data and associated behaviors that accomplish a function or feature of a device.
+//
 // Service wraps [raw.CBService] with a fluent Go API.
 type Service struct {
 	inner *raw.CBService

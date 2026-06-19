@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlvertexattributedata
 type MDLVertexAttributeData struct {
 	foundation.NSObject

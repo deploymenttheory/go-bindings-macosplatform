@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a perspective warp transformation.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnimagehomographicalignmentobservation
 type VNImageHomographicAlignmentObservation struct {
 	VNImageAlignmentObservation

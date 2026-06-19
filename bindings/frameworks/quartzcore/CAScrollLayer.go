@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that displays scrollable content larger than its own bounds.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cascrolllayer
 type CAScrollLayer struct {
 	CALayer
@@ -34,10 +36,12 @@ func CAScrollLayerFromID(id objc.ID) *CAScrollLayer {
 	return o
 }
 
+// Changes the origin of the receiver to the specified point.
 func (o *CAScrollLayer) ScrollToPoint(p corefoundation.CGPoint) {
 	o.Ptr().Send(_cAScrollLayerSelScrollToPoint, p)
 }
 
+// Scroll the contents of the receiver to ensure that the rectangle is visible.
 func (o *CAScrollLayer) ScrollToRect(r corefoundation.CGRect) {
 	o.Ptr().Send(_cAScrollLayerSelScrollToRect, r)
 }

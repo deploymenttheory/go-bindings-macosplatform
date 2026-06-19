@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient filter that upsamples an existing Metal Performance Shaders image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplinggradient
 type MPSCNNUpsamplingGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

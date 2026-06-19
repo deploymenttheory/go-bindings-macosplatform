@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the metadata for a matched reference signature.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shmatchedmediaitem
 type SHMatchedMediaItem struct {
 	SHMediaItem

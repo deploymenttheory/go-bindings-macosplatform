@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single entry in a player item’s access log.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemaccesslogevent
 type AVPlayerItemAccessLogEvent struct {
 	foundation.NSObject

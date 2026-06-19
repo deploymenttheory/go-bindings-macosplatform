@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the state of a property.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionpropertystate
 type CMIOExtensionPropertyState[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func CMIOExtensionPropertyStateFromID[ObjectType purego.AnyObject](id objc.ID) *
 	return o
 }
 
-// @method propertyStateWithValue: @abstract Returns a property state instance. @param value The value associated with a property state. @result A CMIOExtensionPropertyState instance with a nil attributes.
+// Returns a new property state with a value.
 func CMIOExtensionPropertyStatePropertyStateWithValue(value objc.ID) *CMIOExtensionPropertyState[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyState), _cMIOExtensionPropertyStateSelPropertyStateWithValue, value)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func CMIOExtensionPropertyStatePropertyStateWithValue(value objc.ID) *CMIOExtens
 	return CMIOExtensionPropertyStateFromID[objc.ID](_ret)
 }
 
-// @method propertyStateWithValue:attributes: @abstract Returns a property state instance. @param value The value associated with a property state. @param attributes The property attributes associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+// Returns a new property state with a value and attributes.
 func CMIOExtensionPropertyStatePropertyStateWithValueAttributes(value objc.ID, attributes *CMIOExtensionPropertyAttributes[objc.ID]) *CMIOExtensionPropertyState[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyState), _cMIOExtensionPropertyStateSelPropertyStateWithValueAttributes, value, attributes.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func CMIOExtensionPropertyStatePropertyStateWithValueAttributes(value objc.ID, a
 	return CMIOExtensionPropertyStateFromID[objc.ID](_ret)
 }
 
-// @method initWithValue: @abstract Initialize a property state instance. @param value The value associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+// Creates a property state with a value.
 func (o *CMIOExtensionPropertyState[ObjectType]) InitWithValue(value ObjectType) *CMIOExtensionPropertyState[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyStateSelInitWithValue, value)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *CMIOExtensionPropertyState[ObjectType]) InitWithValue(value ObjectType)
 	return CMIOExtensionPropertyStateFromID[ObjectType](_ret)
 }
 
-// @method initWithValue:attributes: @abstract Initialize a property state instance. @param value The value associated with a property state. @param attributes The property attributes associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+// Creates a property state with a value and attributes.
 func (o *CMIOExtensionPropertyState[ObjectType]) InitWithValueAttributes(value ObjectType, attributes *CMIOExtensionPropertyAttributes[ObjectType]) *CMIOExtensionPropertyState[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyStateSelInitWithValueAttributes, value, attributes.Ptr())
 	if _ret != 0 {

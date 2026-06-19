@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that defines the common behavior that open and closed polygon overlays share.
+//
 // MultiPoint wraps [raw.MKMultiPoint] with a fluent Go API.
 type MultiPoint struct {
 	inner *raw.MKMultiPoint
@@ -37,33 +39,45 @@ func NewMultiPoint() *MultiPoint {
 	return &MultiPoint{inner: raw.MKMultiPointFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *MultiPoint) WithTitle(title string) *MultiPoint {
 	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
 	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// Returns an array of map points associated with the shape.
+//
 // Points calls the underlying Points.
 func (x *MultiPoint) Points() *raw.MKMapPoint {
 	return x.inner.Points()
 }
 
+// Retrieves one or more points associated with the shape and converts them to coordinate values.
+//
 // GetCoordinatesRange calls the underlying GetCoordinatesRange.
 func (x *MultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
 	x.inner.GetCoordinatesRange(coords, range_)
 }
 
+// Translates a point index into a unit distance along the shape.
+//
 // LocationAtPointIndex calls the underlying LocationAtPointIndex.
 func (x *MultiPoint) LocationAtPointIndex(index uint) float64 {
 	return x.inner.LocationAtPointIndex(index)
 }
 
+// Returns a set of unit distance values that correspond to the point indexes along the shape.
+//
 // LocationsAtPointIndexes calls the underlying LocationsAtPointIndexes.
 func (x *MultiPoint) LocationsAtPointIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[*foundation.NSNumber] {
 	return x.inner.LocationsAtPointIndexes(indexes)

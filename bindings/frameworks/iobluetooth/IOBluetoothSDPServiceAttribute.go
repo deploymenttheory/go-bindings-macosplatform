@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// IOBluetoothSDPServiceAttribute represents a single SDP service attribute.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute
 type IOBluetoothSDPServiceAttribute struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func IOBluetoothSDPServiceAttributeFromID(id objc.ID) *IOBluetoothSDPServiceAttr
 	return o
 }
 
+// Creates a new service attribute with the given ID and element value.
 func IOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue *foundation.NSObject) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceAttribute), _iOBluetoothSDPServiceAttributeSelWithIDAttributeElementValue, newAttributeID, attributeElementValue.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func IOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID ui
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
+// Creates a new service attribute with the given ID and data element.
 func IOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceAttribute), _iOBluetoothSDPServiceAttributeSelWithIDAttributeElement, newAttributeID, attributeElement.Ptr())
 	if _ret != 0 {
@@ -52,6 +56,7 @@ func IOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint16,
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
+// Initializes a new service attribute with the given ID and element value.
 func (o *IOBluetoothSDPServiceAttribute) InitWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue *foundation.NSObject) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElementValue, newAttributeID, attributeElementValue.Ptr())
 	if _ret != 0 {
@@ -60,6 +65,7 @@ func (o *IOBluetoothSDPServiceAttribute) InitWithIDAttributeElementValue(newAttr
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
+// Initializes a new service attribute with the given ID and data element.
 func (o *IOBluetoothSDPServiceAttribute) InitWithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElement, newAttributeID, attributeElement.Ptr())
 	if _ret != 0 {
@@ -68,11 +74,13 @@ func (o *IOBluetoothSDPServiceAttribute) InitWithIDAttributeElement(newAttribute
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
+// Returns the attribute ID for the target service attribute.
 func (o *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _iOBluetoothSDPServiceAttributeSelGetAttributeID)
 	return _ret
 }
 
+// Returns the data element for the target service attribute.
 func (o *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelGetDataElement)
 	if _ret != 0 {
@@ -81,6 +89,7 @@ func (o *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataEle
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Returns the data element representing the attribute ID for the target service attribute.
 func (o *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelGetIDDataElement)
 	if _ret != 0 {

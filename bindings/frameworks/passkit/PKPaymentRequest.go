@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a request for payment, including details about payment-processing capabilities, the payment amount, and shipping information.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequest
 type PKPaymentRequest struct {
 	foundation.NSObject
@@ -92,36 +94,46 @@ func PKPaymentRequestFromID(id objc.ID) *PKPaymentRequest {
 	return o
 }
 
+// Returns the list of available payment methods that Apple Pay supports.
 func PKPaymentRequestAvailableNetworks() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelAvailableNetworks)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelAvailableNetworks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Creates a contact error with the supplied field and user-facing error message.
 func PKPaymentRequestPaymentContactInvalidErrorWithContactFieldLocalizedDescription(field *foundation.NSString, localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelPaymentContactInvalidErrorWithContactFieldLocalizedDescription, field.Ptr(), localizedDescription.Ptr())
 	return _ret
 }
 
+// Creates a shipping address error with the supplied key and user-facing error message.
 func PKPaymentRequestPaymentShippingAddressInvalidErrorWithKeyLocalizedDescription(postalAddressKey *foundation.NSString, localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelPaymentShippingAddressInvalidErrorWithKeyLocalizedDescription, postalAddressKey.Ptr(), localizedDescription.Ptr())
 	return _ret
 }
 
+// Creates a billing address error with the supplied key and user-facing error message.
 func PKPaymentRequestPaymentBillingAddressInvalidErrorWithKeyLocalizedDescription(postalAddressKey *foundation.NSString, localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelPaymentBillingAddressInvalidErrorWithKeyLocalizedDescription, postalAddressKey.Ptr(), localizedDescription.Ptr())
 	return _ret
 }
 
+// Creates an error for an unserviceable address, with the supplied user-facing error message.
 func PKPaymentRequestPaymentShippingAddressUnserviceableErrorWithLocalizedDescription(localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelPaymentShippingAddressUnserviceableErrorWithLocalizedDescription, localizedDescription.Ptr())
 	return _ret
 }
 
+// Returns an error object that indicates an invalid coupon.
 func PKPaymentRequestPaymentCouponCodeInvalidErrorWithLocalizedDescription(localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelPaymentCouponCodeInvalidErrorWithLocalizedDescription, localizedDescription.Ptr())
 	return _ret
 }
 
+// Returns an error object that indicates an expired coupon.
 func PKPaymentRequestPaymentCouponCodeExpiredErrorWithLocalizedDescription(localizedDescription *foundation.NSString) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsPKPaymentRequest), _pKPaymentRequestSelPaymentCouponCodeExpiredErrorWithLocalizedDescription, localizedDescription.Ptr())
 	return _ret
@@ -164,12 +176,15 @@ func (o *PKPaymentRequest) SetCountryCode(countryCode *foundation.NSString) {
 }
 
 func (o *PKPaymentRequest) SupportedNetworks() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pKPaymentRequestSelSupportedNetworks)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelSupportedNetworks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKPaymentRequest) SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pKPaymentRequestSelSetSupportedNetworks, supportedNetworks)
+	o.Ptr().Send(_pKPaymentRequestSelSetSupportedNetworks, supportedNetworks.Ptr())
 }
 
 func (o *PKPaymentRequest) MerchantCapabilities() PKMerchantCapability {
@@ -236,12 +251,15 @@ func (o *PKPaymentRequest) SetCurrencyCode(currencyCode *foundation.NSString) {
 }
 
 func (o *PKPaymentRequest) RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pKPaymentRequestSelRequiredBillingContactFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelRequiredBillingContactFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKPaymentRequest) SetRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_pKPaymentRequestSelSetRequiredBillingContactFields, requiredBillingContactFields)
+	o.Ptr().Send(_pKPaymentRequestSelSetRequiredBillingContactFields, requiredBillingContactFields.Ptr())
 }
 
 func (o *PKPaymentRequest) RequiredBillingAddressFields() PKAddressField {
@@ -266,12 +284,15 @@ func (o *PKPaymentRequest) SetBillingContact(billingContact *PKContact) {
 }
 
 func (o *PKPaymentRequest) RequiredShippingContactFields() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pKPaymentRequestSelRequiredShippingContactFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelRequiredShippingContactFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKPaymentRequest) SetRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_pKPaymentRequestSelSetRequiredShippingContactFields, requiredShippingContactFields)
+	o.Ptr().Send(_pKPaymentRequestSelSetRequiredShippingContactFields, requiredShippingContactFields.Ptr())
 }
 
 func (o *PKPaymentRequest) RequiredShippingAddressFields() PKAddressField {
@@ -338,12 +359,15 @@ func (o *PKPaymentRequest) SetApplicationData(applicationData *foundation.NSData
 }
 
 func (o *PKPaymentRequest) SupportedCountries() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pKPaymentRequestSelSupportedCountries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestSelSupportedCountries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKPaymentRequest) SetSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_pKPaymentRequestSelSetSupportedCountries, supportedCountries)
+	o.Ptr().Send(_pKPaymentRequestSelSetSupportedCountries, supportedCountries.Ptr())
 }
 
 func (o *PKPaymentRequest) MultiTokenContexts() *foundation.NSArray[*PKPaymentTokenContext] {

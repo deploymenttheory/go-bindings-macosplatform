@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable caption region subclass that you use to create new caption regions.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablecaptionregion
 type AVMutableCaptionRegion struct {
 	AVCaptionRegion
@@ -36,7 +38,7 @@ func AVMutableCaptionRegionFromID(id objc.ID) *AVMutableCaptionRegion {
 	return o
 }
 
-// @method init @abstract Create a region object without any properties.
+// Creates a caption region.
 func (o *AVMutableCaptionRegion) Init() *AVMutableCaptionRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCaptionRegionSelInit)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *AVMutableCaptionRegion) Init() *AVMutableCaptionRegion {
 	return AVMutableCaptionRegionFromID(_ret)
 }
 
-// @method initWithIdentifier: @abstract Create a region object with the identifier.
+// Creates a caption region that has an identifier.
 func (o *AVMutableCaptionRegion) InitWithIdentifier(identifier *foundation.NSString) *AVMutableCaptionRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCaptionRegionSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {

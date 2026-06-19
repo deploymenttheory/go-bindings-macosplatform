@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that provides decorative accessory views for selected and highlighted items within a scrubber control.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberselectionstyle
 type NSScrubberSelectionStyle struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func NSScrubberSelectionStyleFromID(id objc.ID) *NSScrubberSelectionStyle {
 	return o
 }
 
+// Initializes a new scrubber selection style.
 func (o *NSScrubberSelectionStyle) Init() *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInit)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *NSScrubberSelectionStyle) Init() *NSScrubberSelectionStyle {
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
+// Initializes a scrubber selection style when included from a nib or Storyboard.
 func (o *NSScrubberSelectionStyle) InitWithCoder(coder *foundation.NSCoder) *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -50,6 +54,7 @@ func (o *NSScrubberSelectionStyle) InitWithCoder(coder *foundation.NSCoder) *NSS
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
+// Provides an opportunity to create a customized scrubber selection style.
 func (o *NSScrubberSelectionStyle) MakeSelectionView() *NSScrubberSelectionView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelMakeSelectionView)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that serves as the basis for objects that enable archiving and distribution of other objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscoder
 type NSCoder struct {
 	NSObject
@@ -105,14 +107,17 @@ func NSCoderFromID(id objc.ID) *NSCoder {
 	return o
 }
 
+// Encodes a value of the given type at the given address.
 func (o *NSCoder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelEncodeValueOfObjCTypeAt, type_, addr)
 }
 
+// Encodes a given data object.
 func (o *NSCoder) EncodeDataObject(data *NSData) {
 	o.Ptr().Send(_nSCoderSelEncodeDataObject, data.Ptr())
 }
 
+// Decodes and returns an NSData object that was previously encoded with encodeDataObject:. Subclasses must override this method.
 func (o *NSCoder) DecodeDataObject() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeDataObject)
 	if _ret != 0 {
@@ -121,48 +126,59 @@ func (o *NSCoder) DecodeDataObject() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Decodes a single value of a known type from the specified data buffer.
 func (o *NSCoder) DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size uint) {
 	o.Ptr().Send(_nSCoderSelDecodeValueOfObjCTypeAtSize, type_, data, size)
 }
 
+// This method is present for historical reasons and is not used with keyed archivers.
 func (o *NSCoder) VersionForClassName(className *NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCoderSelVersionForClassName, className.Ptr())
 	return _ret
 }
 
+// Encodes an object.
 func (o *NSCoder) EncodeObject(object objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodeObject, object)
 }
 
+// An encoding method for subclasses to override to encode an interconnected group of objects, starting with the provided root object.
 func (o *NSCoder) EncodeRootObject(rootObject objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodeRootObject, rootObject)
 }
 
+// An encoding method for subclasses to override such that it creates a copy, rather than a proxy, when decoded.
 func (o *NSCoder) EncodeBycopyObject(anObject objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodeBycopyObject, anObject)
 }
 
+// An encoding method for subclasses to override such that it creates a proxy, rather than a copy, when decoded.
 func (o *NSCoder) EncodeByrefObject(anObject objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodeByrefObject, anObject)
 }
 
+// An encoding method for subclasses to override to conditionally encode an object, preserving common references to it.
 func (o *NSCoder) EncodeConditionalObject(object objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodeConditionalObject, object)
 }
 
+// Encodes an array of the given Objective-C type, provided the number of items and a pointer.
 func (o *NSCoder) EncodeArrayOfObjCTypeCountAt(type_ string, count uint, array unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelEncodeArrayOfObjCTypeCountAt, type_, count, array)
 }
 
+// Encodes a buffer of data of an unspecified type.
 func (o *NSCoder) EncodeBytesLength(byteaddr unsafe.Pointer, length uint) {
 	o.Ptr().Send(_nSCoderSelEncodeBytesLength, byteaddr, length)
 }
 
+// Decodes and returns an object that was previously encoded with any of the encode…Object methods.
 func (o *NSCoder) DecodeObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeObject)
 	return _ret
 }
 
+// Decodes a previously-encoded object, populating an error if decoding fails.
 func (o *NSCoder) DecodeTopLevelObjectAndReturnError() (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeTopLevelObjectAndReturnError, unsafe.Pointer(&_nsErr))
@@ -172,79 +188,97 @@ func (o *NSCoder) DecodeTopLevelObjectAndReturnError() (objc.ID, error) {
 	return _ret, nil
 }
 
+// Decodes an array of count items, whose Objective-C type is given by itemType.
 func (o *NSCoder) DecodeArrayOfObjCTypeCountAt(itemType string, count uint, array unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelDecodeArrayOfObjCTypeCountAt, itemType, count, array)
 }
 
+// Decodes a buffer of data whose types are unspecified.
 func (o *NSCoder) DecodeBytesWithReturnedLength(lengthp *uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSCoderSelDecodeBytesWithReturnedLength, lengthp)
 	return _ret
 }
 
+// Encodes a property list.
 func (o *NSCoder) EncodePropertyList(aPropertyList objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodePropertyList, aPropertyList)
 }
 
+// Decodes a property list that was previously encoded with encodePropertyList:.
 func (o *NSCoder) DecodePropertyList() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodePropertyList)
 	return _ret
 }
 
+// This method is present for historical reasons and has no effect.
 func (o *NSCoder) SetObjectZone(zone unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelSetObjectZone, zone)
 }
 
+// This method is present for historical reasons and has no effect.
 func (o *NSCoder) ObjectZone() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSCoderSelObjectZone)
 	return _ret
 }
 
+// Encodes an object and associates it with the string key.
 func (o *NSCoder) EncodeObjectForKey(object objc.ID, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeObjectForKey, object, key.Ptr())
 }
 
+// An encoding method for subclasses to override to conditionally encode an object, preserving common references to it, only if it has been unconditionally encoded.
 func (o *NSCoder) EncodeConditionalObjectForKey(object objc.ID, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeConditionalObjectForKey, object, key.Ptr())
 }
 
+// Encodes a Boolean value and associates it with the string key.
 func (o *NSCoder) EncodeBoolForKey(value bool, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeBoolForKey, value, key.Ptr())
 }
 
+// Encodes a C integer value and associates it with the string key.
 func (o *NSCoder) EncodeIntForKey(value int, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeIntForKey, value, key.Ptr())
 }
 
+// Encodes a 32-bit integer value and associates it with the string key.
 func (o *NSCoder) EncodeInt32ForKey(value int32, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeInt32ForKey, value, key.Ptr())
 }
 
+// Encodes a 64-bit integer value and associates it with the string key.
 func (o *NSCoder) EncodeInt64ForKey(value int64, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeInt64ForKey, value, key.Ptr())
 }
 
+// Encodes a floating point value and associates it with the string key.
 func (o *NSCoder) EncodeFloatForKey(value float32, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeFloatForKey, value, key.Ptr())
 }
 
+// Encodes a double-precision floating point value and associates it with the string key.
 func (o *NSCoder) EncodeDoubleForKey(value float64, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeDoubleForKey, value, key.Ptr())
 }
 
+// Encodes a buffer of data, given its length and a pointer, and associates it with a string key.
 func (o *NSCoder) EncodeBytesLengthForKey(bytes_ *uint8, length uint, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeBytesLengthForKey, bytes_, length, key.Ptr())
 }
 
+// Returns a Boolean value that indicates whether an encoded value is available for a string.
 func (o *NSCoder) ContainsValueForKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCoderSelContainsValueForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns a previously-encoded object that was previously encoded with encodeObject:forKey: or encodeConditionalObject:forKey: and associated with the string key.
 func (o *NSCoder) DecodeObjectForKey(key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeObjectForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes the previously-encoded object associated by a key, populating an error if decoding fails.
 func (o *NSCoder) DecodeTopLevelObjectForKeyError(key *NSString) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeTopLevelObjectForKeyError, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -254,67 +288,78 @@ func (o *NSCoder) DecodeTopLevelObjectForKeyError(key *NSString) (objc.ID, error
 	return _ret, nil
 }
 
+// Decodes and returns a boolean value that was previously encoded with encodeBool:forKey: and associated with the string key.
 func (o *NSCoder) DecodeBoolForKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCoderSelDecodeBoolForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns an int value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (o *NSCoder) DecodeIntForKey(key *NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCoderSelDecodeIntForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns a 32-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (o *NSCoder) DecodeInt32ForKey(key *NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _nSCoderSelDecodeInt32ForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns a 64-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (o *NSCoder) DecodeInt64ForKey(key *NSString) int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSCoderSelDecodeInt64ForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns a float value that was previously encoded with encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
 func (o *NSCoder) DecodeFloatForKey(key *NSString) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSCoderSelDecodeFloatForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns a double value that was previously encoded with either encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
 func (o *NSCoder) DecodeDoubleForKey(key *NSString) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSCoderSelDecodeDoubleForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes a buffer of data that was previously encoded with encodeBytes:length:forKey: and associated with the string key.
 func (o *NSCoder) DecodeBytesForKeyReturnedLength(key *NSString, lengthp *uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSCoderSelDecodeBytesForKeyReturnedLength, key.Ptr(), lengthp)
 	return _ret
 }
 
-// Decode bytes from the decoder. The length of the bytes must be greater than or equal to the `length` parameter. If the result exists, but is of insufficient length, then the decoder uses `failWithError` to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using `NSDecodingFailurePolicy`.
+// Decode bytes from the decoder. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
 func (o *NSCoder) DecodeBytesWithMinimumLength(length uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSCoderSelDecodeBytesWithMinimumLength, length)
 	return _ret
 }
 
-// Decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the `length` parameter. If the result exists, but is of insufficient length, then the decoder uses `failWithError` to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using `NSDecodingFailurePolicy`.
+// Decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
 func (o *NSCoder) DecodeBytesForKeyMinimumLength(key *NSString, length uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSCoderSelDecodeBytesForKeyMinimumLength, key.Ptr(), length)
 	return _ret
 }
 
+// Encodes an integer value and associates it with the string key.
 func (o *NSCoder) EncodeIntegerForKey(value int, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeIntegerForKey, value, key.Ptr())
 }
 
+// Decodes and returns an NSInteger value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (o *NSCoder) DecodeIntegerForKey(key *NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCoderSelDecodeIntegerForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes an object for the key, restricted to the specified class.
 func (o *NSCoder) DecodeObjectOfClassForKey(aClass objc.Class, key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeObjectOfClassForKey, aClass, key.Ptr())
 	return _ret
 }
 
+// Decode an object as an expected type, failing if the archived type does not match.
 func (o *NSCoder) DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key *NSString) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeTopLevelObjectOfClassForKeyError, aClass, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -324,50 +369,65 @@ func (o *NSCoder) DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key 
 	return _ret, nil
 }
 
-// Decodes the \c NSArray object for the given  \c key, which should be an \c NSArray<cls>, containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the coder.
 func (o *NSCoder) DecodeArrayOfObjectsOfClassForKey(cls objc.Class, key *NSString) *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSCoderSelDecodeArrayOfObjectsOfClassForKey, cls, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeArrayOfObjectsOfClassForKey, cls, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
-// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary<keyCls,objectCls> , with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary<keyCls,objectCls> , with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the coder.
 func (o *NSCoder) DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls objc.Class, objectCls objc.Class, key *NSString) *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSCoderSelDecodeDictionaryWithKeysOfClassObjectsOfClassForKey, keyCls, objectCls, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeDictionaryWithKeysOfClassObjectsOfClassForKey, keyCls, objectCls, key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Decodes an object for the key, restricted to the specified classes.
 func (o *NSCoder) DecodeObjectOfClassesForKey(classes *NSSet[objc.Class], key *NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeObjectOfClassesForKey, classes, key.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeObjectOfClassesForKey, classes.Ptr(), key.Ptr())
 	return _ret
 }
 
+// Decode an object as one of several expected types, failing if the archived type does not match.
 func (o *NSCoder) DecodeTopLevelObjectOfClassesForKeyError(classes *NSSet[objc.Class], key *NSString) (objc.ID, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeTopLevelObjectOfClassesForKeyError, classes, key.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeTopLevelObjectOfClassesForKeyError, classes.Ptr(), key.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder.
 func (o *NSCoder) DecodeArrayOfObjectsOfClassesForKey(classes *NSSet[objc.Class], key *NSString) *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSCoderSelDecodeArrayOfObjectsOfClassesForKey, classes, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeArrayOfObjectsOfClassesForKey, classes.Ptr(), key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
-// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder.
 func (o *NSCoder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses *NSSet[objc.Class], objectClasses *NSSet[objc.Class], key *NSString) *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSCoderSelDecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey, keyClasses, objectClasses, key.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey, keyClasses.Ptr(), objectClasses.Ptr(), key.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a decoded property list for the specified key.
 func (o *NSCoder) DecodePropertyListForKey(key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodePropertyListForKey, key.Ptr())
 	return _ret
 }
 
-// @abstract Signals to this coder that the decode has failed. @parameter non-nil error that describes the reason why the decode failed @discussion Sets an error on this NSCoder once per TopLevel decode; calling it repeatedly will have no effect until the call stack unwinds to one of the TopLevel decode entry-points. This method is only meaningful to call for decodes. Typically, you would want to call this method in your -initWithCoder: implementation when you detect situations like: - lack of secure coding - corruption of your data - domain validation failures After calling -failWithError: within your -initWithCoder: implementation, you should clean up and return nil as early as possible. Once an error has been signaled to a decoder, it remains set until it has handed off to the first TopLevel decode invocation above it.  For example, consider the following call graph: A    -decodeTopLevelObjectForKey:error: B        -initWithCoder: C            -decodeObjectForKey: D                -initWithCoder: E                    -decodeObjectForKey: F                        -failWithError: In this case the error provided in stack-frame F will be returned via the outError in stack-frame A. Furthermore the result object from decodeTopLevelObjectForKey:error: will be nil, regardless of the result of stack-frame B. NSCoder implementations support two mechanisms for the stack-unwinding from F to A: - forced (NSException based) - particpatory (error based) The kind of unwinding you get is determined by the decodingFailurePolicy property of this NSCoder (which defaults to NSDecodingFailurePolicyRaiseException to match historical behavior).
+// Signals to this coder that the decode operation has failed.
 func (o *NSCoder) FailWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelFailWithError, error_)
 }
@@ -388,8 +448,11 @@ func (o *NSCoder) RequiresSecureCoding() bool {
 }
 
 func (o *NSCoder) AllowedClasses() *NSSet[objc.Class] {
-	_ret := objc.Send[*NSSet[objc.Class]](o.Ptr(), _nSCoderSelAllowedClasses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelAllowedClasses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSSetFromID[objc.Class](_ret)
 }
 
 // @abstract Defines the behavior this NSCoder should take on decode failure (i.e. corrupt archive, invalid data, etc.). @discussion The default result of this property is NSDecodingFailurePolicyRaiseException, subclasses can change this to an alternative policy.
@@ -404,71 +467,86 @@ func (o *NSCoder) Error() unsafe.Pointer {
 	return _ret
 }
 
+// Encodes an old-style object onto the coder.
 // Deprecated: Not supported
 func (o *NSCoder) EncodeNXObject(object objc.ID) {
 	o.Ptr().Send(_nSCoderSelEncodeNXObject, object)
 }
 
+// Decodes an object previously written with encodeNXObject:.
 // Deprecated: Not supported
 func (o *NSCoder) DecodeNXObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoderSelDecodeNXObject)
 	return _ret
 }
 
+// Decodes a single value, whose Objective-C type is given by valueType.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSCoder) DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer) {
 	o.Ptr().Send(_nSCoderSelDecodeValueOfObjCTypeAt, type_, data)
 }
 
+// Encodes a point.
 func (o *NSCoder) EncodePoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSCoderSelEncodePoint, point)
 }
 
+// Decodes and returns an NSPoint structure that was previously encoded with encodePoint:.
 func (o *NSCoder) DecodePoint() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCoderSelDecodePoint)
 	return _ret
 }
 
+// Encodes a size structure.
 func (o *NSCoder) EncodeSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_nSCoderSelEncodeSize, size)
 }
 
+// Decodes and returns an NSSize structure that was previously encoded with encodeSize:.
 func (o *NSCoder) DecodeSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCoderSelDecodeSize)
 	return _ret
 }
 
+// Encodes a rectangle structure.
 func (o *NSCoder) EncodeRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSCoderSelEncodeRect, rect)
 }
 
+// Decodes and returns an NSRect structure that was previously encoded with encodeRect:.
 func (o *NSCoder) DecodeRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCoderSelDecodeRect)
 	return _ret
 }
 
+// Encodes a point and associates it with the string key.
 func (o *NSCoder) EncodePointForKey(point corefoundation.CGPoint, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodePointForKey, point, key.Ptr())
 }
 
+// Encodes a size structure and associates it with the given string key.
 func (o *NSCoder) EncodeSizeForKey(size corefoundation.CGSize, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeSizeForKey, size, key.Ptr())
 }
 
+// Encodes a rectangle structure and associates it with the string key.
 func (o *NSCoder) EncodeRectForKey(rect corefoundation.CGRect, key *NSString) {
 	o.Ptr().Send(_nSCoderSelEncodeRectForKey, rect, key.Ptr())
 }
 
+// Decodes and returns an NSPoint structure that was previously encoded with encodePoint:forKey:.
 func (o *NSCoder) DecodePointForKey(key *NSString) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCoderSelDecodePointForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns an NSSize structure that was previously encoded with encodeSize:forKey:.
 func (o *NSCoder) DecodeSizeForKey(key *NSString) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCoderSelDecodeSizeForKey, key.Ptr())
 	return _ret
 }
 
+// Decodes and returns an NSRect structure that was previously encoded with encodeRect:forKey:.
 func (o *NSCoder) DecodeRectForKey(key *NSString) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCoderSelDecodeRectForKey, key.Ptr())
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user interface of a browser.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbrowsercell
 type NSBrowserCell struct {
 	NSCell
@@ -67,6 +69,7 @@ func (o *NSBrowserCell) InitWithCoder(coder *foundation.NSCoder) *NSBrowserCell 
 	return NSBrowserCellFromID(_ret)
 }
 
+// Returns the highlight color that the receiver wants to display.
 func (o *NSBrowserCell) HighlightColorInView(controlView *NSView) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelHighlightColorInView, controlView.Ptr())
 	if _ret != 0 {
@@ -75,10 +78,12 @@ func (o *NSBrowserCell) HighlightColorInView(controlView *NSView) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Unhighlights the receiver and unsets its state.
 func (o *NSBrowserCell) Reset() {
 	o.Ptr().Send(_nSBrowserCellSelReset)
 }
 
+// Highlights the receiver and sets its state.
 func (o *NSBrowserCell) Set() {
 	o.Ptr().Send(_nSBrowserCellSelSet)
 }

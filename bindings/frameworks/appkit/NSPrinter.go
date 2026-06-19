@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a printer’s capabilities.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsprinter
 type NSPrinter struct {
 	foundation.NSObject
@@ -57,6 +59,7 @@ func NSPrinterFromID(id objc.ID) *NSPrinter {
 	return o
 }
 
+// Creates and returns a printer object initialized with the specified printer name.
 func NSPrinterPrinterWithName(name *foundation.NSString) *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterWithName, name.Ptr())
 	if _ret != 0 {
@@ -65,6 +68,7 @@ func NSPrinterPrinterWithName(name *foundation.NSString) *NSPrinter {
 	return NSPrinterFromID(_ret)
 }
 
+// Creates and returns a printer object initialized to the first available printer with the specified make and model information.
 func NSPrinterPrinterWithType(type_ *foundation.NSString) *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterWithType, type_.Ptr())
 	if _ret != 0 {
@@ -73,19 +77,26 @@ func NSPrinterPrinterWithType(type_ *foundation.NSString) *NSPrinter {
 	return NSPrinterFromID(_ret)
 }
 
+// Returns the size of the page for the specified paper type.
 func (o *NSPrinter) PageSizeForPaper(paperName *foundation.NSString) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSPrinterSelPageSizeForPaper, paperName.Ptr())
 	return _ret
 }
 
 func NSPrinterPrinterNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterNames)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func NSPrinterPrinterTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSPrinter) Name() *foundation.NSString {
@@ -110,52 +121,63 @@ func (o *NSPrinter) LanguageLevel() int {
 }
 
 func (o *NSPrinter) DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPrinterSelDeviceDescription)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelDeviceDescription)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Returns the status of the specified table.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) StatusForTable(tableName *foundation.NSString) NSPrinterTableStatus {
 	_ret := objc.Send[NSPrinterTableStatus](o.Ptr(), _nSPrinterSelStatusForTable, tableName.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the specified key is in the specified table.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) IsKeyInTable(key *foundation.NSString, table *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrinterSelIsKeyInTable, key.Ptr(), table.Ptr())
 	return _ret
 }
 
+// Returns the Boolean value associated with the specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) BooleanForKeyInTable(key *foundation.NSString, table *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrinterSelBooleanForKeyInTable, key.Ptr(), table.Ptr())
 	return _ret
 }
 
+// Returns the floating-point value associated with the specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) FloatForKeyInTable(key *foundation.NSString, table *foundation.NSString) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSPrinterSelFloatForKeyInTable, key.Ptr(), table.Ptr())
 	return _ret
 }
 
+// Returns the integer value associated with the specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) IntForKeyInTable(key *foundation.NSString, table *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPrinterSelIntForKeyInTable, key.Ptr(), table.Ptr())
 	return _ret
 }
 
+// Returns the rectangle associated with the specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) RectForKeyInTable(key *foundation.NSString, table *foundation.NSString) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPrinterSelRectForKeyInTable, key.Ptr(), table.Ptr())
 	return _ret
 }
 
+// Returns the size data type associated with the specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) SizeForKeyInTable(key *foundation.NSString, table *foundation.NSString) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSPrinterSelSizeForKeyInTable, key.Ptr(), table.Ptr())
 	return _ret
 }
 
+// Returns the first occurrence of a value associated with specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) StringForKeyInTable(key *foundation.NSString, table *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelStringForKeyInTable, key.Ptr(), table.Ptr())
@@ -165,42 +187,52 @@ func (o *NSPrinter) StringForKeyInTable(key *foundation.NSString, table *foundat
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns an array of strings, one for each occurrence, associated with specified key.
 // Deprecated: since macOS 10.9.
 func (o *NSPrinter) StringListForKeyInTable(key *foundation.NSString, table *foundation.NSString) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSPrinterSelStringListForKeyInTable, key.Ptr(), table.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelStringListForKeyInTable, key.Ptr(), table.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) ImageRectForPaper(paperName *foundation.NSString) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPrinterSelImageRectForPaper, paperName.Ptr())
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) AcceptsBinary() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrinterSelAcceptsBinary)
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) IsColor() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrinterSelIsColor)
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) IsFontAvailable(faceName *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrinterSelIsFontAvailable, faceName.Ptr())
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) IsOutputStackInReverseOrder() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrinterSelIsOutputStackInReverseOrder)
 	return _ret
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func NSPrinterPrinterWithNameDomainIncludeUnavailable(name *foundation.NSString, domain *foundation.NSString, flag bool) *NSPrinter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrinter), _nSPrinterSelPrinterWithNameDomainIncludeUnavailable, name.Ptr(), domain.Ptr(), flag)
@@ -210,6 +242,7 @@ func NSPrinterPrinterWithNameDomainIncludeUnavailable(name *foundation.NSString,
 	return NSPrinterFromID(_ret)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) Domain() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelDomain)
@@ -219,6 +252,7 @@ func (o *NSPrinter) Domain() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) Host() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelHost)
@@ -228,6 +262,7 @@ func (o *NSPrinter) Host() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Deprecated.
 // Deprecated: since macOS 10.2.
 func (o *NSPrinter) Note() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrinterSelNote)

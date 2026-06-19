@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that represents input for the binary large object extension in passkey assertion requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertioninput
 type ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of IOBluetoothDevicePair represents a pairing attempt to a remote Bluetooth device.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair
 type IOBluetoothDevicePair struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func IOBluetoothDevicePairFromID(id objc.ID) *IOBluetoothDevicePair {
 	return o
 }
 
+// Creates an autorelease IOBluetoothDevicePair object with a device as the pairing target.
 func IOBluetoothDevicePairPairWithDevice(device *IOBluetoothDevice) *IOBluetoothDevicePair {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevicePair), _iOBluetoothDevicePairSelPairWithDevice, device.Ptr())
 	if _ret != 0 {
@@ -46,15 +49,18 @@ func IOBluetoothDevicePairPairWithDevice(device *IOBluetoothDevice) *IOBluetooth
 	return IOBluetoothDevicePairFromID(_ret)
 }
 
+// Kicks off the pairing with the device.
 func (o *IOBluetoothDevicePair) Start() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDevicePairSelStart)
 	return _ret
 }
 
+// Stops the current pairing. Removes the delegate and disconnects if device was connected.
 func (o *IOBluetoothDevicePair) Stop() {
 	o.Ptr().Send(_iOBluetoothDevicePairSelStop)
 }
 
+// Get the IOBluetoothDevice being used by the object.
 func (o *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDevicePairSelDevice)
 	if _ret != 0 {
@@ -63,14 +69,17 @@ func (o *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
 	return IOBluetoothDeviceFromID(_ret)
 }
 
+// Set the device object to pair with. It is retained by the object.
 func (o *IOBluetoothDevicePair) SetDevice(inDevice *IOBluetoothDevice) {
 	o.Ptr().Send(_iOBluetoothDevicePairSelSetDevice, inDevice.Ptr())
 }
 
+// This is the required reply to the devicePairingPINCodeRequest delegate message. Set the PIN code to use during pairing if required.
 func (o *IOBluetoothDevicePair) ReplyPINCodePINCode(pINCodeSize uint, pINCode *BluetoothPINCode) {
 	o.Ptr().Send(_iOBluetoothDevicePairSelReplyPINCodePINCode, pINCodeSize, pINCode)
 }
 
+// This is the required reply to the devicePairingUserConfirmationRequest delegate message.
 func (o *IOBluetoothDevicePair) ReplyUserConfirmation(reply bool) {
 	o.Ptr().Send(_iOBluetoothDevicePairSelReplyUserConfirmation, reply)
 }

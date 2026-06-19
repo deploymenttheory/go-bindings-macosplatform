@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The view controller for a popover associated with your app extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariextensionviewcontroller
 type SFSafariExtensionViewController struct {
 	appkit.NSViewController

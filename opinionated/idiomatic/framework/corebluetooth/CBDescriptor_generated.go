@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides further information about a remote peripheral’s characteristic.
+//
 // Descriptor wraps [raw.CBDescriptor] with a fluent Go API.
 type Descriptor struct {
 	inner *raw.CBDescriptor

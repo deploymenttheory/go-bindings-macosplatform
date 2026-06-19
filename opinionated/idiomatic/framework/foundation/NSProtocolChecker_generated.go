@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).
+//
 // ProtocolChecker wraps [raw.NSProtocolChecker] with a fluent Go API.
 type ProtocolChecker struct {
 	inner *raw.NSProtocolChecker
@@ -30,6 +32,8 @@ func ProtocolCheckerFromID(id objc.ID) *ProtocolChecker {
 	return &ProtocolChecker{inner: raw.NSProtocolCheckerFromID(id)}
 }
 
+// Initializes a newly allocated NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
+//
 // NewProtocolCheckerWithTargetProtocol creates a new [ProtocolChecker].
 func NewProtocolCheckerWithTargetProtocol(anObject *raw.NSObject, aProtocol unsafe.Pointer) *ProtocolChecker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSProtocolChecker")), objc.RegisterName("alloc"))

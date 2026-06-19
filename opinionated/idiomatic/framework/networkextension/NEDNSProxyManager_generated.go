@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object to create and manage an DNS proxy provider’s configuration.
+//
 // NEDNSProxyManager wraps [raw.NEDNSProxyManager] with a fluent Go API.
 type NEDNSProxyManager struct {
 	inner *raw.NEDNSProxyManager
@@ -39,7 +41,7 @@ func NewNEDNSProxyManager() *NEDNSProxyManager {
 	return &NEDNSProxyManager{inner: raw.NEDNSProxyManagerFromID(_id)}
 }
 
-// @property localizedDescription @discussion A string containing a description of the DNS proxy.
+// A description of the DNS proxy.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEDNSProxyManager) WithLocalizedDescription(localizedDescription string) *NEDNSProxyManager {
@@ -47,7 +49,7 @@ func (x *NEDNSProxyManager) WithLocalizedDescription(localizedDescription string
 	return x
 }
 
-// @property providerProtocol @discussion An NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
+// The provider-specific portion of the DNS proxy configuration.
 //
 // WithProviderProtocol sets the providerProtocol property and returns the receiver for chaining.
 func (x *NEDNSProxyManager) WithProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) *NEDNSProxyManager {
@@ -55,7 +57,7 @@ func (x *NEDNSProxyManager) WithProviderProtocol(providerProtocol *NEDNSProxyPro
 	return x
 }
 
-// @property enabled @discussion Toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to NO when other DNS proxy configurations are enabled.
+// The status of a DNS proxy.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEDNSProxyManager) WithEnabled(enabled bool) *NEDNSProxyManager {
@@ -63,7 +65,7 @@ func (x *NEDNSProxyManager) WithEnabled(enabled bool) *NEDNSProxyManager {
 	return x
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current DNS proxy configuration from the caller's DNS proxy preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Loads the current DNS proxy configuration from the caller’s DNS proxy preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
@@ -83,7 +85,7 @@ func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the DNS proxy configuration from the caller's DNS proxy preferences. If the DNS proxy is enabled, the DNS proxy becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Removes the DNS proxy configuration from the caller’s DNS proxy preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
@@ -103,7 +105,7 @@ func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the DNS proxy configuration in the caller's DNS proxy preferences. If the DNS proxy is enabled, it will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Saves the DNS proxy configuration in the caller’s DNS proxy preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {

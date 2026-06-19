@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A URL session task that is stream-based.
+//
 // URLSessionStreamTask wraps [raw.NSURLSessionStreamTask] with a fluent Go API.
 type URLSessionStreamTask struct {
 	inner *raw.NSURLSessionStreamTask

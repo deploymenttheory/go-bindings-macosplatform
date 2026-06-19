@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that represents a discrete quantity.
+//
 // DiscreteQuantitySample wraps [raw.HKDiscreteQuantitySample] with a fluent Go API.
 type DiscreteQuantitySample struct {
 	inner *raw.HKDiscreteQuantitySample

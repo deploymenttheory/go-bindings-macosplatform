@@ -8,11 +8,15 @@ import (
 	"fmt"
 )
 
+// Values indicating the type of data that is to be resolved or the type of data that was resolved.
 type CFHostInfoType int32
 
 const (
-	KCFHostAddresses    CFHostInfoType = 0
-	KCFHostNames        CFHostInfoType = 1
+	// Specifies that addresses are to be resolved or that addresses were resolved.
+	KCFHostAddresses CFHostInfoType = 0
+	// Specifies that names are to be resolved or that names were resolved.
+	KCFHostNames CFHostInfoType = 1
+	// Specifies that reachability information is to be resolved or that reachability information was resolved.
 	KCFHostReachability CFHostInfoType = 2
 )
 
@@ -29,9 +33,11 @@ func (e CFHostInfoType) String() string {
 	}
 }
 
+// Record type specifier used to tell a service monitor the type of record changes to watch for.
 type CFNetServiceMonitorType int32
 
 const (
+	// Watch for TXT record changes.
 	KCFNetServiceMonitorTXT CFNetServiceMonitorType = 1
 )
 

@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "framework": "CallKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CXAction": {
+      "doc": "An abstract class that declares a programmatic interface for objects that represent a telephony action.",
+      "url": "https://developer.apple.com/documentation/callkit/cxaction"
+    },
+    "CXAnswerCallAction": {
+      "doc": "An encapsulation of the act of answering an incoming call.",
+      "url": "https://developer.apple.com/documentation/callkit/cxanswercallaction"
+    },
+    "CXCall": {
+      "doc": "A telephony call.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcall"
+    },
+    "CXCallAction": {
+      "doc": "A programmatic interface for objects that represent a telephony action associated with a call object.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcallaction"
+    },
+    "CXCallController": {
+      "doc": "A programmatic interface for interacting with and observing calls.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller"
+    },
+    "CXCallDirectoryExtensionContext": {
+      "doc": "A programmatic interface for adding identification and blocking entries to a Call Directory app extension.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext"
+    },
+    "CXCallDirectoryManager": {
+      "doc": "The programmatic interface to an object that manages a Call Directory app extension.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcalldirectorymanager"
+    },
+    "CXCallDirectoryProvider": {
+      "doc": "The principal object for a Call Directory app extension for a host app.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryprovider"
+    },
+    "CXCallObserver": {
+      "doc": "A programmatic interface for an object that manages a list of active calls and observes call changes.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcallobserver"
+    },
+    "CXCallUpdate": {
+      "doc": "An encapsulation of new and changed information about a call.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcallupdate"
+    },
+    "CXEndCallAction": {
+      "doc": "An encapsulation of the act of ending a call.",
+      "url": "https://developer.apple.com/documentation/callkit/cxendcallaction"
+    },
+    "CXHandle": {
+      "doc": "A way to reach a call recipient, such as a phone number or email address.",
+      "url": "https://developer.apple.com/documentation/callkit/cxhandle"
+    },
+    "CXPlayDTMFCallAction": {
+      "doc": "An encapsulation of the act of playing a dual tone multifrequency (DTMF) sequence.",
+      "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallaction"
+    },
+    "CXProvider": {
+      "doc": "An object that represents a telephony provider.",
+      "url": "https://developer.apple.com/documentation/callkit/cxprovider"
+    },
+    "CXProviderConfiguration": {
+      "doc": "An encapsulation of the configuration of a provider object.",
+      "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration"
+    },
+    "CXSetGroupCallAction": {
+      "doc": "An encapsulation of the act of grouping or ungrouping calls.",
+      "url": "https://developer.apple.com/documentation/callkit/cxsetgroupcallaction"
+    },
+    "CXSetHeldCallAction": {
+      "doc": "An encapsulation of the act of placing a call on hold or removing a call from hold.",
+      "url": "https://developer.apple.com/documentation/callkit/cxsetheldcallaction"
+    },
+    "CXSetMutedCallAction": {
+      "doc": "An encapsulation of the act of muting or unmuting a call.",
+      "url": "https://developer.apple.com/documentation/callkit/cxsetmutedcallaction"
+    },
+    "CXStartCallAction": {
+      "doc": "An encapsulation of the act of initiating an outgoing call.",
+      "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction"
+    },
+    "CXTransaction": {
+      "doc": "An object that contains zero or more action objects for a call controller to perform.",
+      "url": "https://developer.apple.com/documentation/callkit/cxtransaction"
+    }
+  },
+  "protocols": {
+    "CXCallDirectoryExtensionContextDelegate": {
+      "doc": "A collection of methods a Call Directory extension context object calls when a request fails.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontextdelegate"
+    },
+    "CXCallObserverDelegate": {
+      "doc": "A collection of methods the system calls when a call changes state.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcallobserverdelegate"
+    },
+    "CXProviderDelegate": {
+      "doc": "A collection of methods that a telephony provider object calls.",
+      "url": "https://developer.apple.com/documentation/callkit/cxproviderdelegate"
+    }
+  },
+  "enums": {
+    "CXCallDirectoryEnabledStatus": {
+      "doc": "The enabled status of a Call Directory app extension, as reported by the getEnabledStatusForExtension(withIdentifier:completionHandler:) method.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryenabledstatus"
+    },
+    "CXCallEndedReason": {
+      "doc": "The reason that a call ended.",
+      "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason",
+      "members": {
+        "CXCallEndedReasonAnsweredElsewhere": {
+          "doc": "Another device answered the call.",
+          "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason/answeredelsewhere"
+        },
+        "CXCallEndedReasonDeclinedElsewhere": {
+          "doc": "Another device declined the call.",
+          "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason/declinedelsewhere"
+        },
+        "CXCallEndedReasonFailed": {
+          "doc": "An error occurred while attempting to service the call.",
+          "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason/failed"
+        },
+        "CXCallEndedReasonRemoteEnded": {
+          "doc": "The remote party explicitly ended the call.",
+          "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason/remoteended"
+        },
+        "CXCallEndedReasonUnanswered": {
+          "doc": "The call never started connecting and was never explicitly ended, such as when an outgoing or incoming call times out.",
+          "url": "https://developer.apple.com/documentation/callkit/cxcallendedreason/unanswered"
+        }
+      }
+    },
+    "CXErrorCode": {
+      "doc": "Error codes for the CallKit errors.",
+      "url": "https://developer.apple.com/documentation/callkit/cxerrorcode"
+    },
+    "CXErrorCodeCallDirectoryManagerError": {
+      "doc": "Errors when interacting with a call directory manager.",
+      "url": "https://developer.apple.com/documentation/callkit/cxerrorcodecalldirectorymanagererror"
+    },
+    "CXErrorCodeIncomingCallError": {
+      "doc": "Codes for errors that occur during incoming calls.",
+      "url": "https://developer.apple.com/documentation/callkit/cxerrorcodeincomingcallerror"
+    },
+    "CXErrorCodeNotificationServiceExtensionError": {
+      "doc": "Errors that can occur when reporting new, incoming VoIP calls.",
+      "url": "https://developer.apple.com/documentation/callkit/cxerrorcodenotificationserviceextensionerror"
+    },
+    "CXErrorCodeRequestTransactionError": {
+      "url": "https://developer.apple.com/documentation/callkit/cxerrorcoderequesttransactionerror"
+    },
+    "CXHandleType": {
+      "doc": "The possible types of handles.",
+      "url": "https://developer.apple.com/documentation/callkit/cxhandletype"
+    },
+    "CXPlayDTMFCallActionType": {
+      "doc": "The types of events that generate dial tones.",
+      "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallactiontype"
+    }
+  },
+  "methods": {
+    "CXAction": {
+      "-fail": {
+        "doc": "Reports the failed execution of the action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/fail()"
+      },
+      "-fulfill": {
+        "doc": "Reports the successful execution of the action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/fulfill()"
+      },
+      "-init": {
+        "doc": "Initializes a new telephony action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/init()"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new telephony action with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/init(coder:)"
+      }
+    },
+    "CXAnswerCallAction": {
+      "-fulfillWithDateConnected:": {
+        "doc": "Reports the successful execution of the action at the specified time.",
+        "url": "https://developer.apple.com/documentation/callkit/cxanswercallaction/fulfill(withdateconnected:)"
+      }
+    },
+    "CXCall": {
+      "-isEqualToCall:": {
+        "doc": "Returns a Boolean value that indicates whether a given call is equal to the receiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcall/isequaltocall:"
+      }
+    },
+    "CXCallAction": {
+      "-initWithCallUUID:": {
+        "doc": "Initializes a new action for a call identified by a given UUID.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallaction/init(call:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new action for a call with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallaction/init(coder:)"
+      }
+    },
+    "CXCallController": {
+      "-init": {
+        "doc": "Initializes a new call controller with a private, serial queue, which is used for calling completion blocks.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller/init()"
+      },
+      "-initWithQueue:": {
+        "doc": "Initializes a new call controller with a specified queue, which is used for calling completion blocks.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller/init(queue:)"
+      },
+      "-requestTransaction:completion:": {
+        "doc": "Requests that the actions in the specified transaction be asynchronously performed by the telephony provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller/request(_:completion:)"
+      },
+      "-requestTransactionWithAction:completion:": {
+        "doc": "Requests that the transaction that contains the specified action be asynchronously performed by the telephony provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller/requesttransaction(with:completion:)-ffme"
+      },
+      "-requestTransactionWithActions:completion:": {
+        "doc": "Requests that the transaction that contains the specified actions be asynchronously performed by the telephony provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller/requesttransaction(with:completion:)-4o1m4"
+      }
+    },
+    "CXCallDirectoryExtensionContext": {
+      "-addBlockingEntryWithNextSequentialPhoneNumber:": {
+        "doc": "Adds a blocking entry with the specified phone number.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/addblockingentry(withnextsequentialphonenumber:)"
+      },
+      "-addIdentificationEntryWithNextSequentialPhoneNumber:label:": {
+        "doc": "Adds an identification entry with the specified phone number and label.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/addidentificationentry(withnextsequentialphonenumber:label:)"
+      },
+      "-completeRequestWithCompletionHandler:": {
+        "doc": "Completes the request to the extension context.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/completerequest(completionhandler:)"
+      },
+      "-removeAllBlockingEntries": {
+        "doc": "Removes all stored blocking entries.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/removeallblockingentries()"
+      },
+      "-removeAllIdentificationEntries": {
+        "doc": "Removes all stored identification entries.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/removeallidentificationentries()"
+      },
+      "-removeBlockingEntryWithPhoneNumber:": {
+        "doc": "Removes a blocking entry that contains the specified phone number.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/removeblockingentry(withphonenumber:)"
+      },
+      "-removeIdentificationEntryWithPhoneNumber:": {
+        "doc": "Removes an identification entry that contains the specified phone number.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/removeidentificationentry(withphonenumber:)"
+      }
+    },
+    "CXCallDirectoryManager": {
+      "-getEnabledStatusForExtensionWithIdentifier:completionHandler:": {
+        "doc": "Asynchronously returns the enabled status of the extension with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectorymanager/getenabledstatusforextension(withidentifier:completionhandler:)"
+      },
+      "-openSettingsWithCompletionHandler:": {
+        "doc": "Opens the iOS Settings app and shows the Call Blocking \u0026 Identification settings.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectorymanager/opensettings(completionhandler:)"
+      },
+      "-reloadExtensionWithIdentifier:completionHandler:": {
+        "doc": "Asynchronously reloads the extension with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectorymanager/reloadextension(withidentifier:completionhandler:)"
+      }
+    },
+    "CXCallDirectoryProvider": {
+      "-beginRequestWithExtensionContext:": {
+        "doc": "Tells the extension to prepare for a host app’s request.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryprovider/beginrequest(with:)"
+      }
+    },
+    "CXCallObserver": {
+      "-setDelegate:queue:": {
+        "doc": "Sets a call observer delegate, specifying an optional queue on which to execute delegate methods.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallobserver/setdelegate(_:queue:)"
+      }
+    },
+    "CXEndCallAction": {
+      "-fulfillWithDateEnded:": {
+        "doc": "Reports the successful execution of the action at the specified time.",
+        "url": "https://developer.apple.com/documentation/callkit/cxendcallaction/fulfill(withdateended:)"
+      }
+    },
+    "CXHandle": {
+      "-initWithType:value:": {
+        "doc": "Initializes a new handle of a given type with the specified value.",
+        "url": "https://developer.apple.com/documentation/callkit/cxhandle/init(type:value:)"
+      },
+      "-isEqualToHandle:": {
+        "doc": "Returns a Boolean value that indicates whether a given handle is equal to the receiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxhandle/isequaltohandle:"
+      }
+    },
+    "CXPlayDTMFCallAction": {
+      "-initWithCallUUID:digits:type:": {
+        "doc": "Initializes a new action for a call identified by a given UUID, as well as a specified type and sequence of digits.",
+        "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallaction/init(call:digits:type:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new action to play dual-tone multifrequency (DTMF) tones with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallaction/init(coder:)"
+      }
+    },
+    "CXProvider": {
+      "+reportNewIncomingVoIPPushPayload:completion:": {
+        "doc": "Reports a new incoming call after your notification service extension decrypts a VoIP call request.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/reportnewincomingvoippushpayload(_:completion:)"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Initializes a new provider with the specified configuration.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/init(configuration:)"
+      },
+      "-invalidate": {
+        "doc": "Invalidates the provider and completes all active calls with an error.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/invalidate()"
+      },
+      "-pendingCallActionsOfClass:withCallUUID:": {
+        "doc": "Returns all call actions in any pending transactions of the specified class for the specified call identifier that are incomplete.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/pendingcallactions(of:withcall:)"
+      },
+      "-reportCallWithUUID:endedAtDate:reason:": {
+        "doc": "Reports to the provider that a call with the specified identifier ended at a given date for a particular reason.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/reportcall(with:endedat:reason:)"
+      },
+      "-reportCallWithUUID:updated:": {
+        "doc": "Reports to the provider that an active call updated its information.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/reportcall(with:updated:)"
+      },
+      "-reportNewIncomingCallWithUUID:update:completion:": {
+        "doc": "Reports a new incoming call with the specified unique identifier to the provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/reportnewincomingcall(with:update:completion:)"
+      },
+      "-reportOutgoingCallWithUUID:connectedAtDate:": {
+        "doc": "Reports to the provider that an outgoing call with the specified unique identifier finished connecting at a particular time.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/reportoutgoingcall(with:connectedat:)"
+      },
+      "-reportOutgoingCallWithUUID:startedConnectingAtDate:": {
+        "doc": "Reports to the provider that an outgoing call with the specified unique identifier started connecting at a particular time.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/reportoutgoingcall(with:startedconnectingat:)"
+      },
+      "-setDelegate:queue:": {
+        "doc": "Sets a provider delegate, specifying an optional queue on which to execute delegate methods.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/setdelegate(_:queue:)"
+      }
+    },
+    "CXProviderConfiguration": {
+      "-init": {
+        "doc": "Creates the configuration of a provider object.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/init()"
+      },
+      "-initWithLocalizedName:": {
+        "doc": "Initializes a configuration with the specified localized name.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/init(localizedname:)"
+      }
+    },
+    "CXSetGroupCallAction": {
+      "-initWithCallUUID:callUUIDToGroupWith:": {
+        "doc": "Initializes a new action for a call identified by a given UUID, as well as a call to group with identified by another UUID.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetgroupcallaction/init(call:calluuidtogroupwith:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new action to group calls with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetgroupcallaction/init(coder:)"
+      }
+    },
+    "CXSetHeldCallAction": {
+      "-initWithCallUUID:onHold:": {
+        "doc": "Initializes a new action for a call identified by a given UUID, as well as whether the call is on hold.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetheldcallaction/init(call:onhold:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new action to place a call on hold with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetheldcallaction/init(coder:)"
+      }
+    },
+    "CXSetMutedCallAction": {
+      "-initWithCallUUID:muted:": {
+        "doc": "Initializes a new action for a call identified by a given UUID, as well as whether the call is muted.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetmutedcallaction/init(call:muted:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new action for a call with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetmutedcallaction/init(coder:)"
+      }
+    },
+    "CXStartCallAction": {
+      "-fulfillWithDateStarted:": {
+        "doc": "Reports the successful execution of the action at the specified time.",
+        "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction/fulfill(withdatestarted:)"
+      },
+      "-initWithCallUUID:handle:": {
+        "doc": "Initializes a new action to start a call with the specified UUID to a recipient with the specified handle.",
+        "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction/init(call:handle:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates a new action to start a call with data in an unarchiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction/init(coder:)"
+      }
+    },
+    "CXTransaction": {
+      "-addAction:": {
+        "doc": "Adds the specified action to the transaction.",
+        "url": "https://developer.apple.com/documentation/callkit/cxtransaction/addaction(_:)"
+      },
+      "-initWithAction:": {
+        "doc": "Initializes a new transaction with the specified action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxtransaction/init(action:)"
+      },
+      "-initWithActions:": {
+        "doc": "Initializes a new transaction with the specified actions.",
+        "url": "https://developer.apple.com/documentation/callkit/cxtransaction/init(actions:)"
+      }
+    }
+  },
+  "properties": {
+    "CXAction": {
+      "UUID": {
+        "doc": "The unique identifier for the action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/uuid"
+      },
+      "complete": {
+        "doc": "A Boolean value that indicates whether the action has been performed by the provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/iscomplete"
+      },
+      "timeoutDate": {
+        "doc": "The time after which the action cannot be completed.",
+        "url": "https://developer.apple.com/documentation/callkit/cxaction/timeoutdate"
+      }
+    },
+    "CXCall": {
+      "UUID": {
+        "doc": "The unique identifier for the call.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcall/uuid"
+      },
+      "hasConnected": {
+        "doc": "A Boolean value that indicates whether the call has connected.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcall/hasconnected"
+      },
+      "hasEnded": {
+        "doc": "A Boolean value that indicates whether the call has ended.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcall/hasended"
+      },
+      "onHold": {
+        "doc": "A Boolean value that indicates whether the call is on hold.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcall/isonhold"
+      },
+      "outgoing": {
+        "doc": "A Boolean value that indicates whether the call is outgoing.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcall/isoutgoing"
+      }
+    },
+    "CXCallAction": {
+      "callUUID": {
+        "doc": "The unique identifier for the call associated with the action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallaction/calluuid"
+      }
+    },
+    "CXCallController": {
+      "callObserver": {
+        "doc": "Returns an observer for active calls.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallcontroller/callobserver"
+      }
+    },
+    "CXCallDirectoryExtensionContext": {
+      "delegate": {
+        "doc": "Sets a delegate that can handle request failures for the Call Directory extension context object.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/delegate"
+      },
+      "incremental": {
+        "doc": "A Boolean value that indicates whether the request provides data incrementally.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectoryextensioncontext/isincremental"
+      }
+    },
+    "CXCallDirectoryManager": {
+      "CXCallDirectoryEnabledStatus": {
+        "doc": "The enabled status of a Call Directory app extension, as reported by the getEnabledStatusForExtensionWithIdentifier:completionHandler: method.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectorymanager/enabledstatus"
+      },
+      "sharedInstance": {
+        "doc": "Returns the shared call directory manager instance for the app.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcalldirectorymanager/sharedinstance"
+      }
+    },
+    "CXCallObserver": {
+      "calls": {
+        "doc": "Returns the active calls of the telephony provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallobserver/calls"
+      }
+    },
+    "CXCallUpdate": {
+      "hasVideo": {
+        "doc": "A Boolean value that indicates whether the call includes video in addition to audio.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/hasvideo"
+      },
+      "localizedCallerName": {
+        "doc": "The localized name of the caller.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/localizedcallername"
+      },
+      "remoteHandle": {
+        "doc": "The handle for the remote party (for an incoming call, this is the caller; for an outgoing call, this is the callee).",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/remotehandle"
+      },
+      "supportsDTMF": {
+        "doc": "A Boolean value that indicates whether the call can send DTMF (dual tone multifrequency) tones via hard pause digits or in-call keypad entries.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/supportsdtmf"
+      },
+      "supportsGrouping": {
+        "doc": "A Boolean value that indicates whether the call can be grouped with other calls.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/supportsgrouping"
+      },
+      "supportsHolding": {
+        "doc": "A Boolean value that indicates whether the call can be placed on hold or removed from hold.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/supportsholding"
+      },
+      "supportsUngrouping": {
+        "doc": "A Boolean value that indicates whether the call can be ungrouped from other calls.",
+        "url": "https://developer.apple.com/documentation/callkit/cxcallupdate/supportsungrouping"
+      }
+    },
+    "CXHandle": {
+      "CXHandleType": {
+        "doc": "The possible types of handles.",
+        "url": "https://developer.apple.com/documentation/callkit/cxhandle/handletype"
+      },
+      "type": {
+        "doc": "The type of the handle.",
+        "url": "https://developer.apple.com/documentation/callkit/cxhandle/type"
+      },
+      "value": {
+        "doc": "The value of the handle.",
+        "url": "https://developer.apple.com/documentation/callkit/cxhandle/value"
+      }
+    },
+    "CXPlayDTMFCallAction": {
+      "CXPlayDTMFCallActionType": {
+        "doc": "The types of events that generate dial tones.",
+        "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallaction/actiontype"
+      },
+      "digits": {
+        "doc": "The digits tapped by the user into the in-call keypad or included in the dial string.",
+        "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallaction/digits"
+      },
+      "type": {
+        "doc": "The type of the call action.",
+        "url": "https://developer.apple.com/documentation/callkit/cxplaydtmfcallaction/type"
+      }
+    },
+    "CXProvider": {
+      "configuration": {
+        "doc": "The configuration of the provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/configuration"
+      },
+      "pendingTransactions": {
+        "doc": "Incomplete transactions.",
+        "url": "https://developer.apple.com/documentation/callkit/cxprovider/pendingtransactions"
+      }
+    },
+    "CXProviderConfiguration": {
+      "iconTemplateImageData": {
+        "doc": "The PNG data for the icon image to be displayed for the provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/icontemplateimagedata"
+      },
+      "includesCallsInRecents": {
+        "doc": "A Boolean value that indicates whether the provider includes a call in the system’s Recents list after the call ends.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/includescallsinrecents"
+      },
+      "localizedName": {
+        "doc": "The localized name of the provider.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/localizedname"
+      },
+      "maximumCallGroups": {
+        "doc": "The maximum number of call groups.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/maximumcallgroups"
+      },
+      "maximumCallsPerCallGroup": {
+        "doc": "The maximum number of calls per call group.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/maximumcallspercallgroup"
+      },
+      "ringtoneSound": {
+        "doc": "The name of the sound resource in the app bundle to be used for the provider ringtone.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/ringtonesound"
+      },
+      "supportedHandleTypes": {
+        "doc": "The supported handle types.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/supportedhandletypes-995uh"
+      },
+      "supportsVideo": {
+        "doc": "A Boolean value that indicates whether the provider supports video in addition to audio.",
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/supportsvideo"
+      }
+    },
+    "CXSetGroupCallAction": {
+      "callUUIDToGroupWith": {
+        "doc": "The unique identifier of the call to be grouped with the call associated with the receiver.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetgroupcallaction/calluuidtogroupwith"
+      }
+    },
+    "CXSetHeldCallAction": {
+      "onHold": {
+        "doc": "A Boolean value that indicates whether the call is placed on hold.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetheldcallaction/isonhold"
+      }
+    },
+    "CXSetMutedCallAction": {
+      "muted": {
+        "doc": "A Boolean value that indicates whether the call is muted.",
+        "url": "https://developer.apple.com/documentation/callkit/cxsetmutedcallaction/ismuted"
+      }
+    },
+    "CXStartCallAction": {
+      "contactIdentifier": {
+        "doc": "The identifier for the call recipient.",
+        "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction/contactidentifier"
+      },
+      "handle": {
+        "doc": "The handle of the call recipient.",
+        "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction/handle"
+      },
+      "video": {
+        "doc": "A Boolean value that indicates whether the call is a video call.",
+        "url": "https://developer.apple.com/documentation/callkit/cxstartcallaction/isvideo"
+      }
+    },
+    "CXTransaction": {
+      "UUID": {
+        "doc": "The unique identifier of the transaction.",
+        "url": "https://developer.apple.com/documentation/callkit/cxtransaction/uuid"
+      },
+      "actions": {
+        "doc": "The actions added to a transaction.",
+        "url": "https://developer.apple.com/documentation/callkit/cxtransaction/actions"
+      },
+      "complete": {
+        "doc": "A Boolean value that indicates whether the transaction has been completed.",
+        "url": "https://developer.apple.com/documentation/callkit/cxtransaction/iscomplete"
+      }
+    }
+  }
+}

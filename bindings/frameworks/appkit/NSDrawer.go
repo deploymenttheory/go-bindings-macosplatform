@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A user interface element that contains and displays text, scroll, and browser views, in addition to other view subclasses.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdrawer
 // Deprecated: Drawers are deprecated; consider using NSSplitViewController
 type NSDrawer struct {
@@ -56,6 +58,7 @@ func NSDrawerFromID(id objc.ID) *NSDrawer {
 	return o
 }
 
+// Creates a new drawer with the given size on the specified edge of the parent window.
 // Deprecated: Drawers are deprecated; consider using NSSplitViewController
 func (o *NSDrawer) InitWithContentSizePreferredEdge(contentSize corefoundation.CGSize, edge foundation.NSRectEdge) *NSDrawer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelInitWithContentSizePreferredEdge, contentSize, edge)
@@ -65,26 +68,32 @@ func (o *NSDrawer) InitWithContentSizePreferredEdge(contentSize corefoundation.C
 	return NSDrawerFromID(_ret)
 }
 
+// If the receiver is closed, this method opens it.
 func (o *NSDrawer) Open() {
 	o.Ptr().Send(_nSDrawerSelOpen)
 }
 
+// Causes the receiver to open on the specified edge of the parent window.
 func (o *NSDrawer) OpenOnEdge(edge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSDrawerSelOpenOnEdge, edge)
 }
 
+// If the receiver is open, this method closes it.
 func (o *NSDrawer) Close() {
 	o.Ptr().Send(_nSDrawerSelClose)
 }
 
+// An action method to open the drawer.
 func (o *NSDrawer) Open2(sender objc.ID) {
 	o.Ptr().Send(_nSDrawerSelOpen, sender)
 }
 
+// An action method to close the receiver.
 func (o *NSDrawer) Close2(sender objc.ID) {
 	o.Ptr().Send(_nSDrawerSelClose, sender)
 }
 
+// Toggles the drawer open or closed.
 func (o *NSDrawer) Toggle(sender objc.ID) {
 	o.Ptr().Send(_nSDrawerSelToggle, sender)
 }

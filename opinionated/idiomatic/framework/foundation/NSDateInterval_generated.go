@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing the span of time between a specific start date and end date.
+//
 // DateInterval wraps [raw.NSDateInterval] with a fluent Go API.
 type DateInterval struct {
 	inner *raw.NSDateInterval
@@ -35,6 +37,8 @@ func NewDateInterval() *DateInterval {
 	return &DateInterval{inner: raw.NSDateIntervalFromID(_id)}
 }
 
+// Returns a date interval initialized from data in the given unarchiver.
+//
 // NewDateIntervalWithCoder creates a new [DateInterval].
 func NewDateIntervalWithCoder(coder *raw.NSCoder) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDateInterval")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewDateIntervalWithCoder(coder *raw.NSCoder) *DateInterval {
 	return &DateInterval{inner: raw.NSDateIntervalFromID(_id)}
 }
 
+// Initializes a date interval with a given start date and duration.
+//
 // NewDateIntervalWithStartDateDuration creates a new [DateInterval].
 func NewDateIntervalWithStartDateDuration(startDate *raw.NSDate, duration float64) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDateInterval")), objc.RegisterName("alloc"))
@@ -49,6 +55,8 @@ func NewDateIntervalWithStartDateDuration(startDate *raw.NSDate, duration float6
 	return &DateInterval{inner: raw.NSDateIntervalFromID(_id)}
 }
 
+// Initializes a date interval from a given start date and end date.
+//
 // NewDateIntervalWithStartDateEndDate creates a new [DateInterval].
 func NewDateIntervalWithStartDateEndDate(startDate *raw.NSDate, endDate *raw.NSDate) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDateInterval")), objc.RegisterName("alloc"))
@@ -62,21 +70,29 @@ func (x *DateInterval) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Compares the receiver with the specified date interval.
+//
 // Compare calls the underlying Compare.
 func (x *DateInterval) Compare(dateInterval *raw.NSDateInterval) NSComparisonResult {
 	return NSComparisonResult(x.inner.Compare(dateInterval))
 }
 
+// Indicates whether the receiver is equal to the specified date interval.
+//
 // IsEqualToDateInterval calls the underlying IsEqualToDateInterval.
 func (x *DateInterval) IsEqualToDateInterval(dateInterval *raw.NSDateInterval) bool {
 	return x.inner.IsEqualToDateInterval(dateInterval)
 }
 
+// Indicates whether the receiver intersects with the specified date interval.
+//
 // IntersectsDateInterval calls the underlying IntersectsDateInterval.
 func (x *DateInterval) IntersectsDateInterval(dateInterval *raw.NSDateInterval) bool {
 	return x.inner.IntersectsDateInterval(dateInterval)
 }
 
+// Returns the intersection between the receiver and the specified date interval.
+//
 // IntersectionWithDateInterval calls the underlying IntersectionWithDateInterval.
 func (x *DateInterval) IntersectionWithDateInterval(dateInterval *raw.NSDateInterval) *DateInterval {
 	_r := x.inner.IntersectionWithDateInterval(dateInterval)
@@ -86,6 +102,8 @@ func (x *DateInterval) IntersectionWithDateInterval(dateInterval *raw.NSDateInte
 	return &DateInterval{inner: _r}
 }
 
+// Indicates whether the receiver contains the specified date.
+//
 // ContainsDate calls the underlying ContainsDate.
 func (x *DateInterval) ContainsDate(date *raw.NSDate) bool {
 	return x.inner.ContainsDate(date)

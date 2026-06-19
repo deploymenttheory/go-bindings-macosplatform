@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract data class for a metric.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetric
 type MXMetric struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func MXMetricFromID(id objc.ID) *MXMetric {
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this metric. @result        An NSData object containing the JSON representation
+// Returns the contents of the metric in JSON format.
 func (o *MXMetric) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricSelJSONRepresentation)
 	if _ret != 0 {
@@ -40,8 +42,11 @@ func (o *MXMetric) JSONRepresentation() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this metric. @result        An NSDictionary object containing the dictionary representation
+// Returns the contents of a metric as a dictionary.
 func (o *MXMetric) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXMetricSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

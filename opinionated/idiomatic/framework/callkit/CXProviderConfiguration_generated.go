@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of the configuration of a provider object.
+//
 // ProviderConfiguration wraps [raw.CXProviderConfiguration] with a fluent Go API.
 type ProviderConfiguration struct {
 	inner *raw.CXProviderConfiguration
@@ -37,6 +39,8 @@ func NewProviderConfiguration() *ProviderConfiguration {
 	return &ProviderConfiguration{inner: raw.CXProviderConfigurationFromID(_id)}
 }
 
+// Initializes a configuration with the specified localized name.
+//
 // NewProviderConfigurationWithLocalizedName creates a new [ProviderConfiguration].
 func NewProviderConfigurationWithLocalizedName(localizedName string) *ProviderConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CXProviderConfiguration")), objc.RegisterName("alloc"))
@@ -44,7 +48,7 @@ func NewProviderConfigurationWithLocalizedName(localizedName string) *ProviderCo
 	return &ProviderConfiguration{inner: raw.CXProviderConfigurationFromID(_id)}
 }
 
-// Name of resource in app's bundle to play as ringtone for incoming call
+// The name of the sound resource in the app bundle to be used for the provider ringtone.
 //
 // WithRingtoneSound sets the ringtoneSound property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithRingtoneSound(ringtoneSound string) *ProviderConfiguration {
@@ -52,25 +56,31 @@ func (x *ProviderConfiguration) WithRingtoneSound(ringtoneSound string) *Provide
 	return x
 }
 
+// The PNG data for the icon image to be displayed for the provider.
+//
 // WithIconTemplateImageData sets the iconTemplateImageData property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithIconTemplateImageData(iconTemplateImageData *foundation.NSData) *ProviderConfiguration {
 	x.inner.SetIconTemplateImageData(iconTemplateImageData)
 	return x
 }
 
+// The maximum number of call groups.
+//
 // WithMaximumCallGroups sets the maximumCallGroups property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithMaximumCallGroups(maximumCallGroups uint) *ProviderConfiguration {
 	x.inner.SetMaximumCallGroups(maximumCallGroups)
 	return x
 }
 
+// The maximum number of calls per call group.
+//
 // WithMaximumCallsPerCallGroup sets the maximumCallsPerCallGroup property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithMaximumCallsPerCallGroup(maximumCallsPerCallGroup uint) *ProviderConfiguration {
 	x.inner.SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup)
 	return x
 }
 
-// Whether this provider's calls should be included in the system's Recents list at the end of each call. Default: YES
+// A Boolean value that indicates whether the provider includes a call in the system’s Recents list after the call ends.
 //
 // WithIncludesCallsInRecents sets the includesCallsInRecents property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithIncludesCallsInRecents(includesCallsInRecents bool) *ProviderConfiguration {
@@ -78,6 +88,8 @@ func (x *ProviderConfiguration) WithIncludesCallsInRecents(includesCallsInRecent
 	return x
 }
 
+// A Boolean value that indicates whether the provider supports video in addition to audio.
+//
 // WithSupportsVideo sets the supportsVideo property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithSupportsVideo(supportsVideo bool) *ProviderConfiguration {
 	x.inner.SetSupportsVideo(supportsVideo)
@@ -90,6 +102,8 @@ func (x *ProviderConfiguration) WithSupportsAudioTranslation(supportsAudioTransl
 	return x
 }
 
+// The supported handle types.
+//
 // WithSupportedHandleTypes sets the supportedHandleTypes property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes *foundation.NSSet[*foundation.NSNumber]) *ProviderConfiguration {
 	x.inner.SetSupportedHandleTypes(supportedHandleTypes)

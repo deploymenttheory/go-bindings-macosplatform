@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The details of your app-specific content that someone might search for on their devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cssearchableitem
 type CSSearchableItem struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func CSSearchableItemFromID(id objc.ID) *CSSearchableItem {
 	return o
 }
 
+// Returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
 func (o *CSSearchableItem) InitWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIdentifier *foundation.NSString, domainIdentifier *foundation.NSString, attributeSet *CSSearchableItemAttributeSet) *CSSearchableItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableItemSelInitWithUniqueIdentifierDomainIdentifierAttributeSet, uniqueIdentifier.Ptr(), domainIdentifier.Ptr(), attributeSet.Ptr())
 	if _ret != 0 {
@@ -51,6 +54,7 @@ func (o *CSSearchableItem) InitWithUniqueIdentifierDomainIdentifierAttributeSet(
 	return CSSearchableItemFromID(_ret)
 }
 
+// Compares two items by rank and returns the result.
 func (o *CSSearchableItem) CompareByRank(other *CSSearchableItem) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _cSSearchableItemSelCompareByRank, other.Ptr())
 	return _ret

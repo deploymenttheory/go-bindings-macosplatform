@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel
+// A representation of a fully connected convolution layer with binary weights and optionally binarized input image.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryfullyconnectednode
 type MPSCNNBinaryFullyConnectedNode struct {

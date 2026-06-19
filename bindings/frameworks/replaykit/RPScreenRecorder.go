@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class RPScreenRecorder @abstract Singleton class used to control app recording.
+// The shared recorder object that provides the ability to record audio and video of your app.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpscreenrecorder
 type RPScreenRecorder struct {
@@ -55,6 +55,7 @@ func RPScreenRecorderFromID(id objc.ID) *RPScreenRecorder {
 	return o
 }
 
+// Returns an app’s instance of the shared screen recorder.
 func RPScreenRecorderSharedRecorder() *RPScreenRecorder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsRPScreenRecorder), _rPScreenRecorderSelSharedRecorder)
 	if _ret != 0 {
@@ -63,7 +64,7 @@ func RPScreenRecorderSharedRecorder() *RPScreenRecorder {
 	return RPScreenRecorderFromID(_ret)
 }
 
-// @abstract Starts app recording with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called after user interactions are complete. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting the recording.
+// Starts recording the app display.
 func (o *RPScreenRecorder) StartRecordingWithHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -75,7 +76,7 @@ func (o *RPScreenRecorder) StartRecordingWithHandler(handler func(unsafe.Pointer
 	o.Ptr().Send(_rPScreenRecorderSelStartRecordingWithHandler, __block_handler)
 }
 
-// @abstract Stops app recording with a completion handler. @discussion handler Called when the movie is ready. Will return an instance of RPPreviewViewController on success which should be presented using [UIViewController presentViewController:animated:completion:]. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the recording.
+// Stops the current recording.
 func (o *RPScreenRecorder) StopRecordingWithHandler(handler func(*RPPreviewViewController, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -90,7 +91,7 @@ func (o *RPScreenRecorder) StopRecordingWithHandler(handler func(*RPPreviewViewC
 	o.Ptr().Send(_rPScreenRecorderSelStopRecordingWithHandler, __block_handler)
 }
 
-// @abstract Stops app recording with output URL and completion handler. @param url Output URL for app recording movie. @discussion handler Called when  movie is written to specified output URL. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the recording and writing the output URL.
+// Stops the current recording and writes the movie to the specified output URL.
 func (o *RPScreenRecorder) StopRecordingWithOutputURLCompletionHandler(url *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -102,7 +103,7 @@ func (o *RPScreenRecorder) StopRecordingWithOutputURLCompletionHandler(url *foun
 	o.Ptr().Send(_rPScreenRecorderSelStopRecordingWithOutputURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
-// @abstract Discards the current recording. This can only be called after the handler block in stopRecordingWithHandler: is executed.
+// Discards the current recording.
 func (o *RPScreenRecorder) DiscardRecordingWithHandler(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -114,7 +115,7 @@ func (o *RPScreenRecorder) DiscardRecordingWithHandler(handler func()) {
 	o.Ptr().Send(_rPScreenRecorderSelDiscardRecordingWithHandler, __block_handler)
 }
 
-// @abstract Starts screen and audio capture and continually calls the supplied handler with the current sampleBuffer and bufferType and passed it back to the application. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called continually with sampleBuffers and the bufferType. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting the capture.
+// Starts screen and audio capture.
 func (o *RPScreenRecorder) StartCaptureWithHandlerCompletionHandler(captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer), completionHandler func(unsafe.Pointer)) {
 	var __block_captureHandler objc.Block
 	if captureHandler != nil {
@@ -133,7 +134,7 @@ func (o *RPScreenRecorder) StartCaptureWithHandlerCompletionHandler(captureHandl
 	o.Ptr().Send(_rPScreenRecorderSelStartCaptureWithHandlerCompletionHandler, __block_captureHandler, __block_completionHandler)
 }
 
-// @abstract Stops screen capture with a completion handler @discussion handler Called after the screen capture has stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the capture
+// Stops screen capture
 func (o *RPScreenRecorder) StopCaptureWithHandler(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -145,7 +146,7 @@ func (o *RPScreenRecorder) StopCaptureWithHandler(handler func(unsafe.Pointer)) 
 	o.Ptr().Send(_rPScreenRecorderSelStopCaptureWithHandler, __block_handler)
 }
 
-// @abstract Start clip recording buffering with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called after clip recording is started. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting clip record buffering.
+// Starts buffering a clip recording.
 func (o *RPScreenRecorder) StartClipBufferingWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -157,7 +158,7 @@ func (o *RPScreenRecorder) StartClipBufferingWithCompletionHandler(completionHan
 	o.Ptr().Send(_rPScreenRecorderSelStartClipBufferingWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract Stop clip recording buffering with a completion handler. @discussion handler Called after clip recording session is stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping clip record buffering.
+// Stops buffering a clip recording.
 func (o *RPScreenRecorder) StopClipBufferingWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -169,7 +170,7 @@ func (o *RPScreenRecorder) StopClipBufferingWithCompletionHandler(completionHand
 	o.Ptr().Send(_rPScreenRecorderSelStopClipBufferingWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract Exports clip recording @param url URL containing absolute path for where to save the clip @param duration Length of time in seconds for clip recording, capped at either the elapsed time, or a maximum of 15 seconds, depending on which is the shorter amount of time @discussion Must be called after startClipBufferingWithCompletionHandler:, otherwise this will return an error. Exports clip recording from newest samples in buffer for duration. handler Will be called after asset is finished writing to output path. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue generating the clip recording.
+// Exports a clip recording to a file.
 func (o *RPScreenRecorder) ExportClipToURLDurationCompletionHandler(url *foundation.NSURL, duration float64, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

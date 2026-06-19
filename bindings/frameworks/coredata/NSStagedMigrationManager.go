@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that handles the migration event loop and provides access to the migrating persistent store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsstagedmigrationmanager
 type NSStagedMigrationManager struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func NSStagedMigrationManagerFromID(id objc.ID) *NSStagedMigrationManager {
 	return o
 }
 
+// Creates a migration manager with the specified stages.
 func (o *NSStagedMigrationManager) InitWithMigrationStages(stages *foundation.NSArray[*NSMigrationStage]) *NSStagedMigrationManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStagedMigrationManagerSelInitWithMigrationStages, stages.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to fetch or purge persistent history.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest
 type NSPersistentHistoryChangeRequest struct {
 	NSPersistentStoreRequest
@@ -41,6 +43,7 @@ func NSPersistentHistoryChangeRequestFromID(id objc.ID) *NSPersistentHistoryChan
 	return o
 }
 
+// Retrieves history since a given date.
 func NSPersistentHistoryChangeRequestFetchHistoryAfterDate(date *foundation.NSDate) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryAfterDate, date.Ptr())
 	if _ret != 0 {
@@ -49,6 +52,7 @@ func NSPersistentHistoryChangeRequestFetchHistoryAfterDate(date *foundation.NSDa
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
+// Retrieves the request history after a given token.
 func NSPersistentHistoryChangeRequestFetchHistoryAfterToken(token *NSPersistentHistoryToken) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryAfterToken, token.Ptr())
 	if _ret != 0 {
@@ -57,6 +61,7 @@ func NSPersistentHistoryChangeRequestFetchHistoryAfterToken(token *NSPersistentH
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
+// Retrieves history since a given transaction.
 func NSPersistentHistoryChangeRequestFetchHistoryAfterTransaction(transaction *NSPersistentHistoryTransaction) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryAfterTransaction, transaction.Ptr())
 	if _ret != 0 {
@@ -65,14 +70,16 @@ func NSPersistentHistoryChangeRequestFetchHistoryAfterTransaction(transaction *N
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
+// Retrieves history based on a fetch request.
 func NSPersistentHistoryChangeRequestFetchHistoryWithFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) *NSPersistentHistoryChangeRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryWithFetchRequest, fetchRequest)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryWithFetchRequest, fetchRequest.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
+// Purges history older than a given date.
 func NSPersistentHistoryChangeRequestDeleteHistoryBeforeDate(date *foundation.NSDate) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeDate, date.Ptr())
 	if _ret != 0 {
@@ -81,6 +88,7 @@ func NSPersistentHistoryChangeRequestDeleteHistoryBeforeDate(date *foundation.NS
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
+// Purges history older than that defined by a given token.
 func NSPersistentHistoryChangeRequestDeleteHistoryBeforeToken(token *NSPersistentHistoryToken) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeToken, token.Ptr())
 	if _ret != 0 {
@@ -89,6 +97,7 @@ func NSPersistentHistoryChangeRequestDeleteHistoryBeforeToken(token *NSPersisten
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
+// Purges history older than a given transaction.
 func NSPersistentHistoryChangeRequestDeleteHistoryBeforeTransaction(transaction *NSPersistentHistoryTransaction) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeTransaction, transaction.Ptr())
 	if _ret != 0 {
@@ -115,10 +124,13 @@ func (o *NSPersistentHistoryChangeRequest) Token() *NSPersistentHistoryToken {
 }
 
 func (o *NSPersistentHistoryChangeRequest) FetchRequest() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](o.Ptr(), _nSPersistentHistoryChangeRequestSelFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryChangeRequestSelFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSPersistentHistoryChangeRequest) SetFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) {
-	o.Ptr().Send(_nSPersistentHistoryChangeRequestSelSetFetchRequest, fetchRequest)
+	o.Ptr().Send(_nSPersistentHistoryChangeRequestSelSetFetchRequest, fetchRequest.Ptr())
 }

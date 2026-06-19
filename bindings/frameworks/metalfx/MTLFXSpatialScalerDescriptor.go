@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of properties that configure a spatial scaling effect, and a factory method that creates the effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor
 type MTLFXSpatialScalerDescriptor struct {
 	foundation.NSObject
@@ -48,25 +50,25 @@ func MTLFXSpatialScalerDescriptorFromID(id objc.ID) *MTLFXSpatialScalerDescripto
 	return o
 }
 
-// Creates a spatial scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the spatial scaler. - Returns: A new spatial scaler instance upon success, or `nil` otherwise.
+// Creates a spatial scaler instance from this descriptor’s current property values.
 func (o *MTLFXSpatialScalerDescriptor) NewSpatialScalerWithDevice(device metal.MTLDevice) MTLFXSpatialScaler {
 	_ret := objc.Send[MTLFXSpatialScaler](o.Ptr(), _mTLFXSpatialScalerDescriptorSelNewSpatialScalerWithDevice, device)
 	return _ret
 }
 
-// Creates a spatial scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the spatial scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new spatial scaler instance upon success, or `nil` otherwise.
+// Creates a spatial scaler instance for a Metal device.
 func (o *MTLFXSpatialScalerDescriptor) NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) MTL4FXSpatialScaler {
 	_ret := objc.Send[MTL4FXSpatialScaler](o.Ptr(), _mTLFXSpatialScalerDescriptorSelNewSpatialScalerWithDeviceCompiler, device, compiler)
 	return _ret
 }
 
-// Queries whether a Metal device supports spatial scaling compatible with Metal 4. - Parameters: - device: The GPU device for which this methods tests support. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports spatial scaling with Metal 4, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Queries whether a Metal device supports spatial scaling compatible with Metal 4.
 func MTLFXSpatialScalerDescriptorSupportsMetal4FX(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXSpatialScalerDescriptor), _mTLFXSpatialScalerDescriptorSelSupportsMetal4FX, device)
 	return _ret
 }
 
-// Returns a Boolean value that indicates whether the spatial scaler works with a GPU. - Parameters: - device: An “MTLDevice“ instance that represents a GPU. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports spatial scaling, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Returns a Boolean value that indicates whether the spatial scaler works with a GPU.
 func MTLFXSpatialScalerDescriptorSupportsDevice(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXSpatialScalerDescriptor), _mTLFXSpatialScalerDescriptorSelSupportsDevice, device)
 	return _ret

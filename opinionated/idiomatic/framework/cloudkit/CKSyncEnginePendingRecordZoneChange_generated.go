@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an unsent record modification.
+//
 // SyncEnginePendingRecordZoneChange wraps [raw.CKSyncEnginePendingRecordZoneChange] with a fluent Go API.
 type SyncEnginePendingRecordZoneChange struct {
 	inner *raw.CKSyncEnginePendingRecordZoneChange
@@ -31,7 +33,7 @@ func SyncEnginePendingRecordZoneChangeFromID(id objc.ID) *SyncEnginePendingRecor
 	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(id)}
 }
 
-// Creates a record zone change of the specified type for the given record. - Parameters: - recordID: The identifier of the record to change. - type: The type of change to make. - Returns: An initialized record zone change.
+// Creates a record zone change of the specified type for the given record.
 //
 // NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a new [SyncEnginePendingRecordZoneChange].
 func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecordID, type_ CKSyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {

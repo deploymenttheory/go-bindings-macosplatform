@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that decodes GeoJSON objects into MapKit types.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkgeojsondecoder
 type MKGeoJSONDecoder struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func MKGeoJSONDecoderFromID(id objc.ID) *MKGeoJSONDecoder {
 	return o
 }
 
+// Decodes the provided data into native MapKit types that a map can display.
 func (o *MKGeoJSONDecoder) GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[MKGeoJSONObject], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKGeoJSONDecoderSelGeoJSONObjectsWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))

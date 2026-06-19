@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An open polygon overlay consisting of one or more connected line segments.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpolyline
 type MKPolyline struct {
 	MKMultiPoint
@@ -32,6 +34,7 @@ func MKPolylineFromID(id objc.ID) *MKPolyline {
 	return o
 }
 
+// Creates a polyline object from the specified set of map points.
 func MKPolylinePolylineWithPointsCount(points *MKMapPoint, count uint) *MKPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolyline), _mKPolylineSelPolylineWithPointsCount, points, count)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func MKPolylinePolylineWithPointsCount(points *MKMapPoint, count uint) *MKPolyli
 	return MKPolylineFromID(_ret)
 }
 
+// Creates a polyline object from the specified set of coordinates.
 func MKPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count uint) *MKPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolyline), _mKPolylineSelPolylineWithCoordinatesCount, coords, count)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation of one of your annotation objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkannotationview
 type MKAnnotationView struct {
 	appkit.NSView
@@ -80,6 +82,7 @@ func MKAnnotationViewFromID(id objc.ID) *MKAnnotationView {
 	return o
 }
 
+// Creates and returns a new annotation view.
 func (o *MKAnnotationView) InitWithAnnotationReuseIdentifier(annotation MKAnnotation, reuseIdentifier *foundation.NSString) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithAnnotationReuseIdentifier, annotation, reuseIdentifier.Ptr())
 	if _ret != 0 {
@@ -88,6 +91,7 @@ func (o *MKAnnotationView) InitWithAnnotationReuseIdentifier(annotation MKAnnota
 	return MKAnnotationViewFromID(_ret)
 }
 
+// Creates an annotation view using data from the specified unarchiver.
 func (o *MKAnnotationView) InitWithCoder(aDecoder *foundation.NSCoder) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -96,14 +100,17 @@ func (o *MKAnnotationView) InitWithCoder(aDecoder *foundation.NSCoder) *MKAnnota
 	return MKAnnotationViewFromID(_ret)
 }
 
+// Notifies the annotation view that the map view is about to display it.
 func (o *MKAnnotationView) PrepareForDisplay() {
 	o.Ptr().Send(_mKAnnotationViewSelPrepareForDisplay)
 }
 
+// Sets the selection state of the annotation view.
 func (o *MKAnnotationView) SetSelectedAnimated(selected bool, animated bool) {
 	o.Ptr().Send(_mKAnnotationViewSelSetSelectedAnimated, selected, animated)
 }
 
+// Sets the drag state for the annotation view.
 func (o *MKAnnotationView) SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool) {
 	o.Ptr().Send(_mKAnnotationViewSelSetDragStateAnimated, newDragState, animated)
 }

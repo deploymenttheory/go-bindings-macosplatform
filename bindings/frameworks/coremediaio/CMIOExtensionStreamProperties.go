@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the properties of an extension stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties
 type CMIOExtensionStreamProperties struct {
 	foundation.NSObject
@@ -48,27 +50,27 @@ func CMIOExtensionStreamPropertiesFromID(id objc.ID) *CMIOExtensionStreamPropert
 	return o
 }
 
-// @method streamPropertiesWithDictionary: @abstract Return a stream properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionStreamProperties instance.
+// Returns a new properties object that provides the specified properties and default states.
 func CMIOExtensionStreamPropertiesStreamPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionStreamProperties {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStreamProperties), _cMIOExtensionStreamPropertiesSelStreamPropertiesWithDictionary, propertiesDictionary)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStreamProperties), _cMIOExtensionStreamPropertiesSelStreamPropertiesWithDictionary, propertiesDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CMIOExtensionStreamPropertiesFromID(_ret)
 }
 
-// @method initWithDictionary: @abstract Initialize a stream properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionStreamProperties instance.
+// Creates a properties object that provides the specified properties and default states.
 func (o *CMIOExtensionStreamProperties) InitWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionStreamProperties {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelInitWithDictionary, propertiesDictionary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelInitWithDictionary, propertiesDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CMIOExtensionStreamPropertiesFromID(_ret)
 }
 
-// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+// Sets the state of the specified property.
 func (o *CMIOExtensionStreamProperties) SetPropertyStateForProperty(propertyState *CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
-	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetPropertyStateForProperty, propertyState, property.Ptr())
+	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetPropertyStateForProperty, propertyState.Ptr(), property.Ptr())
 }
 
 // @property activeFormatIndex @abstract The active format index. @discussion The property key is CMIOExtensionPropertyStreamActiveFormatIndex.
@@ -86,22 +88,28 @@ func (o *CMIOExtensionStreamProperties) SetActiveFormatIndex(activeFormatIndex *
 
 // @property frameDuration @abstract The frame duration. @discussion The property key is CMIOExtensionPropertyStreamFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
 func (o *CMIOExtensionStreamProperties) FrameDuration() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cMIOExtensionStreamPropertiesSelFrameDuration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelFrameDuration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *CMIOExtensionStreamProperties) SetFrameDuration(frameDuration *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetFrameDuration, frameDuration)
+	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetFrameDuration, frameDuration.Ptr())
 }
 
 // @property maxFrameDuration @abstract The maximum frame duration. @discussion The property key is CMIOExtensionPropertyStreamMaxFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
 func (o *CMIOExtensionStreamProperties) MaxFrameDuration() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cMIOExtensionStreamPropertiesSelMaxFrameDuration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelMaxFrameDuration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *CMIOExtensionStreamProperties) SetMaxFrameDuration(maxFrameDuration *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetMaxFrameDuration, maxFrameDuration)
+	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetMaxFrameDuration, maxFrameDuration.Ptr())
 }
 
 // @property sinkBufferQueueSize @abstract The sink stream property buffer queue size. @discussion The property key is CMIOExtensionPropertyStreamSinkBufferQueueSize.
@@ -158,10 +166,13 @@ func (o *CMIOExtensionStreamProperties) SetSinkEndOfData(sinkEndOfData *foundati
 
 // @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
 func (o *CMIOExtensionStreamProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cMIOExtensionStreamPropertiesSelPropertiesDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelPropertiesDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *CMIOExtensionStreamProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetPropertiesDictionary, propertiesDictionary)
+	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetPropertiesDictionary, propertiesDictionary.Ptr())
 }

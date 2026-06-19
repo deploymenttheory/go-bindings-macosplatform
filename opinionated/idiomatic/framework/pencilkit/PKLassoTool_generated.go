@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tool for selecting stroked lines and shapes in a canvas view.
+//
 // LassoTool wraps [raw.PKLassoTool] with a fluent Go API.
 type LassoTool struct {
 	inner *raw.PKLassoTool

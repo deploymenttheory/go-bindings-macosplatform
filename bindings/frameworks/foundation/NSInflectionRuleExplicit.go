@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An inflection rule that uses a morphology instance to determine how to inflect attribued strings.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsinflectionruleexplicit
 type NSInflectionRuleExplicit struct {
 	NSInflectionRule
@@ -30,6 +32,7 @@ func NSInflectionRuleExplicitFromID(id objc.ID) *NSInflectionRuleExplicit {
 	return o
 }
 
+// Creates an inflection rule with the given morphology.
 func (o *NSInflectionRuleExplicit) InitWithMorphology(morphology *NSMorphology) *NSInflectionRuleExplicit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInflectionRuleExplicitSelInitWithMorphology, morphology.Ptr())
 	if _ret != 0 {

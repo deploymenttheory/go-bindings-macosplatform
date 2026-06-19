@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties for creating a compiler context.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4compilerdescriptor
 type MTL4CompilerDescriptor struct {
 	foundation.NSObject

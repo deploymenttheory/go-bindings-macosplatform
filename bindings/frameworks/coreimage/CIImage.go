@@ -16,6 +16,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an image to be processed or produced by Core Image filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciimage
 type CIImage struct {
 	foundation.NSObject
@@ -147,6 +149,7 @@ func CIImageFromID(id objc.ID) *CIImage {
 	return o
 }
 
+// Creates and returns an image object from a Quartz 2D image.
 func CIImageImageWithCGImage(image unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGImage, image)
 	if _ret != 0 {
@@ -155,8 +158,9 @@ func CIImageImageWithCGImage(image unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from a Quartz 2D image using the specified options.
 func CIImageImageWithCGImageOptions(image unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGImageOptions, image, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGImageOptions, image, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -164,13 +168,14 @@ func CIImageImageWithCGImageOptions(image unsafe.Pointer, options *foundation.NS
 }
 
 func CIImageImageWithCGImageSourceIndexOptions(source unsafe.Pointer, index uint, dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGImageSourceIndexOptions, source, index, dict)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGImageSourceIndexOptions, source, index, dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents supplied by a CGLayer object.
 // Deprecated: since macOS 10.11.
 func CIImageImageWithCGLayer(layer unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGLayer, layer)
@@ -180,15 +185,17 @@ func CIImageImageWithCGLayer(layer unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents supplied by a CGLayer object, using the specified options.
 // Deprecated: since macOS 10.11.
 func CIImageImageWithCGLayerOptions(layer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGLayerOptions, layer, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCGLayerOptions, layer, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from bitmap data.
 func CIImageImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data *foundation.NSData, bytesPerRow uint, size corefoundation.CGSize, format int, colorSpace unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithBitmapDataBytesPerRowSizeFormatColorSpace, data.Ptr(), bytesPerRow, size, format, colorSpace)
 	if _ret != 0 {
@@ -197,6 +204,7 @@ func CIImageImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data *foundation.
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object initialized with data supplied by an OpenGL texture.
 func CIImageImageWithTextureSizeFlippedColorSpace(name uint, size corefoundation.CGSize, flipped bool, colorSpace unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithTextureSizeFlippedColorSpace, name, size, flipped, colorSpace)
 	if _ret != 0 {
@@ -205,22 +213,25 @@ func CIImageImageWithTextureSizeFlippedColorSpace(name uint, size corefoundation
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object initialized with data supplied by an OpenGL texture.
 func CIImageImageWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize, flipped bool, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithTextureSizeFlippedOptions, name, size, flipped, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithTextureSizeFlippedOptions, name, size, flipped, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object with data supplied by a Metal texture.
 func CIImageImageWithMTLTextureOptions(texture metal.MTLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithMTLTextureOptions, texture, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithMTLTextureOptions, texture, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents of a file.
 func CIImageImageWithContentsOfURL(url *foundation.NSURL) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -229,14 +240,16 @@ func CIImageImageWithContentsOfURL(url *foundation.NSURL) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents of a file, using the specified options.
 func CIImageImageWithContentsOfURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithContentsOfURLOptions, url.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithContentsOfURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object initialized with the supplied image data.
 func CIImageImageWithData(data *foundation.NSData) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithData, data.Ptr())
 	if _ret != 0 {
@@ -245,14 +258,16 @@ func CIImageImageWithData(data *foundation.NSData) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object initialized with the supplied image data, using the specified options.
 func CIImageImageWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithDataOptions, data.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithDataOptions, data.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents of CVImageBuffer object.
 func CIImageImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCVImageBuffer, imageBuffer)
 	if _ret != 0 {
@@ -261,14 +276,16 @@ func CIImageImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents of CVImageBuffer object, using the specified options.
 func CIImageImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCVImageBufferOptions, imageBuffer, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCVImageBufferOptions, imageBuffer, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents of CVPixelBuffer object.
 func CIImageImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCVPixelBuffer, pixelBuffer)
 	if _ret != 0 {
@@ -277,14 +294,16 @@ func CIImageImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image object from the contents of CVPixelBuffer object, using the specified options.
 func CIImageImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCVPixelBufferOptions, pixelBuffer, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithCVPixelBufferOptions, pixelBuffer, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image from the contents of an IOSurface.
 func CIImageImageWithIOSurface(surface unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithIOSurface, surface)
 	if _ret != 0 {
@@ -293,14 +312,16 @@ func CIImageImageWithIOSurface(surface unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates, using the specified options, and returns an image from the contents of an IOSurface.
 func CIImageImageWithIOSurfaceOptions(surface unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithIOSurfaceOptions, surface, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithIOSurfaceOptions, surface, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an image of infinite extent whose entire content is the specified color.
 func CIImageImageWithColor(color *CIColor) *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithColor, color.Ptr())
 	if _ret != 0 {
@@ -309,6 +330,7 @@ func CIImageImageWithColor(color *CIColor) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Creates and returns an empty image object.
 func CIImageEmptyImage() *CIImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelEmptyImage)
 	if _ret != 0 {
@@ -317,6 +339,7 @@ func CIImageEmptyImage() *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with a Quartz 2D image.
 func (o *CIImage) InitWithCGImage(image unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGImage, image)
 	if _ret != 0 {
@@ -325,8 +348,9 @@ func (o *CIImage) InitWithCGImage(image unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with a Quartz 2D image, using the specified options.
 func (o *CIImage) InitWithCGImageOptions(image unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGImageOptions, image, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGImageOptions, image, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -334,13 +358,14 @@ func (o *CIImage) InitWithCGImageOptions(image unsafe.Pointer, options *foundati
 }
 
 func (o *CIImage) InitWithCGImageSourceIndexOptions(source unsafe.Pointer, index uint, dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGImageSourceIndexOptions, source, index, dict)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGImageSourceIndexOptions, source, index, dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object from the contents supplied by a CGLayer object.
 // Deprecated: since macOS 10.11.
 func (o *CIImage) InitWithCGLayer(layer unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGLayer, layer)
@@ -350,15 +375,17 @@ func (o *CIImage) InitWithCGLayer(layer unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object from the contents supplied by a CGLayer object, using the specified options.
 // Deprecated: since macOS 10.11.
 func (o *CIImage) InitWithCGLayerOptions(layer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGLayerOptions, layer, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCGLayerOptions, layer, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with the supplied image data.
 // Deprecated: since macOS 10.11.
 func (o *CIImage) InitWithData(data *foundation.NSData) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithData, data.Ptr())
@@ -368,15 +395,17 @@ func (o *CIImage) InitWithData(data *foundation.NSData) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with the supplied image data, using the specified options.
 // Deprecated: since macOS 10.11.
 func (o *CIImage) InitWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithDataOptions, data.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithDataOptions, data.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with bitmap data.
 func (o *CIImage) InitWithBitmapDataBytesPerRowSizeFormatColorSpace(data *foundation.NSData, bytesPerRow uint, size corefoundation.CGSize, format int, colorSpace unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithBitmapDataBytesPerRowSizeFormatColorSpace, data.Ptr(), bytesPerRow, size, format, colorSpace)
 	if _ret != 0 {
@@ -385,6 +414,7 @@ func (o *CIImage) InitWithBitmapDataBytesPerRowSizeFormatColorSpace(data *founda
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with data supplied by an OpenGL texture.
 func (o *CIImage) InitWithTextureSizeFlippedColorSpace(name uint, size corefoundation.CGSize, flipped bool, colorSpace unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithTextureSizeFlippedColorSpace, name, size, flipped, colorSpace)
 	if _ret != 0 {
@@ -393,22 +423,25 @@ func (o *CIImage) InitWithTextureSizeFlippedColorSpace(name uint, size corefound
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with data supplied by an OpenGL texture.
 func (o *CIImage) InitWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize, flipped bool, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithTextureSizeFlippedOptions, name, size, flipped, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithTextureSizeFlippedOptions, name, size, flipped, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object with data supplied by a Metal texture.
 func (o *CIImage) InitWithMTLTextureOptions(texture metal.MTLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithMTLTextureOptions, texture, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithMTLTextureOptions, texture, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object by reading an image from a URL.
 func (o *CIImage) InitWithContentsOfURL(url *foundation.NSURL) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -417,14 +450,16 @@ func (o *CIImage) InitWithContentsOfURL(url *foundation.NSURL) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object by reading an image from a URL, using the specified options.
 func (o *CIImage) InitWithContentsOfURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithContentsOfURLOptions, url.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithContentsOfURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image with the contents of an IOSurface.
 func (o *CIImage) InitWithIOSurface(surface unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithIOSurface, surface)
 	if _ret != 0 {
@@ -433,23 +468,26 @@ func (o *CIImage) InitWithIOSurface(surface unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes, using the specified options, an image with the contents of an IOSurface.
 func (o *CIImage) InitWithIOSurfaceOptions(surface unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithIOSurfaceOptions, surface, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithIOSurfaceOptions, surface, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.
 // Deprecated: since macOS 10.11.
 func (o *CIImage) InitWithIOSurfacePlaneFormatOptions(surface unsafe.Pointer, plane uint, format int, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithIOSurfacePlaneFormatOptions, surface, plane, format, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithIOSurfacePlaneFormatOptions, surface, plane, format, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object from the contents of a Core Video image buffer.
 func (o *CIImage) InitWithCVImageBuffer(imageBuffer unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCVImageBuffer, imageBuffer)
 	if _ret != 0 {
@@ -458,14 +496,16 @@ func (o *CIImage) InitWithCVImageBuffer(imageBuffer unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object from the contents of a Core Video image buffer, using the specified options.
 func (o *CIImage) InitWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCVImageBufferOptions, imageBuffer, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCVImageBufferOptions, imageBuffer, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object from the contents of a Core Video pixel buffer.
 func (o *CIImage) InitWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCVPixelBuffer, pixelBuffer)
 	if _ret != 0 {
@@ -474,14 +514,16 @@ func (o *CIImage) InitWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image object from the contents of a Core Video pixel buffer using the specified options.
 func (o *CIImage) InitWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCVPixelBufferOptions, pixelBuffer, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithCVPixelBufferOptions, pixelBuffer, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Initializes an image of infinite extent whose entire content is the specified color.
 func (o *CIImage) InitWithColor(color *CIColor) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithColor, color.Ptr())
 	if _ret != 0 {
@@ -490,6 +532,7 @@ func (o *CIImage) InitWithColor(color *CIColor) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image that represents the original image after applying an affine transform.
 func (o *CIImage) ImageByApplyingTransform(matrix corefoundation.CGAffineTransform) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingTransform, matrix)
 	if _ret != 0 {
@@ -506,6 +549,7 @@ func (o *CIImage) ImageByApplyingTransformHighQualityDownsample(matrix corefound
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by transforming the original image to the specified EXIF orientation.
 func (o *CIImage) ImageByApplyingOrientation(orientation int) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingOrientation, orientation)
 	if _ret != 0 {
@@ -514,11 +558,13 @@ func (o *CIImage) ImageByApplyingOrientation(orientation int) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns the transformation needed to reorient the image to the specified orientation.
 func (o *CIImage) ImageTransformForOrientation(orientation int) corefoundation.CGAffineTransform {
 	_ret := objc.Send[corefoundation.CGAffineTransform](o.Ptr(), _cIImageSelImageTransformForOrientation, orientation)
 	return _ret
 }
 
+// Transforms the original image by a given orientation.
 func (o *CIImage) ImageByApplyingCGOrientation(orientation imageio.CGImagePropertyOrientation) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingCGOrientation, orientation)
 	if _ret != 0 {
@@ -527,11 +573,13 @@ func (o *CIImage) ImageByApplyingCGOrientation(orientation imageio.CGImageProper
 	return CIImageFromID(_ret)
 }
 
+// The affine transform for changing the image to the given orientation.
 func (o *CIImage) ImageTransformForCGOrientation(orientation imageio.CGImagePropertyOrientation) corefoundation.CGAffineTransform {
 	_ret := objc.Send[corefoundation.CGAffineTransform](o.Ptr(), _cIImageSelImageTransformForCGOrientation, orientation)
 	return _ret
 }
 
+// Returns a new image created by compositing the original image over the specified destination image.
 func (o *CIImage) ImageByCompositingOverImage(dest *CIImage) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByCompositingOverImage, dest.Ptr())
 	if _ret != 0 {
@@ -540,6 +588,7 @@ func (o *CIImage) ImageByCompositingOverImage(dest *CIImage) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image with a cropped portion of the original image.
 func (o *CIImage) ImageByCroppingToRect(rect corefoundation.CGRect) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByCroppingToRect, rect)
 	if _ret != 0 {
@@ -548,6 +597,7 @@ func (o *CIImage) ImageByCroppingToRect(rect corefoundation.CGRect) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by making the pixel colors along its edges extend infinitely in all directions.
 func (o *CIImage) ImageByClampingToExtent() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByClampingToExtent)
 	if _ret != 0 {
@@ -556,6 +606,7 @@ func (o *CIImage) ImageByClampingToExtent() *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by cropping to a specified area, then making the pixel colors along the edges of the cropped image extend infinitely in all directions.
 func (o *CIImage) ImageByClampingToRect(rect corefoundation.CGRect) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByClampingToRect, rect)
 	if _ret != 0 {
@@ -564,14 +615,16 @@ func (o *CIImage) ImageByClampingToRect(rect corefoundation.CGRect) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by applying a filter to the original image with the specified name and parameters.
 func (o *CIImage) ImageByApplyingFilterWithInputParameters(filterName *foundation.NSString, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingFilterWithInputParameters, filterName.Ptr(), params)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingFilterWithInputParameters, filterName.Ptr(), params.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
+// Applies the filter to an image and returns the output.
 func (o *CIImage) ImageByApplyingFilter(filterName *foundation.NSString) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingFilter, filterName.Ptr())
 	if _ret != 0 {
@@ -580,6 +633,7 @@ func (o *CIImage) ImageByApplyingFilter(filterName *foundation.NSString) *CIImag
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by color matching from the specified color space to the context’s working color space.
 func (o *CIImage) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByColorMatchingColorSpaceToWorkingSpace, colorSpace)
 	if _ret != 0 {
@@ -588,6 +642,7 @@ func (o *CIImage) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace unsafe
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by color matching from the context’s working color space to the specified color space.
 func (o *CIImage) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace unsafe.Pointer) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByColorMatchingWorkingSpaceToColorSpace, colorSpace)
 	if _ret != 0 {
@@ -596,6 +651,7 @@ func (o *CIImage) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace unsafe
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by multiplying the image’s RGB values by its alpha values.
 func (o *CIImage) ImageByPremultiplyingAlpha() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByPremultiplyingAlpha)
 	if _ret != 0 {
@@ -604,6 +660,7 @@ func (o *CIImage) ImageByPremultiplyingAlpha() *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by dividing the image’s RGB values by its alpha values.
 func (o *CIImage) ImageByUnpremultiplyingAlpha() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByUnpremultiplyingAlpha)
 	if _ret != 0 {
@@ -612,6 +669,7 @@ func (o *CIImage) ImageByUnpremultiplyingAlpha() *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns a new image created by setting all alpha values to 1.0 within the specified rectangle and to 0.0 outside of that area.
 func (o *CIImage) ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySettingAlphaOneInExtent, extent)
 	if _ret != 0 {
@@ -620,7 +678,7 @@ func (o *CIImage) ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *
 	return CIImageFromID(_ret)
 }
 
-// Create an image by applying a gaussian blur to the receiver. - Parameters: - sigma: The sigma of the gaussian blur to apply to the receiver. If the sigma is very small (less than `0.16`) then the receiver is returned. - Returns: An autoreleased “CIImage“ instance or the received image.
+// Create an image by applying a gaussian blur to the receiver.
 func (o *CIImage) ImageByApplyingGaussianBlurWithSigma(sigma float64) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingGaussianBlurWithSigma, sigma)
 	if _ret != 0 {
@@ -629,16 +687,16 @@ func (o *CIImage) ImageByApplyingGaussianBlurWithSigma(sigma float64) *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Return a new image by changing the receiver's metadata properties. When you create an image, Core Image sets an image’s properties to a metadata dictionary as described here: “properties“. Use this method to override an image’s metadata properties with new values. - Parameters: - properties: A dictionary of metadata properties akin to the `CGImageSourceCopyPropertiesAtIndex()` function. - Returns: An autoreleased “CIImage“ instance with a copy of the new properties.
+// Return a new image by changing the receiver’s metadata properties.
 func (o *CIImage) ImageBySettingProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySettingProperties, properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySettingProperties, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
-// Create an image by changing the receiver's sample mode to bilinear interpolation. - Returns: An autoreleased “CIImage“ instance with a bilinear sampling.
+// Create an image by changing the receiver’s sample mode to bilinear interpolation.
 func (o *CIImage) ImageBySamplingLinear() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySamplingLinear)
 	if _ret != 0 {
@@ -647,7 +705,7 @@ func (o *CIImage) ImageBySamplingLinear() *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image by changing the receiver's sample mode to nearest neighbor. - Returns: An autoreleased “CIImage“ instance with a nearest sampling.
+// Create an image by changing the receiver’s sample mode to nearest neighbor.
 func (o *CIImage) ImageBySamplingNearest() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySamplingNearest)
 	if _ret != 0 {
@@ -656,7 +714,7 @@ func (o *CIImage) ImageBySamplingNearest() *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image that inserts a intermediate that is cacheable This intermediate will be not be cached if “kCIContextCacheIntermediates“ is false. - Returns: An autoreleased “CIImage“.
+// Create an image that inserts a intermediate that is cacheable
 func (o *CIImage) ImageByInsertingIntermediate() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByInsertingIntermediate)
 	if _ret != 0 {
@@ -665,7 +723,7 @@ func (o *CIImage) ImageByInsertingIntermediate() *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image that inserts a intermediate that is cacheable. - Parameters: - cache: Controls if Core Image caches the returned image. * `YES` : This intermediate will be cacheable even if “kCIContextCacheIntermediates“ is false. * `NO`  : the intermediate will be not be cached if “kCIContextCacheIntermediates“ is false. - Returns: An autoreleased “CIImage“.
+// Create an image that inserts a intermediate that is cacheable.
 func (o *CIImage) ImageByInsertingIntermediate2(cache bool) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByInsertingIntermediate, cache)
 	if _ret != 0 {
@@ -674,7 +732,7 @@ func (o *CIImage) ImageByInsertingIntermediate2(cache bool) *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image that inserts a intermediate that is cached in tiles This intermediate will be cacheable even if “kCIContextCacheIntermediates“ is false. - Returns: An autoreleased “CIImage“.
+// Create an image that inserts a intermediate that is cached in tiles
 func (o *CIImage) ImageByInsertingTiledIntermediate() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByInsertingTiledIntermediate)
 	if _ret != 0 {
@@ -683,7 +741,7 @@ func (o *CIImage) ImageByInsertingTiledIntermediate() *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image that applies a gain map Core Image image to the received Core Image image. The gain map image can be obtained by creating a “CIImage“ instance from `NSURL`/`NSData` and setting the “kCIImageAuxiliaryHDRGainMap“ option set to `@YES`. If the gain map “CIImage“ instance doesn't have the needed “properties“ metadata, the received image will be returned as-is. - Returns: An autoreleased “CIImage“ instance or the received image.
+// Create an image that applies a gain map Core Image image to the received Core Image image.
 func (o *CIImage) ImageByApplyingGainMap(gainmap *CIImage) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingGainMap, gainmap.Ptr())
 	if _ret != 0 {
@@ -692,7 +750,7 @@ func (o *CIImage) ImageByApplyingGainMap(gainmap *CIImage) *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image. - Parameters: - gainmap: The gain map “CIImage“ instance to apply to the receiver. - headroom: a float value that specify how much headroom the resulting image should have. The headroom value will be limited to between 1.0 (i.e. SDR) and the full headroom allowed by the gain map. - Returns: An autoreleased “CIImage“ instance or the received image.
+// Create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image.
 func (o *CIImage) ImageByApplyingGainMapHeadroom(gainmap *CIImage, headroom float32) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageByApplyingGainMapHeadroom, gainmap.Ptr(), headroom)
 	if _ret != 0 {
@@ -701,7 +759,7 @@ func (o *CIImage) ImageByApplyingGainMapHeadroom(gainmap *CIImage, headroom floa
 	return CIImageFromID(_ret)
 }
 
-// Create an image by changing the receiver's contentHeadroom property. Changing this value will alter the behavior of the `CIToneMapHeadroom` and `CISystemToneMap` filters. * If the value is set to 0.0 then the returned image's headroom is unknown. * If the value is set to 1.0 then the returned image is SDR. * If the value is set to greater 1.0 then the returned image is HDR. * Otherwise the returned image's headroom is unknown. - Returns: An autoreleased “CIImage“.
+// Create an image by changing the receiver’s contentHeadroom property.
 func (o *CIImage) ImageBySettingContentHeadroom(headroom float32) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySettingContentHeadroom, headroom)
 	if _ret != 0 {
@@ -710,7 +768,7 @@ func (o *CIImage) ImageBySettingContentHeadroom(headroom float32) *CIImage {
 	return CIImageFromID(_ret)
 }
 
-// Create an image by changing the receiver's contentAverageLightLevel property. Changing this value will alter the behavior of the `CIToneMapHeadroom` and `CISystemToneMap` filters. * If the value is set to 0.0 or less then the returned image's “contentAverageLightLevel“ is unknown. - Returns: An autoreleased “CIImage“.
+// Create an image by changing the receiver’s contentAverageLightLevel property.
 func (o *CIImage) ImageBySettingContentAverageLightLevel(average float32) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelImageBySettingContentAverageLightLevel, average)
 	if _ret != 0 {
@@ -719,6 +777,7 @@ func (o *CIImage) ImageBySettingContentAverageLightLevel(average float32) *CIIma
 	return CIImageFromID(_ret)
 }
 
+// Returns the region of interest for the filter chain that generates the image.
 func (o *CIImage) RegionOfInterestForImageInRect(image *CIImage, rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cIImageSelRegionOfInterestForImageInRect, image.Ptr(), rect)
 	return _ret
@@ -818,8 +877,11 @@ func (o *CIImage) IsOpaque() bool {
 
 // Returns the metadata properties dictionary of the image. If the “CIImage“ was created from `NSURL` or `NSData` then this dictionary is determined by calling `CGImageSourceCopyPropertiesAtIndex()`. If the “CIImage“ was created with the “kCIImageProperties“ option, then that dictionary is returned. If the “CIImage“ was created by applying “CIFilter-class“ or “CIKernel“ then the properties of the root inputImage will be returned.
 func (o *CIImage) Properties() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cIImageSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *CIImage) Definition() *CIFilterShape {
@@ -871,6 +933,7 @@ func (o *CIImage) MetalTexture() metal.MTLTexture {
 	return _ret
 }
 
+// Returns all possible automatically selected and configured filters for adjusting the image.
 func (o *CIImage) AutoAdjustmentFilters() *foundation.NSArray[*CIFilter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelAutoAdjustmentFilters)
 	if _ret != 0 {
@@ -879,8 +942,9 @@ func (o *CIImage) AutoAdjustmentFilters() *foundation.NSArray[*CIFilter] {
 	return foundation.NSArrayFromID[*CIFilter](_ret)
 }
 
+// Returns a subset of automatically selected and configured filters for adjusting the image.
 func (o *CIImage) AutoAdjustmentFiltersWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*CIFilter] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelAutoAdjustmentFiltersWithOptions, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelAutoAdjustmentFiltersWithOptions, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -904,7 +968,7 @@ func (o *CIImage) ImageByConvertingLabToWorkingSpace() *CIImage {
 }
 
 func (o *CIImage) InitWithDepthDataOptions(data *avfoundation.AVDepthData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithDepthDataOptions, data.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithDepthDataOptions, data.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -920,7 +984,7 @@ func (o *CIImage) InitWithDepthData(data *avfoundation.AVDepthData) *CIImage {
 }
 
 func CIImageImageWithDepthDataOptions(data *avfoundation.AVDepthData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithDepthDataOptions, data.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithDepthDataOptions, data.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -944,7 +1008,7 @@ func (o *CIImage) DepthData() *avfoundation.AVDepthData {
 }
 
 func (o *CIImage) InitWithPortaitEffectsMatteOptions(matte *avfoundation.AVPortraitEffectsMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithPortaitEffectsMatteOptions, matte.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithPortaitEffectsMatteOptions, matte.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -960,7 +1024,7 @@ func (o *CIImage) InitWithPortaitEffectsMatte(matte *avfoundation.AVPortraitEffe
 }
 
 func CIImageImageWithPortaitEffectsMatteOptions(matte *avfoundation.AVPortraitEffectsMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithPortaitEffectsMatteOptions, matte.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithPortaitEffectsMatteOptions, matte.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -984,7 +1048,7 @@ func (o *CIImage) PortraitEffectsMatte() *avfoundation.AVPortraitEffectsMatte {
 }
 
 func (o *CIImage) InitWithSemanticSegmentationMatteOptions(matte *avfoundation.AVSemanticSegmentationMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithSemanticSegmentationMatteOptions, matte.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithSemanticSegmentationMatteOptions, matte.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -1000,7 +1064,7 @@ func (o *CIImage) InitWithSemanticSegmentationMatte(matte *avfoundation.AVSemant
 }
 
 func CIImageImageWithSemanticSegmentationMatteOptions(matte *avfoundation.AVSemanticSegmentationMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithSemanticSegmentationMatteOptions, matte.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithSemanticSegmentationMatteOptions, matte.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -1023,18 +1087,18 @@ func (o *CIImage) SemanticSegmentationMatte() *avfoundation.AVSemanticSegmentati
 	return avfoundation.AVSemanticSegmentationMatteFromID(_ret)
 }
 
-// Create an image object based on pixels from an image provider object. Core Image retains the provider object until the image is deallocated. The image provider object will not be called until the image is rendered. - Parameters: - provider: An object that implements the `CIImageProvider` protocol. - width: The width of the image. - height: The height of the image. - format: The “CIFormat“ of the provided pixels. - colorSpace: The color space that the image is defined in. If `nil`, then the pixels will not be is not color matched to the Core Image working color space. - options: A dictionary that contains various “CIImageOption“ keys that affect the resulting “CIImage“. The option “kCIImageProviderTileSize“ controls if and how the provider object is called in tiles. The option “kCIImageProviderUserInfo“ allows additional state to be passed to the provider object. - Returns: An autoreleased “CIImage“ object based on the data provider.
+// Create an image object based on pixels from an image provider object.
 func CIImageImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, width uint, height uint, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithImageProviderSizeFormatColorSpaceOptions, provider, width, height, format, colorSpace, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIImage), _cIImageSelImageWithImageProviderSizeFormatColorSpaceOptions, provider, width, height, format, colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIImageFromID(_ret)
 }
 
-// Initializes an image object based on pixels from an image provider object. Core Image retains the provider object until the image is deallocated. The image provider object will not be called until the image is rendered. - Parameters: - provider: An object that implements the `CIImageProvider` protocol. - width: The width of the image. - height: The height of the image. - format: The “CIFormat“ of the provided pixels. - colorSpace: The color space that the image is defined in. If `nil`, then the pixels will not be is not color matched to the Core Image working color space. - options: A dictionary that contains various “CIImageOption“ keys that affect the resulting “CIImage“. The option “kCIImageProviderTileSize“ controls if and how the provider object is called in tiles. The option “kCIImageProviderUserInfo“ allows additional state to be passed to the provider object. - Returns: An initialized “CIImage“ object based on the data provider.
+// Initializes an image object based on pixels from an image provider object.
 func (o *CIImage) InitWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, width uint, height uint, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithImageProviderSizeFormatColorSpaceOptions, provider, width, height, format, colorSpace, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageSelInitWithImageProviderSizeFormatColorSpaceOptions, provider, width, height, format, colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

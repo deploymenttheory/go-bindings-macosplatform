@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Text recognized in an image through a text recognition request.
+//
 // RecognizedText wraps [raw.VNRecognizedText] with a fluent Go API.
 type RecognizedText struct {
 	inner *raw.VNRecognizedText
@@ -37,7 +39,7 @@ func NewRecognizedText() *RecognizedText {
 	return &RecognizedText{inner: raw.VNRecognizedTextFromID(_id)}
 }
 
-// @brief Calculate the bounding box around the characters in the range of the string. @discussion The bounding boxes are not guaranteed to be an exact fit around the characters and are purely meant for UI purposes and not for image processing.
+// Calculates the bounding box around the characters in the range of a string.
 //
 // BoundingBoxForRangeError calls the underlying BoundingBoxForRangeError.
 func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*RectangleObservation, error) {

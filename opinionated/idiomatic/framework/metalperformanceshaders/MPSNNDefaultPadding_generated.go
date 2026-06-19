@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that provides predefined padding policies for common tasks.
+//
 // NNDefaultPadding wraps [raw.MPSNNDefaultPadding] with a fluent Go API.
 type NNDefaultPadding struct {
 	inner *raw.MPSNNDefaultPadding

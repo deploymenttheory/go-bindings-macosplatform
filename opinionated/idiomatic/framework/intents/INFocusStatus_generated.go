@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The user’s preference for receiving notifications.
+//
 // FocusStatus wraps [raw.INFocusStatus] with a fluent Go API.
 type FocusStatus struct {
 	inner *raw.INFocusStatus
@@ -30,6 +32,8 @@ func FocusStatusFromID(id objc.ID) *FocusStatus {
 	return &FocusStatus{inner: raw.INFocusStatusFromID(id)}
 }
 
+// Creates an object that indicates the user’s ability to receive communication notifications.
+//
 // NewFocusStatusWithIsFocused creates a new [FocusStatus].
 func NewFocusStatusWithIsFocused(isFocused *foundation.NSNumber) *FocusStatus {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INFocusStatus")), objc.RegisterName("alloc"))

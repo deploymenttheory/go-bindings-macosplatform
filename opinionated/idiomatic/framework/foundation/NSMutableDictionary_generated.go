@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A dynamic collection of objects associated with unique keys.
+//
 // MutableDictionary wraps [raw.NSMutableDictionary] with a fluent Go API.
 type MutableDictionary struct {
 	inner *raw.NSMutableDictionary[objc.ID, objc.ID]
@@ -37,6 +39,8 @@ func NewMutableDictionary() *MutableDictionary {
 	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
+//
 // NewMutableDictionaryWithCapacity creates a new [MutableDictionary].
 func NewMutableDictionaryWithCapacity(numItems uint) *MutableDictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableDictionary")), objc.RegisterName("alloc"))
@@ -71,36 +75,50 @@ func (x *MutableDictionary) WithScriptingProperties(scriptingProperties *raw.NSD
 	return x
 }
 
+// Removes a given key and its associated value from the dictionary.
+//
 // RemoveObjectForKey calls the underlying RemoveObjectForKey.
 func (x *MutableDictionary) RemoveObjectForKey(aKey objc.ID) {
 	x.inner.RemoveObjectForKey(aKey)
 }
 
+// Adds a given key-value pair to the dictionary.
+//
 // SetObjectForKey calls the underlying SetObjectForKey.
 func (x *MutableDictionary) SetObjectForKey(anObject objc.ID, aKey raw.NSCopying) {
 	x.inner.SetObjectForKey(anObject, aKey)
 }
 
+// Adds to the receiving dictionary the entries from another dictionary.
+//
 // AddEntriesFromDictionary calls the underlying AddEntriesFromDictionary.
 func (x *MutableDictionary) AddEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.AddEntriesFromDictionary(otherDictionary)
 }
 
+// Empties the dictionary of its entries.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MutableDictionary) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()
 }
 
+// Removes from the dictionary entries specified by elements in a given array.
+//
 // RemoveObjectsForKeys calls the underlying RemoveObjectsForKeys.
 func (x *MutableDictionary) RemoveObjectsForKeys(keyArray *raw.NSArray[objc.ID]) {
 	x.inner.RemoveObjectsForKeys(keyArray)
 }
 
+// Sets the contents of the receiving dictionary to entries in a given dictionary.
+//
 // SetDictionary calls the underlying SetDictionary.
 func (x *MutableDictionary) SetDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetDictionary(otherDictionary)
 }
 
+// Adds a given key-value pair to the dictionary.
+//
 // SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
 func (x *MutableDictionary) SetObjectForKeyedSubscript(obj objc.ID, key raw.NSCopying) {
 	x.inner.SetObjectForKeyedSubscript(obj, key)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the first action sent to an app when the user shares a collaboration.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swstartcollaborationaction
 type SWStartCollaborationAction struct {
 	SWAction
@@ -31,6 +33,7 @@ func SWStartCollaborationActionFromID(id objc.ID) *SWStartCollaborationAction {
 	return o
 }
 
+// Informs an app to set up the universal link and device independent identifier to provide to the system.
 func (o *SWStartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url *foundation.NSURL, collaborationIdentifier *foundation.NSString) {
 	o.Ptr().Send(_sWStartCollaborationActionSelFulfillUsingURLCollaborationIdentifier, url.Ptr(), collaborationIdentifier.Ptr())
 }

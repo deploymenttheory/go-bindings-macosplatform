@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a speed associated with an intent.
+//
 // SpeedResolutionResult wraps [raw.INSpeedResolutionResult] with a fluent Go API.
 type SpeedResolutionResult struct {
 	inner *raw.INSpeedResolutionResult

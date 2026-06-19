@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer for selecting elements from two tensors.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcselectionlayer
 type MLCSelectionLayer struct {
 	MLCLayer
@@ -29,7 +31,7 @@ func MLCSelectionLayerFromID(id objc.ID) *MLCSelectionLayer {
 	return o
 }
 
-// @abstract Create a select layer @return   A new layer for selecting elements between two tensors.
+// Creates a selection layer.
 func MLCSelectionLayerLayer() *MLCSelectionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSelectionLayer), _mLCSelectionLayerSelLayer)
 	if _ret != 0 {

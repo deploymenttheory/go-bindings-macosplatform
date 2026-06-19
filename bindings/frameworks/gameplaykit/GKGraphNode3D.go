@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// GKGraphNode coupled with a 3D position
+// A node in a navigation graph, associated with a point in continuous 3D space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgraphnode3d
 type GKGraphNode3D struct {
@@ -36,6 +36,7 @@ func GKGraphNode3DFromID(id objc.ID) *GKGraphNode3D {
 	return o
 }
 
+// Creates a graph node with the specified point.
 func GKGraphNode3DNodeWithPoint(point unsafe.Pointer) *GKGraphNode3D {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGraphNode3D), _gKGraphNode3DSelNodeWithPoint, point)
 	if _ret != 0 {
@@ -44,6 +45,7 @@ func GKGraphNode3DNodeWithPoint(point unsafe.Pointer) *GKGraphNode3D {
 	return GKGraphNode3DFromID(_ret)
 }
 
+// Initializes a graph node with the specified point.
 func (o *GKGraphNode3D) InitWithPoint(point unsafe.Pointer) *GKGraphNode3D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNode3DSelInitWithPoint, point)
 	if _ret != 0 {

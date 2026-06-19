@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IKScannerDeviceView class displays a view that allows scanning. It can be customized by specifying the display mode. The delegate receives the scanned data and must implement the IKScannerDeviceViewDelegate protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikscannerdeviceview
 type IKScannerDeviceView struct {
 	appkit.NSView

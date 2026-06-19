@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optional border for an annotation that lies completely within the annotation rectangle.
+//
 // Border wraps [raw.PDFBorder] with a fluent Go API.
 type Border struct {
 	inner *raw.PDFBorder
@@ -37,18 +39,24 @@ func NewBorder() *Border {
 	return &Border{inner: raw.PDFBorderFromID(_id)}
 }
 
+// Sets the border style.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *Border) WithStyle(style PDFBorderStyle) *Border {
 	x.inner.SetStyle(raw.PDFBorderStyle(style))
 	return x
 }
 
+// Sets the line width (in points) for the border.
+//
 // WithLineWidth sets the lineWidth property and returns the receiver for chaining.
 func (x *Border) WithLineWidth(lineWidth float64) *Border {
 	x.inner.SetLineWidth(lineWidth)
 	return x
 }
 
+// Draws the border.
+//
 // DrawInRect calls the underlying DrawInRect.
 func (x *Border) DrawInRect(rect corefoundation.CGRect) {
 	x.inner.DrawInRect(rect)

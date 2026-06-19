@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
+//
 // Apple documentation: https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser
 type MCNearbyServiceAdvertiser struct {
 	foundation.NSObject
@@ -37,18 +39,21 @@ func MCNearbyServiceAdvertiserFromID(id objc.ID) *MCNearbyServiceAdvertiser {
 	return o
 }
 
+// Initializes an advertiser object.
 func (o *MCNearbyServiceAdvertiser) InitWithPeerDiscoveryInfoServiceType(myPeerID *MCPeerID, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], serviceType *foundation.NSString) *MCNearbyServiceAdvertiser {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelInitWithPeerDiscoveryInfoServiceType, myPeerID.Ptr(), info, serviceType.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelInitWithPeerDiscoveryInfoServiceType, myPeerID.Ptr(), info.Ptr(), serviceType.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MCNearbyServiceAdvertiserFromID(_ret)
 }
 
+// Begins advertising the service provided by a local peer.
 func (o *MCNearbyServiceAdvertiser) StartAdvertisingPeer() {
 	o.Ptr().Send(_mCNearbyServiceAdvertiserSelStartAdvertisingPeer)
 }
 
+// Stops advertising the service provided by a local peer.
 func (o *MCNearbyServiceAdvertiser) StopAdvertisingPeer() {
 	o.Ptr().Send(_mCNearbyServiceAdvertiserSelStopAdvertisingPeer)
 }
@@ -71,8 +76,11 @@ func (o *MCNearbyServiceAdvertiser) MyPeerID() *MCPeerID {
 }
 
 func (o *MCNearbyServiceAdvertiser) DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _mCNearbyServiceAdvertiserSelDiscoveryInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelDiscoveryInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *MCNearbyServiceAdvertiser) ServiceType() *foundation.NSString {

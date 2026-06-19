@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A controller that acts as a bridge between your Finder Sync extension and the Finder itself. Use the Finder Sync controller to configure your extension, to set badges on items in the Finder’s window, and to get a list of selected and targeted items.
+// A controller that acts as a bridge between your Finder Sync extension and the Finder itself.
 //
 // Apple documentation: https://developer.apple.com/documentation/findersync/fifindersynccontroller
 type FIFinderSyncController struct {
@@ -47,7 +47,7 @@ func FIFinderSyncControllerFromID(id objc.ID) *FIFinderSyncController {
 	return o
 }
 
-// Returns the shared Finder Sync controller object. - Returns: The default Finder Sync controller object for this extension.
+// Returns the shared Finder Sync controller object.
 func FIFinderSyncControllerDefaultController() *FIFinderSyncController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFIFinderSyncController), _fIFinderSyncControllerSelDefaultController)
 	if _ret != 0 {
@@ -56,17 +56,17 @@ func FIFinderSyncControllerDefaultController() *FIFinderSyncController {
 	return FIFinderSyncControllerFromID(_ret)
 }
 
-// Sets the badge image and label for the given ID. Use this method to configure your badges. Finder may display the image, the label or both. Your Finder Sync extension typically sets up a fixed number of badges during its `init` method. - Parameters: - image: An <doc://com.apple.documentation/documentation/appkit/nsimage> object. The system may or may not draw this image on top of the item’s icon; when it does, the system determines the overlay position. Don't add any padding to the image to adjust this positioning. The image draws at up to 320 x 320 points. - label: A label describing the sync state represented by this badge. Each label should be a short localized string, such as "Waiting." - badgeID: A unique ID, identifying this badge.
+// Sets the badge image and label for the given ID.
 func (o *FIFinderSyncController) SetBadgeImageLabelForBadgeIdentifier(image *appkit.NSImage, label *foundation.NSString, badgeID *foundation.NSString) {
 	o.Ptr().Send(_fIFinderSyncControllerSelSetBadgeImageLabelForBadgeIdentifier, image.Ptr(), label.Ptr(), badgeID.Ptr())
 }
 
-// Sets the badge for a file or directory. Adds the specified badge to the given file or directory. Setting the identifier to an empty string (`@""`) removes the badge. Avoid adding badges to items that the Finder hasn't displayed yet. When setting the initial badge, call this method from your Finder Sync extension’s “FIFinderSync/requestBadgeIdentifierForURL:“ method. When updating badges, call this method only for items that have already received a badge. - Parameters: - badgeID: A unique ID, identifying the badge. - url: The URL of the file or directory. ## See Also - “FIFinderSync/requestBadgeIdentifierForURL:“
+// Sets the badge for a file or directory.
 func (o *FIFinderSyncController) SetBadgeIdentifierForURL(badgeID *foundation.NSString, url *foundation.NSURL) {
 	o.Ptr().Send(_fIFinderSyncControllerSelSetBadgeIdentifierForURL, badgeID.Ptr(), url.Ptr())
 }
 
-// Returns the URL of the Finder’s current target. Use this method when creating a custom shortcut menu for the Finder. This returns the URL of the item that the user Control-clicked, letting you customize the menu for that item. This method returns valid values only from the Finder Sync extension’s “FIFinderSync/menuForMenuKind:“ method or from one of the menu actions created in this method. If the selected items are outside the extension’s managed directories (for example, when the user clicks on the toolbar button), this method returns `nil`. - Returns: The URL of the Finder’s current target.
+// Returns the URL of the Finder’s current target.
 func (o *FIFinderSyncController) TargetedURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fIFinderSyncControllerSelTargetedURL)
 	if _ret != 0 {
@@ -75,10 +75,13 @@ func (o *FIFinderSyncController) TargetedURL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-// Returns an array of selected items. Use this method when creating a shortcut menu or a menu for the extension’s toolbar button. You can then modify the menu’s content based on the items currently selected. This method returns valid values only from the Finder Sync extension’s “FIFinderSync/menuForMenuKind:“ method or from one of the menu actions created in this method. If the selected items are outside the extension’s managed directories (for example, when the user clicks on the toolbar button), this method returns `nil`. - Returns: An array of items currently selected in the Finder window.
+// Returns an array of selected items.
 func (o *FIFinderSyncController) SelectedItemURLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _fIFinderSyncControllerSelSelectedItemURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _fIFinderSyncControllerSelSelectedItemURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
 func (o *FIFinderSyncController) LastUsedDateForItemWithURL(itemURL *foundation.NSURL) *foundation.NSDate {
@@ -125,13 +128,16 @@ func FIFinderSyncControllerShowExtensionManagementInterface() {
 
 // The directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
 func (o *FIFinderSyncController) DirectoryURLs() *foundation.NSSet[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSURL]](o.Ptr(), _fIFinderSyncControllerSelDirectoryURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _fIFinderSyncControllerSelDirectoryURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSURL](_ret)
 }
 
 // The directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
 func (o *FIFinderSyncController) SetDirectoryURLs(directoryURLs *foundation.NSSet[*foundation.NSURL]) {
-	o.Ptr().Send(_fIFinderSyncControllerSelSetDirectoryURLs, directoryURLs)
+	o.Ptr().Send(_fIFinderSyncControllerSelSetDirectoryURLs, directoryURLs.Ptr())
 }
 
 func FIFinderSyncControllerIsExtensionEnabled() bool {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of user interaction with a context.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsactivity
 type CLSActivity struct {
 	CLSObject
@@ -41,12 +43,12 @@ func CLSActivityFromID(id objc.ID) *CLSActivity {
 	return o
 }
 
-// @abstract      Adds progress to this activity. @discussion    The progress should be a decimal representation of the start and ending percentage [0.0, 1.0]. @param         start      Starting percentage. @param         end        Ending percentage.
+// Adds a progress range to a given activity.
 func (o *CLSActivity) AddProgressRangeFromStartToEnd(start float64, end float64) {
 	o.Ptr().Send(_cLSActivitySelAddProgressRangeFromStartToEnd, start, end)
 }
 
-// @abstract      Add an activity item to this CLSActivity.
+// Adds an activity item to an activity.
 func (o *CLSActivity) AddAdditionalActivityItem(activityItem *CLSActivityItem) {
 	o.Ptr().Send(_cLSActivitySelAddAdditionalActivityItem, activityItem.Ptr())
 }
@@ -89,17 +91,17 @@ func (o *CLSActivity) AdditionalActivityItems() *foundation.NSArray[*CLSActivity
 	return foundation.NSArrayFromID[*CLSActivityItem](_ret)
 }
 
-// @abstract      Start Activity. @discussion    Starts the activity (or resumes if previously stopped).
+// Tells an activity to start recording duration and progress for a task.
 func (o *CLSActivity) Start() {
 	o.Ptr().Send(_cLSActivitySelStart)
 }
 
-// @abstract      Stop Activity. @discussion    Stops or pauses the activity and ends the time being tracked on it.
+// Tells an activity to stop or pause recording duration and progress for a task.
 func (o *CLSActivity) Stop() {
 	o.Ptr().Send(_cLSActivitySelStop)
 }
 
-// @abstract Deletes all activity items. @discussion Convenience method to delete all activity items associated with the current activity.
+// Deletes all activity items associated with the current activity.
 func (o *CLSActivity) RemoveAllActivityItems() {
 	o.Ptr().Send(_cLSActivitySelRemoveAllActivityItems)
 }

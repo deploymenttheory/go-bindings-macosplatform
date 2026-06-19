@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that computes the histogram of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram
 type MPSImageHistogram struct {
 	mpscore.MPSKernel
@@ -45,6 +47,7 @@ func MPSImageHistogramFromID(id objc.ID) *MPSImageHistogram {
 	return o
 }
 
+// Initializes a histogram with specific information.
 func (o *MPSImageHistogram) InitWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *mpsimage.MPSImageHistogramInfo) *MPSImageHistogram {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageHistogramSelInitWithDeviceHistogramInfo, device, histogramInfo)
 	if _ret != 0 {
@@ -62,12 +65,12 @@ func (o *MPSImageHistogram) InitWithCoderDevice(aDecoder *foundation.NSCoder, de
 	return MPSImageHistogramFromID(_ret)
 }
 
-// @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder. @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer           A valid MTLCommandBuffer. @param  source                  A valid MTLTexture containing the source image for the filter @param  histogram               A valid MTLBuffer to receive the histogram results. @param  histogramOffset         Byte offset into histogram buffer at which to write the histogram results. Must be a multiple of 32 bytes. The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. The histogram results are stored in the histogram buffer as follows: - histogram results for the R channel for all bins followed by - histogram results for the G channel for all bins followed by - histogram results for the B channel for all bins followed by - histogram results for the A channel for all bins
+// Encodes the filter to a command buffer using a compute command encoder.
 func (o *MPSImageHistogram) EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	o.Ptr().Send(_mPSImageHistogramSelEncodeToCommandBufferSourceTextureHistogramHistogramOffset, commandBuffer, source, histogram, histogramOffset)
 }
 
-// @abstract   The amount of space in the output MTLBuffer the histogram will take up. @discussion This convenience function calculates the minimum amount of space needed in the output histogram for the results.  The MTLBuffer should be at least this length, longer if histogramOffset is non-zero. @param      sourceFormat      The MTLPixelFormat of the source image. This is the source parameter of -encodeToCommandBuffer: sourceTexture:histogram:histogramOffset @return     The number of bytes needed to store the result histograms.
+// The amount of space the histogram will take up in the output buffer.
 func (o *MPSImageHistogram) HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSImageHistogramSelHistogramSizeForSourceFormat, sourceFormat)
 	return _ret

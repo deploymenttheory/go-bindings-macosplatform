@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Affine transform information that an image-alignment request produces.
+//
 // ImageTranslationAlignmentObservation wraps [raw.VNImageTranslationAlignmentObservation] with a fluent Go API.
 type ImageTranslationAlignmentObservation struct {
 	inner *raw.VNImageTranslationAlignmentObservation

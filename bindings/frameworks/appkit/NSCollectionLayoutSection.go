@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that combines a set of groups into distinct visual groupings.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutsection
 type NSCollectionLayoutSection struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func NSCollectionLayoutSectionFromID(id objc.ID) *NSCollectionLayoutSection {
 	return o
 }
 
+// Creates a section containing the specified group.
 func NSCollectionLayoutSectionSectionWithGroup(group *NSCollectionLayoutGroup) *NSCollectionLayoutSection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSection), _nSCollectionLayoutSectionSelSectionWithGroup, group.Ptr())
 	if _ret != 0 {

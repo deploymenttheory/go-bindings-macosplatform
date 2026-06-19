@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that calculates the sum of squared pixels over a specified region in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageintegralofsquares
 type MPSImageIntegralOfSquares struct {
 	mpsimage.MPSUnaryImageKernel

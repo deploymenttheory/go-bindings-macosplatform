@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A measurement of the ambient pressure and temperature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmambientpressuredata
 type CMAmbientPressureData struct {
 	CMLogItem
@@ -33,12 +35,18 @@ func CMAmbientPressureDataFromID(id objc.ID) *CMAmbientPressureData {
 
 // Discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
 func (o *CMAmbientPressureData) Pressure() *foundation.NSMeasurement[*foundation.NSUnitPressure] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitPressure]](o.Ptr(), _cMAmbientPressureDataSelPressure)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMAmbientPressureDataSelPressure)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitPressure](_ret)
 }
 
 // Discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
 func (o *CMAmbientPressureData) Temperature() *foundation.NSMeasurement[*foundation.NSUnitTemperature] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitTemperature]](o.Ptr(), _cMAmbientPressureDataSelTemperature)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMAmbientPressureDataSelTemperature)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitTemperature](_ret)
 }

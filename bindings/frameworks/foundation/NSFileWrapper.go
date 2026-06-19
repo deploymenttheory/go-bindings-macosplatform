@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a node (a file, directory, or symbolic link) in the file system.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilewrapper
 type NSFileWrapper struct {
 	NSObject
@@ -207,12 +209,15 @@ func (o *NSFileWrapper) SetFilename(filename *NSString) {
 }
 
 func (o *NSFileWrapper) FileAttributes() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSFileWrapperSelFileAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileWrapperSelFileAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSFileWrapper) SetFileAttributes(fileAttributes *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSFileWrapperSelSetFileAttributes, fileAttributes)
+	o.Ptr().Send(_nSFileWrapperSelSetFileAttributes, fileAttributes.Ptr())
 }
 
 func (o *NSFileWrapper) SerializedRepresentation() *NSData {

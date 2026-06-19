@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The object you use to start and stop the delivery of location-related events to your app.
+//
 // LocationManager wraps [raw.CLLocationManager] with a fluent Go API.
 type LocationManager struct {
 	inner *raw.CLLocationManager
@@ -39,6 +41,8 @@ func NewLocationManager() *LocationManager {
 	return &LocationManager{inner: raw.CLLocationManagerFromID(_id)}
 }
 
+// The delegate object to receive update events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *LocationManager) WithDelegate(delegate raw.CLLocationManagerDelegate) *LocationManager {
 	x.inner.SetDelegate(delegate)
@@ -51,40 +55,54 @@ func (x *LocationManager) WithPurpose(purpose string) *LocationManager {
 	return x
 }
 
+// The type of activity the app expects the user to typically perform while in the app’s location session.
+//
 // WithActivityType sets the activityType property and returns the receiver for chaining.
 func (x *LocationManager) WithActivityType(activityType CLActivityType) *LocationManager {
 	x.inner.SetActivityType(raw.CLActivityType(activityType))
 	return x
 }
 
+// A Boolean value that indicates whether the location-manager object may pause location updates.
+//
 // WithPausesLocationUpdatesAutomatically sets the pausesLocationUpdatesAutomatically property and returns the receiver for chaining.
 func (x *LocationManager) WithPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool) *LocationManager {
 	x.inner.SetPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically)
 	return x
 }
 
+// A Boolean value that indicates whether the app receives location updates when running in the background.
+//
 // WithAllowsBackgroundLocationUpdates sets the allowsBackgroundLocationUpdates property and returns the receiver for chaining.
 func (x *LocationManager) WithAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool) *LocationManager {
 	x.inner.SetAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates)
 	return x
 }
 
+// The device orientation to use when computing heading values.
+//
 // WithHeadingOrientation sets the headingOrientation property and returns the receiver for chaining.
 func (x *LocationManager) WithHeadingOrientation(headingOrientation CLDeviceOrientation) *LocationManager {
 	x.inner.SetHeadingOrientation(raw.CLDeviceOrientation(headingOrientation))
 	return x
 }
 
+// Requests the user’s permission to use location services while the app is in use.
+//
 // RequestWhenInUseAuthorization calls the underlying RequestWhenInUseAuthorization.
 func (x *LocationManager) RequestWhenInUseAuthorization() {
 	x.inner.RequestWhenInUseAuthorization()
 }
 
+// Requests the user’s permission to use location services regardless of whether the app is in use.
+//
 // RequestAlwaysAuthorization calls the underlying RequestAlwaysAuthorization.
 func (x *LocationManager) RequestAlwaysAuthorization() {
 	x.inner.RequestAlwaysAuthorization()
 }
 
+// Requests permission to temporarily use location services with full accuracy and reports the results to the provided completion handler.
+//
 // RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion blocks until the operation completes or ctx is cancelled.
 func (x *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(ctx context.Context, purposeKey string) error {
 	_ch := make(chan error, 1)
@@ -103,41 +121,57 @@ func (x *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKe
 	}
 }
 
+// Requests permission to temporarily use location services with full accuracy.
+//
 // RequestTemporaryFullAccuracyAuthorizationWithPurposeKey calls the underlying RequestTemporaryFullAccuracyAuthorizationWithPurposeKey.
 func (x *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKey(purposeKey string) {
 	x.inner.RequestTemporaryFullAccuracyAuthorizationWithPurposeKey(foundation.NSStringStringWithUTF8String(purposeKey))
 }
 
+// Starts the generation of updates that report the user’s current location.
+//
 // StartUpdatingLocation calls the underlying StartUpdatingLocation.
 func (x *LocationManager) StartUpdatingLocation() {
 	x.inner.StartUpdatingLocation()
 }
 
+// Stops the generation of location updates.
+//
 // StopUpdatingLocation calls the underlying StopUpdatingLocation.
 func (x *LocationManager) StopUpdatingLocation() {
 	x.inner.StopUpdatingLocation()
 }
 
+// Requests the one-time delivery of the user’s current location.
+//
 // RequestLocation calls the underlying RequestLocation.
 func (x *LocationManager) RequestLocation() {
 	x.inner.RequestLocation()
 }
 
+// Starts the generation of updates that report the user’s current heading.
+//
 // StartUpdatingHeading calls the underlying StartUpdatingHeading.
 func (x *LocationManager) StartUpdatingHeading() {
 	x.inner.StartUpdatingHeading()
 }
 
+// Dismisses the heading calibration view from the screen immediately.
+//
 // DismissHeadingCalibrationDisplay calls the underlying DismissHeadingCalibrationDisplay.
 func (x *LocationManager) DismissHeadingCalibrationDisplay() {
 	x.inner.DismissHeadingCalibrationDisplay()
 }
 
+// Starts the generation of updates based on significant location changes.
+//
 // StartMonitoringSignificantLocationChanges calls the underlying StartMonitoringSignificantLocationChanges.
 func (x *LocationManager) StartMonitoringSignificantLocationChanges() {
 	x.inner.StartMonitoringSignificantLocationChanges()
 }
 
+// Stops the delivery of location events based on significant location changes.
+//
 // StopMonitoringSignificantLocationChanges calls the underlying StopMonitoringSignificantLocationChanges.
 func (x *LocationManager) StopMonitoringSignificantLocationChanges() {
 	x.inner.StopMonitoringSignificantLocationChanges()
@@ -173,11 +207,15 @@ func (x *LocationManager) StopRangingBeaconsInRegion(region *raw.CLBeaconRegion)
 	x.inner.StopRangingBeaconsInRegion(region)
 }
 
+// Starts the delivery of notifications for the specified beacon constraints.
+//
 // StartRangingBeaconsSatisfyingConstraint calls the underlying StartRangingBeaconsSatisfyingConstraint.
 func (x *LocationManager) StartRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint) {
 	x.inner.StartRangingBeaconsSatisfyingConstraint(constraint)
 }
 
+// Stops the delivery of notifications for the specified beacon constraints.
+//
 // StopRangingBeaconsSatisfyingConstraint calls the underlying StopRangingBeaconsSatisfyingConstraint.
 func (x *LocationManager) StopRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint) {
 	x.inner.StopRangingBeaconsSatisfyingConstraint(constraint)
@@ -346,11 +384,15 @@ func (x *LocationManager) RangedBeaconConstraints() *foundation.NSSet[*raw.CLBea
 	return x.inner.RangedBeaconConstraints()
 }
 
+// Starts the delivery of visit-related events.
+//
 // StartMonitoringVisits calls the underlying StartMonitoringVisits.
 func (x *LocationManager) StartMonitoringVisits() {
 	x.inner.StartMonitoringVisits()
 }
 
+// Stops the delivery of visit-related events.
+//
 // StopMonitoringVisits calls the underlying StopMonitoringVisits.
 func (x *LocationManager) StopMonitoringVisits() {
 	x.inner.StopMonitoringVisits()

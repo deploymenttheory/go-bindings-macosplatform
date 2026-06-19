@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A window controller that displays available network audio devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/canetworkbrowserwindowcontroller
 type CANetworkBrowserWindowController struct {
 	appkit.NSWindowController
@@ -31,13 +33,13 @@ func CANetworkBrowserWindowControllerFromID(id objc.ID) *CANetworkBrowserWindowC
 	return o
 }
 
-// @discussion Provides a check for determining if the current machine hardware supports AVB. @return True if AVB is supported.
+// Returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).
 func CANetworkBrowserWindowControllerIsAVBSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCANetworkBrowserWindowController), _cANetworkBrowserWindowControllerSelIsAVBSupported)
 	return _ret
 }
 
-// @discussion Designated initializer @return initialized instance of CANetworkBrowerWindowController
+// Creates a new network browser window controller.
 func (o *CANetworkBrowserWindowController) Init() *CANetworkBrowserWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cANetworkBrowserWindowControllerSelInit)
 	if _ret != 0 {

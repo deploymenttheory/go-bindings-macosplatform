@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that decodes GeoJSON objects into MapKit types.
+//
 // GeoJSONDecoder wraps [raw.MKGeoJSONDecoder] with a fluent Go API.
 type GeoJSONDecoder struct {
 	inner *raw.MKGeoJSONDecoder
@@ -36,6 +38,8 @@ func NewGeoJSONDecoder() *GeoJSONDecoder {
 	return &GeoJSONDecoder{inner: raw.MKGeoJSONDecoderFromID(_id)}
 }
 
+// Decodes the provided data into native MapKit types that a map can display.
+//
 // GeoJSONObjectsWithDataError calls the underlying GeoJSONObjectsWithDataError.
 func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[raw.MKGeoJSONObject], error) {
 	return x.inner.GeoJSONObjectsWithDataError(data)

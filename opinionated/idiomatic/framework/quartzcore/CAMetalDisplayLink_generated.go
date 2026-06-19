@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class your Metal app uses to register for callbacks to synchronize its animations for a display.
+//
 // MetalDisplayLink wraps [raw.CAMetalDisplayLink] with a fluent Go API.
 type MetalDisplayLink struct {
 	inner *raw.CAMetalDisplayLink
@@ -30,6 +32,8 @@ func MetalDisplayLinkFromID(id objc.ID) *MetalDisplayLink {
 	return &MetalDisplayLink{inner: raw.CAMetalDisplayLinkFromID(id)}
 }
 
+// Creates a display link for Metal from a Core Animation layer.
+//
 // NewMetalDisplayLinkWithMetalLayer creates a new [MetalDisplayLink].
 func NewMetalDisplayLinkWithMetalLayer(layer *raw.CAMetalLayer) *MetalDisplayLink {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAMetalDisplayLink")), objc.RegisterName("alloc"))
@@ -37,40 +41,54 @@ func NewMetalDisplayLinkWithMetalLayer(layer *raw.CAMetalLayer) *MetalDisplayLin
 	return &MetalDisplayLink{inner: raw.CAMetalDisplayLinkFromID(_id)}
 }
 
+// An instance of a type your app implements that responds to the system’s callbacks.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *MetalDisplayLink) WithDelegate(delegate raw.CAMetalDisplayLinkDelegate) *MetalDisplayLink {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The amount of time, in frames, your app requests to render a frame.
+//
 // WithPreferredFrameLatency sets the preferredFrameLatency property and returns the receiver for chaining.
 func (x *MetalDisplayLink) WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink {
 	x.inner.SetPreferredFrameLatency(preferredFrameLatency)
 	return x
 }
 
+// A range of frequencies your app allows for frame updates, affecting how often the system invokes your delegate’s callback.
+//
 // WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
 func (x *MetalDisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *MetalDisplayLink {
 	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
 	return x
 }
 
+// A Boolean value that indicates whether the system suspends the display link’s notifications to the target.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// Registers the display link with a run loop.
+//
 // AddToRunLoopForMode calls the underlying AddToRunLoopForMode.
 func (x *MetalDisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	x.inner.AddToRunLoopForMode(runloop, mode)
 }
 
+// Removes a mode’s display link from a run loop.
+//
 // RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
 func (x *MetalDisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	x.inner.RemoveFromRunLoopForMode(runloop, mode)
 }
 
+// Removes the display link from all run loops for all modes.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *MetalDisplayLink) Invalidate() {
 	x.inner.Invalidate()

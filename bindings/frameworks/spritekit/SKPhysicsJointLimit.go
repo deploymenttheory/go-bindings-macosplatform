@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsjointlimit
 type SKPhysicsJointLimit struct {
 	SKPhysicsJoint
@@ -32,6 +34,7 @@ func SKPhysicsJointLimitFromID(id objc.ID) *SKPhysicsJointLimit {
 	return o
 }
 
+// Creates a new limit joint.
 func SKPhysicsJointLimitJointWithBodyABodyBAnchorAAnchorB(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *SKPhysicsJointLimit {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointLimit), _sKPhysicsJointLimitSelJointWithBodyABodyBAnchorAAnchorB, bodyA.Ptr(), bodyB.Ptr(), anchorA, anchorB)
 	if _ret != 0 {

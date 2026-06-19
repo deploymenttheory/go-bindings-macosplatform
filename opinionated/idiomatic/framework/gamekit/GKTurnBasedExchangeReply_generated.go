@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Details about a recipient’s response to an exchange request.
+//
 // TurnBasedExchangeReply wraps [raw.GKTurnBasedExchangeReply] with a fluent Go API.
 type TurnBasedExchangeReply struct {
 	inner *raw.GKTurnBasedExchangeReply

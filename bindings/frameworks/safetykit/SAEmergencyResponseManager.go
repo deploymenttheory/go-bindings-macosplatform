@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Provides actions in response to a Crash Detection event.
+//
 // Apple documentation: https://developer.apple.com/documentation/safetykit/saemergencyresponsemanager
 type SAEmergencyResponseManager struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func SAEmergencyResponseManagerFromID(id objc.ID) *SAEmergencyResponseManager {
 	return o
 }
 
-// @discussion Requests the system to dial a voice call on behalf of the user. Apps running in the background / foreground can request to dial a voice call without user confirmation. Emergency numbers are not allowed. Requests are accepted only if user has authorized the app to receive and handle emergency detection events and only for a limited time after an emergency event is detected. @sa SAEmergencyResponseDelegate @param phoneNumber Apps can request the system to dial a voice call by providing a phone number. Emergency numbers are not allowed. @param handler Completion handler invoked with the status of the voice call request. If requested is accepted, the handler is invoked with a nil error. Interpret the error returned using SAErrorDomain. Requests will fail with SAErrorNotAuthorized if user has not authorized the app to receive and handle any emergency events. Requests will fail with SAErrorNotAvailable if invoked outside of the limited time window after an emergency event is detected. Use the SAEmergencyResponseDelegate to monitor the progress of the voice call.
+// Request the system to dial a voice call on behalf of someone involved in a crash.
 func (o *SAEmergencyResponseManager) DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber *foundation.NSString, handler func(bool, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

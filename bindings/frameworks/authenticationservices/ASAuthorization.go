@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The encapsulation of a successful authorization by a controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorization
 type ASAuthorization struct {
 	foundation.NSObject

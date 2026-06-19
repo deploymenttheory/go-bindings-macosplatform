@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class represents an artist, such as the performer of a song.
+//
 // LibArtist wraps [raw.ITLibArtist] with a fluent Go API.
 type LibArtist struct {
 	inner *raw.ITLibArtist

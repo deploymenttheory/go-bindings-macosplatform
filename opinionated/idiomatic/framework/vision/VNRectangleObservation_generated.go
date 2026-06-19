@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the four vertices of a detected rectangle.
+//
 // RectangleObservation wraps [raw.VNRectangleObservation] with a fluent Go API.
 type RectangleObservation struct {
 	inner *raw.VNRectangleObservation

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that represents a cumulative quantity.
+//
 // CumulativeQuantitySample wraps [raw.HKCumulativeQuantitySample] with a fluent Go API.
 type CumulativeQuantitySample struct {
 	inner *raw.HKCumulativeQuantitySample

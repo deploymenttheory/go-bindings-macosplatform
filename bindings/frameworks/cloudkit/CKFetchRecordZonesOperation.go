@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation for retrieving record zones from a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonesoperation
 type CKFetchRecordZonesOperation struct {
 	CKDatabaseOperation
@@ -40,7 +42,7 @@ func CKFetchRecordZonesOperationFromID(id objc.ID) *CKFetchRecordZonesOperation 
 	return o
 }
 
-// Returns an operation for fetching all record zones in the current database. Assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property of the operation that this method returns so that you can process the results.
+// Returns an operation for fetching all record zones in the current database.
 func CKFetchRecordZonesOperationFetchAllRecordZonesOperation() *CKFetchRecordZonesOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKFetchRecordZonesOperation), _cKFetchRecordZonesOperationSelFetchAllRecordZonesOperation)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func CKFetchRecordZonesOperationFetchAllRecordZonesOperation() *CKFetchRecordZon
 	return CKFetchRecordZonesOperationFromID(_ret)
 }
 
-// Creates an empty fetch zones operation. You must set the “CKFetchRecordZonesOperation/recordZoneIDs“ property before you execute the operation. After creating the operation, assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property so you can process the results.
+// Creates an empty fetch zones operation.
 func (o *CKFetchRecordZonesOperation) Init() *CKFetchRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZonesOperationSelInit)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *CKFetchRecordZonesOperation) Init() *CKFetchRecordZonesOperation {
 	return CKFetchRecordZonesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching the specified record zones. - Parameters: - zoneIDs: An array of “CKRecordZone/ID“ objects that represents the zones you want to retrieve. If you provide an empty array, you must set the “CKFetchRecordZonesOperation/recordZoneIDs“ property before you execute the operation. After creating the operation, assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property so you can process the results.
+// Creates an operation for fetching the specified record zones.
 func (o *CKFetchRecordZonesOperation) InitWithRecordZoneIDs(zoneIDs *foundation.NSArray[*CKRecordZoneID]) *CKFetchRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZonesOperationSelInitWithRecordZoneIDs, zoneIDs.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Description of an Index Element
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription
 type NSFetchIndexElementDescription struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSFetchIndexElementDescriptionFromID(id objc.ID) *NSFetchIndexElementDescri
 	return o
 }
 
+// Creates an index element description using the specified property description and collation type.
 func (o *NSFetchIndexElementDescription) InitWithPropertyCollationType(property *NSPropertyDescription, collationType NSFetchIndexElementType) *NSFetchIndexElementDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexElementDescriptionSelInitWithPropertyCollationType, property.Ptr(), collationType)
 	if _ret != 0 {

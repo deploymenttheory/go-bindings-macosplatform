@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol effect that applies the DrawOff animation to symbol images.
+//
 // SymbolDrawOffEffect wraps [raw.NSSymbolDrawOffEffect] with a fluent Go API.
 type SymbolDrawOffEffect struct {
 	inner *raw.NSSymbolDrawOffEffect

@@ -8,12 +8,17 @@ import (
 	"strings"
 )
 
+// The kinds of outcomes that a binary activity item can represent.
 type CLSBinaryValueType int64
 
 const (
-	CLSBinaryValueTypeTrueFalse        CLSBinaryValueType = 0
-	CLSBinaryValueTypePassFail         CLSBinaryValueType = 1
-	CLSBinaryValueTypeYesNo            CLSBinaryValueType = 2
+	// True or false.
+	CLSBinaryValueTypeTrueFalse CLSBinaryValueType = 0
+	// Pass or fail.
+	CLSBinaryValueTypePassFail CLSBinaryValueType = 1
+	// Yes or no.
+	CLSBinaryValueTypeYesNo CLSBinaryValueType = 2
+	// Correct or incorrect.
 	CLSBinaryValueTypeCorrectIncorrect CLSBinaryValueType = 3
 )
 
@@ -32,27 +37,46 @@ func (e CLSBinaryValueType) String() string {
 	}
 }
 
+// The kinds of assignable content a context can contain.
 type CLSContextType int64
 
 const (
-	CLSContextTypeNone      CLSContextType = 0
-	CLSContextTypeApp       CLSContextType = 1
-	CLSContextTypeChapter   CLSContextType = 2
-	CLSContextTypeSection   CLSContextType = 3
-	CLSContextTypeLevel     CLSContextType = 4
-	CLSContextTypePage      CLSContextType = 5
-	CLSContextTypeTask      CLSContextType = 6
+	// No type is assigned.
+	CLSContextTypeNone CLSContextType = 0
+	// An app context.
+	CLSContextTypeApp CLSContextType = 1
+	// A chapter context.
+	CLSContextTypeChapter CLSContextType = 2
+	// A section context.
+	CLSContextTypeSection CLSContextType = 3
+	// A level context.
+	CLSContextTypeLevel CLSContextType = 4
+	// A page context.
+	CLSContextTypePage CLSContextType = 5
+	// A task context.
+	CLSContextTypeTask CLSContextType = 6
+	// A challenge context.
 	CLSContextTypeChallenge CLSContextType = 7
-	CLSContextTypeQuiz      CLSContextType = 8
-	CLSContextTypeExercise  CLSContextType = 9
-	CLSContextTypeLesson    CLSContextType = 10
-	CLSContextTypeBook      CLSContextType = 11
-	CLSContextTypeGame      CLSContextType = 12
-	CLSContextTypeDocument  CLSContextType = 13
-	CLSContextTypeAudio     CLSContextType = 14
-	CLSContextTypeVideo     CLSContextType = 15
-	CLSContextTypeCourse    CLSContextType = 16
-	CLSContextTypeCustom    CLSContextType = 17
+	// A quiz context.
+	CLSContextTypeQuiz CLSContextType = 8
+	// An exercise context.
+	CLSContextTypeExercise CLSContextType = 9
+	// A lesson context.
+	CLSContextTypeLesson CLSContextType = 10
+	// A book context.
+	CLSContextTypeBook CLSContextType = 11
+	// A game context.
+	CLSContextTypeGame CLSContextType = 12
+	// A document context.
+	CLSContextTypeDocument CLSContextType = 13
+	// An audio context.
+	CLSContextTypeAudio CLSContextType = 14
+	// A video context.
+	CLSContextTypeVideo CLSContextType = 15
+	// A context that represents an entire course.
+	CLSContextTypeCourse CLSContextType = 16
+	// A context for assignable content that isn’t represented by one of the built-in context types.
+	CLSContextTypeCustom CLSContextType = 17
 )
 
 func (e CLSContextType) String() string {
@@ -98,6 +122,7 @@ func (e CLSContextType) String() string {
 	}
 }
 
+// Error codes that ClassKit issues.
 type CLSErrorCode int64
 
 const (
@@ -143,6 +168,7 @@ func (e CLSErrorCode) String() string {
 	}
 }
 
+// The available kinds of progress reporting that a context can perform.
 type CLSProgressReportingCapabilityKind int64
 
 const (

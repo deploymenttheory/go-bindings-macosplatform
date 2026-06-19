@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates an IEEE 802.11 channel.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwchannel
 type CWChannel struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func CWChannelFromID(id objc.ID) *CWChannel {
 	return o
 }
 
-// @method @param channel The CWChannel with which to compare the receiver. @result YES if the objects are equal, otherwise NO. @abstract Determine CWChannel equality. @discussion CWChannel objects are considered equal if all their corresponding properties are equal.
+// Determine CWChannel object equality.
 func (o *CWChannel) IsEqualToChannel(channel *CWChannel) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWChannelSelIsEqualToChannel, channel.Ptr())
 	return _ret

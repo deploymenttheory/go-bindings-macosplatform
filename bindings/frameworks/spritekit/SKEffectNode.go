@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A SpriteKit node that applies frame buffer effects to the rendered results of its child nodes. This is done continuously on live content and is not a simple snapshot of the rendered result at one instant of time.
+// A node that renders its children into a separate buffer, optionally applying an effect, before drawing the final result.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skeffectnode
 type SKEffectNode struct {

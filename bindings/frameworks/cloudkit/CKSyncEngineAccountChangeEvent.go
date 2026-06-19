@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user signed in or out of their account.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncengineaccountchangeevent
 type CKSyncEngineAccountChangeEvent struct {
 	CKSyncEngineEvent

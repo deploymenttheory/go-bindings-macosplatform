@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that performs a conversion of color space, alpha, or pixel format.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconversion
 type MPSImageConversion struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,7 +37,7 @@ func MPSImageConversionFromID(id objc.ID) *MPSImageConversion {
 	return o
 }
 
-// @abstract   Create a converter that can convert texture colorspace, alpha and texture format @discussion Create a converter that can convert texture colorspace, alpha and MTLPixelFormat. Optimized cases exist for NULL color space converter and no alpha conversion. @param      device              The device the filter will run on @param      srcAlpha            The alpha encoding for the source texture @param      destAlpha           The alpha encoding for the destination texture @param      backgroundColor     An array of CGFloats giving the background color to use when flattening an image. The color is in the source colorspace.  The length of the array is the number of color channels in the src colorspace. If NULL, use {0}. @param      conversionInfo      The colorspace conversion to use. May be NULL, indicating no color space conversions need to be done. @result     An initialized MPSImageConversion object.
+// Initializes a filter that can convert texture color space, alpha, and pixel format.
 func (o *MPSImageConversion) InitWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(device metal.MTLDevice, srcAlpha mpsimage.MPSAlphaType, destAlpha mpsimage.MPSAlphaType, backgroundColor *float64, conversionInfo unsafe.Pointer) *MPSImageConversion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageConversionSelInitWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo, device, srcAlpha, destAlpha, backgroundColor, conversionInfo)
 	if _ret != 0 {

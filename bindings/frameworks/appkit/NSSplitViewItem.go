@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item in a split view controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssplitviewitem
 type NSSplitViewItem struct {
 	foundation.NSObject
@@ -72,7 +74,7 @@ func NSSplitViewItemFromID(id objc.ID) *NSSplitViewItem {
 	return o
 }
 
-// Creates an autoreleased SplitViewItem that represents the provided ViewController. All other properties are left at their default. \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem.
+// Creates a split view item that represents the specified view controller.
 func NSSplitViewItemSplitViewItemWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelSplitViewItemWithViewController, viewController.Ptr())
 	if _ret != 0 {
@@ -81,7 +83,7 @@ func NSSplitViewItemSplitViewItemWithViewController(viewController *NSViewContro
 	return NSSplitViewItemFromID(_ret)
 }
 
-// Creates a split view item representing a sidebar for the provided ViewController. Sidebars have standard system behavior, specifically: - Translucent material background - The ability to collapse/uncollapse on split view size changes - The ability to overlay at small split view sizes when in fullscreen - canCollapse is set to YES - minimumThickness and maximumThickness are set to the standard minimum and maximum sidebar size - preferredThicknessFraction is set to the standard fraction for sidebars (0.15) - springLoaded is set to YES \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem that acts as a sidebar.
+// Creates a split view item that represents a sidebar for the specified view controller.
 func NSSplitViewItemSidebarWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelSidebarWithViewController, viewController.Ptr())
 	if _ret != 0 {
@@ -90,7 +92,7 @@ func NSSplitViewItemSidebarWithViewController(viewController *NSViewController) 
 	return NSSplitViewItemFromID(_ret)
 }
 
-// Creates a split view item representing a content list for the provided ViewController, akin to Mail's message list, Note's note list. Content lists have system standard defaults, specifically: - minimumThickness and maximumThickness are set to the system standard for content lists - automaticMaximumThickness is set to the system standard for content lists - preferredThicknessFraction is set to the standard fraction for content lists (0.28 when a neighbor sidebar is visible, 0.33 if not) \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem that acts as a content list.
+// Creates a split view item that represents a content list for the specified view controller.
 func NSSplitViewItemContentListWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelContentListWithViewController, viewController.Ptr())
 	if _ret != 0 {
@@ -99,7 +101,7 @@ func NSSplitViewItemContentListWithViewController(viewController *NSViewControll
 	return NSSplitViewItemFromID(_ret)
 }
 
-// Creates a split view item representing an inspector for the provided ViewController. On macOS 14.0 and above inspectors have the following standard system behavior: - canCollapse is set to YES - minimumThickness and maximumThickness are set to the standard inspector size (270) and are not resizable by default \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem that acts as an inspector.
+// Creates a split view item that represents an inspector for the specified view controller.
 func NSSplitViewItemInspectorWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelInspectorWithViewController, viewController.Ptr())
 	if _ret != 0 {
@@ -116,7 +118,7 @@ func (o *NSSplitViewItem) InsertTopAlignedAccessoryViewControllerAtIndex(childVi
 	o.Ptr().Send(_nSSplitViewItemSelInsertTopAlignedAccessoryViewControllerAtIndex, childViewController.Ptr(), index)
 }
 
-// NOTE: you can use this method, or `-removeFromParentViewController:`, whichever is easier.
+// NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
 func (o *NSSplitViewItem) RemoveTopAlignedAccessoryViewControllerAtIndex(index int) {
 	o.Ptr().Send(_nSSplitViewItemSelRemoveTopAlignedAccessoryViewControllerAtIndex, index)
 }
@@ -129,7 +131,7 @@ func (o *NSSplitViewItem) InsertBottomAlignedAccessoryViewControllerAtIndex(chil
 	o.Ptr().Send(_nSSplitViewItemSelInsertBottomAlignedAccessoryViewControllerAtIndex, childViewController.Ptr(), index)
 }
 
-// NOTE: you can use this method, or `-removeFromParentViewController:`, whichever is easier.
+// NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
 func (o *NSSplitViewItem) RemoveBottomAlignedAccessoryViewControllerAtIndex(index int) {
 	o.Ptr().Send(_nSSplitViewItemSelRemoveBottomAlignedAccessoryViewControllerAtIndex, index)
 }

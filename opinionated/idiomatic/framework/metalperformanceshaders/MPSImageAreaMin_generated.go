@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that finds the minimum pixel value in a rectangular region centered around each pixel in the source image.
+//
 // ImageAreaMin wraps [raw.MPSImageAreaMin] with a fluent Go API.
 type ImageAreaMin struct {
 	inner *raw.MPSImageAreaMin
@@ -39,7 +41,7 @@ func NewImageAreaMin() *ImageAreaMin {
 	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageAreaMin) WithOffset(offset mpscore.MPSOffset) *ImageAreaMin {
@@ -47,7 +49,7 @@ func (x *ImageAreaMin) WithOffset(offset mpscore.MPSOffset) *ImageAreaMin {
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageAreaMin) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin {
@@ -55,7 +57,7 @@ func (x *ImageAreaMin) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin {
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin {
@@ -63,7 +65,7 @@ func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAre
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageAreaMin) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMin {
@@ -71,7 +73,7 @@ func (x *ImageAreaMin) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaM
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageAreaMin) WithLabel(label string) *ImageAreaMin {

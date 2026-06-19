@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An ordered list of color objects, identified by keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorlist
 type NSColorList struct {
 	foundation.NSObject
@@ -45,6 +47,7 @@ func NSColorListFromID(id objc.ID) *NSColorList {
 	return o
 }
 
+// Searches the available color lists array and returns the color list with the specified name.
 func NSColorListColorListNamed(name *foundation.NSString) *NSColorList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorList), _nSColorListSelColorListNamed, name.Ptr())
 	if _ret != 0 {
@@ -53,6 +56,7 @@ func NSColorListColorListNamed(name *foundation.NSString) *NSColorList {
 	return NSColorListFromID(_ret)
 }
 
+// Initializes and returns a color list, registering it under the specified name if it isn’t in use already.
 func (o *NSColorList) InitWithName(name *foundation.NSString) *NSColorList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelInitWithName, name.Ptr())
 	if _ret != 0 {
@@ -61,6 +65,7 @@ func (o *NSColorList) InitWithName(name *foundation.NSString) *NSColorList {
 	return NSColorListFromID(_ret)
 }
 
+// Initializes and returns a color list from the specified file, registering it under the specified name if it isn’t in use already.
 func (o *NSColorList) InitWithNameFromFile(name *foundation.NSString, path *foundation.NSString) *NSColorList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelInitWithNameFromFile, name.Ptr(), path.Ptr())
 	if _ret != 0 {
@@ -69,18 +74,22 @@ func (o *NSColorList) InitWithNameFromFile(name *foundation.NSString, path *foun
 	return NSColorListFromID(_ret)
 }
 
+// Associates the specified color object with the specified key.
 func (o *NSColorList) SetColorForKey(color *NSColor, key *foundation.NSString) {
 	o.Ptr().Send(_nSColorListSelSetColorForKey, color.Ptr(), key.Ptr())
 }
 
+// Inserts the specified color at the specified location in the color list.
 func (o *NSColorList) InsertColorKeyAtIndex(color *NSColor, key *foundation.NSString, loc uint) {
 	o.Ptr().Send(_nSColorListSelInsertColorKeyAtIndex, color.Ptr(), key.Ptr(), loc)
 }
 
+// Removes the color associated with the specified key from the color list.
 func (o *NSColorList) RemoveColorWithKey(key *foundation.NSString) {
 	o.Ptr().Send(_nSColorListSelRemoveColorWithKey, key.Ptr())
 }
 
+// Returns the color object associated with the specified key.
 func (o *NSColorList) ColorWithKey(key *foundation.NSString) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelColorWithKey, key.Ptr())
 	if _ret != 0 {
@@ -89,6 +98,7 @@ func (o *NSColorList) ColorWithKey(key *foundation.NSString) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Saves the color list to the file at the specified URL.
 func (o *NSColorList) WriteToURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSColorListSelWriteToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -98,12 +108,14 @@ func (o *NSColorList) WriteToURLError(url *foundation.NSURL) (bool, error) {
 	return _ret, nil
 }
 
+// Saves the color list to the file at the specified path.
 // Deprecated: Use -writeToURL:error: instead
 func (o *NSColorList) WriteToFile(path *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSColorListSelWriteToFile, path.Ptr())
 	return _ret
 }
 
+// Removes the file from which the list was created, if the file is in a standard search path and owned by the user.
 // Deprecated: Use -writeToURL:error: instead
 func (o *NSColorList) RemoveFile() {
 	o.Ptr().Send(_nSColorListSelRemoveFile)
@@ -126,8 +138,11 @@ func (o *NSColorList) Name() *foundation.NSString {
 }
 
 func (o *NSColorList) AllKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSColorListSelAllKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelAllKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSColorList) IsEditable() bool {

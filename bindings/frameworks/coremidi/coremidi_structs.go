@@ -15,6 +15,7 @@ type MIDI2DeviceRevisionLevel struct {
 	RevisionLevel [4]uint8
 }
 
+// A structure that describes a MIDI-CI device.
 type MIDICIDeviceIdentification struct {
 	Manufacturer  [3]uint8
 	Family        [2]uint8
@@ -41,7 +42,7 @@ type MIDICIProfileIDStandard struct {
 	ProfileLevel   uint8
 }
 
-// @struct     MIDIControlTransform @abstract   Describes a transformation of MIDI control change events. A single MIDIThruConnectionParams may describe any number of transformations to control events. It is important that multiple transformations are ordered correctly: filter out, remap, then alter values. All transformations are done internally using 14-bit values, so for example, when doing an add/min/max transform on a 7-bit control value, the parameter must be a 14-bit value. For example, to add 10 to a control value, param must be (10 << 7) = 1280. As per the MIDI specification, a number of controls are interpreted specially: Control | Function --------|--------- 32-63   | the LSBs of 0-31 6/38    | data entry 96, 97  | data increment, decrement 98-101  | NRPN/RPN @field  controlType         The type of control specified by controlNumber @field  remappedControlType If transform is kMIDITransform_MapControl, the output control type @field  controlNumber       The control number to be affected. @field  transform           The type of transformation to be applied to the event values. @field  param               An argument to the transformation method (see description of MIDITransformType).
+// A structure that describes the transformation of MIDI control change events.
 type MIDIControlTransform struct {
 	ControlType         MIDITransformControlType
 	RemappedControlType MIDITransformControlType
@@ -50,7 +51,7 @@ type MIDIControlTransform struct {
 	Param               int16
 }
 
-// @struct		MIDIDriverInterface @abstract		The COM-style interface to a MIDI driver. @discussion This is the function table interface to a MIDI driver.  Version 1 and 2 drivers use this same table of function pointers (except as noted). Drivers which support multiple version interfaces can tell which version of the server is running by checking to see whether kMIDIDriverInterface2ID or kMIDIDriverInterfaceID is passed to the factory function. If the version 1 interface is requested, the driver should behave as if it is a version 1 driver.
+// The interface to a MIDI driver.
 type MIDIDriverInterface struct {
 	QueryInterface unsafe.Pointer
 	AddRef         unsafe.Pointer
@@ -67,20 +68,21 @@ type MIDIDriverInterface struct {
 	MonitorEvents  unsafe.Pointer
 }
 
-// @struct			MIDIEventList @abstract		A variable-length list of MIDIEventPackets. @discussion The timestamps in the list must be in ascending order. Note that the packets in the list, while defined as an array, may not be accessed as an array, since they are variable-length.  To iterate through the packets in an event list, use a loop such as: ``` MIDIEventPacket *packet = &packetList->packet[0]; for (unsigned i = 0; i < packetList->numPackets; ++i) { ... packet = MIDIEventPacketNext(packet); } ``` WARNING: When using MIDIEventList in C++ be aware of the following: MIDIEventList is a variable-length struct and should ALWAYS be passed-by-pointer rather than passed-by-reference. Conversion from a MIDIEventList reference to a pointer is undefined behavior and can lead to the unintended truncation of data. @field	protocol The MIDI protocol variant of the events in the list. @field	numPackets The number of MIDIEventPacket structs in the list. @field	packet An open-ended array of variable-length MIDIEventPacket structs.
+// A variable-length list of MIDI event packets.
 type MIDIEventList struct {
 	Protocol   MIDIProtocolID
 	NumPackets uint
 	Packet     [1]MIDIEventPacket
 }
 
-// @struct			MIDIEventPacket @abstract		A series of simultaneous MIDI events in UMP format. @discussion WARNING: When using MIDIEventPacket in C++ be aware of the following: MIDIEventPacket is a variable-length struct and should ALWAYS be passed-by-pointer rather than passed-by-reference. Conversion from a MIDIEventPacket reference to a pointer is undefined behavior and can lead to the unintended truncation of data. @field			timeStamp The time at which the events occurred, if receiving MIDI, or, if sending MIDI, the time at which the events are to be played.  Zero means "now."  The time stamp applies applies to each UMP in the word stream. @field			wordCount The number of valid MIDI 32-bit words which follow, in data. (It may be larger than 64 words if the packet is dynamically allocated.) @field			words A variable-length stream of native-endian 32-bit Universal MIDI Packets. Running status is not allowed.  In the case of system-exclusive messages, a packet may only contain a single message, or portion of one, with no other MIDI events. Messages must always be syntactically complete; for example, for 64-bit message types, both words must be present in the same packet. The same MIDI message constraints from above apply here. (This is declared to be 64 words in length so clients don't have to create custom data structures in simple situations.)
+// A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.
 type MIDIEventPacket struct {
 	TimeStamp uint64
 	WordCount uint
 	Words     [64]uint
 }
 
+// A general I/O error notification.
 type MIDIIOErrorNotification struct {
 	MessageID    MIDINotificationMessageID
 	MessageSize  uint
@@ -88,6 +90,7 @@ type MIDIIOErrorNotification struct {
 	ErrorCode    int
 }
 
+// A 128-bit MIDI message.
 type MIDIMessage_128 struct {
 	Word0 uint
 	Word1 uint
@@ -95,24 +98,26 @@ type MIDIMessage_128 struct {
 	Word3 uint
 }
 
+// A 64-bit MIDI message.
 type MIDIMessage_64 struct {
 	Word0 uint
 	Word1 uint
 }
 
+// A 96-bit MIDI message.
 type MIDIMessage_96 struct {
 	Word0 uint
 	Word1 uint
 	Word2 uint
 }
 
-// @struct			MIDINotification @abstract		A message describing a system state change. @discussion A MIDINotification is a structure passed to a MIDINotifyProc or MIDINotifyBlock, when CoreMIDI wishes to inform a client of a change in the state of the system. @field			messageID type of message @field			messageSize size of the entire message, including messageID and messageSize
+// A message that describes a system state change.
 type MIDINotification struct {
 	MessageID   MIDINotificationMessageID
 	MessageSize uint
 }
 
-// @struct			MIDIObjectAddRemoveNotification @abstract		A message describing the addition or removal of an object. @field			messageID type of message @field			messageSize size of the entire message, including messageID and messageSize @field			parent the parent of the added or removed object (possibly NULL) @field			parentType the type of the parent object (undefined if parent is NULL) @field			child the added or removed object @field			childType the type of the added or removed object
+// A message that describes the addition or removal of an object.
 type MIDIObjectAddRemoveNotification struct {
 	MessageID   MIDINotificationMessageID
 	MessageSize uint
@@ -122,7 +127,7 @@ type MIDIObjectAddRemoveNotification struct {
 	ChildType   MIDIObjectType
 }
 
-// @struct			MIDIObjectPropertyChangeNotification @abstract		A message describing the addition or removal of an object. @field			messageID type of message @field			messageSize size of the entire message, including messageID and messageSize @field			object the object whose property has changed @field			objectType the type of the object whose property has changed @field			propertyName the name of the changed property
+// A message that describes the change to an object property.
 type MIDIObjectPropertyChangeNotification struct {
 	MessageID    MIDINotificationMessageID
 	MessageSize  uint
@@ -131,20 +136,20 @@ type MIDIObjectPropertyChangeNotification struct {
 	PropertyName unsafe.Pointer
 }
 
-// @struct			MIDIPacket @abstract		A collection of simultaneous MIDI events. @discussion WARNING: When using MIDIPacket in C++ be aware of the following: MIDIPacket is a variable-length struct and should ALWAYS be passed-by-pointer rather than passed-by-reference. Conversion from a MIDIPacket reference to a pointer is undefined behavior and can lead to the unintended truncation of data. @field			timeStamp The time at which the events occurred, if receiving MIDI, or, if sending MIDI, the time at which the events are to be played.  Zero means "now."  The time stamp applies to the first MIDI byte in the packet. @field			length The number of valid MIDI bytes which follow, in data. (It may be larger than 256 bytes if the packet is dynamically allocated.) @field			data A variable-length stream of MIDI messages.  Running status is not allowed.  In the case of system-exclusive messages, a packet may only contain a single message, or portion of one, with no other MIDI events. The MIDI messages in the packet must always be complete, except for system-exclusive. (This is declared to be 256 bytes in length so clients don't have to create custom data structures in simple situations.)
+// A collection of simultaneous MIDI events.
 type MIDIPacket struct {
 	TimeStamp uint64
 	Length    uint16
 	Data      [256]uint8
 }
 
-// @struct			MIDIPacketList @abstract		A list of MIDI events being received from, or being sent to, one endpoint. @discussion The timestamps in the packet list must be in ascending order. Note that the packets in the list, while defined as an array, may not be accessed as an array, since they are variable-length.  To iterate through the packets in a packet list, use a loop such as: ``` MIDIPacket *packet = &packetList->packet[0]; for (unsigned i = 0; i < packetList->numPackets; ++i) { ... packet = MIDIPacketNext(packet); } ``` The MIDIPacketNext macro is especially important when considering that the alignment requirements of MIDIPacket may differ between CPU architectures. On Intel and PowerPC, MIDIPacket is unaligned. On ARM, MIDIPacket must be 4-byte aligned. WARNING: When using MIDIPacketList in C++ be aware of the following: MIDIPacketList is a variable-length struct and should ALWAYS be passed-by-pointer rather than passed-by-reference. Conversion from a MIDIPacketList reference to a pointer is undefined behavior and can lead to the unintended truncation of data. @field			numPackets The number of MIDIPackets in the list. @field			packet An open-ended array of variable-length MIDIPackets.
+// A list of MIDI events the system sends to or receives from an endpoint.
 type MIDIPacketList struct {
 	NumPackets uint
 	Packet     [1]MIDIPacket
 }
 
-// @struct			MIDISysexSendRequest @abstract		A request to transmit a system-exclusive event. @discussion This represents a request to send a single system-exclusive MIDI event to a MIDI destination asynchronously. @field			destination The endpoint to which the event is to be sent. @field			data Initially, a pointer to the sys-ex event to be sent. MIDISendSysex will advance this pointer as bytes are sent. @field			bytesToSend Initially, the number of bytes to be sent.  MIDISendSysex will decrement this counter as bytes are sent. @field			complete The client may set this to true at any time to abort transmission.  The implementation sets this to true when all bytes have been sent. @field			completionProc Called when all bytes have been sent, or after the client has set complete to true. @field			completionRefCon Passed as a refCon to completionProc.
+// A request to asynchronously send a single system-exclusive (SysEx) event to a destination.
 type MIDISysexSendRequest struct {
 	Destination      uint
 	Data             *uint8
@@ -155,7 +160,7 @@ type MIDISysexSendRequest struct {
 	CompletionRefCon unsafe.Pointer
 }
 
-// @struct			MIDISysexSendRequestUMP @abstract		A request to transmit a UMP system-exclusive event. @discussion This represents a request to send a single UMP system-exclusive MIDI event to a MIDI destination asynchronously. @field			destination The endpoint to which the event is to be sent. @field			words Initially, a pointer to the UMP SysEx event to be sent. MIDISendUMPSysex will advance this pointer as data is sent. @field			wordsToSend Initially, the number of words to be sent.  MIDISendUMPSysex will decrement this counter as data is sent. @field			complete The client may set this to true at any time to abort transmission.  The implementation sets this to true when all data been transmitted. @field			completionProc Called when all bytes have been sent, or after the client has set complete to true. @field			completionRefCon Passed as a refCon to completionProc.
+// A request to asynchronously send a single universal MIDI packet (UMP) system-exclusive (SysEx) event to a destination.
 type MIDISysexSendRequestUMP struct {
 	Destination      uint
 	Words            *uint
@@ -165,13 +170,13 @@ type MIDISysexSendRequestUMP struct {
 	CompletionRefCon unsafe.Pointer
 }
 
-// @struct     MIDIThruConnectionEndpoint @abstract   Describes a source or destination in a MIDIThruConnection. When creating one of these, you can leave uniqueID 0 if the endpoint exists and you are passing its MIDIEndpointRef. When obtaining one of these from CoreMIDI, endpointRef may be NULL if it doesn't exist, but the uniqueID will always be non-zero. @field  endpointRef     The endpoint specified as a MIDIEndpointRef. @field  uniqueID        The endpoint specified by its uniqueID.
+// A source or destination in a MIDI thru connection.
 type MIDIThruConnectionEndpoint struct {
 	EndpointRef uint
 	UniqueID    int
 }
 
-// @struct     MIDIThruConnectionParams @abstract   Describes a set of MIDI routings and transformations. The remainder of the structure is variably-sized. It contains numControlTransform instances of MIDIControlTransform, followed by numMaps instances of MIDIValueMap. @field      version     Version of this structure; must be 0. @field      numSources  The number of valid sources in the following array. @field      sources     All MIDI generated by these sources is routed into this connection for processing and distribution to destinations. @field      numDestinations The number of valid destinations in the following array. @field      destinations    All MIDI output from the connection is routed to these destinations. @field      channelMap      Maps each of the source 16 MIDI channels to channel 0-15 (1-16) or 0xFF when MIDI from a channel is to be filtered out. @field      lowVelocity     Note events with a velocity less than this value are filtered out. @field      highVelocity    Note events with a velocity greater than this, if it is not 0, are filtered out. @field      lowNote         See highNote. @field      highNote        If highNote >= lowNote, then notes outside this range are filtered out. If lowNote > highNote, then notes <i>inside</i> this range are filtered out. This applies to note and polyphonic key pressure events. These fields are ignored if a there is a MIDIValueMap applying to noteNumber. @field      noteNumber      Specifies how MIDI note numbers are transformed. @field      velocity        Specifies how MIDI note velocities are transformed. @field      keyPressure     Specifies how MIDI polyphonic key pressure events are transformed. @field      channelPressure Specifies how MIDI monophonic (channel) pressure events are transformed. @field      programChange   Specifies how MIDI program change events are transformed. @field      pitchBend       Specifies how MIDI pitch bend events are transformed. @field      filterOutSysEx  If 1, specifies that system-exclusive messages are to be filtered out. @field      filterOutMTC    If 1, specifies that MIDI Time Code messages are to be filtered out. @field      filterOutBeatClock  If 1, specifies the MIDI clock, play, stop, and resume messages are to be filtered out. @field      filterOutTuneRequest    If 1, specifies that MIDI Tune Request messages are to be filtered out. @field      reserved2       Must be 0. @field      filterOutAllControls    If 1, specifies that all MIDI continuous control messages are to be filtered out. @field      numControlTransforms    The number of control transformations in the variable-length portion of the struct. @field      numMaps                 The number of MIDIValueMaps in the variable-length portion of the struct. @field      reserved3       Must be 0.
+// A set of MIDI routings and transformations.
 type MIDIThruConnectionParams struct {
 	Version              uint
 	NumSources           uint
@@ -200,7 +205,7 @@ type MIDIThruConnectionParams struct {
 	Reserved3            [4]uint16
 }
 
-// @struct     MIDITransform @abstract   Describes how a single type of MIDI event is transformed. This structure controls the transformation of various MIDI events other than control changes. @field      transform   The type of transformation to be applied to the event values. @field      param       An argument to the transformation method (see description of MIDITransformType).
+// The transformation of a single type of MIDI event.
 type MIDITransform struct {
 	Transform MIDITransformType
 	Param     int16
@@ -214,7 +219,7 @@ type MIDIUniversalMessage struct {
 	Field3   unsafe.Pointer
 }
 
-// @struct         MIDIValueMap @abstract       A custom mapping function to transform MIDI 7-bit values, as contained in note numbers, velocities, control values, etc.  y = value[x], where x is the input MIDI value, y the output.
+// A custom lookup table to transform MIDI 7-bit values, as contained in note numbers, velocities, control values, and so on.
 type MIDIValueMap struct {
 	Value [128]uint8
 }

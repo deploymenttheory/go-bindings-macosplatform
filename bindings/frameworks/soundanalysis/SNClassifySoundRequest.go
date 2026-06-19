@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that classifies sound using a Core ML model.
+//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest
 type SNClassifySoundRequest struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func SNClassifySoundRequestFromID(id objc.ID) *SNClassifySoundRequest {
 	return o
 }
 
-// Initializes a sound classification request with the provided MLModel - Parameter mlModel: The CoreML audio classification model to be used with this request The provided model must accept audio data as input, and output a classification dictionary containing the probability of each category.
+// Creates a request that uses a custom sound classification model.
 func (o *SNClassifySoundRequest) InitWithMLModelError(mlModel *coreml.MLModel) (*SNClassifySoundRequest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelInitWithMLModelError, mlModel.Ptr(), unsafe.Pointer(&_nsErr))
@@ -54,7 +56,7 @@ func (o *SNClassifySoundRequest) InitWithMLModelError(mlModel *coreml.MLModel) (
 	return SNClassifySoundRequestFromID(_ret), nil
 }
 
-// Initializes a sound classification request with a known classifier. - Parameters: - classifierIdentifier: An identifier identifying the particular classifier to use for labeling sounds. - error: An output parameter which, in the case of an error, will be populated with details about that error. Upon success, the contents of this output parameter are undefined. Please use the return value of this method to determine whether or not an error occurred before using the value assigned to this output parameter. - Returns Upon failure, `nil`; upon success, an `SNClassifySoundRequest` instance which can be added to an analyzer to classify sounds using a recognized classifier. This initializer may be used to classify sounds using Apple-provided sound classifiers. Note that Apple may add new classifiers in the future, but it commits to ensuring the consistent performance of existing classifiers.
+// Creates a request that uses the framework’s built-in sound classification model.
 func (o *SNClassifySoundRequest) InitWithClassifierIdentifierError(classifierIdentifier *foundation.NSString) (*SNClassifySoundRequest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelInitWithClassifierIdentifierError, classifierIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -98,6 +100,9 @@ func (o *SNClassifySoundRequest) WindowDurationConstraint() *SNTimeDurationConst
 
 // Lists all labels that can be produced by this request. - Returns: An array of strings containing all sound identifiers which can be produced by this request.
 func (o *SNClassifySoundRequest) KnownClassifications() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sNClassifySoundRequestSelKnownClassifications)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelKnownClassifications)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that applies a convolution over a signal.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer
 type MLCConvolutionLayer struct {
 	MLCLayer
@@ -34,7 +36,7 @@ func MLCConvolutionLayerFromID(id objc.ID) *MLCConvolutionLayer {
 	return o
 }
 
-// @abstract   Create a convolution layer @param      weights        The weights tensor @param      biases         The bias tensor @param      descriptor     The convolution descriptor @return     A new convolution layer.
+// Creates a convolution layer with the weights, biases, and descriptor you specify.
 func MLCConvolutionLayerLayerWithWeightsBiasesDescriptor(weights *MLCTensor, biases *MLCTensor, descriptor *MLCConvolutionDescriptor) *MLCConvolutionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionLayer), _mLCConvolutionLayerSelLayerWithWeightsBiasesDescriptor, weights.Ptr(), biases.Ptr(), descriptor.Ptr())
 	if _ret != 0 {

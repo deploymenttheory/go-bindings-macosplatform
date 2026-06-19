@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a text table as a whole.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstexttable
 type NSTextTable struct {
 	NSTextBlock
@@ -41,16 +43,19 @@ func NSTextTableFromID(id objc.ID) *NSTextTable {
 	return o
 }
 
+// Returns the rectangle within which glyphs should be laid out for a text table block.
 func (o *NSTextTable) RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextTableSelRectForBlockLayoutAtPointInRectTextContainerCharacterRange, block.Ptr(), startingPoint, rect, textContainer.Ptr(), charRange)
 	return _ret
 }
 
+// Returns the rectangle the text table block actually occupies, including padding, borders, and margins.
 func (o *NSTextTable) BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *NSTextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextTableSelBoundsRectForBlockContentRectInRectTextContainerCharacterRange, block.Ptr(), contentRect, rect, textContainer.Ptr(), charRange)
 	return _ret
 }
 
+// Draws any colors and other decorations for a text table block.
 func (o *NSTextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *NSTextTableBlock, frameRect corefoundation.CGRect, controlView *NSView, charRange foundation.NSRange, layoutManager *NSLayoutManager) {
 	o.Ptr().Send(_nSTextTableSelDrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager, block.Ptr(), frameRect, controlView.Ptr(), charRange, layoutManager.Ptr())
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that holds data from a forward pass to be used in a backward pass.
+//
 // RNNMatrixTrainingState wraps [raw.MPSRNNMatrixTrainingState] with a fluent Go API.
 type RNNMatrixTrainingState struct {
 	inner *raw.MPSRNNMatrixTrainingState

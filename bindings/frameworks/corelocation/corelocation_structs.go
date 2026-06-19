@@ -3,5 +3,6 @@
 
 package corelocation
 
+// The latitude and longitude associated with a location, specified using the WGS 84 reference frame.
 // CLLocationCoordinate2D is an opaque type.
 type CLLocationCoordinate2D struct{}

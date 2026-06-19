@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create an activation layer.
+//
 // ActivationDescriptor wraps [raw.MLCActivationDescriptor] with a fluent Go API.
 type ActivationDescriptor struct {
 	inner *raw.MLCActivationDescriptor

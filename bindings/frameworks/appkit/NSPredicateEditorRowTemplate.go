@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A template that describes available predicates and how to display them.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspredicateeditorrowtemplate
 type NSPredicateEditorRowTemplate struct {
 	foundation.NSObject
@@ -46,54 +48,65 @@ func NSPredicateEditorRowTemplateFromID(id objc.ID) *NSPredicateEditorRowTemplat
 	return o
 }
 
+// Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.
 func (o *NSPredicateEditorRowTemplate) MatchForPredicate(predicate *foundation.NSPredicate) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSPredicateEditorRowTemplateSelMatchForPredicate, predicate.Ptr())
 	return _ret
 }
 
+// Sets the value of the views according to the given predicate.
 func (o *NSPredicateEditorRowTemplate) SetPredicate(predicate *foundation.NSPredicate) {
 	o.Ptr().Send(_nSPredicateEditorRowTemplateSelSetPredicate, predicate.Ptr())
 }
 
+// Returns the predicate represented by the receiver’s views’ values and the given sub-predicates.
 func (o *NSPredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelPredicateWithSubpredicates, subpredicates)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelPredicateWithSubpredicates, subpredicates.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns the subpredicates that should be made sub-rows of a given predicate.
 func (o *NSPredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSPredicate]](o.Ptr(), _nSPredicateEditorRowTemplateSelDisplayableSubpredicatesOfPredicate, predicate.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelDisplayableSubpredicatesOfPredicate, predicate.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSPredicate](_ret)
 }
 
+// Initializes and returns a “pop-up-pop-up-pop-up”–style row template.
 func (o *NSPredicateEditorRowTemplate) InitWithLeftExpressionsRightExpressionsModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], rightExpressions *foundation.NSArray[*foundation.NSExpression], modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *NSPredicateEditorRowTemplate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionsModifierOperatorsOptions, leftExpressions, rightExpressions, modifier, operators, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionsModifierOperatorsOptions, leftExpressions.Ptr(), rightExpressions.Ptr(), modifier, operators.Ptr(), options)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPredicateEditorRowTemplateFromID(_ret)
 }
 
+// Initializes and returns a “pop-up-pop-up-view”–style row template.
 func (o *NSPredicateEditorRowTemplate) InitWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], attributeType coredata.NSAttributeType, modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *NSPredicateEditorRowTemplate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions, leftExpressions, attributeType, modifier, operators, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions, leftExpressions.Ptr(), attributeType, modifier, operators.Ptr(), options)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPredicateEditorRowTemplateFromID(_ret)
 }
 
+// Initializes and returns a row template suitable for displaying compound predicates.
 func (o *NSPredicateEditorRowTemplate) InitWithCompoundTypes(compoundTypes *foundation.NSArray[*foundation.NSNumber]) *NSPredicateEditorRowTemplate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithCompoundTypes, compoundTypes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithCompoundTypes, compoundTypes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPredicateEditorRowTemplateFromID(_ret)
 }
 
+// Returns an array of predicate templates for the given attribute key paths for a given entity.
 func NSPredicateEditorRowTemplateTemplatesWithAttributeKeyPathsInEntityDescription(keyPaths *foundation.NSArray[*foundation.NSString], entityDescription *coredata.NSEntityDescription) *foundation.NSArray[*NSPredicateEditorRowTemplate] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicateEditorRowTemplate), _nSPredicateEditorRowTemplateSelTemplatesWithAttributeKeyPathsInEntityDescription, keyPaths, entityDescription.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicateEditorRowTemplate), _nSPredicateEditorRowTemplateSelTemplatesWithAttributeKeyPathsInEntityDescription, keyPaths.Ptr(), entityDescription.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -109,13 +122,19 @@ func (o *NSPredicateEditorRowTemplate) TemplateViews() *foundation.NSArray[*NSVi
 }
 
 func (o *NSPredicateEditorRowTemplate) LeftExpressions() *foundation.NSArray[*foundation.NSExpression] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSExpression]](o.Ptr(), _nSPredicateEditorRowTemplateSelLeftExpressions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelLeftExpressions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSExpression](_ret)
 }
 
 func (o *NSPredicateEditorRowTemplate) RightExpressions() *foundation.NSArray[*foundation.NSExpression] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSExpression]](o.Ptr(), _nSPredicateEditorRowTemplateSelRightExpressions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelRightExpressions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSExpression](_ret)
 }
 
 func (o *NSPredicateEditorRowTemplate) RightExpressionAttributeType() coredata.NSAttributeType {
@@ -129,8 +148,11 @@ func (o *NSPredicateEditorRowTemplate) Modifier() foundation.NSComparisonPredica
 }
 
 func (o *NSPredicateEditorRowTemplate) Operators() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nSPredicateEditorRowTemplateSelOperators)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelOperators)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *NSPredicateEditorRowTemplate) Options() uint {
@@ -139,6 +161,9 @@ func (o *NSPredicateEditorRowTemplate) Options() uint {
 }
 
 func (o *NSPredicateEditorRowTemplate) CompoundTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nSPredicateEditorRowTemplateSelCompoundTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelCompoundTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

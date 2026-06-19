@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The base class of all SpriteKit nodes.
+//
 // Node wraps [raw.SKNode] with a fluent Go API.
 type Node struct {
 	inner *raw.SKNode
@@ -40,7 +42,7 @@ func NewNode() *Node {
 	return &Node{inner: raw.SKNodeFromID(_id)}
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Called when a node is initialized from an .sks file.
 //
 // NewNodeWithCoder creates a new [Node].
 func NewNodeWithCoder(aDecoder *foundation.NSCoder) *Node {
@@ -49,7 +51,7 @@ func NewNodeWithCoder(aDecoder *foundation.NSCoder) *Node {
 	return &Node{inner: raw.SKNodeFromID(_id)}
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *Node) WithPosition(position corefoundation.CGPoint) *Node {
@@ -57,7 +59,7 @@ func (x *Node) WithPosition(position corefoundation.CGPoint) *Node {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *Node) WithZPosition(zPosition float64) *Node {
@@ -65,7 +67,7 @@ func (x *Node) WithZPosition(zPosition float64) *Node {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *Node) WithZRotation(zRotation float64) *Node {
@@ -73,7 +75,7 @@ func (x *Node) WithZRotation(zRotation float64) *Node {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *Node) WithXScale(xScale float64) *Node {
@@ -81,7 +83,7 @@ func (x *Node) WithXScale(xScale float64) *Node {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *Node) WithYScale(yScale float64) *Node {
@@ -89,7 +91,7 @@ func (x *Node) WithYScale(yScale float64) *Node {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Node) WithSpeed(speed float64) *Node {
@@ -97,7 +99,7 @@ func (x *Node) WithSpeed(speed float64) *Node {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *Node) WithAlpha(alpha float64) *Node {
@@ -105,7 +107,7 @@ func (x *Node) WithAlpha(alpha float64) *Node {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *Node) WithPaused(paused bool) *Node {
@@ -113,7 +115,7 @@ func (x *Node) WithPaused(paused bool) *Node {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Node) WithHidden(hidden bool) *Node {
@@ -121,7 +123,7 @@ func (x *Node) WithHidden(hidden bool) *Node {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *Node) WithUserInteractionEnabled(userInteractionEnabled bool) *Node {
@@ -129,7 +131,7 @@ func (x *Node) WithUserInteractionEnabled(userInteractionEnabled bool) *Node {
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Node) WithName(name string) *Node {
@@ -137,7 +139,7 @@ func (x *Node) WithName(name string) *Node {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
@@ -145,7 +147,7 @@ func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *Node) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Node {
@@ -153,7 +155,7 @@ func (x *Node) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, ob
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *Node) WithReachConstraints(reachConstraints *ReachConstraints) *Node {
@@ -161,7 +163,7 @@ func (x *Node) WithReachConstraints(reachConstraints *ReachConstraints) *Node {
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *Node) WithConstraints(items ...*raw.SKConstraint) *Node {
@@ -184,7 +186,7 @@ func (x *Node) WithConstraints(items ...*raw.SKConstraint) *Node {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *Node) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Node {
@@ -192,67 +194,87 @@ func (x *Node) WithAttributeValues(attributeValues *foundation.NSDictionary[*fou
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityElement(accessibilityElement bool) *Node {
 	x.inner.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityRole(accessibilityRole string) *Node {
 	x.inner.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Node {
 	x.inner.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *Node) WithAccessibilitySubrole(accessibilitySubrole string) *Node {
 	x.inner.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Node {
 	x.inner.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityParent(accessibilityParent objc.ID) *Node {
 	x.inner.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityHelp(accessibilityHelp string) *Node {
 	x.inner.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityLabel(accessibilityLabel string) *Node {
 	x.inner.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *Node) WithAccessibilityEnabled(accessibilityEnabled bool) *Node {
 	x.inner.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
-// Calculates the bounding box including all child nodes in parents coordinate system.
+// Returns a rectangle in the parent’s coordinate system that contains the position and size of itself and all child nodes.
 //
 // CalculateAccumulatedFrame calls the underlying CalculateAccumulatedFrame.
 func (x *Node) CalculateAccumulatedFrame() corefoundation.CGRect {
 	return x.inner.CalculateAccumulatedFrame()
 }
 
+// The value of a shader attribute.
+//
 // ValueForAttributeNamed calls the underlying ValueForAttributeNamed.
 func (x *Node) ValueForAttributeNamed(key string) *AttributeValue {
 	_r := x.inner.ValueForAttributeNamed(foundation.NSStringStringWithUTF8String(key))
@@ -262,30 +284,36 @@ func (x *Node) ValueForAttributeNamed(key string) *AttributeValue {
 	return &AttributeValue{inner: _r}
 }
 
+// Sets an attribute value for an attached shader
+//
 // SetValueForAttributeNamed calls the underlying SetValueForAttributeNamed.
 func (x *Node) SetValueForAttributeNamed(value *raw.SKAttributeValue, key string) {
 	x.inner.SetValueForAttributeNamed(value, foundation.NSStringStringWithUTF8String(key))
 }
 
-// Sets both the x & y scale @param scale the uniform scale to set.
+// Sets the xScale and yScale properties of the node.
 //
 // SetScale calls the underlying SetScale.
 func (x *Node) SetScale(scale float64) {
 	x.inner.SetScale(scale)
 }
 
-// Adds a node as a child node of this node The added node must not have a parent. @param node the child node to add.
+// Adds a node to the end of the receiver’s list of child nodes.
 //
 // AddChild calls the underlying AddChild.
 func (x *Node) AddChild(node *raw.SKNode) {
 	x.inner.AddChild(node)
 }
 
+// Inserts a node into a specific position in the receiver’s list of child nodes.
+//
 // InsertChildAtIndex calls the underlying InsertChildAtIndex.
 func (x *Node) InsertChildAtIndex(node *raw.SKNode, index int) {
 	x.inner.InsertChildAtIndex(node, index)
 }
 
+// Removes a list of children from the receiving node.
+//
 // RemoveChildrenInArray calls the underlying RemoveChildrenInArray.
 func (x *Node) RemoveChildrenInArray(nodes ...NodeProvider) {
 	_ptrs := make([]objc.ID, len(nodes))
@@ -302,21 +330,29 @@ func (x *Node) RemoveChildrenInArray(nodes ...NodeProvider) {
 	x.inner.RemoveChildrenInArray(_arg0)
 }
 
+// Removes all of the node’s children.
+//
 // RemoveAllChildren calls the underlying RemoveAllChildren.
 func (x *Node) RemoveAllChildren() {
 	x.inner.RemoveAllChildren()
 }
 
+// Removes the receiving node from its parent.
+//
 // RemoveFromParent calls the underlying RemoveFromParent.
 func (x *Node) RemoveFromParent() {
 	x.inner.RemoveFromParent()
 }
 
+// Moves the node to a new parent node in the scene.
+//
 // MoveToParent calls the underlying MoveToParent.
 func (x *Node) MoveToParent(parent *raw.SKNode) {
 	x.inner.MoveToParent(parent)
 }
 
+// Searches the children of the receiving node for a node with a specific name.
+//
 // ChildNodeWithName calls the underlying ChildNodeWithName.
 func (x *Node) ChildNodeWithName(name string) *Node {
 	_r := x.inner.ChildNodeWithName(foundation.NSStringStringWithUTF8String(name))
@@ -326,28 +362,36 @@ func (x *Node) ChildNodeWithName(name string) *Node {
 	return &Node{inner: _r}
 }
 
+// Searches the children of the receiving node to perform processing for nodes that share a name.
+//
 // EnumerateChildNodesWithNameUsing calls the underlying EnumerateChildNodesWithNameUsing.
 func (x *Node) EnumerateChildNodesWithNameUsing(name string, block func(*raw.SKNode, *bool)) {
 	x.inner.EnumerateChildNodesWithNameUsing(foundation.NSStringStringWithUTF8String(name), block)
 }
 
-// Simplified shorthand for enumerateChildNodesWithName that returns an array of the matching nodes. This allows subscripting of the form: NSArray *childrenMatchingName = node[@"name"] or even complex like: NSArray *siblingsBeginningWithA = node[@"../a*"] @param name An Xpath style path that can include simple regular expressions for matching node names. @see enumerateChildNodesWithName:usingBlock:
+// Returns an array of nodes that match the name parameter.
 //
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Node) ObjectForKeyedSubscript(name string) *foundation.NSArray[*raw.SKNode] {
 	return x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Returns a Boolean value that indicates whether the node is a descendant of the target node.
+//
 // InParentHierarchy calls the underlying InParentHierarchy.
 func (x *Node) InParentHierarchy(parent *raw.SKNode) bool {
 	return x.inner.InParentHierarchy(parent)
 }
 
+// Adds an action to the list of actions executed by the node.
+//
 // RunAction calls the underlying RunAction.
 func (x *Node) RunAction(action *raw.SKAction) {
 	x.inner.RunAction(action)
 }
 
+// Adds an action to the list of actions executed by the node and schedules the argument block to be run upon completion of the action.
+//
 // RunActionCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Node) RunActionCompletion(ctx context.Context, action *raw.SKAction) error {
 	_ch := make(chan error, 1)
@@ -362,16 +406,22 @@ func (x *Node) RunActionCompletion(ctx context.Context, action *raw.SKAction) er
 	}
 }
 
+// Adds an identifiable action to the list of actions executed by the node.
+//
 // RunActionWithKey calls the underlying RunActionWithKey.
 func (x *Node) RunActionWithKey(action *raw.SKAction, key string) {
 	x.inner.RunActionWithKey(action, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a Boolean value that indicates whether the node is executing actions.
+//
 // HasActions calls the underlying HasActions.
 func (x *Node) HasActions() bool {
 	return x.inner.HasActions()
 }
 
+// Returns an action associated with a specific key.
+//
 // ActionForKey calls the underlying ActionForKey.
 func (x *Node) ActionForKey(key string) *Action {
 	_r := x.inner.ActionForKey(foundation.NSStringStringWithUTF8String(key))
@@ -381,22 +431,28 @@ func (x *Node) ActionForKey(key string) *Action {
 	return &Action{inner: _r}
 }
 
+// Removes an action associated with a specific key.
+//
 // RemoveActionForKey calls the underlying RemoveActionForKey.
 func (x *Node) RemoveActionForKey(key string) {
 	x.inner.RemoveActionForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Ends and removes all actions from the node.
+//
 // RemoveAllActions calls the underlying RemoveAllActions.
 func (x *Node) RemoveAllActions() {
 	x.inner.RemoveAllActions()
 }
 
+// Returns a Boolean value that indicates whether a point lies inside the parent’s coordinate system.
+//
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *Node) ContainsPoint(p corefoundation.CGPoint) bool {
 	return x.inner.ContainsPoint(p)
 }
 
-// Returns the node itself or a child node at the point given. If the receiver is returned there is no child node at the given point. @return a child node or self at the given location.
+// Returns the deepest visible descendant that intersects a point.
 //
 // NodeAtPoint calls the underlying NodeAtPoint.
 func (x *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
@@ -407,26 +463,36 @@ func (x *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
 	return &Node{inner: _r}
 }
 
+// Returns an array of all visible descendants that intersect a point.
+//
 // NodesAtPoint calls the underlying NodesAtPoint.
 func (x *Node) NodesAtPoint(p corefoundation.CGPoint) *foundation.NSArray[*raw.SKNode] {
 	return x.inner.NodesAtPoint(p)
 }
 
+// Converts a point from the coordinate system of another node in the node tree to the coordinate system of this node.
+//
 // ConvertPointFromNode calls the underlying ConvertPointFromNode.
 func (x *Node) ConvertPointFromNode(point corefoundation.CGPoint, node *raw.SKNode) corefoundation.CGPoint {
 	return x.inner.ConvertPointFromNode(point, node)
 }
 
+// Converts a point in this node’s coordinate system to the coordinate system of another node in the node tree.
+//
 // ConvertPointToNode calls the underlying ConvertPointToNode.
 func (x *Node) ConvertPointToNode(point corefoundation.CGPoint, node *raw.SKNode) corefoundation.CGPoint {
 	return x.inner.ConvertPointToNode(point, node)
 }
 
+// Returns a Boolean value that indicates whether this node intersects the specified node.
+//
 // IntersectsNode calls the underlying IntersectsNode.
 func (x *Node) IntersectsNode(node *raw.SKNode) bool {
 	return x.inner.IntersectsNode(node)
 }
 
+// Compares the parameter node to the receiving node.
+//
 // IsEqualToNode calls the underlying IsEqualToNode.
 func (x *Node) IsEqualToNode(node *raw.SKNode) bool {
 	return x.inner.IsEqualToNode(node)
@@ -682,6 +748,8 @@ func (x *Node) SetAttributeValues(attributeValues *foundation.NSDictionary[*foun
 	x.inner.SetAttributeValues(attributeValues)
 }
 
+// Returns the frontmost user interface element in the element hierarchy.
+//
 // AccessibilityHitTest calls the underlying AccessibilityHitTest.
 func (x *Node) AccessibilityHitTest(point corefoundation.CGPoint) objc.ID {
 	return x.inner.AccessibilityHitTest(point)

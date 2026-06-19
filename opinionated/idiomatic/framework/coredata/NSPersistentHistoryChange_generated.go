@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A change representing the insertion, update, or deletion of a managed object in the persistent store.
+//
 // PersistentHistoryChange wraps [raw.NSPersistentHistoryChange] with a fluent Go API.
 type PersistentHistoryChange struct {
 	inner *raw.NSPersistentHistoryChange

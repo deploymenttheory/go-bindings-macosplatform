@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "framework": "Social",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SLComposeServiceViewController": {
+      "doc": "A view controller that you present from your share app extension, allowing the user to compose social media posts.",
+      "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller"
+    },
+    "SLRequest": {
+      "doc": "An object that you use to assemble an HTTP request for communicating with a social media service.",
+      "url": "https://developer.apple.com/documentation/social/slrequest"
+    }
+  },
+  "enums": {
+    "SLRequestMethod": {
+      "doc": "Indicates the request method used in the request.",
+      "url": "https://developer.apple.com/documentation/social/slrequestmethod",
+      "members": {
+        "SLRequestMethodDELETE": {
+          "doc": "Deletes the specified resource.",
+          "url": "https://developer.apple.com/documentation/social/slrequestmethod/delete"
+        },
+        "SLRequestMethodGET": {
+          "doc": "Requests information from the specified resource.",
+          "url": "https://developer.apple.com/documentation/social/slrequestmethod/get"
+        },
+        "SLRequestMethodPOST": {
+          "doc": "Submits data to be processed.",
+          "url": "https://developer.apple.com/documentation/social/slrequestmethod/post"
+        },
+        "SLRequestMethodPUT": {
+          "doc": "Uses a PUT request to submit the data.",
+          "url": "https://developer.apple.com/documentation/social/slrequestmethod/put"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SLComposeServiceViewController": {
+      "-cancel": {
+        "doc": "Starts the animated dismissal of the compose view.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/cancel()"
+      },
+      "-configurationItems": {
+        "doc": "Returns configuration items to display in the compose view.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/configurationitems()"
+      },
+      "-didSelectCancel": {
+        "doc": "Sent to the compose view after the cancel animation finishes.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/didselectcancel()"
+      },
+      "-didSelectPost": {
+        "doc": "Sent to the compose view after the post animation finishes.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/didselectpost()"
+      },
+      "-isContentValid": {
+        "doc": "A Boolean value that indicates whether the current content and attachments are valid.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/iscontentvalid()"
+      },
+      "-loadPreviewView": {
+        "doc": "Loads a view that displays a preview of the attachments in the extension context.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/loadpreviewview()"
+      },
+      "-popConfigurationViewController": {
+        "doc": "Dismisses the current configuration view controller.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/popconfigurationviewcontroller()"
+      },
+      "-presentationAnimationDidFinish": {
+        "doc": "Tells the compose view controller that the presentation animation is finished.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/presentationanimationdidfinish()"
+      },
+      "-pushConfigurationViewController:": {
+        "doc": "Presents a configuration view controller that lets the user configure the post.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/pushconfigurationviewcontroller(_:)"
+      },
+      "-reloadConfigurationItems": {
+        "doc": "Reloads the list of configuration items.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/reloadconfigurationitems()"
+      },
+      "-validateContent": {
+        "doc": "Performs validation of the current content and updates the state of the Post button, if appropriate.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/validatecontent()"
+      }
+    },
+    "SLRequest": {
+      "+requestForServiceType:requestMethod:URL:parameters:": {
+        "doc": "Initializes a newly created request object with the specified properties.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/init(forservicetype:requestmethod:url:parameters:)-2cnf1"
+      },
+      "-addMultipartData:withName:type:": {
+        "doc": "Specifies a named multipart POST body for this request.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/addmultipartdata(_:withname:type:)"
+      },
+      "-addMultipartData:withName:type:filename:": {
+        "doc": "Specifies a named multipart POST body for this request.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/addmultipartdata(_:withname:type:filename:)"
+      },
+      "-performRequestWithHandler:": {
+        "doc": "Performs an asynchronous request and calls the specified handler when done.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/perform(handler:)"
+      },
+      "-preparedURLRequest": {
+        "doc": "Returns an authorized URL request that can be sent using an NSURLConnection object.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/preparedurlrequest()"
+      }
+    }
+  },
+  "properties": {
+    "SLComposeServiceViewController": {
+      "autoCompletionViewController": {
+        "doc": "The view controller that manages an autocompletion view for suggesting common text completions while users type.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/autocompletionviewcontroller"
+      },
+      "charactersRemaining": {
+        "doc": "The number of characters remaining in a custom character limit.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/charactersremaining"
+      },
+      "contentText": {
+        "doc": "A string that represents the text which the user entered into the compose view’s text view.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/contenttext"
+      },
+      "placeholder": {
+        "doc": "A string that’s displayed in the compose view’s text view when the text view is empty.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/placeholder"
+      },
+      "textView": {
+        "doc": "The editable text view in the compose view.",
+        "url": "https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller/textview"
+      }
+    },
+    "SLRequest": {
+      "URL": {
+        "doc": "The destination URL for this request.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/url"
+      },
+      "account": {
+        "doc": "Account information used to authenticate the request.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/account"
+      },
+      "parameters": {
+        "doc": "The parameters for this request.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/parameters"
+      },
+      "requestMethod": {
+        "doc": "The method to use for this request.",
+        "url": "https://developer.apple.com/documentation/social/slrequest/requestmethod"
+      }
+    }
+  }
+}

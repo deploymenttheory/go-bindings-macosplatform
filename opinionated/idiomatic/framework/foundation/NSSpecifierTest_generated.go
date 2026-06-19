@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A comparison between an object specifier and a test object.
+//
 // SpecifierTest wraps [raw.NSSpecifierTest] with a fluent Go API.
 type SpecifierTest struct {
 	inner *raw.NSSpecifierTest
@@ -36,6 +38,8 @@ func NewSpecifierTestWithCoder(inCoder *raw.NSCoder) *SpecifierTest {
 	return &SpecifierTest{inner: raw.NSSpecifierTestFromID(_id)}
 }
 
+// Returns a specifier test initialized to evaluate a test object against an object specified by an object specifier using a given comparison operation.
+//
 // NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject creates a new [SpecifierTest].
 func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *raw.NSScriptObjectSpecifier, compOp NSTestComparisonOperation, obj2 objc.ID) *SpecifierTest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSpecifierTest")), objc.RegisterName("alloc"))

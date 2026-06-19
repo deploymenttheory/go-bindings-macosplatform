@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A right circular cone or frustum geometry.
+//
 // Cone wraps [raw.SCNCone] with a fluent Go API.
 type Cone struct {
 	inner *raw.SCNCone
@@ -37,7 +39,7 @@ func NewCone() *Cone {
 	return &Cone{inner: raw.SCNConeFromID(_id)}
 }
 
-// @property topRadius @abstract The radius at the top of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.
+// The radius of the cone’s circular top. Animatable.
 //
 // WithTopRadius sets the topRadius property and returns the receiver for chaining.
 func (x *Cone) WithTopRadius(topRadius float64) *Cone {
@@ -45,7 +47,7 @@ func (x *Cone) WithTopRadius(topRadius float64) *Cone {
 	return x
 }
 
-// @property bottomRadius @abstract The radius at the bottom of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.5.
+// The radius of the cone’s circular base. Animatable.
 //
 // WithBottomRadius sets the bottomRadius property and returns the receiver for chaining.
 func (x *Cone) WithBottomRadius(bottomRadius float64) *Cone {
@@ -53,7 +55,7 @@ func (x *Cone) WithBottomRadius(bottomRadius float64) *Cone {
 	return x
 }
 
-// @property height @abstract The height of the cone. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the cylinder along its y-axis. Animatable.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Cone) WithHeight(height float64) *Cone {
@@ -61,7 +63,7 @@ func (x *Cone) WithHeight(height float64) *Cone {
 	return x
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+// The number of subdivisions around the circumference of the cone. Animatable.
 //
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Cone) WithRadialSegmentCount(radialSegmentCount int) *Cone {
@@ -69,7 +71,7 @@ func (x *Cone) WithRadialSegmentCount(radialSegmentCount int) *Cone {
 	return x
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in the sides of the cone along its y-axis. Animatable.
 //
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Cone) WithHeightSegmentCount(heightSegmentCount int) *Cone {
@@ -77,7 +79,7 @@ func (x *Cone) WithHeightSegmentCount(heightSegmentCount int) *Cone {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Cone) WithName(name string) *Cone {
@@ -85,7 +87,7 @@ func (x *Cone) WithName(name string) *Cone {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
@@ -108,7 +110,7 @@ func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Cone) WithFirstMaterial(firstMaterial *Material) *Cone {
@@ -116,7 +118,7 @@ func (x *Cone) WithFirstMaterial(firstMaterial *Material) *Cone {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Cone) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone {
@@ -145,7 +147,7 @@ func (x *Cone) WithTessellator(tessellator *GeometryTessellator) *Cone {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Cone) WithSubdivisionLevel(subdivisionLevel uint) *Cone {
@@ -161,7 +163,7 @@ func (x *Cone) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone {
@@ -169,7 +171,7 @@ func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Cone) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cone {

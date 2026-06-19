@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to create and manage an DNS proxy provider’s configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nednsproxymanager
 type NEDNSProxyManager struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func NEDNSProxyManagerFromID(id objc.ID) *NEDNSProxyManager {
 	return o
 }
 
-// @method sharedManager @return The singleton NEDNSProxyManager object for the calling process.
+// Returns a singleton DNS proxy manager instance.
 func NEDNSProxyManagerSharedManager() *NEDNSProxyManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEDNSProxyManager), _nEDNSProxyManagerSelSharedManager)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func NEDNSProxyManagerSharedManager() *NEDNSProxyManager {
 	return NEDNSProxyManagerFromID(_ret)
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current DNS proxy configuration from the caller's DNS proxy preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Loads the current DNS proxy configuration from the caller’s DNS proxy preferences.
 func (o *NEDNSProxyManager) LoadFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -62,7 +64,7 @@ func (o *NEDNSProxyManager) LoadFromPreferencesWithCompletionHandler(completionH
 	o.Ptr().Send(_nEDNSProxyManagerSelLoadFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the DNS proxy configuration from the caller's DNS proxy preferences. If the DNS proxy is enabled, the DNS proxy becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Removes the DNS proxy configuration from the caller’s DNS proxy preferences.
 func (o *NEDNSProxyManager) RemoveFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -74,7 +76,7 @@ func (o *NEDNSProxyManager) RemoveFromPreferencesWithCompletionHandler(completio
 	o.Ptr().Send(_nEDNSProxyManagerSelRemoveFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the DNS proxy configuration in the caller's DNS proxy preferences. If the DNS proxy is enabled, it will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Saves the DNS proxy configuration in the caller’s DNS proxy preferences.
 func (o *NEDNSProxyManager) SaveToPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

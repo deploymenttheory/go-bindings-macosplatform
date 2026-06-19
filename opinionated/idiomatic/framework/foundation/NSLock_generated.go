@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that coordinates the operation of multiple threads of execution within the same application.
+//
 // Lock wraps [raw.NSLock] with a fluent Go API.
 type Lock struct {
 	inner *raw.NSLock
@@ -36,6 +38,8 @@ func NewLock() *Lock {
 	return &Lock{inner: raw.NSLockFromID(_id)}
 }
 
+// The name associated with the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Lock) WithName(name string) *Lock {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
@@ -48,11 +52,15 @@ func (x *Lock) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*ra
 	return x
 }
 
+// Attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
+//
 // TryLock calls the underlying TryLock.
 func (x *Lock) TryLock() bool {
 	return x.inner.TryLock()
 }
 
+// Attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
+//
 // LockBeforeDate calls the underlying LockBeforeDate.
 func (x *Lock) LockBeforeDate(limit *raw.NSDate) bool {
 	return x.inner.LockBeforeDate(limit)

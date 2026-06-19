@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about regions of text that an image-analysis request detects.
+//
 // TextObservation wraps [raw.VNTextObservation] with a fluent Go API.
 type TextObservation struct {
 	inner *raw.VNTextObservation

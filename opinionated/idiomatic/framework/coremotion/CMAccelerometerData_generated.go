@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data sample from the device’s three accelerometers.
+//
 // AccelerometerData wraps [raw.CMAccelerometerData] with a fluent Go API.
 type AccelerometerData struct {
 	inner *raw.CMAccelerometerData

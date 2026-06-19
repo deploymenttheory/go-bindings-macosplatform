@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// NSUserDefaults is a hierarchical persistent interprocess (optionally distributed) key-value store, optimized for storing user settings. Hierarchical: NSUserDefaults has a list of places to look for data called the "search list". A search list is referred to by an arbitrary string called the "suite identifier" or "domain identifier". When queried, NSUserDefaults checks each entry of its search list until it finds one that contains the key in question, or has searched the whole list. The list is (note: "current host + current user" preferences are unimplemented on iOS, watchOS, and tvOS, and "any user" preferences are not generally useful for applications on those operating systems): - Managed ("forced") preferences, set by a configuration profile or via mcx from a network administrator - Commandline arguments - Preferences for the current domain, in the cloud - Preferences for the current domain, the current user, in the current host - Preferences for the current domain, the current user, in any host - Preferences added via -addSuiteNamed: - Preferences global to all apps for the current user, in the current host - Preferences global to all apps for the current user, in any host - Preferences for the current domain, for all users, in the current host - Preferences global to all apps for all users, in the current host - Preferences registered with -registerDefaults: Persistent: Preferences stored in NSUserDefaults persist across reboots and relaunches of apps unless otherwise specified. Interprocess: Preferences may be accessible to and modified from multiple processes simultaneously (for example between an application and an extension). Optionally distributed (Currently only supported in Shared iPad for Students mode):  Data stored in user defaults can be made "ubiqitous", i.e. synchronized between devices via the cloud.  Ubiquitous user defaults are automatically propagated to all devices logged into the same iCloud account. When reading defaults (via -*ForKey: methods on NSUserDefaults), ubiquitous defaults are searched before local defaults. All operations on ubiquitous defaults are asynchronous, so registered defaults may be returned in place of ubiquitous defaults if downloading from iCloud hasn't finished. Ubiquitous defaults are specified in the Defaults Configuration File for an application. Key-Value Store: NSUserDefaults stores Property List objects (NSString, NSData, NSNumber, NSDate, NSArray, and NSDictionary) identified by NSString keys, similar to an NSMutableDictionary. Optimized for storing user settings: NSUserDefaults is intended for relatively small amounts of data, queried very frequently, and modified occasionally. Using it in other ways may be slow or use more memory than solutions more suited to those uses. The 'App' CFPreferences functions in CoreFoundation act on the same search lists that NSUserDefaults does. NSUserDefaults can be observed using Key-Value Observing for any key stored in it. Using NSKeyValueObservingOptionPrior to observe changes from other processes or devices will behave as though NSKeyValueObservingOptionPrior was not specified.
+// An interface to the user’s defaults database, which stores system-wide and app-specific settings.
 //
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuserdefaults
 type NSUserDefaults struct {
@@ -125,14 +125,20 @@ func (o *NSUserDefaults) StringForKey(defaultName *NSString) *NSString {
 
 // -arrayForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray.
 func (o *NSUserDefaults) ArrayForKey(defaultName *NSString) *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSUserDefaultsSelArrayForKey, defaultName.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelArrayForKey, defaultName.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 // -dictionaryForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSDictionary.
 func (o *NSUserDefaults) DictionaryForKey(defaultName *NSString) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUserDefaultsSelDictionaryForKey, defaultName.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelDictionaryForKey, defaultName.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 // -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
@@ -213,7 +219,7 @@ func (o *NSUserDefaults) SetURLForKey(url *NSURL, defaultName *NSString) {
 
 // -registerDefaults: adds the registrationDictionary to the last item in every search list. This means that after NSUserDefaults has looked for a value in every other valid location, it will look in registered defaults, making them useful as a "fallback" value. Registered defaults are never stored between runs of an application, and are visible only to the application that registers them. Default values from Defaults Configuration Files will automatically be registered.
 func (o *NSUserDefaults) RegisterDefaults(registrationDictionary *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSUserDefaultsSelRegisterDefaults, registrationDictionary)
+	o.Ptr().Send(_nSUserDefaultsSelRegisterDefaults, registrationDictionary.Ptr())
 }
 
 // -addSuiteNamed: adds the full search list for 'suiteName' as a sub-search-list of the receiver's. The additional search lists are searched after the current domain, but before global defaults. Passing NSGlobalDomain or the current application's bundle identifier is unsupported.
@@ -228,17 +234,23 @@ func (o *NSUserDefaults) RemoveSuiteNamed(suiteName *NSString) {
 
 // -dictionaryRepresentation returns a composite snapshot of the values in the receiver's search list, such that [[receiver dictionaryRepresentation] objectForKey:x] will return the same thing as [receiver objectForKey:x].
 func (o *NSUserDefaults) DictionaryRepresentation() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUserDefaultsSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSUserDefaults) VolatileDomainForName(domainName *NSString) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUserDefaultsSelVolatileDomainForName, domainName.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelVolatileDomainForName, domainName.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSUserDefaults) SetVolatileDomainForName(domain *NSDictionary[*NSString, objc.ID], domainName *NSString) {
-	o.Ptr().Send(_nSUserDefaultsSelSetVolatileDomainForName, domain, domainName.Ptr())
+	o.Ptr().Send(_nSUserDefaultsSelSetVolatileDomainForName, domain.Ptr(), domainName.Ptr())
 }
 
 func (o *NSUserDefaults) RemoveVolatileDomainForName(domainName *NSString) {
@@ -248,20 +260,26 @@ func (o *NSUserDefaults) RemoveVolatileDomainForName(domainName *NSString) {
 // -persistentDomainNames returns an incomplete list of domains that have preferences stored in them.
 // Deprecated: Not recommended
 func (o *NSUserDefaults) PersistentDomainNames() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSUserDefaultsSelPersistentDomainNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelPersistentDomainNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 // -persistentDomainForName: returns a dictionary representation of the search list entry specified by 'domainName', the current user, and any host.
 // Deprecated: Not recommended
 func (o *NSUserDefaults) PersistentDomainForName(domainName *NSString) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUserDefaultsSelPersistentDomainForName, domainName.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserDefaultsSelPersistentDomainForName, domainName.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 // -setPersistentDomain:forName: replaces all values in the search list entry specified by 'domainName', the current user, and any host, with the values in 'domain'. The change will be persisted.
 func (o *NSUserDefaults) SetPersistentDomainForName(domain *NSDictionary[*NSString, objc.ID], domainName *NSString) {
-	o.Ptr().Send(_nSUserDefaultsSelSetPersistentDomainForName, domain, domainName.Ptr())
+	o.Ptr().Send(_nSUserDefaultsSelSetPersistentDomainForName, domain.Ptr(), domainName.Ptr())
 }
 
 // -removePersistentDomainForName: removes all values from the search list entry specified by 'domainName', the current user, and any host. The change is persistent.

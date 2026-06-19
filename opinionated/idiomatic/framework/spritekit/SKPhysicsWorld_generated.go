@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The driver of the physics engine in a scene; it exposes the ability for you to configure and query the physics system.
+//
 // PhysicsWorld wraps [raw.SKPhysicsWorld] with a fluent Go API.
 type PhysicsWorld struct {
 	inner *raw.SKPhysicsWorld
@@ -37,7 +39,7 @@ func NewPhysicsWorld() *PhysicsWorld {
 	return &PhysicsWorld{inner: raw.SKPhysicsWorldFromID(_id)}
 }
 
-// A global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
+// A vector that specifies the gravitational acceleration applied to physics bodies in the physics world.
 //
 // WithGravity sets the gravity property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithGravity(gravity corefoundation.CGVector) *PhysicsWorld {
@@ -45,38 +47,52 @@ func (x *PhysicsWorld) WithGravity(gravity corefoundation.CGVector) *PhysicsWorl
 	return x
 }
 
+// The rate at which the simulation executes.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// A delegate that is called when two physics bodies come in contact with each other.
+//
 // WithContactDelegate sets the contactDelegate property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithContactDelegate(contactDelegate raw.SKPhysicsContactDelegate) *PhysicsWorld {
 	x.inner.SetContactDelegate(contactDelegate)
 	return x
 }
 
+// Adds a joint to the physics world.
+//
 // AddJoint calls the underlying AddJoint.
 func (x *PhysicsWorld) AddJoint(joint *raw.SKPhysicsJoint) {
 	x.inner.AddJoint(joint)
 }
 
+// Removes a specific joint from the physics world.
+//
 // RemoveJoint calls the underlying RemoveJoint.
 func (x *PhysicsWorld) RemoveJoint(joint *raw.SKPhysicsJoint) {
 	x.inner.RemoveJoint(joint)
 }
 
+// Removes all joints from the physics world.
+//
 // RemoveAllJoints calls the underlying RemoveAllJoints.
 func (x *PhysicsWorld) RemoveAllJoints() {
 	x.inner.RemoveAllJoints()
 }
 
+// Samples all of the field nodes in the scene and returns the summation of their forces at that point.
+//
 // SampleFieldsAt calls the underlying SampleFieldsAt.
 func (x *PhysicsWorld) SampleFieldsAt(position unsafe.Pointer) unsafe.Pointer {
 	return x.inner.SampleFieldsAt(position)
 }
 
+// Searches for the first physics body that contains a point.
+//
 // BodyAtPoint calls the underlying BodyAtPoint.
 func (x *PhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody {
 	_r := x.inner.BodyAtPoint(point)
@@ -86,6 +102,8 @@ func (x *PhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody {
 	return &PhysicsBody{inner: _r}
 }
 
+// Searches for the first physics body that intersects the specified rectangle.
+//
 // BodyInRect calls the underlying BodyInRect.
 func (x *PhysicsWorld) BodyInRect(rect corefoundation.CGRect) *PhysicsBody {
 	_r := x.inner.BodyInRect(rect)
@@ -95,6 +113,8 @@ func (x *PhysicsWorld) BodyInRect(rect corefoundation.CGRect) *PhysicsBody {
 	return &PhysicsBody{inner: _r}
 }
 
+// Searches for the first physics body that intersects a ray.
+//
 // BodyAlongRayStartEnd calls the underlying BodyAlongRayStartEnd.
 func (x *PhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *PhysicsBody {
 	_r := x.inner.BodyAlongRayStartEnd(start, end)
@@ -104,16 +124,22 @@ func (x *PhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end co
 	return &PhysicsBody{inner: _r}
 }
 
+// Enumerates all the physics bodies in the scene that contain a point.
+//
 // EnumerateBodiesAtPointUsing calls the underlying EnumerateBodiesAtPointUsing.
 func (x *PhysicsWorld) EnumerateBodiesAtPointUsing(point corefoundation.CGPoint, block func(*raw.SKPhysicsBody, *bool)) {
 	x.inner.EnumerateBodiesAtPointUsing(point, block)
 }
 
+// Enumerates all the physics bodies in the scene that intersect the specified rectangle.
+//
 // EnumerateBodiesInRectUsing calls the underlying EnumerateBodiesInRectUsing.
 func (x *PhysicsWorld) EnumerateBodiesInRectUsing(rect corefoundation.CGRect, block func(*raw.SKPhysicsBody, *bool)) {
 	x.inner.EnumerateBodiesInRectUsing(rect, block)
 }
 
+// Enumerates all the physics bodies in the scene that intersect a ray.
+//
 // EnumerateBodiesAlongRayStartEndUsing calls the underlying EnumerateBodiesAlongRayStartEndUsing.
 func (x *PhysicsWorld) EnumerateBodiesAlongRayStartEndUsing(start corefoundation.CGPoint, end corefoundation.CGPoint, block objc.Block) {
 	x.inner.EnumerateBodiesAlongRayStartEndUsing(start, end, block)

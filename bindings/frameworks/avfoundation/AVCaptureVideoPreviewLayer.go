@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Core Animation layer that displays video from a camera device.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturevideopreviewlayer
 type AVCaptureVideoPreviewLayer struct {
 	quartzcore.CALayer
@@ -49,7 +51,7 @@ func AVCaptureVideoPreviewLayerFromID(id objc.ID) *AVCaptureVideoPreviewLayer {
 	return o
 }
 
-// @method layerWithSession: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
+// Returns a new layer to preview the visual output of a capture session.
 func AVCaptureVideoPreviewLayerLayerWithSession(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureVideoPreviewLayer), _aVCaptureVideoPreviewLayerSelLayerWithSession, session.Ptr())
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func AVCaptureVideoPreviewLayerLayerWithSession(session *AVCaptureSession) *AVCa
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
-// @method initWithSession: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
+// Creates a layer to preview the visual output of a capture session.
 func (o *AVCaptureVideoPreviewLayer) InitWithSession(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelInitWithSession, session.Ptr())
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func (o *AVCaptureVideoPreviewLayer) InitWithSession(session *AVCaptureSession) 
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
-// @method layerWithSessionWithNoConnection: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession, but creates no connections to any of the session's eligible video inputs. Only use this initializer if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
+// Returns a new layer to preview the visual output of a capture session, without making connections to eligible video inputs.
 func AVCaptureVideoPreviewLayerLayerWithSessionWithNoConnection(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureVideoPreviewLayer), _aVCaptureVideoPreviewLayerSelLayerWithSessionWithNoConnection, session.Ptr())
 	if _ret != 0 {
@@ -76,7 +78,7 @@ func AVCaptureVideoPreviewLayerLayerWithSessionWithNoConnection(session *AVCaptu
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
-// @method initWithSessionWithNoConnection: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession, but creates no connections to any of the session's eligible video inputs. Only use this initializer if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
+// Creates a layer to preview the visual output of a capture session, without making connections to eligible video inputs.
 func (o *AVCaptureVideoPreviewLayer) InitWithSessionWithNoConnection(session *AVCaptureSession) *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelInitWithSessionWithNoConnection, session.Ptr())
 	if _ret != 0 {
@@ -85,36 +87,36 @@ func (o *AVCaptureVideoPreviewLayer) InitWithSessionWithNoConnection(session *AV
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
-// method setSessionWithNoConnection: @abstract Attaches the receiver to a given session without implicitly forming a connection to the first eligible video AVCaptureInputPort. Only use this setter if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @discussion The session is retained by the preview layer.
+// Associates a session with the layer without automatically forming a connection to an eligible input port.
 func (o *AVCaptureVideoPreviewLayer) SetSessionWithNoConnection(session *AVCaptureSession) {
 	o.Ptr().Send(_aVCaptureVideoPreviewLayerSelSetSessionWithNoConnection, session.Ptr())
 }
 
-// @method captureDevicePointOfInterestForPoint: @abstract Converts a point in layer coordinates to a point of interest in the coordinate space of the capture device providing input to the layer. @param pointInLayer A CGPoint in layer coordinates. @result A CGPoint in the coordinate space of the capture device providing input to the layer. @discussion AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a point in the coordinate space of the receiver to a point of interest in the coordinate space of the AVCaptureDevice providing input to the receiver. The conversion takes frameSize and videoGravity into consideration.
+// Converts a point from layer coordinates to the coordinate space of the capture device.
 func (o *AVCaptureVideoPreviewLayer) CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _aVCaptureVideoPreviewLayerSelCaptureDevicePointOfInterestForPoint, pointInLayer)
 	return _ret
 }
 
-// @method pointForCaptureDevicePointOfInterest: @abstract Converts a point of interest in the coordinate space of the capture device providing input to the layer to a point in layer coordinates. @param captureDevicePointOfInterest A CGPoint in the coordinate space of the capture device providing input to the layer. @result A CGPoint in layer coordinates. @discussion AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a point in the coordinate space of the AVCaptureDevice providing input to the coordinate space of the receiver. The conversion takes frame size and videoGravity into consideration.
+// Converts a point from the coordinate space of the capture device to the coordinate space of the layer.
 func (o *AVCaptureVideoPreviewLayer) PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _aVCaptureVideoPreviewLayerSelPointForCaptureDevicePointOfInterest, captureDevicePointOfInterest)
 	return _ret
 }
 
-// @method metadataOutputRectOfInterestForRect: @abstract Converts a rectangle in layer coordinates to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose capture device is providing input to the layer. @param rectInLayerCoordinates A CGRect in layer coordinates. @result A CGRect in the coordinate space of the metadata output whose capture device is providing input to the layer. @discussion AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of the receiver to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the receiver. The conversion takes frame size and videoGravity into consideration.
+// Converts a rectangle from layer coordinates to the coordinate space of the metadata output.
 func (o *AVCaptureVideoPreviewLayer) MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureVideoPreviewLayerSelMetadataOutputRectOfInterestForRect, rectInLayerCoordinates)
 	return _ret
 }
 
-// @method rectForMetadataOutputRectOfInterest: @abstract Converts a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose capture device is providing input to the layer to a rectangle in layer coordinates. @param rectInMetadataOutputCoordinates A CGRect in the coordinate space of the metadata output whose capture device is providing input to the layer. @result A CGRect in layer coordinates. @discussion AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the coordinate space of the receiver. The conversion takes frame size and videoGravity into consideration.
+// Converts a rectangle from metadata output coordinates to the coordinate space of the layer.
 func (o *AVCaptureVideoPreviewLayer) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureVideoPreviewLayerSelRectForMetadataOutputRectOfInterest, rectInMetadataOutputCoordinates)
 	return _ret
 }
 
-// @method transformedMetadataObjectForMetadataObject: @abstract Converts an AVMetadataObject's visual properties to layer coordinates. @param metadataObject An AVMetadataObject originating from the same AVCaptureInput as the preview layer. @result An AVMetadataObject whose properties are in layer coordinates. @discussion AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. Face metadata objects likewise express yaw and roll angles with respect to an unrotated picture. -transformedMetadataObjectForMetadataObject: converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of the receiver. The conversion takes orientation, mirroring, layer bounds and videoGravity into consideration. If the provided metadata object originates from an input source other than the preview layer's, nil will be returned.
+// Converts a metadata object’s visual properties to layer coordinates.
 func (o *AVCaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(metadataObject *AVMetadataObject) *AVMetadataObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoPreviewLayerSelTransformedMetadataObjectForMetadataObject, metadataObject.Ptr())
 	if _ret != 0 {

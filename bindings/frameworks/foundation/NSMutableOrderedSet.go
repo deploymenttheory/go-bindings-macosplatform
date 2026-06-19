@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dynamic, ordered collection of unique objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutableorderedset
 type NSMutableOrderedSet[ObjectType purego.AnyObject] struct {
 	NSOrderedSet[ObjectType]
@@ -64,14 +66,17 @@ func NSMutableOrderedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSMutab
 	return o
 }
 
+// Inserts the given object at the specified index of the mutable ordered set, if it is not already a member.
 func (o *NSMutableOrderedSet[ObjectType]) InsertObjectAtIndex(object ObjectType, idx uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelInsertObjectAtIndex, object, idx)
 }
 
+// Removes a the object at the specified index from the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) RemoveObjectAtIndex(idx uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelRemoveObjectAtIndex, idx)
 }
 
+// Replaces the object at the specified index with the new object.
 func (o *NSMutableOrderedSet[ObjectType]) ReplaceObjectAtIndexWithObject(idx uint, object ObjectType) {
 	o.Ptr().Send(_nSMutableOrderedSetSelReplaceObjectAtIndexWithObject, idx, object)
 }
@@ -84,6 +89,7 @@ func (o *NSMutableOrderedSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSMutab
 	return NSMutableOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) Init() *NSMutableOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableOrderedSetSelInit)
 	if _ret != 0 {
@@ -92,6 +98,7 @@ func (o *NSMutableOrderedSet[ObjectType]) Init() *NSMutableOrderedSet[ObjectType
 	return NSMutableOrderedSetFromID[ObjectType](_ret)
 }
 
+// Returns an initialized mutable ordered set with a given initial capacity.
 func (o *NSMutableOrderedSet[ObjectType]) InitWithCapacity(numItems uint) *NSMutableOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableOrderedSetSelInitWithCapacity, numItems)
 	if _ret != 0 {
@@ -100,90 +107,112 @@ func (o *NSMutableOrderedSet[ObjectType]) InitWithCapacity(numItems uint) *NSMut
 	return NSMutableOrderedSetFromID[ObjectType](_ret)
 }
 
+// Appends a given object to the end of the mutable ordered set, if it is not already a member.
 func (o *NSMutableOrderedSet[ObjectType]) AddObject(object ObjectType) {
 	o.Ptr().Send(_nSMutableOrderedSetSelAddObject, object)
 }
 
+// Appends the given number of objects from a given C array to the end of the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) AddObjectsCount(objects unsafe.Pointer, count uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelAddObjectsCount, objects, count)
 }
 
+// Appends to the end of the mutable ordered set each object contained in a given array that is not already a member.
 func (o *NSMutableOrderedSet[ObjectType]) AddObjectsFromArray(array *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelAddObjectsFromArray, array.Ptr())
 }
 
+// Exchanges the object at the specified index with the object at the other index.
 func (o *NSMutableOrderedSet[ObjectType]) ExchangeObjectAtIndexWithObjectAtIndex(idx1 uint, idx2 uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelExchangeObjectAtIndexWithObjectAtIndex, idx1, idx2)
 }
 
+// Moves the objects at the specified indexes to the new location.
 func (o *NSMutableOrderedSet[ObjectType]) MoveObjectsAtIndexesToIndex(indexes *NSIndexSet, idx uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelMoveObjectsAtIndexesToIndex, indexes.Ptr(), idx)
 }
 
+// Inserts the objects in the array at the specified indexes.
 func (o *NSMutableOrderedSet[ObjectType]) InsertObjectsAtIndexes(objects *NSArray[ObjectType], indexes *NSIndexSet) {
 	o.Ptr().Send(_nSMutableOrderedSetSelInsertObjectsAtIndexes, objects.Ptr(), indexes.Ptr())
 }
 
+// Appends or replaces the object at the specified index.
 func (o *NSMutableOrderedSet[ObjectType]) SetObjectAtIndex(obj ObjectType, idx uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelSetObjectAtIndex, obj, idx)
 }
 
+// Replaces the given object at the specified index of the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) SetObjectAtIndexedSubscript(obj ObjectType, idx uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelSetObjectAtIndexedSubscript, obj, idx)
 }
 
+// Replaces the objects in the receiving mutable ordered set at the range with the specified number of objects from a given C array.
 func (o *NSMutableOrderedSet[ObjectType]) ReplaceObjectsInRangeWithObjectsCount(range_ NSRange, objects unsafe.Pointer, count uint) {
 	o.Ptr().Send(_nSMutableOrderedSetSelReplaceObjectsInRangeWithObjectsCount, range_, objects, count)
 }
 
+// Replaces the objects at the specified indexes with the new objects.
 func (o *NSMutableOrderedSet[ObjectType]) ReplaceObjectsAtIndexesWithObjects(indexes *NSIndexSet, objects *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelReplaceObjectsAtIndexesWithObjects, indexes.Ptr(), objects.Ptr())
 }
 
+// Removes from the mutable ordered set each of the objects within a given range.
 func (o *NSMutableOrderedSet[ObjectType]) RemoveObjectsInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableOrderedSetSelRemoveObjectsInRange, range_)
 }
 
+// Removes the objects at the specified indexes from the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) RemoveObjectsAtIndexes(indexes *NSIndexSet) {
 	o.Ptr().Send(_nSMutableOrderedSetSelRemoveObjectsAtIndexes, indexes.Ptr())
 }
 
+// Removes all the objects from the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSMutableOrderedSetSelRemoveAllObjects)
 }
 
+// Removes a given object from the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) RemoveObject(object ObjectType) {
 	o.Ptr().Send(_nSMutableOrderedSetSelRemoveObject, object)
 }
 
+// Removes the objects in the array from the mutable ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) RemoveObjectsInArray(array *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelRemoveObjectsInArray, array.Ptr())
 }
 
+// Removes from the receiving ordered set each object that isn’t a member of another ordered set.
 func (o *NSMutableOrderedSet[ObjectType]) IntersectOrderedSet(other *NSOrderedSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelIntersectOrderedSet, other.Ptr())
 }
 
+// Removes each object in another given ordered set from the receiving mutable ordered set, if present.
 func (o *NSMutableOrderedSet[ObjectType]) MinusOrderedSet(other *NSOrderedSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelMinusOrderedSet, other.Ptr())
 }
 
+// Adds each object in another given ordered set to the receiving mutable ordered set, if not present.
 func (o *NSMutableOrderedSet[ObjectType]) UnionOrderedSet(other *NSOrderedSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelUnionOrderedSet, other.Ptr())
 }
 
+// Removes from the receiving ordered set each object that isn’t a member of another set.
 func (o *NSMutableOrderedSet[ObjectType]) IntersectSet(other *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelIntersectSet, other.Ptr())
 }
 
+// Removes each object in another given set from the receiving mutable ordered set, if present.
 func (o *NSMutableOrderedSet[ObjectType]) MinusSet(other *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelMinusSet, other.Ptr())
 }
 
+// Adds each object in another given set to the receiving mutable ordered set, if not present.
 func (o *NSMutableOrderedSet[ObjectType]) UnionSet(other *NSSet[ObjectType]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelUnionSet, other.Ptr())
 }
 
+// Sorts the mutable ordered set using the comparison method specified by the comparator block.
 func (o *NSMutableOrderedSet[ObjectType]) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -195,6 +224,7 @@ func (o *NSMutableOrderedSet[ObjectType]) SortUsingComparator(cmptr func(objc.ID
 	o.Ptr().Send(_nSMutableOrderedSetSelSortUsingComparator, __block_cmptr)
 }
 
+// Sorts the mutable ordered set using the specified options and the comparison method specified by a given comparator block.
 func (o *NSMutableOrderedSet[ObjectType]) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -206,6 +236,7 @@ func (o *NSMutableOrderedSet[ObjectType]) SortWithOptionsUsingComparator(opts NS
 	o.Ptr().Send(_nSMutableOrderedSetSelSortWithOptionsUsingComparator, opts, __block_cmptr)
 }
 
+// Sorts the specified range of the mutable ordered set using the specified options and the comparison method specified by a given comparator block.
 func (o *NSMutableOrderedSet[ObjectType]) SortRangeOptionsUsingComparator(range_ NSRange, opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -217,6 +248,7 @@ func (o *NSMutableOrderedSet[ObjectType]) SortRangeOptionsUsingComparator(range_
 	o.Ptr().Send(_nSMutableOrderedSetSelSortRangeOptionsUsingComparator, range_, opts, __block_cmptr)
 }
 
+// Creates and returns an mutable ordered set with a given initial capacity.
 func NSMutableOrderedSetOrderedSetWithCapacity(numItems uint) *NSMutableOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableOrderedSet), _nSMutableOrderedSetSelOrderedSetWithCapacity, numItems)
 	if _ret != 0 {
@@ -229,10 +261,12 @@ func (o *NSMutableOrderedSet[ObjectType]) ApplyDifference(difference *NSOrderedC
 	o.Ptr().Send(_nSMutableOrderedSetSelApplyDifference, difference.Ptr())
 }
 
+// Sorts the receiving ordered set using a given array of sort descriptors.
 func (o *NSMutableOrderedSet[ObjectType]) SortUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) {
 	o.Ptr().Send(_nSMutableOrderedSetSelSortUsingDescriptors, sortDescriptors.Ptr())
 }
 
+// Evaluates a given predicate against the mutable ordered set’s content and leaves only objects that match.
 func (o *NSMutableOrderedSet[ObjectType]) FilterUsingPredicate(p *NSPredicate) {
 	o.Ptr().Send(_nSMutableOrderedSetSelFilterUsingPredicate, p.Ptr())
 }

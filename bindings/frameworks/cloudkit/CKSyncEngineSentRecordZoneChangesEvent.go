@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The sync engine finished sending a batch of record zone changes to the server.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginesentrecordzonechangesevent
 type CKSyncEngineSentRecordZoneChangesEvent struct {
 	CKSyncEngineEvent
@@ -62,6 +64,9 @@ func (o *CKSyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() *foundation.
 
 // The unique identifiers of the records CloudKit is unable to delete, and the reasons why.
 func (o *CKSyncEngineSentRecordZoneChangesEvent) FailedRecordDeletes() *foundation.NSDictionary[*CKRecordID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*CKRecordID, objc.ID]](o.Ptr(), _cKSyncEngineSentRecordZoneChangesEventSelFailedRecordDeletes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSentRecordZoneChangesEventSelFailedRecordDeletes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*CKRecordID, objc.ID](_ret)
 }

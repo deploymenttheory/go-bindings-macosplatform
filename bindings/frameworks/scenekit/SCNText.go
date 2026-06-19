@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A geometry based on a string of text, optionally extruded to create a three-dimensional object.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scntext
 type SCNText struct {
 	SCNGeometry
@@ -55,7 +57,7 @@ func SCNTextFromID(id objc.ID) *SCNText {
 	return o
 }
 
-// @method textWithString:extrusionDepth: @abstract Creates and returns a 3D representation of given text with given extrusion depth. @param string The text to be represented. @param extrusionDepth The extrusion depth.
+// Creates a text geometry from a specified string, extruded with a specified depth.
 func SCNTextTextWithStringExtrusionDepth(string_ objc.ID, extrusionDepth float64) *SCNText {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNText), _sCNTextSelTextWithStringExtrusionDepth, string_, extrusionDepth)
 	if _ret != 0 {

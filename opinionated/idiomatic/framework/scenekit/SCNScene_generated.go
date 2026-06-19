@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A container for the node hierarchy and global properties that together form a displayable 3D scene.
+//
 // Scene wraps [raw.SCNScene] with a fluent Go API.
 type Scene struct {
 	inner *raw.SCNScene
@@ -39,7 +41,7 @@ func NewScene() *Scene {
 	return &Scene{inner: raw.SCNSceneFromID(_id)}
 }
 
-// @property fogStartDistance @abstract Specifies the receiver's fog start distance. Animatable. Defaults to 0.
+// The distance from a point of view at which the scene’s contents begin to be obscured by fog. Animatable.
 //
 // WithFogStartDistance sets the fogStartDistance property and returns the receiver for chaining.
 func (x *Scene) WithFogStartDistance(fogStartDistance float64) *Scene {
@@ -47,7 +49,7 @@ func (x *Scene) WithFogStartDistance(fogStartDistance float64) *Scene {
 	return x
 }
 
-// @property fogEndDistance @abstract Specifies the receiver's fog end distance. Animatable. Defaults to 0.
+// The distance from a point of view at which the scene’s contents are completely obscured by fog. Animatable.
 //
 // WithFogEndDistance sets the fogEndDistance property and returns the receiver for chaining.
 func (x *Scene) WithFogEndDistance(fogEndDistance float64) *Scene {
@@ -55,7 +57,7 @@ func (x *Scene) WithFogEndDistance(fogEndDistance float64) *Scene {
 	return x
 }
 
-// @property fogDensityExponent @abstract Specifies the receiver's fog power exponent. Animatable. Defaults to 1. @discussion Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
+// The transition curve for the fog’s intensity between its start and end distances. Animatable.
 //
 // WithFogDensityExponent sets the fogDensityExponent property and returns the receiver for chaining.
 func (x *Scene) WithFogDensityExponent(fogDensityExponent float64) *Scene {
@@ -63,7 +65,7 @@ func (x *Scene) WithFogDensityExponent(fogDensityExponent float64) *Scene {
 	return x
 }
 
-// @property fogColor @abstract Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor.
+// The color of the fog effect to be rendered with the scene. Animatable.
 //
 // WithFogColor sets the fogColor property and returns the receiver for chaining.
 func (x *Scene) WithFogColor(fogColor objc.ID) *Scene {
@@ -103,7 +105,7 @@ func (x *Scene) WithScreenSpaceReflectionStride(screenSpaceReflectionStride floa
 	return x
 }
 
-// @property paused @abstract Controls whether or not the scene is paused. Defaults to NO. @discussion Pausing a scene will pause animations, actions, particles and physics.
+// A Boolean value that determines whether to run actions, animations, particle systems, and physics simulations in the scene graph.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *Scene) WithPaused(paused bool) *Scene {
@@ -111,21 +113,21 @@ func (x *Scene) WithPaused(paused bool) *Scene {
 	return x
 }
 
-// @method attributeForKey: @abstract Retrieves a scene attribute. @discussion The available keys are listed in the "Scene attributes" group. @param key An NSString object that specifies the attribute to be read
+// Returns the scene attribute for the specified key.
 //
 // AttributeForKey calls the underlying AttributeForKey.
 func (x *Scene) AttributeForKey(key string) objc.ID {
 	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
-// @method setAttribute:forKey: @abstract Sets a scene attribute @discussion The available keys are listed in the "Scene attributes" group. @param attribute An object that specifies the value of the attribute to be written. @param key An NSString object that specifies the attribute to be written
+// Sets a scene attribute for the specified key.
 //
 // SetAttributeForKey calls the underlying SetAttributeForKey.
 func (x *Scene) SetAttributeForKey(attribute objc.ID, key string) {
 	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))
 }
 
-// @method writeToURL:options:delegate:progressHandler: @abstract write the scene to the specified url. @param url the destination url to write the scene to. @param options A dictionary of options. The valid keys are described in the "Scene writing options" section. @param delegate an optional delegate to manage external references such as images. @param progressHandler an optional block to handle the progress of the operation. @return Returns YES if the operation succeeded, NO otherwise. Errors checking can be done via the "error" parameter of the 'progressHandler'. @discussion macOS 10.10 and lower only supports exporting to .dae files. Starting macOS 10.11 exporting supports .dae, .scn as well as file all formats supported by Model I/O. Starting iOS 10 exporting supports .scn as well as all file formats supported by Model I/O.
+// Exports the scene and its contents to a file at the specified URL.
 //
 // WriteToURLOptionsDelegateProgressHandler calls the underlying WriteToURLOptionsDelegateProgressHandler.
 func (x *Scene) WriteToURLOptionsDelegateProgressHandler(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate raw.SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool {
@@ -284,16 +286,22 @@ func (x *Scene) SetPaused(paused bool) {
 	x.inner.SetPaused(paused)
 }
 
+// Attaches a particle system to the scene, using the specified transform.
+//
 // AddParticleSystemWithTransform calls the underlying AddParticleSystemWithTransform.
 func (x *Scene) AddParticleSystemWithTransform(system *raw.SCNParticleSystem, transform quartzcore.CATransform3D) {
 	x.inner.AddParticleSystemWithTransform(system, transform)
 }
 
+// Removes any particle systems directly attached to the scene.
+//
 // RemoveAllParticleSystems calls the underlying RemoveAllParticleSystems.
 func (x *Scene) RemoveAllParticleSystems() {
 	x.inner.RemoveAllParticleSystems()
 }
 
+// Removes a particle system attached to the scene.
+//
 // RemoveParticleSystem calls the underlying RemoveParticleSystem.
 func (x *Scene) RemoveParticleSystem(system *raw.SCNParticleSystem) {
 	x.inner.RemoveParticleSystem(system)

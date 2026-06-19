@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents scheduled output.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionscheduledoutput
 type CMIOExtensionScheduledOutput struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func CMIOExtensionScheduledOutputFromID(id objc.ID) *CMIOExtensionScheduledOutpu
 	return o
 }
 
-// @method scheduledOutputWithSequenceNumber:hostTimeInNanoseconds: @abstract Return a stream scheduled output instance. @param sequenceNumber The buffer sequence number that was output. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was output. @result A CMIOExtensionScheduledOutput instance that describes the state of the stream.
+// Returns a new scheduled output object.
 func CMIOExtensionScheduledOutputScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *CMIOExtensionScheduledOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionScheduledOutput), _cMIOExtensionScheduledOutputSelScheduledOutputWithSequenceNumberHostTimeInNanoseconds, sequenceNumber, hostTimeInNanoseconds)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func CMIOExtensionScheduledOutputScheduledOutputWithSequenceNumberHostTimeInNano
 	return CMIOExtensionScheduledOutputFromID(_ret)
 }
 
-// @method initWithSequenceNumber:hostTimeInNanoseconds: @abstract Initialize a stream scheduled output instance. @param sequenceNumber The buffer sequence number that was output. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was output. @result A CMIOExtensionScheduledOutput instance that describes the state of the stream.
+// Creates a scheduled output object.
 func (o *CMIOExtensionScheduledOutput) InitWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *CMIOExtensionScheduledOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionScheduledOutputSelInitWithSequenceNumberHostTimeInNanoseconds, sequenceNumber, hostTimeInNanoseconds)
 	if _ret != 0 {

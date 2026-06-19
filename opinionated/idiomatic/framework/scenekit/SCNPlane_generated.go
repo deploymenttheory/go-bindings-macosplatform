@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A rectangular, one-sided plane geometry of specified width and height.
+//
 // Plane wraps [raw.SCNPlane] with a fluent Go API.
 type Plane struct {
 	inner *raw.SCNPlane
@@ -37,7 +39,7 @@ func NewPlane() *Plane {
 	return &Plane{inner: raw.SCNPlaneFromID(_id)}
 }
 
-// @property width @abstract The plane extent along the X axis. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the plane along its horizontal axis. Animatable.
 //
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Plane) WithWidth(width float64) *Plane {
@@ -45,7 +47,7 @@ func (x *Plane) WithWidth(width float64) *Plane {
 	return x
 }
 
-// @property height @abstract The plane extent along the Y axis. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the plane along its vertical axis. Animatable.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Plane) WithHeight(height float64) *Plane {
@@ -53,7 +55,7 @@ func (x *Plane) WithHeight(height float64) *Plane {
 	return x
 }
 
-// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in the plane’s surface along its horizontal axis. Animatable.
 //
 // WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithWidthSegmentCount(widthSegmentCount int) *Plane {
@@ -61,7 +63,7 @@ func (x *Plane) WithWidthSegmentCount(widthSegmentCount int) *Plane {
 	return x
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. The default value is 1. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in the plane’s surface along its vertical axis. Animatable.
 //
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithHeightSegmentCount(heightSegmentCount int) *Plane {
@@ -69,7 +71,7 @@ func (x *Plane) WithHeightSegmentCount(heightSegmentCount int) *Plane {
 	return x
 }
 
-// @property cornerRadius @abstract The corner radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+// The radius of curvature for the plane’s corners. Animatable.
 //
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *Plane) WithCornerRadius(cornerRadius float64) *Plane {
@@ -77,7 +79,7 @@ func (x *Plane) WithCornerRadius(cornerRadius float64) *Plane {
 	return x
 }
 
-// @property cornerSegmentCount @abstract The number of subdivisions for the rounded corners. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+// The number of line segments used to create each rounded corner of the plane. Animatable.
 //
 // WithCornerSegmentCount sets the cornerSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithCornerSegmentCount(cornerSegmentCount int) *Plane {
@@ -85,7 +87,7 @@ func (x *Plane) WithCornerSegmentCount(cornerSegmentCount int) *Plane {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Plane) WithName(name string) *Plane {
@@ -93,7 +95,7 @@ func (x *Plane) WithName(name string) *Plane {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Plane) WithMaterials(items ...*raw.SCNMaterial) *Plane {
@@ -116,7 +118,7 @@ func (x *Plane) WithMaterials(items ...*raw.SCNMaterial) *Plane {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Plane) WithFirstMaterial(firstMaterial *Material) *Plane {
@@ -124,7 +126,7 @@ func (x *Plane) WithFirstMaterial(firstMaterial *Material) *Plane {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Plane) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Plane {
@@ -153,7 +155,7 @@ func (x *Plane) WithTessellator(tessellator *GeometryTessellator) *Plane {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Plane) WithSubdivisionLevel(subdivisionLevel uint) *Plane {
@@ -169,7 +171,7 @@ func (x *Plane) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pla
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Plane {
@@ -177,7 +179,7 @@ func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pla
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Plane) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Plane {

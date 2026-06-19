@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the structure, format, and layout for vertex data buffers associated with a mesh.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlvertexdescriptor
 type MDLVertexDescriptor struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func MDLVertexDescriptorFromID(id objc.ID) *MDLVertexDescriptor {
 	return o
 }
 
-// @method initVertexDescriptor: @abstract Initializes the object with values from supplied vertexDescriptor @discussion This performs a deep copy of all data in the supplied descriptor.
+// Creates a new vertex descriptor by performing a deep copy of the specified vertex descriptor.
 func (o *MDLVertexDescriptor) InitWithVertexDescriptor(vertexDescriptor *MDLVertexDescriptor) *MDLVertexDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexDescriptorSelInitWithVertexDescriptor, vertexDescriptor.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *MDLVertexDescriptor) InitWithVertexDescriptor(vertexDescriptor *MDLVert
 	return MDLVertexDescriptorFromID(_ret)
 }
 
-// @method attributeNamed: @abstract Retrieves the attribute with the given name @return The attribute with the supplied name or nil if attribute with the given name does not exist in the descriptor object
+// Returns the vertex attribute with the specified name in the vertex descriptor.
 func (o *MDLVertexDescriptor) AttributeNamed(name *foundation.NSString) *MDLVertexAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexDescriptorSelAttributeNamed, name.Ptr())
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *MDLVertexDescriptor) AttributeNamed(name *foundation.NSString) *MDLVert
 	return MDLVertexAttributeFromID(_ret)
 }
 
-// @method addOrReplaceAttribute: @abstract Replace any attribute with the same name and time, or add it if it does not already exist.
+// Adds the specified vertex attribute to the vertex descriptor, replacing any existing attribute with the same name.
 func (o *MDLVertexDescriptor) AddOrReplaceAttribute(attribute *MDLVertexAttribute) {
 	o.Ptr().Send(_mDLVertexDescriptorSelAddOrReplaceAttribute, attribute.Ptr())
 }
@@ -68,17 +70,17 @@ func (o *MDLVertexDescriptor) RemoveAttributeNamed(name *foundation.NSString) {
 	o.Ptr().Send(_mDLVertexDescriptorSelRemoveAttributeNamed, name.Ptr())
 }
 
-// @method reset @abstract Tesets the descriptor to initial values
+// Resets a vertex descriptor to its default state.
 func (o *MDLVertexDescriptor) Reset() {
 	o.Ptr().Send(_mDLVertexDescriptorSelReset)
 }
 
-// @method setPackedStrides @abstract Sets the stride in each VertexBufferLout in the layouts array to the minimum value encompassing all attributes in the vertex buffer
+// Sets the stride for each vertex layout to the minimum value to pack vertex data together in a single buffer.
 func (o *MDLVertexDescriptor) SetPackedStrides() {
 	o.Ptr().Send(_mDLVertexDescriptorSelSetPackedStrides)
 }
 
-// @method setPackedOffsets @abstract Sets the stride in each VertexAttribute in the attributes array to the minimum value to pack each attribute next to each other in its vertexbuffer
+// Sets the offset for each vertex attribute to the minimum value to pack vertex data together in a single buffer.
 func (o *MDLVertexDescriptor) SetPackedOffsets() {
 	o.Ptr().Send(_mDLVertexDescriptorSelSetPackedOffsets)
 }

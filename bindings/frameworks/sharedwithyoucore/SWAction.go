@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a collaboration action.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swaction
 type SWAction struct {
 	foundation.NSObject
@@ -33,10 +35,12 @@ func SWActionFromID(id objc.ID) *SWAction {
 	return o
 }
 
+// Reports a successful execution of the action.
 func (o *SWAction) Fulfill() {
 	o.Ptr().Send(_sWActionSelFulfill)
 }
 
+// Reports a failed execution of the action.
 func (o *SWAction) Fail() {
 	o.Ptr().Send(_sWActionSelFail)
 }

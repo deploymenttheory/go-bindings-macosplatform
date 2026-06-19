@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An authorization request that uses credentials stored in the keychain.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpasswordrequest
 type ASAuthorizationPasswordRequest struct {
 	ASAuthorizationRequest

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A fetch result object that encompasses the response from an executed asynchronous fetch request.
+//
 // AsynchronousFetchResult wraps [raw.NSAsynchronousFetchResult] with a fluent Go API.
 type AsynchronousFetchResult struct {
 	inner *raw.NSAsynchronousFetchResult[objc.ID]

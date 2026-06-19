@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object with a shape and position that blocks audio from reaching the listener.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseoccluder
 type PHASEOccluder struct {
 	PHASEObject
@@ -31,7 +33,7 @@ func PHASEOccluderFromID(id objc.ID) *PHASEOccluder {
 	return o
 }
 
-// @method initWithEngine:shapes: @abstract Initialize a new occluder with shapes. @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple occluders from multiple threads, if required.
+// Creates an occluder with the given engine and shapes.
 func (o *PHASEOccluder) InitWithEngineShapes(engine *PHASEEngine, shapes *foundation.NSArray[*PHASEShape]) *PHASEOccluder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEOccluderSelInitWithEngineShapes, engine.Ptr(), shapes.Ptr())
 	if _ret != 0 {

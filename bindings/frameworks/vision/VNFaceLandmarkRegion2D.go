@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// 2D geometry information for a specific facial feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d
 type VNFaceLandmarkRegion2D struct {
 	VNFaceLandmarkRegion
@@ -36,7 +38,7 @@ func VNFaceLandmarkRegion2DFromID(id objc.ID) *VNFaceLandmarkRegion2D {
 	return o
 }
 
-// @brief	Provides the array of landmark points in the coordinate space of a specific image size. @discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points in the coordinate space of a specific image size.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does. @param	imageSize			The pixel dimensions of the image in which the landmark points are being presented. @return the address of the array of pointCount points, or NULL if the conversion could not take place.
+// A buffer in memory containing landmark points in the coordinate space of the specified image size.
 func (o *VNFaceLandmarkRegion2D) PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint {
 	_ret := objc.Send[*corefoundation.CGPoint](o.Ptr(), _vNFaceLandmarkRegion2DSelPointsInImageOfSize, imageSize)
 	return _ret
@@ -50,8 +52,11 @@ func (o *VNFaceLandmarkRegion2D) NormalizedPoints() unsafe.Pointer {
 
 // @brief    Obtains the array of accuracy placement estimates per landmark point. @discussion    Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations @return NSArray object of NSNumber(s) initialized to floating point values.
 func (o *VNFaceLandmarkRegion2D) PrecisionEstimatesPerPoint() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vNFaceLandmarkRegion2DSelPrecisionEstimatesPerPoint)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNFaceLandmarkRegion2DSelPrecisionEstimatesPerPoint)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @brief Describes how to interpret the points provided by the region.

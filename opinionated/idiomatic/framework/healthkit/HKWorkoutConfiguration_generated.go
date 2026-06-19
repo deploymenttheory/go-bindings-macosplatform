@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains configuration information about a workout session.
+//
 // WorkoutConfiguration wraps [raw.HKWorkoutConfiguration] with a fluent Go API.
 type WorkoutConfiguration struct {
 	inner *raw.HKWorkoutConfiguration
@@ -35,7 +37,7 @@ func NewWorkoutConfiguration() *WorkoutConfiguration {
 	return &WorkoutConfiguration{inner: raw.HKWorkoutConfigurationFromID(_id)}
 }
 
-// @property      activityType @abstract      Indicates the type of workout for the configuration.
+// The workout session’s activity type.
 //
 // WithActivityType sets the activityType property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithActivityType(activityType HKWorkoutActivityType) *WorkoutConfiguration {
@@ -43,7 +45,7 @@ func (x *WorkoutConfiguration) WithActivityType(activityType HKWorkoutActivityTy
 	return x
 }
 
-// @property      locationType @abstract      Indicates the type of location (indoors vs. outdoors) for the configuration.
+// The workout session’s location.
 //
 // WithLocationType sets the locationType property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithLocationType(locationType HKWorkoutSessionLocationType) *WorkoutConfiguration {
@@ -51,7 +53,7 @@ func (x *WorkoutConfiguration) WithLocationType(locationType HKWorkoutSessionLoc
 	return x
 }
 
-// @property      swimmingLocationType @abstract      Indicates the type of swimming location (pool vs. open water) where the workout will take place.
+// The workout session’s swimming location.
 //
 // WithSwimmingLocationType sets the swimmingLocationType property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType HKWorkoutSwimmingLocationType) *WorkoutConfiguration {
@@ -59,7 +61,7 @@ func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType HKW
 	return x
 }
 
-// @property      lapLength @abstract      Indicates the length of the pool, when the workout location type is pool. @discussion    This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
+// The length of the lap for a workout session.
 //
 // WithLapLength sets the lapLength property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {

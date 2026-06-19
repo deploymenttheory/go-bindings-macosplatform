@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Texture drawing parameters for use in GLKit rendering effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkeffectpropertytexture
 type GLKEffectPropertyTexture struct {
 	GLKEffectProperty

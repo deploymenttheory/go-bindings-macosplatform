@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The class you create when providing a data-based Quick Look preview extension.
+//
 // PreviewReply wraps [raw.QLPreviewReply] with a fluent Go API.
 type PreviewReply struct {
 	inner *raw.QLPreviewReply
@@ -43,7 +45,7 @@ func NewPreviewReplyWithContextSizeIsBitmapDrawingBlock(contextSize corefoundati
 	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
 }
 
-// @abstract Use this method to provide a preview by providing a URL to a file of a supported type. @param fileURL  A file URL representing a preview of the previewed URL. Currently supported types include: UTTypeImage, UTTypePDF, UTTypeHTML, UTTypeXML, UTTypePlainText, UTTypeRTF, UTTypeRTFD, UTTypeMovie, UTTypeAudio
+// Creates a preview reply from an existing file URL.
 //
 // NewPreviewReplyWithFileURL creates a new [PreviewReply].
 func NewPreviewReplyWithFileURL(fileURL string) *PreviewReply {
@@ -76,7 +78,7 @@ func (x *PreviewReply) WithStringEncoding(stringEncoding uint) *PreviewReply {
 	return x
 }
 
-// Attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
+// The attachments for a preview reply that provide additional data for the system to display the preview.
 //
 // WithAttachments sets the attachments property and returns the receiver for chaining.
 func (x *PreviewReply) WithAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) *PreviewReply {
@@ -84,7 +86,7 @@ func (x *PreviewReply) WithAttachments(attachments *foundation.NSDictionary[*fou
 	return x
 }
 
-// Custom display title for the preview. If left as the empty string, QuickLook will use the file name.
+// The title for the system to display with the preview.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *PreviewReply) WithTitle(title string) *PreviewReply {

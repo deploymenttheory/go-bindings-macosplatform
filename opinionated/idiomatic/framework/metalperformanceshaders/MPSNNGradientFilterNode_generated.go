@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient filter.
+//
 // NNGradientFilterNode wraps [raw.MPSNNGradientFilterNode] with a fluent Go API.
 type NNGradientFilterNode struct {
 	inner *raw.MPSNNGradientFilterNode

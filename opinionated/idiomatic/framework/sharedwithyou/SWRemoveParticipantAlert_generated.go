@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An alert that prompts the user to remove a participant from a Messages group.
+//
 // RemoveParticipantAlert wraps [raw.SWRemoveParticipantAlert] with a fluent Go API.
 type RemoveParticipantAlert struct {
 	inner *raw.SWRemoveParticipantAlert

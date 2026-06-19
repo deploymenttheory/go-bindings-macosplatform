@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A session manager that mediates sharing data between an app and a web browser.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionwebbrowsersessionmanager
 type ASWebAuthenticationSessionWebBrowserSessionManager struct {
 	foundation.NSObject

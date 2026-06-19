@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that moves one or more scriptable objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmovecommand
 type NSMoveCommand struct {
 	NSScriptCommand

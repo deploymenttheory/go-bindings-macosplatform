@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that models a track of media that an asset contains.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassettrack
 type AVAssetTrack struct {
 	foundation.NSObject
@@ -87,7 +89,7 @@ func (o *AVAssetTrack) TrackID() int32 {
 	return _ret
 }
 
-// Reports whether the track references media with the specified media characteristic. - Parameter mediaCharacteristic: The media characteristic of interest, e.g. AVMediaCharacteristicVisual, AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, etc., as defined above. - Returns: YES if the track references media with the specified characteristic, otherwise NO.
+// Returns a Boolean value that indicates whether the track references media with the specified media characteristic.
 func (o *AVAssetTrack) HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetTrackSelHasMediaCharacteristic, mediaCharacteristic.Ptr())
 	return _ret
@@ -104,8 +106,11 @@ func (o *AVAssetTrack) MediaType() *foundation.NSString {
 
 // Provides an array of CMFormatDescriptions each of which indicates the format of media samples referenced by the track; a track that presents uniform media, e.g. encoded according to the same encoding settings, will provide an array with a count of 1.
 func (o *AVAssetTrack) FormatDescriptions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aVAssetTrackSelFormatDescriptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelFormatDescriptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.
@@ -216,7 +221,7 @@ func (o *AVAssetTrack) RequiresFrameReordering() bool {
 	return _ret
 }
 
-// Supplies the AVAssetTrackSegment from the segments array with a target timeRange that either contains the specified track time or is the closest to it among the target timeRanges of the track's segments. If the trackTime does not map to a sample presentation time (e.g. it's outside the track's timeRange), the segment closest in time to the specified trackTime is returned. - Parameter trackTime: The trackTime for which an AVAssetTrackSegment is requested. - Returns: An AVAssetTrackSegment.
+// Retrieves a segment with a target time range that contains, or is closest to, the specified track time.
 // Deprecated: Use loadSegmentForTrackTime:completionHandler: instead
 func (o *AVAssetTrack) SegmentForTrackTime(trackTime coremedia.CMTime) *AVAssetTrackSegment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelSegmentForTrackTime, trackTime)
@@ -226,7 +231,7 @@ func (o *AVAssetTrack) SegmentForTrackTime(trackTime coremedia.CMTime) *AVAssetT
 	return AVAssetTrackSegmentFromID(_ret)
 }
 
-// Loads the AVAssetTrackSegment from the segments array with a target timeRange that either contains the specified track time or is the closest to it among the target timeRanges of the track's segments. If the trackTime does not map to a sample presentation time (e.g. it's outside the track's timeRange), the segment closest in time to the specified trackTime is returned. - Parameter trackTime: The trackTime for which an AVAssetTrackSegment is requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending an AVAssetTrackSegment or an error.
+// Loads a segment with a target time range that contains, or is closest to, the specified track time.
 func (o *AVAssetTrack) LoadSegmentForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -238,14 +243,14 @@ func (o *AVAssetTrack) LoadSegmentForTrackTimeCompletionHandler(trackTime coreme
 	o.Ptr().Send(_aVAssetTrackSelLoadSegmentForTrackTimeCompletionHandler, trackTime, __block_completionHandler)
 }
 
-// Maps the specified trackTime through the appropriate time mapping and returns the resulting sample presentation time. - Parameter trackTime: The trackTime for which a sample presentation time is requested. - Returns: A CMTime; will be invalid if the trackTime is out of range
+// Maps the specified track time through the appropriate time mapping and returns the resulting sample presentation time.
 // Deprecated: Use loadSamplePresentationTimeForTrackTime:completionHandler: instead
 func (o *AVAssetTrack) SamplePresentationTimeForTrackTime(trackTime coremedia.CMTime) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVAssetTrackSelSamplePresentationTimeForTrackTime, trackTime)
 	return _ret
 }
 
-// Maps the specified trackTime through the appropriate time mapping and loads the resulting sample presentation time. - Parameter trackTime: The trackTime for which a sample presentation time is requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending a CMTime (which will be invalid if the trackTime is out of range) or an error.
+// Loads a sample presentation time that maps to the specified track time.
 func (o *AVAssetTrack) LoadSamplePresentationTimeForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler objc.Block) {
 	o.Ptr().Send(_aVAssetTrackSelLoadSamplePresentationTimeForTrackTimeCompletionHandler, trackTime, completionHandler)
 }
@@ -259,7 +264,7 @@ func (o *AVAssetTrack) Segments() *foundation.NSArray[*AVAssetTrackSegment] {
 	return foundation.NSArrayFromID[*AVAssetTrackSegment](_ret)
 }
 
-// Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format. Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded - Parameter format: The metadata format for which items are requested. - Returns: An NSArray containing AVMetadataItems.
+// Returns metadata items that a track contains for the specified format.
 // Deprecated: Use loadMetadataForFormat:completionHandler: instead
 func (o *AVAssetTrack) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMetadataForFormat, format.Ptr())
@@ -269,7 +274,7 @@ func (o *AVAssetTrack) MetadataForFormat(format *foundation.NSString) *foundatio
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
-// Loads an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format. - Parameter format: The metadata format for which items are requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending the array of metadata items (which may be empty if there is no metadata of the specified format) or an error.
+// Loads metadata items that a track contains for the specified format.
 func (o *AVAssetTrack) LoadMetadataForFormatCompletionHandler(format *foundation.NSString, completionHandler func(*foundation.NSArray[*AVMetadataItem], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -304,11 +309,14 @@ func (o *AVAssetTrack) Metadata() *foundation.NSArray[*AVMetadataItem] {
 
 // Provides an NSArray of NSStrings, each representing a format of metadata that's available for the track (e.g. QuickTime userdata, etc.) Metadata formats are defined in AVMetadataItem.h.
 func (o *AVAssetTrack) AvailableMetadataFormats() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetTrackSelAvailableMetadataFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelAvailableMetadataFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Provides an NSArray of AVAssetTracks, one for each track associated with the receiver with the specified type of track association. Becomes callable without blocking when the key @"availableTrackAssociationTypes" has been loaded. - Parameter trackAssociationType: The type of track association for which associated tracks are requested. - Returns: An NSArray containing AVAssetTracks; may be empty if there is no associated tracks of the specified type.
+// Returns an array of associated tracks that have the specified association type.
 // Deprecated: Use loadAssociatedTracksOfType:completionHandler: instead
 func (o *AVAssetTrack) AssociatedTracksOfType(trackAssociationType *foundation.NSString) *foundation.NSArray[*AVAssetTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelAssociatedTracksOfType, trackAssociationType.Ptr())
@@ -318,7 +326,7 @@ func (o *AVAssetTrack) AssociatedTracksOfType(trackAssociationType *foundation.N
 	return foundation.NSArrayFromID[*AVAssetTrack](_ret)
 }
 
-// Provides an NSArray of AVAssetTracks, one for each track associated with the receiver with the specified type of track association. - Parameter trackAssociationType: The type of track association for which associated tracks are requested. - Parameter completionHandler: A block that is invoked when loading is comlete, vending an array of tracks (which may be empty if there is no associated tracks of the specified type) or an error. `
+// Loads associated tracks that have the specified association type.
 func (o *AVAssetTrack) LoadAssociatedTracksOfTypeCompletionHandler(trackAssociationType *foundation.NSString, completionHandler func(*foundation.NSArray[*AVAssetTrack], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -335,11 +343,14 @@ func (o *AVAssetTrack) LoadAssociatedTracksOfTypeCompletionHandler(trackAssociat
 
 // Provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.). Track association types are defined immediately above.
 func (o *AVAssetTrack) AvailableTrackAssociationTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetTrackSelAvailableTrackAssociationTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelAvailableTrackAssociationTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Creates an instance of AVSampleCursor and positions it at or near the specified presentation timestamp. If the receiver's asset has a value of YES for providesPreciseDurationAndTiming, the sample cursor will be accurately positioned at the receiver's last media sample with presentation timestamp less than or equal to the desired timestamp, or, if there are no such samples, the first sample in presentation order. If the receiver's asset has a value of NO for providesPreciseDurationAndTiming, and it is prohibitively expensive to locate the precise sample at the desired timestamp, the sample cursor may be approximately positioned. This method will return nil if there are no samples in the track. - Parameter presentationTimeStamp: The desired initial presentation timestamp of the returned AVSampleCursor. - Returns: An instance of AVSampleCursor.
+// Creates a sample cursor and positions it at or near the specified presentation timestamp.
 func (o *AVAssetTrack) MakeSampleCursorWithPresentationTimeStamp(presentationTimeStamp coremedia.CMTime) *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMakeSampleCursorWithPresentationTimeStamp, presentationTimeStamp)
 	if _ret != 0 {
@@ -348,7 +359,7 @@ func (o *AVAssetTrack) MakeSampleCursorWithPresentationTimeStamp(presentationTim
 	return AVSampleCursorFromID(_ret)
 }
 
-// Creates an instance of AVSampleCursor and positions it at the receiver's first media sample in decode order. This method will return nil if there are no samples in the track. - Returns: An instance of AVSampleCursor.
+// Creates a sample cursor and positions it at the track’s first media sample in decode order.
 func (o *AVAssetTrack) MakeSampleCursorAtFirstSampleInDecodeOrder() *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMakeSampleCursorAtFirstSampleInDecodeOrder)
 	if _ret != 0 {
@@ -357,7 +368,7 @@ func (o *AVAssetTrack) MakeSampleCursorAtFirstSampleInDecodeOrder() *AVSampleCur
 	return AVSampleCursorFromID(_ret)
 }
 
-// Creates an instance of AVSampleCursor and positions it at the receiver's last media sample in decode order. This method will return nil if there are no samples in the track. - Returns: An instance of AVSampleCursor.
+// Creates a sample cursor and positions it at the track’s last media sample in decode order.
 func (o *AVAssetTrack) MakeSampleCursorAtLastSampleInDecodeOrder() *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetTrackSelMakeSampleCursorAtLastSampleInDecodeOrder)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A texture whose contents can be dynamically updated.
+//
 // MutableTexture wraps [raw.SKMutableTexture] with a fluent Go API.
 type MutableTexture struct {
 	inner *raw.SKMutableTexture
@@ -31,7 +33,7 @@ func MutableTextureFromID(id objc.ID) *MutableTexture {
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(id)}
 }
 
-// Create a mutable texture with a specfic size. @param size the dimension to use when creating the given texture.
+// Initializes an empty texture with a specific size.
 //
 // NewMutableTextureWithSize creates a new [MutableTexture].
 func NewMutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
@@ -40,7 +42,7 @@ func NewMutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
 }
 
-// Create a mutable texture with a specfic size and type. @param size the dimension to use when creating the given texture. @param format the CoreVideo format type.  supported types include 'RGBA', 'RGhA', and 'RGfA' for byte, half-float, and float components.
+// Initializes an empty texture with a specific size and format.
 //
 // NewMutableTextureWithSizePixelFormat creates a new [MutableTexture].
 func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int) *MutableTexture {
@@ -49,7 +51,7 @@ func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
 }
 
-// The filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
+// The filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
 //
 // WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
 func (x *MutableTexture) WithFilteringMode(filteringMode SKTextureFilteringMode) *MutableTexture {
@@ -57,7 +59,7 @@ func (x *MutableTexture) WithFilteringMode(filteringMode SKTextureFilteringMode)
 	return x
 }
 
-// Request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
+// A Boolean value that indicates whether the texture attempts to generate mipmaps.
 //
 // WithUsesMipmaps sets the usesMipmaps property and returns the receiver for chaining.
 func (x *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
@@ -65,7 +67,7 @@ func (x *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
 	return x
 }
 
-// Modify the created mutable texture.
+// Modifies the contents of a mutable texture.
 //
 // ModifyPixelDataWith calls the underlying ModifyPixelDataWith.
 func (x *MutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, uint)) {

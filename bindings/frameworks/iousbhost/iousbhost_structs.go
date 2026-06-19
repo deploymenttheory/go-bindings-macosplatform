@@ -14,7 +14,7 @@ type IOUSBHostCIMessage struct {
 	Data1   uint64
 }
 
-// @struct      IOUSBHostIOSourceDescriptors @brief       Encapsulates descriptors for a single endpoint @discussion  The IOUSBHostIOSourceDescriptors struct is used to initialize and adjust pipes in the system. The bcdUSB member must be initialized to the USB revision supported by the device. Acceptable values are 0x0110, 0x0200, 0x0300, 0x0310. The descriptor member must always be initialized with a valid endpoint descriptor. The ssCompanionDescriptor and sspCompanionDescriptor members may be required for bcdUSB versions 0x0300 and greater, depending on device operating speed and values set in the descriptors.  See USB 3.1 § 9.5 for more information on when these descriptors may be required.
+// The descriptors for a single endpoint.
 type IOUSBHostIOSourceDescriptors struct {
 	BcdUSB                 uint16
 	Descriptor             unsafe.Pointer
@@ -22,7 +22,7 @@ type IOUSBHostIOSourceDescriptors struct {
 	SspCompanionDescriptor unsafe.Pointer
 }
 
-// @struct      IOUSBHostIsochronousFrame @discussion  Structure representing a single frame in an isochronous transfer. Use of this structure is discouraged, use @link IOUSBHostIsochronousTransaction @/link instead. @field       status Completion status for this individual frame. IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the frame. @field       requestCount The number of bytes requested to transfer for this frame. This field must be initialized by the caller before the structure is submitted. @field       completeCount The number of bytes actually transferred for this frame. IOUSBHostFamily will update this field upon completion of the frame. @field       reserved Reserved for future use. @field       timeStamp The observed IOUSBHostTime for this frame's completion.  Note that interrupt latency and system load may result in more than one frame completing with the same timestamp.
+// A structure that represents a single frame in an isochronous transfer.
 type IOUSBHostIsochronousFrame struct {
 	Status        int
 	RequestCount  uint32

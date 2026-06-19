@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration parameters for a DNS proxy.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nednsproxyproviderprotocol
 type NEDNSProxyProviderProtocol struct {
 	NEVPNProtocol
@@ -35,12 +37,15 @@ func NEDNSProxyProviderProtocolFromID(id objc.ID) *NEDNSProxyProviderProtocol {
 
 // @property providerConfiguration @discussion A dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
 func (o *NEDNSProxyProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nEDNSProxyProviderProtocolSelProviderConfiguration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSProxyProviderProtocolSelProviderConfiguration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nEDNSProxyProviderProtocolSelSetProviderConfiguration, providerConfiguration)
+	o.Ptr().Send(_nEDNSProxyProviderProtocolSelSetProviderConfiguration, providerConfiguration.Ptr())
 }
 
 // @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.

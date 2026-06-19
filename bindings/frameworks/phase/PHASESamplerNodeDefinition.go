@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that plays complete audio data.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasesamplernodedefinition
 type PHASESamplerNodeDefinition struct {
 	PHASEGeneratorNodeDefinition
@@ -36,7 +38,7 @@ func PHASESamplerNodeDefinitionFromID(id objc.ID) *PHASESamplerNodeDefinition {
 	return o
 }
 
-// @method initWithSoundAssetIdentifier:mixerDefinition:identifier @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @param identifier An optional custom identifier to give to this object @return A new PHASESamplerNodeDefinition object
+// Creates a named sampler node with the given sound asset and mixer.
 func (o *PHASESamplerNodeDefinition) InitWithSoundAssetIdentifierMixerDefinitionIdentifier(soundAssetIdentifier *foundation.NSString, mixerDefinition *PHASEMixerDefinition, identifier *foundation.NSString) *PHASESamplerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinitionIdentifier, soundAssetIdentifier.Ptr(), mixerDefinition.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *PHASESamplerNodeDefinition) InitWithSoundAssetIdentifierMixerDefinition
 	return PHASESamplerNodeDefinitionFromID(_ret)
 }
 
-// @method initWithSoundAssetIdentifier:mixerDefinition @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @return A new PHASESamplerNodeDefinition object
+// Creates a sampler node with the given sound asset and mixer.
 func (o *PHASESamplerNodeDefinition) InitWithSoundAssetIdentifierMixerDefinition(soundAssetIdentifier *foundation.NSString, mixerDefinition *PHASEMixerDefinition) *PHASESamplerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESamplerNodeDefinitionSelInitWithSoundAssetIdentifierMixerDefinition, soundAssetIdentifier.Ptr(), mixerDefinition.Ptr())
 	if _ret != 0 {

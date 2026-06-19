@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object in the payment queue.
+//
 // PaymentTransaction wraps [raw.SKPaymentTransaction] with a fluent Go API.
 type PaymentTransaction struct {
 	inner *raw.SKPaymentTransaction

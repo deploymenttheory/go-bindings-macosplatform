@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A region for detecting the presence of iBeacon devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clbeaconregion
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 type CLBeaconRegion struct {
@@ -45,6 +47,7 @@ func CLBeaconRegionFromID(id objc.ID) *CLBeaconRegion {
 	return o
 }
 
+// Creates and returns a region object that targets beacons with the specified UUID.
 func (o *CLBeaconRegion) InitWithUUIDIdentifier(uuid *foundation.NSUUID, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithUUIDIdentifier, uuid.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -53,6 +56,7 @@ func (o *CLBeaconRegion) InitWithUUIDIdentifier(uuid *foundation.NSUUID, identif
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Creates and returns a region object that targets a beacon with the specified UUID.
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) InitWithProximityUUIDIdentifier(proximityUUID *foundation.NSUUID, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithProximityUUIDIdentifier, proximityUUID.Ptr(), identifier.Ptr())
@@ -62,6 +66,7 @@ func (o *CLBeaconRegion) InitWithProximityUUIDIdentifier(proximityUUID *foundati
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Creates and returns a region object that targets beacons with the specified UUID and major value.
 func (o *CLBeaconRegion) InitWithUUIDMajorIdentifier(uuid *foundation.NSUUID, major uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithUUIDMajorIdentifier, uuid.Ptr(), major, identifier.Ptr())
 	if _ret != 0 {
@@ -70,6 +75,7 @@ func (o *CLBeaconRegion) InitWithUUIDMajorIdentifier(uuid *foundation.NSUUID, ma
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Creates and returns a region object that targets a beacon with the specified proximity ID and major value.
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) InitWithProximityUUIDMajorIdentifier(proximityUUID *foundation.NSUUID, major uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithProximityUUIDMajorIdentifier, proximityUUID.Ptr(), major, identifier.Ptr())
@@ -79,6 +85,7 @@ func (o *CLBeaconRegion) InitWithProximityUUIDMajorIdentifier(proximityUUID *fou
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Creates and returns a region object that targets beacons with the specified UUID, and major and minor values.
 func (o *CLBeaconRegion) InitWithUUIDMajorMinorIdentifier(uuid *foundation.NSUUID, major uint16, minor uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithUUIDMajorMinorIdentifier, uuid.Ptr(), major, minor, identifier.Ptr())
 	if _ret != 0 {
@@ -87,6 +94,7 @@ func (o *CLBeaconRegion) InitWithUUIDMajorMinorIdentifier(uuid *foundation.NSUUI
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Creates and returns a region object that targets a beacon with the specified proximity ID, major value, and minor value.
 // Deprecated: since macOS 10.15.
 func (o *CLBeaconRegion) InitWithProximityUUIDMajorMinorIdentifier(proximityUUID *foundation.NSUUID, major uint16, minor uint16, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithProximityUUIDMajorMinorIdentifier, proximityUUID.Ptr(), major, minor, identifier.Ptr())
@@ -96,6 +104,7 @@ func (o *CLBeaconRegion) InitWithProximityUUIDMajorMinorIdentifier(proximityUUID
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Creates and returns a region object that targets beacons that satisfy the specified beacon identity constraints.
 func (o *CLBeaconRegion) InitWithBeaconIdentityConstraintIdentifier(beaconIdentityConstraint *CLBeaconIdentityConstraint, identifier *foundation.NSString) *CLBeaconRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelInitWithBeaconIdentityConstraintIdentifier, beaconIdentityConstraint.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -104,9 +113,13 @@ func (o *CLBeaconRegion) InitWithBeaconIdentityConstraintIdentifier(beaconIdenti
 	return CLBeaconRegionFromID(_ret)
 }
 
+// Retrieves data that you can use to advertise the current device as a beacon.
 func (o *CLBeaconRegion) PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cLBeaconRegionSelPeripheralDataWithMeasuredPower, measuredPower.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconRegionSelPeripheralDataWithMeasuredPower, measuredPower.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *CLBeaconRegion) BeaconIdentityConstraint() *CLBeaconIdentityConstraint {

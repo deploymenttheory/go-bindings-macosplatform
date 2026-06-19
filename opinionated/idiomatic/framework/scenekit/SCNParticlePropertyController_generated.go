@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An animation for a single property of the individual particles rendered by a particle system.
+//
 // ParticlePropertyController wraps [raw.SCNParticlePropertyController] with a fluent Go API.
 type ParticlePropertyController struct {
 	inner *raw.SCNParticlePropertyController
@@ -38,36 +40,48 @@ func NewParticlePropertyController() *ParticlePropertyController {
 	return &ParticlePropertyController{inner: raw.SCNParticlePropertyControllerFromID(_id)}
 }
 
+// The Core Animation object defining the behavior of the property animation.
+//
 // WithAnimation sets the animation property and returns the receiver for chaining.
 func (x *ParticlePropertyController) WithAnimation(animation *quartzcore.CAAnimation) *ParticlePropertyController {
 	x.inner.SetAnimation(animation)
 	return x
 }
 
+// The mode that determines input values for the property controller’s animation.
+//
 // WithInputMode sets the inputMode property and returns the receiver for chaining.
 func (x *ParticlePropertyController) WithInputMode(inputMode SCNParticleInputMode) *ParticlePropertyController {
 	x.inner.SetInputMode(raw.SCNParticleInputMode(inputMode))
 	return x
 }
 
+// A factor for multiplying the input value of the controller’s animation.
+//
 // WithInputScale sets the inputScale property and returns the receiver for chaining.
 func (x *ParticlePropertyController) WithInputScale(inputScale float64) *ParticlePropertyController {
 	x.inner.SetInputScale(inputScale)
 	return x
 }
 
+// An offset to add to the input value of the controller’s animation.
+//
 // WithInputBias sets the inputBias property and returns the receiver for chaining.
 func (x *ParticlePropertyController) WithInputBias(inputBias float64) *ParticlePropertyController {
 	x.inner.SetInputBias(inputBias)
 	return x
 }
 
+// A node whose distance to each particle provides input values for the controller’s animation.
+//
 // WithInputOrigin sets the inputOrigin property and returns the receiver for chaining.
 func (x *ParticlePropertyController) WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController {
 	x.inner.SetInputOrigin(inputOrigin.asNode())
 	return x
 }
 
+// A particle property that provides input values for this property controller’s animation.
+//
 // WithInputProperty sets the inputProperty property and returns the receiver for chaining.
 func (x *ParticlePropertyController) WithInputProperty(inputProperty *foundation.NSString) *ParticlePropertyController {
 	x.inner.SetInputProperty(inputProperty)

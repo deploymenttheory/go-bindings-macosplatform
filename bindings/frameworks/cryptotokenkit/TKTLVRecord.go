@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class encapsulating a Tag-Length-Value record.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktlvrecord
 type TKTLVRecord struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func TKTLVRecordFromID(id objc.ID) *TKTLVRecord {
 	return o
 }
 
-// Parses TLV record from data block @param data Data block containing serialized form of TLV record. @return newly parsed record instance or nil if data do not represent valid record.
+// Creates and returns a TLV record from by parsing the specified data.
 func TKTLVRecordRecordFromData(data *foundation.NSData) *TKTLVRecord {
 	_ret := objc.Send[objc.ID](objc.ID(_clsTKTLVRecord), _tKTLVRecordSelRecordFromData, data.Ptr())
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func TKTLVRecordRecordFromData(data *foundation.NSData) *TKTLVRecord {
 	return TKTLVRecordFromID(_ret)
 }
 
-// Parses sequence of TLV records from data block. The amount of records is determined by the length of input data block. @param data Data block containing zero or more serialized forms of TLV record. @return An array of TLV record instances parsed from input data block or nil if data do not form valid TLV record sequence.
+// Creates and returns an array of TLV records from the specified data.
 func TKTLVRecordSequenceOfRecordsFromData(data *foundation.NSData) *foundation.NSArray[*TKTLVRecord] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsTKTLVRecord), _tKTLVRecordSelSequenceOfRecordsFromData, data.Ptr())
 	if _ret != 0 {

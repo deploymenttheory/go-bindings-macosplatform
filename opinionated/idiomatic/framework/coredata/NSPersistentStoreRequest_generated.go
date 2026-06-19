@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Criteria used to retrieve data from or save data to a persistent store.
+//
 // PersistentStoreRequest wraps [raw.NSPersistentStoreRequest] with a fluent Go API.
 type PersistentStoreRequest struct {
 	inner *raw.NSPersistentStoreRequest
@@ -38,6 +40,8 @@ func NewPersistentStoreRequest() *PersistentStoreRequest {
 	return &PersistentStoreRequest{inner: raw.NSPersistentStoreRequestFromID(_id)}
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest {
 	if len(items) == 0 {

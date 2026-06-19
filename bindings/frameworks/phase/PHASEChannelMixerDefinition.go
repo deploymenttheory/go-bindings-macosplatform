@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An audio-layering object that routes sound directly to the device’s output.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasechannelmixerdefinition
 type PHASEChannelMixerDefinition struct {
 	PHASEMixerDefinition
@@ -33,7 +35,7 @@ func PHASEChannelMixerDefinitionFromID(id objc.ID) *PHASEChannelMixerDefinition 
 	return o
 }
 
-// @method initWithChannelLayout:identifier @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. @param identifier An optional custom identifier to give to this object @return A new PHASEChannelMixerDefinition object
+// Creates a named channel mixer with the given channel layout.
 func (o *PHASEChannelMixerDefinition) InitWithChannelLayoutIdentifier(layout *avfaudio.AVAudioChannelLayout, identifier *foundation.NSString) *PHASEChannelMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEChannelMixerDefinitionSelInitWithChannelLayoutIdentifier, layout.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *PHASEChannelMixerDefinition) InitWithChannelLayoutIdentifier(layout *av
 	return PHASEChannelMixerDefinitionFromID(_ret)
 }
 
-// @method initWithChannelLayout @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. Any connected sampler must match this channel layout. @return A new PHASEChannelMixerDefinition object
+// Creates a channel mixer with the given channel layout.
 func (o *PHASEChannelMixerDefinition) InitWithChannelLayout(layout *avfaudio.AVAudioChannelLayout) *PHASEChannelMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEChannelMixerDefinitionSelInitWithChannelLayout, layout.Ptr())
 	if _ret != 0 {

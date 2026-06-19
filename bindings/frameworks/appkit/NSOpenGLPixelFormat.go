@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the types of buffers and other attributes of the OpenGL context.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsopenglpixelformat
 type NSOpenGLPixelFormat struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSOpenGLPixelFormatFromID(id objc.ID) *NSOpenGLPixelFormat {
 	return o
 }
 
+// Returns an OpenGL pixel format object initialized with using an existing CGL pixel format object.
 func (o *NSOpenGLPixelFormat) InitWithCGLPixelFormatObj(format unsafe.Pointer) *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelInitWithCGLPixelFormatObj, format)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *NSOpenGLPixelFormat) InitWithCGLPixelFormatObj(format unsafe.Pointer) *
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
+// Returns an OpenGL pixel format object initialized with specified pixel format attributes.
 func (o *NSOpenGLPixelFormat) InitWithAttributes(attribs *uint32) *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelInitWithAttributes, attribs)
 	if _ret != 0 {
@@ -55,12 +59,14 @@ func (o *NSOpenGLPixelFormat) InitWithAttributes(attribs *uint32) *NSOpenGLPixel
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
+// Returns an OpenGL pixel format object initialized with specified pixel format attribute data.
 // Deprecated: Use -initWithAttributes: instead
 func (o *NSOpenGLPixelFormat) InitWithData(attribs *foundation.NSData) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelInitWithData, attribs.Ptr())
 	return _ret
 }
 
+// The attribute data for the pixel format object.
 // Deprecated: since macOS 10.6.
 func (o *NSOpenGLPixelFormat) Attributes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelAttributes)
@@ -70,11 +76,13 @@ func (o *NSOpenGLPixelFormat) Attributes() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// Sets the attribute data for the pixel format object.
 // Deprecated: since macOS 10.6.
 func (o *NSOpenGLPixelFormat) SetAttributes(attribs *foundation.NSData) {
 	o.Ptr().Send(_nSOpenGLPixelFormatSelSetAttributes, attribs.Ptr())
 }
 
+// Gets the value for the specified pixel format attribute.
 // Deprecated: since macOS 10.6.
 func (o *NSOpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(vals *int32, attrib uint32, screen int32) {
 	o.Ptr().Send(_nSOpenGLPixelFormatSelGetValuesForAttributeForVirtualScreen, vals, attrib, screen)

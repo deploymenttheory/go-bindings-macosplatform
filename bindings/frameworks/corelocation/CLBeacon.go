@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about an observed iBeacon device and its relative distance to a person’s device.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clbeacon
 type CLBeacon struct {
 	foundation.NSObject

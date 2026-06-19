@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of render pipeline color attachment descriptor objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpipelinecolorattachmentdescriptorarray
 type MTLRenderPipelineColorAttachmentDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLRenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTLRende
 	return o
 }
 
+// Returns the render pipeline state for the specified color attachment.
 func (o *MTLRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLRenderPipelineColorAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineColorAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscri
 	return MTLRenderPipelineColorAttachmentDescriptorFromID(_ret)
 }
 
+// Sets the render pipeline state for a specified color attachment.
 func (o *MTLRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLRenderPipelineColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }

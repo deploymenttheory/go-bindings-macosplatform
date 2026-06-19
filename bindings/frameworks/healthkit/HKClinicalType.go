@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that contain clinical record data.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkclinicaltype
 type HKClinicalType struct {
 	HKSampleType

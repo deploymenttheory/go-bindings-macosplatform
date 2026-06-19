@@ -180,13 +180,16 @@ func WebViewCanShowMIMETypeAsHTML(mIMEType *foundation.NSString) bool {
 
 // @method MIMETypesShownAsHTML @result Returns an array of NSStrings that describe the MIME types WebKit will attempt to render as HTML.
 func WebViewMIMETypesShownAsHTML() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsWebView), _webViewSelMIMETypesShownAsHTML)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelMIMETypesShownAsHTML)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method setMIMETypesShownAsHTML: @discussion Sets the array of NSString MIME types that WebKit will attempt to render as HTML.  Typically you will retrieve the built-in array using MIMETypesShownAsHTML and add additional MIME types to that array.
 func WebViewSetMIMETypesShownAsHTML(mIMETypes *foundation.NSArray[objc.ID]) {
-	objc.ID(_clsWebView).Send(_webViewSelSetMIMETypesShownAsHTML, mIMETypes)
+	objc.ID(_clsWebView).Send(_webViewSelSetMIMETypesShownAsHTML, mIMETypes.Ptr())
 }
 
 // @method URLFromPasteboard: @abstract Returns a URL from a pasteboard @param pasteboard The pasteboard with a URL @result A URL if the pasteboard has one. Nil if it does not. @discussion This method differs than NSURL's URLFromPasteboard method in that it tries multiple pasteboard types including NSURLPboardType to find a URL on the pasteboard.
@@ -280,24 +283,30 @@ func WebViewRegisterViewClassRepresentationClassForMIMEType(viewClass objc.Class
 
 // @method elementAtPoint: @param point A point in the coordinates of the WebView @result An element dictionary describing the point
 func (o *WebView) ElementAtPoint(point corefoundation.CGPoint) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _webViewSelElementAtPoint, point)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelElementAtPoint, point)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method writeSelectionWithPasteboardTypes:toPasteboard: @abstract Writes the current selection to the pasteboard @param types The types that WebView will write to the pasteboard @param pasteboard The pasteboard to write to
 func (o *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types *foundation.NSArray[objc.ID], pasteboard *appkit.NSPasteboard) {
-	o.Ptr().Send(_webViewSelWriteSelectionWithPasteboardTypesToPasteboard, types, pasteboard.Ptr())
+	o.Ptr().Send(_webViewSelWriteSelectionWithPasteboardTypesToPasteboard, types.Ptr(), pasteboard.Ptr())
 }
 
 // @method pasteboardTypesForElement: @abstract Returns the pasteboard types that WebView can use for an element @param element The element
 func (o *WebView) PasteboardTypesForElement(element *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webViewSelPasteboardTypesForElement, element)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPasteboardTypesForElement, element.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method writeElement:withPasteboardTypes:toPasteboard: @abstract Writes an element to the pasteboard @param element The element to write to the pasteboard @param types The types that WebView will write to the pasteboard @param pasteboard The pasteboard to write to
 func (o *WebView) WriteElementWithPasteboardTypesToPasteboard(element *foundation.NSDictionary[objc.ID, objc.ID], types *foundation.NSArray[objc.ID], pasteboard *appkit.NSPasteboard) {
-	o.Ptr().Send(_webViewSelWriteElementWithPasteboardTypesToPasteboard, element, types, pasteboard.Ptr())
+	o.Ptr().Send(_webViewSelWriteElementWithPasteboardTypesToPasteboard, element.Ptr(), types.Ptr(), pasteboard.Ptr())
 }
 
 // @method moveDragCaretToPoint: @param point A point in the coordinates of the WebView @discussion This method moves the caret that shows where something being dragged will be dropped. It may cause the WebView to scroll to make the new position of the drag caret visible.
@@ -540,8 +549,11 @@ func (o *WebView) IsLoading() bool {
 
 // @property pasteboardTypesForSelection @abstract The pasteboard types that the WebView can use for the current selection
 func (o *WebView) PasteboardTypesForSelection() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webViewSelPasteboardTypesForSelection)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPasteboardTypesForSelection)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property drawsBackground @abstract Whether the receiver draws a default white background when the loaded page has no background specified.

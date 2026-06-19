@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An Apple streaming service customer and their subscriptions.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsapplesubscription
 type VSAppleSubscription struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func VSAppleSubscriptionFromID(id objc.ID) *VSAppleSubscription {
 }
 
 func (o *VSAppleSubscription) InitWithCustomerIDProductCodes(customerID *foundation.NSString, productCodes *foundation.NSArray[*foundation.NSString]) *VSAppleSubscription {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vSAppleSubscriptionSelInitWithCustomerIDProductCodes, customerID.Ptr(), productCodes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSAppleSubscriptionSelInitWithCustomerIDProductCodes, customerID.Ptr(), productCodes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -55,10 +57,13 @@ func (o *VSAppleSubscription) SetCustomerID(customerID *foundation.NSString) {
 }
 
 func (o *VSAppleSubscription) ProductCodes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSAppleSubscriptionSelProductCodes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSAppleSubscriptionSelProductCodes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VSAppleSubscription) SetProductCodes(productCodes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSAppleSubscriptionSelSetProductCodes, productCodes)
+	o.Ptr().Send(_vSAppleSubscriptionSelSetProductCodes, productCodes.Ptr())
 }

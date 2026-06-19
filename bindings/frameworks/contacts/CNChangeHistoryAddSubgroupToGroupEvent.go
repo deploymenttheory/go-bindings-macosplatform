@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a user adding a subgroup to a group.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistoryaddsubgrouptogroupevent
 type CNChangeHistoryAddSubgroupToGroupEvent struct {
 	CNChangeHistoryEvent

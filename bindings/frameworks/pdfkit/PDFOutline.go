@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFOutline object is an element in a tree-structured hierarchy that can represent the structure of a PDF document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfoutline
 type PDFOutline struct {
 	foundation.NSObject
@@ -47,6 +49,7 @@ func PDFOutlineFromID(id objc.ID) *PDFOutline {
 	return o
 }
 
+// Initializes a PDFOutline object.
 func (o *PDFOutline) Init() *PDFOutline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelInit)
 	if _ret != 0 {
@@ -55,6 +58,7 @@ func (o *PDFOutline) Init() *PDFOutline {
 	return PDFOutlineFromID(_ret)
 }
 
+// Returns the child outline object at the specified index.
 func (o *PDFOutline) ChildAtIndex(index uint) *PDFOutline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFOutlineSelChildAtIndex, index)
 	if _ret != 0 {
@@ -63,10 +67,12 @@ func (o *PDFOutline) ChildAtIndex(index uint) *PDFOutline {
 	return PDFOutlineFromID(_ret)
 }
 
+// Inserts the specified outline object at the specified index.
 func (o *PDFOutline) InsertChildAtIndex(child *PDFOutline, index uint) {
 	o.Ptr().Send(_pDFOutlineSelInsertChildAtIndex, child.Ptr(), index)
 }
 
+// Removes the outline object from its parent (does nothing if outline object is the root outline object).
 func (o *PDFOutline) RemoveFromParent() {
 	o.Ptr().Send(_pDFOutlineSelRemoveFromParent)
 }

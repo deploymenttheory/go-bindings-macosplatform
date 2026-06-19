@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores information that’s used to generate printed output.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsprintinfo
 type NSPrintInfo struct {
 	foundation.NSObject
@@ -81,14 +83,16 @@ func NSPrintInfoFromID(id objc.ID) *NSPrintInfo {
 	return o
 }
 
+// Returns a printing information object initialized with the parameters in the specified dictionary.
 func (o *NSPrintInfo) InitWithDictionary(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSPrintInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInitWithDictionary, attributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInitWithDictionary, attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPrintInfoFromID(_ret)
 }
 
+// Creates a printing information object from data in an unarchiver.
 func (o *NSPrintInfo) InitWithCoder(coder *foundation.NSCoder) *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -97,6 +101,7 @@ func (o *NSPrintInfo) InitWithCoder(coder *foundation.NSCoder) *NSPrintInfo {
 	return NSPrintInfoFromID(_ret)
 }
 
+// Creates a printing information object.
 func (o *NSPrintInfo) Init() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelInit)
 	if _ret != 0 {
@@ -105,38 +110,49 @@ func (o *NSPrintInfo) Init() *NSPrintInfo {
 	return NSPrintInfoFromID(_ret)
 }
 
+// Returns the print info’s dictionary that contains the printing attributes.
 func (o *NSPrintInfo) Dictionary() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPrintInfoSelDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Validates the attributes encapsulated by the print info.
 func (o *NSPrintInfo) SetUpPrintOperationDefaultValues() {
 	o.Ptr().Send(_nSPrintInfoSelSetUpPrintOperationDefaultValues)
 }
 
+// Returns a Core Printing object configured with the print info’s session information.
 func (o *NSPrintInfo) PMPrintSession() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPrintInfoSelPMPrintSession)
 	return _ret
 }
 
+// Returns a Core Printing object configured with the print info’s page format information.
 func (o *NSPrintInfo) PMPageFormat() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPrintInfoSelPMPageFormat)
 	return _ret
 }
 
+// Returns a Core Printing object configured with the print info’s print settings information
 func (o *NSPrintInfo) PMPrintSettings() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPrintInfoSelPMPrintSettings)
 	return _ret
 }
 
+// Synchronizes the print info’s page format information with information from its associated page format object.
 func (o *NSPrintInfo) UpdateFromPMPageFormat() {
 	o.Ptr().Send(_nSPrintInfoSelUpdateFromPMPageFormat)
 }
 
+// Synchronizes the print info’s print settings information with information from its associated print settings object.
 func (o *NSPrintInfo) UpdateFromPMPrintSettings() {
 	o.Ptr().Send(_nSPrintInfoSelUpdateFromPMPrintSettings)
 }
 
+// Updates the print info with all the settings and attributes in the specified PDF info object.
 func (o *NSPrintInfo) TakeSettingsFromPDFInfo(inPDFInfo *NSPDFInfo) {
 	o.Ptr().Send(_nSPrintInfoSelTakeSettingsFromPDFInfo, inPDFInfo.Ptr())
 }
@@ -310,8 +326,11 @@ func NSPrintInfoDefaultPrinter() *NSPrinter {
 }
 
 func (o *NSPrintInfo) PrintSettings() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPrintInfoSelPrintSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintInfoSelPrintSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSPrintInfo) IsSelectionOnly() bool {
@@ -323,11 +342,13 @@ func (o *NSPrintInfo) SetSelectionOnly(selectionOnly bool) {
 	o.Ptr().Send(_nSPrintInfoSelSetSelectionOnly, selectionOnly)
 }
 
+// Deprecated.
 // Deprecated: NSPrintInfo's implementation has no effect
 func NSPrintInfoSetDefaultPrinter(printer *NSPrinter) {
 	objc.ID(_clsNSPrintInfo).Send(_nSPrintInfoSelSetDefaultPrinter, printer.Ptr())
 }
 
+// Deprecated.
 // Deprecated: Use -[NSPrinter pageSizeForPaper:] instead
 func NSPrintInfoSizeForPaperName(name *foundation.NSString) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSPrintInfo), _nSPrintInfoSelSizeForPaperName, name.Ptr())

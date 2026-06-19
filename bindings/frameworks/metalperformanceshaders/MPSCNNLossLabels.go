@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that stores the per-element weight buffer used by loss and gradient loss kernels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlosslabels
 type MPSCNNLossLabels struct {
 	mpscore.MPSState

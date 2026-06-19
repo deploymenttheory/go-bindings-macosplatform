@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that scales the layers in a symbol-based image separately or as a whole.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolscaleeffect
 type NSSymbolScaleEffect struct {
 	NSSymbolEffect
@@ -33,7 +35,7 @@ func NSSymbolScaleEffectFromID(id objc.ID) *NSSymbolScaleEffect {
 	return o
 }
 
-// The default scaling effect, determined by the system.
+// An animation that scales the layers in a symbol-based image separately or as a whole.
 func NSSymbolScaleEffectEffect() *NSSymbolScaleEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolScaleEffect), _nSSymbolScaleEffectSelEffect)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func NSSymbolScaleEffectEffect() *NSSymbolScaleEffect {
 	return NSSymbolScaleEffectFromID(_ret)
 }
 
-// Convenience initializer to create a scale effect with a scale up level.
+// An effect that scales the symbol up.
 func NSSymbolScaleEffectScaleUpEffect() *NSSymbolScaleEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolScaleEffect), _nSSymbolScaleEffectSelScaleUpEffect)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func NSSymbolScaleEffectScaleUpEffect() *NSSymbolScaleEffect {
 	return NSSymbolScaleEffectFromID(_ret)
 }
 
-// Convenience initializer to create a scale effect with a scale down level.
+// An effect that scales the symbol down.
 func NSSymbolScaleEffectScaleDownEffect() *NSSymbolScaleEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolScaleEffect), _nSSymbolScaleEffectSelScaleDownEffect)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func NSSymbolScaleEffectScaleDownEffect() *NSSymbolScaleEffect {
 	return NSSymbolScaleEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that scales each layer separately.
 func (o *NSSymbolScaleEffect) EffectWithByLayer() *NSSymbolScaleEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolScaleEffectSelEffectWithByLayer)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *NSSymbolScaleEffect) EffectWithByLayer() *NSSymbolScaleEffect {
 	return NSSymbolScaleEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that scales all layers simultaneously.
 func (o *NSSymbolScaleEffect) EffectWithWholeSymbol() *NSSymbolScaleEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolScaleEffectSelEffectWithWholeSymbol)
 	if _ret != 0 {

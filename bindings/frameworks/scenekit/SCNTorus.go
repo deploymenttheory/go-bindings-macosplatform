@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A torus, or ring-shaped geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scntorus
 type SCNTorus struct {
 	SCNGeometry
@@ -37,7 +39,7 @@ func SCNTorusFromID(id objc.ID) *SCNTorus {
 	return o
 }
 
-// @method torusWithRingRadius:pipeRadius: @abstract Creates and returns a torus with given ring radius and pipe radius. @param ringRadius The radius of the ring. @param pipeRadius The radius of the pipe.
+// Creates a torus geometry with the specified ring radius and pipe radius.
 func SCNTorusTorusWithRingRadiusPipeRadius(ringRadius float64, pipeRadius float64) *SCNTorus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTorus), _sCNTorusSelTorusWithRingRadiusPipeRadius, ringRadius, pipeRadius)
 	if _ret != 0 {

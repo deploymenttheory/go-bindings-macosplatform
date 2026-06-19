@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A service that provides a custom communication channel between your app and a File Provider extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfileproviderservice
 type NSFileProviderService struct {
 	NSObject
@@ -32,6 +34,7 @@ func NSFileProviderServiceFromID(id objc.ID) *NSFileProviderService {
 	return o
 }
 
+// Asynchronously returns the service’s connection object.
 func (o *NSFileProviderService) GetFileProviderConnectionWithCompletionHandler(completionHandler func(*NSXPCConnection, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides basic, single-keyframe animation capabilities for a layer property.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cabasicanimation
 type CABasicAnimation struct {
 	CAPropertyAnimation

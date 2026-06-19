@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to specify attributes to create and style a drop shadow during drawing operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsshadow
 type NSShadow struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSShadowFromID(id objc.ID) *NSShadow {
 	return o
 }
 
+// Creates a shadow object with default values.
 func (o *NSShadow) Init() *NSShadow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSShadowSelInit)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *NSShadow) Init() *NSShadow {
 	return NSShadowFromID(_ret)
 }
 
+// Sets the shadow of subsequent drawing operations to the current shadow.
 func (o *NSShadow) Set() {
 	o.Ptr().Send(_nSShadowSelSet)
 }

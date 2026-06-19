@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the result of a scene-space or view-space search for scene elements.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnhittestresult
 type SCNHitTestResult struct {
 	foundation.NSObject
@@ -48,7 +50,7 @@ func SCNHitTestResultFromID(id objc.ID) *SCNHitTestResult {
 	return o
 }
 
-// @method textureCoordinatesWithMappingChannel: @abstract Returns the texture coordinates at the point of intersection, for a given mapping channel. @param channel The texture coordinates source index of the geometry to use. The channel must exists on the geometry otherwise {0,0} will be returned.
+// Returns the texture coordinates at the point of intersection for the specified texture mapping channel.
 func (o *SCNHitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sCNHitTestResultSelTextureCoordinatesWithMappingChannel, channel)
 	return _ret

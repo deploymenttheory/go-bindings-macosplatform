@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "framework": "vmnet",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "interface_event_t": {
+      "doc": "Interface event types.",
+      "url": "https://developer.apple.com/documentation/vmnet/interface_event_t"
+    },
+    "operating_modes_t": {
+      "doc": "The operating modes for an interface.",
+      "url": "https://developer.apple.com/documentation/vmnet/operating_modes_t"
+    },
+    "vmnet_return_t": {
+      "doc": "Values returned by functions in the vmnet Framework.",
+      "url": "https://developer.apple.com/documentation/vmnet/vmnet_return_t"
+    }
+  },
+  "structs": {
+    "vmpktdesc": {
+      "doc": "Describes a packet.",
+      "url": "https://developer.apple.com/documentation/vmnet/vmpktdesc"
+    }
+  }
+}

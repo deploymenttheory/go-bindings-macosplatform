@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A joint that pins together two physics bodies, allowing independent rotation.
+//
 // PhysicsJointPin wraps [raw.SKPhysicsJointPin] with a fluent Go API.
 type PhysicsJointPin struct {
 	inner *raw.SKPhysicsJointPin
@@ -35,42 +37,56 @@ func NewPhysicsJointPin() *PhysicsJointPin {
 	return &PhysicsJointPin{inner: raw.SKPhysicsJointPinFromID(_id)}
 }
 
+// A Boolean value that indicates whether the pin joint’s rotation is limited to a specific range of values.
+//
 // WithShouldEnableLimits sets the shouldEnableLimits property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointPin {
 	x.inner.SetShouldEnableLimits(shouldEnableLimits)
 	return x
 }
 
+// The smallest angle allowed for the pin joint, in radians.
+//
 // WithLowerAngleLimit sets the lowerAngleLimit property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithLowerAngleLimit(lowerAngleLimit float64) *PhysicsJointPin {
 	x.inner.SetLowerAngleLimit(lowerAngleLimit)
 	return x
 }
 
+// The largest angle allowed for the pin joint, in radians.
+//
 // WithUpperAngleLimit sets the upperAngleLimit property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithUpperAngleLimit(upperAngleLimit float64) *PhysicsJointPin {
 	x.inner.SetUpperAngleLimit(upperAngleLimit)
 	return x
 }
 
+// The resistance applied by the pin joint to spinning around the anchor point.
+//
 // WithFrictionTorque sets the frictionTorque property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithFrictionTorque(frictionTorque float64) *PhysicsJointPin {
 	x.inner.SetFrictionTorque(frictionTorque)
 	return x
 }
 
+// The speed, in radians per second, at which the physics bodies are driven around the pin joint.
+//
 // WithRotationSpeed sets the rotationSpeed property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithRotationSpeed(rotationSpeed float64) *PhysicsJointPin {
 	x.inner.SetRotationSpeed(rotationSpeed)
 	return x
 }
 
+// The first body connected by the joint.
+//
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin {
 	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
+// The second body connected by the joint.
+//
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
 func (x *PhysicsJointPin) WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin {
 	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())

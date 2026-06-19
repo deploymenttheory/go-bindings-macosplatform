@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create a convolution or fully connected layer.
+//
 // ConvolutionDescriptor wraps [raw.MLCConvolutionDescriptor] with a fluent Go API.
 type ConvolutionDescriptor struct {
 	inner *raw.MLCConvolutionDescriptor

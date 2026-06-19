@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass defining an API for objects that act as stand-ins for other objects or for objects that don’t exist yet.
+//
 // Proxy wraps [raw.NSProxy] with a fluent Go API.
 type Proxy struct {
 	inner *raw.NSProxy
@@ -35,11 +37,15 @@ func NewProxy() *Proxy {
 	return &Proxy{inner: raw.NSProxyFromID(_id)}
 }
 
+// Passes a given invocation to the real object the proxy represents.
+//
 // ForwardInvocation calls the underlying ForwardInvocation.
 func (x *Proxy) ForwardInvocation(invocation *raw.NSInvocation) {
 	x.inner.ForwardInvocation(invocation)
 }
 
+// Raises NSInvalidArgumentException. Override this method in your concrete subclass to return a proper NSMethodSignature object for the given selector and the class your proxy objects stand in for.
+//
 // MethodSignatureForSelector calls the underlying MethodSignatureForSelector.
 func (x *Proxy) MethodSignatureForSelector(sel objc.SEL) *MethodSignature {
 	_r := x.inner.MethodSignatureForSelector(sel)
@@ -49,11 +55,15 @@ func (x *Proxy) MethodSignatureForSelector(sel objc.SEL) *MethodSignature {
 	return &MethodSignature{inner: _r}
 }
 
+// Deallocates the memory occupied by the receiver.
+//
 // Dealloc calls the underlying Dealloc.
 func (x *Proxy) Dealloc() {
 	x.inner.Dealloc()
 }
 
+// The garbage collector invokes this method on the receiver before disposing of the memory it uses.
+//
 // Finalize calls the underlying Finalize.
 func (x *Proxy) Finalize() {
 	x.inner.Finalize()

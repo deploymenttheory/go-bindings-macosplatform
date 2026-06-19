@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query for one-time access to a SMART Health Card or EU Digital COVID Certificate.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkverifiableclinicalrecordquery
 type HKVerifiableClinicalRecordQuery struct {
 	HKQuery
@@ -35,7 +37,7 @@ func HKVerifiableClinicalRecordQueryFromID(id objc.ID) *HKVerifiableClinicalReco
 	return o
 }
 
-// @method        initWithRecordTypes:predicate:resultsHandler: @abstract      Returns an one-time query that will ask for access to verifiable clinical records that match the query. @param         recordTypes     The record types that need to be present on a verifiable clinical record. @param         predicate       The predicate which records should match. @param         resultsHandler  The block to invoke with the verifiable clinical records from the query.
+// Creates a query for one-time access to a SMART Health Card.
 func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*HKVerifiableClinicalRecordQuery, *foundation.NSArray[*HKVerifiableClinicalRecord], unsafe.Pointer)) *HKVerifiableClinicalRecordQuery {
 	var __block_resultsHandler objc.Block
 	if resultsHandler != nil {
@@ -50,14 +52,14 @@ func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesPredicateResultsHan
 		})
 		defer __block_resultsHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelInitWithRecordTypesPredicateResultsHandler, recordTypes, predicate.Ptr(), __block_resultsHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelInitWithRecordTypesPredicateResultsHandler, recordTypes.Ptr(), predicate.Ptr(), __block_resultsHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKVerifiableClinicalRecordQueryFromID(_ret)
 }
 
-// @method        initWithRecordTypes:sourceTypes:predicate:resultsHandler: @abstract      Returns a one-time query that will ask for access to and return verifiable clinical records that match the query. @param         recordTypes     The record types that need to be present on a verifiable clinical record. @param         sourceTypes     The source type(s) of the records. @param         predicate       The predicate which records should match. @param         resultsHandler  The block to invoke with the verifiable clinical records from the query.
+// Creates a query for one-time access to a verifiable clinical record.
 func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesSourceTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], sourceTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*HKVerifiableClinicalRecordQuery, *foundation.NSArray[*HKVerifiableClinicalRecord], unsafe.Pointer)) *HKVerifiableClinicalRecordQuery {
 	var __block_resultsHandler objc.Block
 	if resultsHandler != nil {
@@ -72,7 +74,7 @@ func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesSourceTypesPredicat
 		})
 		defer __block_resultsHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelInitWithRecordTypesSourceTypesPredicateResultsHandler, recordTypes, sourceTypes, predicate.Ptr(), __block_resultsHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelInitWithRecordTypesSourceTypesPredicateResultsHandler, recordTypes.Ptr(), sourceTypes.Ptr(), predicate.Ptr(), __block_resultsHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -81,12 +83,18 @@ func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesSourceTypesPredicat
 
 // @property      recordTypes @abstract      The record types that need to be present on desired records.
 func (o *HKVerifiableClinicalRecordQuery) RecordTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _hKVerifiableClinicalRecordQuerySelRecordTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelRecordTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property      sourceTypes @abstract      The source type(s) of the records.
 func (o *HKVerifiableClinicalRecordQuery) SourceTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _hKVerifiableClinicalRecordQuerySelSourceTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelSourceTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

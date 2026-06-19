@@ -276,9 +276,25 @@ func (x *AssetExportSession) Progress() float32 {
 
 // Determines the output file types an asset export session supports writing in its current configuration.
 //
-// DetermineCompatibleFileTypesWithCompletionHandler calls the underlying DetermineCompatibleFileTypesWithCompletionHandler.
-func (x *AssetExportSession) DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block) {
-	x.inner.DetermineCompatibleFileTypesWithCompletionHandler(handler)
+// DetermineCompatibleFileTypes blocks until the operation completes or ctx is cancelled.
+func (x *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.DetermineCompatibleFileTypesWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // SupportedFileTypes returns the collection as a Go slice.
@@ -492,7 +508,7 @@ type AssetExportSessionable interface {
 	Status() AVAssetExportSessionStatus
 	Error() unsafe.Pointer
 	Progress() float32
-	DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block)
+	DetermineCompatibleFileTypes(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
 	SupportedFileTypes() []*foundation.NSString
 	EstimateMaximumDurationWithCompletionHandler(handler objc.Block)
 	EstimateOutputFileLengthWithCompletionHandler(handler func(int64, unsafe.Pointer))

@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// A node that displays a text label with a given font.
+// A graphical element that draws text.
 //
 // LabelNode wraps [raw.SKLabelNode] with a fluent Go API.
 type LabelNode struct {
@@ -36,6 +36,8 @@ func LabelNodeFromID(id objc.ID) *LabelNode {
 	return &LabelNode{inner: raw.SKLabelNodeFromID(id)}
 }
 
+// Initializes a new label object with a specified font.
+//
 // NewLabelNodeWithFontNamed creates a new [LabelNode].
 func NewLabelNodeWithFontNamed(fontName string) *LabelNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKLabelNode")), objc.RegisterName("alloc"))
@@ -43,19 +45,23 @@ func NewLabelNodeWithFontNamed(fontName string) *LabelNode {
 	return &LabelNode{inner: raw.SKLabelNodeFromID(_id)}
 }
 
+// The vertical position of the text within the node.
+//
 // WithVerticalAlignmentMode sets the verticalAlignmentMode property and returns the receiver for chaining.
 func (x *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) *LabelNode {
 	x.inner.SetVerticalAlignmentMode(raw.SKLabelVerticalAlignmentMode(verticalAlignmentMode))
 	return x
 }
 
+// The horizontal position of the text within the node.
+//
 // WithHorizontalAlignmentMode sets the horizontalAlignmentMode property and returns the receiver for chaining.
 func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) *LabelNode {
 	x.inner.SetHorizontalAlignmentMode(raw.SKLabelHorizontalAlignmentMode(horizontalAlignmentMode))
 	return x
 }
 
-// Determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
+// Determines the number of lines to draw.
 //
 // WithNumberOfLines sets the numberOfLines property and returns the receiver for chaining.
 func (x *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
@@ -63,7 +69,7 @@ func (x *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
 	return x
 }
 
-// Determines the line break mode for multiple lines. Default is NSLineBreakByTruncatingTail
+// Determines the line-break mode for multiple lines.
 //
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *LabelNode) WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *LabelNode {
@@ -71,7 +77,7 @@ func (x *LabelNode) WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *Lab
 	return x
 }
 
-// If nonzero, this is used when determining layout width for multiline labels. Default is zero.
+// The width, in screen points, after which line-break mode should be applied.
 //
 // WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
 func (x *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode {
@@ -79,31 +85,39 @@ func (x *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
 	return x
 }
 
+// The font used for the text in the label.
+//
 // WithFontName sets the fontName property and returns the receiver for chaining.
 func (x *LabelNode) WithFontName(fontName string) *LabelNode {
 	x.inner.SetFontName(foundation.NSStringStringWithUTF8String(fontName))
 	return x
 }
 
+// The string that the label node displays.
+//
 // WithText sets the text property and returns the receiver for chaining.
 func (x *LabelNode) WithText(text string) *LabelNode {
 	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
 	return x
 }
 
+// The attributed string displayed by the label.
+//
 // WithAttributedText sets the attributedText property and returns the receiver for chaining.
 func (x *LabelNode) WithAttributedText(attributedText *foundation.NSAttributedString) *LabelNode {
 	x.inner.SetAttributedText(attributedText)
 	return x
 }
 
+// The size of the font used in the label.
+//
 // WithFontSize sets the fontSize property and returns the receiver for chaining.
 func (x *LabelNode) WithFontSize(fontSize float64) *LabelNode {
 	x.inner.SetFontSize(fontSize)
 	return x
 }
 
-// Base color that the text is rendered with (if supported by the font)
+// The color of the label.
 //
 // WithFontColor sets the fontColor property and returns the receiver for chaining.
 func (x *LabelNode) WithFontColor(fontColor *appkit.NSColor) *LabelNode {
@@ -111,7 +125,7 @@ func (x *LabelNode) WithFontColor(fontColor *appkit.NSColor) *LabelNode {
 	return x
 }
 
-// Controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+// A floating-point value that describes how the color is blended with the font color.
 //
 // WithColorBlendFactor sets the colorBlendFactor property and returns the receiver for chaining.
 func (x *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
@@ -119,7 +133,7 @@ func (x *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
 	return x
 }
 
-// Color to be blended with the text based on the colorBlendFactor
+// An alternative to the font color that can be used for animations.
 //
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *LabelNode) WithColor(color *appkit.NSColor) *LabelNode {
@@ -127,7 +141,7 @@ func (x *LabelNode) WithColor(color *appkit.NSColor) *LabelNode {
 	return x
 }
 
-// Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
+// The blend mode used to draw the label into the parent’s framebuffer.
 //
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *LabelNode) WithBlendMode(blendMode SKBlendMode) *LabelNode {
@@ -135,7 +149,7 @@ func (x *LabelNode) WithBlendMode(blendMode SKBlendMode) *LabelNode {
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
@@ -143,7 +157,7 @@ func (x *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *LabelNode) WithZPosition(zPosition float64) *LabelNode {
@@ -151,7 +165,7 @@ func (x *LabelNode) WithZPosition(zPosition float64) *LabelNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *LabelNode) WithZRotation(zRotation float64) *LabelNode {
@@ -159,7 +173,7 @@ func (x *LabelNode) WithZRotation(zRotation float64) *LabelNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *LabelNode) WithXScale(xScale float64) *LabelNode {
@@ -167,7 +181,7 @@ func (x *LabelNode) WithXScale(xScale float64) *LabelNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *LabelNode) WithYScale(yScale float64) *LabelNode {
@@ -175,7 +189,7 @@ func (x *LabelNode) WithYScale(yScale float64) *LabelNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *LabelNode) WithSpeed(speed float64) *LabelNode {
@@ -183,7 +197,7 @@ func (x *LabelNode) WithSpeed(speed float64) *LabelNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *LabelNode) WithAlpha(alpha float64) *LabelNode {
@@ -191,7 +205,7 @@ func (x *LabelNode) WithAlpha(alpha float64) *LabelNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *LabelNode) WithPaused(paused bool) *LabelNode {
@@ -199,7 +213,7 @@ func (x *LabelNode) WithPaused(paused bool) *LabelNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *LabelNode) WithHidden(hidden bool) *LabelNode {
@@ -207,7 +221,7 @@ func (x *LabelNode) WithHidden(hidden bool) *LabelNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
@@ -215,7 +229,7 @@ func (x *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Lab
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *LabelNode) WithName(name string) *LabelNode {
@@ -223,7 +237,7 @@ func (x *LabelNode) WithName(name string) *LabelNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
@@ -231,7 +245,7 @@ func (x *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *LabelNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode {
@@ -239,7 +253,7 @@ func (x *LabelNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
@@ -247,7 +261,7 @@ func (x *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *La
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *LabelNode) WithConstraints(items ...*raw.SKConstraint) *LabelNode {
@@ -270,7 +284,7 @@ func (x *LabelNode) WithConstraints(items ...*raw.SKConstraint) *LabelNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *LabelNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode {
@@ -278,54 +292,72 @@ func (x *LabelNode) WithAttributeValues(attributeValues *foundation.NSDictionary
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityElement(accessibilityElement bool) *LabelNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityRole(accessibilityRole string) *LabelNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityParent(accessibilityParent objc.ID) *LabelNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityHelp(accessibilityHelp string) *LabelNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityLabel(accessibilityLabel string) *LabelNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

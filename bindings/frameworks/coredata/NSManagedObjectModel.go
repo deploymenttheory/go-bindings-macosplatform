@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A programmatic representation of the .xcdatamodeld file describing your objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel
 type NSManagedObjectModel struct {
 	foundation.NSObject
@@ -55,14 +57,16 @@ func NSManagedObjectModelFromID(id objc.ID) *NSManagedObjectModel {
 	return o
 }
 
+// Returns a model created by merging all the models found in given bundles.
 func NSManagedObjectModelMergedModelFromBundles(bundles *foundation.NSArray[*foundation.NSBundle]) *NSManagedObjectModel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelMergedModelFromBundles, bundles)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelMergedModelFromBundles, bundles.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
+// Creates a single model from an array of existing models.
 func NSManagedObjectModelModelByMergingModels(models *foundation.NSArray[*NSManagedObjectModel]) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelModelByMergingModels, models.Ptr())
 	if _ret != 0 {
@@ -71,6 +75,7 @@ func NSManagedObjectModelModelByMergingModels(models *foundation.NSArray[*NSMana
 	return NSManagedObjectModelFromID(_ret)
 }
 
+// Initializes an empty managed object model.
 func (o *NSManagedObjectModel) Init() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelInit)
 	if _ret != 0 {
@@ -79,6 +84,7 @@ func (o *NSManagedObjectModel) Init() *NSManagedObjectModel {
 	return NSManagedObjectModelFromID(_ret)
 }
 
+// Initializes the managed object model using the model file at the specified URL.
 func (o *NSManagedObjectModel) InitWithContentsOfURL(url *foundation.NSURL) *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -87,6 +93,7 @@ func (o *NSManagedObjectModel) InitWithContentsOfURL(url *foundation.NSURL) *NSM
 	return NSManagedObjectModelFromID(_ret)
 }
 
+// Returns the entities of the model for a specified configuration.
 func (o *NSManagedObjectModel) EntitiesForConfiguration(configuration *foundation.NSString) *foundation.NSArray[*NSEntityDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelEntitiesForConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -95,57 +102,76 @@ func (o *NSManagedObjectModel) EntitiesForConfiguration(configuration *foundatio
 	return foundation.NSArrayFromID[*NSEntityDescription](_ret)
 }
 
+// Associates the specified entities with the model using the given configuration name.
 func (o *NSManagedObjectModel) SetEntitiesForConfiguration(entities *foundation.NSArray[*NSEntityDescription], configuration *foundation.NSString) {
 	o.Ptr().Send(_nSManagedObjectModelSelSetEntitiesForConfiguration, entities.Ptr(), configuration.Ptr())
 }
 
+// Associates the specified fetch request with the receiver using the given name.
 func (o *NSManagedObjectModel) SetFetchRequestTemplateForName(fetchRequestTemplate *NSFetchRequest[objc.ID], name *foundation.NSString) {
-	o.Ptr().Send(_nSManagedObjectModelSelSetFetchRequestTemplateForName, fetchRequestTemplate, name.Ptr())
+	o.Ptr().Send(_nSManagedObjectModelSelSetFetchRequestTemplateForName, fetchRequestTemplate.Ptr(), name.Ptr())
 }
 
+// Returns the fetch request with a specified name.
 func (o *NSManagedObjectModel) FetchRequestTemplateForName(name *foundation.NSString) *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](o.Ptr(), _nSManagedObjectModelSelFetchRequestTemplateForName, name.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelFetchRequestTemplateForName, name.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
+// Returns a copy of the fetch request template with the variables substituted by values from the substitutions dictionary.
 func (o *NSManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name *foundation.NSString, variables *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](o.Ptr(), _nSManagedObjectModelSelFetchRequestFromTemplateWithNameSubstitutionVariables, name.Ptr(), variables)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelFetchRequestFromTemplateWithNameSubstitutionVariables, name.Ptr(), variables.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
+// Returns a merged model from a specified array for the version information in provided metadata.
 func NSManagedObjectModelMergedModelFromBundlesForStoreMetadata(bundles *foundation.NSArray[*foundation.NSBundle], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSManagedObjectModel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelMergedModelFromBundlesForStoreMetadata, bundles, metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelMergedModelFromBundlesForStoreMetadata, bundles.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
+// Returns, for the version information in given metadata, a model merged from a given array of models.
 func NSManagedObjectModelModelByMergingModelsForStoreMetadata(models *foundation.NSArray[*NSManagedObjectModel], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSManagedObjectModel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelModelByMergingModelsForStoreMetadata, models.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelModelByMergingModelsForStoreMetadata, models.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether a given configuration in the model is compatible with given metadata from a persistent store.
 func (o *NSManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration *foundation.NSString, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectModelSelIsConfigurationCompatibleWithStoreMetadata, configuration.Ptr(), metadata)
+	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectModelSelIsConfigurationCompatibleWithStoreMetadata, configuration.Ptr(), metadata.Ptr())
 	return _ret
 }
 
 func NSManagedObjectModelChecksumsForVersionedModelAtURLError(modelURL *foundation.NSURL) (*foundation.NSDictionary[*foundation.NSString, *foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelChecksumsForVersionedModelAtURLError, modelURL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObjectModel), _nSManagedObjectModelSelChecksumsForVersionedModelAtURLError, modelURL.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret), nil
 }
 
 func (o *NSManagedObjectModel) EntitiesByName() *foundation.NSDictionary[*foundation.NSString, *NSEntityDescription] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSEntityDescription]](o.Ptr(), _nSManagedObjectModelSelEntitiesByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelEntitiesByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSEntityDescription](_ret)
 }
 
 func (o *NSManagedObjectModel) Entities() *foundation.NSArray[*NSEntityDescription] {
@@ -161,36 +187,51 @@ func (o *NSManagedObjectModel) SetEntities(entities *foundation.NSArray[*NSEntit
 }
 
 func (o *NSManagedObjectModel) Configurations() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSManagedObjectModelSelConfigurations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelConfigurations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSManagedObjectModel) LocalizationDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _nSManagedObjectModelSelLocalizationDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelLocalizationDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *NSManagedObjectModel) SetLocalizationDictionary(localizationDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_nSManagedObjectModelSelSetLocalizationDictionary, localizationDictionary)
+	o.Ptr().Send(_nSManagedObjectModelSelSetLocalizationDictionary, localizationDictionary.Ptr())
 }
 
 func (o *NSManagedObjectModel) FetchRequestTemplatesByName() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSManagedObjectModelSelFetchRequestTemplatesByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelFetchRequestTemplatesByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSManagedObjectModel) VersionIdentifiers() *foundation.NSSet[objc.ID] {
-	_ret := objc.Send[*foundation.NSSet[objc.ID]](o.Ptr(), _nSManagedObjectModelSelVersionIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelVersionIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[objc.ID](_ret)
 }
 
 func (o *NSManagedObjectModel) SetVersionIdentifiers(versionIdentifiers *foundation.NSSet[objc.ID]) {
-	o.Ptr().Send(_nSManagedObjectModelSelSetVersionIdentifiers, versionIdentifiers)
+	o.Ptr().Send(_nSManagedObjectModelSelSetVersionIdentifiers, versionIdentifiers.Ptr())
 }
 
 func (o *NSManagedObjectModel) EntityVersionHashesByName() *foundation.NSDictionary[*foundation.NSString, *foundation.NSData] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSData]](o.Ptr(), _nSManagedObjectModelSelEntityVersionHashesByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectModelSelEntityVersionHashesByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSData](_ret)
 }
 
 func (o *NSManagedObjectModel) VersionChecksum() *foundation.NSString {

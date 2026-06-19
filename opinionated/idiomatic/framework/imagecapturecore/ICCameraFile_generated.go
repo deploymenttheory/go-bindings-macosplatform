@@ -78,7 +78,7 @@ func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Conte
 // Requests metadata and executes the completion block in place of the delegate.
 //
 // RequestMetadataDictionaryWithOptionsCompletion calls the underlying RequestMetadataDictionaryWithOptionsCompletion.
-func (x *CameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion objc.Block) {
+func (x *CameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer)) {
 	x.inner.RequestMetadataDictionaryWithOptionsCompletion(options, completion)
 }
 
@@ -391,7 +391,7 @@ type CameraFileable interface {
 	Unwrap() *raw.ICCameraFile
 	WithOrientation(orientation ICEXIFOrientationType) *CameraFile
 	RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
-	RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion objc.Block)
+	RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer))
 	RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress
 	RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (*foundation.NSData, error)
 	RequestSecurityScopedURLWithCompletion(ctx context.Context) (*foundation.NSURL, error)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An argument of options you pass to a GPU device to get a render pipeline state.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpipelinedescriptor
 type MTLRenderPipelineDescriptor struct {
 	foundation.NSObject
@@ -95,7 +97,7 @@ func MTLRenderPipelineDescriptorFromID(id objc.ID) *MTLRenderPipelineDescriptor 
 	return o
 }
 
-// @method reset @abstract Restore all pipeline descriptor properties to their default values.
+// Specifies the default rendering pipeline state values for the descriptor.
 func (o *MTLRenderPipelineDescriptor) Reset() {
 	o.Ptr().Send(_mTLRenderPipelineDescriptorSelReset)
 }

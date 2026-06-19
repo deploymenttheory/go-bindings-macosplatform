@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A sphere (or ball or globe) geometry.
+//
 // Sphere wraps [raw.SCNSphere] with a fluent Go API.
 type Sphere struct {
 	inner *raw.SCNSphere
@@ -37,7 +39,7 @@ func NewSphere() *Sphere {
 	return &Sphere{inner: raw.SCNSphereFromID(_id)}
 }
 
-// @property radius @abstract The sphere radius. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+// The radius of the sphere. Animatable.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Sphere) WithRadius(radius float64) *Sphere {
@@ -45,7 +47,7 @@ func (x *Sphere) WithRadius(radius float64) *Sphere {
 	return x
 }
 
-// @property geodesic @abstract Indicate if the geometry is a geosphere. @discussion The default value is NO.
+// A Boolean value specifying whether SceneKit uses a geodesic polygon mesh to render the sphere.
 //
 // WithGeodesic sets the geodesic property and returns the receiver for chaining.
 func (x *Sphere) WithGeodesic(geodesic bool) *Sphere {
@@ -53,7 +55,7 @@ func (x *Sphere) WithGeodesic(geodesic bool) *Sphere {
 	return x
 }
 
-// @property segmentCount @abstract The number of segments along both spherical coordinates. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+// A number determining the detail of the polygon mesh SceneKit uses to render the sphere. Animatable.
 //
 // WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
 func (x *Sphere) WithSegmentCount(segmentCount int) *Sphere {
@@ -61,7 +63,7 @@ func (x *Sphere) WithSegmentCount(segmentCount int) *Sphere {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Sphere) WithName(name string) *Sphere {
@@ -69,7 +71,7 @@ func (x *Sphere) WithName(name string) *Sphere {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Sphere) WithMaterials(items ...*raw.SCNMaterial) *Sphere {
@@ -92,7 +94,7 @@ func (x *Sphere) WithMaterials(items ...*raw.SCNMaterial) *Sphere {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Sphere) WithFirstMaterial(firstMaterial *Material) *Sphere {
@@ -100,7 +102,7 @@ func (x *Sphere) WithFirstMaterial(firstMaterial *Material) *Sphere {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Sphere) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Sphere {
@@ -129,7 +131,7 @@ func (x *Sphere) WithTessellator(tessellator *GeometryTessellator) *Sphere {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Sphere) WithSubdivisionLevel(subdivisionLevel uint) *Sphere {
@@ -145,7 +147,7 @@ func (x *Sphere) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sp
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Sphere) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere {
@@ -153,7 +155,7 @@ func (x *Sphere) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sp
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Sphere) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere {

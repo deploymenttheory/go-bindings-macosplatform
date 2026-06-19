@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// A rule system consists of 3 things: - The current state, which upon creation is considered the inital state. - The current set of rules. - The current set of facts. Each time a fact is added to the system, the set of rules are evaluated in order and their actions executed in the system if their predicates are true. Rules can be fuzzy, allowing predicates and facts to be asserted to a degree of confidence instead of just boolean on/off. The facts can be any kind of objects as long as they correctly determine equality using isEqual: The simplest approach is to use strings or dictionaries as they provide the most flexibility in defining facts, but user defined classes work just as well and may describe the problem space better. The fact set is at all times a fuzzy set, as defined by fact membership in the set being modulated by their grade of membership. The rules may use the grade of membership to predicate their actions and in such a manner create fuzzy logic. The fuzzy logic Zadeh operators are available on the system itself in order to query multiple facts for combined membership grade.
+// A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.
 //
 // RuleSystem wraps [raw.GKRuleSystem] with a fluent Go API.
 type RuleSystem struct {
@@ -40,21 +40,21 @@ func NewRuleSystem() *RuleSystem {
 	return &RuleSystem{inner: raw.GKRuleSystemFromID(_id)}
 }
 
-// Explicitly evaluate the agenda of the rule system based on the current state and the current set of facts. This may in turn assert or retract more facts or change the state of the system, including activating more rules in the agenda.
+// Evaluates the rule system, executing the list of rules in its agenda.
 //
 // Evaluate calls the underlying Evaluate.
 func (x *RuleSystem) Evaluate() {
 	x.inner.Evaluate()
 }
 
-// Adds a rule to the system. Also adds it to the agenda in salience order.
+// Adds the specified rule to the system.
 //
 // AddRule calls the underlying AddRule.
 func (x *RuleSystem) AddRule(rule *raw.GKRule) {
 	x.inner.AddRule(rule)
 }
 
-// Adds rules to the system. Also adds them to the agenda in salience order.
+// Adds the specified list of rules to the system.
 //
 // AddRulesFromArray calls the underlying AddRulesFromArray.
 func (x *RuleSystem) AddRulesFromArray(rules ...RuleProvider) {
@@ -72,63 +72,63 @@ func (x *RuleSystem) AddRulesFromArray(rules ...RuleProvider) {
 	x.inner.AddRulesFromArray(_arg0)
 }
 
-// Removes all rules from the system.  This also removes them from the agenda and executed sets.
+// Removes all rules from the system.
 //
 // RemoveAllRules calls the underlying RemoveAllRules.
 func (x *RuleSystem) RemoveAllRules() {
 	x.inner.RemoveAllRules()
 }
 
-// Returns the current membership grade for the given fact, which is 0.0 if the fact is not a member of the current set of facts. @return The membership grade of the given fact, in the range [0.0, 1.0].
+// Returns the membership grade of the specified fact.
 //
 // GradeForFact calls the underlying GradeForFact.
 func (x *RuleSystem) GradeForFact(fact foundation.NSObjectProtocol) float32 {
 	return x.inner.GradeForFact(fact)
 }
 
-// Returns the combined membership grade for the all the given facts. This performs the logical AND operation between the given facts. @return The membership grade by applying the AND operator on the given facts, in the range [0.0, 1.0].
+// Returns the lowest membership grade among the specified facts.
 //
 // MinimumGradeForFacts calls the underlying MinimumGradeForFacts.
 func (x *RuleSystem) MinimumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
 	return x.inner.MinimumGradeForFacts(facts)
 }
 
-// Returns the maximum membership grade for the any one of the given facts. This performs the logical OR operation between the given facts. @return The membership grade by applying the OR operator on the given facts, in the range [0.0, 1.0].
+// Returns the highest membership grade among the specified facts.
 //
 // MaximumGradeForFacts calls the underlying MaximumGradeForFacts.
 func (x *RuleSystem) MaximumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
 	return x.inner.MaximumGradeForFacts(facts)
 }
 
-// Asserts a fact with membership grade of 1.0. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. This is shorthand for calling assertFact:grade: with a grade of 1.0 @see assertFact:grade: @see evaluate @see NSObject.isEqual:
+// Adds the specified fact to the fact set with a membership grade of 1.0, and reevaluates the rules in the system’s agenda.
 //
 // AssertFact calls the underlying AssertFact.
 func (x *RuleSystem) AssertFact(fact foundation.NSObjectProtocol) {
 	x.inner.AssertFact(fact)
 }
 
-// Asserts a fact with the supplied membership grade. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. @see evaluate
+// Increases the membership grade of the specified fact by the specified amount, adding it to the fact set if necessary, and reevaluates the rules in the system’s agenda.
 //
 // AssertFactGrade calls the underlying AssertFactGrade.
 func (x *RuleSystem) AssertFactGrade(fact foundation.NSObjectProtocol, grade float32) {
 	x.inner.AssertFactGrade(fact, grade)
 }
 
-// Retracts a fact, setting its membership grade to 0, which also removes it from the fact set. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. This is short hand for calling retractFact:grade: with a grade of 1.0 @see retractFact:grade: @see evaluate
+// Removes the specified fact from the fact set, and reevaluates the rules in the system’s agenda.
 //
 // RetractFact calls the underlying RetractFact.
 func (x *RuleSystem) RetractFact(fact foundation.NSObjectProtocol) {
 	x.inner.RetractFact(fact)
 }
 
-// Retracts a fact, reducing its membership grade by the supplied grade. If this brings the grade to 0 it is also removed from the fact set. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. @see evaluate
+// Reduces the membership grade of the specified fact by the specified amount, removing it from the fact set if necessary, and reevaluates the rules in the system’s agenda.
 //
 // RetractFactGrade calls the underlying RetractFactGrade.
 func (x *RuleSystem) RetractFactGrade(fact foundation.NSObjectProtocol, grade float32) {
 	x.inner.RetractFactGrade(fact, grade)
 }
 
-// Clears the agenda and executed sets and removes all facts currently in the system. It then fills the agenda with rules from the rule set, in salience order. @see rules @see facts
+// Returns the rule system to its original agenda and clears all facts.
 //
 // Reset calls the underlying Reset.
 func (x *RuleSystem) Reset() {

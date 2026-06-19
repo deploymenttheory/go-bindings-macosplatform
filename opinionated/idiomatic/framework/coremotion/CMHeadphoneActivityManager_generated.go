@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that starts and manages headphone activity services.
+//
 // HeadphoneActivityManager wraps [raw.CMHeadphoneActivityManager] with a fluent Go API.
 type HeadphoneActivityManager struct {
 	inner *raw.CMHeadphoneActivityManager
@@ -37,16 +39,22 @@ func NewHeadphoneActivityManager() *HeadphoneActivityManager {
 	return &HeadphoneActivityManager{inner: raw.CMHeadphoneActivityManagerFromID(_id)}
 }
 
+// Starts headphone activity updates, providing data to the given handler through the given queue.
+//
 // StartActivityUpdatesToQueueWithHandler calls the underlying StartActivityUpdatesToQueueWithHandler.
 func (x *HeadphoneActivityManager) StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMMotionActivity, unsafe.Pointer)) {
 	x.inner.StartActivityUpdatesToQueueWithHandler(queue, handler)
 }
 
+// Stops headphone activity updates.
+//
 // StopActivityUpdates calls the underlying StopActivityUpdates.
 func (x *HeadphoneActivityManager) StopActivityUpdates() {
 	x.inner.StopActivityUpdates()
 }
 
+// Starts headphone status updates, providing data to the given handler through the given queue.
+//
 // StartStatusUpdatesToQueueWithHandler calls the underlying StartStatusUpdatesToQueueWithHandler.
 func (x *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(CMHeadphoneActivityStatus, unsafe.Pointer)) {
 	x.inner.StartStatusUpdatesToQueueWithHandler(queue, func(_a0 raw.CMHeadphoneActivityStatus, _a1 unsafe.Pointer) {
@@ -54,6 +62,8 @@ func (x *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *f
 	})
 }
 
+// Stops headphone status updates.
+//
 // StopStatusUpdates calls the underlying StopStatusUpdates.
 func (x *HeadphoneActivityManager) StopStatusUpdates() {
 	x.inner.StopStatusUpdates()

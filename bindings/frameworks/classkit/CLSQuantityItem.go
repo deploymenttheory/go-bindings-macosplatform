@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Activity information that signifies a quantity.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsquantityitem
 type CLSQuantityItem struct {
 	CLSActivityItem
@@ -32,7 +34,7 @@ func CLSQuantityItemFromID(id objc.ID) *CLSQuantityItem {
 	return o
 }
 
-// @abstract      Create a quantity item with an identifier and title. @param         identifier      An identifier that is unique within activity. @param         title           Title of the quantity. Ex @em Hints
+// Initializes an activity item that records a discrete quantity.
 func (o *CLSQuantityItem) InitWithIdentifierTitle(identifier *foundation.NSString, title *foundation.NSString) *CLSQuantityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSQuantityItemSelInitWithIdentifierTitle, identifier.Ptr(), title.Ptr())
 	if _ret != 0 {

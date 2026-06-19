@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that converts between JSON and the equivalent Foundation objects.
+//
 // JSONSerialization wraps [raw.NSJSONSerialization] with a fluent Go API.
 type JSONSerialization struct {
 	inner *raw.NSJSONSerialization

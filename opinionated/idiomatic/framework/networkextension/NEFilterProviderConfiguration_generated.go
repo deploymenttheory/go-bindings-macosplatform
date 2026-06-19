@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Configuration parameters for a content filter.
+//
 // NEFilterProviderConfiguration wraps [raw.NEFilterProviderConfiguration] with a fluent Go API.
 type NEFilterProviderConfiguration struct {
 	inner *raw.NEFilterProviderConfiguration
@@ -37,7 +39,7 @@ func NewNEFilterProviderConfiguration() *NEFilterProviderConfiguration {
 	return &NEFilterProviderConfiguration{inner: raw.NEFilterProviderConfigurationFromID(_id)}
 }
 
-// @property filterBrowsers @discussion If YES, the filter plugin will be allowed to filter browser traffic. If NO, the filter plugin will not see any browser flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
+// A Boolean value that indicates that the system applies the filter to flows of network data originated from WebKit browser objects.
 //
 // WithFilterBrowsers sets the filterBrowsers property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterBrowsers(filterBrowsers bool) *NEFilterProviderConfiguration {
@@ -45,7 +47,7 @@ func (x *NEFilterProviderConfiguration) WithFilterBrowsers(filterBrowsers bool) 
 	return x
 }
 
-// @property filterSockets @discussion If YES, the filter plugin will be allowed to filter socket traffic. If NO, the filter plugin will not see any socket flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
+// A Boolean value that indicates that the system applies the filter to flows of network data originated from sockets.
 //
 // WithFilterSockets sets the filterSockets property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterSockets(filterSockets bool) *NEFilterProviderConfiguration {
@@ -53,7 +55,7 @@ func (x *NEFilterProviderConfiguration) WithFilterSockets(filterSockets bool) *N
 	return x
 }
 
-// @property filterPackets @discussion If YES, a NEFilterPacketProvider will be instantiated and will be allowed to filter packets.
+// A Boolean value that indicates that the system applies the filter to packets of network data.
 //
 // WithFilterPackets sets the filterPackets property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterPackets(filterPackets bool) *NEFilterProviderConfiguration {
@@ -61,7 +63,7 @@ func (x *NEFilterProviderConfiguration) WithFilterPackets(filterPackets bool) *N
 	return x
 }
 
-// @property vendorConfiguration @discussion An optional dictionary of plugin-specific keys to be passed to the plugin.
+// A dictionary of provider-specific configuration settings.
 //
 // WithVendorConfiguration sets the vendorConfiguration property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEFilterProviderConfiguration {
@@ -69,7 +71,7 @@ func (x *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfigurat
 	return x
 }
 
-// @property serverAddress @discussion The optional address of the server used to support the filter.
+// The address of a server that the Filter Control Provider may contact for rules and other configuration information.
 //
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithServerAddress(serverAddress string) *NEFilterProviderConfiguration {
@@ -77,7 +79,7 @@ func (x *NEFilterProviderConfiguration) WithServerAddress(serverAddress string) 
 	return x
 }
 
-// @property username @discussion The optional username associated with the filter.
+// A string that identifies the user.
 //
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithUsername(username string) *NEFilterProviderConfiguration {
@@ -85,7 +87,7 @@ func (x *NEFilterProviderConfiguration) WithUsername(username string) *NEFilterP
 	return x
 }
 
-// @property organization @discussion The optional organization associated with the filter.
+// A string that identifies the organization that administers the filter.
 //
 // WithOrganization sets the organization property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithOrganization(organization string) *NEFilterProviderConfiguration {
@@ -93,7 +95,7 @@ func (x *NEFilterProviderConfiguration) WithOrganization(organization string) *N
 	return x
 }
 
-// @property passwordReference @discussion The optional password keychain reference associated with the filter.
+// A persistent reference to a keychain item containing a password associated with the filter.
 //
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithPasswordReference(passwordReference *foundation.NSData) *NEFilterProviderConfiguration {
@@ -101,7 +103,7 @@ func (x *NEFilterProviderConfiguration) WithPasswordReference(passwordReference 
 	return x
 }
 
-// @property identityReference @discussion The optional certificate identity keychain reference associated with the filter.
+// A persistent reference to a keychain item containing a certificate and private key associated with the filter.
 //
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithIdentityReference(identityReference *foundation.NSData) *NEFilterProviderConfiguration {
@@ -109,7 +111,7 @@ func (x *NEFilterProviderConfiguration) WithIdentityReference(identityReference 
 	return x
 }
 
-// @property filterDataProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
+// The bundle identifier of the filter data provider system extension.
 //
 // WithFilterDataProviderBundleIdentifier sets the filterDataProviderBundleIdentifier property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) *NEFilterProviderConfiguration {
@@ -117,7 +119,7 @@ func (x *NEFilterProviderConfiguration) WithFilterDataProviderBundleIdentifier(f
 	return x
 }
 
-// @property filterPacketProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
+// The bundle identifier of the filter packet provider system extension.
 //
 // WithFilterPacketProviderBundleIdentifier sets the filterPacketProviderBundleIdentifier property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) *NEFilterProviderConfiguration {

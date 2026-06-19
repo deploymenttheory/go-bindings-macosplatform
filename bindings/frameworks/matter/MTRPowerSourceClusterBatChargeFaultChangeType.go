@@ -34,19 +34,25 @@ func MTRPowerSourceClusterBatChargeFaultChangeTypeFromID(id objc.ID) *MTRPowerSo
 }
 
 func (o *MTRPowerSourceClusterBatChargeFaultChangeType) Current() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRPowerSourceClusterBatChargeFaultChangeTypeSelCurrent)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRPowerSourceClusterBatChargeFaultChangeTypeSelCurrent)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRPowerSourceClusterBatChargeFaultChangeType) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetCurrent, current)
+	o.Ptr().Send(_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetCurrent, current.Ptr())
 }
 
 func (o *MTRPowerSourceClusterBatChargeFaultChangeType) Previous() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRPowerSourceClusterBatChargeFaultChangeTypeSelPrevious)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRPowerSourceClusterBatChargeFaultChangeTypeSelPrevious)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRPowerSourceClusterBatChargeFaultChangeType) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetPrevious, previous)
+	o.Ptr().Send(_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetPrevious, previous.Ptr())
 }

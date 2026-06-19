@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type of challenge where a player must earn another player’s achievement.
+//
 // AchievementChallenge wraps [raw.GKAchievementChallenge] with a fluent Go API.
 type AchievementChallenge struct {
 	inner *raw.GKAchievementChallenge

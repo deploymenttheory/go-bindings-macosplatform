@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A model instance that specifies how to map a model from a source to a destination managed object model.
+//
 // MappingModel wraps [raw.NSMappingModel] with a fluent Go API.
 type MappingModel struct {
 	inner *raw.NSMappingModel
@@ -32,6 +34,8 @@ func MappingModelFromID(id objc.ID) *MappingModel {
 	return &MappingModel{inner: raw.NSMappingModelFromID(id)}
 }
 
+// Returns a mapping model initialized from a given URL.
+//
 // NewMappingModelWithContentsOfURL creates a new [MappingModel].
 func NewMappingModelWithContentsOfURL(url string) *MappingModel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMappingModel")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewMappingModelWithContentsOfURL(url string) *MappingModel {
 	return &MappingModel{inner: raw.NSMappingModelFromID(_id)}
 }
 
+// The entity mappings for the mapping model.
+//
 // WithEntityMappings sets the collection, converting the Go slice to an NSArray.
 func (x *MappingModel) WithEntityMappings(items ...*raw.NSEntityMapping) *MappingModel {
 	if len(items) == 0 {

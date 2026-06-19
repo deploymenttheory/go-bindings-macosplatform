@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A URL session task that stores downloaded data to a file.
+//
 // URLSessionDownloadTask wraps [raw.NSURLSessionDownloadTask] with a fluent Go API.
 type URLSessionDownloadTask struct {
 	inner *raw.NSURLSessionDownloadTask

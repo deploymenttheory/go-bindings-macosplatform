@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that tracks the movement of a previously identified object across multiple images or video frames.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrackobjectrequest
 type VNTrackObjectRequest struct {
 	VNTrackingRequest
@@ -32,7 +34,7 @@ func VNTrackObjectRequestFromID(id objc.ID) *VNTrackObjectRequest {
 	return o
 }
 
-// @brief Create a new request with detected object observation. @param    observation          Detected object observation with bounding box info.
+// Creates a new object tracking request with a detected object observation.
 func (o *VNTrackObjectRequest) InitWithDetectedObjectObservation(observation *VNDetectedObjectObservation) *VNTrackObjectRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackObjectRequestSelInitWithDetectedObjectObservation, observation.Ptr())
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *VNTrackObjectRequest) InitWithDetectedObjectObservation(observation *VN
 	return VNTrackObjectRequestFromID(_ret)
 }
 
-// @brief Create a new request with detected object observation. @param    observation          Detected object observation with bounding box info. @param    completionHandler    The block that is invoked when the request has been performed.
+// Creates a new object tracking request with a detected object observation.
 func (o *VNTrackObjectRequest) InitWithDetectedObjectObservationCompletionHandler(observation *VNDetectedObjectObservation, completionHandler func(*VNRequest, unsafe.Pointer)) *VNTrackObjectRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

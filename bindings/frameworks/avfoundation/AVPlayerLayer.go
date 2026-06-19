@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that presents the visual contents of a player object.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayerlayer
 type AVPlayerLayer struct {
 	quartzcore.CALayer
@@ -45,7 +47,7 @@ func AVPlayerLayerFromID(id objc.ID) *AVPlayerLayer {
 	return o
 }
 
-// @method		layerWithPlayer: @abstract		Returns an instance of AVPlayerLayer to display the visual output of the specified AVPlayer. @result		An instance of AVPlayerLayer.
+// Creates a layer object to present the visual contents of a player’s current item.
 func AVPlayerLayerPlayerLayerWithPlayer(player *AVPlayer) *AVPlayerLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerLayer), _aVPlayerLayerSelPlayerLayerWithPlayer, player.Ptr())
 	if _ret != 0 {
@@ -54,18 +56,18 @@ func AVPlayerLayerPlayerLayerWithPlayer(player *AVPlayer) *AVPlayerLayer {
 	return AVPlayerLayerFromID(_ret)
 }
 
-// @method			copyDisplayedPixelBuffer @abstract		Returns a retained reference to the pixel buffer currently displayed in this AVPlayerLayer. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, if the current player's rate is non-zero or if the image is unavailable. @discussion		This will only return the current image while the media is paused, otherwise this will return nil. Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
+// Returns the pixel buffer that the player layer currently displays.
 func (o *AVPlayerLayer) CopyDisplayedPixelBuffer() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVPlayerLayerSelCopyDisplayedPixelBuffer)
 	return _ret
 }
 
-// Starts displaying a caption preview with the specified accessibility profile. This method enables a preview mode that displays sample caption text using the visual appearance settings from the specified accessibility profile. The preview replaces any currently active subtitles and/or closed captions while active. The sample caption text position can be specified to avoid UI controls. - Parameters: - profileID: The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from `MACaptionAppearanceCopyProfileIDs()`. This determines font, color, background, and other visual characteristics. - position: A CGPoint that defines the position (in points) of the caption preview relative to the default positioning of content captions (centered near the bottom of the video). Position values can be negative. (0, 0) represents the default positioning. - text: Optional custom text to display in the preview. If `nil`, a standard localized preview message will be shown. - Note: You must call “stopShowingCaptionPreview“ to exit the preview.
+// Starts displaying a caption preview with the specified accessibility profile.
 func (o *AVPlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID *foundation.NSString, position corefoundation.CGPoint, text *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerLayerSelSetCaptionPreviewProfileIDPositionText, profileID.Ptr(), position, text.Ptr())
 }
 
-// Stops showing the caption preview. This method stops the caption preview and restores any currently active subtitles and/or closed captions.
+// Stops showing the caption preview.
 func (o *AVPlayerLayer) StopShowingCaptionPreview() {
 	o.Ptr().Send(_aVPlayerLayerSelStopShowingCaptionPreview)
 }
@@ -110,10 +112,13 @@ func (o *AVPlayerLayer) VideoRect() corefoundation.CGRect {
 
 // @property		pixelBufferAttributes @abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback. @discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
 func (o *AVPlayerLayer) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVPlayerLayerSelPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerLayerSelPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AVPlayerLayer) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aVPlayerLayerSelSetPixelBufferAttributes, pixelBufferAttributes)
+	o.Ptr().Send(_aVPlayerLayerSelSetPixelBufferAttributes, pixelBufferAttributes.Ptr())
 }

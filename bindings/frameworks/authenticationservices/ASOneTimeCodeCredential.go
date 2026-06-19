@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A one-time passcode (OTP) credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asonetimecodecredential
 type ASOneTimeCodeCredential struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func ASOneTimeCodeCredentialCredentialWithCode(code *foundation.NSString) *ASOne
 	return ASOneTimeCodeCredentialFromID(_ret)
 }
 
-// @abstract Initializes an ASOneTimeCodeCredential object. @param code the one time code.
+// Creates a one-time passcode (OTP) credential.
 func (o *ASOneTimeCodeCredential) InitWithCode(code *foundation.NSString) *ASOneTimeCodeCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSOneTimeCodeCredentialSelInitWithCode, code.Ptr())
 	if _ret != 0 {

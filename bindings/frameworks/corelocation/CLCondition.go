@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for all other monitor conditions.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clcondition
 type CLCondition struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a player’s score on a leaderboard.
+//
 // LeaderboardScore wraps [raw.GKLeaderboardScore] with a fluent Go API.
 type LeaderboardScore struct {
 	inner *raw.GKLeaderboardScore

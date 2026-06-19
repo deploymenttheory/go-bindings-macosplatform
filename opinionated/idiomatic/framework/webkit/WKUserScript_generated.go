@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A script that the web view injects into a webpage.
+//
 // WKUserScript wraps [raw.WKUserScript] with a fluent Go API.
 type WKUserScript struct {
 	inner *raw.WKUserScript
@@ -31,7 +33,7 @@ func WKUserScriptFromID(id objc.ID) *WKUserScript {
 	return &WKUserScript{inner: raw.WKUserScriptFromID(id)}
 }
 
-// @abstract Returns an initialized user script that can be added to a @link WKUserContentController @/link. @param source The script source. @param injectionTime When the script should be injected. @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame. @discussion Calling this method is the same as calling `initWithSource:injectionTime:forMainFrameOnly:inContentWorld:` with a `contentWorld` value of `WKContentWorld.pageWorld`
+// Creates a user script object that contains the specified source code and attributes.
 //
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a new [WKUserScript].
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
@@ -40,7 +42,7 @@ func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injec
 	return &WKUserScript{inner: raw.WKUserScriptFromID(_id)}
 }
 
-// @abstract Returns an initialized user script that can be added to a @link WKUserContentController @/link. @param source The script source. @param injectionTime When the script should be injected. @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame. @param contentWorld The WKContentWorld in which to inject the script.
+// Creates a user script object that is scoped to a particular content world.
 //
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a new [WKUserScript].
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *raw.WKContentWorld) *WKUserScript {

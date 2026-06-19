@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the amount of attenuation distance, the gradual loss in audio intensity, and other characteristics.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioenvironmentdistanceattenuationparameters
 type AVAudioEnvironmentDistanceAttenuationParameters struct {
 	foundation.NSObject

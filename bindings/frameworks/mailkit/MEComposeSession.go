@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a single mail compose window.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/mecomposesession
 type MEComposeSession struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func MEComposeSessionFromID(id objc.ID) *MEComposeSession {
 	return o
 }
 
-// @brief Requests Mail to refresh compose session with new information that the extension has. @discussion Extensions can use this call this method to regenerate @c MEAddressAnnotation instances to replace those that were previously generated for this session. This will result in invocations to @c -[MEComposeSessionHandler @c session:annotateAddressesWithCompletionHandler:].
+// Refreshes the compose session with the extension’s new information.
 func (o *MEComposeSession) ReloadSession() {
 	o.Ptr().Send(_mEComposeSessionSelReloadSession)
 }

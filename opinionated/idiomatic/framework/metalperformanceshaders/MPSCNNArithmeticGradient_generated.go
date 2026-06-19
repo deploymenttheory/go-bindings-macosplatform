@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for gradient arithmetic operators.
+//
 // CNNArithmeticGradient wraps [raw.MPSCNNArithmeticGradient] with a fluent Go API.
 type CNNArithmeticGradient struct {
 	inner *raw.MPSCNNArithmeticGradient
@@ -225,7 +227,7 @@ func (x *CNNArithmeticGradient) WithDestinationImageAllocator(destinationImageAl
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNArithmeticGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNArithmeticGradient {
@@ -233,7 +235,7 @@ func (x *CNNArithmeticGradient) WithOptions(options mpscore.MPSKernelOptions) *C
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNArithmeticGradient) WithLabel(label string) *CNNArithmeticGradient {

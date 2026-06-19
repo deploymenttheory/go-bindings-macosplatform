@@ -67,7 +67,7 @@ func MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsGradientStateLo
 
 // @abstract   Init a gradient loss node from multiple images @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter Node0: logits, Node1: labels, Node2: weights @return     A new MPSNNFilter node.
 func MPSNNLossGradientNodeNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNLossGradientNode), _mPSNNLossGradientNodeSelNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter, sourceNodes, gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNLossGradientNode), _mPSNNLossGradientNodeSelNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter, sourceNodes.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -91,7 +91,7 @@ func (o *MPSNNLossGradientNode) InitWithSourceGradientSourceImageLabelsGradientS
 }
 
 func (o *MPSNNLossGradientNode) InitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *MPSNNLossGradientNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientNodeSelInitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter, sourceNodes, gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientNodeSelInitWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter, sourceNodes.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for all operations that execute in a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckoperation
 type CKOperation struct {
 	foundation.NSOperation
@@ -47,7 +49,7 @@ func CKOperationFromID(id objc.ID) *CKOperation {
 	return o
 }
 
-// Creates an operation. - Important: Don't use this method directly. Instead, create database operations using the initializers of the concrete subclasses.
+// Creates an operation.
 func (o *CKOperation) Init() *CKOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationSelInit)
 	if _ret != 0 {

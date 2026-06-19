@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A custom model trained to classify or tag natural language text.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlmodel
 type NLModel struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NLModelFromID(id objc.ID) *NLModel {
 	return o
 }
 
+// Creates a new natural language model based on a compiled Core ML model at the given URL.
 func NLModelModelWithContentsOfURLError(url *foundation.NSURL) (*NLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModel), _nLModelSelModelWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -51,6 +54,7 @@ func NLModelModelWithContentsOfURLError(url *foundation.NSURL) (*NLModel, error)
 	return NLModelFromID(_ret), nil
 }
 
+// Creates a new natural language model based on the given Core ML model instance.
 func NLModelModelWithMLModelError(mlModel *coreml.MLModel) (*NLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLModel), _nLModelSelModelWithMLModelError, mlModel.Ptr(), unsafe.Pointer(&_nsErr))
@@ -63,6 +67,7 @@ func NLModelModelWithMLModelError(mlModel *coreml.MLModel) (*NLModel, error) {
 	return NLModelFromID(_ret), nil
 }
 
+// Predicts a label for the given input string.
 func (o *NLModel) PredictedLabelForString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelSelPredictedLabelForString, string_.Ptr())
 	if _ret != 0 {
@@ -71,19 +76,31 @@ func (o *NLModel) PredictedLabelForString(string_ *foundation.NSString) *foundat
 	return foundation.NSStringFromID(_ret)
 }
 
+// Predicts a label for each string in the given array.
 func (o *NLModel) PredictedLabelsForTokens(tokens *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLModelSelPredictedLabelsForTokens, tokens)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelSelPredictedLabelsForTokens, tokens.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Predicts multiple possible labels for the given input string.
 func (o *NLModel) PredictedLabelHypothesesForStringMaximumCount(string_ *foundation.NSString, maximumCount uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]](o.Ptr(), _nLModelSelPredictedLabelHypothesesForStringMaximumCount, string_.Ptr(), maximumCount)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelSelPredictedLabelHypothesesForStringMaximumCount, string_.Ptr(), maximumCount)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSNumber](_ret)
 }
 
+// Predicts multiple possible labels for each string in the given array.
 func (o *NLModel) PredictedLabelHypothesesForTokensMaximumCount(tokens *foundation.NSArray[*foundation.NSString], maximumCount uint) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nLModelSelPredictedLabelHypothesesForTokensMaximumCount, tokens, maximumCount)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLModelSelPredictedLabelHypothesesForTokensMaximumCount, tokens.Ptr(), maximumCount)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NLModel) Configuration() *NLModelConfiguration {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.
+//
 // ListFormatter wraps [raw.NSListFormatter] with a fluent Go API.
 type ListFormatter struct {
 	inner *raw.NSListFormatter

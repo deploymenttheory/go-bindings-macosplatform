@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An opaque object that contains the serialized representation of a sync engine’s current state.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginestateserialization
 type CKSyncEngineStateSerialization struct {
 	foundation.NSObject

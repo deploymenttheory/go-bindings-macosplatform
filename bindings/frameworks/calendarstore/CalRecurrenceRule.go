@@ -61,7 +61,7 @@ func (o *CalRecurrenceRule) InitWeeklyRecurrenceWithIntervalEnd(interval uint, e
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) InitWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd(interval uint, days *foundation.NSArray[objc.ID], end *CalRecurrenceEnd) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd, interval, days, end.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd, interval, days.Ptr(), end.Ptr())
 	return _ret
 }
 
@@ -73,7 +73,7 @@ func (o *CalRecurrenceRule) InitMonthlyRecurrenceWithIntervalEnd(interval uint, 
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) InitMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd(interval uint, monthDays *foundation.NSArray[objc.ID], end *CalRecurrenceEnd) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd, interval, monthDays, end.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd, interval, monthDays.Ptr(), end.Ptr())
 	return _ret
 }
 
@@ -91,13 +91,13 @@ func (o *CalRecurrenceRule) InitYearlyRecurrenceWithIntervalEnd(interval uint, e
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) InitYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd(interval uint, months *foundation.NSArray[objc.ID], end *CalRecurrenceEnd) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd, interval, months, end.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd, interval, months.Ptr(), end.Ptr())
 	return _ret
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) InitYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthForMonthsOfTheYearEnd(interval uint, weekDay uint, monthWeek int, months *foundation.NSArray[objc.ID], end *CalRecurrenceEnd) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthForMonthsOfTheYearEnd, interval, weekDay, monthWeek, months, end.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelInitYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthForMonthsOfTheYearEnd, interval, weekDay, monthWeek, months.Ptr(), end.Ptr())
 	return _ret
 }
 
@@ -130,24 +130,36 @@ func (o *CalRecurrenceRule) FirstDayOfTheWeek() uint {
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) DaysOfTheWeek() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calRecurrenceRuleSelDaysOfTheWeek)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelDaysOfTheWeek)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) DaysOfTheMonth() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calRecurrenceRuleSelDaysOfTheMonth)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelDaysOfTheMonth)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) NthWeekDaysOfTheMonth() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calRecurrenceRuleSelNthWeekDaysOfTheMonth)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelNthWeekDaysOfTheMonth)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalRecurrenceRule) MonthsOfTheYear() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calRecurrenceRuleSelMonthsOfTheYear)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _calRecurrenceRuleSelMonthsOfTheYear)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

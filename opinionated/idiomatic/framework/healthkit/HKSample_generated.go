@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A HealthKit sample represents a piece of data associated with a start and end time.
+//
 // Sample wraps [raw.HKSample] with a fluent Go API.
 type Sample struct {
 	inner *raw.HKSample

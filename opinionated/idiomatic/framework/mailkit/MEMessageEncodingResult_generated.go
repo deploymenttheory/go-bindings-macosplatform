@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains a signed or encrypted message, or errors that indicate failure to encode the message.
+//
 // MessageEncodingResult wraps [raw.MEMessageEncodingResult] with a fluent Go API.
 type MessageEncodingResult struct {
 	inner *raw.MEMessageEncodingResult
@@ -30,6 +32,8 @@ func MessageEncodingResultFromID(id objc.ID) *MessageEncodingResult {
 	return &MessageEncodingResult{inner: raw.MEMessageEncodingResultFromID(id)}
 }
 
+// Creates an encoding result object with a signed or encrypted message, or errors if the message encoder fails to encode the message.
+//
 // NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError creates a new [MessageEncodingResult].
 func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encodedMessage *raw.MEEncodedOutgoingMessage, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageEncodingResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageEncodingResult")), objc.RegisterName("alloc"))

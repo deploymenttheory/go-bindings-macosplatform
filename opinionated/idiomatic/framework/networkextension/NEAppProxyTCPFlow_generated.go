@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object for reading and writing data to and from a TCP connection being proxied by the provider.
+//
 // NEAppProxyTCPFlow wraps [raw.NEAppProxyTCPFlow] with a fluent Go API.
 type NEAppProxyTCPFlow struct {
 	inner *raw.NEAppProxyTCPFlow
@@ -39,7 +41,7 @@ func NewNEAppProxyTCPFlow() *NEAppProxyTCPFlow {
 	return &NEAppProxyTCPFlow{inner: raw.NEAppProxyTCPFlowFromID(_id)}
 }
 
-// @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+// The network interface, if any, used by this flow.
 //
 // WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
 func (x *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyTCPFlow {
@@ -47,7 +49,7 @@ func (x *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface *foundation.NS
 	return x
 }
 
-// @method readDataWithCompletionHandler: @discussion Read data from the flow. @param completionHandler A block that will be executed when some data is read from the flow. The block is passed either the data that was read or a non-nil error if an error occurred. If data has a length of 0 then no data can be subsequently read from the flow. The completion handler is only called for the single read operation that was initiated by calling this method. If the caller wants to read more data then it should call this method again to schedule another read operation and another execution of the completion handler block.
+// Read data from the flow.
 //
 // ReadData blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (*foundation.NSData, error) {
@@ -73,7 +75,7 @@ func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (*foundation.NSData, e
 	}
 }
 
-// @method writeData:completionHandler @discussion Write data to the flow. @param data The data to write. @param completionHandler A block that will be executed when the data is written into the associated socket's receive buffer. The caller should use this callback as an indication that it is possible to write more data to the flow without using up excessive buffer memory. If an error occurs while writing the data then a non-nil NSError object is passed to the block.
+// Write data to the flow.
 //
 // WriteData blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data *foundation.NSData) error {

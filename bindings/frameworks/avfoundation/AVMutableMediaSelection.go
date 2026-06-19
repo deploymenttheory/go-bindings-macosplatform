@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable object that represents a complete rendition of media selection options on an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablemediaselection
 type AVMutableMediaSelection struct {
 	AVMediaSelection
@@ -29,7 +31,7 @@ func AVMutableMediaSelectionFromID(id objc.ID) *AVMutableMediaSelection {
 	return o
 }
 
-// @method		selectMediaOption:inMediaSelectionGroup: @abstract		Selects the media option described by the specified instance of AVMediaSelectionOption in the specified AVMediaSelectionGroup and deselects all other options in that group. @param			mediaSelectionOption The option to select. @param			mediaSelectionGroup The media selection group, obtained from the receiver's asset, that contains the specified option. @discussion If the specified media selection option isn't a member of the specified media selection group, no change in presentation state will result. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, you can pass nil for mediaSelectionOption to deselect all media selection options in the group.
+// Selects the media option in the specified media selection group.
 func (o *AVMutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *AVMediaSelectionOption, mediaSelectionGroup *AVMediaSelectionGroup) {
 	o.Ptr().Send(_aVMutableMediaSelectionSelSelectMediaOptionInMediaSelectionGroup, mediaSelectionOption.Ptr(), mediaSelectionGroup.Ptr())
 }

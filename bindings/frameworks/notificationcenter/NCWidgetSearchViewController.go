@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a default search view within a macOS Today widget.
+//
 // Apple documentation: https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 type NCWidgetSearchViewController struct {
@@ -51,12 +53,15 @@ func (o *NCWidgetSearchViewController) SetDelegate(delegate NCWidgetSearchViewDe
 }
 
 func (o *NCWidgetSearchViewController) SearchResults() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResults)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResults)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NCWidgetSearchViewController) SetSearchResults(searchResults *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResults, searchResults)
+	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResults, searchResults.Ptr())
 }
 
 func (o *NCWidgetSearchViewController) SearchDescription() *foundation.NSString {

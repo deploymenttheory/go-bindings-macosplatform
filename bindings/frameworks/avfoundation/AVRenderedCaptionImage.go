@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a rendered pixel buffer and its position in pixels.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avrenderedcaptionimage
 type AVRenderedCaptionImage struct {
 	foundation.NSObject

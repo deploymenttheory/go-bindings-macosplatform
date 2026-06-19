@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Clinical Document Architecture (CDA) sample that stores a single document.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcdadocumentsample
 type HKCDADocumentSample struct {
 	HKDocumentSample
@@ -33,10 +35,10 @@ func HKCDADocumentSampleFromID(id objc.ID) *HKCDADocumentSample {
 	return o
 }
 
-// @method                CDADocumentSampleWithData:startDate:endDate:device:metadata:validationError: @abstract              Creates a new document sample with the specified attributes. @param documentData    Document contents in an XML format that meets the CDA standard. @param startDate       The start date for the document. @param endDate         The end date for the document. @param metadata        Metadata for the document. @param validationError The XML content will be validated against the standard for CDA content.  If that validation fails, then this parameter will be set with the relavant error.  Detailed information about the failure may be obtained by examining the value for the HKDetailedCDAValidationErrorKey key of the NSError's userInfo dictionary. @return                The new instance or nil if the documentData does not pass validation. @discussion            Attributes of the document, such as title, patient name, etc. will be extracted automatically from the document content.
+// Returns a CDA document sample containing the provided XML document and metadata.
 func HKCDADocumentSampleCDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData *foundation.NSData, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*HKCDADocumentSample, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKCDADocumentSample), _hKCDADocumentSampleSelCDADocumentSampleWithDataStartDateEndDateMetadataValidationError, documentData.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKCDADocumentSample), _hKCDADocumentSampleSelCDADocumentSampleWithDataStartDateEndDateMetadataValidationError, documentData.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

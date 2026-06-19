@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The manager of a shared credentials cache.
+//
 // URLCredentialStorage wraps [raw.NSURLCredentialStorage] with a fluent Go API.
 type URLCredentialStorage struct {
 	inner *raw.NSURLCredentialStorage

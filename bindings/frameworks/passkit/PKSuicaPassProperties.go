@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The properties of a pass used as a ticket for the Suica transportation system.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pksuicapassproperties
 type PKSuicaPassProperties struct {
 	PKTransitPassProperties
@@ -33,7 +35,7 @@ func PKSuicaPassPropertiesFromID(id objc.ID) *PKSuicaPassProperties {
 	return o
 }
 
-// Properties for a given pass, or nil if the pass doesn’t support the set of properties being requested
+// Instantiates a Suica pass properties object that contains the properties supported in the specified pass.
 func PKSuicaPassPropertiesPassPropertiesForPass(pass *PKPass) *PKSuicaPassProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKSuicaPassProperties), _pKSuicaPassPropertiesSelPassPropertiesForPass, pass.Ptr())
 	if _ret != 0 {

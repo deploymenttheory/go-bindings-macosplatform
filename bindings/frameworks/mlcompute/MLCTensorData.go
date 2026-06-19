@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of the memory that tensor data uses.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlctensordata
 type MLCTensorData struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func MLCTensorDataFromID(id objc.ID) *MLCTensorData {
 	return o
 }
 
-// @abstract   Creates a data object that holds a given number of bytes from a given buffer. @note       The returned object will not take ownership of the \p bytes pointer and thus will not free it on deallocation. @param      bytes   A buffer containing data for the new object. @param      length  The number of bytes to hold from \p bytes. This value must not exceed the length of \p bytes. @return     A new \p MLCTensorData object.
+// Creates a tensor data instance with the buffer of data and length of bytes you specify.
 func MLCTensorDataDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *MLCTensorData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorData), _mLCTensorDataSelDataWithBytesNoCopyLength, bytes_, length)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func MLCTensorDataDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) 
 	return MLCTensorDataFromID(_ret)
 }
 
-// @abstract   Creates a data object that holds a given number of bytes from a given buffer. @note       The returned object will not take ownership of the \p bytes pointer and thus will not free it on deallocation. The underlying bytes in the return object should not be mutated. @param      bytes   A buffer containing data for the new object. @param      length  The number of bytes to hold from \p bytes. This value must not exceed the length of \p bytes. @return     A new \p MLCTensorData object.
+// Creates a tensor data instance with the buffer of immutable data and length of bytes you specify.
 func MLCTensorDataDataWithImmutableBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *MLCTensorData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorData), _mLCTensorDataSelDataWithImmutableBytesNoCopyLength, bytes_, length)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func MLCTensorDataDataWithImmutableBytesNoCopyLength(bytes_ unsafe.Pointer, leng
 	return MLCTensorDataFromID(_ret)
 }
 
-// @absract          Creates a data object that holds a given number of bytes from a given buffer. with a custom deallocator block. @param     bytes   A buffer containing data for the new object. @param     length  The number of bytes to hold from \p bytes. This value must not exceed the length of \p bytes. @param     deallocator A block to invoke when the resulting object is deallocated. @return    A new  \p MLCTensorData object.
+// Creates a tensor data instance with a data buffer, byte length, and custom deallocator closure you specify.
 func MLCTensorDataDataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint, deallocator func(unsafe.Pointer, uint)) *MLCTensorData {
 	var __block_deallocator objc.Block
 	if deallocator != nil {

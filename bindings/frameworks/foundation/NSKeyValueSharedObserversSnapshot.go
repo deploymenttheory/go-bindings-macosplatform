@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of key-value observations which may be registered with multiple observable objects. Create using -[NSKeyValueSharedObservers snapshot]
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nskeyvaluesharedobserverssnapshot
 type NSKeyValueSharedObserversSnapshot struct {
 	NSObject

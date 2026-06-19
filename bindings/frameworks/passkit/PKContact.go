@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates contact information needed for billing and shipping.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkcontact
 type PKContact struct {
 	foundation.NSObject

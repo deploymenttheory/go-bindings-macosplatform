@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel for computing the solution of a linear system of equations using a Cholesky factorization.
+//
 // MatrixSolveCholesky wraps [raw.MPSMatrixSolveCholesky] with a fluent Go API.
 type MatrixSolveCholesky struct {
 	inner *raw.MPSMatrixSolveCholesky
@@ -82,7 +84,7 @@ func (x *MatrixSolveCholesky) WithBatchSize(batchSize uint) *MatrixSolveCholesky
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixSolveCholesky) WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveCholesky {
@@ -90,7 +92,7 @@ func (x *MatrixSolveCholesky) WithOptions(options mpscore.MPSKernelOptions) *Mat
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixSolveCholesky) WithLabel(label string) *MatrixSolveCholesky {

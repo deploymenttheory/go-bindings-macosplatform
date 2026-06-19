@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a Neural Engine compute device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlneuralenginecomputedevice
 type MLNeuralEngineComputeDevice struct {
 	foundation.NSObject

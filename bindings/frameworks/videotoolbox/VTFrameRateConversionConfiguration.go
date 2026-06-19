@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enables the frame rate conversion on a frame processing session.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration
 type VTFrameRateConversionConfiguration struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func VTFrameRateConversionConfigurationFromID(id objc.ID) *VTFrameRateConversion
 	return o
 }
 
-// Creates a new frame-rate conversion configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: A Boolean value that indicates whether you are providing Optical Flow. If false, optical flow is computed on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new frame rate conversion configuration with specified flow width and height.
 func (o *VTFrameRateConversionConfiguration) InitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTFrameRateConversionConfigurationQualityPrioritization, revision VTFrameRateConversionConfigurationRevision) *VTFrameRateConversionConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionConfigurationSelInitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision, frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
 	if _ret != 0 {
@@ -98,20 +100,29 @@ func VTFrameRateConversionConfigurationDefaultRevision() VTFrameRateConversionCo
 
 // Supported pixel formats available for source frames for current configuration.
 func (o *VTFrameRateConversionConfiguration) FrameSupportedPixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTFrameRateConversionConfigurationSelFrameSupportedPixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionConfigurationSelFrameSupportedPixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTFrameRateConversionConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTFrameRateConversionConfigurationSelSourcePixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionConfigurationSelSourcePixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTFrameRateConversionConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTFrameRateConversionConfigurationSelDestinationPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionConfigurationSelDestinationPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Reports whether the system supports this processor.

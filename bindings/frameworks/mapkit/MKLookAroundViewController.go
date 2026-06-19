@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that manages the presentation and display of a LookAround view.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller
 type MKLookAroundViewController struct {
 	appkit.NSViewController
@@ -45,6 +47,7 @@ func MKLookAroundViewControllerFromID(id objc.ID) *MKLookAroundViewController {
 	return o
 }
 
+// Creates a new LookAround view controller with the specified scene.
 func (o *MKLookAroundViewController) InitWithScene(scene *MKLookAroundScene) *MKLookAroundViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithScene, scene.Ptr())
 	if _ret != 0 {
@@ -53,6 +56,7 @@ func (o *MKLookAroundViewController) InitWithScene(scene *MKLookAroundScene) *MK
 	return MKLookAroundViewControllerFromID(_ret)
 }
 
+// Creates a new LookAround view controller from the specified nib and bundle.
 func (o *MKLookAroundViewController) InitWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *MKLookAroundViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
 	if _ret != 0 {
@@ -61,6 +65,7 @@ func (o *MKLookAroundViewController) InitWithNibNameBundle(nibNameOrNil *foundat
 	return MKLookAroundViewControllerFromID(_ret)
 }
 
+// Creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
 func (o *MKLookAroundViewController) InitWithCoder(coder *foundation.NSCoder) *MKLookAroundViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {

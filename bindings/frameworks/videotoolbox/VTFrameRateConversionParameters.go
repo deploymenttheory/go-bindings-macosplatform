@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the required input and output parameters to run a frame rate conversion processor on a frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters
 type VTFrameRateConversionParameters struct {
 	foundation.NSObject
@@ -36,9 +38,9 @@ func VTFrameRateConversionParametersFromID(id objc.ID) *VTFrameRateConversionPar
 	return o
 }
 
-// Creates new frame rate conversion parameters. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, if `sourceFrame` and reference frames don't have the same pixel format, or if `interpolationPhase` array count does not match `destinationFrames` array count. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; must be non `nil`. - opticalFlow: Optional “VTFrameProcessorOpticalFlow“ object that contains forward and backward optical flow with next frame. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - interpolationPhase: Array of float numbers that indicate intervals at which the processor inserts a frame between current and next frame. The array size indicates how many frames to interpolate and this size must match `destinationFrames` size, with one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTFrameRateConversionParametersSubmissionMode“. - destinationFrames: Caller-allocated array of “VTFrameProcessorFrame“ that contains pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase`.
+// Creates a new frame rate conversion parameters object.
 func (o *VTFrameRateConversionParameters) InitWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *VTFrameProcessorFrame, nextFrame *VTFrameProcessorFrame, opticalFlow *VTFrameProcessorOpticalFlow, interpolationPhase *foundation.NSArray[*foundation.NSNumber], submissionMode VTFrameRateConversionParametersSubmissionMode, destinationFrame *foundation.NSArray[*VTFrameProcessorFrame]) *VTFrameRateConversionParameters {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelInitWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames, sourceFrame.Ptr(), nextFrame.Ptr(), opticalFlow.Ptr(), interpolationPhase, submissionMode, destinationFrame.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelInitWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames, sourceFrame.Ptr(), nextFrame.Ptr(), opticalFlow.Ptr(), interpolationPhase.Ptr(), submissionMode, destinationFrame.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -74,8 +76,11 @@ func (o *VTFrameRateConversionParameters) OpticalFlow() *VTFrameProcessorOptical
 
 // Array of float numbers that indicate intervals at which the processor inserts a frame between the current and next frame. Array size indicates how many frames to interpolate and must match `destinationFrames` size, one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5.
 func (o *VTFrameRateConversionParameters) InterpolationPhase() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTFrameRateConversionParametersSelInterpolationPhase)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelInterpolationPhase)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Ordering of the input frames in this submission relative to the previous submission.

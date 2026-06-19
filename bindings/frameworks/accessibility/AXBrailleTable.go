@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A rule for translating print text to Braille, and back-translating Braille to print text.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axbrailletable
 type AXBrailleTable struct {
 	foundation.NSObject
@@ -43,11 +45,14 @@ func AXBrailleTableFromID(id objc.ID) *AXBrailleTable {
 
 // All locales supported by existing tables.
 func AXBrailleTableSupportedLocales() *foundation.NSSet[*foundation.NSLocale] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSLocale]](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelSupportedLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelSupportedLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSLocale](_ret)
 }
 
-// The default table that provides translations for the given locale's language. Returns nil if there is none.
+// The default table that provides translations for the given locale’s language. Returns nil if there is none.
 func AXBrailleTableDefaultTableForLocale(locale *foundation.NSLocale) *AXBrailleTable {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelDefaultTableForLocale, locale.Ptr())
 	if _ret != 0 {
@@ -56,7 +61,7 @@ func AXBrailleTableDefaultTableForLocale(locale *foundation.NSLocale) *AXBraille
 	return AXBrailleTableFromID(_ret)
 }
 
-// All tables that provide translations for the given locale's language.
+// All tables that provide translations for the given locale’s language.
 func AXBrailleTableTablesForLocale(locale *foundation.NSLocale) *foundation.NSSet[*AXBrailleTable] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelTablesForLocale, locale.Ptr())
 	if _ret != 0 {
@@ -130,8 +135,11 @@ func (o *AXBrailleTable) Language() *foundation.NSString {
 
 // All locales this table supports.
 func (o *AXBrailleTable) Locales() *foundation.NSSet[*foundation.NSLocale] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSLocale]](o.Ptr(), _aXBrailleTableSelLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSLocale](_ret)
 }
 
 // Returns true if this table makes use of eight dots as opposed to six dots.

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The decoded representation of a GeoJSON feature.
+//
 // GeoJSONFeature wraps [raw.MKGeoJSONFeature] with a fluent Go API.
 type GeoJSONFeature struct {
 	inner *raw.MKGeoJSONFeature

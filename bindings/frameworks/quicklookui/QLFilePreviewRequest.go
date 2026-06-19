@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Quick Look preview request that indicates the content to preview.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookui/qlfilepreviewrequest
 type QLFilePreviewRequest struct {
 	foundation.NSObject

@@ -130,6 +130,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// A value you use to configure the appearance of previews for PDF files.
 // Deprecated: Use a QLPreviewingController in a Preview Extension to provide previews for your file types.
 type QLPreviewPDFStyle int64
 

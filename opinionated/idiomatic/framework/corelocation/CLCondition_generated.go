@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for all other monitor conditions.
+//
 // Condition wraps [raw.CLCondition] with a fluent Go API.
 type Condition struct {
 	inner *raw.CLCondition

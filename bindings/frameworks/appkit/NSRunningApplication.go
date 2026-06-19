@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can manipulate and provide information for a single instance of an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsrunningapplication
 type NSRunningApplication struct {
 	foundation.NSObject
@@ -53,43 +55,43 @@ func NSRunningApplicationFromID(id objc.ID) *NSRunningApplication {
 	return o
 }
 
-// Attempts to hide the receiver. @return `YES` if the request to hide or unhide was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be unhidden).
+// Attempts to hide or the application.
 func (o *NSRunningApplication) Hide() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRunningApplicationSelHide)
 	return _ret
 }
 
-// Attempts to unhide the receiver. @return `YES` if the request to hide or unhide was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be unhidden).
+// Attempts to unhide or the application.
 func (o *NSRunningApplication) Unhide() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRunningApplicationSelUnhide)
 	return _ret
 }
 
-// Attempts to activate the application using the specified options. You shouldn’t assume the app will be active immediately after sending this message. The framework also does not guarantee that the app will be activated at all. Additionally allows specifying another application to take the active status from, which can be used for coordinated or cooperative activation. The other application should call `-yieldActivationToApplication:` or equivalent prior to this request being sent. @return `YES` if the request has been allowed by the system, otherwise `NO`.
+// Attempts to activate the application using the specified options.
 func (o *NSRunningApplication) ActivateFromApplicationOptions(application *NSRunningApplication, options NSApplicationActivationOptions) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRunningApplicationSelActivateFromApplicationOptions, application.Ptr(), options)
 	return _ret
 }
 
-// Attempts to activate the receiver. @return `YES` if the request to activate was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be activated).
+// Attempts to activate the application using the specified options.
 func (o *NSRunningApplication) ActivateWithOptions(options NSApplicationActivationOptions) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRunningApplicationSelActivateWithOptions, options)
 	return _ret
 }
 
-// Attempts to quit the receiver normally. @return `YES` if the request was successfully sent, `NO` if not (for example, if the application is no longer running). This method may return before the receiver exits; you should observe the terminated property or listen for the notification to detect when the app has exited.
+// Attempts to quit the receiver normally.
 func (o *NSRunningApplication) Terminate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRunningApplicationSelTerminate)
 	return _ret
 }
 
-// Attempts to force the receiver to quit. @return `YES` if the request was successfully sent, `NO` if not (for example, if the application is no longer running). This method may return before the receiver exits; you should observe the terminated property or listen for the notification to detect when the app has exited.
+// Attempts to force the receiver to quit.
 func (o *NSRunningApplication) ForceTerminate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRunningApplicationSelForceTerminate)
 	return _ret
 }
 
-// @return An array of currently running applications with the given bundle identifier, or an empty array if no apps match.
+// Returns an array of currently running applications with the specified bundle identifier.
 func NSRunningApplicationRunningApplicationsWithBundleIdentifier(bundleIdentifier *foundation.NSString) *foundation.NSArray[*NSRunningApplication] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunningApplication), _nSRunningApplicationSelRunningApplicationsWithBundleIdentifier, bundleIdentifier.Ptr())
 	if _ret != 0 {
@@ -98,7 +100,7 @@ func NSRunningApplicationRunningApplicationsWithBundleIdentifier(bundleIdentifie
 	return foundation.NSArrayFromID[*NSRunningApplication](_ret)
 }
 
-// @return The running application with the given process identifier, or nil if no application has that pid. Applications that do not have PIDs cannot be returned from this method.
+// Returns the running application with the given process identifier, or nil if no application has that pid.
 func NSRunningApplicationRunningApplicationWithProcessIdentifier(pid int) *NSRunningApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunningApplication), _nSRunningApplicationSelRunningApplicationWithProcessIdentifier, pid)
 	if _ret != 0 {
@@ -107,7 +109,7 @@ func NSRunningApplicationRunningApplicationWithProcessIdentifier(pid int) *NSRun
 	return NSRunningApplicationFromID(_ret)
 }
 
-// Cause any applications that are invisibly still running (see `NSProcessInfo.h` automatic termination methods and docs) to terminate as if triggered by system memory pressure. This is intended for installer apps and the like to make sure that nothing is unexpectedly relying on the files they're replacing.
+// Terminates invisibly running applications as if triggered by system memory pressure.
 func NSRunningApplicationTerminateAutomaticallyTerminableApplications() {
 	objc.ID(_clsNSRunningApplication).Send(_nSRunningApplicationSelTerminateAutomaticallyTerminableApplications)
 }

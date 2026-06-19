@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A request to insert a batch of data in a persistent store.
+//
 // BatchInsertRequest wraps [raw.NSBatchInsertRequest] with a fluent Go API.
 type BatchInsertRequest struct {
 	inner *raw.NSBatchInsertRequest
@@ -38,6 +40,8 @@ func NewBatchInsertRequest() *BatchInsertRequest {
 	return &BatchInsertRequest{inner: raw.NSBatchInsertRequestFromID(_id)}
 }
 
+// Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
+//
 // NewBatchInsertRequestWithEntityNameObjects creates a new [BatchInsertRequest].
 func NewBatchInsertRequestWithEntityNameObjects(entityName string, dictionaries *foundation.NSArray[objc.ID]) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchInsertRequest")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewBatchInsertRequestWithEntityNameObjects(entityName string, dictionaries 
 	return &BatchInsertRequest{inner: raw.NSBatchInsertRequestFromID(_id)}
 }
 
+// Creates a batch-insertion request for a managed entity, and provides an array of data dictionaries for insertion.
+//
 // NewBatchInsertRequestWithEntityObjects creates a new [BatchInsertRequest].
 func NewBatchInsertRequestWithEntityObjects(entity *raw.NSEntityDescription, dictionaries *foundation.NSArray[objc.ID]) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchInsertRequest")), objc.RegisterName("alloc"))
@@ -52,13 +58,17 @@ func NewBatchInsertRequestWithEntityObjects(entity *raw.NSEntityDescription, dic
 	return &BatchInsertRequest{inner: raw.NSBatchInsertRequestFromID(_id)}
 }
 
+// Creates a batch-insertion request for a managed entity, and specifies a closure that provides data dictionaries for insertion.
+//
 // NewBatchInsertRequestWithEntityDictionaryHandler creates a new [BatchInsertRequest].
-func NewBatchInsertRequestWithEntityDictionaryHandler(entity *raw.NSEntityDescription, handler objc.Block) *BatchInsertRequest {
+func NewBatchInsertRequestWithEntityDictionaryHandler(entity *raw.NSEntityDescription, handler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:dictionaryHandler:"), entity.Ptr(), handler)
 	return &BatchInsertRequest{inner: raw.NSBatchInsertRequestFromID(_id)}
 }
 
+// Creates a batch-insertion request for a managed entity, and specifies a closure that inserts data into the entity.
+//
 // NewBatchInsertRequestWithEntityManagedObjectHandler creates a new [BatchInsertRequest].
 func NewBatchInsertRequestWithEntityManagedObjectHandler(entity *raw.NSEntityDescription, handler func(*raw.NSManagedObject) bool) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchInsertRequest")), objc.RegisterName("alloc"))
@@ -67,7 +77,7 @@ func NewBatchInsertRequestWithEntityManagedObjectHandler(entity *raw.NSEntityDes
 }
 
 // NewBatchInsertRequestWithEntityNameDictionaryHandler creates a new [BatchInsertRequest].
-func NewBatchInsertRequestWithEntityNameDictionaryHandler(entityName string, handler objc.Block) *BatchInsertRequest {
+func NewBatchInsertRequestWithEntityNameDictionaryHandler(entityName string, handler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityName:dictionaryHandler:"), foundation.NSStringStringWithUTF8String(entityName).Ptr(), handler)
 	return &BatchInsertRequest{inner: raw.NSBatchInsertRequestFromID(_id)}
@@ -80,6 +90,8 @@ func NewBatchInsertRequestWithEntityNameManagedObjectHandler(entityName string, 
 	return &BatchInsertRequest{inner: raw.NSBatchInsertRequestFromID(_id)}
 }
 
+// An array of dictionaries that represents the objects to insert with the keys as attribute names and their assigned values.
+//
 // WithObjectsToInsert sets the collection, converting the Go slice to an NSArray.
 func (x *BatchInsertRequest) WithObjectsToInsert(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *BatchInsertRequest {
 	if len(items) == 0 {
@@ -101,24 +113,32 @@ func (x *BatchInsertRequest) WithObjectsToInsert(items ...*foundation.NSDictiona
 	return x
 }
 
+// A closure that provides a dictionary for your app to insert data into.
+//
 // WithDictionaryHandler sets the dictionaryHandler property and returns the receiver for chaining.
-func (x *BatchInsertRequest) WithDictionaryHandler(dictionaryHandler objc.Block) *BatchInsertRequest {
+func (x *BatchInsertRequest) WithDictionaryHandler(dictionaryHandler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *BatchInsertRequest {
 	x.inner.SetDictionaryHandler(dictionaryHandler)
 	return x
 }
 
+// A closure that provides a managed object for your app to insert data into.
+//
 // WithManagedObjectHandler sets the managedObjectHandler property and returns the receiver for chaining.
 func (x *BatchInsertRequest) WithManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool) *BatchInsertRequest {
 	x.inner.SetManagedObjectHandler(managedObjectHandler)
 	return x
 }
 
+// The type of result that Core Data returns from this request.
+//
 // WithResultType sets the resultType property and returns the receiver for chaining.
 func (x *BatchInsertRequest) WithResultType(resultType NSBatchInsertRequestResultType) *BatchInsertRequest {
 	x.inner.SetResultType(raw.NSBatchInsertRequestResultType(resultType))
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest {
 	if len(items) == 0 {
@@ -174,7 +194,7 @@ func (x *BatchInsertRequest) DictionaryHandler() objc.Block {
 }
 
 // SetDictionaryHandler calls the underlying SetDictionaryHandler.
-func (x *BatchInsertRequest) SetDictionaryHandler(dictionaryHandler objc.Block) {
+func (x *BatchInsertRequest) SetDictionaryHandler(dictionaryHandler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) {
 	x.inner.SetDictionaryHandler(dictionaryHandler)
 }
 
@@ -206,7 +226,7 @@ func (x *BatchInsertRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRe
 type BatchInsertRequestable interface {
 	Unwrap() *raw.NSBatchInsertRequest
 	WithObjectsToInsert(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *BatchInsertRequest
-	WithDictionaryHandler(dictionaryHandler objc.Block) *BatchInsertRequest
+	WithDictionaryHandler(dictionaryHandler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *BatchInsertRequest
 	WithManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool) *BatchInsertRequest
 	WithResultType(resultType NSBatchInsertRequestResultType) *BatchInsertRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest
@@ -215,7 +235,7 @@ type BatchInsertRequestable interface {
 	ObjectsToInsert() *foundation.NSArray[objc.ID]
 	SetObjectsToInsert(objectsToInsert *foundation.NSArray[objc.ID])
 	DictionaryHandler() objc.Block
-	SetDictionaryHandler(dictionaryHandler objc.Block)
+	SetDictionaryHandler(dictionaryHandler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool)
 	ManagedObjectHandler() objc.Block
 	SetManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool)
 	ResultType() NSBatchInsertRequestResultType

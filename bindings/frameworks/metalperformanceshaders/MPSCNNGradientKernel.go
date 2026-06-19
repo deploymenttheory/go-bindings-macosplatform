@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for gradient layers.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnngradientkernel
 type MPSCNNGradientKernel struct {
 	mpsneuralnetwork.MPSCNNBinaryKernel

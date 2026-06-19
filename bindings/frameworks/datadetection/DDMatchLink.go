@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that contains a web link that the data detection system matches. The DataDetection framework returns a link match in a `DDMatchLink` object, which contains a <doc://com.apple.documentation/documentation/foundation/url> (Swift) or <doc://com.apple.documentation/documentation/foundation/nsurl> (Objective-C).
+// An object that contains a web link that the data detection system matches.
 //
 // Apple documentation: https://developer.apple.com/documentation/datadetection/ddmatchlink
 type DDMatchLink struct {

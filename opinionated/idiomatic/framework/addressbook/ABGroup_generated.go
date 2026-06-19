@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a group of records in the Address Book database.
+//
 // Group wraps [raw.ABGroup] with a fluent Go API.
 type Group struct {
 	inner *raw.ABGroup
@@ -37,46 +39,64 @@ func NewGroup() *Group {
 	return &Group{inner: raw.ABGroupFromID(_id)}
 }
 
+// Returns an array of persons in a group.
+//
 // Members calls the underlying Members.
 func (x *Group) Members() *foundation.NSArray[objc.ID] {
 	return x.inner.Members()
 }
 
+// Adds a person to a group.
+//
 // AddMember calls the underlying AddMember.
 func (x *Group) AddMember(person *raw.ABPerson) bool {
 	return x.inner.AddMember(person)
 }
 
+// Removes a person from a group.
+//
 // RemoveMember calls the underlying RemoveMember.
 func (x *Group) RemoveMember(person *raw.ABPerson) bool {
 	return x.inner.RemoveMember(person)
 }
 
+// Returns an array containing a group’s subgroups.
+//
 // Subgroups calls the underlying Subgroups.
 func (x *Group) Subgroups() *foundation.NSArray[objc.ID] {
 	return x.inner.Subgroups()
 }
 
+// Adds a subgroup to another group.
+//
 // AddSubgroup calls the underlying AddSubgroup.
 func (x *Group) AddSubgroup(group *raw.ABGroup) bool {
 	return x.inner.AddSubgroup(group)
 }
 
+// Removes a subgroup from a group.
+//
 // RemoveSubgroup calls the underlying RemoveSubgroup.
 func (x *Group) RemoveSubgroup(group *raw.ABGroup) bool {
 	return x.inner.RemoveSubgroup(group)
 }
 
+// Returns an array containing a group’s parents—that is, the groups that a group belongs to.
+//
 // ParentGroups calls the underlying ParentGroups.
 func (x *Group) ParentGroups() *foundation.NSArray[objc.ID] {
 	return x.inner.ParentGroups()
 }
 
+// Assigns a specific distribution identifier for a person’s multivalue list property so that the group can be used as a distribution list.
+//
 // SetDistributionIdentifierForPropertyPerson calls the underlying SetDistributionIdentifierForPropertyPerson.
 func (x *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *raw.ABPerson) bool {
 	return x.inner.SetDistributionIdentifierForPropertyPerson(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(property), person)
 }
 
+// Returns the distribution identifier for the given property and person.
+//
 // DistributionIdentifierForPropertyPerson calls the underlying DistributionIdentifierForPropertyPerson.
 func (x *Group) DistributionIdentifierForPropertyPerson(property string, person *raw.ABPerson) string {
 	_r := x.inner.DistributionIdentifierForPropertyPerson(foundation.NSStringStringWithUTF8String(property), person)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a parameter of an intent object.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inintentresolutionresult
 type INIntentResolutionResult struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func INIntentResolutionResultFromID(id objc.ID) *INIntentResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution indicates that a required parameter value is missing.
 func INIntentResolutionResultNeedsValue() *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelNeedsValue)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func INIntentResolutionResultNeedsValue() *INIntentResolutionResult {
 	return INIntentResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution indicates that you don’t need the value of the parameter.
 func INIntentResolutionResultNotRequired() *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelNotRequired)
 	if _ret != 0 {
@@ -50,6 +54,7 @@ func INIntentResolutionResultNotRequired() *INIntentResolutionResult {
 	return INIntentResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution indicates that your app doesn’t support the specified value.
 func INIntentResolutionResultUnsupported() *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelUnsupported)
 	if _ret != 0 {
@@ -58,6 +63,7 @@ func INIntentResolutionResultUnsupported() *INIntentResolutionResult {
 	return INIntentResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution indicates that your app doesn’t support the specified value.
 func INIntentResolutionResultUnsupportedWithReason(reason int) *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelUnsupportedWithReason, reason)
 	if _ret != 0 {
@@ -66,6 +72,7 @@ func INIntentResolutionResultUnsupportedWithReason(reason int) *INIntentResoluti
 	return INIntentResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution indicates that your app requires confirmation of the specified value.
 func INIntentResolutionResultConfirmationRequiredWithItemToConfirmForReason(itemToConfirm objc.ID, reason int) *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelConfirmationRequiredWithItemToConfirmForReason, itemToConfirm, reason)
 	if _ret != 0 {

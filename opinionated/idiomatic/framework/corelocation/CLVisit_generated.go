@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Information about the user’s location during a specific period of time.
+//
 // Visit wraps [raw.CLVisit] with a fluent Go API.
 type Visit struct {
 	inner *raw.CLVisit

@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A component system is a homogeneous collection of components that are intended to be called at the same time. The system is homogeneous, meaning it only allows members of the same class into the system.
+// Manages periodic update messages for all component objects of a specified class.
 //
 // ComponentSystem wraps [raw.GKComponentSystem] with a fluent Go API.
 type ComponentSystem struct {
@@ -32,7 +32,7 @@ func ComponentSystemFromID(id objc.ID) *ComponentSystem {
 	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](id)}
 }
 
-// Initializes a system for the given component class. The receiver can now only accept components of the given class.
+// Initializes a component system to manage components of the specified class.
 //
 // NewComponentSystemWithComponentClass creates a new [ComponentSystem].
 func NewComponentSystemWithComponentClass(cls objc.Class) *ComponentSystem {
@@ -41,42 +41,42 @@ func NewComponentSystemWithComponentClass(cls objc.Class) *ComponentSystem {
 	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](_id)}
 }
 
-// Supports getting components via a [] subscript.
+// Returns the component at the specified index in the system’s list of components.
 //
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *ComponentSystem) ObjectAtIndexedSubscript(idx uint) objc.ID {
 	return x.inner.ObjectAtIndexedSubscript(idx)
 }
 
-// Adds a component to the system. The component must be of the same class as the system's componentClass. The component is added to the tail of the collection and will be processed after components that were added before it. @throws NSInvalidArgumentException if the component added is not a kind of the system's componentClass.
+// Adds a component instance to the component system.
 //
 // AddComponent calls the underlying AddComponent.
 func (x *ComponentSystem) AddComponent(component objc.ID) {
 	x.inner.AddComponent(component)
 }
 
-// Adds the supported component from the entity's component collection. This is conceptually the same as the pseudo-code: for (GKComponent *component in entity.components) if (component.class == system.componentClass) [system addComponent:component] @see GKEntity.components
+// Adds any instances of the component system’s component class in the specified entity to the component system.
 //
 // AddComponentWithEntity calls the underlying AddComponentWithEntity.
 func (x *ComponentSystem) AddComponentWithEntity(entity *raw.GKEntity) {
 	x.inner.AddComponentWithEntity(entity)
 }
 
-// Removes the supported component from the entity's component collection This is conceptually the same as the pseudo-code: for (GKComponent *component in entity.components) if (component.class == system.componentClass) [system removeComponent:component]
+// Removes any instances of the component system’s component class in the specified entity from the component system.
 //
 // RemoveComponentWithEntity calls the underlying RemoveComponentWithEntity.
 func (x *ComponentSystem) RemoveComponentWithEntity(entity *raw.GKEntity) {
 	x.inner.RemoveComponentWithEntity(entity)
 }
 
-// Removes a component from the system Does nothing if the component is not in this system
+// Removes the specified component instance from the component system.
 //
 // RemoveComponent calls the underlying RemoveComponent.
 func (x *ComponentSystem) RemoveComponent(component objc.ID) {
 	x.inner.RemoveComponent(component)
 }
 
-// Updates each component with the given delta time since the last update. Each component thus performs its time based logic with a single message.
+// Tells all component instances managed by the system to perform their custom periodic actions.
 //
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *ComponentSystem) UpdateWithDeltaTime(seconds float64) {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data set that projects sound of a certain frequency outward in the shape of a heart.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelsubbandparameters
 type PHASECardioidDirectivityModelSubbandParameters struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func PHASECardioidDirectivityModelSubbandParametersFromID(id objc.ID) *PHASECard
 	return o
 }
 
+// Creates a data set that projects sound of a certain frequency outward in the shape of a heart.
 func (o *PHASECardioidDirectivityModelSubbandParameters) Init() *PHASECardioidDirectivityModelSubbandParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASECardioidDirectivityModelSubbandParametersSelInit)
 	if _ret != 0 {

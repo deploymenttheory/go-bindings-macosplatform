@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The representation of a compute data type.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphtensordata
 type MPSGraphTensorData struct {
 	MPSGraphObject
@@ -47,6 +49,7 @@ func MPSGraphTensorDataFromID(id objc.ID) *MPSGraphTensorData {
 	return o
 }
 
+// Initializes the tensor data with an NSData on a device.
 func (o *MPSGraphTensorData) InitWithDeviceDataShapeDataType(device *MPSGraphDevice, data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithDeviceDataShapeDataType, device.Ptr(), data.Ptr(), shape, dataType)
 	if _ret != 0 {
@@ -55,7 +58,7 @@ func (o *MPSGraphTensorData) InitWithDeviceDataShapeDataType(device *MPSGraphDev
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes an tensor data with a metal buffer. The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - buffer: MTLBuffer to be used within the MPSGraphTensorData - shape: shape of the output tensor - dataType: dataType of the placeholder tensor - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes an tensor data with a metal buffer.
 func (o *MPSGraphTensorData) InitWithMTLBufferShapeDataType(buffer metal.MTLBuffer, shape unsafe.Pointer, dataType mpscore.MPSDataType) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMTLBufferShapeDataType, buffer, shape, dataType)
 	if _ret != 0 {
@@ -64,7 +67,7 @@ func (o *MPSGraphTensorData) InitWithMTLBufferShapeDataType(buffer metal.MTLBuff
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes an tensor data with a metal buffer. The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - buffer: MTLBuffer to be used within the MPSGraphTensorData - shape: shape of the output tensor - dataType: dataType of the placeholder tensor - rowBytes: rowBytes for the fastest moving dimension, must be larger than or equal to sizeOf(dataType)shape[rank - 1] and must be a multiple of sizeOf(dataType) - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes an tensor data with a metal buffer.
 func (o *MPSGraphTensorData) InitWithMTLBufferShapeDataTypeRowBytes(buffer metal.MTLBuffer, shape unsafe.Pointer, dataType mpscore.MPSDataType, rowBytes uint) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMTLBufferShapeDataTypeRowBytes, buffer, shape, dataType, rowBytes)
 	if _ret != 0 {
@@ -73,7 +76,7 @@ func (o *MPSGraphTensorData) InitWithMTLBufferShapeDataTypeRowBytes(buffer metal
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes a tensor data with an MPS matrix. The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - matrix: MPSMatrix to be used within the MPSGraphTensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes a tensor data with an MPS matrix.
 func (o *MPSGraphTensorData) InitWithMPSMatrix(matrix *mpscore.MPSMatrix) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMPSMatrix, matrix.Ptr())
 	if _ret != 0 {
@@ -82,7 +85,7 @@ func (o *MPSGraphTensorData) InitWithMPSMatrix(matrix *mpscore.MPSMatrix) *MPSGr
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes a tensor data with an MPS matrix enforcing rank of the result. The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - matrix: MPSMatrix to be used within the MPSGraphTensorData - rank: The rank of the resulting TensorData tensor. NOTE: must be within { 1, ... ,16 }. - Returns: A valid MPSGraphTensorData of given rank, or nil if allocation failure.
+// Initializes a tensor data with an MPS matrix enforcing rank of the result.
 func (o *MPSGraphTensorData) InitWithMPSMatrixRank(matrix *mpscore.MPSMatrix, rank uint) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMPSMatrixRank, matrix.Ptr(), rank)
 	if _ret != 0 {
@@ -91,7 +94,7 @@ func (o *MPSGraphTensorData) InitWithMPSMatrixRank(matrix *mpscore.MPSMatrix, ra
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes a tensor data with an MPS vector. The device of the MPSVector will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - vector: MPSVector to be used within the MPSGraphTensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes a tensor data with an MPS vector.
 func (o *MPSGraphTensorData) InitWithMPSVector(vector *mpscore.MPSVector) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMPSVector, vector.Ptr())
 	if _ret != 0 {
@@ -100,7 +103,7 @@ func (o *MPSGraphTensorData) InitWithMPSVector(vector *mpscore.MPSVector) *MPSGr
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes a tensor data with an MPS vector enforcing rank of the result. The device of the MPSVector will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - vector: MPSVector to be used within the MPSGraphTensorData - rank: The rank of the resulting TensorData tensor. NOTE: must be within { 1, ... ,16 }. - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes a tensor data with an MPS vector enforcing rank of the result.
 func (o *MPSGraphTensorData) InitWithMPSVectorRank(vector *mpscore.MPSVector, rank uint) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMPSVectorRank, vector.Ptr(), rank)
 	if _ret != 0 {
@@ -109,7 +112,7 @@ func (o *MPSGraphTensorData) InitWithMPSVectorRank(vector *mpscore.MPSVector, ra
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes an MPSGraphTensorData with an MPS ndarray. The device of the MPSNDArray will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - ndarray: MPSNDArray to be used within the MPSGraphTensorData. - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes an MPSGraphTensorData with an MPS ndarray.
 func (o *MPSGraphTensorData) InitWithMPSNDArray(ndarray *mpscore.MPSNDArray) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMPSNDArray, ndarray.Ptr())
 	if _ret != 0 {
@@ -118,7 +121,7 @@ func (o *MPSGraphTensorData) InitWithMPSNDArray(ndarray *mpscore.MPSNDArray) *MP
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes a tensor data with an MPS image batch. The dataLayout used will be NHWC, call a transpose or permute to change to a layout of your choice. - Parameters: - imageBatch: The device on which the kernel will run, unorm8 and unorm16 images will create a float32 tensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes a tensor data with an MPS image batch.
 func (o *MPSGraphTensorData) InitWithMPSImageBatch(imageBatch unsafe.Pointer) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMPSImageBatch, imageBatch)
 	if _ret != 0 {
@@ -127,7 +130,7 @@ func (o *MPSGraphTensorData) InitWithMPSImageBatch(imageBatch unsafe.Pointer) *M
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Initializes an MPSGraphTensorData with an MTLTensor. The internal storage of the MTLTensor will be aliased. Requires tensor to support MTLTensorUsageMachineLearning. - Parameters: - tensor: MTLTensor to be used within the MPSGraphTensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+// Initializes an MPSGraphTensorData with an MTLTensor.
 func (o *MPSGraphTensorData) InitWithMTLTensor(tensor metal.MTLTensor) *MPSGraphTensorData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelInitWithMTLTensor, tensor)
 	if _ret != 0 {
@@ -136,7 +139,7 @@ func (o *MPSGraphTensorData) InitWithMTLTensor(tensor metal.MTLTensor) *MPSGraph
 	return MPSGraphTensorDataFromID(_ret)
 }
 
-// Return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray. - Returns: A valid MPSNDArray, or nil if allocation fails.
+// Return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
 func (o *MPSGraphTensorData) Mpsndarray() *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphTensorDataSelMpsndarray)
 	if _ret != 0 {

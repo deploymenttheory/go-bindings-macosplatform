@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A function that defines the pacing of an animation as a timing curve.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/camediatimingfunction
 type CAMediaTimingFunction struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func CAMediaTimingFunctionFromID(id objc.ID) *CAMediaTimingFunction {
 	return o
 }
 
+// Creates and returns a new instance of CAMediaTimingFunction configured with the predefined timing function specified by name.
 func CAMediaTimingFunctionFunctionWithName(name *foundation.NSString) *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAMediaTimingFunction), _cAMediaTimingFunctionSelFunctionWithName, name.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func CAMediaTimingFunctionFunctionWithName(name *foundation.NSString) *CAMediaTi
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
+// Creates and returns a new instance of CAMediaTimingFunction timing function modeled as a cubic Bézier curve using the specified control points.
 func CAMediaTimingFunctionFunctionWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAMediaTimingFunction), _cAMediaTimingFunctionSelFunctionWithControlPoints, c1x, c1y, c2x, c2y)
 	if _ret != 0 {
@@ -49,6 +53,7 @@ func CAMediaTimingFunctionFunctionWithControlPoints(c1x float32, c1y float32, c2
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
+// Returns an initialized timing function modeled as a cubic Bézier curve using the specified control points.
 func (o *CAMediaTimingFunction) InitWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAMediaTimingFunctionSelInitWithControlPoints, c1x, c1y, c2x, c2y)
 	if _ret != 0 {
@@ -57,6 +62,7 @@ func (o *CAMediaTimingFunction) InitWithControlPoints(c1x float32, c1y float32, 
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
+// Returns the control point for the specified index.
 func (o *CAMediaTimingFunction) GetControlPointAtIndexValues(idx uint, ptr *float32) {
 	o.Ptr().Send(_cAMediaTimingFunctionSelGetControlPointAtIndexValues, idx, ptr)
 }

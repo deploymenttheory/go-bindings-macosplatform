@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.
+//
 // ReceiptRefreshRequest wraps [raw.SKReceiptRefreshRequest] with a fluent Go API.
 type ReceiptRefreshRequest struct {
 	inner *raw.SKReceiptRefreshRequest
@@ -31,6 +33,8 @@ func ReceiptRefreshRequestFromID(id objc.ID) *ReceiptRefreshRequest {
 	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(id)}
 }
 
+// Creates a receipt refresh request with optional properties.
+//
 // NewReceiptRefreshRequestWithReceiptProperties creates a new [ReceiptRefreshRequest].
 func NewReceiptRefreshRequestWithReceiptProperties(properties purego.IDer) *ReceiptRefreshRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReceiptRefreshRequest")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewReceiptRefreshRequestWithReceiptProperties(properties purego.IDer) *Rece
 	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(_id)}
 }
 
+// The delegate of the request object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ReceiptRefreshRequest) WithDelegate(delegate raw.SKRequestDelegate) *ReceiptRefreshRequest {
 	x.inner.SKRequest.SetDelegate(delegate)

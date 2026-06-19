@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The properties of a transit pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pktransitpassproperties
 type PKTransitPassProperties struct {
 	PKStoredValuePassProperties

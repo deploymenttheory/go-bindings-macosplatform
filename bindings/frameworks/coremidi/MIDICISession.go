@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI-CI session.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midicisession
 type MIDICISession struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func MIDICISessionFromID(id objc.ID) *MIDICISession {
 	return o
 }
 
+// Creates a MIDI-CI session.
 func (o *MIDICISession) InitWithDiscoveredNodeDataReadyHandlerDisconnectHandler(discoveredNode *MIDICIDiscoveredNode, handler func(), disconnectHandler func(*MIDICISession, unsafe.Pointer)) *MIDICISession {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -71,6 +74,7 @@ func (o *MIDICISession) InitWithDiscoveredNodeDataReadyHandlerDisconnectHandler(
 	return MIDICISessionFromID(_ret)
 }
 
+// Returns the profile state for the specified MIDI channel number.
 func (o *MIDICISession) ProfileStateForChannel(channel uint8) *MIDICIProfileState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICISessionSelProfileStateForChannel, channel)
 	if _ret != 0 {
@@ -79,6 +83,7 @@ func (o *MIDICISession) ProfileStateForChannel(channel uint8) *MIDICIProfileStat
 	return MIDICIProfileStateFromID(_ret)
 }
 
+// Performs an asynchronous request to enable a profile for a specific MIDI channel number.
 func (o *MIDICISession) EnableProfileOnChannelError(profile *MIDICIProfile, channel uint8) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mIDICISessionSelEnableProfileOnChannelError, profile.Ptr(), channel, unsafe.Pointer(&_nsErr))
@@ -88,6 +93,7 @@ func (o *MIDICISession) EnableProfileOnChannelError(profile *MIDICIProfile, chan
 	return _ret, nil
 }
 
+// Performs an asynchronous request to disable a profile for a specific MIDI channel number.
 func (o *MIDICISession) DisableProfileOnChannelError(profile *MIDICIProfile, channel uint8) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mIDICISessionSelDisableProfileOnChannelError, profile.Ptr(), channel, unsafe.Pointer(&_nsErr))
@@ -97,6 +103,7 @@ func (o *MIDICISession) DisableProfileOnChannelError(profile *MIDICIProfile, cha
 	return _ret, nil
 }
 
+// Sends profile-specific data to the MIDI-CI session.
 func (o *MIDICISession) SendProfileOnChannelProfileData(profile *MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDICISessionSelSendProfileOnChannelProfileData, profile.Ptr(), channel, profileSpecificData.Ptr())
 	return _ret

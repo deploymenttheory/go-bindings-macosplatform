@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolbounceeffect
 type NSSymbolBounceEffect struct {
 	NSSymbolEffect
@@ -33,7 +35,7 @@ func NSSymbolBounceEffectFromID(id objc.ID) *NSSymbolBounceEffect {
 	return o
 }
 
-// The default bounce effect, determined by the system.
+// An animation that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
 func NSSymbolBounceEffectEffect() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBounceEffect), _nSSymbolBounceEffectSelEffect)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func NSSymbolBounceEffectEffect() *NSSymbolBounceEffect {
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
-// Convenience initializer for a bounce effect that bounces up.
+// An effect that bounces the symbol upward.
 func NSSymbolBounceEffectBounceUpEffect() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBounceEffect), _nSSymbolBounceEffectSelBounceUpEffect)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func NSSymbolBounceEffectBounceUpEffect() *NSSymbolBounceEffect {
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
-// Convenience initializer for a bounce effect that bounces down.
+// An effect that bounces the symbol downward.
 func NSSymbolBounceEffectBounceDownEffect() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolBounceEffect), _nSSymbolBounceEffectSelBounceDownEffect)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func NSSymbolBounceEffectBounceDownEffect() *NSSymbolBounceEffect {
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that bounces each layer separately.
 func (o *NSSymbolBounceEffect) EffectWithByLayer() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolBounceEffectSelEffectWithByLayer)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *NSSymbolBounceEffect) EffectWithByLayer() *NSSymbolBounceEffect {
 	return NSSymbolBounceEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that bounces all layers simultaneously.
 func (o *NSSymbolBounceEffect) EffectWithWholeSymbol() *NSSymbolBounceEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolBounceEffectSelEffectWithWholeSymbol)
 	if _ret != 0 {

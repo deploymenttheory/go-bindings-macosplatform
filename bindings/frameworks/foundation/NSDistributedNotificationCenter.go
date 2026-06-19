@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdistributednotificationcenter
 type NSDistributedNotificationCenter struct {
 	NSNotificationCenter
@@ -56,11 +58,11 @@ func (o *NSDistributedNotificationCenter) AddObserverSelectorNameObjectSuspensio
 }
 
 func (o *NSDistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *NSString, object *NSString, userInfo *NSDictionary[objc.ID, objc.ID], deliverImmediately bool) {
-	o.Ptr().Send(_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoDeliverImmediately, name.Ptr(), object.Ptr(), userInfo, deliverImmediately)
+	o.Ptr().Send(_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoDeliverImmediately, name.Ptr(), object.Ptr(), userInfo.Ptr(), deliverImmediately)
 }
 
 func (o *NSDistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *NSString, object *NSString, userInfo *NSDictionary[objc.ID, objc.ID], options NSDistributedNotificationOptions) {
-	o.Ptr().Send(_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoOptions, name.Ptr(), object.Ptr(), userInfo, options)
+	o.Ptr().Send(_nSDistributedNotificationCenterSelPostNotificationNameObjectUserInfoOptions, name.Ptr(), object.Ptr(), userInfo.Ptr(), options)
 }
 
 func (o *NSDistributedNotificationCenter) Suspended() bool {

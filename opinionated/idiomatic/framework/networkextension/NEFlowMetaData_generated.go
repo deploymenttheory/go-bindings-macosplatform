@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Additional information about data flowing through a per-app VPN provider.
+//
 // NEFlowMetaData wraps [raw.NEFlowMetaData] with a fluent Go API.
 type NEFlowMetaData struct {
 	inner *raw.NEFlowMetaData

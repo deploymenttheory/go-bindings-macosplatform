@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about fetched database changes.
+//
 // SyncEngineFetchedDatabaseChangesEvent wraps [raw.CKSyncEngineFetchedDatabaseChangesEvent] with a fluent Go API.
 type SyncEngineFetchedDatabaseChangesEvent struct {
 	inner *raw.CKSyncEngineFetchedDatabaseChangesEvent

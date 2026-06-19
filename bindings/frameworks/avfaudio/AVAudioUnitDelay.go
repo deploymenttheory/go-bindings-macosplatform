@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements a delay effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitdelay
 type AVAudioUnitDelay struct {
 	AVAudioUnitEffect

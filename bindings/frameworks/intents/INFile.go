@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/infile
 type INFile struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func INFileFromID(id objc.ID) *INFile {
 	return o
 }
 
+// Creates a new file object with the specified data and identifier.
 func INFileFileWithDataFilenameTypeIdentifier(data *foundation.NSData, filename *foundation.NSString, typeIdentifier *foundation.NSString) *INFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFile), _iNFileSelFileWithDataFilenameTypeIdentifier, data.Ptr(), filename.Ptr(), typeIdentifier.Ptr())
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func INFileFileWithDataFilenameTypeIdentifier(data *foundation.NSData, filename 
 	return INFileFromID(_ret)
 }
 
+// Creates a new file object with the specified URL and identifier.
 func INFileFileWithFileURLFilenameTypeIdentifier(fileURL *foundation.NSURL, filename *foundation.NSString, typeIdentifier *foundation.NSString) *INFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFile), _iNFileSelFileWithFileURLFilenameTypeIdentifier, fileURL.Ptr(), filename.Ptr(), typeIdentifier.Ptr())
 	if _ret != 0 {

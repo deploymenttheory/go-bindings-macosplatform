@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a player’s score on a leaderboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkleaderboardscore
 type GKLeaderboardScore struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A PDFOutline object is an element in a tree-structured hierarchy that can represent the structure of a PDF document.
+//
 // Outline wraps [raw.PDFOutline] with a fluent Go API.
 type Outline struct {
 	inner *raw.PDFOutline
@@ -38,24 +40,32 @@ func NewOutline() *Outline {
 	return &Outline{inner: raw.PDFOutlineFromID(_id)}
 }
 
+// Returns the label for the outline.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *Outline) WithLabel(label string) *Outline {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Returns a Boolean value that indicates whether the outline object is initially disclosed.
+//
 // WithIsOpen sets the isOpen property and returns the receiver for chaining.
 func (x *Outline) WithIsOpen(isOpen bool) *Outline {
 	x.inner.SetIsOpen(isOpen)
 	return x
 }
 
+// Returns the destination associated with the outline.
+//
 // WithDestination sets the destination property and returns the receiver for chaining.
 func (x *Outline) WithDestination(destination *Destination) *Outline {
 	x.inner.SetDestination(destination.Unwrap())
 	return x
 }
 
+// Returns the child outline object at the specified index.
+//
 // ChildAtIndex calls the underlying ChildAtIndex.
 func (x *Outline) ChildAtIndex(index uint) *Outline {
 	_r := x.inner.ChildAtIndex(index)
@@ -65,11 +75,15 @@ func (x *Outline) ChildAtIndex(index uint) *Outline {
 	return &Outline{inner: _r}
 }
 
+// Inserts the specified outline object at the specified index.
+//
 // InsertChildAtIndex calls the underlying InsertChildAtIndex.
 func (x *Outline) InsertChildAtIndex(child *raw.PDFOutline, index uint) {
 	x.inner.InsertChildAtIndex(child, index)
 }
 
+// Removes the outline object from its parent (does nothing if outline object is the root outline object).
+//
 // RemoveFromParent calls the underlying RemoveFromParent.
 func (x *Outline) RemoveFromParent() {
 	x.inner.RemoveFromParent()

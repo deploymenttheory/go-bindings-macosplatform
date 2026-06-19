@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for objects representing notable features detected in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cifeature
 type CIFeature struct {
 	foundation.NSObject

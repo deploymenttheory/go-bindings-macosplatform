@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance you use to capture Metal command data in your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcapturemanager
 type MTLCaptureManager struct {
 	foundation.NSObject
@@ -43,7 +45,7 @@ func MTLCaptureManagerFromID(id objc.ID) *MTLCaptureManager {
 	return o
 }
 
-// Retrieves the shared capture manager for this process. There is only one capture manager per process. The capture manager allows the user to create capture scopes and trigger captures from code. When a capture has been completed, it will be displayed in Xcode and the application will be paused. @remarks: only MTLCommandBuffers created after starting a capture and committed before stopping it are captured.
+// Provides the shared capture manager for your Metal app.
 func MTLCaptureManagerSharedCaptureManager() *MTLCaptureManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLCaptureManager), _mTLCaptureManagerSelSharedCaptureManager)
 	if _ret != 0 {
@@ -52,6 +54,7 @@ func MTLCaptureManagerSharedCaptureManager() *MTLCaptureManager {
 	return MTLCaptureManagerFromID(_ret)
 }
 
+// Creates a capture scope for commands submitted to a specific command queue.
 func (o *MTLCaptureManager) NewCaptureScopeWithCommandQueue(commandQueue MTLCommandQueue) MTLCaptureScope {
 	_ret := objc.Send[MTLCaptureScope](o.Ptr(), _mTLCaptureManagerSelNewCaptureScopeWithCommandQueue, commandQueue)
 	return _ret
@@ -62,12 +65,13 @@ func (o *MTLCaptureManager) NewCaptureScopeWithMTL4CommandQueue(commandQueue MTL
 	return _ret
 }
 
+// Checks to see whether a particular capture destination is supported.
 func (o *MTLCaptureManager) SupportsDestination(destination MTLCaptureDestination) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLCaptureManagerSelSupportsDestination, destination)
 	return _ret
 }
 
-// Start capturing until stopCapture is called. @param descriptor MTLCaptureDescriptor specifies the parameters. @param error Optional error output to check why a capture could not be started. @return true if the capture was successfully started, otherwise false. @remarks Only MTLCommandBuffer​s created after starting and committed before stopping it are captured.
+// Starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
 func (o *MTLCaptureManager) StartCaptureWithDescriptorError(descriptor *MTLCaptureDescriptor) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mTLCaptureManagerSelStartCaptureWithDescriptorError, descriptor.Ptr(), unsafe.Pointer(&_nsErr))
@@ -77,21 +81,25 @@ func (o *MTLCaptureManager) StartCaptureWithDescriptorError(descriptor *MTLCaptu
 	return _ret, nil
 }
 
+// Starts capturing any of your app’s Metal commands that are executed by the device object.
 // Deprecated: Use startCaptureWithDescriptor:error: instead
 func (o *MTLCaptureManager) StartCaptureWithDevice(device MTLDevice) {
 	o.Ptr().Send(_mTLCaptureManagerSelStartCaptureWithDevice, device)
 }
 
+// Starts capturing any of your app’s Metal commands that are executed by the command queue.
 // Deprecated: Use startCaptureWithDescriptor:error: instead
 func (o *MTLCaptureManager) StartCaptureWithCommandQueue(commandQueue MTLCommandQueue) {
 	o.Ptr().Send(_mTLCaptureManagerSelStartCaptureWithCommandQueue, commandQueue)
 }
 
+// Starts capturing any of your app’s Metal commands that are in the specified capture scope.
 // Deprecated: Use startCaptureWithDescriptor:error: instead
 func (o *MTLCaptureManager) StartCaptureWithScope(captureScope MTLCaptureScope) {
 	o.Ptr().Send(_mTLCaptureManagerSelStartCaptureWithScope, captureScope)
 }
 
+// Stops capturing Metal commands.
 // Deprecated: Use startCaptureWithDescriptor:error: instead
 func (o *MTLCaptureManager) StopCapture() {
 	o.Ptr().Send(_mTLCaptureManagerSelStopCapture)

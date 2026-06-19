@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing the state of a gradient kernel when it was encoded.
+//
 // NNGradientState wraps [raw.MPSNNGradientState] with a fluent Go API.
 type NNGradientState struct {
 	inner *raw.MPSNNGradientState

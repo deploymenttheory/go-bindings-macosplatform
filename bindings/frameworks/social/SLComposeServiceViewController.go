@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that you present from your share app extension, allowing the user to compose social media posts.
+//
 // Apple documentation: https://developer.apple.com/documentation/social/slcomposeserviceviewcontroller
 type SLComposeServiceViewController struct {
 	appkit.NSViewController
@@ -42,27 +44,33 @@ func SLComposeServiceViewControllerFromID(id objc.ID) *SLComposeServiceViewContr
 	return o
 }
 
+// Tells the compose view controller that the presentation animation is finished.
 func (o *SLComposeServiceViewController) PresentationAnimationDidFinish() {
 	o.Ptr().Send(_sLComposeServiceViewControllerSelPresentationAnimationDidFinish)
 }
 
+// Sent to the compose view after the post animation finishes.
 func (o *SLComposeServiceViewController) DidSelectPost() {
 	o.Ptr().Send(_sLComposeServiceViewControllerSelDidSelectPost)
 }
 
+// Sent to the compose view after the cancel animation finishes.
 func (o *SLComposeServiceViewController) DidSelectCancel() {
 	o.Ptr().Send(_sLComposeServiceViewControllerSelDidSelectCancel)
 }
 
+// Starts the animated dismissal of the compose view.
 func (o *SLComposeServiceViewController) Cancel() {
 	o.Ptr().Send(_sLComposeServiceViewControllerSelCancel)
 }
 
+// A Boolean value that indicates whether the current content and attachments are valid.
 func (o *SLComposeServiceViewController) IsContentValid() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sLComposeServiceViewControllerSelIsContentValid)
 	return _ret
 }
 
+// Performs validation of the current content and updates the state of the Post button, if appropriate.
 func (o *SLComposeServiceViewController) ValidateContent() {
 	o.Ptr().Send(_sLComposeServiceViewControllerSelValidateContent)
 }

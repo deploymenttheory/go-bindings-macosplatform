@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a spatial normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalizationnode
 type MPSCNNSpatialNormalizationNode struct {
 	mpsneuralnetwork.MPSCNNNormalizationNode

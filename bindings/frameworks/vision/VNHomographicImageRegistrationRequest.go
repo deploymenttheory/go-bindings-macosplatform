@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that determines the perspective warp matrix necessary to align the content of two images.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnhomographicimageregistrationrequest
 type VNHomographicImageRegistrationRequest struct {
 	VNImageRegistrationRequest

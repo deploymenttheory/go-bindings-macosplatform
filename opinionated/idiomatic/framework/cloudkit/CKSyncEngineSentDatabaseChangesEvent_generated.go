@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about a sent batch of database changes.
+//
 // SyncEngineSentDatabaseChangesEvent wraps [raw.CKSyncEngineSentDatabaseChangesEvent] with a fluent Go API.
 type SyncEngineSentDatabaseChangesEvent struct {
 	inner *raw.CKSyncEngineSentDatabaseChangesEvent

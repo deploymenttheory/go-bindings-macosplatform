@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an expression to include with a fetch request.
+//
 // ExpressionDescription wraps [raw.NSExpressionDescription] with a fluent Go API.
 type ExpressionDescription struct {
 	inner *raw.NSExpressionDescription
@@ -36,66 +38,88 @@ func NewExpressionDescription() *ExpressionDescription {
 	return &ExpressionDescription{inner: raw.NSExpressionDescriptionFromID(_id)}
 }
 
+// The expression to evaluate.
+//
 // WithExpression sets the expression property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithExpression(expression *foundation.NSExpression) *ExpressionDescription {
 	x.inner.SetExpression(expression)
 	return x
 }
 
+// The attribute type of the expression’s result.
+//
 // WithExpressionResultType sets the expressionResultType property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithExpressionResultType(expressionResultType NSAttributeType) *ExpressionDescription {
 	x.inner.SetExpressionResultType(raw.NSAttributeType(expressionResultType))
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithName(name string) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is optional.
+//
 // WithOptional sets the optional property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithOptional(optional bool) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetOptional(optional)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transient.
+//
 // WithTransient sets the transient property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithTransient(transient bool) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetTransient(transient)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver should be indexed for searching.
+//
 // WithIndexed sets the indexed property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithIndexed(indexed bool) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetIndexed(indexed)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithVersionHashModifier(versionHashModifier string) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+//
 // WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
 	return x
 }
 
+// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+//
 // WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription {
 	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))

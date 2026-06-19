@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A custom pronoun for referring to a third person.
+//
 // MorphologyPronoun wraps [raw.NSMorphologyPronoun] with a fluent Go API.
 type MorphologyPronoun struct {
 	inner *raw.NSMorphologyPronoun

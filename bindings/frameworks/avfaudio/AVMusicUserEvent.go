@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a custom user message.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmusicuserevent
 type AVMusicUserEvent struct {
 	AVMusicEvent
@@ -31,7 +33,7 @@ func AVMusicUserEventFromID(id objc.ID) *AVMusicUserEvent {
 	return o
 }
 
-// @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the contents to be returned via the AVMusicTrack's user callback.
+// Creates a user event with the data you specify.
 func (o *AVMusicUserEvent) InitWithData(data *foundation.NSData) *AVMusicUserEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMusicUserEventSelInitWithData, data.Ptr())
 	if _ret != 0 {

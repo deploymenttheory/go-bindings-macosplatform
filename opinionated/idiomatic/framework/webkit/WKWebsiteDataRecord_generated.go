@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A record of the data that a particular website stores persistently.
+//
 // WKWebsiteDataRecord wraps [raw.WKWebsiteDataRecord] with a fluent Go API.
 type WKWebsiteDataRecord struct {
 	inner *raw.WKWebsiteDataRecord

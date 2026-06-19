@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A component that encapsulates a SpriteKit node.
+// A component that manages a SpriteKit node.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gksknodecomponent
 type GKSKNodeComponent struct {
@@ -35,7 +35,7 @@ func GKSKNodeComponentFromID(id objc.ID) *GKSKNodeComponent {
 	return o
 }
 
-// Creates a component that encapsulate the given SpriteKit node. When the component is added to an entity, the SKNode's entity property will be set. @param node Node to associate with the component. @see SKNode.entity
+// Creates a component to manage the specified SpriteKit node.
 func GKSKNodeComponentComponentWithNode(node *spritekit.SKNode) *GKSKNodeComponent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSKNodeComponent), _gKSKNodeComponentSelComponentWithNode, node.Ptr())
 	if _ret != 0 {
@@ -44,7 +44,7 @@ func GKSKNodeComponentComponentWithNode(node *spritekit.SKNode) *GKSKNodeCompone
 	return GKSKNodeComponentFromID(_ret)
 }
 
-// Initializes component to encapsulate the given SpriteKit node. When the component is added to an entity, the SKNode's entity property will be set. @param node Node to associate with the component. @see SKNode.entity
+// Initializes a component to manage the specified SpriteKit node.
 func (o *GKSKNodeComponent) InitWithNode(node *spritekit.SKNode) *GKSKNodeComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSKNodeComponentSelInitWithNode, node.Ptr())
 	if _ret != 0 {

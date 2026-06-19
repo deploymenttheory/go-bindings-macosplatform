@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an HTTP cookie.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshttpcookie
 type NSHTTPCookie struct {
 	NSObject
@@ -47,16 +49,16 @@ func NSHTTPCookieFromID(id objc.ID) *NSHTTPCookie {
 
 // @method initWithProperties: @abstract Initialize a NSHTTPCookie object with a dictionary of parameters @param properties The dictionary of properties to be used to initialize this cookie. @discussion Supported dictionary keys and value types for the given dictionary are as follows. All properties can handle an NSString value, but some can also handle other types. <table border="1" cellspacing="2" cellpadding="4"> <tr> <th>Property key constant</th> <th>Type of value</th> <th>Required</th> <th>Description</th> </tr> <tr> <td>NSHTTPCookieComment</td> <td>NSString</td> <td>NO</td> <td>Comment for the cookie. Only valid for version 1 cookies and later. Default is nil.</td> </tr> <tr> <td>NSHTTPCookieCommentURL</td> <td>NSURL or NSString</td> <td>NO</td> <td>Comment URL for the cookie. Only valid for version 1 cookies and later. Default is nil.</td> </tr> <tr> <td>NSHTTPCookieDomain</td> <td>NSString</td> <td>Special, a value for either NSHTTPCookieOriginURL or NSHTTPCookieDomain must be specified.</td> <td>Domain for the cookie. Inferred from the value for NSHTTPCookieOriginURL if not provided.</td> </tr> <tr> <td>NSHTTPCookieDiscard</td> <td>NSString</td> <td>NO</td> <td>A string stating whether the cookie should be discarded at the end of the session. String value must be either "TRUE" or "FALSE". Default is "FALSE", unless this is cookie is version 1 or greater and a value for NSHTTPCookieMaximumAge is not specified, in which case it is assumed "TRUE".</td> </tr> <tr> <td>NSHTTPCookieExpires</td> <td>NSDate or NSString</td> <td>NO</td> <td>Expiration date for the cookie. Used only for version 0 cookies. Ignored for version 1 or greater.</td> </tr> <tr> <td>NSHTTPCookieMaximumAge</td> <td>NSString</td> <td>NO</td> <td>A string containing an integer value stating how long in seconds the cookie should be kept, at most. Only valid for version 1 cookies and later. Default is "0".</td> </tr> <tr> <td>NSHTTPCookieName</td> <td>NSString</td> <td>YES</td> <td>Name of the cookie</td> </tr> <tr> <td>NSHTTPCookieOriginURL</td> <td>NSURL or NSString</td> <td>Special, a value for either NSHTTPCookieOriginURL or NSHTTPCookieDomain must be specified.</td> <td>URL that set this cookie. Used as default for other fields as noted.</td> </tr> <tr> <td>NSHTTPCookiePath</td> <td>NSString</td> <td>NO</td> <td>Path for the cookie. Inferred from the value for NSHTTPCookieOriginURL if not provided. Default is "/".</td> </tr> <tr> <td>NSHTTPCookiePort</td> <td>NSString</td> <td>NO</td> <td>comma-separated integer values specifying the ports for the cookie. Only valid for version 1 cookies and later. Default is empty string ("").</td> </tr> <tr> <td>NSHTTPCookieSecure</td> <td>NSString</td> <td>NO</td> <td>A string stating whether the cookie should be transmitted only over secure channels. String value must be either "TRUE" or "FALSE". Default is "FALSE".</td> </tr> <tr> <td>NSHTTPCookieValue</td> <td>NSString</td> <td>YES</td> <td>Value of the cookie</td> </tr> <tr> <td>NSHTTPCookieVersion</td> <td>NSString</td> <td>NO</td> <td>Specifies the version of the cookie. Must be either "0" or "1". Default is "0".</td> </tr> <tr> <td>NSHTTPCookieSetByJavaScript</td> <td>NSNumber</td> <td>NO</td> <td>@YES if the cookie is set via JavaScript. @NO if the cookie is not set via JavaScript</td> </tr> </table> <p> All other keys are ignored. @result An initialized NSHTTPCookie, or nil if the set of dictionary keys is invalid, for example because a required key is missing, or a recognized key maps to an illegal value.
 func (o *NSHTTPCookie) InitWithProperties(properties *NSDictionary[*NSString, objc.ID]) *NSHTTPCookie {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieSelInitWithProperties, properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieSelInitWithProperties, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSHTTPCookieFromID(_ret)
 }
 
-// @method cookieWithProperties: @abstract Allocates and initializes an NSHTTPCookie with the given dictionary. @discussion See the NSHTTPCookie <tt>-initWithProperties:</tt> method for more information on the constraints imposed on the dictionary, and for descriptions of the supported keys and values. @param properties The dictionary to use to initialize this cookie. @result A newly-created and autoreleased NSHTTPCookie instance, or nil if the set of dictionary keys is invalid, for example because a required key is missing, or a recognized key maps to an illegal value.
+// Creates and initializes an HTTP cookie object using the provided properties.
 func NSHTTPCookieCookieWithProperties(properties *NSDictionary[*NSString, objc.ID]) *NSHTTPCookie {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPCookie), _nSHTTPCookieSelCookieWithProperties, properties)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPCookie), _nSHTTPCookieSelCookieWithProperties, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -83,8 +85,11 @@ func NSHTTPCookieCookiesWithResponseHeaderFieldsForURL(headerFields *NSDictionar
 
 // @abstract Returns a dictionary representation of the receiver. @discussion This method returns a dictionary representation of the NSHTTPCookie which can be saved and passed to <tt>-initWithProperties:</tt> or <tt>+cookieWithProperties:</tt> later to reconstitute an equivalent cookie. <p>See the NSHTTPCookie <tt>-initWithProperties:</tt> method for more information on the constraints imposed on the dictionary, and for descriptions of the supported keys and values. @result The dictionary representation of the receiver.
 func (o *NSHTTPCookie) Properties() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSHTTPCookieSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 // @abstract Returns the name of the receiver. @result the name of the receiver.

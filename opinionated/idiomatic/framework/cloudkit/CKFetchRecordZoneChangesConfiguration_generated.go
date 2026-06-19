@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A configuration object that describes the information to fetch from a record zone.
+//
 // FetchRecordZoneChangesConfiguration wraps [raw.CKFetchRecordZoneChangesConfiguration] with a fluent Go API.
 type FetchRecordZoneChangesConfiguration struct {
 	inner *raw.CKFetchRecordZoneChangesConfiguration
@@ -56,7 +58,7 @@ func (x *FetchRecordZoneChangesConfiguration) WithResultsLimit(resultsLimit uint
 	return x
 }
 
-// The fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
+// The fields to fetch for the requested records.
 //
 // WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRecordZoneChangesConfiguration) WithDesiredKeys(items ...*foundation.NSString) *FetchRecordZoneChangesConfiguration {

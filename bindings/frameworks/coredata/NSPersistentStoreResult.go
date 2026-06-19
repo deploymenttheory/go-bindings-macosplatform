@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for results returned from a persistent store coordinator.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstoreresult
 type NSPersistentStoreResult struct {
 	foundation.NSObject

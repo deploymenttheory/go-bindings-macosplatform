@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of the device memory associated with a tensor that an optimizer uses.
+//
 // TensorOptimizerDeviceData wraps [raw.MLCTensorOptimizerDeviceData] with a fluent Go API.
 type TensorOptimizerDeviceData struct {
 	inner *raw.MLCTensorOptimizerDeviceData

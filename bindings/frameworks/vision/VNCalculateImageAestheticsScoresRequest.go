@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that analyzes an image for aesthetically pleasing attributes.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncalculateimageaestheticsscoresrequest
 type VNCalculateImageAestheticsScoresRequest struct {
 	VNImageBasedRequest

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing the location and unique identifier of an Apple App Store storefront.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skstorefront
 // Deprecated: Use Storefront.
 type SKStorefront struct {

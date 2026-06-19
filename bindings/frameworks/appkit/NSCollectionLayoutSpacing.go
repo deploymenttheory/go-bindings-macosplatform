@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the space between or around items in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutspacing
 type NSCollectionLayoutSpacing struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func NSCollectionLayoutSpacingFromID(id objc.ID) *NSCollectionLayoutSpacing {
 	return o
 }
 
+// Creates a space equivalent to or greater than the specified number of points, depending on the available space.
 func NSCollectionLayoutSpacingFlexibleSpacing(flexibleSpacing float64) *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFlexibleSpacing, flexibleSpacing)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func NSCollectionLayoutSpacingFlexibleSpacing(flexibleSpacing float64) *NSCollec
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
+// Creates a space equivalent to the specified number of points.
 func NSCollectionLayoutSpacingFixedSpacing(fixedSpacing float64) *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFixedSpacing, fixedSpacing)
 	if _ret != 0 {

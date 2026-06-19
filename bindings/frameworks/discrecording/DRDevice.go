@@ -63,8 +63,11 @@ func DRDeviceFromID(id objc.ID) *DRDevice {
 
 // @method 		devices @abstract		Obtains a static list of devices connected to the computer. @discussion		Returns all CD/DVD devices connected to the computer at the time this method is called. Since devices can come and go at any time, the output of this method is simply a snapshot of the set of devices connected. @result  		An NSArray of DRDevices.
 func DRDeviceDevices() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsDRDevice), _dRDeviceSelDevices)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsDRDevice), _dRDeviceSelDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method 		deviceForBSDName: @abstract		Obtains a DRDevice for the device corresponding to the bsd /dev node. @discussion		If the device is not an authoring device (i.e., CDR, CDRW, DVR-R, etc), returns nil. @param 			bsdName	The bsd /dev node name. @result  		An autoreleased DRDevice object.
@@ -93,14 +96,20 @@ func (o *DRDevice) IsValid() bool {
 
 // @method			info @abstract		Returns a dictionary of information describing the device. @discussion		The information returned include the types of media the device can write to, how it's connected and its identifying information such as the vendor and product name. @result			An NSDictionary containing device information.
 func (o *DRDevice) Info() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRDeviceSelInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method			status @abstract		Returns a dictionary of information describing the media in the device. @discussion		In addition to information about the media (type, space available/used, etc), the dictionary returned includes those pieces of information about the device itself which are in part determined by the media (i.e., maximum burn speed). @result			An NSDictionary containing media information.
 func (o *DRDevice) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRDeviceSelStatus)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRDeviceSelStatus)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method			openTray @abstract		Commands the device to open its tray. @discussion		Does nothing if the device does not have a tray (slotload). If there is media in the drive this method will do nothing and return false. In this case use @link //apple_ref/occ/instm/DRDevice/ejectMedia ejectMedia @/link to eject the media and open the tray. @result			Returns <i>YES</i> if the tray could be opened and <i>NO</i> if not.

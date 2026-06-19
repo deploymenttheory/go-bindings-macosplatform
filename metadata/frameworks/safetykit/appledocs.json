@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "framework": "SafetyKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SACrashDetectionEvent": {
+      "doc": "Describes the information about a vehicular crash.",
+      "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionevent"
+    },
+    "SACrashDetectionManager": {
+      "doc": "Provides registration and management of Crash Detection events.",
+      "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionmanager"
+    },
+    "SAEmergencyResponseManager": {
+      "doc": "Provides actions in response to a Crash Detection event.",
+      "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsemanager"
+    }
+  },
+  "protocols": {
+    "SACrashDetectionDelegate": {
+      "doc": "The protocol that an object adopts to receive Crash Detection events and changes to the authorization status.",
+      "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectiondelegate"
+    },
+    "SAEmergencyResponseDelegate": {
+      "doc": "The interface for receiving updates about a requested emergency response action.",
+      "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsedelegate"
+    }
+  },
+  "enums": {
+    "SAAuthorizationStatus": {
+      "doc": "An enumeration that represents the current Crash Detection event authorization state.",
+      "url": "https://developer.apple.com/documentation/safetykit/saauthorizationstatus",
+      "members": {
+        "SAAuthorizationStatusAuthorized": {
+          "doc": "This is the designated app for receiving Crash Detection events.",
+          "url": "https://developer.apple.com/documentation/safetykit/saauthorizationstatus/authorized"
+        },
+        "SAAuthorizationStatusDenied": {
+          "doc": "The system denies the app from receiving Crash Detection events because another app has authorization.",
+          "url": "https://developer.apple.com/documentation/safetykit/saauthorizationstatus/denied"
+        },
+        "SAAuthorizationStatusNotDetermined": {
+          "doc": "There isn’t a designated app for receiving Crash Detection events.",
+          "url": "https://developer.apple.com/documentation/safetykit/saauthorizationstatus/notdetermined"
+        }
+      }
+    },
+    "SACrashDetectionEventResponse": {
+      "doc": "An enumeration that defines possible emergency responses to a Crash Detection event.",
+      "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectioneventresponse"
+    },
+    "SAEmergencyResponseManagerVoiceCallStatus": {
+      "doc": "An enumeration that defines the status of a requested voice call.",
+      "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsemanagervoicecallstatus"
+    },
+    "SAErrorCode": {
+      "doc": "Codes for identifying errors in SafetyKit.",
+      "url": "https://developer.apple.com/documentation/safetykit/saerrorcode"
+    }
+  },
+  "methods": {
+    "SACrashDetectionManager": {
+      "-requestAuthorizationWithCompletionHandler:": {
+        "doc": "Requests permission to access Crash Detection information.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionmanager/requestauthorization(completionhandler:)"
+      }
+    },
+    "SAEmergencyResponseManager": {
+      "-dialVoiceCallToPhoneNumber:completionHandler:": {
+        "doc": "Request the system to dial a voice call on behalf of someone involved in a crash.",
+        "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsemanager/dialvoicecall(tophonenumber:completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "SACrashDetectionEvent": {
+      "SACrashDetectionEventResponse": {
+        "doc": "An enumeration that defines possible emergency responses to a Crash Detection event.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionevent/response-swift.enum"
+      },
+      "date": {
+        "doc": "The date and time the crash occurred.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionevent/date"
+      },
+      "location": {
+        "doc": "The longitude and latitude where the crash detection occurred.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionevent/location"
+      },
+      "response": {
+        "doc": "An indication of whether the system attempted to call an Emergency SOS provider.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionevent/response-swift.property"
+      }
+    },
+    "SACrashDetectionManager": {
+      "authorizationStatus": {
+        "doc": "A value that indicates if the person authorized the app to receive Crash Detection events.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionmanager/authorizationstatus"
+      },
+      "available": {
+        "doc": "A Boolean value that indicates if Crash Detection is available.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionmanager/isavailable"
+      },
+      "delegate": {
+        "doc": "The object that receives Crash Detection events.",
+        "url": "https://developer.apple.com/documentation/safetykit/sacrashdetectionmanager/delegate"
+      }
+    },
+    "SAEmergencyResponseManager": {
+      "SAEmergencyResponseManagerVoiceCallStatus": {
+        "doc": "An enumeration that defines the status of a requested voice call.",
+        "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsemanager/voicecallstatus"
+      },
+      "delegate": {
+        "doc": "The object that receives voice call status updates and requested emergency response actions.",
+        "url": "https://developer.apple.com/documentation/safetykit/saemergencyresponsemanager/delegate"
+      }
+    }
+  }
+}

@@ -60,10 +60,13 @@ func (o *MTRMicrowaveOvenModeClusterModeOptionStruct) SetMode(mode *foundation.N
 }
 
 func (o *MTRMicrowaveOvenModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRMicrowaveOvenModeClusterModeOptionStructSelModeTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMicrowaveOvenModeClusterModeOptionStructSelModeTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRMicrowaveOvenModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRMicrowaveOvenModeClusterModeOptionStructSelSetModeTags, modeTags)
+	o.Ptr().Send(_mTRMicrowaveOvenModeClusterModeOptionStructSelSetModeTags, modeTags.Ptr())
 }

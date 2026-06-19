@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements encoding using Simple-TLV encoding according to ISO 7816-4.
+//
 // SimpleTLVRecord wraps [raw.TKSimpleTLVRecord] with a fluent Go API.
 type SimpleTLVRecord struct {
 	inner *raw.TKSimpleTLVRecord
@@ -30,7 +32,7 @@ func SimpleTLVRecordFromID(id objc.ID) *SimpleTLVRecord {
 	return &SimpleTLVRecord{inner: raw.TKSimpleTLVRecordFromID(id)}
 }
 
-// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+// Initializes a TLV record with the specified tag and value.
 //
 // NewSimpleTLVRecordWithTagValue creates a new [SimpleTLVRecord].
 func NewSimpleTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *SimpleTLVRecord {

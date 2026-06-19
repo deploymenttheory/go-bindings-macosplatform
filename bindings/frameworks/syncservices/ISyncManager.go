@@ -106,7 +106,7 @@ func (o *ISyncManager) ClientWithIdentifierNeedsSyncing(clientId *foundation.NSS
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames *foundation.NSArray[objc.ID], client *ISyncClient) *ISyncRecordSnapshot {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncManagerSelSnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient, entityNames, client.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncManagerSelSnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient, entityNames.Ptr(), client.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -125,6 +125,9 @@ func (o *ISyncManager) RemoveRequestMode(mode *foundation.NSString) {
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncManager) RequestModes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncManagerSelRequestModes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncManagerSelRequestModes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class that manages central and peripheral objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbmanager
 type CBManager struct {
 	foundation.NSObject

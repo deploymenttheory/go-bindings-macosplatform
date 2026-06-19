@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A product promotion controller for customizing the order and visibility of In-App Purchases per device.
+//
 // ProductStorePromotionController wraps [raw.SKProductStorePromotionController] with a fluent Go API.
 type ProductStorePromotionController struct {
 	inner *raw.SKProductStorePromotionController
@@ -41,6 +43,8 @@ func NewProductStorePromotionController() *ProductStorePromotionController {
 	return &ProductStorePromotionController{inner: raw.SKProductStorePromotionControllerFromID(_id)}
 }
 
+// Reads the visibility setting of a promoted product in the App Store for this device.
+//
 // FetchStorePromotionVisibilityForProductCompletionHandler calls the underlying FetchStorePromotionVisibilityForProductCompletionHandler.
 func (x *ProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(SKProductStorePromotionVisibility, unsafe.Pointer)) {
 	x.inner.FetchStorePromotionVisibilityForProductCompletionHandler(product, func(_a0 raw.SKProductStorePromotionVisibility, _a1 unsafe.Pointer) {
@@ -48,6 +52,8 @@ func (x *ProductStorePromotionController) FetchStorePromotionVisibilityForProduc
 	})
 }
 
+// Updates the visibility of the product on the App Store, per device.
+//
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility SKProductStorePromotionVisibility, product *raw.SKProduct) error {
 	_ch := make(chan error, 1)
@@ -66,6 +72,8 @@ func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProdu
 	}
 }
 
+// Reads the product order override that determines the promoted product order on this device.
+//
 // FetchStorePromotionOrder blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (*foundation.NSArray[*raw.SKProduct], error) {
 	type _result struct {
@@ -90,6 +98,8 @@ func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.C
 	}
 }
 
+// Overrides the promoted product order on this device.
+//
 // UpdateStorePromotionOrder blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder *foundation.NSArray[*raw.SKProduct]) error {
 	_ch := make(chan error, 1)

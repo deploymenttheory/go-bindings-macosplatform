@@ -68,14 +68,21 @@ func (e INAnswerCallIntentResponseCode) String() string {
 	}
 }
 
+// Constants indicating the state of the response.
 type INBookRestaurantReservationIntentCode int64
 
 const (
-	INBookRestaurantReservationIntentCodeSuccess                                                INBookRestaurantReservationIntentCode = 0
-	INBookRestaurantReservationIntentCodeDenied                                                 INBookRestaurantReservationIntentCode = 1
-	INBookRestaurantReservationIntentCodeFailure                                                INBookRestaurantReservationIntentCode = 2
-	INBookRestaurantReservationIntentCodeFailureRequiringAppLaunch                              INBookRestaurantReservationIntentCode = 3
-	INBookRestaurantReservationIntentCodeFailureRequiringAppLaunchMustVerifyCredentials         INBookRestaurantReservationIntentCode = 4
+	// You successfully handled the intent.
+	INBookRestaurantReservationIntentCodeSuccess INBookRestaurantReservationIntentCode = 0
+	// The restaurant declined the reservation.
+	INBookRestaurantReservationIntentCodeDenied INBookRestaurantReservationIntentCode = 1
+	// You were unable to create the reservation object in your system.
+	INBookRestaurantReservationIntentCodeFailure INBookRestaurantReservationIntentCode = 2
+	// The user must launch your app to make the reservation.
+	INBookRestaurantReservationIntentCodeFailureRequiringAppLaunch INBookRestaurantReservationIntentCode = 3
+	// Your app failed to create the reservation because the user’s credentials were invalid or missing.
+	INBookRestaurantReservationIntentCodeFailureRequiringAppLaunchMustVerifyCredentials INBookRestaurantReservationIntentCode = 4
+	// Your service is temporarily unavailable.
 	INBookRestaurantReservationIntentCodeFailureRequiringAppLaunchServiceTemporarilyUnavailable INBookRestaurantReservationIntentCode = 5
 )
 
@@ -98,12 +105,16 @@ func (e INBookRestaurantReservationIntentCode) String() string {
 	}
 }
 
+// Constants that describe the audio route for the call.
 type INCallAudioRoute int64
 
 const (
-	INCallAudioRouteUnknown                INCallAudioRoute = 0
+	// An unknown audio route.
+	INCallAudioRouteUnknown INCallAudioRoute = 0
+	// The device’s speakerphone mode.
 	INCallAudioRouteSpeakerphoneAudioRoute INCallAudioRoute = 1
-	INCallAudioRouteBluetoothAudioRoute    INCallAudioRoute = 2
+	// A connected Bluetooth device.
+	INCallAudioRouteBluetoothAudioRoute INCallAudioRoute = 2
 )
 
 func (e INCallAudioRoute) String() string {
@@ -119,11 +130,15 @@ func (e INCallAudioRoute) String() string {
 	}
 }
 
+// Constants indicating the capabilities of the call.
 type INCallCapability int64
 
 const (
-	INCallCapabilityUnknown   INCallCapability = 0
+	// An unknown type of call.
+	INCallCapabilityUnknown INCallCapability = 0
+	// An audio call.
 	INCallCapabilityAudioCall INCallCapability = 1
+	// A video call.
 	INCallCapabilityVideoCall INCallCapability = 2
 )
 
@@ -140,10 +155,13 @@ func (e INCallCapability) String() string {
 	}
 }
 
+// Constants indicating the capabilities of the call.
 type INCallCapabilityOptions uint64
 
 const (
+	// An audio-only call.
 	INCallCapabilityOptionAudioCall INCallCapabilityOptions = 1
+	// A video call.
 	INCallCapabilityOptionVideoCall INCallCapabilityOptions = 2
 )
 
@@ -161,19 +179,30 @@ func (e INCallCapabilityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants describing the destination of a call.
 type INCallDestinationType int64
 
 const (
-	INCallDestinationTypeUnknown              INCallDestinationType = 0
-	INCallDestinationTypeNormal               INCallDestinationType = 1
-	INCallDestinationTypeEmergency            INCallDestinationType = 2
-	INCallDestinationTypeVoicemail            INCallDestinationType = 3
-	INCallDestinationTypeRedial               INCallDestinationType = 4
-	INCallDestinationTypeCallBack             INCallDestinationType = 5
-	INCallDestinationTypeNormalDestination    INCallDestinationType = 1
+	// An unknown call destination.
+	INCallDestinationTypeUnknown INCallDestinationType = 0
+	// A call routed to its expected destination.
+	INCallDestinationTypeNormal INCallDestinationType = 1
+	// A call routed to an emergency number.
+	INCallDestinationTypeEmergency INCallDestinationType = 2
+	// A call routed to the user’s voicemail.
+	INCallDestinationTypeVoicemail INCallDestinationType = 3
+	// A call that was the result of redialing a previous call.
+	INCallDestinationTypeRedial INCallDestinationType = 4
+	// A call that was the result of a call back.
+	INCallDestinationTypeCallBack INCallDestinationType = 5
+	// A call routed to its expected destination.
+	INCallDestinationTypeNormalDestination INCallDestinationType = 1
+	// A call routed to an emergency number.
 	INCallDestinationTypeEmergencyDestination INCallDestinationType = 2
+	// A call routed to the user’s voicemail.
 	INCallDestinationTypeVoicemailDestination INCallDestinationType = 3
-	INCallDestinationTypeRedialDestination    INCallDestinationType = 4
+	// A call that was the result of redialing a previous call.
+	INCallDestinationTypeRedialDestination INCallDestinationType = 4
 )
 
 func (e INCallDestinationType) String() string {
@@ -195,18 +224,28 @@ func (e INCallDestinationType) String() string {
 	}
 }
 
+// Constants describing the type of the call.
 type INCallRecordType int64
 
 const (
-	INCallRecordTypeUnknown    INCallRecordType = 0
-	INCallRecordTypeOutgoing   INCallRecordType = 1
-	INCallRecordTypeMissed     INCallRecordType = 2
-	INCallRecordTypeReceived   INCallRecordType = 3
-	INCallRecordTypeLatest     INCallRecordType = 4
-	INCallRecordTypeVoicemail  INCallRecordType = 5
-	INCallRecordTypeRinging    INCallRecordType = 6
+	// An unknown type of call.
+	INCallRecordTypeUnknown INCallRecordType = 0
+	// A call initiated by the current user.
+	INCallRecordTypeOutgoing INCallRecordType = 1
+	// A received call that the user did not answer.
+	INCallRecordTypeMissed INCallRecordType = 2
+	// A received call that the user answered.
+	INCallRecordTypeReceived INCallRecordType = 3
+	// The most recent call involving the user.
+	INCallRecordTypeLatest INCallRecordType = 4
+	// A voicemail left from a missed call.
+	INCallRecordTypeVoicemail INCallRecordType = 5
+	// An incoming call that is currently causing the user’s phone to ring.
+	INCallRecordTypeRinging INCallRecordType = 6
+	// A received call that is currently in progress.
 	INCallRecordTypeInProgress INCallRecordType = 7
-	INCallRecordTypeOnHold     INCallRecordType = 8
+	// A received call that the user has put on hold.
+	INCallRecordTypeOnHold INCallRecordType = 8
 )
 
 func (e INCallRecordType) String() string {
@@ -234,17 +273,26 @@ func (e INCallRecordType) String() string {
 	}
 }
 
+// Constants describing the types of calls to include during a search.
 type INCallRecordTypeOptions uint64
 
 const (
-	INCallRecordTypeOptionOutgoing   INCallRecordTypeOptions = 1
-	INCallRecordTypeOptionMissed     INCallRecordTypeOptions = 2
-	INCallRecordTypeOptionReceived   INCallRecordTypeOptions = 4
-	INCallRecordTypeOptionLatest     INCallRecordTypeOptions = 8
-	INCallRecordTypeOptionVoicemail  INCallRecordTypeOptions = 16
-	INCallRecordTypeOptionRinging    INCallRecordTypeOptions = 32
+	// A call initiated by the user.
+	INCallRecordTypeOptionOutgoing INCallRecordTypeOptions = 1
+	// A call received by the user that went unanswered.
+	INCallRecordTypeOptionMissed INCallRecordTypeOptions = 2
+	// A received call that the user answered.
+	INCallRecordTypeOptionReceived INCallRecordTypeOptions = 4
+	// The most recent call involving the user.
+	INCallRecordTypeOptionLatest INCallRecordTypeOptions = 8
+	// A voicemail left from a missed call.
+	INCallRecordTypeOptionVoicemail INCallRecordTypeOptions = 16
+	// An incoming call that is currently causing the user’s phone to ring.
+	INCallRecordTypeOptionRinging INCallRecordTypeOptions = 32
+	// A received call that is currently in progress.
 	INCallRecordTypeOptionInProgress INCallRecordTypeOptions = 64
-	INCallRecordTypeOptionOnHold     INCallRecordTypeOptions = 128
+	// A received call that the user has put on hold.
+	INCallRecordTypeOptionOnHold INCallRecordTypeOptions = 128
 )
 
 func (e INCallRecordTypeOptions) String() string {
@@ -327,13 +375,18 @@ func (e INEditMessageIntentResponseCode) String() string {
 	}
 }
 
+// A constant that indicates whether your app has authorization to access the user’s focus status.
 type INFocusStatusAuthorizationStatus int64
 
 const (
+	// The user hasn’t chosen whether to grant your app access to their focus status yet.
 	INFocusStatusAuthorizationStatusNotDetermined INFocusStatusAuthorizationStatus = 0
-	INFocusStatusAuthorizationStatusRestricted    INFocusStatusAuthorizationStatus = 1
-	INFocusStatusAuthorizationStatusDenied        INFocusStatusAuthorizationStatus = 2
-	INFocusStatusAuthorizationStatusAuthorized    INFocusStatusAuthorizationStatus = 3
+	// A restriction prevents your app from accessing the user’s focus status.
+	INFocusStatusAuthorizationStatusRestricted INFocusStatusAuthorizationStatus = 1
+	// The user has denied your app access to their focus status.
+	INFocusStatusAuthorizationStatusDenied INFocusStatusAuthorizationStatus = 2
+	// Your app has authorization to access the user’s focus status.
+	INFocusStatusAuthorizationStatusAuthorized INFocusStatusAuthorizationStatus = 3
 )
 
 func (e INFocusStatusAuthorizationStatus) String() string {
@@ -351,11 +404,15 @@ func (e INFocusStatusAuthorizationStatus) String() string {
 	}
 }
 
+// Constants indicating the state of the response.
 type INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode int64
 
 const (
-	INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCodeSuccess     INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode = 0
-	INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCodeFailure     INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode = 1
+	// You successfully handled the intent.
+	INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCodeSuccess INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode = 0
+	// You were unable to provide a set of default values.
+	INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCodeFailure INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode = 1
+	// You chose not to provide default values.
 	INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCodeUnspecified INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode = 2
 )
 
@@ -372,13 +429,18 @@ func (e INGetAvailableRestaurantReservationBookingDefaultsIntentResponseCode) St
 	}
 }
 
+// Constants indicating the state of the response.
 type INGetAvailableRestaurantReservationBookingsIntentCode int64
 
 const (
-	INGetAvailableRestaurantReservationBookingsIntentCodeSuccess                     INGetAvailableRestaurantReservationBookingsIntentCode = 0
-	INGetAvailableRestaurantReservationBookingsIntentCodeFailure                     INGetAvailableRestaurantReservationBookingsIntentCode = 1
+	// You successfully handled the intent.
+	INGetAvailableRestaurantReservationBookingsIntentCodeSuccess INGetAvailableRestaurantReservationBookingsIntentCode = 0
+	// You were unable to provide a list of possible reservation times.
+	INGetAvailableRestaurantReservationBookingsIntentCodeFailure INGetAvailableRestaurantReservationBookingsIntentCode = 1
+	// You could not complete the request because the data you received from Maps was invalid.
 	INGetAvailableRestaurantReservationBookingsIntentCodeFailureRequestUnsatisfiable INGetAvailableRestaurantReservationBookingsIntentCode = 2
-	INGetAvailableRestaurantReservationBookingsIntentCodeFailureRequestUnspecified   INGetAvailableRestaurantReservationBookingsIntentCode = 3
+	// There was a failure in getting the requested booking times and the cause of the failure is unknown.
+	INGetAvailableRestaurantReservationBookingsIntentCodeFailureRequestUnspecified INGetAvailableRestaurantReservationBookingsIntentCode = 3
 )
 
 func (e INGetAvailableRestaurantReservationBookingsIntentCode) String() string {
@@ -396,14 +458,21 @@ func (e INGetAvailableRestaurantReservationBookingsIntentCode) String() string {
 	}
 }
 
+// Constants that indicate the status of the request for reservations details.
 type INGetReservationDetailsIntentResponseCode int64
 
 const (
-	INGetReservationDetailsIntentResponseCodeUnspecified               INGetReservationDetailsIntentResponseCode = 0
-	INGetReservationDetailsIntentResponseCodeReady                     INGetReservationDetailsIntentResponseCode = 1
-	INGetReservationDetailsIntentResponseCodeInProgress                INGetReservationDetailsIntentResponseCode = 2
-	INGetReservationDetailsIntentResponseCodeSuccess                   INGetReservationDetailsIntentResponseCode = 3
-	INGetReservationDetailsIntentResponseCodeFailure                   INGetReservationDetailsIntentResponseCode = 4
+	// The response code is unspecified.
+	INGetReservationDetailsIntentResponseCodeUnspecified INGetReservationDetailsIntentResponseCode = 0
+	// Your app is ready to handle the intent.
+	INGetReservationDetailsIntentResponseCodeReady INGetReservationDetailsIntentResponseCode = 1
+	// Your app is processing the request for reservation details.
+	INGetReservationDetailsIntentResponseCodeInProgress INGetReservationDetailsIntentResponseCode = 2
+	// Your app successfully handled the intent.
+	INGetReservationDetailsIntentResponseCodeSuccess INGetReservationDetailsIntentResponseCode = 3
+	// Your app is unable to retrieve the reservation details.
+	INGetReservationDetailsIntentResponseCodeFailure INGetReservationDetailsIntentResponseCode = 4
+	// The user must launch your app to retrieve the reservation details.
 	INGetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch INGetReservationDetailsIntentResponseCode = 5
 )
 
@@ -426,10 +495,13 @@ func (e INGetReservationDetailsIntentResponseCode) String() string {
 	}
 }
 
+// Constants indicating the state of the response.
 type INGetRestaurantGuestIntentResponseCode int64
 
 const (
+	// You successfully handled the intent.
 	INGetRestaurantGuestIntentResponseCodeSuccess INGetRestaurantGuestIntentResponseCode = 0
+	// You were unable to return information about the guest.
 	INGetRestaurantGuestIntentResponseCodeFailure INGetRestaurantGuestIntentResponseCode = 1
 )
 
@@ -444,13 +516,18 @@ func (e INGetRestaurantGuestIntentResponseCode) String() string {
 	}
 }
 
+// Constants indicating the state of the response.
 type INGetUserCurrentRestaurantReservationBookingsIntentResponseCode int64
 
 const (
-	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeSuccess                     INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 0
-	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeFailure                     INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 1
+	// You successfully handled the intent.
+	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeSuccess INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 0
+	// You were unable to fetch the user’s reservations.
+	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeFailure INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 1
+	// The intent object contained conflicting information.
 	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeFailureRequestUnsatisfiable INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 2
-	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeUnspecified                 INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 3
+	// The request did not contain enough information for you to proceed.
+	INGetUserCurrentRestaurantReservationBookingsIntentResponseCodeUnspecified INGetUserCurrentRestaurantReservationBookingsIntentResponseCode = 3
 )
 
 func (e INGetUserCurrentRestaurantReservationBookingsIntentResponseCode) String() string {
@@ -615,14 +692,21 @@ func (e INIntentErrorCode) String() string {
 	}
 }
 
+// Constants indicating the current state of the interaction.
 type INIntentHandlingStatus int64
 
 const (
-	INIntentHandlingStatusUnspecified              INIntentHandlingStatus = 0
-	INIntentHandlingStatusReady                    INIntentHandlingStatus = 1
-	INIntentHandlingStatusInProgress               INIntentHandlingStatus = 2
-	INIntentHandlingStatusSuccess                  INIntentHandlingStatus = 3
-	INIntentHandlingStatusFailure                  INIntentHandlingStatus = 4
+	// The status of the interaction is unknown. This is the default value.
+	INIntentHandlingStatusUnspecified INIntentHandlingStatus = 0
+	// The intent is ready to be handled, but has not yet been handled.
+	INIntentHandlingStatusReady INIntentHandlingStatus = 1
+	// The Intents extension is in the process of handling the intent.
+	INIntentHandlingStatusInProgress INIntentHandlingStatus = 2
+	// The Intents extension successfully handled the intent.
+	INIntentHandlingStatusSuccess INIntentHandlingStatus = 3
+	// The Intents extension encountered an unrecoverable problem when handling the intent.
+	INIntentHandlingStatusFailure INIntentHandlingStatus = 4
+	// The Intents extension asked its associated app to handle the intent.
 	INIntentHandlingStatusDeferredToApplication    INIntentHandlingStatus = 5
 	INIntentHandlingStatusUserConfirmationRequired INIntentHandlingStatus = 6
 )
@@ -648,12 +732,16 @@ func (e INIntentHandlingStatus) String() string {
 	}
 }
 
+// Constants indicating whether the app is providing or receiving information.
 type INInteractionDirection int64
 
 const (
+	// An unspecified direction.
 	INInteractionDirectionUnspecified INInteractionDirection = 0
-	INInteractionDirectionOutgoing    INInteractionDirection = 1
-	INInteractionDirectionIncoming    INInteractionDirection = 2
+	// An interaction in which information is sent from the device.
+	INInteractionDirectionOutgoing INInteractionDirection = 1
+	// An interaction in which information is received on the device.
+	INInteractionDirectionIncoming INInteractionDirection = 2
 )
 
 func (e INInteractionDirection) String() string {
@@ -690,11 +778,15 @@ func (e INMessageReactionType) String() string {
 	}
 }
 
+// The format of the message.
 type INOutgoingMessageType int64
 
 const (
-	INOutgoingMessageTypeUnknown              INOutgoingMessageType = 0
-	INOutgoingMessageTypeOutgoingMessageText  INOutgoingMessageType = 1
+	// An unspecified message format.
+	INOutgoingMessageTypeUnknown INOutgoingMessageType = 0
+	// Plain text.
+	INOutgoingMessageTypeOutgoingMessageText INOutgoingMessageType = 1
+	// An audio recording.
 	INOutgoingMessageTypeOutgoingMessageAudio INOutgoingMessageType = 2
 )
 
@@ -711,18 +803,28 @@ func (e INOutgoingMessageType) String() string {
 	}
 }
 
+// Constants describing the available payment options.
 type INPaymentMethodType int64
 
 const (
-	INPaymentMethodTypeUnknown   INPaymentMethodType = 0
-	INPaymentMethodTypeChecking  INPaymentMethodType = 1
-	INPaymentMethodTypeSavings   INPaymentMethodType = 2
+	// An unspecified payment type.
+	INPaymentMethodTypeUnknown INPaymentMethodType = 0
+	// Payment from a checking account.
+	INPaymentMethodTypeChecking INPaymentMethodType = 1
+	// Payment from a savings account.
+	INPaymentMethodTypeSavings INPaymentMethodType = 2
+	// Payment from a brokerage account.
 	INPaymentMethodTypeBrokerage INPaymentMethodType = 3
-	INPaymentMethodTypeDebit     INPaymentMethodType = 4
-	INPaymentMethodTypeCredit    INPaymentMethodType = 5
-	INPaymentMethodTypePrepaid   INPaymentMethodType = 6
-	INPaymentMethodTypeStore     INPaymentMethodType = 7
-	INPaymentMethodTypeApplePay  INPaymentMethodType = 8
+	// Payment using a debit card.
+	INPaymentMethodTypeDebit INPaymentMethodType = 4
+	// Payment using a credit card.
+	INPaymentMethodTypeCredit INPaymentMethodType = 5
+	// Payment using a prepaid card or account.
+	INPaymentMethodTypePrepaid INPaymentMethodType = 6
+	// Payment using a store charge card.
+	INPaymentMethodTypeStore INPaymentMethodType = 7
+	// Payment using Apple Pay.
+	INPaymentMethodTypeApplePay INPaymentMethodType = 8
 )
 
 func (e INPaymentMethodType) String() string {
@@ -750,12 +852,16 @@ func (e INPaymentMethodType) String() string {
 	}
 }
 
+// Constants indicating the types of data that can be associated with a person handle.
 type INPersonHandleType int64
 
 const (
-	INPersonHandleTypeUnknown      INPersonHandleType = 0
+	// An unknown type of data. Use this type if the identifier data is unique to your app.
+	INPersonHandleTypeUnknown INPersonHandleType = 0
+	// An email address.
 	INPersonHandleTypeEmailAddress INPersonHandleType = 1
-	INPersonHandleTypePhoneNumber  INPersonHandleType = 2
+	// A phone number.
+	INPersonHandleTypePhoneNumber INPersonHandleType = 2
 )
 
 func (e INPersonHandleType) String() string {
@@ -771,11 +877,15 @@ func (e INPersonHandleType) String() string {
 	}
 }
 
+// Constants indicating how to display the person’s identity.
 type INPersonSuggestionType int64
 
 const (
-	INPersonSuggestionTypeNone                  INPersonSuggestionType = 0
-	INPersonSuggestionTypeSocialProfile         INPersonSuggestionType = 1
+	// No contact information to donate.
+	INPersonSuggestionTypeNone INPersonSuggestionType = 0
+	// A social media account.
+	INPersonSuggestionTypeSocialProfile INPersonSuggestionType = 1
+	// An instant messaging address.
 	INPersonSuggestionTypeInstantMessageAddress INPersonSuggestionType = 2
 )
 
@@ -792,16 +902,24 @@ func (e INPersonSuggestionType) String() string {
 	}
 }
 
+// The time frame for which the rule applies.
 type INRecurrenceFrequency int64
 
 const (
+	// An unknown repetition frequency.
 	INRecurrenceFrequencyUnknown INRecurrenceFrequency = 0
-	INRecurrenceFrequencyMinute  INRecurrenceFrequency = 1
-	INRecurrenceFrequencyHourly  INRecurrenceFrequency = 2
-	INRecurrenceFrequencyDaily   INRecurrenceFrequency = 3
-	INRecurrenceFrequencyWeekly  INRecurrenceFrequency = 4
+	// A time range that repeats every minute.
+	INRecurrenceFrequencyMinute INRecurrenceFrequency = 1
+	// A time range that repeats on an hourly basis.
+	INRecurrenceFrequencyHourly INRecurrenceFrequency = 2
+	// A time range that repeats on a daily basis.
+	INRecurrenceFrequencyDaily INRecurrenceFrequency = 3
+	// A date range that repeats on a weekly basis.
+	INRecurrenceFrequencyWeekly INRecurrenceFrequency = 4
+	// A date range that repeats on a monthly basis.
 	INRecurrenceFrequencyMonthly INRecurrenceFrequency = 5
-	INRecurrenceFrequencyYearly  INRecurrenceFrequency = 6
+	// A date range that repeats on a yearly basis.
+	INRecurrenceFrequencyYearly INRecurrenceFrequency = 6
 )
 
 func (e INRecurrenceFrequency) String() string {
@@ -825,10 +943,13 @@ func (e INRecurrenceFrequency) String() string {
 	}
 }
 
+// Constants that describe the type of reservation action.
 type INReservationActionType int64
 
 const (
+	// An unknown state.
 	INReservationActionTypeUnknown INReservationActionType = 0
+	// A check-in action.
 	INReservationActionTypeCheckIn INReservationActionType = 1
 )
 
@@ -843,13 +964,19 @@ func (e INReservationActionType) String() string {
 	}
 }
 
+// Constants that describe the current status of the reservation.
 type INReservationStatus int64
 
 const (
-	INReservationStatusUnknown   INReservationStatus = 0
-	INReservationStatusCanceled  INReservationStatus = 1
-	INReservationStatusPending   INReservationStatus = 2
-	INReservationStatusHold      INReservationStatus = 3
+	// The current reservation is unknown.
+	INReservationStatusUnknown INReservationStatus = 0
+	// The user or business canceled the reservation.
+	INReservationStatusCanceled INReservationStatus = 1
+	// The reservation confirmation is pending.
+	INReservationStatusPending INReservationStatus = 2
+	// The reservation is on hold.
+	INReservationStatusHold INReservationStatus = 3
+	// The reservation is confirmed.
 	INReservationStatusConfirmed INReservationStatus = 4
 )
 
@@ -870,12 +997,16 @@ func (e INReservationStatus) String() string {
 	}
 }
 
+// Constants indicating the status of a user reservation.
 type INRestaurantReservationUserBookingStatus uint64
 
 const (
-	INRestaurantReservationUserBookingStatusPending   INRestaurantReservationUserBookingStatus = 0
+	// The restaurant hasn’t confirmed or denied the reservation.
+	INRestaurantReservationUserBookingStatusPending INRestaurantReservationUserBookingStatus = 0
+	// The restaurant accepted the reservation.
 	INRestaurantReservationUserBookingStatusConfirmed INRestaurantReservationUserBookingStatus = 1
-	INRestaurantReservationUserBookingStatusDenied    INRestaurantReservationUserBookingStatus = 2
+	// The restaurant declined the reservation.
+	INRestaurantReservationUserBookingStatusDenied INRestaurantReservationUserBookingStatus = 2
 )
 
 func (e INRestaurantReservationUserBookingStatus) String() string {
@@ -891,15 +1022,23 @@ func (e INRestaurantReservationUserBookingStatus) String() string {
 	}
 }
 
+// Constants that indicate the response state.
 type INSendMessageIntentResponseCode int64
 
 const (
-	INSendMessageIntentResponseCodeUnspecified                         INSendMessageIntentResponseCode = 0
-	INSendMessageIntentResponseCodeReady                               INSendMessageIntentResponseCode = 1
-	INSendMessageIntentResponseCodeInProgress                          INSendMessageIntentResponseCode = 2
-	INSendMessageIntentResponseCodeSuccess                             INSendMessageIntentResponseCode = 3
-	INSendMessageIntentResponseCodeFailure                             INSendMessageIntentResponseCode = 4
-	INSendMessageIntentResponseCodeFailureRequiringAppLaunch           INSendMessageIntentResponseCode = 5
+	// The response code isn’t specified.
+	INSendMessageIntentResponseCodeUnspecified INSendMessageIntentResponseCode = 0
+	// You are ready to handle the intent.
+	INSendMessageIntentResponseCodeReady INSendMessageIntentResponseCode = 1
+	// You are in the process of sending the message but have not yet done so.
+	INSendMessageIntentResponseCodeInProgress INSendMessageIntentResponseCode = 2
+	// You successfully handled the intent.
+	INSendMessageIntentResponseCodeSuccess INSendMessageIntentResponseCode = 3
+	// You are unable to send the message.
+	INSendMessageIntentResponseCodeFailure INSendMessageIntentResponseCode = 4
+	// The user must launch your app before they can send the message.
+	INSendMessageIntentResponseCodeFailureRequiringAppLaunch INSendMessageIntentResponseCode = 5
+	// You were unable to send the message because your message service is currently unavailable.
 	INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable   INSendMessageIntentResponseCode = 6
 	INSendMessageIntentResponseCodeFailureRequiringInAppAuthentication INSendMessageIntentResponseCode = 7
 )
@@ -927,16 +1066,23 @@ func (e INSendMessageIntentResponseCode) String() string {
 	}
 }
 
+// Constants indicating the reason why a recipient is not supported.
 type INSendMessageRecipientUnsupportedReason int64
 
 const (
-	INSendMessageRecipientUnsupportedReasonNoAccount                              INSendMessageRecipientUnsupportedReason = 1
-	INSendMessageRecipientUnsupportedReasonOffline                                INSendMessageRecipientUnsupportedReason = 2
+	// A recipient without an account.
+	INSendMessageRecipientUnsupportedReasonNoAccount INSendMessageRecipientUnsupportedReason = 1
+	// An offline recipient.
+	INSendMessageRecipientUnsupportedReasonOffline INSendMessageRecipientUnsupportedReason = 2
+	// A recipient for whom messaging is not enabled.
 	INSendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient INSendMessageRecipientUnsupportedReason = 3
-	INSendMessageRecipientUnsupportedReasonNoValidHandle                          INSendMessageRecipientUnsupportedReason = 4
-	INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid                 INSendMessageRecipientUnsupportedReason = 5
-	INSendMessageRecipientUnsupportedReasonNoHandleForLabel                       INSendMessageRecipientUnsupportedReason = 6
-	INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication           INSendMessageRecipientUnsupportedReason = 7
+	// A recipient for whom there is no valid handle.
+	INSendMessageRecipientUnsupportedReasonNoValidHandle INSendMessageRecipientUnsupportedReason = 4
+	// A recipient for whom the requested handle is invalid.
+	INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid INSendMessageRecipientUnsupportedReason = 5
+	// A recipient for whom there is no handle for the provided label.
+	INSendMessageRecipientUnsupportedReasonNoHandleForLabel             INSendMessageRecipientUnsupportedReason = 6
+	INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication INSendMessageRecipientUnsupportedReason = 7
 )
 
 func (e INSendMessageRecipientUnsupportedReason) String() string {
@@ -960,14 +1106,21 @@ func (e INSendMessageRecipientUnsupportedReason) String() string {
 	}
 }
 
+// A constant that indicates your app’s ability to handle an intent to share the user’s focus status.
 type INShareFocusStatusIntentResponseCode int64
 
 const (
-	INShareFocusStatusIntentResponseCodeUnspecified               INShareFocusStatusIntentResponseCode = 0
-	INShareFocusStatusIntentResponseCodeReady                     INShareFocusStatusIntentResponseCode = 1
-	INShareFocusStatusIntentResponseCodeInProgress                INShareFocusStatusIntentResponseCode = 2
-	INShareFocusStatusIntentResponseCodeSuccess                   INShareFocusStatusIntentResponseCode = 3
-	INShareFocusStatusIntentResponseCodeFailure                   INShareFocusStatusIntentResponseCode = 4
+	// An unspecified response code.
+	INShareFocusStatusIntentResponseCodeUnspecified INShareFocusStatusIntentResponseCode = 0
+	// Your intent handler is ready to handle the intent.
+	INShareFocusStatusIntentResponseCodeReady INShareFocusStatusIntentResponseCode = 1
+	// Your intent handler is handling the intent, but it may take some time.
+	INShareFocusStatusIntentResponseCodeInProgress INShareFocusStatusIntentResponseCode = 2
+	// Your intent handler successfully updated the user’s communication status.
+	INShareFocusStatusIntentResponseCodeSuccess INShareFocusStatusIntentResponseCode = 3
+	// Your intent handler is unable to handle the intent.
+	INShareFocusStatusIntentResponseCodeFailure INShareFocusStatusIntentResponseCode = 4
+	// The user needs to launch your app to update their focus status.
 	INShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch INShareFocusStatusIntentResponseCode = 5
 )
 
@@ -990,9 +1143,11 @@ func (e INShareFocusStatusIntentResponseCode) String() string {
 	}
 }
 
+// A reason why your app can’t use a record to call a person back.
 type INStartCallCallRecordToCallBackUnsupportedReason int64
 
 const (
+	// A reason indicating that no call record matches the intent’s parameter.
 	INStartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall INStartCallCallRecordToCallBackUnsupportedReason = 1
 )
 
@@ -1026,11 +1181,14 @@ func (e INStickerType) String() string {
 	}
 }
 
+// Constants that define the type of ticketed event.
 type INTicketedEventCategory int64
 
 const (
+	// The ticketed event category is unknown.
 	INTicketedEventCategoryUnknown INTicketedEventCategory = 0
-	INTicketedEventCategoryMovie   INTicketedEventCategory = 1
+	// The ticketed event is a movie.
+	INTicketedEventCategoryMovie INTicketedEventCategory = 1
 )
 
 func (e INTicketedEventCategory) String() string {

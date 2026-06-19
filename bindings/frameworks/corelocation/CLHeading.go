@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The orientation of the user’s device, relative to true or magnetic north.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clheading
 type CLHeading struct {
 	foundation.NSObject

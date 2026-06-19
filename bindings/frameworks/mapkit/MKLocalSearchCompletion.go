@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A fully formed string that completes a partial string.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklocalsearchcompletion
 type MKLocalSearchCompletion struct {
 	foundation.NSObject
@@ -42,8 +44,11 @@ func (o *MKLocalSearchCompletion) Title() *foundation.NSString {
 }
 
 func (o *MKLocalSearchCompletion) TitleHighlightRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _mKLocalSearchCompletionSelTitleHighlightRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompletionSelTitleHighlightRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *MKLocalSearchCompletion) Subtitle() *foundation.NSString {
@@ -55,6 +60,9 @@ func (o *MKLocalSearchCompletion) Subtitle() *foundation.NSString {
 }
 
 func (o *MKLocalSearchCompletion) SubtitleHighlightRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _mKLocalSearchCompletionSelSubtitleHighlightRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompletionSelSubtitleHighlightRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A list or range of sizes that augment an image constraint’s default size.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlimagesizeconstraint
 type MLImageSizeConstraint struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
+//
 // URLResponse wraps [raw.NSURLResponse] with a fluent Go API.
 type URLResponse struct {
 	inner *raw.NSURLResponse

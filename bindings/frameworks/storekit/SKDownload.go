@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Downloadable content associated with a product.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skdownload
 // Deprecated: Hosted content is no longer supported.
 type SKDownload struct {
@@ -44,6 +46,7 @@ func SKDownloadFromID(id objc.ID) *SKDownload {
 	return o
 }
 
+// Returns the local location for the previously downloaded flie.
 // Deprecated: Hosted content is no longer supported.
 func SKDownloadContentURLForProductID(productID *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKDownload), _sKDownloadSelContentURLForProductID, productID.Ptr())
@@ -53,6 +56,7 @@ func SKDownloadContentURLForProductID(productID *foundation.NSString) *foundatio
 	return foundation.NSURLFromID(_ret)
 }
 
+// Deletes the previously downloaded file.
 // Deprecated: Hosted content is no longer supported.
 func SKDownloadDeleteContentForProductID(productID *foundation.NSString) {
 	objc.ID(_clsSKDownload).Send(_sKDownloadSelDeleteContentForProductID, productID.Ptr())

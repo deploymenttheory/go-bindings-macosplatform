@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that adjusts the exposure bias of a capture device within the system-recommended range.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturesystemexposurebiasslider
 type AVCaptureSystemExposureBiasSlider struct {
 	AVCaptureControl
@@ -30,7 +32,7 @@ func AVCaptureSystemExposureBiasSliderFromID(id objc.ID) *AVCaptureSystemExposur
 	return o
 }
 
-// @method initWithDevice: @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
+// Creates a slider to control the exposure bias of the specified capture device.
 func (o *AVCaptureSystemExposureBiasSlider) InitWithDevice(device *AVCaptureDevice) *AVCaptureSystemExposureBiasSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemExposureBiasSliderSelInitWithDevice, device.Ptr())
 	if _ret != 0 {
@@ -39,7 +41,7 @@ func (o *AVCaptureSystemExposureBiasSlider) InitWithDevice(device *AVCaptureDevi
 	return AVCaptureSystemExposureBiasSliderFromID(_ret)
 }
 
-// @method initWithDevice:action @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device` with a `@MainActor` `action` for handling `exposureTargetBias` changes. @param device The device to control. @param action An action called on `@MainActor` to handle `exposureTargetBias` changes by `AVCaptureSystemExposureBiasSlider`. @discussion `action` is **only** called when `exposureTargetBias` is changed by this control. Clients should not change `exposureTargetBias` on the device when `action` is called. If you need to react to other sources of `exposureTargetBias` changes, you will still need to use key-value observation. `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
+// Creates a slider to control the exposure bias of the specified capture device with an action to respond to exposure bias changes.
 func (o *AVCaptureSystemExposureBiasSlider) InitWithDeviceAction(device *AVCaptureDevice, action func(float32)) *AVCaptureSystemExposureBiasSlider {
 	var __block_action objc.Block
 	if action != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that guides the video decoder operation on a per-frame basis.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/medecodeframeoptions
 type MEDecodeFrameOptions struct {
 	foundation.NSObject

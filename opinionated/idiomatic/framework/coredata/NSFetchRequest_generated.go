@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of search criteria used to retrieve data from a persistent store.
+//
 // FetchRequest wraps [raw.NSFetchRequest] with a fluent Go API.
 type FetchRequest struct {
 	inner *raw.NSFetchRequest[objc.ID]
@@ -45,18 +47,24 @@ func NewFetchRequestWithEntityName(entityName string) *FetchRequest {
 	return &FetchRequest{inner: raw.NSFetchRequestFromID[objc.ID](_id)}
 }
 
+// The entity specified for the fetch request.
+//
 // WithEntity sets the entity property and returns the receiver for chaining.
 func (x *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
 	x.inner.SetEntity(entity.Unwrap())
 	return x
 }
 
+// The predicate of the fetch request.
+//
 // WithPredicate sets the predicate property and returns the receiver for chaining.
 func (x *FetchRequest) WithPredicate(predicate *foundation.NSPredicate) *FetchRequest {
 	x.inner.SetPredicate(predicate)
 	return x
 }
 
+// The sort descriptors of the fetch request.
+//
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRequest) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchRequest {
 	if len(items) == 0 {
@@ -78,36 +86,48 @@ func (x *FetchRequest) WithSortDescriptors(items ...*foundation.NSSortDescriptor
 	return x
 }
 
+// The fetch limit of the fetch request.
+//
 // WithFetchLimit sets the fetchLimit property and returns the receiver for chaining.
 func (x *FetchRequest) WithFetchLimit(fetchLimit uint) *FetchRequest {
 	x.inner.SetFetchLimit(fetchLimit)
 	return x
 }
 
+// The result type of the fetch request.
+//
 // WithResultType sets the resultType property and returns the receiver for chaining.
 func (x *FetchRequest) WithResultType(resultType NSFetchRequestResultType) *FetchRequest {
 	x.inner.SetResultType(raw.NSFetchRequestResultType(resultType))
 	return x
 }
 
+// A Boolean value that indicates whether the fetch request includes subentities in the results.
+//
 // WithIncludesSubentities sets the includesSubentities property and returns the receiver for chaining.
 func (x *FetchRequest) WithIncludesSubentities(includesSubentities bool) *FetchRequest {
 	x.inner.SetIncludesSubentities(includesSubentities)
 	return x
 }
 
+// A Boolean value that indicates whether, when the fetch is executed, property data is obtained from the persistent store.
+//
 // WithIncludesPropertyValues sets the includesPropertyValues property and returns the receiver for chaining.
 func (x *FetchRequest) WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest {
 	x.inner.SetIncludesPropertyValues(includesPropertyValues)
 	return x
 }
 
+// A Boolean value that indicates whether the objects resulting from a fetch request are faults.
+//
 // WithReturnsObjectsAsFaults sets the returnsObjectsAsFaults property and returns the receiver for chaining.
 func (x *FetchRequest) WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest {
 	x.inner.SetReturnsObjectsAsFaults(returnsObjectsAsFaults)
 	return x
 }
 
+// The relationship key paths to prefetch along with the entity for the request.
+//
 // WithRelationshipKeyPathsForPrefetching sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...*foundation.NSString) *FetchRequest {
 	if len(items) == 0 {
@@ -129,42 +149,56 @@ func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...*foundati
 	return x
 }
 
+// A Boolean value that indicates whether, when the fetch is executed, it matches against currently unsaved changes in the managed object context.
+//
 // WithIncludesPendingChanges sets the includesPendingChanges property and returns the receiver for chaining.
 func (x *FetchRequest) WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest {
 	x.inner.SetIncludesPendingChanges(includesPendingChanges)
 	return x
 }
 
+// A Boolean value that indicates whether the fetch request returns only distinct values for the fields specified by propertiesToFetch.
+//
 // WithReturnsDistinctResults sets the returnsDistinctResults property and returns the receiver for chaining.
 func (x *FetchRequest) WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest {
 	x.inner.SetReturnsDistinctResults(returnsDistinctResults)
 	return x
 }
 
+// The fetch offset of the fetch request.
+//
 // WithFetchOffset sets the fetchOffset property and returns the receiver for chaining.
 func (x *FetchRequest) WithFetchOffset(fetchOffset uint) *FetchRequest {
 	x.inner.SetFetchOffset(fetchOffset)
 	return x
 }
 
+// The batch size of the objects specified in the fetch request.
+//
 // WithFetchBatchSize sets the fetchBatchSize property and returns the receiver for chaining.
 func (x *FetchRequest) WithFetchBatchSize(fetchBatchSize uint) *FetchRequest {
 	x.inner.SetFetchBatchSize(fetchBatchSize)
 	return x
 }
 
+// A Boolean value that indicates whether the property values of fetched objects will be updated with the current values in the persistent store.
+//
 // WithShouldRefreshRefetchedObjects sets the shouldRefreshRefetchedObjects property and returns the receiver for chaining.
 func (x *FetchRequest) WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest {
 	x.inner.SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects)
 	return x
 }
 
+// The predicate used to filter rows being returned by a query containing a GROUP BY directive.
+//
 // WithHavingPredicate sets the havingPredicate property and returns the receiver for chaining.
 func (x *FetchRequest) WithHavingPredicate(havingPredicate *foundation.NSPredicate) *FetchRequest {
 	x.inner.SetHavingPredicate(havingPredicate)
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
 	if len(items) == 0 {
@@ -186,6 +220,8 @@ func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *Fet
 	return x
 }
 
+// Executes the fetch request against the managed object context that is associated with the current queue.
+//
 // Execute calls the underlying Execute.
 func (x *FetchRequest) Execute() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.Execute()

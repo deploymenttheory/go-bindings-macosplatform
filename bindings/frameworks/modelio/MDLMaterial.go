@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of material properties that together describe the intended surface appearance for rendering a 3D object.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlmaterial
 type MDLMaterial struct {
 	foundation.NSObject
@@ -48,6 +50,7 @@ func MDLMaterialFromID(id objc.ID) *MDLMaterial {
 	return o
 }
 
+// Initializes a material
 func (o *MDLMaterial) InitWithNameScatteringFunction(name *foundation.NSString, scatteringFunction *MDLScatteringFunction) *MDLMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelInitWithNameScatteringFunction, name.Ptr(), scatteringFunction.Ptr())
 	if _ret != 0 {
@@ -56,14 +59,17 @@ func (o *MDLMaterial) InitWithNameScatteringFunction(name *foundation.NSString, 
 	return MDLMaterialFromID(_ret)
 }
 
+// Adds a new material property to or replaces an existing material property in the material.
 func (o *MDLMaterial) SetProperty(property *MDLMaterialProperty) {
 	o.Ptr().Send(_mDLMaterialSelSetProperty, property.Ptr())
 }
 
+// Removes the specified material property from the material.
 func (o *MDLMaterial) RemoveProperty(property *MDLMaterialProperty) {
 	o.Ptr().Send(_mDLMaterialSelRemoveProperty, property.Ptr())
 }
 
+// Returns the material property with the specified name.
 func (o *MDLMaterial) PropertyNamed(name *foundation.NSString) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelPropertyNamed, name.Ptr())
 	if _ret != 0 {
@@ -72,6 +78,7 @@ func (o *MDLMaterial) PropertyNamed(name *foundation.NSString) *MDLMaterialPrope
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Returns the material property for the specified material semantic.
 func (o *MDLMaterial) PropertyWithSemantic(semantic MDLMaterialSemantic) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelPropertyWithSemantic, semantic)
 	if _ret != 0 {
@@ -80,6 +87,7 @@ func (o *MDLMaterial) PropertyWithSemantic(semantic MDLMaterialSemantic) *MDLMat
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Returns the complete list of material properties that match the specified material semantic.
 func (o *MDLMaterial) PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*MDLMaterialProperty] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelPropertiesWithSemantic, semantic)
 	if _ret != 0 {
@@ -88,18 +96,22 @@ func (o *MDLMaterial) PropertiesWithSemantic(semantic MDLMaterialSemantic) *foun
 	return foundation.NSArrayFromID[*MDLMaterialProperty](_ret)
 }
 
+// Removes all material properties from the material.
 func (o *MDLMaterial) RemoveAllProperties() {
 	o.Ptr().Send(_mDLMaterialSelRemoveAllProperties)
 }
 
+// Resolves all texture string paths as NSURLs with resolver.
 func (o *MDLMaterial) ResolveTexturesWithResolver(resolver MDLAssetResolver) {
 	o.Ptr().Send(_mDLMaterialSelResolveTexturesWithResolver, resolver)
 }
 
+// Loads textures using resolver for string paths and NSURLs.
 func (o *MDLMaterial) LoadTexturesUsingResolver(resolver MDLAssetResolver) {
 	o.Ptr().Send(_mDLMaterialSelLoadTexturesUsingResolver, resolver)
 }
 
+// Returns the material property at the specified index in the material, for use with subscript syntax.
 func (o *MDLMaterial) ObjectAtIndexedSubscript(idx uint) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelObjectAtIndexedSubscript, idx)
 	if _ret != 0 {
@@ -108,6 +120,7 @@ func (o *MDLMaterial) ObjectAtIndexedSubscript(idx uint) *MDLMaterialProperty {
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Returns the material property with the specified name, for use with subscript syntax.
 func (o *MDLMaterial) ObjectForKeyedSubscript(name *foundation.NSString) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelObjectForKeyedSubscript, name.Ptr())
 	if _ret != 0 {

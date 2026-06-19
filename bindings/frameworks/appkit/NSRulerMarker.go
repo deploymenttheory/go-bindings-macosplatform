@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A symbol on a ruler view, indicating a location for the graphics element it represents in the client of the ruler view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsrulermarker
 type NSRulerMarker struct {
 	foundation.NSObject
@@ -50,6 +52,7 @@ func NSRulerMarkerFromID(id objc.ID) *NSRulerMarker {
 	return o
 }
 
+// Initializes a newly allocated ruler marker, associating it with (but not adding it to) a specified ruler view and assigning the attributes provided.
 func (o *NSRulerMarker) InitWithRulerViewMarkerLocationImageImageOrigin(ruler *NSRulerView, location float64, image *NSImage, imageOrigin corefoundation.CGPoint) *NSRulerMarker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerMarkerSelInitWithRulerViewMarkerLocationImageImageOrigin, ruler.Ptr(), location, image.Ptr(), imageOrigin)
 	if _ret != 0 {
@@ -66,10 +69,12 @@ func (o *NSRulerMarker) InitWithCoder(coder *foundation.NSCoder) *NSRulerMarker 
 	return NSRulerMarkerFromID(_ret)
 }
 
+// Draws the receiver’s image that appears in the supplied rectangle.
 func (o *NSRulerMarker) DrawRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSRulerMarkerSelDrawRect, rect)
 }
 
+// Handles user manipulation of the receiver in its ruler view.
 func (o *NSRulerMarker) TrackMouseAdding(mouseDownEvent *NSEvent, isAdding bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRulerMarkerSelTrackMouseAdding, mouseDownEvent.Ptr(), isAdding)
 	return _ret

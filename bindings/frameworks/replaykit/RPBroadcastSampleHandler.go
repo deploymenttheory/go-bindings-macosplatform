@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that processes buffer objects as received from ReplayKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler
 type RPBroadcastSampleHandler struct {
 	RPBroadcastHandler
@@ -38,37 +40,37 @@ func RPBroadcastSampleHandlerFromID(id objc.ID) *RPBroadcastSampleHandler {
 	return o
 }
 
-// @abstract Method is called when the RPBroadcastController startBroadcast method is called from the broadcasting application. @param setupInfo Dictionary that can be supplied by the UI extension to the sample handler.
+// Perform any required actions after starting a live broadcast.
 func (o *RPBroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
-	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastStartedWithSetupInfo, setupInfo)
+	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastStartedWithSetupInfo, setupInfo.Ptr())
 }
 
-// @abstract Method is called when the RPBroadcastController pauseBroadcast method is called from the broadcasting application.
+// Perform any required actions after a live broadcast is paused.
 func (o *RPBroadcastSampleHandler) BroadcastPaused() {
 	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastPaused)
 }
 
-// @abstract Method is called when the RPBroadcastController resumeBroadcast method is called from the broadcasting application.
+// Perform any required actions after a live broadcast is resumed.
 func (o *RPBroadcastSampleHandler) BroadcastResumed() {
 	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastResumed)
 }
 
-// @abstract Method is called when the RPBroadcastController finishBroadcast method is called from the broadcasting application.
+// Perform any required actions after a live broadcast is finished.
 func (o *RPBroadcastSampleHandler) BroadcastFinished() {
 	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastFinished)
 }
 
-// @abstract Method is called when broadcast is started from Control Center and provides extension information about the first application opened or used during the broadcast. @param applicationInfo Dictionary that contains information about the first application opened or used buring the broadcast.
+// Perform any required actions after starting a live broadcast.
 func (o *RPBroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastAnnotatedWithApplicationInfo, applicationInfo)
+	o.Ptr().Send(_rPBroadcastSampleHandlerSelBroadcastAnnotatedWithApplicationInfo, applicationInfo.Ptr())
 }
 
-// @abstract Method is called as video and audio data become available during a broadcast session and is delivered as CMSampleBuffer objects. @param sampleBuffer CMSampleBuffer object which contains either video or audio data. @param sampleBufferType Determine's the type of the sample buffer defined by the RPSampleBufferType enum.
+// Processes video and audio data as it becomes available during a live broadcast.
 func (o *RPBroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType RPSampleBufferType) {
 	o.Ptr().Send(_rPBroadcastSampleHandlerSelProcessSampleBufferWithType, sampleBuffer, sampleBufferType)
 }
 
-// @abstract Method that should be called when broadcasting can not proceed due to an error. Calling this method will stop the broadcast and deliver the error back to the broadcasting app through RPBroadcastController's delegate. @param error NSError object that will be passed back to the broadcasting app through RPBroadcastControllerDelegate's broadcastController:didFinishWithError: method.
+// Stops the broadcast and passes an error back to the broadcasting app.
 func (o *RPBroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_rPBroadcastSampleHandlerSelFinishBroadcastWithError, error_)
 }

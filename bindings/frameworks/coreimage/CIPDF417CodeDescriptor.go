@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete subclass of Core Image Barcode Descriptor that represents a PDF417 symbol.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor
 type CIPDF417CodeDescriptor struct {
 	CIBarcodeDescriptor
@@ -35,7 +37,7 @@ func CIPDF417CodeDescriptorFromID(id objc.ID) *CIPDF417CodeDescriptor {
 	return o
 }
 
-// Initializes an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An initialized “CIPDF417CodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes an PDF417 code descriptor for the given payload and parameters.
 func (o *CIPDF417CodeDescriptor) InitWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *CIPDF417CodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIPDF417CodeDescriptorSelInitWithPayloadIsCompactRowCountColumnCount, errorCorrectedPayload.Ptr(), isCompact, rowCount, columnCount)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *CIPDF417CodeDescriptor) InitWithPayloadIsCompactRowCountColumnCount(err
 	return CIPDF417CodeDescriptorFromID(_ret)
 }
 
-// Creates an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An autoreleased “CIPDF417CodeDescriptor“ instance or `nil` if the parameters are invalid
+// Creates an PDF417 code descriptor for the given payload and parameters.
 func CIPDF417CodeDescriptorDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *CIPDF417CodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIPDF417CodeDescriptor), _cIPDF417CodeDescriptorSelDescriptorWithPayloadIsCompactRowCountColumnCount, errorCorrectedPayload.Ptr(), isCompact, rowCount, columnCount)
 	if _ret != 0 {

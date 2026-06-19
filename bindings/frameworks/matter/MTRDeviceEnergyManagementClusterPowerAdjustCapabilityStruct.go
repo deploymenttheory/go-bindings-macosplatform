@@ -34,12 +34,15 @@ func MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructFromID(id objc.I
 }
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) PowerAdjustCapability() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelPowerAdjustCapability)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelPowerAdjustCapability)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAdjustCapability(powerAdjustCapability *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelSetPowerAdjustCapability, powerAdjustCapability)
+	o.Ptr().Send(_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelSetPowerAdjustCapability, powerAdjustCapability.Ptr())
 }
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() *foundation.NSNumber {

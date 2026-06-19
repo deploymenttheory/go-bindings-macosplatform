@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the interface to query for the requirements of the current pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetwriterinputpassdescription
 type AVAssetWriterInputPassDescription struct {
 	foundation.NSObject
@@ -31,6 +33,9 @@ func AVAssetWriterInputPassDescriptionFromID(id objc.ID) *AVAssetWriterInputPass
 }
 
 func (o *AVAssetWriterInputPassDescription) SourceTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVAssetWriterInputPassDescriptionSelSourceTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputPassDescriptionSelSourceTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

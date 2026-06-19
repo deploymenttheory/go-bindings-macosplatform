@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for an average.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxaverage
 type MXAverage[UnitType purego.AnyObject] struct {
 	foundation.NSObject

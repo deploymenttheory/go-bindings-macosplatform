@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The Print panel that queries the user for information about a print job.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsprintpanel
 type NSPrintPanel struct {
 	foundation.NSObject
@@ -52,6 +54,7 @@ func NSPrintPanelFromID(id objc.ID) *NSPrintPanel {
 	return o
 }
 
+// Returns a new print panel object.
 func NSPrintPanelPrintPanel() *NSPrintPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintPanel), _nSPrintPanelSelPrintPanel)
 	if _ret != 0 {
@@ -60,18 +63,22 @@ func NSPrintPanelPrintPanel() *NSPrintPanel {
 	return NSPrintPanelFromID(_ret)
 }
 
+// Adds a custom controller to the Print panel to manage an accessory view.
 func (o *NSPrintPanel) AddAccessoryController(accessoryController *NSViewController) {
 	o.Ptr().Send(_nSPrintPanelSelAddAccessoryController, accessoryController.Ptr())
 }
 
+// Removes the specified controller and accessory view from the Print panel.
 func (o *NSPrintPanel) RemoveAccessoryController(accessoryController *NSViewController) {
 	o.Ptr().Send(_nSPrintPanelSelRemoveAccessoryController, accessoryController.Ptr())
 }
 
+// Sets the title of the Print panel’s default button.
 func (o *NSPrintPanel) SetDefaultButtonTitle(defaultButtonTitle *foundation.NSString) {
 	o.Ptr().Send(_nSPrintPanelSelSetDefaultButtonTitle, defaultButtonTitle.Ptr())
 }
 
+// Returns the title of the Print panel’s default button.
 func (o *NSPrintPanel) DefaultButtonTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelDefaultButtonTitle)
 	if _ret != 0 {
@@ -91,16 +98,19 @@ func (o *NSPrintPanel) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printIn
 	o.Ptr().Send(_nSPrintPanelSelBeginSheetUsingPrintInfoOnWindowCompletionHandler, printInfo.Ptr(), parentWindow.Ptr(), __block_handler)
 }
 
+// Displays a Print panel sheet and runs it modally for the specified window.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSPrintPanel) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *NSPrintInfo, docWindow *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSPrintPanelSelBeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo, printInfo.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
 }
 
+// Displays the Print panel and runs the modal loop using the specified printing information.
 func (o *NSPrintPanel) RunModalWithPrintInfo(printInfo *NSPrintInfo) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPrintPanelSelRunModalWithPrintInfo, printInfo.Ptr())
 	return _ret
 }
 
+// Displays the Print panel and begins the modal loop.
 func (o *NSPrintPanel) RunModal() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPrintPanelSelRunModal)
 	return _ret
@@ -155,11 +165,13 @@ func (o *NSPrintPanel) PrintInfo() *NSPrintInfo {
 	return NSPrintInfoFromID(_ret)
 }
 
+// Sets the accessory view for the Print panel.
 // Deprecated: Use -addAccessoryController instead
 func (o *NSPrintPanel) SetAccessoryView(accessoryView *NSView) {
 	o.Ptr().Send(_nSPrintPanelSelSetAccessoryView, accessoryView.Ptr())
 }
 
+// Returns the accessory view of the Print panel.
 // Deprecated: Use -accessoryControllers instead. For compatibility this returns the view of the first accessory controller, or nil
 func (o *NSPrintPanel) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintPanelSelAccessoryView)
@@ -169,11 +181,13 @@ func (o *NSPrintPanel) AccessoryView() *NSView {
 	return NSViewFromID(_ret)
 }
 
+// Updates the Print panel with information from the current print operation object.
 // Deprecated: since macOS 10.5.
 func (o *NSPrintPanel) UpdateFromPrintInfo() {
 	o.Ptr().Send(_nSPrintPanelSelUpdateFromPrintInfo)
 }
 
+// Writes the Print panel’s printing attributes to the current print operation object.
 // Deprecated: since macOS 10.5.
 func (o *NSPrintPanel) FinalWritePrintInfo() {
 	o.Ptr().Send(_nSPrintPanelSelFinalWritePrintInfo)

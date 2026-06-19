@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for effects that you can apply to a symbol-based image.
+//
 // SymbolEffect wraps [raw.NSSymbolEffect] with a fluent Go API.
 type SymbolEffect struct {
 	inner *raw.NSSymbolEffect

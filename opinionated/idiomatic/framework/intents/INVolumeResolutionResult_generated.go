@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a volume associated with an intent.
+//
 // VolumeResolutionResult wraps [raw.INVolumeResolutionResult] with a fluent Go API.
 type VolumeResolutionResult struct {
 	inner *raw.INVolumeResolutionResult

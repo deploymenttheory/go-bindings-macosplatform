@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that provides the position and extent of an image feature that an image- analysis request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectedobjectobservation
 type VNDetectedObjectObservation struct {
 	VNObservation
@@ -33,7 +35,7 @@ func VNDetectedObjectObservationFromID(id objc.ID) *VNDetectedObjectObservation 
 	return o
 }
 
-// @brief create a new VNDetectedObjectObservation with a normalized bounding box and a confidence of 1.0.
+// Creates an observation with a bounding box.
 func VNDetectedObjectObservationObservationWithBoundingBox(boundingBox corefoundation.CGRect) *VNDetectedObjectObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectedObjectObservation), _vNDetectedObjectObservationSelObservationWithBoundingBox, boundingBox)
 	if _ret != 0 {
@@ -42,6 +44,7 @@ func VNDetectedObjectObservationObservationWithBoundingBox(boundingBox corefound
 	return VNDetectedObjectObservationFromID(_ret)
 }
 
+// Creates an observation with a revision number and bounding box.
 func VNDetectedObjectObservationObservationWithRequestRevisionBoundingBox(requestRevision uint, boundingBox corefoundation.CGRect) *VNDetectedObjectObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectedObjectObservation), _vNDetectedObjectObservationSelObservationWithRequestRevisionBoundingBox, requestRevision, boundingBox)
 	if _ret != 0 {

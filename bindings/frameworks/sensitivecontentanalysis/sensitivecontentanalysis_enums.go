@@ -151,14 +151,15 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Configurations that represent the way the framework checks for sensitive content and how the app responds.
 type SCSensitivityAnalysisPolicy int64
 
 const (
-	// No feature enabled that is requiring Sensitive Analysis on device, analysis will be disabled
+	// An indicator that the app lacks access to use the framework.
 	SCSensitivityAnalysisPolicyDisabled SCSensitivityAnalysisPolicy = 0
-	// Sensitive Analysis is enabled on device through "Sensitive Content Warning" in Settings. It is expected that brief/inline UI, like simple "show" button.
+	// An indicator that user preference requests discrete detection of sensitive content.
 	SCSensitivityAnalysisPolicySimpleInterventions SCSensitivityAnalysisPolicy = 1
-	// Sensitive Analysis is enabled for kids or teens in ScreenTime through "Communications Safety" feature. It's expected to have more descriptive UI for the user, explaining potential risks.
+	// An indicator that the person requests overt detection of sensitive content.
 	SCSensitivityAnalysisPolicyDescriptiveInterventions SCSensitivityAnalysisPolicy = 2
 )
 

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An archive of assets that the system downloads together.
+//
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/baassetpack
 type BAAssetPack struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func BAAssetPackFromID(id objc.ID) *BAAssetPack {
 	return o
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager. - Remark: Use this method in your main app; use “BAAssetPack/downloadForContentRequest:“ instead in your downloader extension.
+// Creates a download object for the asset pack that you schedule using a download manager.
 func (o *BAAssetPack) Download() *BADownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelDownload)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *BAAssetPack) Download() *BADownload {
 	return BADownloadFromID(_ret)
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A download object. - Remark: Use this method in your downloader extension; use “BAAssetPack/download“ instead in your main app.
+// Creates a download object for the asset pack that you schedule using a download manager.
 func (o *BAAssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *BADownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackSelDownloadForContentRequest, contentRequest)
 	if _ret != 0 {

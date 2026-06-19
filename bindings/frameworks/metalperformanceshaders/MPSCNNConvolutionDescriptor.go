@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the attributes of a convolution kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor
 type MPSCNNConvolutionDescriptor struct {
 	foundation.NSObject
@@ -79,7 +81,7 @@ func (o *MPSCNNConvolutionDescriptor) InitWithCoder(aDecoder *foundation.NSCoder
 	return MPSCNNConvolutionDescriptorFromID(_ret)
 }
 
-// @abstract   This method is deprecated. Please use neuronType, neuronParameterA and neuronParameterB properites to fuse neuron with convolution. @param      kernelWidth             The width of the filter window.  Must be > 0. Large values will take a long time. @param      kernelHeight            The height of the filter window.   Must be > 0. Large values will take a long time. @param      inputFeatureChannels    The number of feature channels in the input image. Must be >= 1. @param      outputFeatureChannels   The number of feature channels in the output image. Must be >= 1. @param      neuronFilter            An optional neuron filter that can be applied to the output of convolution. @return     A valid MPSCNNConvolutionDescriptor object or nil, if failure.
+// Creates a convolution descriptor with an optional neuron filter.
 func MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter(kernelWidth uint, kernelHeight uint, inputFeatureChannels uint, outputFeatureChannels uint, neuronFilter *mpsneuralnetwork.MPSCNNNeuron) *MPSCNNConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionDescriptor), _mPSCNNConvolutionDescriptorSelCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter, kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels, neuronFilter.Ptr())
 	if _ret != 0 {

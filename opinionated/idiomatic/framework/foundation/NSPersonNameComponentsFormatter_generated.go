@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that provides localized representations of the components of a person’s name.
+//
 // PersonNameComponentsFormatter wraps [raw.NSPersonNameComponentsFormatter] with a fluent Go API.
 type PersonNameComponentsFormatter struct {
 	inner *raw.NSPersonNameComponentsFormatter

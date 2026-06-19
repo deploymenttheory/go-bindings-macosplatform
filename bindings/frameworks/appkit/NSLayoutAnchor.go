@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A factory class for creating layout constraint objects using a fluent API.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutanchor
 type NSLayoutAnchor[AnchorType purego.AnyObject] struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSLayoutAnchorFromID[AnchorType purego.AnyObject](id objc.ID) *NSLayoutAnch
 	return o
 }
 
+// Returns a constraint that defines one item’s attribute as equal to another.
 func (o *NSLayoutAnchor[AnchorType]) ConstraintEqualToAnchor(anchor *NSLayoutAnchor[AnchorType]) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintEqualToAnchor, anchor.Ptr())
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *NSLayoutAnchor[AnchorType]) ConstraintEqualToAnchor(anchor *NSLayoutAnc
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines one item’s attribute as greater than or equal to another.
 func (o *NSLayoutAnchor[AnchorType]) ConstraintGreaterThanOrEqualToAnchor(anchor *NSLayoutAnchor[AnchorType]) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchor, anchor.Ptr())
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func (o *NSLayoutAnchor[AnchorType]) ConstraintGreaterThanOrEqualToAnchor(anchor
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines one item’s attribute as less than or equal to another.
 func (o *NSLayoutAnchor[AnchorType]) ConstraintLessThanOrEqualToAnchor(anchor *NSLayoutAnchor[AnchorType]) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintLessThanOrEqualToAnchor, anchor.Ptr())
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func (o *NSLayoutAnchor[AnchorType]) ConstraintLessThanOrEqualToAnchor(anchor *N
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines one item’s attribute as equal to another item’s attribute plus a constant offset.
 func (o *NSLayoutAnchor[AnchorType]) ConstraintEqualToAnchorConstant(anchor *NSLayoutAnchor[AnchorType], c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintEqualToAnchorConstant, anchor.Ptr(), c)
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func (o *NSLayoutAnchor[AnchorType]) ConstraintEqualToAnchorConstant(anchor *NSL
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines one item’s attribute as greater than or equal to another item’s attribute plus a constant offset.
 func (o *NSLayoutAnchor[AnchorType]) ConstraintGreaterThanOrEqualToAnchorConstant(anchor *NSLayoutAnchor[AnchorType], c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchorConstant, anchor.Ptr(), c)
 	if _ret != 0 {
@@ -79,6 +86,7 @@ func (o *NSLayoutAnchor[AnchorType]) ConstraintGreaterThanOrEqualToAnchorConstan
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines one item’s attribute as less than or equal to another item’s attribute plus a constant offset.
 func (o *NSLayoutAnchor[AnchorType]) ConstraintLessThanOrEqualToAnchorConstant(anchor *NSLayoutAnchor[AnchorType], c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintLessThanOrEqualToAnchorConstant, anchor.Ptr(), c)
 	if _ret != 0 {

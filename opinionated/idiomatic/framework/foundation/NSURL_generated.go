@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the location of a resource, such as an item on a remote server or the path to a local file.
+//
 // URL wraps [raw.NSURL] with a fluent Go API.
 type URL struct {
 	inner *raw.NSURL
@@ -32,6 +34,8 @@ func URLFromID(id objc.ID) *URL {
 	return &URL{inner: raw.NSURLFromID(id)}
 }
 
+// Initializes a newly created NSURL with a specified scheme, host, and path.
+//
 // NewURLWithSchemeHostPath creates a new [URL].
 func NewURLWithSchemeHostPath(scheme string, host string, path string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewURLWithSchemeHostPath(scheme string, host string, path string) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
+//
 // NewURLFileURLWithPathIsDirectoryRelativeToURL creates a new [URL].
 func NewURLFileURLWithPathIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewURLFileURLWithPathIsDirectoryRelativeToURL(path string, isDir bool, base
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
+//
 // NewURLFileURLWithPathRelativeToURL creates a new [URL].
 func NewURLFileURLWithPathRelativeToURL(path string, baseURL string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -53,6 +61,8 @@ func NewURLFileURLWithPathRelativeToURL(path string, baseURL string) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created NSURL referencing the local file or directory at path.
+//
 // NewURLFileURLWithPathIsDirectory creates a new [URL].
 func NewURLFileURLWithPathIsDirectory(path string, isDir bool) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -60,6 +70,8 @@ func NewURLFileURLWithPathIsDirectory(path string, isDir bool) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created NSURL referencing the local file or directory at path.
+//
 // NewURLFileURLWithPath creates a new [URL].
 func NewURLFileURLWithPath(path string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -67,6 +79,8 @@ func NewURLFileURLWithPath(path string) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a URL object with a C string representing a local file system path.
+//
 // NewURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL creates a new [URL].
 func NewURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -74,6 +88,8 @@ func NewURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path stri
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes an NSURL object with a provided URL string.
+//
 // NewURLWithString creates a new [URL].
 func NewURLWithString(uRLString string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -81,6 +97,8 @@ func NewURLWithString(uRLString string) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes an NSURL object with a base URL and a relative string.
+//
 // NewURLWithStringRelativeToURL creates a new [URL].
 func NewURLWithStringRelativeToURL(uRLString string, baseURL string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -88,7 +106,7 @@ func NewURLWithStringRelativeToURL(uRLString string, baseURL string) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
-// Initializes an `NSURL` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURL` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURL` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURL` instance for a valid URL, or `nil` if the URL is invalid.
+// Creates an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 //
 // NewURLWithStringEncodingInvalidCharacters creates a new [URL].
 func NewURLWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URL {
@@ -97,6 +115,8 @@ func NewURLWithStringEncodingInvalidCharacters(uRLString string, encodingInvalid
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created NSURL using the contents of the given data, relative to a base URL.
+//
 // NewURLWithDataRepresentationRelativeToURL creates a new [URL].
 func NewURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -104,6 +124,8 @@ func NewURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string)
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created absolute NSURL using the contents of the given data, relative to a base URL.
+//
 // NewURLAbsoluteURLWithDataRepresentationRelativeToURL creates a new [URL].
 func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -111,6 +133,8 @@ func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *raw.NSData, base
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes a newly created NSURL that points to a location specified by resolving bookmark data.
+//
 // NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError creates a new [URL].
 func NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -128,16 +152,22 @@ func (x *URL) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw
 	return x
 }
 
+// Fills the provided buffer with a C string representing a local file system path.
+//
 // GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
 func (x *URL) GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool {
 	return x.inner.GetFileSystemRepresentationMaxLength(buffer, maxBufferLength)
 }
 
+// Returns whether the URL is a file reference URL.
+//
 // IsFileReferenceURL calls the underlying IsFileReferenceURL.
 func (x *URL) IsFileReferenceURL() bool {
 	return x.inner.IsFileReferenceURL()
 }
 
+// Returns a new file reference URL that points to the same resource as the receiver.
+//
 // FileReferenceURL calls the underlying FileReferenceURL.
 func (x *URL) FileReferenceURL() *URL {
 	_r := x.inner.FileReferenceURL()
@@ -147,11 +177,15 @@ func (x *URL) FileReferenceURL() *URL {
 	return &URL{inner: _r}
 }
 
+// Returns the value of the resource property for the specified key.
+//
 // GetResourceValueForKeyError calls the underlying GetResourceValueForKeyError.
 func (x *URL) GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error) {
 	return x.inner.GetResourceValueForKeyError(value, key)
 }
 
+// Returns the resource values for the properties identified by specified array of keys.
+//
 // ResourceValuesForKeysError calls the underlying ResourceValuesForKeysError.
 func (x *URL) ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
 	_ptrs := make([]objc.ID, len(keys))
@@ -168,31 +202,43 @@ func (x *URL) ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDiction
 	return x.inner.ResourceValuesForKeysError(_arg0)
 }
 
+// Sets the URL’s resource property for a given key to a given value.
+//
 // SetResourceValueForKeyError calls the underlying SetResourceValueForKeyError.
 func (x *URL) SetResourceValueForKeyError(value objc.ID, key *raw.NSString) (bool, error) {
 	return x.inner.SetResourceValueForKeyError(value, key)
 }
 
+// Sets the URL’s resource properties for a given set of keys to a given set of values.
+//
 // SetResourceValuesError calls the underlying SetResourceValuesError.
 func (x *URL) SetResourceValuesError(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetResourceValuesError(keyedValues)
 }
 
+// Removes the cached resource value identified by a given key from the URL object.
+//
 // RemoveCachedResourceValueForKey calls the underlying RemoveCachedResourceValueForKey.
 func (x *URL) RemoveCachedResourceValueForKey(key *raw.NSString) {
 	x.inner.RemoveCachedResourceValueForKey(key)
 }
 
+// Removes all cached resource values and temporary resource values from the URL object.
+//
 // RemoveAllCachedResourceValues calls the underlying RemoveAllCachedResourceValues.
 func (x *URL) RemoveAllCachedResourceValues() {
 	x.inner.RemoveAllCachedResourceValues()
 }
 
+// Sets a temporary resource value on the URL object.
+//
 // SetTemporaryResourceValueForKey calls the underlying SetTemporaryResourceValueForKey.
 func (x *URL) SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString) {
 	x.inner.SetTemporaryResourceValueForKey(value, key)
 }
 
+// Returns a bookmark for the URL, created with specified options and resource values.
+//
 // BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError calls the underlying BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError.
 func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error) {
 	_r, _err := x.inner.BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(raw.NSURLBookmarkCreationOptions(options), keys, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)))
@@ -205,11 +251,15 @@ func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURL
 	return &Data{inner: _r}, nil
 }
 
+// In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
+//
 // StartAccessingSecurityScopedResource calls the underlying StartAccessingSecurityScopedResource.
 func (x *URL) StartAccessingSecurityScopedResource() bool {
 	return x.inner.StartAccessingSecurityScopedResource()
 }
 
+// In an app that adopts App Sandbox, revokes access to the resource pointed to by a security-scoped URL.
+//
 // StopAccessingSecurityScopedResource calls the underlying StopAccessingSecurityScopedResource.
 func (x *URL) StopAccessingSecurityScopedResource() {
 	x.inner.StopAccessingSecurityScopedResource()
@@ -392,11 +442,15 @@ func (x *URL) FilePathURL() *URL {
 	return &URL{inner: _r}
 }
 
+// Returns the value of the resource property for the specified key.
+//
 // GetPromisedItemResourceValueForKeyError calls the underlying GetPromisedItemResourceValueForKeyError.
 func (x *URL) GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error) {
 	return x.inner.GetPromisedItemResourceValueForKeyError(value, key)
 }
 
+// Returns the resource values for the properties identified by specified array of keys.
+//
 // PromisedItemResourceValuesForKeysError calls the underlying PromisedItemResourceValuesForKeysError.
 func (x *URL) PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
 	_ptrs := make([]objc.ID, len(keys))
@@ -413,12 +467,16 @@ func (x *URL) PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*r
 	return x.inner.PromisedItemResourceValuesForKeysError(_arg0)
 }
 
+// Returns whether the promised item can be reached.
+//
 // CheckPromisedItemIsReachableAndReturnError returns any validation error.
 func (x *URL) CheckPromisedItemIsReachableAndReturnError() error {
 	_, err := x.inner.CheckPromisedItemIsReachableAndReturnError()
 	return err
 }
 
+// Returns a new URL by appending a path component to the original URL.
+//
 // URLByAppendingPathComponent calls the underlying URLByAppendingPathComponent.
 func (x *URL) URLByAppendingPathComponent(pathComponent string) *URL {
 	_r := x.inner.URLByAppendingPathComponent(foundation.NSStringStringWithUTF8String(pathComponent))
@@ -428,6 +486,8 @@ func (x *URL) URLByAppendingPathComponent(pathComponent string) *URL {
 	return &URL{inner: _r}
 }
 
+// Returns a new URL by appending a path component to the original URL, along with a trailing slash if the component is a directory.
+//
 // URLByAppendingPathComponentIsDirectory calls the underlying URLByAppendingPathComponentIsDirectory.
 func (x *URL) URLByAppendingPathComponentIsDirectory(pathComponent string, isDirectory bool) *URL {
 	_r := x.inner.URLByAppendingPathComponentIsDirectory(foundation.NSStringStringWithUTF8String(pathComponent), isDirectory)
@@ -437,6 +497,8 @@ func (x *URL) URLByAppendingPathComponentIsDirectory(pathComponent string, isDir
 	return &URL{inner: _r}
 }
 
+// Returns a new URL by appending a path extension to the original URL.
+//
 // URLByAppendingPathExtension calls the underlying URLByAppendingPathExtension.
 func (x *URL) URLByAppendingPathExtension(pathExtension string) *URL {
 	_r := x.inner.URLByAppendingPathExtension(foundation.NSStringStringWithUTF8String(pathExtension))
@@ -446,6 +508,8 @@ func (x *URL) URLByAppendingPathExtension(pathExtension string) *URL {
 	return &URL{inner: _r}
 }
 
+// Returns whether the resource pointed to by a file URL can be reached.
+//
 // CheckResourceIsReachableAndReturnError returns any validation error.
 func (x *URL) CheckResourceIsReachableAndReturnError() error {
 	_, err := x.inner.CheckResourceIsReachableAndReturnError()
@@ -517,6 +581,8 @@ func (x *URL) URLByResolvingSymlinksInPath() *URL {
 	return &URL{inner: _r}
 }
 
+// Returns the receiver’s resource data, loading it if necessary.
+//
 // ResourceDataUsingCache calls the underlying ResourceDataUsingCache.
 func (x *URL) ResourceDataUsingCache(shouldUseCache bool) *Data {
 	_r := x.inner.ResourceDataUsingCache(shouldUseCache)
@@ -526,26 +592,36 @@ func (x *URL) ResourceDataUsingCache(shouldUseCache bool) *Data {
 	return &Data{inner: _r}
 }
 
+// Loads the receiver’s resource data in the background.
+//
 // LoadResourceDataNotifyingClientUsingCache calls the underlying LoadResourceDataNotifyingClientUsingCache.
 func (x *URL) LoadResourceDataNotifyingClientUsingCache(client objc.ID, shouldUseCache bool) {
 	x.inner.LoadResourceDataNotifyingClientUsingCache(client, shouldUseCache)
 }
 
+// Returns the specified property of the receiver’s resource.
+//
 // PropertyForKey calls the underlying PropertyForKey.
 func (x *URL) PropertyForKey(propertyKey string) objc.ID {
 	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(propertyKey))
 }
 
+// Attempts to set the resource data for the receiver.
+//
 // SetResourceData calls the underlying SetResourceData.
 func (x *URL) SetResourceData(data *raw.NSData) bool {
 	return x.inner.SetResourceData(data)
 }
 
+// Changes the specified property of the receiver’s resource.
+//
 // SetPropertyForKey calls the underlying SetPropertyForKey.
 func (x *URL) SetPropertyForKey(property objc.ID, propertyKey string) bool {
 	return x.inner.SetPropertyForKey(property, foundation.NSStringStringWithUTF8String(propertyKey))
 }
 
+// Returns a URL handle to service the receiver.
+//
 // URLHandleUsingCache calls the underlying URLHandleUsingCache.
 func (x *URL) URLHandleUsingCache(shouldUseCache bool) *URLHandle {
 	_r := x.inner.URLHandleUsingCache(shouldUseCache)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that contain clinical record data.
+//
 // ClinicalType wraps [raw.HKClinicalType] with a fluent Go API.
 type ClinicalType struct {
 	inner *raw.HKClinicalType

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view for displaying and browsing a large collection of images and movies.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikimagebrowserview
 // Deprecated: Deprecated - Please use NSCollectionView instead
 type IKImageBrowserView struct {

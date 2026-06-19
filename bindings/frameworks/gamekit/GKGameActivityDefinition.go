@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the static metadata you define for the activity.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition
 type GKGameActivityDefinition struct {
 	foundation.NSObject
@@ -128,8 +130,11 @@ func (o *GKGameActivityDefinition) Details() *foundation.NSString {
 
 // Default properties defined by the developer for this type of game activity.
 func (o *GKGameActivityDefinition) DefaultProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _gKGameActivityDefinitionSelDefaultProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivityDefinitionSelDefaultProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 // A fallback URL that can be used to construct a game-specific URL for players to share or join, if the joining device does not support the default URL.
@@ -210,5 +215,5 @@ func GKGameActivityDefinitionLoadGameActivityDefinitionsWithIDsCompletionHandler
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsGKGameActivityDefinition).Send(_gKGameActivityDefinitionSelLoadGameActivityDefinitionsWithIDsCompletionHandler, activityDefinitionIDs, __block_completionHandler)
+	objc.ID(_clsGKGameActivityDefinition).Send(_gKGameActivityDefinitionSelLoadGameActivityDefinitionsWithIDsCompletionHandler, activityDefinitionIDs.Ptr(), __block_completionHandler)
 }

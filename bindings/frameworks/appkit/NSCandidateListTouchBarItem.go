@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that, along with its delegate, provides a list of textual suggestions for the current text view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscandidatelisttouchbaritem
 type NSCandidateListTouchBarItem[CandidateType purego.AnyObject] struct {
 	NSTouchBarItem
@@ -46,10 +48,12 @@ func NSCandidateListTouchBarItemFromID[CandidateType purego.AnyObject](id objc.I
 	return o
 }
 
+// Updates the candidate list visibility configuration based on the client’s insertion point state.
 func (o *NSCandidateListTouchBarItem[CandidateType]) UpdateWithInsertionPointVisibility(isVisible bool) {
 	o.Ptr().Send(_nSCandidateListTouchBarItemSelUpdateWithInsertionPointVisibility, isVisible)
 }
 
+// Sets an array of candidate objects to be displayed in the candidate list bar item.
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[CandidateType], selectedRange foundation.NSRange, originalString *foundation.NSString) {
 	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCandidatesForSelectedRangeInString, candidates.Ptr(), selectedRange, originalString.Ptr())
 }

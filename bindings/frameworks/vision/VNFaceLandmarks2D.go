@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of facial features that a request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnfacelandmarks2d
 type VNFaceLandmarks2D struct {
 	VNFaceLandmarks

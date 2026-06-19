@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A credential object that encapsulates the information needed to authenticate a user.
+//
 // Apple documentation: https://developer.apple.com/documentation/accounts/acaccountcredential
 // Deprecated: Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead
 type ACAccountCredential struct {
@@ -34,6 +36,7 @@ func ACAccountCredentialFromID(id objc.ID) *ACAccountCredential {
 	return o
 }
 
+// Initializes an account credential using OAuth.
 // Deprecated: Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead
 func (o *ACAccountCredential) InitWithOAuthTokenTokenSecret(token *foundation.NSString, secret *foundation.NSString) *ACAccountCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountCredentialSelInitWithOAuthTokenTokenSecret, token.Ptr(), secret.Ptr())
@@ -43,6 +46,7 @@ func (o *ACAccountCredential) InitWithOAuthTokenTokenSecret(token *foundation.NS
 	return ACAccountCredentialFromID(_ret)
 }
 
+// Initializes an account credential using OAuth 2.
 func (o *ACAccountCredential) InitWithOAuth2TokenRefreshTokenExpiryDate(token *foundation.NSString, refreshToken *foundation.NSString, expiryDate *foundation.NSDate) *ACAccountCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountCredentialSelInitWithOAuth2TokenRefreshTokenExpiryDate, token.Ptr(), refreshToken.Ptr(), expiryDate.Ptr())
 	if _ret != 0 {

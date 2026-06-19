@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that marks the stopping point for a query and the starting point for retrieving the remaining results.
+//
 // QueryCursor wraps [raw.CKQueryCursor] with a fluent Go API.
 type QueryCursor struct {
 	inner *raw.CKQueryCursor

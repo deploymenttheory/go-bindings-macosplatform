@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation for modifying one or more subscriptions.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckmodifysubscriptionsoperation
 type CKModifySubscriptionsOperation struct {
 	CKDatabaseOperation
@@ -52,9 +54,9 @@ func (o *CKModifySubscriptionsOperation) Init() *CKModifySubscriptionsOperation 
 	return CKModifySubscriptionsOperationFromID(_ret)
 }
 
-// Creates an operation for saving and deleting the specified subscriptions. - Parameters: - subscriptionsToSave: The subscriptions to save or update. You can specify `nil` for this parameter. - subscriptionIDsToDelete: The IDs of the subscriptions to delete. You can specify `nil` for this parameter. The subscriptions that you want to save or delete must reside in the same container. CloudKit creates a subscription if you save one that doesn't already exist. CloudKit returns an error if you try to delete a subscription that doesn't exist.
+// Creates an operation for saving and deleting the specified subscriptions.
 func (o *CKModifySubscriptionsOperation) InitWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave *foundation.NSArray[*CKSubscription], subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) *CKModifySubscriptionsOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifySubscriptionsOperationSelInitWithSubscriptionsToSaveSubscriptionIDsToDelete, subscriptionsToSave.Ptr(), subscriptionIDsToDelete)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifySubscriptionsOperationSelInitWithSubscriptionsToSaveSubscriptionIDsToDelete, subscriptionsToSave.Ptr(), subscriptionIDsToDelete.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -76,12 +78,15 @@ func (o *CKModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToS
 
 // The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
 func (o *CKModifySubscriptionsOperation) SubscriptionIDsToDelete() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKModifySubscriptionsOperationSelSubscriptionIDsToDelete)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifySubscriptionsOperationSelSubscriptionIDsToDelete)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetSubscriptionIDsToDelete, subscriptionIDsToDelete)
+	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetSubscriptionIDsToDelete, subscriptionIDsToDelete.Ptr())
 }
 
 // The closure to execute when CloudKit saves a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit saves. - The subscription that CloudKit saves, or `nil` if CloudKit can't save the subscription. - If CloudKit can't save the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionsToSave“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
@@ -133,6 +138,19 @@ func (o *CKModifySubscriptionsOperation) ModifySubscriptionsCompletionBlock() ob
 	return _ret
 }
 
-func (o *CKModifySubscriptionsOperation) SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) {
-	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetModifySubscriptionsCompletionBlock, modifySubscriptionsCompletionBlock)
+func (o *CKModifySubscriptionsOperation) SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(*foundation.NSArray[*CKSubscription], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
+	var __block_modifySubscriptionsCompletionBlock objc.Block
+	if modifySubscriptionsCompletionBlock != nil {
+		__block_modifySubscriptionsCompletionBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			modifySubscriptionsCompletionBlock(foundation.NSArrayFromID[*CKSubscription](blockParam0), foundation.NSArrayFromID[*foundation.NSString](blockParam1), blockParam2)
+		})
+		defer __block_modifySubscriptionsCompletionBlock.Release()
+	}
+	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetModifySubscriptionsCompletionBlock, __block_modifySubscriptionsCompletionBlock)
 }

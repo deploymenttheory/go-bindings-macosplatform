@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A map of strings to vectors, which locates neighboring, similar strings.
+//
 // Embedding wraps [raw.NLEmbedding] with a fluent Go API.
 type Embedding struct {
 	inner *raw.NLEmbedding
@@ -37,61 +39,85 @@ func NewEmbedding() *Embedding {
 	return &Embedding{inner: raw.NLEmbeddingFromID(_id)}
 }
 
+// Requests a Boolean value that indicates whether the term is in the vocabulary.
+//
 // ContainsString calls the underlying ContainsString.
 func (x *Embedding) ContainsString(string_ string) bool {
 	return x.inner.ContainsString(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Calculates the distance between two strings in the vocabulary space.
+//
 // DistanceBetweenStringAndStringDistanceType calls the underlying DistanceBetweenStringAndStringDistanceType.
 func (x *Embedding) DistanceBetweenStringAndStringDistanceType(firstString string, secondString string, distanceType NLDistanceType) float64 {
 	return x.inner.DistanceBetweenStringAndStringDistanceType(foundation.NSStringStringWithUTF8String(firstString), foundation.NSStringStringWithUTF8String(secondString), raw.NLDistanceType(distanceType))
 }
 
+// Passes the nearest strings of a string in the vocabulary to a block.
+//
 // EnumerateNeighborsForStringMaximumCountDistanceTypeUsing calls the underlying EnumerateNeighborsForStringMaximumCountDistanceTypeUsing.
 func (x *Embedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ string, maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	x.inner.EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(foundation.NSStringStringWithUTF8String(string_), maxCount, raw.NLDistanceType(distanceType), block)
 }
 
+// Passes the nearest strings, within a radius of a string in the vocabulary, to a block.
+//
 // EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing calls the underlying EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing.
 func (x *Embedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ string, maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	x.inner.EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(foundation.NSStringStringWithUTF8String(string_), maxCount, maxDistance, raw.NLDistanceType(distanceType), block)
 }
 
+// Retrieves a limited number of strings near a string in the vocabulary.
+//
 // NeighborsForStringMaximumCountDistanceType calls the underlying NeighborsForStringMaximumCountDistanceType.
 func (x *Embedding) NeighborsForStringMaximumCountDistanceType(string_ string, maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.NeighborsForStringMaximumCountDistanceType(foundation.NSStringStringWithUTF8String(string_), maxCount, raw.NLDistanceType(distanceType))
 }
 
+// Retrieves a limited number of strings, within a radius of a string, in the vocabulary.
+//
 // NeighborsForStringMaximumCountMaximumDistanceDistanceType calls the underlying NeighborsForStringMaximumCountMaximumDistanceDistanceType.
 func (x *Embedding) NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ string, maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.NeighborsForStringMaximumCountMaximumDistanceDistanceType(foundation.NSStringStringWithUTF8String(string_), maxCount, maxDistance, raw.NLDistanceType(distanceType))
 }
 
+// Requests the vector for the given term.
+//
 // VectorForString calls the underlying VectorForString.
 func (x *Embedding) VectorForString(string_ string) *foundation.NSArray[*foundation.NSNumber] {
 	return x.inner.VectorForString(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Copies a vector into the given a pointer to a float array.
+//
 // GetVectorForString calls the underlying GetVectorForString.
 func (x *Embedding) GetVectorForString(vector *float32, string_ string) bool {
 	return x.inner.GetVectorForString(vector, foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Passes the nearest strings of a location in the vocabulary space to a closure.
+//
 // EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing calls the underlying EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing.
 func (x *Embedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	x.inner.EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector, maxCount, raw.NLDistanceType(distanceType), block)
 }
 
+// Passes the nearest strings, within a radius of a location in the vocabulary space, to a block.
+//
 // EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing calls the underlying EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing.
 func (x *Embedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
 	x.inner.EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector, maxCount, maxDistance, raw.NLDistanceType(distanceType), block)
 }
 
+// Retrieves a limited number of strings near a location in the vocabulary space.
+//
 // NeighborsForVectorMaximumCountDistanceType calls the underlying NeighborsForVectorMaximumCountDistanceType.
 func (x *Embedding) NeighborsForVectorMaximumCountDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.NeighborsForVectorMaximumCountDistanceType(vector, maxCount, raw.NLDistanceType(distanceType))
 }
 
+// Retrieves a limited number of strings within a radius of a location in the vocabulary space.
+//
 // NeighborsForVectorMaximumCountMaximumDistanceDistanceType calls the underlying NeighborsForVectorMaximumCountMaximumDistanceDistanceType.
 func (x *Embedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector, maxCount, maxDistance, raw.NLDistanceType(distanceType))

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract  A node representing a MPSCNNPoolingL2Norm kernel @discussion The default edge mode is MPSImageEdgeModeClamp
+// A representation of a L2-norm pooling filter.
 //
 // CNNPoolingL2NormNode wraps [raw.MPSCNNPoolingL2NormNode] with a fluent Go API.
 type CNNPoolingL2NormNode struct {

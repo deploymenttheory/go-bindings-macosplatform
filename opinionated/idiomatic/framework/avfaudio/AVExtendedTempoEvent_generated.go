@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a tempo change to a specific beats-per-minute value.
+//
 // ExtendedTempoEvent wraps [raw.AVExtendedTempoEvent] with a fluent Go API.
 type ExtendedTempoEvent struct {
 	inner *raw.AVExtendedTempoEvent
@@ -29,7 +31,7 @@ func ExtendedTempoEventFromID(id objc.ID) *ExtendedTempoEvent {
 	return &ExtendedTempoEvent{inner: raw.AVExtendedTempoEventFromID(id)}
 }
 
-// @method initWithTempo: @abstract Initialize the event tempo. @param tempo The new tempo in beats-per-minute.  Range:  Any positive value. The new tempo will begin at the timestamp for this event.
+// Creates an extended tempo event.
 //
 // NewExtendedTempoEventWithTempo creates a new [ExtendedTempoEvent].
 func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
@@ -38,7 +40,7 @@ func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
 	return &ExtendedTempoEvent{inner: raw.AVExtendedTempoEventFromID(_id)}
 }
 
-// @property tempo The new tempo in beats-per-minute.  Range:  Any positive value.
+// The tempo in beats per minute as a positive value.
 //
 // WithTempo sets the tempo property and returns the receiver for chaining.
 func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {

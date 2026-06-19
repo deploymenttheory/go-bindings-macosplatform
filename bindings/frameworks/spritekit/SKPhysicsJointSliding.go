@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A joint that allows two physics bodies to slide along an axis.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsjointsliding
 type SKPhysicsJointSliding struct {
 	SKPhysicsJoint
@@ -36,6 +38,7 @@ func SKPhysicsJointSlidingFromID(id objc.ID) *SKPhysicsJointSliding {
 	return o
 }
 
+// Creates a new sliding joint.
 func SKPhysicsJointSlidingJointWithBodyABodyBAnchorAxis(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchor corefoundation.CGPoint, axis corefoundation.CGVector) *SKPhysicsJointSliding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointSliding), _sKPhysicsJointSlidingSelJointWithBodyABodyBAnchorAxis, bodyA.Ptr(), bodyB.Ptr(), anchor, axis)
 	if _ret != 0 {

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A deterministic pseudo-random source that generates random numbers based on a mersenne twister algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly slower than an Arc4 source, but more random, in that it has a longer period until repeating sequences. While deterministic, this is not a cryptographic random source. It is however suitable for obfuscation of gameplay data.
+// A basic random number generator implementing the Mersenne Twister algorithm, which is more random, but slower than the default random source.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkmersennetwisterrandomsource
 type GKMersenneTwisterRandomSource struct {
@@ -34,7 +34,7 @@ func GKMersenneTwisterRandomSourceFromID(id objc.ID) *GKMersenneTwisterRandomSou
 	return o
 }
 
-// Initializes a linear congruential random source with bits from a high entropy system resource like SecRandomCopyBytes.
+// Initializes a random source from a nondeterministic seed.
 func (o *GKMersenneTwisterRandomSource) Init() *GKMersenneTwisterRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMersenneTwisterRandomSourceSelInit)
 	if _ret != 0 {
@@ -43,7 +43,7 @@ func (o *GKMersenneTwisterRandomSource) Init() *GKMersenneTwisterRandomSource {
 	return GKMersenneTwisterRandomSourceFromID(_ret)
 }
 
-// Initializes a linear congruential random source with bits the given 64 bit seed.
+// Initializes a random source with the specified seed value.
 func (o *GKMersenneTwisterRandomSource) InitWithSeed(seed uint64) *GKMersenneTwisterRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMersenneTwisterRandomSourceSelInitWithSeed, seed)
 	if _ret != 0 {

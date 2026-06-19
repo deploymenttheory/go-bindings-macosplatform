@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A GPU-based image-processing routine that processes only the geometry information in an image, used to create custom Core Image filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciwarpkernel
 type CIWarpKernel struct {
 	CIKernel
@@ -32,6 +34,7 @@ func CIWarpKernelFromID(id objc.ID) *CIWarpKernel {
 	return o
 }
 
+// Creates a warp kernel object from the specified kernel source code.
 func CIWarpKernelKernelWithString(string_ *foundation.NSString) *CIWarpKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIWarpKernel), _cIWarpKernelSelKernelWithString, string_.Ptr())
 	if _ret != 0 {
@@ -40,8 +43,9 @@ func CIWarpKernelKernelWithString(string_ *foundation.NSString) *CIWarpKernel {
 	return CIWarpKernelFromID(_ret)
 }
 
+// Creates a new image using the kernel and the specified input image and arguments.
 func (o *CIWarpKernel) ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *CIImage, args *foundation.NSArray[objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIWarpKernelSelApplyWithExtentRoiCallbackInputImageArguments, extent, callback, image.Ptr(), args)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIWarpKernelSelApplyWithExtentRoiCallbackInputImageArguments, extent, callback, image.Ptr(), args.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

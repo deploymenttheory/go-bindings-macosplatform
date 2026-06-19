@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about regions of text that an image-analysis request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntextobservation
 type VNTextObservation struct {
 	VNRectangleObservation

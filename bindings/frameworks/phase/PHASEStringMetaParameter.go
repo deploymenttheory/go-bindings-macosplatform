@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A metaparameter with a text definition that can change over time.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasestringmetaparameter
 type PHASEStringMetaParameter struct {
 	PHASEMetaParameter

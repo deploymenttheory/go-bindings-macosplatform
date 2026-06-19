@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A specialized predicate that evaluates logical combinations of other predicates.
+//
 // CompoundPredicate wraps [raw.NSCompoundPredicate] with a fluent Go API.
 type CompoundPredicate struct {
 	inner *raw.NSCompoundPredicate
@@ -30,6 +32,8 @@ func CompoundPredicateFromID(id objc.ID) *CompoundPredicate {
 	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(id)}
 }
 
+// Returns the receiver that a specified type initializes using predicates from a specified array.
+//
 // NewCompoundPredicateWithTypeSubpredicates creates a new [CompoundPredicate].
 func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates ...PredicateProvider) *CompoundPredicate {
 	_ptrs := make([]objc.ID, len(subpredicates))
@@ -48,6 +52,8 @@ func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, su
 	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
 }
 
+// Creates a predicate by decoding from the coder you specify.
+//
 // NewCompoundPredicateWithCoder creates a new [CompoundPredicate].
 func NewCompoundPredicateWithCoder(coder *raw.NSCoder) *CompoundPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompoundPredicate")), objc.RegisterName("alloc"))

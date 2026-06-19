@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages smooth transitions between a node’s base geometry and one or more target geometries.
+//
 // Morpher wraps [raw.SCNMorpher] with a fluent Go API.
 type Morpher struct {
 	inner *raw.SCNMorpher
@@ -38,7 +40,7 @@ func NewMorpher() *Morpher {
 	return &Morpher{inner: raw.SCNMorpherFromID(_id)}
 }
 
-// @property targets @abstract Specifies the morph targets as an array of SCNGeometry. @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
+// The array of target geometries to morph between.
 //
 // WithTargets sets the collection, converting the Go slice to an NSArray.
 func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
@@ -84,7 +86,7 @@ func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
 	return x
 }
 
-// @property calculationMode @abstract Specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.
+// The interpolation formula for blending between target geometries.
 //
 // WithCalculationMode sets the calculationMode property and returns the receiver for chaining.
 func (x *Morpher) WithCalculationMode(calculationMode SCNMorpherCalculationMode) *Morpher {
@@ -100,14 +102,14 @@ func (x *Morpher) WithUnifiesNormals(unifiesNormals bool) *Morpher {
 	return x
 }
 
-// @method setWeight:forTargetAtIndex: @abstract Sets the weight for the target at the specified index. Animatable implicitly or explicitly with the keyPath "weights[index]" or "weights["targetName"]" (targetName is the name of the target geometry).
+// Specifies a weight value at a specified target index.
 //
 // SetWeightForTargetAtIndex calls the underlying SetWeightForTargetAtIndex.
 func (x *Morpher) SetWeightForTargetAtIndex(weight float64, targetIndex uint) {
 	x.inner.SetWeightForTargetAtIndex(weight, targetIndex)
 }
 
-// @method weightForTargetAtIndex: @abstract Retrieves the weight for the target at the specified index.
+// Returns the weight value for the specified target index.
 //
 // WeightForTargetAtIndex calls the underlying WeightForTargetAtIndex.
 func (x *Morpher) WeightForTargetAtIndex(targetIndex uint) float64 {

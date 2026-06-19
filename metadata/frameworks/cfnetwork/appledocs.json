@@ -1,0 +1,531 @@
+{
+  "schema_version": 1,
+  "framework": "CFNetwork",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "CFHostInfoType": {
+      "doc": "Values indicating the type of data that is to be resolved or the type of data that was resolved.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfhostinfotype",
+      "members": {
+        "kCFHostAddresses": {
+          "doc": "Specifies that addresses are to be resolved or that addresses were resolved.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfhostinfotype/addresses"
+        },
+        "kCFHostNames": {
+          "doc": "Specifies that names are to be resolved or that names were resolved.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfhostinfotype/names"
+        },
+        "kCFHostReachability": {
+          "doc": "Specifies that reachability information is to be resolved or that reachability information was resolved.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfhostinfotype/reachability"
+        }
+      }
+    },
+    "CFNetDiagnosticStatusValues": {
+      "doc": "Constants for diagnostic status values.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetdiagnosticstatusvalues",
+      "members": {
+        "kCFNetDiagnosticConnectionDown": {
+          "doc": "The connection does not appear to be working.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetdiagnosticstatusvalues/connectiondown"
+        },
+        "kCFNetDiagnosticConnectionIndeterminate": {
+          "doc": "The status of the connection is not known.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetdiagnosticstatusvalues/connectionindeterminate"
+        },
+        "kCFNetDiagnosticConnectionUp": {
+          "doc": "The connection appears to be working.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetdiagnosticstatusvalues/connectionup"
+        },
+        "kCFNetDiagnosticErr": {
+          "doc": "An error occurred that prevented the call from completing.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetdiagnosticstatusvalues/err"
+        },
+        "kCFNetDiagnosticNoErr": {
+          "doc": "No error occurred but there is no status.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetdiagnosticstatusvalues/noerr"
+        }
+      }
+    },
+    "CFNetServiceBrowserFlags": {
+      "doc": "Flags that the system passes to net service browser callbacks.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicebrowserflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a flag value with the specified bitfield.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicebrowserflags/init(rawvalue:)"
+        },
+        "kCFNetServiceFlagIsDefault": {
+          "doc": "Specifies whether the resulting domain is the default registration or browse domain.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicebrowserflags/isdefault"
+        },
+        "kCFNetServiceFlagIsDomain": {
+          "doc": "Specifies whether the result pertains to a search for domains or services.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicebrowserflags/isdomain"
+        },
+        "kCFNetServiceFlagMoreComing": {
+          "doc": "A hint that the system will call the client’s callback function again soon.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicebrowserflags/morecoming"
+        },
+        "kCFNetServiceFlagRemove": {
+          "doc": "Specifies whether the client should remove the result instead of adding it.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicebrowserflags/remove"
+        }
+      }
+    },
+    "CFNetServiceMonitorType": {
+      "doc": "Record type specifier used to tell a service monitor the type of record changes to watch for.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicemonitortype",
+      "members": {
+        "kCFNetServiceMonitorTXT": {
+          "doc": "Watch for TXT record changes.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetservicemonitortype/txt"
+        }
+      }
+    },
+    "CFNetServiceRegisterFlags": {
+      "doc": "Options to use when registering a service on the network.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceregisterflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a flag value with the specified bitfield.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceregisterflags/init(rawvalue:)"
+        },
+        "kCFNetServiceFlagNoAutoRename": {
+          "doc": "Causes registrations to fail if a name conflict occurs.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceregisterflags/noautorename"
+        }
+      }
+    },
+    "CFNetServicesError": {
+      "doc": "Error codes that may be returned by CFNetServices functions or passed to CFNetServices callback functions.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror",
+      "members": {
+        "kCFNetServicesErrorBadArgument": {
+          "doc": "A required argument was not provided.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/badargument"
+        },
+        "kCFNetServicesErrorCancel": {
+          "doc": "The search or service was canceled.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/cancel"
+        },
+        "kCFNetServicesErrorCollision": {
+          "doc": "An attempt was made to use a name that is already in use.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/collision"
+        },
+        "kCFNetServicesErrorInProgress": {
+          "doc": "A search is already in progress.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/inprogress"
+        },
+        "kCFNetServicesErrorInvalid": {
+          "doc": "Invalid data was passed to a CFNetServices function.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/invalid"
+        },
+        "kCFNetServicesErrorMissingRequiredConfiguration": {
+          "doc": "A required configuration for local network access is missing.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/missingrequiredconfiguration"
+        },
+        "kCFNetServicesErrorNotFound": {
+          "doc": "Not used.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/notfound"
+        },
+        "kCFNetServicesErrorTimeout": {
+          "doc": "Resolution failed because the timeout was reached.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/timeout"
+        },
+        "kCFNetServicesErrorUnknown": {
+          "doc": "An unknown CFNetService error occurred.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceserror/unknown"
+        }
+      }
+    },
+    "CFNetworkErrors": {
+      "doc": "This enumeration contains error codes returned under the error domain kCFErrorDomainCFNetwork.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors",
+      "members": {
+        "kCFErrorHTTPAuthenticationTypeUnsupported": {
+          "doc": "The client and server couldn’t agree on a supported authentication type.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpauthenticationtypeunsupported"
+        },
+        "kCFErrorHTTPBadCredentials": {
+          "doc": "The server rejected the credentials provided for an authenticated connection.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpbadcredentials"
+        },
+        "kCFErrorHTTPBadProxyCredentials": {
+          "doc": "The proxy rejected the authentication credentials provided for logging in.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpbadproxycredentials"
+        },
+        "kCFErrorHTTPBadURL": {
+          "doc": "The requested URL couldn’t be retrieved.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpbadurl"
+        },
+        "kCFErrorHTTPConnectionLost": {
+          "doc": "The connection to the server was dropped.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpconnectionlost"
+        },
+        "kCFErrorHTTPParseFailure": {
+          "doc": "The HTTP server response couldn’t be parsed.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpparsefailure"
+        },
+        "kCFErrorHTTPProxyConnectionFailure": {
+          "doc": "A connection to the HTTPS proxy couldn’t be established.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpproxyconnectionfailure"
+        },
+        "kCFErrorHTTPRedirectionLoopDetected": {
+          "doc": "Too many HTTP redirects occurred before reaching a page that didn’t redirect the client to another page.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpredirectionloopdetected"
+        },
+        "kCFErrorHTTPSProxyConnectionFailure": {
+          "doc": "A connection couldn’t be established to the HTTPS proxy.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorhttpsproxyconnectionfailure"
+        },
+        "kCFErrorPACFileAuth": {
+          "doc": "The authentication credentials provided by the proxy autoconfiguration file were rejected.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorpacfileauth"
+        },
+        "kCFErrorPACFileError": {
+          "doc": "An error occurred with the proxy autoconfiguration file.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cferrorpacfileerror"
+        },
+        "kCFFTPErrorUnexpectedStatusCode": {
+          "doc": "The server returned an unexpected status code.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfftperrorunexpectedstatuscode"
+        },
+        "kCFHTTPCookieCannotParseCookieFile": {
+          "doc": "The cookie file can’t be parsed.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfhttpcookiecannotparsecookiefile"
+        },
+        "kCFHostErrorHostNotFound": {
+          "doc": "The specified host wasn’t found.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfhosterrorhostnotfound"
+        },
+        "kCFHostErrorUnknown": {
+          "doc": "An unknown error.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfhosterrorunknown"
+        },
+        "kCFNetServiceErrorBadArgument": {
+          "doc": "A required argument either wasn’t provided or wasn’t valid.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrorbadargument"
+        },
+        "kCFNetServiceErrorCancel": {
+          "doc": "The search or service was canceled.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrorcancel"
+        },
+        "kCFNetServiceErrorCollision": {
+          "doc": "An attempt was made to use a name that’s already in use.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrorcollision"
+        },
+        "kCFNetServiceErrorDNSServiceFailure": {
+          "doc": "The DNS service discovery returned an error.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrordnsservicefailure"
+        },
+        "kCFNetServiceErrorInProgress": {
+          "doc": "A new search couldn’t be started because a search is already in progress.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrorinprogress"
+        },
+        "kCFNetServiceErrorInvalid": {
+          "doc": "Invalid data was passed to a CFNetServices function.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrorinvalid"
+        },
+        "kCFNetServiceErrorNotFound": {
+          "doc": "This error isn’t used.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrornotfound"
+        },
+        "kCFNetServiceErrorTimeout": {
+          "doc": "Resolution failed because the timeout was reached.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrortimeout"
+        },
+        "kCFNetServiceErrorUnknown": {
+          "doc": "An error of unknown type has occurred.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfnetserviceerrorunknown"
+        },
+        "kCFSOCKS4ErrorIdConflict": {
+          "doc": "The server rejected the request because the client program and the identd daemon reported different user IDs.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks4erroridconflict"
+        },
+        "kCFSOCKS4ErrorIdentdFailed": {
+          "doc": "The server couldn’t connect to the identd daemon on the client and rejected the request.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks4erroridentdfailed"
+        },
+        "kCFSOCKS4ErrorRequestFailed": {
+          "doc": "The server rejected the request, or the request failed.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks4errorrequestfailed"
+        },
+        "kCFSOCKS4ErrorUnknownStatusCode": {
+          "doc": "The server returned an unknown status code.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks4errorunknownstatuscode"
+        },
+        "kCFSOCKS5ErrorBadCredentials": {
+          "doc": "The SOCKS server refused the client connection because of bad login credentials.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks5errorbadcredentials"
+        },
+        "kCFSOCKS5ErrorBadResponseAddr": {
+          "doc": "The address type returned isn’t supported.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks5errorbadresponseaddr"
+        },
+        "kCFSOCKS5ErrorBadState": {
+          "doc": "The stream isn’t in a state that allows the requested operation.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks5errorbadstate"
+        },
+        "kCFSOCKS5ErrorNoAcceptableMethod": {
+          "doc": "The client and server couldn’t find a mutually agreeable authentication method.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks5errornoacceptablemethod"
+        },
+        "kCFSOCKS5ErrorUnsupportedNegotiationMethod": {
+          "doc": "The requested method isn’t supported.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsocks5errorunsupportednegotiationmethod"
+        },
+        "kCFSOCKSErrorUnknownClientVersion": {
+          "doc": "The SOCKS server rejected access because it doesn’t support connections with the requested SOCKS version.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsockserrorunknownclientversion"
+        },
+        "kCFSOCKSErrorUnsupportedServerVersion": {
+          "doc": "The SOCKS server doesn’t support the requested version.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfsockserrorunsupportedserverversion"
+        },
+        "kCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod": {
+          "doc": "The HTTPS proxy returned an unexpected status code, such as a 3xx redirect.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfstreamerrorhttpsproxyfailureunexpectedresponsetoconnectmethod"
+        },
+        "kCFURLErrorAppTransportSecurityRequiresSecureConnection": {
+          "doc": "The connection failed because the App Transport Security configuration requires a secure connection.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorapptransportsecurityrequiressecureconnection"
+        },
+        "kCFURLErrorBackgroundSessionInUseByAnotherProcess": {
+          "doc": "The background session failed because it was in use by another process.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorbackgroundsessioninusebyanotherprocess"
+        },
+        "kCFURLErrorBackgroundSessionWasDisconnected": {
+          "doc": "The background session failed because it was disconnected.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorbackgroundsessionwasdisconnected"
+        },
+        "kCFURLErrorBadServerResponse": {
+          "doc": "The connection received an invalid server response.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorbadserverresponse"
+        },
+        "kCFURLErrorBadURL": {
+          "doc": "The connection failed due to a malformed URL.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorbadurl"
+        },
+        "kCFURLErrorCallIsActive": {
+          "doc": "The connection failed because a call is active.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcallisactive"
+        },
+        "kCFURLErrorCancelled": {
+          "doc": "The connection was cancelled.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcancelled"
+        },
+        "kCFURLErrorCannotCloseFile": {
+          "doc": "The file can’t be closed.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotclosefile"
+        },
+        "kCFURLErrorCannotConnectToHost": {
+          "doc": "The connection failed because a connection can’t be made to the host.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotconnecttohost"
+        },
+        "kCFURLErrorCannotCreateFile": {
+          "doc": "The file can’t be created.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotcreatefile"
+        },
+        "kCFURLErrorCannotDecodeContentData": {
+          "doc": "The connection can’t decode data encoded with an unknown content encoding.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotdecodecontentdata"
+        },
+        "kCFURLErrorCannotDecodeRawData": {
+          "doc": "The connection can’t decode data encoded with a known content encoding.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotdecoderawdata"
+        },
+        "kCFURLErrorCannotFindHost": {
+          "doc": "The connection failed because the host couldn’t be found.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotfindhost"
+        },
+        "kCFURLErrorCannotLoadFromNetwork": {
+          "doc": "The connection failed because it’s being required to return a cached resource, but one isn’t available.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotloadfromnetwork"
+        },
+        "kCFURLErrorCannotMoveFile": {
+          "doc": "The file can’t be moved.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotmovefile"
+        },
+        "kCFURLErrorCannotOpenFile": {
+          "doc": "The file can’t be opened.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotopenfile"
+        },
+        "kCFURLErrorCannotParseResponse": {
+          "doc": "The connection can’t parse the server’s response.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotparseresponse"
+        },
+        "kCFURLErrorCannotRemoveFile": {
+          "doc": "The file can’t be removed.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotremovefile"
+        },
+        "kCFURLErrorCannotWriteToFile": {
+          "doc": "The file can’t be written.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorcannotwritetofile"
+        },
+        "kCFURLErrorClientCertificateRejected": {
+          "doc": "The secure connection failed because the client’s certificate was rejected.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorclientcertificaterejected"
+        },
+        "kCFURLErrorClientCertificateRequired": {
+          "doc": "The secure connection failed because the server requires a client certificate.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorclientcertificaterequired"
+        },
+        "kCFURLErrorDNSLookupFailed": {
+          "doc": "The connection failed because the DNS lookup failed.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrordnslookupfailed"
+        },
+        "kCFURLErrorDataLengthExceedsMaximum": {
+          "doc": "The file operation failed because the file is too large.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrordatalengthexceedsmaximum"
+        },
+        "kCFURLErrorDataNotAllowed": {
+          "doc": "The connection failed because data use isn’t currently allowed on the device.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrordatanotallowed"
+        },
+        "kCFURLErrorDownloadDecodingFailedMidStream": {
+          "doc": "The download failed because decoding of the downloaded data failed midstream.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrordownloaddecodingfailedmidstream"
+        },
+        "kCFURLErrorDownloadDecodingFailedToComplete": {
+          "doc": "The download failed because decoding of the downloaded data failed to complete.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrordownloaddecodingfailedtocomplete"
+        },
+        "kCFURLErrorFileDoesNotExist": {
+          "doc": "The file operation failed because the file doesn’t exist.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorfiledoesnotexist"
+        },
+        "kCFURLErrorFileIsDirectory": {
+          "doc": "The file operation failed because the file is a directory.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorfileisdirectory"
+        },
+        "kCFURLErrorFileOutsideSafeArea": {
+          "doc": "The file is outside of the safe area.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorfileoutsidesafearea"
+        },
+        "kCFURLErrorHTTPTooManyRedirects": {
+          "doc": "The HTTP connection failed due to too many redirects.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorhttptoomanyredirects"
+        },
+        "kCFURLErrorInternationalRoamingOff": {
+          "doc": "The connection failed because international roaming is disabled on the device.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorinternationalroamingoff"
+        },
+        "kCFURLErrorNetworkConnectionLost": {
+          "doc": "The connection failed because the network connection was lost.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrornetworkconnectionlost"
+        },
+        "kCFURLErrorNoPermissionsToReadFile": {
+          "doc": "The file operation failed because it doesn’t have permission to read the file.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrornopermissionstoreadfile"
+        },
+        "kCFURLErrorNotConnectedToInternet": {
+          "doc": "The connection failed because the device isn’t connected to the internet.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrornotconnectedtointernet"
+        },
+        "kCFURLErrorRedirectToNonExistentLocation": {
+          "doc": "The connection was redirected to a nonexistent location.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorredirecttononexistentlocation"
+        },
+        "kCFURLErrorRequestBodyStreamExhausted": {
+          "doc": "The connection failed because the request’s body stream was exhausted.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorrequestbodystreamexhausted"
+        },
+        "kCFURLErrorResourceUnavailable": {
+          "doc": "The connection’s resource is unavailable.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorresourceunavailable"
+        },
+        "kCFURLErrorSecureConnectionFailed": {
+          "doc": "The secure connection failed for an unknown reason.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorsecureconnectionfailed"
+        },
+        "kCFURLErrorServerCertificateHasBadDate": {
+          "doc": "The secure connection failed because the server’s certificate has an invalid date.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorservercertificatehasbaddate"
+        },
+        "kCFURLErrorServerCertificateHasUnknownRoot": {
+          "doc": "The secure connection failed because the server’s certificate has an unknown root.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorservercertificatehasunknownroot"
+        },
+        "kCFURLErrorServerCertificateNotYetValid": {
+          "doc": "The secure connection failed because the server’s certificate isn’t valid yet.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorservercertificatenotyetvalid"
+        },
+        "kCFURLErrorServerCertificateUntrusted": {
+          "doc": "The secure connection failed because the server’s certificate isn’t trusted.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorservercertificateuntrusted"
+        },
+        "kCFURLErrorTimedOut": {
+          "doc": "The connection timed out.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrortimedout"
+        },
+        "kCFURLErrorUnknown": {
+          "doc": "An unknown error occurred.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorunknown"
+        },
+        "kCFURLErrorUnsupportedURL": {
+          "doc": "The connection failed due to an unsupported URL scheme.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorunsupportedurl"
+        },
+        "kCFURLErrorUserAuthenticationRequired": {
+          "doc": "The connection failed because it requires authentication.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerroruserauthenticationrequired"
+        },
+        "kCFURLErrorUserCancelledAuthentication": {
+          "doc": "The connection failed because the user cancelled required authentication.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorusercancelledauthentication"
+        },
+        "kCFURLErrorZeroByteResource": {
+          "doc": "The resource retrieved by the connection is zero bytes.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/cfurlerrorzerobyteresource"
+        }
+      }
+    },
+    "CFStreamErrorHTTP": {
+      "doc": "Error codes that a read stream for an HTTP request may return.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttp",
+      "members": {
+        "kCFStreamErrorHTTPBadURL": {
+          "doc": "The URL is not properly formatted.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttp/badurl"
+        },
+        "kCFStreamErrorHTTPParseFailure": {
+          "doc": "A parsing error occurred while an incoming message was being deserialized and appended to a message object. The headers of the incoming message may be formatted improperly.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttp/parsefailure"
+        },
+        "kCFStreamErrorHTTPRedirectionLoop": {
+          "doc": "A redirection loop has been detected.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttp/redirectionloop"
+        }
+      }
+    },
+    "CFStreamErrorHTTPAuthentication": {
+      "doc": "Authentication error codes that may be returned when trying to apply authentication to a request.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttpauthentication",
+      "members": {
+        "kCFStreamErrorHTTPAuthenticationBadPassword": {
+          "doc": "Password is in a format that is not suitable for the request. Currently, passwords are decoded using kCFStringEncodingISOLatin1.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttpauthentication/badpassword"
+        },
+        "kCFStreamErrorHTTPAuthenticationBadUserName": {
+          "doc": "User name is in a format that is not suitable for the request. Currently, user names are decoded using kCFStringEncodingISOLatin1.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttpauthentication/badusername"
+        },
+        "kCFStreamErrorHTTPAuthenticationTypeUnsupported": {
+          "doc": "Specified authentication type is not supported.",
+          "url": "https://developer.apple.com/documentation/cfnetwork/cfstreamerrorhttpauthentication/typeunsupported"
+        }
+      }
+    }
+  },
+  "structs": {
+    "CFHostClientContext": {
+      "doc": "A structure containing user-defined data and callbacks for CFHost objects.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfhostclientcontext"
+    },
+    "CFNetServiceClientContext": {
+      "doc": "A structure provided when a CFNetService is associated with a callback function or when a CFNetServiceBrowser is created.",
+      "url": "https://developer.apple.com/documentation/cfnetwork/cfnetserviceclientcontext"
+    }
+  }
+}

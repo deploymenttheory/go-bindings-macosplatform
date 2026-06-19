@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that maps URL requests to cached response objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlcache
 type NSURLCache struct {
 	NSObject
@@ -56,7 +58,7 @@ func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity u
 	return NSURLCacheFromID(_ret)
 }
 
-// @method initWithMemoryCapacity:diskCapacity:directoryURL: @abstract Initializes an NSURLCache with the given capacity and directory. @param memoryCapacity the capacity, measured in bytes, for the cache in memory. Or 0 to disable memory cache. @param diskCapacity the capacity, measured in bytes, for the cache on disk. Or 0 to disable disk cache. @param directoryURL the path to a directory on disk where the cache data is stored. Or nil for default directory. @result an initialized NSURLCache, with the given capacity, optionally backed by disk.
+// Creates a URL cache object with the specified memory and disk capacities, in the specified directory.
 func (o *NSURLCache) InitWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity uint, diskCapacity uint, directoryURL *NSURL) *NSURLCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCacheSelInitWithMemoryCapacityDiskCapacityDirectoryURL, memoryCapacity, diskCapacity, directoryURL.Ptr())
 	if _ret != 0 {

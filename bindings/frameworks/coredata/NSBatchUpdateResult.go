@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result returned when executing a batch update request.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsbatchupdateresult
 type NSBatchUpdateResult struct {
 	NSPersistentStoreResult

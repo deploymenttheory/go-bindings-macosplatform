@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The version of the item’s content and its metadata.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileprovideritemversion
 type NSFileProviderItemVersion struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func NSFileProviderItemVersionFromID(id objc.ID) *NSFileProviderItemVersion {
 	return o
 }
 
-// Items versions have two distinct components, one for the file contents and one for metadata. Components are limited to 128 bytes in size.
+// Creates a new version object.
 func (o *NSFileProviderItemVersion) InitWithContentVersionMetadataVersion(contentVersion *foundation.NSData, metadataVersion *foundation.NSData) *NSFileProviderItemVersion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderItemVersionSelInitWithContentVersionMetadataVersion, contentVersion.Ptr(), metadataVersion.Ptr())
 	if _ret != 0 {

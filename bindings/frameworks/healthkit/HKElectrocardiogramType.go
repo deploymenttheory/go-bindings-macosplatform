@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples containing electrocardiogram data.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkelectrocardiogramtype
 type HKElectrocardiogramType struct {
 	HKSampleType

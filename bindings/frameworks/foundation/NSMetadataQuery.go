@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that you perform against Spotlight metadata.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmetadataquery
 type NSMetadataQuery struct {
 	NSObject
@@ -62,28 +64,34 @@ func NSMetadataQueryFromID(id objc.ID) *NSMetadataQuery {
 	return o
 }
 
+// Attempts to start the query.
 func (o *NSMetadataQuery) StartQuery() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMetadataQuerySelStartQuery)
 	return _ret
 }
 
+// Stops the receiver’s current query from gathering any further results.
 func (o *NSMetadataQuery) StopQuery() {
 	o.Ptr().Send(_nSMetadataQuerySelStopQuery)
 }
 
+// Disables updates to the query results.
 func (o *NSMetadataQuery) DisableUpdates() {
 	o.Ptr().Send(_nSMetadataQuerySelDisableUpdates)
 }
 
+// Enables updates to the query results.
 func (o *NSMetadataQuery) EnableUpdates() {
 	o.Ptr().Send(_nSMetadataQuerySelEnableUpdates)
 }
 
+// Returns the query result at a specific index.
 func (o *NSMetadataQuery) ResultAtIndex(idx uint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelResultAtIndex, idx)
 	return _ret
 }
 
+// Enumerates the current set of results using the given block.
 func (o *NSMetadataQuery) EnumerateResultsUsing(block func(objc.ID, uint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -95,6 +103,7 @@ func (o *NSMetadataQuery) EnumerateResultsUsing(block func(objc.ID, uint, *bool)
 	o.Ptr().Send(_nSMetadataQuerySelEnumerateResultsUsing, __block_block)
 }
 
+// Enumerates the current set of results using the given options and block.
 func (o *NSMetadataQuery) EnumerateResultsWithOptionsUsing(opts NSEnumerationOptions, block func(objc.ID, uint, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -106,11 +115,13 @@ func (o *NSMetadataQuery) EnumerateResultsWithOptionsUsing(opts NSEnumerationOpt
 	o.Ptr().Send(_nSMetadataQuerySelEnumerateResultsWithOptionsUsing, opts, __block_block)
 }
 
+// Returns the index of a query result object in the receiver’s results array.
 func (o *NSMetadataQuery) IndexOfResult(result objc.ID) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMetadataQuerySelIndexOfResult, result)
 	return _ret
 }
 
+// Returns the value for the attribute name attrName at the index in the results specified by idx.
 func (o *NSMetadataQuery) ValueOfAttributeForResultAtIndex(attrName *NSString, idx uint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelValueOfAttributeForResultAtIndex, attrName.Ptr(), idx)
 	return _ret
@@ -183,21 +194,27 @@ func (o *NSMetadataQuery) SetNotificationBatchingInterval(notificationBatchingIn
 }
 
 func (o *NSMetadataQuery) SearchScopes() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSMetadataQuerySelSearchScopes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelSearchScopes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSMetadataQuery) SetSearchScopes(searchScopes *NSArray[objc.ID]) {
-	o.Ptr().Send(_nSMetadataQuerySelSetSearchScopes, searchScopes)
+	o.Ptr().Send(_nSMetadataQuerySelSetSearchScopes, searchScopes.Ptr())
 }
 
 func (o *NSMetadataQuery) SearchItems() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSMetadataQuerySelSearchItems)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelSearchItems)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSMetadataQuery) SetSearchItems(searchItems *NSArray[objc.ID]) {
-	o.Ptr().Send(_nSMetadataQuerySelSetSearchItems, searchItems)
+	o.Ptr().Send(_nSMetadataQuerySelSetSearchItems, searchItems.Ptr())
 }
 
 func (o *NSMetadataQuery) OperationQueue() *NSOperationQueue {
@@ -233,13 +250,19 @@ func (o *NSMetadataQuery) ResultCount() uint {
 }
 
 func (o *NSMetadataQuery) Results() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSMetadataQuerySelResults)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelResults)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSMetadataQuery) ValueLists() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSMetadataQuerySelValueLists)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQuerySelValueLists)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSMetadataQuery) GroupedResults() *NSArray[*NSMetadataQueryResultGroup] {

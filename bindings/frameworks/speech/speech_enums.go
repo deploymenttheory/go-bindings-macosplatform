@@ -151,6 +151,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Error codes that can be thrown under the Speech framework’s error domain.
 type SFSpeechErrorCode int64
 
 const (
@@ -187,16 +188,17 @@ func (e SFSpeechErrorCode) String() string {
 	}
 }
 
+// The type of task for which you are using speech recognition.
 type SFSpeechRecognitionTaskHint int64
 
 const (
-	// An unspecified type of task. Use this hint type when the intended use for captured speech does not match the other task types.
+	// An unspecified type of task.
 	SFSpeechRecognitionTaskHintUnspecified SFSpeechRecognitionTaskHint = 0
-	// A task that uses captured speech for text entry. Use this hint type when you are using speech recognition for a task that's similar to the keyboard's built-in dictation function.
+	// A task that uses captured speech for text entry.
 	SFSpeechRecognitionTaskHintDictation SFSpeechRecognitionTaskHint = 1
-	// A task that uses captured speech to specify search terms. Use this hint type when you are using speech recognition to identify search terms.
+	// A task that uses captured speech to specify search terms.
 	SFSpeechRecognitionTaskHintSearch SFSpeechRecognitionTaskHint = 2
-	// A task that uses captured speech for short, confirmation-style requests. Use this hint type when you are using speech recognition to handle confirmation commands, such as "yes," "no," or "maybe."
+	// A task that uses captured speech for short, confirmation-style requests.
 	SFSpeechRecognitionTaskHintConfirmation SFSpeechRecognitionTaskHint = 3
 )
 
@@ -215,6 +217,7 @@ func (e SFSpeechRecognitionTaskHint) String() string {
 	}
 }
 
+// The state of the task associated with the recognition request.
 type SFSpeechRecognitionTaskState int64
 
 const (
@@ -247,16 +250,17 @@ func (e SFSpeechRecognitionTaskState) String() string {
 	}
 }
 
+// The app’s authorization to perform speech recognition.
 type SFSpeechRecognizerAuthorizationStatus int64
 
 const (
-	// The app's authorization status has not yet been determined. When your app's status is not determined, calling the ``SFSpeechRecognizer/requestAuthorization(_:)`` method prompts the user to grant or deny authorization.
+	// The app’s authorization status has not yet been determined.
 	SFSpeechRecognizerAuthorizationStatusNotDetermined SFSpeechRecognizerAuthorizationStatus = 0
-	// The user denied your app's request to perform speech recognition.
+	// The user denied your app’s request to perform speech recognition.
 	SFSpeechRecognizerAuthorizationStatusDenied SFSpeechRecognizerAuthorizationStatus = 1
 	// The device prevents your app from performing speech recognition.
 	SFSpeechRecognizerAuthorizationStatusRestricted SFSpeechRecognizerAuthorizationStatus = 2
-	// The user granted your app's request to perform speech recognition.
+	// The user granted your app’s request to perform speech recognition.
 	SFSpeechRecognizerAuthorizationStatusAuthorized SFSpeechRecognizerAuthorizationStatus = 3
 )
 

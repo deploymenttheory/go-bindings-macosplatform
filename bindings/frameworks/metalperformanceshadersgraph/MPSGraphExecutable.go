@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The compiled representation of a compute graph executable.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphexecutable
 type MPSGraphExecutable struct {
 	MPSGraphObject
@@ -43,12 +45,12 @@ func MPSGraphExecutableFromID(id objc.ID) *MPSGraphExecutable {
 	return o
 }
 
-// Specialize the executable and optimize it. Use this method to choose when specialization happens, else it occurs at encode time automatically. - Parameters: - device:Optional MPSGraph device to compile with. - inputTypes: Input types expected to be passed to the executable. - compilationDescriptor: Compilation descriptor to be used to specialize, since the executable was created with a compilationDescriptor already this one overrides those settings to the extent it can.
+// Specialize the executable and optimize it.
 func (o *MPSGraphExecutable) SpecializeWithDeviceInputTypesCompilationDescriptor(device *MPSGraphDevice, inputTypes *foundation.NSArray[*MPSGraphType], compilationDescriptor *MPSGraphCompilationDescriptor) {
 	o.Ptr().Send(_mPSGraphExecutableSelSpecializeWithDeviceInputTypesCompilationDescriptor, device.Ptr(), inputTypes.Ptr(), compilationDescriptor.Ptr())
 }
 
-// Get output shapes for a specialized executable. In case specialization has not been done yet then calling this function will specialize for the given input shapes. - Parameters: - device: Optional MPSGraph device to compile with - inputTypes: Input types expected to be passed to the executable. - compilationDescriptor: CompilationDescriptor to be used to specialize, since the executable was created with a compilationDescriptor already this one overrides those settings to the extent it can.
+// Get output shapes for a specialized executable.
 func (o *MPSGraphExecutable) GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *MPSGraphDevice, inputTypes *foundation.NSArray[*MPSGraphType], compilationDescriptor *MPSGraphCompilationDescriptor) *foundation.NSArray[*MPSGraphShapedType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelGetOutputTypesWithDeviceInputTypesCompilationDescriptor, device.Ptr(), inputTypes.Ptr(), compilationDescriptor.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func (o *MPSGraphExecutable) GetOutputTypesWithDeviceInputTypesCompilationDescri
 	return foundation.NSArrayFromID[*MPSGraphShapedType](_ret)
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is synchronous and will return on completion of execution. - Parameters: - commandQueue: CommandQueue passed to exectute the graph on. - inputsArray: Feeds tensorData for the placeholder tensors, same order as arguments of main function. - resultsArray: Results tensorData for which the caller wishes MPSGraphTensorData to be returned. - Returns: A valid MPSGraphTensorData array with results synchronized to the CPU memory if MPSGraphOptionsSynchronizeResults set.
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
 func (o *MPSGraphExecutable) RunWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTLCommandQueue, inputsArray *foundation.NSArray[*MPSGraphTensorData], resultsArray *foundation.NSArray[*MPSGraphTensorData], executionDescriptor *MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*MPSGraphTensorData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelRunWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor, commandQueue, inputsArray.Ptr(), resultsArray.Ptr(), executionDescriptor.Ptr())
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func (o *MPSGraphExecutable) RunWithMTLCommandQueueInputsArrayResultsArrayExecut
 	return foundation.NSArrayFromID[*MPSGraphTensorData](_ret)
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately. - Parameters: - commandQueue: CommandQueue passed to exectute the graph on. - inputsArray: Feeds tensorData for the placeholder tensors, same order as arguments of main function. - resultsArray: Tensors for which the caller wishes MPSGraphTensorData to be returned. - executionDescriptor: ExecutionDescriptor to be passed in and used. - Returns: A valid MPSGraphTensorData array with results synchronized to the CPU memory if MPSGraphOptionsSynchronizeResults set.
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately.
 func (o *MPSGraphExecutable) RunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTLCommandQueue, inputsArray *foundation.NSArray[*MPSGraphTensorData], resultsArray *foundation.NSArray[*MPSGraphTensorData], executionDescriptor *MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*MPSGraphTensorData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelRunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor, commandQueue, inputsArray.Ptr(), resultsArray.Ptr(), executionDescriptor.Ptr())
 	if _ret != 0 {
@@ -75,7 +77,7 @@ func (o *MPSGraphExecutable) RunAsyncWithMTLCommandQueueInputsArrayResultsArrayE
 	return foundation.NSArrayFromID[*MPSGraphTensorData](_ret)
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately after finishing encoding. - Parameters: - commandBuffer: CommandBuffer passed to exectute the graph on, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted - inputsArray: Feeds tensorData for the placeholder tensors, same order as arguments of main function - resultsArray: Tensors for which the caller wishes MPSGraphTensorData to be returned - executionDescriptor: ExecutionDescriptor to be passed in and used, - Returns: A valid MPSGraphTensorData array with results synchronized to the CPU memory if MPSGraphOptionsSynchronizeResults set.
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately after finishing encoding.
 func (o *MPSGraphExecutable) EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, inputsArray *foundation.NSArray[*MPSGraphTensorData], resultsArray *foundation.NSArray[*MPSGraphTensorData], executionDescriptor *MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*MPSGraphTensorData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelEncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor, commandBuffer.Ptr(), inputsArray.Ptr(), resultsArray.Ptr(), executionDescriptor.Ptr())
 	if _ret != 0 {
@@ -84,12 +86,12 @@ func (o *MPSGraphExecutable) EncodeToCommandBufferInputsArrayResultsArrayExecuti
 	return foundation.NSArrayFromID[*MPSGraphTensorData](_ret)
 }
 
-// Serialize the MPSGraph executable at the provided url. - Parameters: - url: The URL where to serialize the MPSGraph executable. - descriptor: The descriptor to be used to serialize the graph.
+// Serialize the MPSGraph executable at the provided url.
 func (o *MPSGraphExecutable) SerializeToMPSGraphPackageAtURLDescriptor(url *foundation.NSURL, descriptor *MPSGraphExecutableSerializationDescriptor) {
 	o.Ptr().Send(_mPSGraphExecutableSelSerializeToMPSGraphPackageAtURLDescriptor, url.Ptr(), descriptor.Ptr())
 }
 
-// Initialize the executable with the Metal Performance Shaders Graph package at the provided URL. - Parameters: - mpsgraphPackageURL: The URL where to read the serialized MPSGraphExecutable. - compilationDescriptor: Compilation descriptor to be used to specialize, since the executable was created with a compilationDescriptor already this one overrides those settings to the extent it can.
+// Initialize the executable with the Metal Performance Shaders Graph package at the provided URL.
 func (o *MPSGraphExecutable) InitWithMPSGraphPackageAtURLCompilationDescriptor(mpsgraphPackageURL *foundation.NSURL, compilationDescriptor *MPSGraphCompilationDescriptor) *MPSGraphExecutable {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelInitWithMPSGraphPackageAtURLCompilationDescriptor, mpsgraphPackageURL.Ptr(), compilationDescriptor.Ptr())
 	if _ret != 0 {
@@ -98,7 +100,7 @@ func (o *MPSGraphExecutable) InitWithMPSGraphPackageAtURLCompilationDescriptor(m
 	return MPSGraphExecutableFromID(_ret)
 }
 
-// Initialize the executable with the Core ML model package at the provided URL. - Parameters: - coreMLPackageURL: The URL where to read the Core ML model package. - compilationDescriptor: Compilation descriptor to be used to specialize, since the executable was created with a compilationDescriptor already this one overrides those settings to the extent it can.
+// Initialize the executable with the Core ML model package at the provided URL.
 func (o *MPSGraphExecutable) InitWithCoreMLPackageAtURLCompilationDescriptor(coreMLPackageURL *foundation.NSURL, compilationDescriptor *MPSGraphCompilationDescriptor) *MPSGraphExecutable {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSelInitWithCoreMLPackageAtURLCompilationDescriptor, coreMLPackageURL.Ptr(), compilationDescriptor.Ptr())
 	if _ret != 0 {

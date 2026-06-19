@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Core Animation layer that renders a SceneKit scene as its content.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnlayer
 type SCNLayer struct {
 	quartzcore.CAOpenGLLayer

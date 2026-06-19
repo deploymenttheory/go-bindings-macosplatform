@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for all MIDI messages that operate on a single MIDI channel.
+//
 // MIDIChannelEvent wraps [raw.AVMIDIChannelEvent] with a fluent Go API.
 type MIDIChannelEvent struct {
 	inner *raw.AVMIDIChannelEvent
@@ -35,7 +37,7 @@ func NewMIDIChannelEvent() *MIDIChannelEvent {
 	return &MIDIChannelEvent{inner: raw.AVMIDIChannelEventFromID(_id)}
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIChannelEvent) WithChannel(channel uint) *MIDIChannelEvent {

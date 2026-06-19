@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the call types to include in a search.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incallrecordtypeoptionsresolutionresult
 type INCallRecordTypeOptionsResolutionResult struct {
 	INIntentResolutionResult
@@ -30,6 +32,7 @@ func INCallRecordTypeOptionsResolutionResultFromID(id objc.ID) *INCallRecordType
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions INCallRecordTypeOptions) *INCallRecordTypeOptionsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordTypeOptionsResolutionResult), _iNCallRecordTypeOptionsResolutionResultSelSuccessWithResolvedCallRecordTypeOptions, resolvedCallRecordTypeOptions)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOpt
 	return INCallRecordTypeOptionsResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm INCallRecordTypeOptions) *INCallRecordTypeOptionsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordTypeOptionsResolutionResult), _iNCallRecordTypeOptionsResolutionResultSelConfirmationRequiredWithCallRecordTypeOptionsToConfirm, callRecordTypeOptionsToConfirm)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object containing the location and unique identifier of an Apple App Store storefront.
+//
 // Storefront wraps [raw.SKStorefront] with a fluent Go API.
 type Storefront struct {
 	inner *raw.SKStorefront

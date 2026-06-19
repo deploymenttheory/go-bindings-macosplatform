@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a user’s participation in a share.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckshareparticipant
 type CKShareParticipant struct {
 	foundation.NSObject

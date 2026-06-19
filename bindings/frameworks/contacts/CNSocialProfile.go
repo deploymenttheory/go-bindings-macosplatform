@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that represents one of the user’s social profiles.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnsocialprofile
 type CNSocialProfile struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func CNSocialProfileFromID(id objc.ID) *CNSocialProfile {
 	return o
 }
 
+// Initializes a new social profile object with the specified URL.
 func (o *CNSocialProfile) InitWithUrlStringUsernameUserIdentifierService(urlString *foundation.NSString, username *foundation.NSString, userIdentifier *foundation.NSString, service *foundation.NSString) *CNSocialProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSocialProfileSelInitWithUrlStringUsernameUserIdentifierService, urlString.Ptr(), username.Ptr(), userIdentifier.Ptr(), service.Ptr())
 	if _ret != 0 {
@@ -44,7 +47,7 @@ func (o *CNSocialProfile) InitWithUrlStringUsernameUserIdentifierService(urlStri
 	return CNSocialProfileFromID(_ret)
 }
 
-// Returns a user displayable property name.
+// Returns the localized name of the property for the specified key.
 func CNSocialProfileLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNSocialProfile), _cNSocialProfileSelLocalizedStringForKey, key.Ptr())
 	if _ret != 0 {
@@ -53,7 +56,7 @@ func CNSocialProfileLocalizedStringForKey(key *foundation.NSString) *foundation.
 	return foundation.NSStringFromID(_ret)
 }
 
-// Returns a user displayable service name.
+// Returns the localized name of the specified service.
 func CNSocialProfileLocalizedStringForService(service *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNSocialProfile), _cNSocialProfileSelLocalizedStringForService, service.Ptr())
 	if _ret != 0 {

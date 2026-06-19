@@ -39,7 +39,7 @@ func MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(id objc.ID) *
 // Initialize an MTRUnitTestingClusterTestListInt8UReverseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -50,12 +50,15 @@ func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) InitWithRespon
 }
 
 func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) Arg1() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelArg1)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelArg1)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetArg1, arg1)
+	o.Ptr().Send(_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetArg1, arg1.Ptr())
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.

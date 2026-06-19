@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A circular geographic region that a center point and radius deine.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clcircularregion
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 type CLCircularRegion struct {
@@ -33,6 +35,7 @@ func CLCircularRegionFromID(id objc.ID) *CLCircularRegion {
 	return o
 }
 
+// Creates and returns a region object defining a circular geographic area.
 func (o *CLCircularRegion) InitWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier *foundation.NSString) *CLCircularRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLCircularRegionSelInitWithCenterRadiusIdentifier, center, radius, identifier.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation of a single polygon overlay.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpolygonrenderer
 type MKPolygonRenderer struct {
 	MKOverlayPathRenderer
@@ -34,6 +36,7 @@ func MKPolygonRendererFromID(id objc.ID) *MKPolygonRenderer {
 	return o
 }
 
+// Creates a new renderer that handles drawing for the specified polygon overlay object.
 func (o *MKPolygonRenderer) InitWithPolygon(polygon *MKPolygon) *MKPolygonRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolygonRendererSelInitWithPolygon, polygon.Ptr())
 	if _ret != 0 {

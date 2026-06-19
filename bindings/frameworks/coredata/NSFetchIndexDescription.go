@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The description of the index.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsfetchindexdescription
 type NSFetchIndexDescription struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSFetchIndexDescriptionFromID(id objc.ID) *NSFetchIndexDescription {
 	return o
 }
 
+// Creates a fetch index description using the specified name and element descriptions.
 func (o *NSFetchIndexDescription) InitWithNameElements(name *foundation.NSString, elements *foundation.NSArray[*NSFetchIndexElementDescription]) *NSFetchIndexDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchIndexDescriptionSelInitWithNameElements, name.Ptr(), elements.Ptr())
 	if _ret != 0 {

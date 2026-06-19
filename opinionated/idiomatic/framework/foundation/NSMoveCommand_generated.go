@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command that moves one or more scriptable objects.
+//
 // MoveCommand wraps [raw.NSMoveCommand] with a fluent Go API.
 type MoveCommand struct {
 	inner *raw.NSMoveCommand
@@ -36,42 +38,56 @@ func NewMoveCommand() *MoveCommand {
 	return &MoveCommand{inner: raw.NSMoveCommandFromID(_id)}
 }
 
+// Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+//
 // WithDirectParameter sets the directParameter property and returns the receiver for chaining.
 func (x *MoveCommand) WithDirectParameter(directParameter objc.ID) *MoveCommand {
 	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
 	return x
 }
 
+// Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+//
 // WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
 func (x *MoveCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *MoveCommand {
 	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the arguments of the command to args.
+//
 // WithArguments sets the arguments property and returns the receiver for chaining.
 func (x *MoveCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand {
 	x.inner.NSScriptCommand.SetArguments(arguments)
 	return x
 }
 
+// Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+//
 // WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
 func (x *MoveCommand) WithScriptErrorNumber(scriptErrorNumber int) *MoveCommand {
 	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
 	return x
 }
 
+// Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+//
 // WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
 func (x *MoveCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *MoveCommand {
 	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
 	return x
 }
 
+// Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+//
 // WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
 func (x *MoveCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *MoveCommand {
 	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
 	return x
 }
 
+// Sets a script error string that is associated with execution of the command.
+//
 // WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
 func (x *MoveCommand) WithScriptErrorString(scriptErrorString string) *MoveCommand {
 	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A rule for filters that combines a rule to match network traffic and an action to take when the rule matches.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterrule
 type NEFilterRule struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 	return o
 }
 
-// @method initWithNetworkRule:action: @discussion Initialize a newly-allocated NEFilterRule object @param networkRule A NENetworkRule object that defines the network traffic characteristics that this rule matches. @param action The action to take when this rule matches.
+// Creates a new filter rule from a network rule and an action to take when network traffic matches.
 func (o *NEFilterRule) InitWithNetworkRuleAction(networkRule *NENetworkRule, action NEFilterAction) *NEFilterRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterRuleSelInitWithNetworkRuleAction, networkRule.Ptr(), action)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// PDFActionRemoteGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action that targets another document.
+//
 // ActionRemoteGoTo wraps [raw.PDFActionRemoteGoTo] with a fluent Go API.
 type ActionRemoteGoTo struct {
 	inner *raw.PDFActionRemoteGoTo
@@ -31,6 +33,8 @@ func ActionRemoteGoToFromID(id objc.ID) *ActionRemoteGoTo {
 	return &ActionRemoteGoTo{inner: raw.PDFActionRemoteGoToFromID(id)}
 }
 
+// Initializes the remote go-to action with the specified page index, point, and document URL.
+//
 // NewActionRemoteGoToWithPageIndexAtPointFileURL creates a new [ActionRemoteGoTo].
 func NewActionRemoteGoToWithPageIndexAtPointFileURL(pageIndex uint, point corefoundation.CGPoint, url string) *ActionRemoteGoTo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionRemoteGoTo")), objc.RegisterName("alloc"))
@@ -38,18 +42,24 @@ func NewActionRemoteGoToWithPageIndexAtPointFileURL(pageIndex uint, point corefo
 	return &ActionRemoteGoTo{inner: raw.PDFActionRemoteGoToFromID(_id)}
 }
 
+// Returns the zero-based page index referenced by the remote go-to action.
+//
 // WithPageIndex sets the pageIndex property and returns the receiver for chaining.
 func (x *ActionRemoteGoTo) WithPageIndex(pageIndex uint) *ActionRemoteGoTo {
 	x.inner.SetPageIndex(pageIndex)
 	return x
 }
 
+// Sets the point, in page space, on the page referenced by the remote go-to action.
+//
 // WithPoint sets the point property and returns the receiver for chaining.
 func (x *ActionRemoteGoTo) WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo {
 	x.inner.SetPoint(point)
 	return x
 }
 
+// Returns the URL of the document referenced by the remote go-to action.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))

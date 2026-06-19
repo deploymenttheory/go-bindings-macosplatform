@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that finds rectangular regions that contain people in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecthumanrectanglesrequest
 type VNDetectHumanRectanglesRequest struct {
 	VNImageBasedRequest

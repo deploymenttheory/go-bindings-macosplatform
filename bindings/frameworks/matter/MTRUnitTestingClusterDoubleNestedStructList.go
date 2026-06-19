@@ -32,10 +32,13 @@ func MTRUnitTestingClusterDoubleNestedStructListFromID(id objc.ID) *MTRUnitTesti
 }
 
 func (o *MTRUnitTestingClusterDoubleNestedStructList) A() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterDoubleNestedStructListSelA)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterDoubleNestedStructListSelA)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterDoubleNestedStructList) SetA(a *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterDoubleNestedStructListSelSetA, a)
+	o.Ptr().Send(_mTRUnitTestingClusterDoubleNestedStructListSelSetA, a.Ptr())
 }

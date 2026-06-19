@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages cookies, disk and memory caches, and other types of data for a web view.
+//
 // WKWebsiteDataStore wraps [raw.WKWebsiteDataStore] with a fluent Go API.
 type WKWebsiteDataStore struct {
 	inner *raw.WKWebsiteDataStore
@@ -59,21 +61,21 @@ func (x *WKWebsiteDataStore) WithProxyConfigurations(items ...*foundation.NSObje
 	return x
 }
 
-// @abstract Fetches data records containing the given website data types. @param dataTypes The website data types to fetch records for. @param completionHandler A block to invoke when the data records have been fetched.
+// Fetches the specified types of records from the data store.
 //
 // FetchDataRecordsOfTypesCompletionHandler calls the underlying FetchDataRecordsOfTypesCompletionHandler.
 func (x *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSArray[*raw.WKWebsiteDataRecord])) {
 	x.inner.FetchDataRecordsOfTypesCompletionHandler(dataTypes, completionHandler)
 }
 
-// @abstract Removes website data of the given types for the given data records. @param dataTypes The website data types that should be removed. @param dataRecords The website data records to delete website data for. @param completionHandler A block to invoke when the website data for the records has been removed.
+// Removes the specified types of website data from one or more data records.
 //
 // RemoveDataOfTypesForDataRecordsCompletionHandler calls the underlying RemoveDataOfTypesForDataRecordsCompletionHandler.
 func (x *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], dataRecords *foundation.NSArray[*raw.WKWebsiteDataRecord], completionHandler func()) {
 	x.inner.RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes, dataRecords, completionHandler)
 }
 
-// @abstract Removes all website data of the given types that has been modified since the given date. @param dataTypes The website data types that should be removed. @param date A date. All website data modified after this date will be removed. @param completionHandler A block to invoke when the website data has been removed.
+// Removes website data that changed after the specified date.
 //
 // RemoveDataOfTypesModifiedSinceCompletionHandler calls the underlying RemoveDataOfTypesModifiedSinceCompletionHandler.
 func (x *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], date *foundation.NSDate, completionHandler func()) {

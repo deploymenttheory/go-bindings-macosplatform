@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a subscriber’s access to content.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vssubscription
 type VSSubscription struct {
 	foundation.NSObject
@@ -62,12 +64,15 @@ func (o *VSSubscription) SetAccessLevel(accessLevel VSSubscriptionAccessLevel) {
 
 // Identifies a subset of content from your catalog that subscriber can play. Only provide values that are used in your availability feed's tier restrictions.
 func (o *VSSubscription) TierIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSSubscriptionSelTierIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSSubscriptionSelTierIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VSSubscription) SetTierIdentifiers(tierIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSSubscriptionSelSetTierIdentifiers, tierIdentifiers)
+	o.Ptr().Send(_vSSubscriptionSelSetTierIdentifiers, tierIdentifiers.Ptr())
 }
 
 // Identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A utility object that computes directions and travel-time information based on the route information you provide.
+//
 // Directions wraps [raw.MKDirections] with a fluent Go API.
 type Directions struct {
 	inner *raw.MKDirections
@@ -30,6 +32,8 @@ func DirectionsFromID(id objc.ID) *Directions {
 	return &Directions{inner: raw.MKDirectionsFromID(id)}
 }
 
+// Creates and returns a directions object using the specified request.
+//
 // NewDirectionsWithRequest creates a new [Directions].
 func NewDirectionsWithRequest(request *raw.MKDirectionsRequest) *Directions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKDirections")), objc.RegisterName("alloc"))
@@ -37,16 +41,22 @@ func NewDirectionsWithRequest(request *raw.MKDirectionsRequest) *Directions {
 	return &Directions{inner: raw.MKDirectionsFromID(_id)}
 }
 
+// Begins calculating the requested route information asynchronously.
+//
 // CalculateDirectionsWithCompletionHandler calls the underlying CalculateDirectionsWithCompletionHandler.
 func (x *Directions) CalculateDirectionsWithCompletionHandler(completionHandler func(*raw.MKDirectionsResponse, unsafe.Pointer)) {
 	x.inner.CalculateDirectionsWithCompletionHandler(completionHandler)
 }
 
+// Begins calculating the requested travel-time information asynchronously.
+//
 // CalculateETAWithCompletionHandler calls the underlying CalculateETAWithCompletionHandler.
 func (x *Directions) CalculateETAWithCompletionHandler(completionHandler func(*raw.MKETAResponse, unsafe.Pointer)) {
 	x.inner.CalculateETAWithCompletionHandler(completionHandler)
 }
 
+// Cancels a pending request.
+//
 // Cancel calls the underlying Cancel.
 func (x *Directions) Cancel() {
 	x.inner.Cancel()

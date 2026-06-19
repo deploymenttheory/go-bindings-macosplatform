@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that returns a specified value for each pixel with a value greater than a specified threshold or 0 otherwise.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinary
 type MPSImageThresholdBinary struct {
 	mpsimage.MPSUnaryImageKernel
@@ -36,7 +38,7 @@ func MPSImageThresholdBinaryFromID(id objc.ID) *MPSImageThresholdBinary {
 	return o
 }
 
-// @abstract   initialize a MPSImageThresholdBinary filter @param      device          The device the filter will run on @param      thresholdValue  The threshold value to use @param      maximumValue    The maximum value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
+// Initializes the kernel.
 func (o *MPSImageThresholdBinary) InitWithDeviceThresholdValueMaximumValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, maximumValue float32, transform *float32) *MPSImageThresholdBinary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdBinarySelInitWithDeviceThresholdValueMaximumValueLinearGrayColorTransform, device, thresholdValue, maximumValue, transform)
 	if _ret != 0 {

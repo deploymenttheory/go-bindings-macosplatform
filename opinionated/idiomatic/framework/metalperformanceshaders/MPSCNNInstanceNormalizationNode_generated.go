@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of an instance normalization kernel.
+//
 // CNNInstanceNormalizationNode wraps [raw.MPSCNNInstanceNormalizationNode] with a fluent Go API.
 type CNNInstanceNormalizationNode struct {
 	inner *raw.MPSCNNInstanceNormalizationNode

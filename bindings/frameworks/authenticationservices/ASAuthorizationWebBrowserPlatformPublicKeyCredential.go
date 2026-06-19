@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredential
 type ASAuthorizationWebBrowserPlatformPublicKeyCredential struct {
 	foundation.NSObject

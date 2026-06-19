@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that identifies the origin of a particular resource.
+//
 // WKSecurityOrigin wraps [raw.WKSecurityOrigin] with a fluent Go API.
 type WKSecurityOrigin struct {
 	inner *raw.WKSecurityOrigin

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that encapsulates the parameters that you use to control the reverb of the environment node class.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioenvironmentreverbparameters
 type AVAudioEnvironmentReverbParameters struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func AVAudioEnvironmentReverbParametersFromID(id objc.ID) *AVAudioEnvironmentRev
 	return o
 }
 
-// @method loadFactoryReverbPreset: @abstract Load one of the reverb's factory presets @param preset Reverb preset to be set. @discussion Loading a factory reverb preset changes the sound of the reverb. This works independently of the filter which follows the reverb in the signal chain.
+// Loads one of the reverbs factory presets.
 func (o *AVAudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AVAudioUnitReverbPreset) {
 	o.Ptr().Send(_aVAudioEnvironmentReverbParametersSelLoadFactoryReverbPreset, preset)
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to configure frame processor for low-latency super-resolution scaler processing.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration
 type VTLowLatencySuperResolutionScalerConfiguration struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func VTLowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *VTLowLate
 	return o
 }
 
-// Creates a new low-latency super-resolution scaler configuration with specified frame width and height. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - scaleFactor: The scale factor to apply. This must be a supported value that “supportedScaleFactorsForFrameWidth:frameHeight:“ returns.
+// Creates a new low-latency super-resolution scaler configuration with specified frame width and height.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) InitWithFrameWidthFrameHeightScaleFactor(frameWidth int, frameHeight int, scaleFactor float32) *VTLowLatencySuperResolutionScalerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelInitWithFrameWidthFrameHeightScaleFactor, frameWidth, frameHeight, scaleFactor)
 	if _ret != 0 {
@@ -50,10 +52,13 @@ func (o *VTLowLatencySuperResolutionScalerConfiguration) InitWithFrameWidthFrame
 	return VTLowLatencySuperResolutionScalerConfigurationFromID(_ret)
 }
 
-// Returns an array of supported scale factors values, or an empty list if the processor doesn't support the dimensions.
+// Returns an array of supported scale factors values, or an empty list if the processor doesn’t support the dimensions.
 func VTLowLatencySuperResolutionScalerConfigurationSupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight int) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelSupportedScaleFactorsForFrameWidthFrameHeight, frameWidth, frameHeight)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsVTLowLatencySuperResolutionScalerConfiguration), _vTLowLatencySuperResolutionScalerConfigurationSelSupportedScaleFactorsForFrameWidthFrameHeight, frameWidth, frameHeight)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Width of source frame in pixels.
@@ -70,20 +75,29 @@ func (o *VTLowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
 
 // Available supported pixel formats for source frames for current configuration.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelFrameSupportedPixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelFrameSupportedPixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelSourcePixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelSourcePixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTLowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerConfigurationSelDestinationPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Scale factor with which you initialized the configuration.

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An annotation in a PDF document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotation
 type PDFAnnotation struct {
 	foundation.NSObject
@@ -148,38 +150,45 @@ func PDFAnnotationFromID(id objc.ID) *PDFAnnotation {
 	return o
 }
 
+// Creates a PDF annotation with the specified bounds, type, and optional properties.
 func (o *PDFAnnotation) InitWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID]) *PDFAnnotation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithBoundsForTypeWithProperties, bounds, annotationType, properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithBoundsForTypeWithProperties, bounds, annotationType, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PDFAnnotationFromID(_ret)
 }
 
+// Draws the annotation in a graphics context using page-space coordinates relative to the origin of the specified box.
 func (o *PDFAnnotation) DrawWithBoxInContext(box PDFDisplayBox, context_ unsafe.Pointer) {
 	o.Ptr().Send(_pDFAnnotationSelDrawWithBoxInContext, box, context_)
 }
 
+// Sets a value in the annotation’s dictionary.
 func (o *PDFAnnotation) SetValueForAnnotationKey(value objc.ID, key unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetValueForAnnotationKey, value, key)
 	return _ret
 }
 
+// Sets a Boolean value in the annotation’s dictionary.
 func (o *PDFAnnotation) SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetBooleanForAnnotationKey, value, key)
 	return _ret
 }
 
+// Sets a rectangle value in the annotation’s dictionary.
 func (o *PDFAnnotation) SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetRectForAnnotationKey, value, key)
 	return _ret
 }
 
+// Returns a deep copy of the key-value pairs of properties for the specified key.
 func (o *PDFAnnotation) ValueForAnnotationKey(key unsafe.Pointer) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelValueForAnnotationKey, key)
 	return _ret
 }
 
+// Removes a value from the annotation’s dictionary.
 func (o *PDFAnnotation) RemoveValueForAnnotationKey(key unsafe.Pointer) {
 	o.Ptr().Send(_pDFAnnotationSelRemoveValueForAnnotationKey, key)
 }
@@ -318,7 +327,7 @@ func (o *PDFAnnotation) AnnotationKeyValues() unsafe.Pointer {
 }
 
 func (o *PDFAnnotation) InitWithDictionaryForPage(dictionary *foundation.NSDictionary[objc.ID, objc.ID], page *PDFPage) *PDFAnnotation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithDictionaryForPage, dictionary, page.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithDictionaryForPage, dictionary.Ptr(), page.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -355,11 +364,13 @@ func (o *PDFAnnotation) SetMouseUpAction(mouseUpAction unsafe.Pointer) {
 	o.Ptr().Send(_pDFAnnotationSelSetMouseUpAction, mouseUpAction)
 }
 
+// Returns a line style that corresponds to the specified name.
 func PDFAnnotationLineStyleFromName(name *foundation.NSString) PDFLineStyle {
 	_ret := objc.Send[PDFLineStyle](objc.ID(_clsPDFAnnotation), _pDFAnnotationSelLineStyleFromName, name.Ptr())
 	return _ret
 }
 
+// Returns the name of the line style, which matches the definition in the Adobe PDF Specification.
 func PDFAnnotationNameForLineStyle(style PDFLineStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPDFAnnotation), _pDFAnnotationSelNameForLineStyle, style)
 	if _ret != 0 {
@@ -368,10 +379,12 @@ func PDFAnnotationNameForLineStyle(style PDFLineStyle) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Adds a bezier path to the ink annotation.
 func (o *PDFAnnotation) AddBezierPath(path *appkit.NSBezierPath) {
 	o.Ptr().Send(_pDFAnnotationSelAddBezierPath, path.Ptr())
 }
 
+// Removes a bezier path from an ink annotation.
 func (o *PDFAnnotation) RemoveBezierPath(path *appkit.NSBezierPath) {
 	o.Ptr().Send(_pDFAnnotationSelRemoveBezierPath, path.Ptr())
 }
@@ -467,12 +480,15 @@ func (o *PDFAnnotation) SetIconType(iconType PDFTextAnnotationIconType) {
 }
 
 func (o *PDFAnnotation) QuadrilateralPoints() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _pDFAnnotationSelQuadrilateralPoints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelQuadrilateralPoints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 func (o *PDFAnnotation) SetQuadrilateralPoints(quadrilateralPoints *foundation.NSArray[*foundation.NSValue]) {
-	o.Ptr().Send(_pDFAnnotationSelSetQuadrilateralPoints, quadrilateralPoints)
+	o.Ptr().Send(_pDFAnnotationSelSetQuadrilateralPoints, quadrilateralPoints.Ptr())
 }
 
 func (o *PDFAnnotation) MarkupType() PDFMarkupType {
@@ -603,21 +619,27 @@ func (o *PDFAnnotation) SetListChoice(listChoice bool) {
 }
 
 func (o *PDFAnnotation) Choices() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pDFAnnotationSelChoices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelChoices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PDFAnnotation) SetChoices(choices *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pDFAnnotationSelSetChoices, choices)
+	o.Ptr().Send(_pDFAnnotationSelSetChoices, choices.Ptr())
 }
 
 func (o *PDFAnnotation) Values() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pDFAnnotationSelValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PDFAnnotation) SetValues(values *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pDFAnnotationSelSetValues, values)
+	o.Ptr().Send(_pDFAnnotationSelSetValues, values.Ptr())
 }
 
 func (o *PDFAnnotation) ButtonWidgetState() PDFWidgetCellState {
@@ -651,8 +673,11 @@ func (o *PDFAnnotation) SetOpen(open bool) {
 }
 
 func (o *PDFAnnotation) Paths() *foundation.NSArray[*appkit.NSBezierPath] {
-	_ret := objc.Send[*foundation.NSArray[*appkit.NSBezierPath]](o.Ptr(), _pDFAnnotationSelPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*appkit.NSBezierPath](_ret)
 }
 
 func (o *PDFAnnotation) Destination() *PDFDestination {

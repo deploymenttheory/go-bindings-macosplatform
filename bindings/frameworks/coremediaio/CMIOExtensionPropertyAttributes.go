@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the attributes of a property.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionpropertyattributes
 type CMIOExtensionPropertyAttributes[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func CMIOExtensionPropertyAttributesFromID[ObjectType purego.AnyObject](id objc.
 	return o
 }
 
-// @method propertyAttributesWithMinValue:maxValue:validValues:readonly: @abstract Returns a property attributes instance. @param minValue The minimum value of the property. @param maxValue The maximum value of the property. @param validValues The array of valid values. @param readOnly A readOnly flag. @result A CMIOExtensionPropertyAttributes instance that describes the attributes of a property. @discussion Property attributes may contain a minValue in which case the property is bounded by a minimum value. Property attributes may contain a maxValue in which case the property is bounded by a maximum value. Property attributes may contain both minValue and maxValue in which case the property is bounded within a range. Property attributes may contain a validValues in which case the property is discrete and can only have a certain set of value. If a property does not have a minValue/maxValue/validValues attributes, the property can have any value.
+// Returns a new property attributes object with the specified configuration.
 func CMIOExtensionPropertyAttributesPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue objc.ID, maxValue objc.ID, validValues *foundation.NSArray[objc.ID], readOnly bool) *CMIOExtensionPropertyAttributes[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionPropertyAttributes), _cMIOExtensionPropertyAttributesSelPropertyAttributesWithMinValueMaxValueValidValuesReadOnly, minValue, maxValue, validValues.Ptr(), readOnly)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func CMIOExtensionPropertyAttributesPropertyAttributesWithMinValueMaxValueValidV
 	return CMIOExtensionPropertyAttributesFromID[objc.ID](_ret)
 }
 
-// @method propertyAttributesWithMinValue:maxValue:validValues:readonly: @abstract Initialize a property attributes instance. @param minValue The minimum value of the property. @param maxValue The maximum value of the property. @param validValues The array of valid values. @param readOnly A readOnly flag. @result A CMIOExtensionPropertyAttributes instance that describes the attributes of a property. @discussion Property attributes may contain a minValue in which case the property is bounded by a minimum value. Property attributes may contain a maxValue in which case the property is bounded by a maximum value. Property attributes may contain both minValue and maxValue in which case the property is bounded within a range. Property attributes may contain a validValues in which case the property is discrete and can only have a certain set of value. If a property does not have a minValue/maxValue/validValues attributes, the property can have any value.
+// Creates a property attributes object with the specified configuration.
 func (o *CMIOExtensionPropertyAttributes[ObjectType]) InitWithMinValueMaxValueValidValuesReadOnly(minValue ObjectType, maxValue ObjectType, validValues *foundation.NSArray[ObjectType], readOnly bool) *CMIOExtensionPropertyAttributes[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionPropertyAttributesSelInitWithMinValueMaxValueValidValuesReadOnly, minValue, maxValue, validValues.Ptr(), readOnly)
 	if _ret != 0 {

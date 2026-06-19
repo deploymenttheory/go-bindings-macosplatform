@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores subscription information that the system provides to the Apple TV app.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionregistrationcenter
 type VSSubscriptionRegistrationCenter struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func VSSubscriptionRegistrationCenterFromID(id objc.ID) *VSSubscriptionRegistrat
 	return o
 }
 
-// Use the default subscription registration center to tell the system about the customer's ability to access content within your app.
+// Returns the default subscription registration center object.
 func VSSubscriptionRegistrationCenterDefaultSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVSSubscriptionRegistrationCenter), _vSSubscriptionRegistrationCenterSelDefaultSubscriptionRegistrationCenter)
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func VSSubscriptionRegistrationCenterDefaultSubscriptionRegistrationCenter() *VS
 	return VSSubscriptionRegistrationCenterFromID(_ret)
 }
 
-// Provide a subscription when the subscriber first authenticates, and when the subscription changes. When the subscriber signs out or otherwise loses access to subscription content, invoke this method with nil. You might also want to call this method opportunistically, if you happen to have just confirmed the validity of the subscription, or in response to app lifecycle events, e.g. when your app becomes active.  The system may use this activity as a hint that the user is actively using the subscription. It is an error to provide a current subscription with an unknown access level; you should not provide a subscription if the user only has access to content that is offered for free without any account requirements.
+// Sets the subscription information for the current user.
 func (o *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
 	o.Ptr().Send(_vSSubscriptionRegistrationCenterSelSetCurrentSubscription, currentSubscription.Ptr())
 }

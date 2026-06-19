@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The local player who signs in to Game Center on the device running the game.
+//
 // LocalPlayer wraps [raw.GKLocalPlayer] with a fluent Go API.
 type LocalPlayer struct {
 	inner *raw.GKLocalPlayer
@@ -40,13 +42,15 @@ func NewLocalPlayer() *LocalPlayer {
 	return &LocalPlayer{inner: raw.GKLocalPlayerFromID(_id)}
 }
 
+// A handler that GameKit calls while initializing the local player.
+//
 // WithAuthenticateHandler sets the authenticateHandler property and returns the receiver for chaining.
 func (x *LocalPlayer) WithAuthenticateHandler(authenticateHandler func(*appkit.NSViewController, unsafe.Pointer)) *LocalPlayer {
 	x.inner.SetAuthenticateHandler(authenticateHandler)
 	return x
 }
 
-// Asynchronously load the recent players list as an array of GKPlayer.  A recent player is someone that you have played a game with or is a legacy game center friend.  Calls completionHandler when finished. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads players from the friends list or players that recently participated in a game with the local player.
 //
 // LoadRecentPlayers blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
@@ -72,7 +76,7 @@ func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (*foundation.NSArra
 	}
 }
 
-// Asynchronously load the challengable friends list as an array of GKPlayer.  A challengable player is a friend player with friend level FL1 and FL2.  Calls completionHandler when finished. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads players to whom the local player can issue a challenge.
 //
 // LoadChallengableFriends blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
@@ -98,7 +102,7 @@ func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (*foundation.
 	}
 }
 
-// Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Generates a signature that you can use to authenticate the local player on your own server.
 //
 // FetchItemsForIdentityVerificationSignature calls the underlying FetchItemsForIdentityVerificationSignature.
 func (x *LocalPlayer) FetchItemsForIdentityVerificationSignature(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer)) {
@@ -133,18 +137,22 @@ func (x *LocalPlayer) IsPersonalizedCommunicationRestricted() bool {
 	return x.inner.IsPersonalizedCommunicationRestricted()
 }
 
-// A single listener may be registered once. Registering multiple times results in undefined behavior. The registered listener will receive callbacks for any selector it responds to.
+// Registers a listener for a particular event.
 //
 // RegisterListener calls the underlying RegisterListener.
 func (x *LocalPlayer) RegisterListener(listener raw.GKLocalPlayerListener) {
 	x.inner.RegisterListener(listener)
 }
 
+// Unregisters a listener object.
+//
 // UnregisterListener calls the underlying UnregisterListener.
 func (x *LocalPlayer) UnregisterListener(listener raw.GKLocalPlayerListener) {
 	x.inner.UnregisterListener(listener)
 }
 
+// Unregisters all listeners in your game.
+//
 // UnregisterAllListeners calls the underlying UnregisterAllListeners.
 func (x *LocalPlayer) UnregisterAllListeners() {
 	x.inner.UnregisterAllListeners()
@@ -243,7 +251,7 @@ func (x *LocalPlayer) GenerateIdentityVerificationSignatureWithCompletionHandler
 	x.inner.GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler)
 }
 
-// Load the default leaderboard identifier for the local player Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+// Loads the identifier for the local player’s default leaderboard.
 //
 // LoadDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (string, error) {
@@ -271,7 +279,7 @@ func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (str
 	}
 }
 
-// Set the default leaderboard for the current game Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+// Sets the local player’s default leaderboard.
 //
 // SetDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error {
@@ -293,9 +301,28 @@ func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leade
 
 // This method is obsolete. It will never be invoked and its implementation does nothing**
 //
-// LoadFriendsWithCompletionHandler calls the underlying LoadFriendsWithCompletionHandler.
-func (x *LocalPlayer) LoadFriendsWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.LoadFriendsWithCompletionHandler(completionHandler)
+// LoadFriends blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadFriends(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadFriendsWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // Friends returns the collection as a Go slice.
@@ -309,6 +336,8 @@ func (x *LocalPlayer) Friends() []string {
 	})
 }
 
+// Returns whether the player authorizes your game to access their friends list.
+//
 // LoadFriendsAuthorizationStatus calls the underlying LoadFriendsAuthorizationStatus.
 func (x *LocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(GKFriendsAuthorizationStatus, unsafe.Pointer)) {
 	x.inner.LoadFriendsAuthorizationStatus(func(_a0 raw.GKFriendsAuthorizationStatus, _a1 unsafe.Pointer) {
@@ -316,30 +345,8 @@ func (x *LocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(GKFr
 	})
 }
 
-// LoadFriends blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
-	type _result struct {
-		val *foundation.NSArray[*raw.GKPlayer]
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.LoadFriends(func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKPlayer]
-		return _zero, ctx.Err()
-	}
-}
-
+// Loads the player’s friends list, scoped by the identifiers, if the player and their friends grant access.
+//
 // LoadFriendsWithIdentifiers blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKPlayer], error) {
 	type _result struct {
@@ -364,7 +371,7 @@ func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifier
 	}
 }
 
-// presentFriendRequestCreatorFromWindow: Discussion: MacOS only. When invoked, if no error is encountered, the caller application is backgrounded and the 'Messages' application is launched/foregrounded, with a formatted friend request message. If an error occurs, controls are returned to the caller application, with an error describing the error. Possible reasons for error: - The local player user account is not allowed to add friends - The device is not allowing outgoing traffic at the time of the operation
+// Opens the Messages app with a sheet for the player to request friends.
 //
 // PresentFriendRequestCreatorFromWindowError calls the underlying PresentFriendRequestCreatorFromWindowError.
 func (x *LocalPlayer) PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error) {
@@ -407,7 +414,7 @@ func (x *LocalPlayer) IsPresentingFriendRequestViewController() bool {
 	return x.inner.IsPresentingFriendRequestViewController()
 }
 
-// Asynchronously fetch saved games. The handler is called with an array of GKSavedGame objects or an error. If there is more than one saved game with the same name then a conflict exists. The application should determine the correct data to use and call resolveConflictingSavedGames:withData:completionHandler:. This may require data merging or asking the user.
+// Retrieves all available saved games.
 //
 // FetchSavedGames blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (*foundation.NSArray[*raw.GKSavedGame], error) {
@@ -433,7 +440,7 @@ func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (*foundation.NSArray[
 	}
 }
 
-// Asynchronously save game data. If a saved game with that name already exists it is overwritten, otherwise a new one is created. The completion handler is called with the new / modified GKSavedGame or an error. If the saved game was in conflict then the overwritten version will be the one with the same deviceName if present, otherwise the most recent overall.
+// Saves game data with the specified name.
 //
 // SaveGameDataWithName blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data *foundation.NSData, name string) (*SavedGame, error) {
@@ -461,7 +468,7 @@ func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data *foundation
 	}
 }
 
-// Asynchronously delete saved games with the given name. The completion handler will indicate whether or not the deletion was successful.
+// Deletes saved games with the specified filename.
 //
 // DeleteSavedGamesWithName blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string) error {
@@ -481,7 +488,7 @@ func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string)
 	}
 }
 
-// Asynchronously resolve a saved game conflict. This deletes all versions included in conflictingSavedGames and creates a new version with the given data. The completion handler is called with the newly created save and all other remaining versions or an error.
+// Replaces duplicate saved games that use the same filename with one file containing the specified game data.
 //
 // ResolveConflictingSavedGamesWithData blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames *foundation.NSArray[*raw.GKSavedGame], data *foundation.NSData) (*foundation.NSArray[*raw.GKSavedGame], error) {
@@ -532,10 +539,9 @@ type LocalPlayerable interface {
 	GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer))
 	LoadDefaultLeaderboardIdentifier(ctx context.Context) (string, error)
 	SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error
-	LoadFriendsWithCompletionHandler(completionHandler objc.Block)
+	LoadFriends(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
 	Friends() []string
 	LoadFriendsAuthorizationStatus(completionHandler func(GKFriendsAuthorizationStatus, unsafe.Pointer))
-	LoadFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error)
 	LoadFriendsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKPlayer], error)
 	PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error)
 	AuthenticateHandler() objc.Block

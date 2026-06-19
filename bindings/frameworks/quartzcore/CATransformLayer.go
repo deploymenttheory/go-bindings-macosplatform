@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Objects used to create true 3D layer hierarchies, rather than the flattened hierarchy rendering model used by other layer types.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/catransformlayer
 type CATransformLayer struct {
 	CALayer

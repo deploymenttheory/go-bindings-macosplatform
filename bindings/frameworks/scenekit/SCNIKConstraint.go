@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A constraint that applies inverse kinematics to make a chain of nodes “reach” toward a target point.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnikconstraint
 type SCNIKConstraint struct {
 	SCNConstraint
@@ -35,7 +37,7 @@ func SCNIKConstraintFromID(id objc.ID) *SCNIKConstraint {
 	return o
 }
 
-// @method initWithChainRootNode: @abstract Creates and returns a SCNIKConstraint object with the specified parameter. @param chainRootNode The root node of the kinematic chain. @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
+// Initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
 func (o *SCNIKConstraint) InitWithChainRootNode(chainRootNode *SCNNode) *SCNIKConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNIKConstraintSelInitWithChainRootNode, chainRootNode.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *SCNIKConstraint) InitWithChainRootNode(chainRootNode *SCNNode) *SCNIKCo
 	return SCNIKConstraintFromID(_ret)
 }
 
-// @method inverseKinematicsConstraintWithChainRootNode: @abstract Creates and returns a SCNIKConstraint object with the specified parameter. @param chainRootNode The root node of the kinematic chain. @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
+// Creates an inverse kinematics constraint whose chain of nodes begins with the specified node.
 func SCNIKConstraintInverseKinematicsConstraintWithChainRootNode(chainRootNode *SCNNode) *SCNIKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNIKConstraint), _sCNIKConstraintSelInverseKinematicsConstraintWithChainRootNode, chainRootNode.Ptr())
 	if _ret != 0 {
@@ -53,11 +55,12 @@ func SCNIKConstraintInverseKinematicsConstraintWithChainRootNode(chainRootNode *
 	return SCNIKConstraintFromID(_ret)
 }
 
-// @method setMaxAllowedRotationAngle:forJoint: @abstract Specifies the maximum rotation allowed (in degrees) for the specified joint from its initial orientation. Defaults to 180.
+// Sets the rotation limit, in degrees, for the specified node.
 func (o *SCNIKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *SCNNode) {
 	o.Ptr().Send(_sCNIKConstraintSelSetMaxAllowedRotationAngleForJoint, angle, node.Ptr())
 }
 
+// Returns the rotation limit, in degrees, for the specified node.
 func (o *SCNIKConstraint) MaxAllowedRotationAngleForJoint(node *SCNNode) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sCNIKConstraintSelMaxAllowedRotationAngleForJoint, node.Ptr())
 	return _ret

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A parsed ATR (Answer To Reset) message from a Smart Card.
+//
 // SmartCardATR wraps [raw.TKSmartCardATR] with a fluent Go API.
 type SmartCardATR struct {
 	inner *raw.TKSmartCardATR
@@ -31,7 +33,7 @@ func SmartCardATRFromID(id objc.ID) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(id)}
 }
 
-// Parses ATR from binary data block @param bytes Data containing full valid ATR @return Parsed ATR instance, or nil when #bytes do not contain valid ATR.
+// Initializes a TKSmartCardATR object from a provided data object.
 //
 // NewSmartCardATRWithBytes creates a new [SmartCardATR].
 func NewSmartCardATRWithBytes(bytes_ *foundation.NSData) *SmartCardATR {
@@ -40,7 +42,7 @@ func NewSmartCardATRWithBytes(bytes_ *foundation.NSData) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
 }
 
-// Parses ATR from stream. @param source Provides one byte of ATR from the stream or -1 in case of an error @return Parsed ATR instance, or nil when #source method failed or an invalid ATR is detected
+// Initializes a TKSmartCardATR object from a provided data source.
 //
 // NewSmartCardATRWithSource creates a new [SmartCardATR].
 func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
@@ -49,7 +51,7 @@ func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
 }
 
-// Retrieves interface group with specified index. @param index Index of the requested interface group.  Indexing conforms to ISO7816-3, i.e. starts from 1. @return Interface group with given index, or nil of no such group was present.
+// Returns the interface group at the specified index.
 //
 // InterfaceGroupAtIndex calls the underlying InterfaceGroupAtIndex.
 func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup {
@@ -60,7 +62,7 @@ func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGr
 	return &SmartCardATRInterfaceGroup{inner: _r}
 }
 
-// @param protocol Protocol number for which the interface group is requested.
+// Returns the interface group with the specified protocol.
 //
 // InterfaceGroupForProtocol calls the underlying InterfaceGroupForProtocol.
 func (x *SmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *SmartCardATRInterfaceGroup {

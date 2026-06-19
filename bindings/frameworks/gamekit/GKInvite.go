@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An invitation to join a match sent to the local player from another player.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkinvite
 type GKInvite struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An annotation that reflects the user’s location on the map.
+//
 // UserLocation wraps [raw.MKUserLocation] with a fluent Go API.
 type UserLocation struct {
 	inner *raw.MKUserLocation
@@ -39,12 +41,16 @@ func NewUserLocation() *UserLocation {
 	return &UserLocation{inner: raw.MKUserLocationFromID(_id)}
 }
 
+// The title to display for the user’s location annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *UserLocation) WithTitle(title string) *UserLocation {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle to display for the user’s location annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *UserLocation) WithSubtitle(subtitle string) *UserLocation {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

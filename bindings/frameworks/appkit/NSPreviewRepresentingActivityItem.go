@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that adds metadata to an item you share using the macOS share sheet.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspreviewrepresentingactivityitem
 type NSPreviewRepresentingActivityItem struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func NSPreviewRepresentingActivityItemFromID(id objc.ID) *NSPreviewRepresentingA
 	return o
 }
 
+// Creates a metadata object with the title, image, and icon for a shareable item.
 func (o *NSPreviewRepresentingActivityItem) InitWithItemTitleImageIcon(item objc.ID, title *foundation.NSString, image *NSImage, icon *NSImage) *NSPreviewRepresentingActivityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreviewRepresentingActivityItemSelInitWithItemTitleImageIcon, item, title.Ptr(), image.Ptr(), icon.Ptr())
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *NSPreviewRepresentingActivityItem) InitWithItemTitleImageIcon(item objc
 	return NSPreviewRepresentingActivityItemFromID(_ret)
 }
 
+// Creates a metadata object that provides a title and images for a shareable item.
 func (o *NSPreviewRepresentingActivityItem) InitWithItemTitleImageProviderIconProvider(item objc.ID, title *foundation.NSString, imageProvider *foundation.NSItemProvider, iconProvider *foundation.NSItemProvider) *NSPreviewRepresentingActivityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreviewRepresentingActivityItemSelInitWithItemTitleImageProviderIconProvider, item, title.Ptr(), imageProvider.Ptr(), iconProvider.Ptr())
 	if _ret != 0 {

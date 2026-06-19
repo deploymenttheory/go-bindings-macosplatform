@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A request to fetch setup, import, or export events in a persistent CloudKit container.
+//
 // PersistentCloudKitContainerEventRequest wraps [raw.NSPersistentCloudKitContainerEventRequest] with a fluent Go API.
 type PersistentCloudKitContainerEventRequest struct {
 	inner *raw.NSPersistentCloudKitContainerEventRequest
@@ -39,12 +41,16 @@ func NewPersistentCloudKitContainerEventRequest() *PersistentCloudKitContainerEv
 	return &PersistentCloudKitContainerEventRequest{inner: raw.NSPersistentCloudKitContainerEventRequestFromID(_id)}
 }
 
+// The type of result that the request returns.
+//
 // WithResultType sets the resultType property and returns the receiver for chaining.
 func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest {
 	x.inner.SetResultType(raw.NSPersistentCloudKitContainerEventResultType(resultType))
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest {
 	if len(items) == 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The identifying information for a user of your app.
+//
 // PersonHandle wraps [raw.INPersonHandle] with a fluent Go API.
 type PersonHandle struct {
 	inner *raw.INPersonHandle
@@ -31,6 +33,8 @@ func PersonHandleFromID(id objc.ID) *PersonHandle {
 	return &PersonHandle{inner: raw.INPersonHandleFromID(id)}
 }
 
+// Initializes and returns a person handle with the specified data.
+//
 // NewPersonHandleWithValueTypeLabel creates a new [PersonHandle].
 func NewPersonHandleWithValueTypeLabel(value string, type_ INPersonHandleType, label *foundation.NSString) *PersonHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPersonHandle")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewPersonHandleWithValueTypeLabel(value string, type_ INPersonHandleType, l
 	return &PersonHandle{inner: raw.INPersonHandleFromID(_id)}
 }
 
+// Initializes and returns a person handle with the specified data.
+//
 // NewPersonHandleWithValueType creates a new [PersonHandle].
 func NewPersonHandleWithValueType(value string, type_ INPersonHandleType) *PersonHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPersonHandle")), objc.RegisterName("alloc"))

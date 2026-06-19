@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phpickerupdateconfiguration
 type PHPickerUpdateConfiguration struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the properties of an extension provider.
+//
 // ExtensionProviderProperties wraps [raw.CMIOExtensionProviderProperties] with a fluent Go API.
 type ExtensionProviderProperties struct {
 	inner *raw.CMIOExtensionProviderProperties
@@ -31,7 +33,7 @@ func ExtensionProviderPropertiesFromID(id objc.ID) *ExtensionProviderProperties 
 	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(id)}
 }
 
-// @method initWithDictionary: @abstract Initialize a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
+// Creates a provider properties object with the specified properties.
 //
 // NewExtensionProviderPropertiesWithDictionary creates a new [ExtensionProviderProperties].
 func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionProviderProperties {
@@ -40,7 +42,7 @@ func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary purego.ID
 	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(_id)}
 }
 
-// @property name @abstract The provider name. @discussion The property key is CMIOExtensionPropertyProviderName.
+// The provider name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ExtensionProviderProperties) WithName(name string) *ExtensionProviderProperties {
@@ -48,7 +50,7 @@ func (x *ExtensionProviderProperties) WithName(name string) *ExtensionProviderPr
 	return x
 }
 
-// @property manufacturer @abstract The provider manufacturer. @discussion The property key is CMIOExtensionPropertyProviderManufacturer.
+// The provider manufacturer.
 //
 // WithManufacturer sets the manufacturer property and returns the receiver for chaining.
 func (x *ExtensionProviderProperties) WithManufacturer(manufacturer string) *ExtensionProviderProperties {
@@ -56,7 +58,7 @@ func (x *ExtensionProviderProperties) WithManufacturer(manufacturer string) *Ext
 	return x
 }
 
-// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+// A dictionary of properties for a provider.
 //
 // WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
 func (x *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties {
@@ -64,7 +66,7 @@ func (x *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDiction
 	return x
 }
 
-// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+// Sets a state value for the specified property.
 //
 // SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
 func (x *ExtensionProviderProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A bidirectional communication channel between two processes.
+//
 // XPCConnection wraps [raw.NSXPCConnection] with a fluent Go API.
 type XPCConnection struct {
 	inner *raw.NSXPCConnection
@@ -32,6 +34,8 @@ func XPCConnectionFromID(id objc.ID) *XPCConnection {
 	return &XPCConnection{inner: raw.NSXPCConnectionFromID(id)}
 }
 
+// Initializes an NSXPCConnection object to connect to an NSXPCListener object in an XPC service, identified by a service name.
+//
 // NewXPCConnectionWithServiceName creates a new [XPCConnection].
 func NewXPCConnectionWithServiceName(serviceName string) *XPCConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewXPCConnectionWithServiceName(serviceName string) *XPCConnection {
 	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
 }
 
+// Initializes an NSXPCConnection object to connect to a LaunchAgent or LaunchDaemon with a name advertised in a launchd.plist.
+//
 // NewXPCConnectionWithMachServiceNameOptions creates a new [XPCConnection].
 func NewXPCConnectionWithMachServiceNameOptions(name string, options NSXPCConnectionOptions) *XPCConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewXPCConnectionWithMachServiceNameOptions(name string, options NSXPCConnec
 	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
 }
 
+// Initializes an NSXPCConnection object to connect to an NSXPCListener object in another process, identified by an NSXPCListenerEndpoint object.
+//
 // NewXPCConnectionWithListenerEndpoint creates a new [XPCConnection].
 func NewXPCConnectionWithListenerEndpoint(endpoint *raw.NSXPCListenerEndpoint) *XPCConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
@@ -53,30 +61,40 @@ func NewXPCConnectionWithListenerEndpoint(endpoint *raw.NSXPCListenerEndpoint) *
 	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
 }
 
+// The NSXPCInterface object that describes the protocol for the exported object on this connection.
+//
 // WithExportedInterface sets the exportedInterface property and returns the receiver for chaining.
 func (x *XPCConnection) WithExportedInterface(exportedInterface *XPCInterface) *XPCConnection {
 	x.inner.SetExportedInterface(exportedInterface.Unwrap())
 	return x
 }
 
+// An exported object for the connection.
+//
 // WithExportedObject sets the exportedObject property and returns the receiver for chaining.
 func (x *XPCConnection) WithExportedObject(exportedObject objc.ID) *XPCConnection {
 	x.inner.SetExportedObject(exportedObject)
 	return x
 }
 
+// Defines the NSXPCInterface object that describes the protocol for the object represented by the remoteObjectProxy.
+//
 // WithRemoteObjectInterface sets the remoteObjectInterface property and returns the receiver for chaining.
 func (x *XPCConnection) WithRemoteObjectInterface(remoteObjectInterface *XPCInterface) *XPCConnection {
 	x.inner.SetRemoteObjectInterface(remoteObjectInterface.Unwrap())
 	return x
 }
 
+// An interruption handler that is called if the remote process exits or crashes.
+//
 // WithInterruptionHandler sets the interruptionHandler property and returns the receiver for chaining.
 func (x *XPCConnection) WithInterruptionHandler(interruptionHandler func()) *XPCConnection {
 	x.inner.SetInterruptionHandler(interruptionHandler)
 	return x
 }
 
+// An invalidation handler that is called if the connection can not be formed or the connection has terminated and may not be re-established.
+//
 // WithInvalidationHandler sets the invalidationHandler property and returns the receiver for chaining.
 func (x *XPCConnection) WithInvalidationHandler(invalidationHandler func()) *XPCConnection {
 	x.inner.SetInvalidationHandler(invalidationHandler)
@@ -89,36 +107,50 @@ func (x *XPCConnection) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Returns a proxy for the remote object (that is, the object exported from the other side of this connection) with the specified error handler.
+//
 // RemoteObjectProxyWithErrorHandler calls the underlying RemoteObjectProxyWithErrorHandler.
 func (x *XPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
 	return x.inner.RemoteObjectProxyWithErrorHandler(handler)
 }
 
+// Returns a proxy that makes a synchronous IPC call instead of the default async behavior.
+//
 // SynchronousRemoteObjectProxyWithErrorHandler calls the underlying SynchronousRemoteObjectProxyWithErrorHandler.
 func (x *XPCConnection) SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
 	return x.inner.SynchronousRemoteObjectProxyWithErrorHandler(handler)
 }
 
+// Starts or resumes handling of messages on a connection.
+//
 // Resume calls the underlying Resume.
 func (x *XPCConnection) Resume() {
 	x.inner.Resume()
 }
 
+// Suspends the connection.
+//
 // Suspend calls the underlying Suspend.
 func (x *XPCConnection) Suspend() {
 	x.inner.Suspend()
 }
 
+// Activates the connection.
+//
 // Activate calls the underlying Activate.
 func (x *XPCConnection) Activate() {
 	x.inner.Activate()
 }
 
+// Invalidates the connection.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *XPCConnection) Invalidate() {
 	x.inner.Invalidate()
 }
 
+// Add a barrier block to execute on the connection.
+//
 // ScheduleSendBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -133,7 +165,7 @@ func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 	}
 }
 
-// Sets the code signing requirement for this connection. If the requirement is malformed, an exception is thrown. If new messages do not match the requirement, the connection is invalidated. It is recommended to set this before calling `resume`, as it is an XPC error to call it more than once. See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+// Sets the code signing requirement for this connection.
 //
 // SetCodeSigningRequirement calls the underlying SetCodeSigningRequirement.
 func (x *XPCConnection) SetCodeSigningRequirement(requirement string) {

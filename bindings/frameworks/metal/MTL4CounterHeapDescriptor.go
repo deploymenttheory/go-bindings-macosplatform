@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together parameters for configuring a counter heap object at creation time.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4counterheapdescriptor
 type MTL4CounterHeapDescriptor struct {
 	foundation.NSObject

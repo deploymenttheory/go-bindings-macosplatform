@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Constants that indicate the clock type of a stream.
 type CMIOExtensionStreamClockType int64
 
 const (
@@ -30,6 +31,7 @@ func (e CMIOExtensionStreamClockType) String() string {
 	}
 }
 
+// Constants that define the data-flow direction of the stream.
 type CMIOExtensionStreamDirection int64
 
 const (
@@ -48,10 +50,12 @@ func (e CMIOExtensionStreamDirection) String() string {
 	}
 }
 
+// Constants that specify the types of discontinuities that can occur in a media stream.
 // Bitmask — values may be combined with |.
 type CMIOExtensionStreamDiscontinuityFlags int64
 
 const (
+	// A flag that indicates there’s no discontinuity in the stream.
 	CMIOExtensionStreamDiscontinuityFlagNone          CMIOExtensionStreamDiscontinuityFlags = 0
 	CMIOExtensionStreamDiscontinuityFlagUnknown       CMIOExtensionStreamDiscontinuityFlags = 1
 	CMIOExtensionStreamDiscontinuityFlagTime          CMIOExtensionStreamDiscontinuityFlags = 2

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Filters a user specifies to redial a call.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incallrecordfilter
 type INCallRecordFilter struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func INCallRecordFilterFromID(id objc.ID) *INCallRecordFilter {
 	return o
 }
 
+// Creates a filtered call record with the details about a call.
 func (o *INCallRecordFilter) InitWithParticipantsCallTypesCallCapability(participants *foundation.NSArray[*INPerson], callTypes INCallRecordTypeOptions, callCapability INCallCapability) *INCallRecordFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordFilterSelInitWithParticipantsCallTypesCallCapability, participants.Ptr(), callTypes, callCapability)
 	if _ret != 0 {

@@ -74,10 +74,13 @@ func (o *MTRActionsClusterEndpointListStruct) SetType(type_ *foundation.NSNumber
 }
 
 func (o *MTRActionsClusterEndpointListStruct) Endpoints() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRActionsClusterEndpointListStructSelEndpoints)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterEndpointListStructSelEndpoints)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRActionsClusterEndpointListStructSelSetEndpoints, endpoints)
+	o.Ptr().Send(_mTRActionsClusterEndpointListStructSelSetEndpoints, endpoints.Ptr())
 }

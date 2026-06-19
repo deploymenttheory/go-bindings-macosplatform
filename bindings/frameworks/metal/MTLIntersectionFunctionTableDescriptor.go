@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification of how to create an intersection function table.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlintersectionfunctiontabledescriptor
 type MTLIntersectionFunctionTableDescriptor struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MTLIntersectionFunctionTableDescriptorFromID(id objc.ID) *MTLIntersectionFu
 	return o
 }
 
-// @method intersectionFunctionTableDescriptor @abstract Create an autoreleased intersection function table descriptor
+// Creates an intersection function table descriptor.
 func MTLIntersectionFunctionTableDescriptorIntersectionFunctionTableDescriptor() *MTLIntersectionFunctionTableDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLIntersectionFunctionTableDescriptor), _mTLIntersectionFunctionTableDescriptorSelIntersectionFunctionTableDescriptor)
 	if _ret != 0 {

@@ -35,7 +35,7 @@ func HKGAD7AssessmentFromID(id objc.ID) *HKGAD7Assessment {
 
 // Creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
 func HKGAD7AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber]) *HKGAD7Assessment {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKGAD7Assessment), _hKGAD7AssessmentSelAssessmentWithDateAnswers, date.Ptr(), answers)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKGAD7Assessment), _hKGAD7AssessmentSelAssessmentWithDateAnswers, date.Ptr(), answers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -44,7 +44,7 @@ func HKGAD7AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers 
 
 // Creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
 func HKGAD7AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKGAD7Assessment {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKGAD7Assessment), _hKGAD7AssessmentSelAssessmentWithDateAnswersMetadata, date.Ptr(), answers, metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKGAD7Assessment), _hKGAD7AssessmentSelAssessmentWithDateAnswersMetadata, date.Ptr(), answers.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -53,8 +53,11 @@ func HKGAD7AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, 
 
 // Answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
 func (o *HKGAD7Assessment) Answers() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _hKGAD7AssessmentSelAnswers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKGAD7AssessmentSelAnswers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   risk @discussion The risk determined by the score on a GAD-7 assessment.

@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "framework": "VideoSubscriberAccount",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "VSAccountApplicationProvider": {
+      "doc": "An object to display app-specific providers in your app.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountapplicationprovider"
+    },
+    "VSAccountManager": {
+      "doc": "The object that coordinates your app’s authentication requests with a TV provider’s authentication service.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanager"
+    },
+    "VSAccountManagerResult": {
+      "doc": "An object that represents a request made for subscriber account information.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanagerresult"
+    },
+    "VSAccountMetadata": {
+      "doc": "A collection of information for a subscriber’s account.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata"
+    },
+    "VSAccountMetadataRequest": {
+      "doc": "An object that specifies what subscriber account information your app retrieves.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest"
+    },
+    "VSAccountProviderResponse": {
+      "doc": "An object that contains the response from the account provider.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountproviderresponse"
+    },
+    "VSAppleSubscription": {
+      "doc": "An Apple streaming service customer and their subscriptions.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsapplesubscription"
+    },
+    "VSAutoSignInToken": {
+      "doc": "A value that represents a person’s account and their consent to Automatic Sign-In.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintoken"
+    },
+    "VSAutoSignInTokenUpdateContext": {
+      "doc": "An object that contains information about a person’s choice in the Automatic Sign-In prompt.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintokenupdatecontext"
+    },
+    "VSSubscription": {
+      "doc": "An object that describes a subscriber’s access to content.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscription"
+    },
+    "VSSubscriptionRegistrationCenter": {
+      "doc": "An object that stores subscription information that the system provides to the Apple TV app.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionregistrationcenter"
+    },
+    "VSUserAccount": {
+      "doc": "An object that represents a user’s account.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccount"
+    },
+    "VSUserAccountManager": {
+      "doc": "The object that coordinates your app’s user account actions.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager"
+    }
+  },
+  "protocols": {
+    "VSAccountManagerDelegate": {
+      "doc": "The methods you use to respond to authentication view controller requests.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanagerdelegate"
+    }
+  },
+  "enums": {
+    "VSAccountAccessStatus": {
+      "doc": "Constants that represent your app’s access status to the user’s subscription information.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountaccessstatus",
+      "members": {
+        "VSAccountAccessStatusDenied": {
+          "doc": "The user denied the app access to subscription information.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountaccessstatus/denied"
+        },
+        "VSAccountAccessStatusGranted": {
+          "doc": "The user allowed the app to access subscription information.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountaccessstatus/granted"
+        },
+        "VSAccountAccessStatusNotDetermined": {
+          "doc": "The user hasn’t chosen whether to allow the app to access subscription information.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountaccessstatus/notdetermined"
+        },
+        "VSAccountAccessStatusRestricted": {
+          "doc": "The app isn’t allowed to access subscription information.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountaccessstatus/restricted"
+        }
+      }
+    },
+    "VSAutoSignInAuthorization": {
+      "doc": "The possible states the framework sets for Automatic Sign-In.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosigninauthorization",
+      "members": {
+        "VSAutoSignInAuthorizationDenied": {
+          "doc": "A state that indicates the person denied authorization.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosigninauthorization/vsautosigninauthorizationdenied"
+        },
+        "VSAutoSignInAuthorizationGranted": {
+          "doc": "A state that indicates the person opts in to Automatic Sign-In.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosigninauthorization/vsautosigninauthorizationgranted"
+        },
+        "VSAutoSignInAuthorizationNotDetermined": {
+          "doc": "A state that indicates the framework needs to reauthorize Automatic Sign-In.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosigninauthorization/vsautosigninauthorizationnotdetermined"
+        }
+      }
+    },
+    "VSErrorCode": {
+      "doc": "Error codes in the framework error domain.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vserrorcode"
+    },
+    "VSOriginatingDeviceCategory": {
+      "doc": "Constants that represent whether the device from which the user originally registered is mobile.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsoriginatingdevicecategory",
+      "members": {
+        "VSOriginatingDeviceCategoryMobile": {
+          "doc": "A constant that indicates the original registering device is mobile.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsoriginatingdevicecategory/vsoriginatingdevicecategorymobile"
+        },
+        "VSOriginatingDeviceCategoryOther": {
+          "doc": "A constant that indicates the original registering device is not mobile.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsoriginatingdevicecategory/vsoriginatingdevicecategoryother"
+        }
+      }
+    },
+    "VSSubscriptionAccessLevel": {
+      "doc": "Constants representing a subscriber’s level of access to your content.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionaccesslevel",
+      "members": {
+        "VSSubscriptionAccessLevelFreeWithAccount": {
+          "doc": "The user has access to free content with a valid account.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionaccesslevel/freewithaccount"
+        },
+        "VSSubscriptionAccessLevelPaid": {
+          "doc": "The user has access to content that requires a paid subscription.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionaccesslevel/paid"
+        },
+        "VSSubscriptionAccessLevelUnknown": {
+          "doc": "The default access level.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionaccesslevel/unknown"
+        }
+      }
+    },
+    "VSUserAccountQueryOptions": {
+      "doc": "Constants that represent options you use to fetch a list of user accounts.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountqueryoptions",
+      "members": {
+        "VSUserAccountQueryNone": {
+          "doc": "A constant that indicates fetching user accounts from the user’s current device only.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountqueryoptions/vsuseraccountquerynone"
+        }
+      }
+    },
+    "VSUserAccountType": {
+      "doc": "Constants that represent whether a user has access to paid content.",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccounttype",
+      "members": {
+        "VSUserAccountTypeFree": {
+          "doc": "A constant that indicates a user has access to free content.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccounttype/vsuseraccounttypefree"
+        },
+        "VSUserAccountTypePaid": {
+          "doc": "A constant that indicates a user has access to paid content.",
+          "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccounttype/vsuseraccounttypepaid"
+        }
+      }
+    }
+  },
+  "methods": {
+    "VSAccountApplicationProvider": {
+      "-initWithLocalizedDisplayName:identifier:": {
+        "doc": "Returns an application provider using a given display name and identifier.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountapplicationprovider/init(localizeddisplayname:identifier:)"
+      }
+    },
+    "VSAccountManager": {
+      "-checkAccessStatusWithOptions:completionHandler:": {
+        "doc": "Checks your app’s access to user subscription information, and requests access if needed.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanager/checkaccessstatus(options:completionhandler:)"
+      },
+      "-enqueueAccountMetadataRequest:completionHandler:": {
+        "doc": "Submits a request for subscriber account information.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanager/enqueue(_:completionhandler:)"
+      }
+    },
+    "VSAccountManagerResult": {
+      "-cancel": {
+        "doc": "Cancels an in-progress request for subscriber account information.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanagerresult/cancel()"
+      }
+    },
+    "VSSubscriptionRegistrationCenter": {
+      "+defaultSubscriptionRegistrationCenter": {
+        "doc": "Returns the default subscription registration center object.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionregistrationcenter/default()"
+      },
+      "-setCurrentSubscription:": {
+        "doc": "Sets the subscription information for the current user.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscriptionregistrationcenter/setcurrentsubscription(_:)"
+      }
+    },
+    "VSUserAccountManager": {
+      "-deleteAutoSignInTokenWithCompletionHandler:": {
+        "doc": "Deletes the value of the current Automatic Sign-In token.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/deleteautosignintokenwithcompletionhandler:"
+      },
+      "-queryAutoSignInTokenWithCompletionHandler:": {
+        "doc": "Retrieves the current Automatic Sign-In token.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/queryautosignintokenwithcompletionhandler:"
+      },
+      "-queryUserAccountsWithOptions:completion:": {
+        "doc": "Returns a list of registered user accounts for your app.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/queryuseraccountswithoptions:completion:"
+      },
+      "-requestAutoSignInAuthorizationWithCompletionHandler:": {
+        "doc": "Presents a modal sheet that offers a person to opt in to Automatic Sign-In.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/requestautosigninauthorizationwithcompletionhandler:"
+      },
+      "-updateAutoSignInToken:updateContext:completionHandler:": {
+        "doc": "Sets the current Automatic Sign-In token.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/updateautosignintoken:updatecontext:completionhandler:"
+      },
+      "-updateUserAccount:completion:": {
+        "doc": "Registers a new user account.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/updateuseraccount:completion:"
+      }
+    }
+  },
+  "properties": {
+    "VSAccountApplicationProvider": {
+      "identifier": {
+        "doc": "A string that identifies a provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountapplicationprovider/identifier"
+      },
+      "localizedDisplayName": {
+        "doc": "The display name of the provider as it will appear in the list of providers.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountapplicationprovider/localizeddisplayname"
+      }
+    },
+    "VSAccountManager": {
+      "delegate": {
+        "doc": "The delegate of the account manager object.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanager/delegate"
+      }
+    },
+    "VSAccountMetadata": {
+      "SAMLAttributeQueryResponse": {
+        "doc": "The SAML response from the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata/samlattributequeryresponse"
+      },
+      "accountProviderIdentifier": {
+        "doc": "The unique identifier of the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata/accountprovideridentifier"
+      },
+      "accountProviderResponse": {
+        "doc": "The response from the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata/accountproviderresponse"
+      },
+      "authenticationExpirationDate": {
+        "doc": "The date when the user’s current authentication session expires.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata/authenticationexpirationdate"
+      },
+      "verificationData": {
+        "doc": "Data you use to verify that the response came from the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata/verificationdata"
+      }
+    },
+    "VSAccountMetadataRequest": {
+      "accountProviderAuthenticationToken": {
+        "doc": "An authentication session token that your app sends to the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/accountproviderauthenticationtoken"
+      },
+      "applicationAccountProviders": {
+        "doc": "An array of application-specific providers to add to the list of account providers.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/applicationaccountproviders"
+      },
+      "attributeNames": {
+        "doc": "The SAML attributes that your app sends to the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/attributenames"
+      },
+      "channelIdentifier": {
+        "doc": "The channel identifier for the request.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/channelidentifier"
+      },
+      "featuredAccountProviderIdentifiers": {
+        "doc": "The providers your app lists prominently during authentication.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/featuredaccountprovideridentifiers"
+      },
+      "forceAuthentication": {
+        "doc": "A Boolean value that indicates whether the app ignores cached credentials.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/forceauthentication"
+      },
+      "includeAccountProviderIdentifier": {
+        "doc": "A Boolean value that indicates whether your app requests the identifier of the account provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/includeaccountprovideridentifier"
+      },
+      "includeAuthenticationExpirationDate": {
+        "doc": "A Boolean value that indicates whether your app requests the expiration date of the user’s current authentication session.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/includeauthenticationexpirationdate"
+      },
+      "interruptionAllowed": {
+        "doc": "A Boolean value that indicates whether your app can prompt the user to authenticate to complete the request.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/isinterruptionallowed"
+      },
+      "localizedVideoTitle": {
+        "doc": "A short, user-presentable name for the video that the user wants to play.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/localizedvideotitle"
+      },
+      "supportedAccountProviderIdentifiers": {
+        "doc": "A list of identifiers for TV providers that your app supports.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/supportedaccountprovideridentifiers"
+      },
+      "supportedAuthenticationSchemes": {
+        "doc": "A collection of authentication schemes your app supports for this request.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/supportedauthenticationschemes"
+      },
+      "verificationToken": {
+        "doc": "A token that your app sends to an account provider to identify itself.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest/verificationtoken"
+      }
+    },
+    "VSAccountProviderResponse": {
+      "authenticationScheme": {
+        "doc": "The authentication scheme type of the response.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountproviderresponse/authenticationscheme"
+      },
+      "body": {
+        "doc": "The raw response from the provider.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountproviderresponse/body"
+      },
+      "status": {
+        "doc": "The status code for the response.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsaccountproviderresponse/status"
+      }
+    },
+    "VSAutoSignInToken": {
+      "authorization": {
+        "doc": "A state that represents a person’s approval of Automatic Sign-In.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintoken/authorization"
+      },
+      "value": {
+        "doc": "A string that represents a person’s account.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintoken/value"
+      }
+    },
+    "VSAutoSignInTokenUpdateContext": {
+      "authorization": {
+        "doc": "A state that represents a person’s approval of Automatic Sign-In.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintokenupdatecontext/authorization"
+      }
+    },
+    "VSSubscription": {
+      "accessLevel": {
+        "doc": "The subscriber’s level of access to your catalog of content.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscription/accesslevel"
+      },
+      "billingIdentifier": {
+        "doc": "The subscriber’s billing group.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscription/billingidentifier"
+      },
+      "expirationDate": {
+        "doc": "The date when the user’s subscription expires.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscription/expirationdate"
+      },
+      "tierIdentifiers": {
+        "doc": "A list of content from your catalog that the subscriber can access.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vssubscription/tieridentifiers"
+      }
+    },
+    "VSUserAccountManager": {
+      "VSUserAccountManager.AutoSignInAuthorization": {
+        "doc": "The possible states the framework sets for Automatic Sign-In.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/autosigninauthorization"
+      },
+      "VSUserAccountManager.AutoSignInToken": {
+        "doc": "A value that represents a person’s account and their consent to Automatic Sign-In.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/autosignintoken-swift.struct"
+      },
+      "VSUserAccountManager.AutoSignInTokenUpdateContext": {
+        "doc": "An object that contains information about a person’s choice in the Automatic Sign-In prompt.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/autosignintokenupdatecontext"
+      },
+      "VSUserAccountQueryOptions": {
+        "doc": "Constants that represent options you use to fetch a list of user accounts.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/queryoptions"
+      },
+      "autoSignInToken": {
+        "doc": "The current Automatic Sign-In token.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/autosignintoken-swift.property"
+      },
+      "deleteAutoSignInToken()": {
+        "doc": "Deletes the value of the current Automatic Sign-In token.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/deleteautosignintoken()"
+      },
+      "requestAutoSignInAuthorization()": {
+        "doc": "Presents a modal sheet that offers a person to opt in to Automatic Sign-In.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/requestautosigninauthorization()"
+      },
+      "sharedUserAccountManager": {
+        "doc": "A shared instance of the user account manager class.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/shared"
+      },
+      "update(_:)": {
+        "doc": "Registers a new user account.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/update(_:)"
+      },
+      "updateAutoSignInToken(_:updateContext:)": {
+        "doc": "Sets the current Automatic Sign-In token.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/updateautosignintoken(_:updatecontext:)"
+      },
+      "userAccounts(options:)": {
+        "doc": "Returns a list of registered user accounts for your app.",
+        "url": "https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccountmanager/useraccounts(options:)"
+      }
+    }
+  }
+}

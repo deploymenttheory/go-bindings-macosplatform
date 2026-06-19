@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that presents a sheet that prompts the user to authorize a payment request.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller
 type PKPaymentAuthorizationViewController struct {
 	appkit.NSViewController
@@ -40,21 +42,25 @@ func PKPaymentAuthorizationViewControllerFromID(id objc.ID) *PKPaymentAuthorizat
 	return o
 }
 
+// Returns whether the user can make payments.
 func PKPaymentAuthorizationViewControllerCanMakePayments() bool {
 	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelCanMakePayments)
 	return _ret
 }
 
+// Returns whether the user can make payments through the specified network.
 func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworks, supportedNetworks)
+	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworks, supportedNetworks.Ptr())
 	return _ret
 }
 
+// Returns whether the user can make payments using a card from the specified network with the specified capabilities.
 func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
-	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworksCapabilities, supportedNetworks, capabilties)
+	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworksCapabilities, supportedNetworks.Ptr(), capabilties)
 	return _ret
 }
 
+// Initializes and returns a payment authorization view controller.
 func (o *PKPaymentAuthorizationViewController) InitWithPaymentRequest(request *PKPaymentRequest) *PKPaymentAuthorizationViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithPaymentRequest, request.Ptr())
 	if _ret != 0 {
@@ -63,21 +69,25 @@ func (o *PKPaymentAuthorizationViewController) InitWithPaymentRequest(request *P
 	return PKPaymentAuthorizationViewControllerFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether this device can process disbursement requests.
 func PKPaymentAuthorizationViewControllerSupportsDisbursements() bool {
 	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelSupportsDisbursements)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks.
 func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworks, supportedNetworks)
+	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworks, supportedNetworks.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks and merchant capabilities.
 func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilities PKMerchantCapability) bool {
-	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworksCapabilities, supportedNetworks, capabilities)
+	_ret := objc.Send[bool](objc.ID(_clsPKPaymentAuthorizationViewController), _pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworksCapabilities, supportedNetworks.Ptr(), capabilities)
 	return _ret
 }
 
+// Initializes and returns a new payment authorization view controller with the provided disbursement request.
 func (o *PKPaymentAuthorizationViewController) InitWithDisbursementRequest(request *PKDisbursementRequest) *PKPaymentAuthorizationViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithDisbursementRequest, request.Ptr())
 	if _ret != 0 {

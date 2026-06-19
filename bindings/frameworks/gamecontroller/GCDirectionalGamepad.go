@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A profile that supports only the directional pad, without motion or rotation.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcdirectionalgamepad
 type GCDirectionalGamepad struct {
 	GCMicroGamepad

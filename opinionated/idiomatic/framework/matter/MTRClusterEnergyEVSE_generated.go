@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Energy EVSE Electric Vehicle Supply Equipment (EVSE) is equipment used to charge an Electric Vehicle (EV) or Plug-In Hybrid Electric Vehicle. This cluster provides an interface to the functionality of Electric Vehicle Supply Equipment (EVSE) management.
+//
 // MTRClusterEnergyEVSE wraps [raw.MTRClusterEnergyEVSE] with a fluent Go API.
 type MTRClusterEnergyEVSE struct {
 	inner *raw.MTRClusterEnergyEVSE

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single route between a requested start and end point.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkroute
 type MKRoute struct {
 	foundation.NSObject
@@ -49,8 +51,11 @@ func (o *MKRoute) Name() *foundation.NSString {
 }
 
 func (o *MKRoute) AdvisoryNotices() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mKRouteSelAdvisoryNotices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteSelAdvisoryNotices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *MKRoute) Distance() unsafe.Pointer {

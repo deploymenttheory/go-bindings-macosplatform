@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides the configuration for a download task.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadconfiguration
 type AVAssetDownloadConfiguration struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func AVAssetDownloadConfigurationFromID(id objc.ID) *AVAssetDownloadConfiguratio
 	return o
 }
 
-// Creates and initializes a download configuration object. This method will throw an exception if AVURLAsset has been invalidated. - Parameter asset: The asset to create the download configuration for. - Parameter title: A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app.
+// Creates a download configuration for a media asset.
 func AVAssetDownloadConfigurationDownloadConfigurationWithAssetTitle(asset *AVURLAsset, title *foundation.NSString) *AVAssetDownloadConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetDownloadConfiguration), _aVAssetDownloadConfigurationSelDownloadConfigurationWithAssetTitle, asset.Ptr(), title.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func AVAssetDownloadConfigurationDownloadConfigurationWithAssetTitle(asset *AVUR
 	return AVAssetDownloadConfigurationFromID(_ret)
 }
 
-// Sets media selection on interstitials for this asset Typically, interstitial assets have not been discovered when the main download is initiated. This method allows the user to specify AVMediaSelectionCriteria for all interstitials that are discovered. Each AVPlayerMediaSelectionCriteria in the array of criteria specfies a set of criteria for a variant to download. - Parameter criteria: The array of selection criteria to set - Parameter mediaCharacteristic: The AVMediaCharacteristic to which the criteria will be applied
+// Sets media selection on interstitials for this asset
 func (o *AVAssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria *foundation.NSArray[*AVPlayerMediaSelectionCriteria], mediaCharacteristic *foundation.NSString) {
 	o.Ptr().Send(_aVAssetDownloadConfigurationSelSetInterstitialMediaSelectionCriteriaForMediaCharacteristic, criteria.Ptr(), mediaCharacteristic.Ptr())
 }

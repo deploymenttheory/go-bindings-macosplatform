@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that looks up address strings for the provided geographic coordinates.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest
 type MKReverseGeocodingRequest struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func MKReverseGeocodingRequestFromID(id objc.ID) *MKReverseGeocodingRequest {
 	return o
 }
 
+// Initializes a new reverse geocoder request object with the provided location.
 func (o *MKReverseGeocodingRequest) InitWithLocation(location unsafe.Pointer) *MKReverseGeocodingRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKReverseGeocodingRequestSelInitWithLocation, location)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *MKReverseGeocodingRequest) InitWithLocation(location unsafe.Pointer) *M
 	return MKReverseGeocodingRequestFromID(_ret)
 }
 
+// Returns the map items relevant to the reverse geocoded location.
 func (o *MKReverseGeocodingRequest) GetMapItemsWithCompletionHandler(completionHandler func(*foundation.NSArray[*MKMapItem], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -61,6 +65,7 @@ func (o *MKReverseGeocodingRequest) GetMapItemsWithCompletionHandler(completionH
 	o.Ptr().Send(_mKReverseGeocodingRequestSelGetMapItemsWithCompletionHandler, __block_completionHandler)
 }
 
+// A method you call to cancel a reverse geocoding request that’s in progress.
 func (o *MKReverseGeocodingRequest) Cancel() {
 	o.Ptr().Send(_mKReverseGeocodingRequestSelCancel)
 }

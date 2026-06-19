@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFSelection object identifies a contiguous or noncontiguous selection of text in a PDF document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfselection
 type PDFSelection struct {
 	foundation.NSObject
@@ -49,6 +51,7 @@ func PDFSelectionFromID(id objc.ID) *PDFSelection {
 	return o
 }
 
+// Returns an empty PDFSelection object.
 func (o *PDFSelection) InitWithDocument(document *PDFDocument) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelInitWithDocument, document.Ptr())
 	if _ret != 0 {
@@ -57,6 +60,7 @@ func (o *PDFSelection) InitWithDocument(document *PDFDocument) *PDFSelection {
 	return PDFSelectionFromID(_ret)
 }
 
+// Returns the bounds of the selection on the specified page.
 func (o *PDFSelection) BoundsForPage(page *PDFPage) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFSelectionSelBoundsForPage, page.Ptr())
 	return _ret
@@ -72,6 +76,7 @@ func (o *PDFSelection) RangeAtIndexOnPage(index uint, page *PDFPage) foundation.
 	return _ret
 }
 
+// Returns an array of selections, one for each line of text covered by the receiver.
 func (o *PDFSelection) SelectionsByLine() *foundation.NSArray[*PDFSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFSelectionSelSelectionsByLine)
 	if _ret != 0 {
@@ -80,18 +85,22 @@ func (o *PDFSelection) SelectionsByLine() *foundation.NSArray[*PDFSelection] {
 	return foundation.NSArrayFromID[*PDFSelection](_ret)
 }
 
+// Adds the specified selection to the receiving selection.
 func (o *PDFSelection) AddSelection(selection *PDFSelection) {
 	o.Ptr().Send(_pDFSelectionSelAddSelection, selection.Ptr())
 }
 
+// Adds the specified array of selections to the receiving selection.
 func (o *PDFSelection) AddSelections(selections *foundation.NSArray[*PDFSelection]) {
 	o.Ptr().Send(_pDFSelectionSelAddSelections, selections.Ptr())
 }
 
+// Extends the selection from its end toward the end of the document.
 func (o *PDFSelection) ExtendSelectionAtEnd(succeed int) {
 	o.Ptr().Send(_pDFSelectionSelExtendSelectionAtEnd, succeed)
 }
 
+// Extends the selection from its start toward the beginning of the document.
 func (o *PDFSelection) ExtendSelectionAtStart(precede int) {
 	o.Ptr().Send(_pDFSelectionSelExtendSelectionAtStart, precede)
 }
@@ -100,10 +109,12 @@ func (o *PDFSelection) ExtendSelectionForLineBoundaries() {
 	o.Ptr().Send(_pDFSelectionSelExtendSelectionForLineBoundaries)
 }
 
+// Calls drawForPage:withBox:active: with a default value for box parameter.
 func (o *PDFSelection) DrawForPageActive(page *PDFPage, active bool) {
 	o.Ptr().Send(_pDFSelectionSelDrawForPageActive, page.Ptr(), active)
 }
 
+// Draws the selection relative to the origin of the specified box in page space.
 func (o *PDFSelection) DrawForPageWithBoxActive(page *PDFPage, box PDFDisplayBox, active bool) {
 	o.Ptr().Send(_pDFSelectionSelDrawForPageWithBoxActive, page.Ptr(), box, active)
 }

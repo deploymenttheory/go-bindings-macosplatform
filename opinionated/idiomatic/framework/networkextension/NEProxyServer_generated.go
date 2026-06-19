@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// NEProxyServer contains settings for a proxy server.
+//
 // NEProxyServer wraps [raw.NEProxyServer] with a fluent Go API.
 type NEProxyServer struct {
 	inner *raw.NEProxyServer
@@ -31,7 +33,7 @@ func NEProxyServerFromID(id objc.ID) *NEProxyServer {
 	return &NEProxyServer{inner: raw.NEProxyServerFromID(id)}
 }
 
-// @method initWithAddress:port: @discussion This function initializes a newly-allocated NEProxyServer object @param address The string representation of the proxy server IP address. @param port The TCP port of the proxy server.
+// Initialize a newly-allocated NEProxyServer object
 //
 // NewNEProxyServerWithAddressPort creates a new [NEProxyServer].
 func NewNEProxyServerWithAddressPort(address string, port int) *NEProxyServer {
@@ -40,7 +42,7 @@ func NewNEProxyServerWithAddressPort(address string, port int) *NEProxyServer {
 	return &NEProxyServer{inner: raw.NEProxyServerFromID(_id)}
 }
 
-// @property authenticationRequired @discussion A flag indicating if the server requires authentication credentials.
+// A Boolean indicating if the server requires authentication credentials.
 //
 // WithAuthenticationRequired sets the authenticationRequired property and returns the receiver for chaining.
 func (x *NEProxyServer) WithAuthenticationRequired(authenticationRequired bool) *NEProxyServer {
@@ -48,7 +50,7 @@ func (x *NEProxyServer) WithAuthenticationRequired(authenticationRequired bool) 
 	return x
 }
 
-// @property username @discussion The username portion of the authentication credential to use when communicating with the proxy server.
+// The username portion of the authentication credential to be used to authenticate with the proxy server.
 //
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEProxyServer) WithUsername(username string) *NEProxyServer {
@@ -56,7 +58,7 @@ func (x *NEProxyServer) WithUsername(username string) *NEProxyServer {
 	return x
 }
 
-// @property password @discussion The password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
+// The password portion of the authentication credential to be used to authenticate with the proxy server.
 //
 // WithPassword sets the password property and returns the receiver for chaining.
 func (x *NEProxyServer) WithPassword(password string) *NEProxyServer {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that uniquely identifies a record in a database.
+//
 // RecordID wraps [raw.CKRecordID] with a fluent Go API.
 type RecordID struct {
 	inner *raw.CKRecordID
@@ -40,7 +42,7 @@ func NewRecordIDWithRecordName(recordName string) *RecordID {
 	return &RecordID{inner: raw.CKRecordIDFromID(_id)}
 }
 
-// Creates a new record ID with the specified name and zone information. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - zoneID: The ID of the zone where you want to store the record. This parameter must not be `nil`. - Returns: An initialized record ID object. Use this method when you create or search for records in a zone other than the default zone. The value in the `zoneID` parameter must represent a zone that already exists in the database. If the record zone doesn't exist, save the corresponding “CKRecordZone“ object to the database before attempting to save any “CKRecord“ objects in that zone.
+// Creates a new record ID with the specified name and zone information.
 //
 // NewRecordIDWithRecordNameZoneID creates a new [RecordID].
 func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *raw.CKRecordZoneID) *RecordID {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A right that gates access to a key and a secret.
+//
 // PersistedRight wraps [raw.LAPersistedRight] with a fluent Go API.
 type PersistedRight struct {
 	inner *raw.LAPersistedRight
@@ -35,7 +37,7 @@ func NewPersistedRight() *PersistedRight {
 	return &PersistedRight{inner: raw.LAPersistedRightFromID(_id)}
 }
 
-// @brief An application-supplied integer that can be used to identify right instances. The default value is @c 0.
+// An integer you use to identify a right.
 //
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *PersistedRight) WithTag(tag int) *PersistedRight {

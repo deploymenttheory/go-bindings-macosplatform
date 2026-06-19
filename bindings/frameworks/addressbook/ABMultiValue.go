@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable representation of a property that might have multiple values.
+//
 // Apple documentation: https://developer.apple.com/documentation/addressbook/abmultivalue
 type ABMultiValue struct {
 	foundation.NSObject
@@ -38,16 +40,19 @@ func ABMultiValueFromID(id objc.ID) *ABMultiValue {
 	return o
 }
 
+// Returns the number of entries in a multivalue list.
 func (o *ABMultiValue) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aBMultiValueSelCount)
 	return _ret
 }
 
+// Returns the value for the given index.
 func (o *ABMultiValue) ValueAtIndex(index uint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelValueAtIndex, index)
 	return _ret
 }
 
+// Returns the label for the given index.
 func (o *ABMultiValue) LabelAtIndex(index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelLabelAtIndex, index)
 	if _ret != 0 {
@@ -56,6 +61,7 @@ func (o *ABMultiValue) LabelAtIndex(index uint) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the identifier for the given index.
 func (o *ABMultiValue) IdentifierAtIndex(index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelIdentifierAtIndex, index)
 	if _ret != 0 {
@@ -64,11 +70,13 @@ func (o *ABMultiValue) IdentifierAtIndex(index uint) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the index for the given identifier.
 func (o *ABMultiValue) IndexForIdentifier(identifier *foundation.NSString) uint {
 	_ret := objc.Send[uint](o.Ptr(), _aBMultiValueSelIndexForIdentifier, identifier.Ptr())
 	return _ret
 }
 
+// Returns the identifier for the primary value.
 func (o *ABMultiValue) PrimaryIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelPrimaryIdentifier)
 	if _ret != 0 {
@@ -77,16 +85,19 @@ func (o *ABMultiValue) PrimaryIdentifier() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the type for the values in a multivalue list.
 func (o *ABMultiValue) PropertyType() int {
 	_ret := objc.Send[int](o.Ptr(), _aBMultiValueSelPropertyType)
 	return _ret
 }
 
+// Returns the value for the given identifier.
 func (o *ABMultiValue) ValueForIdentifier(identifier *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelValueForIdentifier, identifier.Ptr())
 	return _ret
 }
 
+// Returns the label for the given identifier.
 func (o *ABMultiValue) LabelForIdentifier(identifier *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMultiValueSelLabelForIdentifier, identifier.Ptr())
 	return _ret

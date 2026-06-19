@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that plays a sequence of audio buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasepushstreamnodedefinition
 type PHASEPushStreamNodeDefinition struct {
 	PHASEGeneratorNodeDefinition
@@ -35,7 +37,7 @@ func PHASEPushStreamNodeDefinitionFromID(id objc.ID) *PHASEPushStreamNodeDefinit
 	return o
 }
 
-// @method initWithMixerDefinition:format:identifier @abstract Create a push stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @param identifier An optional custom identifier to give to this object @return A new PHASEPushStreamNodeDefinition object
+// Creates a named node definition for audio streams.
 func (o *PHASEPushStreamNodeDefinition) InitWithMixerDefinitionFormatIdentifier(mixerDefinition *PHASEMixerDefinition, format *avfaudio.AVAudioFormat, identifier *foundation.NSString) *PHASEPushStreamNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormatIdentifier, mixerDefinition.Ptr(), format.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *PHASEPushStreamNodeDefinition) InitWithMixerDefinitionFormatIdentifier(
 	return PHASEPushStreamNodeDefinitionFromID(_ret)
 }
 
-// @method initWithMixerDefinition:format @abstract Create a push stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @return A new PHASEPushStreamNodeDefinition object
+// Creates a node definition for audio streams.
 func (o *PHASEPushStreamNodeDefinition) InitWithMixerDefinitionFormat(mixerDefinition *PHASEMixerDefinition, format *avfaudio.AVAudioFormat) *PHASEPushStreamNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormat, mixerDefinition.Ptr(), format.Ptr())
 	if _ret != 0 {

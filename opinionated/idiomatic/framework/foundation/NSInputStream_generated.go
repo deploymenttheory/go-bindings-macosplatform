@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A stream that provides read-only stream functionality.
+//
 // InputStream wraps [raw.NSInputStream] with a fluent Go API.
 type InputStream struct {
 	inner *raw.NSInputStream

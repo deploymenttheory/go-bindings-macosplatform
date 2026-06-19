@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A token’s configuration.
+//
 // TokenConfiguration wraps [raw.TKTokenConfiguration] with a fluent Go API.
 type TokenConfiguration struct {
 	inner *raw.TKTokenConfiguration

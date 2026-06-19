@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of the state created to record the properties of a gradient kernel at the time it was encoded.
+//
 // NNGradientStateNode wraps [raw.MPSNNGradientStateNode] with a fluent Go API.
 type NNGradientStateNode struct {
 	inner *raw.MPSNNGradientStateNode

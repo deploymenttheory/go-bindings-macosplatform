@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a restaurant reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inrestaurantreservation
 type INRestaurantReservation struct {
 	INReservation
@@ -35,6 +37,7 @@ func INRestaurantReservationFromID(id objc.ID) *INRestaurantReservation {
 	return o
 }
 
+// Creates a restaurant reservation with the provided information.
 func (o *INRestaurantReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservationDuration *INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *INRestaurantReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservationDuration.Ptr(), partySize.Ptr(), restaurantLocation.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *INRestaurantReservation) InitWithItemReferenceReservationNumberBookingT
 	return INRestaurantReservationFromID(_ret)
 }
 
+// Creates a new restaurant reservation with the provided information.
 func (o *INRestaurantReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], reservationDuration *INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *INRestaurantReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRestaurantReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), reservationDuration.Ptr(), partySize.Ptr(), restaurantLocation.Ptr())
 	if _ret != 0 {
